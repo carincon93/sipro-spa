@@ -1,0 +1,25 @@
+export const route = window.route
+
+export const links = [
+    { name: 'Calls', route: 'calls' },
+    { name: 'Users', route: 'users' },
+    { name: 'Regionales', route: 'regionales' },
+    { name: 'Centros de formación', route: 'centros-formacion' },
+    { name: 'Programas de formación', route: 'programas-formacion' },
+    { name: 'Programmatic lines', route: 'programmatic-lines' },
+    { name: 'Redes de conocimiento', route: 'redes-conocimiento' },
+    { name: 'Temáticas estratégicas SENA', route: 'tematicas-estrategicas' },
+    { name: 'Project types', route: 'project-types' },
+    { name: 'Sectores productivos', route: 'sectores-productivos' },
+    { name: 'Mesas técnicas', route: 'mesas-tecnicas' },
+    { name: 'Temas priorizados', route: 'temas-priorizados' },
+    { name: 'Research groups', route: 'research-groups' },
+    { name: 'Research lines', route: 'research-lines' },
+    { name: 'Research teams', route: 'research-teams' },
+    { name: 'System roles', route: 'roles' },
+    { name: 'Minciencias typologies', route: 'minciencias-typologies' },
+    { name: 'Minciencias subtypologies', route: 'minciencias-subtypologies' },
+    { name: 'Sennova roles', route: 'sennova-roles' },
+    { name: 'Anexos', route: 'anexos' },
+    { name: 'Techno academies', route: 'techno-academies' },
+]

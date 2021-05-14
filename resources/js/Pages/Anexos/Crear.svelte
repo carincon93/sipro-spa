@@ -1,0 +1,155 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { Inertia } from '@inertiajs/inertia'
+    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+
+    import Textarea from '@/Components/Textarea'
+    import Label from '@/Components/Label'
+    import LoadingButton from '@/Components/LoadingButton'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
+    import InputError from '@/Components/InputError'
+
+    export let errors
+    export let lineasProgramaticas
+
+    $: $title = 'Crear anexo'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    // prettier-ignore
+    let canIndexAnexos = authUser.can.find((element) => element == 'anexos.index') == 'anexos.index'
+    // prettier-ignore
+    let canShowAnexos = authUser.can.find((element) => element == 'anexos.show') == 'anexos.show'
+    // prettier-ignore
+    let canCreateAnexos = authUser.can.find((element) => element == 'anexos.create') == 'anexos.create'
+    // prettier-ignore
+    let canEditAnexos = authUser.can.find((element) => element == 'anexos.edit') == 'anexos.edit'
+    // prettier-ignore
+    let canDestroyAnexos = authUser.can.find((element) => element == 'anexos.destroy') == 'anexos.destroy'
+
+    let sending = false
+    let form = useForm({
+        nombre: '',
+        descripcion: '',
+        linea_programatica_id: [],
+    })
+
+    function submit() {
+        if (canCreateAnexos || isSuperAdmin) {
+            $form.post(route('anexos.store'), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+            })
+        }
+    }
+</script>
+
+<AuthenticatedLayout>
+    <header class="shadow bg-white" slot="header">
+        <div
+            class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6"
+        >
+            <div>
+                <h1>
+                    {#if canIndexAnexos || canCreateAnexos || isSuperAdmin}
+                        <a
+                            use:inertia
+                            href={route('anexos.index')}
+                            class="text-indigo-400 hover:text-indigo-600"
+                        >
+                            Anexos
+                        </a>
+                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    Crear
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-white rounded shadow max-w-3xl">
+        <form on:submit|preventDefault={submit}>
+            <fieldset
+                class="p-8"
+                disabled={canCreateAnexos || isSuperAdmin ? undefined : true}
+            >
+                <div class="mt-4">
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="nombre"
+                        value="Nombre del anexo"
+                    />
+                    <Textarea
+                        rows="4"
+                        id="nombre"
+                        error={errors.nombre}
+                        bind:value={$form.nombre}
+                        required
+                    />
+                </div>
+
+                <div class="mt-4">
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="descripcion"
+                        value="Descripción"
+                    />
+                    <Textarea
+                        rows="4"
+                        id="descripcion"
+                        error={errors.descripcion}
+                        bind:value={$form.descripcion}
+                        required
+                    />
+                </div>
+
+                <div class="bg-white rounded shadow overflow-hidden mt-20">
+                    <div class="p-4">
+                        <Label
+                            required
+                            class="mb-4"
+                            labelFor="linea_programatica_id"
+                            value="Seleccione alguna línea programática"
+                        />
+                        <InputError message={errors.linea_programatica_id} />
+                    </div>
+                    <div class="grid grid-cols-2">
+                        {#each lineasProgramaticas as { id, nombre, codigo }, i}
+                            <FormField>
+                                <Checkbox
+                                    bind:group={$form.linea_programatica_id}
+                                    value={id}
+                                />
+                                <span slot="label">{nombre} ({codigo})</span>
+                            </FormField>
+                        {/each}
+                    </div>
+                </div>
+            </fieldset>
+            <div
+                class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0"
+            >
+                {#if canCreateAnexos || isSuperAdmin}
+                    <LoadingButton
+                        loading={sending}
+                        class="btn-indigo ml-auto"
+                        type="submit"
+                    >
+                        Crear anexo
+                    </LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
+</AuthenticatedLayout>

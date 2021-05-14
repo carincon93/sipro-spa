@@ -1,0 +1,126 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+    import { Inertia } from '@inertiajs/inertia'
+
+    import Button from '@/Components/Button'
+    import Pagination from '@/Components/Pagination'
+    import DataTable from '@/Components/DataTable'
+    import ResourceMenu from '@/Components/ResourceMenu'
+    import { Item, Text } from '@smui/list'
+
+    export let lineasProgramaticas
+
+    $title = 'Líneas programáticas'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    // prettier-ignore
+    let canIndexLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.index') == 'lineas-programaticas.index'
+    // prettier-ignore
+    let canShowLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.show') == 'lineas-programaticas.show'
+    // prettier-ignore
+    let canCreateLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.create') == 'lineas-programaticas.create'
+    // prettier-ignore
+    let canEditLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.edit') == 'lineas-programaticas.edit'
+    // prettier-ignore
+    let canDestroyLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.destroy') == 'lineas-programaticas.destroy'
+
+    let filters = {}
+</script>
+
+<AuthenticatedLayout>
+    <DataTable class="mt-20">
+        <div slot="title">Líneas programáticas</div>
+
+        <div slot="actions">
+            {#if canCreateLineasProgramaticas || isSuperAdmin}
+                <Button
+                    on:click={() =>
+                        Inertia.visit(route('lineas-programaticas.create'))}
+                    variant="raised"
+                >
+                    Crear línea programática
+                </Button>
+            {/if}
+        </div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Nombre
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Código
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Categoría
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody slot="tbody">
+            {#each lineasProgramaticas.data as lineaProgramatica (lineaProgramatica.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p
+                            class="px-6 py-4 flex items-center focus:text-indigo-500"
+                        >
+                            {lineaProgramatica.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {lineaProgramatica.codigo}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {lineaProgramatica.categoria_proyecto}
+                        </p>
+                    </td>
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            {#if canShowLineasProgramaticas || canEditLineasProgramaticas || canDestroyLineasProgramaticas || isSuperAdmin}
+                                <Item
+                                    on:SMUI:action={() =>
+                                        Inertia.visit(
+                                            route(
+                                                'lineas-programaticas.edit',
+                                                lineaProgramatica.id,
+                                            ),
+                                        )}
+                                >
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if lineasProgramaticas.data.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4">
+                        Sin información registrada
+                    </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+    <Pagination links={lineasProgramaticas.links} />
+</AuthenticatedLayout>

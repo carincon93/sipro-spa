@@ -1,0 +1,127 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+    import { Inertia } from '@inertiajs/inertia'
+
+    import Button from '@/Components/Button'
+    import Pagination from '@/Components/Pagination'
+    import DataTable from '@/Components/DataTable'
+    import ResourceMenu from '@/Components/ResourceMenu'
+    import { Item, Text } from '@smui/list'
+
+    export let programasFormacion
+
+    $title = 'Programas de formación'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    // prettier-ignore
+    let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
+    // prettier-ignore
+    let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
+    // prettier-ignore
+    let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
+    // prettier-ignore
+    let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
+    // prettier-ignore
+    let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
+
+    let filters = {}
+</script>
+
+<AuthenticatedLayout>
+    <DataTable class="mt-20">
+        <div slot="title">Programas de formación</div>
+
+        <div slot="actions">
+            {#if canCreateProgramasFormacion || isSuperAdmin}
+                <Button
+                    on:click={() =>
+                        Inertia.visit(route('programas-formacion.create'))}
+                    variant="raised"
+                >
+                    Crear programa de formación
+                </Button>
+            {/if}
+        </div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Nombre
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Código
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Centro de formación
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+
+        <tbody slot="tbody">
+            {#each programasFormacion.data as programaFormacion (programaFormacion.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p
+                            class="px-6 py-4 flex items-center focus:text-indigo-500"
+                        >
+                            {programaFormacion.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {programaFormacion.codigo}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {programaFormacion.centro_formacion?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            {#if canShowProgramasFormacion || canEditProgramasFormacion || canDestroyProgramasFormacion || isSuperAdmin}
+                                <Item
+                                    on:SMUI:action={() =>
+                                        Inertia.visit(
+                                            route(
+                                                'programas-formacion.edit',
+                                                programaFormacion.id,
+                                            ),
+                                        )}
+                                >
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if programasFormacion.data.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4">
+                        Sin información registrada
+                    </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+    <Pagination links={programasFormacion.links} />
+</AuthenticatedLayout>

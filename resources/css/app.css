@@ -1,0 +1,146 @@
+@import 'svelte-material-ui/bare.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+    --mdc-theme-primary: #4f46e5;
+    --mdc-theme-secondary: rgba(99, 102, 241, 1);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+.fill-white {
+    fill: white;
+}
+
+button:focus, a:focus {
+    outline: none;
+}
+
+text {
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 10px;
+}
+
+.bg-mistyrose {
+    background-color: mistyrose;
+}
+
+.outline-none-important {
+    outline: none !important;
+    border-color: transparent !important;
+    outline-offset: 0px !important;
+    box-shadow: none !important;
+}
+
+.container.svelte-4lwi8h {
+    max-width: 100vw;
+}
+
+input, select, textarea {
+    width: 100%;
+}
+
+[type='checkbox']:not(.mdc-switch__native-control) {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #757575;
+    border-radius: 2px;
+}
+
+[type='checkbox']:not(.mdc-switch__native-control):hover {
+    cursor: pointer;
+}
+
+[type='checkbox']:not(.mdc-switch__native-control):hover:before {
+    content: "";
+    background: #52525214;
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    border-radius: 50%;
+    right: 0;
+    transition: all 0.4s ease-in;
+    opacity: 1;
+}
+
+[type='checkbox']:not(.mdc-switch__native-control):focus {
+    outline: none;
+    box-shadow: none;
+}
+
+fieldset {
+    min-width: auto;
+}
+
+fieldset[disabled] input, fieldset[disabled] textarea, fieldset[disabled] select {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+fieldset[disabled] .selectContainer {
+    background: transparent !important;
+    height: auto !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+fieldset[disabled] .clearSelect, fieldset[disabled] .listContainer, fieldset[disabled] .label-required {
+    display: none;
+    opacity: 0;
+}
+
+fieldset[disabled] .selection {
+    white-space: pre-line !important;
+}
+
+fieldset[disabled] .selectedItem {
+    line-height: 1.7 !important;
+    height: auto !important;
+}
+
+.mdc-dialog {
+    z-index: 9999;
+}
+
+.mdc-switch__native-control {
+    width: 64px !important;
+    height: 48px !important;
+}
+
+.btn-spinner,
+.btn-spinner:after {
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.btn-spinner {
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: .2em solid white;
+    border-right: .2em solid white;
+    border-bottom: .2em solid white;
+    border-left: .2em solid transparent;
+    transform: translateZ(0);
+    animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+

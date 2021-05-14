@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class MincienciasSubtypology extends Model
+{
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'minciencias_typology_id',
+        'name'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        //
+    ];
+
+    /**
+     * Relationship with MincienciasTypology
+     *
+     * @return void
+     */
+    public function mincienciasTypology()
+    {
+        return $this->belongsTo(MincienciasTypology::class);
+    }
+
+    /**
+     * Relationship with RDIOutput
+     *
+     * @return void
+     */
+    public function rdiOutputs()
+    {
+        return $this->hasMany(RDIOutput::class);
+    }
+
+    /**
+     * Filtrar registros
+     *
+     * @param  mixed $query
+     * @param  mixed $filters
+     * @return void
+     */
+    public function scopeFilterMincienciasSubtypology($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'ilike', '%'.$search.'%');
+        });
+    }
+}

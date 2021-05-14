@@ -1,0 +1,153 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+
+    import Input from '@/Components/Input'
+    import Label from '@/Components/Label'
+    import LoadingButton from '@/Components/LoadingButton'
+    import Select from '@/Components/Select'
+
+    export let errors
+    export let sectoresProductivos
+    export let mesasTecnicas
+
+    $: $title = 'Crear tema priorizado'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    // prettier-ignore
+    let canIndexTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.index') == 'temas-priorizados.index'
+    // prettier-ignore
+    let canShowTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.show') == 'temas-priorizados.show'
+    // prettier-ignore
+    let canCreateTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.create') == 'temas-priorizados.create'
+    // prettier-ignore
+    let canEditTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.edit') == 'temas-priorizados.edit'
+    // prettier-ignore
+    let canDestroyTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.destroy') == 'temas-priorizados.destroy'
+
+    let sending = false
+    let form = useForm({
+        nombre: '',
+        mesa_tecnica_id: null,
+        sector_productivo_id: null,
+    })
+
+    function submit() {
+        if (canCreateTemasPriorizados || isSuperAdmin) {
+            $form.post(route('temas-priorizados.store'), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+            })
+        }
+    }
+</script>
+
+<AuthenticatedLayout>
+    <header class="shadow bg-white" slot="header">
+        <div
+            class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6"
+        >
+            <div>
+                <h1>
+                    {#if canIndexTemasPriorizados || canCreateTemasPriorizados || isSuperAdmin}
+                        <a
+                            use:inertia
+                            href={route('temas-priorizados.index')}
+                            class="text-indigo-400 hover:text-indigo-600"
+                        >
+                            Temas priorizados
+                        </a>
+                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    Crear
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-white rounded shadow max-w-3xl">
+        <form on:submit|preventDefault={submit}>
+            <fieldset
+                class="p-8"
+                disabled={canCreateTemasPriorizados || isSuperAdmin
+                    ? undefined
+                    : true}
+            >
+                <div class="mt-4">
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="nombre"
+                        value="Nombre"
+                    />
+                    <Input
+                        id="nombre"
+                        type="text"
+                        class="mt-1 block w-full"
+                        bind:value={$form.nombre}
+                        error={errors.nombre}
+                        required
+                    />
+                </div>
+
+                <div class="mt-4">
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="sector_productivo_id"
+                        value="Sector productivo"
+                    />
+                    <Select
+                        id="sector_productivo_id"
+                        items={sectoresProductivos}
+                        bind:selectedValue={$form.sector_productivo_id}
+                        error={errors.sector_productivo_id}
+                        autocomplete="off"
+                        placeholder="Seleccione un sector productivo"
+                        required
+                    />
+                </div>
+
+                <div class="mt-4">
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="mesa_tecnica_id"
+                        value="Mesa técnica de servicios tecnológicos"
+                    />
+                    <Select
+                        id="mesa_tecnica_id"
+                        items={mesasTecnicas}
+                        bind:selectedValue={$form.mesa_tecnica_id}
+                        error={errors.mesa_tecnica_id}
+                        autocomplete="off"
+                        placeholder="Seleccione una mesta técnica de servicios tecnológicos"
+                        required
+                    />
+                </div>
+            </fieldset>
+            <div
+                class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0"
+            >
+                {#if canCreateTemasPriorizados || isSuperAdmin}
+                    <LoadingButton
+                        loading={sending}
+                        class="btn-indigo ml-auto"
+                        type="submit"
+                    >
+                        Crear tema priorizado
+                    </LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
+</AuthenticatedLayout>

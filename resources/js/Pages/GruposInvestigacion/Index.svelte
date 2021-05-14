@@ -1,0 +1,132 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+    import { Inertia } from '@inertiajs/inertia'
+
+    import Button from '@/Components/Button'
+    import Pagination from '@/Components/Pagination'
+    import DataTable from '@/Components/DataTable'
+    import ResourceMenu from '@/Components/ResourceMenu'
+    import { Item, Text } from '@smui/list'
+
+    export let gruposInvestigacion
+
+    $title = 'Grupos de investigación'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+
+    // prettier-ignore
+    let canIndexGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.index') == 'grupos-investigacion.index'
+    // prettier-ignore
+    let canShowGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.show') == 'grupos-investigacion.show'
+    // prettier-ignore
+    let canCreateGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.create') == 'grupos-investigacion.create'
+    // prettier-ignore
+    let canEditGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.edit') == 'grupos-investigacion.edit'
+    // prettier-ignore
+    let canDestroyGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.destroy') == 'grupos-investigacion.destroy'
+
+    let filters = {}
+</script>
+
+<AuthenticatedLayout>
+    <DataTable class="mt-20">
+        <div slot="title">Grupos de investigación</div>
+
+        <div slot="actions">
+            {#if canCreateGruposInvestigacion || isSuperAdmin}
+                <Button
+                    on:click={() =>
+                        Inertia.visit(route('grupos-investigacion.create'))}
+                    variant="raised"
+                >
+                    Crear grupo de investigación
+                </Button>
+            {/if}
+        </div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Nombre
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Centro de formación
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Regional
+                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody slot="tbody">
+            {#each gruposInvestigacion.data as grupoInvestigacion (grupoInvestigacion.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p
+                            class="px-6 py-4 flex items-center focus:text-indigo-500"
+                        >
+                            {grupoInvestigacion.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p
+                            class="px-6 py-4 flex items-center focus:text-indigo-500"
+                        >
+                            {grupoInvestigacion.centro_formacion?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p
+                            class="px-6 py-4 flex items-center focus:text-indigo-500"
+                        >
+                            {grupoInvestigacion.centro_formacion?.regional
+                                ?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            {#if canIndexGruposInvestigacion || canShowGruposInvestigacion || canEditGruposInvestigacion || canDestroyGruposInvestigacion || isSuperAdmin}
+                                <Item
+                                    on:SMUI:action={() =>
+                                        Inertia.visit(
+                                            route(
+                                                'grupos-investigacion.edit',
+                                                grupoInvestigacion.id,
+                                            ),
+                                        )}
+                                >
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if gruposInvestigacion.data.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4">
+                        Sin información registrada
+                    </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+    <Pagination links={gruposInvestigacion.links} />
+</AuthenticatedLayout>
