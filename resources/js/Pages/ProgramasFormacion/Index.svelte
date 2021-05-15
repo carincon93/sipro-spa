@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
-    // prettier-ignore
+
     let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
-    // prettier-ignore
+
     let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
-    // prettier-ignore
+
     let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
-    // prettier-ignore
+
     let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
 
     let filters = {}
@@ -43,30 +43,16 @@
 
         <div slot="actions">
             {#if canCreateProgramasFormacion || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('programas-formacion.create'))}
-                    variant="raised"
-                >
-                    Crear programa de formación
-                </Button>
+                <Button on:click={() => Inertia.visit(route('programas-formacion.create'))} variant="raised">Crear programa de formación</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Código
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Centro de formación
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Código </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Centro de formación </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
 
@@ -74,9 +60,7 @@
             {#each programasFormacion.data as programaFormacion (programaFormacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {programaFormacion.nombre}
                         </p>
                     </td>
@@ -93,15 +77,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowProgramasFormacion || canEditProgramasFormacion || canDestroyProgramasFormacion || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'programas-formacion.edit',
-                                                programaFormacion.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('programas-formacion.edit', programaFormacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -116,9 +92,7 @@
 
             {#if programasFormacion.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

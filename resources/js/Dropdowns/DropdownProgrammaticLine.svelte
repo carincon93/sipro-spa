@@ -23,9 +23,7 @@
 
     afterUpdate(() => {
         if (required) {
-            formProgrammaticLine != null && select != null
-                ? select.setCustomValidity('')
-                : select.setCustomValidity($_('Please fill out this field.'))
+            formProgrammaticLine != null && select != null ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
         }
     })
 
@@ -41,9 +39,7 @@
 
     function selectProgrammaticLine() {
         if (formProgrammaticLine) {
-            let filterItem = programmaticLines.filter(function (
-                programmaticLine,
-            ) {
+            let filterItem = programmaticLines.filter(function (programmaticLine) {
                 return programmaticLine.value == formProgrammaticLine
             })
             programmaticLineFiltered = filterItem[0]
@@ -51,15 +47,7 @@
     }
 </script>
 
-<Select
-    selectedValue={programmaticLineFiltered}
-    inputAttributes={{ id: id }}
-    placeholder="Busque por el nombre de la línea programática"
-    containerClasses="programmatic-lines {classes}"
-    items={programmaticLines}
-    on:select={handleProgrammaticLine}
-    on:clear={() => (formProgrammaticLine = null)}
-/>
+<Select selectedValue={programmaticLineFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre de la línea programática" containerClasses="programmatic-lines {classes}" items={programmaticLines} on:select={handleProgrammaticLine} on:clear={() => (formProgrammaticLine = null)} />
 <InputError {message} />
 
 <style>

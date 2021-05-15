@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.index') == 'sectores-productivos.index'
-    // prettier-ignore
+
     let canShowSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.show') == 'sectores-productivos.show'
-    // prettier-ignore
+
     let canCreateSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.create') == 'sectores-productivos.create'
-    // prettier-ignore
+
     let canEditSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.edit') == 'sectores-productivos.edit'
-    // prettier-ignore
+
     let canDestroySectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.destroy') == 'sectores-productivos.destroy'
 
     let filters = {}
@@ -43,48 +43,28 @@
 
         <div slot="actions">
             {#if canCreateSectoresProductivos || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('sectores-productivos.create'))}
-                    variant="raised"
-                >
-                    Crear sector productivo
-                </Button>
+                <Button on:click={() => Inertia.visit(route('sectores-productivos.create'))} variant="raised">Crear sector productivo</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each sectoresProductivos.data as sectorProductivo (sectorProductivo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {sectorProductivo.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowSectoresProductivos || canEditSectoresProductivos || canDestroySectoresProductivos || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'sectores-productivos.edit',
-                                                sectorProductivo.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('sectores-productivos.edit', sectorProductivo.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -99,9 +79,7 @@
 
             {#if sectoresProductivos.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

@@ -24,9 +24,7 @@
 
     afterUpdate(() => {
         if (required) {
-            value != null && select != null
-                ? select.setCustomValidity('')
-                : select.setCustomValidity($_('Please fill out this field.'))
+            value != null && select != null ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
         }
     })
 
@@ -50,15 +48,7 @@
     }
 </script>
 
-<Select
-    selectedValue={itemFiltered}
-    inputAttributes={{ id: id }}
-    {placeholder}
-    containerClasses="items {classes}"
-    {items}
-    on:select={handleSelect}
-    on:clear={() => (value = null)}
-/>
+<Select selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} />
 <InputError {message} />
 
 <style>

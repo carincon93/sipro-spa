@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.index') == 'centros-formacion.index'
-    // prettier-ignore
+
     let canShowCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.show') == 'centros-formacion.show'
-    // prettier-ignore
+
     let canCreateCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.create') == 'centros-formacion.create'
-    // prettier-ignore
+
     let canEditCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.edit') == 'centros-formacion.edit'
-    // prettier-ignore
+
     let canDestroyCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.destroy') == 'centros-formacion.destroy'
 
     let filters = {}
@@ -43,30 +43,16 @@
 
         <div slot="actions">
             {#if canCreateCentrosFormacion || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('centros-formacion.create'))}
-                    variant="raised"
-                >
-                    Crear Centro de formación
-                </Button>
+                <Button on:click={() => Inertia.visit(route('centros-formacion.create'))} variant="raised">Crear Centro de formación</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Código
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Regional
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Código </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Regional </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
 
@@ -74,9 +60,7 @@
             {#each centrosFormacion.data as centroFormacion (centroFormacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {centroFormacion.nombre}
                         </p>
                     </td>
@@ -93,15 +77,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowCentrosFormacion || canEditCentrosFormacion || canDestroyCentrosFormacion || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'centros-formacion.edit',
-                                                centroFormacion.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('centros-formacion.edit', centroFormacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -116,9 +92,7 @@
 
             {#if centrosFormacion.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"
-                        >Sin información registrada</td
-                    >
+                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

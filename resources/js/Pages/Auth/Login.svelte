@@ -54,32 +54,13 @@
 <form on:submit|preventDefault={handleSubmit}>
     <div>
         <Label required class="mb-4" labelFor="email" value={$_('Email')} />
-        <Input
-            id="email"
-            type="email"
-            class="mt-1 block w-full"
-            bind:value={form.email}
-            required
-            autocomplete="email"
-        />
+        <Input id="email" type="email" class="mt-1 block w-full" bind:value={form.email} required autocomplete="email" />
         <InputError message={errors.email} />
     </div>
 
     <div class="mt-4">
-        <Label
-            required
-            class="mb-4"
-            labelFor="password"
-            value={$_('Password')}
-        />
-        <Input
-            id="password"
-            type="password"
-            class="mt-1 block w-full"
-            bind:value={form.password}
-            required
-            autocomplete="current-password"
-        />
+        <Label required class="mb-4" labelFor="password" value={$_('Password')} />
+        <Input id="password" type="password" class="mt-1 block w-full" bind:value={form.password} required autocomplete="current-password" />
         <InputError message={errors.password} />
     </div>
 
@@ -92,17 +73,11 @@
 
     <div class="flex items-center justify-end mt-4">
         {#if canResetPassword}
-            <a
-                use:inertia
-                href={route('password.request')}
-                class="mr-4 underline text-sm text-gray-600 hover:text-gray-900"
-            >
+            <a use:inertia href={route('password.request')} class="mr-4 underline text-sm text-gray-600 hover:text-gray-900">
                 {$_('Forgot your password?')}
             </a>
         {/if}
 
-        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit"
-            >{$_('Login')}</LoadingButton
-        >
+        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">{$_('Login')}</LoadingButton>
     </div>
 </form>

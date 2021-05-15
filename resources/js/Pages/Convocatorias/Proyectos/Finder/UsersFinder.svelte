@@ -22,22 +22,12 @@
 </script>
 
 <h1 class="text-4xl text-center">Proponentes</h1>
-<p class="text-center w-1/3 m-auto mt-8">
-    Realiza la búsqueda de proponentes por número de documento o correo
-    electrónico institucional
-</p>
+<p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de proponentes por número de documento o correo electrónico institucional</p>
 
 <form on:submit|preventDefault={submit}>
     <div class="p-8">
         <div class="mt-4">
-            <Input
-                id="search"
-                type="search"
-                placeholder="Escriba el número de documento o el correo electrónico instiucional"
-                class="mt-1 w-9/12 m-auto block"
-                bind:value={$form.search}
-                required
-            />
+            <Input id="search" type="search" placeholder="Escriba el número de documento o el correo electrónico instiucional" class="mt-1 w-9/12 m-auto block" bind:value={$form.search} required />
         </div>
     </div>
 </form>

@@ -25,23 +25,9 @@
 
     onMount(() => {
         getSecondBudgetInfo()
-        sennovaBudget?.call_budget?.sennova_budget?.second_budget_info_id
-            ? getThirdBudgetInfo(
-                  sennovaBudget?.call_budget?.sennova_budget
-                      ?.second_budget_info_id,
-              )
-            : null
-        sennovaBudget?.call_budget?.sennova_budget?.third_budget_info_id
-            ? getBudgetUsages(
-                  sennovaBudget?.call_budget?.sennova_budget
-                      ?.second_budget_info_id,
-                  sennovaBudget?.call_budget?.sennova_budget
-                      ?.third_budget_info_id,
-              )
-            : null
-        sennovaBudget?.call_budget?.id
-            ? getBudgetUsageData(sennovaBudget?.call_budget?.id)
-            : null
+        sennovaBudget?.call_budget?.sennova_budget?.second_budget_info_id ? getThirdBudgetInfo(sennovaBudget?.call_budget?.sennova_budget?.second_budget_info_id) : null
+        sennovaBudget?.call_budget?.sennova_budget?.third_budget_info_id ? getBudgetUsages(sennovaBudget?.call_budget?.sennova_budget?.second_budget_info_id, sennovaBudget?.call_budget?.sennova_budget?.third_budget_info_id) : null
+        sennovaBudget?.call_budget?.id ? getBudgetUsageData(sennovaBudget?.call_budget?.id) : null
     })
 
     async function getSecondBudgetInfo() {
@@ -53,16 +39,13 @@
         selectedSecondBudgetInfoID = e.target.value
         budgetMessage = null
         showQtyInput = null
-        if (selectedSecondBudgetInfoID != '')
-            getThirdBudgetInfo(selectedSecondBudgetInfoID)
+        if (selectedSecondBudgetInfoID != '') getThirdBudgetInfo(selectedSecondBudgetInfoID)
     }
 
     async function getThirdBudgetInfo(secondBudgetInfoID) {
         thirdBudgetInfo = []
         budgetUsages = []
-        let res = await axios.get(
-            route('web-api.third-budget-info', [secondBudgetInfoID]),
-        )
+        let res = await axios.get(route('web-api.third-budget-info', [secondBudgetInfoID]))
         thirdBudgetInfo = res.data
     }
 
@@ -71,22 +54,11 @@
         showQtyInput = null
         selectedThirdBudgetInfoID = e.target.value
 
-        if (selectedSecondBudgetInfoID != '' && selectedThirdBudgetInfoID != '')
-            getBudgetUsages(
-                selectedSecondBudgetInfoID,
-                selectedThirdBudgetInfoID,
-            )
+        if (selectedSecondBudgetInfoID != '' && selectedThirdBudgetInfoID != '') getBudgetUsages(selectedSecondBudgetInfoID, selectedThirdBudgetInfoID)
     }
 
     async function getBudgetUsages(secondBudgetInfoID, thirdBudgetInfoID) {
-        let res = await axios.get(
-            route('web-api.budget-usages', [
-                call,
-                programmaticLine,
-                secondBudgetInfoID,
-                thirdBudgetInfoID,
-            ]),
-        )
+        let res = await axios.get(route('web-api.budget-usages', [call, programmaticLine, secondBudgetInfoID, thirdBudgetInfoID]))
         budgetUsages = res.data
     }
 
@@ -95,39 +67,21 @@
     }
 
     function getBudgetUsageData(value) {
-        budgetMessage = budgetUsages.find(
-            (item) => item.value == value,
-        )?.message
+        budgetMessage = budgetUsages.find((item) => item.value == value)?.message
 
         budgetUsageCode = budgetUsages.find((item) => item.value == value)?.code
 
-        showQtyInput = budgetUsages.find(
-            (item) => item.value == value,
-        )?.requires_market_research
+        showQtyInput = budgetUsages.find((item) => item.value == value)?.requires_market_research
     }
 </script>
 
 <div class="mt-4">
-    <Label
-        id="second_budget_info_id"
-        value="Concepto interno SENA"
-        {required}
-    />
+    <Label id="second_budget_info_id" value="Concepto interno SENA" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select
-        id="second_budget_info_id"
-        class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}"
-        on:change={(e) => handleSecondBudgetInfo(e)}
-    >
+    <select id="second_budget_info_id" class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleSecondBudgetInfo(e)}>
         <option value="">Seleccione el concepto interno SENA</option>
         {#each secondBudgetInfo as { value, label }}
-            <option
-                {value}
-                selected={sennovaBudget?.call_budget?.sennova_budget
-                    ?.second_budget_info_id == value
-                    ? true
-                    : false}>{label}</option
-            >
+            <option {value} selected={sennovaBudget?.call_budget?.sennova_budget?.second_budget_info_id == value ? true : false}>{label}</option>
         {/each}
     </select>
 </div>
@@ -135,22 +89,10 @@
 <div class="mt-4">
     <Label id="third_budget_info_id" value="Rubro" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select
-        id="third_budget_info_id"
-        disabled={!(thirdBudgetInfo.length > 0)}
-        class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}"
-        on:change={(e) => handleThirdBudgetInfo(e)}
-    >
+    <select id="third_budget_info_id" disabled={!(thirdBudgetInfo.length > 0)} class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleThirdBudgetInfo(e)}>
         <option value="">Seleccione el rubro</option>
         {#each thirdBudgetInfo as { value, label }}
-            <option
-                class="shadow p-8 hover:bg-gray-100"
-                {value}
-                selected={sennovaBudget?.call_budget?.sennova_budget
-                    ?.third_budget_info_id == value
-                    ? true
-                    : false}>{label}</option
-            >
+            <option class="shadow p-8 hover:bg-gray-100" {value} selected={sennovaBudget?.call_budget?.sennova_budget?.third_budget_info_id == value ? true : false}>{label}</option>
         {/each}
     </select>
 </div>
@@ -158,22 +100,10 @@
 <div class="mt-4">
     <Label id="budget_usage_id" value="Uso presupuestal" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select
-        id="budget_usage_id"
-        disabled={!(budgetUsages.length > 0)}
-        class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}"
-        bind:value={selectedBudgetUsage}
-        on:change={(e) => handleSennovaBudget(e)}
-    >
+    <select id="budget_usage_id" disabled={!(budgetUsages.length > 0)} class="budget-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedBudgetUsage} on:change={(e) => handleSennovaBudget(e)}>
         <option value="">Seleccione el uso presupuestal</option>
         {#each budgetUsages as { value, label }}
-            <option
-                class="shadow p-8 hover:bg-gray-100"
-                {value}
-                selected={sennovaBudget?.call_budget?.id == value
-                    ? true
-                    : false}>{label}</option
-            >
+            <option class="shadow p-8 hover:bg-gray-100" {value} selected={sennovaBudget?.call_budget?.id == value ? true : false}>{label}</option>
         {/each}
     </select>
     <InputError {message} />

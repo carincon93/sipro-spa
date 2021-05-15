@@ -23,21 +23,11 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexSennovaRoles =
-        authUser.can.find((element) => element == 'sennova-roles.index') ==
-        'sennova-roles.index'
-    let canShowSennovaRoles =
-        authUser.can.find((element) => element == 'sennova-roles.show') ==
-        'sennova-roles.show'
-    let canCreateSennovaRoles =
-        authUser.can.find((element) => element == 'sennova-roles.create') ==
-        'sennova-roles.create'
-    let canEditSennovaRoles =
-        authUser.can.find((element) => element == 'sennova-roles.edit') ==
-        'sennova-roles.edit'
-    let canDestroySennovaRoles =
-        authUser.can.find((element) => element == 'sennova-roles.destroy') ==
-        'sennova-roles.delete'
+    let canIndexSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.index') == 'sennova-roles.index'
+    let canShowSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.show') == 'sennova-roles.show'
+    let canCreateSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.create') == 'sennova-roles.create'
+    let canEditSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.edit') == 'sennova-roles.edit'
+    let canDestroySennovaRoles = authUser.can.find((element) => element == 'sennova-roles.destroy') == 'sennova-roles.delete'
 
     let filters = {}
 </script>
@@ -48,11 +38,7 @@
 
         <div slot="actions">
             {#if canCreateSennovaRoles || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('sennova-roles.create'))}
-                    variant="raised"
-                >
+                <Button on:click={() => Inertia.visit(route('sennova-roles.create'))} variant="raised">
                     Crear
                     {$_('Sennova roles.singular')}
                 </Button>
@@ -61,36 +47,22 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"
-                    >Nombre</th
-                >
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"
-                    >Acciones</th
-                >
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each sennovaRoles.data as sennovaRole (sennovaRole.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {sennovaRole.name}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowSennovaRoles || canEditSennovaRoles || canDestroySennovaRoles || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'sennova-roles.edit',
-                                                sennovaRole.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('sennova-roles.edit', sennovaRole.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -105,9 +77,7 @@
 
             {#if sennovaRoles.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"
-                        >Sin información registrada</td
-                    >
+                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

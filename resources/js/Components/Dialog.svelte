@@ -5,14 +5,7 @@
     export let id
 </script>
 
-<Dialog
-    bind:open
-    scrimClickAction=""
-    escapeKeyAction=""
-    aria-labelledby="mandatory-title"
-    aria-describedby="mandatory-content"
-    id="{id}-dialog"
->
+<Dialog bind:open scrimClickAction="" escapeKeyAction="" aria-labelledby="mandatory-title" aria-describedby="mandatory-content" id="{id}-dialog">
     <Title id="{id}-mandatory-title">
         <slot name="title" />
     </Title>

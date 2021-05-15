@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ImpactpRequest extends FormRequest
+class ImpactoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

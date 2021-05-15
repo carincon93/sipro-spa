@@ -21,15 +21,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexRegionales = authUser.can.find((element) => element == 'regionales.index') == 'regionales.index'
-    // prettier-ignore
+
     let canShowRegionales = authUser.can.find((element) => element == 'regionales.show') == 'regionales.show'
-    // prettier-ignore
+
     let canCreateRegionales = authUser.can.find((element) => element == 'regionales.create') == 'regionales.create'
-    // prettier-ignore
+
     let canEditRegionales = authUser.can.find((element) => element == 'regionales.edit') == 'regionales.edit'
-    // prettier-ignore
+
     let canDestroyRegionales = authUser.can.find((element) => element == 'regionales.destroy') == 'regionales.destroy'
 
     let sending = false
@@ -52,19 +52,11 @@
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
-        <div
-            class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6"
-        >
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
                     {#if canIndexRegionales || canCreateRegionales || isSuperAdmin}
-                        <a
-                            use:inertia
-                            href={route('regionales.index')}
-                            class="text-indigo-400 hover:text-indigo-600"
-                        >
-                            Regionales
-                        </a>
+                        <a use:inertia href={route('regionales.index')} class="text-indigo-400 hover:text-indigo-600"> Regionales </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -75,93 +67,30 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset
-                class="p-8"
-                disabled={canCreateRegionales || isSuperAdmin
-                    ? undefined
-                    : true}
-            >
+            <fieldset class="p-8" disabled={canCreateRegionales || isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="nombre"
-                        value="Nombre"
-                    />
-                    <Input
-                        id="nombre"
-                        type="text"
-                        class="mt-1 block w-full"
-                        bind:value={$form.nombre}
-                        error={errors.nombre}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="codigo"
-                        value="Código"
-                    />
-                    <Input
-                        id="codigo"
-                        type="number"
-                        min="0"
-                        max="999"
-                        class="mt-1 block w-full"
-                        bind:value={$form.codigo}
-                        error={errors.codigo}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="codigo" value="Código" />
+                    <Input id="codigo" type="number" min="0" max="999" class="mt-1 block w-full" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="region_id"
-                        value="Región"
-                    />
-                    <DynamicList
-                        id="region_id"
-                        bind:value={$form.region_id}
-                        routeWebApi={route('web-api.regiones')}
-                        placeholder="Busque por el nombre de la región"
-                        message={errors.region_id}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="region_id" value="Región" />
+                    <DynamicList id="region_id" bind:value={$form.region_id} routeWebApi={route('web-api.regiones')} placeholder="Busque por el nombre de la región" message={errors.region_id} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="director_regional_id"
-                        value="Director(a) Regional"
-                    />
-                    <DynamicList
-                        id="director_regional_id"
-                        bind:value={$form.director_regional_id}
-                        routeWebApi={route('web-api.directores-regional')}
-                        placeholder="Busque por el nombre del director"
-                        message={errors.director_regional_id}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="director_regional_id" value="Director(a) Regional" />
+                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.directores-regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
                 </div>
             </fieldset>
-            <div
-                class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0"
-            >
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if canCreateRegionales || isSuperAdmin}
-                    <LoadingButton
-                        loading={sending}
-                        class="btn-indigo ml-auto"
-                        type="submit"
-                    >
-                        Crear regional
-                    </LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear regional</LoadingButton>
                 {/if}
             </div>
         </form>

@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.index') == 'tipos-proyecto.index'
-    // prettier-ignore
+
     let canShowTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.show') == 'tipos-proyecto.show'
-    // prettier-ignore
+
     let canCreateTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.create') == 'tipos-proyecto.create'
-    // prettier-ignore
+
     let canEditTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.edit') == 'tipos-proyecto.edit'
-    // prettier-ignore
+
     let canDestroyTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.destroy') == 'tipos-proyecto.destroy'
 
     let filters = {}
@@ -43,58 +43,34 @@
 
         <div slot="actions">
             {#if canCreateTiposProyecto || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('tipos-proyecto.create'))}
-                    variant="raised"
-                >
-                    Crear tipo de proyecto
-                </Button>
+                <Button on:click={() => Inertia.visit(route('tipos-proyecto.create'))} variant="raised">Crear tipo de proyecto</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Línea programática
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Línea programática </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each tiposProyecto.data as tipoProyecto (tipoProyecto.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {tipoProyecto.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {tipoProyecto.linea_programatica?.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowTiposProyecto || canEditTiposProyecto || canDestroyTiposProyecto || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'tipos-proyecto.edit',
-                                                tipoProyecto.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('tipos-proyecto.edit', tipoProyecto.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -109,9 +85,7 @@
 
             {#if tiposProyecto.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

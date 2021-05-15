@@ -28,19 +28,12 @@
 
     afterUpdate(() => {
         if (required && select != null) {
-            formProjectSennovaRole != null
-                ? select.setCustomValidity('')
-                : select.setCustomValidity($_('Please fill out this field.'))
+            formProjectSennovaRole != null ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
         }
     })
 
     async function getProjectSennovaRoles() {
-        let res = await axios.get(
-            route('web-api.calls.project-sennova-roles', [
-                call.id,
-                programmaticLine,
-            ]),
-        )
+        let res = await axios.get(route('web-api.calls.project-sennova-roles', [call.id, programmaticLine]))
         projectSennovaRoles = res.data
         selectProjectSennovaRole()
     }
@@ -54,9 +47,7 @@
 
     function selectProjectSennovaRole() {
         if (formProjectSennovaRole) {
-            let filterItem = projectSennovaRoles.filter(function (
-                projectSennovaRole,
-            ) {
+            let filterItem = projectSennovaRoles.filter(function (projectSennovaRole) {
                 return projectSennovaRole.value == formProjectSennovaRole
             })
             projectSennovaRoleFiltered = filterItem[0]
@@ -64,15 +55,7 @@
     }
 </script>
 
-<Select
-    selectedValue={projectSennovaRoleFiltered}
-    inputAttributes={{ id: id }}
-    placeholder="Busque por el nombre del rol"
-    containerClasses="project-sennova-roles {classes}"
-    items={projectSennovaRoles}
-    on:select={handleProjectSennovaRole}
-    on:clear={() => (formProjectSennovaRole = null)}
-/>
+<Select selectedValue={projectSennovaRoleFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre del rol" containerClasses="project-sennova-roles {classes}" items={projectSennovaRoles} on:select={handleProjectSennovaRole} on:clear={() => (formProjectSennovaRole = null)} />
 <InputError {message} />
 
 {#if sennovaRoleMessage}

@@ -22,19 +22,9 @@
 
     $: selectedValue
     $: if (required && select != null) {
-        selectedValue != undefined
-            ? select.setCustomValidity('')
-            : select.setCustomValidity($_('Please fill out this field.'))
+        selectedValue != undefined ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
     }
 </script>
 
-<SelectMulti
-    inputAttributes={{ id: id }}
-    bind:selectedValue
-    {items}
-    isMulti={true}
-    {groupBy}
-    {placeholder}
-    on:clear={() => (selectedValue = null)}
-/>
+<SelectMulti inputAttributes={{ id: id }} bind:selectedValue {items} isMulti={true} {groupBy} {placeholder} on:clear={() => (selectedValue = null)} />
 <InputError message={error} />

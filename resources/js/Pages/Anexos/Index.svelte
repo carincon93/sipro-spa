@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexAnexos = authUser.can.find((element) => element == 'anexos.index') == 'anexos.index'
-    // prettier-ignore
+
     let canShowAnexos = authUser.can.find((element) => element == 'anexos.show') == 'anexos.show'
-    // prettier-ignore
+
     let canCreateAnexos = authUser.can.find((element) => element == 'anexos.create') == 'anexos.create'
-    // prettier-ignore
+
     let canEditAnexos = authUser.can.find((element) => element == 'anexos.edit') == 'anexos.edit'
-    // prettier-ignore
+
     let canDestroyAnexos = authUser.can.find((element) => element == 'anexos.destroy') == 'anexos.destroy'
 
     let filters = {}
@@ -43,23 +43,14 @@
 
         <div slot="actions">
             {#if canCreateAnexos || isSuperAdmin}
-                <Button
-                    on:click={() => Inertia.visit(route('anexos.create'))}
-                    variant="raised"
-                >
-                    Crear anexo
-                </Button>
+                <Button on:click={() => Inertia.visit(route('anexos.create'))} variant="raised">Crear anexo</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
 
@@ -67,21 +58,14 @@
             {#each anexos.data as anexo (anexo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {anexo.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowAnexos || canEditAnexos || canDestroyAnexos || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route('anexos.edit', anexo.id),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('anexos.edit', anexo.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -96,9 +80,7 @@
 
             {#if anexos.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

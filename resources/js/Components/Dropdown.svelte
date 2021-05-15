@@ -52,12 +52,7 @@
 
 <svelte:window on:keydown={keydown} />
 
-<button
-    {...$$restProps}
-    bind:this={button}
-    type="button"
-    on:click={() => (show = true)}
->
+<button {...$$restProps} bind:this={button} type="button" on:click={() => (show = true)}>
     <slot />
 </button>
 
@@ -68,12 +63,7 @@
         black; opacity: .2"
             on:click={() => (show = false)}
         />
-        <div
-            class={classes}
-            bind:this={dropdown}
-            style="position: absolute; z-index: 99999;"
-            on:click|stopPropagation={() => (show = autoclose ? false : true)}
-        >
+        <div class={classes} bind:this={dropdown} style="position: absolute; z-index: 99999;" on:click|stopPropagation={() => (show = autoclose ? false : true)}>
             <slot name="dropdown" />
         </div>
     </div>

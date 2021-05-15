@@ -23,19 +23,11 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexRoles =
-        authUser.can.find((element) => element == 'roles.index') ==
-        'roles.index'
-    let canShowRoles =
-        authUser.can.find((element) => element == 'roles.show') == 'roles.show'
-    let canCreateRoles =
-        authUser.can.find((element) => element == 'roles.create') ==
-        'roles.create'
-    let canEditRoles =
-        authUser.can.find((element) => element == 'roles.edit') == 'roles.edit'
-    let canDestroyRoles =
-        authUser.can.find((element) => element == 'roles.destroy') ==
-        'roles.delete'
+    let canIndexRoles = authUser.can.find((element) => element == 'roles.index') == 'roles.index'
+    let canShowRoles = authUser.can.find((element) => element == 'roles.show') == 'roles.show'
+    let canCreateRoles = authUser.can.find((element) => element == 'roles.create') == 'roles.create'
+    let canEditRoles = authUser.can.find((element) => element == 'roles.edit') == 'roles.edit'
+    let canDestroyRoles = authUser.can.find((element) => element == 'roles.destroy') == 'roles.delete'
 
     let filters = {}
 </script>
@@ -46,10 +38,7 @@
 
         <div slot="actions">
             {#if canCreateRoles || isSuperAdmin}
-                <Button
-                    on:click={() => Inertia.visit(route('roles.create'))}
-                    variant="raised"
-                >
+                <Button on:click={() => Inertia.visit(route('roles.create'))} variant="raised">
                     Crear
                     {$_('System roles.singular')}
                 </Button>
@@ -58,33 +47,22 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"
-                    >Nombre</th
-                >
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"
-                    >Acciones</th
-                >
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each roles.data as role (role.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {role.name}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowRoles || canEditRoles || canDestroyRoles || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route('roles.edit', role.id),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('roles.edit', role.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -99,9 +77,7 @@
 
             {#if roles.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"
-                        >Sin información registrada</td
-                    >
+                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

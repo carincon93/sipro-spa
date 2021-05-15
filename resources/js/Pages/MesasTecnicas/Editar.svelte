@@ -20,15 +20,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.index') == 'mesas-tecnicas.index'
-    // prettier-ignore
+
     let canShowMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.show') == 'mesas-tecnicas.show'
-    // prettier-ignore
+
     let canCreateMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.create') == 'mesas-tecnicas.create'
-    // prettier-ignore
+
     let canEditMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.edit') == 'mesas-tecnicas.edit'
-    // prettier-ignore
+
     let canDestroyMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.destroy') == 'mesas-tecnicas.destroy'
 
     let dialog_open = false
@@ -56,19 +56,11 @@
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
-        <div
-            class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6"
-        >
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
                     {#if canIndexMesasTecnicas || canShowMesasTecnicas || canEditMesasTecnicas || canDestroyMesasTecnicas || isSuperAdmin}
-                        <a
-                            use:inertia
-                            href={route('mesas-tecnicas.index')}
-                            class="text-indigo-400 hover:text-indigo-600"
-                        >
-                            Mesas técnicas
-                        </a>
+                        <a use:inertia href={route('mesas-tecnicas.index')} class="text-indigo-400 hover:text-indigo-600"> Mesas técnicas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {mesaTecnica.nombre}
@@ -79,69 +71,26 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset
-                class="p-8"
-                disabled={canEditMesasTecnicas || isSuperAdmin
-                    ? undefined
-                    : true}
-            >
+            <fieldset class="p-8" disabled={canEditMesasTecnicas || isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="nombre"
-                        value="Nombre"
-                    />
-                    <Input
-                        id="nombre"
-                        type="text"
-                        class="mt-1 block w-full"
-                        bind:value={$form.nombre}
-                        error={errors.nombre}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
             </fieldset>
-            <div
-                class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0"
-            >
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if canDestroyMesasTecnicas || isSuperAdmin}
-                    <button
-                        class="text-red-600 hover:underline text-left"
-                        tabindex="-1"
-                        type="button"
-                        on:click={(event) => (dialog_open = true)}
-                    >
-                        Eliminar mesa técnica
-                    </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar mesa técnica </button>
                 {/if}
                 {#if canEditMesasTecnicas || isSuperAdmin}
-                    <LoadingButton
-                        loading={sending}
-                        class="btn-indigo ml-auto"
-                        type="submit"
-                    >
-                        Editar mesa técnica
-                    </LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar mesa técnica</LoadingButton>
                 {/if}
             </div>
         </form>
     </div>
     <Dialog bind:open={dialog_open}>
         <div slot="title" class="flex items-center">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2 text-red-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             Eliminar recurso
         </div>
@@ -156,10 +105,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button
-                    on:click={(event) => (dialog_open = false)}
-                    variant={null}>Cancelar</Button
-                >
+                <Button on:click={(event) => (dialog_open = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

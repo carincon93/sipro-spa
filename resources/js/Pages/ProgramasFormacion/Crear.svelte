@@ -24,15 +24,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
-    // prettier-ignore
+
     let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
-    // prettier-ignore
+
     let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
-    // prettier-ignore
+
     let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
-    // prettier-ignore
+
     let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
 
     let sending = false
@@ -55,19 +55,11 @@
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
-        <div
-            class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6"
-        >
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
                     {#if canIndexProgramasFormacion || canCreateProgramasFormacion || isSuperAdmin}
-                        <a
-                            use:inertia
-                            href={route('programas-formacion.index')}
-                            class="text-indigo-400 hover:text-indigo-600"
-                        >
-                            Programas de formación
-                        </a>
+                        <a use:inertia href={route('programas-formacion.index')} class="text-indigo-400 hover:text-indigo-600"> Programas de formación </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -78,94 +70,30 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset
-                class="p-8"
-                disabled={canCreateProgramasFormacion || isSuperAdmin
-                    ? undefined
-                    : true}
-            >
+            <fieldset class="p-8" disabled={canCreateProgramasFormacion || isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="nombre"
-                        value="Nombre"
-                    />
-                    <Input
-                        id="nombre"
-                        type="text"
-                        class="mt-1 block w-full"
-                        bind:value={$form.nombre}
-                        error={errors.nombre}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="codigo"
-                        value="Código"
-                    />
-                    <Input
-                        id="codigo"
-                        type="number"
-                        min="0"
-                        max="999"
-                        class="mt-1 block w-full"
-                        bind:value={$form.codigo}
-                        error={errors.codigo}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="codigo" value="Código" />
+                    <Input id="codigo" type="number" min="0" max="999" class="mt-1 block w-full" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="modalidad"
-                        value="Modalidad de estudio"
-                    />
-                    <Select
-                        id="modalidad"
-                        items={modalidades}
-                        bind:selectedValue={$form.modalidad}
-                        error={errors.modalidad}
-                        autocomplete="off"
-                        placeholder="Seleccione una modalidad de estudio"
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="modalidad" value="Modalidad de estudio" />
+                    <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad de estudio" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="centro_formacion_id"
-                        value="Centro de formación"
-                    />
-                    <DynamicList
-                        id="centro_formacion_id"
-                        bind:value={$form.centro_formacion_id}
-                        routeWebApi={route('web-api.centros-formacion')}
-                        placeholder="Busque por el nombre del centro de formación"
-                        message={errors.centro_formacion_id}
-                        required
-                    />
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </fieldset>
-            <div
-                class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0"
-            >
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if canCreateProgramasFormacion || isSuperAdmin}
-                    <LoadingButton
-                        loading={sending}
-                        class="btn-indigo ml-auto"
-                        type="submit"
-                    >
-                        Crear Programa de formación
-                    </LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear Programa de formación</LoadingButton>
                 {/if}
             </div>
         </form>

@@ -21,13 +21,13 @@ use App\Http\Controllers\SemilleroInvestigacionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ConvocatoriaController;
 use App\Http\Controllers\IDiController;
-use App\Http\Controllers\ProjectTreeController;
+use App\Http\Controllers\ArbolProyectoController;
 use App\Http\Controllers\OutputController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ConvocatoriaSennovaRoleController;
 use App\Http\Controllers\SennovaRoleController;
-use App\Http\Controllers\ProjectSennovaRoleController;
+use App\Http\Controllers\ProyectoRolSennovaController;
 use App\Http\Controllers\FirstBudgetInfoController;
 use App\Http\Controllers\SecondBudgetInfoController;
 use App\Http\Controllers\ThirdBudgetInfoController;
@@ -96,19 +96,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    // Muestra el árbol de objetivos
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/objectives-tree', [ProjectTreeController::class, 'showObjectivesTree'])->name('convocatorias.proyectos.objectives-tree');
-    // Actualiza el impacto en el arbol de objetivos
-    Route::post('proyectos/{proyecto}/impact/{impact}', [ProjectTreeController::class, 'updateImpact'])->name('proyectos.impact');
-    // Actualiza el impacto en el arbol de objetivos
-    Route::post('proyectos/{proyecto}/proyecto_result/{proyecto_result}', [ProjectTreeController::class, 'updateProjectResult'])->name('proyectos.proyecto_result');
-    // Actualiza el problema general del proyecto en el arbol de problemas
-    Route::post('proyectos/{proyecto}/primary-objective', [ProjectTreeController::class, 'updateObjective'])->name('proyectos.objetivo_general');
-    // Actualiza el objetivo especifico en el arbol de objetivos
-    Route::post('proyectos/{proyecto}/specific_objective/{specific_objective}', [ProjectTreeController::class, 'updateSpecificObjective'])->name('proyectos.specific_objective');
-    // Actualiza la actividad en el arbol de objetivos
-    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/activity/{activity}', [ProjectTreeController::class, 'updateActivity'])->name('proyectos.activity');
-
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participants', [ProyectoController::class, 'participants'])->name('convocatorias.proyectos.participants');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-annexes/{proyecto_annexe}/download', [ProjectAnexoController::class, 'download'])->name('convocatorias.proyectos.proyecto-annexes.download');
@@ -140,18 +127,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.third-budget-info');
 
     // Trae los usos presupuestales
-    Route::get('web-api/calls/{convocatoria}/programmatic-lines/{programmaticLine}/sennova-budgets/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($call, $programmaticLine, $secondBudgetInfo, $thirdBudgetInfo) {
+    Route::get('web-api/calls/{convocatoria}/programmatic-lines/{linea_programatica}/sennova-budgets/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($call, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
         return response(SennovaBudget::select('call_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.message')
             ->join('budget_usages', 'sennova_budgets.budget_usage_id', 'budget_usages.id')
             ->join('call_budgets', 'sennova_budgets.id', 'call_budgets.sennova_budget_id')
             ->where('call_budgets.call_id', $call)
-            ->where('sennova_budgets.linea_programatica_id', $programmaticLine)
+            ->where('sennova_budgets.linea_programatica_id', $lineaProgramatica)
             ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
             ->where('sennova_budgets.third_budget_info_id', $thirdBudgetInfo)
             ->orderBy('budget_usages.description', 'ASC')->get());
     })->name('web-api.budget-usages');
 
-    Route::get('web-api/calls/{convocatoria}/{programmaticLine}/proyecto-sennova-roles', function($call, $programmaticLine) {
+    Route::get('web-api/calls/{convocatoria}/{linea_programatica}/proyecto-rol-sennova', function($call, $lineaProgramatica) {
         return response(CallSennovaRole::selectRaw("call_sennova_roles.id as value, call_sennova_roles.message,
         CASE academic_degree
 				WHEN '0' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
@@ -164,10 +151,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         END as label,
         call_sennova_roles.qty_months, call_sennova_roles.qty_roles, call_sennova_roles.months_experience")
             ->join('sennova_roles', 'call_sennova_roles.sennova_role_id', 'sennova_roles.id')
-            ->where('call_sennova_roles.linea_programatica_id', $programmaticLine)
+            ->where('call_sennova_roles.linea_programatica_id', $lineaProgramatica)
             ->where('call_sennova_roles.call_id', $call)
             ->orderBy('sennova_roles.nombre')->get());
-    })->name('web-api.convocatorias.proyecto-sennova-roles');
+    })->name('web-api.convocatorias.proyecto-rol-sennova');
 
 
     /**
@@ -381,20 +368,39 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
     
     Route::resource('convocatorias', ConvocatoriaController::class)->parameters(['convocatorias' => 'convocatoria'])->except(['show']);
+
+    // Muestra el árbol de objetivos
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-objetivos', [ArbolProyectoController::class, 'showArbolObjetivos'])->name('convocatorias.proyectos.arbol-objetivos');
+    // Actualiza el impacto en el arbol de objetivos
+    Route::post('proyectos/{proyecto}/impacto/{impacto}', [ArbolProyectoController::class, 'updateImpacto'])->name('proyectos.impacto');
+    // Actualiza el impacto en el arbol de objetivos
+    Route::post('proyectos/{proyecto}/resultado/{resultado}', [ArbolProyectoController::class, 'updateResultado'])->name('proyectos.resultado');
+    // Actualiza el problema general del proyecto en el arbol de problemas
+    Route::post('proyectos/{proyecto}/objetivo-general', [ArbolProyectoController::class, 'updateObjetivoGeneral'])->name('proyectos.objetivo-general');
+    // Actualiza el objetivo especifico en el arbol de objetivos
+    Route::post('proyectos/{proyecto}/objetivo-especifico/{objetivo_especifico}', [ArbolProyectoController::class, 'updateObjetivoEspecifico'])->name('proyectos.objetivo-especifico');
+    // Actualiza la actividad en el arbol de objetivos
+    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/actividad/{actividad}', [ArbolProyectoController::class, 'updateActividad'])->name('proyectos.actividad');
     
     // Muestra el árbol de problemas
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-problemas', [ProjectTreeController::class, 'showProblemTree'])->name('convocatorias.proyectos.arbol-problemas');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-problemas', [ArbolProyectoController::class, 'showArbolProblemas'])->name('convocatorias.proyectos.arbol-problemas');
     // Actualiza el problema general del proyecto en el arbol de problemas
-    Route::post('proyectos/{proyecto}/planteamiento-problema', [ProjectTreeController::class, 'updatePlanteamientoProblema'])->name('proyectos.planteamiento-problema');
+    Route::post('proyectos/{proyecto}/planteamiento-problema', [ArbolProyectoController::class, 'updatePlanteamientoProblema'])->name('proyectos.planteamiento-problema');
     // Actualiza efecto directo en el arbol de problemas
-    Route::post('proyectos/{proyecto}/efecto-directo/{efecto_directo}', [ProjectTreeController::class, 'updateEfectoDirecto'])->name('proyectos.efecto-directo');
+    Route::post('proyectos/{proyecto}/efecto-directo/{efecto_directo}', [ArbolProyectoController::class, 'updateEfectoDirecto'])->name('proyectos.efecto-directo');
     // Crea o Actualiza efecto indirecto en el arbol de problemas
-    Route::post('proyectos/{proyecto}/efecto-indirecto/{efecto_directo}', [ProjectTreeController::class, 'createOrUpdateEfectoIndirecto'])->name('proyectos.efecto-indirecto');
+    Route::post('proyectos/{proyecto}/efecto-indirecto/{efecto_directo}', [ArbolProyectoController::class, 'createOrUpdateEfectoIndirecto'])->name('proyectos.efecto-indirecto');
     // Actualiza causa directa en el arbol de problemas
-    Route::post('proyectos/{proyecto}/causa-directa/{causa_directa}', [ProjectTreeController::class, 'updateCausaDirecta'])->name('proyectos.causa-directa');
+    Route::post('proyectos/{proyecto}/causa-directa/{causa_directa}', [ArbolProyectoController::class, 'updateCausaDirecta'])->name('proyectos.causa-directa');
     // Crea o Actualiza causa indirecta en el arbol de problemas
-    Route::post('proyectos/{proyecto}/causa-indirecta/{causa_directa}', [ProjectTreeController::class, 'createOrUpdateCausaIndirecta'])->name('proyectos.causa-indirecta');
+    Route::post('proyectos/{proyecto}/causa-indirecta/{causa_directa}', [ArbolProyectoController::class, 'createOrUpdateCausaIndirecta'])->name('proyectos.causa-indirecta');
     
+
+    /**
+     * Mesas sectoriales
+     * 
+    */
+    Route::resource('convocatorias.proyectos.roles-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'roles-sennova' => 'rol-sennova'])->except(['show']);
 
     
     Route::resource('convocatorias.proyectos.risk-analysis', RiskAnalysisController::class)->parameters(['risk-analysis' => 'risk_analysis']);
@@ -410,7 +416,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'convocatorias.proyectos.outputs' => OutputController::class,
             'convocatorias.proyectos.activities' => ActivityController::class,
             'convocatorias.proyectos.proyecto-sennova-budgets' => ProjectSennovaBudgetController::class,
-            'convocatorias.proyectos.proyecto-sennova-roles' => ProjectSennovaRoleController::class,
             'convocatorias.call-sennova-roles' => ConvocatoriaSennovaRoleController::class,
             'first-budget-info' => FirstBudgetInfoController::class,
             'second-budget-info' => SecondBudgetInfoController::class,

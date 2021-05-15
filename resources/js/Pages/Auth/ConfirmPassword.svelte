@@ -26,33 +26,17 @@
 </script>
 
 <div class="mb-4 text-sm text-gray-600">
-    {$_(
-        'This is a secure area of the application. Please confirm your password before continuing.',
-    )}
+    {$_('This is a secure area of the application. Please confirm your password before continuing.')}
 </div>
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Label
-            required
-            class="mb-4"
-            labelFor="password"
-            value={$_('Password')}
-        />
-        <Input
-            id="password"
-            type="password"
-            class="mt-1 block w-full"
-            bind:value={form.password}
-            required
-            autocomplete="current-password"
-        />
+        <Label required class="mb-4" labelFor="password" value={$_('Password')} />
+        <Input id="password" type="password" class="mt-1 block w-full" bind:value={form.password} required autocomplete="current-password" />
         <InputError message={errors.password} />
     </div>
 
     <div class="flex justify-end mt-4">
-        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit"
-            >Confirmar</LoadingButton
-        >
+        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">Confirmar</LoadingButton>
     </div>
 </form>

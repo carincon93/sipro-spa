@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.index') == 'redes-conocimiento.index'
-    // prettier-ignore
+
     let canShowRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.show') == 'redes-conocimiento.show'
-    // prettier-ignore
+
     let canCreateRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.create') == 'redes-conocimiento.create'
-    // prettier-ignore
+
     let canEditRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.edit') == 'redes-conocimiento.edit'
-    // prettier-ignore
+
     let canDestroyRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.destroy') == 'redes-conocimiento.destroy'
 
     let filters = {}
@@ -43,47 +43,27 @@
 
         <div slot="actions">
             {#if canCreateRedesConocimiento || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('redes-conocimiento.create'))}
-                    variant="raised"
-                >
-                    Crear red de conocimiento
-                </Button>
+                <Button on:click={() => Inertia.visit(route('redes-conocimiento.create'))} variant="raised">Crear red de conocimiento</Button>
             {/if}
         </div>
 
         <tr class="text-left font-bold" slot="thead">
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                Nombre
-            </th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                Acciones
-            </th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
         </tr>
 
         <tbody slot="tbody">
             {#each redesConocimiento.data as redConocimiento (redConocimiento.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {redConocimiento.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowRedesConocimiento || canEditRedesConocimiento || canDestroyRedesConocimiento || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'redes-conocimiento.edit',
-                                                redConocimiento.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('redes-conocimiento.edit', redConocimiento.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -98,9 +78,7 @@
 
             {#if redesConocimiento.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

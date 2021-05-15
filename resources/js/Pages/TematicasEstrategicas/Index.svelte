@@ -24,15 +24,14 @@
             return role.id == 1
         }).length > 0
 
-    // prettier-ignore
     let canIndexTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.index') == 'tematicas-estrategicas.index'
-    // prettier-ignore
+
     let canShowTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.show') == 'tematicas-estrategicas.show'
-    // prettier-ignore
+
     let canCreateTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.create') == 'tematicas-estrategicas.create'
-    // prettier-ignore
+
     let canEditTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.edit') == 'tematicas-estrategicas.edit'
-    // prettier-ignore
+
     let canDestroyTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.destroy') == 'tematicas-estrategicas.destroy'
 
     let filters = {}
@@ -44,48 +43,28 @@
 
         <div slot="actions">
             {#if canCreateTematicasEstrategicas || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('tematicas-estrategicas.create'))}
-                    variant="raised"
-                >
-                    Crear temática estratégica SENA
-                </Button>
+                <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.create'))} variant="raised">Crear temática estratégica SENA</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each tematicasEstrategicas.data as tematicaEstrategica (tematicaEstrategica.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {tematicaEstrategica.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowTematicasEstrategicas || canEditTematicasEstrategicas || canDestroyTematicasEstrategicas || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'tematicas-estrategicas.edit',
-                                                tematicaEstrategica.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('tematicas-estrategicas.edit', tematicaEstrategica.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -100,9 +79,7 @@
 
             {#if tematicasEstrategicas.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

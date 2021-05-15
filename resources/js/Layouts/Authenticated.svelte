@@ -60,13 +60,8 @@
                         </div>
 
                         <!-- Navigation Links -->
-                        <div
-                            class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center"
-                        >
-                            <Button
-                                on:click={() => (dialog_open = true)}
-                                variant={null}
-                            >
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
+                            <Button on:click={() => (dialog_open = true)} variant={null}>
                                 {$_('Dashboard')}
                             </Button>
                         </div>
@@ -76,34 +71,20 @@
                         <!-- Settings Dropdown -->
                         <div class="ml-3 relative">
                             <Dropdown class="mt-1" placement="bottom-end">
-                                <div
-                                    class="flex items-center cursor-pointer select-none group"
-                                >
-                                    <div
-                                        class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap"
-                                    >
+                                <div class="flex items-center cursor-pointer select-none group">
+                                    <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
                                         <span>{authUser.user_name}</span>
                                     </div>
-                                    <Icon
-                                        name="cheveron-down"
-                                        class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600"
-                                    />
+                                    <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>
-                                <div
-                                    slot="dropdown"
-                                    class="mt-2 py-2 shadow-xl bg-white rounded text-sm"
-                                >
+                                <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
                                     <!-- <a
                                         use:inertia
                                         href={route('users.edit', authUser.id)}
                                         class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         Mi perfil
                                     </a> -->
-                                    <a
-                                        use:inertia={{ method: 'post' }}
-                                        href={route('logout')}
-                                        class="block px-6 py-2 hover:bg-indigo-500 hover:text-white"
-                                    >
+                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         {$_('Logout')}
                                     </a>
                                 </div>
@@ -124,15 +105,9 @@
             </div>
 
             <!-- Responsive Navigation Menu -->
-            <div
-                class="sm:hidden{(showingNavigationDropdown ? ' block' : '',
-                !showingNavigationDropdown ? ' hidden' : '')}"
-            >
+            <div class="sm:hidden{(showingNavigationDropdown ? ' block' : '', !showingNavigationDropdown ? ' hidden' : '')}">
                 <div class="pt-2 pb-3 space-y-1">
-                    <ResponsiveNavLink
-                        href={route('dashboard')}
-                        active={route().current('dashboard')}
-                    >
+                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                         {$_('Dashboard')}
                     </ResponsiveNavLink>
                 </div>
@@ -149,11 +124,7 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route('logout')}
-                            method="post"
-                            as="button"
-                        >
+                        <ResponsiveNavLink href={route('logout')} method="post" as="button">
                             {$_('Logout')}
                         </ResponsiveNavLink>
                     </div>
@@ -184,14 +155,7 @@
         <div class="grid grid-cols-3 gap-5 p-8">
             {#each links as link}
                 {#if authUser.can.find((element) => element == link.route + '.index') != undefined || authUser.can.find((element) => element == link.route + '.show') != undefined || authUser.can.find((element) => element == link.route + '.create') != undefined || authUser.can.find((element) => element == link.route + '.edit') != undefined || authUser.can.find((element) => element == link.route + '.delete') != undefined || isSuperAdmin}
-                    <Button
-                        on:click={() =>
-                            Inertia.visit(route(link.route + '.index'))}
-                        variant={isUrl('/' + link.route + '/*')
-                            ? 'raised'
-                            : 'outlined'}
-                        class="p-2"
-                    >
+                    <Button on:click={() => Inertia.visit(route(link.route + '.index'))} variant={isUrl('/' + link.route + '/*') ? 'raised' : 'outlined'} class="p-2">
                         {link.name}
                     </Button>
                 {/if}
@@ -200,9 +164,7 @@
     </div>
     <div slot="actions">
         <div class="p-4">
-            <Button on:click={(event) => (dialog_open = false)} variant={null}
-                >Cancelar</Button
-            >
+            <Button on:click={(event) => (dialog_open = false)} variant={null}>Cancelar</Button>
         </div>
     </div>
 </Dialog>
@@ -222,8 +184,7 @@
         margin-bottom: 0;
     }
 
-    :global(#main-menu-dialog .mdc-button--outlined, #main-menu-dialog
-            .mdc-button--raised) {
+    :global(#main-menu-dialog .mdc-button--outlined, #main-menu-dialog .mdc-button--raised) {
         height: auto;
     }
 </style>

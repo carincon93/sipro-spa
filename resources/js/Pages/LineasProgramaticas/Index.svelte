@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.index') == 'lineas-programaticas.index'
-    // prettier-ignore
+
     let canShowLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.show') == 'lineas-programaticas.show'
-    // prettier-ignore
+
     let canCreateLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.create') == 'lineas-programaticas.create'
-    // prettier-ignore
+
     let canEditLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.edit') == 'lineas-programaticas.edit'
-    // prettier-ignore
+
     let canDestroyLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.destroy') == 'lineas-programaticas.destroy'
 
     let filters = {}
@@ -43,39 +43,23 @@
 
         <div slot="actions">
             {#if canCreateLineasProgramaticas || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(route('lineas-programaticas.create'))}
-                    variant="raised"
-                >
-                    Crear línea programática
-                </Button>
+                <Button on:click={() => Inertia.visit(route('lineas-programaticas.create'))} variant="raised">Crear línea programática</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Nombre
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Código
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Categoría
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Código </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Categoría </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each lineasProgramaticas.data as lineaProgramatica (lineaProgramatica.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {lineaProgramatica.nombre}
                         </p>
                     </td>
@@ -92,15 +76,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowLineasProgramaticas || canEditLineasProgramaticas || canDestroyLineasProgramaticas || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route(
-                                                'lineas-programaticas.edit',
-                                                lineaProgramatica.id,
-                                            ),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('lineas-programaticas.edit', lineaProgramatica.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -115,9 +91,7 @@
 
             {#if lineasProgramaticas.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

@@ -24,15 +24,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    // prettier-ignore
+
     let canIndexIDi = authUser.can.find((element) => element == 'IDi.index') == 'IDi.index'
-    // prettier-ignore
+
     let canCreateIDi = authUser.can.find((element) => element == 'IDi.create') == 'IDi.create'
-    // prettier-ignore
+
     let canShowIDi = authUser.can.find((element) => element == 'IDi.show') == 'IDi.show'
-    // prettier-ignore
+
     let canEditIDi = authUser.can.find((element) => element == 'IDi.edit') == 'IDi.edit'
-    // prettier-ignore
+
     let canDestroyIDi = authUser.can.find((element) => element == 'IDi.destroy') == 'IDi.destroy'
 
     let filters = {}
@@ -44,31 +44,15 @@
 
         <div slot="actions">
             {#if canCreateIDi || isSuperAdmin}
-                <Button
-                    on:click={() =>
-                        Inertia.visit(
-                            route('convocatorias.idi.create', [
-                                convocatoria.id,
-                            ]),
-                        )}
-                    variant="raised"
-                >
-                    Crear proyecto I+D+i
-                </Button>
+                <Button on:click={() => Inertia.visit(route('convocatorias.idi.create', [convocatoria.id]))} variant="raised">Crear proyecto I+D+i</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Título
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Fecha de ejecución
-                </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">
-                    Acciones
-                </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Título </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Fecha de ejecución </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
             </tr>
         </thead>
 
@@ -76,9 +60,7 @@
             {#each IDi.data as { id, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p
-                            class="px-6 py-4 flex items-center focus:text-indigo-500"
-                        >
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                             {titulo}
                         </p>
                     </td>
@@ -90,15 +72,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if canShowIDi || canEditIDi || canDestroyIDi || isSuperAdmin}
-                                <Item
-                                    on:SMUI:action={() =>
-                                        Inertia.visit(
-                                            route('convocatorias.idi.edit', [
-                                                convocatoria.id,
-                                                id,
-                                            ]),
-                                        )}
-                                >
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -113,9 +87,7 @@
 
             {#if IDi.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        Sin información registrada
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

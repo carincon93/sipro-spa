@@ -25,7 +25,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class ProjectTreeController extends Controller
+class ArbolProyectoController extends Controller
 {
     /**
      * generateTree
@@ -87,15 +87,15 @@ class ProjectTreeController extends Controller
     }
 
     /**
-     * showProblemTree
+     * showArbolProblemas
      *
      * @param  mixed $convocatoria
      * @param  mixed $proyecto
      * @return void
      */
-    public function showProblemTree(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('showProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('showArbolProblemas', [Proyecto::class, $proyecto]);
 
         switch ($proyecto) {
             case $proyecto->IDi()->exists():
@@ -111,7 +111,7 @@ class ProjectTreeController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
-        return Inertia::render('Convocatorias/Proyectos/ProjectTree/ProblemTree', [
+        return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica'),
             'efectosDirectos'   => $efectosDirectos,
@@ -128,7 +128,7 @@ class ProjectTreeController extends Controller
      */
     public function updatePlanteamientoProblema(Request $request, Proyecto $proyecto)
     {
-        $this->authorize('createOrUpdateProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolProblemas', [Proyecto::class, $proyecto]);
 
         $request->validate([
             'planteamiento_problema' => 'required|string|max:1200',
@@ -159,7 +159,7 @@ class ProjectTreeController extends Controller
      */
     public function updateEfectoDirecto(EfectoDirectoRequest $request, Proyecto $proyecto, EfectoDirecto $efectoDirecto)
     {
-        $this->authorize('createOrUpdateProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolProblemas', [Proyecto::class, $proyecto]);
 
         $efectoDirecto->descripcion = $request->descripcion;
 
@@ -178,7 +178,7 @@ class ProjectTreeController extends Controller
      */
     public function createOrUpdateEfectoIndirecto(EfectoIndirectoRequest $request, Proyecto $proyecto, EfectoDirecto $efectoDirecto)
     {
-        $this->authorize('createOrUpdateProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolProblemas', [Proyecto::class, $proyecto]);
 
         if (empty($request->id) && $efectoDirecto->efectosIndirectos()->count() < 3) {
             $efectoIndirecto = new EfectoIndirecto();
@@ -213,7 +213,7 @@ class ProjectTreeController extends Controller
      */
     public function updateCausaDirecta(CausaDirectaRequest $request, Proyecto $proyecto, CausaDirecta $causaDirecta)
     {
-        $this->authorize('createOrUpdateProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolProblemas', [Proyecto::class, $proyecto]);
 
         $causaDirecta->descripcion = $request->descripcion;
 
@@ -232,7 +232,7 @@ class ProjectTreeController extends Controller
      */
     public function createOrUpdateCausaIndirecta(CausaIndirectaRequest $request, Proyecto $proyecto, CausaDirecta $causaDirecta)
     {
-        $this->authorize('createOrUpdateProblemTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolProblemas', [Proyecto::class, $proyecto]);
 
         if (empty($request->id) && $causaDirecta->causasIndirectas()->count() < 3) {
             $causaIndirecta = new CausaIndirecta();
@@ -256,15 +256,15 @@ class ProjectTreeController extends Controller
     }
 
     /**
-     * showObjectivesTree
+     * showArbolObjetivos
      *
      * @param  mixed $convocatoria
      * @param  mixed $proyecto
      * @return void
      */
-    public function showObjectivesTree(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('showObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('showArbolObjetivos', [Proyecto::class, $proyecto]);
 
         switch ($proyecto) {
             case $proyecto->IDi()->exists():
@@ -272,21 +272,18 @@ class ProjectTreeController extends Controller
 
                 $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultado')->get();
                 $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+                $proyecto->planteamiento_problema = $proyecto->IDi->planteamiento_problema;
+                $proyecto->objetivo_general = $proyecto->IDi->objetivo_general;
                 break;
-            default:
+                default:
                 break;
-        }
+            }
+            
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
-        $proyecto->tipoProyecto->lineaProgramatica;
-        $proyecto->makeHidden(
-            'IDi', 
-            'proyectoSennovaBudgets', 
-            'updated_at',
-        );
-
-        return Inertia::render('Convocatorias/Proyectos/ProjectTree/ObjectivesTree', [
+        return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id'),
-            'proyecto'        => $proyecto,
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'planteamiento_problema', 'objetivo_general'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),
@@ -295,15 +292,15 @@ class ProjectTreeController extends Controller
     }
 
     /**
-     * updateObjective
+     * updateObjetivoGeneral
      *
      * @param  mixed $request
      * @param  mixed $proyecto
      * @return void
      */
-    public function updateObjective(Request $request, Proyecto $proyecto)
+    public function updateObjetivoGeneral(Request $request, Proyecto $proyecto)
     {
-        $this->authorize('createOrUpdateObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolObjetivos', [Proyecto::class, $proyecto]);
 
         $request->validate([
             'objetivo_general' => 'required|string|max:1200',
@@ -311,7 +308,7 @@ class ProjectTreeController extends Controller
 
         switch ($proyecto) {
             case $proyecto->IDi()->exists():
-                $IDi                    = $proyecto->IDi;
+                $IDi                   = $proyecto->IDi;
                 $IDi->objetivo_general = $request->objetivo_general;
 
                 $IDi->save();
@@ -333,10 +330,10 @@ class ProjectTreeController extends Controller
      */
     public function updateImpacto(ImpactoRequest $request, Proyecto $proyecto, Impacto $impacto)
     {
-        $this->authorize('createOrUpdateObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolObjetivos', [Proyecto::class, $proyecto]);
 
         $impacto->descripcion    = $request->descripcion;
-        $impacto->type           = $request->type;
+        $impacto->tipo           = $request->tipo;
 
         if ($impacto->save()) {
             return redirect()->back()->with('success', 'The resource has been saved successfully.');
@@ -355,7 +352,7 @@ class ProjectTreeController extends Controller
      */
     public function updateResultado(ResultadoRequest $request, Proyecto $proyecto, Resultado $resultado)
     {
-        $this->authorize('createOrUpdateObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolObjetivos', [Proyecto::class, $proyecto]);
 
         $resultado->fill($request->all());
 
@@ -376,7 +373,7 @@ class ProjectTreeController extends Controller
      */
     public function updateObjetivoEspecifico(ObjetivoEspecificoRequest $request, Proyecto $proyecto, ObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('createOrUpdateObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolObjetivos', [Proyecto::class, $proyecto]);
 
         $objetivoEspecifico->descripcion = $request->descripcion;
         $objetivoEspecifico->numero      = $request->numero;
@@ -399,7 +396,7 @@ class ProjectTreeController extends Controller
      */
     public function updateActividad(ActividadRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('createOrUpdateObjectivesTree', [Proyecto::class, $proyecto]);
+        $this->authorize('createOrUpdateArbolObjetivos', [Proyecto::class, $proyecto]);
 
         $actividad->fill($request->all());
 

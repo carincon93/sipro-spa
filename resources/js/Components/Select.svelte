@@ -24,9 +24,7 @@
 
     afterUpdate(() => {
         if (required && select != null) {
-            selectedValue?.value != undefined
-                ? select.setCustomValidity('')
-                : select.setCustomValidity($_('Please fill out this field.'))
+            selectedValue?.value != undefined ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
         }
     })
 
@@ -35,19 +33,7 @@
     }
 </script>
 
-<Select
-    selectedValue={selectedValue?.value ? selectedValue : null}
-    inputAttributes={{ id: id }}
-    {placeholder}
-    containerClasses="items {classes}"
-    {items}
-    {autocomplete}
-    {isMulti}
-    {isSearchable}
-    {groupBy}
-    on:select={(e) => handleSelect(e)}
-    on:clear={() => (selectedValue = null)}
-/>
+<Select selectedValue={selectedValue?.value ? selectedValue : null} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} {autocomplete} {isMulti} {isSearchable} {groupBy} on:select={(e) => handleSelect(e)} on:clear={() => (selectedValue = null)} />
 <InputError message={error} />
 
 <style>
