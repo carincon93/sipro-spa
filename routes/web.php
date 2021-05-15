@@ -22,7 +22,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ConvocatoriaController;
 use App\Http\Controllers\IDiController;
 use App\Http\Controllers\ArbolProyectoController;
-use App\Http\Controllers\OutputController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ConvocatoriaRolSennovaController;
@@ -57,7 +57,7 @@ use App\Models\CentroFormacion;
 use App\Models\Region;
 use App\Models\Regional;
 use App\Models\GrupoInvestigacion;
-use App\Models\MincienciasSubtypology;
+use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
 use App\Models\SecondBudgetInfo;
@@ -102,17 +102,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-sennova-budgets/{proyecto_sennova_budget}/proyecto-budget-batches/{proyecto_budget_batch}/download', [ProjectBudgetBatchController::class, 'download'])->name('convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches.download');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-sennova-budgets/{proyecto_sennova_budget}/market-research/{market_research}/download', [ProjectBudgetBatchController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches.download-price-qoute-file');    
 
-    // Trae las líneas programáticas
-    Route::get('web-api/lineas-programaticas', function() {
-        return response(LineaProgramatica::select('id as value', 'name as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.lineas-programaticas');
-
-    
-
-    // Trae las subtipologías Minciencias
-    Route::get('web-api/minciencias-subtypologies', function() {
-        return response(MincienciasSubtypology::selectRaw('minciencias_subtypologies.id as value, concat(minciencias_subtypologies.nombre, chr(10), \'∙ Tipología Minciencias: \', minciencias_typologies.nombre) as label')->join('minciencias_typologies', 'minciencias_subtypologies.minciencias_typology_id', 'minciencias_typologies.id')->orderBy('minciencias_subtypologies.nombre')->get());
-    })->name('web-api.minciencias-subtypologies');
 
     // Trae los conceptos internos SENA
     Route::get('web-api/second-budget-info', function() {
@@ -165,6 +154,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/regiones', function() {
         return response(Region::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.regiones');
+
     /**
     * Trae las regionales
     */
@@ -311,7 +301,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     /**
-     * Proyectos
+     * Web api
      * 
      */
     Route::get('web-api/municipios', function() {
@@ -320,17 +310,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->get());
     })->name('web-api.municipios');
 
-    // Trae las Tecnoacademias
+    /**
+     * Web api
+     * 
+     * Trae las Tecnoacademias
+     */
     Route::get('web-api/tecnoacademias', function() {
         return response(Tecnoacademia::select('tecnoacademias.id as value', 'tecnoacademias.nombre as label')->get());
     })->name('web-api.tecnoacademias');
 
-    // Trae las líneas tecnológicas
+    /**
+     * Web api
+     * 
+     * Trae las líneas tecnológicas
+     */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function($tecnoacademia) {
         return response(LineaTecnologica::select('id', 'nombre')->where('lineas_tecnologicas.tecnoacademia_id', $tecnoacademia)->get());
     })->name('web-api.tecnoacademias.lineas-tecnologicas');
 
-    // Trae los tipos de proyectos
+    /**
+     * Web api
+     * 
+     * Trae los tipos de proyectos
+     */
     Route::get('web-api/tipos-proyecto/{tipo_proyecto}', function($tipoProyecto) {
         return response(TipoProyecto::selectRaw('tipos_proyecto.id as value, concat(tipos_proyecto.nombre, chr(10), \'∙ Línea programática: \', lineas_programaticas.codigo, \' - \', lineas_programaticas.nombre) as label')
             ->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id')
@@ -338,27 +340,66 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->get());
     })->name('web-api.tipos-proyecto');
 
-    // Trae las redes de conocimiento 
+    /**
+     * Web api
+     * 
+     * Trae las redes de conocimiento 
+     */
     Route::get('web-api/redes-conocimiento', function() {
         return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.redes-conocimiento');
 
-    // Trae las disciplinas de subáreas de conocimiento
+    /**
+     * Web api
+     * 
+     * Trae las disciplinas de subáreas de conocimiento
+     */
     Route::get('web-api/disciplinas-subarea-conocimiento', function() {
         return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.disciplinas-subarea-conocimiento');
 
-    // Trae los actividades económicas
+    /**
+     * Web api
+     * 
+     * Trae los actividades económicas
+     */
     Route::get('web-api/actividades-economicas', function() {
         return response(ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.actividades-economicas');
 
-    // Trae las temáticas estrategicas SENA
+    /**
+     * Web api
+     * 
+     * Trae las temáticas estrategicas SENA
+     */
     Route::get('web-api/tematicas-estrategicas', function() {
         return response(TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.tematicas-estrategicas');
 
+    /**
+     * Web api
+     * 
+     * Trae las líneas programáticas
+     */
+     Route::get('web-api/lineas-programaticas', function() {
+        return response(LineaProgramatica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.lineas-programaticas');
 
+    
+    /**
+     * Web api
+     * 
+     * Trae las subtipologías Minciencias
+     */
+    Route::get('web-api/subtipologias-minciencias', function() {
+        return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
+    })->name('web-api.subtipologias-minciencias');
+
+
+    /**
+     * Convocatorias
+     * 
+     */
     Route::get('convocatorias/{convocatoria}/dashboard', [ConvocatoriaController::class, 'dashboard'])->name('convocatorias.dashboard');
 
     Route::resource('convocatorias.idi', IDiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi'])->except(['show']);
@@ -369,7 +410,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::resource('convocatorias', ConvocatoriaController::class)->parameters(['convocatorias' => 'convocatoria'])->except(['show']);
 
-    // Muestra el árbol de objetivos
+    /**
+     * Muestra el árbol de objetivos
+     * 
+     */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-objetivos', [ArbolProyectoController::class, 'showArbolObjetivos'])->name('convocatorias.proyectos.arbol-objetivos');
     // Actualiza el impacto en el arbol de objetivos
     Route::post('proyectos/{proyecto}/impacto/{impacto}', [ArbolProyectoController::class, 'updateImpacto'])->name('proyectos.impacto');
@@ -382,7 +426,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Actualiza la actividad en el arbol de objetivos
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/actividad/{actividad}', [ArbolProyectoController::class, 'updateActividad'])->name('proyectos.actividad');
     
-    // Muestra el árbol de problemas
+    /**
+     * Muestra el árbol de problemas
+     * 
+     */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-problemas', [ArbolProyectoController::class, 'showArbolProblemas'])->name('convocatorias.proyectos.arbol-problemas');
     // Actualiza el problema general del proyecto en el arbol de problemas
     Route::post('proyectos/{proyecto}/planteamiento-problema', [ArbolProyectoController::class, 'updatePlanteamientoProblema'])->name('proyectos.planteamiento-problema');
@@ -395,6 +442,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Crea o Actualiza causa indirecta en el arbol de problemas
     Route::post('proyectos/{proyecto}/causa-indirecta/{causa_directa}', [ArbolProyectoController::class, 'createOrUpdateCausaIndirecta'])->name('proyectos.causa-indirecta');
     
+    /**
+     * Productos
+     * 
+    */
+    Route::resource('convocatorias.proyectos.productos', ProductoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'productos' => 'producto'])->except(['show']);
 
     /**
      * Mesas sectoriales
@@ -410,10 +462,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches' => ProjectBudgetBatchController::class,
             'budget-usages' => BudgetUsageController::class,
             'minciencias-typologies' => MincienciasTypologyController::class,
-            'minciencias-subtypologies' => MincienciasSubtypologyController::class,
+            'minciencias-subtypologies' => SubtipologiaMincienciasController::class,
             'users' => UserController::class,
             'roles' => RoleController::class,
-            'convocatorias.proyectos.outputs' => OutputController::class,
             'convocatorias.proyectos.activities' => ActivityController::class,
             'convocatorias.proyectos.proyecto-sennova-budgets' => ProjectSennovaBudgetController::class,
             'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,

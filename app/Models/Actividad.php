@@ -21,7 +21,7 @@ class Actividad extends Model
      *
      * @var array
      */
-    protected $appends = ['start_year', 'start_month', 'start_day', 'end_year', 'end_month', 'end_day'];
+    protected $appends = ['year_inicio', 'mes_inicio', 'dia_inicio', 'year_finalizacion', 'mes_finalizacion', 'dia_finalizacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -75,13 +75,13 @@ class Actividad extends Model
     }
 
     /**
-     * Relationship with Output
+     * Relationship with Producto
      *
      * @return void
      */
-    public function outputs()
+    public function productos()
     {
-        return $this->belongsToMany(Output::class, 'activity_output', 'activity_id', 'output_id');
+        return $this->belongsToMany(Producto::class, 'actividad_producto', 'actividad_id', 'producto_id');
     }
 
     /**
@@ -99,7 +99,7 @@ class Actividad extends Model
      *
      * @return void
      */
-    public function entidadAliadas()
+    public function entidadesAliadas()
     {
         return $this->belongsToMany(EntidadAliada::class, 'activity_partner_organization', 'activity_id', 'partner_organization_id');
     }
@@ -118,32 +118,32 @@ class Actividad extends Model
         });
     }
 
-    public function getStartYearAttribute()
+    public function getYearInicioAttribute()
     {
         return date('Y', strtotime($this->fecha_inicio));
     }
 
-    public function getStartMonthAttribute()
+    public function getMesInicioAttribute()
     {
         return date('m', strtotime($this->fecha_inicio));
     }
 
-    public function getStartDayAttribute()
+    public function getDiaInicioAttribute()
     {
         return date('d', strtotime($this->fecha_inicio));
     }
 
-    public function getEndYearAttribute()
+    public function getYearFinalizacionAttribute()
     {
         return date('Y', strtotime($this->fecha_finalizacion));
     }
 
-    public function getEndMonthAttribute()
+    public function getMEsFinalizacionAttribute()
     {
         return date('m', strtotime($this->fecha_finalizacion));
     }
 
-    public function getEndDayAttribute()
+    public function getDiaFinalizacionAttribute()
     {
         return date('d', strtotime($this->fecha_finalizacion));
     }

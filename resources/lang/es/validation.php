@@ -173,6 +173,7 @@ return [
 		'convocatoria_rol_sennova_id' => 'rol SENNOVA',
 		'numero_roles'  		=> 'número de personas',
 		'numero_meses' 			=> 'número de meses',
+		'resultado_id' 			=> 'resultado',
 		
 		'grupo_investigacion_id' => 'grupo de investigación',
 		'linea_investigacion_id' => 'línea de investigación',

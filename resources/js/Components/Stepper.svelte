@@ -46,7 +46,7 @@
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.outputs.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">7</div>
             <p class="text-sm text-center">Productos</p>
         </a>

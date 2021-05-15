@@ -28,7 +28,7 @@
         data.addColumn('string', 'Dependencies')
 
         items.map(function (item) {
-            data.addRows([['itemID-' + item.id, '', new Date(item.start_year, item.start_month - 1, item.start_day), new Date(item.end_year, item.end_month - 1, item.end_day), null, 100, null]])
+            data.addRows([['itemID-' + item.id, '', new Date(item.year_inicio, item.mes_inicio - 1, item.dia_inicio), new Date(item.year_finalizacion, item.mes_finalizacion - 1, item.dia_finalizacion), null, 100, null]])
         })
 
         let trackHeight = 120
@@ -100,7 +100,7 @@
                     <li style="height: 120px; padding: 7px;line-height: 1.2;display: flex;justify-content: space-between;width: 100%;">
                         {#if request}
                             <p style="max-width: 90%;max-height: 50px;overflow: hidden;">
-                                {item.description ?? item.name}
+                                {item.descripcion ?? item.nombre}
                             </p>
                             <ResourceMenu>
                                 <Item on:SMUI:action={() => Inertia.visit(route(request.uri, arrayPush(item.id)))}>
@@ -108,7 +108,7 @@
                                 </Item>
                             </ResourceMenu>
                         {:else}
-                            <span style="max-width: 90%;max-height: 50px;overflow: hidden;">{item.description ?? item.name}</span>
+                            <span style="max-width: 90%;max-height: 50px;overflow: hidden;">{item.descripcion ?? item.nombre}</span>
                         {/if}
                     </li>
                 {/each}

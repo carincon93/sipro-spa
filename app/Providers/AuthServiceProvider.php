@@ -27,14 +27,13 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\GrupoInvestigacion' => 'App\Policies\GrupoInvestigacionPolicy',
         'App\Models\LineaInvestigacion' => 'App\Policies\LineaInvestigacionPolicy',
         'App\Models\SemilleroInvestigacion' => 'App\Policies\SemilleroInvestigacionPolicy',
-        'App\Models\Role' => 'App\Policies\RolePolicy',
         'App\Models\Convocatoria' => 'App\Policies\ConvocatoriaPolicy',
         'App\Models\IDi' => 'App\Policies\IDiPolicy',
-        'App\Models\RDIOutput' => 'App\Policies\RDIOutputPolicy',
+        'App\Models\Producto' => 'App\Policies\ProductoPolicy',
         'App\Models\Activity' => 'App\Policies\ActivityPolicy',
         'App\Models\ConvocatoriaRolSennova' => 'App\Policies\CallRolSennovaPolicy',
         'App\Models\RolSennova' => 'App\Policies\RolSennovaPolicy',
-        'App\Models\ProjectRolSennova' => 'App\Policies\ProjectRolSennovaPolicy',
+        'App\Models\ProyectoRolSennova' => 'App\Policies\ProyectoRolSennovaPolicy',
         'App\Models\FirstBudgetInfo' => 'App\Policies\FirstBudgetInfoPolicy',
         'App\Models\SecondBudgetInfo' => 'App\Policies\SecondBudgetInfoPolicy',
         'App\Models\ThirdBudgetInfo' => 'App\Policies\ThirdBudgetInfoPolicy',
@@ -52,6 +51,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Tecnoacademia' => 'App\Policies\TecnoacademiaPolicy',
         'App\Models\LineaTecnologica' => 'App\Policies\LineaTecnologicaPolicy',
         'App\Models\MesaSectorial' => 'App\Policies\MesaSectorialPolicy',
+        'App\Models\Role' => 'App\Policies\RolePolicy',
     ];
 
     /**
