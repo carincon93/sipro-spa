@@ -201,7 +201,7 @@
     <div slot="actions">
         <div class="p-4">
             <Button on:click={(event) => (dialog_open = false)} variant={null}
-                >{$_('Cancel')}</Button
+                >Cancelar</Button
             >
         </div>
     </div>

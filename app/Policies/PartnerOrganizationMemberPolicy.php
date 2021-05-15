@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PartnerOrganizationMember;
+use App\Models\EntidadAliadaMember;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PartnerOrganizationMemberPolicy
+class EntidadAliadaMemberPolicy
 {
     use HandlesAuthorization;
 
@@ -29,10 +29,10 @@ class PartnerOrganizationMemberPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return mixed
      */
-    public function view(User $user, PartnerOrganizationMember $partnerOrganizationMember)
+    public function view(User $user, EntidadAliadaMember $EntidadAliadaMember)
     {
         if ( $user->hasPermissionTo('partner-organization-members.show') ) {
             return true;
@@ -60,10 +60,10 @@ class PartnerOrganizationMemberPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return mixed
      */
-    public function update(User $user, PartnerOrganizationMember $partnerOrganizationMember)
+    public function update(User $user, EntidadAliadaMember $EntidadAliadaMember)
     {
         if ( $user->hasPermissionTo('partner-organization-members.show') || $user->hasPermissionTo('partner-organization-members.edit') || $user->hasPermissionTo('partner-organization-members.delete') ) {
             return true;
@@ -76,10 +76,10 @@ class PartnerOrganizationMemberPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return mixed
      */
-    public function delete(User $user, PartnerOrganizationMember $partnerOrganizationMember)
+    public function delete(User $user, EntidadAliadaMember $EntidadAliadaMember)
     {
         if ( $user->hasPermissionTo('partner-organization-members.delete') ) {
             return true;
@@ -92,10 +92,10 @@ class PartnerOrganizationMemberPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return mixed
      */
-    public function restore(User $user, PartnerOrganizationMember $partnerOrganizationMember)
+    public function restore(User $user, EntidadAliadaMember $EntidadAliadaMember)
     {
         //
     }
@@ -104,10 +104,10 @@ class PartnerOrganizationMemberPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return mixed
      */
-    public function forceDelete(User $user, PartnerOrganizationMember $partnerOrganizationMember)
+    public function forceDelete(User $user, EntidadAliadaMember $EntidadAliadaMember)
     {
         //
     }

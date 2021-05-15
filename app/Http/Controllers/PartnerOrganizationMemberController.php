@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PartnerOrganizationMemberRequest;
-use App\Models\Call;
-use App\Models\RDI;
-use App\Models\PartnerOrganization;
-use App\Models\PartnerOrganizationMember;
+use App\Http\Requests\EntidadAliadaMemberRequest;
+use App\Models\Convocatoria;
+use App\Models\IDi;
+use App\Models\EntidadAliada;
+use App\Models\EntidadAliadaMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class PartnerOrganizationMemberController extends Controller
+class EntidadAliadaMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, RDI $rdi, PartnerOrganization $partnerOrganization)
+    public function index(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada)
     {
-        $this->authorize('viewAny', [PartnerOrganizationMember::class]);
+        $this->authorize('viewAny', [EntidadAliadaMember::class]);
 
-        return Inertia::render('Calls/Projects/RDI/PartnerOrganizations/PartnerOrganizationMembers/Index', [
+        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadAliadas/EntidadAliadaMembers/Index', [
             'filters'   => request()->all('search'),
-            'partnerOrganizationMembers' => PartnerOrganizationMember::orderBy('nombre', 'ASC')
-                ->filterPartnerOrganizationMember(request()->only('search'))->paginate(),
-            'call'                  => $call,
-            'rdi'                   => $rdi,
-            'partnerOrganization'   => $partnerOrganization
+            'EntidadAliadaMembers' => EntidadAliadaMember::orderBy('nombre', 'ASC')
+                ->filterEntidadAliadaMember(request()->only('search'))->paginate(),
+            'convocatoria'                  => $convocatoria,
+            'IDi'                   => $IDi,
+            'EntidadAliada'   => $EntidadAliada
         ]);
     }
 
@@ -37,15 +37,15 @@ class PartnerOrganizationMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, RDI $rdi, PartnerOrganization $partnerOrganization)
+    public function create(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada)
     {
-        $this->authorize('create', [PartnerOrganizationMember::class]);
+        $this->authorize('create', [EntidadAliadaMember::class]);
 
-        return Inertia::render('Calls/Projects/RDI/PartnerOrganizations/PartnerOrganizationMembers/Create', [
+        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadAliadas/EntidadAliadaMembers/Create', [
             'documentTypes'         => json_decode(Storage::get('json/document-types.json'), true),
-            'call'                  => $call->only('id'),
-            'rdi'                   => $rdi->only('id'),
-            'partnerOrganization'   => $partnerOrganization->only('id')
+            'convocatoria'                  => $convocatoria->only('id'),
+            'IDi'                   => $IDi->only('id'),
+            'EntidadAliada'   => $EntidadAliada->only('id')
         ]);
     }
 
@@ -55,57 +55,57 @@ class PartnerOrganizationMemberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PartnerOrganizationMemberRequest $request, Call $call, RDI $rdi, PartnerOrganization $partnerOrganization)
+    public function store(EntidadAliadaMemberRequest $request, Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada)
     {
-        $this->authorize('create', [PartnerOrganizationMember::class]);
+        $this->authorize('create', [EntidadAliadaMember::class]);
 
-        $partnerOrganizationMember = new PartnerOrganizationMember();
-        $partnerOrganizationMember->name                = $request->name;
-        $partnerOrganizationMember->email               = $request->email;
-        $partnerOrganizationMember->document_type       = $request->document_type;
-        $partnerOrganizationMember->document_number     = $request->document_number;
-        $partnerOrganizationMember->cellphone_number    = $request->cellphone_number;
-        $partnerOrganizationMember->partnerOrganization()->associate($partnerOrganization);
+        $EntidadAliadaMember = new EntidadAliadaMember();
+        $EntidadAliadaMember->name                = $request->name;
+        $EntidadAliadaMember->email               = $request->email;
+        $EntidadAliadaMember->document_type       = $request->document_type;
+        $EntidadAliadaMember->document_number     = $request->document_number;
+        $EntidadAliadaMember->cellphone_number    = $request->cellphone_number;
+        $EntidadAliadaMember->EntidadAliada()->associate($EntidadAliada);
 
-        $partnerOrganizationMember->save();
+        $EntidadAliadaMember->save();
 
-        return redirect()->route('calls.rdi.partner-organizations.partner-organization-members.index', [$call, $rdi, $partnerOrganization])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.IDi.partner-organizations.partner-organization-members.index', [$convocatoria, $IDi, $EntidadAliada])->with('success', 'The resource has been created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return \Illuminate\Http\Response
      */
-    public function show(Call $call, RDI $rdi, PartnerOrganization $partnerOrganization, PartnerOrganizationMember $partnerOrganizationMember)
+    public function show(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada, EntidadAliadaMember $EntidadAliadaMember)
     {
-        $this->authorize('view', [PartnerOrganizationMember::class, $partnerOrganizationMember]);
+        $this->authorize('view', [EntidadAliadaMember::class, $EntidadAliadaMember]);
 
-        return Inertia::render('Calls/Projects/RDI/PartnerOrganizations/PartnerOrganizationMembers/Show', [
-            'call'                      => $call,
-            'rdi'                       => $rdi,
-            'partnerOrganization'       => $partnerOrganization,
-            'partnerOrganizationMember' => $partnerOrganizationMember
+        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadAliadas/EntidadAliadaMembers/Show', [
+            'convocatoria'                      => $convocatoria,
+            'IDi'                       => $IDi,
+            'EntidadAliada'       => $EntidadAliada,
+            'EntidadAliadaMember' => $EntidadAliadaMember
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, RDI $rdi, PartnerOrganization $partnerOrganization, PartnerOrganizationMember $partnerOrganizationMember)
+    public function edit(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada, EntidadAliadaMember $EntidadAliadaMember)
     {
-        $this->authorize('update', [PartnerOrganizationMember::class, $partnerOrganizationMember]);
+        $this->authorize('update', [EntidadAliadaMember::class, $EntidadAliadaMember]);
 
-        return Inertia::render('Calls/Projects/RDI/PartnerOrganizations/PartnerOrganizationMembers/Editar', [
-            'call'                      => $call->only('id'),
-            'rdi'                       => $rdi->only('id'),
+        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadAliadas/EntidadAliadaMembers/Editar', [
+            'convocatoria'                      => $convocatoria->only('id'),
+            'IDi'                       => $IDi->only('id'),
             'documentTypes'         => json_decode(Storage::get('json/document-types.json'), true),
-            'partnerOrganization'       => $partnerOrganization->only('id'),
-            'partnerOrganizationMember' => $partnerOrganizationMember,
+            'EntidadAliada'       => $EntidadAliada->only('id'),
+            'EntidadAliadaMember' => $EntidadAliadaMember,
         ]);
     }
 
@@ -113,21 +113,21 @@ class PartnerOrganizationMemberController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return \Illuminate\Http\Response
      */
-    public function update(PartnerOrganizationMemberRequest $request, Call $call, RDI $rdi, PartnerOrganization $partnerOrganization, PartnerOrganizationMember $partnerOrganizationMember)
+    public function update(EntidadAliadaMemberRequest $request, Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada, EntidadAliadaMember $EntidadAliadaMember)
     {
-        $this->authorize('update', [PartnerOrganizationMember::class, $partnerOrganizationMember]);
+        $this->authorize('update', [EntidadAliadaMember::class, $EntidadAliadaMember]);
 
-        $partnerOrganizationMember->name                = $request->name;
-        $partnerOrganizationMember->email               = $request->email;
-        $partnerOrganizationMember->document_type       = $request->document_type;
-        $partnerOrganizationMember->document_number     = $request->document_number;
-        $partnerOrganizationMember->cellphone_number    = $request->cellphone_number;
-        $partnerOrganizationMember->partnerOrganization()->associate($partnerOrganization);
+        $EntidadAliadaMember->name                = $request->name;
+        $EntidadAliadaMember->email               = $request->email;
+        $EntidadAliadaMember->document_type       = $request->document_type;
+        $EntidadAliadaMember->document_number     = $request->document_number;
+        $EntidadAliadaMember->cellphone_number    = $request->cellphone_number;
+        $EntidadAliadaMember->EntidadAliada()->associate($EntidadAliada);
 
-        $partnerOrganizationMember->save();
+        $EntidadAliadaMember->save();
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
     }
@@ -135,15 +135,15 @@ class PartnerOrganizationMemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PartnerOrganizationMember  $partnerOrganizationMember
+     * @param  \App\Models\EntidadAliadaMember  $EntidadAliadaMember
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Call $call, RDI $rdi, PartnerOrganization $partnerOrganization, PartnerOrganizationMember $partnerOrganizationMember)
+    public function destroy(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $EntidadAliada, EntidadAliadaMember $EntidadAliadaMember)
     {
-        $this->authorize('delete', [PartnerOrganizationMember::class, $partnerOrganizationMember]);
+        $this->authorize('delete', [EntidadAliadaMember::class, $EntidadAliadaMember]);
 
-        $partnerOrganizationMember->delete();
+        $EntidadAliadaMember->delete();
 
-        return redirect()->route('calls.rdi.partner-organizations.partner-organization-members.index', [$call, $rdi, $partnerOrganization])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.IDi.partner-organizations.partner-organization-members.index', [$convocatoria, $IDi, $EntidadAliada])->with('success', 'The resource has been deleted successfully.');
     }
 }

@@ -44,13 +44,13 @@ class Departamento extends Model
     ];
 
     /**
-     * Relationship with Ciudad
+     * Relationship with Municipio
      *
      * @return void
      */
-    public function ciudades()
+    public function municipios()
     {
-        return $this->hasMany(Ciudad::class);
+        return $this->hasMany(Municipio::class);
     }
 
     /**

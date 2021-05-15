@@ -35,5 +35,6 @@
     isMulti={true}
     {groupBy}
     {placeholder}
+    on:clear={() => (selectedValue = null)}
 />
-<InputError classes="text-center" message={error} />
+<InputError message={error} />

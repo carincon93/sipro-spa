@@ -10,6 +10,13 @@ class EntidadAliada extends Model
     use HasFactory;
 
     /**
+     * table
+     *
+     * @var string
+     */
+    protected $table = 'entidades_aliadas';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -76,7 +83,7 @@ class EntidadAliada extends Model
      *
      * @return void
      */
-    public function partnerOrganizationMembers()
+    public function EntidadAliadaMembers()
     {
         return $this->hasMany(EntidadAliadaMember::class);
     }

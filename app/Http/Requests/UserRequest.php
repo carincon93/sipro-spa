@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'academic_centre_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:academic_centres,id'],
+                'centro_formacion_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:academic_centres,id'],
                 'name'                  => ['required', 'max:255', 'string'],
                 'email'                 => ['required', 'max:255', 'regex:/(.*)sena\.edu\.co$/i', 'email', 'unique:users,email,'.$this->route('user')->id.',id'],
                 'document_type'         => ['required', 'max:2'],
@@ -37,7 +37,7 @@ class UserRequest extends FormRequest
             ];
         } else {
             return [
-                'academic_centre_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:academic_centres,id'],
+                'centro_formacion_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:academic_centres,id'],
                 'name'                  => ['required', 'max:255', 'string'],
                 'email'                 => ['required', 'max:255', 'regex:/(.*)sena\.edu\.co$/i', 'unique:users,email', 'email'],
                 'document_type'         => ['required', 'max:2'],

@@ -28,7 +28,7 @@ class SennovaBudgetRequest extends FormRequest
             'second_budget_info_id'             => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:second_budget_info,id'],
             'third_budget_info_id'              => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:third_budget_info,id'],
             'budget_usage_id'                   => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:budget_usages,id'],
-            'programmatic_line_id'              => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:programmatic_lines,id'],
+            'linea_programatica_id'              => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:programmatic_lines,id'],
             'requires_market_research_batch'    => ['required', 'boolean'],
             'requires_market_research'          => ['required', 'boolean'],
             'can_be_added'                      => ['required', 'boolean'],

@@ -28,8 +28,8 @@ class OutputRequest extends FormRequest
         return [
             'project_result_id' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:project_results,id'],
             'name'              => ['required', 'max:191'],
-            'fecha_incio'        => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new ProjectStartDate($this->route('call'))],
-            'fecha_finalizacion'          => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_incio', new ProjectEndDate($this->route('call'))],
+            'fecha_inicio'        => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new ProjectStartDate($this->route('call'))],
+            'fecha_finalizacion'          => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new ProjectEndDate($this->route('call'))],
         ];
     }
 

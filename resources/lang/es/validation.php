@@ -159,9 +159,23 @@ return [
 		'enlace_gruplac' 		=> 'enlace GrupLAC',
 		'codigo_minciencias'    => 'código Minciencias',
 		'categoria_minciencias' => 'categoría Minciencias',
+		'year' 					=> 'año',
+		'tipo_proyecto_id' 		=> 'tipo de proyecto',
+        'actividad_economica_id'=> 'actividad económica',
+		'linea_tecnologica_id'  => 'línea tecnológica',
+		'titulo' 				=> 'título',
+		'mesa_sectorial_id' 	=> 'mesa sectorial',
+		'muestreo' 				=> '¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?',
+		'numero_aprendices'     => 'número de aprendices beneficiados',
+        'actividades_muestreo'  => 'actividad que pretende con la especie nativa',
+        'objetivo_muestreo'     => 'finalidad de las actividades a realizar con la especie nativa',
+		'municipios'            => 'nombre de los municipios beneficiados',
+		
 		'grupo_investigacion_id' => 'grupo de investigación',
 		'linea_investigacion_id' => 'línea de investigación',
-
+		'min_fecha_inicio_proyectos' 		=> 'rango de fechas de ejecución de proyectos',
+		'max_fecha_finalizacion_proyectos' 	=> 'rango de fechas de ejecución de proyectos',
+		
         // Usuarios - Users
         'academic_centre_id'    => 'centro de formación',
         'email'                 => 'correo electrónico',
@@ -184,13 +198,13 @@ return [
         // Actividad - Activity
         'specific_objective_id'     => 'objetivo específico',
         'description'               => 'descripción',
-        'fecha_incio'                => 'fecha de inicio',
+        'fecha_inicio'                => 'fecha de inicio',
         'fecha_finalizacion'                  => 'fecha de cierre',
         'output_id'                 => 'productos',
         'project_sennova_budget_id' => 'rubros de proyecto',
 
         // Anexos - Annexes
-        'programmatic_line_id'  => 'línea programática',
+        'linea_programatica_id'  => 'línea programática',
 
         // Rubro de convocatoria - Call budget
         'sennova_budget_id'     => 'rubro sennova',
@@ -198,7 +212,7 @@ return [
 
         // Convocatoria - Call
         'active'                => 'activo',
-        'project_fecha_incio'    => 'fecha límite de inicio de proyectos',
+        'project_fecha_inicio'    => 'fecha límite de inicio de proyectos',
         'project_fecha_finalizacion'      => 'fecha límite de cierre de proyectos',
 
         // Rol SENNOVA de convocatoria - Call sennova role
@@ -287,7 +301,6 @@ return [
 		'disciplina_subarea_conocimiento_id'           => 'disciplina de la subárea de conocimiento',
         'tematica_estrategica_id'                     => 'temáticas estratégicas SENA',
 		'red_conocimiento_id'                      => 'red de conocimiento',
-        'actividad_economica_id'                              => 'Actividad económica',
 		'title'                                     => 'título',
 		'abstract'                                  => 'resumen ',
 		'antecedentes'                        => 'antecedentes del proyecto',
@@ -296,13 +309,9 @@ return [
 		'propuesta_sostenibilidad'                   => 'propuesta de sostenibilidad',
 		'objetivo_general'                         => 'objetivo general',
 		'bibliografia'                              => 'bibliografía',
-		'numero_aprendices'                                  => 'número de aprendices beneficiados',
-        'muestreo'                                  => 'muestras',
-        'actividades_muestreo'                         => 'actividad que pretende con la especie nativa',
-        'muestreo_objective'                        => 'finalidad de las actividades a realizar con la especie nativa',
-        'cities'                                    => 'nombre de los municipios beneficiados',
-        'cities'                                    => 'nombre de los municipios beneficiados',
-        'impacto_ciudades'                             => 'descripción del beneficio en los municipios',
+		
+        
+        'impacto_'                             => 'descripción del beneficio en los municipios',
         'impacto_centro_formacion'                           => 'impacto académico',
         'relacionado_plan_tecnologico'           => '¿El proyecto se alinea con el plan tecnológico desarrollado por el centro de formación?',
         'relacionado_agendas_competitividad'   => '¿El proyecto se alinea con las Agendas Departamentales de Competitividad e Innovación?',
@@ -311,7 +320,7 @@ return [
         'sector_based_committee_id'                 => 'mesa sectorial',
         'technological_line_id'                     => 'línea tecnológica',
         'justificacion_industria_4'                  => 'industria 4.0',
-		'justificacion_economica_naranja'              => 'economía naranja',
+		'justificacion_economia_naranja'              => 'economía naranja',
 		'justificacion_politica_discapacidad'         => 'Política Institucional para Atención de las Personas con discapacidad',
 		'planteamiento_problema'                         => 'planteamiento del problema',
 		'justificacion_problema'                     => 'justificacion',

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ActivityRequest;
-use App\Models\Call;
-use App\Models\Project;
-use App\Models\Activity;
+use App\Http\Requests\ActividadRequest;
+use App\Models\Convocatoria;
+use App\Models\Proyecto;
+use App\Models\Actividad;
 use App\Models\ProjectSennovaBudget;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,27 +17,27 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, Project $project)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('viewAny', [Activity::class]);
 
-        $specificObjective = $project->directCauses()->with('specificObjective')->get()->pluck('specificObjective')->flatten()->filter();
+        $specificObjective = $proyecto->directCauses()->with('specificObjective')->get()->pluck('specificObjective')->flatten()->filter();
 
-        $project->projectType->programmaticLine;
-        $project->makeHidden(
+        $proyecto->projectType->programmaticLine;
+        $proyecto->makeHidden(
             'rdi', 
             'projectSennovaBudgets', 
             'updated_at',
         );
 
-        return Inertia::render('Calls/Projects/Activities/Index', [
-            'call'          => $call,
-            'project'       => $project,
+        return Inertia::render('Convocatorias/Proyectos/Activities/Index', [
+            'convocatoria'          => $convocatoria,
+            'proyecto'      => $proyecto,
             'filters'       => request()->all('search'),
             'activities'    => Activity::whereIn('specific_objective_id',
                             $specificObjective->map(function ($specificObjective) {
                                 return $specificObjective->id;
-                            }))->filterActivity(request()->only('search'))->orderBy('fecha_incio', 'ASC')->paginate(),
+                            }))->filterActivity(request()->only('search'))->orderBy('fecha_inicio', 'ASC')->paginate(),
         ]);
     }
 
@@ -46,14 +46,14 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Project $project)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [Activity::class]);
 
-        return Inertia::render('Calls/Projects/Activities/Create', [
-            'call' => $call,
-            'project' => $project,
-            'outputs' => $project->outputs
+        return Inertia::render('Convocatorias/Proyectos/Activities/Create', [
+            'convocatoria' => $convocatoria,
+            'proyecto'=> $proyecto,
+            'outputs' => $proyecto->outputs
         ]);
     }
 
@@ -63,7 +63,7 @@ class ActivityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ActivityRequest $request, Call $call, Project $project)
+    public function store(ActividadRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [Activity::class]);
 
@@ -83,13 +83,9 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show( Call $call, Project $project, Activity $activity)
+    public function show( Convocatoria $convocatoria, Proyecto $proyecto, Activity $activity)
     {
         $this->authorize('view', [Activity::class, $activity]);
-
-        return Inertia::render('Calls/Projects/Activities/Show', [
-            'activity' => $activity
-        ]);
     }
 
     /**
@@ -98,16 +94,16 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit( Call $call, Project $project, Activity $activity)
+    public function edit( Convocatoria $convocatoria, Proyecto $proyecto, Activity $activity)
     {
         $this->authorize('update', [Activity::class, $activity]);
 
-        return Inertia::render('Calls/Projects/Activities/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/Activities/Editar', [
             'activity'                      => $activity,
-            'call'                          => $call,
-            'project'                       => $project,
-            'outputs'                       => $project->directEffects()->with('projectResult.outputs')->get()->pluck('projectResult.outputs')->flatten(),
-            'projectSennovaBudgets'         => ProjectSennovaBudget::where('project_id', $project->id)->with('callBudget.sennovaBudget.thirdBudgetInfo:id,name', 'callBudget.sennovaBudget.secondBudgetInfo:id,name', 'callBudget.sennovaBudget.budgetUsage:id,description')->get(),
+            'convocatoria'                  => $convocatoria,
+            'proyecto'                      => $proyecto,
+            'outputs'                       => $proyecto->directEffects()->with('projectResult.outputs')->get()->pluck('projectResult.outputs')->flatten(),
+            'projectSennovaBudgets'         => ProjectSennovaBudget::where('project_id', $proyecto->id)->with('convocatoriaBudget.sennovaBudget.thirdBudgetInfo:id,name', 'convocatoriaBudget.sennovaBudget.secondBudgetInfo:id,name', 'convocatoriaBudget.sennovaBudget.budgetUsage:id,description')->get(),
             'activityOutputs'               => $activity->outputs()->pluck('id'),
             'activityProjectSennovaBudgets' => $activity->projectSennovaBudgets()->pluck('id')
         ]);
@@ -120,17 +116,15 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(ActivityRequest $request,  Call $call, Project $project, Activity $activity)
+    public function update(ActividadRequest $request,  Convocatoria $convocatoria, Proyecto $proyecto, Activity $activity)
     {
         $this->authorize('update', [Activity::class, $activity]);
 
         $activity->description  = $request->description;
-        $activity->fecha_incio   = $request->fecha_incio;
+        $activity->fecha_inicio   = $request->fecha_inicio;
         $activity->fecha_finalizacion     = $request->fecha_finalizacion;
 
         $activity->save();
-
-        dd($request->all());
 
         $activity->outputs()->sync($request->output_id);
         $activity->projectSennovaBudgets()->sync($request->project_sennova_budget_id);
@@ -144,12 +138,12 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Call $call, Project $project, Activity $activity)
+    public function destroy( Convocatoria $convocatoria, Proyecto $proyecto, Activity $activity)
     {
         $this->authorize('delete', [Activity::class, $activity]);
 
         $activity->delete();
 
-        return redirect()->route('calls.projects.activities.index', [$call, $project])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.projects.activities.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
     }
 }

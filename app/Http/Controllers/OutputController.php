@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OutputRequest;
-use App\Models\Call;
-use App\Models\Project;
+use App\Models\Convocatoria;
+use App\Models\Proyecto;
 use App\Models\Output;
 use App\Models\RDIOutput;
 use Illuminate\Http\Request;
@@ -17,26 +17,26 @@ class OutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, Project $project)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('viewAny', [Output::class]);
 
-        $projectResult = $project->directEffects()->with('projectResult')->get()->pluck('projectResult')->flatten()->filter();
+        $proyectoResult = $proyecto->directEffects()->with('projectResult')->get()->pluck('projectResult')->flatten()->filter();
         
-        $project->projectType->programmaticLine;
-        $project->makeHidden(
+        $proyecto->projectType->programmaticLine;
+        $proyecto->makeHidden(
             'rdi', 
             'projectSennovaBudgets', 
             'updated_at',
         );
 
-        return Inertia::render('Calls/Projects/Outputs/Index', [
-            'call'    => $call,
-            'project' => $project,
+        return Inertia::render('Convocatorias/Proyectos/Outputs/Index', [
+            'convocatoria'    => $convocatoria,
+            'project' => $proyecto,
             'filters' => request()->all('search'),
             'outputs' => Output::whereIn('project_result_id',
-                        $projectResult->map(function ($projectResult) {
-                            return $projectResult->id;
+                        $proyectoResult->map(function ($proyectoResult) {
+                            return $proyectoResult->id;
                         }))->filterOutput(request()->only('search'))->paginate(),
             ]);
     }
@@ -46,16 +46,16 @@ class OutputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Project $project)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [Output::class]);
 
-        $project->rdi;
+        $proyecto->rdi;
 
-        return Inertia::render('Calls/Projects/Outputs/Create', [
-            'call'              => $call,
-            'project'           => $project,
-            'projectResults'    => $project->directEffects()->whereHas('projectResult', function ($query) {
+        return Inertia::render('Convocatorias/Proyectos/Outputs/Create', [
+            'convocatoria'              => $convocatoria,
+            'project'           => $proyecto,
+            'projectResults'    => $proyecto->directEffects()->whereHas('projectResult', function ($query) {
                     $query->where('description', '!=', null);
                 })->with('projectResult:id as value,description as label,direct_effect_id')->get()->pluck('projectResult')
         ]);
@@ -67,13 +67,13 @@ class OutputController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OutputRequest $request, Call $call, Project $project)
+    public function store(OutputRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [Output::class]);
 
         $output = new Output();
         $output->name       = $request->name;
-        $output->fecha_incio = $request->fecha_incio;
+        $output->fecha_inicio = $request->fecha_inicio;
         $output->fecha_finalizacion   = $request->fecha_finalizacion;
         $output->projectResult()->associate($request->project_result_id);
         $output->save();
@@ -86,7 +86,7 @@ class OutputController extends Controller
             $rdiOutput->save();
         }
 
-        return redirect()->route('calls.projects.outputs.index', [$call, $project])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.projects.outputs.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -95,13 +95,13 @@ class OutputController extends Controller
      * @param  \App\Models\Output  $output
      * @return \Illuminate\Http\Response
      */
-    public function show(Call $call, Project $project, Output $output)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, Output $output)
     {
         $this->authorize('view', [Output::class, $output]);
 
-        return Inertia::render('Calls/Projects/Outputs/Show', [
-            'call' => $call,
-            'project'  => $project,
+        return Inertia::render('Convocatorias/Proyectos/Outputs/Show', [
+            'convocatoria' => $convocatoria,
+            'project'  => $proyecto,
             'output' => $output
         ]);
     }
@@ -112,18 +112,18 @@ class OutputController extends Controller
      * @param  \App\Models\Output  $output
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Project $project, Output $output)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Output $output)
     {
         $this->authorize('update', [Output::class, $output]);
 
-        $project->rdi;
+        $proyecto->rdi;
         $output->rdiOutput;
 
-        return Inertia::render('Calls/Projects/Outputs/Editar', [
-            'call'              => $call->only('id'),
-            'project'           => $project->only('id'),
+        return Inertia::render('Convocatorias/Proyectos/Outputs/Editar', [
+            'convocatoria'              => $convocatoria->only('id'),
+            'project'           => $proyecto->only('id'),
             'output'            => $output,
-            'projectResults'    => $project->directEffects()->whereHas('projectResult', function ($query) {
+            'projectResults'    => $proyecto->directEffects()->whereHas('projectResult', function ($query) {
                     $query->where('description', '!=', null);
                 })->with('projectResult:id as value,description as label,direct_effect_id')->get()->pluck('projectResult'),
         ]);
@@ -136,12 +136,12 @@ class OutputController extends Controller
      * @param  \App\Models\Output  $output
      * @return \Illuminate\Http\Response
      */
-    public function update(OutputRequest $request, Call $call, Project $project, Output $output)
+    public function update(OutputRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Output $output)
     {
         $this->authorize('update', [Output::class, $output]);
 
         $output->name = $request->name;
-        $output->fecha_incio = $request->fecha_incio;
+        $output->fecha_inicio = $request->fecha_inicio;
         $output->fecha_finalizacion = $request->fecha_finalizacion;
         $output->projectResult()->associate($request->project_result_id);
 
@@ -160,12 +160,12 @@ class OutputController extends Controller
      * @param  \App\Models\Output  $output
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Call $call, Project $project, Output $output)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Output $output)
     {
         $this->authorize('delete', [Output::class, $output]);
 
         $output->delete();
 
-        return redirect()->route('calls.projects.outputs.index', [$call, $project])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.projects.outputs.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
     }
 }

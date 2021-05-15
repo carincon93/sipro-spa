@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\PartnerOrganization;
+use App\Models\EntidadAliada;
 use App\Models\User;
-use App\Models\RDI;
+use App\Models\IDi;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PartnerOrganizationPolicy
+class EntidadAliadaPolicy
 {
     use HandlesAuthorization;
 
@@ -34,10 +34,10 @@ class PartnerOrganizationPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganization  $partnerOrganization
+     * @param  \App\Models\EntidadAliada  $EntidadAliada
      * @return mixed
      */
-    public function view(User $user, PartnerOrganization $partnerOrganization)
+    public function view(User $user, EntidadAliada $EntidadAliada)
     {
         if ( $user->hasPermissionTo('partner-organizations.show') ) {
             return true;
@@ -65,10 +65,10 @@ class PartnerOrganizationPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganization  $partnerOrganization
+     * @param  \App\Models\EntidadAliada  $EntidadAliada
      * @return mixed
      */
-    public function update(User $user, PartnerOrganization $partnerOrganization)
+    public function update(User $user, EntidadAliada $EntidadAliada)
     {
         if ( $user->hasPermissionTo('partner-organizations.show') || $user->hasPermissionTo('partner-organizations.edit') || $user->hasPermissionTo('partner-organizations.delete') ) {
             return true;
@@ -81,10 +81,10 @@ class PartnerOrganizationPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganization  $partnerOrganization
+     * @param  \App\Models\EntidadAliada  $EntidadAliada
      * @return mixed
      */
-    public function delete(User $user, PartnerOrganization $partnerOrganization)
+    public function delete(User $user, EntidadAliada $EntidadAliada)
     {
         if ( $user->hasPermissionTo('partner-organizations.delete') ) {
             return true;
@@ -97,10 +97,10 @@ class PartnerOrganizationPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganization  $partnerOrganization
+     * @param  \App\Models\EntidadAliada  $EntidadAliada
      * @return mixed
      */
-    public function restore(User $user, PartnerOrganization $partnerOrganization)
+    public function restore(User $user, EntidadAliada $EntidadAliada)
     {
         //
     }
@@ -109,10 +109,10 @@ class PartnerOrganizationPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PartnerOrganization  $partnerOrganization
+     * @param  \App\Models\EntidadAliada  $EntidadAliada
      * @return mixed
      */
-    public function forceDelete(User $user, PartnerOrganization $partnerOrganization)
+    public function forceDelete(User $user, EntidadAliada $EntidadAliada)
     {
         //
     }

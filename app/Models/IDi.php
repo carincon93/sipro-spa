@@ -22,7 +22,7 @@ class IDi extends Model
      *
      * @var array
      */
-    protected $appends = ['fechaEjecucion'];
+    protected $appends = ['fecha_ejecucion'];
 
     /**
      * The attributes that are mass assignable.
@@ -35,24 +35,24 @@ class IDi extends Model
         'tematica_estrategica_id',
         'red_conocimiento_id',
         'actividad_economica_id',
-        'title',
-        'fecha_incio',
+        'titulo',
+        'fecha_inicio',
         'fecha_finalizacion',
         'video',
         'justificacion_industria_4',
-        'justificacion_economica_naranja',
+        'justificacion_economia_naranja',
         'justificacion_politica_discapacidad',
-        'abstract',
+        'resumen',
         'antecedentes',
         'marco_conceptual',
         'metodologia',
         'propuesta_sostenibilidad',
         'muestreo',
         'actividades_muestreo',
-        'muestreo_objective',
+        'objetivo_muestreo',
         'bibliografia',
         'numero_aprendices',
-        'impacto_ciudades',
+        'impacto_',
         'impacto_centro_formacion',
         'objetivo_general',
         'planteamiento_problema',
@@ -142,13 +142,13 @@ class IDi extends Model
     }
 
     /**
-     * Relationship with LineaTecnologcia
+     * Relationship with LineaTecnologica
      *
      * @return void
      */
     public function lineasTecnologicas()
     {
-        return $this->belongsToMany(LineaTecnologcia::class, 'idi_linea_tecnologica', 'idi_id', 'linea_tecnologica_id');
+        return $this->belongsToMany(LineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'linea_tecnologica_id');
     }
 
     /**
@@ -202,8 +202,8 @@ class IDi extends Model
      */
     public function getFechaEjecucionAttribute()
     {
-        $fecha_incio = Carbon::parse($this->fecha_incio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
-        $fecha_finalizacion   = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
-        return "$fecha_incio al $fecha_finalizacion";
+        $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        return "$fecha_inicio al $fecha_finalizacion";
     }
 }

@@ -17,7 +17,7 @@ class CallSennovaRole extends Model
      * @var array
      */
     protected $fillable = [
-        'programmatic_line_id',
+        'linea_programatica_id',
         'call_id',
         'sennova_role_id',
         'salary',

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectSennovaBudgetRequest;
-use App\Models\Call;
-use App\Models\CallBudget;
+use App\Models\Convocatoria;
+use App\Models\ConvocatoriaBudget;
 use App\Models\SecondBudgetInfo;
-use App\Models\Project;
+use App\Models\Proyecto;
 use App\Models\ProjectSennovaBudget;
 use App\Models\SoftwareInfo;
 use Illuminate\Http\Request;
@@ -22,23 +22,23 @@ class ProjectSennovaBudgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, Project $project)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('viewAny', ProjectSennovaBudget::class);
 
-        $project->projectType->programmaticLine;
-        $project->makeHidden(
+        $proyecto->projectType->programmaticLine;
+        $proyecto->makeHidden(
             'rdi', 
             'projectSennovaBudgets', 
             'updated_at',
         );
 
-        return Inertia::render('Calls/Projects/ProjectSennovaBudgets/Index', [
-            'call'                  => $call->only('id'),
-            'project'               => $project,
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Index', [
+            'convocatoria'                  => $convocatoria->only('id'),
+            'proyecto'              => $proyecto,
             'filters'               => request()->all('search'),
-            'projectSennovaBudgets' => ProjectSennovaBudget::where('project_id', $project->id)->filterProjectSennovaBudget(request()->only('search'))->with('callBudget.sennovaBudget.thirdBudgetInfo:id,name', 'callBudget.sennovaBudget.secondBudgetInfo:id,name', 'callBudget.sennovaBudget.budgetUsage:id,description')->paginate(),
-            'secondBudgetInfo'      => SecondBudgetInfo::orderBy('nombre', 'ASC')->get('name'),
+            'projectSennovaBudgets' => ProjectSennovaBudget::where('proyecto_id', $proyecto->id)->filterProjectSennovaBudget(request()->only('search'))->with('convocatoriaBudget.sennovaBudget.thirdBudgetInfo:id,nombre', 'convocatoriaBudget.sennovaBudget.secondBudgetInfo:id,nombre', 'convocatoriaBudget.sennovaBudget.budgetUsage:id,description')->paginate(),
+            'secondBudgetInfo'      => SecondBudgetInfo::orderBy('nombre', 'ASC')->get('nombre'),
         ]);
     }
 
@@ -47,15 +47,15 @@ class ProjectSennovaBudgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Project $project)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [ProjectSennovaBudget::class]);
 
-        $project->projectType->programmaticLine->only('id');
+        $proyecto->projectType->programmaticLine->only('id');
 
-        return Inertia::render('Calls/Projects/ProjectSennovaBudgets/Create', [
-            'call'          => $call,
-            'project'       => $project,
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Create', [
+            'convocatoria'          => $convocatoria,
+            'proyecto'      => $proyecto,
             'licenceTypes'  => json_decode(Storage::get('json/license-types.json'), true),
             'softwareTypes' => json_decode(Storage::get('json/software-types.json'), true)
         ]);
@@ -67,76 +67,76 @@ class ProjectSennovaBudgetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectSennovaBudgetRequest $request, Call $call, Project $project)
+    public function store(ProjectSennovaBudgetRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [ProjectSennovaBudget::class]);
 
         // Validaciones
         // Línea 66
-        if ($project->projectType->programmaticLine->code == 66) {
-            if (BudgetValidationTrait::viaticsValidation($project->total_viatics, $request->value, $request->qty_items, 0, 0)) {
+        if ($proyecto->projectType->programmaticLine->code == 66) {
+            if (BudgetValidationTrait::viaticsValidation($proyecto->total_viatics, $request->value, $request->qty_items, 0, 0)) {
                 return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
             }
         }
 
-        $callBudget = CallBudget::find($request->call_budget_id);
+        $convocatoriaBudget = ConvocatoriaBudget::find($request->convocatoria_budget_id);
 
-        $projectSennovaBudget = new ProjectSennovaBudget();
-        $projectSennovaBudget->description      = $request->description;
-        $projectSennovaBudget->justification    = $request->justification;
-        $projectSennovaBudget->value            = $request->value;
-        $projectSennovaBudget->qty_items        = $request->qty_items;
+        $proyectoSennovaBudget = new ProjectSennovaBudget();
+        $proyectoSennovaBudget->description      = $request->description;
+        $proyectoSennovaBudget->justification    = $request->justification;
+        $proyectoSennovaBudget->value            = $request->value;
+        $proyectoSennovaBudget->qty_items        = $request->qty_items;
 
-        $projectSennovaBudget->project()->associate($project);
-        $projectSennovaBudget->callBudget()->associate($callBudget);
-        $projectSennovaBudget->save();
+        $proyectoSennovaBudget->project()->associate($proyecto);
+        $proyectoSennovaBudget->convocatoriaBudget()->associate($convocatoriaBudget);
+        $proyectoSennovaBudget->save();
 
         if($request->get('budget_usage_code') == '2010100600203101') {
             $softwareInfo = new SoftwareInfo();
             $softwareInfo->license_type     = $request->get('license_type');
             $softwareInfo->software_type    = $request->get('software_type');
-            $softwareInfo->fecha_incio       = $request->get('fecha_incio');
+            $softwareInfo->fecha_inicio       = $request->get('fecha_inicio');
             $softwareInfo->fecha_finalizacion         = $request->get('fecha_finalizacion');
             
-            $projectSennovaBudget->softwareInfo()->save($softwareInfo);
+            $proyectoSennovaBudget->softwareInfo()->save($softwareInfo);
         }
 
-        return redirect()->route('calls.projects.project-sennova-budgets.project-budget-batches.index', [$call, $project, $projectSennovaBudget])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.projects.project-sennova-budgets.project-budget-batches.index', [$convocatoria, $proyecto, $proyectoSennovaBudget])->with('success', 'The resource has been created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProjectSennovaBudget  $projectSennovaBudget
+     * @param  \App\Models\ProjectSennovaBudget  $proyectoSennovaBudget
      * @return \Illuminate\Http\Response
      */
-    public function show(Call $call, Project $project, ProjectSennovaBudget $projectSennovaBudget)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaBudget $proyectoSennovaBudget)
     {
-        $this->authorize('view', [ProjectSennovaBudget::class, $projectSennovaBudget]);
+        $this->authorize('view', [ProjectSennovaBudget::class, $proyectoSennovaBudget]);
 
-        return Inertia::render('Calls/Projects/ProjectSennovaBudgets/Show', [
-            'projectSennovaBudget' => $projectSennovaBudget
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Show', [
+            'projectSennovaBudget' => $proyectoSennovaBudget
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProjectSennovaBudget  $projectSennovaBudget
+     * @param  \App\Models\ProjectSennovaBudget  $proyectoSennovaBudget
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Project $project, ProjectSennovaBudget $projectSennovaBudget)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaBudget $proyectoSennovaBudget)
     {
-        $this->authorize('update', [ProjectSennovaBudget::class, $projectSennovaBudget]);
+        $this->authorize('update', [ProjectSennovaBudget::class, $proyectoSennovaBudget]);
 
-        $projectSennovaBudget->softwareInfo;
-        $projectSennovaBudget->callBudget->sennovaBudget->budgetUsage;
-        $project->projectType->programmaticLine;
+        $proyectoSennovaBudget->softwareInfo;
+        $proyectoSennovaBudget->convocatoriaBudget->sennovaBudget->budgetUsage;
+        $proyecto->projectType->programmaticLine;
 
-        return Inertia::render('Calls/Projects/ProjectSennovaBudgets/Editar', [
-            'call'                  => $call->only('id'),
-            'project'               => $project,
-            'projectSennovaBudget'  => $projectSennovaBudget,
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Editar', [
+            'convocatoria'                  => $convocatoria->only('id'),
+            'proyecto'              => $proyecto,
+            'projectSennovaBudget'  => $proyectoSennovaBudget,
             'licenceTypes'          => json_decode(Storage::get('json/license-types.json'), true),
             'softwareTypes'         => json_decode(Storage::get('json/software-types.json'), true)
         ]);
@@ -146,46 +146,46 @@ class ProjectSennovaBudgetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProjectSennovaBudget  $projectSennovaBudget
+     * @param  \App\Models\ProjectSennovaBudget  $proyectoSennovaBudget
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Call $call, Project $project, ProjectSennovaBudget $projectSennovaBudget)
+    public function update(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaBudget $proyectoSennovaBudget)
     {
-        $this->authorize('update', [ProjectSennovaBudget::class, $projectSennovaBudget]);
+        $this->authorize('update', [ProjectSennovaBudget::class, $proyectoSennovaBudget]);
 
         // Validaciones
         // Línea 66
-        if ($project->projectType->programmaticLine->code == 66) {
-            if (BudgetValidationTrait::viaticsValidation($project->total_viatics, $request->value, $request->qty_items, $projectSennovaBudget->value, $projectSennovaBudget->qty_items)) {
+        if ($proyecto->projectType->programmaticLine->code == 66) {
+            if (BudgetValidationTrait::viaticsValidation($proyecto->total_viatics, $request->value, $request->qty_items, $proyectoSennovaBudget->value, $proyectoSennovaBudget->qty_items)) {
                 return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
             }
         }
 
-        $callBudget = CallBudget::find($request->call_budget_id);
+        $convocatoriaBudget = ConvocatoriaBudget::find($request->convocatoria_budget_id);
 
-        $projectSennovaBudget->description      = $request->description;
-        $projectSennovaBudget->justification    = $request->justification;
-        $projectSennovaBudget->value            = null;
-        $projectSennovaBudget->qty_items        = null;
+        $proyectoSennovaBudget->description      = $request->description;
+        $proyectoSennovaBudget->justification    = $request->justification;
+        $proyectoSennovaBudget->value            = null;
+        $proyectoSennovaBudget->qty_items        = null;
 
-        if (!$callBudget->sennovaBudget->requires_market_research) {
-            foreach ($projectSennovaBudget->projectBudgetBatches as $projectBudgetBatch) {
-                Storage::delete($projectBudgetBatch->fact_sheet);
+        if (!$convocatoriaBudget->sennovaBudget->requires_market_research) {
+            foreach ($proyectoSennovaBudget->projectBudgetBatches as $proyectoBudgetBatch) {
+                Storage::delete($proyectoBudgetBatch->fact_sheet);
 
-                foreach ($projectBudgetBatch->marketResearch as $marketResearch) {
+                foreach ($proyectoBudgetBatch->marketResearch as $marketResearch) {
                     Storage::delete($marketResearch->price_quote_file);
                 }
 
-                $projectBudgetBatch->delete();
+                $proyectoBudgetBatch->delete();
             }
 
-            $projectSennovaBudget->value      = $request->value;
-            $projectSennovaBudget->qty_items  = $request->qty_items;
+            $proyectoSennovaBudget->value      = $request->value;
+            $proyectoSennovaBudget->qty_items  = $request->qty_items;
         }
 
-        $projectSennovaBudget->project()->associate($project);
-        $projectSennovaBudget->callBudget()->associate($callBudget);
-        $projectSennovaBudget->save();
+        $proyectoSennovaBudget->project()->associate($proyecto);
+        $proyectoSennovaBudget->convocatoriaBudget()->associate($convocatoriaBudget);
+        $proyectoSennovaBudget->save();
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
     }
@@ -193,15 +193,15 @@ class ProjectSennovaBudgetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProjectSennovaBudget  $projectSennovaBudget
+     * @param  \App\Models\ProjectSennovaBudget  $proyectoSennovaBudget
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Call $call, Project $project, ProjectSennovaBudget $projectSennovaBudget)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaBudget $proyectoSennovaBudget)
     {
-        $this->authorize('delete', [ProjectSennovaBudget::class, $projectSennovaBudget]);
+        $this->authorize('delete', [ProjectSennovaBudget::class, $proyectoSennovaBudget]);
 
-        $projectSennovaBudget->delete();
+        $proyectoSennovaBudget->delete();
 
-        return redirect()->route('calls.projects.project-sennova-budgets.index', [$call, $project])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.projects.project-sennova-budgets.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
     }
 }

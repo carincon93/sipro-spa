@@ -28,7 +28,7 @@ class User extends Authenticatable
         'cellphone_number',
         'is_enabled',
         'participation_type',
-        'academic_centre_id'
+        'centro_formacion_id'
     ];
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
      * @return void
      */
     public function projects() {
-        return $this->belongsToMany(Project::class, 'project_participants', 'user_id', 'project_id')
+        return $this->belongsToMany(Proyecto::class, 'project_participants', 'user_id', 'project_id')
             ->withPivot([
                 'is_author',
                 'qty_months',

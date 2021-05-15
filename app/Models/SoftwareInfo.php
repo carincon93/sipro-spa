@@ -19,7 +19,7 @@ class SoftwareInfo extends Model
     protected $fillable = [
         'license_type',
         'software_type',
-        'fecha_incio',
+        'fecha_inicio',
         'fecha_finalizacion',
         'project_sennova_budget_id'
     ];

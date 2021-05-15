@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RiskAnalysisRequest;
-use App\Models\Call;
-use App\Models\Project;
+use App\Models\Convocatoria;
+use App\Models\Proyecto;
 use App\Models\RiskAnalysis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,22 +17,22 @@ class RiskAnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, Project $project)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('viewAny', [RiskAnalysis::class]);
 
-        $project->projectType->programmaticLine;
-        $project->makeHidden(
+        $proyecto->projectType->programmaticLine;
+        $proyecto->makeHidden(
             'rdi', 
             'projectSennovaBudgets', 
             'updated_at',
         );
 
-        return Inertia::render('Calls/Projects/RiskAnalysis/Index', [
-            'call'      => $call,
-            'project'   => $project,
+        return Inertia::render('Convocatorias/Proyectos/RiskAnalysis/Index', [
+            'convocatoria'      => $convocatoria,
+            'project'   => $proyecto,
             'filters'   => request()->all('search'),
-            'riskAnalysis' => RiskAnalysis::where('project_id', $project->id)->orderBy('description', 'ASC')
+            'riskAnalysis' => RiskAnalysis::where('project_id', $proyecto->id)->orderBy('description', 'ASC')
                 ->filterRiskAnalysis(request()->only('search'))->paginate(),
         ]);
     }
@@ -42,13 +42,13 @@ class RiskAnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Project $project)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [RiskAnalysis::class]);
 
-        return Inertia::render('Calls/Projects/RiskAnalysis/Create', [
-            'call'              => $call,
-            'project'           => $project,
+        return Inertia::render('Convocatorias/Proyectos/RiskAnalysis/Create', [
+            'convocatoria'              => $convocatoria,
+            'project'           => $proyecto,
             'riskLevels'        => json_decode(Storage::get('json/risk-levels.json'), true),
             'riskTypes'         => json_decode(Storage::get('json/risk-types.json'), true),
             'riskProbabilities' => json_decode(Storage::get('json/risk-probabilities.json'), true),
@@ -62,7 +62,7 @@ class RiskAnalysisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RiskAnalysisRequest $request, Call $call, Project $project)
+    public function store(RiskAnalysisRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [RiskAnalysis::class]);
 
@@ -74,11 +74,11 @@ class RiskAnalysisController extends Controller
         $riskAnalysis->impact               = $request->impact;
         $riskAnalysis->effects              = $request->effects;
         $riskAnalysis->mitigation_measures  = $request->mitigation_measures;
-        $riskAnalysis->project()->associate($project);
+        $riskAnalysis->project()->associate($proyecto);
 
         $riskAnalysis->save();
 
-        return redirect()->route('calls.projects.risk-analysis.index', [$call, $project])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.projects.risk-analysis.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -87,11 +87,11 @@ class RiskAnalysisController extends Controller
      * @param  \App\Models\RiskAnalysis  $riskAnalysis
      * @return \Illuminate\Http\Response
      */
-    public function show(Call $call, Project $project, RiskAnalysis $riskAnalysis)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, RiskAnalysis $riskAnalysis)
     {
         $this->authorize('view', [RiskAnalysis::class, $riskAnalysis]);
 
-        return Inertia::render('Calls/Projects/RiskAnalysis/Show', [
+        return Inertia::render('Convocatorias/Proyectos/RiskAnalysis/Show', [
             'riskAnalysis' => $riskAnalysis
         ]);
     }
@@ -102,13 +102,13 @@ class RiskAnalysisController extends Controller
      * @param  \App\Models\RiskAnalysis  $riskAnalysis
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Project $project, RiskAnalysis $riskAnalysis)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, RiskAnalysis $riskAnalysis)
     {
         $this->authorize('update', [RiskAnalysis::class, $riskAnalysis]);
 
-        return Inertia::render('Calls/Projects/RiskAnalysis/Editar', [
-            'call'              => $call,
-            'project'           => $project,
+        return Inertia::render('Convocatorias/Proyectos/RiskAnalysis/Editar', [
+            'convocatoria'              => $convocatoria,
+            'project'           => $proyecto,
             'riskAnalysis'      => $riskAnalysis,
             'riskLevels'        => json_decode(Storage::get('json/risk-levels.json'), true),
             'riskTypes'         => json_decode(Storage::get('json/risk-types.json'), true),
@@ -124,7 +124,7 @@ class RiskAnalysisController extends Controller
      * @param  \App\Models\RiskAnalysis  $riskAnalysis
      * @return \Illuminate\Http\Response
      */
-    public function update(RiskAnalysisRequest $request, Call $call, Project $project, RiskAnalysis $riskAnalysis)
+    public function update(RiskAnalysisRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, RiskAnalysis $riskAnalysis)
     {
         $this->authorize('update', [RiskAnalysis::class, $riskAnalysis]);
 
@@ -135,7 +135,7 @@ class RiskAnalysisController extends Controller
         $riskAnalysis->impact               = $request->impact;
         $riskAnalysis->effects              = $request->effects;
         $riskAnalysis->mitigation_measures  = $request->mitigation_measures;
-        $riskAnalysis->project()->associate($project);
+        $riskAnalysis->project()->associate($proyecto);
 
         $riskAnalysis->save();
 
@@ -148,12 +148,12 @@ class RiskAnalysisController extends Controller
      * @param  \App\Models\RiskAnalysis  $riskAnalysis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Call $call, Project $project, RiskAnalysis $riskAnalysis)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, RiskAnalysis $riskAnalysis)
     {
         $this->authorize('delete', [RiskAnalysis::class, $riskAnalysis]);
 
         $riskAnalysis->delete();
 
-        return redirect()->route('calls.projects.risk-analysis.index', [$call, $project])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.projects.risk-analysis.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
     }
 }

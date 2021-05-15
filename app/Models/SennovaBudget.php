@@ -19,7 +19,7 @@ class SennovaBudget extends Model
         'second_budget_info_id',
         'third_budget_info_id',
         'budget_ussage_id',
-        'programmatic_line_id',
+        'linea_programatica_id',
         'requires_market_research',
         'requires_market_research_batch',
         'can_be_added'
@@ -98,7 +98,7 @@ class SennovaBudget extends Model
      *
      * @return void
      */
-    public function callBudgets()
+    public function rubrosPresupuestalesConvocatoria()
     {
         return $this->hasMany(CallBudget::class);
     }

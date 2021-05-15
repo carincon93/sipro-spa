@@ -9,7 +9,7 @@ class LineaProgramatica extends Model
 {
     use HasFactory;
 
-        /**
+    /**
      * table
      *
      * @var string
@@ -47,13 +47,13 @@ class LineaProgramatica extends Model
     ];
 
     /**
-     * Relationship with ProjectType
+     * Relationship with TipoProyecto
      *
      * @return void
      */
-    public function projectTypes()
+    public function tiposProyecto()
     {
-        return $this->hasMany(ProjectType::class);
+        return $this->hasMany(TipoProyecto::class);
     }
 
     /**

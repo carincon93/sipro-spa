@@ -3,8 +3,8 @@
     import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    export let call
-    export let project
+    export let convocatoria
+    export let proyecto
 </script>
 
 <!-- Steper -->
@@ -12,7 +12,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.rdi.edit', [call.id, project.id])}
+            href={route('convocatorias.idi.edit', [
+                convocatoria.id,
+                proyecto.id,
+            ])}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -26,7 +29,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.problem-tree', [call.id, project.id])}
+            href={route('convocatorias.proyectos.arbol-problemas', [
+                convocatoria.id,
+                proyecto.id,
+            ])}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -40,9 +46,9 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.objectives-tree', [
-                call.id,
-                project.id,
+            href={route('convocatorias.proyectos.objectives-tree', [
+                convocatoria.id,
+                proyecto.id,
             ])}
             class="flex flex-col items-center inline-block"
         >
@@ -57,10 +63,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.project-sennova-roles.index', [
-                call.id,
-                project.id,
-            ])}
+            href={route(
+                'convocatorias.proyectos.proyecto-sennova-roles.index',
+                [convocatoria.id, proyecto.id],
+            )}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -74,10 +80,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.project-sennova-budgets.index', [
-                call.id,
-                project.id,
-            ])}
+            href={route(
+                'convocatorias.proyectos.proyecto-sennova-budgets.index',
+                [convocatoria.id, proyecto.id],
+            )}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -91,7 +97,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.participants', [call.id, project.id])}
+            href={route('convocatorias.proyectos.participants', [
+                convocatoria.id,
+                proyecto.id,
+            ])}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -105,7 +114,10 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.outputs.index', [call.id, project.id])}
+            href={route('convocatorias.proyectos.outputs.index', [
+                convocatoria.id,
+                proyecto.id,
+            ])}
             class="flex flex-col items-center inline-block"
         >
             <div
@@ -119,9 +131,9 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.activities.index', [
-                call.id,
-                project.id,
+            href={route('convocatorias.proyectos.activities.index', [
+                convocatoria.id,
+                proyecto.id,
             ])}
             class="flex flex-col items-center inline-block"
         >
@@ -136,9 +148,9 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.risk-analysis.index', [
-                call.id,
-                project.id,
+            href={route('convocatorias.proyectos.risk-analysis.index', [
+                convocatoria.id,
+                proyecto.id,
             ])}
             class="flex flex-col items-center inline-block"
         >
@@ -150,13 +162,13 @@
             <p class="text-sm text-center">Análisis de riesgos</p>
         </a>
     </div>
-    {#if project.project_type.programmatic_line.code == 66 || project.project_type.programmatic_line.code == 82}
+    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <div class="w-10/12">
             <a
                 use:inertia
-                href={route('calls.rdi.partner-organizations.index', [
-                    call.id,
-                    project.id,
+                href={route('convocatorias.idi.entidades-aliadas.index', [
+                    convocatoria.id,
+                    proyecto.id,
                 ])}
                 class="flex flex-col items-center inline-block"
             >
@@ -172,16 +184,16 @@
     <div class="w-10/12">
         <a
             use:inertia
-            href={route('calls.projects.project-annexes.index', [
-                call.id,
-                project.id,
+            href={route('convocatorias.proyectos.proyecto-annexes.index', [
+                convocatoria.id,
+                proyecto.id,
             ])}
             class="flex flex-col items-center inline-block"
         >
             <div
                 class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2"
             >
-                {#if project.project_type.programmatic_line.code == 66 || project.project_type.programmatic_line.code == 82}
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     11
                 {:else}
                     10
@@ -195,7 +207,7 @@
             <div
                 class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2"
             >
-                {#if project.project_type.programmatic_line.code == 66 || project.project_type.programmatic_line.code == 82}
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     12
                 {:else}
                     11
@@ -209,7 +221,7 @@
             <div
                 class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2"
             >
-                {#if project.project_type.programmatic_line.code == 66 || project.project_type.programmatic_line.code == 82}
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     13
                 {:else}
                     12

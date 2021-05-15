@@ -48,9 +48,9 @@ class TematicaEstrategica extends Model
      *
      * @return void
      */
-    public function rdi()
+    public function IDi()
     {
-        return $this->hasMany(RDI::class);
+        return $this->hasMany(IDi::class);
     }
 
     /**

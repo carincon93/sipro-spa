@@ -14,7 +14,7 @@ class DisciplinaSubareaConocimiento extends Model
      *
      * @var string
      */
-    protected $table = 'discplinas_subarea_conocimiento';
+    protected $table = 'disciplinas_subarea_conocimiento';
 
 
     /**
@@ -60,9 +60,9 @@ class DisciplinaSubareaConocimiento extends Model
      *
      * @return void
      */
-    public function rdi()
+    public function IDi()
     {
-        return $this->hasMany(RDI::class);
+        return $this->hasMany(IDi::class);
     }
 
     /**

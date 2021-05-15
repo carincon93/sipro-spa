@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectSennovaRoleRequest;
-use App\Models\Call;
-use App\Models\Project;
+use App\Models\Convocatoria;
+use App\Models\Proyecto;
 use App\Models\ProjectSennovaRole;
 use Illuminate\Http\Request;
 use App\Http\Traits\ProjectRoleValidationTrait;
@@ -17,22 +17,22 @@ class ProjectSennovaRoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Call $call, Project $project)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('viewAny', [ProjectSennovaRole::class]);
 
-        $project->projectType->programmaticLine;
-        $project->makeHidden(
+        $proyecto->projectType->programmaticLine;
+        $proyecto->makeHidden(
             'rdi', 
             'projectSennovaBudgets', 
             'updated_at',
         );
 
-        return Inertia::render('Calls/Projects/ProjectSennovaRoles/Index', [
-            'call'                  => $call->only('id'),
-            'project'               => $project,
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaRoles/Index', [
+            'convocatoria'                  => $convocatoria->only('id'),
+            'project'               => $proyecto,
             'filters'               => request()->all('search'),
-            'projectSennovaRoles'   => ProjectSennovaRole::where('project_id', $project->id)->filterProjectSennovaRole(request()->only('search'))->with('callSennovaRole.sennovaRole')->paginate(),
+            'projectSennovaRoles'   => ProjectSennovaRole::where('proyecto_id', $proyecto->id)->filterProjectSennovaRole(request()->only('search'))->with('convocatoriaSennovaRole.sennovaRole')->paginate(),
         ]);
     }
 
@@ -41,14 +41,14 @@ class ProjectSennovaRoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Call $call, Project $project)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [ProjectSennovaRole::class]);
 
-        return Inertia::render('Calls/Projects/ProjectSennovaRoles/Create', [
-            'call'              => $call->only('id'),
-            'project'           => $project->only('id', 'diff_months'),
-            'programmaticLine'  => $project->projectType->programmaticLine->only('id')
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaRoles/Create', [
+            'convocatoria'              => $convocatoria->only('id'),
+            'project'           => $proyecto->only('id', 'diff_months'),
+            'programmaticLine'  => $proyecto->projectType->programmaticLine->only('id')
         ]);
     }
 
@@ -58,57 +58,57 @@ class ProjectSennovaRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectSennovaRoleRequest $request, Call $call, Project $project)
+    public function store(ProjectSennovaRoleRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [ProjectSennovaRole::class]);
 
-        if (ProjectRoleValidationTrait::studentRoleValidation($request->call_sennova_role_id, $project, null, $request->qty_months, $request->qty_roles)) {
+        if (ProjectRoleValidationTrait::studentRoleValidation($request->convocatoria_sennova_role_id, $proyecto, null, $request->qty_months, $request->qty_roles)) {
             return redirect()->back()->with('error', "Máximo 2 monitorias de 3 a 6 meses cada una");
         }
 
-        $projectSennovaRole = new ProjectSennovaRole();
-        $projectSennovaRole->qty_months     = $request->qty_months;
-        $projectSennovaRole->qty_roles      = $request->qty_roles;
-        $projectSennovaRole->description    = $request->description;
-        $projectSennovaRole->project()->associate($project->id);
-        $projectSennovaRole->callSennovaRole()->associate($request->call_sennova_role_id);
+        $proyectoSennovaRole = new ProjectSennovaRole();
+        $proyectoSennovaRole->qty_months     = $request->qty_months;
+        $proyectoSennovaRole->qty_roles      = $request->qty_roles;
+        $proyectoSennovaRole->description    = $request->description;
+        $proyectoSennovaRole->project()->associate($proyecto->id);
+        $proyectoSennovaRole->convocatoriaSennovaRole()->associate($request->convocatoria_sennova_role_id);
 
-        $projectSennovaRole->save();
+        $proyectoSennovaRole->save();
 
-        return redirect()->route('calls.projects.project-sennova-roles.index', [$call, $project])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.projects.project-sennova-roles.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProjectSennovaRole  $projectSennovaRole
+     * @param  \App\Models\ProjectSennovaRole  $proyectoSennovaRole
      * @return \Illuminate\Http\Response
      */
-    public function show(Call $call, Project $project, ProjectSennovaRole $projectSennovaRole)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaRole $proyectoSennovaRole)
     {
-        $this->authorize('view', [ProjectSennovaRole::class, $projectSennovaRole]);
+        $this->authorize('view', [ProjectSennovaRole::class, $proyectoSennovaRole]);
 
-        return Inertia::render('Calls/Projects/ProjectSennovaRoles/Show', [
-            'projectSennovaRole' => $projectSennovaRole
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaRoles/Show', [
+            'projectSennovaRole' => $proyectoSennovaRole
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProjectSennovaRole  $projectSennovaRole
+     * @param  \App\Models\ProjectSennovaRole  $proyectoSennovaRole
      * @return \Illuminate\Http\Response
      */
-    public function edit(Call $call, Project $project, ProjectSennovaRole $projectSennovaRole)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaRole $proyectoSennovaRole)
     {
-        $this->authorize('update', [ProjectSennovaRole::class, $projectSennovaRole]);
+        $this->authorize('update', [ProjectSennovaRole::class, $proyectoSennovaRole]);
 
-        return Inertia::render('Calls/Projects/ProjectSennovaRoles/Editar', [
-            'projectSennovaRole'    => $projectSennovaRole,
-            'call'                  => $call->only('id'),
-            'project'               => $project->only('id', 'diff_months'),
-            'roleName'              => $projectSennovaRole->callSennovaRole->sennovaRole->only('name'),
-            'programmaticLine'      => $project->projectType->programmaticLine->only('id')
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaRoles/Editar', [
+            'projectSennovaRole'    => $proyectoSennovaRole,
+            'convocatoria'                  => $convocatoria->only('id'),
+            'project'               => $proyecto->only('id', 'diff_months'),
+            'roleName'              => $proyectoSennovaRole->convocatoriaSennovaRole->sennovaRole->only('name'),
+            'programmaticLine'      => $proyecto->projectType->programmaticLine->only('id')
         ]);
     }
 
@@ -116,24 +116,24 @@ class ProjectSennovaRoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProjectSennovaRole  $projectSennovaRole
+     * @param  \App\Models\ProjectSennovaRole  $proyectoSennovaRole
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectSennovaRoleRequest $request, Call $call, Project $project, ProjectSennovaRole $projectSennovaRole)
+    public function update(ProjectSennovaRoleRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaRole $proyectoSennovaRole)
     {
-        $this->authorize('update', [ProjectSennovaRole::class, $projectSennovaRole]);
+        $this->authorize('update', [ProjectSennovaRole::class, $proyectoSennovaRole]);
 
-        if (ProjectRoleValidationTrait::studentRoleValidation($request->call_sennova_role_id, $project, $projectSennovaRole, $request->qty_months, $request->qty_roles)) {
+        if (ProjectRoleValidationTrait::studentRoleValidation($request->convocatoria_sennova_role_id, $proyecto, $proyectoSennovaRole, $request->qty_months, $request->qty_roles)) {
             return redirect()->back()->with('error', "Máximo 2 monitorias de 3 a 6 meses cada una");
         }
 
-        $projectSennovaRole->qty_months     = $request->qty_months;
-        $projectSennovaRole->qty_roles      = $request->qty_roles;
-        $projectSennovaRole->description    = $request->description;
-        $projectSennovaRole->project()->associate($project->id);
-        $projectSennovaRole->callSennovaRole()->associate($request->call_sennova_role_id);
+        $proyectoSennovaRole->qty_months     = $request->qty_months;
+        $proyectoSennovaRole->qty_roles      = $request->qty_roles;
+        $proyectoSennovaRole->description    = $request->description;
+        $proyectoSennovaRole->project()->associate($proyecto->id);
+        $proyectoSennovaRole->convocatoriaSennovaRole()->associate($request->convocatoria_sennova_role_id);
 
-        $projectSennovaRole->save();
+        $proyectoSennovaRole->save();
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
     }
@@ -141,15 +141,15 @@ class ProjectSennovaRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProjectSennovaRole  $projectSennovaRole
+     * @param  \App\Models\ProjectSennovaRole  $proyectoSennovaRole
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Call $call, Project $project, ProjectSennovaRole $projectSennovaRole)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProjectSennovaRole $proyectoSennovaRole)
     {
-        $this->authorize('delete', [ProjectSennovaRole::class, $projectSennovaRole]);
+        $this->authorize('delete', [ProjectSennovaRole::class, $proyectoSennovaRole]);
 
-        $projectSennovaRole->delete();
+        $proyectoSennovaRole->delete();
 
-        return redirect()->route('calls.projects.project-sennova-roles.index', [$call, $project])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.projects.project-sennova-roles.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
     }
 }

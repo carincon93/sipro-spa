@@ -77,7 +77,7 @@
     </header>
 
     <div class="bg-white rounded shadow max-w-3xl">
-        <form on:submit|preventDefault={submit} novalidate>
+        <form on:submit|preventDefault={submit}>
             <fieldset
                 class="p-8"
                 disabled={canCreateProgramasFormacion || isSuperAdmin

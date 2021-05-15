@@ -63,7 +63,7 @@ class UserController extends Controller
         $user->cellphone_number     = $request->cellphone_number;
         $user->is_enabled           = $request->is_enabled;
         $user->participation_type   = $request->participation_type;
-        $user->academicCentre()->associate($request->academic_centre_id);
+        $user->academicCentre()->associate($request->centro_formacion_id);
 
         $user->save();
 
@@ -124,7 +124,7 @@ class UserController extends Controller
         $user->cellphone_number     = $request->cellphone_number;
         $user->is_enabled           = $request->is_enabled;
         $user->participation_type   = $request->participation_type;
-        $user->academicCentre()->associate($request->academic_centre_id);
+        $user->academicCentre()->associate($request->centro_formacion_id);
 
         $user->save();
 

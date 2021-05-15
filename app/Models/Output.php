@@ -24,7 +24,7 @@ class Output extends Model
     protected $fillable = [
         'project_result_id',
         'name',
-        'fecha_incio',
+        'fecha_inicio',
         'fecha_finalizacion'
     ];
 
@@ -92,17 +92,17 @@ class Output extends Model
 
     public function getStartYearAttribute()
     {
-        return date('Y', strtotime($this->fecha_incio));
+        return date('Y', strtotime($this->fecha_inicio));
     }
 
     public function getStartMonthAttribute()
     {
-        return date('m', strtotime($this->fecha_incio));
+        return date('m', strtotime($this->fecha_inicio));
     }
 
     public function getStartDayAttribute()
     {
-        return date('d', strtotime($this->fecha_incio));
+        return date('d', strtotime($this->fecha_inicio));
     }
 
     public function getEndYearAttribute()

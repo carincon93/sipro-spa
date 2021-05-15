@@ -45,7 +45,7 @@
         name: '',
         description: '',
         academic_degree: '',
-        programmatic_line_id: null,
+        linea_programatica_id: null,
     })
 
     function submit() {
@@ -126,13 +126,13 @@
                     <Label
                         required
                         class="mb-4"
-                        labelFor="programmatic_line_id"
+                        labelFor="linea_programatica_id"
                         value={$_('Programmatic lines.singular')}
                     />
                     <DropdownProgrammaticLine
-                        id="programmatic_line_id"
-                        bind:formProgrammaticLine={$form.programmatic_line_id}
-                        message={errors.programmatic_line_id}
+                        id="linea_programatica_id"
+                        bind:formProgrammaticLine={$form.linea_programatica_id}
+                        message={errors.linea_programatica_id}
                         required
                     />
                 </div>

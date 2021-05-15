@@ -54,7 +54,7 @@
                         class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col"
                     >
                         <span>ICON</span>
-                        {$_(link.name + '.plural')}
+                        {link.name}
                     </a>
                 {/if}
             {/each}

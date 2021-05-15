@@ -18,9 +18,9 @@ class CallBudgetController extends Controller
     {
         $this->authorize('viewAny', [CallBudget::class]);
 
-        return Inertia::render('CallBudgets/Index', [
+        return Inertia::render('rubrosPresupuestalesConvocatoria/Index', [
             'filters'   => request()->all('search'),
-            'callBudgets' => CallBudget::orderBy('', 'ASC')
+            'rubrosPresupuestalesConvocatoria' => CallBudget::orderBy('', 'ASC')
                 ->filterCallBudget(request()->only('search'))->paginate(),
         ]);
     }
@@ -34,7 +34,7 @@ class CallBudgetController extends Controller
     {
         $this->authorize('create', [CallBudget::class]);
 
-        return Inertia::render('CallBudgets/Create');
+        return Inertia::render('rubrosPresupuestalesConvocatoria/Create');
     }
 
     /**
@@ -67,7 +67,7 @@ class CallBudgetController extends Controller
     {
         $this->authorize('view', [CallBudget::class, $callBudget]);
 
-        return Inertia::render('CallBudgets/Show', [
+        return Inertia::render('rubrosPresupuestalesConvocatoria/Show', [
             'callBudget' => $callBudget
         ]);
     }
@@ -82,7 +82,7 @@ class CallBudgetController extends Controller
     {
         $this->authorize('update', [CallBudget::class, $callBudget]);
 
-        return Inertia::render('CallBudgets/Editar', [
+        return Inertia::render('rubrosPresupuestalesConvocatoria/Editar', [
             'callBudget' => $callBudget
         ]);
     }

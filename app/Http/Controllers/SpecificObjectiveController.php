@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SpecificObjectiveRequest;
-use App\Models\Project;
+use App\Models\Proyecto;
 use App\Models\SpecificObjective;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,7 +15,7 @@ class SpecificObjectiveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project)
+    public function index(Proyecto $proyecto)
     {
         $this->authorize('viewAny', [SpecificObjective::class]);
 
@@ -31,7 +31,7 @@ class SpecificObjectiveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project)
+    public function create(Proyecto $proyecto)
     {
         $this->authorize('create', [SpecificObjective::class]);
 
@@ -44,7 +44,7 @@ class SpecificObjectiveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SpecificObjectiveRequest $request, Project $project)
+    public function store(SpecificObjectiveRequest $request, Proyecto $proyecto)
     {
         $this->authorize('create', [SpecificObjective::class]);
 
@@ -64,7 +64,7 @@ class SpecificObjectiveController extends Controller
      * @param  \App\Models\SpecificObjective  $specificObjective
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, SpecificObjective $specificObjective)
+    public function show(Proyecto $proyecto, SpecificObjective $specificObjective)
     {
         $this->authorize('view', [SpecificObjective::class, $specificObjective]);
 
@@ -79,7 +79,7 @@ class SpecificObjectiveController extends Controller
      * @param  \App\Models\SpecificObjective  $specificObjective
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, SpecificObjective $specificObjective)
+    public function edit(Proyecto $proyecto, SpecificObjective $specificObjective)
     {
         $this->authorize('update', [SpecificObjective::class, $specificObjective]);
 
@@ -95,7 +95,7 @@ class SpecificObjectiveController extends Controller
      * @param  \App\Models\SpecificObjective  $specificObjective
      * @return \Illuminate\Http\Response
      */
-    public function update(SpecificObjectiveRequest $request, Project $project, SpecificObjective $specificObjective)
+    public function update(SpecificObjectiveRequest $request, Proyecto $proyecto, SpecificObjective $specificObjective)
     {
         $this->authorize('update', [SpecificObjective::class, $specificObjective]);
 
@@ -114,7 +114,7 @@ class SpecificObjectiveController extends Controller
      * @param  \App\Models\SpecificObjective  $specificObjective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, SpecificObjective $specificObjective)
+    public function destroy(Proyecto $proyecto, SpecificObjective $specificObjective)
     {
         $this->authorize('delete', [SpecificObjective::class, $specificObjective]);
 

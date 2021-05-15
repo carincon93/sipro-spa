@@ -54,7 +54,7 @@
                 (item) => item.value == sennovaRole.academic_degree,
             )?.label,
         },
-        programmatic_line_id: sennovaRole.programmatic_line_id,
+        linea_programatica_id: sennovaRole.linea_programatica_id,
     })
 
     function submit() {
@@ -142,13 +142,13 @@
                     <Label
                         required
                         class="mb-4"
-                        labelFor="programmatic_line_id"
+                        labelFor="linea_programatica_id"
                         value={$_('Programmatic lines.singular')}
                     />
                     <DropdownProgrammaticLine
-                        id="programmatic_line_id"
-                        bind:formProgrammaticLine={$form.programmatic_line_id}
-                        message={errors.programmatic_line_id}
+                        id="linea_programatica_id"
+                        bind:formProgrammaticLine={$form.linea_programatica_id}
+                        message={errors.linea_programatica_id}
                         required
                     />
                 </div>
