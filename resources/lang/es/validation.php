@@ -170,6 +170,9 @@ return [
         'actividades_muestreo'  => 'actividad que pretende con la especie nativa',
         'objetivo_muestreo'     => 'finalidad de las actividades a realizar con la especie nativa',
 		'municipios'            => 'nombre de los municipios beneficiados',
+		'convocatoria_rol_sennova_id' => 'rol SENNOVA',
+		'numero_roles'  		=> 'número de personas',
+		'numero_meses' 			=> 'número de meses',
 		
 		'grupo_investigacion_id' => 'grupo de investigación',
 		'linea_investigacion_id' => 'línea de investigación',

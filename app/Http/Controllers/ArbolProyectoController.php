@@ -272,8 +272,8 @@ class ArbolProyectoController extends Controller
 
                 $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultado')->get();
                 $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
-                $proyecto->planteamiento_problema = $proyecto->IDi->planteamiento_problema;
-                $proyecto->objetivo_general = $proyecto->IDi->objetivo_general;
+                $proyecto->planteamiento_problema   = $proyecto->IDi->planteamiento_problema;
+                $proyecto->objetivo_general         = $proyecto->IDi->objetivo_general;
                 break;
                 default:
                 break;

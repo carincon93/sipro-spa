@@ -22,6 +22,7 @@ class Proyecto extends Model
      *
      * @var array
      */
+    protected $appends = ['diff_meses'];
     // protected $appends = ['code', 'diff_months', 'total_project_budget', 'total_industrial_machinery', 'total_special_construction_services', 'total_viatics', 'total_machinery_maintenance'];
 
     /**
@@ -123,5 +124,23 @@ class Proyecto extends Model
     public function efectosDirectos()
     {
         return $this->hasMany(EfectoDirecto::class)->orderBy('id', 'ASC');
+    }
+
+    /**
+     * Relationship with ProyectoRolSennova
+     *
+     * @return void
+     */
+    public function proyectoRolesSennova()
+    {
+        return $this->hasMany(ProyectoRolSennova::class);
+    }
+
+
+    public function getDiffMesesAttribute()
+    {
+        $fecha_finalizacion = Carbon::parse($this->idi->fecha_finalizacion, 'UTC')->floorMonth();
+        $fecha_inicio       = Carbon::parse($this->idi->fecha_inicio, 'UTC')->floorMonth();
+        return $fecha_inicio->diffInMonths($fecha_finalizacion);
     }
 }

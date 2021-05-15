@@ -67,13 +67,13 @@ class LineaProgramatica extends Model
     }
 
     /**
-     * Relationship with CallSennovaRole
+     * Relationship with CallRolSennova
      *
      * @return void
      */
-    public function callSennovaRoles()
+    public function callRolSennovas()
     {
-        return $this->hasMany(CallSennovaRole::class);
+        return $this->hasMany(CallRolSennova::class);
     }
 
     /**

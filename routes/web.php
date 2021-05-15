@@ -25,8 +25,8 @@ use App\Http\Controllers\ArbolProyectoController;
 use App\Http\Controllers\OutputController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\ConvocatoriaSennovaRoleController;
-use App\Http\Controllers\SennovaRoleController;
+use App\Http\Controllers\ConvocatoriaRolSennovaController;
+use App\Http\Controllers\RolSennovaController;
 use App\Http\Controllers\ProyectoRolSennovaController;
 use App\Http\Controllers\FirstBudgetInfoController;
 use App\Http\Controllers\SecondBudgetInfoController;
@@ -59,7 +59,7 @@ use App\Models\Regional;
 use App\Models\GrupoInvestigacion;
 use App\Models\MincienciasSubtypology;
 use App\Models\LineaProgramatica;
-use App\Models\CallSennovaRole;
+use App\Models\ConvocatoriaRolSennova;
 use App\Models\SecondBudgetInfo;
 use App\Models\ThirdBudgetInfo;
 use App\Models\SennovaBudget;
@@ -103,9 +103,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-sennova-budgets/{proyecto_sennova_budget}/market-research/{market_research}/download', [ProjectBudgetBatchController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches.download-price-qoute-file');    
 
     // Trae las líneas programáticas
-    Route::get('web-api/programmatic-lines', function() {
+    Route::get('web-api/lineas-programaticas', function() {
         return response(LineaProgramatica::select('id as value', 'name as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.programmatic-lines');
+    })->name('web-api.lineas-programaticas');
 
     
 
@@ -127,34 +127,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.third-budget-info');
 
     // Trae los usos presupuestales
-    Route::get('web-api/calls/{convocatoria}/programmatic-lines/{linea_programatica}/sennova-budgets/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($call, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
-        return response(SennovaBudget::select('call_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.message')
+    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/sennova-budgets/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($convocatoria, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
+        return response(SennovaBudget::select('convocatoria_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.mensaje')
             ->join('budget_usages', 'sennova_budgets.budget_usage_id', 'budget_usages.id')
-            ->join('call_budgets', 'sennova_budgets.id', 'call_budgets.sennova_budget_id')
-            ->where('call_budgets.call_id', $call)
+            ->join('convocatoria_budgets', 'sennova_budgets.id', 'convocatoria_budgets.sennova_budget_id')
+            ->where('convocatoria_budgets.convocatoria_id', $convocatoria)
             ->where('sennova_budgets.linea_programatica_id', $lineaProgramatica)
             ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
             ->where('sennova_budgets.third_budget_info_id', $thirdBudgetInfo)
             ->orderBy('budget_usages.description', 'ASC')->get());
     })->name('web-api.budget-usages');
 
-    Route::get('web-api/calls/{convocatoria}/{linea_programatica}/proyecto-rol-sennova', function($call, $lineaProgramatica) {
-        return response(CallSennovaRole::selectRaw("call_sennova_roles.id as value, call_sennova_roles.message,
-        CASE academic_degree
-				WHEN '0' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '1' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Técnico', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '2' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Tecnólogo', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '3' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Pregrado', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '4' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Especalización', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '5' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Maestría', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
-                WHEN '6' THEN	concat(sennova_roles.nombre, ' - Nivel académico: Doctorado', chr(10), '∙ Asignación mensual: ', call_sennova_roles.salary)
+    Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function($convocatoria, $lineaProgramatica) {
+        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.mensaje,
+        CASE nivel_academico
+				WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
         END as label,
-        call_sennova_roles.qty_months, call_sennova_roles.qty_roles, call_sennova_roles.months_experience")
-            ->join('sennova_roles', 'call_sennova_roles.sennova_role_id', 'sennova_roles.id')
-            ->where('call_sennova_roles.linea_programatica_id', $lineaProgramatica)
-            ->where('call_sennova_roles.call_id', $call)
-            ->orderBy('sennova_roles.nombre')->get());
-    })->name('web-api.convocatorias.proyecto-rol-sennova');
+        convocatoria_rol_sennova.meses_experiencia")
+            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
+            ->where('convocatoria_rol_sennova.linea_programatica_id', $lineaProgramatica)
+            ->where('convocatoria_rol_sennova.convocatoria_id', $convocatoria)
+            ->orderBy('roles_sennova.nombre')->get());
+    })->name('web-api.convocatorias.roles-sennova');
 
 
     /**
@@ -400,7 +400,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Mesas sectoriales
      * 
     */
-    Route::resource('convocatorias.proyectos.roles-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'roles-sennova' => 'rol-sennova'])->except(['show']);
+    Route::resource('convocatorias.proyectos.proyecto-rol-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-rol-sennova' => 'proyecto-rol-sennova'])->except(['show']);
 
     
     Route::resource('convocatorias.proyectos.risk-analysis', RiskAnalysisController::class)->parameters(['risk-analysis' => 'risk_analysis']);
@@ -416,13 +416,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'convocatorias.proyectos.outputs' => OutputController::class,
             'convocatorias.proyectos.activities' => ActivityController::class,
             'convocatorias.proyectos.proyecto-sennova-budgets' => ProjectSennovaBudgetController::class,
-            'convocatorias.call-sennova-roles' => ConvocatoriaSennovaRoleController::class,
+            'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,
             'first-budget-info' => FirstBudgetInfoController::class,
             'second-budget-info' => SecondBudgetInfoController::class,
             'third-budget-info' => ThirdBudgetInfoController::class,
             'sennova-budgets' => SennovaBudgetController::class,
-            'sennova-roles' => SennovaRoleController::class,
-            'call-budgets' => CallBudgetController::class,
+            'sennova-roles' => RolSennovaController::class,
+            'convocatoria-budgets' => CallBudgetController::class,
         ]
     );
 });

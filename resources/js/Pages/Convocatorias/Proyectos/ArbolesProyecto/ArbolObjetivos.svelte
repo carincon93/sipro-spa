@@ -193,14 +193,14 @@
     })
 
     let showObjetivoGeneralForm = false
-    let problemStatement
+    let planteamiento_problema
     function showObjetivoGeneralDialog() {
         reset()
         dialogTitle = 'Objetivo general'
         dialog_open = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
-        problemStatement = proyecto.planteamiento_problema
+        planteamiento_problema = proyecto.planteamiento_problema
         $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general
     }
 
@@ -632,7 +632,7 @@
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {problemStatement}
+                            {planteamiento_problema}
                         </p>
                         <div>
                             <Label class="mb-4" labelFor="objetivo_general" value="Objetivo general" />

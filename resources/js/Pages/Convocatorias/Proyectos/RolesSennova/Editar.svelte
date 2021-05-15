@@ -9,19 +9,19 @@
     import Button from '@/Components/Button'
     import LoadingButton from '@/Components/LoadingButton'
     import Textarea from '@/Components/Textarea'
-    import DropdownProjectSennovaRole from '@/Dropdowns/DropdownProjectSennovaRole'
+    import DropdownProyectoRolSennova from '@/Dropdowns/DropdownProyectoRolSennova'
     import Dialog from '@/Components/Dialog'
 
-    export let call
-    export let project
-    export let programmaticLine
-    export let roleName
-    export let projectSennovaRole = {}
+    export let convocatoria
+    export let proyecto
+    export let lineaProgramatica
+    export let rolSennova
+    export let proyectoRolSennova
     export let errors
 
-    let projectSennovaRoleInfo
+    let infoRolSennova
 
-    $: $title = roleName.name
+    $: $title = rolSennova.nombre
 
     /**
      * Permisos
@@ -31,32 +31,24 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.index') == 'project-sennova-roles.index'
-    let canShowProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.show') == 'project-sennova-roles.show'
-    let canCreateProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.create') == 'project-sennova-roles.create'
-    let canEditProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.edit') == 'project-sennova-roles.edit'
-    let canDestroyProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.delete') == 'project-sennova-roles.delete'
+    let canIndexProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.index') == 'proyecto-roles-sennova.index'
+    let canShowProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.show') == 'proyecto-roles-sennova.show'
+    let canCreateProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.create') == 'proyecto-roles-sennova.create'
+    let canEditProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.edit') == 'proyecto-roles-sennova.edit'
+    let canDestroyProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.destroy') == 'proyecto-roles-sennova.destroy'
 
     let dialog_open = false
     let sending = false
     let form = useForm({
-        qty_months: projectSennovaRole.qty_months,
-        qty_roles: projectSennovaRole.qty_roles,
-        description: projectSennovaRole.description,
-        call_sennova_role_id: projectSennovaRole.call_sennova_role_id,
+        numero_meses: proyectoRolSennova.numero_meses,
+        numero_roles: proyectoRolSennova.numero_roles,
+        descripcion: proyectoRolSennova.descripcion,
+        convocatoria_rol_sennova_id: proyectoRolSennova.convocatoria_rol_sennova_id,
     })
 
-    $: if (projectSennovaRoleInfo?.qty_months != null && projectSennovaRoleInfo?.qty_roles) {
-        $form.qty_months = projectSennovaRoleInfo.qty_months
-        $form.qty_roles = projectSennovaRoleInfo.qty_roles
-    } else {
-        $form.qty_months = projectSennovaRole.qty_months
-        $form.qty_roles = projectSennovaRole.qty_roles
-    }
-
     function submit() {
-        if (canEditProjectSennovaRoles || isSuperAdmin) {
-            $form.put(route('calls.projects.project-sennova-roles.update', [call.id, project.id, projectSennovaRole.id]), {
+        if (canEditProyectoRolesSennova || isSuperAdmin) {
+            $form.put(route('convocatorias.proyectos.proyecto-rol-sennova.update', [convocatoria.id, proyecto.id, proyectoRolSennova.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -65,8 +57,8 @@
     }
 
     function destroy() {
-        if (canDestroyProjectSennovaRoles || isSuperAdmin) {
-            $form.delete(route('calls.projects.project-sennova-roles.destroy', [call.id, project.id, projectSennovaRole.id]))
+        if (canDestroyProyectoRolesSennova || isSuperAdmin) {
+            $form.delete(route('convocatorias.proyectos.proyecto-rol-sennova.destroy', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))
         }
     }
 </script>
@@ -76,13 +68,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexProjectSennovaRoles || canShowProjectSennovaRoles || canEditProjectSennovaRoles || canDestroyProjectSennovaRoles || isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-roles.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Project sennova roles.plural')}
-                        </a>
+                    {#if canIndexProyectoRolesSennova || canShowProyectoRolesSennova || canEditProyectoRolesSennova || canDestroyProyectoRolesSennova || isSuperAdmin}
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {roleName.name}
+                    {rolSennova.nombre}
                 </h1>
             </div>
         </div>
@@ -90,72 +80,47 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditProjectSennovaRoles || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={canEditProyectoRolesSennova || isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="call_sennova_role_id" value="Rol SENNOVA" />
-                    <DropdownProjectSennovaRole id="call_sennova_role_id" {call} {programmaticLine} bind:formProjectSennovaRole={$form.call_sennova_role_id} bind:projectSennovaRoleInfo message={errors.call_sennova_role_id} required />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
+                    <DropdownProyectoRolSennova id="convocatoria_rol_sennova_id" {convocatoria} {lineaProgramatica} bind:formProyectRolSennova={$form.convocatoria_rol_sennova_id} bind:infoRolSennova message={errors.convocatoria_rol_sennova_id} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="description" value="Descripción" />
-                    <Textarea rows="4" id="description" error={errors.description} bind:value={$form.description} required />
+                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
+                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
-                {#if projectSennovaRoleInfo?.months_experience}
+                {#if infoRolSennova?.meses_experiencia}
                     <div class="mt-4">
                         <p class="block font-medium text-sm text-gray-700 ">
                             Experiencia (meses)
                             <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {projectSennovaRoleInfo.months_experience}
+                                {infoRolSennova.meses_experiencia}
                             </span>
                         </p>
                     </div>
                 {/if}
 
-                {#if projectSennovaRoleInfo?.qty_months}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
-                            Número de meses que requiere el apoyo:
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {projectSennovaRoleInfo?.qty_months}
-                            </span>
-                        </p>
-                    </div>
-                {:else}
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="qty_months" value="Número de meses que requiere el apoyo" />
-                        <Input id="qty_months" type="number" min="1" max={project.diff_months} class="mt-1 block w-full" error={errors.qty_months} bind:value={$form.qty_months} required />
-                    </div>
-                {/if}
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="numero_meses" value="Número de meses que requiere el apoyo" />
+                    <Input id="numero_meses" type="number" min="1" max={proyecto.diff_meses} class="mt-1 block w-full" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                </div>
 
-                {#if projectSennovaRoleInfo?.qty_roles}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
-                            Número de personas requeridas:
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {projectSennovaRoleInfo?.qty_roles}
-                            </span>
-                        </p>
-                    </div>
-                {:else}
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="qty_roles" value="Número de personas requeridas" />
-                        <Input id="qty_roles" type="number" min="1" class="mt-1 block w-full" error={errors.qty_roles} bind:value={$form.qty_roles} required />
-                    </div>
-                {/if}
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="numero_roles" value="Número de personas requeridas" />
+                    <Input id="numero_roles" type="number" min="1" class="mt-1 block w-full" error={errors.numero_roles} bind:value={$form.numero_roles} required />
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canDestroyProjectSennovaRoles || isSuperAdmin}
+                {#if canDestroyProyectoRolesSennova || isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
                         Eliminar
                         {$_('Project sennova roles.singular').toLowerCase()}
                     </button>
                 {/if}
-                {#if canEditProjectSennovaRoles || isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                        Editar
-                        {$_('Project sennova roles.singular')}
-                    </LoadingButton>
+                {#if canEditProyectoRolesSennova || isSuperAdmin}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
                 {/if}
             </div>
         </form>

@@ -77,13 +77,13 @@ class Convocatoria extends Model
     }
 
     /**
-     * Relationship with ConvocatoriaSennovaRole
+     * Relationship with ConvocatoriaRolSennova
      *
      * @return void
      */
-    public function callSennovaRoles()
+    public function callRolSennovas()
     {
-        return $this->hasMany(ConvocatoriaSennovaRole::class);
+        return $this->hasMany(ConvocatoriaRolSennova::class);
     }
 
     /**

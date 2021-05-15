@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\SennovaRole;
+use App\Models\RolSennova;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SennovaRolePolicy
+class RolSennovaPolicy
 {
     use HandlesAuthorization;
 
@@ -29,10 +29,10 @@ class SennovaRolePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return mixed
      */
-    public function view(User $user, SennovaRole $sennovaRole)
+    public function view(User $user, RolSennova $rolSennova)
     {
         if ( $user->hasPermissionTo('sennova-roles.show') ) {
             return true;
@@ -60,10 +60,10 @@ class SennovaRolePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return mixed
      */
-    public function update(User $user, SennovaRole $sennovaRole)
+    public function update(User $user, RolSennova $rolSennova)
     {
         if ( $user->hasPermissionTo('sennova-roles.show') || $user->hasPermissionTo('sennova-roles.edit') || $user->hasPermissionTo('sennova-roles.delete') ) {
             return true;
@@ -76,10 +76,10 @@ class SennovaRolePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return mixed
      */
-    public function delete(User $user, SennovaRole $sennovaRole)
+    public function delete(User $user, RolSennova $rolSennova)
     {
         if ( $user->hasPermissionTo('sennova-roles.delete') ) {
             return true;
@@ -92,10 +92,10 @@ class SennovaRolePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return mixed
      */
-    public function restore(User $user, SennovaRole $sennovaRole)
+    public function restore(User $user, RolSennova $rolSennova)
     {
         //
     }
@@ -104,10 +104,10 @@ class SennovaRolePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return mixed
      */
-    public function forceDelete(User $user, SennovaRole $sennovaRole)
+    public function forceDelete(User $user, RolSennova $rolSennova)
     {
         //
     }

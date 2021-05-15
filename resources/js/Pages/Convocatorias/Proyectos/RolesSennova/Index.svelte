@@ -12,11 +12,11 @@
     import DataTable from '@/Components/DataTable'
     import Stepper from '@/Components/Stepper'
 
-    export let call
-    export let project
-    export let projectSennovaRoles = []
+    export let convocatoria
+    export let proyecto
+    export let proyectoRolesSennova = []
 
-    $title = $_('Project sennova roles.plural')
+    $title = 'Roles SENNOVA'
 
     /**
      * Permisos
@@ -26,27 +26,24 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.index') == 'project-sennova-roles.index'
-    let canShowProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.show') == 'project-sennova-roles.show'
-    let canCreateProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.create') == 'project-sennova-roles.create'
-    let canEditProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.edit') == 'project-sennova-roles.edit'
-    let canDestroyProjectSennovaRoles = authUser.can.find((element) => element == 'project-sennova-roles.delete') == 'project-sennova-roles.delete'
+    let canIndexProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.index') == 'proyecto-roles-sennova.index'
+    let canShowProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.show') == 'proyecto-roles-sennova.show'
+    let canCreateProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.create') == 'proyecto-roles-sennova.create'
+    let canEditProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.edit') == 'proyecto-roles-sennova.edit'
+    let canDestroyProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.destroy') == 'proyecto-roles-sennova.destroy'
 
     let filters = {}
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {call} {project} />
+    <Stepper {convocatoria} {proyecto} />
 
     <DataTable class="mt-20">
-        <div slot="title">{$_('Project sennova roles.plural')}</div>
+        <div slot="title">Roles SENNOVA</div>
 
         <div slot="actions">
-            {#if canCreateProjectSennovaRoles || isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('calls.projects.project-sennova-roles.create', [call.id, project.id]))} variant="raised">
-                    Crear
-                    {$_('Project sennova roles.singular')}
-                </Button>
+            {#if canCreateProyectoRolesSennova || isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
 
@@ -59,22 +56,22 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each projectSennovaRoles.data as projectSennovaRole (projectSennovaRole.id)}
+            {#each proyectoRolesSennova.data as proyectoRolSennova (proyectoRolSennova.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {projectSennovaRole?.call_sennova_role?.sennova_role?.name}
+                            {proyectoRolSennova?.convocatoria_rol_sennova?.rol_sennova?.nombre}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {projectSennovaRole?.call_sennova_role?.salary}
+                            {proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowProjectSennovaRoles || canEditProjectSennovaRoles || canDestroyProjectSennovaRoles || isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('calls.projects.project-sennova-roles.edit', [call.id, project.id, projectSennovaRole.id]))}>
+                            {#if canShowProyectoRolesSennova || canEditProyectoRolesSennova || canDestroyProyectoRolesSennova || isSuperAdmin}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -87,12 +84,12 @@
                 </tr>
             {/each}
 
-            {#if projectSennovaRoles.data.length === 0}
+            {#if proyectoRolesSennova.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
-    <Pagination links={projectSennovaRoles.links} />
+    <Pagination links={proyectoRolesSennova.links} />
 </AuthenticatedLayout>

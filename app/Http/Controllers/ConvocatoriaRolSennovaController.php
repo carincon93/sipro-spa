@@ -1,0 +1,164 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ConvocatoriaRolSennovaRequest;
+use App\Models\Convocatoria;
+use App\Models\ConvocatoriaRolSennova;
+use App\Models\RolSennova;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class ConvocatoriaRolSennovaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Convocatoria $convocatoria)
+    {
+        $this->authorize('viewAny', [ConvocatoriaRolSennova::class]);
+
+        return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Index', [
+            'filters'   => request()->all('search'),
+            'convocatoriaRolesSennova' =>
+                $convocatoria->convocatoriaRolesSennova()
+                ->selectRaw("convocatoria_rol_sennova.id, convocatoria_rol_sennova.asignacion_mensual, CASE convocatoria_rol_sennova.nivel_academico
+                        WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+                        WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
+                        WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
+                        WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
+                        WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
+                        WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
+                        WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+                    END as nombre")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
+                    ->filterConvocatoriaRolSennova(request()->only('search'))->paginate(),
+            'convocatoria' => $convocatoria,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Convocatoria $convocatoria)
+    {
+        $this->authorize('create', [ConvocatoriaRolSennova::class]);
+
+        return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Create', [
+            'convocatoria' => $convocatoria,
+            'rolesSennova' => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
+                WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
+                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
+                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
+                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
+                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
+                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+            END as label")
+            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
+            ->orderBy('roles_sennova.nombre', 'ASC')->get()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ConvocatoriaRolSennovaRequest $request, Convocatoria $convocatoria)
+    {
+        $this->authorize('create', [ConvocatoriaRolSennova::class]);
+
+        $convocatoriaRolSennova = new ConvocatoriaRolSennova();
+        $convocatoriaRolSennova->asignacion_mensual    = $request->asignacion_mensual;
+        $convocatoriaRolSennova->nivel_academico       = $request->nivel_academico;
+        $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
+        $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
+        $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);
+
+        $convocatoriaRolSennova->save();
+
+        return redirect()->route('convocatorias.convocatoria-sennova-roles.index', [$convocatoria])->with('success', 'The resource has been created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\ConvocatoriaRolSennova  $convocatoriaRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Convocatoria $convocatoria, ConvocatoriaRolSennova $convocatoriaRolSennova)
+    {
+        $this->authorize('view', [ConvocatoriaRolSennova::class, $convocatoriaRolSennova]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ConvocatoriaRolSennova  $convocatoriaRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Convocatoria $convocatoria, ConvocatoriaRolSennova $convocatoriaRolSennova)
+    {
+        $this->authorize('update', [ConvocatoriaRolSennova::class, $convocatoriaRolSennova]);
+
+        $convocatoriaRolSennova->rolSennova;
+
+        return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Editar', [
+            'convocatoriaRolSennova'   => $convocatoriaRolSennova,
+            'convocatoria'              => $convocatoria,
+            'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
+                WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
+                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
+                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
+                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
+                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
+                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+            END as label")
+            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
+            ->orderBy('roles_sennova.nombre', 'ASC')->get()
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\ConvocatoriaRolSennova  $convocatoriaRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ConvocatoriaRolSennovaRequest $request, Convocatoria $convocatoria, ConvocatoriaRolSennova $convocatoriaRolSennova)
+    {
+        $this->authorize('update', [ConvocatoriaRolSennova::class, $convocatoriaRolSennova]);
+
+        $convocatoriaRolSennova->asignacion_mensual    = $request->asignacion_mensual;
+        $convocatoriaRolSennova->nivel_academico       = $request->nivel_academico;
+        $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
+        $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
+        $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);
+
+        $convocatoriaRolSennova->save();
+
+        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ConvocatoriaRolSennova  $convocatoriaRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Convocatoria $convocatoria, ConvocatoriaRolSennova $convocatoriaRolSennova)
+    {
+        $this->authorize('delete', [ConvocatoriaRolSennova::class, $convocatoriaRolSennova]);
+
+        $convocatoriaRolSennova->delete();
+
+        return redirect()->route('convocatorias.convocatoria-sennova-roles.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
+    }
+}

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SennovaRoleRequest;
-use App\Models\SennovaRole;
+use App\Http\Requests\RolSennovaRequest;
+use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class SennovaRoleController extends Controller
+class RolSennovaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,12 @@ class SennovaRoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [SennovaRole::class]);
+        $this->authorize('viewAny', [RolSennova::class]);
 
-        return Inertia::render('SennovaRoles/Index', [
+        return Inertia::render('RolSennovas/Index', [
             'filters'   => request()->all('search'),
-            'sennovaRoles' => SennovaRole::orderBy('nombre', 'ASC')
-                ->filterSennovaRole(request()->only('search'))->paginate(),
+            'rolSennovas' => RolSennova::orderBy('nombre', 'ASC')
+                ->filterRolSennova(request()->only('search'))->paginate(),
         ]);
     }
 
@@ -33,9 +33,9 @@ class SennovaRoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', [SennovaRole::class]);
+        $this->authorize('create', [RolSennova::class]);
 
-        return Inertia::render('SennovaRoles/Create', [
+        return Inertia::render('RolSennovas/Create', [
             'academicDegrees' => json_decode(Storage::get('json/academic-degrees.json'), true)
         ]);
     }
@@ -46,15 +46,15 @@ class SennovaRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SennovaRoleRequest $request)
+    public function store(RolSennovaRequest $request)
     {
-        $this->authorize('create', [SennovaRole::class]);
+        $this->authorize('create', [RolSennova::class]);
 
-        $sennovaRole = new SennovaRole();
-        $sennovaRole->name              = $request->name;
-        $sennovaRole->description       = $request->description;
+        $rolSennova = new RolSennova();
+        $rolSennova->name              = $request->name;
+        $rolSennova->description       = $request->description;
 
-        $sennovaRole->save();
+        $rolSennova->save();
 
         return redirect()->route('sennova-roles.index')->with('success', 'The resource has been created successfully.');
     }
@@ -62,30 +62,30 @@ class SennovaRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return \Illuminate\Http\Response
      */
-    public function show(SennovaRole $sennovaRole)
+    public function show(RolSennova $rolSennova)
     {
-        $this->authorize('view', [SennovaRole::class, $sennovaRole]);
+        $this->authorize('view', [RolSennova::class, $rolSennova]);
 
-        return Inertia::render('SennovaRoles/Show', [
-            'sennovaRole' => $sennovaRole
+        return Inertia::render('RolSennovas/Show', [
+            'rolSennova' => $rolSennova
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return \Illuminate\Http\Response
      */
-    public function edit(SennovaRole $sennovaRole)
+    public function edit(RolSennova $rolSennova)
     {
-        $this->authorize('update', [SennovaRole::class, $sennovaRole]);
+        $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        return Inertia::render('SennovaRoles/Editar', [
-            'sennovaRole'       => $sennovaRole,
+        return Inertia::render('RolSennovas/Editar', [
+            'rolSennova'       => $rolSennova,
             'academicDegrees'   => json_decode(Storage::get('json/academic-degrees.json'), true)
         ]);
     }
@@ -94,17 +94,17 @@ class SennovaRoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return \Illuminate\Http\Response
      */
-    public function update(SennovaRoleRequest $request, SennovaRole $sennovaRole)
+    public function update(RolSennovaRequest $request, RolSennova $rolSennova)
     {
-        $this->authorize('update', [SennovaRole::class, $sennovaRole]);
+        $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        $sennovaRole->name              = $request->name;
-        $sennovaRole->description       = $request->description;
+        $rolSennova->name              = $request->name;
+        $rolSennova->description       = $request->description;
 
-        $sennovaRole->save();
+        $rolSennova->save();
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
     }
@@ -112,14 +112,14 @@ class SennovaRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SennovaRole  $sennovaRole
+     * @param  \App\Models\RolSennova  $rolSennova
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SennovaRole $sennovaRole)
+    public function destroy(RolSennova $rolSennova)
     {
-        $this->authorize('delete', [SennovaRole::class, $sennovaRole]);
+        $this->authorize('delete', [RolSennova::class, $rolSennova]);
 
-        $sennovaRole->delete();
+        $rolSennova->delete();
 
         return redirect()->route('sennova-roles.index')->with('success', 'The resource has been deleted successfully.');
     }
