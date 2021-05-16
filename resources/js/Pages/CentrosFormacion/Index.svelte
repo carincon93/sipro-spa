@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.index') == 'centros-formacion.index'
-
-    let canShowCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.show') == 'centros-formacion.show'
-
-    let canCreateCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.create') == 'centros-formacion.create'
-
-    let canEditCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.edit') == 'centros-formacion.edit'
-
-    let canDestroyCentrosFormacion = authUser.can.find((element) => element == 'centros-formacion.destroy') == 'centros-formacion.destroy'
-
     let filters = {}
 </script>
 

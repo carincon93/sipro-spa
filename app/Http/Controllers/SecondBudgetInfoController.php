@@ -53,7 +53,7 @@ class SecondBudgetInfoController extends Controller
 
         $secondBudgetInfo->save();
 
-        return redirect()->route('second-budget-info.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('segundo-grupo-presupuestal.index')->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -117,6 +117,6 @@ class SecondBudgetInfoController extends Controller
 
         $secondBudgetInfo->delete();
 
-        return redirect()->route('second-budget-info.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('segundo-grupo-presupuestal.index')->with('success', 'The resource has been deleted successfully.');
     }
 }

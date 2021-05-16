@@ -13,7 +13,7 @@
 
     export let roles = []
 
-    $title = $_('System roles.plural')
+    $title = 'Roles de sistema'
 
     /**
      * Permisos
@@ -23,25 +23,17 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexRoles = authUser.can.find((element) => element == 'roles.index') == 'roles.index'
-    let canShowRoles = authUser.can.find((element) => element == 'roles.show') == 'roles.show'
-    let canCreateRoles = authUser.can.find((element) => element == 'roles.create') == 'roles.create'
-    let canEditRoles = authUser.can.find((element) => element == 'roles.edit') == 'roles.edit'
-    let canDestroyRoles = authUser.can.find((element) => element == 'roles.destroy') == 'roles.delete'
 
     let filters = {}
 </script>
 
 <AuthenticatedLayout>
     <DataTable class="mt-20">
-        <div slot="title">{$_('System roles.plural')}</div>
+        <div slot="title">Roles de sistema</div>
 
         <div slot="actions">
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('roles.create'))} variant="raised">
-                    Crear
-                    {$_('System roles.singular')}
-                </Button>
+                <Button on:click={() => Inertia.visit(route('roles.create'))} variant="raised">Crear rol de sistema</Button>
             {/if}
         </div>
 

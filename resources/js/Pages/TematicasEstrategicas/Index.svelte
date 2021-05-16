@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.index') == 'tematicas-estrategicas.index'
-
-    let canShowTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.show') == 'tematicas-estrategicas.show'
-
-    let canCreateTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.create') == 'tematicas-estrategicas.create'
-
-    let canEditTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.edit') == 'tematicas-estrategicas.edit'
-
-    let canDestroyTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.destroy') == 'tematicas-estrategicas.destroy'
-
     let filters = {}
 </script>
 

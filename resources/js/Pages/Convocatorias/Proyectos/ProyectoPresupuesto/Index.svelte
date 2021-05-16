@@ -28,11 +28,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProyectoPresupuesto = authUser.can.find((element) => element == 'proyecto-presupuesto.index') == 'proyecto-presupuesto.index'
-    let canShowProyectoPresupuesto = authUser.can.find((element) => element == 'proyecto-presupuesto.show') == 'proyecto-presupuesto.show'
-    let canCreateProyectoPresupuesto = authUser.can.find((element) => element == 'proyecto-presupuesto.create') == 'proyecto-presupuesto.create'
-    let canEditProyectoPresupuesto = authUser.can.find((element) => element == 'proyecto-presupuesto.edit') == 'proyecto-presupuesto.edit'
-    let canDestroyProyectoPresupuesto = authUser.can.find((element) => element == 'proyecto-presupuesto.destroy') == 'proyecto-presupuesto.destroy'
 
     let filters = {}
 </script>

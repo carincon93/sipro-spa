@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.index') == 'tipos-proyecto.index'
-
-    let canShowTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.show') == 'tipos-proyecto.show'
-
-    let canCreateTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.create') == 'tipos-proyecto.create'
-
-    let canEditTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.edit') == 'tipos-proyecto.edit'
-
-    let canDestroyTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.destroy') == 'tipos-proyecto.destroy'
-
     let filters = {}
 </script>
 

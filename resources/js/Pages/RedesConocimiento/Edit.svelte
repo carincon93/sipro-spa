@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.index') == 'redes-conocimiento.index'
-
-    let canShowRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.show') == 'redes-conocimiento.show'
-
-    let canCreateRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.create') == 'redes-conocimiento.create'
-
-    let canEditRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.edit') == 'redes-conocimiento.edit'
-
-    let canDestroyRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.destroy') == 'redes-conocimiento.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -41,7 +31,7 @@
     })
 
     function submit() {
-        if (canEditRedesConocimiento || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('redes-conocimiento.update', redConocimiento.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -51,7 +41,7 @@
     }
 
     function destroy() {
-        if (canDestroyRedesConocimiento || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('redes-conocimiento.destroy', redConocimiento.id))
         }
     }
@@ -74,7 +64,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditRedesConocimiento || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

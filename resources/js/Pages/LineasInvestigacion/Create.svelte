@@ -22,16 +22,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.index') == 'lineas-investigacion.index'
-
-    let canShowLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.show') == 'lineas-investigacion.show'
-
-    let canCreateLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.create') == 'lineas-investigacion.create'
-
-    let canEditLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.edit') == 'lineas-investigacion.edit'
-
-    let canDestroyLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.destroy') == 'lineas-investigacion.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -39,7 +29,7 @@
     })
 
     function submit() {
-        if (canCreateLineasInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('lineas-investigacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -65,7 +55,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateLineasInvestigacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

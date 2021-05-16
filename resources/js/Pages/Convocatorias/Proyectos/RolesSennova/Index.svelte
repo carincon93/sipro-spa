@@ -26,11 +26,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.index') == 'proyecto-roles-sennova.index'
-    let canShowProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.show') == 'proyecto-roles-sennova.show'
-    let canCreateProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.create') == 'proyecto-roles-sennova.create'
-    let canEditProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.edit') == 'proyecto-roles-sennova.edit'
-    let canDestroyProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.destroy') == 'proyecto-roles-sennova.destroy'
 
     let filters = {}
 </script>

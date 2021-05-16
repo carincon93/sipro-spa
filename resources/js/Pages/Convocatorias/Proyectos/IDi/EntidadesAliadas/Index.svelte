@@ -26,11 +26,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.index') == 'partner-organizations.index'
-    let canShowEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.show') == 'partner-organizations.show'
-    let canCreateEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.create') == 'partner-organizations.create'
-    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.edit') == 'partner-organizations.edit'
-    let canDestroyEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.destroy') == 'partner-organizations.destroy'
 
     let filters = {}
 </script>

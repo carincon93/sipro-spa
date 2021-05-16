@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.index') == 'semilleros-investigacion.index'
-
-    let canShowSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.show') == 'semilleros-investigacion.show'
-
-    let canCreateSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.create') == 'semilleros-investigacion.create'
-
-    let canEditSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.edit') == 'semilleros-investigacion.edit'
-
-    let canDestroySemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.destroy') == 'semilleros-investigacion.destroy'
-
     let filters = {}
 </script>
 

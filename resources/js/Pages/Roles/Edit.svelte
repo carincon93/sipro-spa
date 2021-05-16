@@ -29,11 +29,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexRoles = authUser.can.find((element) => element == 'roles.index') == 'roles.index'
-    let canShowRoles = authUser.can.find((element) => element == 'roles.show') == 'roles.show'
-    let canCreateRoles = authUser.can.find((element) => element == 'roles.create') == 'roles.create'
-    let canEditRoles = authUser.can.find((element) => element == 'roles.edit') == 'roles.edit'
-    let canDestroyRoles = authUser.can.find((element) => element == 'roles.destroy') == 'roles.delete'
 
     let dialog_open = false
     let sending = false
@@ -44,7 +39,7 @@
     })
 
     function submit() {
-        if (canEditRoles || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('roles.update', role.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -54,7 +49,7 @@
     }
 
     function destroy() {
-        if (canDestroyRoles || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('roles.destroy', role.id))
         }
     }
@@ -66,9 +61,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('roles.index')} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('System roles.plural')}
-                        </a>
+                        <a use:inertia href={route('roles.index')} class="text-indigo-400 hover:text-indigo-600"> Roles de sistema </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {role.name}
@@ -78,7 +71,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset disabled={canEditRoles || isSuperAdmin ? undefined : true}>
+        <fieldset disabled={isSuperAdmin ? undefined : true}>
             <div class="bg-white rounded shadow max-w-3xl p-8">
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="name" value="Nombre" />
@@ -115,16 +108,10 @@
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                    Eliminar
-                    {$_('System roles.singular').toLowerCase()}
-                </button>
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar rol de sistema </button>
             {/if}
             {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                    Editar
-                    {$_('System roles.singular')}
-                </LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol de sistema</LoadingButton>
             {/if}
         </div>
     </form>

@@ -19,7 +19,7 @@
     export let participationTypes
     export let roles
 
-    $: $title = $_('Create') + ' ' + $_('Users.singular').toLowerCase()
+    $: $title = 'Crear usuario'
 
     /**
      * Permisos
@@ -29,11 +29,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexUsers = authUser.can.find((element) => element == 'users.index') == 'users.index'
-    let canShowUsers = authUser.can.find((element) => element == 'users.show') == 'users.show'
-    let canCreateUsers = authUser.can.find((element) => element == 'users.create') == 'users.create'
-    let canEditUsers = authUser.can.find((element) => element == 'users.edit') == 'users.edit'
-    let canDestroyUsers = authUser.can.find((element) => element == 'users.destroy') == 'users.delete'
 
     let sending = false
     let form = useForm({
@@ -49,7 +44,7 @@
     })
 
     function submit() {
-        if (canCreateUsers || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('users.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -64,9 +59,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Users.plural')}
-                        </a>
+                        <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -145,10 +138,7 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                    Crear
-                    {$_('Users.singular')}
-                </LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear usuario</LoadingButton>
             {/if}
         </div>
     </form>

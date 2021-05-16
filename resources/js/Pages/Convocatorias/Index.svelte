@@ -15,12 +15,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexConvocatorias = authUser.can.find((element) => element == 'convocatorias.index') == 'convocatorias.index'
-    let canShowConvocatorias = authUser.can.find((element) => element == 'convocatorias.show') == 'convocatorias.show'
-    let canCreateConvocatorias = authUser.can.find((element) => element == 'convocatorias.create') == 'convocatorias.create'
-    let canEditConvocatorias = authUser.can.find((element) => element == 'convocatorias.edit') == 'convocatorias.edit'
-    let canDestroyConvocatorias = authUser.can.find((element) => element == 'convocatorias.destroy') == 'convocatorias.destroy'
-
     $title = 'Convocatorias'
 </script>
 

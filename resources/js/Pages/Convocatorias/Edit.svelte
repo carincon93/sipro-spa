@@ -28,22 +28,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexConvocatorias = authUser.can.find((element) => element == 'convocatorias.index') == 'convocatorias.index'
-
-    let canShowConvocatorias = authUser.can.find((element) => element == 'convocatorias.show') == 'convocatorias.show'
-
-    let canCreateConvocatorias = authUser.can.find((element) => element == 'convocatorias.create') == 'convocatorias.create'
-
-    let canEditConvocatorias = authUser.can.find((element) => element == 'convocatorias.edit') == 'convocatorias.edit'
-
-    let canDestroyConvocatorias = authUser.can.find((element) => element == 'convocatorias.destroy') == 'convocatorias.destroy'
-
-    let canIndexCallSenovaRoles = authUser.can.find((element) => element == 'convocatoria-sennova-roles.index') == 'convocatoria-sennova-roles.index'
-    let canShowCallSenovaRoles = authUser.can.find((element) => element == 'convocatoria-sennova-roles.show') == 'convocatoria-sennova-roles.show'
-    let canCreateCallSenovaRoles = authUser.can.find((element) => element == 'convocatoria-sennova-roles.create') == 'convocatoria-sennova-roles.create'
-    let canEditCallSenovaRoles = authUser.can.find((element) => element == 'convocatoria-sennova-roles.edit') == 'convocatoria-sennova-roles.edit'
-    let canDestroyCallSenovaRoles = authUser.can.find((element) => element == 'convocatoria-sennova-roles.delete') == 'convocatoria-sennova-roles.delete'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -56,7 +40,7 @@
     })
 
     function submit() {
-        if (canEditConvocatorias || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.update', convocatoria.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -69,7 +53,7 @@
     })
 
     function destroy() {
-        if (canDestroyConvocatorias || isSuperAdmin) {
+        if (isSuperAdmin) {
             $deleteForm.delete(route('convocatorias.destroy', [convocatoria.id]), {
                 preserveScroll: true,
             })
@@ -100,7 +84,7 @@
     {/if}
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditConvocatorias || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4 mb-20">
                     <p class="text-center">Fecha de la conovicatoria</p>
                     <div class="mt-4 flex items-start justify-around">

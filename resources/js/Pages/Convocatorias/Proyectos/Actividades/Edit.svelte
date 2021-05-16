@@ -33,11 +33,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexActividades = authUser.can.find((element) => element == 'actividades.index') == 'actividades.index'
-    let canShowActividades = authUser.can.find((element) => element == 'actividades.show') == 'actividades.show'
-    let canCreateActividades = authUser.can.find((element) => element == 'actividades.create') == 'actividades.create'
-    let canEditActividades = authUser.can.find((element) => element == 'actividades.edit') == 'actividades.edit'
-    let canDestroyActividades = authUser.can.find((element) => element == 'actividades.destroy') == 'actividades.destroy'
 
     let dialog_open = false
     let sending = false
@@ -50,7 +45,7 @@
     })
 
     function submit() {
-        if (canEditActividades || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.proyectos.actividades.update', [convocatoria.id, proyecto.id, actividad.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -60,7 +55,7 @@
     }
 
     function destroy() {
-        if (canDestroyActividades || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.proyectos.actividades.destroy', [convocatoria.id, proyecto.id, actividad.id]))
         }
     }
@@ -83,7 +78,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditActividades || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">

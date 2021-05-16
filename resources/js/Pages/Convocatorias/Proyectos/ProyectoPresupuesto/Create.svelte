@@ -7,15 +7,15 @@
     import Input from '@/Components/Input'
     import Label from '@/Components/Label'
     import LoadingButton from '@/Components/LoadingButton'
-    import DropdownCallBudget from '@/Dropdowns/DropdownCallBudget'
+    import DropdownPresupuesto from '@/Dropdowns/DropdownPresupuesto'
     import Textarea from '@/Components/Textarea'
     import InputError from '@/Components/InputError'
 
     export let convocatoria
     export let proyecto
     export let errors
-    export let licenceTypes
-    export let softwareTypes
+    export let tiposLicencia
+    export let tiposSoftware
 
     $: $title = 'Crear presupuesto'
 
@@ -27,31 +27,26 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProjectSennovaBudgets = authUser.can.find((element) => element == 'proyecto-sennova-budgets.index') == 'proyecto-sennova-budgets.index'
-    let canShowProjectSennovaBudgets = authUser.can.find((element) => element == 'proyecto-sennova-budgets.show') == 'proyecto-sennova-budgets.show'
-    let canCreateProjectSennovaBudgets = authUser.can.find((element) => element == 'proyecto-sennova-budgets.create') == 'proyecto-sennova-budgets.create'
-    let canEditProjectSennovaBudgets = authUser.can.find((element) => element == 'proyecto-sennova-budgets.edit') == 'proyecto-sennova-budgets.edit'
-    let canDestroyProjectSennovaBudgets = authUser.can.find((element) => element == 'proyecto-sennova-budgets.delete') == 'proyecto-sennova-budgets.delete'
 
     let showQtyInput = true
     let sending = false
     let form = useForm({
-        convocatoria_budget_id: null,
-        description: '',
-        justification: '',
-        value: '',
-        qty_items: '',
-        software_type: '',
-        license_type: '',
+        convocatoria_presupuesto_id: null,
+        descripcion: '',
+        justificacion: '',
+        valor: '',
+        numero_items: '',
+        tipo_software: '',
+        tipo_licencia: '',
         fecha_inicio: '',
         fecha_finalizacion: '',
-        budget_usage_code: '',
+        uso_presupuestal_codigo: '',
     })
 
     function submit() {
-        if (canCreateProjectSennovaBudgets || isSuperAdmin) {
+        if (isSuperAdmin) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-sennova-budgets.store', [convocatoria.id, proyecto.id]), {
+                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.store', [convocatoria.id, proyecto.id]), {
                     onStart: () => (sending = true),
                     onFinish: () => (sending = false),
                 })
@@ -65,9 +60,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-sennova-budgets.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Project sennova budgets.plural')}
-                        </a>
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuestos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -78,49 +71,49 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateProjectSennovaBudgets || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <DropdownCallBudget bind:selectedBudgetUsage={$form.convocatoria_budget_id} bind:showQtyInput bind:budgetUsageCode={$form.budget_usage_code} message={errors.convocatoria_budget_id} {convocatoria} programmaticLine={proyecto.proyecto_type.programmatic_line} required />
+                    <DropdownPresupuesto bind:selectedUsoPresupuestal={$form.convocatoria_presupuesto_id} bind:showQtyInput bind:codigoUsoPresupuestal={$form.uso_presupuestal_codigo} message={errors.convocatoria_presupuesto_id} {convocatoria} lineaProgramatica={proyecto.tipo_proyecto.linea_programatica} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="description" value="Describa el bien o servicio a adquirir. Sea específico" />
-                    <Textarea rows="4" id="description" error={errors.description} bind:value={$form.description} required />
+                    <Label required class="mb-4" labelFor="descripcion" value="Describa el bien o servicio a adquirir. Sea específico" />
+                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="justification" value="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" />
-                    <Textarea rows="4" id="justification" error={errors.justification} bind:value={$form.justification} required />
+                    <Label required class="mb-4" labelFor="justificacion" value="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" />
+                    <Textarea rows="4" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
 
                 {#if !showQtyInput}
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="qty_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
-                        <Input id="qty_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.qty_items} error={errors.qty_items} required />
+                        <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
+                        <Input id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
                     </div>
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="value" value="Valor" />
-                        <Input id="value" type="number" min="1" class="mt-1 block w-full" bind:value={$form.value} error={errors.value} required />
+                        <Label required class="mb-4" labelFor="valor" value="Valor" />
+                        <Input id="valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.valor} error={errors.valor} required />
                     </div>
                 {/if}
 
-                {#if $form.budget_usage_code == '2010100600203101'}
+                {#if $form.uso_presupuestal_codigo == '2010100600203101'}
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="license_type" value="Tipo de licencia" />
-                        <select id="license_type" bind:value={$form.license_type} required>
+                        <Label required class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
+                        <select id="tipo_licencia" bind:value={$form.tipo_licencia} required>
                             <option value="">Seleccione el tipo de licencia </option>
-                            {#each licenceTypes as { value, label }}
-                                <option {value}>{label}</option>
+                            {#each tiposLicencia as { valor, label }}
+                                <option {valor}>{label}</option>
                             {/each}
                         </select>
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="software_type" value="Tipo de software" />
-                        <select id="software_type" bind:value={$form.software_type} required>
+                        <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
+                        <select id="tipo_software" bind:value={$form.tipo_software} required>
                             <option value="">Seleccione el tipo de software </option>
-                            {#each softwareTypes as { value, label }}
-                                <option {value}>{label}</option>
+                            {#each tiposSoftware as { valor, label }}
+                                <option {valor}>{label}</option>
                             {/each}
                         </select>
                     </div>
@@ -142,11 +135,8 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if (canCreateProjectSennovaBudgets && $form.convocatoria_budget_id != '') || (isSuperAdmin && $form.convocatoria_budget_id != '')}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                        Crear
-                        {$_('Project sennova budgets.singular')}
-                    </LoadingButton>
+                {#if $form.convocatoria_presupuesto_id != '' || (isSuperAdmin && $form.convocatoria_presupuesto_id != '')}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear presupuesto</LoadingButton>
                 {/if}
             </div>
         </form>

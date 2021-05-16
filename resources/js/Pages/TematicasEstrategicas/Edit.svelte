@@ -21,16 +21,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.index') == 'tematicas-estrategicas.index'
-
-    let canShowTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.show') == 'tematicas-estrategicas.show'
-
-    let canCreateTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.create') == 'tematicas-estrategicas.create'
-
-    let canEditTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.edit') == 'tematicas-estrategicas.edit'
-
-    let canDestroyTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.destroy') == 'tematicas-estrategicas.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -38,7 +28,7 @@
     })
 
     function submit() {
-        if (canEditTematicasEstrategicas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('tematicas-estrategicas.update', tematicaEstrategica.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -48,7 +38,7 @@
     }
 
     function destroy() {
-        if (canDestroyTematicasEstrategicas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('tematicas-estrategicas.destroy', tematicaEstrategica.id))
         }
     }
@@ -71,7 +61,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditTematicasEstrategicas || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

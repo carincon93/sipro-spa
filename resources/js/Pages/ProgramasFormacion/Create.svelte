@@ -25,16 +25,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
-
-    let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
-
-    let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
-
-    let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
-
-    let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -44,7 +34,7 @@
     })
 
     function submit() {
-        if (canCreateProgramasFormacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('programas-formacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -70,7 +60,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateProgramasFormacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

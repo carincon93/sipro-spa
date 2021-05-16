@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.index') == 'lineas-programaticas.index'
-
-    let canShowLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.show') == 'lineas-programaticas.show'
-
-    let canCreateLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.create') == 'lineas-programaticas.create'
-
-    let canEditLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.edit') == 'lineas-programaticas.edit'
-
-    let canDestroyLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.destroy') == 'lineas-programaticas.destroy'
-
     let filters = {}
 </script>
 

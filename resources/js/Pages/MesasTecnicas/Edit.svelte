@@ -21,16 +21,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.index') == 'mesas-tecnicas.index'
-
-    let canShowMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.show') == 'mesas-tecnicas.show'
-
-    let canCreateMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.create') == 'mesas-tecnicas.create'
-
-    let canEditMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.edit') == 'mesas-tecnicas.edit'
-
-    let canDestroyMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.destroy') == 'mesas-tecnicas.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -38,7 +28,7 @@
     })
 
     function submit() {
-        if (canEditMesasTecnicas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('mesas-tecnicas.update', mesaTecnica.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -48,7 +38,7 @@
     }
 
     function destroy() {
-        if (canDestroyMesasTecnicas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('mesas-tecnicas.destroy', mesaTecnica.id))
         }
     }
@@ -71,7 +61,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditMesasTecnicas || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

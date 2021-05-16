@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.index') == 'lineas-programaticas.index'
-
-    let canShowLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.show') == 'lineas-programaticas.show'
-
-    let canCreateLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.create') == 'lineas-programaticas.create'
-
-    let canEditLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.edit') == 'lineas-programaticas.edit'
-
-    let canDestroyLineasProgramaticas = authUser.can.find((element) => element == 'lineas-programaticas.destroy') == 'lineas-programaticas.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -43,7 +33,7 @@
     })
 
     function submit() {
-        if (canCreateLineasProgramaticas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('lineas-programaticas.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -69,7 +59,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateLineasProgramaticas || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

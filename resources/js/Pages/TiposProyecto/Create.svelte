@@ -23,16 +23,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.index') == 'tipos-proyecto.index'
-
-    let canShowTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.show') == 'tipos-proyecto.show'
-
-    let canCreateTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.create') == 'tipos-proyecto.create'
-
-    let canEditTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.edit') == 'tipos-proyecto.edit'
-
-    let canDestroyTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.destroy') == 'tipos-proyecto.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -64,7 +54,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateTiposProyecto || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

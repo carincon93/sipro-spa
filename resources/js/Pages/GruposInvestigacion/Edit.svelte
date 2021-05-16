@@ -27,16 +27,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.index') == 'grupos-investigacion.index'
-
-    let canShowGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.show') == 'grupos-investigacion.show'
-
-    let canCreateGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.create') == 'grupos-investigacion.create'
-
-    let canEditGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.edit') == 'grupos-investigacion.edit'
-
-    let canDestroyGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.destroy') == 'grupos-investigacion.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -53,7 +43,7 @@
     })
 
     function submit() {
-        if (canEditGruposInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('grupos-investigacion.update', grupoInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -63,7 +53,7 @@
     }
 
     function destroy() {
-        if (canDestroyGruposInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('grupos-investigacion.destroy', grupoInvestigacion.id))
         }
     }
@@ -86,7 +76,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditGruposInvestigacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
@@ -124,10 +114,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                        Eliminar
-                        {$_('Research groups.singular').toLowerCase()}
-                    </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar grupo de investigación </button>
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar grupo de investigación</LoadingButton>

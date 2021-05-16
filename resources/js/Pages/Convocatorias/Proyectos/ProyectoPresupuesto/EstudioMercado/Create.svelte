@@ -27,11 +27,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexMarketResearch = authUser.can.find((element) => element == 'market-research.index') == 'market-research.index'
-    let canShowMarketResearch = authUser.can.find((element) => element == 'market-research.show') == 'market-research.show'
-    let canCreateMarketResearch = authUser.can.find((element) => element == 'market-research.create') == 'market-research.create'
-    let canEditMarketResearch = authUser.can.find((element) => element == 'market-research.edit') == 'market-research.edit'
-    let canDestroyMarketResearch = authUser.can.find((element) => element == 'market-research.destroy') == 'market-research.delete'
 
     let form = useForm({
         requires_third_market_research: false,
@@ -52,7 +47,7 @@
     })
 
     function submit() {
-        if (canCreateMarketResearch || isSuperAdmin) {
+        if (isSuperAdmin) {
             ;(sending = true),
                 $form.post(route('calls.projects.project-sennova-budgets.project-budget-batches.store', [call.id, project.id, projectSennovaBudget]), {
                     onStart: () => (sending = true),

@@ -47,12 +47,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexIDi = authUser.can.find((element) => element == 'IDi.index') == 'IDi.index'
-    let canCreateIDi = authUser.can.find((element) => element == 'IDi.create') == 'IDi.create'
-    let canShowIDi = authUser.can.find((element) => element == 'IDi.show') == 'IDi.show'
-    let canEditIDi = authUser.can.find((element) => element == 'IDi.edit') == 'IDi.edit'
-    let canDestroyIDi = authUser.can.find((element) => element == 'IDi.destroy') == 'IDi.destroy'
-
     let dialog_open = errors.password != undefined ? true : false
     let sending = false
 
@@ -125,7 +119,7 @@
     })
 
     function submit() {
-        if (canEditIDi || isSuperAdmin) {
+        if (isSuperAdmin) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
@@ -144,7 +138,7 @@
     })
 
     function destroy() {
-        if (canDestroyIDi || isSuperAdmin) {
+        if (isSuperAdmin) {
             $deleteForm.delete(route('convocatorias.idi.destroy', [convocatoria.id, idi.id]), {
                 preserveScroll: true,
             })
@@ -175,7 +169,7 @@
     <Stepper {convocatoria} proyecto={idi} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={canEditIDi || isSuperAdmin ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
                 <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />

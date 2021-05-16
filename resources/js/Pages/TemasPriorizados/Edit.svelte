@@ -27,16 +27,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.index') == 'temas-priorizados.index'
-
-    let canShowTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.show') == 'temas-priorizados.show'
-
-    let canCreateTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.create') == 'temas-priorizados.create'
-
-    let canEditTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.edit') == 'temas-priorizados.edit'
-
-    let canDestroyTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.destroy') == 'temas-priorizados.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -52,7 +42,7 @@
     })
 
     function submit() {
-        if (canEditTemasPriorizados || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('temas-priorizados.update', temaPriorizado.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -62,7 +52,7 @@
     }
 
     function destroy() {
-        if (canDestroyTemasPriorizados || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('temas-priorizados.destroy', temaPriorizado.id))
         }
     }
@@ -85,7 +75,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditTemasPriorizados || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

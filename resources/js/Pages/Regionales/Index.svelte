@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexRegionales = authUser.can.find((element) => element == 'regionales.index') == 'regionales.index'
-
-    let canShowRegionales = authUser.can.find((element) => element == 'regionales.show') == 'regionales.show'
-
-    let canCreateRegionales = authUser.can.find((element) => element == 'regionales.create') == 'regionales.create'
-
-    let canEditRegionales = authUser.can.find((element) => element == 'regionales.edit') == 'regionales.edit'
-
-    let canDestroyRegionales = authUser.can.find((element) => element == 'regionales.destroy') == 'regionales.destroy'
-
     let filters = {}
 </script>
 

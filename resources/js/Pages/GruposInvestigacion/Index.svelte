@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.index') == 'grupos-investigacion.index'
-
-    let canShowGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.show') == 'grupos-investigacion.show'
-
-    let canCreateGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.create') == 'grupos-investigacion.create'
-
-    let canEditGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.edit') == 'grupos-investigacion.edit'
-
-    let canDestroyGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.destroy') == 'grupos-investigacion.destroy'
-
     let filters = {}
 </script>
 

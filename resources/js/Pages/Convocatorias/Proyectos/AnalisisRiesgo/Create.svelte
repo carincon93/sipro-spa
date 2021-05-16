@@ -27,11 +27,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.index') == 'analisis-riesgos.index'
-    let canShowAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.show') == 'analisis-riesgos.show'
-    let canCreateAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.create') == 'analisis-riesgos.create'
-    let canEditAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.edit') == 'analisis-riesgos.edit'
-    let canDestroyAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.destroy') == 'analisis-riesgos.destroy'
 
     let sending = false
     let form = useForm({
@@ -45,7 +40,7 @@
     })
 
     function submit() {
-        if (canCreateAnalisisRiesgo || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('convocatorias.proyectos.analisis-riesgos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -71,7 +66,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit} novalidate>
-            <fieldset class="p-8" disabled={canCreateAnalisisRiesgo || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel" value="Nivel de riesgo" />
                     <Select id="nivel" items={nivelesRiesgo} bind:selectedValue={$form.nivel} error={errors.nivel} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />

@@ -26,14 +26,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.index') == 'miembros-entidad-aliada.index'
-    let canShowMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.show') == 'miembros-entidad-aliada.show'
-    let canCreateMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.create') == 'miembros-entidad-aliada.create'
-    let canEditMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.edit') == 'miembros-entidad-aliada.edit'
-    let canDestroyMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.destroy') == 'miembros-entidad-aliada.destroy'
-
-    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.index') == 'entidades-aliadas.index'
-    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.edit') == 'entidades-aliadas.edit'
 
     let filters = {}
 </script>

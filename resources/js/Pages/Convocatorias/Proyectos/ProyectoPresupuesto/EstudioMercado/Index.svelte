@@ -29,7 +29,7 @@
     $: dialog_open = Object.keys(errors).length > 0 ? true : false
     let sending = false
 
-    $title = $_('Market research.plural')
+    $title = 'Estudios de mercado'
 
     /**
      * Permisos
@@ -39,13 +39,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexMarketResearch = authUser.can.find((element) => element == 'market-research.index') == 'market-research.index'
-    let canShowMarketResearch = authUser.can.find((element) => element == 'market-research.show') == 'market-research.show'
-    let canCreateMarketResearch = authUser.can.find((element) => element == 'market-research.create') == 'market-research.create'
-    let canEditMarketResearch = authUser.can.find((element) => element == 'market-research.edit') == 'market-research.edit'
-    let canDestroyMarketResearch = authUser.can.find((element) => element == 'market-research.destroy') == 'market-research.delete'
-
-    let canEditProjectSennovaBudgets = authUser.can.find((element) => element == 'project-sennova-budgets.edit') == 'project-sennova-budgets.edit'
 
     let filters = {}
 </script>
@@ -56,9 +49,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Project sennova budgets.plural')}
-                        </a>
+                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {#if isSuperAdmin}
@@ -67,7 +58,7 @@
                         </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {$_('Market research.plural')}
+                    Estudios de mercado
                 </h1>
             </div>
         </div>
@@ -82,10 +73,7 @@
                 <p class="mb-4">
                     El uso presupuestal <strong>{budgetUsage.description}</strong>
                     permite que se agreguen multiples estudios de mercado. De clic en el botón
-                    <strong
-                        >'{$_('Add')}
-                        {$_('Market research.singular').toLowerCase()}'</strong
-                    > y añada los que considere necesarios.
+                    <strong> 'Añador estudio de mercado' </strong> y añada los que considere necesarios.
                 </p>
             {/if}
             {#if sennovaBudget.message}
@@ -96,17 +84,14 @@
         {/if}
 
         <DataTable class="mt-20">
-            <div slot="title">{$_('Market research.plural')}</div>
+            <div slot="title">Estudios de mercado</div>
 
             <div slot="actions">
                 {#if (!requiresMarketResearchBatch && requiresMarketResearch && projectBudgetBatches.data.length < 1) || (requiresMarketResearch && requiresMarketResearchBatch)}
                     <div class="mb-6 flex justify-end items-center">
                         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
                         {#if isSuperAdmin}
-                            <Button on:click={() => (dialog_open = true)} variant="raised">
-                                {$_('Add')}
-                                {$_('Market research.singular').toLowerCase()}
-                            </Button>
+                            <Button on:click={() => (dialog_open = true)} variant="raised">Añadir estudio de mercado</Button>
                         {/if}
                     </div>
                 {/if}
@@ -149,7 +134,7 @@
                                     </Item>
                                 {:else}
                                     <Item>
-                                        <Text>{$_("You don't have permissions")}</Text>
+                                        <Text>No tiene permisos</Text>
                                     </Item>
                                 {/if}
                             </ResourceMenu>

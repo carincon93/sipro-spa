@@ -22,16 +22,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexRegionales = authUser.can.find((element) => element == 'regionales.index') == 'regionales.index'
-
-    let canShowRegionales = authUser.can.find((element) => element == 'regionales.show') == 'regionales.show'
-
-    let canCreateRegionales = authUser.can.find((element) => element == 'regionales.create') == 'regionales.create'
-
-    let canEditRegionales = authUser.can.find((element) => element == 'regionales.edit') == 'regionales.edit'
-
-    let canDestroyRegionales = authUser.can.find((element) => element == 'regionales.destroy') == 'regionales.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -41,7 +31,7 @@
     })
 
     function submit() {
-        if (canCreateRegionales || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('regionales.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -67,7 +57,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateRegionales || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

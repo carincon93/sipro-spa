@@ -15,7 +15,7 @@
     export let errors
     export let allPermissions
 
-    $: $title = $_('Create') + ' ' + $_('System roles.singular').toLowerCase()
+    $: $title = 'Crear rol de sistema'
 
     /**
      * Permisos
@@ -25,11 +25,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexRoles = authUser.can.find((element) => element == 'roles.index') == 'roles.index'
-    let canShowRoles = authUser.can.find((element) => element == 'roles.show') == 'roles.show'
-    let canCreateRoles = authUser.can.find((element) => element == 'roles.create') == 'roles.create'
-    let canEditRoles = authUser.can.find((element) => element == 'roles.edit') == 'roles.edit'
-    let canDestroyRoles = authUser.can.find((element) => element == 'roles.destroy') == 'roles.delete'
 
     let sending = false
     let form = useForm({
@@ -39,7 +34,7 @@
     })
 
     function submit() {
-        if (canCreateRoles || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('roles.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -55,9 +50,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('roles.index')} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('System roles.plural')}
-                        </a>
+                        <a use:inertia href={route('roles.index')} class="text-indigo-400 hover:text-indigo-600"> Roles de sistema </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -67,7 +60,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset disabled={canCreateRoles || isSuperAdmin ? undefined : true}>
+        <fieldset disabled={isSuperAdmin ? undefined : true}>
             <div class="bg-white rounded shadow max-w-3xl p-8">
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="name" value="Nombre" />
@@ -104,10 +97,7 @@
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                    Crear
-                    {$_('System roles.singular')}
-                </LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear rol de sistema</LoadingButton>
             {/if}
         </div>
     </form>

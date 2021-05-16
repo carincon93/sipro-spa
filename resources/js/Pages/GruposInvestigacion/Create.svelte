@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.index') == 'grupos-investigacion.index'
-
-    let canShowGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.show') == 'grupos-investigacion.show'
-
-    let canCreateGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.create') == 'grupos-investigacion.create'
-
-    let canEditGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.edit') == 'grupos-investigacion.edit'
-
-    let canDestroyGruposInvestigacion = authUser.can.find((element) => element == 'grupos-investigacion.destroy') == 'grupos-investigacion.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -46,7 +36,7 @@
     })
 
     function submit() {
-        if (canCreateGruposInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('grupos-investigacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -72,7 +62,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateGruposInvestigacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

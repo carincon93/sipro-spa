@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexIDi = authUser.can.find((element) => element == 'IDi.index') == 'IDi.index'
-
-    let canCreateIDi = authUser.can.find((element) => element == 'IDi.create') == 'IDi.create'
-
-    let canShowIDi = authUser.can.find((element) => element == 'IDi.show') == 'IDi.show'
-
-    let canEditIDi = authUser.can.find((element) => element == 'IDi.edit') == 'IDi.edit'
-
-    let canDestroyIDi = authUser.can.find((element) => element == 'IDi.destroy') == 'IDi.destroy'
-
     let sending = false
     let form = useForm({
         centro_formacion_id: null,
@@ -49,7 +39,7 @@
     })
 
     function submit() {
-        if (canCreateIDi || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('convocatorias.idi.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),

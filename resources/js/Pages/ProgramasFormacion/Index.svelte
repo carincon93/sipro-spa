@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
-
-    let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
-
-    let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
-
-    let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
-
-    let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
-
     let filters = {}
 </script>
 

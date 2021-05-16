@@ -28,11 +28,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndextMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.index') == 'miembros-entidad-aliada.index'
-    let canShowtMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.show') == 'miembros-entidad-aliada.show'
-    let canCreatetMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.create') == 'miembros-entidad-aliada.create'
-    let canEditMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.edit') == 'miembros-entidad-aliada.edit'
-    let canDestroytMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.delete') == 'miembros-entidad-aliada.delete'
 
     let dialog_open = false
     let sending = false
@@ -48,7 +43,7 @@
     })
 
     function submit() {
-        if (canEditMiembrosEntidadAliada || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.update', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -58,7 +53,7 @@
     }
 
     function destroy() {
-        if (canDestroytMiembrosEntidadAliada || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.destroy', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))
         }
     }
@@ -81,7 +76,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreatetMiembrosEntidadAliada || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

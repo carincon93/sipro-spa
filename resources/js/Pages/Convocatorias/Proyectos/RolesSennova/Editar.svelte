@@ -31,11 +31,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.index') == 'proyecto-roles-sennova.index'
-    let canShowProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.show') == 'proyecto-roles-sennova.show'
-    let canCreateProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.create') == 'proyecto-roles-sennova.create'
-    let canEditProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.edit') == 'proyecto-roles-sennova.edit'
-    let canDestroyProyectoRolesSennova = authUser.can.find((element) => element == 'proyecto-roles-sennova.destroy') == 'proyecto-roles-sennova.destroy'
 
     let dialog_open = false
     let sending = false
@@ -47,7 +42,7 @@
     })
 
     function submit() {
-        if (canEditProyectoRolesSennova || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.proyectos.proyecto-rol-sennova.update', [convocatoria.id, proyecto.id, proyectoRolSennova.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -57,7 +52,7 @@
     }
 
     function destroy() {
-        if (canDestroyProyectoRolesSennova || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.proyectos.proyecto-rol-sennova.destroy', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))
         }
     }
@@ -80,7 +75,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditProyectoRolesSennova || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
                     <DropdownProyectoRolSennova id="convocatoria_rol_sennova_id" {convocatoria} {lineaProgramatica} bind:formProyectRolSennova={$form.convocatoria_rol_sennova_id} bind:infoRolSennova message={errors.convocatoria_rol_sennova_id} required />
@@ -114,10 +109,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                        Eliminar
-                        {$_('Project sennova roles.singular').toLowerCase()}
-                    </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar rol SENNOVA </button>
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>

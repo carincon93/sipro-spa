@@ -45,11 +45,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.index') == 'partner-organizations.index'
-    let canShowEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.show') == 'partner-organizations.show'
-    let canCreateEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.create') == 'partner-organizations.create'
-    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.edit') == 'partner-organizations.edit'
-    let canDestroyEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.destroy') == 'partner-organizations.destroy'
 
     let dialog_open = false
     let sending = false
@@ -75,7 +70,7 @@
     })
 
     function submit() {
-        if (canEditEntidadesAliadas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.idi.entidades-aliadas.update', [convocatoria.id, idi.id, entidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -85,7 +80,7 @@
     }
 
     function destroy() {
-        if (canDestroyEntidadesAliadas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.idi.entidades-aliadas.destroy', [convocatoria.id, idi.id, entidadAliada.id]))
         }
     }
@@ -113,7 +108,7 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl">
             <form on:submit|preventDefault={submit}>
-                <fieldset class="p-8" disabled={canEditEntidadesAliadas || isSuperAdmin ? undefined : true}>
+                <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                         <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
@@ -212,9 +207,7 @@
                         </progress>
                     {/if}
 
-                    <h6 class="mt-20 mb-12 text-2xl" id="actividades">
-                        {$_('Activities.plural')}
-                    </h6>
+                    <h6 class="mt-20 mb-12 text-2xl" id="actividades">Actividades</h6>
 
                     <div class="bg-white rounded shadow overflow-hidden">
                         <div class="p-4">
@@ -233,16 +226,10 @@
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin}
-                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                            Eliminar
-                            {$_('Partner organizations.singular').toLowerCase()}
-                        </button>
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar entidad aliada </button>
                     {/if}
                     {#if isSuperAdmin}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                            Editar
-                            {$_('Partner organizations.singular')}
-                        </LoadingButton>
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar entidad aliada</LoadingButton>
                     {/if}
                 </div>
             </form>
@@ -251,23 +238,17 @@
             <h1 class="mb-4">Enlaces de interés</h1>
             <ul>
                 <li>
-                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada">
-                        {$_('Partner organization members.plural')}
-                    </a>
+                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Miembros de entidad aliada </a>
                 </li>
                 <li class="mt-6">
-                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#specific-objectives">
-                        {$_('Specific objectives.plural')} relacionados
-                    </a>
+                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#specific-objectives"> Objetivos específcos relacionados </a>
                 </li>
             </ul>
         </div>
     </div>
 
     <DataTable class="mt-20">
-        <div slot="title" id="miembros-entidad-aliada">
-            {$_('Partner organization members.plural')}
-        </div>
+        <div slot="title" id="miembros-entidad-aliada">Miembros de entidad aliada</div>
 
         <div slot="actions">
             <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, idi.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>

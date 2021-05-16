@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.index') == 'mesas-tecnicas.index'
-
-    let canShowMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.show') == 'mesas-tecnicas.show'
-
-    let canCreateMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.create') == 'mesas-tecnicas.create'
-
-    let canEditMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.edit') == 'mesas-tecnicas.edit'
-
-    let canDestroyMesasTecnicas = authUser.can.find((element) => element == 'mesas-tecnicas.destroy') == 'mesas-tecnicas.destroy'
-
     let filters = {}
 </script>
 

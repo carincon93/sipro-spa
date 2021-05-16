@@ -30,11 +30,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexProductos = authUser.can.find((element) => element == 'productos.index') == 'productos.index'
-    let canShowProductos = authUser.can.find((element) => element == 'productos.show') == 'productos.show'
-    let canCreateProductos = authUser.can.find((element) => element == 'productos.create') == 'productos.create'
-    let canEditProductos = authUser.can.find((element) => element == 'productos.edit') == 'productos.edit'
-    let canDestroyProductos = authUser.can.find((element) => element == 'productos.destroy') == 'productos.destroy'
 
     let dialog_open = false
     let sending = false
@@ -50,7 +45,7 @@
     })
 
     function submit() {
-        if (canEditProductos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.proyectos.productos.update', [convocatoria.id, proyecto.id, producto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -60,7 +55,7 @@
     }
 
     function destroy() {
-        if (canDestroyProductos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.proyectos.productos.destroy', [convocatoria.id, proyecto.id, producto.id]))
         }
     }
@@ -83,7 +78,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditProductos || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-8 mb-8">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">

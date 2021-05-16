@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.index') == 'sectores-productivos.index'
-
-    let canShowSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.show') == 'sectores-productivos.show'
-
-    let canCreateSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.create') == 'sectores-productivos.create'
-
-    let canEditSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.edit') == 'sectores-productivos.edit'
-
-    let canDestroySectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.destroy') == 'sectores-productivos.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -41,7 +31,7 @@
     })
 
     function submit() {
-        if (canEditSectoresProductivos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('sectores-productivos.update', sectorProductivo.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -51,7 +41,7 @@
     }
 
     function destroy() {
-        if (canDestroySectoresProductivos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('sectores-productivos.destroy', sectorProductivo.id))
         }
     }
@@ -74,7 +64,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditSectoresProductivos || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

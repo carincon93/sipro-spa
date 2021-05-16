@@ -25,16 +25,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.index') == 'lineas-investigacion.index'
-
-    let canShowLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.show') == 'lineas-investigacion.show'
-
-    let canCreateLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.create') == 'lineas-investigacion.create'
-
-    let canEditLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.edit') == 'lineas-investigacion.edit'
-
-    let canDestroyLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.destroy') == 'lineas-investigacion.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -43,7 +33,7 @@
     })
 
     function submit() {
-        if (canEditLineasInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('lineas-investigacion.update', lineaInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,7 +43,7 @@
     }
 
     function destroy() {
-        if (canDestroyLineasInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('lineas-investigacion.destroy', lineaInvestigacion.id))
         }
     }
@@ -76,7 +66,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditLineasInvestigacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

@@ -97,33 +97,33 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     // Muestra los participantes
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participants', [ProyectoController::class, 'participants'])->name('convocatorias.proyectos.participants');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto-sennova/{proyecto_sennova_budget}/lote-estudio-mercado/{proyecto_budget_batch}/download', [ProyectLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto-sennova/{proyecto_sennova_budget}/market-research/{market_research}/download', [ProyectLoteEstudioMercadoController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado.download-price-qoute-file');    
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes', [ProyectoController::class, 'participantes'])->name('convocatorias.proyectos.participantes');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/lotes-estudio-mercado/{lote_estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto.lote-estudio-mercado.download');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/market-research/{estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-presupuesto.lote-estudio-mercado.download-price-qoute-file');    
 
 
     // Trae los conceptos internos SENA
-    Route::get('web-api/second-budget-info', function() {
-        return response(SegundoGrupoPresupuestal::select('second_budget_info.id as value', 'second_budget_info.nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.second-budget-info');
+    Route::get('web-api/segundo-grupo-presupuestal', function() {
+        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.segundo-grupo-presupuestal');
 
-    Route::get('web-api/third-budget-info/{secondBudgetInfo}', function($secondBudgetInfo) {
-        return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(third_budget_info.id) as value, third_budget_info.nombre as label')
-            ->join('sennova_budgets', 'third_budget_info.id', 'sennova_budgets.third_budget_info_id')
-            ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
+    Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function($segundoGrupoPresupuestal) {
+        return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(tercer_grupo_presupuestal.id) as value, tercer_grupo_presupuestal.nombre as label')
+            ->join('presupuesto_sennova', 'tercer_grupo_presupuestal.id', 'presupuesto_sennova.tercer_grupo_presupuestal_id')
+            ->where('presupuesto_sennova.segundo_grupo_presupuestal_id', $segundoGrupoPresupuestal)
             ->get());
-    })->name('web-api.third-budget-info');
+    })->name('web-api.tercer-grupo-presupuestal');
 
     // Trae los usos presupuestales
-    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($convocatoria, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
-        return response(PresupuestoSennova::select('convocatoria_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.mensaje')
-            ->join('budget_usages', 'sennova_budgets.budget_usage_id', 'budget_usages.id')
-            ->join('convocatoria_budgets', 'sennova_budgets.id', 'convocatoria_budgets.sennova_budget_id')
-            ->where('convocatoria_budgets.convocatoria_id', $convocatoria)
-            ->where('sennova_budgets.linea_programatica_id', $lineaProgramatica)
-            ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
-            ->where('sennova_budgets.third_budget_info_id', $thirdBudgetInfo)
-            ->orderBy('budget_usages.description', 'ASC')->get());
+    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', function($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal) {
+        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje')
+            ->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')
+            ->join('convocatoria_presupuesto', 'presupuesto_sennova.id', 'convocatoria_presupuesto.presupuesto_sennova_id')
+            ->where('convocatoria_presupuesto.convocatoria_id', $convocatoria)
+            ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
+            ->where('presupuesto_sennova.segundo_grupo_presupuestal_id', $segundoGrupoPresupuestal)
+            ->where('presupuesto_sennova.tercer_grupo_presupuestal_id', $tercerGrupoPresupuestal)
+            ->orderBy('usos_presupuestales.descripcion', 'ASC')->get());
     })->name('web-api.usos-presupuestales');
 
     Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function($convocatoria, $lineaProgramatica) {

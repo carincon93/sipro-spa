@@ -11,7 +11,7 @@
 
     export let errors
 
-    $: $title = $_('Create') + ' ' + $_('Research teams.singular').toLowerCase()
+    $: $title = 'Crear semillero de investigación'
 
     /**
      * Permisos
@@ -22,16 +22,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.index') == 'semilleros-investigacion.index'
-
-    let canShowSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.show') == 'semilleros-investigacion.show'
-
-    let canCreateSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.create') == 'semilleros-investigacion.create'
-
-    let canEditSemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.edit') == 'semilleros-investigacion.edit'
-
-    let canDestroySemillerosInvestigacion = authUser.can.find((element) => element == 'semilleros-investigacion.destroy') == 'semilleros-investigacion.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -39,7 +29,7 @@
     })
 
     function submit() {
-        if (canCreateSemillerosInvestigacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('semilleros-investigacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -65,7 +55,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateSemillerosInvestigacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

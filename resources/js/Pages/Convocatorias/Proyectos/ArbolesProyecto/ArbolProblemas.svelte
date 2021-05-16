@@ -38,12 +38,6 @@
             return role.id == 1
         }).length > 0
 
-    let canCreateIDi = authUser.can.find((element) => element == 'idi.create') == 'idi.create'
-
-    let canEditIDi = authUser.can.find((element) => element == 'idi.edit') == 'idi.edit'
-
-    let canCreateOrUpdate = isSuperAdmin ? undefined : canCreateIDi ? undefined : canEditIDi ? undefined : true
-
     /**
      * Efectos indirectos
      */

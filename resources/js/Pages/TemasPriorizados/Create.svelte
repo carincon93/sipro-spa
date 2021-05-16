@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.index') == 'temas-priorizados.index'
-
-    let canShowTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.show') == 'temas-priorizados.show'
-
-    let canCreateTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.create') == 'temas-priorizados.create'
-
-    let canEditTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.edit') == 'temas-priorizados.edit'
-
-    let canDestroyTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.destroy') == 'temas-priorizados.destroy'
-
     let sending = false
     let form = useForm({
         nombre: '',
@@ -42,7 +32,7 @@
     })
 
     function submit() {
-        if (canCreateTemasPriorizados || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('temas-priorizados.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -68,7 +58,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateTemasPriorizados || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

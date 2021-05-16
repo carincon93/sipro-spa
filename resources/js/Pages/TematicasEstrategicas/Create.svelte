@@ -10,23 +10,13 @@
 
     export let errors
 
-    $: $title = $_('Create') + ' ' + ' ' + $_('Strategic thematics.singular').toLowerCase()
+    $: $title = 'Crear temática estratégica SENA'
 
     let authUser = $page.props.auth.user
     let isSuperAdmin =
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-
-    let canIndexTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.index') == 'tematicas-estrategicas.index'
-
-    let canShowTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.show') == 'tematicas-estrategicas.show'
-
-    let canCreateTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.create') == 'tematicas-estrategicas.create'
-
-    let canEditTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.edit') == 'tematicas-estrategicas.edit'
-
-    let canDestroyTematicasEstrategicas = authUser.can.find((element) => element == 'tematicas-estrategicas.destroy') == 'tematicas-estrategicas.destroy'
 
     let sending = false
     let form = useForm({
@@ -36,7 +26,7 @@
     console.log($page.props.auth.user.can)
 
     function submit() {
-        if (canCreateTematicasEstrategicas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('tematicas-estrategicas.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -62,7 +52,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateTematicasEstrategicas || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

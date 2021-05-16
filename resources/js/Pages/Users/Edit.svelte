@@ -33,11 +33,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexUsers = authUser.can.find((element) => element == 'users.index') == 'users.index'
-    let canShowUsers = authUser.can.find((element) => element == 'users.show') == 'users.show'
-    let canCreateUsers = authUser.can.find((element) => element == 'users.create') == 'users.create'
-    let canEditUsers = authUser.can.find((element) => element == 'users.edit') == 'users.edit'
-    let canDestroyUsers = authUser.can.find((element) => element == 'users.destroy') == 'users.delete'
 
     let dialog_open = false
     let sending = false
@@ -61,7 +56,7 @@
     })
 
     function submit() {
-        if (canEditUsers || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('users.update', user.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -71,7 +66,7 @@
     }
 
     function destroy() {
-        if (canDestroyUsers || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('users.destroy', user.id))
         }
     }
@@ -83,9 +78,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Users.plural')}
-                        </a>
+                        <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {user.name}
@@ -96,7 +89,7 @@
 
     <form on:submit|preventDefault={submit}>
         <div class="bg-white rounded shadow max-w-3xl">
-            <fieldset class="p-8" disabled={canEditUsers || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="name" value="Nombre completo" />
                     <Input id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
@@ -141,7 +134,7 @@
         </div>
 
         <div class="bg-white rounded shadow overflow-hidden mt-20">
-            <fieldset class="p-8" disabled={canEditUsers || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="p-4">
                     <Label required class="mb-4" labelFor="role_id" value="Seleccione algún rol" />
                     <InputError message={errors.role_id} />
@@ -161,16 +154,10 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                    Eliminar
-                    {$_('Users.singular').toLowerCase()}
-                </button>
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar usuario </button>
             {/if}
             {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                    Editar
-                    {$_('Users.singular')}
-                </LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar usuario</LoadingButton>
             {/if}
         </div>
     </form>

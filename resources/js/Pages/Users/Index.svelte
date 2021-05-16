@@ -23,11 +23,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexUsers = authUser.can.find((element) => element == 'usuarios.index') == 'usuarios.index'
-    let canShowUsers = authUser.can.find((element) => element == 'usuarios.show') == 'usuarios.show'
-    let canCreateUsers = authUser.can.find((element) => element == 'usuarios.create') == 'usuarios.create'
-    let canEditUsers = authUser.can.find((element) => element == 'usuarios.edit') == 'usuarios.edit'
-    let canDestroyUsers = authUser.can.find((element) => element == 'usuarios.destroy') == 'usuarios.delete'
 
     let filters = {}
 </script>

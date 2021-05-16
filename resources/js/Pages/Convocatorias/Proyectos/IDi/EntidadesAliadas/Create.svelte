@@ -37,11 +37,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.index') == 'entidades-aliadas.index'
-    let canShowEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.show') == 'entidades-aliadas.show'
-    let canCreateEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.create') == 'entidades-aliadas.create'
-    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.edit') == 'entidades-aliadas.edit'
-    let canDestroyEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.delete') == 'entidades-aliadas.delete'
 
     let sending = false
     let form = useForm({
@@ -65,7 +60,7 @@
     })
 
     function submit() {
-        if (canCreateEntidadesAliadas || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('convocatorias.idi.entidades-aliadas.store', [convocatoria.id, idi.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -91,7 +86,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit} novalidate>
-            <fieldset class="p-8" disabled={canCreateEntidadesAliadas || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                     <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />

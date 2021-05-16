@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexAnexos = authUser.can.find((element) => element == 'anexos.index') == 'anexos.index'
-
-    let canShowAnexos = authUser.can.find((element) => element == 'anexos.show') == 'anexos.show'
-
-    let canCreateAnexos = authUser.can.find((element) => element == 'anexos.create') == 'anexos.create'
-
-    let canEditAnexos = authUser.can.find((element) => element == 'anexos.edit') == 'anexos.edit'
-
-    let canDestroyAnexos = authUser.can.find((element) => element == 'anexos.destroy') == 'anexos.destroy'
-
     let filters = {}
 </script>
 

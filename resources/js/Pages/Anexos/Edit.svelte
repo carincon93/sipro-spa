@@ -28,16 +28,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexAnexos = authUser.can.find((element) => element == 'anexos.index') == 'anexos.index'
-
-    let canShowAnexos = authUser.can.find((element) => element == 'anexos.show') == 'anexos.show'
-
-    let canCreateAnexos = authUser.can.find((element) => element == 'anexos.create') == 'anexos.create'
-
-    let canEditAnexos = authUser.can.find((element) => element == 'anexos.edit') == 'anexos.edit'
-
-    let canDestroyAnexos = authUser.can.find((element) => element == 'anexos.destroy') == 'anexos.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -47,7 +37,7 @@
     })
 
     function submit() {
-        if (canEditAnexos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('anexos.update', anexo.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -57,7 +47,7 @@
     }
 
     function destroy() {
-        if (canDestroyAnexos || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('anexos.destroy', anexo.id))
         }
     }
@@ -80,7 +70,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditAnexos || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre del anexo" />
                     <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />

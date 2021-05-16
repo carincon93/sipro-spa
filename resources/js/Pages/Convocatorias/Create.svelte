@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexConvocatorias = authUser.can.find((element) => element == 'convocatorias.index') == 'convocatorias.index'
-
-    let canShowConvocatorias = authUser.can.find((element) => element == 'convocatorias.show') == 'convocatorias.show'
-
-    let canCreateConvocatorias = authUser.can.find((element) => element == 'convocatorias.create') == 'convocatorias.create'
-
-    let canEditConvocatorias = authUser.can.find((element) => element == 'convocatorias.edit') == 'convocatorias.edit'
-
-    let canDestroyConvocatorias = authUser.can.find((element) => element == 'convocatorias.destroy') == 'convocatorias.destroy'
-
     let sending = false
     let form = useForm({
         descripcion: '',
@@ -45,7 +35,7 @@
     })
 
     function submit() {
-        if (canCreateConvocatorias || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('convocatorias.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -71,7 +61,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateConvocatorias || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4 mb-20">
                     <p class="text-center">Fecha de la conovicatoria</p>
                     <div class="mt-4 flex items-start justify-around">

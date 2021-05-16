@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.index') == 'sectores-productivos.index'
-
-    let canShowSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.show') == 'sectores-productivos.show'
-
-    let canCreateSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.create') == 'sectores-productivos.create'
-
-    let canEditSectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.edit') == 'sectores-productivos.edit'
-
-    let canDestroySectoresProductivos = authUser.can.find((element) => element == 'sectores-productivos.destroy') == 'sectores-productivos.destroy'
-
     let filters = {}
 </script>
 

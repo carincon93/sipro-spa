@@ -26,16 +26,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.index') == 'tipos-proyecto.index'
-
-    let canShowTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.show') == 'tipos-proyecto.show'
-
-    let canCreateTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.create') == 'tipos-proyecto.create'
-
-    let canEditTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.edit') == 'tipos-proyecto.edit'
-
-    let canDestroyTiposProyecto = authUser.can.find((element) => element == 'tipos-proyecto.destroy') == 'tipos-proyecto.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -47,7 +37,7 @@
     })
 
     function submit() {
-        if (canEditTiposProyecto || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('tipos-proyecto.update', tipoProyecto.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -57,7 +47,7 @@
     }
 
     function destroy() {
-        if (canDestroyTiposProyecto || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('tipos-proyecto.destroy', tipoProyecto.id))
         }
     }
@@ -80,7 +70,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditTiposProyecto || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

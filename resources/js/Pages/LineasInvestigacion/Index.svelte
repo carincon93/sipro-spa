@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.index') == 'lineas-investigacion.index'
-
-    let canShowLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.show') == 'lineas-investigacion.show'
-
-    let canCreateLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.create') == 'lineas-investigacion.create'
-
-    let canEditLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.edit') == 'lineas-investigacion.edit'
-
-    let canDestroyLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.destroy') == 'lineas-investigacion.destroy'
-
     let filters = {}
 </script>
 

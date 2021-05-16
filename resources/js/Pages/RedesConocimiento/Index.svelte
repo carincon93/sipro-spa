@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.index') == 'redes-conocimiento.index'
-
-    let canShowRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.show') == 'redes-conocimiento.show'
-
-    let canCreateRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.create') == 'redes-conocimiento.create'
-
-    let canEditRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.edit') == 'redes-conocimiento.edit'
-
-    let canDestroyRedesConocimiento = authUser.can.find((element) => element == 'redes-conocimiento.destroy') == 'redes-conocimiento.destroy'
-
     let filters = {}
 </script>
 

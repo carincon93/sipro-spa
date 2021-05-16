@@ -26,11 +26,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.index') == 'analisis-riesgos.index'
-    let canShowAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.show') == 'analisis-riesgos.show'
-    let canCreateAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.create') == 'analisis-riesgos.create'
-    let canEditAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.edit') == 'analisis-riesgos.edit'
-    let canDestroyAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.destroy') == 'analisis-riesgos.destroy'
 
     let filters = {}
 </script>
@@ -39,7 +34,7 @@
     <Stepper {convocatoria} {proyecto} />
 
     <DataTable class="mt-20">
-        <div slot="title">{$_('Risk analysis.plural')}</div>
+        <div slot="title">Análisis de riesgos</div>
 
         <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
 

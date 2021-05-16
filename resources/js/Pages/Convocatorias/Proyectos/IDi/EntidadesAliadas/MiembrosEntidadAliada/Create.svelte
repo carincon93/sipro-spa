@@ -25,11 +25,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.index') == 'miembros-entidad-aliada.index'
-    let canShowMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.show') == 'miembros-entidad-aliada.show'
-    let canCreateMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.create') == 'miembros-entidad-aliada.create'
-    let canEditMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.edit') == 'miembros-entidad-aliada.edit'
-    let canDestroyMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.destroy') == 'miembros-entidad-aliada.destroy'
 
     let sending = false
     let form = useForm({
@@ -41,7 +36,7 @@
     })
 
     function submit() {
-        if (canCreateMiembrosEntidadAliada || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.post(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.store', [convocatoria.id, idi.id, entidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -67,7 +62,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit} novalidate>
-            <fieldset class="p-8" disabled={canCreateMiembrosEntidadAliada || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />

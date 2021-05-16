@@ -30,11 +30,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.index') == 'analisis-riesgos.index'
-    let canShowAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.show') == 'analisis-riesgos.show'
-    let canCreateAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.create') == 'analisis-riesgos.create'
-    let canEditAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.edit') == 'analisis-riesgos.edit'
-    let canDestroyAnalisisRiesgo = authUser.can.find((element) => element == 'analisis-riesgos.destroy') == 'analisis-riesgos.destroy'
 
     let dialog_open = false
     let sending = false
@@ -61,7 +56,7 @@
     })
 
     function submit() {
-        if (canEditAnalisisRiesgo || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('convocatorias.proyectos.analisis-riesgos.update', [convocatoria.id, proyecto.id, analisisRiesgo.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -71,7 +66,7 @@
     }
 
     function destroy() {
-        if (canDestroyAnalisisRiesgo || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('convocatorias.proyectos.analisis-riesgos.destroy', [convocatoria.id, proyecto.id, analisisRiesgo.id]))
         }
     }
@@ -94,7 +89,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditAnalisisRiesgo || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel" value="Nivel de riesgo" />
                     <Select id="nivel" items={nivelesRiesgo} bind:selectedValue={$form.nivel} error={errors.nivel} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />

@@ -30,11 +30,6 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexMarketResearch = authUser.can.find((element) => element == 'market-research.index') == 'market-research.index'
-    let canShowMarketResearch = authUser.can.find((element) => element == 'market-research.show') == 'market-research.show'
-    let canCreateMarketResearch = authUser.can.find((element) => element == 'market-research.create') == 'market-research.create'
-    let canEditMarketResearch = authUser.can.find((element) => element == 'market-research.edit') == 'market-research.edit'
-    let canDestroyMarketResearch = authUser.can.find((element) => element == 'market-research.destroy') == 'market-research.delete'
 
     let dialog_open = false
     let sending = false
@@ -62,7 +57,7 @@
     })
 
     function submit() {
-        if (canEditMarketResearch || isSuperAdmin) {
+        if (isSuperAdmin) {
             ;(sending = true),
                 $form.post(route('calls.projects.project-sennova-budgets.project-budget-batches.update', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id]), {
                     onStart: () => (sending = true),
@@ -78,7 +73,7 @@
     }
 
     function destroy() {
-        if (canDestroyMarketResearch || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('calls.projects.project-sennova-budgets.project-budget-batches.destroy', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id]))
         }
     }
@@ -93,9 +88,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Project sennova budgets.plural')}
-                        </a>
+                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {#if isSuperAdmin}
@@ -104,7 +97,7 @@
                         </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {$_('Market research.plural')}
+                    Estudios de mercado
                     <span class="text-indigo-400 font-medium">/</span>
                     {$_('Edit')}
                 </h1>
@@ -114,7 +107,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditMarketResearch || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="qty_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
                     <Input id="qty_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.qty_items} error={errors.qty_items} required />
@@ -192,19 +185,13 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                        Eliminar
-                        {$_('Market research.singular').toLowerCase()}
-                    </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar estudio de mercado </button>
                 {/if}
                 <p class="break-all w-72">
                     Valor promedio: ${average > 0 ? new Intl.NumberFormat('de-DE').format(average) : 0} COP
                 </p>
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                        Editar
-                        {$_('Market research.singular')}
-                    </LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar estudio de mercado</LoadingButton>
                 {/if}
             </div>
         </form>

@@ -27,16 +27,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.index') == 'programas-formacion.index'
-
-    let canShowProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.show') == 'programas-formacion.show'
-
-    let canCreateProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.create') == 'programas-formacion.create'
-
-    let canEditProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.edit') == 'programas-formacion.edit'
-
-    let canDestroyProgramasFormacion = authUser.can.find((element) => element == 'programas-formacion.destroy') == 'programas-formacion.destroy'
-
     let dialog_open = false
     let sending = false
     let form = useForm({
@@ -50,7 +40,7 @@
     })
 
     function submit() {
-        if (canEditProgramasFormacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.put(route('programas-formacion.update', programaFormacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -60,7 +50,7 @@
     }
 
     function destroy() {
-        if (canDestroyProgramasFormacion || isSuperAdmin) {
+        if (isSuperAdmin) {
             $form.delete(route('programas-formacion.destroy', programaFormacion.id))
         }
     }
@@ -83,7 +73,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canEditProgramasFormacion || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
@@ -106,10 +96,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
-                        Eliminar
-                        {$_('Academic programs.singular').toLowerCase()}
-                    </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar programa de formación </button>
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar Programa de formación</LoadingButton>

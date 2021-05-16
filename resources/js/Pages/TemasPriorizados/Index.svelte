@@ -24,16 +24,6 @@
             return role.id == 1
         }).length > 0
 
-    let canIndexTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.index') == 'temas-priorizados.index'
-
-    let canShowTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.show') == 'temas-priorizados.show'
-
-    let canCreateTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.create') == 'temas-priorizados.create'
-
-    let canEditTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.edit') == 'temas-priorizados.edit'
-
-    let canDestroyTemasPriorizados = authUser.can.find((element) => element == 'temas-priorizados.destroy') == 'temas-priorizados.destroy'
-
     let filters = {}
 </script>
 
