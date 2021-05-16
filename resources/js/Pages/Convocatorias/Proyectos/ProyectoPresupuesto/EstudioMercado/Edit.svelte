@@ -15,12 +15,12 @@
     import PercentageProgress from '@/Components/PercentageProgress'
 
     export let errors
-    export let call
-    export let project
-    export let projectSennovaBudget
-    export let projectBudgetBatch
+    export let convocatoria
+    export let proyecto
+    export let proyectoPresupuesto
+    export let loteEstudioMercado
 
-    $: $title = projectSennovaBudget.call_budget.sennova_budget.budget_usage.description ? projectSennovaBudget.call_budget.sennova_budget.budget_usage.description : null
+    $: $title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion ? proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion : null
 
     /**
      * Permisos
@@ -35,37 +35,37 @@
     let sending = false
     let form = useForm({
         _method: 'put',
-        requires_third_market_research: projectBudgetBatch.market_research[2] || errors.third_price_quote || errors.third_company_name || errors.third_price_quote_file ? true : false,
-        call_budget_id: projectSennovaBudget.call_budget.id,
-        qty_items: projectBudgetBatch.qty_items,
-        fact_sheet: null,
+        requiere_tercer_estudio_mercado: loteEstudioMercado.estudioMercado[2] || errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false,
+        convocatoria_presupuesto_id: proyectoPresupuesto.convocatoria_presupuesto.id,
+        numero_items: loteEstudioMercado.numero_items,
+        ficha_tecnica: null,
 
-        first_market_research_id: projectBudgetBatch.market_research[0].id,
-        first_price_quote: projectBudgetBatch.market_research[0].price_quote,
-        first_company_name: projectBudgetBatch.market_research[0].company_name,
-        first_price_quote_file: null,
+        primer_estudio_mercado_id: loteEstudioMercado.estudioMercado[0].id,
+        primer_valor: loteEstudioMercado.estudioMercado[0].price_quote,
+        primer_empresa: loteEstudioMercado.estudioMercado[0].company_name,
+        primer_archivo: null,
 
-        second_market_research_id: projectBudgetBatch.market_research[1].id,
-        second_price_quote: projectBudgetBatch.market_research[1].price_quote,
-        second_company_name: projectBudgetBatch.market_research[1].company_name,
-        second_price_quote_file: null,
+        segundo_estudio_mercado_id: loteEstudioMercado.estudioMercado[1].id,
+        segundo_valor: loteEstudioMercado.estudioMercado[1].price_quote,
+        segunda_empresa: loteEstudioMercado.estudioMercado[1].company_name,
+        segundo_archivo: null,
 
-        third_market_research_id: projectBudgetBatch.market_research[2]?.id ?? null,
-        third_price_quote: projectBudgetBatch.market_research[2]?.price_quote ?? null,
-        third_company_name: projectBudgetBatch.market_research[2]?.company_name ?? null,
-        third_price_quote_file: null,
+        tercer_estudio_mercado_id: loteEstudioMercado.estudioMercado[2]?.id ?? null,
+        tercer_valor: loteEstudioMercado.estudioMercado[2]?.price_quote ?? null,
+        tercer_empresa: loteEstudioMercado.estudioMercado[2]?.company_name ?? null,
+        tercer_archivo: null,
     })
 
     function submit() {
         if (isSuperAdmin) {
             ;(sending = true),
-                $form.post(route('calls.projects.project-sennova-budgets.project-budget-batches.update', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id]), {
+                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         sending = false
                     },
                     onError: () => {
-                        $form.requires_third_market_research = errors.third_price_quote || errors.third_company_name || errors.third_price_quote_file ? true : false
+                        $form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false
                     },
                     preserveScroll: true,
                 })
@@ -74,12 +74,12 @@
 
     function destroy() {
         if (isSuperAdmin) {
-            $form.delete(route('calls.projects.project-sennova-budgets.project-budget-batches.destroy', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id]))
+            $form.delete(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))
         }
     }
 
     let average
-    $: average = (parseInt($form.first_price_quote) + parseInt($form.second_price_quote) + (parseInt($form.third_price_quote) > 0 && $form.requires_third_market_research ? parseInt($form.third_price_quote) : 0)) / (parseInt($form.third_price_quote) > 0 && $form.requires_third_market_research ? 3 : 2)
+    $: average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0 && $form.requiere_tercer_estudio_mercado ? parseInt($form.tercer_valor) : 0)) / (parseInt($form.tercer_valor) > 0 && $form.requiere_tercer_estudio_mercado ? 3 : 2)
 </script>
 
 <AuthenticatedLayout>
@@ -88,16 +88,18 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
-                    {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.project-budget-batches.index', [call.id, project.id, projectSennovaBudget.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {projectSennovaBudget.call_budget.sennova_budget.budget_usage.description}
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">
+                            {$_('Proyecto sennova budgets.plural')}
                         </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    Estudios de mercado
+                    {#if isSuperAdmin}
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
+                            {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
+                        </a>
+                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    {$_('Market research.plural')}
                     <span class="text-indigo-400 font-medium">/</span>
                     {$_('Edit')}
                 </h1>
@@ -109,76 +111,76 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="qty_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
-                    <Input id="qty_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.qty_items} error={errors.qty_items} required />
+                    <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
+                    <Input id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="fact_sheet" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-                    <File id="fact_sheet" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.fact_sheet} error={errors.fact_sheet} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id])}>Descargar ficha técnica</a>
+                    <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
+                    <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="first_price_quote" value="Valor (incluido IVA)" />
-                    <Input id="first_price_quote" type="number" min="1" class="mt-1 block w-full" bind:value={$form.first_price_quote} error={errors.first_price_quote} required />
+                    <Label required class="mb-4" labelFor="primer_valor" value="Valor (incluido IVA)" />
+                    <Input id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="first_company_name" value="Nombre de la empresa" />
-                    <Input id="first_company_name" type="text" class="mt-1 block w-full" bind:value={$form.first_company_name} error={errors.first_company_name} required />
+                    <Label required class="mb-4" labelFor="primer_empresa" value="Nombre de la empresa" />
+                    <Input id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="first_price_quote_file" value="Soporte" />
-                    <File id="first_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.first_price_quote_file} error={errors.first_price_quote_file} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download-price-qoute-file', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.market_research[0].id])}>Descargar soporte</a>
+                    <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
+                    <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[0].id])}>Descargar soporte</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="second_price_quote" value="Valor (incluido IVA)" />
-                    <Input id="second_price_quote" type="number" min="1" class="mt-1 block w-full" bind:value={$form.second_price_quote} error={errors.second_price_quote} required />
+                    <Label required class="mb-4" labelFor="segundo_valor" value="Valor (incluido IVA)" />
+                    <Input id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="second_company_name" value="Nombre de la empresa" />
-                    <Input id="second_company_name" type="text" class="mt-1 block w-full" bind:value={$form.second_company_name} error={errors.second_company_name} required />
+                    <Label required class="mb-4" labelFor="segunda_empresa" value="Nombre de la empresa" />
+                    <Input id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="second_price_quote_file" value="Soporte" />
-                    <File id="second_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.second_price_quote_file} error={errors.second_price_quote_file} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download-price-qoute-file', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.market_research[1].id])}>Descargar soporte</a>
+                    <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
+                    <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[1].id])}>Descargar soporte</a>
                 </div>
 
                 <div class="mt-8">
-                    <Label labelFor="requires_third_market_research" value="¿Requiere de un tercer estudio de mercado?" class="inline-block mb-4" />
+                    <Label labelFor="requiere_tercer_estudio_mercado" value="¿Requiere de un tercer estudio de mercado?" class="inline-block mb-4" />
                     <br />
-                    <Switch bind:checked={$form.requires_third_market_research} />
-                    <InputError message={errors.requires_third_market_research} />
+                    <Switch bind:checked={$form.requiere_tercer_estudio_mercado} />
+                    <InputError message={errors.requiere_tercer_estudio_mercado} />
                 </div>
 
-                {#if $form.requires_third_market_research}
+                {#if $form.requiere_tercer_estudio_mercado}
                     <h1 class="text-center mt-20 mb-20">Tercer estudio de mercado</h1>
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="third_price_quote" value="Valor (incluido IVA)" />
-                        <Input id="third_price_quote" type="number" min="0" class="mt-1 block w-full" bind:value={$form.third_price_quote} error={errors.third_price_quote} required />
+                        <Label required class="mb-4" labelFor="tercer_valor" value="Valor (incluido IVA)" />
+                        <Input id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="third_company_name" value="Nombre de la empresa" />
-                        <Input id="third_company_name" type="text" class="mt-1 block w-full" bind:value={$form.third_company_name} error={errors.third_company_name} required />
+                        <Label required class="mb-4" labelFor="tercer_empresa" value="Nombre de la empresa" />
+                        <Input id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
                     </div>
 
                     <div class="mt-4">
-                        <Label labelFor="third_price_quote_file" value="Soporte" required />
-                        <File id="third_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.third_price_quote_file} error={errors.third_price_quote_file} />
-                        {#if projectBudgetBatch.market_research[2] != undefined}
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download-price-qoute-file', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.market_research[2].id])} required>Descargar soporte</a>
+                        <Label labelFor="tercer_archivo" value="Soporte" required />
+                        <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
+                        {#if loteEstudioMercado.estudioMercado[2] != undefined}
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[2].id])} required>Descargar soporte</a>
                         {/if}
                     </div>
                 {/if}

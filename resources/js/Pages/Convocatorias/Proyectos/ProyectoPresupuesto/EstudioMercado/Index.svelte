@@ -170,8 +170,8 @@
 
         <div slot="actions" class="block flex w-full">
             <Button on:click={() => (dialog_open = false)} type="button" variant={null}>Cancelar</Button>
-            {#if canCreateMarketResearch}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="market-reseach-form">Guardar</LoadingButton>
+            {#if isSuperAdmin}
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
             {/if}
         </div>
     </Dialog>

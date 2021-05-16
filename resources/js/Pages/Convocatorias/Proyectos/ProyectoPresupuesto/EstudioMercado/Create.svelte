@@ -11,10 +11,10 @@
     import PercentageProgress from '@/Components/PercentageProgress'
 
     export let errors
-    export let call
-    export let project
-    export let projectSennovaBudget
-    export let callBudget
+    export let convocatoria
+    export let proyecto
+    export let proyectoPresupuesto
+    export let convocatoriaPresupuesto
     export let dialogOpen
 
     export let sending = false
@@ -29,33 +29,34 @@
         }).length > 0
 
     let form = useForm({
-        requires_third_market_research: false,
-        call_budget_id: callBudget.id,
-        qty_items: '',
-        fact_sheet: '',
-        first_price_quote: '',
-        first_company_name: '',
-        first_price_quote_file: '',
+        requiere_tercer_estudio_mercado: false,
+        convocatoria_presupuesto_id: convocatoriaPresupuesto.id,
+        numero_items: '',
+        ficha_tecnica: '',
 
-        second_price_quote: '',
-        second_company_name: '',
-        second_price_quote_file: '',
+        primer_valor: '',
+        primer_empresa: '',
+        primer_archivo: '',
 
-        third_price_quote: '',
-        third_company_name: '',
-        third_price_quote_file: '',
+        segundo_valor: '',
+        segunda_empresa: '',
+        segundo_archivo: '',
+
+        tercer_valor: '',
+        tercer_empresa: '',
+        tercer_archivo: '',
     })
 
     function submit() {
         if (isSuperAdmin) {
             ;(sending = true),
-                $form.post(route('calls.projects.project-sennova-budgets.project-budget-batches.store', [call.id, project.id, projectSennovaBudget]), {
+                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)
                     },
                     onError: () => {
-                        $form.requires_third_market_research = errors.third_price_quote || errors.third_company_name || errors.third_price_quote_file ? true : false
+                        $form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false
                     },
                     onSuccess: () => {
                         $form.reset()
@@ -66,78 +67,78 @@
 
     let average
     // afterUpdate(() => {
-    $: average = (parseInt($form.first_price_quote) + parseInt($form.second_price_quote) + (parseInt($form.third_price_quote) > 0 ? parseInt($form.third_price_quote) : 0)) / (parseInt($form.third_price_quote) > 0 ? 3 : 2)
+    $: average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0 ? parseInt($form.tercer_valor) : 0)) / (parseInt($form.tercer_valor) > 0 ? 3 : 2)
     // })
 </script>
 
-<form on:submit|preventDefault={submit} id="market-reseach-form">
+<form on:submit|preventDefault={submit} id="form-estudio-mercado">
     <fieldset class="p-8">
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="qty_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
-            <Input id="qty_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.qty_items} error={errors.qty_items} required />
+            <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
+            <Input id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="fact_sheet" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-            <File id="fact_sheet" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.fact_sheet} error={errors.fact_sheet} required />
+            <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
+            <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} required />
         </div>
 
         <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="first_price_quote" value="Valor (incluido IVA)" />
-            <Input id="first_price_quote" type="number" min="1" class="mt-1 block w-full" bind:value={$form.first_price_quote} error={errors.first_price_quote} required />
+            <Label required class="mb-4" labelFor="primer_valor" value="Valor (incluido IVA)" />
+            <Input id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="first_company_name" value="Nombre de la empresa" />
-            <Input id="first_company_name" type="text" class="mt-1 block w-full" bind:value={$form.first_company_name} error={errors.first_company_name} required />
+            <Label required class="mb-4" labelFor="primer_empresa" value="Nombre de la empresa" />
+            <Input id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="first_price_quote_file" value="Soporte" />
-            <File id="first_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.first_price_quote_file} error={errors.first_price_quote_file} required />
+            <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
+            <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.primer_archivo} error={errors.primer_archivo} required />
         </div>
 
         <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="second_price_quote" value="Valor (incluido IVA)" />
-            <Input id="second_price_quote" type="number" min="1" class="mt-1 block w-full" bind:value={$form.second_price_quote} error={errors.second_price_quote} required />
+            <Label required class="mb-4" labelFor="segundo_valor" value="Valor (incluido IVA)" />
+            <Input id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="second_company_name" value="Nombre de la empresa" />
-            <Input id="second_company_name" type="text" class="mt-1 block w-full" bind:value={$form.second_company_name} error={errors.second_company_name} required />
+            <Label required class="mb-4" labelFor="segunda_empresa" value="Nombre de la empresa" />
+            <Input id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="second_price_quote_file" value="Soporte" />
-            <File id="second_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.second_price_quote_file} error={errors.second_price_quote_file} required />
+            <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
+            <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} required />
         </div>
 
         <div class="mt-8">
-            <Label labelFor="requires_third_market_research" value="¿Requiere de un tercer estudio de mercado?" class="inline-block mb-4" />
+            <Label labelFor="requiere_tercer_estudio_mercado" value="¿Requiere de un tercer estudio de mercado?" class="inline-block mb-4" />
             <br />
-            <Switch bind:checked={$form.requires_third_market_research} />
-            <InputError message={errors.requires_third_market_research} />
+            <Switch bind:checked={$form.requiere_tercer_estudio_mercado} />
+            <InputError message={errors.requiere_tercer_estudio_mercado} />
         </div>
 
-        {#if $form.requires_third_market_research}
+        {#if $form.requiere_tercer_estudio_mercado}
             <h1 class="text-center mt-20 mb-20">Tercer estudio de mercado</h1>
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="third_price_quote" value="Valor (incluido IVA)" />
-                <Input id="third_price_quote" type="number" min="0" class="mt-1 block w-full" bind:value={$form.third_price_quote} error={errors.third_price_quote} required />
+                <Label required class="mb-4" labelFor="tercer_valor" value="Valor (incluido IVA)" />
+                <Input id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
             </div>
 
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="third_company_name" value="Nombre de la empresa" />
-                <Input id="third_company_name" type="text" class="mt-1 block w-full" bind:value={$form.third_company_name} error={errors.third_company_name} required />
+                <Label required class="mb-4" labelFor="tercer_empresa" value="Nombre de la empresa" />
+                <Input id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
             </div>
 
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="third_price_quote_file" value="Soporte" />
-                <File id="third_price_quote_file" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.third_price_quote_file} error={errors.third_price_quote_file} required />
+                <Label required class="mb-4" labelFor="tercer_archivo" value="Soporte" />
+                <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} required />
             </div>
         {/if}
     </fieldset>
