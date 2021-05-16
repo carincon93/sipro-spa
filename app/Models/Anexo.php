@@ -57,13 +57,13 @@ class Anexo extends Model
     }
 
     /**
-     * Relationship with AnexoProyecto
+     * Relationship with ProyectoAnexo
      *
      * @return void
      */
-    public function AnexosProyecto()
+    public function proyectoAnexo()
     {
-        return $this->hasMany(AnexoProyecto::class);
+        return $this->hasMany(ProyectoAnexo::class);
     }
 
     /**

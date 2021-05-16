@@ -34,7 +34,7 @@ class TematicaEstrategicaController extends Controller
     {
         $this->authorize('create', [TematicaEstrategica::class]);
 
-        return Inertia::render('TematicasEstrategicas/Crear');
+        return Inertia::render('TematicasEstrategicas/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class TematicaEstrategicaController extends Controller
     {
         $this->authorize('update', [TematicaEstrategica::class, $tematicaEstrategica]);
 
-        return Inertia::render('TematicasEstrategicas/Editar', [
+        return Inertia::render('TematicasEstrategicas/Edit', [
             'tematicaEstrategica' => $tematicaEstrategica
         ]);
     }

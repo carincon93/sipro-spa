@@ -46,7 +46,7 @@ class ProductoController extends Controller
 
         $proyecto->idi;
 
-        return Inertia::render('Convocatorias/Proyectos/Productos/Crear', [
+        return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
             'convocatoria'      => $convocatoria,
             'proyecto'          => $proyecto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
@@ -107,7 +107,7 @@ class ProductoController extends Controller
         $proyecto->idi;
         $producto->idiProducto;
 
-        return Inertia::render('Convocatorias/Proyectos/Productos/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id'),
             'producto'          => $producto,

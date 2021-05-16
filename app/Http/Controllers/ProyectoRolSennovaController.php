@@ -40,7 +40,7 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('create', [ProyectoRolSennova::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/RolesSennova/Crear', [
+        return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
             'convocatoria'       => $convocatoria->only('id'),
             'proyecto'           => $proyecto->only('id', 'diff_meses'),
             'lineaProgramatica'  => $proyecto->tipoProyecto->lineaProgramatica->only('id')
@@ -94,7 +94,7 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('update', [ProyectoRolSennova::class, $proyectoRolSennova]);
 
-        return Inertia::render('Convocatorias/Proyectos/RolesSennova/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
             'proyecto'              => $proyecto->only('id', 'diff_meses'),
             'proyectoRolSennova'    => $proyectoRolSennova,

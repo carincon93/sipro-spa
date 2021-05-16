@@ -34,7 +34,7 @@ class MesaTecnicaController extends Controller
     {
         $this->authorize('create', [MesaTecnica::class]);
 
-        return Inertia::render('MesasTecnicas/Crear');
+        return Inertia::render('MesasTecnicas/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class MesaTecnicaController extends Controller
     {
         $this->authorize('update', [MesaTecnica::class, $mesaTecnica]);
 
-        return Inertia::render('MesasTecnicas/Editar', [
+        return Inertia::render('MesasTecnicas/Edit', [
             'mesaTecnica' => $mesaTecnica
         ]);
     }

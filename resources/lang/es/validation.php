@@ -171,9 +171,19 @@ return [
         'objetivo_muestreo'     => 'finalidad de las actividades a realizar con la especie nativa',
 		'municipios'            => 'nombre de los municipios beneficiados',
 		'convocatoria_rol_sennova_id' => 'rol SENNOVA',
+		'proyecto_presupuesto_id'     => 'rubro presupuestal',
+		'descripcion_recursos_dinero' => 'descripción de la destinación del dinero aportado',
+		'actividades_transferencia_conocimiento' => 'actividades de transferencia de conocimiento',
 		'numero_roles'  		=> 'número de personas',
 		'numero_meses' 			=> 'número de meses',
 		'resultado_id' 			=> 'resultado',
+		'producto_id'           => 'producto',
+		'actividad_id'          => 'actividad',
+		'carta_intencion'       => 'carta de intención',
+		'fecha_inicio'          => 'fecha de inicio',
+        'fecha_finalizacion'    => 'fecha de finalizacion',
+		'numero_documento'      => 'número de documento',
+		'numero_celular'      	=> 'número de celular',
 		
 		'grupo_investigacion_id' => 'grupo de investigación',
 		'linea_investigacion_id' => 'línea de investigación',
@@ -201,9 +211,6 @@ return [
 
         // Actividad - Activity
         'specific_objective_id'     => 'objetivo específico',
-        'description'               => 'descripción',
-        'fecha_inicio'                => 'fecha de inicio',
-        'fecha_finalizacion'                  => 'fecha de cierre',
         'output_id'                 => 'productos',
         'project_sennova_budget_id' => 'rubros de proyecto',
 

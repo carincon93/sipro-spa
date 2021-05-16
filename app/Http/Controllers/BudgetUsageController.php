@@ -65,10 +65,6 @@ class BudgetUsageController extends Controller
     public function show(BudgetUsage $budgetUsage)
     {
         $this->authorize('view', [BudgetUsage::class, $budgetUsage]);
-
-        return Inertia::render('Budgets/BudgetUsages/Show', [
-            'budgetUsage' => $budgetUsage
-        ]);
     }
 
     /**
@@ -81,7 +77,7 @@ class BudgetUsageController extends Controller
     {
         $this->authorize('update', [BudgetUsage::class, $budgetUsage]);
 
-        return Inertia::render('Budgets/BudgetUsages/Editar', [
+        return Inertia::render('Budgets/BudgetUsages/Edit', [
             'budgetUsage' => $budgetUsage
         ]);
     }

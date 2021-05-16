@@ -133,7 +133,7 @@ class ProjectSennovaBudgetController extends Controller
         $proyectoSennovaBudget->convocatoriaBudget->sennovaBudget->budgetUsage;
         $proyecto->projectType->programmaticLine;
 
-        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/Edit', [
             'convocatoria'                  => $convocatoria->only('id'),
             'proyecto'              => $proyecto,
             'projectSennovaBudget'  => $proyectoSennovaBudget,

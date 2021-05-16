@@ -37,7 +37,7 @@ class CentroFormacionController extends Controller
     {
         $this->authorize('create', [CentroFormacion::class]);
 
-        return Inertia::render('CentrosFormacion/Crear', [
+        return Inertia::render('CentrosFormacion/Create', [
             'regional' => Regional::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
         ]);
     }
@@ -84,7 +84,7 @@ class CentroFormacionController extends Controller
     {
         $this->authorize('update', [CentroFormacion::class, $centroFormacion]);
 
-        return Inertia::render('CentrosFormacion/Editar', [
+        return Inertia::render('CentrosFormacion/Edit', [
             'centroFormacion' => $centroFormacion->only(['id', 'nombre', 'codigo', 'regional_id', 'subdirector_id']),
             'regional'        => Regional::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
         ]);

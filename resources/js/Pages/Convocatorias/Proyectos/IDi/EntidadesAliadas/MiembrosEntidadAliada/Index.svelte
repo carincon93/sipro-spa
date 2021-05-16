@@ -1,0 +1,123 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+    import { Inertia } from '@inertiajs/inertia'
+
+    import ResourceMenu from '@/Components/ResourceMenu'
+    import { Item, Text } from '@smui/list'
+    import DataTable from '@/Components/DataTable'
+    import Button from '@/Components/Button'
+    import Pagination from '@/Components/Pagination'
+
+    export let convocatoria
+    export let idi
+    export let entidadAliada
+    export let miembrosEntidadAliada
+
+    $title = 'Miembros de la entidad aliada'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    let canIndexMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.index') == 'miembros-entidad-aliada.index'
+    let canShowMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.show') == 'miembros-entidad-aliada.show'
+    let canCreateMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.create') == 'miembros-entidad-aliada.create'
+    let canEditMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.edit') == 'miembros-entidad-aliada.edit'
+    let canDestroyMiembrosEntidadAliada = authUser.can.find((element) => element == 'miembros-entidad-aliada.destroy') == 'miembros-entidad-aliada.destroy'
+
+    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.index') == 'entidades-aliadas.index'
+    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'entidades-aliadas.edit') == 'entidades-aliadas.edit'
+
+    let filters = {}
+</script>
+
+<AuthenticatedLayout>
+    <header class="shadow bg-white" slot="header">
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
+            <div>
+                <h1>
+                    {#if canIndexEntidadesAliadas || canEditEntidadesAliadas || isSuperAdmin}
+                        <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
+                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    <a use:inertia href={route('convocatorias.idi.entidades-aliadas.edit', [convocatoria.id, idi.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">
+                        {entidadAliada.nombre}
+                    </a>
+                    <span class="text-indigo-400 font-medium">/</span>
+                    Miembros de la entidad aliada
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <DataTable class="mt-20">
+        <div slot="title">Miembros de la entidad aliada</div>
+
+        <div slot="actions">
+            {#if canCreateMiembrosEntidadAliada || isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, idi.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
+            {/if}
+        </div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Número de celular</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody slot="tbody">
+            {#each miembrosEntidadAliada.data as miembroEntidadAliada (miembroEntidadAliada.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.nombre}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.email}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.numero_celular}
+                        </p>
+                    </td>
+
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            {#if canShowMiembrosEntidadAliada || canEditMiembrosEntidadAliada || canDestroyMiembrosEntidadAliada || isSuperAdmin}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if miembrosEntidadAliada.data.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+    <Pagination links={miembrosEntidadAliada.links} />
+</AuthenticatedLayout>

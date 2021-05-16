@@ -34,7 +34,7 @@ class LineaInvestigacionController extends Controller
     {
         $this->authorize('create', [LineaInvestigacion::class]);
 
-        return Inertia::render('LineasInvestigacion/Crear');
+        return Inertia::render('LineasInvestigacion/Create');
     }
 
     /**
@@ -77,7 +77,7 @@ class LineaInvestigacionController extends Controller
     {
         $this->authorize('update', [LineaInvestigacion::class, $lineaInvestigacion]);
 
-        return Inertia::render('LineasInvestigacion/Editar', [
+        return Inertia::render('LineasInvestigacion/Edit', [
             'lineaInvestigacion' => $lineaInvestigacion,
         ]);
     }

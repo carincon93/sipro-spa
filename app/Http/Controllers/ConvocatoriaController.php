@@ -52,7 +52,7 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('create', [Convocatoria::class]);
 
-        return Inertia::render('Convocatorias/Crear');
+        return Inertia::render('Convocatorias/Create');
     }
 
     /**
@@ -104,7 +104,7 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
-        return Inertia::render('Convocatorias/Editar', [
+        return Inertia::render('Convocatorias/Edit', [
             'convocatoria' => $convocatoria
         ]);
     }

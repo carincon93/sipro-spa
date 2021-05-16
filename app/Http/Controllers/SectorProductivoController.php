@@ -34,7 +34,7 @@ class SectorProductivoController extends Controller
     {
         $this->authorize('create', [SectorProductivo::class]);
 
-        return Inertia::render('SectoresProductivos/Crear');
+        return Inertia::render('SectoresProductivos/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class SectorProductivoController extends Controller
     {
         $this->authorize('update', [SectorProductivo::class, $sectorProductivo]);
 
-        return Inertia::render('SectoresProductivos/Editar', [
+        return Inertia::render('SectoresProductivos/Edit', [
             'sectorProductivo' => $sectorProductivo
         ]);
     }

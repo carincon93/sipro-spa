@@ -73,7 +73,7 @@
                             <Dropdown class="mt-1" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
-                                        <span>{authUser.user_name}</span>
+                                        <span>{authUser.nombre_usuario}</span>
                                     </div>
                                     <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>

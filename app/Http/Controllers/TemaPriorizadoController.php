@@ -36,7 +36,7 @@ class TemaPriorizadoController extends Controller
     {
         $this->authorize('create', [TemaPriorizado::class]);
 
-        return Inertia::render('TemasPriorizados/Crear', [
+        return Inertia::render('TemasPriorizados/Create', [
             'sectoresProductivos'   => SectorProductivo::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
             'mesasTecnicas'         =>  MesaTecnica::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
         ]);
@@ -83,7 +83,7 @@ class TemaPriorizadoController extends Controller
     {
         $this->authorize('update', [TemaPriorizado::class, $temaPriorizado]);
 
-        return Inertia::render('TemasPriorizados/Editar', [
+        return Inertia::render('TemasPriorizados/Edit', [
             'temaPriorizado'        => $temaPriorizado,
             'sectoresProductivos'   => SectorProductivo::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
             'mesasTecnicas'         => MesaTecnica::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),

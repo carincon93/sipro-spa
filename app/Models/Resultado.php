@@ -64,13 +64,13 @@ class Resultado extends Model
     }
 
     /**
-     * Relationship with Output
+     * Relationship with Producto
      *
      * @return void
      */
-    public function outputs()
+    public function productos()
     {
-        return $this->hasMany(Output::class);
+        return $this->hasMany(Producto::class);
     }
 
     /**

@@ -208,7 +208,7 @@ class ProjectBudgetBatchController extends Controller
         $proyectoSennovaBudget->convocatoriaBudget->sennovaBudget->budgetUsage;
         $proyectoBudgetBatch->marketResearch;
 
-        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/MarketResearch/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/ProjectSennovaBudgets/MarketResearch/Edit', [
             'convocatoria'                  => $convocatoria,
             'project'               => $proyecto,
             'projectSennovaBudget'  => $proyectoSennovaBudget,

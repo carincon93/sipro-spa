@@ -44,7 +44,7 @@
         {/if}
         <h1 class="text-4xl text-center">
             ¡Bienvenido(a)
-            <span class="capitalize">{$page.props.auth.user.name}</span>! Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque y de Servicios Tecnológicos para la vigencia {convocatoria.year}
+            <span class="capitalize">{$page.props.auth.user.nombre}</span>! Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque y de Servicios Tecnológicos para la vigencia {convocatoria.year}
         </h1>
         <div class="grid grid-cols-3 gap-10 mt-24">
             {#if canIndexIDi || isSuperAdmin}

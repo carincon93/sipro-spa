@@ -1,0 +1,379 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { Inertia } from '@inertiajs/inertia'
+    import { inertia, page, useForm } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+
+    import Label from '@/Components/Label'
+    import LoadingButton from '@/Components/LoadingButton'
+    import Button from '@/Components/Button'
+    import Textarea from '@/Components/Textarea'
+    import Input from '@/Components/Input'
+    import Switch from '@/Components/Switch'
+    import File from '@/Components/File'
+    import Select from '@/Components/Select'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
+    import { Item, Text } from '@smui/list'
+    import DataTable from '@/Components/DataTable'
+    import Dialog from '@/Components/Dialog'
+    import ResourceMenu from '@/Components/ResourceMenu'
+    import InputError from '@/Components/InputError'
+
+    export let errors
+    export let convocatoria
+    export let idi
+    export let entidadAliada
+    export let actividades
+    export let actividadesRelacionadas
+    export let objetivosEspecificosRelacionados
+    export let tiposEntidadAliada
+    export let naturalezaEntidadAliada
+    export let tiposEmpresa
+
+    let grupoInvestigacion = entidadAliada.grupo_investigacion != null ? true : false
+    let convenio = entidadAliada.descripcion_convenio != null ? true : false
+
+    $: $title = entidadAliada ? entidadAliada.nombre : null
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    let canIndexEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.index') == 'partner-organizations.index'
+    let canShowEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.show') == 'partner-organizations.show'
+    let canCreateEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.create') == 'partner-organizations.create'
+    let canEditEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.edit') == 'partner-organizations.edit'
+    let canDestroyEntidadesAliadas = authUser.can.find((element) => element == 'partner-organizations.destroy') == 'partner-organizations.destroy'
+
+    let dialog_open = false
+    let sending = false
+
+    let form = useForm({
+        tipo: { value: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.value, label: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.label },
+        nombre: entidadAliada.nombre,
+        naturaleza: { value: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.value, label: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.label },
+        tipo_empresa: { value: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.value, label: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.label },
+        nit: entidadAliada.nit,
+        descripcion_convenio: entidadAliada.descripcion_convenio,
+        grupo_investigacion: entidadAliada.grupo_investigacion,
+        codigo_gruplac: entidadAliada.codigo_gruplac,
+        enlace_gruplac: entidadAliada.enlace_gruplac,
+        actividades_transferencia_conocimiento: entidadAliada.actividades_transferencia_conocimiento,
+        recursos_especie: entidadAliada.recursos_especie,
+        descripcion_recursos_especie: entidadAliada.descripcion_recursos_especie,
+        recursos_dinero: entidadAliada.recursos_dinero,
+        descripcion_recursos_dinero: entidadAliada.descripcion_recursos_dinero,
+        carta_intencion: null,
+        carta_propiedad_intelectual: null,
+        actividad_id: actividadesRelacionadas,
+    })
+
+    function submit() {
+        if (canEditEntidadesAliadas || isSuperAdmin) {
+            $form.put(route('convocatorias.idi.entidades-aliadas.update', [convocatoria.id, idi.id, entidadAliada.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
+    function destroy() {
+        if (canDestroyEntidadesAliadas || isSuperAdmin) {
+            $form.delete(route('convocatorias.idi.entidades-aliadas.destroy', [convocatoria.id, idi.id, entidadAliada.id]))
+        }
+    }
+
+    function handleFile(e, test) {
+        $form[test] = e.target.files[0]
+    }
+</script>
+
+<AuthenticatedLayout>
+    <header class="shadow bg-white" slot="header">
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
+            <div>
+                <h1>
+                    {#if canIndexEntidadesAliadas || canShowEntidadesAliadas || canEditEntidadesAliadas || canDestroyEntidadesAliadas || isSuperAdmin}
+                        <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
+                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    {entidadAliada.nombre}
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <div class="bg-white rounded shadow max-w-3xl">
+            <form on:submit|preventDefault={submit}>
+                <fieldset class="p-8" disabled={canEditEntidadesAliadas || isSuperAdmin ? undefined : true}>
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
+                        <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="nombre" value="Nombre de la entidad aliada/Centro de formación" />
+                        <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="naturaleza" value="Naturaleza de la entidad" />
+                        <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="tipo_empresa" value="Tipo de empresa" />
+                        <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione la probabilidad" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="nit" value="NIT" />
+                        <Input id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <p>¿Hay convenio?</p>
+                        <Switch bind:checked={convenio} />
+                    </div>
+                    {#if convenio}
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
+                            <Textarea rows="4" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                        </div>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿La entidad aliada tiene grupo de investigación?</p>
+                        <Switch bind:checked={grupoInvestigacion} />
+                    </div>
+                    {#if grupoInvestigacion}
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
+                            <Textarea rows="4" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                        </div>
+
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="codigo_gruplac" value="Código del GrupLAC" />
+                            <Input id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        </div>
+
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace del GrupLAC" />
+                            <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        </div>
+                    {/if}
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="recursos_especie" value="Recursos en especie entidad aliada ($COP)" />
+                        <Input id="recursos_especie" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="descripcion_recursos_especie" value="Descripción de los recursos en especie aportados" />
+                        <Textarea rows="4" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="recursos_dinero" value="Recursos en especie entidad aliada ($COP)" />
+                        <Input id="recursos_dinero" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="descripcion_recursos_dinero" value="Descripción de la destinación del dinero aportado" />
+                        <Textarea rows="4" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
+                        <Textarea rows="4" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
+                        <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
+                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
+                    </div>
+
+                    {#if $form.progress}
+                        <progress value={$form.progress.percentage} max="100" class="mt-4">
+                            {$form.progress.percentage}%
+                        </progress>
+                    {/if}
+
+                    <h6 class="mt-20 mb-12 text-2xl" id="actividades">
+                        {$_('Activities.plural')}
+                    </h6>
+
+                    <div class="bg-white rounded shadow overflow-hidden">
+                        <div class="p-4">
+                            <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
+                            <InputError message={errors.actividad_id} />
+                        </div>
+                        <div class="grid grid-cols-2">
+                            {#each actividades as { id, descripcion }, i}
+                                <FormField>
+                                    <Checkbox bind:group={$form.actividad_id} value={id} />
+                                    <span slot="label">{descripcion}</span>
+                                </FormField>
+                            {/each}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if canDestroyEntidadesAliadas || isSuperAdmin}
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
+                            Eliminar
+                            {$_('Partner organizations.singular').toLowerCase()}
+                        </button>
+                    {/if}
+                    {#if canEditEntidadesAliadas || isSuperAdmin}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+                            Editar
+                            {$_('Partner organizations.singular')}
+                        </LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+        <div class="px-4">
+            <h1 class="mb-4">Enlaces de interés</h1>
+            <ul>
+                <li>
+                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada">
+                        {$_('Partner organization members.plural')}
+                    </a>
+                </li>
+                <li class="mt-6">
+                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#specific-objectives">
+                        {$_('Specific objectives.plural')} relacionados
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <DataTable class="mt-20">
+        <div slot="title" id="miembros-entidad-aliada">
+            {$_('Partner organization members.plural')}
+        </div>
+
+        <div slot="actions">
+            <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, idi.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
+        </div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Correo electrónico </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Número de celular </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
+            </tr>
+        </thead>
+
+        <tbody slot="tbody">
+            {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.nombre}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.email}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {miembroEntidadAliada.cellphone_number}
+                        </p>
+                    </td>
+
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            {#if canShowEntidadesAliadas || canDestroyEntidadesAliadas || isSuperAdmin}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
+        </tbody>
+    </DataTable>
+
+    <DataTable class="mt-20">
+        <div slot="title" id="specific-objectives">Objetivos específicos</div>
+
+        <p class="mb-6" slot="caption">
+            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
+        </p>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Descripción </th>
+            </tr>
+        </thead>
+
+        <tbody slot="tbody">
+            {#each objetivosEspecificosRelacionados as { id, descripcion }}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {descripcion}
+                        </p>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if objetivosEspecificosRelacionados.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+
+    <Dialog bind:open={dialog_open}>
+        <div slot="title" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Eliminar recurso
+        </div>
+        <div slot="content">
+            <p>
+                ¿Está seguro(a) que desea eliminar este recurso?
+                <br />
+                Todos los datos se eliminarán de forma permanente.
+                <br />
+                Está acción no se puede deshacer.
+            </p>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (dialog_open = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" on:click={destroy}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
+</AuthenticatedLayout>

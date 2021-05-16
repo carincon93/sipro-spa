@@ -23,7 +23,7 @@ class MiembroEntidadAliada extends Model
      */
     protected $fillable = [
         'entidad_aliada_id',
-        'nombrbe',
+        'nombre',
         'email',
         'tipo_documento',
         'numero_documento',
@@ -65,10 +65,10 @@ class MiembroEntidadAliada extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterEntidadAliadaMember($query, array $filters)
+    public function scopeFilterMiembroEntidadAliada($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombrbe', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%'.$search.'%');
         });
     }
 }

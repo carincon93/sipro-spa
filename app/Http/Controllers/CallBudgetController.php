@@ -66,10 +66,6 @@ class CallBudgetController extends Controller
     public function show(CallBudget $callBudget)
     {
         $this->authorize('view', [CallBudget::class, $callBudget]);
-
-        return Inertia::render('rubrosPresupuestalesConvocatoria/Show', [
-            'callBudget' => $callBudget
-        ]);
     }
 
     /**
@@ -82,7 +78,7 @@ class CallBudgetController extends Controller
     {
         $this->authorize('update', [CallBudget::class, $callBudget]);
 
-        return Inertia::render('rubrosPresupuestalesConvocatoria/Editar', [
+        return Inertia::render('rubrosPresupuestalesConvocatoria/Edit', [
             'callBudget' => $callBudget
         ]);
     }

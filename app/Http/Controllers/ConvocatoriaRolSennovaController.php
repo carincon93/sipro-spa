@@ -108,7 +108,7 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->rolSennova;
 
-        return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Editar', [
+        return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Edit', [
             'convocatoriaRolSennova'   => $convocatoriaRolSennova,
             'convocatoria'              => $convocatoria,
             'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico

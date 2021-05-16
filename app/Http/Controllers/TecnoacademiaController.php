@@ -34,7 +34,7 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('create', [Tecnoacademia::class]);
 
-        return Inertia::render('Tecnoacademias/Crear');
+        return Inertia::render('Tecnoacademias/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('update', [Tecnoacademia::class, $tecnoAcademia]);
 
-        return Inertia::render('Tecnoacademias/Editar', [
+        return Inertia::render('Tecnoacademias/Edit', [
             'tecnoAcademia' => $tecnoAcademia
         ]);
     }

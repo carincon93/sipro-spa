@@ -17,11 +17,11 @@ class SoftwareInfo extends Model
      * @var array
      */
     protected $fillable = [
-        'license_type',
-        'software_type',
+        'tipo_licencia',
+        'tipo_software',
         'fecha_inicio',
         'fecha_finalizacion',
-        'project_sennova_budget_id'
+        'proyecto_presupuesto_id'
     ];
 
     /**
@@ -43,13 +43,13 @@ class SoftwareInfo extends Model
     ];
 
     /**
-     * Relationship with ProjectSennovaBudget
+     * Relationship with ProyectoPresupuesto
      *
      * @return void
      */
-    public function projectSennovaBudget()
+    public function proyectoPresupuesto()
     {
-        return $this->belongsTo(ProjectSennovaBudget::class);
+        return $this->belongsTo(ProyectoPresupuesto::class);
     }
 
     /**
@@ -62,7 +62,7 @@ class SoftwareInfo extends Model
     public function scopeFilterSoftwareInfo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('license_type', 'ilike', '%'.$search.'%');
+            $query->where('tipo_licencia', 'ilike', '%'.$search.'%');
         });
     }
 }

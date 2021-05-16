@@ -37,7 +37,7 @@ class TipoProyectoController extends Controller
     {
         $this->authorize('create', [TipoProyecto::class]);
 
-        return Inertia::render('TiposProyecto/Crear', [
+        return Inertia::render('TiposProyecto/Create', [
             'lineasProgramaticas' => LineaProgramatica::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
         ]);
     }
@@ -82,7 +82,7 @@ class TipoProyectoController extends Controller
     {
         $this->authorize('update', [TipoProyecto::class, $tipoProyecto]);
 
-        return Inertia::render('TiposProyecto/Editar', [
+        return Inertia::render('TiposProyecto/Edit', [
             'tipoProyecto'        => $tipoProyecto,
             'lineasProgramaticas' => LineaProgramatica::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
         ]);

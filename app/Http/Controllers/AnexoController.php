@@ -35,7 +35,7 @@ class AnexoController extends Controller
     {
         $this->authorize('create', [Anexo::class]);
 
-        return Inertia::render('Anexos/Crear', [
+        return Inertia::render('Anexos/Create', [
             'lineasProgramaticas' => LineaProgramatica::orderBy('nombre', 'ASC')->get()
         ]);
     }
@@ -83,7 +83,7 @@ class AnexoController extends Controller
     {
         $this->authorize('update', [Anexo::class, $anexo]);
 
-        return Inertia::render('Anexos/Editar', [
+        return Inertia::render('Anexos/Edit', [
             'anexo'                     => $anexo,
             'lineasProgramaticas'       => LineaProgramatica::orderBy('nombre', 'ASC')->get(),
             'anexoLineasProgramaticas'  => $anexo->lineasProgramaticas()->pluck('id'),

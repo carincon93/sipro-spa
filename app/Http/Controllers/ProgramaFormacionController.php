@@ -38,7 +38,7 @@ class ProgramaFormacionController extends Controller
     {
         $this->authorize('create', [ProgramaFormacion::class]);
 
-        return Inertia::render('ProgramasFormacion/Crear', [
+        return Inertia::render('ProgramasFormacion/Create', [
             'modalidades' => json_decode(Storage::get('json/modalidades-estudio.json'), true)
         ]);
     }
@@ -85,7 +85,7 @@ class ProgramaFormacionController extends Controller
     {
         $this->authorize('update', [ProgramaFormacion::class, $programaFormacion]);
 
-        return Inertia::render('ProgramasFormacion/Editar', [
+        return Inertia::render('ProgramasFormacion/Edit', [
             'programaFormacion'   => $programaFormacion->only(['id', 'nombre', 'codigo', 'modalidad', 'centro_formacion_id']),
             'modalidades'         => json_decode(Storage::get('json/modalidades-estudio.json'), true)
         ]);

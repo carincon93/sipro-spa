@@ -24,23 +24,23 @@ use App\Http\Controllers\IDiController;
 use App\Http\Controllers\ArbolProyectoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProyectoController;
-use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\ConvocatoriaRolSennovaController;
 use App\Http\Controllers\RolSennovaController;
 use App\Http\Controllers\ProyectoRolSennovaController;
-use App\Http\Controllers\FirstBudgetInfoController;
-use App\Http\Controllers\SecondBudgetInfoController;
-use App\Http\Controllers\ThirdBudgetInfoController;
-use App\Http\Controllers\SennovaBudgetController;
-use App\Http\Controllers\CallBudgetController;
-use App\Http\Controllers\ProjectSennovaBudgetController;
-use App\Http\Controllers\RiskAnalysisController;
+use App\Http\Controllers\PrimerGrupoPresupuestalController;
+use App\Http\Controllers\SegundoGrupoPresupuestalController;
+use App\Http\Controllers\TercerGrupoPresupuestalController;
+use App\Http\Controllers\PresupuestoSennovaController;
+use App\Http\Controllers\PresupuestoConvocatoriaController;
+use App\Http\Controllers\ProyectoPresupuestoSennovaController;
+use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
 use App\Http\Controllers\ActividadEconomicaController;
-use App\Http\Controllers\ProjectAnexoController;
-use App\Http\Controllers\BudgetUsageController;
-use App\Http\Controllers\ProjectBudgetBatchController;
+use App\Http\Controllers\ProyectoAnexoController;
+use App\Http\Controllers\UsoPresupuestalController;
+use App\Http\Controllers\ProyectLoteEstudioMercadoController;
 use App\Http\Controllers\MarketResearchController;
 use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
@@ -60,9 +60,9 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
-use App\Models\SecondBudgetInfo;
-use App\Models\ThirdBudgetInfo;
-use App\Models\SennovaBudget;
+use App\Models\SegundoGrupoPresupuestal;
+use App\Models\TercerGrupoPresupuestal;
+use App\Models\PresupuestoSennova;
 use App\Models\Tecnoacademia;
 use App\Models\LineaTecnologica;
 use App\Models\Municipio;
@@ -98,26 +98,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participants', [ProyectoController::class, 'participants'])->name('convocatorias.proyectos.participants');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-annexes/{proyecto_annexe}/download', [ProjectAnexoController::class, 'download'])->name('convocatorias.proyectos.proyecto-annexes.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-sennova-budgets/{proyecto_sennova_budget}/proyecto-budget-batches/{proyecto_budget_batch}/download', [ProjectBudgetBatchController::class, 'download'])->name('convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-sennova-budgets/{proyecto_sennova_budget}/market-research/{market_research}/download', [ProjectBudgetBatchController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches.download-price-qoute-file');    
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto-sennova/{proyecto_sennova_budget}/lote-estudio-mercado/{proyecto_budget_batch}/download', [ProyectLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado.download');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto-sennova/{proyecto_sennova_budget}/market-research/{market_research}/download', [ProyectLoteEstudioMercadoController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado.download-price-qoute-file');    
 
 
     // Trae los conceptos internos SENA
     Route::get('web-api/second-budget-info', function() {
-        return response(SecondBudgetInfo::select('second_budget_info.id as value', 'second_budget_info.nombre as label')->orderBy('nombre', 'ASC')->get());
+        return response(SegundoGrupoPresupuestal::select('second_budget_info.id as value', 'second_budget_info.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.second-budget-info');
 
     Route::get('web-api/third-budget-info/{secondBudgetInfo}', function($secondBudgetInfo) {
-        return response(ThirdBudgetInfo::selectRaw('DISTINCT(third_budget_info.id) as value, third_budget_info.nombre as label')
+        return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(third_budget_info.id) as value, third_budget_info.nombre as label')
             ->join('sennova_budgets', 'third_budget_info.id', 'sennova_budgets.third_budget_info_id')
             ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
             ->get());
     })->name('web-api.third-budget-info');
 
     // Trae los usos presupuestales
-    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/sennova-budgets/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($convocatoria, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
-        return response(SennovaBudget::select('convocatoria_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.mensaje')
+    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/second-budget-info/{secondBudgetInfo}/third-budget-info/{thirdBudgetInfo}', function($convocatoria, $lineaProgramatica, $secondBudgetInfo, $thirdBudgetInfo) {
+        return response(PresupuestoSennova::select('convocatoria_budgets.id as value', 'budget_usages.description as label', 'budget_usages.codigo', 'sennova_budgets.requires_market_research', 'sennova_budgets.mensaje')
             ->join('budget_usages', 'sennova_budgets.budget_usage_id', 'budget_usages.id')
             ->join('convocatoria_budgets', 'sennova_budgets.id', 'convocatoria_budgets.sennova_budget_id')
             ->where('convocatoria_budgets.convocatoria_id', $convocatoria)
@@ -125,7 +124,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->where('sennova_budgets.second_budget_info_id', $secondBudgetInfo)
             ->where('sennova_budgets.third_budget_info_id', $thirdBudgetInfo)
             ->orderBy('budget_usages.description', 'ASC')->get());
-    })->name('web-api.budget-usages');
+    })->name('web-api.usos-presupuestales');
 
     Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function($convocatoria, $lineaProgramatica) {
         return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.mensaje,
@@ -170,12 +169,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', 'roles.id')
             ->where('roles.id', 7)
-            ->orWhere('roles.nombre', 'ilike', '%director de regional%')
+            ->orWhere('roles.name', 'ilike', '%director de regional%')
             ->orderBy('users.nombre', 'ASC')->get());
     })->name('web-api.directores-regional');
 
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
-
 
     /**
      * Centros de formación
@@ -187,7 +185,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', 'roles.id')
             ->where('roles.id', 14)
-            ->orWhere('roles.nombre', 'ilike', '%subdirector de centro de formación%')
+            ->orWhere('roles.name', 'ilike', '%subdirector de centro de formación%')
             ->orderBy('users.nombre', 'ASC')->get());
     })->name('web-api.subdirectores');
 
@@ -404,9 +402,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('convocatorias.idi', IDiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi'])->except(['show']);
 
-    Route::resource('convocatorias.idi.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
+    Route::resource('convocatorias.idi.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
 
-    Route::resource('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
+    Route::resource('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
     
     Route::resource('convocatorias', ConvocatoriaController::class)->parameters(['convocatorias' => 'convocatoria'])->except(['show']);
 
@@ -449,31 +447,45 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.proyectos.productos', ProductoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'productos' => 'producto'])->except(['show']);
 
     /**
+     * Actividades
+     * 
+    */
+    Route::resource('convocatorias.proyectos.actividades', ActividadController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'actividades' => 'actividad'])->except(['show']);
+
+    /**
      * Mesas sectoriales
      * 
     */
     Route::resource('convocatorias.proyectos.proyecto-rol-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-rol-sennova' => 'proyecto-rol-sennova'])->except(['show']);
 
-    
-    Route::resource('convocatorias.proyectos.risk-analysis', RiskAnalysisController::class)->parameters(['risk-analysis' => 'risk_analysis']);
-    Route::resource('convocatorias.proyectos.proyecto-annexes', ProjectAnexoController::class)->parameters(['proyecto-annexes' => 'proyecto-annexe']);
+    /**
+     * Análisis de riesgos
+     * 
+    */
+    Route::resource('convocatorias.proyectos.analisis-riesgos', AnalisisRiesgoController::class)->parameters(['analisis-riesgos' => 'analisis-riesgo']);
+
+    /**
+     * Anexos de proyecto
+     * 
+    */
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-anexos/{proyecto_anexo}/download', [ProyectoAnexoController::class, 'download'])->name('convocatorias.proyectos.proyecto-anexos.download');
+    Route::resource('convocatorias.proyectos.proyecto-anexos', ProyectoAnexoController::class)->parameters(['proyecto-anexos' => 'proyecto-anexo']);
+
     Route::resources(
         [
-            'convocatorias.proyectos.proyecto-sennova-budgets.proyecto-budget-batches' => ProjectBudgetBatchController::class,
-            'budget-usages' => BudgetUsageController::class,
-            'minciencias-typologies' => MincienciasTypologyController::class,
-            'minciencias-subtypologies' => SubtipologiaMincienciasController::class,
+            'convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado' => ProyectLoteEstudioMercadoController::class,
+            'convocatorias.proyectos.proyecto-presupuesto-sennova' => ProyectoPresupuestoSennovaController::class,
+            'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,
+            'convocatoria-presupuesto' => PresupuestoConvocatoriaController::class,
+            
+            'primer-grupo-presupuestal' => PrimerGrupoPresupuestalController::class,
+            'segundo-grupo-presupuestal' => SegundoGrupoPresupuestalController::class,
+            'tercer-grupo-presupuestal' => TercerGrupoPresupuestalController::class,
+            'usos-presupuestales' => UsoPresupuestalController::class,
+            'presupuesto-sennova' => PresupuestoSennovaController::class,
+            'roles-sennova' => RolSennovaController::class,
             'users' => UserController::class,
             'roles' => RoleController::class,
-            'convocatorias.proyectos.activities' => ActivityController::class,
-            'convocatorias.proyectos.proyecto-sennova-budgets' => ProjectSennovaBudgetController::class,
-            'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,
-            'first-budget-info' => FirstBudgetInfoController::class,
-            'second-budget-info' => SecondBudgetInfoController::class,
-            'third-budget-info' => ThirdBudgetInfoController::class,
-            'sennova-budgets' => SennovaBudgetController::class,
-            'sennova-roles' => RolSennovaController::class,
-            'convocatoria-budgets' => CallBudgetController::class,
         ]
     );
 });

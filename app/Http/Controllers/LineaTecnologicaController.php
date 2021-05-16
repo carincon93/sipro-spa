@@ -34,7 +34,7 @@ class LineaTecnologicaController extends Controller
     {
         $this->authorize('create', [LineaTecnologica::class]);
 
-        return Inertia::render('LineasTecnologicas/Crear');
+        return Inertia::render('LineasTecnologicas/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class LineaTecnologicaController extends Controller
     {
         $this->authorize('update', [LineaTecnologica::class, $lineaTecnologica]);
 
-        return Inertia::render('LineasTecnologicas/Editar', [
+        return Inertia::render('LineasTecnologicas/Edit', [
             'lineaTecnologica' => $lineaTecnologica
         ]);
     }

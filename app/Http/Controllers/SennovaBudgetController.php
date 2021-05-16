@@ -82,7 +82,7 @@ class SennovaBudgetController extends Controller
     {
         $this->authorize('update', [SennovaBudget::class, $sennovaBudget]);
 
-        return Inertia::render('SennovaBudgets/Editar', [
+        return Inertia::render('SennovaBudgets/Edit', [
             'sennovaBudget' => $sennovaBudget
         ]);
     }

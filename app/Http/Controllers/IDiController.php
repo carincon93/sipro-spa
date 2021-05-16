@@ -43,7 +43,7 @@ class IDiController extends Controller
     {
         $this->authorize('create', [IDi::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/Crear', [
+        return Inertia::render('Convocatorias/Proyectos/IDi/Create', [
             'convocatoria' => $convocatoria->only('id')
         ]);
     }
@@ -120,7 +120,7 @@ class IDiController extends Controller
 
         $IDi->codigo_linea_programatica = $IDi->proyecto->tipoProyecto->lineaProgramatica->codigo;
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/Editar', [
+        return Inertia::render('Convocatorias/Proyectos/IDi/Edit', [
             'convocatoria'                      => $convocatoria->only('id'),
             'idi'                               => $IDi,
             'mesasSectorialesRelacionadas'      => $IDi->mesasSectoriales()->pluck('id'),
@@ -128,7 +128,7 @@ class IDiController extends Controller
             'tecnoacademia'                     => $IDi->lineasTecnologicas()->first() ? $IDi->lineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'OpcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-idi-dropdown.json'), true),
+            'opcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-idi-dropdown.json'), true),
             'proyectoMunicipios'                => $IDi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')->join('departamentos', 'departamentos.id', 'municipios.departamento_id')->get(),
         ]);
     }

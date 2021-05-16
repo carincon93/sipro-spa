@@ -84,7 +84,7 @@ class RolSennovaController extends Controller
     {
         $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        return Inertia::render('RolSennovas/Editar', [
+        return Inertia::render('RolSennovas/Edit', [
             'rolSennova'       => $rolSennova,
             'academicDegrees'   => json_decode(Storage::get('json/academic-degrees.json'), true)
         ]);

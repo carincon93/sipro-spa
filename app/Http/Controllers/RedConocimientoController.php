@@ -34,7 +34,7 @@ class RedConocimientoController extends Controller
     {
         $this->authorize('create', [RedConocimiento::class]);
 
-        return Inertia::render('RedesConocimiento/Crear');
+        return Inertia::render('RedesConocimiento/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class RedConocimientoController extends Controller
     {
         $this->authorize('update', [RedConocimiento::class, $redConocimiento]);
 
-        return Inertia::render('RedesConocimiento/Editar', [
+        return Inertia::render('RedesConocimiento/Edit', [
             'redConocimiento' => $redConocimiento
         ]);
     }

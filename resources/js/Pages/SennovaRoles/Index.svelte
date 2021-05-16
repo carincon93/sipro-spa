@@ -13,7 +13,7 @@
 
     export let sennovaRoles = []
 
-    $title = $_('Sennova roles.plural')
+    $title = 'Roles SENNOVA'
 
     /**
      * Permisos
@@ -23,11 +23,11 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.index') == 'sennova-roles.index'
-    let canShowSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.show') == 'sennova-roles.show'
-    let canCreateSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.create') == 'sennova-roles.create'
-    let canEditSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.edit') == 'sennova-roles.edit'
-    let canDestroySennovaRoles = authUser.can.find((element) => element == 'sennova-roles.destroy') == 'sennova-roles.delete'
+    let canIndexRolesSennova = authUser.can.find((element) => element == 'roles-sennova.index') == 'roles-sennova.index'
+    let canShowRolesSennova = authUser.can.find((element) => element == 'roles-sennova.show') == 'roles-sennova.show'
+    let canCreateRolesSennova = authUser.can.find((element) => element == 'roles-sennova.create') == 'roles-sennova.create'
+    let canEditRolesSennova = authUser.can.find((element) => element == 'roles-sennova.edit') == 'roles-sennova.edit'
+    let canDestroyRolesSennova = authUser.can.find((element) => element == 'roles-sennova.destroy') == 'roles-sennova.destroy'
 
     let filters = {}
 </script>
@@ -37,8 +37,8 @@
         <div slot="title">{$_('Sennova roles.plural')}</div>
 
         <div slot="actions">
-            {#if canCreateSennovaRoles || isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('sennova-roles.create'))} variant="raised">
+            {#if canCreateRolesSennova || isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('roles-sennova.create'))} variant="raised">
                     Crear
                     {$_('Sennova roles.singular')}
                 </Button>
@@ -61,8 +61,8 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowSennovaRoles || canEditSennovaRoles || canDestroySennovaRoles || isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('sennova-roles.edit', sennovaRole.id))}>
+                            {#if canShowRolesSennova || canEditRolesSennova || canDestroyRolesSennova || isSuperAdmin}
+                                <Item on:SMUI:action={() => Inertia.visit(route('roles-sennova.edit', sennovaRole.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

@@ -22,7 +22,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['diff_meses'];
+    protected $appends = ['diff_meses', 'codigo'];
     // protected $appends = ['code', 'diff_months', 'total_project_budget', 'total_industrial_machinery', 'total_special_construction_services', 'total_viatics', 'total_machinery_maintenance'];
 
     /**
@@ -134,6 +134,36 @@ class Proyecto extends Model
     public function proyectoRolesSennova()
     {
         return $this->hasMany(ProyectoRolSennova::class);
+    }
+
+    /**
+     * Relationship with ProyectoAnexo
+     *
+     * @return void
+     */
+    public function proyectoAnexo()
+    {
+        return $this->hasMany(ProyectoAnexo::class);
+    }
+
+    /**
+     * Relationship with AnalisisRiesgo
+     *
+     * @return void
+     */
+    public function analisisRiesgo()
+    {
+        return $this->hasMany(AnalisisRiesgo::class);
+    }
+
+    /**
+     * Get code e.g. SGPS-8000-2021
+     *
+     * @return void
+     */
+    public function getCodigoAttribute()
+    {
+        return 'SGPS-' . ($this->id + 8000) .'-' . date('Y', strtotime($this->idi->fecha_finalizacion));
     }
 
 

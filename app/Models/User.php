@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    protected $appends = ['can', 'user_name'];
+    protected $appends = ['can', 'nombre_usuario'];
 
     /**
      * The attributes that are mass assignable.
@@ -20,14 +20,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'nombre',
         'email',
         'password',
-        'document_type',
-        'document_number',
-        'cellphone_number',
-        'is_enabled',
-        'participation_type',
+        'tipo_documento',
+        'numero_documento',
+        'numero_celular',
+        'habilitado',
+        'tipo_participacion',
         'centro_formacion_id'
     ];
 
@@ -51,37 +51,37 @@ class User extends Authenticatable
     ];
 
     /**
-     * Relationship with Project (participants)
+     * Relationship with Proyecto (participants)
      *
      * @return void
      */
-    public function projects() {
-        return $this->belongsToMany(Proyecto::class, 'project_participants', 'user_id', 'project_id')
+    public function proyectos() {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_participantes', 'user_id', 'proyecto_id')
             ->withPivot([
-                'is_author',
-                'qty_months',
-                'qty_hours'
+                'es_autor',
+                'numero_meses',
+                'numero_horas'
             ]);
     }
 
     /**
-     * Relationship with AcademicCentre
+     * Relationship with CentroFormacion
      *
      * @return void
      */
-    public function academicCentre()
+    public function centroFormacion()
     {
-        return $this->belongsTo(AcademicCentre::class);
+        return $this->belongsTo(CentroFormacion::class);
     }
 
     /**
-     * Relationship with AcademicCentre
+     * Relationship with CentroFormacion
      *
      * @return void
      */
-    public function academicCentreDeputyDirector()
+    public function subdirectorCentroFormacion()
     {
-        return $this->hasOne(AcademicCentre::class, 'deputy_director_id');
+        return $this->hasOne(CentroFormacion::class, 'subdirector_id');
     }
 
     /**
@@ -89,9 +89,9 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function regionalDirector()
+    public function directorRegional()
     {
-        return $this->hasOne(Regional::class, 'regional_director_id');
+        return $this->hasOne(Regional::class, 'director_regional_id');
     }
 
     /**
@@ -132,22 +132,22 @@ class User extends Authenticatable
     }
 
     /**
-     * getNameAttribute
+     * getNombreAttribute
      *
      * @return void
      */
-    public function getNameAttribute($value)
+    public function getNombreAttribute($value)
     {
         return ucwords($value);
     }
 
     /**
-     * getUserNameAttribute
+     * getNombreUsuarioAttribute
      *
      * @return void
      */
-    public function getUserNameAttribute()
+    public function getNombreUsuarioAttribute()
     {
-        return ucwords($this->name);
+        return ucwords($this->nombre);
     }
 }

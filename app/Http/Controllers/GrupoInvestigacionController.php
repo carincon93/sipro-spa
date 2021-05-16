@@ -35,7 +35,7 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('create', [GrupoInvestigacion::class]);
 
-        return Inertia::render('GruposInvestigacion/Crear', [
+        return Inertia::render('GruposInvestigacion/Create', [
             'categoriasMinciencias' => json_decode(Storage::get('json/categorias-minciencias.json'), true),
         ]);
     }
@@ -85,7 +85,7 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('update', [GrupoInvestigacion::class, $grupoInvestigacion]);
 
-        return Inertia::render('GruposInvestigacion/Editar', [
+        return Inertia::render('GruposInvestigacion/Edit', [
             'grupoInvestigacion'    => $grupoInvestigacion,
             'categoriasMinciencias' => json_decode(Storage::get('json/categorias-minciencias.json'), true),
         ]);

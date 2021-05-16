@@ -81,7 +81,7 @@ class Convocatoria extends Model
      *
      * @return void
      */
-    public function callRolSennovas()
+    public function convocatoriaRolesSennova()
     {
         return $this->hasMany(ConvocatoriaRolSennova::class);
     }

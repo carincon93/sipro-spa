@@ -85,13 +85,13 @@ class Actividad extends Model
     }
 
     /**
-     * Relationship with ProjectSennovaBudget
+     * Relationship with ProyectoPresupuesto
      *
      * @return void
      */
-    public function projectSennovaBudgets()
+    public function proyectoPresupuesto()
     {
-        return $this->belongsToMany(ProjectSennovaBudget::class, 'activity_project_sennova_budget', 'activity_id', 'project_sennova_budget_id');
+        return $this->belongsToMany(ProyectoPresupuesto::class, 'actividad_proyecto_presupuesto', 'actividad_id', 'proyecto_presupuesto_id');
     }
 
     /**
@@ -101,7 +101,7 @@ class Actividad extends Model
      */
     public function entidadesAliadas()
     {
-        return $this->belongsToMany(EntidadAliada::class, 'activity_partner_organization', 'activity_id', 'partner_organization_id');
+        return $this->belongsToMany(EntidadAliada::class, 'actividad_entidad_aliada', 'actividad_id', 'entidad_aliada_id');
     }
 
     /**

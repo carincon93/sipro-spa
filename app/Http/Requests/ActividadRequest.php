@@ -29,7 +29,7 @@ class ActividadRequest extends FormRequest
             return [
                 'objetivo_especifico_id'            => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:objetivos_especificos,id'],
                 'producto_id*'                      => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:productos,id'],
-                'rubro_presupuestal_proyecto_id*'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_rubro_presupuestal,id'],
+                'proyecto_presupuesto_id*'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_rubro_presupuestal,id'],
                 'descripcion'                       => ['required', 'string'],
                 'fecha_inicio'                      => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
@@ -38,7 +38,7 @@ class ActividadRequest extends FormRequest
             return [
                 'objetivo_especifico_id'            => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:objetivos_especificos,id'],
                 'producto_id*'                      => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:productos,id'],
-                'rubro_presupuestal_proyecto_id*'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_rubro_presupuestal,id'],
+                'proyecto_presupuesto_id*'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_rubro_presupuestal,id'],
                 'descripcion'                       => ['required', 'string'],
                 'fecha_inicio'                      => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],

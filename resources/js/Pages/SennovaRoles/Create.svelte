@@ -9,12 +9,12 @@
     import Select from '@/Components/Select'
     import LoadingButton from '@/Components/LoadingButton'
     import Textarea from '@/Components/Textarea'
-    import DropdownProgrammaticLine from '@/Dropdowns/DropdownProgrammaticLine'
+    import DropdownLineaProgramatica from '@/Dropdowns/DropdownLineaProgramatica'
 
     export let errors
-    export let academicDegrees
+    export let nivelesAcademicos
 
-    $: $title = $_('Create') + ' ' + $_('Sennova roles.singular').toLowerCase()
+    $: $title = 'Crear rol SENNOVA'
 
     /**
      * Permisos
@@ -24,22 +24,22 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.index') == 'sennova-roles.index'
-    let canShowSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.show') == 'sennova-roles.show'
-    let canCreateSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.create') == 'sennova-roles.create'
-    let canEditSennovaRoles = authUser.can.find((element) => element == 'sennova-roles.edit') == 'sennova-roles.edit'
-    let canDestroySennovaRoles = authUser.can.find((element) => element == 'sennova-roles.destroy') == 'sennova-roles.delete'
+    let canIndexRolesSennova = authUser.can.find((element) => element == 'roles-sennova.index') == 'roles-sennova.index'
+    let canShowRolesSennova = authUser.can.find((element) => element == 'roles-sennova.show') == 'roles-sennova.show'
+    let canCreateRolesSennova = authUser.can.find((element) => element == 'roles-sennova.create') == 'roles-sennova.create'
+    let canEditRolesSennova = authUser.can.find((element) => element == 'roles-sennova.edit') == 'roles-sennova.edit'
+    let canDestroyRolesSennova = authUser.can.find((element) => element == 'roles-sennova.destroy') == 'roles-sennova.destroy'
 
     let sending = false
     let form = useForm({
-        name: '',
-        description: '',
-        academic_degree: '',
+        nombre: '',
+        descripcion: '',
+        nivel_academico: '',
         linea_programatica_id: null,
     })
 
     function submit() {
-        if (canCreateSennovaRoles || isSuperAdmin) {
+        if (canCreateRolesSennova || isSuperAdmin) {
             $form.post(route('sennova-roles.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,10 +53,8 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexSennovaRoles || canCreateSennovaRoles || isSuperAdmin}
-                        <a use:inertia href={route('sennova-roles.index')} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Sennova roles.plural')}
-                        </a>
+                    {#if canIndexRolesSennova || canCreateRolesSennova || isSuperAdmin}
+                        <a use:inertia href={route('sennova-roles.index')} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -67,33 +65,30 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={canCreateSennovaRoles || isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={canCreateRolesSennova || isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="name" value="Nombre" />
-                    <Input id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="description" value="Descripción" />
-                    <Textarea rows="4" id="description" bind:value={$form.description} error={errors.description} required />
+                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
+                    <Textarea rows="4" id="descripcion" bind:value={$form.descripcion} error={errors.descripcion} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="linea_programatica_id" value={$_('Programmatic lines.singular')} />
-                    <DropdownProgrammaticLine id="linea_programatica_id" bind:formProgrammaticLine={$form.linea_programatica_id} message={errors.linea_programatica_id} required />
+                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
+                    <DropdownLineaProgramatica id="linea_programatica_id" bind:formLineaProgramatica={$form.linea_programatica_id} message={errors.linea_programatica_id} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="academic_degree" value={$_('Academic degrees.singular')} />
-                    <Select id="academic_degree" items={academicDegrees} bind:selectedValue={$form.academic_degree} error={errors.academic_degree} autocomplete="off" placeholder="Seleccione un nivel académico" required />
+                    <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
+                    <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canCreateSennovaRoles || isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                        Crear
-                        {$_('Sennova roles.singular')}
-                    </LoadingButton>
+                {#if canCreateRolesSennova || isSuperAdmin}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear rol SENNOVA</LoadingButton>
                 {/if}
             </div>
         </form>

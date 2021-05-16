@@ -34,7 +34,7 @@ class RegionalController extends Controller
     {
         $this->authorize('create', [Regional::class]);
 
-        return Inertia::render('Regionales/Crear');
+        return Inertia::render('Regionales/Create');
     }
 
     /**
@@ -81,7 +81,7 @@ class RegionalController extends Controller
     {
         $this->authorize('update', [Regional::class, $regional]);
 
-        return Inertia::render('Regionales/Editar', [
+        return Inertia::render('Regionales/Edit', [
             'regional' => $regional
         ]);
     }

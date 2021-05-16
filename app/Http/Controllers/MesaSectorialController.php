@@ -34,7 +34,7 @@ class MesaSectorialController extends Controller
     {
         $this->authorize('create', [MesaSectorial::class]);
 
-        return Inertia::render('MesasSectoriales/Crear');
+        return Inertia::render('MesasSectoriales/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class MesaSectorialController extends Controller
     {
         $this->authorize('update', [MesaSectorial::class, $mesaSectorial]);
 
-        return Inertia::render('MesasSectoriales/Editar', [
+        return Inertia::render('MesasSectoriales/Edit', [
             'mesaSectorial' => $mesaSectorial
         ]);
     }

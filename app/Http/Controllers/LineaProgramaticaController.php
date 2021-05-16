@@ -41,7 +41,7 @@ class LineaProgramaticaController extends Controller
     {
         $this->authorize('create', [LineaProgramatica::class]);
 
-        return Inertia::render('LineasProgramaticas/Crear', [
+        return Inertia::render('LineasProgramaticas/Create', [
             'categoriasProyectos' => json_decode(Storage::get('json/categorias-proyectos.json'), true),
         ]);
     }
@@ -88,7 +88,7 @@ class LineaProgramaticaController extends Controller
     {
         $this->authorize('update', [LineaProgramatica::class, $lineaProgramatica]);
 
-        return Inertia::render('LineasProgramaticas/Editar', [
+        return Inertia::render('LineasProgramaticas/Edit', [
             'lineaProgramatica'   => $lineaProgramatica->only('id', 'nombre', 'descripcion', 'codigo', 'categoria_proyecto', 'descripcion'),
             'categoriasProyectos' => json_decode(Storage::get('json/categorias-proyectos.json'), true),
         ]);

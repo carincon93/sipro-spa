@@ -35,7 +35,7 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('create', [SemilleroInvestigacion::class]);
 
-        return Inertia::render('SemillerosInvestigacion/Crear', [
+        return Inertia::render('SemillerosInvestigacion/Create', [
             'lineasInvestigacion' => LineaInvestigacion::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
         ]);
     }
@@ -80,7 +80,7 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
-        return Inertia::render('SemillerosInvestigacion/Editar', [
+        return Inertia::render('SemillerosInvestigacion/Edit', [
             'semilleroInvestigacion'  => $semilleroInvestigacion,
             'lineasInvestigacion'     => LineaInvestigacion::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
         ]);

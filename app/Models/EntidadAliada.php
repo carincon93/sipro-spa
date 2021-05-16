@@ -22,22 +22,24 @@ class EntidadAliada extends Model
      * @var array
      */
     protected $fillable = [
-        'partner_organization_type',
-        'name',
-        'legal_status',
-        'company_type',
+        'idi_id',
+        'tipo',
+        'nombre',
+        'naturaleza',
+        'tipo_empresa',
         'nit',
-        'agreement_description',
-        'research_group',
-        'gruplac_code',
-        'gruplac_link',
-        'knowledge_transfer_activities',
-        'letter_of_intent',
-        'intellectual_property',
-        'in_kind',
-        'in_kind_description',
-        'funds',
-        'funds_description'
+        'descripcion_convenio',
+        'grupo_investigacion',
+        'codigo_gruplac',
+        'enlace_gruplac',
+        'actividades_transferencia_conocimiento',
+        'carta_intencion',
+        'carta_propiedad_intelectual',
+        'recursos_especie',
+        'descripcion_recursos_especie',
+        'recursos_dinero',
+        'descripcion_recursos_dinero'
+
     ];
 
     /**
@@ -69,23 +71,23 @@ class EntidadAliada extends Model
     }
 
     /**
-     * Relationship with Activity
+     * Relationship with Actividad
      *
      * @return void
      */
-    public function activities()
+    public function actividades()
     {
-        return $this->belongsToMany(Activity::class, 'activity_partner_organization', 'partner_organization_id', 'activity_id');
+        return $this->belongsToMany(Actividad::class, 'actividad_entidad_aliada', 'entidad_aliada_id', 'actividad_id');
     }
 
     /**
-     * Relationship with EntidadAliadaMember
+     * Relationship with MiembroEntidadAliada
      *
      * @return void
      */
-    public function EntidadAliadaMembers()
+    public function miembrosEntidadAliada()
     {
-        return $this->hasMany(EntidadAliadaMember::class);
+        return $this->hasMany(MiembroEntidadAliada::class);
     }
 
     /**
@@ -103,12 +105,12 @@ class EntidadAliada extends Model
     }
 
     /**
-     * getEntidadAliadaTypeAttribute
+     * getTipoAttribute
      *
      * @param  mixed $value
      * @return void
      */
-    public function getEntidadAliadaTypeAttribute($value)
+    public function getTipoAttribute($value)
     {
         switch ($value) {
             case 1:
@@ -133,12 +135,12 @@ class EntidadAliada extends Model
     }
 
     /**
-     * getLegalStatusAttribute
+     * getNaturalezaAttribute
      *
      * @param  mixed $value
      * @return void
      */
-    public function getLegalStatusAttribute($value)
+    public function getNaturalezaAttribute($value)
     {
         switch ($value) {
             case 1:
@@ -160,12 +162,12 @@ class EntidadAliada extends Model
     }
 
     /**
-     * getCompanyTypeAttribute
+     * getTipoEmpresaAttribute
      *
      * @param  mixed $value
      * @return void
      */
-    public function getCompanyTypeAttribute($value)
+    public function getTipoEmpresaAttribute($value)
     {
         switch ($value) {
             case 1:

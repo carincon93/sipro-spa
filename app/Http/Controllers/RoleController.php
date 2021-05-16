@@ -87,7 +87,7 @@ class RoleController extends Controller
     {
         $this->authorize('update', [Role::class, $role]);
 
-        return Inertia::render('Roles/Editar', [
+        return Inertia::render('Roles/Edit', [
             'role'             => $role,
             'allPermissions'   => Permission::orderBy('id')->get(['id', 'name']),
             'rolePermissions'  => $role->permissions->pluck('id')

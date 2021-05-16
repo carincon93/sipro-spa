@@ -81,7 +81,7 @@ class ThirdBudgetInfoController extends Controller
     {
         $this->authorize('update', [ThirdBudgetInfo::class, $thirdBudgetInfo]);
 
-        return Inertia::render('Budgets/ThirdBudgetInfo/Editar', [
+        return Inertia::render('Budgets/ThirdBudgetInfo/Edit', [
             'thirdBudgetInfo' => $thirdBudgetInfo
         ]);
     }

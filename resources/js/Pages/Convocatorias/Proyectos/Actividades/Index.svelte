@@ -1,0 +1,48 @@
+<script>
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { page } from '@inertiajs/inertia-svelte'
+    import { _ } from 'svelte-i18n'
+    import Stepper from '@/Components/Stepper'
+    import Gantt from '@/Components/Gantt'
+    import InfoMessage from '@/Components/InfoMessage'
+
+    export let convocatoria
+    export let proyecto
+    export let actividades
+
+    $title = 'Actividades'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin =
+        authUser.roles.filter(function (role) {
+            return role.id == 1
+        }).length > 0
+    let canIndexActividades = authUser.can.find((element) => element == 'actividades.index') == 'actividades.index'
+    let canShowActividades = authUser.can.find((element) => element == 'actividades.show') == 'actividades.show'
+    let canCreateActividades = authUser.can.find((element) => element == 'actividades.create') == 'actividades.create'
+    let canEditActividades = authUser.can.find((element) => element == 'actividades.edit') == 'actividades.edit'
+    let canDestroyActividades = authUser.can.find((element) => element == 'actividades.destroy') == 'actividades.destroy'
+
+    let filters = {}
+</script>
+
+<AuthenticatedLayout>
+    <Stepper {convocatoria} {proyecto} />
+
+    <h1 class="font-bold text-3xl m-24 text-center">Actividades</h1>
+
+    <InfoMessage message="Si desea añadir actividades, por favor diríjase al 'Arbol de objetivos'" />
+
+    <Gantt
+        items={actividades.data}
+        request={canShowActividades || canEditActividades || canDestroyActividades || isSuperAdmin
+            ? {
+                  uri: 'convocatorias.proyectos.actividades.edit',
+                  params: [convocatoria.id, proyecto.id],
+              }
+            : null}
+    />
+</AuthenticatedLayout>

@@ -97,7 +97,7 @@ class UserController extends Controller
     {
         $this->authorize('update', [User::class, $user]);
 
-        return Inertia::render('Users/Editar', [
+        return Inertia::render('Users/Edit', [
             'user'                  => $user,
             'documentTypes'         => json_decode(Storage::get('json/document-types.json'), true),
             'participationTypes'    => json_decode(Storage::get('json/participation-types.json'), true),

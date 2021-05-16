@@ -68,33 +68,33 @@ class CentroFormacion extends Model
     }
 
     /**
-     * Relationship with Project
+     * Relationship with Proyecto
      *
      * @return void
      */
-    public function projects()
+    public function proyectos()
     {
         return $this->hasMany(Proyecto::class);
     }
 
     /**
-     * Relationship with AcademicProgram
+     * Relationship with ProgramaFormacion
      *
      * @return void
      */
-    public function academicPrograms()
+    public function programasFormacion()
     {
-        return $this->hasMany(AcademicProgram::class);
+        return $this->hasMany(ProgramaFormacion::class);
     }
 
     /**
-     * Relationship with ResearchGroup
+     * Relationship with GrupoInvestigacion
      *
      * @return void
      */
-    public function researchGroups()
+    public function gruposInvestigacion()
     {
-        return $this->hasMany(ResearchGroup::class);
+        return $this->hasMany(GrupoInvestigacion::class);
     }
 
     /**
