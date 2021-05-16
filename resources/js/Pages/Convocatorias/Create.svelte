@@ -59,7 +59,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexConvocatorias || canCreateConvocatorias || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.index')} class="text-indigo-400 hover:text-indigo-600"> Convocatorias </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -131,7 +131,7 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canCreateConvocatorias || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear convocatoria</LoadingButton>
                 {/if}
             </div>

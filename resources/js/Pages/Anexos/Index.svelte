@@ -42,7 +42,7 @@
         <div slot="title">Anexos</div>
 
         <div slot="actions">
-            {#if canCreateAnexos || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('anexos.create'))} variant="raised">Crear anexo</Button>
             {/if}
         </div>
@@ -64,7 +64,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowAnexos || canEditAnexos || canDestroyAnexos || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('anexos.edit', anexo.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -42,7 +42,7 @@
         <div slot="title">Mesas técnicas</div>
 
         <div slot="actions">
-            {#if canCreateMesasTecnicas || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('mesas-tecnicas.create'))} variant="raised">Crear mesa técnica</Button>
             {/if}
         </div>
@@ -63,7 +63,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowMesasTecnicas || canEditMesasTecnicas || canDestroyMesasTecnicas || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('mesas-tecnicas.edit', mesaTecnica.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -42,7 +42,7 @@
         <div slot="title">Roles SENNOVA</div>
 
         <div slot="actions">
-            {#if canCreateProyectoRolesSennova || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
@@ -70,7 +70,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowProyectoRolesSennova || canEditProyectoRolesSennova || canDestroyProyectoRolesSennova || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

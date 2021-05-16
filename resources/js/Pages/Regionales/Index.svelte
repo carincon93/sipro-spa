@@ -42,7 +42,7 @@
         <div slot="title">Regionales</div>
 
         <div slot="actions">
-            {#if canCreateRegionales || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('regionales.create'))} variant="raised">Crear Regional</Button>
             {/if}
         </div>
@@ -70,7 +70,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowRegionales || canEditRegionales || canDestroyRegionales || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('regionales.edit', regional.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

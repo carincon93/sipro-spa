@@ -14,7 +14,7 @@ class SegundoGrupoPresupuestal extends Model
      *
      * @var string
      */
-    protected $table = 'segundo_grupo_resupuestal';
+    protected $table = 'segundo_grupo_presupuestal';
 
     /**
      * The attributes that are mass assignable.

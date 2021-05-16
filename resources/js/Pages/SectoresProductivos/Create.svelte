@@ -51,7 +51,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexSectoresProductivos || canCreateSectoresProductivos || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('sectores-productivos.index')} class="text-indigo-400 hover:text-indigo-600"> Sectores productivos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -70,7 +70,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canCreateSectoresProductivos || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear sector productivo</LoadingButton>
                 {/if}
             </div>

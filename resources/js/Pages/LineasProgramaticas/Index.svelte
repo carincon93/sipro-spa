@@ -42,7 +42,7 @@
         <div slot="title">Líneas programáticas</div>
 
         <div slot="actions">
-            {#if canCreateLineasProgramaticas || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('lineas-programaticas.create'))} variant="raised">Crear línea programática</Button>
             {/if}
         </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowLineasProgramaticas || canEditLineasProgramaticas || canDestroyLineasProgramaticas || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-programaticas.edit', lineaProgramatica.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

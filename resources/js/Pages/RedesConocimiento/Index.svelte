@@ -42,7 +42,7 @@
         <div slot="title">Redes de conocimiento</div>
 
         <div slot="actions">
-            {#if canCreateRedesConocimiento || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('redes-conocimiento.create'))} variant="raised">Crear red de conocimiento</Button>
             {/if}
         </div>
@@ -62,7 +62,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowRedesConocimiento || canEditRedesConocimiento || canDestroyRedesConocimiento || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('redes-conocimiento.edit', redConocimiento.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

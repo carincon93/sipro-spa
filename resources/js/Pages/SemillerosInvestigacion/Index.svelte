@@ -42,7 +42,7 @@
         <div slot="title">Semilleros de investigación</div>
 
         <div slot="actions">
-            {#if canCreateSemillerosInvestigacion || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('semilleros-investigacion.create'))} variant="raised">Crear semillero de investigación</Button>
             {/if}
         </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowSemillerosInvestigacion || canEditSemillerosInvestigacion || canDestroySemillerosInvestigacion || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('semilleros-investigacion.edit', semilleroInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -42,7 +42,7 @@
         <div slot="title">Programas de formación</div>
 
         <div slot="actions">
-            {#if canCreateProgramasFormacion || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('programas-formacion.create'))} variant="raised">Crear programa de formación</Button>
             {/if}
         </div>
@@ -76,7 +76,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowProgramasFormacion || canEditProgramasFormacion || canDestroyProgramasFormacion || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('programas-formacion.edit', programaFormacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

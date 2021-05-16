@@ -38,7 +38,7 @@
         <div slot="title">{$_('Call sennova roles.plural')}</div>
 
         <div slot="actions">
-            {#if canCreateCallSennovaRoles || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('calls.call-sennova-roles.create', call.id))} variant="raised">
                     Crear
                     {$_('Call sennova roles.singular')}
@@ -78,7 +78,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowCallSennovaRoles || canEditCallSennovaRoles || canDestroyCallSennovaRoles || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('calls.call-sennova-roles.edit', [call.id, callSennovaRole.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -42,7 +42,7 @@
         <div slot="title">Tipos de proyecto</div>
 
         <div slot="actions">
-            {#if canCreateTiposProyecto || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('tipos-proyecto.create'))} variant="raised">Crear tipo de proyecto</Button>
             {/if}
         </div>
@@ -69,7 +69,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowTiposProyecto || canEditTiposProyecto || canDestroyTiposProyecto || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tipos-proyecto.edit', tipoProyecto.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

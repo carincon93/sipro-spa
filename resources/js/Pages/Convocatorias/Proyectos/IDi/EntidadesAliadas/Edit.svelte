@@ -100,7 +100,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexEntidadesAliadas || canShowEntidadesAliadas || canEditEntidadesAliadas || canDestroyEntidadesAliadas || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -232,13 +232,13 @@
                     </div>
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if canDestroyEntidadesAliadas || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}>
                             Eliminar
                             {$_('Partner organizations.singular').toLowerCase()}
                         </button>
                     {/if}
-                    {#if canEditEntidadesAliadas || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                             Editar
                             {$_('Partner organizations.singular')}
@@ -305,7 +305,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowEntidadesAliadas || canDestroyEntidadesAliadas || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -617,10 +617,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if canDestroyIDi || isSuperAdmin}
+            {#if isSuperAdmin}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar </button>
             {/if}
-            {#if canEditIDi || isSuperAdmin}
+            {#if isSuperAdmin}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

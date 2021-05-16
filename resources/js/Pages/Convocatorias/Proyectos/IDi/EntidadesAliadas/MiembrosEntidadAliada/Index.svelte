@@ -43,7 +43,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexEntidadesAliadas || canEditEntidadesAliadas || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -61,7 +61,7 @@
         <div slot="title">Miembros de la entidad aliada</div>
 
         <div slot="actions">
-            {#if canCreateMiembrosEntidadAliada || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, idi.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
             {/if}
         </div>
@@ -98,7 +98,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowMiembrosEntidadAliada || canEditMiembrosEntidadAliada || canDestroyMiembrosEntidadAliada || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

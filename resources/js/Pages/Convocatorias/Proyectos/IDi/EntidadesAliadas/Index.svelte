@@ -42,7 +42,7 @@
         <div slot="title">Entidades aliadas</div>
 
         <div slot="actions">
-            {#if canCreateEntidadesAliadas || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.create', [convocatoria.id, idi.id]))} variant="raised">Crear entidad aliada</Button>
             {/if}
         </div>
@@ -64,7 +64,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowEntidadesAliadas || canEditEntidadesAliadas || canDestroyEntidadesAliadas || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.edit', [convocatoria.id, idi.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

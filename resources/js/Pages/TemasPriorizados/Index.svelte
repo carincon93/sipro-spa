@@ -42,7 +42,7 @@
         <div slot="title">Temas priorizados</div>
 
         <div slot="actions">
-            {#if canCreateTemasPriorizados || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('temas-priorizados.create'))} variant="raised">Crear tema priorizado</Button>
             {/if}
         </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowTemasPriorizados || canEditTemasPriorizados || canDestroyTemasPriorizados || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('temas-priorizados.edit', temaPriorizado.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

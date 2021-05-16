@@ -82,7 +82,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexConvocatorias || canShowConvocatorias || canEditConvocatorias || canDestroyConvocatorias || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.index')} class="text-indigo-400 hover:text-indigo-600"> Cpnvocatorias </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -95,10 +95,8 @@
         </div>
     </header>
 
-    {#if canIndexCallSenovaRoles || canShowCallSenovaRoles || canCreateCallSenovaRoles || canEditCallSenovaRoles || canDestroyCallSenovaRoles || isSuperAdmin}
-        <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.convocatoria-sennova-roles.index', convocatoria.id))} class="mb-4">
-            {$_('Call sennova roles.plural')}
-        </Button>
+    {#if isSuperAdmin}
+        <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.convocatoria-sennova-roles.index', convocatoria.id))} class="mb-4">Roles SENNOVA</Button>
     {/if}
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
@@ -162,10 +160,10 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canDestroyConvocatorias || isSuperAdmin}
+                {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar convocatoria </button>
                 {/if}
-                {#if canEditConvocatorias || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar convocatoria</LoadingButton>
                 {/if}
             </div>

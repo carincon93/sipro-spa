@@ -44,7 +44,7 @@
         <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
 
         <div slot="actions">
-            {#if canCreateAnalisisRiesgo || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgo</Button>
             {/if}
         </div>
@@ -74,7 +74,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowAnalisisRiesgo || canEditAnalisisRiesgo || canDestroyAnalisisRiesgo || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

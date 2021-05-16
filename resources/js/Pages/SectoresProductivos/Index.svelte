@@ -42,7 +42,7 @@
         <div slot="title">Sectores productivos</div>
 
         <div slot="actions">
-            {#if canCreateSectoresProductivos || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('sectores-productivos.create'))} variant="raised">Crear sector productivo</Button>
             {/if}
         </div>
@@ -63,7 +63,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowSectoresProductivos || canEditSectoresProductivos || canDestroySectoresProductivos || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('sectores-productivos.edit', sectorProductivo.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

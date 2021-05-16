@@ -40,7 +40,7 @@
     <div class="mb-6 flex justify-end items-center">
         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
-            {#if canCreateProductos || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>

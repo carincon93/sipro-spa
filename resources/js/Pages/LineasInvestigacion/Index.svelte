@@ -23,15 +23,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    
+
     let canIndexLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.index') == 'lineas-investigacion.index'
-    
+
     let canShowLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.show') == 'lineas-investigacion.show'
-    
+
     let canCreateLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.create') == 'lineas-investigacion.create'
-    
+
     let canEditLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.edit') == 'lineas-investigacion.edit'
-    
+
     let canDestroyLineasInvestigacion = authUser.can.find((element) => element == 'lineas-investigacion.destroy') == 'lineas-investigacion.destroy'
 
     let filters = {}
@@ -42,7 +42,7 @@
         <div slot="title">Líneas de investigación</div>
 
         <div slot="actions">
-            {#if canCreateLineasInvestigacion || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('lineas-investigacion.create'))} variant="raised">Crear línea de investigación</Button>
             {/if}
         </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowLineasInvestigacion || canEditLineasInvestigacion || canDestroyLineasInvestigacion || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-investigacion.edit', lineaInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

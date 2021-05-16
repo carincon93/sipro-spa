@@ -80,18 +80,18 @@ class ProyectoLoteEstudioMercado extends Model
     }
 
     /**
-     * getAverageAttribute
+     * getPromedioAttribute
      *
      * @return void
      */
-    public function getAverageAttribute()
+    public function getPromedioAttribute()
     {
-        $average    = 0;
+        $promedio    = 0;
 
-        foreach ($this->marketResearch as $marketResearch) {
-            $average += (int) $marketResearch->price_quote;
+        foreach ($this->estudiosMercado as $estudioMercado) {
+            $promedio += (int) $estudioMercado->valor;
         }
 
-        return $this->marketResearch->count() > 0 ? ($average / $this->marketResearch->count()) : 0;
+        return $this->estudioMercado->count() > 0 ? ($promedio / $this->estudioMercado->count()) : 0;
     }
 }

@@ -11,37 +11,34 @@
     import ResourceMenu from '@/Components/ResourceMenu'
     import { Item, Text } from '@smui/list'
 
-    export let users = []
+    export let usuarios
 
-    $title = $_('Users.plural')
+    $title = 'Usuarios'
 
     /**
      * Permisos
      */
-    let authUser = $page.props.auth.user
+    let authUser = $page.props.auth.usuario
     let isSuperAdmin =
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    let canIndexUsers = authUser.can.find((element) => element == 'users.index') == 'users.index'
-    let canShowUsers = authUser.can.find((element) => element == 'users.show') == 'users.show'
-    let canCreateUsers = authUser.can.find((element) => element == 'users.create') == 'users.create'
-    let canEditUsers = authUser.can.find((element) => element == 'users.edit') == 'users.edit'
-    let canDestroyUsers = authUser.can.find((element) => element == 'users.destroy') == 'users.delete'
+    let canIndexUsers = authUser.can.find((element) => element == 'usuarios.index') == 'usuarios.index'
+    let canShowUsers = authUser.can.find((element) => element == 'usuarios.show') == 'usuarios.show'
+    let canCreateUsers = authUser.can.find((element) => element == 'usuarios.create') == 'usuarios.create'
+    let canEditUsers = authUser.can.find((element) => element == 'usuarios.edit') == 'usuarios.edit'
+    let canDestroyUsers = authUser.can.find((element) => element == 'usuarios.destroy') == 'usuarios.delete'
 
     let filters = {}
 </script>
 
 <AuthenticatedLayout>
     <DataTable class="mt-20">
-        <div slot="title">{$_('Users.plural')}</div>
+        <div slot="title">Usuarios</div>
 
         <div slot="actions">
-            {#if canCreateUsers || isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('users.create'))} variant="raised">
-                    Crear
-                    {$_('Users.singular')}
-                </Button>
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('users.create'))} variant="raised">Crear usuario</Button>
             {/if}
         </div>
 
@@ -53,22 +50,22 @@
             </tr>
         </thead>
         <tbody slot="tbody">
-            {#each users.data as user (user.id)}
+            {#each usuarios.data as usuario (usuario.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {user.name}
+                            {usuario.nombre}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {user.email}
+                            {usuario.email}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowUsers || canEditUsers || canDestroyUsers || isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('users.edit', user.id))}>
+                            {#if isSuperAdmin}
+                                <Item on:SMUI:action={() => Inertia.visit(route('users.edit', usuario.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -81,12 +78,12 @@
                 </tr>
             {/each}
 
-            {#if users.data.length === 0}
+            {#if usuarios.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
-    <Pagination links={users.links} />
+    <Pagination links={usuarios.links} />
 </AuthenticatedLayout>

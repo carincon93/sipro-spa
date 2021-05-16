@@ -33,7 +33,7 @@ use App\Http\Controllers\SegundoGrupoPresupuestalController;
 use App\Http\Controllers\TercerGrupoPresupuestalController;
 use App\Http\Controllers\PresupuestoSennovaController;
 use App\Http\Controllers\PresupuestoConvocatoriaController;
-use App\Http\Controllers\ProyectoPresupuestoSennovaController;
+use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
@@ -471,10 +471,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-anexos/{proyecto_anexo}/download', [ProyectoAnexoController::class, 'download'])->name('convocatorias.proyectos.proyecto-anexos.download');
     Route::resource('convocatorias.proyectos.proyecto-anexos', ProyectoAnexoController::class)->parameters(['proyecto-anexos' => 'proyecto-anexo']);
 
+
+    Route::resource('convocatorias.proyectos.proyecto-presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto']);
+
+    Route::resource('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado', ProyectLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto', 'lotes-estudio-mercado' => 'lote-estudio-mercado']);
+    
     Route::resources(
         [
-            'convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado' => ProyectLoteEstudioMercadoController::class,
-            'convocatorias.proyectos.proyecto-presupuesto-sennova' => ProyectoPresupuestoSennovaController::class,
             'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,
             'convocatoria-presupuesto' => PresupuestoConvocatoriaController::class,
             

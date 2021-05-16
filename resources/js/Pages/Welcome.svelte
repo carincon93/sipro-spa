@@ -11,9 +11,7 @@
     {#if canLogin}
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             {#if $page.props.auth.user}
-                <a use:inertia href={route('dashboard')} class="text-sm text-gray-700 underline">
-                    {$_('Dashboard')}
-                </a>
+                <a use:inertia href={route('dashboard')} class="text-sm text-gray-700 underline"> Panel de control </a>
             {:else}
                 <a use:inertia href={route('login')} class="text-sm text-gray-700 underline">
                     {$_('Login')}

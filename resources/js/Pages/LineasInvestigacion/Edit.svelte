@@ -64,7 +64,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexLineasInvestigacion || canShowLineasInvestigacion || canEditLineasInvestigacion || canDestroyLineasInvestigacion || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('lineas-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -88,10 +88,10 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canDestroyLineasInvestigacion || isSuperAdmin}
+                {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar línea de investigación </button>
                 {/if}
-                {#if canEditLineasInvestigacion || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar línea de investigación</LoadingButton>
                 {/if}
             </div>

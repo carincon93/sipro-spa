@@ -42,7 +42,7 @@
         <div slot="title">Temáticas estratégicas SENA</div>
 
         <div slot="actions">
-            {#if canCreateTematicasEstrategicas || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.create'))} variant="raised">Crear temática estratégica SENA</Button>
             {/if}
         </div>
@@ -63,7 +63,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canShowTematicasEstrategicas || canEditTematicasEstrategicas || canDestroyTematicasEstrategicas || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tematicas-estrategicas.edit', tematicaEstrategica.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

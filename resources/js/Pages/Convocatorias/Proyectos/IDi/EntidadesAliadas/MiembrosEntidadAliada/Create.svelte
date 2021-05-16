@@ -55,7 +55,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexMiembrosEntidadAliada || canCreateMiembrosEntidadAliada || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, idi.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">Miembros de la entidad aliada</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -94,7 +94,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canCreateMiembrosEntidadAliada || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear miembro de la entidad aliada</LoadingButton>
                 {/if}
             </div>

@@ -42,7 +42,7 @@
         <div slot="title">Grupos de investigación</div>
 
         <div slot="actions">
-            {#if canCreateGruposInvestigacion || isSuperAdmin}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('grupos-investigacion.create'))} variant="raised">Crear grupo de investigación</Button>
             {/if}
         </div>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if canIndexGruposInvestigacion || canShowGruposInvestigacion || canEditGruposInvestigacion || canDestroyGruposInvestigacion || isSuperAdmin}
+                            {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

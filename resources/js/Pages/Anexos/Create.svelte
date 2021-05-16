@@ -25,15 +25,15 @@
         authUser.roles.filter(function (role) {
             return role.id == 1
         }).length > 0
-    
+
     let canIndexAnexos = authUser.can.find((element) => element == 'anexos.index') == 'anexos.index'
-    
+
     let canShowAnexos = authUser.can.find((element) => element == 'anexos.show') == 'anexos.show'
-    
+
     let canCreateAnexos = authUser.can.find((element) => element == 'anexos.create') == 'anexos.create'
-    
+
     let canEditAnexos = authUser.can.find((element) => element == 'anexos.edit') == 'anexos.edit'
-    
+
     let canDestroyAnexos = authUser.can.find((element) => element == 'anexos.destroy') == 'anexos.destroy'
 
     let sending = false
@@ -58,7 +58,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if canIndexAnexos || canCreateAnexos || isSuperAdmin}
+                    {#if isSuperAdmin}
                         <a use:inertia href={route('anexos.index')} class="text-indigo-400 hover:text-indigo-600"> Anexos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -97,7 +97,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if canCreateAnexos || isSuperAdmin}
+                {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear anexo</LoadingButton>
                 {/if}
             </div>

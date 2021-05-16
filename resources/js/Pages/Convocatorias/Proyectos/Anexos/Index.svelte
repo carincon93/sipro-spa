@@ -52,14 +52,14 @@
             {#each anexos.data as anexo (anexo.id)}
                 <tr>
                     <td class="border-t">
-                        {#if canShowProyectoAnexo || canCreateProyectoAnexo || canEditProyectoAnexo || isSuperAdmin}
+                        {#if isSuperAdmin}
                             <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                                 {anexo.nombre}
                             </p>
                         {/if}
                     </td>
                     <td class="border-t">
-                        {#if canShowProyectoAnexo || canCreateProyectoAnexo || canEditProyectoAnexo || isSuperAdmin}
+                        {#if isSuperAdmin}
                             <Create {convocatoria} {proyecto} {anexo} {proyectoAnexo} bind:sending />
                         {/if}
                     </td>
