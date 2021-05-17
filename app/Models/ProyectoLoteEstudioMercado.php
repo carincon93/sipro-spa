@@ -62,7 +62,7 @@ class ProyectoLoteEstudioMercado extends Model
      */
     public function estudiosMercado()
     {
-        return $this->hasMany(EstudioMercado::class);
+        return $this->hasMany(EstudioMercado::class)->orderBy('id', 'ASC');
     }
 
     /**
@@ -92,6 +92,6 @@ class ProyectoLoteEstudioMercado extends Model
             $promedio += (int) $estudioMercado->valor;
         }
 
-        return $this->estudioMercado->count() > 0 ? ($promedio / $this->estudioMercado->count()) : 0;
+        return $this->estudiosMercado->count() > 0 ? ($promedio / $this->estudiosMercado->count()) : 0;
     }
 }

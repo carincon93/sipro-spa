@@ -9,7 +9,7 @@ export const links = [
     { name: 'Líneas programáticas', route: 'lineas-programaticas' },
     { name: 'Redes de conocimiento', route: 'redes-conocimiento' },
     { name: 'Temáticas estratégicas SENA', route: 'tematicas-estrategicas' },
-    { name: 'Project types', route: 'project-types' },
+    { name: 'Tipos de proyecto', route: 'tipos-proyecto' },
     { name: 'Sectores productivos', route: 'sectores-productivos' },
     { name: 'Mesas técnicas', route: 'mesas-tecnicas' },
     { name: 'Temas priorizados', route: 'temas-priorizados' },
@@ -17,7 +17,7 @@ export const links = [
     { name: 'Líneas de investigación', route: 'lineas-investigacion' },
     { name: 'Semilleros de investigación', route: 'semilleros-investigacion' },
     { name: 'Roles de sistema', route: 'roles' },
-    { name: 'Roles SENNOVA', route: 'sennova-roles' },
+    { name: 'Roles SENNOVA', route: 'roles-sennova' },
     { name: 'Anexos', route: 'anexos' },
     { name: 'Tecnoacademias', route: 'tecnoacademias' },
 ]

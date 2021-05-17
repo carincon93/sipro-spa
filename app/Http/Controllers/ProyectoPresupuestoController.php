@@ -32,7 +32,7 @@ class ProyectoPresupuestoController extends Controller
             'convocatoria'              => $convocatoria->only('id'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria'),
             'filters'                   => request()->all('search'),
-            'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.thirdBudgetInfo:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
+            'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
             'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),
         ]);
     }
@@ -67,7 +67,7 @@ class ProyectoPresupuestoController extends Controller
         $this->authorize('create', [ProyectoPresupuesto::class]);
 
         // Validaciones
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto->total_viaticos, $request->valor, $request->numero_items, 0, 0, $proyecto)) {
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $request->valor, $request->numero_items, 0, 0)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
         }
 
@@ -93,7 +93,7 @@ class ProyectoPresupuestoController extends Controller
             $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
         }
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto-sennova.lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -141,7 +141,8 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('update', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
 
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto->total_viaticos, $request->valor, $request->numero_items, $proyectoPresupuesto->valor, $proyectoPresupuesto->numero_items, $proyecto)) {
+        // Validaciones
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $request->valor, $request->numero_items, $proyectoPresupuesto->valor, $proyectoPresupuesto->numero_items)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
         }
 

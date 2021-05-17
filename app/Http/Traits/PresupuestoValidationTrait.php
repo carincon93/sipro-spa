@@ -2,9 +2,10 @@
 
 namespace App\Http\Traits;
 
-trait PresupuestoValidationTrait {
+trait PresupuestoValidationTrait 
+{
 
-    public static function viaticosValidation($totalViaticos, $valor, $numeroItems, $valorGuardado, $numeroItemsGuardado, $proyecto) 
+    public static function viaticosValidation($proyecto, $valor, $numeroItems, $valorGuardado, $numeroItemsGuardado) 
     {
         if ($proyecto->tipoProyecto->lineaProgramatica->codigo != 66) {
             return false;
@@ -12,49 +13,137 @@ trait PresupuestoValidationTrait {
 
         $total = 0;
         $total -= $valorGuardado * $numeroItemsGuardado;
-        $total += ($valor * $numeroItems) + $totalViaticos;
+        $total += ($valor * $numeroItems) + self::totalViaticos($proyecto);
         return ($total > 4000000) ? true : false;
     }
-
-    public static function specialConstructionServicesValidation($firstPriceQuote, $secondPriceQuote, $thirdPriceQuote, $budgetUsageCode, $totalSpecialConstructionServices, $projectSennovaBudgetAverage, $percentageIndustrialMachinery)
+    
+    /**
+     * totalViaticos
+     *
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function totalViaticos($proyecto)
     {
-        $firstPriceQuote  = $firstPriceQuote;
-        $secondPriceQuote = $secondPriceQuote;
-        $thirdPriceQuote  = $thirdPriceQuote ?? 0;
+        $total = 0;
 
-        $division = ($thirdPriceQuote > 0) ? 3 : 2;
-        $average = ($firstPriceQuote + $secondPriceQuote + $thirdPriceQuote) / $division;
+        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
+                if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200600301' || $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200600303' || $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '20202006004') {
+                    $total += $proyectoPresupuesto->getPromedioAttribute();
+                }
+            }
+        }
+
+        return $total;
+    }
+
+    public static function serviciosEspecialesConstruccionValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    {
+        $porcentajeMaquinariaIndustrial         = self::porcentajeMaquinariaIndustrial($proyecto);
+        $totalServiciosEspecialesConstruccion   = self::totalServiciosEspecialesConstruccion($proyecto);
+        
+        if ($porcentajeMaquinariaIndustrial == 0) {
+            return false;
+        } 
+
+        $tercerValor = $tercerValor ?? 0;
+
+        $division = ($tercerValor > 0) ? 3 : 2;
+        $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+
+        $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
 
         // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "SERVICIOS ESPECIALES DE CONSTRUCCIÓN"
-        $averageAllBudgets = $average + ($totalSpecialConstructionServices - $projectSennovaBudgetAverage);
+        $promedioPresupuestoTotal = $promedio + ($totalServiciosEspecialesConstruccion - $promedioPresupuestoGuardado);
 
         // "El valor no debe superar el 5% del rubro de "MAQUINARIA INDUSTRIAL" y no lo debe dejar guardar hasta que se cumpla esa regla.
         // Dejar el siguiente mensaje para este rubro: Antes de diligenciar este rubro de "SERVICIOS ESPECIALES DE CONSTRUCCIÓN - ADECUACIONES Y CONSTRUCCIONES" tenga en cuenta que el valor total NO debe superar el 5% del total del rubro "MAQUINARIA INDUSTRIAL".
-        if ($budgetUsageCode == '2020200500405') {
-            return ($averageAllBudgets > $percentageIndustrialMachinery)  ? true : false;
+        if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
+            return ($promedioPresupuestoTotal > $porcentajeMaquinariaIndustrial)  ? true : false;
         }
 
         return false;
     }
 
-    public static function totalProjectBudgetValidation($totalProjectBudget, $percentage, $totalMachineryMaintenance, $firstPriceQuote, $secondPriceQuote, $thirdPriceQuote, $budgetUsageCode, $projectSennovaBudgetAverage)
+    // Porcentaje total del rubro 'Maquinaria Industrial'
+    public static function totalMaquinariaIndustrial($proyecto)
     {
-        $firstPriceQuote  = $firstPriceQuote;
-        $secondPriceQuote = $secondPriceQuote;
-        $thirdPriceQuote  = $thirdPriceQuote ?? 0;
+        $total = 0;
+        $segundoGrupoPresupuestalId = null;
 
-        $division = ($thirdPriceQuote > 0) ? 3 : 2;
-        $average = ($firstPriceQuote + $secondPriceQuote + $thirdPriceQuote) / $division;
+        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
 
-        // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "SERVICIOS ESPECIALES DE CONSTRUCCIÓN"
-        $averageAllBudgets = $average + ($totalMachineryMaintenance - $projectSennovaBudgetAverage);
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2040115') {
+                $total += $proyectoPresupuesto->getPromedioAttribute();
+            }
+        }
 
-        // "El valor no debe superar el 5% del rubro de "MAQUINARIA INDUSTRIAL" y no lo debe dejar guardar hasta que se cumpla esa regla.
-        // Dejar el siguiente mensaje para este rubro: Antes de diligenciar este rubro de "SERVICIOS ESPECIALES DE CONSTRUCCIÓN - ADECUACIONES Y CONSTRUCCIONES" tenga en cuenta que el valor total NO debe superar el 5% del total del rubro "MAQUINARIA INDUSTRIAL".
-        if ($budgetUsageCode == '20202008007013' || $budgetUsageCode == '20202008007012' || $budgetUsageCode == '20202008007014' || $budgetUsageCode == '20202008007015' || $budgetUsageCode == '20202008007011') {
-            return $averageAllBudgets > ($totalProjectBudget * $percentage) ? true : false;
+        return $total;
+    }
+
+    public static function porcentajeMaquinariaIndustrial($proyecto)
+    {
+        $total = 0;
+
+        return self::totalMaquinariaIndustrial($proyecto) * 0.05;
+    }
+
+    public static function totalServiciosEspecialesConstruccion($proyecto)
+    {
+        $total = 0;
+
+        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
+                $total += $proyectoPresupuesto->getPromedioAttribute();
+            }
+        }
+
+        return $total;
+    }
+
+
+    public static function serviciosMantenimientoValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    {
+        if($proyecto->getTotalProyectoPresupuestoAttribute() == 0) {
+            return false;
+        }
+        
+        $tercerValor  = $tercerValor ?? 0;
+
+        $division = ($tercerValor > 0) ? 3 : 2;
+        $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+
+        $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+        $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
+
+        $totalMantenimientoMaquinaria = self::totalMantenimientoMaquinaria($proyecto);
+
+        $promedioPresupuestoTotal = $promedio + ($totalMantenimientoMaquinaria - $promedioPresupuestoGuardado);
+
+        // El valor no debe superar el 5% del total del proyecto y no lo debe dejar finalizar este modulo hasta que se cumpla esa regla. 
+        // Dejar el siguiente mensaje para este rubro: Antes de diligenciar este rubro de "MANTENIMIENTO DE MAQUINARIA, EQUIPO, TRANSPORTE Y SOFWARE" tenga en cuenta que NO debe superar el 5% del total del proyecto. 
+        if ($codigoUsoPresupuestal == '20202008007013' || $codigoUsoPresupuestal == '20202008007012' || $codigoUsoPresupuestal == '20202008007014' || $codigoUsoPresupuestal == '20202008007015' || $codigoUsoPresupuestal == '20202008007011') {
+            return $promedioPresupuestoTotal > ($proyecto->getTotalProyectoPresupuestoAttribute() * 0.05) ? true : false;
         }
 
         return false;
+    }
+
+    public static function totalMantenimientoMaquinaria($proyecto)
+    {
+        $total = 0;
+        
+        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+            $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
+                if ($codigoUsoPresupuestal == '20202008007013' || $codigoUsoPresupuestal == '20202008007012' || $codigoUsoPresupuestal == '20202008007014' || $codigoUsoPresupuestal == '20202008007015' || $codigoUsoPresupuestal == '20202008007011') {
+                    $total += $proyectoPresupuesto->getPromedioAttribute();
+                }
+            }
+        }
+
+        return $total;
     }
 }

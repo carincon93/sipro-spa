@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\ConvocatoriaRolSennova;
 use App\Models\RolSennova;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ConvocatoriaRolSennovaController extends Controller
@@ -48,7 +49,8 @@ class ConvocatoriaRolSennovaController extends Controller
         $this->authorize('create', [ConvocatoriaRolSennova::class]);
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Create', [
-            'convocatoria' => $convocatoria,
+            'convocatoria'      => $convocatoria->only('id'),
+            'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
             'rolesSennova' => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
                 WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
@@ -74,8 +76,10 @@ class ConvocatoriaRolSennovaController extends Controller
         $this->authorize('create', [ConvocatoriaRolSennova::class]);
 
         $convocatoriaRolSennova = new ConvocatoriaRolSennova();
-        $convocatoriaRolSennova->asignacion_mensual    = $request->asignacion_mensual;
-        $convocatoriaRolSennova->nivel_academico       = $request->nivel_academico;
+        $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
+        $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->mensaje                = $request->mensaje;
+        $convocatoriaRolSennova->meses_experiencia      = $request->meses_experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
         $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
         $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);
@@ -109,8 +113,9 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova->rolSennova;
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Edit', [
-            'convocatoriaRolSennova'   => $convocatoriaRolSennova,
-            'convocatoria'              => $convocatoria,
+            'convocatoria'            => $convocatoria->only('id'),
+            'convocatoriaRolSennova'  => $convocatoriaRolSennova,
+            'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
             'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
                 WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
@@ -136,8 +141,10 @@ class ConvocatoriaRolSennovaController extends Controller
     {
         $this->authorize('update', [ConvocatoriaRolSennova::class, $convocatoriaRolSennova]);
 
-        $convocatoriaRolSennova->asignacion_mensual    = $request->asignacion_mensual;
-        $convocatoriaRolSennova->nivel_academico       = $request->nivel_academico;
+        $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
+        $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->mensaje                = $request->mensaje;
+        $convocatoriaRolSennova->meses_experiencia      = $request->meses_experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
         $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
         $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);

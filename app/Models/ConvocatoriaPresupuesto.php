@@ -10,6 +10,13 @@ class ConvocatoriaPresupuesto extends Model
     use HasFactory;
 
     /**
+     * table
+     *
+     * @var string
+     */
+    protected $table = 'convocatoria_presupuesto';
+    
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

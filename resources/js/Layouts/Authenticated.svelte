@@ -107,9 +107,7 @@
             <!-- Responsive Navigation Menu -->
             <div class="sm:hidden{(showingNavigationDropdown ? ' block' : '', !showingNavigationDropdown ? ' hidden' : '')}">
                 <div class="pt-2 pb-3 space-y-1">
-                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                        {$_('Dashboard')}
-                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>Panel de control</ResponsiveNavLink>
                 </div>
 
                 <!-- Responsive Settings Options -->

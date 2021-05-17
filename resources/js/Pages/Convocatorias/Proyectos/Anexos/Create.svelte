@@ -30,7 +30,7 @@
     })
 
     function submit() {
-        if ((canCreateProyectoAnexo && !sending) || (canEditProyectoAnexo && !sending) || (isSuperAdmin && !sending)) {
+        if (isSuperAdmin && !sending) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,7 +53,7 @@
             {anexo.nombre}
         </a>
     {/if}
-    <fieldset disabled={(canCreateProyectoAnexo && !sending) || (canEditProyectoAnexo && !sending) || (isSuperAdmin && !sending) ? undefined : true}>
+    <fieldset disabled={isSuperAdmin && !sending ? undefined : true}>
         <div>
             <File id="archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>

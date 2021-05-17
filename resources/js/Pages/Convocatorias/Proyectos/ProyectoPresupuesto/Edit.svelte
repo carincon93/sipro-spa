@@ -81,8 +81,6 @@
         </div>
     </header>
 
-    {$form.codigo_uso_presupuestal}
-
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto">
@@ -92,7 +90,7 @@
                         <InputError message={errors.convocatoria_presupuesto_id} />
                     </div>
 
-                    {#if !showQtyInput && proyectoPresupuesto.lotes_estudio_mercado?.length > 0}
+                    {#if showQtyInput != undefined && !showQtyInput && proyectoPresupuesto.lotes_estudio_mercado?.length > 0}
                         <div class="bg-indigo-100 p-5 text-indigo-600 mb-10">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px)">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -111,7 +109,7 @@
                         <Textarea rows="4" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                     </div>
 
-                    {#if showQtyInput != undefined}
+                    {#if showQtyInput != undefined && !showQtyInput}
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
                             <Input id="numero_items" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
@@ -175,7 +173,7 @@
             <ul>
                 {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
                     </li>
                 {/if}
             </ul>

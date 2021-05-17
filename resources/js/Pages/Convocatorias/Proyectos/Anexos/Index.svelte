@@ -65,7 +65,7 @@
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
-            {:else if !canCreateProyectoAnexo && !canEditProyectoAnexo && !isSuperAdmin}
+            {:else if !isSuperAdmin}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">No tiene permisos</td>
                 </tr>

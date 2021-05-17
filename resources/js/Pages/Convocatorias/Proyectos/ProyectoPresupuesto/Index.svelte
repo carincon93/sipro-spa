@@ -158,7 +158,7 @@
                             <div class="mt-3">
                                 <small>Uso presupuestal</small>
                                 <p>
-                                    {proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.description}
+                                    {proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
                                 </p>
                             </div>
                         </div>

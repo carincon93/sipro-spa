@@ -32,7 +32,7 @@ use App\Http\Controllers\PrimerGrupoPresupuestalController;
 use App\Http\Controllers\SegundoGrupoPresupuestalController;
 use App\Http\Controllers\TercerGrupoPresupuestalController;
 use App\Http\Controllers\PresupuestoSennovaController;
-use App\Http\Controllers\PresupuestoConvocatoriaController;
+use App\Http\Controllers\ConvocatoriaPresupuestoController;
 use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
@@ -41,7 +41,6 @@ use App\Http\Controllers\ActividadEconomicaController;
 use App\Http\Controllers\ProyectoAnexoController;
 use App\Http\Controllers\UsoPresupuestalController;
 use App\Http\Controllers\ProyectLoteEstudioMercadoController;
-use App\Http\Controllers\MarketResearchController;
 use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnologicaController;
@@ -98,8 +97,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes', [ProyectoController::class, 'participantes'])->name('convocatorias.proyectos.participantes');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/lotes-estudio-mercado/{lote_estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto.lote-estudio-mercado.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/market-research/{estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'downloadPriceQuoteFile'])->name('convocatorias.proyectos.proyecto-presupuesto.lote-estudio-mercado.download-price-qoute-file');    
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/proyecto-lote-estudio-mercado/{proyecto_lote_estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.proyecto-presupuesto.download-soporte');    
 
 
     // Trae los conceptos internos SENA
@@ -189,7 +188,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->orderBy('users.nombre', 'ASC')->get());
     })->name('web-api.subdirectores');
 
-    Route::resource('centros-formacion', CentroFormacionController::class)->parameters(['centros-formacion' => 'centro-formacion'])->except(['show']);
+    Route::resource('centros-formacion', CentroFormacionController::class)->except(['show'])->parameters(['centros-formacion' => 'centro-formacion']);
 
     /**
      * Programas de formación
@@ -462,35 +461,84 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Análisis de riesgos
      * 
     */
-    Route::resource('convocatorias.proyectos.analisis-riesgos', AnalisisRiesgoController::class)->parameters(['analisis-riesgos' => 'analisis-riesgo']);
+    Route::resource('convocatorias.proyectos.analisis-riesgos', AnalisisRiesgoController::class)->parameters(['analisis-riesgos' => 'analisis-riesgo'])->except(['show']);
 
     /**
      * Anexos de proyecto
      * 
     */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-anexos/{proyecto_anexo}/download', [ProyectoAnexoController::class, 'download'])->name('convocatorias.proyectos.proyecto-anexos.download');
-    Route::resource('convocatorias.proyectos.proyecto-anexos', ProyectoAnexoController::class)->parameters(['proyecto-anexos' => 'proyecto-anexo']);
+    Route::resource('convocatorias.proyectos.proyecto-anexos', ProyectoAnexoController::class)->parameters(['proyecto-anexos' => 'proyecto-anexo'])->except(['show']);
 
+    /**
+     * Presupuesto de proyecto
+     * 
+    */
+    Route::resource('convocatorias.proyectos.proyecto-presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto'])->except(['show']);
 
-    Route::resource('convocatorias.proyectos.proyecto-presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto']);
-
-    Route::resource('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado', ProyectLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto', 'lotes-estudio-mercado' => 'lote-estudio-mercado']);
+    Route::resource('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado', ProyectLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto', 'proyecto-lote-estudio-mercado' => 'proyecto-lote-estudio-mercado'])->except(['show']);
     
-    Route::resources(
-        [
-            'convocatorias.convocatoria-sennova-roles' => ConvocatoriaRolSennovaController::class,
-            'convocatoria-presupuesto' => PresupuestoConvocatoriaController::class,
-            
-            'primer-grupo-presupuestal' => PrimerGrupoPresupuestalController::class,
-            'segundo-grupo-presupuestal' => SegundoGrupoPresupuestalController::class,
-            'tercer-grupo-presupuestal' => TercerGrupoPresupuestalController::class,
-            'usos-presupuestales' => UsoPresupuestalController::class,
-            'presupuesto-sennova' => PresupuestoSennovaController::class,
-            'roles-sennova' => RolSennovaController::class,
-            'users' => UserController::class,
-            'roles' => RoleController::class,
-        ]
-    );
+
+    /**
+     * Rol SENNOVA de convocatoria
+     * 
+    */
+
+    Route::resource('convocatorias.convocatoria-rol-sennova',  ConvocatoriaRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'convocatoria-rol-sennova' => 'convocatoria-rol-sennova'])->except(['show']);
+    
+    /**
+     * Presupuesto de convocatoria
+     * 
+    */
+    Route::resource('convocatoria-presupuesto',  ConvocatoriaPresupuestoController::class)->parameters(['convocatoria-presupuesto' => 'convocatoria-presupuesto'])->except(['show']);
+    
+    /**
+     * Primer grupo presupuestal
+     * 
+    */
+    Route::resource('primer-grupo-presupuestal',  PrimerGrupoPresupuestalController::class)->parameters(['primer-grupo-presupuestal' => 'primer-grupo-presupuestal'])->except(['show']);
+    
+    /**
+     * Segundo grupo presupuestal
+     * 
+    */
+    Route::resource('segundo-grupo-presupuestal',  SegundoGrupoPresupuestalController::class)->parameters(['segundo-grupo-presupuestal' => 'segundo-grupo-presupuestal'])->except(['show']);
+    
+    /**
+     * Tercer grupo presupuestal
+     * 
+    */
+    Route::resource('tercer-grupo-presupuestal',  TercerGrupoPresupuestalController::class)->parameters(['tercer-grupo-presupuestal' => 'tercer-grupo-presupuestal'])->except(['show']);
+    
+    /**
+     * Usos presupuestales
+     * 
+    */
+    Route::resource('usos-presupuestales',  UsoPresupuestalController::class)->parameters(['usos-presupuestales' => 'uso-presupuestal'])->except(['show']);
+    
+    /**
+     * Presupuesto SENNOVA
+     * 
+    */
+    Route::resource('presupuesto-sennova',  PresupuestoSennovaController::class)->parameters(['presupuesto-sennova' => 'presupuesto-sennova'])->except(['show']);
+    
+    /**
+     * Roles SENNOVA
+     * 
+    */
+    Route::resource('roles-sennova',  RolSennovaController::class)->parameters(['roles-sennova' => 'rol-sennova'])->except(['show']);
+    
+    /**
+     * Usuarios
+     * 
+    */
+    Route::resource('users',  UserController::class)->except(['show']);
+
+    /**
+     * Roles de sistema
+     * 
+    */
+    Route::resource('roles', RoleController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';

@@ -8,14 +8,11 @@
     import Input from '@/Components/Input'
     import Label from '@/Components/Label'
     import Button from '@/Components/Button'
-    import Select from '@/Components/Select'
     import LoadingButton from '@/Components/LoadingButton'
     import Textarea from '@/Components/Textarea'
-    import DropdownLineaProgramatica from '@/Dropdowns/DropdownLineaProgramatica'
 
     export let errors
     export let rolSennova
-    export let nivelesAcademicos
 
     $: $title = rolSennova ? rolSennova.nombre : null
 
@@ -28,16 +25,12 @@
             return role.id == 1
         }).length > 0
 
+    console.log(rolSennova.nivel_academico)
     let dialog_open = false
     let sending = false
     let form = useForm({
         nombre: rolSennova.nombre,
         descripcion: rolSennova.descripcion,
-        nivel_academico: {
-            value: rolSennova.nivel_academico,
-            label: nivelesAcademicos.find((item) => item.value == rolSennova.nivel_academico)?.label,
-        },
-        linea_programatica_id: rolSennova.linea_programatica_id,
     })
 
     function submit() {
@@ -83,16 +76,6 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                     <Textarea rows="4" id="descripcion" bind:value={$form.descripcion} error={errors.descripcion} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
-                    <DropdownLineaProgramatica id="linea_programatica_id" bind:formLineaProgramatica={$form.linea_programatica_id} message={errors.linea_programatica_id} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
-                    <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

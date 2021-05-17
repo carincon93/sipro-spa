@@ -194,6 +194,7 @@ return [
         'role_id'               				=> 'rol',
 		'trl'                   				=> 'TRL',
 		'nit'                   				=> 'NIT',
+		'convocatoria_presupuesto_id' 			=> 'uso presupuestal',
         'linea_investigacion_id'                => 'línea de investigación',
 		'disciplina_subarea_conocimiento_id'    => 'disciplina de la subárea de conocimiento',
         'tematica_estrategica_id'               => 'temáticas estratégicas SENA',
@@ -216,5 +217,6 @@ return [
 		'justificacion_problema'                => 'justificación',
         'permission_id'     					=> 'permisos',
 		'password'          					=> 'contraseña',
+		'justificacion' 						=> 'justificación',
 	],
 ];

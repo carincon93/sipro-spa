@@ -33,7 +33,7 @@
 
     <Gantt
         items={actividades.data}
-        request={canShowActividades || canEditActividades || canDestroyActividades || isSuperAdmin
+        request={isSuperAdmin
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',
                   params: [convocatoria.id, proyecto.id],

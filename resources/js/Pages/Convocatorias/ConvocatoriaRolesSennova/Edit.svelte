@@ -9,12 +9,15 @@
     import Button from '@/Components/Button'
     import LoadingButton from '@/Components/LoadingButton'
     import Select from '@/Components/Select'
+    import Textarea from '@/Components/Textarea'
     import Dialog from '@/Components/Dialog'
+    import DropdownLineaProgramatica from '@/Dropdowns/DropdownLineaProgramatica'
 
     export let errors
     export let convocatoria
     export let convocatoriaRolSennova
     export let rolesSennova
+    export let nivelesAcademicos
 
     $: $title = convocatoriaRolSennova ? convocatoriaRolSennova.nombre : null
 
@@ -31,11 +34,17 @@
     let sending = false
     let form = useForm({
         asignacion_mensual: convocatoriaRolSennova.asignacion_mensual,
-        numero_meses: convocatoriaRolSennova.numero_meses,
+        meses_experiencia: convocatoriaRolSennova.meses_experiencia,
+        nivel_academico: {
+            value: convocatoriaRolSennova.nivel_academico,
+            label: nivelesAcademicos.find((item) => item.value == convocatoriaRolSennova.nivel_academico)?.label,
+        },
+        linea_programatica_id: convocatoriaRolSennova.linea_programatica_id,
         rol_sennova_id: {
             value: convocatoriaRolSennova.rol_sennova_id,
             label: rolesSennova.find((item) => item.value == convocatoriaRolSennova.rol_sennova_id)?.label,
         },
+        mensaje: convocatoriaRolSennova.mensaje,
     })
 
     function submit() {
@@ -84,13 +93,22 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="numero_meses" value="Número de meses que requiere el apoyo" />
-                    <Input id="numero_meses" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_meses} error={errors.numero_meses} />
+                    <Label class="mb-4" labelFor="meses_experiencia" value="Número de meses de experiencia requerida" />
+                    <Input id="meses_experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.meses_experiencia} error={errors.meses_experiencia} />
+                </div>
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
+                    <DropdownLineaProgramatica id="linea_programatica_id" bind:formLineaProgramatica={$form.linea_programatica_id} message={errors.linea_programatica_id} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="qty_roles" value="Número de personas requeridas" />
-                    <Input id="qty_roles" type="number" min="0" class="mt-1 block w-full" bind:value={$form.qty_roles} error={errors.qty_roles} />
+                    <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
+                    <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
+                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

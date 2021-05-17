@@ -35,7 +35,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('sennova-roles.store'), {
+            $form.post(route('roles-sennova.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
@@ -49,7 +49,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('sennova-roles.index')} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
+                        <a use:inertia href={route('roles-sennova.index')} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear

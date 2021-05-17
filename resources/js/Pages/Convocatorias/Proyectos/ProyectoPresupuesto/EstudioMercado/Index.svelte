@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import CreateMarketResearch from '@/Pages/Calls/Projects/ProjectSennovaBudgets/MarketResearch/Create'
+    import CreateEstudioMercado from '@/Pages/Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Create'
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -14,16 +14,16 @@
     import { Item, Text } from '@smui/list'
     import Dialog from '@/Components/Dialog'
 
-    export let call
-    export let project
-    export let projectSennovaBudget
-    export let projectBudgetBatches = []
-    export let budgetUsage
-    export let requiresMarketResearch
-    export let requiresMarketResearchBatch
-    export let callBudget
-    export let sennovaBudget
     export let errors
+    export let convocatoria
+    export let proyecto
+    export let proyectoPresupuesto
+    export let proyectoLotesEstudioMercado
+    export let usoPresupuestal
+    export let requiereEstudioMercado
+    export let requiereLoteEstudioMercado
+    export let convocatoriaPresupuesto
+    export let presupuestoSennova
 
     let dialog_open
     $: dialog_open = Object.keys(errors).length > 0 ? true : false
@@ -49,12 +49,12 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.index', [call.id, project.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('calls.projects.project-sennova-budgets.edit', [call.id, project.id, projectSennovaBudget.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {budgetUsage.description}
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
+                            {usoPresupuestal.descripcion}
                         </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -68,17 +68,17 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px)">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        {#if requiresMarketResearch}
-            {#if requiresMarketResearchBatch}
+        {#if requiereEstudioMercado}
+            {#if requiereLoteEstudioMercado}
                 <p class="mb-4">
-                    El uso presupuestal <strong>{budgetUsage.description}</strong>
+                    El uso presupuestal <strong>{usoPresupuestal.descripcion}</strong>
                     permite que se agreguen multiples estudios de mercado. De clic en el botón
-                    <strong> 'Añador estudio de mercado' </strong> y añada los que considere necesarios.
+                    <strong> 'Añadir estudio de mercado' </strong> y añada los que considere necesarios.
                 </p>
             {/if}
-            {#if sennovaBudget.message}
+            {#if presupuestoSennova.mensaje}
                 <p class="mb-4">
-                    <strong>Importante: </strong>{sennovaBudget.message} No debe superar los ${project.percentage_industrial_machinery} COP
+                    <strong>Importante: </strong>{presupuestoSennova.mensaje} No debe superar los $ COP
                 </p>
             {/if}
         {/if}
@@ -87,7 +87,7 @@
             <div slot="title">Estudios de mercado</div>
 
             <div slot="actions">
-                {#if (!requiresMarketResearchBatch && requiresMarketResearch && projectBudgetBatches.data.length < 1) || (requiresMarketResearch && requiresMarketResearchBatch)}
+                {#if (!requiereLoteEstudioMercado && requiereEstudioMercado && proyectoLotesEstudioMercado.data.length < 1) || (requiereEstudioMercado && requiereLoteEstudioMercado)}
                     <div class="mb-6 flex justify-end items-center">
                         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
                         {#if isSuperAdmin}
@@ -104,32 +104,32 @@
             </thead>
 
             <tbody slot="tbody">
-                {#each projectBudgetBatches.data as projectBudgetBatch, i}
+                {#each proyectoLotesEstudioMercado.data as loteEstudioMercado, i}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
                             <h1>Estudio de mercado #{i + 1}</h1>
                             <p>
-                                Cantidad de items: {projectBudgetBatch.qty_items}
+                                Cantidad de items: {loteEstudioMercado.numero_items}
                             </p>
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id])}>Descargar ficha técnica</a>
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
                         </td>
                         <td class="border-t px-6 pt-6 pb-4">
-                            {#each projectBudgetBatch.market_research as { id, company_name, price_quote }}
+                            {#each loteEstudioMercado.estudios_mercado as { id, empresa, valor }}
                                 <div>
-                                    <strong>Nombre de la compañía: </strong>{company_name}
+                                    <strong>Nombre de la compañía: </strong>{empresa}
                                 </div>
                                 <div>
-                                    <strong>Valor: </strong>${new Intl.NumberFormat('de-DE').format(price_quote)} COP
+                                    <strong>Valor: </strong>${new Intl.NumberFormat('de-DE').format(valor)} COP
                                 </div>
 
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('calls.projects.project-sennova-budgets.project-budget-batches.download-price-qoute-file', [call.id, project.id, projectSennovaBudget.id, id])}>Descargar soporte</a>
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, id])}>Descargar soporte</a>
                             {/each}
                         </td>
 
                         <td class="border-t px-6 pt-6 pb-4">
                             <ResourceMenu>
                                 {#if isSuperAdmin}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('calls.projects.project-sennova-budgets.project-budget-batches.edit', [call.id, project.id, projectSennovaBudget.id, projectBudgetBatch.id]))}>
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
                                 {:else}
@@ -142,7 +142,7 @@
                     </tr>
                 {/each}
 
-                {#if projectBudgetBatches.data.length === 0}
+                {#if proyectoLotesEstudioMercado.data.length === 0}
                     <tr>
                         <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
                     </tr>
@@ -153,7 +153,7 @@
                 <tr>
                     <td class="border-t px-6 pt-6 pb-4" colspan="3">
                         <h1>
-                            Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(projectSennovaBudget.average)} COP</strong>
+                            Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.average)} COP</strong>
                         </h1>
                     </td>
                 </tr>
@@ -162,10 +162,10 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialog_open} id="market-reseach">
+    <Dialog bind:open={dialog_open} id="estudio-mercado">
         <div slot="title" />
         <div slot="content">
-            <CreateMarketResearch bind:dialogOpen={dialog_open} {sending} {errors} {call} {project} {projectSennovaBudget} {projectBudgetBatches} {callBudget} />
+            <CreateEstudioMercado bind:dialogOpen={dialog_open} {sending} {errors} {convocatoria} {proyecto} {proyectoPresupuesto} {proyectoLotesEstudioMercado} {convocatoriaPresupuesto} />
         </div>
 
         <div slot="actions" class="block flex w-full">
@@ -176,20 +176,20 @@
         </div>
     </Dialog>
 
-    <Pagination links={projectBudgetBatches.links} />
+    <Pagination links={proyectoLotesEstudioMercado.links} />
 </AuthenticatedLayout>
 
 <style>
-    :global(#market-reseach-dialog .mdc-dialog__surface) {
+    :global(#estudio-mercado-dialog .mdc-dialog__surface) {
         width: 750px;
         max-width: calc(100vw - 32px) !important;
     }
 
-    :global(#market-reseach-dialog .mdc-dialog__content) {
+    :global(#estudio-mercado-dialog .mdc-dialog__content) {
         padding-top: 40px !important;
     }
 
-    :global(#market-reseach-dialog .mdc-dialog__title) {
+    :global(#estudio-mercado-dialog .mdc-dialog__title) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         margin-bottom: 0;
     }

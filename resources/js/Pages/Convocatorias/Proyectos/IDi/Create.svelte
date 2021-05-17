@@ -63,7 +63,7 @@
         </div>
     </header>
 
-    <form on:submit|preventDefault={submit} novalidate>
+    <form on:submit|preventDefault={submit}>
         <fieldset class="p-8">
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />

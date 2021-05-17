@@ -18,7 +18,7 @@
     export let convocatoria
     export let proyecto
     export let proyectoPresupuesto
-    export let loteEstudioMercado
+    export let proyectoLoteEstudioMercado
 
     $: $title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion ? proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion : null
 
@@ -35,31 +35,31 @@
     let sending = false
     let form = useForm({
         _method: 'put',
-        requiere_tercer_estudio_mercado: loteEstudioMercado.estudioMercado[2] || errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false,
+        requiere_tercer_estudio_mercado: proyectoLoteEstudioMercado.estudios_mercado[2] || errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false,
         convocatoria_presupuesto_id: proyectoPresupuesto.convocatoria_presupuesto.id,
-        numero_items: loteEstudioMercado.numero_items,
+        numero_items: proyectoLoteEstudioMercado.numero_items,
         ficha_tecnica: null,
 
-        primer_estudio_mercado_id: loteEstudioMercado.estudioMercado[0].id,
-        primer_valor: loteEstudioMercado.estudioMercado[0].price_quote,
-        primer_empresa: loteEstudioMercado.estudioMercado[0].company_name,
+        primer_estudio_mercado_id: proyectoLoteEstudioMercado.estudios_mercado[0].id,
+        primer_valor: proyectoLoteEstudioMercado.estudios_mercado[0].valor,
+        primer_empresa: proyectoLoteEstudioMercado.estudios_mercado[0].empresa,
         primer_archivo: null,
 
-        segundo_estudio_mercado_id: loteEstudioMercado.estudioMercado[1].id,
-        segundo_valor: loteEstudioMercado.estudioMercado[1].price_quote,
-        segunda_empresa: loteEstudioMercado.estudioMercado[1].company_name,
+        segundo_estudio_mercado_id: proyectoLoteEstudioMercado.estudios_mercado[1].id,
+        segundo_valor: proyectoLoteEstudioMercado.estudios_mercado[1].valor,
+        segunda_empresa: proyectoLoteEstudioMercado.estudios_mercado[1].empresa,
         segundo_archivo: null,
 
-        tercer_estudio_mercado_id: loteEstudioMercado.estudioMercado[2]?.id ?? null,
-        tercer_valor: loteEstudioMercado.estudioMercado[2]?.price_quote ?? null,
-        tercer_empresa: loteEstudioMercado.estudioMercado[2]?.company_name ?? null,
+        tercer_estudio_mercado_id: proyectoLoteEstudioMercado.estudios_mercado[2]?.id ?? null,
+        tercer_valor: proyectoLoteEstudioMercado.estudios_mercado[2]?.valor ?? null,
+        tercer_empresa: proyectoLoteEstudioMercado.estudios_mercado[2]?.empresa ?? null,
         tercer_archivo: null,
     })
 
     function submit() {
         if (isSuperAdmin) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]), {
+                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         sending = false
@@ -74,7 +74,7 @@
 
     function destroy() {
         if (isSuperAdmin) {
-            $form.delete(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))
+            $form.delete(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]))
         }
     }
 
@@ -88,20 +88,18 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">
-                            {$_('Proyecto sennova budgets.plural')}
-                        </a>
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
+                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {$_('Market research.plural')}
+                    Estudios de mercado
                     <span class="text-indigo-400 font-medium">/</span>
-                    {$_('Edit')}
+                    Editar
                 </h1>
             </div>
         </div>
@@ -118,7 +116,7 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
                     <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id])}>Descargar ficha técnica</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
@@ -136,7 +134,7 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
                     <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[0].id])}>Descargar soporte</a>
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[0].id])}>Descargar soporte</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
@@ -154,7 +152,7 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
                     <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
-                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[1].id])}>Descargar soporte</a>
+                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[1].id])}>Descargar soporte</a>
                 </div>
 
                 <div class="mt-8">
@@ -179,8 +177,8 @@
                     <div class="mt-4">
                         <Label labelFor="tercer_archivo" value="Soporte" required />
                         <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
-                        {#if loteEstudioMercado.estudioMercado[2] != undefined}
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.download-price-qoute-file', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.estudioMercado[2].id])} required>Descargar soporte</a>
+                        {#if proyectoLoteEstudioMercado.estudios_mercado[2] != undefined}
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[2].id])} required>Descargar soporte</a>
                         {/if}
                     </div>
                 {/if}

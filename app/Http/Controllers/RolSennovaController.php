@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RolSennovaRequest;
 use App\Models\RolSennova;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RolSennovaController extends Controller
@@ -19,9 +18,9 @@ class RolSennovaController extends Controller
     {
         $this->authorize('viewAny', [RolSennova::class]);
 
-        return Inertia::render('RolSennovas/Index', [
-            'filters'   => request()->all('search'),
-            'rolSennovas' => RolSennova::orderBy('nombre', 'ASC')
+        return Inertia::render('RolesSennova/Index', [
+            'filters'       => request()->all('search'),
+            'rolesSennova'  => RolSennova::orderBy('nombre', 'ASC')
                 ->filterRolSennova(request()->only('search'))->paginate(),
         ]);
     }
@@ -35,9 +34,7 @@ class RolSennovaController extends Controller
     {
         $this->authorize('create', [RolSennova::class]);
 
-        return Inertia::render('RolSennovas/Create', [
-            'academicDegrees' => json_decode(Storage::get('json/academic-degrees.json'), true)
-        ]);
+        return Inertia::render('RolesSennova/Create');
     }
 
     /**
@@ -51,8 +48,8 @@ class RolSennovaController extends Controller
         $this->authorize('create', [RolSennova::class]);
 
         $rolSennova = new RolSennova();
-        $rolSennova->name              = $request->name;
-        $rolSennova->description       = $request->description;
+        $rolSennova->nombre            = $request->nombre;
+        $rolSennova->descripcion       = $request->descripcion;
 
         $rolSennova->save();
 
@@ -68,10 +65,6 @@ class RolSennovaController extends Controller
     public function show(RolSennova $rolSennova)
     {
         $this->authorize('view', [RolSennova::class, $rolSennova]);
-
-        return Inertia::render('RolSennovas/Show', [
-            'rolSennova' => $rolSennova
-        ]);
     }
 
     /**
@@ -84,9 +77,8 @@ class RolSennovaController extends Controller
     {
         $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        return Inertia::render('RolSennovas/Edit', [
-            'rolSennova'       => $rolSennova,
-            'academicDegrees'   => json_decode(Storage::get('json/academic-degrees.json'), true)
+        return Inertia::render('RolesSennova/Edit', [
+            'rolSennova'        => $rolSennova,
         ]);
     }
 
@@ -101,8 +93,8 @@ class RolSennovaController extends Controller
     {
         $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        $rolSennova->name              = $request->name;
-        $rolSennova->description       = $request->description;
+        $rolSennova->nombre              = $request->nombre;
+        $rolSennova->descripcion       = $request->descripcion;
 
         $rolSennova->save();
 

@@ -85,7 +85,7 @@
     </header>
 
     <div class="bg-white rounded shadow max-w-3xl">
-        <form on:submit|preventDefault={submit} novalidate>
+        <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />

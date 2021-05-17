@@ -50,7 +50,7 @@
     function submit() {
         if (isSuperAdmin) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.lotes-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)
@@ -59,6 +59,7 @@
                         $form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false
                     },
                     onSuccess: () => {
+                        console.log('success')
                         $form.reset()
                     },
                 })

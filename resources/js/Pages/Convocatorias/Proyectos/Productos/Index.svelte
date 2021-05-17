@@ -48,7 +48,7 @@
 
     <Gantt
         items={productos.data}
-        request={canShowProductos || canEditProductos || canDestroyProductos || isSuperAdmin
+        request={isSuperAdmin
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
                   params: [convocatoria.id, proyecto.id],

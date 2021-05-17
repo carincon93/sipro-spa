@@ -29,7 +29,9 @@ class PresupuestoSennova extends Model
         'linea_programatica_id',
         'requiere_estudio_mercado',
         'requiere_lote_estudio_mercado',
-        'sumar_al_presupuesto'
+        'sumar_al_presupuesto',
+        'valor_maximo',
+        'mensaje'
     ];
 
     /**
@@ -51,63 +53,63 @@ class PresupuestoSennova extends Model
     ];
 
     /**
-     * Relationship with FirstBudgetInfo
+     * Relationship with PrimerGrupoPresupuestal
      *
      * @return void
      */
-    public function firstBudgetInfo()
+    public function primerGrupoPresupuestal()
     {
-        return $this->belongsTo(FirstBudgetInfo::class);
+        return $this->belongsTo(PrimerGrupoPresupuestal::class);
     }
 
     /**
-     * Relationship with SecondBudgetInfo
+     * Relationship with SegundoGrupoPresupuestal
      *
      * @return void
      */
-    public function secondBudgetInfo()
+    public function segundoGrupoPresupuestal()
     {
-        return $this->belongsTo(SecondBudgetInfo::class);
+        return $this->belongsTo(SegundoGrupoPresupuestal::class);
     }
 
     /**
-     * Relationship with ThirdBudgetInfo
+     * Relationship with TercerGrupoPresupuestal
      *
      * @return void
      */
-    public function thirdBudgetInfo()
+    public function tercerGrupoPresupuestal()
     {
-        return $this->belongsTo(ThirdBudgetInfo::class);
+        return $this->belongsTo(TercerGrupoPresupuestal::class);
     }
 
     /**
-     * Relationship with BudgetUsage
+     * Relationship with UsoPresupuestal
      *
      * @return void
      */
-    public function budgetUsage()
+    public function usoPresupuestal()
     {
-        return $this->belongsTo(BudgetUsage::class);
+        return $this->belongsTo(UsoPresupuestal::class);
     }
 
     /**
-     * Relationship with ProgrammaticLine
+     * Relationship with LineaProgramatica
      *
      * @return void
      */
-    public function programmaticLine()
+    public function lineaProgramatica()
     {
-        return $this->belongsTo(ProgrammaticLine::class);
+        return $this->belongsTo(LineaProgramatica::class);
     }
 
     /**
-     * Relationship with CallBudget
+     * Relationship with ConvocatoriaPresupuesto
      *
      * @return void
      */
-    public function rubrosPresupuestalesConvocatoria()
+    public function convocatoriaPresupuesto()
     {
-        return $this->hasMany(CallBudget::class);
+        return $this->hasMany(ConvocatoriaPresupuesto::class);
     }
 
     /**
@@ -120,7 +122,7 @@ class PresupuestoSennova extends Model
     public function scopeFilterPresupuestoSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%'.$search.'%');
+            $query->where('mensaje', 'ilike', '%'.$search.'%');
         });
     }
 }
