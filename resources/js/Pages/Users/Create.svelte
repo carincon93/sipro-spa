@@ -15,8 +15,8 @@
     import DynamicList from '@/Dropdowns/DynamicList'
 
     export let errors
-    export let documentTypes
-    export let participationTypes
+    export let tiposDocumento
+    export let tiposParticipacion
     export let roles
 
     $: $title = 'Crear usuario'
@@ -32,14 +32,14 @@
 
     let sending = false
     let form = useForm({
-        name: '',
+        nombre: '',
         email: '',
-        document_type: '',
-        document_number: '',
-        cellphone_number: '',
-        is_enabled: '',
-        participation_type: '',
-        academic_centre_id: '',
+        tipo_documento: '',
+        numero_documento: '',
+        numero_celular: '',
+        habilitado: '',
+        tipo_participacion: '',
+        centro_formacion_id: null,
         role_id: [],
     })
 
@@ -72,8 +72,8 @@
         <div class="bg-white rounded shadow max-w-3xl">
             <div class="p-8">
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="name" value="Nombre completo" />
-                    <Input id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
@@ -82,40 +82,40 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="document_type" value="Tipo de documento" />
-                    <Select id="document_type" items={documentTypes} bind:selectedValue={$form.document_type} error={errors.document_type} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
+                    <Label required class="mb-4" labelFor="tipo_documento" value="Tipo de documento" />
+                    <Select id="tipo_documento" items={tiposDocumento} bind:selectedValue={$form.tipo_documento} error={errors.tipo_documento} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="document_number" value="Número de documento" />
-                    <Input id="document_number" type="number" min="0" class="mt-1 block w-full" bind:value={$form.document_number} error={errors.document_number} required />
+                    <Label required class="mb-4" labelFor="numero_documento" value="Número de documento" />
+                    <Input id="numero_documento" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="cellphone_number" value="Número de celular" />
-                    <Input id="cellphone_number" type="number" min="0" class="mt-1 block w-full" bind:value={$form.cellphone_number} error={errors.cellphone_number} required />
+                    <Label required class="mb-4" labelFor="numero_celular" value="Número de celular" />
+                    <Input id="numero_celular" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="is_enabled" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
                     <br />
-                    <Switch bind:checked={$form.is_enabled} />
-                    <InputError message={errors.is_enabled} />
+                    <Switch bind:checked={$form.habilitado} />
+                    <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="participation_type" value="Tipo de participación" />
-                    <Select id="participation_type" items={participationTypes} bind:selectedValue={$form.participation_type} error={errors.participation_type} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_participacion" value="Tipo de participación" />
+                    <Select id="tipo_participacion" items={tiposParticipacion} bind:selectedValue={$form.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="academic_centre_id" value="Centro de formación" />
-                    <DynamicList id="academic_centre_id" bind:value={$form.academic_centre_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.academic_centre_id} required />
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
 
                 <div>
                     <p>
-                        La contraseña de este usuario es: {#if $form.document_number}
-                            Sena{$form.document_number}*{/if}
+                        La contraseña de este usuario es: {#if $form.numero_documento}
+                            Sena{$form.numero_documento}*{/if}
                     </p>
                 </div>
             </div>

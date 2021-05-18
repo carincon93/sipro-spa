@@ -6,6 +6,7 @@
     import Loading from './Loading'
     import ResourceMenu from '@/Components/ResourceMenu'
     import { Item, Text } from '@smui/list'
+    import InfoMessage from '@/Components/InfoMessage'
 
     export let items
     export let request = null
@@ -90,9 +91,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" on:load={initChart}></script>
 </svelte:head>
 
-<div class="flex relative">
+<div class="flex relative mt-10">
     {#if items.length === 0}
-        <p>{$_('No data recorded')}</p>
+        <InfoMessage message={$_('No data recorded')} />
     {:else}
         <aside class="labels" style={items.length > 0 ? 'flex: 0.5' : ''}>
             <ul class="list-unstyled">

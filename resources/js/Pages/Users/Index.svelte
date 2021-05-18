@@ -18,7 +18,7 @@
     /**
      * Permisos
      */
-    let authUser = $page.props.auth.usuario
+    let authUser = $page.props.auth.user
     let isSuperAdmin =
         authUser.roles.filter(function (role) {
             return role.id == 1

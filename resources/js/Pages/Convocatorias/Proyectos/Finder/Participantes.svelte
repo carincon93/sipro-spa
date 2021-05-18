@@ -1,19 +1,19 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import Stepper from '@/Components/Stepper.svelte'
+    import Stepper from '@/Components/Stepper'
 
-    import AcademicProgramsFinder from './AcademicProgramsFinder.svelte'
-    import ResearchTeamsFinder from './ResearchTeamsFinder.svelte'
-    import UsersFinder from './UsersFinder.svelte'
+    import AcademicProgramsFinder from './AcademicProgramsFinder'
+    import ResearchTeamsFinder from './ResearchTeamsFinder'
+    import UsersFinder from './UsersFinder'
 
-    export let call
-    export let project
+    export let convocatoria
+    export let proyecto
 
     $: $title = 'Participantes'
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {call} {project} />
+    <Stepper {convocatoria} {proyecto} />
 
     <div class="py-12">
         <div class="mt-16">

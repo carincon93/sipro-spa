@@ -28,10 +28,12 @@ class ActividadController extends Controller
             'convocatoria'   => $convocatoria->only('id'),
             'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica'),
             'filters'        => request()->all('search'),
-            'actividades'    => Actividad::whereIn('objetivo_especifico_id',
-                            $objetivoEspecifico->map(function ($objetivoEspecifico) {
-                                return $objetivoEspecifico->id;
-                            }))->filterActividad(request()->only('search'))->orderBy('fecha_inicio', 'ASC')->paginate(),
+            'actividades'    => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->filterActividad(request()->only('search'))->orderBy('fecha_inicio', 'ASC')->paginate(),
         ]);
     }
 
@@ -77,7 +79,7 @@ class ActividadController extends Controller
      * @param  \App\Models\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function show( Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
         $this->authorize('view', [Actividad::class, $actividad]);
     }
@@ -96,7 +98,7 @@ class ActividadController extends Controller
             'convocatoria'                   => $convocatoria,
             'proyecto'                       => $proyecto,
             'productos'                      => $proyecto->efectosDirectos()->with('resultado.productos')->get()->pluck('resultado.productos')->flatten(),
-            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.primerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
+            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
             'actividad'                      => $actividad,
             'productosRelacionados'          => $actividad->productos()->pluck('id'),
             'proyectoPresupuestoRelacionado' => $actividad->proyectoPresupuesto()->pluck('id')
@@ -132,7 +134,7 @@ class ActividadController extends Controller
      * @param  \App\Models\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
         $this->authorize('delete', [Actividad::class, $actividad]);
 

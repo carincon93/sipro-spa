@@ -8,71 +8,71 @@
 </script>
 
 <!-- Steper -->
-<div class="flex justify-around">
+<div class="flex justify-around" id="stepper">
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.idi.edit', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.idi.edit')} href={route('convocatorias.idi.edit', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">1</div>
             <p class="text-sm text-center">Generalidades</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.arbol-problemas', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.arbol-problemas')} href={route('convocatorias.proyectos.arbol-problemas', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">2</div>
             <p class="text-sm text-center">Árbol de problemas</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.arbol-objetivos', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.arbol-objetivos')} href={route('convocatorias.proyectos.arbol-objetivos', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">3</div>
             <p class="text-sm text-center">Árbol de objetivos</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-rol-sennova.index')} href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">4</div>
             <p class="text-sm text-center">Roles</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-presupuesto.index')} href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">5</div>
             <p class="text-sm text-center">Presupuesto</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.participantes', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.participantes')} href={route('convocatorias.proyectos.participantes', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">6</div>
             <p class="text-sm text-center">Participantes</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.productos.index')} href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">7</div>
             <p class="text-sm text-center">Productos</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.actividades.index')} href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">8</div>
             <p class="text-sm text-center">Actividades</p>
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.analisis-riesgos.index')} href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">9</div>
             <p class="text-sm text-center">Análisis de riesgos</p>
         </a>
     </div>
     {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <div class="w-10/12">
-            <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+            <a use:inertia active={route().current('convocatorias.idi.entidades-aliadas.index')} href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">10</div>
                 <p class="text-sm text-center">Entidades aliadas</p>
             </a>
         </div>
     {/if}
     <div class="w-10/12">
-        <a use:inertia href={route('convocatorias.proyectos.proyecto-anexos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-anexos.index')} href={route('convocatorias.proyectos.proyecto-anexos.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">
                 {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     11
@@ -108,3 +108,10 @@
         </a>
     </div>
 </div>
+
+<style>
+    #stepper a[active='true'] .rounded-full {
+        background: #6366f1;
+        color: #fff;
+    }
+</style>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProyectoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
@@ -15,18 +14,11 @@ class ProyectoController extends Controller
      *
      * @return void
      */
-    public function participants(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function participantes(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         // $this->authorize('viewAny', [Proyecto::class]);
 
-        $proyecto->tipoProyecto->lineaProgramatica;
-        $proyecto->makeHidden(
-            'idi', 
-            'projectSennovaBudgets', 
-            'updated_at',
-        );
-
-        return Inertia::render('Convocatorias/Proyectos/Finder/Participants', [
+        return Inertia::render('Convocatorias/Proyectos/Finder/Participantes', [
             'convocatoria'  => $convocatoria,
             'proyecto'      => $proyecto
         ]);

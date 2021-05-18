@@ -105,7 +105,7 @@ class User extends Authenticatable
     public function scopeFilterUser($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'ilike', '%' . $search . '%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

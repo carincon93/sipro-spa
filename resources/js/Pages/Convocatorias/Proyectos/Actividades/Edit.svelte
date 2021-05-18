@@ -134,15 +134,15 @@
                                 <span slot="label">
                                     <div class="mb-8 mt-4">
                                         <small class="block">Concepto interno SENA</small>
-                                        {presupuesto.convocatoria_rubro_presupuestal?.sennova_rubro_presupuestal?.segundo_grupo_presupuestal.nombre}
+                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
                                     </div>
                                     <div class="mb-8">
                                         <small class="block">Rubro</small>
-                                        {presupuesto.convocatoria_rubro_presupuestal?.sennova_rubro_presupuestal?.tercer_grupo_presupuestal.nombre}
+                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
                                     </div>
                                     <div class="mb-8">
                                         <small class="block">Uso presupuestal</small>
-                                        {presupuesto.convocatoria_rubro_presupuestal?.sennova_rubro_presupuestal?.uso_presupuestal.descripcion}
+                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
                                     </div>
                                     <div class="mb-8">
                                         <small class="block">Descripción</small>

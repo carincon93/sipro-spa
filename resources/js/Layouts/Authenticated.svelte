@@ -35,10 +35,6 @@
     Inertia.on('finish', () => {
         loading = true
     })
-
-    $: isUrl = (...urls) => {
-        return urls.filter((url) => $page.url.match(url)).length
-    }
 </script>
 
 <svelte:head>
@@ -153,7 +149,7 @@
         <div class="grid grid-cols-3 gap-5 p-8">
             {#each links as link}
                 {#if authUser.can.find((element) => element == link.route + '.index') != undefined || authUser.can.find((element) => element == link.route + '.show') != undefined || authUser.can.find((element) => element == link.route + '.create') != undefined || authUser.can.find((element) => element == link.route + '.edit') != undefined || authUser.can.find((element) => element == link.route + '.delete') != undefined || isSuperAdmin}
-                    <Button on:click={() => Inertia.visit(route(link.route + '.index'))} variant={isUrl('/' + link.route + '/*') ? 'raised' : 'outlined'} class="p-2">
+                    <Button on:click={() => Inertia.visit(route(link.route + '.index'))} variant={route().current(link.route + '.*') ? 'raised' : 'outlined'} class="p-2">
                         {link.name}
                     </Button>
                 {/if}

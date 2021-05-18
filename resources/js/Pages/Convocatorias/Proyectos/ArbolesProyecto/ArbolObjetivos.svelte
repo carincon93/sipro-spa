@@ -96,7 +96,7 @@
     }
 
     function submitImpacto() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formImpacto.post(
                 route('proyectos.impacto', {
                     proyecto: proyecto.id,
@@ -159,7 +159,7 @@
     }
 
     function submitResult() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formResultado.post(
                 route('proyectos.resultado', {
                     proyecto: proyecto.id,
@@ -201,7 +201,7 @@
     }
 
     function submitObjetivoGeneral() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -242,7 +242,7 @@
     }
 
     function submitSpecificObjective() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
                     proyecto: proyecto.id,
@@ -295,7 +295,7 @@
     }
 
     function submitActividad() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formActividad.post(
                 route('proyectos.actividad', {
                     convocatoria: convocatoria.id,
@@ -576,7 +576,7 @@
         <div slot="content">
             {#if showActividadForm}
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
                         <p class="mb-20 whitespace-pre-line">
                             {actividadCausaIndirecta}
@@ -610,7 +610,7 @@
                 </form>
             {:else if showObjetivoEspecificoForm}
                 <form on:submit|preventDefault={submitSpecificObjective} id="objetivo-especifico-form">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -624,7 +624,7 @@
                 </form>
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -639,7 +639,7 @@
                 </form>
             {:else if showResultadoForm}
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
                         <p class="mb-20 whitespace-pre-line">
                             {resultadoEfectoDirecto}
@@ -675,7 +675,7 @@
                 </form>
             {:else if showImpactoForm}
                 <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
 
                         <p class="mt-4 whitespace-pre-line">
@@ -702,7 +702,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if !canCreateOrUpdate && formId}
+            {#if isSuperAdmin && formId}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

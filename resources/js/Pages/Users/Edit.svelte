@@ -17,13 +17,13 @@
     import DynamicList from '@/Dropdowns/DynamicList'
 
     export let errors
-    export let user = {}
-    export let documentTypes
-    export let participationTypes
+    export let usuario
+    export let tiposDocumento
+    export let tiposParticipacion
     export let roles
-    export let userRoles
+    export let rolesRelacionados
 
-    $: $title = user ? user.name : null
+    $: $title = usuario ? usuario.nombre : null
 
     /**
      * Permisos
@@ -37,27 +37,27 @@
     let dialog_open = false
     let sending = false
     let form = useForm({
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        document_type: {
-            value: user.document_type,
-            label: documentTypes.find((item) => item.value == user.document_type)?.label,
+        nombre: usuario.nombre,
+        email: usuario.email,
+        password: usuario.password,
+        tipo_documento: {
+            value: usuario.tipo_documento,
+            label: tiposDocumento.find((item) => item.value == usuario.tipo_documento)?.label,
         },
-        document_number: user.document_number,
-        cellphone_number: user.cellphone_number,
-        is_enabled: user.is_enabled,
-        participation_type: {
-            value: user.participation_type,
-            label: participationTypes.find((item) => item.value == user.participation_type)?.label,
+        numero_documento: usuario.numero_documento,
+        numero_celular: usuario.numero_celular,
+        habilitado: usuario.habilitado,
+        tipo_participacion: {
+            value: usuario.tipo_participacion,
+            label: tiposParticipacion.find((item) => item.value == usuario.tipo_participacion)?.label,
         },
-        academic_centre_id: user.academic_centre_id,
-        role_id: userRoles,
+        centro_formacion_id: usuario.centro_formacion_id,
+        role_id: rolesRelacionados,
     })
 
     function submit() {
         if (isSuperAdmin) {
-            $form.put(route('users.update', user.id), {
+            $form.put(route('users.update', usuario.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -67,7 +67,7 @@
 
     function destroy() {
         if (isSuperAdmin) {
-            $form.delete(route('users.destroy', user.id))
+            $form.delete(route('users.destroy', usuario.id))
         }
     }
 </script>
@@ -81,7 +81,7 @@
                         <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {user.name}
+                    {usuario.nombre}
                 </h1>
             </div>
         </div>
@@ -91,8 +91,8 @@
         <div class="bg-white rounded shadow max-w-3xl">
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="name" value="Nombre completo" />
-                    <Input id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
+                    <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
+                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
@@ -101,34 +101,34 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="document_type" value="Tipo de documento" />
-                    <Select id="document_type" items={documentTypes} bind:selectedValue={$form.document_type} error={errors.document_type} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
+                    <Label required class="mb-4" labelFor="tipo_documento" value="Tipo de documento" />
+                    <Select id="tipo_documento" items={tiposDocumento} bind:selectedValue={$form.tipo_documento} error={errors.tipo_documento} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="document_number" value="Número de documento" />
-                    <Input id="document_number" type="number" min="0" class="mt-1 block w-full" bind:value={$form.document_number} error={errors.document_number} required />
+                    <Label required class="mb-4" labelFor="numero_documento" value="Número de documento" />
+                    <Input id="numero_documento" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="cellphone_number" value="Número de celular" />
-                    <Input id="cellphone_number" type="number" min="0" class="mt-1 block w-full" bind:value={$form.cellphone_number} error={errors.cellphone_number} required />
+                    <Label required class="mb-4" labelFor="numero_celular" value="Número de celular" />
+                    <Input id="numero_celular" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="is_enabled" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
                     <br />
-                    <Switch bind:checked={$form.is_enabled} />
-                    <InputError message={errors.is_enabled} />
+                    <Switch bind:checked={$form.habilitado} />
+                    <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="participation_type" value="Tipo de participación" />
-                    <Select id="participation_type" items={participationTypes} bind:selectedValue={$form.participation_type} error={errors.participation_type} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_participacion" value="Tipo de participación" />
+                    <Select id="tipo_participacion" items={tiposParticipacion} bind:selectedValue={$form.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="academic_centre_id" value="Centro de formación" />
-                    <DynamicList id="academic_centre_id" bind:value={$form.academic_centre_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.academic_centre_id} required />
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </fieldset>
         </div>

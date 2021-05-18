@@ -67,7 +67,7 @@
     }
 
     function submitEfectoIndirecto() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formEfectoIndirecto.post(
                 route('proyectos.efecto-indirecto', {
                     proyecto: proyecto.id,
@@ -110,7 +110,7 @@
     }
 
     function submitEfectoDirecto() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formEfectoDirecto.post(
                 route('proyectos.efecto-directo', {
                     proyecto: proyecto.id,
@@ -152,7 +152,7 @@
     }
 
     function submitPlanteamientoProblema() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formPlanteamientoProblema.post(route('proyectos.planteamiento-problema', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -189,7 +189,7 @@
     }
 
     function submitCausaDirecta() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formCausaDirecta.post(
                 route('proyectos.causa-directa', {
                     proyecto: proyecto.id,
@@ -239,7 +239,7 @@
     }
 
     function submitCausaIndirecta() {
-        if (canCreateOrUpdate == undefined) {
+        if (isSuperAdmin) {
             $formCausaIndirecta.post(
                 route('proyectos.causa-indirecta', {
                     proyecto: proyecto.id,
@@ -507,7 +507,7 @@
         <div slot="content">
             {#if showCausaIndirectaForm}
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
@@ -516,7 +516,7 @@
                 </form>
             {:else if showCausaDirectaForm}
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
@@ -525,7 +525,7 @@
                 </form>
             {:else if showEfectoIndirectoForm}
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
@@ -534,7 +534,7 @@
                 </form>
             {:else if showPlanteamientoProblemaForm}
                 <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
 
@@ -556,7 +556,7 @@
                 </form>
             {:else if showEfectoDirectoForm}
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={canCreateOrUpdate}>
+                    <fieldset disabled={!isSuperAdmin}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
@@ -567,7 +567,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if !canCreateOrUpdate && formId}
+            {#if isSuperAdmin && formId}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

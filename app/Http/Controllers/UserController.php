@@ -22,7 +22,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Index', [
             'filters'   => request()->all('search'),
-            'users'     => User::orderBy('nombre', 'ASC')
+            'usuarios'  => User::orderBy('nombre', 'ASC')
                 ->filterUser(request()->only('search'))->paginate(),
         ]);
     }
@@ -37,8 +37,8 @@ class UserController extends Controller
         $this->authorize('create', [User::class]);
 
         return Inertia::render('Users/Create', [
-            'documentTypes'         => json_decode(Storage::get('json/document-types.json'), true),
-            'participationTypes'    => json_decode(Storage::get('json/participation-types.json'), true),
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
             'roles'                 => Role::select('id', 'name')->get('id')
         ]);
     }
@@ -55,15 +55,15 @@ class UserController extends Controller
 
         $user = new User();
 
-        $user->name                 = $request->name;
+        $user->nombre               = $request->nombre;
         $user->email                = $request->email;
-        $user->password             = $user::makePassword($request->document_number);
-        $user->document_type        = $request->document_type;
-        $user->document_number      = $request->document_number;
-        $user->cellphone_number     = $request->cellphone_number;
-        $user->is_enabled           = $request->is_enabled;
-        $user->participation_type   = $request->participation_type;
-        $user->academicCentre()->associate($request->centro_formacion_id);
+        $user->password             = $user::makePassword($request->numero_documento);
+        $user->tipo_documento       = $request->tipo_documento;
+        $user->numero_documento     = $request->numero_documento;
+        $user->numero_celular       = $request->numero_celular;
+        $user->habilitado           = $request->habilitado;
+        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();
 
@@ -81,10 +81,6 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize('view', [User::class, $user]);
-
-        return Inertia::render('Users/Show', [
-            'user' => $user
-        ]);
     }
 
     /**
@@ -98,10 +94,10 @@ class UserController extends Controller
         $this->authorize('update', [User::class, $user]);
 
         return Inertia::render('Users/Edit', [
-            'user'                  => $user,
-            'documentTypes'         => json_decode(Storage::get('json/document-types.json'), true),
-            'participationTypes'    => json_decode(Storage::get('json/participation-types.json'), true),
-            'userRoles'             => $user->roles()->pluck('id'),
+            'usuario'               => $user,
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'rolesRelacionados'     => $user->roles()->pluck('id'),
             'roles'                 => Role::select('id', 'name')->get('id')
         ]);
     }
@@ -117,14 +113,14 @@ class UserController extends Controller
     {
         $this->authorize('update', [User::class, $user]);
 
-        $user->name                 = $request->name;
+        $user->nombre               = $request->nombre;
         $user->email                = $request->email;
-        $user->document_type        = $request->document_type;
-        $user->document_number      = $request->document_number;
-        $user->cellphone_number     = $request->cellphone_number;
-        $user->is_enabled           = $request->is_enabled;
-        $user->participation_type   = $request->participation_type;
-        $user->academicCentre()->associate($request->centro_formacion_id);
+        $user->tipo_documento       = $request->tipo_documento;
+        $user->numero_documento     = $request->numero_documento;
+        $user->numero_celular       = $request->numero_celular;
+        $user->habilitado           = $request->habilitado;
+        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();
 

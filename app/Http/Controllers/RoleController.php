@@ -21,7 +21,7 @@ class RoleController extends Controller
 
         return Inertia::render('Roles/Index', [
             'filters'   => request()->all('search'),
-            'roles'     => Role::orderBy('nombre', 'ASC')
+            'roles'     => Role::orderBy('name', 'ASC')
                 ->filterRole(request()->only('search'))->paginate(),
         ]);
     }
