@@ -61,6 +61,10 @@ class ProyectoRolSennovaController extends Controller
             return redirect()->back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
         }
 
+        if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
+            return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+        }
+
         $proyectoRolSennova = new ProyectoRolSennova();
         $proyectoRolSennova->numero_meses = $request->numero_meses;
         $proyectoRolSennova->numero_roles = $request->numero_roles;
@@ -116,6 +120,10 @@ class ProyectoRolSennovaController extends Controller
 
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
             return redirect()->back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
+        }
+
+        if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
+            return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
         }
 
         $proyectoRolSennova->numero_meses   = $request->numero_meses;

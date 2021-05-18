@@ -48,7 +48,7 @@ class ProyectoAnexo extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -58,7 +58,7 @@ class ProyectoAnexo extends Model
     /**
      * Relationship with Anexo
      *
-     * @return void
+     * @return object
      */
     public function anexo()
     {
@@ -75,7 +75,7 @@ class ProyectoAnexo extends Model
     public function scopeFilterProyectoAnexo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->where('anexos.nombre', 'ilike', '%'.$search.'%');
+            $query->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->where('anexos.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -48,7 +48,7 @@ class Impacto extends Model
     /**
      * Relationship with EfectoIndirecto
      *
-     * @return void
+     * @return object
      */
     public function efectoIndirecto()
     {
@@ -65,7 +65,7 @@ class Impacto extends Model
     public function scopeFilterImpacto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('tipo', 'ilike', '%'.$search.'%');
+            $query->where('tipo', 'ilike', '%' . $search . '%');
         });
     }
 }

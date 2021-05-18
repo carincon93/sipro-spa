@@ -47,7 +47,7 @@ class TipoProyecto extends Model
     /**
      * Relationship with LineaProgramatica
      *
-     * @return void
+     * @return object
      */
     public function lineaProgramatica()
     {
@@ -57,7 +57,7 @@ class TipoProyecto extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyectos()
     {
@@ -74,7 +74,7 @@ class TipoProyecto extends Model
     public function scopeFilterTipoProyecto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

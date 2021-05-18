@@ -56,7 +56,7 @@ class Producto extends Model
     /**
      * Relationship with Resultado
      *
-     * @return void
+     * @return object
      */
     public function resultado()
     {
@@ -66,17 +66,17 @@ class Producto extends Model
     /**
      * Relationship with IDiProducto
      *
-     * @return void
+     * @return object
      */
     public function idiProducto()
     {
         return $this->hasOne(IDiProducto::class);
     }
 
-        /**
+    /**
      * Relationship with Actividad
      *
-     * @return void
+     * @return object
      */
     public function actividades()
     {
@@ -93,7 +93,7 @@ class Producto extends Model
     public function scopeFilterProducto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

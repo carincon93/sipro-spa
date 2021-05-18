@@ -84,7 +84,7 @@ class IDi extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -94,7 +94,7 @@ class IDi extends Model
     /**
      * Relationship with LineaInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function lineaInvestigacion()
     {
@@ -104,7 +104,7 @@ class IDi extends Model
     /**
      * Relationship with DisciplinaSubareaConocimiento
      *
-     * @return void
+     * @return object
      */
     public function disciplinaSubareaConocimiento()
     {
@@ -114,7 +114,7 @@ class IDi extends Model
     /**
      * Relationship with TematicaEstrategica
      *
-     * @return void
+     * @return object
      */
     public function tematicaEstrategica()
     {
@@ -124,7 +124,7 @@ class IDi extends Model
     /**
      * Relationship with RedConocimiento
      *
-     * @return void
+     * @return object
      */
     public function redConocimiento()
     {
@@ -134,7 +134,7 @@ class IDi extends Model
     /**
      * Relationship with ActividadEconomica
      *
-     * @return void
+     * @return object
      */
     public function actividadEconomica()
     {
@@ -144,7 +144,7 @@ class IDi extends Model
     /**
      * Relationship with LineaTecnologica
      *
-     * @return void
+     * @return object
      */
     public function lineasTecnologicas()
     {
@@ -154,7 +154,7 @@ class IDi extends Model
     /**
      * Relationship with MesaSectorial
      *
-     * @return void
+     * @return object
      */
     public function mesasSectoriales()
     {
@@ -164,7 +164,7 @@ class IDi extends Model
     /**
      * Relationship with MesaTecnica
      *
-     * @return void
+     * @return object
      */
     public function mesaTecnica()
     {
@@ -174,7 +174,7 @@ class IDi extends Model
     /**
      * Relationship with EntidadAliada
      *
-     * @return void
+     * @return object
      */
     public function entidadesAliadas()
     {
@@ -191,7 +191,7 @@ class IDi extends Model
     public function scopeFilterIDi($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('titulo', 'ilike', '%'.$search.'%');
+            $query->where('titulo', 'ilike', '%' . $search . '%');
         });
     }
 

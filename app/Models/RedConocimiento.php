@@ -47,7 +47,7 @@ class RedConocimiento extends Model
     /**
      * Relationship with IDi
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -64,7 +64,7 @@ class RedConocimiento extends Model
     public function scopeFilterRedConocimiento($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

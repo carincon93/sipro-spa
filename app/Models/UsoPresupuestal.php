@@ -43,11 +43,11 @@ class UsoPresupuestal extends Model
     protected $casts = [
         //
     ];
-    
+
     /**
      * Relationship with PresupuestoSennova
      *
-     * @return void
+     * @return object
      */
     public function presupuestoSennova()
     {
@@ -64,7 +64,7 @@ class UsoPresupuestal extends Model
     public function scopeFilterUsoPresupuestal($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 

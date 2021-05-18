@@ -49,7 +49,7 @@ class LineaProgramatica extends Model
     /**
      * Relationship with TipoProyecto
      *
-     * @return void
+     * @return object
      */
     public function tiposProyecto()
     {
@@ -59,7 +59,7 @@ class LineaProgramatica extends Model
     /**
      * Relationship with SennovaBudget
      *
-     * @return void
+     * @return object
      */
     public function sennovaBudgets()
     {
@@ -69,7 +69,7 @@ class LineaProgramatica extends Model
     /**
      * Relationship with CallRolSennova
      *
-     * @return void
+     * @return object
      */
     public function callRolSennovas()
     {
@@ -79,7 +79,7 @@ class LineaProgramatica extends Model
     /**
      * Relationship with Anexo
      *
-     * @return void
+     * @return object
      */
     public function anexos()
     {
@@ -96,7 +96,7 @@ class LineaProgramatica extends Model
     public function scopeFilterLineaProgramatica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

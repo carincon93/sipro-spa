@@ -47,7 +47,7 @@ class MesaTecnica extends Model
     /**
      * Relationship with TemaPriorizado
      *
-     * @return void
+     * @return object
      */
     public function temasPriorizados()
     {
@@ -64,7 +64,7 @@ class MesaTecnica extends Model
     public function scopeFilterMesaTecnica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

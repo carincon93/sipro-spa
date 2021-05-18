@@ -47,7 +47,7 @@ class SubtipologiaMinciencias extends Model
     /**
      * Relationship with TipologiaMinciencias
      *
-     * @return void
+     * @return object
      */
     public function tipologiaMinciencias()
     {
@@ -57,7 +57,7 @@ class SubtipologiaMinciencias extends Model
     /**
      * Relationship with IDiProducto
      *
-     * @return void
+     * @return object
      */
     public function idiProductos()
     {
@@ -74,7 +74,7 @@ class SubtipologiaMinciencias extends Model
     public function scopeFilterSubtipologiaMinciencias($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

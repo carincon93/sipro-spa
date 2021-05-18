@@ -53,7 +53,7 @@ class GrupoInvestigacion extends Model
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function centroFormacion()
     {
@@ -63,7 +63,7 @@ class GrupoInvestigacion extends Model
     /**
      * Relationship with LineaInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function lineasInvestigacion()
     {
@@ -80,7 +80,7 @@ class GrupoInvestigacion extends Model
     public function scopeFilterGrupoInvestigacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

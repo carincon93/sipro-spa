@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EfectoDirecto extends Model
 {
     use HasFactory;
-    
+
     /**
      * table
      *
@@ -47,7 +47,7 @@ class EfectoDirecto extends Model
     /**
      * Relationship with EfectoIndirecto
      *
-     * @return void
+     * @return object
      */
     public function efectosIndirectos()
     {
@@ -57,7 +57,7 @@ class EfectoDirecto extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -67,7 +67,7 @@ class EfectoDirecto extends Model
     /**
      * Relationship with Resultado
      *
-     * @return void
+     * @return object
      */
     public function resultado()
     {
@@ -84,7 +84,7 @@ class EfectoDirecto extends Model
     public function scopeFilterEfectoDirecto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -47,7 +47,7 @@ class SubareaConocimiento extends Model
     /**
      * Relationship with AreaConocimiento
      *
-     * @return void
+     * @return object
      */
     public function areaConocimiento()
     {
@@ -57,7 +57,7 @@ class SubareaConocimiento extends Model
     /**
      * Relationship with DisciplinaSubareaConocimiento
      *
-     * @return void
+     * @return object
      */
     public function disciplinasSubareaConocimiento()
     {
@@ -74,7 +74,7 @@ class SubareaConocimiento extends Model
     public function scopeFilterSubareaConocimiento($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProyectoRolSennova extends Model
 {
     use HasFactory;
-        
+
     /**
      * table
      *
@@ -50,7 +50,7 @@ class ProyectoRolSennova extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -60,7 +60,7 @@ class ProyectoRolSennova extends Model
     /**
      * Relationship with ConvocatoriaRolSennova
      *
-     * @return void
+     * @return object
      */
     public function convocatoriaRolSennova()
     {
@@ -79,7 +79,7 @@ class ProyectoRolSennova extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->join('convocatoria_roles_sennova', 'proyecto_roles_sennova.convocatoria_sennova_role_id', 'convocatoria_roles_sennova.id')
                 ->join('roles_sennova', 'convocatoria_roles_sennova.sennova_role_id', 'roles_sennova.id')
-                ->where('convocatoria_roles_sennova.salary', 'ilike', '%'.$search.'%')->orWhere('roles_sennova.nombre', 'ilike', '%'.$search.'%');
+                ->where('convocatoria_roles_sennova.salary', 'ilike', '%' . $search . '%')->orWhere('roles_sennova.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

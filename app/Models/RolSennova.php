@@ -47,7 +47,7 @@ class RolSennova extends Model
     /**
      * Relationship with ConvocatoriaRolSennova
      *
-     * @return void
+     * @return object
      */
     public function convocatoriaRolesSennova()
     {
@@ -64,7 +64,7 @@ class RolSennova extends Model
     public function scopeFilterRolSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

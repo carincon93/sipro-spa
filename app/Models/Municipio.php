@@ -51,7 +51,7 @@ class Municipio extends Model
     /**
      * Relationship with Departamento
      *
-     * @return void
+     * @return object
      */
     public function departamento()
     {
@@ -61,7 +61,7 @@ class Municipio extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyectos()
     {
@@ -78,7 +78,7 @@ class Municipio extends Model
     public function scopeFilterMunicipio($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

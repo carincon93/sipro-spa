@@ -48,7 +48,7 @@ class DisciplinaSubareaConocimiento extends Model
     /**
      * Relationship with SubareaConocimiento
      *
-     * @return void
+     * @return object
      */
     public function subareaConocimiento()
     {
@@ -58,7 +58,7 @@ class DisciplinaSubareaConocimiento extends Model
     /**
      * Relationship with RDI
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -75,7 +75,7 @@ class DisciplinaSubareaConocimiento extends Model
     public function scopeFilterDisciplinaSubareaConocimiento($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

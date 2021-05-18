@@ -48,7 +48,7 @@ class LineaInvestigacion extends Model
     /**
      * Relationship with GrupoInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function grupoInvestigacion()
     {
@@ -58,7 +58,7 @@ class LineaInvestigacion extends Model
     /**
      * Relationship with SemilleroInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function semillerosInvestigacion()
     {
@@ -68,7 +68,7 @@ class LineaInvestigacion extends Model
     /**
      * Relationship with IDi
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -85,7 +85,7 @@ class LineaInvestigacion extends Model
     public function scopeFilterLineaInvestigacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

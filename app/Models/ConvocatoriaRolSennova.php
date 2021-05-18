@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ConvocatoriaRolSennova extends Model
 {
     use HasFactory;
-   
+
     /**
      * table
      *
@@ -52,7 +52,7 @@ class ConvocatoriaRolSennova extends Model
     /**
      * Relationship with Convocatoria
      *
-     * @return void
+     * @return object
      */
     public function convocatoria()
     {
@@ -62,7 +62,7 @@ class ConvocatoriaRolSennova extends Model
     /**
      * Relationship with RolSennova
      *
-     * @return void
+     * @return object
      */
     public function rolSennova()
     {
@@ -72,7 +72,7 @@ class ConvocatoriaRolSennova extends Model
     /**
      * Relationship with LineaProgramatica
      *
-     * @return void
+     * @return object
      */
     public function lineaProgramatica()
     {
@@ -82,7 +82,7 @@ class ConvocatoriaRolSennova extends Model
     /**
      * Relationship with ProyectoRolSennova
      *
-     * @return void
+     * @return object
      */
     public function proyectoRolesSennova()
     {
@@ -99,7 +99,7 @@ class ConvocatoriaRolSennova extends Model
     public function scopeFilterConvocatoriaRolSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('asignacion_mensual', 'ilike', '%'.$search.'%');
+            $query->where('asignacion_mensual', 'ilike', '%' . $search . '%');
         });
     }
 }

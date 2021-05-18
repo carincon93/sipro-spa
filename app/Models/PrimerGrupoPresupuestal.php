@@ -48,7 +48,7 @@ class PrimerGrupoPresupuestal extends Model
     /**
      * Relationship with PresupuestoSennova
      *
-     * @return void
+     * @return object
      */
     public function presupuestoSennova()
     {
@@ -65,7 +65,7 @@ class PrimerGrupoPresupuestal extends Model
     public function scopeFilterPrimerGrupoPresupuestal($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

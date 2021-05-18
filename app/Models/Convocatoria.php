@@ -16,7 +16,7 @@ class Convocatoria extends Model
      * @var string
      */
     protected $table = 'convocatorias';
-    
+
     /**
      * appends
      *
@@ -59,7 +59,7 @@ class Convocatoria extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyectos()
     {
@@ -69,7 +69,7 @@ class Convocatoria extends Model
     /**
      * Relationship with ConvocatoriaBudget
      *
-     * @return void
+     * @return object
      */
     public function rubrosPresupuestalesConvocatoria()
     {
@@ -79,7 +79,7 @@ class Convocatoria extends Model
     /**
      * Relationship with ConvocatoriaRolSennova
      *
-     * @return void
+     * @return object
      */
     public function convocatoriaRolesSennova()
     {
@@ -96,7 +96,7 @@ class Convocatoria extends Model
     public function scopeFilterConvocatoria($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('fecha_inicio', 'ilike', '%'.$search.'%');
+            $query->where('fecha_inicio', 'ilike', '%' . $search . '%');
         });
     }
 

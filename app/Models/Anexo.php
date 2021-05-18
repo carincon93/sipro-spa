@@ -49,7 +49,7 @@ class Anexo extends Model
     /**
      * Relationship with LineaProgramatica
      *
-     * @return void
+     * @return object
      */
     public function lineasProgramaticas()
     {
@@ -59,7 +59,7 @@ class Anexo extends Model
     /**
      * Relationship with ProyectoAnexo
      *
-     * @return void
+     * @return object
      */
     public function proyectoAnexo()
     {
@@ -76,7 +76,7 @@ class Anexo extends Model
     public function scopeFilterAnexo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

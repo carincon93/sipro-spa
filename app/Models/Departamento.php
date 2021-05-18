@@ -46,7 +46,7 @@ class Departamento extends Model
     /**
      * Relationship with Municipio
      *
-     * @return void
+     * @return object
      */
     public function municipios()
     {
@@ -63,7 +63,7 @@ class Departamento extends Model
     public function scopeFilterDepartamento($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

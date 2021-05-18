@@ -45,7 +45,7 @@ class SoftwareInfo extends Model
     /**
      * Relationship with ProyectoPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function proyectoPresupuesto()
     {
@@ -62,7 +62,7 @@ class SoftwareInfo extends Model
     public function scopeFilterSoftwareInfo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('tipo_licencia', 'ilike', '%'.$search.'%');
+            $query->where('tipo_licencia', 'ilike', '%' . $search . '%');
         });
     }
 }

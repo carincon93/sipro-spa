@@ -48,7 +48,7 @@ class ObjetivoEspecifico extends Model
     /**
      * Relationship with CausaDirecta
      *
-     * @return void
+     * @return object
      */
     public function causaDirecta()
     {
@@ -58,17 +58,17 @@ class ObjetivoEspecifico extends Model
     /**
      * Relationship with Resultado
      *
-     * @return void
+     * @return object
      */
     public function resultado()
     {
         return $this->hasOne(Resultado::class);
     }
 
-     /**
+    /**
      * Relationship with Actividad
      *
-     * @return void
+     * @return object
      */
     public function actividades()
     {
@@ -85,10 +85,10 @@ class ObjetivoEspecifico extends Model
     public function scopeFilterObjetivoEspecifico($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
-    
+
     /**
      * getNumeroAttribute
      *

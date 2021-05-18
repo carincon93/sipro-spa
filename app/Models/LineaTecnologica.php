@@ -48,7 +48,7 @@ class LineaTecnologica extends Model
     /**
      * Relationship with Tecnoacademia
      *
-     * @return void
+     * @return object
      */
     public function tecnoacademia()
     {
@@ -58,7 +58,7 @@ class LineaTecnologica extends Model
     /**
      * Relationship with IDi
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -75,7 +75,7 @@ class LineaTecnologica extends Model
     public function scopeFilterLineaTecnologica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

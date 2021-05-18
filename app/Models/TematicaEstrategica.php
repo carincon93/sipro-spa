@@ -46,7 +46,7 @@ class TematicaEstrategica extends Model
     /**
      * Relationship with RDI
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -63,7 +63,7 @@ class TematicaEstrategica extends Model
     public function scopeFilterTematicaEstrategica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

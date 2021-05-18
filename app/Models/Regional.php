@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Regional extends Model
 {
     use HasFactory;
-    
+
     /**
      * table
      *
@@ -49,7 +49,7 @@ class Regional extends Model
     /**
      * Relationship with Region
      *
-     * @return void
+     * @return object
      */
     public function region()
     {
@@ -59,7 +59,7 @@ class Regional extends Model
     /**
      * Relationship with User
      *
-     * @return void
+     * @return object
      */
     public function directorRegional()
     {
@@ -69,7 +69,7 @@ class Regional extends Model
     /**
      * Relationship with AcademicCentre
      *
-     * @return void
+     * @return object
      */
     public function academicCentres()
     {
@@ -86,7 +86,7 @@ class Regional extends Model
     public function scopeFilterRegional($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

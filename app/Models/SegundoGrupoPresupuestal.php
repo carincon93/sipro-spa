@@ -47,7 +47,7 @@ class SegundoGrupoPresupuestal extends Model
     /**
      * Relationship with PresupuestoSennova
      *
-     * @return void
+     * @return object
      */
     public function presupuestoSennova()
     {
@@ -64,7 +64,7 @@ class SegundoGrupoPresupuestal extends Model
     public function scopeFilterSegundoGrupoPresupuestal($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

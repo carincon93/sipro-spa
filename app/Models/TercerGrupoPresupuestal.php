@@ -47,13 +47,13 @@ class TercerGrupoPresupuestal extends Model
     /**
      * Relationship with PresupuestoSennova
      *
-     * @return void
+     * @return object
      */
     public function presupuestoSennova()
     {
         return $this->hasMany(PresupuestoSennova::class);
     }
-    
+
     /**
      * Filtrar registros
      *
@@ -64,7 +64,7 @@ class TercerGrupoPresupuestal extends Model
     public function scopeFilterTercerGrupoPresupuestal($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 

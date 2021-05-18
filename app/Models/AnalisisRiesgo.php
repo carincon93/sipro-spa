@@ -52,7 +52,7 @@ class AnalisisRiesgo extends Model
     /**
      * Relationship with Project
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -69,7 +69,7 @@ class AnalisisRiesgo extends Model
     public function scopeFilterAnalisisRiesgo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 

@@ -53,9 +53,10 @@ class User extends Authenticatable
     /**
      * Relationship with Proyecto (participants)
      *
-     * @return void
+     * @return object
      */
-    public function proyectos() {
+    public function proyectos()
+    {
         return $this->belongsToMany(Proyecto::class, 'proyecto_participantes', 'user_id', 'proyecto_id')
             ->withPivot([
                 'es_autor',
@@ -67,7 +68,7 @@ class User extends Authenticatable
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function centroFormacion()
     {
@@ -77,7 +78,7 @@ class User extends Authenticatable
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function subdirectorCentroFormacion()
     {
@@ -87,7 +88,7 @@ class User extends Authenticatable
     /**
      * Relationship with Regional
      *
-     * @return void
+     * @return object
      */
     public function directorRegional()
     {
@@ -104,7 +105,7 @@ class User extends Authenticatable
     public function scopeFilterUser($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'ilike', '%'.$search.'%');
+            $query->where('name', 'ilike', '%' . $search . '%');
         });
     }
 
@@ -126,7 +127,7 @@ class User extends Authenticatable
      */
     public function getCanAttribute()
     {
-        return $this->getAllPermissions()->map(function($t) {
+        return $this->getAllPermissions()->map(function ($t) {
             return ['name' => $t['name']];
         })->pluck('name');
     }

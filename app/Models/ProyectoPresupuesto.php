@@ -118,7 +118,7 @@ class ProyectoPresupuesto extends Model
             $query
                 ->select('proyecto_presupuesto.*')
                 ->join('convocatoria_presupuesto', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'convocatoria_presupuesto.id')
-                ->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova', 'presupuesto_sennova.id')
+                ->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova_id', 'presupuesto_sennova.id')
                 ->join('segundo_grupo_presupuestal', 'presupuesto_sennova.segundo_grupo_presupuestal_id', 'segundo_grupo_presupuestal.id')
                 ->where('segundo_grupo_presupuestal.nombre', 'ilike', '%' . $search . '%');
         });

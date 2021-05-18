@@ -47,7 +47,7 @@ class IDiProducto extends Model
     /**
      * Relationship with SubtipologiaMinciencias
      *
-     * @return void
+     * @return object
      */
     public function subtipologiaMinciencias()
     {
@@ -57,7 +57,7 @@ class IDiProducto extends Model
     /**
      * Relationship with Producto
      *
-     * @return void
+     * @return object
      */
     public function producto()
     {

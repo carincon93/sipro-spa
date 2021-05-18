@@ -46,7 +46,7 @@ class TipologiaMinciencias extends Model
     /**
      * Relationship with SubtipologiaMinciencias
      *
-     * @return void
+     * @return object
      */
     public function subtipologiaMinciencias()
     {
@@ -63,7 +63,7 @@ class TipologiaMinciencias extends Model
     public function scopeFilterTipologiaMinciencias($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

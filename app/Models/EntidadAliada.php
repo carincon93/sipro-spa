@@ -63,7 +63,7 @@ class EntidadAliada extends Model
     /**
      * Relationship with IDi
      *
-     * @return void
+     * @return object
      */
     public function idi()
     {
@@ -73,7 +73,7 @@ class EntidadAliada extends Model
     /**
      * Relationship with Actividad
      *
-     * @return void
+     * @return object
      */
     public function actividades()
     {
@@ -83,7 +83,7 @@ class EntidadAliada extends Model
     /**
      * Relationship with MiembroEntidadAliada
      *
-     * @return void
+     * @return object
      */
     public function miembrosEntidadAliada()
     {
@@ -100,7 +100,7 @@ class EntidadAliada extends Model
     public function scopeFilterEntidadAliada($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'ilike', '%'.$search.'%');
+            $query->where('name', 'ilike', '%' . $search . '%');
         });
     }
 

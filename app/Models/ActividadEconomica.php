@@ -46,7 +46,7 @@ class ActividadEconomica extends Model
     /**
      * Relationship with IDi
      *
-     * @return void
+     * @return object
      */
     public function IDi()
     {
@@ -63,7 +63,7 @@ class ActividadEconomica extends Model
     public function scopeFilterActividadEconomica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

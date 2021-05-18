@@ -49,18 +49,18 @@ class CentroFormacion extends Model
     /**
      * Relationship with Regional
      *
-     * @return void
+     * @return object
      */
     public function regional()
     {
         return $this->belongsTo(Regional::class);
     }
 
-    
+
     /**
      * Relationship with User
      *
-     * @return void
+     * @return object
      */
     public function subdirector()
     {
@@ -70,7 +70,7 @@ class CentroFormacion extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyectos()
     {
@@ -80,7 +80,7 @@ class CentroFormacion extends Model
     /**
      * Relationship with ProgramaFormacion
      *
-     * @return void
+     * @return object
      */
     public function programasFormacion()
     {
@@ -90,7 +90,7 @@ class CentroFormacion extends Model
     /**
      * Relationship with GrupoInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function gruposInvestigacion()
     {
@@ -100,7 +100,7 @@ class CentroFormacion extends Model
     /**
      * Relationship with User
      *
-     * @return void
+     * @return object
      */
     public function users()
     {
@@ -117,7 +117,7 @@ class CentroFormacion extends Model
     public function scopeFilterCentroFormacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

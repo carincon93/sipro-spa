@@ -15,7 +15,7 @@ class ConvocatoriaPresupuesto extends Model
      * @var string
      */
     protected $table = 'convocatoria_presupuesto';
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,7 +47,7 @@ class ConvocatoriaPresupuesto extends Model
     /**
      * Relationship with Convocatoria
      *
-     * @return void
+     * @return object
      */
     public function convocatoria()
     {
@@ -57,7 +57,7 @@ class ConvocatoriaPresupuesto extends Model
     /**
      * Relationship with PresupuestoSennova
      *
-     * @return void
+     * @return object
      */
     public function presupuestoSennova()
     {
@@ -67,7 +67,7 @@ class ConvocatoriaPresupuesto extends Model
     /**
      * Relationship with ProyectoPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function proyectoPresupuesto()
     {
@@ -84,7 +84,7 @@ class ConvocatoriaPresupuesto extends Model
     public function scopeFilterCallBudget($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('convocatoria_id', 'ilike', '%'.$search.'%');
+            $query->where('convocatoria_id', 'ilike', '%' . $search . '%');
         });
     }
 }

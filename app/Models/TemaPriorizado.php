@@ -48,7 +48,7 @@ class TemaPriorizado extends Model
     /**
      * Relationship with SectorProductivo
      *
-     * @return void
+     * @return object
      */
     public function sectorProductivo()
     {
@@ -58,7 +58,7 @@ class TemaPriorizado extends Model
     /**
      * Relationship with MesaTecnica
      *
-     * @return void
+     * @return object
      */
     public function mesaTecnica()
     {
@@ -75,7 +75,7 @@ class TemaPriorizado extends Model
     public function scopeFilterTemaPriorizado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

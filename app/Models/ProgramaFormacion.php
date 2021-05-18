@@ -49,7 +49,7 @@ class ProgramaFormacion extends Model
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function centroFormacion()
     {
@@ -66,7 +66,7 @@ class ProgramaFormacion extends Model
     public function scopeFilterProgramaFormacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -47,7 +47,7 @@ class CausaIndirecta extends Model
     /**
      * Relationship with CausaDirecta
      *
-     * @return void
+     * @return object
      */
     public function causaDirecta()
     {
@@ -57,7 +57,7 @@ class CausaIndirecta extends Model
     /**
      * Relationship with Actividad
      *
-     * @return void
+     * @return object
      */
     public function actividad()
     {
@@ -74,7 +74,7 @@ class CausaIndirecta extends Model
     public function scopeFilterCausaIndirecta($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 }

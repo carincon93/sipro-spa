@@ -45,7 +45,7 @@ class Resultado extends Model
     /**
      * Relationship with ObjetivoEspecifico
      *
-     * @return void
+     * @return object
      */
     public function objetivoEspecifico()
     {
@@ -56,7 +56,7 @@ class Resultado extends Model
     /**
      * Relationship with EfectoDirecto
      *
-     * @return void
+     * @return object
      */
     public function efectoDirecto()
     {
@@ -66,7 +66,7 @@ class Resultado extends Model
     /**
      * Relationship with Producto
      *
-     * @return void
+     * @return object
      */
     public function productos()
     {
@@ -83,7 +83,7 @@ class Resultado extends Model
     public function Resultado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 }

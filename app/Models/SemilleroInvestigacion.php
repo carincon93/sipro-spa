@@ -48,7 +48,7 @@ class SemilleroInvestigacion extends Model
     /**
      * Relationship with LineaInvestigacion
      *
-     * @return void
+     * @return object
      */
     public function lineaInvestigacion()
     {
@@ -65,7 +65,7 @@ class SemilleroInvestigacion extends Model
     public function scopeFilterSemilleroInvestigacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%'.$search.'%');
+            $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

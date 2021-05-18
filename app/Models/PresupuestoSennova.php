@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PresupuestoSennova extends Model
 {
     use HasFactory;
-        
+
     /**
      * table
      *
@@ -55,7 +55,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with PrimerGrupoPresupuestal
      *
-     * @return void
+     * @return object
      */
     public function primerGrupoPresupuestal()
     {
@@ -65,7 +65,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with SegundoGrupoPresupuestal
      *
-     * @return void
+     * @return object
      */
     public function segundoGrupoPresupuestal()
     {
@@ -75,7 +75,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with TercerGrupoPresupuestal
      *
-     * @return void
+     * @return object
      */
     public function tercerGrupoPresupuestal()
     {
@@ -85,7 +85,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with UsoPresupuestal
      *
-     * @return void
+     * @return object
      */
     public function usoPresupuestal()
     {
@@ -95,7 +95,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with LineaProgramatica
      *
-     * @return void
+     * @return object
      */
     public function lineaProgramatica()
     {
@@ -105,7 +105,7 @@ class PresupuestoSennova extends Model
     /**
      * Relationship with ConvocatoriaPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function convocatoriaPresupuesto()
     {
@@ -122,7 +122,7 @@ class PresupuestoSennova extends Model
     public function scopeFilterPresupuestoSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('mensaje', 'ilike', '%'.$search.'%');
+            $query->where('mensaje', 'ilike', '%' . $search . '%');
         });
     }
 }

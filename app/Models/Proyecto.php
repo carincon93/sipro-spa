@@ -57,7 +57,7 @@ class Proyecto extends Model
     /**
      * Relationship with Convocatoria
      *
-     * @return void
+     * @return object
      */
     public function convocatoria()
     {
@@ -68,7 +68,7 @@ class Proyecto extends Model
     /**
      * Relationship with TipoProyecto
      *
-     * @return void
+     * @return object
      */
     public function tipoProyecto()
     {
@@ -78,7 +78,7 @@ class Proyecto extends Model
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function centroFormacion()
     {
@@ -88,7 +88,7 @@ class Proyecto extends Model
     /**
      * Relationship with RDI
      *
-     * @return void
+     * @return object
      */
     public function idi()
     {
@@ -98,7 +98,7 @@ class Proyecto extends Model
     /**
      * Relationship with Municipio
      *
-     * @return void
+     * @return object
      */
     public function municipios()
     {
@@ -108,7 +108,7 @@ class Proyecto extends Model
     /**
      * Relationship with CausaDirecta
      *
-     * @return void
+     * @return object
      */
     public function causasDirectas()
     {
@@ -118,7 +118,7 @@ class Proyecto extends Model
     /**
      * Relationship with EfectoDirecto
      *
-     * @return void
+     * @return object
      */
     public function efectosDirectos()
     {
@@ -128,7 +128,7 @@ class Proyecto extends Model
     /**
      * Relationship with ProyectoRolSennova
      *
-     * @return void
+     * @return object
      */
     public function proyectoRolesSennova()
     {
@@ -138,7 +138,7 @@ class Proyecto extends Model
     /**
      * Relationship with ProyectoAnexo
      *
-     * @return void
+     * @return object
      */
     public function proyectoAnexo()
     {
@@ -148,7 +148,7 @@ class Proyecto extends Model
     /**
      * Relationship with AnalisisRiesgo
      *
-     * @return void
+     * @return object
      */
     public function analisisRiesgo()
     {
@@ -158,7 +158,7 @@ class Proyecto extends Model
     /**
      * Relationship with ProyectoPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function proyectoPresupuesto()
     {
@@ -169,7 +169,7 @@ class Proyecto extends Model
     /**
      * Relationship with Proyecto (participantes)
      *
-     * @return void
+     * @return object
      */
     public function participantes()
     {

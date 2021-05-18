@@ -169,6 +169,8 @@
                                 ${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.promedio)} COP
                             {:else if proyectoPresupuesto.totalByBudgetWithoutMarketResearch > 0}
                                 ${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.totalByBudgetWithoutMarketResearch)}
+                            {:else}
+                                No ha generado el estudio de mercado aún
                             {/if}
                         </div>
                         {#if !proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto}

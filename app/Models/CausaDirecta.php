@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CausaDirecta extends Model
 {
     use HasFactory;
-    
+
     /**
      * table
      *
@@ -47,7 +47,7 @@ class CausaDirecta extends Model
     /**
      * Relationship with CausaIndirecta
      *
-     * @return void
+     * @return object
      */
     public function causasIndirectas()
     {
@@ -57,7 +57,7 @@ class CausaDirecta extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -67,7 +67,7 @@ class CausaDirecta extends Model
     /**
      * Relationship with ObjetivoEspecifico
      *
-     * @return void
+     * @return object
      */
     public function objetivoEspecifico()
     {
@@ -84,7 +84,7 @@ class CausaDirecta extends Model
     public function scopeFilterCausaDirecta($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 }

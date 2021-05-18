@@ -48,7 +48,7 @@ class ProyectoLoteEstudioMercado extends Model
     /**
      * Relationship with ProyectoPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function proyectoPresupuesto()
     {
@@ -58,7 +58,7 @@ class ProyectoLoteEstudioMercado extends Model
     /**
      * Relationship with EstudioMercado
      *
-     * @return void
+     * @return object
      */
     public function estudiosMercado()
     {
@@ -75,7 +75,7 @@ class ProyectoLoteEstudioMercado extends Model
     public function scopeFilterProyectoLoteEstudioMercado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('numero_items', 'ilike', '%'.$search.'%');
+            $query->where('numero_items', 'ilike', '%' . $search . '%');
         });
     }
 
