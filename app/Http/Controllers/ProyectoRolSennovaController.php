@@ -23,6 +23,13 @@ class ProyectoRolSennovaController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
+        /**
+         * Si el proyecto es de la línea programática 23 se prohibe el acceso. No requiere de roles SENNOVA
+         */
+        if ($proyecto->codigo_linea_programatica == 23) {
+            return redirect()->route('convocatorias.proyectos.arbol-objetivos', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de roles SENNOVA');
+        }
+
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
             'convocatoria'           => $convocatoria->only('id'),
             'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'total_roles_sennova'),

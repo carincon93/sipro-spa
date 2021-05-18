@@ -25,6 +25,13 @@ class EntidadAliadaController extends Controller
 
         $IDi->codigo_linea_programatica = $IDi->proyecto->tipoProyecto->lineaProgramatica->codigo;
 
+        /**
+         * Si el proyecto es de la línea programática 23 se prohibe el acceso. No requiere de entidades aliadas
+         */
+        if ($IDi->codigo_linea_programatica == 23) {
+            return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $IDi->proyecto])->with('error', 'Esta línea programática no requiere de entidades aliadas');
+        }
+
         return Inertia::render('Convocatorias/Proyectos/IDi/EntidadesAliadas/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'idi'           => $IDi->only('id', 'codigo_linea_programatica'),
@@ -48,10 +55,12 @@ class EntidadAliadaController extends Controller
         return Inertia::render('Convocatorias/Proyectos/IDi/EntidadesAliadas/Create', [
             'convocatoria'  => $convocatoria->only('id'),
             'idi'           => $IDi->only('id'),
-            'actividades'   => Actividad::whereIn('objetivo_especifico_id',
+            'actividades'   => Actividad::whereIn(
+                'objetivo_especifico_id',
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
-                }))->orderBy('fecha_inicio', 'ASC')->get(),
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
             'tiposEntidadAliada'        => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
             'naturalezaEntidadAliada'   => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
             'tiposEmpresa'              => json_decode(Storage::get('json/tipos-empresa.json'), true)
@@ -89,16 +98,18 @@ class EntidadAliadaController extends Controller
 
         $cartaIntencion = $request->carta_intencion;
 
-        $nombreArchivoCartaIntencion = "{$IDi->proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random.".$cartaIntencion->extension();
+        $nombreArchivoCartaIntencion = "{$IDi->proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random." . $cartaIntencion->extension();
         $archivoCartaIntencion = $cartaIntencion->storeAs(
-            'cartas-intencion', $nombreArchivoCartaIntencion
+            'cartas-intencion',
+            $nombreArchivoCartaIntencion
         );
         $entidadAliada->carta_intencion = $archivoCartaIntencion;
 
         $cartaPropiedadIntelectual = $request->carta_propiedad_intelectual;
-        $nombreArchivoPropiedadIntelectual = "{$IDi->proyecto->codigo}-propiedad-intelectual-$nombreEmpresa.".$cartaPropiedadIntelectual->extension();
+        $nombreArchivoPropiedadIntelectual = "{$IDi->proyecto->codigo}-propiedad-intelectual-$nombreEmpresa." . $cartaPropiedadIntelectual->extension();
         $archivoPropiedadIntelectual = $cartaPropiedadIntelectual->storeAs(
-            'cartas-propiedad-intelectual', $nombreArchivoPropiedadIntelectual
+            'cartas-propiedad-intelectual',
+            $nombreArchivoPropiedadIntelectual
         );
 
         $entidadAliada->carta_propiedad_intelectual = $archivoPropiedadIntelectual;
@@ -140,10 +151,12 @@ class EntidadAliadaController extends Controller
             'convocatoria'    => $convocatoria->only('id'),
             'idi'             => $IDi->only('id'),
             'entidadAliada'   => $entidadAliada,
-            'actividades'     => Actividad::whereIn('objetivo_especifico_id',
+            'actividades'     => Actividad::whereIn(
+                'objetivo_especifico_id',
                 $objetivoEspecificos->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
-                }))->orderBy('fecha_inicio', 'ASC')->get(),
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
             'actividadesRelacionadas'           => $entidadAliada->actividades()->pluck('id'),
             'objetivosEspecificosRelacionados'  => $entidadAliada->actividades()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico'),
             'tiposEntidadAliada'                => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
@@ -183,9 +196,10 @@ class EntidadAliadaController extends Controller
         if ($request->hasFile('carta_intencion')) {
             Storage::delete($entidadAliada->carta_intencion);
             $cartaIntencion                 = $request->carta_intencion;
-            $nombreArchivoCartaIntencion    = "{$IDi->proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random.".$cartaIntencion->extension();
+            $nombreArchivoCartaIntencion    = "{$IDi->proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random." . $cartaIntencion->extension();
             $archivoCartaIntencion          = $cartaIntencion->storeAs(
-                'cartas-intencion', $nombreArchivoCartaIntencion
+                'cartas-intencion',
+                $nombreArchivoCartaIntencion
             );
             $entidadAliada->carta_intencion = $archivoCartaIntencion;
         }
@@ -193,9 +207,10 @@ class EntidadAliadaController extends Controller
         if ($request->hasFile('carta_propiedad_intelectual')) {
             Storage::delete($entidadAliada->carta_propiedad_intelectual);
             $cartaPropiedadIntelectual          = $request->carta_propiedad_intelectual;
-            $nombreArchivoPropiedadIntelectual  = "{$IDi->proyecto->codigo}-propiedad-intelectual-$nombreEmpresa-cod$random.".$cartaPropiedadIntelectual->extension();
+            $nombreArchivoPropiedadIntelectual  = "{$IDi->proyecto->codigo}-propiedad-intelectual-$nombreEmpresa-cod$random." . $cartaPropiedadIntelectual->extension();
             $archivoPropiedadIntelectual        = $cartaPropiedadIntelectual->storeAs(
-                'cartas-propiedad-intelectual', $nombreArchivoPropiedadIntelectual
+                'cartas-propiedad-intelectual',
+                $nombreArchivoPropiedadIntelectual
             );
             $entidadAliada->carta_propiedad_intelectual = $archivoPropiedadIntelectual;
         }
