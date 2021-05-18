@@ -2,9 +2,10 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Support\Facades\Storage;
+
 trait PresupuestoValidationTrait
 {
-
     public static function viaticosValidation($proyecto, $segundoGrupoPresupuestalCodigo, $valor, $numeroItems, $valorGuardado, $numeroItemsGuardado)
     {
         if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102') {
@@ -148,5 +149,27 @@ trait PresupuestoValidationTrait
         }
 
         return $total;
+    }
+
+    public static function adecuacionesYContruccionesValidation($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    {
+        $promedio = 0;
+
+        $salarioMinimoDiario = json_decode(Storage::get('json/salario-minimo-diario.json'), true);
+
+        $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+
+        if ($codigoUsoPresupuestal == '2020200500406' || $codigoUsoPresupuestal == '2020200500407' || $codigoUsoPresupuestal == '2020200500405' || $codigoUsoPresupuestal == '20202005004023') {
+            $tercerValor = $tercerValor ?? 0;
+
+            $division = ($tercerValor > 0) ? 3 : 2;
+            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+
+            if ($promedio > ($salarioMinimoDiario['value'] * 100)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -82,4 +82,14 @@ class ProyectoRolSennova extends Model
                 ->where('convocatoria_roles_sennova.salary', 'ilike', '%' . $search . '%')->orWhere('roles_sennova.nombre', 'ilike', '%' . $search . '%');
         });
     }
+
+    /**
+     * getTotalRolSennova
+     *
+     * @return int
+     */
+    public function getTotalRolSennova()
+    {
+        return ($this->numero_meses * $this->convocatoriaRolSennova->asignacion_mensual) * $this->numero_roles;
+    }
 }

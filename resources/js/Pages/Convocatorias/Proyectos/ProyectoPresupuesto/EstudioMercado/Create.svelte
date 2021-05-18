@@ -57,7 +57,7 @@
                         document.getElementById('ficha_tecnica').value = null
                         document.getElementById('primer_archivo').value = null
                         document.getElementById('segundo_archivo').value = null
-                        document.getElementById('tercer_archivo').value = null
+                        document.getElementById('tercer_archivo') ? (document.getElementById('tercer_archivo').value = null) : null
                     },
                     onError: () => {
                         $form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false
@@ -147,7 +147,7 @@
         {/if}
     </fieldset>
     <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-        <p class="break-all w-72">
+        <p>
             Valor promedio: ${average > 0 ? new Intl.NumberFormat('de-DE').format(average) : 0} COP
         </p>
     </div>

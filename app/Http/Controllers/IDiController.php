@@ -70,7 +70,7 @@ class IDiController extends Controller
         $IDi->fecha_finalizacion                    = $request->fecha_finalizacion;
         $IDi->video                                 = null;
         $IDi->justificacion_industria_4             = null;
-        $IDi->justificacion_economia_naranja       = null;
+        $IDi->justificacion_economia_naranja        = null;
         $IDi->justificacion_politica_discapacidad   = null;
         $IDi->resumen                               = 'Por favor diligencie el resumen del proyecto';
         $IDi->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
@@ -79,7 +79,7 @@ class IDiController extends Controller
         $IDi->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $IDi->bibliografia                          = 'Por favor diligencie la bibliografía';
         $IDi->numero_aprendices                     = 0;
-        $IDi->impacto_                      = 'Describa el beneficio en los municipios';
+        $IDi->impacto_                              = 'Describa el beneficio en los municipios';
         $IDi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
 
         $IDi->muestreo                              = null;
@@ -119,6 +119,7 @@ class IDiController extends Controller
         $this->authorize('update', [IDi::class, $IDi]);
 
         $IDi->codigo_linea_programatica = $IDi->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $IDi->precio_proyecto           = $IDi->proyecto->precioProyecto;
 
         return Inertia::render('Convocatorias/Proyectos/IDi/Edit', [
             'convocatoria'                      => $convocatoria->only('id'),
@@ -151,7 +152,7 @@ class IDiController extends Controller
         $IDi->justificacion_industria_4             = $request->justificacion_industria_4;
         $IDi->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
         $IDi->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
-        $IDi->resumen                               = $request->resumen ;
+        $IDi->resumen                               = $request->resumen;
         $IDi->antecedentes                          = $request->antecedentes;
         $IDi->marco_conceptual                      = $request->marco_conceptual;
         $IDi->metodologia                           = $request->metodologia;
@@ -199,7 +200,7 @@ class IDiController extends Controller
     {
         $this->authorize('delete', [IDi::class, $IDi]);
 
-        if ( !Hash::check($request->password, Auth::user()->password) ) {
+        if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }

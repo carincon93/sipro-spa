@@ -25,15 +25,15 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('viewAny', ProyectoPresupuesto::class);
 
-        $proyecto->codigo_linea_programatica        = $proyecto->tipoProyecto->lineaProgramatica->codigo;
-        $proyecto->total_maquinaria_industrial      = PresupuestoValidationTrait::totalMaquinariaIndustrial($proyecto);
-        $proyecto->total_viaticos                   = PresupuestoValidationTrait::totalViaticosInteriorGastosAlumnos($proyecto);
-        $proyecto->total_mantenimiento_maquinaria   = PresupuestoValidationTrait::totalMantenimientoMaquinaria($proyecto);
-        $proyecto->total_servicios_especiales_construccion = PresupuestoValidationTrait::totalServiciosEspecialesConstruccion($proyecto);
+        $proyecto->codigo_linea_programatica                = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalMaquinariaIndustrial($proyecto);
+        $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalViaticosInteriorGastosAlumnos($proyecto);
+        $proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalMantenimientoMaquinaria($proyecto);
+        $proyecto->total_servicios_especiales_construccion  = PresupuestoValidationTrait::totalServiciosEspecialesConstruccion($proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Index', [
             'convocatoria'              => $convocatoria->only('id'),
-            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria'),
+            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria'),
             'filters'                   => request()->all('search'),
             'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
             'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),

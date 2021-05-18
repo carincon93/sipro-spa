@@ -23,16 +23,18 @@ class ProductoController extends Controller
 
         $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
-        
+
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'filters'       => request()->all('search'),
-            'productos'     => Producto::whereIn('resultado_id',
-                        $resultado->map(function ($resultado) {
-                            return $resultado->id;
-                        }))->filterProducto(request()->only('search'))->paginate(),
-            ]);
+            'productos'     => Producto::whereIn(
+                'resultado_id',
+                $resultado->map(function ($resultado) {
+                    return $resultado->id;
+                })
+            )->filterProducto(request()->only('search'))->paginate(),
+        ]);
     }
 
     /**
@@ -50,8 +52,8 @@ class ProductoController extends Controller
             'convocatoria'      => $convocatoria,
             'proyecto'          => $proyecto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
-                    $query->where('descripcion', '!=', null);
-                })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')
+                $query->where('descripcion', '!=', null);
+            })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')
         ]);
     }
 
@@ -112,8 +114,8 @@ class ProductoController extends Controller
             'proyecto'          => $proyecto->only('id'),
             'producto'          => $producto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
-                    $query->where('descripcion', '!=', null);
-                })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado'),
+                $query->where('descripcion', '!=', null);
+            })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado'),
         ]);
     }
 

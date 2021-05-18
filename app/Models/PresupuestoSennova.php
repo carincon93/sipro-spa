@@ -30,7 +30,6 @@ class PresupuestoSennova extends Model
         'requiere_estudio_mercado',
         'requiere_lote_estudio_mercado',
         'sumar_al_presupuesto',
-        'valor_maximo',
         'mensaje'
     ];
 

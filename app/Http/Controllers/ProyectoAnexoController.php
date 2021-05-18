@@ -28,7 +28,7 @@ class ProyectoAnexoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Anexos/Index', [
             'filters'           => request()->all('search'),
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')
                 ->filterProyectoAnexo(request()->only('search'))->paginate(),
@@ -67,9 +67,10 @@ class ProyectoAnexoController extends Controller
         $anexoName          = Str::slug(substr($anexo->nombre, 0, 30), '-');
         $random             = Str::random(5);
         $requestFile        = $request->archivo;
-        $nombreArchivo      = "$proyecto->codigo-$anexoName-cod$random.".$requestFile->extension();
+        $nombreArchivo      = "$proyecto->codigo-$anexoName-cod$random." . $requestFile->extension();
         $archivo = $requestFile->storeAs(
-            'anexos', $nombreArchivo
+            'anexos',
+            $nombreArchivo
         );
 
         ProyectoAnexo::updateOrCreate(

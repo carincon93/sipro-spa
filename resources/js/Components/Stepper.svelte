@@ -27,17 +27,20 @@
             <p class="text-sm text-center">Árbol de objetivos</p>
         </a>
     </div>
-    <div class="w-10/12">
-        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-rol-sennova.index')} href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
-            <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">4</div>
-            <p class="text-sm text-center">Roles</p>
-        </a>
-    </div>
-    <div class="w-10/12">
-        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-presupuesto.index')} href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
-            <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">5</div>
-            <p class="text-sm text-center">Presupuesto</p>
-        </a>
+    <div class="flex justify-around relative w-10/12 px-1.5 presupuesto-container">
+        <div class="w-10/12">
+            <a use:inertia active={route().current('convocatorias.proyectos.proyecto-rol-sennova.index')} href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+                <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">4</div>
+                <p class="text-sm text-center">Roles</p>
+            </a>
+        </div>
+        <div class="w-10/12 ml-5">
+            <a use:inertia active={route().current('convocatorias.proyectos.proyecto-presupuesto.index')} href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+                <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">5</div>
+                <p class="text-sm text-center">Presupuesto</p>
+            </a>
+        </div>
+        <small class="absolute bg-indigo-500 text-white px-2 py-1 rounded-full w-max text-center total">$ {new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)} COP</small>
     </div>
     <div class="w-10/12">
         <a use:inertia active={route().current('convocatorias.proyectos.participantes')} href={route('convocatorias.proyectos.participantes', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
@@ -113,5 +116,14 @@
     #stepper a[active='true'] .rounded-full {
         background: #6366f1;
         color: #fff;
+    }
+
+    .presupuesto-container {
+        border: 1px solid #6366f12b;
+    }
+
+    .total {
+        bottom: -18px;
+        box-shadow: -1px -9px 17px 0px rgb(99 102 241 / 25%);
     }
 </style>

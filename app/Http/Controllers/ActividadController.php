@@ -26,7 +26,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
             'convocatoria'   => $convocatoria->only('id'),
-            'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica'),
+            'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'filters'        => request()->all('search'),
             'actividades'    => Actividad::whereIn(
                 'objetivo_especifico_id',

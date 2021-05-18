@@ -33,7 +33,6 @@ class PresupuestoSennovaRequest extends FormRequest
             'requiere_estudio_mercado'         => ['required', 'boolean'],
             'sumar_al_presupuesto'             => ['required', 'boolean'],
             'mensaje'                          => ['nullable', 'string'],
-            'valor_maximo'                     => ['nullable', 'numeric'],
         ];
     }
 }

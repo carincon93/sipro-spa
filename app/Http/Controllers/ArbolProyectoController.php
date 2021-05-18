@@ -38,7 +38,7 @@ class ArbolProyectoController extends Controller
         $objetivosEspecificos = $proyecto->causasDirectas()->with('objetivoEspecifico')->count() > 0 ? $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten() : [];
 
         if ($proyecto->causasDirectas()->count() < 4) {
-            for ($i=0; $i < 4; $i++) {
+            for ($i = 0; $i < 4; $i++) {
                 $causaDirecta = $proyecto->causasDirectas()->create([
                     ['descripcion' => null],
                 ]);
@@ -47,13 +47,13 @@ class ArbolProyectoController extends Controller
                     'descripcion'   => null,
                     'numero'        => $i + 1,
                 ]);
-                
+
                 array_push($objetivosEspecificos, $objetivoEspecifico);
             }
         }
 
         if ($proyecto->efectosDirectos()->count() < 4) {
-            for ($i=0; $i < 4; $i++) {
+            for ($i = 0; $i < 4; $i++) {
                 $efectoDirecto = $proyecto->efectosDirectos()->create([
                     ['descripcion' => null],
                 ]);
@@ -113,7 +113,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
         ]);
@@ -184,12 +184,10 @@ class ArbolProyectoController extends Controller
             $efectoIndirecto = new EfectoIndirecto();
             $efectoIndirecto->fill($request->all());
             $efectoIndirecto->save();
-
         } elseif (!empty($request->id)) {
             $efectoIndirecto = EfectoIndirecto::find($request->id);
             $efectoIndirecto->descripcion = $request->descripcion;
             $efectoIndirecto->save();
-
         } else {
             return redirect()->back()->with('error', 'Cannot add more indirect effects.');
         }
@@ -275,15 +273,15 @@ class ArbolProyectoController extends Controller
                 $proyecto->planteamiento_problema   = $proyecto->IDi->planteamiento_problema;
                 $proyecto->objetivo_general         = $proyecto->IDi->objetivo_general;
                 break;
-                default:
+            default:
                 break;
-            }
-            
+        }
+
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'planteamiento_problema', 'objetivo_general'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'planteamiento_problema', 'objetivo_general'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),

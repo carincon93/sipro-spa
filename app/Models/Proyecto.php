@@ -22,7 +22,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova'];
 
     /**
      * The attributes that are mass assignable.
@@ -126,16 +126,6 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with ProyectoRolSennova
-     *
-     * @return object
-     */
-    public function proyectoRolesSennova()
-    {
-        return $this->hasMany(ProyectoRolSennova::class);
-    }
-
-    /**
      * Relationship with ProyectoAnexo
      *
      * @return object
@@ -150,7 +140,7 @@ class Proyecto extends Model
      *
      * @return object
      */
-    public function analisisRiesgo()
+    public function analisisRiesgos()
     {
         return $this->hasMany(AnalisisRiesgo::class);
     }
@@ -163,6 +153,16 @@ class Proyecto extends Model
     public function proyectoPresupuesto()
     {
         return $this->hasMany(ProyectoPresupuesto::class);
+    }
+
+    /**
+     * Relationship with ProyectoRolSennova
+     *
+     * @return object
+     */
+    public function proyectoRolesSennova()
+    {
+        return $this->hasMany(ProyectoRolSennova::class);
     }
 
 
@@ -182,18 +182,21 @@ class Proyecto extends Model
             ]);
     }
 
-
     /**
      * Get codigo e.g. SGPS-8000-2021
      *
-     * @return void
+     * @return string
      */
     public function getCodigoAttribute()
     {
         return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($this->idi->fecha_finalizacion));
     }
 
-
+    /**
+     * getDiffMesesAttribute
+     *
+     * @return int
+     */
     public function getDiffMesesAttribute()
     {
         $fecha_finalizacion = Carbon::parse($this->idi->fecha_finalizacion, 'UTC')->floorMonth();
@@ -215,16 +218,31 @@ class Proyecto extends Model
         return $total;
     }
 
-    // Validación de la línea 66
-    // Total del monitorías
-    public function getTotalMonitorias()
+    /**
+     * getTotalRolesSennovaAttribute
+     *
+     * @return int
+     */
+    public function getTotalRolesSennovaAttribute()
     {
         $total = 0;
 
-        foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
-            $total = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal()->where('codigo', '20202008005099')->count();
+        foreach ($this->proyectoRolesSennova as $proyectoRolSennova) {
+            if ($proyectoRolSennova->convocatoriaRolSennova->rolSennova->sumar_al_presupuesto) {
+                $total += $proyectoRolSennova->getTotalRolSennova();
+            }
         }
 
         return $total;
+    }
+
+    /**
+     * getPrecioProyecto
+     *
+     * @return int
+     */
+    public function getPrecioProyectoAttribute()
+    {
+        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
     }
 }

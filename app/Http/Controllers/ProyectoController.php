@@ -18,9 +18,11 @@ class ProyectoController extends Controller
     {
         // $this->authorize('viewAny', [Proyecto::class]);
 
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+
         return Inertia::render('Convocatorias/Proyectos/Finder/Participantes', [
-            'convocatoria'  => $convocatoria,
-            'proyecto'      => $proyecto
+            'convocatoria'  => $convocatoria->only('id'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto')
         ]);
     }
 }
