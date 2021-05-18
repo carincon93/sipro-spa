@@ -78,7 +78,7 @@
             {/if}
             {#if presupuestoSennova.mensaje}
                 <p class="mb-4">
-                    <strong>Importante: </strong>{presupuestoSennova.mensaje} No debe superar los $ COP
+                    <strong>Importante: </strong>{presupuestoSennova.mensaje}
                 </p>
             {/if}
         {/if}
@@ -153,7 +153,7 @@
                 <tr>
                     <td class="border-t px-6 pt-6 pb-4" colspan="3">
                         <h1>
-                            Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.average)} COP</strong>
+                            Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.promedio)} COP</strong>
                         </h1>
                     </td>
                 </tr>

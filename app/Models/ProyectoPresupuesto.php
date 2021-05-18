@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProyectoPresupuesto extends Model
 {
     use HasFactory;
-    
+
     /**
      * table
      *
      * @var string
      */
     protected $table = 'proyecto_presupuesto';
-    
+
     /**
      * appends
      *
@@ -58,7 +58,7 @@ class ProyectoPresupuesto extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
@@ -68,7 +68,7 @@ class ProyectoPresupuesto extends Model
     /**
      * Relationship with ConvocatoriaPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function convocatoriaPresupuesto()
     {
@@ -78,7 +78,7 @@ class ProyectoPresupuesto extends Model
     /**
      * Relationship with ProyectoLoteEstudioMercado
      *
-     * @return void
+     * @return object
      */
     public function proyectoLoteEstudioMercado()
     {
@@ -88,7 +88,7 @@ class ProyectoPresupuesto extends Model
     /**
      * Relationship with Actividad
      *
-     * @return void
+     * @return object
      */
     public function actividades()
     {
@@ -98,7 +98,7 @@ class ProyectoPresupuesto extends Model
     /**
      * Relationship with SoftwareInfo
      *
-     * @return void
+     * @return object
      */
     public function softwareInfo()
     {
@@ -120,7 +120,7 @@ class ProyectoPresupuesto extends Model
                 ->join('convocatoria_presupuesto', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'convocatoria_presupuesto.id')
                 ->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova', 'presupuesto_sennova.id')
                 ->join('segundo_grupo_presupuestal', 'presupuesto_sennova.segundo_grupo_presupuestal_id', 'segundo_grupo_presupuestal.id')
-                ->where('segundo_grupo_presupuestal.nombre', 'ilike', '%'.$search.'%');
+                ->where('segundo_grupo_presupuestal.nombre', 'ilike', '%' . $search . '%');
         });
     }
 

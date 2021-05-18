@@ -95,9 +95,9 @@
             </tr>
         </tbody>
 
-        <tfoot>
+        <tfoot slot="tfoot">
             <tr>
-                <td colspan="3">
+                <td colspan="3" class="border-t p-4">
                     <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
                 </td>
             </tr>

@@ -16,7 +16,7 @@ class Proyecto extends Model
      * @var string
      */
     protected $table = 'proyectos';
-    
+
     /**
      * appends
      *
@@ -154,7 +154,7 @@ class Proyecto extends Model
     {
         return $this->hasMany(AnalisisRiesgo::class);
     }
-    
+
     /**
      * Relationship with ProyectoPresupuesto
      *
@@ -183,14 +183,14 @@ class Proyecto extends Model
     }
 
 
-        /**
+    /**
      * Get codigo e.g. SGPS-8000-2021
      *
      * @return void
      */
     public function getCodigoAttribute()
     {
-        return 'SGPS-' . ($this->id + 8000) .'-' . date('Y', strtotime($this->idi->fecha_finalizacion));
+        return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($this->idi->fecha_finalizacion));
     }
 
 
@@ -200,13 +200,13 @@ class Proyecto extends Model
         $fecha_inicio       = Carbon::parse($this->idi->fecha_inicio, 'UTC')->floorMonth();
         return $fecha_inicio->diffInMonths($fecha_finalizacion);
     }
-    
+
 
     public function getTotalProyectoPresupuestoAttribute()
     {
         $total = 0;
 
-        foreach($this->proyectoPresupuesto as $proyectoPresupuesto) {
+        foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
                 $total += $proyectoPresupuesto->getPromedioAttribute();
             }
@@ -221,7 +221,7 @@ class Proyecto extends Model
     {
         $total = 0;
 
-        foreach($this->proyectoPresupuesto as $proyectoPresupuesto) {
+        foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
             $total = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal()->where('codigo', '20202008005099')->count();
         }
 

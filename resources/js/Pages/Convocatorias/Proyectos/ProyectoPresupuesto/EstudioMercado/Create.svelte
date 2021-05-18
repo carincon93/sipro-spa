@@ -32,19 +32,19 @@
         requiere_tercer_estudio_mercado: false,
         convocatoria_presupuesto_id: convocatoriaPresupuesto.id,
         numero_items: '',
-        ficha_tecnica: '',
+        ficha_tecnica: null,
 
         primer_valor: '',
         primer_empresa: '',
-        primer_archivo: '',
+        primer_archivo: null,
 
         segundo_valor: '',
         segunda_empresa: '',
-        segundo_archivo: '',
+        segundo_archivo: null,
 
         tercer_valor: '',
         tercer_empresa: '',
-        tercer_archivo: '',
+        tercer_archivo: null,
     })
 
     function submit() {
@@ -54,22 +54,25 @@
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)
+                        document.getElementById('ficha_tecnica').value = null
+                        document.getElementById('primer_archivo').value = null
+                        document.getElementById('segundo_archivo').value = null
+                        document.getElementById('tercer_archivo').value = null
                     },
                     onError: () => {
                         $form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo ? true : false
                     },
                     onSuccess: () => {
-                        console.log('success')
-                        $form.reset()
+                        if (!$page.props.flash.error) {
+                            $form.reset()
+                        }
                     },
                 })
         }
     }
 
     let average
-    // afterUpdate(() => {
     $: average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0 ? parseInt($form.tercer_valor) : 0)) / (parseInt($form.tercer_valor) > 0 ? 3 : 2)
-    // })
 </script>
 
 <form on:submit|preventDefault={submit} id="form-estudio-mercado">

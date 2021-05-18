@@ -15,25 +15,20 @@
     export let lineaProgramatica
     export let codigoUsoPresupuestal
 
-    let selectedSegundoGrupoPresupuestalId
-    let selectedTercerGrupoPresupuestalId
+    let selectedSegundoGrupoPresupuestalId = presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id
+    let selectedTercerGrupoPresupuestalId = presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal_id
+    let seletcedConvocatoriaPresupuestoId = presupuestoSennova?.convocatoria_presupuesto?.id
     let mensajeUsoPresupuestal
 
     let segundoGrupoPresupuestal = []
     let tercerGrupoPresupuestal = []
-    let usosPresupuestales = []
-
+    $: usosPresupuestales = []
     onMount(() => {
         getSegundoGrupoPresupuestal()
-        presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id ? getTercerGrupoPresupuestal(presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id) : null
-        presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal_id ? getUsosPresupuestales(presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id, presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal_id) : null
-        presupuestoSennova?.convocatoria_presupuesto?.id ? getUsosPresupuestalesData(presupuestoSennova?.convocatoria_presupuesto?.id) : null
+        selectedSegundoGrupoPresupuestalId ? getTercerGrupoPresupuestal(selectedSegundoGrupoPresupuestalId) : null
+        selectedTercerGrupoPresupuestalId ? getUsosPresupuestales(selectedSegundoGrupoPresupuestalId, selectedTercerGrupoPresupuestalId) : null
+        // seletcedConvocatoriaPresupuestoId ? getUsosPresupuestalesData(seletcedConvocatoriaPresupuestoId) : null
     })
-
-    async function getSegundoGrupoPresupuestal() {
-        let res = await axios.get(route('web-api.segundo-grupo-presupuestal'))
-        segundoGrupoPresupuestal = res.data
-    }
 
     function handleSegundoGrupoPresupuestal(e) {
         selectedSegundoGrupoPresupuestalId = e.target.value
@@ -42,11 +37,9 @@
         if (selectedSegundoGrupoPresupuestalId != '') getTercerGrupoPresupuestal(selectedSegundoGrupoPresupuestalId)
     }
 
-    async function getTercerGrupoPresupuestal(segundoGrupoPresupuestalId) {
-        tercerGrupoPresupuestal = []
-        usosPresupuestales = []
-        let res = await axios.get(route('web-api.tercer-grupo-presupuestal', [segundoGrupoPresupuestalId]))
-        tercerGrupoPresupuestal = res.data
+    async function getSegundoGrupoPresupuestal() {
+        let res = await axios.get(route('web-api.segundo-grupo-presupuestal'))
+        segundoGrupoPresupuestal = res.data
     }
 
     function handleTercerGrupoPresupuestal(e) {
@@ -57,21 +50,26 @@
         if (selectedSegundoGrupoPresupuestalId != '' && selectedTercerGrupoPresupuestalId != '') getUsosPresupuestales(selectedSegundoGrupoPresupuestalId, selectedTercerGrupoPresupuestalId)
     }
 
+    async function getTercerGrupoPresupuestal(segundoGrupoPresupuestalId) {
+        tercerGrupoPresupuestal = []
+        usosPresupuestales = []
+        let res = await axios.get(route('web-api.tercer-grupo-presupuestal', [segundoGrupoPresupuestalId]))
+        tercerGrupoPresupuestal = res.data
+    }
+
     async function getUsosPresupuestales(segundoGrupoPresupuestalId, tercerGrupoPresupuestalId) {
         let res = await axios.get(route('web-api.usos-presupuestales', [convocatoria, lineaProgramatica, segundoGrupoPresupuestalId, tercerGrupoPresupuestalId]))
         usosPresupuestales = res.data
     }
 
-    function handlepresupuestoSennova(e) {
-        if (e.target.value != '') getUsosPresupuestalesData(e.target.value)
+    function handlePresupuestoSennova(e) {
+        if (e.target.value != '') seletcedConvocatoriaPresupuestoId = e.target.value
     }
 
-    function getUsosPresupuestalesData(value) {
-        mensajeUsoPresupuestal = usosPresupuestales.find((item) => item.value == value)?.mensaje
-
-        codigoUsoPresupuestal = usosPresupuestales.find((item) => item.value == value)?.codigo
-
-        showQtyInput = usosPresupuestales.find((item) => item.value == value)?.requiere_estudio_mercado
+    $: if (usosPresupuestales) {
+        mensajeUsoPresupuestal = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.mensaje
+        codigoUsoPresupuestal = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.codigo
+        showQtyInput = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.requiere_estudio_mercado
     }
 </script>
 
@@ -81,7 +79,7 @@
     <select id="segundo_grupo_presupuestal_id" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleSegundoGrupoPresupuestal(e)}>
         <option value="">Seleccione el concepto interno SENA</option>
         {#each segundoGrupoPresupuestal as { value, label }}
-            <option {value} selected={presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id == value ? true : false}>{label}</option>
+            <option {value} selected={selectedSegundoGrupoPresupuestalId == value ? true : false}>{label}</option>
         {/each}
     </select>
 </div>
@@ -92,7 +90,7 @@
     <select id="tercer_grupo_presupuestal_id" disabled={!(tercerGrupoPresupuestal.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleTercerGrupoPresupuestal(e)}>
         <option value="">Seleccione el rubro</option>
         {#each tercerGrupoPresupuestal as { value, label }}
-            <option class="shadow p-8 hover:bg-gray-100" {value} selected={presupuestoSennova?.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal_id == value ? true : false}>{label}</option>
+            <option class="shadow p-8 hover:bg-gray-100" {value} selected={selectedTercerGrupoPresupuestalId == value ? true : false}>{label}</option>
         {/each}
     </select>
 </div>
@@ -100,10 +98,10 @@
 <div class="mt-4">
     <Label id="uso_presupuestal_id" value="Uso presupuestal" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedUsoPresupuestal} on:change={(e) => handlepresupuestoSennova(e)}>
+    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedUsoPresupuestal} on:change={(e) => handlePresupuestoSennova(e)}>
         <option value="">Seleccione el uso presupuestal</option>
         {#each usosPresupuestales as { value, label }}
-            <option class="shadow p-8 hover:bg-gray-100" {value} selected={presupuestoSennova?.convocatoria_presupuesto?.id == value ? true : false}>{label}</option>
+            <option class="shadow p-8 hover:bg-gray-100" {value} selected={seletcedConvocatoriaPresupuestoId == value ? true : false}>{label}</option>
         {/each}
     </select>
     <InputError {message} />

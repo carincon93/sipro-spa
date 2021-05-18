@@ -182,7 +182,7 @@ return [
 		'actividad_id'          				=> 'actividad',
 		'carta_intencion'       				=> 'carta de intención',
 		'fecha_inicio'          				=> 'fecha de inicio',
-        'fecha_finalizacion'    				=> 'fecha de finalizacion',
+        'fecha_finalizacion'    				=> 'fecha de finalización',
 		'numero_documento'      				=> 'número de documento',
 		'numero_celular'      					=> 'número de celular',
 		'grupo_investigacion_id' 				=> 'grupo de investigación',
@@ -218,5 +218,8 @@ return [
         'permission_id'     					=> 'permisos',
 		'password'          					=> 'contraseña',
 		'justificacion' 						=> 'justificación',
+		'tipo_software' 						=> 'tipo de software',
+		'tipo_licencia' 						=> 'tipo de licencia',
+		'codigo_uso_presupuestal' 				=> 'código del uso presupuestal',
 	],
 ];

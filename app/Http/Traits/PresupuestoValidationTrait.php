@@ -2,34 +2,40 @@
 
 namespace App\Http\Traits;
 
-trait PresupuestoValidationTrait 
+trait PresupuestoValidationTrait
 {
 
-    public static function viaticosValidation($proyecto, $valor, $numeroItems, $valorGuardado, $numeroItemsGuardado) 
+    public static function viaticosValidation($proyecto, $segundoGrupoPresupuestalCodigo, $valor, $numeroItems, $valorGuardado, $numeroItemsGuardado)
     {
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo != 66) {
-            return false;
+        if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102') {
+            if ($proyecto->tipoProyecto->lineaProgramatica->codigo != 66 || $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
+                return false;
+            }
+
+            $total = 0;
+            $total += ($valor * $numeroItems) + self::totalViaticosInteriorGastosAlumnos($proyecto);
+
+            return ($total > 4000000) ? true : false;
         }
 
-        $total = 0;
-        $total -= $valorGuardado * $numeroItemsGuardado;
-        $total += ($valor * $numeroItems) + self::totalViaticos($proyecto);
-        return ($total > 4000000) ? true : false;
+        return false;
     }
-    
+
     /**
-     * totalViaticos
+     * totalViaticosInteriorGastosAlumnos
      *
      * @param  mixed $proyecto
-     * @return void
+     * @return int
      */
-    public function totalViaticos($proyecto)
+    public static function totalViaticosInteriorGastosAlumnos($proyecto)
     {
         $total = 0;
 
-        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
-            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
-                if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200600301' || $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200600303' || $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '20202006004') {
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+            $presupuestoSennova = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova;
+            if ($presupuestoSennova->segundoGrupoPresupuestal->codigo != '2041101') {
+                $codigoUsoPresupuestal = $presupuestoSennova->usoPresupuestal->codigo;
+                if ($codigoUsoPresupuestal == '2020200600301' || $codigoUsoPresupuestal == '2020200600303' || $codigoUsoPresupuestal == '20202006004') {
                     $total += $proyectoPresupuesto->getPromedioAttribute();
                 }
             }
@@ -42,10 +48,10 @@ trait PresupuestoValidationTrait
     {
         $porcentajeMaquinariaIndustrial         = self::porcentajeMaquinariaIndustrial($proyecto);
         $totalServiciosEspecialesConstruccion   = self::totalServiciosEspecialesConstruccion($proyecto);
-        
+
         if ($porcentajeMaquinariaIndustrial == 0) {
             return false;
-        } 
+        }
 
         $tercerValor = $tercerValor ?? 0;
 
@@ -70,9 +76,8 @@ trait PresupuestoValidationTrait
     public static function totalMaquinariaIndustrial($proyecto)
     {
         $total = 0;
-        $segundoGrupoPresupuestalId = null;
 
-        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
 
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2040115') {
                 $total += $proyectoPresupuesto->getPromedioAttribute();
@@ -84,8 +89,6 @@ trait PresupuestoValidationTrait
 
     public static function porcentajeMaquinariaIndustrial($proyecto)
     {
-        $total = 0;
-
         return self::totalMaquinariaIndustrial($proyecto) * 0.05;
     }
 
@@ -93,7 +96,7 @@ trait PresupuestoValidationTrait
     {
         $total = 0;
 
-        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
 
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
                 $total += $proyectoPresupuesto->getPromedioAttribute();
@@ -106,10 +109,10 @@ trait PresupuestoValidationTrait
 
     public static function serviciosMantenimientoValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
     {
-        if($proyecto->getTotalProyectoPresupuestoAttribute() == 0) {
+        if ($proyecto->getTotalProyectoPresupuestoAttribute() == 0) {
             return false;
         }
-        
+
         $tercerValor  = $tercerValor ?? 0;
 
         $division = ($tercerValor > 0) ? 3 : 2;
@@ -134,8 +137,8 @@ trait PresupuestoValidationTrait
     public static function totalMantenimientoMaquinaria($proyecto)
     {
         $total = 0;
-        
-        foreach($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
             $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
                 if ($codigoUsoPresupuestal == '20202008007013' || $codigoUsoPresupuestal == '20202008007012' || $codigoUsoPresupuestal == '20202008007014' || $codigoUsoPresupuestal == '20202008007015' || $codigoUsoPresupuestal == '20202008007011') {

@@ -82,7 +82,8 @@ class ProyectLoteEstudioMercadoController extends Controller
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $proyectoPresupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$proyectoPercentage}) COP total del proyecto. Vuelva a diligenciar.");
+                $porcentajeProyecto = $proyecto->getTotalProyectoPresupuestoAttribute() * 0.05;
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -196,7 +197,8 @@ class ProyectLoteEstudioMercadoController extends Controller
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $proyectoPresupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$proyectoPercentage}) COP total del proyecto. Vuelva a diligenciar.");
+                $porcentajeProyecto = $proyecto->getTotalProyectoPresupuestoAttribute() * 0.05;
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$porcentajeProyecto}) COP total del proyecto. Vuelva a diligenciar.");
             }
         }
         
@@ -244,8 +246,8 @@ class ProyectLoteEstudioMercadoController extends Controller
 
         if ($tercerEstudioMercado) {
             $proyectoLoteEstudioMercado->estudiosMercado()->where('id', $estudioMercadoId)->updateOrCreate(
+                ['id' => $estudioMercadoId],
                 [
-                    'id'       => $estudioMercadoId,
                     'valor'    => $valor,
                     'empresa'  => $empresa,
                     'soporte'  => $soporte ?? $estudioMercado->soporte,

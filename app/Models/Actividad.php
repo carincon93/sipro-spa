@@ -57,7 +57,7 @@ class Actividad extends Model
     /**
      * Relationship with ObjetivoEspecifico
      *
-     * @return void
+     * @return object
      */
     public function objetivoEspecifico()
     {
@@ -67,7 +67,7 @@ class Actividad extends Model
     /**
      * Relationship with CausaIndirecta
      *
-     * @return void
+     * @return object
      */
     public function causaIndirecta()
     {
@@ -77,7 +77,7 @@ class Actividad extends Model
     /**
      * Relationship with Producto
      *
-     * @return void
+     * @return object
      */
     public function productos()
     {
@@ -87,7 +87,7 @@ class Actividad extends Model
     /**
      * Relationship with ProyectoPresupuesto
      *
-     * @return void
+     * @return object
      */
     public function proyectoPresupuesto()
     {
@@ -97,7 +97,7 @@ class Actividad extends Model
     /**
      * Relationship with EntidadAliada
      *
-     * @return void
+     * @return object
      */
     public function entidadesAliadas()
     {
@@ -114,7 +114,7 @@ class Actividad extends Model
     public function scopeFilterActividad($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%'.$search.'%');
+            $query->where('descripcion', 'ilike', '%' . $search . '%');
         });
     }
 

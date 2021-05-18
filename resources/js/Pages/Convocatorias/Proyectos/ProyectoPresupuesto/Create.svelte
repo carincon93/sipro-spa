@@ -30,7 +30,9 @@
 
     let showQtyInput = true
     let sending = false
+    $: software = $form.codigo_uso_presupuestal == '2010100600203101' ? true : false
     let form = useForm({
+        software: software,
         convocatoria_presupuesto_id: null,
         descripcion: '',
         justificacion: '',
@@ -40,7 +42,7 @@
         tipo_licencia: '',
         fecha_inicio: '',
         fecha_finalizacion: '',
-        uso_presupuestal_codigo: '',
+        codigo_uso_presupuestal: '',
     })
 
     function submit() {
@@ -73,7 +75,7 @@
         <form on:submit|preventDefault={submit} novalidate>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <DropdownPresupuesto bind:selectedUsoPresupuestal={$form.convocatoria_presupuesto_id} bind:showQtyInput bind:codigoUsoPresupuestal={$form.uso_presupuestal_codigo} message={errors.convocatoria_presupuesto_id} {convocatoria} lineaProgramatica={proyecto.tipo_proyecto.linea_programatica} required />
+                    <DropdownPresupuesto bind:selectedUsoPresupuestal={$form.convocatoria_presupuesto_id} bind:showQtyInput bind:codigoUsoPresupuestal={$form.codigo_uso_presupuestal} message={errors.convocatoria_presupuesto_id} {convocatoria} lineaProgramatica={proyecto.tipo_proyecto.linea_programatica} required />
                 </div>
 
                 <div class="mt-4">
@@ -97,25 +99,27 @@
                     </div>
                 {/if}
 
-                {#if $form.uso_presupuestal_codigo == '2010100600203101'}
+                {#if $form.codigo_uso_presupuestal == '2010100600203101'}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
                         <select id="tipo_licencia" bind:value={$form.tipo_licencia} required>
                             <option value="">Seleccione el tipo de licencia </option>
-                            {#each tiposLicencia as { valor, label }}
-                                <option {valor}>{label}</option>
+                            {#each tiposLicencia as { value, label }}
+                                <option {value}>{label}</option>
                             {/each}
                         </select>
+                        <InputError message={errors.tipo_licencia} />
                     </div>
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
                         <select id="tipo_software" bind:value={$form.tipo_software} required>
                             <option value="">Seleccione el tipo de software </option>
-                            {#each tiposSoftware as { valor, label }}
-                                <option {valor}>{label}</option>
+                            {#each tiposSoftware as { value, label }}
+                                <option {value}>{label}</option>
                             {/each}
                         </select>
+                        <InputError message={errors.tipo_software} />
                     </div>
 
                     <div class="mt-8">

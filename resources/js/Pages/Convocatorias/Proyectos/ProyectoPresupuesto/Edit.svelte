@@ -11,6 +11,7 @@
     import Button from '@/Components/Button'
     import Textarea from '@/Components/Textarea'
     import Dialog from '@/Components/Dialog'
+    import InfoMessage from '@/Components/InfoMessage'
     import DropdownPresupuesto from '@/Dropdowns/DropdownPresupuesto'
 
     export let errors
@@ -36,14 +37,16 @@
     let showQtyInput = proyectoPresupuesto.valor != null ? false : true
     let dialog_open = false
     let sending = false
+    $: software = $form.codigo_uso_presupuestal == '2010100600203101' ? true : false
     let form = useForm({
-        codigo_uso_presupuestal: 2010100600203101,
+        codigo_uso_presupuestal: '',
         convocatoria_presupuesto_id: proyectoPresupuesto.convocatoria_presupuesto_id,
         descripcion: proyectoPresupuesto.descripcion,
         justificacion: proyectoPresupuesto.justificacion,
         valor: proyectoPresupuesto.valor,
         numero_items: proyectoPresupuesto.numero_items,
-        software_type: proyectoPresupuesto.software_info?.software_type,
+        software: software,
+        tipo_software: proyectoPresupuesto.software_info?.tipo_software,
         tipo_licencia: proyectoPresupuesto.software_info?.tipo_licencia,
         fecha_inicio: proyectoPresupuesto.software_info?.fecha_inicio,
         fecha_finalizacion: proyectoPresupuesto.software_info?.fecha_finalizacion,
@@ -90,13 +93,8 @@
                         <InputError message={errors.convocatoria_presupuesto_id} />
                     </div>
 
-                    {#if showQtyInput != undefined && !showQtyInput && proyectoPresupuesto.lotes_estudio_mercado?.length > 0}
-                        <div class="bg-indigo-100 p-5 text-indigo-600 mb-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px)">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <p>El uso presupuestal seleccionado no requiere de estudio de mercado. Si el ítem a actualizar tenía estudios de mercado generados estos se eliminarán.</p>
-                        </div>
+                    {#if showQtyInput != undefined && !showQtyInput && proyectoPresupuesto.proyecto_lote_estudio_mercado?.length > 0}
+                        <InfoMessage message="El uso presupuestal seleccionado no requiere de estudio de mercado. Si el ítem a actualizar tenía estudios de mercado generados estos se eliminarán." />
                     {/if}
 
                     <div class="mt-4">
@@ -132,8 +130,8 @@
                         </div>
 
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="software_type" value="Tipo de software" />
-                            <select id="software_type" bind:value={$form.software_type} required>
+                            <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
+                            <select id="tipo_software" bind:value={$form.tipo_software} required>
                                 <option value="">Seleccione el tipo de software </option>
                                 {#each tiposSoftware as { value, label }}
                                     <option {value}>{label}</option>
