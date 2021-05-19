@@ -6,7 +6,7 @@
 </script>
 
 <div {...props}>
-    <h1 class="mb-8 font-bold text-center text-3xl">
+    <h1 class="mt-24 mb-8 text-center text-3xl">
         <slot name="title" />
     </h1>
     <div class="mb-8">

@@ -63,7 +63,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="font-bold text-3xl m-24 text-center">Cadena de valor</h1>
+    <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
     <div class="mt-10">
         <div id="orgchart_div" />

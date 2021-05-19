@@ -21,7 +21,7 @@
     }
 </script>
 
-<h1 class="text-4xl text-center">Proponentes</h1>
+<h1 class="text-3xl text-center">Proponentes</h1>
 <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de proponentes por número de documento o correo electrónico institucional</p>
 
 <form on:submit|preventDefault={submit}>

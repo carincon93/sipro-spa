@@ -361,134 +361,132 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <div class="py-12">
-        <h1 class="text-4xl text-center">Árbol de problemas</h1>
-        <p class="text-center">Debe generar el árbol de problemas iniciando con el planteamiento del problema, relacionando sus causas y efectos.</p>
+    <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
+    <p class="text-center">Debe generar el árbol de problemas iniciando con el planteamiento del problema, relacionando sus causas y efectos.</p>
 
-        <div class="mt-16">
-            <!-- Efectos -->
-            <div class="flex mb-14">
-                {#each efectosDirectos as efectoDirecto, i}
-                    <div class="flex-1">
-                        {#if i == 0}
-                            <!-- Efectos indirectos -->
-                            <div id="efecto-indirecto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                                <small>Efectos indirectos</small>
-                                <div id="arrow-efecto-indirecto" class="arrow" data-popper-arrow />
-                            </div>
-                        {/if}
-                        <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                            {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                                <div class="flex-1 efectos-directos relative">
-                                    <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
-                                            <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
-                                            {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
-                                                {efectoIndirecto.descripcion}
-                                            {/if}
-                                        </p>
-                                    </div>
-                                </div>
-                            {/each}
-                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                                <div class="flex-1 efectos-directos relative" on:click={showEfectoindirectoDialog(null, efectoDirecto.id)}>
-                                    <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
-                                    </div>
-                                </div>
-                            {/each}
+    <div class="mt-16">
+        <!-- Efectos -->
+        <div class="flex mb-14">
+            {#each efectosDirectos as efectoDirecto, i}
+                <div class="flex-1">
+                    {#if i == 0}
+                        <!-- Efectos indirectos -->
+                        <div id="efecto-indirecto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                            <small>Efectos indirectos</small>
+                            <div id="arrow-efecto-indirecto" class="arrow" data-popper-arrow />
                         </div>
-
-                        {#if i == 0}
-                            <!-- Efecto directo -->
-                            <div id="efecto-directo-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                                <small>Efectos directos</small>
-                                <div id="arrow-efecto-directo" class="arrow" data-popper-arrow />
-                            </div>
-                        {/if}
-                        <!-- Efecto directo -->
-                        <div class="efectos-directos relative flex-1" id={i == 0 ? 'efecto-directo-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                            <div on:click={showEfectoDirectoDialog(efectoDirecto)} class="{efectoDirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                                    <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}</small>
-                                    {#if efectoDirecto.descripcion != null && efectoDirecto.descripcion.length > 0}
-                                        {efectoDirecto.descripcion}
-                                    {/if}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-
-            <!-- Planteamiento del problema -->
-            <div id="planteamiento-problema-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                <small class="block line-height-1">Planteamiento <br /> del problema</small>
-                <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
-            </div>
-            <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
-                <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5">
-                    {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
-                        <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                            {proyecto.planteamiento_problema}
-                        </p>
                     {/if}
-                </div>
-            </div>
+                    <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
+                            <div class="flex-1 efectos-directos relative">
+                                <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
+                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
+                                        <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
+                                        {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
+                                            {efectoIndirecto.descripcion}
+                                        {/if}
+                                    </p>
+                                </div>
+                            </div>
+                        {/each}
+                        {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                            <div class="flex-1 efectos-directos relative" on:click={showEfectoindirectoDialog(null, efectoDirecto.id)}>
+                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
+                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
 
-            <!-- Causas -->
-            <div class="flex mt-14">
-                {#each causasDirectas as causaDirecta, i}
-                    <div class="flex-1">
-                        <!-- Causa directa -->
-                        {#if i == 0}
-                            <div id="causa-directa-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                                <small>Causas directas</small>
-                                <div id="arrow-causa-directa" class="arrow" data-popper-arrow />
-                            </div>
-                        {/if}
-                        <div class="causas-directas relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                            <div on:click={showCausaDirectaDialog(causaDirecta)} class="{causaDirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                                    <small class="title block font-bold mb-2">CAU-{causaDirecta.id}</small>
-                                    {#if causaDirecta.descripcion != null && causaDirecta.descripcion.length > 0}
-                                        {causaDirecta.descripcion}
-                                    {/if}
-                                </p>
-                            </div>
+                    {#if i == 0}
+                        <!-- Efecto directo -->
+                        <div id="efecto-directo-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                            <small>Efectos directos</small>
+                            <div id="arrow-efecto-directo" class="arrow" data-popper-arrow />
                         </div>
-
-                        {#if i == 0}
-                            <div id="causa-indirecta-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                                <small>Causas indirectas</small>
-                                <div id="arrow-causa-indirecta" class="arrow" data-popper-arrow />
-                            </div>
-                        {/if}
-                        <!-- Causas indirectas -->
-                        <div class="flex mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                            {#each causaDirecta.causas_indirectas as causaIndirecta}
-                                <div class="causas-directas relative flex-1">
-                                    <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
-                                            <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
-                                            {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
-                                                {causaIndirecta.descripcion}
-                                            {/if}
-                                        </p>
-                                    </div>
-                                </div>
-                            {/each}
-                            {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
-                                <div class="causas-directas relative flex-1">
-                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
-                                    </div>
-                                </div>
-                            {/each}
+                    {/if}
+                    <!-- Efecto directo -->
+                    <div class="efectos-directos relative flex-1" id={i == 0 ? 'efecto-directo-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div on:click={showEfectoDirectoDialog(efectoDirecto)} class="{efectoDirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
+                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                                <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}</small>
+                                {#if efectoDirecto.descripcion != null && efectoDirecto.descripcion.length > 0}
+                                    {efectoDirecto.descripcion}
+                                {/if}
+                            </p>
                         </div>
                     </div>
-                {/each}
+                </div>
+            {/each}
+        </div>
+
+        <!-- Planteamiento del problema -->
+        <div id="planteamiento-problema-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+            <small class="block line-height-1">Planteamiento <br /> del problema</small>
+            <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
+        </div>
+        <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
+            <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5">
+                {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
+                    <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                        {proyecto.planteamiento_problema}
+                    </p>
+                {/if}
             </div>
+        </div>
+
+        <!-- Causas -->
+        <div class="flex mt-14">
+            {#each causasDirectas as causaDirecta, i}
+                <div class="flex-1">
+                    <!-- Causa directa -->
+                    {#if i == 0}
+                        <div id="causa-directa-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                            <small>Causas directas</small>
+                            <div id="arrow-causa-directa" class="arrow" data-popper-arrow />
+                        </div>
+                    {/if}
+                    <div class="causas-directas relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div on:click={showCausaDirectaDialog(causaDirecta)} class="{causaDirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
+                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                                <small class="title block font-bold mb-2">CAU-{causaDirecta.id}</small>
+                                {#if causaDirecta.descripcion != null && causaDirecta.descripcion.length > 0}
+                                    {causaDirecta.descripcion}
+                                {/if}
+                            </p>
+                        </div>
+                    </div>
+
+                    {#if i == 0}
+                        <div id="causa-indirecta-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                            <small>Causas indirectas</small>
+                            <div id="arrow-causa-indirecta" class="arrow" data-popper-arrow />
+                        </div>
+                    {/if}
+                    <!-- Causas indirectas -->
+                    <div class="flex mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        {#each causaDirecta.causas_indirectas as causaIndirecta}
+                            <div class="causas-directas relative flex-1">
+                                <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
+                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
+                                        <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
+                                        {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
+                                            {causaIndirecta.descripcion}
+                                        {/if}
+                                    </p>
+                                </div>
+                            </div>
+                        {/each}
+                        {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
+                            <div class="causas-directas relative flex-1">
+                                <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
+                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            {/each}
         </div>
     </div>
 

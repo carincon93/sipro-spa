@@ -15,15 +15,13 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <div class="py-12">
-        <div class="mt-16">
-            <UsersFinder />
-        </div>
-        <div class="mt-80">
-            <ResearchTeamsFinder />
-        </div>
-        <div class="mt-80">
-            <AcademicProgramsFinder />
-        </div>
+    <div class="mt-24">
+        <UsersFinder />
+    </div>
+    <div class="mt-80">
+        <ResearchTeamsFinder />
+    </div>
+    <div class="mt-80">
+        <AcademicProgramsFinder />
     </div>
 </AuthenticatedLayout>

@@ -27,7 +27,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="font-bold text-3xl m-24 text-center">Actividades</h1>
+    <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
     <InfoMessage message="Si desea añadir actividades, por favor diríjase al 'Arbol de objetivos'" />
 

@@ -31,7 +31,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="font-bold text-3xl m-24 text-center">Productos</h1>
+    <h1 class="text-3xl m-24 text-center">Productos</h1>
     <div class="mb-6 flex justify-end items-center">
         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
