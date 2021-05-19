@@ -28,6 +28,8 @@ class ProyectoController extends Controller
 
     public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+
         $objetivos = collect(['Objetivo general' => $proyecto->idi->objetivo_general]);
         $productos = collect([]);
 
