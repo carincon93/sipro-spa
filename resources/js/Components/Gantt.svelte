@@ -7,16 +7,16 @@
     import ResourceMenu from '@/Components/ResourceMenu'
     import { Item, Text } from '@smui/list'
     import InfoMessage from '@/Components/InfoMessage'
+    import { onMount } from 'svelte'
 
     export let items
     export let request = null
 
     let loading = false
 
-    function initChart() {
-        google.charts.load('current', { packages: ['gantt'], language: 'es' })
+    onMount(() => {
         google.charts.setOnLoadCallback(drawChart)
-    }
+    })
 
     function drawChart() {
         var data = new google.visualization.DataTable()
@@ -55,12 +55,15 @@
         }
 
         // Valida si el document.getElementById('chart_div') existe para proceder a dibujar el GanttChart
-        if (typeof document.getElementById('chart_div') != 'undefined' && document.getElementById('chart_div') != null && items.length > 0) {
+        if (items.length > 0) {
             var chart = new google.visualization.Gantt(document.getElementById('chart_div'))
 
             loading = true
 
-            chart.draw(data, options)
+            if (typeof chart.draw === 'function') {
+                // Draw the chart, setting the allowHtml option to true for the tooltips.
+                chart.draw(data, options)
+            }
 
             google.visualization.events.addListener(chart, 'select', handleClick)
 
@@ -87,10 +90,6 @@
     }
 </script>
 
-<svelte:head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" on:load={initChart}></script>
-</svelte:head>
-
 <div class="flex relative mt-10">
     {#if items.length === 0}
         <InfoMessage message={$_('No data recorded')} />
@@ -100,7 +99,7 @@
                 {#each items as item, i}
                     <li style="height: 120px; padding: 7px;line-height: 1.2;display: flex;justify-content: space-between;width: 100%;">
                         {#if request}
-                            <p style="max-width: 90%;max-height: 50px;overflow: hidden;">
+                            <p style="max-width: 90%;max-height: 56px;overflow: hidden;">
                                 {item.descripcion ?? item.nombre}
                             </p>
                             <ResourceMenu>
@@ -119,3 +118,9 @@
     {/if}
     <Loading {loading} bg="transparent" />
 </div>
+
+<style>
+    :global(#chart_div path) {
+        fill: #4f46e5;
+    }
+</style>

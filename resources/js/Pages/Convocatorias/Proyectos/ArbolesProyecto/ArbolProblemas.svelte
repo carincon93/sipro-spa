@@ -381,7 +381,7 @@
                             {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                                 <div class="flex-1 efectos-directos relative">
                                     <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white">
+                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
                                             <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
                                             {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
                                                 {efectoIndirecto.descripcion}
@@ -469,7 +469,7 @@
                             {#each causaDirecta.causas_indirectas as causaIndirecta}
                                 <div class="causas-directas relative flex-1">
                                     <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white">
+                                        <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
                                             <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
                                             {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
                                                 {causaIndirecta.descripcion}
@@ -628,6 +628,10 @@
 
     .tooltip[data-popper-placement^='left'] > .arrow {
         right: -4px;
+    }
+
+    .node {
+        line-height: 1.24;
     }
 
     :global(.mdc-dialog__surface) {

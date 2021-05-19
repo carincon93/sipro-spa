@@ -438,7 +438,7 @@
                             {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                                 <div class="flex-1 resultados relative">
                                     <div on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultado.id)} class="{efectoIndirecto.impacto && efectoIndirecto.impacto.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-32 overflow-y-hidden p-2.5 text-sm text-white">
+                                        <p class="h-32 overflow-y-hidden p-2.5 text-xs node text-white">
                                             {#if efectoIndirecto.impacto}
                                                 <small class="title block font-bold mb-2 line-height-1">
                                                     RES-{efectoDirecto.resultado.id}
@@ -532,7 +532,7 @@
                             {#each causaDirecta.causas_indirectas as causaIndirecta}
                                 <div class="objetivo-especificos relative flex-1">
                                     <div on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)} class="{causaIndirecta.actividad && causaIndirecta.actividad.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                        <p class="h-32 overflow-y-hidden p-2.5 text-sm text-white">
+                                        <p class="h-32 overflow-y-hidden p-2.5 text-xs node text-white">
                                             {#if causaIndirecta.actividad}
                                                 <small class="title block font-bold mb-2 line-height-1">
                                                     OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
@@ -763,6 +763,10 @@
 
     .tooltip[data-popper-placement^='left'] > .arrow {
         right: -4px;
+    }
+
+    .node {
+        line-height: 1.24;
     }
 
     :global(.mdc-dialog__surface) {

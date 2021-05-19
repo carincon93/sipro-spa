@@ -21,7 +21,7 @@ class Actividad extends Model
      *
      * @var array
      */
-    protected $appends = ['year_inicio', 'mes_inicio', 'dia_inicio', 'year_finalizacion', 'mes_finalizacion', 'dia_finalizacion'];
+    protected $appends = ['costo_actividad', 'year_inicio', 'mes_inicio', 'dia_inicio', 'year_finalizacion', 'mes_finalizacion', 'dia_finalizacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -146,5 +146,16 @@ class Actividad extends Model
     public function getDiaFinalizacionAttribute()
     {
         return date('d', strtotime($this->fecha_finalizacion));
+    }
+
+    public function getCostoActividadAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
+            $total += $proyectoPresupuesto->getPromedioAttribute();
+        }
+
+        return $total;
     }
 }

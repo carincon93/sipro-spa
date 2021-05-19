@@ -33,7 +33,7 @@ class ActividadController extends Controller
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
                 })
-            )->filterActividad(request()->only('search'))->orderBy('fecha_inicio', 'ASC')->paginate(),
+            )->orderBy('fecha_inicio', 'ASC')->filterActividad(request()->only('search'))->paginate(),
         ]);
     }
 

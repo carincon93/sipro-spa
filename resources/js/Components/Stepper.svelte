@@ -91,7 +91,7 @@
         </a>
     </div>
     <div class="w-10/12">
-        <a use:inertia href="#" class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.proyectos.cadena-valor')} href={route('convocatorias.proyectos.cadena-valor', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2">
                 {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     12

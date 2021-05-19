@@ -45,16 +45,6 @@ class EfectoDirecto extends Model
     ];
 
     /**
-     * Relationship with EfectoIndirecto
-     *
-     * @return object
-     */
-    public function efectosIndirectos()
-    {
-        return $this->hasMany(EfectoIndirecto::class)->orderBy('id', 'ASC');
-    }
-
-    /**
      * Relationship with Proyecto
      *
      * @return object
@@ -72,6 +62,16 @@ class EfectoDirecto extends Model
     public function resultado()
     {
         return $this->hasOne(Resultado::class);
+    }
+
+    /**
+     * Relationship with EfectoIndirecto
+     *
+     * @return object
+     */
+    public function efectosIndirectos()
+    {
+        return $this->hasMany(EfectoIndirecto::class)->orderBy('id', 'ASC');
     }
 
     /**
