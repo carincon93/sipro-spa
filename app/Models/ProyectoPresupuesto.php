@@ -34,7 +34,9 @@ class ProyectoPresupuesto extends Model
         'descripcion',
         'justificacion',
         'valor',
-        'numero_items'
+        'numero_items',
+        'software',
+        'codigo_uso_presupuestal'
     ];
 
     /**

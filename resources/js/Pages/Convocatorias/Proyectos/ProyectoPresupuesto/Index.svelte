@@ -126,7 +126,7 @@
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
-                        <span class="hidden md:inline">Proyecto presupuesto</span>
+                        <span class="hidden md:inline">presupuesto</span>
                     </div>
                 </Button>
             {/if}

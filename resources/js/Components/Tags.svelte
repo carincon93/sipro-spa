@@ -7,7 +7,6 @@
 
     export let id
     export let tags
-    export let required
     export let error
 
     let input, tagify
@@ -26,3 +25,9 @@
 
 <input type="text" {id} value={tags} class="tagify-input bg-white w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" />
 <InputError message={error} />
+
+<style>
+    :global(.tagify__input::before) {
+        line-height: initial;
+    }
+</style>

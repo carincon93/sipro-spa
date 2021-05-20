@@ -31,6 +31,7 @@
     })
 
     function handleSegundoGrupoPresupuestal(e) {
+        selectedTercerGrupoPresupuestalId = undefined
         selectedSegundoGrupoPresupuestalId = e.target.value
         mensajeUsoPresupuestal = null
         showQtyInput = null
@@ -66,7 +67,18 @@
         if (e.target.value != '') seletcedConvocatoriaPresupuestoId = e.target.value
     }
 
+    let sinUsosPresupuestales = false
     $: if (usosPresupuestales) {
+        setTimeout(() => {
+            if (selectedTercerGrupoPresupuestalId != undefined && usosPresupuestales.length == 0) {
+                sinUsosPresupuestales = true
+                document.getElementById('uso_presupuestal_id').removeAttribute('disabled')
+                document.getElementById('uso_presupuestal_id').setCustomValidity('No hay usos presupuestales para este filtro, por favor realice un filtro diferente')
+            } else {
+                sinUsosPresupuestales = false
+                document.getElementById('uso_presupuestal_id').setCustomValidity('')
+            }
+        }, 500)
         mensajeUsoPresupuestal = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.mensaje
         codigoUsoPresupuestal = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.codigo
         showQtyInput = usosPresupuestales.find((item) => item.value == seletcedConvocatoriaPresupuestoId)?.requiere_estudio_mercado
@@ -74,9 +86,9 @@
 </script>
 
 <div class="mt-4">
-    <Label id="segundo_grupo_presupuestal_id" value="Concepto interno SENA" {required} />
+    <Label labelFor="segundo_grupo_presupuestal_id" value="Concepto interno SENA" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="segundo_grupo_presupuestal_id" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleSegundoGrupoPresupuestal(e)}>
+    <select id="segundo_grupo_presupuestal_id" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleSegundoGrupoPresupuestal(e)} required>
         <option value="">Seleccione el concepto interno SENA</option>
         {#each segundoGrupoPresupuestal as { value, label }}
             <option {value} selected={selectedSegundoGrupoPresupuestalId == value ? true : false}>{label}</option>
@@ -85,9 +97,9 @@
 </div>
 
 <div class="mt-4">
-    <Label id="tercer_grupo_presupuestal_id" value="Rubro" {required} />
+    <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="tercer_grupo_presupuestal_id" disabled={!(tercerGrupoPresupuestal.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleTercerGrupoPresupuestal(e)}>
+    <select id="tercer_grupo_presupuestal_id" disabled={!(tercerGrupoPresupuestal.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleTercerGrupoPresupuestal(e)} required>
         <option value="">Seleccione el rubro</option>
         {#each tercerGrupoPresupuestal as { value, label }}
             <option class="shadow p-8 hover:bg-gray-100" {value} selected={selectedTercerGrupoPresupuestalId == value ? true : false}>{label}</option>
@@ -96,15 +108,18 @@
 </div>
 
 <div class="mt-4">
-    <Label id="uso_presupuestal_id" value="Uso presupuestal" {required} />
+    <Label labelFor="uso_presupuestal_id" value="Uso presupuestal" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedUsoPresupuestal} on:change={(e) => handlePresupuestoSennova(e)}>
+    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedUsoPresupuestal} on:change={(e) => handlePresupuestoSennova(e)} required>
         <option value="">Seleccione el uso presupuestal</option>
         {#each usosPresupuestales as { value, label }}
             <option class="shadow p-8 hover:bg-gray-100" {value} selected={seletcedConvocatoriaPresupuestoId == value ? true : false}>{label}</option>
         {/each}
     </select>
     <InputError {message} />
+    {#if sinUsosPresupuestales}
+        <InfoMessage message="No hay usos presupuestales para este filtro, por favor realice un filtro diferente" />
+    {/if}
 </div>
 
 {#if mensajeUsoPresupuestal}

@@ -23,7 +23,7 @@ class ProyectoPresupuestoRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this);
+        dd($this);
         return [
             'convocatoria_presupuesto_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:convocatoria_presupuesto,id'],
             'descripcion'                   => ['required', 'string'],
