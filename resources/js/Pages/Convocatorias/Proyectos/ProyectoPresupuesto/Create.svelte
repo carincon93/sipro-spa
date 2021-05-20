@@ -102,7 +102,7 @@
                 {#if $form.codigo_uso_presupuestal == '2010100600203101'}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
-                        <select id="tipo_licencia" bind:value={$form.tipo_licencia} required>
+                        <select id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tipo_licencia} required>
                             <option value="">Seleccione el tipo de licencia </option>
                             {#each tiposLicencia as { value, label }}
                                 <option {value}>{label}</option>
@@ -113,7 +113,7 @@
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
-                        <select id="tipo_software" bind:value={$form.tipo_software} required>
+                        <select id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tipo_software} required>
                             <option value="">Seleccione el tipo de software </option>
                             {#each tiposSoftware as { value, label }}
                                 <option {value}>{label}</option>
