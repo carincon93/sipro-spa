@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
@@ -30,7 +31,15 @@ class ProyectoController extends Controller
     {
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
-        $objetivos = collect(['Objetivo general' => $proyecto->idi->objetivo_general]);
+        if ($proyecto->idi()->exists()) {
+            $objetivoGeneral = $proyecto->idi->objetivo_general;
+        }
+
+        if ($proyecto->tatp()->exists()) {
+            $objetivoGeneral = $proyecto->tatp->objetivo_general;
+        }
+
+        $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
         $productos = collect([]);
 
         foreach ($proyecto->causasDirectas as $causaDirecta) {
@@ -50,5 +59,20 @@ class ProyectoController extends Controller
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);
+    }
+
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                return redirect()->route('convocatorias.idi.edit', [$convocatoria, $proyecto]);
+                break;
+            case $proyecto->tatp()->exists():
+                return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $proyecto]);
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 }

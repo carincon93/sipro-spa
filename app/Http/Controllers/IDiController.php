@@ -27,8 +27,8 @@ class IDiController extends Controller
         $this->authorize('viewAny', [IDi::class]);
 
         return Inertia::render('Convocatorias/Proyectos/IDi/Index', [
-            'filters'       => request()->all('search'),
             'convocatoria'  => $convocatoria->only('id'),
+            'filters'       => request()->all('search'),
             'IDi'           => IDi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
                 ->filterIDi(request()->only('search'))->paginate(),
         ]);
@@ -79,7 +79,7 @@ class IDiController extends Controller
         $IDi->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $IDi->bibliografia                          = 'Por favor diligencie la bibliografía';
         $IDi->numero_aprendices                     = 0;
-        $IDi->impacto_                              = 'Describa el beneficio en los municipios';
+        $IDi->impacto_municipios                    = 'Describa el beneficio en los municipios';
         $IDi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
 
         $IDi->muestreo                              = null;

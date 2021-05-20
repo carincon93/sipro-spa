@@ -74,6 +74,16 @@ class Producto extends Model
     }
 
     /**
+     * Relationship with TaTpProducto
+     *
+     * @return object
+     */
+    public function taTpProducto()
+    {
+        return $this->hasOne(TaTpProducto::class);
+    }
+
+    /**
      * Relationship with Actividad
      *
      * @return object

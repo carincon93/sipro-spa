@@ -64,7 +64,6 @@ class Proyecto extends Model
         return $this->belongsTo(Convocatoria::class);
     }
 
-
     /**
      * Relationship with TipoProyecto
      *
@@ -86,13 +85,23 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with RDI
+     * Relationship with IDi
      *
      * @return object
      */
     public function idi()
     {
         return $this->hasOne(IDi::class, 'id');
+    }
+
+    /**
+     * Relationship with TATP
+     *
+     * @return object
+     */
+    public function taTp()
+    {
+        return $this->hasOne(TaTp::class, 'id');
     }
 
     /**
@@ -189,7 +198,10 @@ class Proyecto extends Model
      */
     public function getCodigoAttribute()
     {
-        return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($this->idi->fecha_finalizacion));
+        if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
+        if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
+
+        return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
     }
 
     /**
@@ -199,9 +211,19 @@ class Proyecto extends Model
      */
     public function getDiffMesesAttribute()
     {
-        $fecha_finalizacion = Carbon::parse($this->idi->fecha_finalizacion, 'UTC')->floorMonth();
-        $fecha_inicio       = Carbon::parse($this->idi->fecha_inicio, 'UTC')->floorMonth();
-        return $fecha_inicio->diffInMonths($fecha_finalizacion);
+        if ($this->idi()->exists()) {
+            $fechaInicio = $this->idi->fecha_inicio;
+            $fechaFinalizacion = $this->idi->fecha_finalizacion;
+        }
+
+        if ($this->tatp()->exists()) {
+            $fechaInicio = $this->tatp->fecha_inicio;
+            $fechaFinalizacion = $this->tatp->fecha_finalizacion;
+        }
+
+        $fechaFinalizacion = Carbon::parse($fechaFinalizacion, 'UTC')->floorMonth();
+        $fechaInicio       = Carbon::parse($fechaInicio, 'UTC')->floorMonth();
+        return $fechaInicio->diffInMonths($fechaFinalizacion);
     }
 
 

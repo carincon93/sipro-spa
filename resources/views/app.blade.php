@@ -26,7 +26,8 @@
         })
 
         google.charts.load('current', {
-            packages: ['orgchart']
+            packages: ['orgchart'],
+            language: 'es'
         })
 
     </script>

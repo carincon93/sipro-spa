@@ -34,10 +34,6 @@
     export let opcionesIDiDropdown
     export let proyectoMunicipios
 
-    let municipios
-
-    $: $title = idi ? idi.titulo : null
-
     /**
      * Permisos
      */
@@ -47,6 +43,7 @@
             return role.id == 1
         }).length > 0
 
+    let municipios
     let dialog_open = errors.password != undefined ? true : false
     let sending = false
 
@@ -115,7 +112,7 @@
         if (tecnoacademia) {
             getLineasTecnologicas(tecnoacademia)
         }
-        getCities()
+        getMunicipios()
     })
 
     function submit() {
@@ -145,10 +142,10 @@
         }
     }
 
-    $: selectedTechnoAcademy = $form.tecnoacademia_id?.value
+    $: selectedTecnoacademia = $form.tecnoacademia_id?.value
 
-    $: if (selectedTechnoAcademy) {
-        getLineasTecnologicas(selectedTechnoAcademy)
+    $: if (selectedTecnoacademia) {
+        getLineasTecnologicas(selectedTecnoacademia)
     }
 
     async function getLineasTecnologicas(tecnoacademia) {
@@ -157,12 +154,14 @@
         lineasTecnologicas = res.data
     }
 
-    async function getCities() {
+    async function getMunicipios() {
         let res = await axios.get(route('web-api.municipios'))
         if (res.status == '200') {
             municipios = res.data
         }
     }
+
+    $: $title = idi ? idi.titulo : null
 </script>
 
 <AuthenticatedLayout>
@@ -585,10 +584,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="" value="Nombre de los municipios beneficiados" />
+                    <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
                 </div>
                 <div>
-                    <SelectMulti id="" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
+                    <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
                 </div>
             </div>
 

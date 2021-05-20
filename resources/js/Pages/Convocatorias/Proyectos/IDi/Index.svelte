@@ -11,8 +11,8 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Components/DataTable'
 
-    export let IDi
     export let convocatoria
+    export let IDi
 
     $title = 'Proyectos I+D+i'
 

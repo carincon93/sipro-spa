@@ -97,19 +97,22 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('showArbolProblemas', [Proyecto::class, $proyecto]);
 
+        $this->generateTree($proyecto);
+        $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
+        $causasDirectas  = $proyecto->causasDirectas()->with('causasIndirectas')->get();
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         switch ($proyecto) {
-            case $proyecto->IDi()->exists():
-                $this->generateTree($proyecto);
-                $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
-                $causasDirectas  = $proyecto->causasDirectas()->with('causasIndirectas')->get();
-                $proyecto->planteamiento_problema = $proyecto->IDi->planteamiento_problema;
-                $proyecto->justificacion_problema = $proyecto->IDi->justificacion_problema;
+            case $proyecto->idi()->exists():
+                $proyecto->planteamiento_problema = $proyecto->idi->planteamiento_problema;
+                $proyecto->justificacion_problema = $proyecto->idi->justificacion_problema;
+                break;
+            case $proyecto->tatp()->exists():
+                $proyecto->planteamiento_problema = $proyecto->tatp->planteamiento_problema;
+                $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
                 break;
             default:
                 break;
         }
-
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
@@ -264,20 +267,23 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('showArbolObjetivos', [Proyecto::class, $proyecto]);
 
-        switch ($proyecto) {
-            case $proyecto->IDi()->exists():
-                $this->generateTree($proyecto);
+        $this->generateTree($proyecto);
 
-                $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultado')->get();
-                $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
-                $proyecto->planteamiento_problema   = $proyecto->IDi->planteamiento_problema;
-                $proyecto->objetivo_general         = $proyecto->IDi->objetivo_general;
+        $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultado')->get();
+        $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $proyecto->objetivo_general         = $proyecto->idi->objetivo_general;
+                $proyecto->planteamiento_problema   = $proyecto->idi->planteamiento_problema;
+                break;
+            case $proyecto->tatp()->exists():
+                $proyecto->objetivo_general         = $proyecto->tatp->objetivo_general;
+                $proyecto->planteamiento_problema   = $proyecto->tatp->planteamiento_problema;
                 break;
             default:
                 break;
         }
-
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id'),

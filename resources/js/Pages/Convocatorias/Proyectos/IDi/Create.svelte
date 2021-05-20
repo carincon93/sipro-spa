@@ -13,8 +13,6 @@
     export let errors
     export let convocatoria
 
-    $: $title = 'Crear I+D+i'
-
     /**
      * Permisos
      */
@@ -46,6 +44,8 @@
             })
         }
     }
+
+    $: $title = 'Crear proyecto I+D+i'
 </script>
 
 <AuthenticatedLayout>
