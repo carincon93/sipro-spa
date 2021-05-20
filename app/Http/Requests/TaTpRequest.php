@@ -30,7 +30,7 @@ class TaTpRequest extends FormRequest
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'linea_tecnologica_id'                      => ['required', 'min:0', 'max:2147483647', 'exists:lineas_tecnologicas,id'],
+                'tecnoacademia_linea_tecnologica_id'        => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
                 'titulo'                                    => ['required', new MaxWords],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
@@ -49,7 +49,7 @@ class TaTpRequest extends FormRequest
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'linea_tecnologica_id'                      => ['required', 'min:0', 'max:2147483647', 'exists:lineas_tecnologicas,id'],
+                'tecnoacademia_linea_tecnologica_id'        => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
                 'titulo'                                    => ['required', new MaxWords],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],

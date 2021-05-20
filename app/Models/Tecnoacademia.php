@@ -51,7 +51,7 @@ class Tecnoacademia extends Model
      */
     public function lineasTecnologicas()
     {
-        return $this->hasMany(LineaTecnologica::class);
+        return $this->belongsToMany(LineaTecnologica::class, 'tecnoacademia_linea_tecnologica', 'tecnoacademia_id', 'linea_tecnologica_id');
     }
 
     /**

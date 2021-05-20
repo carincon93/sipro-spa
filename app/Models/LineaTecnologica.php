@@ -50,9 +50,9 @@ class LineaTecnologica extends Model
      *
      * @return object
      */
-    public function tecnoacademia()
+    public function tecnoacademias()
     {
-        return $this->belongsTo(Tecnoacademia::class);
+        return $this->belongsToMany(Tecnoacademia::class, 'tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_id');
     }
 
     /**
@@ -60,9 +60,10 @@ class LineaTecnologica extends Model
      *
      * @return object
      */
+
     public function idi()
     {
-        return $this->belongsToMany(IDi::class, 'idi_linea_tecnologica', 'linea_tecnologica_id', 'idi_id');
+        return $this->belongsToMany(IDi::class, 'idi_linea_tecnologica', 'tecnoacademia_linea_tecnologica_id', 'idi_id');
     }
 
     /**
@@ -70,9 +71,9 @@ class LineaTecnologica extends Model
      *
      * @return object
      */
-    public function taTp()
+    public function tatp()
     {
-        return $this->hasMany(TaTp::class);
+        return $this->hasMany('tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_linea_tecnologica_id');
     }
 
     /**

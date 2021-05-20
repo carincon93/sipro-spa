@@ -24,7 +24,8 @@ class TecnoacademiaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required', 'max:255']
+            'nombre'                => ['required', 'max:255'],
+            'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnologicas,id'],
         ];
     }
 }

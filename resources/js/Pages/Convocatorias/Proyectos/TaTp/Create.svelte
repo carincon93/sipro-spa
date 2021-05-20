@@ -34,7 +34,7 @@
         fecha_inicio: '',
         fecha_finalizacion: '',
         tecnoacademia_id: null,
-        linea_tecnologica_id: [],
+        tecnoacademia_linea_tecnologica_id: [],
     })
 
     function submit() {
@@ -130,17 +130,17 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Línea tecnológica" />
+                    <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
                 </div>
                 <div>
-                    <select id="linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
+                    <select id="tecnoacademia_linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
                         <option value="">Seleccione una línea tecnológica</option>
                         {#each lineasTecnologicas as { id, nombre }, i}
                             <option value={id}>{nombre}</option>
                         {/each}
                     </select>
 
-                    <InputError message={errors.linea_tecnologica_id} />
+                    <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
                 </div>
             </div>
         </fieldset>

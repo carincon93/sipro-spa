@@ -148,7 +148,7 @@ class IDi extends Model
      */
     public function lineasTecnologicas()
     {
-        return $this->belongsToMany(LineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'linea_tecnologica_id');
+        return $this->belongsToMany(LineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'tecnoacademia_linea_tecnologica_id');
     }
 
     /**

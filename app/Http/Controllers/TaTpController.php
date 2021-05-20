@@ -83,7 +83,7 @@ class TaTpController extends Controller
         $tatp->numero_instituciones                 = 0;
         $tatp->nombre_instituciones                 = null;
 
-        $tatp->lineaTecnologica()->associate($request->linea_tecnologica_id);
+        $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
 
         $proyecto->tatp()->save($tatp);
 
@@ -117,8 +117,8 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Edit', [
             'convocatoria'                      => $convocatoria->only('id'),
             'tatp'                              => $tatp,
-            'tecnoacademiaRelacionada'          => $tatp->lineaTecnologica->tecnoacademia->id,
-            'lineaTecnologicaRelacionada'       => $tatp->lineaTecnologica->id,
+            'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id,
+            'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica->id,
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                => $tatp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')->join('departamentos', 'departamentos.id', 'municipios.departamento_id')->get(),
         ]);
@@ -156,7 +156,7 @@ class TaTpController extends Controller
         $tatp->numero_instituciones                 = count(json_decode($request->nombre_instituciones));
         $tatp->nombre_instituciones                 = $request->nombre_instituciones;
 
-        $tatp->lineaTecnologica()->associate($request->linea_tecnologica_id);
+        $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
         $tatp->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
         $tatp->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $tatp->proyecto->municipios()->sync($request->municipios);

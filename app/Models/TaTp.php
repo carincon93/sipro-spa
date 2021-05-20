@@ -50,7 +50,8 @@ class TaTp extends Model
         'impacto_centro_formacion',
         'bibliografia',
         'numero_instituciones',
-        'nombre_instituciones'
+        'nombre_instituciones',
+        'tecnoacademia_linea_tecnologica_id'
     ];
 
     /**
@@ -82,13 +83,13 @@ class TaTp extends Model
     }
 
     /**
-     * Relationship with LineaTecnologica
+     * Relationship with TecnoacademiaLineaTecnologica
      *
      * @return object
      */
-    public function lineaTecnologica()
+    public function tecnoacademiaLineaTecnologica()
     {
-        return $this->belongsTo(LineaTecnologica::class);
+        return $this->belongsTo(TecnoacademiaLineaTecnologica::class);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TecnoacademiaRequest;
+use App\Models\LineaTecnologica;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -34,7 +35,9 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('create', [Tecnoacademia::class]);
 
-        return Inertia::render('Tecnoacademias/Create');
+        return Inertia::render('Tecnoacademias/Create', [
+            'lineasTecnologicas' => LineaTecnologica::orderBy('nombre', 'ASC')->get()
+        ]);
     }
 
     /**
@@ -47,10 +50,12 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('create', [Tecnoacademia::class]);
 
-        $tecnoAcademia = new Tecnoacademia();
-        $tecnoAcademia->nombre = $request->nombre;
+        $tecnoacademia = new Tecnoacademia();
+        $tecnoacademia->nombre = $request->nombre;
 
-        $tecnoAcademia->save();
+        $tecnoacademia->save();
+
+        $tecnoacademia->lineasTecnologicas()->attach($request->linea_tecnologica_id);
 
         return redirect()->route('tecnoacademias.index')->with('success', 'The resource has been created successfully.');
     }
@@ -58,26 +63,28 @@ class TecnoacademiaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tecnoacademia  $tecnoAcademia
+     * @param  \App\Models\Tecnoacademia  $tecnoacademia
      * @return \Illuminate\Http\Response
      */
-    public function show(Tecnoacademia $tecnoAcademia)
+    public function show(Tecnoacademia $tecnoacademia)
     {
-        $this->authorize('view', [Tecnoacademia::class, $tecnoAcademia]);
+        $this->authorize('view', [Tecnoacademia::class, $tecnoacademia]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tecnoacademia  $tecnoAcademia
+     * @param  \App\Models\Tecnoacademia  $tecnoacademia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tecnoacademia $tecnoAcademia)
+    public function edit(Tecnoacademia $tecnoacademia)
     {
-        $this->authorize('update', [Tecnoacademia::class, $tecnoAcademia]);
+        $this->authorize('update', [Tecnoacademia::class, $tecnoacademia]);
 
         return Inertia::render('Tecnoacademias/Edit', [
-            'tecnoAcademia' => $tecnoAcademia
+            'tecnoacademia'                     => $tecnoacademia,
+            'lineasTecnologicas'                => LineaTecnologica::orderBy('nombre', 'ASC')->get(),
+            'lineasTecnologicasRelacionadas'    => $tecnoacademia->lineasTecnologicas()->pluck('lineas_tecnologicas.id')
         ]);
     }
 
@@ -85,16 +92,16 @@ class TecnoacademiaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tecnoacademia  $tecnoAcademia
+     * @param  \App\Models\Tecnoacademia  $tecnoacademia
      * @return \Illuminate\Http\Response
      */
-    public function update(TecnoacademiaRequest $request, Tecnoacademia $tecnoAcademia)
+    public function update(TecnoacademiaRequest $request, Tecnoacademia $tecnoacademia)
     {
-        $this->authorize('update', [Tecnoacademia::class, $tecnoAcademia]);
+        $this->authorize('update', [Tecnoacademia::class, $tecnoacademia]);
 
-        $tecnoAcademia->nombre = $request->nombre;
-
-        $tecnoAcademia->save();
+        $tecnoacademia->nombre = $request->nombre;
+        $tecnoacademia->lineasTecnologicas()->sync($request->linea_tecnologica_id);
+        $tecnoacademia->save();
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
     }
@@ -102,14 +109,14 @@ class TecnoacademiaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tecnoacademia  $tecnoAcademia
+     * @param  \App\Models\Tecnoacademia  $tecnoacademia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tecnoacademia $tecnoAcademia)
+    public function destroy(Tecnoacademia $tecnoacademia)
     {
-        $this->authorize('delete', [Tecnoacademia::class, $tecnoAcademia]);
+        $this->authorize('delete', [Tecnoacademia::class, $tecnoacademia]);
 
-        $tecnoAcademia->delete();
+        $tecnoacademia->delete();
 
         return redirect()->route('tecnoacademias.index')->with('success', 'The resource has been deleted successfully.');
     }

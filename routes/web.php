@@ -299,7 +299,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::resource('mesas-sectoriales', MesaSectorialController::class)->parameters(['mesas-sectoriales' => 'mesa-sectorial'])->except(['show']);
 
-
     /**
      * Web api
      * 
@@ -325,7 +324,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas tecnológicas
      */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {
-        return response(LineaTecnologica::select('id', 'nombre')->where('lineas_tecnologicas.tecnoacademia_id', $tecnoacademia)->get());
+        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id', 'lineas_tecnologicas.nombre')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
     })->name('web-api.tecnoacademias.lineas-tecnologicas');
 
     /**
