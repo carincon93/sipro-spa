@@ -130,15 +130,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function ($convocatoria, $lineaProgramatica) {
         return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.mensaje,
         CASE nivel_academico
-				WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+				WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
+                WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
         END as label,
-        convocatoria_rol_sennova.meses_experiencia")
+        convocatoria_rol_sennova.experiencia")
             ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
             ->where('convocatoria_rol_sennova.linea_programatica_id', $lineaProgramatica)
             ->where('convocatoria_rol_sennova.convocatoria_id', $convocatoria)
@@ -380,7 +382,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas programáticas
      */
     Route::get('web-api/lineas-programaticas', function () {
-        return response(LineaProgramatica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
+        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.lineas-programaticas');
 
     /**

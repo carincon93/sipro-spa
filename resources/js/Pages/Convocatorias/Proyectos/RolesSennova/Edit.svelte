@@ -86,12 +86,12 @@
                     <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
-                {#if infoRolSennova?.meses_experiencia}
+                {#if infoRolSennova?.experiencia}
                     <div class="mt-4">
                         <p class="block font-medium text-sm text-gray-700 ">
                             Experiencia (meses)
                             <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {infoRolSennova.meses_experiencia}
+                                {infoRolSennova.experiencia}
                             </span>
                         </p>
                     </div>

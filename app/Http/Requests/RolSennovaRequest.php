@@ -24,8 +24,8 @@ class RolSennovaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'      => ['required', 'max:191'],
-            'descripcion' => ['required', 'string'],
+            'nombre'                => ['required', 'max:191'],
+            'sumar_al_presupuesto'  => ['required', 'boolean'],
         ];
     }
 }

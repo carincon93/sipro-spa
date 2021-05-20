@@ -9,7 +9,7 @@
     import Label from '@/Components/Label'
     import Button from '@/Components/Button'
     import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
+    import Switch from '@/Components/Switch'
 
     export let errors
     export let rolSennova
@@ -30,7 +30,7 @@
     let sending = false
     let form = useForm({
         nombre: rolSennova.nombre,
-        descripcion: rolSennova.descripcion,
+        sumar_al_presupuesto: rolSennova.sumar_al_presupuesto,
     })
 
     function submit() {
@@ -72,10 +72,9 @@
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
-
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" bind:value={$form.descripcion} error={errors.descripcion} required />
+                    <Label required class="mb-4" labelFor="nombre" value="¿Este rol suma al presupuesto del proyecto" />
+                    <Switch bind:checked={$form.sumar_al_presupuesto} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

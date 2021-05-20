@@ -28,8 +28,8 @@ class ConvocatoriaRolSennovaRequest extends FormRequest
             'rol_sennova_id'        => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
             'asignacion_mensual'    => ['required', 'min:0', 'max:2147483647'],
             'nivel_academico'       => ['required', 'integer'],
-            'meses_experiencia'     => ['nullable', 'digits_between:0,100'],
-            'mensaje'               => ['required', 'string'],
+            'experiencia'           => ['nullable', 'string'],
+            'mensaje'               => ['nullable', 'string'],
         ];
     }
 
@@ -40,17 +40,16 @@ class ConvocatoriaRolSennovaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->rol_sennova_id) ) {
+        if (is_array($this->rol_sennova_id)) {
             $this->merge([
                 'rol_sennova_id' => $this->rol_sennova_id['value'],
             ]);
         }
 
-        if( is_array($this->nivel_academico) ) {
+        if (is_array($this->nivel_academico)) {
             $this->merge([
                 'nivel_academico' => $this->nivel_academico['value'],
             ]);
         }
     }
-
 }

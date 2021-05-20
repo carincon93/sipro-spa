@@ -34,7 +34,7 @@
     let sending = false
     let form = useForm({
         asignacion_mensual: convocatoriaRolSennova.asignacion_mensual,
-        meses_experiencia: convocatoriaRolSennova.meses_experiencia,
+        experiencia: convocatoriaRolSennova.experiencia,
         nivel_academico: {
             value: convocatoriaRolSennova.nivel_academico,
             label: nivelesAcademicos.find((item) => item.value == convocatoriaRolSennova.nivel_academico)?.label,
@@ -93,8 +93,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="meses_experiencia" value="Número de meses de experiencia requerida" />
-                    <Input id="meses_experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.meses_experiencia} error={errors.meses_experiencia} />
+                    <Label class="mb-4" labelFor="experiencia" value="Número de meses de experiencia requerida" />
+                    <Input id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
@@ -107,8 +107,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
-                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} required />
+                    <Label class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
+                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

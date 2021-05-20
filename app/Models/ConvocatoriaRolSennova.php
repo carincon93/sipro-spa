@@ -26,7 +26,7 @@ class ConvocatoriaRolSennova extends Model
         'convocatoria_id',
         'rol_sennova_id',
         'asignacion_mensual',
-        'meses_experiencia',
+        'experiencia',
         'nivel_academico',
         'mensaje'
     ];

@@ -29,12 +29,12 @@
 
     let sending = false
     let form = useForm({
+        rol_sennova_id: null,
+        linea_programatica_id: null,
         asignacion_mensual: '',
-        meses_experiencia: '',
-        rol_sennova: '',
+        experiencia: '',
         nivel_academico: '',
         mensaje: '',
-        linea_programatica_id: null,
     })
 
     function submit() {
@@ -66,8 +66,8 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
-                    <Select id="rol_sennova" items={rolesSennova} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
+                    <Select id="rol_sennova_id" items={rolesSennova} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
                 <div class="mt-4">
@@ -76,8 +76,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="meses_experiencia" value="Número de meses de experiencia requerida" />
-                    <Input id="meses_experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.meses_experiencia} error={errors.meses_experiencia} />
+                    <Label class="mb-4" labelFor="experiencia" value="Número de meses de experiencia requerida" />
+                    <Input id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
@@ -90,8 +90,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
-                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} required />
+                    <Label class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
+                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

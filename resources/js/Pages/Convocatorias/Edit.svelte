@@ -67,7 +67,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.index')} class="text-indigo-400 hover:text-indigo-600"> Cpnvocatorias </a>
+                        <a use:inertia href={route('convocatorias.index')} class="text-indigo-400 hover:text-indigo-600"> Convocatorias </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="text-indigo-400 hover:text-indigo-600">
@@ -80,7 +80,7 @@
     </header>
 
     {#if isSuperAdmin}
-        <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.convocatoria-sennova-roles.index', convocatoria.id))} class="mb-4">Roles SENNOVA</Button>
+        <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id))} class="mb-4">Roles SENNOVA</Button>
     {/if}
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>

@@ -6,13 +6,10 @@
 
     import Input from '@/Components/Input'
     import Label from '@/Components/Label'
-    import Select from '@/Components/Select'
     import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import DropdownLineaProgramatica from '@/Dropdowns/DropdownLineaProgramatica'
+    import Switch from '@/Components/Switch'
 
     export let errors
-    export let nivelesAcademicos
 
     $: $title = 'Crear rol SENNOVA'
 
@@ -28,9 +25,7 @@
     let sending = false
     let form = useForm({
         nombre: '',
-        descripcion: '',
-        nivel_academico: '',
-        linea_programatica_id: null,
+        sumar_al_presupuesto: false,
     })
 
     function submit() {
@@ -67,18 +62,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" bind:value={$form.descripcion} error={errors.descripcion} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
-                    <DropdownLineaProgramatica id="linea_programatica_id" bind:formLineaProgramatica={$form.linea_programatica_id} message={errors.linea_programatica_id} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
-                    <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
+                    <Label required class="mb-4" labelFor="nombre" value="¿Este rol suma al presupuesto del proyecto" />
+                    <Switch bind:checked={$form.sumar_al_presupuesto} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

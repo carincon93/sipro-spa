@@ -23,19 +23,22 @@ class ConvocatoriaRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Index', [
             'filters'   => request()->all('search'),
+            'convocatoria' => $convocatoria,
             'convocatoriaRolesSennova' =>
-                $convocatoria->convocatoriaRolesSennova()
-                ->selectRaw("convocatoria_rol_sennova.id, convocatoria_rol_sennova.asignacion_mensual, CASE convocatoria_rol_sennova.nivel_academico
-                        WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+            $convocatoria->convocatoriaRolesSennova()
+                ->selectRaw("convocatoria_rol_sennova.id, lineas_programaticas.nombre as linea_programatica_nombre, convocatoria_rol_sennova.asignacion_mensual, CASE convocatoria_rol_sennova.nivel_academico
+                        WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                         WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
                         WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
                         WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
                         WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
                         WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
                         WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+                        WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
+                        WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
                     END as nombre")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-                    ->filterConvocatoriaRolSennova(request()->only('search'))->paginate(),
-            'convocatoria' => $convocatoria,
+                ->join('lineas_programaticas', 'lineas_programaticas.id', 'convocatoria_rol_sennova.linea_programatica_id')
+                ->filterConvocatoriaRolSennova(request()->only('search'))->paginate(),
         ]);
     }
 
@@ -51,17 +54,7 @@ class ConvocatoriaRolSennovaController extends Controller
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Create', [
             'convocatoria'      => $convocatoria->only('id'),
             'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
-            'rolesSennova' => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
-                WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
-                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
-                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
-                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
-                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
-                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
-                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
-            END as label")
-            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-            ->orderBy('roles_sennova.nombre', 'ASC')->get()
+            'rolesSennova'      => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
         ]);
     }
 
@@ -79,14 +72,14 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
-        $convocatoriaRolSennova->meses_experiencia      = $request->meses_experiencia;
+        $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
         $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
-        $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);
+        $convocatoriaRolSennova->lineaProgramatica()->associate($request->linea_programatica_id);
 
         $convocatoriaRolSennova->save();
 
-        return redirect()->route('convocatorias.convocatoria-sennova-roles.index', [$convocatoria])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -116,17 +109,19 @@ class ConvocatoriaRolSennovaController extends Controller
             'convocatoria'            => $convocatoria->only('id'),
             'convocatoriaRolSennova'  => $convocatoriaRolSennova,
             'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
-            'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("id as value, CASE nivel_academico
-                WHEN '0' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+            'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("roles_sennova.id as value, CASE convocatoria_rol_sennova.nivel_academico
+                WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
                 WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
                 WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
                 WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
                 WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
                 WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+                WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
+                WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
             END as label")
-            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-            ->orderBy('roles_sennova.nombre', 'ASC')->get()
+                ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
+                ->orderBy('roles_sennova.nombre', 'ASC')->get()
         ]);
     }
 
@@ -144,10 +139,10 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
-        $convocatoriaRolSennova->meses_experiencia      = $request->meses_experiencia;
+        $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
         $convocatoriaRolSennova->rolSennova()->associate($request->rol_sennova_id);
-        $convocatoriaRolSennova->programmaticLine()->associate($request->linea_programatica_id);
+        $convocatoriaRolSennova->lineaProgramatica()->associate($request->linea_programatica_id);
 
         $convocatoriaRolSennova->save();
 
@@ -166,6 +161,6 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->delete();
 
-        return redirect()->route('convocatorias.convocatoria-sennova-roles.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
     }
 }

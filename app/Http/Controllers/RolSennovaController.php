@@ -48,12 +48,12 @@ class RolSennovaController extends Controller
         $this->authorize('create', [RolSennova::class]);
 
         $rolSennova = new RolSennova();
-        $rolSennova->nombre            = $request->nombre;
-        $rolSennova->descripcion       = $request->descripcion;
+        $rolSennova->nombre                 = $request->nombre;
+        $rolSennova->sumar_al_presupuesto   = $request->sumar_al_presupuesto;
 
         $rolSennova->save();
 
-        return redirect()->route('sennova-roles.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('roles-sennova.index')->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -78,7 +78,7 @@ class RolSennovaController extends Controller
         $this->authorize('update', [RolSennova::class, $rolSennova]);
 
         return Inertia::render('RolesSennova/Edit', [
-            'rolSennova'        => $rolSennova,
+            'rolSennova' => $rolSennova,
         ]);
     }
 
@@ -93,8 +93,8 @@ class RolSennovaController extends Controller
     {
         $this->authorize('update', [RolSennova::class, $rolSennova]);
 
-        $rolSennova->nombre              = $request->nombre;
-        $rolSennova->descripcion       = $request->descripcion;
+        $rolSennova->nombre                 = $request->nombre;
+        $rolSennova->sumar_al_presupuesto   = $request->sumar_al_presupuesto;
 
         $rolSennova->save();
 
@@ -113,6 +113,6 @@ class RolSennovaController extends Controller
 
         $rolSennova->delete();
 
-        return redirect()->route('sennova-roles.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('roles-sennova.index')->with('success', 'The resource has been deleted successfully.');
     }
 }
