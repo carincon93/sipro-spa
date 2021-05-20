@@ -84,10 +84,6 @@
             $form.delete(route('convocatorias.idi.entidades-aliadas.destroy', [convocatoria.id, idi.id, entidadAliada.id]))
         }
     }
-
-    function handleFile(e, test) {
-        $form[test] = e.target.files[0]
-    }
 </script>
 
 <AuthenticatedLayout>
