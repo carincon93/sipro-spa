@@ -15,7 +15,7 @@
         ;(input = document.querySelector('.tagify-input')), (tagify = new Tagify(input, { placeholder: 'Separados por coma' }))
         // listen to any keystrokes which modify tagify's input
 
-        tagify.on('add', onAddRemove).on('remove', onAddRemove)
+        tagify.on('add', onAddRemove).on('remove', onAddRemove).on('edit:updated', onAddRemove)
     })
 
     function onAddRemove() {
