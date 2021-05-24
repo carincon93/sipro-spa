@@ -124,10 +124,6 @@
     let formResultado = useForm({
         descripcion: '',
         tipo: '',
-        trl: 1,
-        indicador: '',
-        medios_verificacion: '',
-        objetivoEspecifico: '',
     })
 
     let showResultadoForm = false
@@ -189,14 +185,14 @@
     })
 
     let showObjetivoGeneralForm = false
-    let planteamiento_problema
+    let planteamientoProblema
     function showObjetivoGeneralDialog() {
         reset()
         dialogTitle = 'Objetivo general'
         dialog_open = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
-        planteamiento_problema = proyecto.planteamiento_problema
+        planteamientoProblema = proyecto.planteamiento_problema
         $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general
     }
 
@@ -227,7 +223,7 @@
     })
 
     let showObjetivoEspecificoForm = false
-    let SpecificObjectiveDirectCause
+    let causaDirectaObjetivoEspecifico
     function showObjetivoEspecificoDialog(causaDirecta, numero) {
         reset()
         codigo = 'OBJ-ESP-' + causaDirecta.objetivo_especifico.id
@@ -238,10 +234,10 @@
         $formObjetivoEspecifico.id = causaDirecta.objetivo_especifico.id
         $formObjetivoEspecifico.descripcion = causaDirecta.objetivo_especifico.descripcion
         $formObjetivoEspecifico.numero = numero
-        SpecificObjectiveDirectCause = causaDirecta.descripcion ?? 'Sin información registrada'
+        causaDirectaObjetivoEspecifico = causaDirecta.descripcion ?? 'Sin información registrada'
     }
 
-    function submitSpecificObjective() {
+    function submitObjetivoEspecifico() {
         if (isSuperAdmin) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
@@ -464,7 +460,7 @@
                     {#if i == 0}
                         <div id="resultado-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
                             <small>Resultados</small>
-                            <div id="arrow-resultadoado" class="arrow" data-popper-arrow />
+                            <div id="arrow-resultado" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
                     <div class="resultados relative flex-1" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
@@ -607,12 +603,12 @@
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}
-                <form on:submit|preventDefault={submitSpecificObjective} id="objetivo-especifico-form">
+                <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
                     <fieldset disabled={!isSuperAdmin}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {SpecificObjectiveDirectCause}
+                            {causaDirectaObjetivoEspecifico}
                         </p>
                         <div>
                             <Label class="mb-4" labelFor="descripcion" value="Descripción" />
@@ -626,7 +622,7 @@
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {planteamiento_problema}
+                            {planteamientoProblema}
                         </p>
                         <div>
                             <Label class="mb-4" labelFor="objetivo_general" value="Objetivo general" />
@@ -649,25 +645,15 @@
                         <p class="mb-20 whitespace-pre-line">
                             {descripcionObjetivoEspecifico.descripcion}
                         </p>
-                        <div class="mb-20">
-                            <Label labelFor="tipo" value="Tipo" />
-                            <Select id="tipo" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
-                        </div>
+
                         <div class="mb-20">
                             <Label labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" maxlength="200" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                         </div>
+
                         <div class="mb-20">
-                            <Label labelFor="trl" value="TRL" />
-                            <Input id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
-                        </div>
-                        <div class="mb-20">
-                            <Label labelFor="indicador" value="Indicador" />
-                            <Textarea rows="4" id="indicador" maxlength="200" error={errors.indicador} bind:value={$formResultado.indicador} required />
-                        </div>
-                        <div class="mb-20">
-                            <Label labelFor="medios_verificacion" value="Medio de verificación" />
-                            <Textarea rows="4" id="medios_verificacion" maxlength="200" error={errors.medios_verificacion} bind:value={$formResultado.medios_verificacion} required />
+                            <Label required labelFor="tipo" value="Tipo" />
+                            <Select id="tipo" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                         </div>
                     </fieldset>
                 </form>

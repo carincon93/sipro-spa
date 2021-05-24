@@ -19,9 +19,6 @@ class Resultado extends Model
         'objetivo_especifico_id',
         'descripcion',
         'tipo',
-        'trl',
-        'indicador',
-        'medios_verificacion',
     ];
 
     /**

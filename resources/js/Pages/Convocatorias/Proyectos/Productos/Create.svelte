@@ -11,6 +11,7 @@
     import Select from '@/Components/Select'
     import DynamicList from '@/Dropdowns/DynamicList'
     import Textarea from '@/Components/Textarea'
+    import InfoMessage from '@/Components/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -35,6 +36,10 @@
         subtipologia_minciencias_id: null,
         fecha_inicio: '',
         fecha_finalizacion: '',
+        indicador: '',
+        trl: null,
+        idi: proyecto.idi ? true : false,
+        valor_proyectado: null,
     })
 
     function submit() {
@@ -97,11 +102,27 @@
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
+                <div class="mt-4">
+                    <Label required labelFor="indicador" value="Indicador" />
+
+                    <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
+                    <Textarea rows="4" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                </div>
 
                 {#if proyecto.idi}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
                         <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required labelFor="trl" value="TRL" />
+                        <Input id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
+                    </div>
+                {:else if proyecto.ta_tp}
+                    <div class="mt-4">
+                        <Label required labelFor="valor_proyectado" value="Valor proyectado" />
+                        <Input id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
             </fieldset>

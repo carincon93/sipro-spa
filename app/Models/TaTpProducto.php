@@ -46,7 +46,7 @@ class TaTpProducto extends Model
     /**
      * Relationship with Producto
      *
-     * @return void
+     * @return object
      */
     public function producto()
     {

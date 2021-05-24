@@ -321,6 +321,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
+     * Trae las tecnoacademias
+     */
+    Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', function ($centroFormacion) {
+        return response(Tecnoacademia::select('tecnoacademias.id', 'tecnoacademias.nombre')->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
+    })->name('web-api.centros-formacion.tecnoacademias');
+
+    /**
+     * Web api
+     * 
      * Trae las líneas tecnológicas
      */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {

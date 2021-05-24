@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Producto;
 use App\Models\IDiProducto;
+use App\Models\TaTpProducto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -47,6 +48,7 @@ class ProductoController extends Controller
         $this->authorize('create', [Producto::class]);
 
         $proyecto->idi;
+        $proyecto->taTp;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
             'convocatoria'      => $convocatoria,
@@ -71,15 +73,25 @@ class ProductoController extends Controller
         $producto->nombre               = $request->nombre;
         $producto->fecha_inicio         = $request->fecha_inicio;
         $producto->fecha_finalizacion   = $request->fecha_finalizacion;
+        $producto->indicador            = $request->indicador;
         $producto->resultado()->associate($request->resultado_id);
         $producto->save();
 
         // Valida si es un producto de I+D+i
         if ($request->subtipologia_minciencias_id) {
             $IDiProducto = new IDiProducto();
-            $IDiProducto->producto()->associate($producto->id);
+            $IDiProducto->trl = $request->trl;
             $IDiProducto->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
+            $IDiProducto->producto()->associate($producto->id);
             $IDiProducto->save();
+        }
+
+        // Valida si es un producto de TaTp
+        if ($request->valor_proyectado) {
+            $taTpProducto = new TaTpProducto();
+            $taTpProducto->producto()->associate($producto->id);
+            $taTpProducto->valor_proyectado = $request->valor_proyectado;
+            $taTpProducto->save();
         }
 
         return redirect()->route('convocatorias.proyectos.productos.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
@@ -108,10 +120,12 @@ class ProductoController extends Controller
 
         $proyecto->idi;
         $producto->idiProducto;
+        $proyecto->taTp;
+        $producto->taTpProducto;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id'),
+            'proyecto'          => $proyecto,
             'producto'          => $producto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
                 $query->where('descripcion', '!=', null);
@@ -133,10 +147,15 @@ class ProductoController extends Controller
         $producto->nombre               = $request->nombre;
         $producto->fecha_inicio         = $request->fecha_inicio;
         $producto->fecha_finalizacion   = $request->fecha_finalizacion;
+        $producto->indicador            = $request->indicador;
         $producto->resultado()->associate($request->resultado_id);
 
         if ($request->subtipologia_minciencias_id) {
-            $producto->IDiProducto()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id]);
+            $producto->IDiProducto()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
+        }
+
+        if ($request->valor_proyectado) {
+            $producto->TaTpProducto()->update(['valor_proyectado' => $request->valor_proyectado]);
         }
 
         $producto->save();

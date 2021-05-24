@@ -51,6 +51,7 @@ class TaTp extends Model
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
+        'diseno_curricular',
         'tecnoacademia_linea_tecnologica_id'
     ];
 

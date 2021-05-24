@@ -15,7 +15,6 @@
     import DynamicList from '@/Dropdowns/DynamicList'
     import Textarea from '@/Components/Textarea'
     import InfoMessage from '@/Components/InfoMessage'
-    import Select from '@/Components/Select'
     import SelectMulti from '@/Components/SelectMulti'
     import Dialog from '@/Components/Dialog'
     import Tags from '@/Components/Tags'
@@ -25,13 +24,13 @@
     export let tatp
     export let lineaTecnologicaRelacionada
     export let tecnoacademiaRelacionada
-    export let tecnoacademias
     export let proyectoMunicipios
 
     let dialog_open = errors.password != undefined ? true : false
     let sending = false
 
-    let municipios
+    let municipios = []
+    let tecnoacademias = []
     let lineasTecnologicas = []
 
     /**
@@ -64,10 +63,7 @@
         propuesta_sostenibilidad: tatp.propuesta_sostenibilidad,
         impacto_centro_formacion: tatp.impacto_centro_formacion,
         bibliografia: tatp.bibliografia,
-        tecnoacademia_id: {
-            value: tecnoacademiaRelacionada,
-            label: tecnoacademias.find((item) => item.value == tecnoacademiaRelacionada)?.label,
-        },
+        tecnoacademia_id: tecnoacademiaRelacionada,
         tecnoacademia_linea_tecnologica_id: lineaTecnologicaRelacionada,
     })
 
@@ -100,8 +96,18 @@
         }
     }
 
-    $: selectedTecnoacademia = $form.tecnoacademia_id?.value
+    $: selectedCentroFormacion = $form.centro_formacion_id
+    $: if (selectedCentroFormacion) {
+        lineasTecnologicas = []
+        getTecnoacademias(selectedCentroFormacion)
+    }
 
+    async function getTecnoacademias(centroFormacionRelacionado) {
+        let res = await axios.get(route('web-api.centros-formacion.tecnoacademias', [centroFormacionRelacionado]))
+        tecnoacademias = res.data
+    }
+
+    $: selectedTecnoacademia = $form.tecnoacademia_id
     $: if (selectedTecnoacademia) {
         getLineasTecnologicas(selectedTecnoacademia)
     }
@@ -149,15 +155,6 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                </div>
-                <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
-                </div>
-            </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
@@ -170,10 +167,31 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                </div>
+                <div>
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
                     <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
                 </div>
                 <div>
-                    <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una Tecnoacademia" required />
+                    <select id="tecnoacademia_id" disabled={!(tecnoacademias.length > 0)} class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" required>
+                        <option value="">Seleccione una Tecnoacademia</option>
+                        {#each tecnoacademias as { id, nombre }}
+                            <option value={id}>{nombre}</option>
+                        {/each}
+                    </select>
+
+                    <InputError message={errors.tecnoacademia_id} />
+
+                    {#if tecnoacademias.length == 0}
+                        <InfoMessage message="No hay tecnoacademias para este filtro, por favor realice un filtro diferente" />
+                    {/if}
                 </div>
             </div>
 
@@ -190,6 +208,10 @@
                     </select>
 
                     <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
+
+                    {#if lineasTecnologicas.length == 0}
+                        <InfoMessage message="No hay líneas tecnológicas para este filtro, por favor realice un filtro diferente" />
+                    {/if}
                 </div>
             </div>
 

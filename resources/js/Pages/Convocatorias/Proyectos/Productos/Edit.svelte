@@ -13,6 +13,7 @@
     import DynamicList from '@/Dropdowns/DynamicList'
     import Textarea from '@/Components/Textarea'
     import Dialog from '@/Components/Dialog'
+    import InfoMessage from '@/Components/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -39,9 +40,13 @@
             value: producto.resultado_id,
             label: resultados.find((item) => item.value == producto.resultado_id)?.label,
         },
-        subtipologia_minciencias_id: producto.idi_producto?.subtipologia_minciencias_id,
         fecha_inicio: producto.fecha_inicio,
         fecha_finalizacion: producto.fecha_finalizacion,
+        indicador: producto.indicador,
+        trl: producto.idi_producto?.trl,
+        subtipologia_minciencias_id: producto.idi_producto?.subtipologia_minciencias_id,
+        valor_proyectado: producto.ta_tp_producto?.valor_proyectado,
+        idi: proyecto.idi ? true : false,
     })
 
     function submit() {
@@ -106,16 +111,31 @@
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
                     <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
-
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                </div>
+                <div class="mt-4">
+                    <Label required labelFor="indicador" value="Indicador" />
+                    <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
+
+                    <Textarea rows="4" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
                 {#if producto.idi_producto}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
                         <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required labelFor="trl" value="TRL" />
+                        <Input id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
+                    </div>
+                {:else if proyecto.ta_tp}
+                    <div class="mt-4">
+                        <Label required labelFor="valor_proyectado" value="Valor proyectado" />
+                        <Input id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
             </fieldset>

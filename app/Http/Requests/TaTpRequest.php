@@ -43,7 +43,8 @@ class TaTpRequest extends FormRequest
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'impacto_centro_formacion'                  => ['required', 'string'],
-                'nombre_instituciones'                      => ['required', 'json']
+                'nombre_instituciones'                      => ['required', 'json'],
+                'diseno_curricular'                         => ['required']
             ];
         } else {
             return [
@@ -56,6 +57,7 @@ class TaTpRequest extends FormRequest
             ];
         }
     }
+
     /**
      * Prepare the data for validation.
      *

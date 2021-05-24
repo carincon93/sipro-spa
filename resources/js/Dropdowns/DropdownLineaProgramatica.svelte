@@ -17,7 +17,7 @@
     let select = null
 
     onMount(() => {
-        getProgrammaticLine()
+        getLineaProgramatica()
         select = document.getElementById(id)
     })
 
@@ -27,17 +27,17 @@
         }
     })
 
-    async function getProgrammaticLine() {
+    async function getLineaProgramatica() {
         let res = await axios.get(route('web-api.lineas-programaticas'))
         lineasProgramaticas = res.data
-        selectProgrammaticLine()
+        selectLineaProgramatica()
     }
 
     function handleLineaProgramatica(event) {
         formLineaProgramatica = event.detail.value
     }
 
-    function selectProgrammaticLine() {
+    function selectLineaProgramatica() {
         if (formLineaProgramatica) {
             let filterItem = lineasProgramaticas.filter(function (lineaProgramatica) {
                 return lineaProgramatica.value == formLineaProgramatica

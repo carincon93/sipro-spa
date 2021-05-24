@@ -24,11 +24,9 @@ class ResultadoRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion'           => ['required', 'string'],
-            'tipo'                  => ['required', 'digits_between:1,4'],
-            'trl'                   => ['required', 'digits_between:1,9'],
-            'indicador'             => ['required', 'string'],
-            'medios_verificacion'   => ['required', 'string'],
+            'descripcion' => ['required', 'string'],
+            'tipo'        => ['required', 'digits_between:1,4'],
+
         ];
     }
 
@@ -39,7 +37,7 @@ class ResultadoRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->tipo) ) {
+        if (is_array($this->tipo)) {
             $this->merge([
                 'tipo' => $this->tipo['value'],
             ]);
