@@ -85,13 +85,13 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with IDi
+     * Relationship with Idi
      *
      * @return object
      */
     public function idi()
     {
-        return $this->hasOne(IDi::class, 'id');
+        return $this->hasOne(Idi::class, 'id');
     }
 
     /**
@@ -102,6 +102,16 @@ class Proyecto extends Model
     public function taTp()
     {
         return $this->hasOne(TaTp::class, 'id');
+    }
+
+    /**
+     * Relationship with EntidadAliada
+     *
+     * @return object
+     */
+    public function entidadesAliadas()
+    {
+        return $this->hasMany(EntidadAliada::class);
     }
 
     /**

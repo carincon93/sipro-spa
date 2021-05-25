@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TecnoacademiaLineaTecnologica extends Model
+class EntidadAliadaTaTp extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class TecnoacademiaLineaTecnologica extends Model
      *
      * @var string
      */
-    protected $table = 'tecnoacademia_linea_tecnologica';
+    protected $table = 'entidad_aliada_ta_tp';
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +22,7 @@ class TecnoacademiaLineaTecnologica extends Model
      * @var array
      */
     protected $fillable = [
-        'tecnoacademia_id',
-        'linea_tecnologica_id'
+        'soporte_convenio',
     ];
 
     /**
@@ -45,43 +44,13 @@ class TecnoacademiaLineaTecnologica extends Model
     ];
 
     /**
-     * Relationship with Tecnoacademia
+     * Relationship with EntidadAliada
      *
-     * @return void
+     * @return object
      */
-    public function tecnoacademia()
+    public function entidadAliada()
     {
-        return $this->belongsTo(Tecnoacademia::class);
-    }
-
-    /**
-     * Relationship with LineaTecnologica
-     *
-     * @return void
-     */
-    public function lineaTecnologica()
-    {
-        return $this->belongsTo(LineaTecnologica::class);
-    }
-
-    /**
-     * Relationship with Idi
-     *
-     * @return void
-     */
-    public function idi()
-    {
-        return $this->hasMany(Idi::class);
-    }
-
-    /**
-     * Relationship with TaTp
-     *
-     * @return void
-     */
-    public function taTp()
-    {
-        return $this->hasMany(TaTp::class);
+        return $this->belongsTo(EntidadAliada::class);
     }
 
     /**
@@ -91,7 +60,7 @@ class TecnoacademiaLineaTecnologica extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTecnoacademiaLineaTecnologica($query, array $filters)
+    public function scopeFilterEntidadAliadaTaTp($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('replace', 'ilike', '%' . $search . '%');

@@ -28,18 +28,11 @@ class EntidadAliada extends Model
         'naturaleza',
         'tipo_empresa',
         'nit',
-        'descripcion_convenio',
-        'grupo_investigacion',
-        'codigo_gruplac',
-        'enlace_gruplac',
-        'actividades_transferencia_conocimiento',
-        'carta_intencion',
-        'carta_propiedad_intelectual',
         'recursos_especie',
         'descripcion_recursos_especie',
         'recursos_dinero',
-        'descripcion_recursos_dinero'
-
+        'descripcion_recursos_dinero',
+        'soporte_convenio'
     ];
 
     /**
@@ -61,13 +54,33 @@ class EntidadAliada extends Model
     ];
 
     /**
-     * Relationship with IDi
+     * Relationship with Proyecto
      *
      * @return object
      */
-    public function idi()
+    public function proyecto()
     {
-        return $this->belongsTo(IDi::class);
+        return $this->belongsTo(Proyecto::class);
+    }
+
+    /**
+     * Relationship with EntidadAliadaIdi
+     *
+     * @return object
+     */
+    public function entidadAliadaIdi()
+    {
+        return $this->hasOne(EntidadAliadaIdi::class);
+    }
+
+    /**
+     * Relationship with EntidadAliadaTaTp
+     *
+     * @return object
+     */
+    public function entidadAliadaTaTp()
+    {
+        return $this->hasOne(EntidadAliadaTaTp::class);
     }
 
     /**

@@ -20,7 +20,7 @@ use App\Http\Controllers\LineaInvestigacionController;
 use App\Http\Controllers\SemilleroInvestigacionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ConvocatoriaController;
-use App\Http\Controllers\IDiController;
+use App\Http\Controllers\IdiController;
 use App\Http\Controllers\ArbolProyectoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProyectoController;
@@ -403,14 +403,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.subtipologias-minciencias');
 
     /**
-     * IDi - Estrategia regional
+     * Idi - Estrategia regional
      * 
      */
-    Route::resource('convocatorias.idi', IDiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi'])->except(['show']);
+    Route::resource('convocatorias.idi', IdiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi'])->except(['show']);
 
-    Route::resource('convocatorias.idi.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
+    Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
 
-    Route::resource('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'IDi', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
+    Route::resource('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
 
     /**
      * TaTp - Estrategia nacional

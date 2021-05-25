@@ -12,7 +12,7 @@
     import Pagination from '@/Components/Pagination'
 
     export let convocatoria
-    export let idi
+    export let proyecto
     export let entidadAliada
     export let miembrosEntidadAliada
 
@@ -36,10 +36,10 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
+                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('convocatorias.idi.entidades-aliadas.edit', [convocatoria.id, idi.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">
+                    <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">
                         {entidadAliada.nombre}
                     </a>
                     <span class="text-indigo-400 font-medium">/</span>
@@ -54,7 +54,7 @@
 
         <div slot="actions">
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, idi.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
             {/if}
         </div>
 
@@ -91,7 +91,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, idi.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

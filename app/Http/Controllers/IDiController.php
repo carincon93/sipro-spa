@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Municipio;
 use App\Models\Proyecto;
-use App\Models\IDi;
+use App\Models\Idi;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
-use App\Http\Requests\IDiRequest;
+use App\Http\Requests\IdiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class IDiController extends Controller
+class IdiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,13 +23,13 @@ class IDiController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [IDi::class]);
+        $this->authorize('viewAny', [Idi::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/Index', [
+        return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'filters'       => request()->all('search'),
-            'IDi'           => IDi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
-                ->filterIDi(request()->only('search'))->paginate(),
+            'idi'           => Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate(),
         ]);
     }
 
@@ -41,9 +40,9 @@ class IDiController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('create', [IDi::class]);
+        $this->authorize('create', [Idi::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/Create', [
+        return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria' => $convocatoria->only('id')
         ]);
     }
@@ -54,9 +53,9 @@ class IDiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IDiRequest $request, Convocatoria $convocatoria)
+    public function store(IdiRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('create', [IDi::class]);
+        $this->authorize('create', [Idi::class]);
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
@@ -64,73 +63,73 @@ class IDiController extends Controller
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
-        $IDi = new IDi();
-        $IDi->titulo                                = $request->titulo;
-        $IDi->fecha_inicio                          = $request->fecha_inicio;
-        $IDi->fecha_finalizacion                    = $request->fecha_finalizacion;
-        $IDi->video                                 = null;
-        $IDi->justificacion_industria_4             = null;
-        $IDi->justificacion_economia_naranja        = null;
-        $IDi->justificacion_politica_discapacidad   = null;
-        $IDi->resumen                               = 'Por favor diligencie el resumen del proyecto';
-        $IDi->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
-        $IDi->marco_conceptual                      = 'Por favor diligencie el marco conceptual del proyecto';
-        $IDi->metodologia                           = 'Por favor diligencie la metodología del proyecto';
-        $IDi->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
-        $IDi->bibliografia                          = 'Por favor diligencie la bibliografía';
-        $IDi->numero_aprendices                     = 0;
-        $IDi->impacto_municipios                    = 'Describa el beneficio en los municipios';
-        $IDi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
+        $idi = new Idi();
+        $idi->titulo                                = $request->titulo;
+        $idi->fecha_inicio                          = $request->fecha_inicio;
+        $idi->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $idi->video                                 = null;
+        $idi->justificacion_industria_4             = null;
+        $idi->justificacion_economia_naranja        = null;
+        $idi->justificacion_politica_discapacidad   = null;
+        $idi->resumen                               = 'Por favor diligencie el resumen del proyecto';
+        $idi->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
+        $idi->marco_conceptual                      = 'Por favor diligencie el marco conceptual del proyecto';
+        $idi->metodologia                           = 'Por favor diligencie la metodología del proyecto';
+        $idi->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
+        $idi->bibliografia                          = 'Por favor diligencie la bibliografía';
+        $idi->numero_aprendices                     = 0;
+        $idi->impacto_municipios                    = 'Describa el beneficio en los municipios';
+        $idi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
 
-        $IDi->muestreo                              = null;
-        $IDi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
-        $IDi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
+        $idi->muestreo                              = null;
+        $idi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
+        $idi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
 
-        $IDi->lineaInvestigacion()->associate($request->linea_investigacion_id);
-        $IDi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
-        $IDi->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $IDi->redConocimiento()->associate($request->red_conocimiento_id);
-        $IDi->actividadEconomica()->associate($request->actividad_economica_id);
+        $idi->lineaInvestigacion()->associate($request->linea_investigacion_id);
+        $idi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
+        $idi->tematicaEstrategica()->associate($request->tematica_estrategica_id);
+        $idi->redConocimiento()->associate($request->red_conocimiento_id);
+        $idi->actividadEconomica()->associate($request->actividad_economica_id);
 
-        $proyecto->IDi()->save($IDi);
+        $proyecto->idi()->save($idi);
 
-        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $IDi])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $idi])->with('success', 'The resource has been created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\IDi  $IDi
+     * @param  \App\Models\Idi  $idi
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, IDi $IDi)
+    public function show(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('view', [IDi::class, $IDi]);
+        $this->authorize('view', [Idi::class, $idi]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\IDi  $IDi
+     * @param  \App\Models\Idi  $idi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, IDi $IDi)
+    public function edit(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('update', [IDi::class, $IDi]);
+        $this->authorize('update', [Idi::class, $idi]);
 
-        $IDi->codigo_linea_programatica = $IDi->proyecto->tipoProyecto->lineaProgramatica->codigo;
-        $IDi->precio_proyecto           = $IDi->proyecto->precioProyecto;
+        $idi->codigo_linea_programatica = $idi->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/Edit', [
+        return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
             'convocatoria'                      => $convocatoria->only('id'),
-            'idi'                               => $IDi,
-            'mesasSectorialesRelacionadas'      => $IDi->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'    => $IDi->lineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                     => $IDi->lineasTecnologicas()->first() ? $IDi->lineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'idi'                               => $idi,
+            'mesasSectorialesRelacionadas'      => $idi->mesasSectoriales()->pluck('id'),
+            'lineasTecnologicasRelacionadas'    => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),
+            'tecnoacademia'                     => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-idi-dropdown.json'), true),
-            'proyectoMunicipios'                => $IDi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')->join('departamentos', 'departamentos.id', 'municipios.departamento_id')->get(),
+            'proyectoMunicipios'                => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')->join('departamentos', 'departamentos.id', 'municipios.departamento_id')->get(),
         ]);
     }
 
@@ -138,53 +137,53 @@ class IDiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\IDi  $IDi
+     * @param  \App\Models\Idi  $idi
      * @return \Illuminate\Http\Response
      */
-    public function update(IDiRequest $request, Convocatoria $convocatoria, IDi $IDi)
+    public function update(IdiRequest $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('update', [IDi::class, $IDi]);
+        $this->authorize('update', [Idi::class, $idi]);
 
-        $IDi->titulo                                = $request->titulo;
-        $IDi->fecha_inicio                          = $request->fecha_inicio;
-        $IDi->fecha_finalizacion                    = $request->fecha_finalizacion;
-        $IDi->video                                 = $request->video;
-        $IDi->justificacion_industria_4             = $request->justificacion_industria_4;
-        $IDi->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
-        $IDi->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
-        $IDi->resumen                               = $request->resumen;
-        $IDi->antecedentes                          = $request->antecedentes;
-        $IDi->marco_conceptual                      = $request->marco_conceptual;
-        $IDi->metodologia                           = $request->metodologia;
-        $IDi->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
-        $IDi->bibliografia                          = $request->bibliografia;
-        $IDi->numero_aprendices                     = $request->numero_aprendices;
-        $IDi->impacto_municipios                    = $request->impacto_municipios;
-        $IDi->impacto_centro_formacion              = $request->impacto_centro_formacion;
+        $idi->titulo                                = $request->titulo;
+        $idi->fecha_inicio                          = $request->fecha_inicio;
+        $idi->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $idi->video                                 = $request->video;
+        $idi->justificacion_industria_4             = $request->justificacion_industria_4;
+        $idi->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
+        $idi->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
+        $idi->resumen                               = $request->resumen;
+        $idi->antecedentes                          = $request->antecedentes;
+        $idi->marco_conceptual                      = $request->marco_conceptual;
+        $idi->metodologia                           = $request->metodologia;
+        $idi->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
+        $idi->bibliografia                          = $request->bibliografia;
+        $idi->numero_aprendices                     = $request->numero_aprendices;
+        $idi->impacto_municipios                    = $request->impacto_municipios;
+        $idi->impacto_centro_formacion              = $request->impacto_centro_formacion;
 
-        $IDi->muestreo                              = $request->muestreo;
-        $IDi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
-        $IDi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
+        $idi->muestreo                              = $request->muestreo;
+        $idi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
+        $idi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
 
-        $IDi->lineaInvestigacion()->associate($request->linea_investigacion_id);
-        $IDi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
-        $IDi->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $IDi->redConocimiento()->associate($request->red_conocimiento_id);
-        $IDi->actividadEconomica()->associate($request->actividad_economica_id);
+        $idi->lineaInvestigacion()->associate($request->linea_investigacion_id);
+        $idi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
+        $idi->tematicaEstrategica()->associate($request->tematica_estrategica_id);
+        $idi->redConocimiento()->associate($request->red_conocimiento_id);
+        $idi->actividadEconomica()->associate($request->actividad_economica_id);
 
-        $IDi->relacionado_plan_tecnologico          = $request->relacionado_plan_tecnologico;
-        $IDi->relacionado_agendas_competitividad    = $request->relacionado_agendas_competitividad;
-        $IDi->relacionado_mesas_sectoriales         = $request->relacionado_mesas_sectoriales;
-        $IDi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
+        $idi->relacionado_plan_tecnologico          = $request->relacionado_plan_tecnologico;
+        $idi->relacionado_agendas_competitividad    = $request->relacionado_agendas_competitividad;
+        $idi->relacionado_mesas_sectoriales         = $request->relacionado_mesas_sectoriales;
+        $idi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
-        $IDi->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        $IDi->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
-        $IDi->proyecto->municipios()->sync($request->municipios);
+        $idi->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
+        $idi->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
+        $idi->proyecto->municipios()->sync($request->municipios);
 
-        $IDi->save();
+        $idi->save();
 
-        $request->relacionado_mesas_sectoriales == 1 ? $IDi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $IDi->mesasSectoriales()->detach();
-        $request->relacionado_tecnoacademia == 1 ? $IDi->lineasTecnologicas()->sync($request->linea_tecnologica_id) : $IDi->lineasTecnologicas()->detach();
+        $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
+        $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnologicas()->detach();
 
 
         return redirect()->back()->with('success', 'The resource has been updated successfully.');
@@ -193,19 +192,19 @@ class IDiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\IDi  $IDi
+     * @param  \App\Models\Idi  $idi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Convocatoria $convocatoria, IDi $IDi)
+    public function destroy(Request $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('delete', [IDi::class, $IDi]);
+        $this->authorize('delete', [Idi::class, $idi]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
-        $IDi->delete();
+        $idi->delete();
 
         return redirect()->route('convocatorias.idi.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
     }

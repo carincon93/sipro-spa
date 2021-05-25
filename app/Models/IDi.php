@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class IDi extends Model
+class Idi extends Model
 {
     use HasFactory;
 
@@ -142,13 +142,13 @@ class IDi extends Model
     }
 
     /**
-     * Relationship with LineaTecnologica
+     * Relationship with TecnoacademiaLineaTecnologica
      *
      * @return object
      */
-    public function lineasTecnologicas()
+    public function tecnoacademiaLineasTecnologicas()
     {
-        return $this->belongsToMany(LineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'tecnoacademia_linea_tecnologica_id');
+        return $this->belongsToMany(TecnoacademiaLineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'tecnoacademia_linea_tecnologica_id');
     }
 
     /**
@@ -172,23 +172,13 @@ class IDi extends Model
     }
 
     /**
-     * Relationship with EntidadAliada
-     *
-     * @return object
-     */
-    public function entidadesAliadas()
-    {
-        return $this->hasMany(EntidadAliada::class);
-    }
-
-    /**
      * Filtrar registros
      *
      * @param  mixed $query
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterIDi($query, array $filters)
+    public function scopeFilterIdi($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('titulo', 'ilike', '%' . $search . '%');

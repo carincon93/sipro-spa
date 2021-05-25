@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MiembroEntidadAliadaRequest;
 use App\Models\Convocatoria;
-use App\Models\IDi;
+use App\Models\Proyecto;
 use App\Models\EntidadAliada;
 use App\Models\MiembroEntidadAliada;
 use Illuminate\Http\Request;
@@ -18,18 +18,22 @@ class MiembroEntidadAliadaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
         $this->authorize('viewAny', [MiembroEntidadAliada::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadesAliadas/MiembrosEntidadAliada/Index', [
-            'convocatoria'          => $convocatoria->only('id'),
-            'idi'                   => $IDi->only('id'),
-            'entidadAliada'         => $entidadAliada,
-            'filters'               => request()->all('search'),
-            'miembrosEntidadAliada' => MiembroEntidadAliada::orderBy('nombre', 'ASC')
-                ->filterMiembroEntidadAliada(request()->only('search'))->paginate()
-        ]);
+        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+            return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Index', [
+                'convocatoria'          => $convocatoria->only('id'),
+                'proyecto'              => $proyecto->only('id'),
+                'entidadAliada'         => $entidadAliada,
+                'filters'               => request()->all('search'),
+                'miembrosEntidadAliada' => MiembroEntidadAliada::where('entidad_aliada_id', $entidadAliada->id)->orderBy('nombre', 'ASC')
+                    ->filterMiembroEntidadAliada(request()->only('search'))->paginate()
+            ]);
+        }
+
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de miembros de entidad aliadas.');
     }
 
     /**
@@ -37,16 +41,20 @@ class MiembroEntidadAliadaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada)
+    public function create(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
         $this->authorize('create', [MiembroEntidadAliada::class]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadesAliadas/MiembrosEntidadAliada/Create', [
-            'convocatoria'    => $convocatoria->only('id'),
-            'idi'             => $IDi->only('id'),
-            'entidadAliada'   => $entidadAliada->only('id'),
-            'tiposDocumento'  => json_decode(Storage::get('json/tipos-documento.json'), true),
-        ]);
+        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+            return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Create', [
+                'convocatoria'    => $convocatoria->only('id'),
+                'proyecto'        => $proyecto->only('id'),
+                'entidadAliada'   => $entidadAliada->only('id'),
+                'tiposDocumento'  => json_decode(Storage::get('json/tipos-documento.json'), true),
+            ]);
+        }
+
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de miembros de entidad aliadas.');
     }
 
     /**
@@ -55,7 +63,7 @@ class MiembroEntidadAliadaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada)
+    public function store(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
         $this->authorize('create', [MiembroEntidadAliada::class]);
 
@@ -69,7 +77,7 @@ class MiembroEntidadAliadaController extends Controller
 
         $miembroEntidadAliada->save();
 
-        return redirect()->route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $IDi, $entidadAliada])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'The resource has been created successfully.');
     }
 
     /**
@@ -78,7 +86,7 @@ class MiembroEntidadAliadaController extends Controller
      * @param  \App\Models\MiembroEntidadAliada  $miembroEntidadAliada
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
         $this->authorize('view', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
     }
@@ -89,17 +97,21 @@ class MiembroEntidadAliadaController extends Controller
      * @param  \App\Models\MiembroEntidadAliada  $miembroEntidadAliada
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
         $this->authorize('update', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
 
-        return Inertia::render('Convocatorias/Proyectos/IDi/EntidadesAliadas/MiembrosEntidadAliada/Edit', [
-            'convocatoria'         => $convocatoria->only('id'),
-            'idi'                  => $IDi->only('id'),
-            'miembroEntidadAliada' => $miembroEntidadAliada,
-            'tiposDocumento'       => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'entidadAliada'        => $entidadAliada->only('id'),
-        ]);
+        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+            return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Edit', [
+                'convocatoria'         => $convocatoria->only('id'),
+                'proyecto'             => $proyecto->only('id'),
+                'miembroEntidadAliada' => $miembroEntidadAliada,
+                'tiposDocumento'       => json_decode(Storage::get('json/tipos-documento.json'), true),
+                'entidadAliada'        => $entidadAliada->only('id'),
+            ]);
+        }
+
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de miembros de entidad aliadas.');
     }
 
     /**
@@ -109,7 +121,7 @@ class MiembroEntidadAliadaController extends Controller
      * @param  \App\Models\MiembroEntidadAliada  $miembroEntidadAliada
      * @return \Illuminate\Http\Response
      */
-    public function update(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
+    public function update(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
         $this->authorize('update', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
 
@@ -131,12 +143,12 @@ class MiembroEntidadAliadaController extends Controller
      * @param  \App\Models\MiembroEntidadAliada  $miembroEntidadAliada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, IDi $IDi, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
         $this->authorize('delete', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
 
         $miembroEntidadAliada->delete();
 
-        return redirect()->route('convocatorias.idi.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $IDi, $entidadAliada])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'The resource has been deleted successfully.');
     }
 }

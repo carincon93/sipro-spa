@@ -13,7 +13,7 @@
     import Stepper from '@/Components/Stepper'
 
     export let convocatoria
-    export let idi
+    export let proyecto
     export let entidadesAliadas
 
     $title = 'Entidades aliadas'
@@ -31,14 +31,14 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} proyecto={idi} />
+    <Stepper {convocatoria} {proyecto} />
 
     <DataTable class="mt-20">
         <div slot="title">Entidades aliadas</div>
 
         <div slot="actions">
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.create', [convocatoria.id, idi.id]))} variant="raised">Crear entidad aliada</Button>
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear entidad aliada</Button>
             {/if}
         </div>
 
@@ -60,7 +60,7 @@
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.entidades-aliadas.edit', [convocatoria.id, idi.id, entidadAliada.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

@@ -45,13 +45,13 @@ class RedConocimiento extends Model
     ];
 
     /**
-     * Relationship with IDi
+     * Relationship with Idi
      *
      * @return object
      */
-    public function IDi()
+    public function idi()
     {
-        return $this->hasMany(IDi::class);
+        return $this->hasMany(Idi::class);
     }
 
     /**

@@ -18,7 +18,7 @@
 
     export let errors
     export let convocatoria
-    export let idi
+    export let proyecto
     export let actividades
     export let tiposEntidadAliada
     export let naturalezaEntidadAliada
@@ -56,12 +56,14 @@
         descripcion_recursos_dinero: '',
         carta_intencion: null,
         carta_propiedad_intelectual: null,
+        soporte_convenio: null,
+        idi: proyecto.idi ? true : false,
         actividad_id: [],
     })
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('convocatorias.idi.entidades-aliadas.store', [convocatoria.id, idi.id]), {
+            $form.post(route('convocatorias.proyectos.entidades-aliadas.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
@@ -75,7 +77,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.idi.entidades-aliadas.index', [convocatoria.id, idi.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
+                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -112,35 +114,42 @@
                     <Input id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
                 </div>
 
-                <div class="mt-4">
-                    <p>¿Hay convenio?</p>
-                    <Switch bind:checked={convenio} />
-                </div>
-                {#if convenio}
+                {#if proyecto.idi}
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
-                        <Textarea rows="4" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                        <p>¿Hay convenio?</p>
+                        <Switch bind:checked={convenio} />
                     </div>
-                {/if}
-
-                <div class="mt-4">
-                    <p>¿La entidad aliada tiene grupo de investigación?</p>
-                    <Switch bind:checked={grupoInvestigacion} />
-                </div>
-                {#if grupoInvestigacion}
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
-                        <Textarea rows="4" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
-                    </div>
+                    {#if convenio}
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
+                            <Textarea rows="4" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                        </div>
+                    {/if}
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="codigo_gruplac" value="Código del GrupLAC" />
-                        <Input id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        <p>¿La entidad aliada tiene grupo de investigación?</p>
+                        <Switch bind:checked={grupoInvestigacion} />
                     </div>
+                    {#if grupoInvestigacion}
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
+                            <Textarea rows="4" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                        </div>
 
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="codigo_gruplac" value="Código del GrupLAC" />
+                            <Input id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        </div>
+
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace del GrupLAC" />
+                            <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        </div>
+                    {/if}
+                {:else}
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace del GrupLAC" />
-                        <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                        <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
+                        <File id="soporte_convenio" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
                     </div>
                 {/if}
 
@@ -164,20 +173,22 @@
                     <Textarea rows="4" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
-                    <Textarea rows="4" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
-                </div>
+                {#if proyecto.idi}
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
+                        <Textarea rows="4" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                    </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                    <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
-                </div>
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
+                        <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
+                    </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                    <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
-                </div>
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
+                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
+                    </div>
+                {/if}
 
                 {#if $form.progress}
                     <progress value={$form.progress.percentage} max="100" class="mt-4">

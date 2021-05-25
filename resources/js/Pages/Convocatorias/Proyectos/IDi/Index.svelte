@@ -12,7 +12,7 @@
     import DataTable from '@/Components/DataTable'
 
     export let convocatoria
-    export let IDi
+    export let idi
 
     $title = 'Proyectos I+D+i'
 
@@ -47,7 +47,7 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each IDi.data as { id, titulo, fecha_ejecucion }}
+            {#each idi.data as { id, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
@@ -75,12 +75,12 @@
                 </tr>
             {/each}
 
-            {#if IDi.data.length === 0}
+            {#if idi.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
-    <Pagination links={IDi.links} />
+    <Pagination links={idi.links} />
 </AuthenticatedLayout>

@@ -138,12 +138,12 @@ class ArbolProyectoController extends Controller
         ]);
 
         switch ($proyecto) {
-            case $proyecto->IDi()->exists():
-                $IDi = $proyecto->IDi;
-                $IDi->planteamiento_problema = $request->planteamiento_problema;
-                $IDi->justificacion_problema = $request->justificacion_problema;
+            case $proyecto->Idi()->exists():
+                $idi = $proyecto->Idi;
+                $idi->planteamiento_problema = $request->planteamiento_problema;
+                $idi->justificacion_problema = $request->justificacion_problema;
 
-                $IDi->save();
+                $idi->save();
                 break;
             default:
                 break;
@@ -311,11 +311,11 @@ class ArbolProyectoController extends Controller
         ]);
 
         switch ($proyecto) {
-            case $proyecto->IDi()->exists():
-                $IDi                   = $proyecto->IDi;
-                $IDi->objetivo_general = $request->objetivo_general;
+            case $proyecto->Idi()->exists():
+                $idi                   = $proyecto->Idi;
+                $idi->objetivo_general = $request->objetivo_general;
 
-                $IDi->save();
+                $idi->save();
                 break;
             default:
                 break;

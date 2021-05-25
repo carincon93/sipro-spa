@@ -64,23 +64,23 @@ class Producto extends Model
     }
 
     /**
-     * Relationship with IDiProducto
+     * Relationship with ProductoIdi
      *
      * @return object
      */
-    public function idiProducto()
+    public function productoIdi()
     {
-        return $this->hasOne(IDiProducto::class);
+        return $this->hasOne(ProductoIdi::class);
     }
 
     /**
-     * Relationship with TaTpProducto
+     * Relationship with ProductoTaTp
      *
      * @return object
      */
-    public function taTpProducto()
+    public function productoTaTp()
     {
-        return $this->hasOne(TaTpProducto::class);
+        return $this->hasOne(ProductoTaTp::class);
     }
 
     /**

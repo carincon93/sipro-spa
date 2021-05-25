@@ -44,13 +44,13 @@ class MesaSectorial extends Model
     ];
 
     /**
-     * Relationship with IDi
+     * Relationship with Idi
      *
      * @return object
      */
-    public function IDi()
+    public function idi()
     {
-        return $this->belongsToMany(IDi::class, 'idi_mesa_sectorial', 'mesa_sectorial_id', 'idi_id');
+        return $this->belongsToMany(Idi::class, 'idi_mesa_sectorial', 'mesa_sectorial_id', 'idi_id');
     }
 
     /**

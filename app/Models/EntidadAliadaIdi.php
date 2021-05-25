@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActividadEconomica extends Model
+class EntidadAliadaIdi extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class ActividadEconomica extends Model
      *
      * @var string
      */
-    protected $table = 'actividades_economicas';
+    protected $table = 'entidad_aliada_idi';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +22,14 @@ class ActividadEconomica extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre'
+        'entidad_aliada_id',
+        'descripcion_convenio',
+        'grupo_investigacion',
+        'codigo_gruplac',
+        'enlace_gruplac',
+        'actividades_transferencia_conocimiento',
+        'carta_intencion',
+        'carta_propiedad_intelectual',
     ];
 
     /**
@@ -44,13 +51,13 @@ class ActividadEconomica extends Model
     ];
 
     /**
-     * Relationship with Idi
+     * Relationship with EntidadAliada
      *
      * @return object
      */
-    public function idi()
+    public function entidadAliada()
     {
-        return $this->hasMany(Idi::class);
+        return $this->belongsTo(EntidadAliada::class);
     }
 
     /**
@@ -60,10 +67,10 @@ class ActividadEconomica extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterActividadEconomica($query, array $filters)
+    public function scopeFilterEntidadAliadaIDI($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $query->where('descripcion_convenio', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class IDiProducto extends Model
+class ProductoIdi extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class IDiProducto extends Model
      *
      * @var string
      */
-    protected $table = 'idi_productos';
+    protected $table = 'producto_idi';
 
     /**
      * The attributes that are mass assignable.

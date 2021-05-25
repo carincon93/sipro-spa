@@ -6,8 +6,8 @@ use App\Http\Requests\ProductoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Producto;
-use App\Models\IDiProducto;
-use App\Models\TaTpProducto;
+use App\Models\ProductoIdi;
+use App\Models\ProductoTaTp;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -79,19 +79,18 @@ class ProductoController extends Controller
 
         // Valida si es un producto de I+D+i
         if ($request->subtipologia_minciencias_id) {
-            $IDiProducto = new IDiProducto();
-            $IDiProducto->trl = $request->trl;
-            $IDiProducto->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
-            $IDiProducto->producto()->associate($producto->id);
-            $IDiProducto->save();
+            $productoIdi = new ProductoIdi();
+            $productoIdi->trl = $request->trl;
+            $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
+            $producto->productoIdi()->save($productoIdi);
         }
 
         // Valida si es un producto de TaTp
         if ($request->valor_proyectado) {
-            $taTpProducto = new TaTpProducto();
-            $taTpProducto->producto()->associate($producto->id);
-            $taTpProducto->valor_proyectado = $request->valor_proyectado;
-            $taTpProducto->save();
+            $productoTaTp = new ProductoTaTp();
+            $productoTaTp->producto()->associate($producto->id);
+            $productoTaTp->valor_proyectado = $request->valor_proyectado;
+            $producto->productoTaTp()->save($productoTaTp);
         }
 
         return redirect()->route('convocatorias.proyectos.productos.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
@@ -121,7 +120,7 @@ class ProductoController extends Controller
         $proyecto->idi;
         $producto->idiProducto;
         $proyecto->taTp;
-        $producto->taTpProducto;
+        $producto->productoTaTp;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'      => $convocatoria->only('id'),
@@ -151,11 +150,11 @@ class ProductoController extends Controller
         $producto->resultado()->associate($request->resultado_id);
 
         if ($request->subtipologia_minciencias_id) {
-            $producto->IDiProducto()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
+            $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
         }
 
         if ($request->valor_proyectado) {
-            $producto->TaTpProducto()->update(['valor_proyectado' => $request->valor_proyectado]);
+            $producto->ProductoTaTp()->update(['valor_proyectado' => $request->valor_proyectado]);
         }
 
         $producto->save();

@@ -33,16 +33,16 @@ class EntidadAliadaRequest extends FormRequest
                 'descripcion_convenio'                      => ['nullable', 'string'],
                 'grupo_investigacion'                       => ['nullable', 'max:191'],
                 'codigo_gruplac'                            => ['nullable', 'max:191'],
-                'enlace_gruplac'                            => ['nullable', 'url', 'max:191'],
-                'actividades_transferencia_conocimiento'    => ['required', 'max:10000'],
+                'enlace_gruplac'                            => ['nullable', 'exclude_if:idi,0', 'url', 'max:191'],
+                'actividades_transferencia_conocimiento'    => ['required_if:idi,1', 'exclude_if:idi,0', 'max:10000'],
                 'carta_intencion'                           => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
                 'carta_propiedad_intelectual'               => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'soporte_convenio'                          => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
                 'recursos_especie'                          => ['required', 'numeric'],
                 'descripcion_recursos_especie'              => ['required', 'string'],
                 'recursos_dinero'                           => ['required', 'numeric'],
                 'descripcion_recursos_dinero'               => ['required', 'string'],
                 'actividad_id*'                             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:actividades,id'],
-
             ];
         } else {
             return [
@@ -55,9 +55,10 @@ class EntidadAliadaRequest extends FormRequest
                 'grupo_investigacion'                       => ['nullable', 'max:191'],
                 'codigo_gruplac'                            => ['nullable', 'max:191'],
                 'enlace_gruplac'                            => ['nullable', 'url', 'max:191'],
-                'actividades_transferencia_conocimiento'    => ['required', 'max:10000'],
-                'carta_intencion'                           => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
-                'carta_propiedad_intelectual'               => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'actividades_transferencia_conocimiento'    => ['required_if:idi,1', 'exclude_if:idi,0', 'max:10000'],
+                'carta_intencion'                           => ['required_if:idi,1', 'exclude_if:idi,0', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'carta_propiedad_intelectual'               => ['required_if:idi,1', 'exclude_if:idi,0', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'soporte_convenio'                          => ['required_if:idi,0', 'exclude_if:idi,1', 'max:10000000', 'file', 'mimetypes:application/pdf'],
                 'recursos_especie'                          => ['required', 'numeric'],
                 'descripcion_recursos_especie'              => ['required', 'string'],
                 'recursos_dinero'                           => ['required', 'numeric'],
@@ -74,19 +75,19 @@ class EntidadAliadaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->tipo) ) {
+        if (is_array($this->tipo)) {
             $this->merge([
                 'tipo' => $this->tipo['value'],
             ]);
         }
 
-        if( is_array($this->naturaleza) ) {
+        if (is_array($this->naturaleza)) {
             $this->merge([
                 'naturaleza' => $this->naturaleza['value'],
             ]);
         }
 
-        if( is_array($this->tipo_empresa) ) {
+        if (is_array($this->tipo_empresa)) {
             $this->merge([
                 'tipo_empresa' => $this->tipo_empresa['value'],
             ]);

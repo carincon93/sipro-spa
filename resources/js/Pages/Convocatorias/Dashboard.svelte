@@ -38,7 +38,7 @@
             {#if isSuperAdmin}
                 <a use:inertia href={route('convocatorias.idi.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col h-96">
                     <span>ICON</span>
-                    IDi
+                    I+D+i
                 </a>
             {/if}
             {#if isSuperAdmin}

@@ -7,7 +7,7 @@ use App\Rules\MaxWords;
 use App\Rules\FechaInicioProyecto;
 use App\Rules\FechaFinalizacionProyecto;
 
-class IDiRequest extends FormRequest
+class IdiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -52,7 +52,7 @@ class IDiRequest extends FormRequest
                 'muestreo_objective'                        => ['nullable', 'max:191'],
                 'bibliografia'                              => ['required', 'string'],
                 'numero_aprendices'                         => ['required', 'min:0', 'max:9999', 'integer'],
-                'municipios*'                               => ['required', 'integer','exists:municipios,id'],
+                'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'impacto_centro_formacion'                  => ['required', 'string'],
                 'relacionado_plan_tecnologico'              => ['required', 'min:0', 'max:3', 'integer'],
@@ -85,51 +85,51 @@ class IDiRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_string($this->titulo) ) {
+        if (is_string($this->titulo)) {
             $this->merge([
                 'titulo' => ucfirst(mb_strtolower($this->titulo)),
             ]);
         }
 
-        if( is_array($this->centro_formacion_id) ) {
+        if (is_array($this->centro_formacion_id)) {
             $this->merge([
                 'centro_formacion_id' => $this->centro_formacion_id['value'],
             ]);
         }
 
-        if( is_array($this->relacionado_plan_tecnologico) ) {
+        if (is_array($this->relacionado_plan_tecnologico)) {
             $this->merge([
                 'relacionado_plan_tecnologico' => $this->relacionado_plan_tecnologico['value'],
             ]);
         }
 
-        if( is_array($this->relacionado_agendas_competitividad) ) {
+        if (is_array($this->relacionado_agendas_competitividad)) {
             $this->merge([
                 'relacionado_agendas_competitividad' => $this->relacionado_agendas_competitividad['value'],
             ]);
         }
 
-        if( is_array($this->relacionado_mesas_sectoriales) ) {
+        if (is_array($this->relacionado_mesas_sectoriales)) {
             $this->merge([
                 'relacionado_mesas_sectoriales' => $this->relacionado_mesas_sectoriales['value'],
             ]);
         }
 
-        if( is_array($this->relacionado_tecnoacademia) ) {
+        if (is_array($this->relacionado_tecnoacademia)) {
             $this->merge([
                 'relacionado_tecnoacademia' => $this->relacionado_tecnoacademia['value'],
             ]);
         }
 
-        if( is_array($this->municipios) ) {
-            if(isset($this->municipios['value']) && is_numeric($this->municipios['value']) ) {
+        if (is_array($this->municipios)) {
+            if (isset($this->municipios['value']) && is_numeric($this->municipios['value'])) {
                 $this->merge([
                     'municipios' => $this->municipios['value'],
                 ]);
-            }else{
+            } else {
                 $municipios = [];
                 foreach ($this->municipios as $municipio) {
-                    if( is_array($municipio) ) {
+                    if (is_array($municipio)) {
                         array_push($municipios, $municipio['value']);
                     }
                 }

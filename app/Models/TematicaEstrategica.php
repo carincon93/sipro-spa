@@ -44,13 +44,13 @@ class TematicaEstrategica extends Model
     ];
 
     /**
-     * Relationship with RDI
+     * Relationship with Idi
      *
      * @return object
      */
-    public function IDi()
+    public function idi()
     {
-        return $this->hasMany(IDi::class);
+        return $this->hasMany(Idi::class);
     }
 
     /**
