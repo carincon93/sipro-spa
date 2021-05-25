@@ -154,7 +154,7 @@ class ProductoController extends Controller
         }
 
         if ($request->valor_proyectado) {
-            $producto->ProductoTaTp()->update(['valor_proyectado' => $request->valor_proyectado]);
+            $producto->productoTaTp()->update(['valor_proyectado' => $request->valor_proyectado]);
         }
 
         $producto->save();
