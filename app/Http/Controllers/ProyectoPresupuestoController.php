@@ -25,6 +25,8 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('viewAny', ProyectoPresupuesto::class);
 
+        // dd(PresupuestoValidationTrait::totalAdecuacionesYConstrucciones($proyecto));
+
         $proyecto->codigo_linea_programatica                = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalMaquinariaIndustrial($proyecto);
         $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalViaticosInteriorGastosAlumnos($proyecto);

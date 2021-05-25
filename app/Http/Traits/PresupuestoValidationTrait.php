@@ -172,4 +172,21 @@ trait PresupuestoValidationTrait
 
         return false;
     }
+
+    // TA TP
+    public static function totalAdecuacionesYConstrucciones($proyecto)
+    {
+        $total = 0;
+
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+            $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
+                if ($codigoUsoPresupuestal == '2045110') {
+                    $total += $proyectoPresupuesto->getPromedioAttribute();
+                }
+            }
+        }
+
+        return $total;
+    }
 }

@@ -80,5 +80,9 @@ class TaTpRequest extends FormRequest
                 $this->merge(['municipios' => $municipios]);
             }
         }
+
+        $this->merge([
+            'diseno_curricular' => 0
+        ]);
     }
 }
