@@ -79,22 +79,22 @@
                         {/if}
                     </td>
                 </tr>
-            {/if}
 
-            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
-                <td class="border-t p-4">
-                    El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto * 0.05 : 0)}) del total del proyecto ( ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)}).
-                </td>
-                <td class="border-t p-4">
-                    Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
-                    {#if proyecto.total_mantenimiento_maquinaria <= proyecto.total_proyecto_presupuesto * 0.05}
-                        <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
-                    {:else}
-                        <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
-                    {/if}
-                </td>
-            </tr>
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
+                    <td class="border-t p-4">
+                        El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto * 0.05 : 0)}) del total del proyecto ( ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)}).
+                    </td>
+                    <td class="border-t p-4">
+                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
+                        {#if proyecto.total_mantenimiento_maquinaria <= proyecto.total_proyecto_presupuesto * 0.05}
+                            <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                        {:else}
+                            <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                        {/if}
+                    </td>
+                </tr>
+            {/if}
         </tbody>
 
         <tfoot slot="tfoot">
@@ -203,4 +203,37 @@
         </tbody>
     </DataTable>
     <Pagination links={proyectoPresupuesto.links} />
+
+    <DataTable class="mt-20">
+        <div slot="title">Presupuesto</div>
+
+        <h2 class="text-center mt-10 mb-24" slot="caption">
+            Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
+        </h2>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Concepto SENA</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regla</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Estado</th>
+            </tr>
+        </thead>
+
+        <tbody slot="tbody">
+            {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
+
+                    <td class="border-t p-4">
+                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
+                        {#if proyecto.total_mantenimiento_maquinaria <= proyecto.total_proyecto_presupuesto * 0.05}
+                            <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                        {:else}
+                            <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                        {/if}
+                    </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
 </AuthenticatedLayout>

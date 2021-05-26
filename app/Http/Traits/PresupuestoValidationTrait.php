@@ -22,29 +22,6 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    /**
-     * totalViaticosInteriorGastosAlumnos
-     *
-     * @param  mixed $proyecto
-     * @return int
-     */
-    public static function totalViaticosInteriorGastosAlumnos($proyecto)
-    {
-        $total = 0;
-
-        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
-            $presupuestoSennova = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova;
-            if ($presupuestoSennova->segundoGrupoPresupuestal->codigo != '2041101') {
-                $codigoUsoPresupuestal = $presupuestoSennova->usoPresupuestal->codigo;
-                if ($codigoUsoPresupuestal == '2020200600301' || $codigoUsoPresupuestal == '2020200600303' || $codigoUsoPresupuestal == '20202006004') {
-                    $total += $proyectoPresupuesto->getPromedioAttribute();
-                }
-            }
-        }
-
-        return $total;
-    }
-
     public static function serviciosEspecialesConstruccionValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
     {
         $porcentajeMaquinariaIndustrial         = self::porcentajeMaquinariaIndustrial($proyecto);
@@ -73,40 +50,10 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    // Porcentaje total del rubro 'Maquinaria Industrial'
-    public static function totalMaquinariaIndustrial($proyecto)
-    {
-        $total = 0;
-
-        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
-
-            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2040115') {
-                $total += $proyectoPresupuesto->getPromedioAttribute();
-            }
-        }
-
-        return $total;
-    }
-
     public static function porcentajeMaquinariaIndustrial($proyecto)
     {
         return self::totalMaquinariaIndustrial($proyecto) * 0.05;
     }
-
-    public static function totalServiciosEspecialesConstruccion($proyecto)
-    {
-        $total = 0;
-
-        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
-
-            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
-                $total += $proyectoPresupuesto->getPromedioAttribute();
-            }
-        }
-
-        return $total;
-    }
-
 
     public static function serviciosMantenimientoValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
     {
@@ -122,7 +69,7 @@ trait PresupuestoValidationTrait
         $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
         $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
 
-        $totalMantenimientoMaquinaria = self::totalMantenimientoMaquinaria($proyecto);
+        $totalMantenimientoMaquinaria = self::totalMantenimientoMaquinariaIdi($proyecto);
 
         $promedioPresupuestoTotal = $promedio + ($totalMantenimientoMaquinaria - $promedioPresupuestoGuardado);
 
@@ -135,7 +82,7 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    public static function totalMantenimientoMaquinaria($proyecto)
+    public static function totalMantenimientoMaquinariaIdi($proyecto)
     {
         $total = 0;
 
@@ -173,15 +120,65 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    // TA TP
-    public static function totalAdecuacionesYConstrucciones($proyecto)
+    /**
+     * totalViaticosInteriorGastosAlumnos
+     *
+     * @param  mixed $proyecto
+     * @return int
+     */
+    public static function totalViaticosInteriorGastosAlumnos($proyecto)
+    {
+        $total = 0;
+
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+            $presupuestoSennova = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova;
+            if ($presupuestoSennova->segundoGrupoPresupuestal->codigo != '2041101') {
+                $codigoUsoPresupuestal = $presupuestoSennova->usoPresupuestal->codigo;
+                if ($codigoUsoPresupuestal == '2020200600301' || $codigoUsoPresupuestal == '2020200600303' || $codigoUsoPresupuestal == '20202006004') {
+                    $total += $proyectoPresupuesto->getPromedioAttribute();
+                }
+            }
+        }
+
+        return $total;
+    }
+
+    public static function totalMaquinariaIndustrial($proyecto)
+    {
+        $total = 0;
+
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2040115') {
+                $total += $proyectoPresupuesto->getPromedioAttribute();
+            }
+        }
+
+        return $total;
+    }
+
+    public static function totalServiciosEspecialesConstruccion($proyecto)
+    {
+        $total = 0;
+
+        foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
+                $total += $proyectoPresupuesto->getPromedioAttribute();
+            }
+        }
+
+        return $total;
+    }
+
+    public static function totalUsoPresupuestal($proyecto, $codigo)
     {
         $total = 0;
 
         foreach ($proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
             $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
-                if ($codigoUsoPresupuestal == '2045110') {
+                if ($codigoUsoPresupuestal == $codigo) {
                     $total += $proyectoPresupuesto->getPromedioAttribute();
                 }
             }
