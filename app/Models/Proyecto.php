@@ -184,9 +184,28 @@ class Proyecto extends Model
         return $this->hasMany(ProyectoRolSennova::class);
     }
 
+    /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function programasFormacion()
+    {
+        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion', 'proyecto_id', 'programa_formacion_id');
+    }
 
     /**
-     * Relationship with Proyecto (participantes)
+     * Relationship with SemilleroInvestigacion
+     *
+     * @return object
+     */
+    public function semillerosInvestigacion()
+    {
+        return $this->belongsToMany(SemilleroInvestigacion::class, 'proyecto_semillero_investigacion', 'proyecto_id', 'semillero_investigacion_id');
+    }
+
+    /**
+     * Relationship with participantes
      *
      * @return object
      */
@@ -196,8 +215,8 @@ class Proyecto extends Model
             ->withPivot([
                 'user_id',
                 'es_autor',
-                'numero_meses',
-                'numero_horas'
+                'cantidad_meses',
+                'cantidad_horas'
             ]);
     }
 

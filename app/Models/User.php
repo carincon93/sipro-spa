@@ -60,8 +60,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyecto::class, 'proyecto_participantes', 'user_id', 'proyecto_id')
             ->withPivot([
                 'es_autor',
-                'numero_meses',
-                'numero_horas'
+                'cantidad_meses',
+                'cantidad_horas'
             ]);
     }
 
@@ -105,7 +105,10 @@ class User extends Authenticatable
     public function scopeFilterUser($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('email', 'ilike', '%' . $search . '%');
+            $query->orWhere('numero_documento', 'ilike', '%' . $search . '%');
         });
     }
 
