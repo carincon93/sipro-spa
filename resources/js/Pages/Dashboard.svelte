@@ -24,12 +24,12 @@
                 <p class="text-2xl mt-4">Revisa las convocatorias y formula proyectos.</p>
 
                 {#if isSuperAdmin}
-                    <Button variant="raised" on:click={() => Inertia.visit(route('calls.index'))} class="mt-4 inline-block">Convocatorias</Button>
+                    <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Convocatorias</Button>
                 {/if}
             </div>
             <div>
                 <figure>
-                    <img src="/storage/images/dashboard.png" alt="" />
+                    <img src={window.basePath + '/images/dashboard.png'} alt="" />
                 </figure>
             </div>
         </div>

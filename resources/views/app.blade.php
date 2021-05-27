@@ -30,6 +30,7 @@
             language: 'es'
         })
 
+        window.basePath = {!! sprintf('"%s"', $_ENV['MIX_ASSET_URL']) !!} 
     </script>
 </head>
 

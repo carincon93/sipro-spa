@@ -49,7 +49,7 @@
             </div>
             <div>
                 <figure>
-                    <img src="/storage/images/dashboard.png" alt="" />
+                    <img src={window.basePath + '/images/dashboard.png'} alt="" />
                 </figure>
             </div>
         </div>
