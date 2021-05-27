@@ -58,8 +58,8 @@
                         El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial * 0.05 : 0)}) del rubro de "MAQUINARIA INDUSTRIAL" (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial : 0)}).
                     </td>
                     <td class="border-t p-4">
-                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_servicios_especiales_construccion) ? proyecto.total_servicios_especiales_construccion : 0)}
-                        {#if proyecto.total_servicios_especiales_construccion <= proyecto.total_maquinaria_industrial * 0.05}
+                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_adecuaciones_construcciones) ? proyecto.total_adecuaciones_construcciones : 0)}
+                        {#if proyecto.total_adecuaciones_construcciones <= proyecto.total_maquinaria_industrial * 0.05}
                             <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
                         {:else}
                             <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
@@ -68,7 +68,7 @@
                 </tr>
 
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t p-4"> Viáticos </td>
+                    <td class="border-t p-4"> Viáticos - Bienestar alumnos </td>
                     <td class="border-t p-4"> La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000 </td>
                     <td class="border-t p-4">
                         Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_viaticos) ? proyecto.total_viaticos : 0)}

@@ -26,20 +26,15 @@ class ProyectoPresupuestoController extends Controller
         $this->authorize('viewAny', ProyectoPresupuesto::class);
 
         $proyecto->codigo_linea_programatica                = $proyecto->tipoProyecto->lineaProgramatica->codigo;
-        $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalMaquinariaIndustrial($proyecto);
-        $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalViaticosInteriorGastosAlumnos($proyecto);
-        $proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalMantenimientoMaquinaria($proyecto);
-        $proyecto->total_servicios_especiales_construccion  = PresupuestoValidationTrait::totalServiciosEspecialesConstruccion($proyecto);
-
-        $proyecto->total_adecuaciones_construcciones = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2045110');
-        $proyecto->total_equipo_sistemas = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040106');
-        $proyecto->total_bienestar_alumnos = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2042186');
-        $proyecto->total_mantenimiento_maquinaria = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040516');
-        $proyecto->total_maquinaria_industrial = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040115');
-        $proyecto->otras_compras_equipos = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040125');
-        $proyecto->software = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040108');
-        $proyecto->viaticos_exterior = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2041104');
-        $proyecto->viaticos_interior = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2041102');
+        $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040115');
+        $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2042186');
+        $proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040516');
+        $proyecto->total_servicios_especiales_construccion  = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2045110');
+        $proyecto->total_equipo_sistemas                    = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040106');
+        $proyecto->otras_compras_equipos                    = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040125');
+        $proyecto->software                                 = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040108');
+        $proyecto->viaticos_exterior                        = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2041104');
+        $proyecto->viaticos_interior                        = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2041102');
 
         // dd($proyecto);
 
