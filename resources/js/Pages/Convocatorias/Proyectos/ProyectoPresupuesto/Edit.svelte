@@ -35,7 +35,7 @@
         }).length > 0
 
     let showQtyInput = proyectoPresupuesto.valor != null ? false : true
-    let dialog_open = false
+    let dialogOpen = false
     let sending = false
     $: software = $form.codigo_uso_presupuestal == '2010100600203101' ? true : false
     let form = useForm({
@@ -158,7 +158,7 @@
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin}
-                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialog_open = true)}> Eliminar presupuesto </button>
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar presupuesto </button>
                     {/if}
                     {#if $form.convocatoria_presupuesto_id != '' || (isSuperAdmin && $form.convocatoria_presupuesto_id != '')}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar presupuesto</LoadingButton>
@@ -177,7 +177,7 @@
             </ul>
         </div>
     </div>
-    <Dialog bind:open={dialog_open}>
+    <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -195,7 +195,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialog_open = false)} variant={null}>Cancelar</Button>
+                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

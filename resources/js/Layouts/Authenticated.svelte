@@ -19,7 +19,7 @@
     import { Inertia } from '@inertiajs/inertia'
     import Loading from '@/Components/Loading.svelte'
 
-    let dialog_open = false
+    let dialogOpen = false
     let showingNavigationDropdown = false
 
     let authUser = $page.props.auth.user
@@ -57,7 +57,7 @@
 
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
-                            <Button on:click={() => (dialog_open = true)} variant={null}>
+                            <Button on:click={() => (dialogOpen = true)} variant={null}>
                                 {$_('Dashboard')}
                             </Button>
                         </div>
@@ -141,7 +141,7 @@
 </div>
 
 <!-- Dialog -->
-<Dialog bind:open={dialog_open} id="main-menu">
+<Dialog bind:open={dialogOpen} id="main-menu">
     <div slot="title" class="mb-6 text-center text-primary">
         <div class="">Menú de navegación</div>
     </div>
@@ -158,7 +158,7 @@
     </div>
     <div slot="actions">
         <div class="p-4">
-            <Button on:click={(event) => (dialog_open = false)} variant={null}>Cancelar</Button>
+            <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
         </div>
     </div>
 </Dialog>

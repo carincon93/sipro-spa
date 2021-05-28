@@ -23,7 +23,7 @@
 
     let formId
     let sending = false
-    let dialog_open = false
+    let dialogOpen = false
     let dialogTitle
     let code
 
@@ -54,7 +54,7 @@
         dialogTitle = 'Efecto indirecto'
         formId = 'efecto-indirecto'
         showEfectoIndirectoForm = true
-        dialog_open = true
+        dialogOpen = true
 
         if (efectoIndirecto != null) {
             $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
@@ -104,7 +104,7 @@
         dialogTitle = 'Efecto directo'
         formId = 'efecto-directo'
         showEfectoDirectoForm = true
-        dialog_open = true
+        dialogOpen = true
         $formEfectoDirecto.descripcion = efectoDirecto.descripcion
         $formEfectoDirecto.id = efectoDirecto.id
     }
@@ -146,7 +146,7 @@
         dialogTitle = 'Planteamiento del problema'
         formId = 'planteamiento-problema'
         showPlanteamientoProblemaForm = true
-        dialog_open = true
+        dialogOpen = true
         $formPlanteamientoProblema.planteamiento_problema = proyecto.planteamiento_problema
         $formPlanteamientoProblema.justificacion_problema = proyecto.justificacion_problema
     }
@@ -183,7 +183,7 @@
         dialogTitle = 'Causa directa'
         formId = 'causa-directa'
         showCausaDirectaForm = true
-        dialog_open = true
+        dialogOpen = true
         $formCausaDirecta.id = causaDirecta.id
         $formCausaDirecta.descripcion = causaDirecta.descripcion
     }
@@ -227,7 +227,7 @@
         dialogTitle = 'Causa indirecta'
         formId = 'causa-indirecta'
         showCausaIndirectaForm = true
-        dialog_open = true
+        dialogOpen = true
         if (causaIndirecta != null) {
             $formCausaIndirecta.id = causaIndirecta.id
             $formCausaIndirecta.descripcion = causaIndirecta.descripcion
@@ -280,7 +280,7 @@
 
     function closeDialog() {
         reset()
-        dialog_open = false
+        dialogOpen = false
     }
 
     onMount(() => {
@@ -491,7 +491,7 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialog_open}>
+    <Dialog bind:open={dialogOpen}>
         <div slot="title" class="mb-10 text-center">
             <div class="text-primary">
                 {dialogTitle}

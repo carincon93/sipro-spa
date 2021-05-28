@@ -39,7 +39,7 @@
         search_participante: '',
     })
     let formID
-    let dialog_open = false
+    let dialogOpen = false
     let dialogTitle
     let sending = false
     let sended = false
@@ -87,7 +87,7 @@
     function showParticipante(user) {
         reset()
         dialogTitle = user.nombre
-        dialog_open = true
+        dialogOpen = true
         formID = 'participante-form'
         $formParticipante.user_id = user.id
         if (user.pivot) {
@@ -180,7 +180,7 @@
 
     function closeDialog() {
         reset()
-        dialog_open = false
+        dialogOpen = false
         open_dialog_register = false
         sending = false
     }
@@ -344,7 +344,7 @@
 </DataTable>
 
 <!-- Dialog -->
-<Dialog bind:open={dialog_open}>
+<Dialog bind:open={dialogOpen}>
     <div slot="title">
         <div class="mb-10 text-center">
             <div class="text-primary">

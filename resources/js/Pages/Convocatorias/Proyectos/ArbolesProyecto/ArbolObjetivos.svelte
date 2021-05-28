@@ -28,7 +28,7 @@
 
     let formId
     let sending = false
-    let dialog_open = false
+    let dialogOpen = false
     let dialogTitle
     let codigo
 
@@ -51,7 +51,7 @@
     function showGeneralInfoDialog(tipo) {
         reset()
         dialogTitle = 'Información general'
-        dialog_open = true
+        dialogOpen = true
 
         generalInfoType = tipo
         showGeneralInfo = true
@@ -74,7 +74,7 @@
         // reset()
         codigo = efectoIndirecto.impacto.id != null ? 'RES-' + resultadoId + '-IMP-' + efectoIndirecto.impacto.id : ''
         dialogTitle = 'Impacto'
-        dialog_open = true
+        dialogOpen = true
         showImpactoForm = true
         formId = 'impacto-form'
         impactoEfectoIndirecto = efectoIndirecto.descripcion
@@ -139,7 +139,7 @@
         }
         codigo = 'RES-' + efectoDirecto.resultado.id
         dialogTitle = 'Resultado'
-        dialog_open = true
+        dialogOpen = true
         showResultadoForm = true
         formId = 'resultado-form'
         $formResultado.id = efectoDirecto.resultado.id
@@ -189,7 +189,7 @@
     function showObjetivoGeneralDialog() {
         reset()
         dialogTitle = 'Objetivo general'
-        dialog_open = true
+        dialogOpen = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
         planteamientoProblema = proyecto.planteamiento_problema
@@ -228,7 +228,7 @@
         reset()
         codigo = 'OBJ-ESP-' + causaDirecta.objetivo_especifico.id
         dialogTitle = causaDirecta.objetivo_especifico.numero
-        dialog_open = true
+        dialogOpen = true
         showObjetivoEspecificoForm = true
         formId = 'objetivo-especifico-form'
         $formObjetivoEspecifico.id = causaDirecta.objetivo_especifico.id
@@ -278,7 +278,7 @@
         reset()
         codigo = causaIndirecta.actividad.id != null ? 'OBJ-ESP-' + objetivoEspecifico + '-ACT-' + causaIndirecta.actividad.id : ''
         dialogTitle = 'Actividad'
-        dialog_open = true
+        dialogOpen = true
         showActividadForm = true
         formId = 'actividad-form'
         $formActividad.id = causaIndirecta.actividad.id
@@ -334,7 +334,7 @@
 
     function closeDialog() {
         reset()
-        dialog_open = false
+        dialogOpen = false
     }
 
     onMount(() => {
@@ -554,7 +554,7 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialog_open}>
+    <Dialog bind:open={dialogOpen}>
         <div slot="title">
             <div class="mb-10 text-center">
                 <div class="text-primary">

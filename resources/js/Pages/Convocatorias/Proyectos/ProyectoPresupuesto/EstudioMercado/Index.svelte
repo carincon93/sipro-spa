@@ -25,8 +25,8 @@
     export let convocatoriaPresupuesto
     export let presupuestoSennova
 
-    let dialog_open
-    $: dialog_open = Object.keys(errors).length > 0 ? true : false
+    let dialogOpen
+    $: dialogOpen = Object.keys(errors).length > 0 ? true : false
     let sending = false
 
     $title = 'Estudios de mercado'
@@ -91,7 +91,7 @@
                     <div class="mb-6 flex justify-end items-center">
                         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
                         {#if isSuperAdmin}
-                            <Button on:click={() => (dialog_open = true)} variant="raised">Añadir estudio de mercado</Button>
+                            <Button on:click={() => (dialogOpen = true)} variant="raised">Añadir estudio de mercado</Button>
                         {/if}
                     </div>
                 {/if}
@@ -162,14 +162,14 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialog_open} id="estudio-mercado">
+    <Dialog bind:open={dialogOpen} id="estudio-mercado">
         <div slot="title" />
         <div slot="content">
-            <CreateEstudioMercado bind:dialogOpen={dialog_open} {sending} {errors} {convocatoria} {proyecto} {proyectoPresupuesto} {proyectoLotesEstudioMercado} {convocatoriaPresupuesto} />
+            <CreateEstudioMercado bind:dialogOpen {sending} {errors} {convocatoria} {proyecto} {proyectoPresupuesto} {proyectoLotesEstudioMercado} {convocatoriaPresupuesto} />
         </div>
 
         <div slot="actions" class="block flex w-full">
-            <Button on:click={() => (dialog_open = false)} type="button" variant={null}>Cancelar</Button>
+            <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
             {#if isSuperAdmin}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
             {/if}
