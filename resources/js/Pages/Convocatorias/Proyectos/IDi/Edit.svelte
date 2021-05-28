@@ -315,10 +315,13 @@
                 </div>
             </div>
 
+            <hr />
+
             <div>
-                <p class="text-center mt-36 mb-20">¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?</p>
+                <p class="text-center mt-36 mb-8">¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?</p>
+                <InfoMessage message="Nota: Bioprospección se define como la exploración sistemática y sostenible de la biodiversidad para identificar y obtener nuevas fuentes de compuestos químicos, genes, proteínas, microorganismos y otros productos que tienen potencial de ser aprovechados comercialmente" />
                 <InputError message={errors.muestreo} />
-                <div class="flex mt-4 items-center">
+                <div class="flex mt-20 items-center">
                     <FormField>
                         <Radio bind:group={$form.muestreo} value="1" />
                         <span slot="label">
@@ -366,7 +369,7 @@
 
                         <div class="bg-gray-300 flex-1 p-8">
                             <div class="flex items-center">
-                                <Label required class="mb-4" id="1.2" value="¿Cuál es la finalidad de las actividades a realizar con la especie nativa?" />
+                                <Label required class="mb-4" id="1.2" value="¿Cuál es la finalidad de las actividades a realizar con la especie nativa/endémica?" />
                             </div>
 
                             <p class="bg-indigo-100 mt-10 p-4 text-indigo-600">Seleccione una opción</p>
