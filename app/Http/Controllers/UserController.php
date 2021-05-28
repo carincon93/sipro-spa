@@ -69,7 +69,7 @@ class UserController extends Controller
 
         $user->assignRole($request->role_id);
 
-        return redirect()->route('users.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('users.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -126,7 +126,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->role_id);
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -141,6 +141,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

@@ -60,7 +60,7 @@ class CentroFormacionController extends Controller
 
         $centroFormacion->save();
 
-        return redirect()->route('centros-formacion.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('centros-formacion.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -108,7 +108,7 @@ class CentroFormacionController extends Controller
 
         $centroFormacion->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -123,6 +123,6 @@ class CentroFormacionController extends Controller
 
         $centroFormacion->delete();
 
-        return redirect()->route('centros-formacion.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('centros-formacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

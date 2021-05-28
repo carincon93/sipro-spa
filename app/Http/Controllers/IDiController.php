@@ -93,7 +93,7 @@ class IdiController extends Controller
 
         $proyecto->idi()->save($idi);
 
-        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $idi])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $idi])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -186,7 +186,7 @@ class IdiController extends Controller
         $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnologicas()->detach();
 
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -206,6 +206,6 @@ class IdiController extends Controller
 
         $idi->delete();
 
-        return redirect()->route('convocatorias.idi.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.idi.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

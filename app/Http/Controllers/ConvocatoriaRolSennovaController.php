@@ -79,7 +79,7 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->save();
 
-        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -146,7 +146,7 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -161,6 +161,6 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->delete();
 
-        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.convocatoria-rol-sennova.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

@@ -27,7 +27,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
 
         // Denega si el rubro no requiere lotes de estudio de mercado y ya hay un estudio de mercado guardado o si el rubro no requiere de estudios de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
-            return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
+            return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Index', [
@@ -116,10 +116,10 @@ class ProyectoLoteEstudioMercadoController extends Controller
         }
 
         if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_lote_estudio_mercado) {
-            return redirect()->back()->with('success', 'The resource has been created successfully.');
+            return redirect()->back()->with('success', 'El recurso se ha creado correctamente.');
         }
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     private function storeEstudioMercado($proyectoLoteEstudioMercado, $proyecto, $valor, $empresa, $archivo)
@@ -165,7 +165,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
-            return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
+            return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
 
         $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
@@ -241,7 +241,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
             $this->updateEstudioMercado($proyecto, $proyectoLoteEstudioMercado, $request->tercer_estudio_mercado_id, $request->tercer_empresa,  $request->tercer_valor, $request->tercer_archivo, true);
         }
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'The resource has been updated successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     public function updateEstudioMercado($proyecto, $proyectoLoteEstudioMercado, $estudioMercadoId, $empresa, $valor, $archivo, $tercerEstudioMercado)
@@ -293,7 +293,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
 
         $proyectoLoteEstudioMercado->delete();
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**

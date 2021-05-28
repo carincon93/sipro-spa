@@ -58,7 +58,7 @@ class TipoProyectoController extends Controller
 
         $tipoProyecto->save();
 
-        return redirect()->route('tipos-proyecto.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('tipos-proyecto.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -104,7 +104,7 @@ class TipoProyectoController extends Controller
 
         $tipoProyecto->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -119,6 +119,6 @@ class TipoProyectoController extends Controller
 
         $tipoProyecto->delete();
 
-        return redirect()->route('tipos-proyecto.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('tipos-proyecto.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

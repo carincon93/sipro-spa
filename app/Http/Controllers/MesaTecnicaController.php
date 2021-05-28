@@ -52,7 +52,7 @@ class MesaTecnicaController extends Controller
 
         $mesaTecnica->save();
 
-        return redirect()->route('mesas-tecnicas.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('mesas-tecnicas.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -96,7 +96,7 @@ class MesaTecnicaController extends Controller
 
         $mesaTecnica->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -111,6 +111,6 @@ class MesaTecnicaController extends Controller
 
         $mesaTecnica->delete();
 
-        return redirect()->route('mesas-tecnicas.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('mesas-tecnicas.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

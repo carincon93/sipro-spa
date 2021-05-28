@@ -73,7 +73,7 @@ class AnalisisRiesgoController extends Controller
 
         $analisisRiesgo->save();
 
-        return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -134,7 +134,7 @@ class AnalisisRiesgoController extends Controller
 
         $analisisRiesgo->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -149,6 +149,6 @@ class AnalisisRiesgoController extends Controller
 
         $analisisRiesgo->delete();
 
-        return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

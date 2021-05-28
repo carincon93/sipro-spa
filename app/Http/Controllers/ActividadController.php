@@ -70,7 +70,7 @@ class ActividadController extends Controller
 
         $actividad->save();
 
-        return redirect()->route('convocatorias.proyectos.actividades.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.actividades.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -125,7 +125,7 @@ class ActividadController extends Controller
         $actividad->productos()->sync($request->producto_id);
         $actividad->proyectoPresupuesto()->sync($request->proyecto_presupuesto_id);
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -140,6 +140,6 @@ class ActividadController extends Controller
 
         $actividad->delete();
 
-        return redirect()->route('convocatorias.proyectos.actividades.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.actividades.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

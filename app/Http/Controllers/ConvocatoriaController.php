@@ -80,7 +80,7 @@ class ConvocatoriaController extends Controller
 
         $convocatoria->save();
 
-        return redirect()->route('convocatorias.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -127,7 +127,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->max_fecha_finalizacion_proyectos = $request->max_fecha_finalizacion_proyectos;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
-            if($convocatoriaPrevActiva) {
+            if ($convocatoriaPrevActiva) {
                 $convocatoriaPrevActiva->esta_activa = false;
                 $convocatoriaPrevActiva->save();
             }
@@ -136,7 +136,7 @@ class ConvocatoriaController extends Controller
 
         $convocatoria->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -148,13 +148,13 @@ class ConvocatoriaController extends Controller
     public function destroy(Request $request, Convocatoria $convocatoria)
     {
         $this->authorize('delete', [Convocatoria::class, $convocatoria]);
-        if ( !Hash::check($request->password, Auth::user()->password) ) {
+        if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
                 ->withErrors(['password' => 'Contraseña incorrecta']);
         }
 
         $convocatoria->delete();
 
-        return redirect()->route('convocatorias.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

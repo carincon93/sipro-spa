@@ -129,7 +129,7 @@ class EntidadAliadaController extends Controller
 
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
 
-            return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'The resource has been created successfully.');
+            return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
         } elseif ($proyecto->taTp()->exists()) {
             $entidadAliadaTaTp = new EntidadAliadaTaTp();
             $soporteConvenio        = $request->soporte_convenio;
@@ -142,7 +142,7 @@ class EntidadAliadaController extends Controller
 
             $entidadAliada->entidadAliadaTaTp()->save($entidadAliadaTaTp);
 
-            return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'The resource has been created successfully.');
+            return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
     }
 
@@ -267,7 +267,7 @@ class EntidadAliadaController extends Controller
 
         $entidadAliada->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -285,6 +285,6 @@ class EntidadAliadaController extends Controller
 
         $entidadAliada->delete();
 
-        return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

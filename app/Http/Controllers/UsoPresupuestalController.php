@@ -53,7 +53,7 @@ class UsoPresupuestalController extends Controller
 
         $UsoPresupuestal->save();
 
-        return redirect()->route('usos-presupuestales.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('usos-presupuestales.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -98,7 +98,7 @@ class UsoPresupuestalController extends Controller
 
         $UsoPresupuestal->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -113,6 +113,6 @@ class UsoPresupuestalController extends Controller
 
         $UsoPresupuestal->delete();
 
-        return redirect()->route('usos-presupuestales.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('usos-presupuestales.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

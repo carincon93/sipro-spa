@@ -59,7 +59,7 @@ class TemaPriorizadoController extends Controller
 
         $temaPriorizado->save();
 
-        return redirect()->route('temas-priorizados.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('temas-priorizados.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -108,7 +108,7 @@ class TemaPriorizadoController extends Controller
 
         $temaPriorizado->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -123,6 +123,6 @@ class TemaPriorizadoController extends Controller
 
         $temaPriorizado->delete();
 
-        return redirect()->route('temas-priorizados.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('temas-priorizados.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

@@ -56,7 +56,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->save();
 
-        return redirect()->route('semilleros-investigacion.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('semilleros-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -102,7 +102,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -117,6 +117,6 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->delete();
 
-        return redirect()->route('semilleros-investigacion.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('semilleros-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

@@ -58,7 +58,7 @@
                 <polygon points="0 11 2 9 7 14 18 3 20 5 7 18" />
             </svg>
             <div class="p-4 text-white text-sm font-medium">
-                {$_(successMessage)}
+                {successMessage}
             </div>
         </div>
     </div>
@@ -91,13 +91,11 @@
             {:else}
                 <div class="p-4 text-white text-sm font-medium">
                     {#if Object.keys(errors).length === 1}
-                        <span>{$_('There is one form error.')}</span>
+                        <span>Hay un error en el formulario.</span>
                     {:else}
-                        <span
-                            >{$_('There are form errors.', {
-                                values: { count: Object.keys(errors).length },
-                            })}</span
-                        >
+                        <span>
+                            Hay {Object.keys(errors).length} errores en el formulario.
+                        </span>
                     {/if}
                 </div>
             {/if}

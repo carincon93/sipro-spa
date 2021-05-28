@@ -22,15 +22,15 @@
         <div class="mt-16">
             <Participantes {convocatoria} {proyecto} {errors} {tiposDocumento} {tiposParticipacion} />
         </div>
-        <hr class="my-16" />
-        <div>
-            <SemillerosInvestigacion {convocatoria} {proyecto} {errors} />
-        </div>
         {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
             <hr class="my-16" />
             <div>
-                <ProgramasFormacion {convocatoria} {proyecto} {errors} />
+                <SemillerosInvestigacion {convocatoria} {proyecto} {errors} />
             </div>
         {/if}
+        <hr class="my-16" />
+        <div>
+            <ProgramasFormacion {convocatoria} {proyecto} {errors} />
+        </div>
     </div>
 </AuthenticatedLayout>

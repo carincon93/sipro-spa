@@ -87,7 +87,7 @@ class TaTpController extends Controller
 
         $proyecto->tatp()->save($tatp);
 
-        return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -163,7 +163,7 @@ class TaTpController extends Controller
 
         $tatp->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -178,6 +178,6 @@ class TaTpController extends Controller
 
         $tatp->delete();
 
-        return redirect()->route('convocatorias.proyectos.tatp.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.tatp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

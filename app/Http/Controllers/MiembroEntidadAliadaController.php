@@ -77,7 +77,7 @@ class MiembroEntidadAliadaController extends Controller
 
         $miembroEntidadAliada->save();
 
-        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -134,7 +134,7 @@ class MiembroEntidadAliadaController extends Controller
 
         $miembroEntidadAliada->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -149,6 +149,6 @@ class MiembroEntidadAliadaController extends Controller
 
         $miembroEntidadAliada->delete();
 
-        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

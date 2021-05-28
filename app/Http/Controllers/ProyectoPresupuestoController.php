@@ -102,7 +102,7 @@ class ProyectoPresupuestoController extends Controller
             $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
         }
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'The resource has been created successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -195,7 +195,7 @@ class ProyectoPresupuestoController extends Controller
             $proyectoPresupuesto->softwareInfo()->delete();
         }
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -210,6 +210,6 @@ class ProyectoPresupuestoController extends Controller
 
         $proyectoPresupuesto->delete();
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

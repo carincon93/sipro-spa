@@ -59,7 +59,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->permission_id);
 
-        return redirect()->route('roles.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('roles.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -112,7 +112,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->permission_id);
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -127,6 +127,6 @@ class RoleController extends Controller
 
         $role->delete();
 
-        return redirect()->route('roles.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('roles.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

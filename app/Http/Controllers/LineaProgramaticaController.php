@@ -27,7 +27,7 @@ class LineaProgramaticaController extends Controller
                 WHEN '3' THEN	'Servicios tecnológicos'
                 WHEN '4' THEN	'Otro'
             END as categoria_proyecto")
-            ->orderBy('nombre', 'ASC')
+                ->orderBy('nombre', 'ASC')
                 ->filterLineaProgramatica(request()->only('search'))->paginate(),
         ]);
     }
@@ -64,7 +64,7 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->save();
 
-        return redirect()->route('lineas-programaticas.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -112,7 +112,7 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -127,6 +127,6 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->delete();
 
-        return redirect()->route('lineas-programaticas.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

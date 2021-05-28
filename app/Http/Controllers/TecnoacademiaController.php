@@ -57,7 +57,7 @@ class TecnoacademiaController extends Controller
 
         $tecnoacademia->lineasTecnologicas()->attach($request->linea_tecnologica_id);
 
-        return redirect()->route('tecnoacademias.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('tecnoacademias.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -103,7 +103,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->lineasTecnologicas()->sync($request->linea_tecnologica_id);
         $tecnoacademia->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -118,6 +118,6 @@ class TecnoacademiaController extends Controller
 
         $tecnoacademia->delete();
 
-        return redirect()->route('tecnoacademias.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('tecnoacademias.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

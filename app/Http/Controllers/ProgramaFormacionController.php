@@ -23,8 +23,8 @@ class ProgramaFormacionController extends Controller
         return Inertia::render('ProgramasFormacion/Index', [
             'filters'   => request()->all('search'),
             'programasFormacion' => ProgramaFormacion::with(['centroFormacion' => function ($query) {
-                    $query->orderBy('nombre', 'ASC');
-                }])
+                $query->orderBy('nombre', 'ASC');
+            }])
                 ->filterProgramaFormacion(request()->only('search'))->paginate(),
         ]);
     }
@@ -61,7 +61,7 @@ class ProgramaFormacionController extends Controller
 
         $programaFormacion->save();
 
-        return redirect()->route('programas-formacion.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('programas-formacion.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -109,7 +109,7 @@ class ProgramaFormacionController extends Controller
 
         $programaFormacion->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -124,6 +124,6 @@ class ProgramaFormacionController extends Controller
 
         $programaFormacion->delete();
 
-        return redirect()->route('programas-formacion.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('programas-formacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

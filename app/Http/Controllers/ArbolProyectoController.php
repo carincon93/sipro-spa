@@ -149,7 +149,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -168,7 +168,7 @@ class ArbolProyectoController extends Controller
 
         $efectoDirecto->save();
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -201,7 +201,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -220,7 +220,7 @@ class ArbolProyectoController extends Controller
 
         $causaDirecta->save();
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -253,7 +253,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -321,7 +321,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'The resource has been saved successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -340,7 +340,7 @@ class ArbolProyectoController extends Controller
         $impacto->tipo           = $request->tipo;
 
         if ($impacto->save()) {
-            return redirect()->back()->with('success', 'The resource has been saved successfully.');
+            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
         return redirect()->back()->with('error', 'Error updating impact.');
@@ -361,7 +361,7 @@ class ArbolProyectoController extends Controller
         $resultado->fill($request->all());
 
         if ($resultado->save()) {
-            return redirect()->back()->with('success', 'The resource has been saved successfully.');
+            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
         return redirect()->back()->with('error', 'Error updating result.');
@@ -383,7 +383,7 @@ class ArbolProyectoController extends Controller
         $objetivoEspecifico->numero      = $request->numero;
 
         if ($objetivoEspecifico->save()) {
-            return redirect()->back()->with('success', 'The resource has been saved successfully.');
+            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
         return redirect()->back()->with('error', 'Error updating specific objective.');
@@ -405,7 +405,7 @@ class ArbolProyectoController extends Controller
         $actividad->fill($request->all());
 
         if ($actividad->save()) {
-            return redirect()->back()->with('success', 'The resource has been saved successfully.');
+            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
         return redirect()->back()->with('error', 'Error updating actividad.');

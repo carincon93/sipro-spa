@@ -53,7 +53,7 @@ class RolSennovaController extends Controller
 
         $rolSennova->save();
 
-        return redirect()->route('roles-sennova.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('roles-sennova.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -98,7 +98,7 @@ class RolSennovaController extends Controller
 
         $rolSennova->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -113,6 +113,6 @@ class RolSennovaController extends Controller
 
         $rolSennova->delete();
 
-        return redirect()->route('roles-sennova.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('roles-sennova.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

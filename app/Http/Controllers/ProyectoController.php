@@ -115,15 +115,15 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
-                return redirect()->back()->with('success', 'El recurso ya está vinculado.');
+                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
             }
             $proyecto->participantes()->attach($request->user_id, $data);
             return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function unlinkParticipante(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -137,9 +137,9 @@ class ProyectoController extends Controller
             }
             return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -153,10 +153,10 @@ class ProyectoController extends Controller
             }
             return redirect()->back()->with('error', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -208,15 +208,15 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->semillerosInvestigacion()->where('id', $request->semillero_investigacion_id)->exists()) {
-                return redirect()->back()->with('success', 'El recurso ya está vinculado.');
+                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
             }
             $proyecto->semillerosInvestigacion()->attach($request->semillero_investigacion_id);
             return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function unlinkSemilleroInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -230,9 +230,9 @@ class ProyectoController extends Controller
             }
             return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function filterProgramasFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -260,15 +260,15 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->programasFormacion()->where('id', $request->programa_formacion_id)->exists()) {
-                return redirect()->back()->with('success', 'El recurso ya está vinculado.');
+                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
             }
             $proyecto->programasFormacion()->attach($request->programa_formacion_id);
             return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
     public function unlinkProgramaFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -282,8 +282,8 @@ class ProyectoController extends Controller
             }
             return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Whoops! Something went wrong.');
+        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 }

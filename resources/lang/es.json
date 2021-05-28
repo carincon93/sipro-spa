@@ -98,7 +98,6 @@
     "Update your account's profile information and email address.": "Actualice la información de perfil y la dirección de correo electrónico de su cuenta.",
     "Select A New Photo": "Seleccionar una nueva foto",
     "Remove Photo": "Borrar foto",
-    "Whoops! Something went wrong.": "Oops! Algo salió mal.",
     "Reset Password Notification": "Notificación de restablecimiento de contraseña",
     "You are receiving this email because we received a password reset request for your account.": "Está recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.",
     "Reset Password": "Restablecer contraseña",
@@ -109,12 +108,6 @@
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Si tiene problemas para hacer clic en el botón \":actionText\", copie y pegue la siguiente URL en su navegador",
     "Are you sure you want to delete this element? All data will be permanently removed. This action cannot be undone.": "¿Está seguro(a) que desea eliminar este registro? Todos los datos se eliminarán de forma permanente. Esta acción no se puede deshacer.",
     "See all notifications": "Ver todas las notificaciones",
-    "The resource has been created successfully.": "El recurso se ha creado correctamente.",
-    "The resource has been updated successfully.": "El recurso se ha actualizado correctamente.",
-    "The resource has been deleted successfully.": "El recurso se ha eliminado correctamente.",
-    "The resource has been saved successfully.": "El recurso se ha guardado correctamente.",
-    "There are form errors.": "Hay {count} errores en el formulario. Por favor revíselos.",
-    "There is one form error.": "Hay un error en el formulario. Por favor revíselo.",
     "Please fill out this field.": "Completa este campo",
     "These credentials do not match our records.": "Estas credenciales no coinciden con nuestros registros"
 }

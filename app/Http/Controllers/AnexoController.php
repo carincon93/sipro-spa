@@ -59,7 +59,7 @@ class AnexoController extends Controller
         $anexo->lineasProgramaticas()->attach($request->linea_programatica_id);
 
 
-        return redirect()->route('anexos.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route('anexos.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -107,7 +107,7 @@ class AnexoController extends Controller
 
         $anexo->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -122,6 +122,6 @@ class AnexoController extends Controller
 
         $anexo->delete();
 
-        return redirect()->route('anexos.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('anexos.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }
