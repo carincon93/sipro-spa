@@ -25,10 +25,10 @@ class ConvocatoriaRequest extends FormRequest
     {
         return [
             'descripcion'                       => ['required'],
-            'fecha_inicio'                       => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion' ],
+            'fecha_inicio'                       => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
             'fecha_finalizacion'                => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
             'esta_activa'                       => ['required', 'boolean'],
-            'min_fecha_inicio_proyectos'        => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos' ],
+            'min_fecha_inicio_proyectos'        => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos'],
             'max_fecha_finalizacion_proyectos'  => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos'],
         ];
     }

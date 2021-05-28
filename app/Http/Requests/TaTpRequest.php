@@ -81,6 +81,12 @@ class TaTpRequest extends FormRequest
             }
         }
 
+        if (is_string($this->titulo)) {
+            $this->merge([
+                'titulo' => ucfirst(mb_strtolower($this->titulo)),
+            ]);
+        }
+
         $this->merge([
             'diseno_curricular' => 0
         ]);

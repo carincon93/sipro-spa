@@ -61,5 +61,13 @@ class NuevoProponenteRequest extends FormRequest
                 'tipo_participacion' => $this->tipo_participacion['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
+
+        $this->merge([
+            'email' => mb_strtolower($this->email),
+        ]);
     }
 }

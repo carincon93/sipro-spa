@@ -36,7 +36,7 @@ class LineaInvestigacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->grupo_investigacion_id) ) {
+        if (is_array($this->grupo_investigacion_id)) {
             $this->merge([
                 'grupo_investigacion_id' => $this->grupo_investigacion_id['value'],
             ]);

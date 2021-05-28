@@ -38,10 +38,14 @@ class LineaProgramaticaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->categoria_proyecto) ) {
+        if (is_array($this->categoria_proyecto)) {
             $this->merge([
                 'categoria_proyecto' => $this->categoria_proyecto['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

@@ -36,10 +36,14 @@ class SemilleroInvestigacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->linea_investigacion_id) ) {
+        if (is_array($this->linea_investigacion_id)) {
             $this->merge([
                 'linea_investigacion_id' => $this->linea_investigacion_id['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

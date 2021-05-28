@@ -38,16 +38,20 @@ class CentroFormacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->regional_id) ) {
+        if (is_array($this->regional_id)) {
             $this->merge([
                 'regional_id' => $this->regional_id['value'],
             ]);
         }
 
-        if( is_array($this->subdirector_id) ) {
+        if (is_array($this->subdirector_id)) {
             $this->merge([
                 'subdirector_id' => $this->subdirector_id['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

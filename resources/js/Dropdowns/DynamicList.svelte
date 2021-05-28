@@ -17,6 +17,10 @@
     let itemFiltered = null
     let select = null
 
+    $: if (routeWebApi) {
+        getItems()
+    }
+
     onMount(() => {
         getItems()
         select = document.getElementById(id)
@@ -48,7 +52,7 @@
     }
 </script>
 
-<Select selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} />
+<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} />
 <InputError {message} />
 
 <style>

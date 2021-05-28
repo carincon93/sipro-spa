@@ -26,7 +26,6 @@ class ResultadoRequest extends FormRequest
         return [
             'descripcion' => ['required', 'string'],
             'tipo'        => ['required', 'digits_between:1,4'],
-
         ];
     }
 

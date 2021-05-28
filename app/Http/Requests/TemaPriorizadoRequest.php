@@ -37,16 +37,20 @@ class TemaPriorizadoRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->sector_productivo_id) ) {
+        if (is_array($this->sector_productivo_id)) {
             $this->merge([
                 'sector_productivo_id' => $this->sector_productivo_id['value'],
             ]);
         }
 
-        if( is_array($this->mesa_tecnica_id) ) {
+        if (is_array($this->mesa_tecnica_id)) {
             $this->merge([
                 'mesa_tecnica_id' => $this->mesa_tecnica_id['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

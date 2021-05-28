@@ -41,25 +41,25 @@ class AnalisisRiesgoRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->nivel) ) {
+        if (is_array($this->nivel)) {
             $this->merge([
                 'nivel' => $this->nivel['value'],
             ]);
         }
 
-        if( is_array($this->tipo) ) {
+        if (is_array($this->tipo)) {
             $this->merge([
                 'tipo' => $this->tipo['value'],
             ]);
         }
 
-        if( is_array($this->impacto) ) {
+        if (is_array($this->impacto)) {
             $this->merge([
                 'impacto' => $this->impacto['value'],
             ]);
         }
 
-        if( is_array($this->probabilidad) ) {
+        if (is_array($this->probabilidad)) {
             $this->merge([
                 'probabilidad' => $this->probabilidad['value'],
             ]);

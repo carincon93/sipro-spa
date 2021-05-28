@@ -55,5 +55,9 @@ class ProductoRequest extends FormRequest
                 'tipo' => $this->tipo['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

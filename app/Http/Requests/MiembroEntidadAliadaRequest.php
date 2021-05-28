@@ -39,10 +39,18 @@ class MiembroEntidadAliadaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->tipo_documento) ) {
+        if (is_array($this->tipo_documento)) {
             $this->merge([
                 'tipo_documento' => $this->tipo_documento['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
+
+        $this->merge([
+            'email' => mb_strtolower($this->email),
+        ]);
     }
 }

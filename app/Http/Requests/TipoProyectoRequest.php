@@ -36,10 +36,14 @@ class TipoProyectoRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->linea_programatica_id) ) {
+        if (is_array($this->linea_programatica_id)) {
             $this->merge([
                 'linea_programatica_id' => $this->linea_programatica_id['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

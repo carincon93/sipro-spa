@@ -83,4 +83,14 @@ class GrupoInvestigacion extends Model
             $query->where('nombre', 'ilike', '%' . $search . '%');
         });
     }
+
+    /**
+     * getNombreAttribute
+     *
+     * @return void
+     */
+    public function getNombreAttribute($value)
+    {
+        return ucwords($value);
+    }
 }

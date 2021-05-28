@@ -28,4 +28,16 @@ class TecnoacademiaRequest extends FormRequest
             'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnologicas,id'],
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
+    }
 }
