@@ -630,21 +630,24 @@
             Eliminar recurso
         </div>
         <div slot="content">
-            <p>
-                ¿Está seguro (a) que desea eliminar este proyecto?
-                <br />
-                Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
-            </p>
+            <InfoMessage
+                message="
+                <p>
+                    ¿Está seguro (a) que desea eliminar este proyecto?
+                    <br />
+                    Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+                </p>"
+            />
 
-            <form on:submit|preventDefault={destroy} id="delete-idi" class="mt-20 mb-28">
-                <Label for="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
+            <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
+                <Label labelFor="password" class="mb-6" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
                 <Input id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-idi">Confirmar</Button>
+                <Button variant="raised" form="delete-tatp">Confirmar</Button>
             </div>
         </div>
     </Dialog>

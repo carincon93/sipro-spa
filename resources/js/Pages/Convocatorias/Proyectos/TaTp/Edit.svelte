@@ -18,10 +18,12 @@
     import SelectMulti from '@/Components/SelectMulti'
     import Dialog from '@/Components/Dialog'
     import Tags from '@/Components/Tags'
+    import Select from 'svelte-select'
 
     export let errors
     export let convocatoria
     export let tatp
+    export let regionales
     export let lineaTecnologicaRelacionada
     export let tecnoacademiaRelacionada
     export let proyectoMunicipios
@@ -32,6 +34,8 @@
     let municipios = []
     let tecnoacademias = []
     let lineasTecnologicas = []
+
+    const groupBy = (item) => item.group
 
     /**
      * Permisos
@@ -66,6 +70,28 @@
         tecnoacademia_id: tecnoacademiaRelacionada,
         tecnoacademia_linea_tecnologica_id: lineaTecnologicaRelacionada,
     })
+
+    let regional
+    $: whitelistInstitucionesEducativas = []
+    $: if (regional) {
+        axios
+            .get('https://www.datos.gov.co/resource/cfw5-qzt5.json?cod_dane_departamento=' + regional?.codigo)
+            .then(function (response) {
+                // handle success
+                response.data.map((item) => {
+                    whitelistInstitucionesEducativas.push(item.nombre_establecimiento)
+                })
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error)
+            })
+            .then(function () {
+                // always executed
+            })
+    }
+
+    $: console.log(whitelistInstitucionesEducativas)
 
     onMount(() => {
         if (tecnoacademiaRelacionada) {
@@ -325,7 +351,9 @@
                     <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen Articulación con la Media" />
                 </div>
                 <div>
-                    <Tags id="nombre_instituciones" bind:tags={$form.nombre_instituciones} error={errors.nombre_instituciones} required />
+                    <Select bind:selectedValue={regional} items={regionales} {groupBy} placeholder="Seleccione un departamento" />
+
+                    <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones} placeholder="Nombre de la IE" error={errors.nombre_instituciones} required />
                 </div>
             </div>
 
@@ -376,14 +404,17 @@
             Eliminar recurso
         </div>
         <div slot="content">
-            <p>
-                ¿Está seguro (a) que desea eliminar este proyecto?
-                <br />
-                Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
-            </p>
+            <InfoMessage
+                message="
+                <p>
+                    ¿Está seguro (a) que desea eliminar este proyecto?
+                    <br />
+                    Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+                </p>"
+            />
 
-            <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-20 mb-28">
-                <Label for="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
+            <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
+                <Label labelFor="password" class="mb-6" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
                 <Input id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>

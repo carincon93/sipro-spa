@@ -23,7 +23,7 @@ class Municipio extends Model
      * @var array
      */
     protected $fillable = [
-        'departamento_id ',
+        'regional_id ',
         'nombre',
         'area',
         'latitud',
@@ -49,13 +49,13 @@ class Municipio extends Model
     ];
 
     /**
-     * Relationship with Departamento
+     * Relationship with Regional
      *
      * @return object
      */
-    public function departamento()
+    public function regional()
     {
-        return $this->belongsTo(Departamento::class);
+        return $this->belongsTo(Regional::class);
     }
 
     /**

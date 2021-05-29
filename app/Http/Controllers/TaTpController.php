@@ -8,6 +8,7 @@ use App\Models\TaTp;
 use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaTpRequest;
+use App\Models\Regional;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -119,8 +120,9 @@ class TaTpController extends Controller
             'tatp'                              => $tatp,
             'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id,
             'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica->id,
+            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'proyectoMunicipios'                => $tatp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')->join('departamentos', 'departamentos.id', 'municipios.departamento_id')->get(),
+            'proyectoMunicipios'                => $tatp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
         ]);
     }
 

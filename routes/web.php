@@ -323,8 +323,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('web-api/municipios', function () {
-        return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')
-            ->join('departamentos', 'departamentos.id', 'municipios.departamento_id')
+        return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')
+            ->join('regionales', 'regionales.id', 'municipios.regional_id')
             ->get());
     })->name('web-api.municipios');
 

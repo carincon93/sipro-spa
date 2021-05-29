@@ -168,7 +168,7 @@
             </p>
 
             <form on:submit|preventDefault={destroy} id="delete-rdi" class="mt-20 mb-28">
-                <Label for="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente esta convocatoria." />
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente esta convocatoria." />
                 <Input id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>

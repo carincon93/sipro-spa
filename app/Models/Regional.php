@@ -57,6 +57,16 @@ class Regional extends Model
     }
 
     /**
+     * Relationship with Municipio
+     *
+     * @return object
+     */
+    public function municipios()
+    {
+        return $this->hasMany(Municipio::class);
+    }
+
+    /**
      * Relationship with User
      *
      * @return object
@@ -67,13 +77,13 @@ class Regional extends Model
     }
 
     /**
-     * Relationship with AcademicCentre
+     * Relationship with CentroFormacion
      *
      * @return object
      */
-    public function academicCentres()
+    public function centrosFormacion()
     {
-        return $this->hasMany(AcademicCentre::class);
+        return $this->hasMany(CentroFormacion::class);
     }
 
     /**

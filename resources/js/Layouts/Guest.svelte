@@ -4,7 +4,8 @@
 </script>
 
 <script>
-    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { inertia } from '@inertiajs/inertia-svelte'
+    import { route } from '@/Utils'
     import ApplicationLogo from '@/Components/ApplicationLogo'
 </script>
 
@@ -14,7 +15,7 @@
 
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
     <div>
-        <a use:inertia href="/">
+        <a use:inertia href={route('login')}>
             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
         </a>
     </div>
