@@ -13,6 +13,7 @@
     export let placeholder
     export let routeWebApi
     export let recurso
+    export let reset
 
     let items = []
     let itemFiltered = null
@@ -51,6 +52,10 @@
             })
             itemFiltered = filterItem[0]
         }
+    }
+
+    $: if (reset) {
+        itemFiltered = null
     }
 </script>
 

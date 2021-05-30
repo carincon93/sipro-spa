@@ -216,7 +216,8 @@ class Proyecto extends Model
                 'user_id',
                 'es_autor',
                 'cantidad_meses',
-                'cantidad_horas'
+                'cantidad_horas',
+                'convocatoria_rol_sennova_id'
             ]);
     }
 

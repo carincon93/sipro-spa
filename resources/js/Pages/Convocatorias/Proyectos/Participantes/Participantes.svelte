@@ -20,6 +20,7 @@
     export let proyecto
     export let tiposDocumento
     export let tiposParticipacion
+    export let lineaProgramatica
 
     let resultados = []
 
@@ -129,10 +130,11 @@
         numero_documento: '',
         numero_celular: '',
         tipo_participacion: '',
-        centro_formacion_id: null,
         es_autor: 0,
         cantidad_meses: 0,
         cantidad_horas: 0,
+        centro_formacion_id: null,
+        convocatoria_rol_sennova_id: null,
     })
 
     let formNuevoParticipanteId
@@ -160,25 +162,14 @@
 
     function reset() {
         //Participante - form
-        $formParticipante.user_id = 0
-        $formParticipante.es_autor = 0
-        $formParticipante.cantidad_meses = 0
-        $formParticipante.cantidad_horas = 0
-        $formParticipante._method = null
+        $formParticipante.reset()
         //Nuevo participante - form
-        $formNuevoParticipante.nombre = ''
-        $formNuevoParticipante.email = ''
-        $formNuevoParticipante.tipo_documento = ''
-        $formNuevoParticipante.numero_documento = ''
-        $formNuevoParticipante.numero_celular = ''
-        $formNuevoParticipante.tipo_participacion = ''
-        $formNuevoParticipante.centro_formacion_id = null
-        $formNuevoParticipante.es_autor = 0
-        $formNuevoParticipante.cantidad_meses = 0
-        $formNuevoParticipante.cantidad_horas = 0
+        $formNuevoParticipante.reset()
+        $formNuevoParticipante.convocatoria_rol_sennova_id = null
     }
 
     function closeDialog() {
+        $formNuevoParticipante.convocatoria_rol_sennova_id = null
         reset()
         dialogOpen = false
         openNuevoParticipanteDialog = false
@@ -425,23 +416,31 @@
                 </div>
 
                 <div class="mt-4">
+                    <Label required class="mb-4" labelFor="centro_formacion_id_nuevo_participante" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id_nuevo_participante" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoParticipante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+
+                <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo_participacion_nuevo_participante" value="Tipo de participación" />
                     <Select id="tipo_participacion_nuevo_participante" items={tiposParticipacion} bind:selectedValue={$formNuevoParticipante.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="centro_formacion_id_nuevo_participante" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id_nuevo_participante" bind:value={$formNuevoParticipante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoParticipante.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
+
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_meses_nuevo_participante" value="Número de meses de vinculación" />
                     <Input id="cantidad_meses_nuevo_participante" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                 </div>
+
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_horas_nuevo_participante" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                     <Input id="cantidad_horas_nuevo_participante" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
                 </div>
+
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="es_autor" value="¿Es autor?" />
                     <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formNuevoParticipante.es_autor} required>

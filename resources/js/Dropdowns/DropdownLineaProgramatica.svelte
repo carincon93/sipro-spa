@@ -47,7 +47,7 @@
     }
 </script>
 
-<Select selectedValue={lineaProgramaticaFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre de la línea programática" containerClasses="lineas-programaticas {classes}" items={lineasProgramaticas} on:select={handleLineaProgramatica} on:clear={() => (formLineaProgramatica = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
+<Select bind:selectedValue={lineaProgramaticaFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre de la línea programática" containerClasses="lineas-programaticas {classes}" items={lineasProgramaticas} on:select={handleLineaProgramatica} on:clear={() => (formLineaProgramatica = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
 <InputError {message} />
 
 <style>

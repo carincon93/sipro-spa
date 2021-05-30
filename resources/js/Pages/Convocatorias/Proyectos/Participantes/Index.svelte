@@ -10,6 +10,7 @@
     export let proyecto
     export let tiposDocumento
     export let tiposParticipacion
+    export let lineaProgramatica
 
     $: $title = 'Participantes'
 </script>
@@ -19,7 +20,7 @@
 
     <div class="py-12">
         <div class="mt-16">
-            <Participantes {convocatoria} {proyecto} {errors} {tiposDocumento} {tiposParticipacion} />
+            <Participantes {convocatoria} {proyecto} {errors} {tiposDocumento} {tiposParticipacion} {lineaProgramatica} />
         </div>
         <hr class="my-16" />
         <div>

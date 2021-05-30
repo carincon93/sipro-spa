@@ -15,6 +15,13 @@ use Inertia\Inertia;
 
 class ProyectoController extends Controller
 {
+    /**
+     * showCadenaValor
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
@@ -49,6 +56,13 @@ class ProyectoController extends Controller
         ]);
     }
 
+    /**
+     * edit
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         switch ($proyecto) {
@@ -65,8 +79,10 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Participantes
+     * participantes
      *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
      * @return void
      */
     public function participantes(Convocatoria $convocatoria, Proyecto $proyecto)
@@ -87,9 +103,18 @@ class ProyectoController extends Controller
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'lineaProgramatica'     => $proyecto->tipoProyecto->lineaProgramatica->only('id')
         ]);
     }
 
+    /**
+     * filterParticipantes
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function filterParticipantes(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_participante)) {
@@ -109,9 +134,17 @@ class ProyectoController extends Controller
         return null;
     }
 
+    /**
+     * linkParticipante
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'convocatoria_rol_sennova_id');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
@@ -126,6 +159,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * unlinkParticipante
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function unlinkParticipante(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $request->validate(['user_id' => 'required']);
@@ -142,6 +183,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * updateParticipante
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses');
@@ -159,6 +208,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * registerParticipante
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('create', [User::class]);
@@ -177,12 +234,22 @@ class ProyectoController extends Controller
 
         $user->save();
 
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses');
+        $user->assignRole(74);
+
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'convocatoria_rol_sennova_id');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);
     }
 
+    /**
+     * filterSemillerosInvestigacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function filterSemillerosInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_semillero_investigacion)) {
@@ -202,6 +269,14 @@ class ProyectoController extends Controller
         return null;
     }
 
+    /**
+     * linkSemilleroInvestigacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function linkSemilleroInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $request->validate(['semillero_investigacion_id' => 'required']);
@@ -219,6 +294,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * unlinkSemilleroInvestigacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function unlinkSemilleroInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $request->validate(['semillero_investigacion_id' => 'required']);
@@ -235,6 +318,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * filterProgramasFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function filterProgramasFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_programa_formacion)) {
@@ -254,6 +345,14 @@ class ProyectoController extends Controller
         return null;
     }
 
+    /**
+     * linkProgramaFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function linkProgramaFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $request->validate(['programa_formacion_id' => 'required']);
@@ -271,6 +370,14 @@ class ProyectoController extends Controller
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
 
+    /**
+     * unlinkProgramaFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function unlinkProgramaFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $request->validate(['programa_formacion_id' => 'required']);

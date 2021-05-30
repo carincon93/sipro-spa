@@ -9,7 +9,7 @@
     import Button from '@/Components/Button'
     import LoadingButton from '@/Components/LoadingButton'
     import Textarea from '@/Components/Textarea'
-    import DropdownProyectoRolSennova from '@/Dropdowns/DropdownProyectoRolSennova'
+    import DynamicList from '@/Dropdowns/DynamicList'
     import Dialog from '@/Components/Dialog'
 
     export let convocatoria
@@ -78,7 +78,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DropdownProyectoRolSennova id="convocatoria_rol_sennova_id" {convocatoria} {lineaProgramatica} bind:formProyectRolSennova={$form.convocatoria_rol_sennova_id} bind:infoRolSennova message={errors.convocatoria_rol_sennova_id} required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
 
                 <div class="mt-4">

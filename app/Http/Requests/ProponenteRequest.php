@@ -24,10 +24,25 @@ class ProponenteRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'           => ['required', 'integer', 'exists:users,id'],
-            'es_autor'          => ['required', 'boolean'],
-            'cantidad_horas'    => ['required', 'numeric', 'min:1'],
-            'cantidad_meses'    => ['required', 'numeric', 'min:1', 'max:11.5'],
+            'user_id'                       => ['required', 'integer', 'exists:users,id'],
+            'convocatoria_rol_sennova_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:convocatoria_rol_sennova,id'],
+            'es_autor'                      => ['required', 'boolean'],
+            'cantidad_horas'                => ['required', 'numeric', 'min:1'],
+            'cantidad_meses'                => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->convocatoria_rol_sennova_id)) {
+            $this->merge([
+                'convocatoria_rol_sennova_id' => $this->convocatoria_rol_sennova_id['value'],
+            ]);
+        }
     }
 }
