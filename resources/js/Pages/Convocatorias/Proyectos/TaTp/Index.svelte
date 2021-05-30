@@ -47,11 +47,11 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each tatp.data as { id, titulo, fecha_ejecucion }}
+            {#each tatp.data as { id, descripcion, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {titulo}
+                            {descripcion}
                         </p>
                     </td>
                     <td class="border-t">

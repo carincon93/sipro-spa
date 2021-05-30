@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\MaxWords;
 use App\Rules\FechaInicioProyecto;
 use App\Rules\FechaFinalizacionProyecto;
 
@@ -30,8 +29,8 @@ class TaTpRequest extends FormRequest
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'tecnoacademia_linea_tecnologica_id'        => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
-                'titulo'                                    => ['required', new MaxWords],
+                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
+                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
                 'resumen'                                   => ['required', 'max:2400', 'string'],
@@ -43,15 +42,15 @@ class TaTpRequest extends FormRequest
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'impacto_centro_formacion'                  => ['required', 'string'],
-                'nombre_instituciones'                      => ['required', 'json'],
-                'diseno_curricular'                         => ['required']
+                'nombre_instituciones'                      => ['required_if:codigo_linea_programatica,70', 'json'],
+                'diseno_curricular'                         => ['required_if:codigo_linea_programatica,70']
             ];
         } else {
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'tecnoacademia_linea_tecnologica_id'        => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
-                'titulo'                                    => ['required', new MaxWords],
+                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
+                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
             ];
@@ -79,12 +78,6 @@ class TaTpRequest extends FormRequest
                 }
                 $this->merge(['municipios' => $municipios]);
             }
-        }
-
-        if (is_string($this->titulo)) {
-            $this->merge([
-                'titulo' => ucfirst(mb_strtolower($this->titulo)),
-            ]);
         }
 
         $this->merge([

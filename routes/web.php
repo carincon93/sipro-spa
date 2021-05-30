@@ -65,6 +65,7 @@ use App\Models\PresupuestoSennova;
 use App\Models\Tecnoacademia;
 use App\Models\LineaTecnologica;
 use App\Models\Municipio;
+use App\Models\NodoTecnoparque;
 use App\Models\User;
 
 /*
@@ -358,12 +359,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
+     * Trae los nodos tecnoparque
+     */
+    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', function ($centroFormacion) {
+        return response(NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->where('nodos_tecnoparque.centro_formacion_id', $centroFormacion)->get());
+    })->name('web-api.nodos-tecnoparque');
+
+    /**
+     * Web api
+     * 
      * Trae los tipos de proyectos
      */
-    Route::get('web-api/tipos-proyecto/{tipo_proyecto}', function ($tipoProyecto) {
-        return response(TipoProyecto::selectRaw('tipos_proyecto.id as value, concat(tipos_proyecto.nombre, chr(10), \'∙ Línea programática: \', lineas_programaticas.codigo, \' - \', lineas_programaticas.nombre) as label')
+    Route::get('web-api/tipos-proyecto/{categoria_proyecto}', function ($categoriaProyecto) {
+        return response(TipoProyecto::selectRaw('tipos_proyecto.id as value, concat(tipos_proyecto.nombre, chr(10), \'∙ Línea programática: \', lineas_programaticas.codigo, \' - \', lineas_programaticas.nombre) as label, lineas_programaticas.codigo as codigo')
             ->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id')
-            ->where('categoria_proyecto', 'ilike', '%' . $tipoProyecto . '%')
+            ->where('categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
             ->get());
     })->name('web-api.tipos-proyecto');
 

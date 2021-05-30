@@ -34,6 +34,13 @@
     let municipios = []
     let tecnoacademias = []
     let lineasTecnologicas = []
+    let codigoLineaProgramatica
+
+    $: if (codigoLineaProgramatica) {
+        $form.codigo_linea_programatica = codigoLineaProgramatica.codigo
+    } else {
+        $form.codigo_linea_programatica = tatp.codigo_linea_programatica
+    }
 
     const groupBy = (item) => item.group
 
@@ -49,7 +56,6 @@
     let form = useForm({
         centro_formacion_id: tatp.proyecto.centro_formacion_id,
         tipo_proyecto_id: tatp.proyecto.tipo_proyecto_id,
-        titulo: tatp.titulo,
         fecha_inicio: tatp.fecha_inicio,
         fecha_finalizacion: tatp.fecha_finalizacion,
         resumen: tatp.resumen,
@@ -69,6 +75,8 @@
         bibliografia: tatp.bibliografia,
         tecnoacademia_id: tecnoacademiaRelacionada,
         tecnoacademia_linea_tecnologica_id: lineaTecnologicaRelacionada,
+        codigo_linea_programatica: null,
+        nodo_tecnoparque_id: tatp.nodo_tecnoparque_id,
     })
 
     let regional
@@ -156,13 +164,8 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} proyecto={tatp} />
 
-    <form on:submit|preventDefault={submit}>
+    <form on:submit|preventDefault={submit} novalidate>
         <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
-            <div class="mt-28">
-                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
-            </div>
-
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
@@ -187,7 +190,7 @@
                     <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Tipo de proyecto" />
                 </div>
                 <div>
-                    <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre del tipo de proyecto, línea programática" message={errors.tipo_proyecto_id} required />
+                    <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} bind:recurso={codigoLineaProgramatica} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre del tipo de proyecto, línea programática" message={errors.tipo_proyecto_id} required />
                 </div>
             </div>
 
@@ -201,45 +204,56 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
+            {#if $form.codigo_linea_programatica == 70}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
+                    </div>
+                    <div>
+                        <select id="tecnoacademia_id" disabled={!(tecnoacademias.length > 0)} class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" required>
+                            <option value="">Seleccione una Tecnoacademia</option>
+                            {#each tecnoacademias as { id, nombre }}
+                                <option value={id}>{nombre}</option>
+                            {/each}
+                        </select>
+
+                        <InputError message={errors.tecnoacademia_id} />
+
+                        {#if tecnoacademias.length == 0}
+                            <InfoMessage message="No hay tecnoacademias para este filtro, por favor realice un filtro diferente" />
+                        {/if}
+                    </div>
                 </div>
-                <div>
-                    <select id="tecnoacademia_id" disabled={!(tecnoacademias.length > 0)} class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" required>
-                        <option value="">Seleccione una Tecnoacademia</option>
-                        {#each tecnoacademias as { id, nombre }}
-                            <option value={id}>{nombre}</option>
-                        {/each}
-                    </select>
 
-                    <InputError message={errors.tecnoacademia_id} />
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                    </div>
+                    <div>
+                        <select id="tecnoacademia_linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
+                            <option value="">Seleccione una línea tecnológica</option>
+                            {#each lineasTecnologicas as { id, nombre }, i}
+                                <option value={id}>{nombre}</option>
+                            {/each}
+                        </select>
 
-                    {#if tecnoacademias.length == 0}
-                        <InfoMessage message="No hay tecnoacademias para este filtro, por favor realice un filtro diferente" />
-                    {/if}
+                        <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
+
+                        {#if lineasTecnologicas.length == 0}
+                            <InfoMessage message="No hay líneas tecnológicas para este filtro, por favor realice un filtro diferente" />
+                        {/if}
+                    </div>
                 </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+            {:else if $form.codigo_linea_programatica == 69}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
+                    </div>
+                    <div>
+                        <DynamicList id="nodo_tecnoparque_id" bind:value={$form.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', $form.centro_formacion_id)} message={errors.nodo_tecnoparque_id} required />
+                    </div>
                 </div>
-                <div>
-                    <select id="tecnoacademia_linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
-                        <option value="">Seleccione una línea tecnológica</option>
-                        {#each lineasTecnologicas as { id, nombre }, i}
-                            <option value={id}>{nombre}</option>
-                        {/each}
-                    </select>
-
-                    <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
-
-                    {#if lineasTecnologicas.length == 0}
-                        <InfoMessage message="No hay líneas tecnológicas para este filtro, por favor realice un filtro diferente" />
-                    {/if}
-                </div>
-            </div>
+            {/if}
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
@@ -253,7 +267,7 @@
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="resumen_regional" value="Complemento Resumen ejecutivo Regional" />
+                    <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
                     <Textarea rows="4" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
@@ -274,7 +288,7 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento Antecedentes Regional" />
+                    <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
                 </div>
                 <div>
                     <Textarea rows="4" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
@@ -283,7 +297,7 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de Retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
+                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
                 </div>
                 <div>
                     <Textarea rows="4" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
@@ -321,7 +335,7 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="metodologia_local" value="Descripcion de La Metodología aplicada a nivel local" />
+                    <Label required class="mb-4" labelFor="metodologia_local" value="Descripcion de la metodología aplicada a nivel local" />
                 </div>
                 <div>
                     <Textarea rows="4" id="metodologia_local" error={errors.metodologia_local} bind:value={$form.metodologia_local} required />
@@ -346,16 +360,18 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen Articulación con la Media" />
-                </div>
-                <div>
-                    <Select bind:selectedValue={regional} items={regionales} {groupBy} placeholder="Seleccione un departamento" />
+            {#if $form.codigo_linea_programatica == 70}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen Articulación con la Media" />
+                    </div>
+                    <div>
+                        <Select bind:selectedValue={regional} items={regionales} {groupBy} placeholder="Seleccione un departamento" />
 
-                    <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones} placeholder="Nombre de la IE" error={errors.nombre_instituciones} required />
+                        <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones} placeholder="Nombre de la IE" error={errors.nombre_instituciones} required />
+                    </div>
                 </div>
-            </div>
+            {/if}
 
             <div class="mt-40 grid grid-cols-1">
                 <div>

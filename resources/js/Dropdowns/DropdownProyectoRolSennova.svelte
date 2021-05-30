@@ -54,7 +54,7 @@
     }
 </script>
 
-<Select selectedValue={proyectoRolSennovaFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre del rol" containerClasses="proyecto-roles-sennova {classes}" items={proyectoRolesSennova} on:select={handleProyectoRolSennova} on:clear={() => (formProyectRolSennova = null)} />
+<Select selectedValue={proyectoRolSennovaFiltered} inputAttributes={{ id: id }} placeholder="Busque por el nombre del rol" containerClasses="proyecto-roles-sennova {classes}" items={proyectoRolesSennova} on:select={handleProyectoRolSennova} on:clear={() => (formProyectRolSennova = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
 <InputError {message} />
 
 {#if rolSennovaMessage}

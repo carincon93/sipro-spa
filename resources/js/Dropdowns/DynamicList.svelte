@@ -12,6 +12,7 @@
     export let required
     export let placeholder
     export let routeWebApi
+    export let recurso
 
     let items = []
     let itemFiltered = null
@@ -40,6 +41,7 @@
 
     function handleSelect(event) {
         value = event.detail.value
+        recurso = event.detail
     }
 
     function selectItem() {
@@ -52,7 +54,7 @@
     }
 </script>
 
-<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} />
+<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
 <InputError {message} />
 
 <style>

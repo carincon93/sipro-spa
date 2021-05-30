@@ -30,7 +30,8 @@ class TaTp extends Model
      * @var array
      */
     protected $fillable = [
-        'titulo',
+        'tecnoacademia_linea_tecnologica_id',
+        'nodo_tecnoparque_id',
         'resumen',
         'resumen_regional',
         'antecedentes',
@@ -51,8 +52,7 @@ class TaTp extends Model
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
-        'diseno_curricular',
-        'tecnoacademia_linea_tecnologica_id'
+        'diseno_curricular'
     ];
 
     /**
@@ -94,6 +94,16 @@ class TaTp extends Model
     }
 
     /**
+     * Relationship with NodoTecnoparque
+     *
+     * @return object
+     */
+    public function nodoTecnoparque()
+    {
+        return $this->belongsTo(NodoTecnoparque::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -103,7 +113,7 @@ class TaTp extends Model
     public function scopeFilterTATP($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('titulo', 'ilike', '%' . $search . '%');
+            $query->where('resumen', 'ilike', '%' . $search . '%');
         });
     }
 

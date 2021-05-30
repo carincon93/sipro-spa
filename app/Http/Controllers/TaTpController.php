@@ -19,7 +19,7 @@ class TaTpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function index(Convocatoria $convocatoria)
     {
         $this->authorize('viewAny', [TaTp::class]);
 
@@ -36,7 +36,7 @@ class TaTpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function create(Convocatoria $convocatoria)
     {
         $this->authorize('create', [TaTp::class]);
 
@@ -63,7 +63,6 @@ class TaTpController extends Controller
         $proyecto->save();
 
         $tatp = new TaTp();
-        $tatp->titulo                               = $request->titulo;
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
         $tatp->resumen                              = 'Por favor diligencie el resumen del proyecto';
@@ -118,8 +117,8 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Edit', [
             'convocatoria'                      => $convocatoria->only('id'),
             'tatp'                              => $tatp,
-            'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id,
-            'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica->id,
+            'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id : null,
+            'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->id : null,
             'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                => $tatp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
@@ -137,7 +136,6 @@ class TaTpController extends Controller
     {
         $this->authorize('update', [TaTp::class, $tatp]);
 
-        $tatp->titulo                               = $request->titulo;
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
         $tatp->resumen                              = $request->resumen;
@@ -155,13 +153,22 @@ class TaTpController extends Controller
         $tatp->retos_oportunidades                  = $request->retos_oportunidades;
         $tatp->pertinencia_territorio               = $request->pertinencia_territorio;
         $tatp->metodologia_local                    = $request->metodologia_local;
-        $tatp->numero_instituciones                 = count(json_decode($request->nombre_instituciones));
-        $tatp->nombre_instituciones                 = $request->nombre_instituciones;
 
-        $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
         $tatp->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
         $tatp->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $tatp->proyecto->municipios()->sync($request->municipios);
+
+        if ($request->codigo_linea_programatica == 70) {
+            $tatp->numero_instituciones                 = count(json_decode($request->nombre_instituciones));
+            $tatp->nombre_instituciones                 = $request->nombre_instituciones;
+            $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
+            $tatp->nodoTecnoparque()->associate(null);
+        } else if ($request->codigo_linea_programatica == 69) {
+            $tatp->numero_instituciones                 = null;
+            $tatp->nombre_instituciones                 = null;
+            $tatp->tecnoacademiaLineaTecnologica()->associate(null);
+            $tatp->nodoTecnoparque()->associate($request->nodo_tecnoparque_id);
+        }
 
         $tatp->save();
 

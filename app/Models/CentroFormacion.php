@@ -98,6 +98,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with NodoTecnoparque
+     *
+     * @return object
+     */
+    public function nodosTecnoparque()
+    {
+        return $this->hasMany(NodoTecnoparque::class);
+    }
+
+    /**
      * Relationship with User
      *
      * @return object

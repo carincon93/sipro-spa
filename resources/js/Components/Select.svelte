@@ -33,7 +33,7 @@
     }
 </script>
 
-<Select selectedValue={selectedValue?.value ? selectedValue : null} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} {autocomplete} {isMulti} {isSearchable} {groupBy} on:select={(e) => handleSelect(e)} on:clear={() => (selectedValue = null)} />
+<Select selectedValue={selectedValue?.value ? selectedValue : null} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} {autocomplete} {isMulti} {isSearchable} {groupBy} on:select={(e) => handleSelect(e)} on:clear={() => (selectedValue = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
 <InputError message={error} />
 
 <style>

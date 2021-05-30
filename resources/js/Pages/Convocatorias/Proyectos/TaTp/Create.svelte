@@ -30,7 +30,6 @@
     let form = useForm({
         centro_formacion_id: null,
         tipo_proyecto_id: null,
-        titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
         fecha_inicio: '',
         fecha_finalizacion: '',
         tecnoacademia_id: null,
@@ -77,11 +76,6 @@
 
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8">
-            <div class="mt-28">
-                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
-            </div>
-
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
