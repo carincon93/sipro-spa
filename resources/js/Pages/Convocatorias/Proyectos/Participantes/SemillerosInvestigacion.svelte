@@ -9,7 +9,6 @@
     import ResourceMenu from '@/Components/ResourceMenu'
     import { Item, Text } from '@smui/list'
 
-    export let errors
     export let convocatoria
     export let proyecto
 

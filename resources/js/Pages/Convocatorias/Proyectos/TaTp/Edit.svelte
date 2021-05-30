@@ -32,7 +32,6 @@
     let sending = false
 
     let municipios = []
-    let tecnoacademias = []
     let lineasTecnologicas = []
     let codigoLineaProgramatica
 
@@ -99,12 +98,7 @@
             })
     }
 
-    $: console.log(whitelistInstitucionesEducativas)
-
     onMount(() => {
-        if (tecnoacademiaRelacionada) {
-            getLineasTecnologicas(tecnoacademiaRelacionada)
-        }
         getMunicipios()
     })
 
@@ -130,27 +124,6 @@
         }
     }
 
-    $: selectedCentroFormacion = $form.centro_formacion_id
-    $: if (selectedCentroFormacion) {
-        lineasTecnologicas = []
-        getTecnoacademias(selectedCentroFormacion)
-    }
-
-    async function getTecnoacademias(centroFormacionRelacionado) {
-        let res = await axios.get(route('web-api.centros-formacion.tecnoacademias', [centroFormacionRelacionado]))
-        tecnoacademias = res.data
-    }
-
-    $: selectedTecnoacademia = $form.tecnoacademia_id
-    $: if (selectedTecnoacademia) {
-        getLineasTecnologicas(selectedTecnoacademia)
-    }
-
-    async function getLineasTecnologicas(tecnoacademiaRelacionada) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnologicas', [tecnoacademiaRelacionada]))
-        lineasTecnologicas = res.data
-    }
-
     async function getMunicipios() {
         let res = await axios.get(route('web-api.municipios'))
         if (res.status == '200') {
@@ -164,7 +137,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} proyecto={tatp} />
 
-    <form on:submit|preventDefault={submit} novalidate>
+    <form on:submit|preventDefault={submit}>
         <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
@@ -210,40 +183,20 @@
                         <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
                     </div>
                     <div>
-                        <select id="tecnoacademia_id" disabled={!(tecnoacademias.length > 0)} class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" required>
-                            <option value="">Seleccione una Tecnoacademia</option>
-                            {#each tecnoacademias as { id, nombre }}
-                                <option value={id}>{nombre}</option>
-                            {/each}
-                        </select>
-
-                        <InputError message={errors.tecnoacademia_id} />
-
-                        {#if tecnoacademias.length == 0}
-                            <InfoMessage message="No hay tecnoacademias para este filtro, por favor realice un filtro diferente" />
-                        {/if}
+                        <DynamicList id="tecnoacademia_id" bind:value={$form.tecnoacademia_id} routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])} placeholder="Busque por el nombre de la Tecnoacademia" message={errors.tecnoacademia_id} required />
                     </div>
                 </div>
 
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                {#if $form.tecnoacademia_id}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                        </div>
+                        <div>
+                            <DynamicList id="tecnoacademia_linea_tecnologica_id" bind:value={$form.tecnoacademia_linea_tecnologica_id} routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])} placeholder="Busque por el nombre de la línea tecnológica" message={errors.tecnoacademia_linea_tecnologica_id} required />
+                        </div>
                     </div>
-                    <div>
-                        <select id="tecnoacademia_linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
-                            <option value="">Seleccione una línea tecnológica</option>
-                            {#each lineasTecnologicas as { id, nombre }, i}
-                                <option value={id}>{nombre}</option>
-                            {/each}
-                        </select>
-
-                        <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
-
-                        {#if lineasTecnologicas.length == 0}
-                            <InfoMessage message="No hay líneas tecnológicas para este filtro, por favor realice un filtro diferente" />
-                        {/if}
-                    </div>
-                </div>
+                {/if}
             {:else if $form.codigo_linea_programatica == 69}
                 <div class="mt-44 grid grid-cols-2">
                     <div>

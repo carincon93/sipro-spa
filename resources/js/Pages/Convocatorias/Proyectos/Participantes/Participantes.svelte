@@ -129,17 +129,17 @@
         numero_documento: '',
         numero_celular: '',
         tipo_participacion: '',
-        centro_formacion_id: '',
+        centro_formacion_id: null,
         es_autor: 0,
         cantidad_meses: 0,
         cantidad_horas: 0,
     })
 
     let formNuevoParticipanteId
-    let open_dialog_register = false
+    let openNuevoParticipanteDialog = false
     function showRegister() {
         reset()
-        open_dialog_register = true
+        openNuevoParticipanteDialog = true
         formNuevoParticipanteId = 'nuevo-participante-form'
     }
 
@@ -159,20 +159,20 @@
     }
 
     function reset() {
-        //participant form
+        //Participante - form
         $formParticipante.user_id = 0
         $formParticipante.es_autor = 0
         $formParticipante.cantidad_meses = 0
         $formParticipante.cantidad_horas = 0
         $formParticipante._method = null
-        //participant register form
+        //Nuevo participante - form
         $formNuevoParticipante.nombre = ''
         $formNuevoParticipante.email = ''
         $formNuevoParticipante.tipo_documento = ''
         $formNuevoParticipante.numero_documento = ''
         $formNuevoParticipante.numero_celular = ''
         $formNuevoParticipante.tipo_participacion = ''
-        $formNuevoParticipante.centro_formacion_id = ''
+        $formNuevoParticipante.centro_formacion_id = null
         $formNuevoParticipante.es_autor = 0
         $formNuevoParticipante.cantidad_meses = 0
         $formNuevoParticipante.cantidad_horas = 0
@@ -181,7 +181,7 @@
     function closeDialog() {
         reset()
         dialogOpen = false
-        open_dialog_register = false
+        openNuevoParticipanteDialog = false
         sending = false
     }
 </script>
@@ -361,11 +361,11 @@
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mb-2">
-                    <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación*" />
-                    <Input id="cantidad_meses" type="number" step="0.5" min="1" max="11.5" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación" />
+                    <Input id="cantidad_meses" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                 </div>
                 <div class="mb-2">
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto*" />
+                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                     <Input id="cantidad_horas" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
                 <div class="mb-2">
@@ -390,7 +390,7 @@
 </Dialog>
 
 <!-- Dialog Register -->
-<Dialog bind:open={open_dialog_register} id="nuevo-participante">
+<Dialog bind:open={openNuevoParticipanteDialog} id="nuevo-participante">
     <div slot="title">
         <div class="mb-10 text-center">
             <div class="text-primary">Registar nuevo participante</div>
@@ -436,7 +436,7 @@
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_meses_nuevo_participante" value="Número de meses de vinculación" />
-                    <Input id="cantidad_meses_nuevo_participante" type="number" step="0.5" min="1" max="11.5" class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <Input id="cantidad_meses_nuevo_participante" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_horas_nuevo_participante" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />

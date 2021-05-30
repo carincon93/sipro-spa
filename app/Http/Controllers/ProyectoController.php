@@ -84,7 +84,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Participantes/Index', [
             'convocatoria'          => $convocatoria,
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
         ]);

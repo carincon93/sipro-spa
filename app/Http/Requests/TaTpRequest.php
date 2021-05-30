@@ -29,8 +29,8 @@ class TaTpRequest extends FormRequest
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
-                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
+                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'exclude_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
+                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'exclude_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
                 'resumen'                                   => ['required', 'max:2400', 'string'],
@@ -42,15 +42,15 @@ class TaTpRequest extends FormRequest
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'impacto_centro_formacion'                  => ['required', 'string'],
-                'nombre_instituciones'                      => ['required_if:codigo_linea_programatica,70', 'json'],
-                'diseno_curricular'                         => ['required_if:codigo_linea_programatica,70']
+                'nombre_instituciones'                      => ['required_if:codigo_linea_programatica,70', 'exclude_if:codigo_linea_programatica,69', 'json'],
+                'diseno_curricular'                         => ['required_if:codigo_linea_programatica,70', 'exclude_if:codigo_linea_programatica,69']
             ];
         } else {
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
-                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
-                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
+                'tecnoacademia_linea_tecnologica_id'        => ['required_if:codigo_linea_programatica,70', 'exclude_if:codigo_linea_programatica,69', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnologica,id'],
+                'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'exclude_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
             ];
@@ -78,6 +78,18 @@ class TaTpRequest extends FormRequest
                 }
                 $this->merge(['municipios' => $municipios]);
             }
+        }
+
+        if (is_array($this->tecnoacademia_linea_tecnologica_id)) {
+            $this->merge([
+                'tecnoacademia_linea_tecnologica_id' => $this->tecnoacademia_linea_tecnologica_id['value'],
+            ]);
+        }
+
+        if (is_array($this->nodo_tecnoparque_id)) {
+            $this->merge([
+                'nodo_tecnoparque_id' => $this->nodo_tecnoparque_id['value'],
+            ]);
         }
 
         $this->merge([

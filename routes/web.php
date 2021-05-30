@@ -344,7 +344,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las tecnoacademias
      */
     Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', function ($centroFormacion) {
-        return response(Tecnoacademia::select('tecnoacademias.id', 'tecnoacademias.nombre')->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
+        return response(Tecnoacademia::select('tecnoacademias.id as value', 'tecnoacademias.nombre as label')->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
     })->name('web-api.centros-formacion.tecnoacademias');
 
     /**
@@ -353,7 +353,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas tecnológicas
      */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {
-        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id', 'lineas_tecnologicas.nombre')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
+        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id as value', 'lineas_tecnologicas.nombre as label')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
     })->name('web-api.tecnoacademias.lineas-tecnologicas');
 
     /**

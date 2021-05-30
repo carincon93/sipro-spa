@@ -3,7 +3,6 @@
 
     import '@yaireo/tagify/dist/tagify.css'
     import InputError from '@/Components/InputError'
-    import App from '@inertiajs/inertia-svelte/src/App.svelte'
 
     export let error
     export let placeholder
@@ -12,11 +11,15 @@
 
     let inputElm, tagify
 
-    let test = JSON.parse(tags)
-        .map(function (item) {
-            return item.value
-        })
-        .join(',')
+    let selectedValues = null
+
+    if (tags) {
+        selectedValues = JSON.parse(tags)
+            .map(function (item) {
+                return item.value
+            })
+            .join(',')
+    }
 
     function init() {
         inputElm = document.querySelector('input[name=tags]')
@@ -87,7 +90,7 @@
     }
 </script>
 
-<input on:load={init()} name="tags" {...props} {placeholder} value={test} />
+<input on:load={init()} name="tags" {...props} {placeholder} value={selectedValues} />
 
 <InputError message={error} />
 
