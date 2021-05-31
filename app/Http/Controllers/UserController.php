@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -139,7 +140,11 @@ class UserController extends Controller
     {
         $this->authorize('delete', [User::class, $user]);
 
-        $user->delete();
+        try {
+            $user->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

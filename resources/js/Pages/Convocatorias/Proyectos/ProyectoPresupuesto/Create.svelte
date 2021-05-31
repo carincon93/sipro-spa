@@ -10,12 +10,14 @@
     import DropdownPresupuesto from '@/Dropdowns/DropdownPresupuesto'
     import Textarea from '@/Components/Textarea'
     import InputError from '@/Components/InputError'
+    import Select from '@/Components/Select'
 
     export let convocatoria
     export let proyecto
     export let errors
     export let tiposLicencia
     export let tiposSoftware
+    export let opcionesServiciosEdicion
 
     $: $title = 'Crear presupuesto'
 
@@ -30,9 +32,7 @@
 
     let showQtyInput = true
     let sending = false
-    $: software = $form.codigo_uso_presupuestal == '2010100600203101' ? true : false
     let form = useForm({
-        software: software,
         convocatoria_presupuesto_id: null,
         descripcion: '',
         justificacion: '',
@@ -43,6 +43,7 @@
         fecha_inicio: '',
         fecha_finalizacion: '',
         codigo_uso_presupuestal: '',
+        servicio_edicion_info: '',
     })
 
     function submit() {
@@ -136,6 +137,11 @@
                     {#if errors.fecha_inicio || errors.fecha_finalizacion}
                         <InputError message={errors.fecha_inicio || errors.fecha_finalizacion} />
                     {/if}
+                {:else if $form.codigo_uso_presupuestal == '2020200800901'}
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="servicio_edicion_info" value="Más información" />
+                        <Select id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={$form.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

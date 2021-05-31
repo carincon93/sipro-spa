@@ -107,6 +107,19 @@ class ProyectoPresupuesto extends Model
         return $this->hasOne(SoftwareInfo::class);
     }
 
+
+    /**
+     * Relationship with ServicioEdicionInfo
+     *
+     * @return object
+     */
+    public function servicioEdicionInfo()
+    {
+        return $this->hasOne(ServicioEdicionInfo::class);
+    }
+
+
+
     /**
      * Filtrar registros
      *

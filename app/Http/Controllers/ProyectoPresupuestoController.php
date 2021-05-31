@@ -12,6 +12,7 @@ use App\Models\SoftwareInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\PresupuestoValidationTrait;
+use App\Models\ServicioEdicionInfo;
 use Inertia\Inertia;
 
 class ProyectoPresupuestoController extends Controller
@@ -59,10 +60,11 @@ class ProyectoPresupuestoController extends Controller
         $proyecto->tipoProyecto->lineaProgramatica->only('id');
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Create', [
-            'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto,
-            'tiposLicencia' => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
-            'tiposSoftware' => json_decode(Storage::get('json/tipos-software.json'), true)
+            'convocatoria'              => $convocatoria->only('id'),
+            'proyecto'                  => $proyecto,
+            'tiposLicencia'             => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
+            'opcionesServiciosEdicion'  => json_decode(Storage::get('json/opciones-servicios-edicion.json'), true),
+            'tiposSoftware'             => json_decode(Storage::get('json/tipos-software.json'), true)
         ]);
     }
 
@@ -78,7 +80,7 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items, 0, 0)) {
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
         }
 
@@ -100,6 +102,11 @@ class ProyectoPresupuestoController extends Controller
             $softwareInfo->fecha_finalizacion   = $request->fecha_finalizacion;
 
             $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
+        } else if ($request->codigo_uso_presupuestal == '2020200800901') {
+            $servicioEdicionInfo = new ServicioEdicionInfo();
+            $servicioEdicionInfo->info = $request->servicio_edicion_info;
+
+            $proyectoPresupuesto->servicioEdicionInfo()->save($servicioEdicionInfo);
         }
 
         return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'El recurso se ha creado correctamente.');
@@ -127,15 +134,17 @@ class ProyectoPresupuestoController extends Controller
         $this->authorize('update', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
 
         $proyectoPresupuesto->softwareInfo;
+        $proyectoPresupuesto->servicioEdicionInfo;
         $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
         $proyecto->tipoProyecto->lineaProgramatica;
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Edit', [
-            'convocatoria'         => $convocatoria->only('id'),
-            'proyecto'             => $proyecto,
-            'proyectoPresupuesto'  => $proyectoPresupuesto,
-            'tiposLicencia'        => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
-            'tiposSoftware'        => json_decode(Storage::get('json/tipos-software.json'), true)
+            'convocatoria'              => $convocatoria->only('id'),
+            'proyecto'                  => $proyecto,
+            'proyectoPresupuesto'       => $proyectoPresupuesto,
+            'tiposLicencia'             => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
+            'opcionesServiciosEdicion'  => json_decode(Storage::get('json/opciones-servicios-edicion.json'), true),
+            'tiposSoftware'             => json_decode(Storage::get('json/tipos-software.json'), true)
         ]);
     }
 
@@ -146,13 +155,13 @@ class ProyectoPresupuestoController extends Controller
      * @param  \App\Models\ProyectoPresupuesto  $proyectoPresupuesto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
+    public function update(ProyectoPresupuestoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
         $this->authorize('update', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items, $proyectoPresupuesto->valor, $proyectoPresupuesto->numero_items)) {
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
         }
 
@@ -169,12 +178,13 @@ class ProyectoPresupuestoController extends Controller
 
             $proyectoPresupuesto->valor        = $request->valor;
             $proyectoPresupuesto->numero_items = $request->numero_items;
+        } else {
+            $proyectoPresupuesto->valor            = null;
+            $proyectoPresupuesto->numero_items     = null;
         }
 
         $proyectoPresupuesto->descripcion      = $request->descripcion;
         $proyectoPresupuesto->justificacion    = $request->justificacion;
-        $proyectoPresupuesto->valor            = null;
-        $proyectoPresupuesto->numero_items     = null;
 
         $proyectoPresupuesto->proyecto()->associate($proyecto);
         $proyectoPresupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
@@ -193,6 +203,18 @@ class ProyectoPresupuestoController extends Controller
             );
         } else {
             $proyectoPresupuesto->softwareInfo()->delete();
+        }
+
+        $servicioEdicionInfo = ServicioEdicionInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
+        if ($request->codigo_uso_presupuestal == '2020200800901') {
+            $proyectoPresupuesto->servicioEdicionInfo()->updateOrCreate(
+                ['id' => $servicioEdicionInfo ? $servicioEdicionInfo->id : null],
+                [
+                    'info' => $request->servicio_edicion_info,
+                ]
+            );
+        } else {
+            $proyectoPresupuesto->servicioEdicionInfo()->delete();
         }
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');

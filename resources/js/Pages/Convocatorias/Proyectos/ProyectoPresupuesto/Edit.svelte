@@ -13,6 +13,7 @@
     import Dialog from '@/Components/Dialog'
     import InfoMessage from '@/Components/InfoMessage'
     import DropdownPresupuesto from '@/Dropdowns/DropdownPresupuesto'
+    import Select from '@/Components/Select'
 
     export let errors
     export let convocatoria
@@ -20,6 +21,7 @@
     export let proyectoPresupuesto
     export let tiposLicencia
     export let tiposSoftware
+    export let opcionesServiciosEdicion
 
     let presupuestoSennova = proyectoPresupuesto
 
@@ -37,7 +39,6 @@
     let showQtyInput = proyectoPresupuesto.valor != null ? false : true
     let dialogOpen = false
     let sending = false
-    $: software = $form.codigo_uso_presupuestal == '2010100600203101' ? true : false
     let form = useForm({
         codigo_uso_presupuestal: '',
         convocatoria_presupuesto_id: proyectoPresupuesto.convocatoria_presupuesto_id,
@@ -45,11 +46,14 @@
         justificacion: proyectoPresupuesto.justificacion,
         valor: proyectoPresupuesto.valor,
         numero_items: proyectoPresupuesto.numero_items,
-        software: software,
         tipo_software: proyectoPresupuesto.software_info?.tipo_software,
         tipo_licencia: proyectoPresupuesto.software_info?.tipo_licencia,
         fecha_inicio: proyectoPresupuesto.software_info?.fecha_inicio,
         fecha_finalizacion: proyectoPresupuesto.software_info?.fecha_finalizacion,
+        servicio_edicion_info: {
+            value: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.value,
+            label: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.label,
+        },
     })
 
     function submit() {
@@ -153,6 +157,11 @@
                         {#if errors.fecha_inicio || errors.fecha_finalizacion}
                             <InputError message={errors.fecha_inicio || errors.fecha_finalizacion} />
                         {/if}
+                    {:else if $form.codigo_uso_presupuestal == '2020200800901'}
+                        <div class="mt-4">
+                            <Label required class="mb-4" labelFor="servicio_edicion_info" value="Más información" />
+                            <Select id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={$form.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" required />
+                        </div>
                     {/if}
                 </div>
 

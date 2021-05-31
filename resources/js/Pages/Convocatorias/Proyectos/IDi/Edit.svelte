@@ -54,12 +54,12 @@
     let requiereJustificacionPoliticaDiscapacidad = idi.justificacion_politica_discapacidad != null
 
     let form = useForm({
-        centro_formacion_id: idi.proyecto.centro_formacion_id,
+        centro_formacion_id: idi.proyecto?.centro_formacion_id,
         linea_investigacion_id: idi.linea_investigacion_id,
         disciplina_subarea_conocimiento_id: idi.disciplina_subarea_conocimiento_id,
         tematica_estrategica_id: idi.tematica_estrategica_id,
         red_conocimiento_id: idi.red_conocimiento_id,
-        tipo_proyecto_id: idi.proyecto.tipo_proyecto_id,
+        tipo_proyecto_id: idi.proyecto?.tipo_proyecto_id,
         actividad_economica_id: idi.actividad_economica_id,
         titulo: idi.titulo,
         fecha_inicio: idi.fecha_inicio,
@@ -208,14 +208,16 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
+            {#if $form.centro_formacion_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
+                    </div>
+                    <div>
+                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                    </div>
                 </div>
-                <div>
-                    <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
-                </div>
-            </div>
+            {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Código dependencia presupuestal (SIIF)" />

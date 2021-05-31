@@ -128,7 +128,7 @@ class IdiController extends Controller
             'tecnoacademia'                     => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'opcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-idi-dropdown.json'), true),
+            'opcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
         ]);
     }

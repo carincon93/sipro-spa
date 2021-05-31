@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RedConocimientoRequest;
 use App\Models\RedConocimiento;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -109,7 +110,11 @@ class RedConocimientoController extends Controller
     {
         $this->authorize('delete', [RedConocimiento::class, $redConocimiento]);
 
-        $redConocimiento->delete();
+        try {
+            $redConocimiento->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('redes-conocimiento.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

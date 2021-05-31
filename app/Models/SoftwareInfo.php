@@ -9,6 +9,11 @@ class SoftwareInfo extends Model
 {
     use HasFactory;
 
+    /**
+     * table
+     *
+     * @var string
+     */
     protected $table = 'software_info';
 
     /**
