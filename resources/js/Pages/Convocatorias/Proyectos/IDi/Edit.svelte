@@ -34,6 +34,8 @@
     export let opcionesIDiDropdown
     export let proyectoMunicipios
 
+    $: $title = idi ? idi.titulo : null
+
     /**
      * Permisos
      */
@@ -98,7 +100,6 @@
             value: idi.relacionado_tecnoacademia,
             label: opcionesIDiDropdown.find((item) => item.value == idi.relacionado_tecnoacademia)?.label,
         },
-
         tecnoacademia_id: {
             value: tecnoacademia?.id,
             label: tecnoacademias.find((item) => item.value == tecnoacademia?.id)?.label,
@@ -160,8 +161,6 @@
             municipios = res.data
         }
     }
-
-    $: $title = idi ? idi.titulo : null
 </script>
 
 <AuthenticatedLayout>
@@ -503,11 +502,11 @@
                             <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
                             {#if lineasTecnologicas.length > 0}
                                 <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
-                                    {#each lineasTecnologicas as { id, nombre }, i}
-                                        <Label class="p-3 border-t border-b flex items-center text-sm" {id} value={nombre} />
+                                    {#each lineasTecnologicas as { value, label }, i}
+                                        <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
 
                                         <div class="border-b border-t flex items-center justify-center">
-                                            <input type="checkbox" bind:group={$form.linea_tecnologica_id} {id} value={id} class="rounded text-indigo-500" />
+                                            <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-indigo-500" />
                                         </div>
                                     {/each}
                                 </div>

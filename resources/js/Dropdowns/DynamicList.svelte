@@ -30,7 +30,7 @@
 
     afterUpdate(() => {
         if (required) {
-            value != null && select != null ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
+            itemFiltered != null && select != null ? select.setCustomValidity('') : select.setCustomValidity($_('Please fill out this field.'))
         }
     })
 
