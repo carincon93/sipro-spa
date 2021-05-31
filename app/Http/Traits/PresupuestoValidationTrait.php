@@ -138,7 +138,6 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-
     /**
      * adecuacionesYContruccionesValidation
      *

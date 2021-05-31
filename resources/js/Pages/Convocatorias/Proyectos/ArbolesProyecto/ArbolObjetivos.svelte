@@ -622,7 +622,7 @@
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {planteamientoProblema}
+                            {planteamientoProblema ? planteamientoProblema : 'Sin información registrada'}
                         </p>
                         <div>
                             <Label class="mb-4" labelFor="objetivo_general" value="Objetivo general" />
