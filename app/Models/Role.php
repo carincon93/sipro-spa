@@ -17,7 +17,8 @@ class Role extends SpatieRole
     protected $fillable = [
         'name',
         'description',
-        'guard_name'
+        'guard_name',
+        'visible_participantes'
     ];
 
     /**
@@ -48,7 +49,7 @@ class Role extends SpatieRole
     public function scopeFilterRole($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'ilike', '%'.$search.'%');
+            $query->where('name', 'ilike', '%' . $search . '%');
         });
     }
 }

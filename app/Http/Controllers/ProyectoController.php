@@ -8,6 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
+use App\Models\Role;
 use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -103,7 +104,7 @@ class ProyectoController extends Controller
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
-            'lineaProgramatica'     => $proyecto->tipoProyecto->lineaProgramatica->only('id')
+            'roles'                 => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -144,12 +145,17 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'convocatoria_rol_sennova_id');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
+
+        if (is_array($data['rol_id'])) {
+            $data['rol_id'] = $data['rol_id']['value'];
+        }
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
                 return redirect()->back()->with('error', 'El recurso ya está vinculado.');
             }
+
             $proyecto->participantes()->attach($request->user_id, $data);
             return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
@@ -236,7 +242,7 @@ class ProyectoController extends Controller
 
         $user->assignRole(74);
 
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'convocatoria_rol_sennova_id');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);

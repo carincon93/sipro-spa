@@ -100,7 +100,7 @@ class TaTp extends Model
      */
     public function nodoTecnoparque()
     {
-        return $this->belongsTo(NodoTecnoparque::class);
+        return $this->belongsTo(NodoTecnoparque::class)->orderBy('nombre');
     }
 
     /**
@@ -110,7 +110,7 @@ class TaTp extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTATP($query, array $filters)
+    public function scopeFilterTaTp($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('resumen', 'ilike', '%' . $search . '%');

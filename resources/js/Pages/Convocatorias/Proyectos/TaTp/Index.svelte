@@ -14,6 +14,8 @@
     export let convocatoria
     export let tatp
 
+    $title = 'Proyectos Tecnoacademia - Tecnoparque'
+
     /**
      * Permisos
      */
@@ -24,8 +26,6 @@
         }).length > 0
 
     let filters = {}
-
-    $title = 'Proyectos Tecnoacademia - Tecnoparque'
 </script>
 
 <AuthenticatedLayout>
@@ -47,22 +47,22 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each tatp.data as { id, descripcion, fecha_ejecucion }}
+            {#each tatp.data as tatp}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {descripcion}
+                            {tatp.nodo_tecnoparque ? tatp.nodo_tecnoparque.nombre : tatp.tecnoacademia_linea_tecnologica ? tatp.tecnoacademia_linea_tecnologica.tecnoacademia.nombre : null}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {fecha_ejecucion}
+                            {tatp.fecha_ejecucion}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
                             {#if isSuperAdmin}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tatp.edit', [convocatoria.id, id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tatp.edit', [convocatoria.id, tatp.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

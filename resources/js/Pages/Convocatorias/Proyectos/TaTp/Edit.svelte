@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            {#if $form.codigo_linea_programatica == 70}
+            {#if $form.codigo_linea_programatica == 70 && $form.centro_formacion_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                 {/if}
-            {:else if $form.codigo_linea_programatica == 69}
+            {:else if $form.codigo_linea_programatica == 69 && $form.centro_formacion_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />

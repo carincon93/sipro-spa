@@ -20,7 +20,7 @@
     export let proyecto
     export let tiposDocumento
     export let tiposParticipacion
-    export let lineaProgramatica
+    export let roles
 
     let resultados = []
 
@@ -83,6 +83,7 @@
         es_autor: 0,
         cantidad_horas: 0,
         cantidad_meses: 0,
+        rol_id: null,
     })
 
     function showParticipante(user) {
@@ -96,6 +97,7 @@
             $formParticipante.es_autor = user.pivot.es_autor ? 1 : 0
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
+            $formParticipante.rol_id = user.pivot.rol_id
         }
     }
 
@@ -134,7 +136,7 @@
         cantidad_meses: 0,
         cantidad_horas: 0,
         centro_formacion_id: null,
-        convocatoria_rol_sennova_id: null,
+        rol_id: null,
     })
 
     let formNuevoParticipanteId
@@ -165,11 +167,9 @@
         $formParticipante.reset()
         //Nuevo participante - form
         $formNuevoParticipante.reset()
-        $formNuevoParticipante.convocatoria_rol_sennova_id = null
     }
 
     function closeDialog() {
-        $formNuevoParticipante.convocatoria_rol_sennova_id = null
         reset()
         dialogOpen = false
         openNuevoParticipanteDialog = false
@@ -351,15 +351,21 @@
         <form on:submit|preventDefault={submitParticipante} id="participante-form">
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
-                <div class="mb-2">
+                <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación" />
                     <Input id="cantidad_meses" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                 </div>
-                <div class="mb-2">
+                <div class="mt-4">
                     <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                     <Input id="cantidad_horas" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
-                <div class="mb-2">
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
+                    <Select id="rol_id" items={roles} bind:selectedValue={$formParticipante.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                </div>
+
+                <div class="mt-4">
                     <Label class="mb-4" labelFor="es_autor" value="¿Es autor?" />
                     <select id="es_autor" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formParticipante.es_autor} required>
                         <option value="1" selected={$formParticipante.es_autor == 1 ? true : false}>Si</option>
@@ -426,8 +432,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoParticipante.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
+                    <Select id="rol_id" items={roles} bind:selectedValue={$formNuevoParticipante.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
