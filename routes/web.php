@@ -45,7 +45,7 @@ use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnologicaController;
 use App\Http\Controllers\MesaSectorialController;
-
+use App\Http\Controllers\ServicioTecnologicoController;
 use App\Models\ActividadEconomica;
 use App\Models\LineaInvestigacion;
 use App\Models\TipoProyecto;
@@ -66,6 +66,8 @@ use App\Models\Tecnoacademia;
 use App\Models\LineaTecnologica;
 use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
+use App\Models\SectorProductivo;
+use App\Models\TemaPriorizado;
 use App\Models\User;
 
 /*
@@ -425,6 +427,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
+     * Trae los sectores productivos
+     */
+    Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
+        return response(SectorProductivo::selectRaw('id as value, nombre as label')->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.sectores-productivos');
+
+    /**
+     * Web api
+     * 
+     * Trae los temas priorizados
+     */
+    Route::get('web-api/temas-priorizados/{mesa_tecnica}/{sector_productivo}', function ($mesaTecnica, $sectorProductivo) {
+        return response(TemaPriorizado::selectRaw('id as value, nombre as label')->where('mesa_tecnica_id', $mesaTecnica)->where('sector_productivo_id', $sectorProductivo)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.temas-priorizados');
+
+    /**
+     * Web api
+     * 
      * Trae las subtipologías Minciencias
      */
     Route::get('web-api/subtipologias-minciencias', function () {
@@ -446,6 +466,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('convocatorias.tatp', TaTpController::class)->parameters(['convocatorias' => 'convocatoria', 'tatp' => 'tatp'])->except(['show']);
+
+    /**
+     * Servicios tecnológicos - Estrategia  nacional
+     * 
+     */
+    Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
 
     /**
      * Convocatorias

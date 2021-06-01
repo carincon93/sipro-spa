@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SectorProductivoRequest;
+use App\Models\MesaTecnica;
 use App\Models\SectorProductivo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

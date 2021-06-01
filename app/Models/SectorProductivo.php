@@ -44,6 +44,16 @@ class SectorProductivo extends Model
     ];
 
     /**
+     * Relationship with MesaTecnica
+     *
+     * @return object
+     */
+    public function mesasTecnicas()
+    {
+        return $this->belongsToMany(MesaTecnica::class, 'mesa_tecnica_sector_productivo', 'sector_productivo_id', 'mesa_tecnica_id');
+    }
+
+    /**
      * Relationship with TemaPriorizado
      *
      * @return object

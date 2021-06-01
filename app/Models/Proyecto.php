@@ -95,6 +95,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with ServicioTecnologico
+     *
+     * @return object
+     */
+    public function servicioTecnologico()
+    {
+        return $this->hasOne(ServicioTecnologico::class, 'id');
+    }
+
+    /**
      * Relationship with TATP
      *
      * @return object
@@ -230,6 +240,7 @@ class Proyecto extends Model
     {
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
         if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
+        if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
 
         return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
     }
@@ -249,6 +260,11 @@ class Proyecto extends Model
         if ($this->tatp()->exists()) {
             $fechaInicio = $this->tatp->fecha_inicio;
             $fechaFinalizacion = $this->tatp->fecha_finalizacion;
+        }
+
+        if ($this->servicioTecnologico()->exists()) {
+            $fechaInicio = $this->servicioTecnologico->fecha_inicio;
+            $fechaFinalizacion = $this->servicioTecnologico->fecha_finalizacion;
         }
 
         $fechaFinalizacion = Carbon::parse($fechaFinalizacion, 'UTC')->floorMonth();
