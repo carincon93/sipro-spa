@@ -6,13 +6,19 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    protected $appends = ['can', 'nombre_usuario'];
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['can', 'nombre_usuario', 'rol_sennova_participante'];
 
     /**
      * The attributes that are mass assignable.
@@ -135,6 +141,22 @@ class User extends Authenticatable
         return $this->getAllPermissions()->map(function ($t) {
             return ['name' => $t['name']];
         })->pluck('name');
+    }
+
+    /**
+     * getRolSennovaParticipanteAttribute
+     *
+     * @return void
+     */
+    public function getRolSennovaParticipanteAttribute()
+    {
+        $rolSennovaName = null;
+        $rolSennovaParticipante = $this->select('roles.name')->join('proyecto_participantes', 'users.id', 'proyecto_participantes.user_id')->join('roles', 'proyecto_participantes.rol_id', 'roles.id')->where('users.id', $this->id)->first();
+        if ($rolSennovaParticipante) {
+            $rolSennovaName = $rolSennovaParticipante->name;
+        }
+
+        return $rolSennovaName;
     }
 
     /**

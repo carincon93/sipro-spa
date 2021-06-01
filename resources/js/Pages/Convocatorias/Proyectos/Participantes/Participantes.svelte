@@ -175,6 +175,8 @@
         openNuevoParticipanteDialog = false
         sending = false
     }
+
+    console.log(proyecto.participantes)
 </script>
 
 <div class="bg-indigo-100 py-4">
@@ -198,8 +200,6 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Documento</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Celular</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
@@ -216,16 +216,6 @@
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
                             {resultado.email}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.numero_documento}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.numero_celular}
                         </p>
                     </td>
                     <td class="border-t">
@@ -269,7 +259,7 @@
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">¿Es autor?</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Rol SENNOVA</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Meses</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Horas</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
@@ -300,7 +290,7 @@
                 </td>
                 <td class="border-t">
                     <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.es_autor ? 'Si' : 'No'}
+                        {participante.rol_sennova_participante ? participante.rol_sennova_participante : 'Sin información registrada'}
                     </p>
                 </td>
                 <td class="border-t">

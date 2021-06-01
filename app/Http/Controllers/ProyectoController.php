@@ -199,7 +199,7 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {

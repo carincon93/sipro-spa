@@ -40,6 +40,16 @@ class Role extends SpatieRole
     ];
 
     /**
+     * Relationship with Proyecto (participants)
+     *
+     * @return object
+     */
+    public function participante()
+    {
+        return $this->hasMany(Participante::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

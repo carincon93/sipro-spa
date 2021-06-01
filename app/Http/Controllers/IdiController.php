@@ -93,7 +93,16 @@ class IdiController extends Controller
 
         $proyecto->idi()->save($idi);
 
-        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $idi])->with('success', 'El recurso se ha creado correctamente.');
+        $proyecto->participantes()->attach(
+            Auth::user()->id,
+            [
+                'es_autor'          => true,
+                'cantidad_meses'    => $proyecto->diff_meses,
+                'cantidad_horas'    => 40
+            ]
+        );
+
+        return redirect()->route('convocatorias.idi.edit', [$convocatoria, $idi])->with('success', 'El recurso se ha creado correctamente. Por favor continue diligenciando la información.');
     }
 
     /**
