@@ -97,7 +97,7 @@
             $formParticipante.es_autor = user.pivot.es_autor ? 1 : 0
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
-            $formParticipante.rol_id = user.pivot.rol_id
+            $formParticipante.rol_id = { value: user.pivot.rol_id, label: roles.find((item) => item.value == user.pivot.rol_id)?.label }
         }
     }
 
@@ -259,7 +259,6 @@
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Rol SENNOVA</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Meses</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Horas</th>
             <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
@@ -286,11 +285,6 @@
                 <td class="border-t">
                     <p class="px-6 py-4 flex items-center">
                         {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.rol_sennova_participante ? participante.rol_sennova_participante : 'Sin información registrada'}
                     </p>
                 </td>
                 <td class="border-t">

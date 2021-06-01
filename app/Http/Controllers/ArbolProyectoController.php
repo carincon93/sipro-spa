@@ -110,6 +110,10 @@ class ArbolProyectoController extends Controller
                 $proyecto->planteamiento_problema = $proyecto->tatp->planteamiento_problema;
                 $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
                 break;
+            case $proyecto->servicioTecnologico()->exists():
+                $proyecto->planteamiento_problema = $proyecto->servicioTecnologico->planteamiento_problema;
+                $proyecto->justificacion_problema = $proyecto->servicioTecnologico->justificacion_problema;
+                break;
             default:
                 break;
         }
@@ -280,6 +284,10 @@ class ArbolProyectoController extends Controller
             case $proyecto->tatp()->exists():
                 $proyecto->objetivo_general         = $proyecto->tatp->objetivo_general;
                 $proyecto->planteamiento_problema   = $proyecto->tatp->planteamiento_problema;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $proyecto->objetivo_general         = $proyecto->servicioTecnologico->objetivo_general;
+                $proyecto->planteamiento_problema   = $proyecto->servicioTecnologico->planteamiento_problema;
                 break;
             default:
                 break;

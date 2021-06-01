@@ -23,9 +23,11 @@
             <Participantes {convocatoria} {proyecto} {errors} {tiposDocumento} {tiposParticipacion} {roles} />
         </div>
         <hr class="my-16" />
-        <div>
-            <SemillerosInvestigacion {convocatoria} {proyecto} {errors} />
-        </div>
+        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 || proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70}
+            <div>
+                <SemillerosInvestigacion {convocatoria} {proyecto} {errors} />
+            </div>
+        {/if}
         {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
             <hr class="my-16" />
             <div>

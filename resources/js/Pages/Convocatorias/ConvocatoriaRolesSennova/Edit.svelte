@@ -44,6 +44,7 @@
             value: convocatoriaRolSennova.rol_sennova_id,
             label: rolesSennova.find((item) => item.value == convocatoriaRolSennova.rol_sennova_id)?.label,
         },
+        perfil: convocatoriaRolSennova.perfil,
         mensaje: convocatoriaRolSennova.mensaje,
     })
 
@@ -104,6 +105,11 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
                     <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label class="mb-4" labelFor="perfil" value="Perfil" />
+                    <Textarea rows="4" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
                 </div>
 
                 <div class="mt-4">

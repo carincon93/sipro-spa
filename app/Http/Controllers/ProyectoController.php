@@ -35,6 +35,10 @@ class ProyectoController extends Controller
             $objetivoGeneral = $proyecto->tatp->objetivo_general;
         }
 
+        if ($proyecto->servicioTecnologico()->exists()) {
+            $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
+        }
+
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
         $productos = collect([]);
 
@@ -72,6 +76,9 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->tatp()->exists():
                 return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $proyecto]);
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $proyecto]);
                 break;
             default:
                 # code...

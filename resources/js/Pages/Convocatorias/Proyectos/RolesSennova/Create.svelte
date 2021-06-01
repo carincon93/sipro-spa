@@ -8,6 +8,7 @@
     import Label from '@/Components/Label'
     import LoadingButton from '@/Components/LoadingButton'
     import Textarea from '@/Components/Textarea'
+    import InfoMessage from '@/Components/InfoMessage'
     import DynamicList from '@/Dropdowns/DynamicList'
 
     export let convocatoria
@@ -66,17 +67,18 @@
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    {#if infoRolSennova?.perfil}
+                        <div class="mt-10">
+                            <h1>Perfil:</h1>
+                            <InfoMessage message={infoRolSennova.perfil} />
+                        </div>
+                    {/if}
                 </div>
 
                 {#if infoRolSennova?.experiencia}
                     <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
+                        <p class="block font-medium text-sm text-gray-700 whitespace-pre-wrap">
                             Experiencia (meses)
                             <span class="block border-gray-300 p-4 rounded-md shadow-sm">
                                 {infoRolSennova.experiencia}
@@ -84,6 +86,11 @@
                         </p>
                     </div>
                 {/if}
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
+                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="numero_meses" value="Número de meses que requiere el apoyo" />

@@ -71,6 +71,7 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova = new ConvocatoriaRolSennova();
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->perfil                 = $request->perfil;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
         $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
@@ -138,6 +139,7 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->perfil                 = $request->perfil;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
         $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);

@@ -150,7 +150,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.usos-presupuestales');
 
     Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function ($convocatoria, $lineaProgramatica) {
-        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.mensaje,
+        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.perfil, convocatoria_rol_sennova.mensaje,
         CASE nivel_academico
 				WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)

@@ -18,7 +18,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['can', 'nombre_usuario', 'rol_sennova_participante'];
+    protected $appends = ['can', 'nombre_usuario'];
 
     /**
      * The attributes that are mass assignable.
@@ -141,22 +141,6 @@ class User extends Authenticatable
         return $this->getAllPermissions()->map(function ($t) {
             return ['name' => $t['name']];
         })->pluck('name');
-    }
-
-    /**
-     * getRolSennovaParticipanteAttribute
-     *
-     * @return void
-     */
-    public function getRolSennovaParticipanteAttribute()
-    {
-        $rolSennovaName = null;
-        $rolSennovaParticipante = $this->select('roles.name')->join('proyecto_participantes', 'users.id', 'proyecto_participantes.user_id')->join('roles', 'proyecto_participantes.rol_id', 'roles.id')->where('users.id', $this->id)->first();
-        if ($rolSennovaParticipante) {
-            $rolSennovaName = $rolSennovaParticipante->name;
-        }
-
-        return $rolSennovaName;
     }
 
     /**
