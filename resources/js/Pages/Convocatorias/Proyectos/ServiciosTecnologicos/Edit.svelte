@@ -427,14 +427,7 @@
             Eliminar recurso
         </div>
         <div slot="content">
-            <InfoMessage
-                message="
-                <p>
-                    ¿Está seguro (a) que desea eliminar este proyecto?
-                    <br />
-                    Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
-                </p>"
-            />
+            <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
                 <Label labelFor="password" class="mb-6" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
