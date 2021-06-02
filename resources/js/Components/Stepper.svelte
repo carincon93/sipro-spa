@@ -6,7 +6,7 @@
     export let convocatoria
     export let proyecto
 
-    let activeProyecto = route().current('convocatorias.tatp.edit') || route().current('convocatorias.idi.edit')
+    let activeProyecto = route().current('convocatorias.tatp.edit') || route().current('convocatorias.idi.edit') || route().current('convocatorias.servicios-tecnologicos.edit')
 </script>
 
 <!-- Steper -->

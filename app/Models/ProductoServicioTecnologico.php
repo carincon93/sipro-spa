@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductoTaTp extends Model
+class ProductoServicioTecnologico extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class ProductoTaTp extends Model
      *
      * @var string
      */
-    protected $table = 'producto_ta_tp';
+    protected $table = 'producto_servicio_tecnologico';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class ProductoTaTp extends Model
      */
     protected $fillable = [
         'producto_id',
-        'valor_proyectado'
+        'medio_verificacion'
     ];
 
     /**
@@ -52,19 +52,5 @@ class ProductoTaTp extends Model
     public function producto()
     {
         return $this->belongsTo(Producto::class);
-    }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterTATPProducto($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('proyectado', 'ilike', '%' . $search . '%');
-        });
     }
 }

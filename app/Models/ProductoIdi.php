@@ -23,7 +23,8 @@ class ProductoIdi extends Model
      */
     protected $fillable = [
         'producto_id',
-        'subtipologia_minciencias_id'
+        'subtipologia_minciencias_id',
+        'medio_verificacion'
     ];
 
     /**

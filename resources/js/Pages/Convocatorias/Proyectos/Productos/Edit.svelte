@@ -43,10 +43,11 @@
         fecha_inicio: producto.fecha_inicio,
         fecha_finalizacion: producto.fecha_finalizacion,
         indicador: producto.indicador,
-        trl: producto.idi_producto?.trl,
-        subtipologia_minciencias_id: producto.idi_producto?.subtipologia_minciencias_id,
-        valor_proyectado: producto.ta_tp_producto?.valor_proyectado,
-        idi: proyecto.idi ? true : false,
+        medio_verificacion: producto.ta_tp ? producto.producto_ta_tp.medio_verificacion : producto.producto_servicio_tecnologico.medio_verificacion,
+        trl: producto.producto_idi?.trl,
+        subtipologia_minciencias_id: producto.producto_idi?.subtipologia_minciencias_id,
+        valor_proyectado: producto.producto_ta_tp?.valor_proyectado,
+        tatp_servicio_tecnologico: proyecto.tatp || proyecto.servicio_tecnologico ? true : false,
     })
 
     function submit() {
@@ -117,12 +118,16 @@
                 </div>
                 <div class="mt-4">
                     <Label required labelFor="indicador" value="Indicador" />
-                    <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
 
+                    {#if $form.tatp_servicio_tecnologico == true}
+                        <InfoMessage message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                    {:else}
+                        <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
+                    {/if}
                     <Textarea rows="4" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
-                {#if producto.idi_producto}
+                {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
                         <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
@@ -136,6 +141,15 @@
                     <div class="mt-4">
                         <Label required labelFor="valor_proyectado" value="Valor proyectado" />
                         <Input id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
+                    </div>
+                {/if}
+
+                {#if $form.tatp_servicio_tecnologico == true}
+                    <div class="mt-4">
+                        <Label required labelFor="medio_verificacion" value="Medio de verificación" />
+
+                        <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                        <Textarea rows="4" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
             </fieldset>

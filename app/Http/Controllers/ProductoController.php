@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Producto;
 use App\Models\ProductoIdi;
+use App\Models\ProductoServicioTecnologico;
 use App\Models\ProductoTaTp;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -78,7 +79,7 @@ class ProductoController extends Controller
         $producto->save();
 
         // Valida si es un producto de I+D+i
-        if ($request->subtipologia_minciencias_id) {
+        if ($proyecto->idi()->exists()) {
             $productoIdi = new ProductoIdi();
             $productoIdi->trl = $request->trl;
             $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
@@ -86,11 +87,20 @@ class ProductoController extends Controller
         }
 
         // Valida si es un producto de TaTp
-        if ($request->valor_proyectado) {
+        if ($proyecto->taTp()->exists()) {
             $productoTaTp = new ProductoTaTp();
             $productoTaTp->producto()->associate($producto->id);
-            $productoTaTp->valor_proyectado = $request->valor_proyectado;
+            $productoTaTp->valor_proyectado     = $request->valor_proyectado;
+            $productoTaTp->medio_verificacion   = $request->medio_verificacion;
             $producto->productoTaTp()->save($productoTaTp);
+        }
+
+        // Valida si es un producto de TaTp
+        if ($proyecto->servicioTecnologico()->exists()) {
+            $productoServicioTecnologico = new ProductoServicioTecnologico();
+            $productoServicioTecnologico->producto()->associate($producto->id);
+            $productoServicioTecnologico->medio_verificacion = $request->medio_verificacion;
+            $producto->productoServicioTecnologico()->save($productoServicioTecnologico);
         }
 
         return redirect()->route('convocatorias.proyectos.productos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
@@ -121,6 +131,8 @@ class ProductoController extends Controller
         $producto->idiProducto;
         $proyecto->taTp;
         $producto->productoTaTp;
+        $proyecto->servicioTecnologico;
+        $producto->productoServicioTecnologico;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'      => $convocatoria->only('id'),
@@ -149,12 +161,16 @@ class ProductoController extends Controller
         $producto->indicador            = $request->indicador;
         $producto->resultado()->associate($request->resultado_id);
 
-        if ($request->subtipologia_minciencias_id) {
+        if ($proyecto->idi()->exists()) {
             $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
         }
 
-        if ($request->valor_proyectado) {
-            $producto->productoTaTp()->update(['valor_proyectado' => $request->valor_proyectado]);
+        if ($proyecto->taTp()->exists()) {
+            $producto->productoTaTp()->update(['valor_proyectado' => $request->valor_proyectado, 'medio_verificacion' => $request->medio_verificacion]);
+        }
+
+        if ($proyecto->servicioTecnologico()->exists()) {
+            $producto->productoServicioTecnologico()->update(['medio_verificacion' => $request->medio_verificacion]);
         }
 
         $producto->save();

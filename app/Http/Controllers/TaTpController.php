@@ -84,7 +84,7 @@ class TaTpController extends Controller
 
         $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
 
-        $proyecto->tatp()->save($tatp);
+        $proyecto->taTp()->save($tatp);
 
         return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'El recurso se ha creado correctamente.');
     }

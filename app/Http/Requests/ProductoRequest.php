@@ -31,9 +31,9 @@ class ProductoRequest extends FormRequest
             'fecha_inicio'                  => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
             'fecha_finalizacion'            => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
             'indicador'                     => ['required', 'string'],
-            'idi'                           => ['required', 'boolean'],
-            'trl'                           => ['required_if:idi,true', 'exclude_if:idi,false', 'digits_between:1,9'],
-            'subtipologia_minciencias_id'   => ['required_if:idi,true', 'exclude_if:idi,false', 'min:0', 'max:2147483647', 'integer', 'exists:subtipologias_minciencias,id'],
+            'medio_verificacion'            => ['required_if:tatp_servicio_tecnologico,true', 'exclude_if:tatp_servicio_tecnologico,false', 'string'],
+            'trl'                           => ['required_if:tatp_servicio_tecnologico,false', 'exclude_if:tatp_servicio_tecnologico,true', 'digits_between:1,9'],
+            'subtipologia_minciencias_id'   => ['required_if:tatp_servicio_tecnologico,false', 'exclude_if:tatp_servicio_tecnologico,true', 'min:0', 'max:2147483647', 'integer', 'exists:subtipologias_minciencias,id'],
         ];
     }
 

@@ -31,7 +31,7 @@ class ProyectoController extends Controller
             $objetivoGeneral = $proyecto->idi->objetivo_general;
         }
 
-        if ($proyecto->tatp()->exists()) {
+        if ($proyecto->taTp()->exists()) {
             $objetivoGeneral = $proyecto->tatp->objetivo_general;
         }
 
@@ -74,7 +74,7 @@ class ProyectoController extends Controller
             case $proyecto->idi()->exists():
                 return redirect()->route('convocatorias.idi.edit', [$convocatoria, $proyecto]);
                 break;
-            case $proyecto->tatp()->exists():
+            case $proyecto->taTp()->exists():
                 return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $proyecto]);
                 break;
             case $proyecto->servicioTecnologico()->exists():

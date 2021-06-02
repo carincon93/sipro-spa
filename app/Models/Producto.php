@@ -84,6 +84,16 @@ class Producto extends Model
     }
 
     /**
+     * Relationship with ProductoServicioTecnologico
+     *
+     * @return object
+     */
+    public function productoServicioTecnologico()
+    {
+        return $this->hasOne(ProductoServicioTecnologico::class);
+    }
+
+    /**
      * Relationship with Actividad
      *
      * @return object
