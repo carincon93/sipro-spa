@@ -53,14 +53,12 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Label required class="mb-4" labelFor="email" value={$_('Email')} />
-        <Input id="email" type="email" class="mt-1 block w-full" bind:value={form.email} required autocomplete="email" />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} required autocomplete="email" />
         <InputError message={errors.email} />
     </div>
 
     <div class="mt-4">
-        <Label required class="mb-4" labelFor="password" value={$_('Password')} />
-        <Input id="password" type="password" class="mt-1 block w-full" bind:value={form.password} required autocomplete="current-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} required autocomplete="current-password" />
         <InputError message={errors.password} />
     </div>
 
@@ -81,3 +79,17 @@
         <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">{$_('Login')}</LoadingButton>
     </div>
 </form>
+
+<p class="text-xs mt-6">
+    Si aún no tiene cuenta puede crear una dilienciando el siguiente <a href={route('register')} class="text-indigo-500">formulario</a>
+</p>
+
+<div class="flex mt-20">
+    <figure>
+        <img src={window.basePath + 'images/sennova-logo.png'} alt="Logo SENNOVA" />
+    </figure>
+
+    <figure class="ml-10">
+        <img src={window.basePath + 'images/grindda.png'} alt="Logo del grupo de investigación GRINDDA" />
+    </figure>
+</div>

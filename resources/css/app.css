@@ -6,6 +6,7 @@
 :root {
     --mdc-theme-primary: #4f46e5;
     --mdc-theme-secondary: rgba(99, 102, 241, 1);
+    --mdc-theme-error: #d93025;
 }
 
 html {
@@ -144,3 +145,24 @@ fieldset[disabled] .selectedItem {
     100% { transform: rotate(360deg) }
 }
 
+.welcome-wallpaper {
+    background-image: url(/images/welcome.jpg);
+    background-size: cover;
+}
+
+.mdc-notched-outline--notched .mdc-notched-outline__notch {
+    border-right: 0px;
+    border-left: 0px;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: #d5d5d5;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--invalid):not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--invalid):not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--invalid):not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-color: #000;
+}
+
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: var(--mdc-theme-error, #d93025);
+}

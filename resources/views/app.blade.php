@@ -34,7 +34,7 @@
     </script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased{{!Auth::user() ? ' welcome-wallpaper' : ''}}">
     @inertia
 </body>
 
