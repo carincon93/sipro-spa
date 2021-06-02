@@ -10,10 +10,15 @@
     export let convocatoriaActiva
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     $title = 'Convocatorias'
 </script>
@@ -64,12 +69,13 @@
             </div>
         {/if}
         <div class="grid grid-cols-3 gap-10">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(74)}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
-                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col">
-                        <span>ICON</span>
+                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-center items-center flex-col">
                         Convocatoria
-                        {convocatoria.year}
+                        <h1 class="text-4xl text-center mt-6">
+                            {convocatoria.year}
+                        </h1>
                         {#if convocatoria.active}
                             <small>Convocatoria activa</small>
                         {/if}

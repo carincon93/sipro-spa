@@ -19,10 +19,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let form = useForm({
         archivo: null,
@@ -30,7 +35,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin && !sending) {
+        if ((isSuperAdmin && !sending) || (checkRole(74) && !sending)) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,7 +58,7 @@
             {anexo.nombre}
         </a>
     {/if}
-    <fieldset disabled={isSuperAdmin && !sending ? undefined : true}>
+    <fieldset disabled={(isSuperAdmin && !sending) || (checkRole(74) && !sending) ? undefined : true}>
         <div>
             <File id="archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>

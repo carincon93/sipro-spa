@@ -23,7 +23,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function index(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('viewAny', [ProyectoLoteEstudioMercado::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes de estudio de mercado y ya hay un estudio de mercado guardado o si el rubro no requiere de estudios de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -53,7 +53,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('create', [ProyectoLoteEstudioMercado::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto]);
     }
@@ -66,7 +66,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function store(ProyectoLoteEstudioMercadoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('create', [ProyectoLoteEstudioMercado::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_lote_estudio_mercado && $proyectoPresupuesto->proyectoLoteEstudioMercado->count() > 0 || !$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -150,7 +150,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto, ProyectoLoteEstudioMercado $proyectoLoteEstudioMercado)
     {
-        $this->authorize('view', [ProyectoLoteEstudioMercado::class, $proyectoLoteEstudioMercado]);
+        $this->authorize('validar-autor', $proyecto);
     }
 
     /**
@@ -161,7 +161,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto, ProyectoLoteEstudioMercado $proyectoLoteEstudioMercado)
     {
-        $this->authorize('update', [ProyectoLoteEstudioMercado::class, $proyectoLoteEstudioMercado]);
+        $this->authorize('validar-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -188,7 +188,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function update(ProyectoLoteEstudioMercadoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto, ProyectoLoteEstudioMercado $proyectoLoteEstudioMercado)
     {
-        $this->authorize('update', [ProyectoLoteEstudioMercado::class, $proyectoLoteEstudioMercado]);
+        $this->authorize('validar-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -285,7 +285,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto, ProyectoLoteEstudioMercado $proyectoLoteEstudioMercado)
     {
-        $this->authorize('delete', [ProyectoLoteEstudioMercado::class, $proyectoLoteEstudioMercado]);
+        $this->authorize('validar-autor', $proyecto);
 
         foreach ($proyectoLoteEstudioMercado->estudiosMercado as $estudioMercado) {
             Storage::delete($estudioMercado->soporte);

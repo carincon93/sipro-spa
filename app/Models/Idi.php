@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Idi extends Model
 {
@@ -195,5 +196,23 @@ class Idi extends Model
         $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         return "$fecha_inicio al $fecha_finalizacion";
+    }
+
+    public static function getProyectosPorRol($convocatoria)
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $idi = $this::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyecto_participantes.user_id', Auth::user()->id)
+                ->orderBy('titulo', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        }
+
+        return $idi;
     }
 }

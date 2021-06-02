@@ -24,7 +24,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('viewAny', ProyectoPresupuesto::class);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica                = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040115');
@@ -55,7 +55,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoPresupuesto::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->tipoProyecto->lineaProgramatica->only('id');
 
@@ -76,7 +76,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function store(ProyectoPresupuestoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoPresupuesto::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
@@ -120,7 +120,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('view', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
+        $this->authorize('validar-autor', $proyecto);
     }
 
     /**
@@ -131,7 +131,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('update', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyectoPresupuesto->softwareInfo;
         $proyectoPresupuesto->servicioEdicionInfo;
@@ -157,7 +157,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function update(ProyectoPresupuestoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('update', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
@@ -228,7 +228,7 @@ class ProyectoPresupuestoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
     {
-        $this->authorize('delete', [ProyectoPresupuesto::class, $proyectoPresupuesto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyectoPresupuesto->delete();
 

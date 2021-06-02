@@ -10,21 +10,29 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 </script>
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
-            <div>
-                <h1 class="font-bold text-5xl">SENNOVA</h1>
-                <p class="text-2xl mt-4">Revisa las convocatorias y formula proyectos.</p>
+            <div class="max-w-2xl">
+                <h1 class="text-4xl">
+                    ¡Bienvenido(a)
+                    <span class="capitalize">{$page.props.auth.user.nombre}</span>! Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque y de Servicios Tecnológicos
+                </h1>
+                <p class="text-2xl mt-4">Revise las convocatorias y empiece la formulación de proyectos.</p>
 
-                {#if isSuperAdmin}
-                    <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Convocatorias</Button>
+                {#if isSuperAdmin || checkRole(74)}
+                    <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Revisar convocatorias</Button>
                 {/if}
             </div>
             <div>

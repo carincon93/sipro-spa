@@ -20,10 +20,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let filters = {}
 </script>
@@ -35,7 +40,7 @@
     <div class="mb-6 flex justify-end items-center">
         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(74)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -48,7 +53,7 @@
 
     <Gantt
         items={productos.data}
-        request={isSuperAdmin
+        request={isSuperAdmin || checkRole(74)
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
                   params: [convocatoria.id, proyecto.id],

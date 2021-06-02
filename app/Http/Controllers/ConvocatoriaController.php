@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\Convocatoria;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,6 @@ class ConvocatoriaController extends Controller
      */
     public function dashboard(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [Convocatoria::class]);
-
         return Inertia::render('Convocatorias/Dashboard', [
             'convocatoria' => $convocatoria
         ]);
@@ -32,14 +31,13 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [Convocatoria::class]);
+        $this->authorize('listar-convocatorias');
 
         return Inertia::render('Convocatorias/Index', [
             'filters'       => request()->all('search'),
             'convocatorias' => Convocatoria::orderBy('fecha_inicio', 'DESC')
                 ->filterConvocatoria(request()->only('search'))->paginate(),
             'convocatoriaActiva' => Convocatoria::where('esta_activa', 1)->first(),
-
         ]);
     }
 

@@ -25,10 +25,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let dialogOpen = false
     let sending = false
@@ -90,16 +95,11 @@
                     <InputError message={errors.permission_id} />
                 </div>
                 <div class="grid grid-cols-6">
-                    {#each allPermissions as { id, only_name, method }, i}
-                        {#if i % 5 === 0}
-                            <div class="p-3 border-t border-b flex items-center text-sm">
-                                {$_(only_name + '.plural')}
-                            </div>
-                        {/if}
+                    {#each allPermissions as { id, name }, i}
                         <div class="pt-8 pb-8 border-t border-b flex flex-col-reverse items-center justify-between">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={id} />
-                                <span slot="label">{$_(method)}</span>
+                                <span slot="label">{name}</span>
                             </FormField>
                         </div>
                     {/each}

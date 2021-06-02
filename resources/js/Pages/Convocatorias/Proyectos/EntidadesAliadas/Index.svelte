@@ -22,10 +22,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let filters = {}
 </script>
@@ -37,7 +42,7 @@
         <div slot="title">Entidades aliadas</div>
 
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(74)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear entidad aliada</Button>
             {/if}
         </div>
@@ -59,7 +64,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if isSuperAdmin}
+                            {#if isSuperAdmin || checkRole(74)}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

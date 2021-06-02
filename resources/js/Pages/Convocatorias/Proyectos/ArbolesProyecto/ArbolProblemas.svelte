@@ -33,10 +33,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     /**
      * Efectos indirectos
@@ -67,7 +72,7 @@
     }
 
     function submitEfectoIndirecto() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $formEfectoIndirecto.post(
                 route('proyectos.efecto-indirecto', {
                     proyecto: proyecto.id,
@@ -110,7 +115,7 @@
     }
 
     function submitEfectoDirecto() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $formEfectoDirecto.post(
                 route('proyectos.efecto-directo', {
                     proyecto: proyecto.id,
@@ -152,7 +157,7 @@
     }
 
     function submitPlanteamientoProblema() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $formPlanteamientoProblema.post(route('proyectos.planteamiento-problema', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -189,7 +194,7 @@
     }
 
     function submitCausaDirecta() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $formCausaDirecta.post(
                 route('proyectos.causa-directa', {
                     proyecto: proyecto.id,
@@ -239,7 +244,7 @@
     }
 
     function submitCausaIndirecta() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $formCausaIndirecta.post(
                 route('proyectos.causa-indirecta', {
                     proyecto: proyecto.id,
@@ -505,7 +510,7 @@
         <div slot="content">
             {#if showCausaIndirectaForm}
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
@@ -514,7 +519,7 @@
                 </form>
             {:else if showCausaDirectaForm}
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
@@ -523,7 +528,7 @@
                 </form>
             {:else if showEfectoIndirectoForm}
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
@@ -532,14 +537,12 @@
                 </form>
             {:else if showPlanteamientoProblemaForm}
                 <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
 
                             <InfoMessage
-                                message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.
-                            <br>
-                            2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                                message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                             />
 
                             <Textarea rows="4" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
@@ -554,7 +557,7 @@
                 </form>
             {:else if showEfectoDirectoForm}
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
                             <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
@@ -565,7 +568,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin && formId}
+            {#if (isSuperAdmin && formId) || (checkRole(74) && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

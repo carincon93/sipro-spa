@@ -27,10 +27,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let dialogOpen = false
     let sending = false
@@ -43,7 +48,7 @@
         fecha_inicio: producto.fecha_inicio,
         fecha_finalizacion: producto.fecha_finalizacion,
         indicador: producto.indicador,
-        medio_verificacion: producto.ta_tp ? producto.producto_ta_tp.medio_verificacion : producto.producto_servicio_tecnologico.medio_verificacion,
+        medio_verificacion: producto.ta_tp ? producto.producto_ta_tp?.medio_verificacion : producto.producto_servicio_tecnologico?.medio_verificacion,
         trl: producto.producto_idi?.trl,
         subtipologia_minciencias_id: producto.producto_idi?.subtipologia_minciencias_id,
         valor_proyectado: producto.producto_ta_tp?.valor_proyectado,
@@ -51,7 +56,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $form.put(route('convocatorias.proyectos.productos.update', [convocatoria.id, proyecto.id, producto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -61,7 +66,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $form.delete(route('convocatorias.proyectos.productos.destroy', [convocatoria.id, proyecto.id, producto.id]))
         }
     }
@@ -72,7 +77,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Productos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -84,7 +89,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                 <div class="mt-8 mb-8">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -154,10 +159,10 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(74)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar producto </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(74)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar producto</LoadingButton>
                 {/if}
             </div>

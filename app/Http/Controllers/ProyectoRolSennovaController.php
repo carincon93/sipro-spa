@@ -19,7 +19,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('viewAny', [ProyectoRolSennova::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
@@ -45,7 +45,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoRolSennova::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
             'convocatoria'       => $convocatoria->only('id'),
@@ -62,7 +62,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function store(ProyectoRolSennovaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoRolSennova::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
             return redirect()->back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
@@ -92,7 +92,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoRolSennova $proyectoRolSennova)
     {
-        $this->authorize('view', [ProyectoRolSennova::class, $proyectoRolSennova]);
+        $this->authorize('validar-autor', $proyecto);
     }
 
     /**
@@ -103,7 +103,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoRolSennova $proyectoRolSennova)
     {
-        $this->authorize('update', [ProyectoRolSennova::class, $proyectoRolSennova]);
+        $this->authorize('validar-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
@@ -123,7 +123,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function update(ProyectoRolSennovaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoRolSennova $proyectoRolSennova)
     {
-        $this->authorize('update', [ProyectoRolSennova::class, $proyectoRolSennova]);
+        $this->authorize('validar-autor', $proyecto);
 
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
             return redirect()->back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
@@ -152,7 +152,7 @@ class ProyectoRolSennovaController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoRolSennova $proyectoRolSennova)
     {
-        $this->authorize('delete', [ProyectoRolSennova::class, $proyectoRolSennova]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyectoRolSennova->delete();
 

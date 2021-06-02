@@ -10,10 +10,15 @@
     export let convocatoria
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     $title = 'Convocatorias - Dashboard'
 </script>
@@ -31,20 +36,25 @@
             </div>
         {/if}
         <h1 class="text-4xl text-center">
-            ¡Bienvenido(a)
-            <span class="capitalize">{$page.props.auth.user.nombre}</span>! Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque y de Servicios Tecnológicos para la vigencia {convocatoria.year}
+            A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} en la(s) que puede formular proyectos.
         </h1>
-        <div class="grid grid-cols-3 gap-10 mt-24">
-            {#if isSuperAdmin}
-                <a use:inertia href={route('convocatorias.idi.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col h-96">
-                    <span>ICON</span>
+        <div class="flex justify-around mt-24">
+            {#if isSuperAdmin || checkRole(74)}
+                <a use:inertia href={route('convocatorias.idi.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                    <figure>
+                        <img src={window.basePath + '/images/idi.png'} alt="" class="rounded-full w-52" />
+                    </figure>
                     I+D+i
                 </a>
-                <a use:inertia href={route('convocatorias.tatp.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col h-96">
+            {/if}
+            {#if isSuperAdmin}
+                <a use:inertia href={route('convocatorias.tatp.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <span>ICON</span>
                     Tecnoacademia - Tecnoparque
                 </a>
-                <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col h-96">
+            {/if}
+            {#if isSuperAdmin}
+                <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <span>ICON</span>
                     Servicios tecnológicos
                 </a>

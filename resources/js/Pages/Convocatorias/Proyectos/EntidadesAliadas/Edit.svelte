@@ -38,10 +38,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let dialogOpen = false
     let sending = false
@@ -72,7 +77,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $form.post(route('convocatorias.proyectos.entidades-aliadas.update', [convocatoria.id, proyecto.id, entidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -82,7 +87,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(74)) {
             $form.delete(route('convocatorias.proyectos.entidades-aliadas.destroy', [convocatoria.id, proyecto.id, entidadAliada.id]))
         }
     }
@@ -93,7 +98,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -106,7 +111,7 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit}>
-                <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+                <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                         <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
@@ -232,10 +237,10 @@
                     </div>
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar entidad aliada </button>
                     {/if}
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar entidad aliada</LoadingButton>
                     {/if}
                 </div>
@@ -296,7 +301,7 @@
 
                         <td class="border-t td-actions">
                             <ResourceMenu>
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(74)}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>

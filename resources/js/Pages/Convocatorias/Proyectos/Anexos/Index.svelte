@@ -22,10 +22,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let filters = {}
 </script>
@@ -47,14 +52,14 @@
             {#each anexos.data as anexo (anexo.id)}
                 <tr>
                     <td class="border-t">
-                        {#if isSuperAdmin}
+                        {#if isSuperAdmin || checkRole(74)}
                             <p class="px-6 py-4 flex items-center focus:text-indigo-500">
                                 {anexo.nombre}
                             </p>
                         {/if}
                     </td>
                     <td class="border-t">
-                        {#if isSuperAdmin}
+                        {#if isSuperAdmin || checkRole(74)}
                             <Create {convocatoria} {proyecto} {anexo} {proyectoAnexo} bind:sending />
                         {/if}
                     </td>
@@ -65,7 +70,7 @@
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
-            {:else if !isSuperAdmin}
+            {:else if !isSuperAdmin || !checkRole(74)}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">No tiene permisos</td>
                 </tr>

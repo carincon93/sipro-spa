@@ -35,10 +35,15 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(1)
+
+    function checkRole(roleId) {
+        return (
+            authUser.roles.filter(function (role) {
+                return role.id == roleId
+            }).length > 0
+        )
+    }
 
     let filters = {}
 </script>
@@ -48,11 +53,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(74)}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {usoPresupuestal.descripcion}
                         </a>
@@ -90,7 +95,7 @@
                 {#if (!requiereLoteEstudioMercado && requiereEstudioMercado && proyectoLotesEstudioMercado.data.length < 1) || (requiereEstudioMercado && requiereLoteEstudioMercado)}
                     <div class="mb-6 flex justify-end items-center">
                         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
-                        {#if isSuperAdmin}
+                        {#if isSuperAdmin || checkRole(74)}
                             <Button on:click={() => (dialogOpen = true)} variant="raised">Añadir estudio de mercado</Button>
                         {/if}
                     </div>
@@ -128,7 +133,7 @@
 
                         <td class="border-t px-6 pt-6 pb-4">
                             <ResourceMenu>
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(74)}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
@@ -170,7 +175,7 @@
 
         <div slot="actions" class="block flex w-full">
             <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(74)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
             {/if}
         </div>

@@ -23,13 +23,12 @@ class IdiController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [Idi::class]);
+        $this->authorize('formular-proyecto-idi');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'filters'       => request()->all('search'),
-            'idi'           => Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
-                ->filterIdi(request()->only('search'))->paginate(),
+            'idi'           => Idi::getProyectosPorRol($convocatoria),
         ]);
     }
 
@@ -40,7 +39,7 @@ class IdiController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('create', [Idi::class]);
+        $this->authorize('formular-proyecto-idi');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria' => $convocatoria->only('id')
@@ -55,7 +54,7 @@ class IdiController extends Controller
      */
     public function store(IdiRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('create', [Idi::class]);
+        $this->authorize('formular-proyecto-idi');
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
@@ -124,7 +123,7 @@ class IdiController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('update', [Idi::class, $idi]);
+        $this->authorize('validar-autor', [$idi->proyecto]);
 
         $idi->codigo_linea_programatica = $idi->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
@@ -151,7 +150,7 @@ class IdiController extends Controller
      */
     public function update(IdiRequest $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('update', [Idi::class, $idi]);
+        $this->authorize('validar-autor', [$idi->proyecto]);
 
         $idi->titulo                                = $request->titulo;
         $idi->fecha_inicio                          = $request->fecha_inicio;
@@ -206,7 +205,7 @@ class IdiController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('delete', [Idi::class, $idi]);
+        $this->authorize('validar-autor', [$idi->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()

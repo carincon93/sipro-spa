@@ -21,7 +21,7 @@ class ProductoController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('viewAny', [Producto::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
@@ -46,7 +46,7 @@ class ProductoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [Producto::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->idi;
         $proyecto->taTp;
@@ -68,7 +68,7 @@ class ProductoController extends Controller
      */
     public function store(ProductoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [Producto::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $producto = new Producto();
         $producto->nombre               = $request->nombre;
@@ -114,7 +114,7 @@ class ProductoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, Producto $producto)
     {
-        $this->authorize('view', [Producto::class, $producto]);
+        $this->authorize('validar-autor', $proyecto);
     }
 
     /**
@@ -125,10 +125,10 @@ class ProductoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Producto $producto)
     {
-        $this->authorize('update', [Producto::class, $producto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->idi;
-        $producto->idiProducto;
+        $producto->productoIdi;
         $proyecto->taTp;
         $producto->productoTaTp;
         $proyecto->servicioTecnologico;
@@ -153,7 +153,7 @@ class ProductoController extends Controller
      */
     public function update(ProductoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Producto $producto)
     {
-        $this->authorize('update', [Producto::class, $producto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $producto->nombre               = $request->nombre;
         $producto->fecha_inicio         = $request->fecha_inicio;
@@ -186,7 +186,7 @@ class ProductoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Producto $producto)
     {
-        $this->authorize('delete', [Producto::class, $producto]);
+        $this->authorize('validar-autor', $proyecto);
 
         $producto->delete();
 
