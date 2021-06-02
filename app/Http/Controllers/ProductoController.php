@@ -80,6 +80,11 @@ class ProductoController extends Controller
 
         // Valida si es un producto de I+D+i
         if ($proyecto->idi()->exists()) {
+            $request->validate([
+                'trl'                           => 'required|integer|between:1,9',
+                'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
+            ]);
+
             $productoIdi = new ProductoIdi();
             $productoIdi->trl = $request->trl;
             $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
@@ -88,6 +93,10 @@ class ProductoController extends Controller
 
         // Valida si es un producto de TaTp
         if ($proyecto->taTp()->exists()) {
+            $request->validate([
+                'medio_verificacion' => 'required|string',
+                'valor_proyectado'   => 'required|integer|between:1,100',
+            ]);
             $productoTaTp = new ProductoTaTp();
             $productoTaTp->producto()->associate($producto->id);
             $productoTaTp->valor_proyectado     = $request->valor_proyectado;
@@ -97,6 +106,9 @@ class ProductoController extends Controller
 
         // Valida si es un producto de TaTp
         if ($proyecto->servicioTecnologico()->exists()) {
+            $request->validate([
+                'medio_verificacion' => 'required|string',
+            ]);
             $productoServicioTecnologico = new ProductoServicioTecnologico();
             $productoServicioTecnologico->producto()->associate($producto->id);
             $productoServicioTecnologico->medio_verificacion = $request->medio_verificacion;
@@ -162,14 +174,26 @@ class ProductoController extends Controller
         $producto->resultado()->associate($request->resultado_id);
 
         if ($proyecto->idi()->exists()) {
+            $request->validate([
+                'medio_verificacion'            => 'required|string',
+                'trl'                           => 'required|integer|between:1,9',
+                'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
+            ]);
             $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
         }
 
         if ($proyecto->taTp()->exists()) {
+            $request->validate([
+                'medio_verificacion' => 'required|string',
+                'valor_proyectado'   => 'required|integer|between:1,100',
+            ]);
             $producto->productoTaTp()->update(['valor_proyectado' => $request->valor_proyectado, 'medio_verificacion' => $request->medio_verificacion]);
         }
 
         if ($proyecto->servicioTecnologico()->exists()) {
+            $request->validate([
+                'medio_verificacion' => 'required|string',
+            ]);
             $producto->productoServicioTecnologico()->update(['medio_verificacion' => $request->medio_verificacion]);
         }
 

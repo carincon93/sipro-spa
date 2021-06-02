@@ -25,7 +25,7 @@ class ImpactoRequest extends FormRequest
     {
         return [
             'descripcion'   => ['required', 'max:1200', 'string'],
-            'tipo'          => ['required', 'digits_between:1,4'],
+            'tipo'          => ['required', 'integer', 'between:1,4'],
         ];
     }
 
@@ -36,7 +36,7 @@ class ImpactoRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->tipo) ) {
+        if (is_array($this->tipo)) {
             $this->merge([
                 'tipo' => $this->tipo['value'],
             ]);

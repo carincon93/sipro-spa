@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\PresupuestoValidationTrait;
 use App\Models\ServicioEdicionInfo;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class ProyectoPresupuestoController extends Controller
@@ -81,7 +82,7 @@ class ProyectoPresupuestoController extends Controller
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
         if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
-            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
+            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
         }
 
         $proyectoPresupuesto = new ProyectoPresupuesto();
@@ -95,6 +96,14 @@ class ProyectoPresupuestoController extends Controller
         $proyectoPresupuesto->save();
 
         if ($request->codigo_uso_presupuestal == '2010100600203101') {
+            $request->validate([
+                'tipo_licencia'             => 'required|integer',
+                'tipo_licencia'             => 'required|integer',
+                'tipo_software'             => 'required|integer',
+                'fecha_inicio'              => 'required|date|date_format:Y-m-d|before:fecha_finalizacion',
+                'fecha_finalizacion'        => 'required|date|date_format:Y-m-d|after:fecha_inicio',
+            ]);
+
             $softwareInfo = new SoftwareInfo();
             $softwareInfo->tipo_licencia        = $request->tipo_licencia;
             $softwareInfo->tipo_software        = $request->tipo_software;
@@ -103,6 +112,10 @@ class ProyectoPresupuestoController extends Controller
 
             $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
         } else if ($request->codigo_uso_presupuestal == '2020200800901') {
+            $request->validate([
+                'servicio_edicion_info' => 'required|integer',
+            ]);
+
             $servicioEdicionInfo = new ServicioEdicionInfo();
             $servicioEdicionInfo->info = $request->servicio_edicion_info;
 
@@ -162,7 +175,7 @@ class ProyectoPresupuestoController extends Controller
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
         // Validaciones
         if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
-            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.000.000");
+            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
         }
 
         if ($convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado == false) {
@@ -192,6 +205,14 @@ class ProyectoPresupuestoController extends Controller
 
         $softwareInfo = SoftwareInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
         if ($request->codigo_uso_presupuestal == '2010100600203101') {
+            $request->validate([
+                'tipo_licencia'             => 'required|integer',
+                'tipo_licencia'             => 'required|integer',
+                'tipo_software'             => 'required|integer',
+                'fecha_inicio'              => 'required|date|date_format:Y-m-d|before:fecha_finalizacion',
+                'fecha_finalizacion'        => 'required|date|date_format:Y-m-d|after:fecha_inicio',
+            ]);
+
             $proyectoPresupuesto->softwareInfo()->updateOrCreate(
                 ['id' => $softwareInfo ? $softwareInfo->id : null],
                 [
@@ -207,6 +228,10 @@ class ProyectoPresupuestoController extends Controller
 
         $servicioEdicionInfo = ServicioEdicionInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
         if ($request->codigo_uso_presupuestal == '2020200800901') {
+            $request->validate([
+                'servicio_edicion_info' => 'required|integer',
+            ]);
+
             $proyectoPresupuesto->servicioEdicionInfo()->updateOrCreate(
                 ['id' => $servicioEdicionInfo ? $servicioEdicionInfo->id : null],
                 [

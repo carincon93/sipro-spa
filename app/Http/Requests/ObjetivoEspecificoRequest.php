@@ -25,7 +25,7 @@ class ObjetivoEspecificoRequest extends FormRequest
     {
         return [
             'descripcion'   => ['required', 'max:1200', 'string'],
-            'numero'        => ['required', 'integer', 'digits_between:1,4'],
+            'numero'        => ['required', 'integer', 'between:1,4'],
         ];
     }
 }

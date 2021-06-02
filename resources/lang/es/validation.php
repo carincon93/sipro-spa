@@ -197,6 +197,7 @@ return [
 		'trl'                   				=> 'TRL',
 		'nit'                   				=> 'NIT',
 		'convocatoria_presupuesto_id' 			=> 'uso presupuestal',
+		'subtipologia_minciencias_id' 			=> 'subtipología Minciencias',
 		'linea_investigacion_id'                => 'línea de investigación',
 		'disciplina_subarea_conocimiento_id'    => 'disciplina de la subárea de conocimiento',
 		'tematica_estrategica_id'               => 'temáticas estratégicas SENA',
