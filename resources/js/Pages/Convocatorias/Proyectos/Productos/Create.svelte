@@ -82,13 +82,13 @@
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_inicio" value="Del" />
                             <div class="ml-4">
-                                <Input id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$form.fecha_inicio} required />
+                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_finalizacion" value="hasta" />
                             <div class="ml-4">
-                                <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$form.fecha_finalizacion} required />
+                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -126,13 +126,11 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required labelFor="trl" value="TRL" />
-                        <Input id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
+                        <Input label="TRL" id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
                     </div>
                 {:else if proyecto.ta_tp}
                     <div class="mt-4">
-                        <Label required labelFor="valor_proyectado" value="Valor proyectado" />
-                        <Input id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
+                        <Input label="Valor proyectado" id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 

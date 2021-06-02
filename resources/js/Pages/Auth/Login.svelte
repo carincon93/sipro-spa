@@ -9,8 +9,6 @@
     import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
     import LoadingButton from '@/Components/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
@@ -53,13 +51,11 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} required autocomplete="email" />
-        <InputError message={errors.email} />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} error={errors.email} required autocomplete="email" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} required autocomplete="current-password" />
-        <InputError message={errors.password} />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="block mt-4">
@@ -81,7 +77,7 @@
 </form>
 
 <p class="text-xs mt-6">
-    Si aún no tiene cuenta puede crear una dilienciando el siguiente <a href={route('register')} class="text-indigo-500">formulario</a>
+    Si aún no tiene cuenta puede crear una dilienciando el siguiente <a use:inertia href={route('register')} class="text-indigo-500">formulario</a>
 </p>
 
 <div class="flex mt-20">

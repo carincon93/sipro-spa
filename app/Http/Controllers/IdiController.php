@@ -42,7 +42,7 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto-idi');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria' => $convocatoria->only('id')
+            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos')
         ]);
     }
 
@@ -129,7 +129,7 @@ class IdiController extends Controller
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
-            'convocatoria'                      => $convocatoria->only('id'),
+            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'idi'                               => $idi,
             'mesasSectorialesRelacionadas'      => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnologicasRelacionadas'    => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),

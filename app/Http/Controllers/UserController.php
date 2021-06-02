@@ -64,6 +64,7 @@ class UserController extends Controller
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
         $user->tipo_participacion   = $request->tipo_participacion;
+        $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();
@@ -121,6 +122,7 @@ class UserController extends Controller
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
         $user->tipo_participacion   = $request->tipo_participacion;
+        $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();

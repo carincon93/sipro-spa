@@ -34,7 +34,8 @@ class User extends Authenticatable
         'numero_celular',
         'habilitado',
         'tipo_participacion',
-        'centro_formacion_id'
+        'centro_formacion_id',
+        'autorizacion_datos'
     ];
 
     /**

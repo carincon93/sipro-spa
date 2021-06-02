@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class RegisteredUserController extends Controller
@@ -20,7 +23,11 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register', [
+            'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->get(),
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+        ]);
     }
 
     /**
@@ -31,19 +38,22 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(UserRegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
-
         Auth::login($user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'nombre'                => $request->nombre,
+            'email'                 => $request->email,
+            'password'              => Hash::make($request->password),
+            'tipo_documento'        => $request->tipo_documento,
+            'numero_documento'      => $request->numero_documento,
+            'numero_celular'        => $request->numero_celular,
+            'habilitado'            => $request->habilitado,
+            'tipo_participacion'    => $request->tipo_participacion,
+            'autorizacion_datos'    => $request->autorizacion_datos,
+            'centro_formacion_id'   => $request->centro_formacion_id
         ]));
+
+        $user->syncRoles($request->role_id);
 
         event(new Registered($user));
 

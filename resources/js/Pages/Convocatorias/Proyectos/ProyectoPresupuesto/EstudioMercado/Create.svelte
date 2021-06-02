@@ -83,8 +83,7 @@
 <form on:submit|preventDefault={submit} id="form-estudio-mercado">
     <fieldset class="p-8">
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
-            <Input id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
+            <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
         </div>
 
         <div class="mt-4">
@@ -95,13 +94,11 @@
         <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="primer_valor" value="Valor (incluido IVA)" />
-            <Input id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
+            <Input label="Valor (incluido IVA)" id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="primer_empresa" value="Nombre de la empresa" />
-            <Input id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
+            <Input label="Nombre de la empresa" id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
         </div>
 
         <div class="mt-4">
@@ -112,13 +109,11 @@
         <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="segundo_valor" value="Valor (incluido IVA)" />
-            <Input id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
+            <Input label="Valor (incluido IVA)" id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="segunda_empresa" value="Nombre de la empresa" />
-            <Input id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
+            <Input label="Nombre de la empresa" id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
         </div>
 
         <div class="mt-4">
@@ -136,13 +131,11 @@
         {#if $form.requiere_tercer_estudio_mercado}
             <h1 class="text-center mt-20 mb-20">Tercer estudio de mercado</h1>
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="tercer_valor" value="Valor (incluido IVA)" />
-                <Input id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
+                <Input label="Valor (incluido IVA)" id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
             </div>
 
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="tercer_empresa" value="Nombre de la empresa" />
-                <Input id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
+                <Input label="Nombre de la empresa" id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
             </div>
 
             <div class="mt-4">

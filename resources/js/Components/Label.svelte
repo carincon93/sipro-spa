@@ -10,9 +10,10 @@
 </script>
 
 {#if value}
-    <label {...props} for={labelFor}
-        >{value}
-        {#if required}<small class="label-required text-red-400">* Campo obligatorio</small>
-        {/if}</label
-    >
+    <label {...props} for={labelFor}>
+        {value}
+        {#if required}
+            <small class="label-required text-red-400">* Campo obligatorio</small>
+        {/if}
+    </label>
 {/if}

@@ -148,6 +148,7 @@ fieldset[disabled] .selectedItem {
 .welcome-wallpaper {
     background-image: url(/images/welcome.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .mdc-notched-outline--notched .mdc-notched-outline__notch {
@@ -165,4 +166,43 @@ fieldset[disabled] .selectedItem {
 
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
     border-color: var(--mdc-theme-error, #d93025);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px white inset !important;
+ box-shadow: 0 0 0 30px white inset !important;
+}
+
+input[type="date"] {
+    border-color: #4f46e5;
+}
+
+.items.selectContainer {
+    height: 56px !important;
+}
+
+.items.selectContainer input {
+    font-size: 1rem !important;
+}
+
+.items .item.hover.svelte-bdnybl:not(.active) {
+    background: #dedcff;
+}
+
+.items .item.active.svelte-bdnybl {
+    background: #4f46e5;
+    color: var(--itemIsActiveColor, #fff);
+}
+
+.selectContainer.focused.svelte-17qb5ew.svelte-17qb5ew {
+    border-color: var(--borderFocusColor, #4f46e5) !important;
+    border-width: 2px;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: #4f46e5;
 }

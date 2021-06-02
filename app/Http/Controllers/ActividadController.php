@@ -45,12 +45,6 @@ class ActividadController extends Controller
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('validar-autor', $proyecto);
-
-        return Inertia::render('Convocatorias/Proyectos/Actividades/Create', [
-            'convocatoria'  => $convocatoria,
-            'proyecto'      => $proyecto,
-            'productos'     => $proyecto->productos
-        ]);
     }
 
     /**
@@ -95,7 +89,7 @@ class ActividadController extends Controller
         $this->authorize('validar-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
-            'convocatoria'                   => $convocatoria,
+            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                       => $proyecto,
             'productos'                      => $proyecto->efectosDirectos()->with('resultado.productos')->get()->pluck('resultado.productos')->flatten(),
             'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),

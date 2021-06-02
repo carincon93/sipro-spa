@@ -92,6 +92,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+/**
+ * Trae los centros de formación
+ */
+Route::get('web-api/centros-formacion', function () {
+    return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
+})->name('web-api.centros-formacion');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
@@ -218,12 +225,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Programas de formación
      * 
-     * Trae los centros de formación
      */
-    Route::get('web-api/centros-formacion', function () {
-        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
-    })->name('web-api.centros-formacion');
-
     Route::resource('programas-formacion', ProgramaFormacionController::class)->parameters(['programas-formacion' => 'programa-formacion'])->except(['show']);
 
     /**

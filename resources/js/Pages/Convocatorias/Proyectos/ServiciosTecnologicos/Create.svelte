@@ -4,7 +4,7 @@
     import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
+    import InputError from '@/Components/InputError'
     import Label from '@/Components/Label'
     import LoadingButton from '@/Components/LoadingButton'
     import DynamicList from '@/Dropdowns/DynamicList'
@@ -95,16 +95,22 @@
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                         <div class="ml-4">
-                            <Input id="fecha_inicio" type="date" class="mt-1 block w-full" error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
+                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
                         </div>
                     </div>
                     <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                         <Label labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                         <div class="ml-4">
-                            <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
+                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                         </div>
                     </div>
                 </div>
+                {#if errors.fecha_inicio || errors.fecha_finalizacion}
+                    <div class="mb-20 flex">
+                        <InputError classes="text-center" message={errors.fecha_inicio} />
+                        <InputError classes="text-center" message={errors.fecha_finalizacion} />
+                    </div>
+                {/if}
             </div>
             <div class="mt-44 grid grid-cols-2">
                 <div>

@@ -42,7 +42,7 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('create', [ServicioTecnologico::class]);
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'   => $convocatoria,
+            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'mesasTecnicas'  => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
@@ -137,7 +137,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->load('temaPriorizado.sectorProductivo', 'temaPriorizado.mesaTecnica');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'          => $convocatoria,
+            'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'servicioTecnologico'   => $servicioTecnologico,
             'mesasTecnicas'         => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);

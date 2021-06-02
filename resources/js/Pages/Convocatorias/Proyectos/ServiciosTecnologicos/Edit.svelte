@@ -120,18 +120,18 @@
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                         <div class="ml-4">
-                            <Input id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$form.fecha_inicio} required />
+                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} bind:value={$form.fecha_inicio} required />
                         </div>
                     </div>
                     <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                         <Label required labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                         <div class="ml-4">
-                            <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$form.fecha_finalizacion} required />
+                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} bind:value={$form.fecha_finalizacion} required />
                         </div>
                     </div>
                 </div>
                 {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                    <div class="mb-20">
+                    <div class="mb-20 flex">
                         <InputError classes="text-center" message={errors.fecha_inicio} />
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
                     </div>
@@ -430,8 +430,7 @@
             <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
-                <Label labelFor="password" class="mb-6" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." />
-                <Input id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
+                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">

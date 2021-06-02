@@ -40,7 +40,7 @@ class TaTpController extends Controller
         $this->authorize('create', [TaTp::class]);
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
         ]);
     }
@@ -114,7 +114,7 @@ class TaTpController extends Controller
         $tatp->precio_proyecto           = $tatp->proyecto->precioProyecto;
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Edit', [
-            'convocatoria'                      => $convocatoria->only('id'),
+            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tatp'                              => $tatp,
             'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id : null,
             'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->id : null,

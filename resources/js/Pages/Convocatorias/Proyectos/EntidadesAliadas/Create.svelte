@@ -115,8 +115,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nit" value="NIT" />
-                    <Input id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
+                    <Input label="NIT" id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
                 </div>
 
                 {#if proyecto.idi}
@@ -142,13 +141,11 @@
                         </div>
 
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="codigo_gruplac" value="Código del GrupLAC" />
-                            <Input id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                            <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
 
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace del GrupLAC" />
-                            <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                            <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
                     {/if}
                 {:else}
@@ -159,8 +156,7 @@
                 {/if}
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="recursos_especie" value="Recursos en especie entidad aliada ($COP)" />
-                    <Input id="recursos_especie" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
+                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                 </div>
 
                 <div class="mt-4">
@@ -169,8 +165,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="recursos_dinero" value="Recursos en dinero entidad aliada ($COP)" />
-                    <Input id="recursos_dinero" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
                 </div>
 
                 <div class="mt-4">

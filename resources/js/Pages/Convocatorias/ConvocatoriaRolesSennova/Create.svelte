@@ -76,13 +76,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="asignacion_mensual" value="Asignación mensual" />
-                    <Input id="asignacion_mensual" type="number" min="0" class="mt-1 block w-full" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
+                    <Input label="Asignación mensual" id="asignacion_mensual" type="number" min="0" class="mt-1 block w-full" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="experiencia" value="Número de meses de experiencia requerida" />
-                    <Input id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
+                    <Input label="Número de meses de experiencia requerida" id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />

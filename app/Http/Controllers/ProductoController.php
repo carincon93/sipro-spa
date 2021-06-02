@@ -52,7 +52,7 @@ class ProductoController extends Controller
         $proyecto->taTp;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
-            'convocatoria'      => $convocatoria,
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
                 $query->where('descripcion', '!=', null);
@@ -147,7 +147,7 @@ class ProductoController extends Controller
         $producto->productoServicioTecnologico;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
             'producto'          => $producto,
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {

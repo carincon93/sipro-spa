@@ -3,6 +3,9 @@
 
     export let loading = false
     export let variant = 'raised'
+    export let disabled = true
+
+    $: disabled ? (loading = false) : (loading = true)
 
     $: props = {
         ...$$restProps,
@@ -11,7 +14,7 @@
 </script>
 
 <Button {...props} disabled={loading} action={null} {variant}>
-    {#if loading}
+    {#if loading && disabled}
         <div class="btn-spinner mr-2" />
     {/if}
 
