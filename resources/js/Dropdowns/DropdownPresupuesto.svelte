@@ -127,6 +127,13 @@
 {/if}
 
 <style>
+    :global(.presupuesto-info) {
+        border-radius: 4px;
+        border: 1px solid #dbdbdb;
+        height: 56px;
+        padding: 0 10px;
+    }
+
     :global(.presupuesto-info .listItem) {
         border-bottom: 1px solid #ccc;
     }

@@ -85,13 +85,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Describa el bien o servicio a adquirir. Sea específico" />
-                    <Textarea maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Describa el bien o servicio a adquirir. Sea específico" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="justificacion" value="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" />
-                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                    <Textarea label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
 
                 {#if !showQtyInput}
@@ -127,12 +125,12 @@
                     </div>
 
                     <div class="mt-8">
-                        <p>Periodo de uso</p>
+                        <Label required class="mb-4" value="Periodo de uso" />
                         <div class="mt-4">
-                            <Input label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1" bind:value={$form.fecha_inicio} required />
+                            <input label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1 p-4" bind:value={$form.fecha_inicio} required />
                         </div>
                         <div class="mt-4">
-                            <Input label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1" bind:value={$form.fecha_finalizacion} />
+                            <input label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1 p-4" bind:value={$form.fecha_finalizacion} />
                         </div>
                     </div>
                     {#if errors.fecha_inicio || errors.fecha_finalizacion}
@@ -155,3 +153,12 @@
         </form>
     </div>
 </AuthenticatedLayout>
+
+<style>
+    :global(#tipo_licencia, #tipo_software) {
+        border-radius: 4px;
+        border: 1px solid #dbdbdb;
+        height: 56px;
+        padding: 0 10px;
+    }
+</style>

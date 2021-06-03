@@ -186,11 +186,11 @@
 
 <div class="bg-indigo-100 py-4">
     <h1 class="text-4xl text-center">Participantes</h1>
-    <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de participantes por número de documento o por el correo electrónico institucional</p>
+    <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <div class="p-8">
             <div class="mt-4 flex flex-row">
-                <Input id="search_participante" type="search" placeholder="Escriba el número de documento o el correo electrónico instiucional" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} minlength="4" autocomplete="off" required />
+                <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} minlength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </div>
@@ -354,7 +354,7 @@
 
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formParticipante.es_autor} required>
+                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 pg-4" bind:value={$formParticipante.es_autor} required>
                         <option value="1" selected={$formParticipante.es_autor == 1 ? true : false}>Si</option>
                         <option value="0" selected={$formParticipante.es_autor == 0 ? true : false}>No</option>
                     </select>
@@ -430,7 +430,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formNuevoParticipante.es_autor} required>
+                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$formNuevoParticipante.es_autor} required>
                         <option value="">Seleccione una opción</option>
                         <option value="1" selected={$formNuevoParticipante.es_autor == 1 ? true : false}>Si</option>
                         <option value="0" selected={$formNuevoParticipante.es_autor == 0 ? true : false}>No</option>
@@ -452,6 +452,6 @@
 
 <style>
     :global(#nuevo-participante-dialog .mdc-dialog__surface) {
-        max-width: 750px;
+        max-width: 1050px;
     }
 </style>

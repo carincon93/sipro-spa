@@ -182,7 +182,8 @@ input:-webkit-autofill:active
 }
 
 input[type="date"] {
-    border-color: #4f46e5;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
 }
 
 .items.selectContainer {
