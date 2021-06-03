@@ -85,7 +85,7 @@
                     class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
                     value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué?, ¿Cómo?, ¿Cuándo?, ¿Dónde?, ¿Con quién? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto."
                 />
-                <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -150,7 +150,7 @@
                     <Label class="mb-4" labelFor="titulo_proyecto_articulado" value="Título del proyecto de la línea programática con la que se realiza articulación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
+                    <Textarea maxlength="40000" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
                 </div>
             </div>
 

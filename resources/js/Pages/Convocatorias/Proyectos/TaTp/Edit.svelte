@@ -225,7 +225,7 @@
                     <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -234,7 +234,7 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
                 </div>
             </div>
 
@@ -246,7 +246,7 @@
                     />
                 </div>
                 <div>
-                    <Textarea rows="4" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
@@ -255,7 +255,7 @@
                     <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
+                    <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
                 </div>
             </div>
 
@@ -264,7 +264,7 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
                 </div>
             </div>
 
@@ -273,7 +273,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificacion y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
                 </div>
             </div>
 
@@ -283,7 +283,7 @@
                     <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                 </div>
             </div>
 
@@ -293,7 +293,7 @@
                     <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
+                    <Textarea maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
                 </div>
             </div>
 
@@ -302,7 +302,7 @@
                     <Label required class="mb-4" labelFor="metodologia_local" value="Descripcion de la metodología aplicada a nivel local" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="metodologia_local" error={errors.metodologia_local} bind:value={$form.metodologia_local} required />
+                    <Textarea maxlength="40000" id="metodologia_local" error={errors.metodologia_local} bind:value={$form.metodologia_local} required />
                 </div>
             </div>
 
@@ -320,7 +320,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -343,7 +343,7 @@
                     <InfoMessage message="Identificar los efectos que tiene el desarrollo del proyecto de ya sea positivos o negativos.  Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                    <Textarea maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
                 </div>
             </div>
 
@@ -352,7 +352,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
                 </div>
             </div>
 
@@ -362,7 +362,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
@@ -387,7 +387,7 @@
             <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
-                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
+                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">

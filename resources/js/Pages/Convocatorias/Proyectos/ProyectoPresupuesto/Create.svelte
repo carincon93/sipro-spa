@@ -86,20 +86,20 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="descripcion" value="Describa el bien o servicio a adquirir. Sea específico" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="justificacion" value="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" />
-                    <Textarea rows="4" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
 
                 {#if !showQtyInput}
                     <div class="mt-4">
-                        <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
+                        <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                     </div>
                     <div class="mt-4">
-                        <Input label="Valor" id="valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.valor} error={errors.valor} required />
+                        <Input label="Valor" id="valor" type="number" input$min="1" class="mt-1" bind:value={$form.valor} error={errors.valor} required />
                     </div>
                 {/if}
 
@@ -129,10 +129,10 @@
                     <div class="mt-8">
                         <p>Periodo de uso</p>
                         <div class="mt-4">
-                            <Input label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$form.fecha_inicio} required />
+                            <Input label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1" bind:value={$form.fecha_inicio} required />
                         </div>
                         <div class="mt-4">
-                            <Input label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$form.fecha_finalizacion} />
+                            <Input label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1" bind:value={$form.fecha_finalizacion} />
                         </div>
                     </div>
                     {#if errors.fecha_inicio || errors.fecha_finalizacion}

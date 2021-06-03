@@ -602,8 +602,7 @@
                             </div>
                         {/if}
                         <div>
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -616,8 +615,7 @@
                             {causaDirectaObjetivoEspecifico}
                         </p>
                         <div>
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -630,9 +628,9 @@
                             {planteamientoProblema ? planteamientoProblema : 'Sin información registrada'}
                         </p>
                         <div>
-                            <Label class="mb-4" labelFor="objetivo_general" value="Objetivo general" />
-                            <InfoMessage message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
-                            <Textarea rows="4" id="objetivo_general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
+                            <InfoMessage class="mb-2" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
+                            <Textarea label="Descripción" maxlength="40000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
@@ -652,13 +650,12 @@
                         </p>
 
                         <div class="mb-20">
-                            <Label labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" maxlength="200" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                         </div>
 
                         <div class="mb-20">
-                            <Label required labelFor="tipo" value="Tipo" />
-                            <Select id="tipo" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                            <Label required labelFor="tipo-resultado" value="Tipo" />
+                            <Select id="tipo-resultado" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                         </div>
                     </fieldset>
                 </form>
@@ -671,12 +668,11 @@
                             {impactoEfectoIndirecto}
                         </p>
                         <div class="mt-4">
-                            <Label labelFor="tipo" value="Tipo" />
-                            <Select id="tipo" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                            <Label labelFor="tipo-impacto" value="Tipo" />
+                            <Select id="tipo-impacto" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                         </div>
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>

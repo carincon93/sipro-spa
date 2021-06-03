@@ -22,10 +22,10 @@
     export let causasDirectas
 
     let formId
+    let dialogTitle
+    let codigo
     let sending = false
     let dialogOpen = false
-    let dialogTitle
-    let code
 
     $: $title = 'Árbol de problemas'
 
@@ -55,7 +55,7 @@
     let showEfectoIndirectoForm = false
     function showEfectoindirectoDialog(efectoIndirecto, efectoDirectoId) {
         reset()
-        code = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
+        codigo = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
         dialogTitle = 'Efecto indirecto'
         formId = 'efecto-indirecto'
         showEfectoIndirectoForm = true
@@ -105,7 +105,7 @@
     let showEfectoDirectoForm = false
     function showEfectoDirectoDialog(efectoDirecto) {
         reset()
-        code = 'EFE-' + efectoDirecto.id
+        codigo = 'EFE-' + efectoDirecto.id
         dialogTitle = 'Efecto directo'
         formId = 'efecto-directo'
         showEfectoDirectoForm = true
@@ -184,7 +184,7 @@
     let showCausaDirectaForm = false
     function showCausaDirectaDialog(causaDirecta) {
         reset()
-        code = 'CAU-' + causaDirecta.id
+        codigo = 'CAU-' + causaDirecta.id
         dialogTitle = 'Causa directa'
         formId = 'causa-directa'
         showCausaDirectaForm = true
@@ -228,7 +228,7 @@
     let showCausaIndirectaForm = false
     function showCausaIndirectaDialog(causaIndirecta, causaDirectaId) {
         reset()
-        code = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
+        codigo = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
         dialogTitle = 'Causa indirecta'
         formId = 'causa-indirecta'
         showCausaIndirectaForm = true
@@ -273,7 +273,7 @@
         showCausaDirectaForm = false
         showCausaIndirectaForm = false
         dialogTitle = ''
-        code = ''
+        codigo = ''
         formId = ''
 
         $formCausaIndirecta.reset()
@@ -501,9 +501,9 @@
             <div class="text-primary">
                 {dialogTitle}
             </div>
-            {#if code}
+            {#if codigo}
                 <small class="block text-primary-light">
-                    Código: {code}
+                    Código: {codigo}
                 </small>
             {/if}
         </div>
@@ -512,8 +512,7 @@
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
                     <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -521,8 +520,7 @@
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
                     <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -530,8 +528,7 @@
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
                     <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -542,16 +539,17 @@
                             <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
 
                             <InfoMessage
+                                class="mb-2"
                                 message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                             />
 
-                            <Textarea rows="4" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
+                            <Textarea label="Descripción" maxlength="40000" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
                         </div>
 
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                            <InfoMessage message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
-                            <Textarea rows="4" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formPlanteamientoProblema.justificacion_problema} required />
+                            <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+                            <Textarea label="Descripción" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formPlanteamientoProblema.justificacion_problema} required />
                         </div>
                     </fieldset>
                 </form>
@@ -559,8 +557,7 @@
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
                     <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
+                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>

@@ -1,30 +1,37 @@
 <script>
-    import { onMount } from 'svelte'
     import fitTextarea from 'fit-textarea'
     import InputError from '@/Components/InputError'
+    import Textarea from '@smui/textfield'
+    import CharacterCounter from '@smui/textfield/character-counter/index'
+    import { onMount } from 'svelte'
 
+    export let error
     export let id
     export let value
-    export let error
-    export let classes = ''
-    export let rows = 10
+    export let label
+    export let maxlength = 2000
 
-    let textarea
+    let container
 
     $: props = {
         ...$$restProps,
+        class: 'w-full block bg-white',
     }
-
-    onMount(() => {
-        fitTextarea.watch(textarea)
-    })
 
     function update(event) {
         value = event.target.value
     }
+
+    onMount(() => {
+        fitTextarea.watch(container.querySelector('textarea'))
+    })
 </script>
 
-<textarea {...props} {rows} class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 {classes}{error ? ' ring ring-opacity-50 border-red-200 ring-red-200 focus:border-red-200 focus:ring-red-200' : 'focus:border-indigo-200 focus:ring-indigo-200'}" bind:this={textarea} {id} {value} on:input={update} />
+<div bind:this={container}>
+    <Textarea textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update}>
+        <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
+    </Textarea>
+</div>
 
 {#if error}
     <InputError message={error} />

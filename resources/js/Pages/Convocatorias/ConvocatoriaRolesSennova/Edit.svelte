@@ -94,11 +94,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Asignación mensual" id="asignacion_mensual" type="number" min="0" class="mt-1 block w-full" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
+                    <Input label="Asignación mensual" id="asignacion_mensual" type="number" min="0" class="mt-1" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de meses de experiencia requerida" id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
+                    <Input label="Número de meses de experiencia requerida" id="experiencia" type="number" min="0" class="mt-1" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
@@ -112,12 +112,12 @@
 
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="perfil" value="Perfil" />
-                    <Textarea rows="4" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
+                    <Textarea maxlength="40000" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
                 </div>
 
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
-                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
+                    <Textarea maxlength="40000" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

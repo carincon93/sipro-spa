@@ -168,6 +168,10 @@ fieldset[disabled] .selectedItem {
     border-color: var(--mdc-theme-error, #d93025);
 }
 
+.mdc-text-field--focused.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: var(--mdc-theme-error, #d93025);
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 

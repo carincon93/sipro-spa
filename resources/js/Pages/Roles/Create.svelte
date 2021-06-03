@@ -68,12 +68,12 @@
         <fieldset disabled={isSuperAdmin ? undefined : true}>
             <div class="bg-white rounded shadow max-w-3xl p-8">
                 <div class="mt-4">
-                    <Input label="Nombre" id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
+                    <Input label="Nombre" id="name" type="text" class="mt-1" bind:value={$form.name} error={errors.name} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="description" value="Descripción" />
-                    <Textarea rows="4" id="description" bind:value={$form.description} error={errors.description} required />
+                    <Textarea maxlength="40000" id="description" bind:value={$form.description} error={errors.description} required />
                 </div>
             </div>
 

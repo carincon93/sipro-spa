@@ -341,10 +341,10 @@
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                 </div>
                 <div class="mt-4">
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
 
                 <div class="mt-4">
@@ -384,11 +384,11 @@
         <form on:submit|preventDefault={submitRegister} id={formNuevoParticipanteId}>
             <fieldset>
                 <div class="mt-4">
-                    <Input label="Nombre completo" id="nombre_nuevo_participante" type="text" class="mt-1 block w-full" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
+                    <Input label="Nombre completo" id="nombre_nuevo_participante" type="text" class="mt-1" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Correo electrónico" id="email_nuevo_participante" type="email" class="mt-1 block w-full" bind:value={$formNuevoParticipante.email} error={errors.email} required />
+                    <Input label="Correo electrónico" id="email_nuevo_participante" type="email" class="mt-1" bind:value={$formNuevoParticipante.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
@@ -397,11 +397,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" min="0" class="mt-1 block w-full" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" min="0" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" min="0" class="mt-1 block w-full" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" min="0" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
                 </div>
 
                 <div class="mt-4">
@@ -421,11 +421,11 @@
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" step="0.5" min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas_nuevo_participante" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas_nuevo_participante" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
                 </div>
 
                 <div class="mt-4">

@@ -46,19 +46,19 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label="Nombre completo" id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required autocomplete="nombre" />
+        <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required autocomplete="nombre" />
     </div>
 
     <div class="mt-4">
-        <Input label="Correo electrónico" id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required autocomplete="username" />
+        <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required autocomplete="username" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={$form.password} error={errors.password} required autocomplete="new-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="new-password" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Confirm Password')} id="password_confirmation" type="password" class="mt-1 block w-full" bind:value={$form.password_confirmation} error={errors.password_confirmation} required autocomplete="new-password" />
+        <Input label={$_('Confirm Password')} id="password_confirmation" type="password" class="mt-1" bind:value={$form.password_confirmation} error={errors.password_confirmation} required autocomplete="new-password" />
     </div>
 
     <div class="mt-4">
@@ -67,11 +67,11 @@
     </div>
 
     <div class="mt-4">
-        <Input label="Número de documento" id="numero_documento" type="number" input$min="0" input$max="3900000000" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+        <Input label="Número de documento" id="numero_documento" type="number" input$min="0" input$max="3900000000" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
     </div>
 
     <div class="mt-4">
-        <Input label="Número de celular" id="numero_celular" type="number" input$min="0" input$max="3900000000" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+        <Input label="Número de celular" id="numero_celular" type="number" input$min="0" input$max="3900000000" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
     </div>
 
     <div class="mt-4">

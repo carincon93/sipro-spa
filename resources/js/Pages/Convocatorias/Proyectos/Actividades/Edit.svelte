@@ -107,7 +107,7 @@
 
                 <div class="mt-20">
                     <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <h6 class="mt-20 mb-12 text-2xl">Productos</h6>

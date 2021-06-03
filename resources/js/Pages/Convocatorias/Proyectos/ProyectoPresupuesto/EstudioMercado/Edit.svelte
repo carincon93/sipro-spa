@@ -114,44 +114,44 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
+                    <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-                    <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
+                    <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id])}>Descargar ficha técnica</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
 
                 <div class="mt-4">
-                    <Input label="Valor (incluido IVA)" id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
+                    <Input label="Valor (incluido IVA)" id="primer_valor" type="number" input$min="1" class="mt-1" bind:value={$form.primer_valor} error={errors.primer_valor} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Nombre de la empresa" id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
+                    <Input label="Nombre de la empresa" id="primer_empresa" type="text" class="mt-1" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
-                    <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
+                    <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[0].id])}>Descargar soporte</a>
                 </div>
 
                 <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
 
                 <div class="mt-4">
-                    <Input label="Valor (incluido IVA)" id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
+                    <Input label="Valor (incluido IVA)" id="segundo_valor" type="number" input$min="1" class="mt-1" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Nombre de la empresa" id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
+                    <Input label="Nombre de la empresa" id="segunda_empresa" type="text" class="mt-1" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
-                    <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
+                    <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[1].id])}>Descargar soporte</a>
                 </div>
 
@@ -165,16 +165,16 @@
                 {#if $form.requiere_tercer_estudio_mercado}
                     <h1 class="text-center mt-20 mb-20">Tercer estudio de mercado</h1>
                     <div class="mt-4">
-                        <Input label="Valor (incluido IVA)" id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
+                        <Input label="Valor (incluido IVA)" id="tercer_valor" type="number" input$min="0" class="mt-1" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
                     </div>
 
                     <div class="mt-4">
-                        <Input label="Nombre de la empresa" id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
+                        <Input label="Nombre de la empresa" id="tercer_empresa" type="text" class="mt-1" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
                     </div>
 
                     <div class="mt-4">
                         <Label labelFor="tercer_archivo" value="Soporte" required />
-                        <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
+                        <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
                         {#if proyectoLoteEstudioMercado.estudios_mercado[2] != undefined}
                             <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[2].id])} required>Descargar soporte</a>
                         {/if}

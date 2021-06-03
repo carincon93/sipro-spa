@@ -96,11 +96,11 @@
         <div class="bg-white rounded shadow max-w-3xl">
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Nombre completo" id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Correo electrónico" id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required />
+                    <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
@@ -109,11 +109,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" min="0" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" min="0" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
                 <div class="mt-4">
                     <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />

@@ -111,7 +111,7 @@
         <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -176,7 +176,7 @@
                     <Label class="mb-4" labelFor="titulo_proyecto_articulado" value="Título del proyecto de la línea programática con la que se realiza articulación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
+                    <Textarea maxlength="40000" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
                 </div>
             </div>
 
@@ -257,7 +257,7 @@
                 </div>
                 <div>
                     <InfoMessage message="Video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" />
-                    <Input id="video" type="url" class="mt-1 block w-full" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
+                    <Input id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
                 </div>
             </div>
 
@@ -272,7 +272,7 @@
 
                     {#if requiereJustificacionIndustria4}
                         <InfoMessage message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea rows="4" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+                        <Textarea maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -287,7 +287,7 @@
                     </div>
                     {#if requiereJustificacionEconomiaNaranja}
                         <InfoMessage message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
-                        <Textarea rows="4" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
+                        <Textarea maxlength="40000" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -302,7 +302,7 @@
                     </div>
                     {#if requiereJustificacionPoliticaDiscapacidad}
                         <InfoMessage message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
-                        <Textarea rows="4" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
+                        <Textarea maxlength="40000" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -313,7 +313,7 @@
                     <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -325,7 +325,7 @@
                     />
                 </div>
                 <div>
-                    <Textarea rows="4" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
@@ -337,7 +337,7 @@
                     />
                 </div>
                 <div>
-                    <Textarea rows="4" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
+                    <Textarea maxlength="40000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
                 </div>
             </div>
 
@@ -347,7 +347,7 @@
                     <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
+                    <Textarea maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
                 </div>
             </div>
 
@@ -357,7 +357,7 @@
                     <InfoMessage message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                    <Textarea maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
                 </div>
             </div>
 
@@ -367,7 +367,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
 
@@ -376,7 +376,7 @@
                     <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
                 </div>
                 <div>
-                    <Input id="numero_aprendices" type="number" min="0" max="9999" class="mt-1 block w-full" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
+                    <Input id="numero_aprendices" type="number" input$tmin="0" input$max="9999" class="mt-1" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
                 </div>
             </div>
 
@@ -385,7 +385,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
                 </div>
             </div>
 
@@ -405,7 +405,7 @@
                     <Label required class="mb-4" labelFor="especificaciones_area" value="Relacione las especificaciones del área donde se desarrollan las actividades de servicios tecnológicos en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="especificaciones_area" error={errors.especificaciones_area} bind:value={$form.especificaciones_area} required />
+                    <Textarea maxlength="40000" id="especificaciones_area" error={errors.especificaciones_area} bind:value={$form.especificaciones_area} required />
                 </div>
             </div>
         </fieldset>
@@ -430,7 +430,7 @@
             <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
-                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
+                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">

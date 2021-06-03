@@ -37,7 +37,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} error={errors.email} name="email" required autocomplete="email" />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={form.email} error={errors.email} name="email" required autocomplete="email" />
     </div>
 
     <div class="flex items-center justify-end mt-4">

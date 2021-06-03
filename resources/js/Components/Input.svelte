@@ -16,7 +16,7 @@
 
     $: props = {
         ...$$restProps,
-        class: 'w-full',
+        class: 'w-full block bg-white',
     }
 
     function update(event) {

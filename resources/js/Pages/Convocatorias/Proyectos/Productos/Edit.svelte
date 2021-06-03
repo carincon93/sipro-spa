@@ -115,7 +115,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
@@ -129,7 +129,7 @@
                     {:else}
                         <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
                     {/if}
-                    <Textarea rows="4" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}
@@ -139,11 +139,11 @@
                     </div>
 
                     <div class="mt-4">
-                        <Input label="TRL" id="trl" type="number" max="9" min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
+                        <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="mt-2" error={errors.trl} bind:value={$form.trl} required />
                     </div>
                 {:else if proyecto.ta_tp}
                     <div class="mt-4">
-                        <Input label="Valor proyectado" id="valor_proyectado" type="number" min="0" max="100" class="mt-1 block w-full" bind:value={$form.valor_proyectado} required />
+                        <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 
@@ -152,7 +152,7 @@
                         <Label required labelFor="medio_verificacion" value="Medio de verificación" />
 
                         <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
-                        <Textarea rows="4" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
+                        <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
             </fieldset>

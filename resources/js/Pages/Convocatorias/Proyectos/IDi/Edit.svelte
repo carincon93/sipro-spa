@@ -175,7 +175,7 @@
         <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea rows="4" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea label="Título" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -201,7 +201,6 @@
                     </div>
                 {/if}
             </div>
-
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
@@ -269,8 +268,8 @@
                 <div>
                     <Switch bind:checked={tieneVideo} />
                     {#if tieneVideo}
-                        <InfoMessage message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
-                        <Input id="video" type="url" class="mt-1 block w-full" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
+                        <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
+                        <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -285,8 +284,8 @@
                     </div>
 
                     {#if requiereJustificacionIndustria4}
-                        <InfoMessage message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea rows="4" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+                        <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -300,8 +299,8 @@
                         <Switch bind:checked={requiereJustificacionEconomiaNaranja} />
                     </div>
                     {#if requiereJustificacionEconomiaNaranja}
-                        <InfoMessage message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
-                        <Textarea rows="4" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
+                        <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -315,8 +314,8 @@
                         <Switch bind:checked={requiereJustificacionPoliticaDiscapacidad} />
                     </div>
                     {#if requiereJustificacionPoliticaDiscapacidad}
-                        <InfoMessage message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
-                        <Textarea rows="4" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
+                        <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -325,7 +324,7 @@
 
             <div>
                 <p class="text-center mt-36 mb-8">¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?</p>
-                <InfoMessage message="Nota: Bioprospección se define como la exploración sistemática y sostenible de la biodiversidad para identificar y obtener nuevas fuentes de compuestos químicos, genes, proteínas, microorganismos y otros productos que tienen potencial de ser aprovechados comercialmente" />
+                <InfoMessage class="mb-2" message="Nota: Bioprospección se define como la exploración sistemática y sostenible de la biodiversidad para identificar y obtener nuevas fuentes de compuestos químicos, genes, proteínas, microorganismos y otros productos que tienen potencial de ser aprovechados comercialmente" />
                 <InputError message={errors.muestreo} />
                 <div class="flex mt-20 items-center">
                     <FormField>
@@ -339,7 +338,7 @@
 
                 <!-- Si seleccionan Especies nativas -->
                 {#if $form.muestreo == 1}
-                    <InfoMessage classes="mt-10" message="Ha seleccionado Especies Nativas. Por favor responda las siguientes preguntas:" />
+                    <InfoMessage class="mb-2" classes="mt-10" message="Ha seleccionado Especies Nativas. Por favor responda las siguientes preguntas:" />
                     <div class="flex mb-20">
                         <div class="bg-gray-200 flex-1 p-8">
                             <div class="flex items-center">
@@ -525,60 +524,60 @@
             <div class="mt-40 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA sexta edición." />
+                    <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA sexta edición." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                    <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
-                    <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
+                    <InfoMessage class="mb-2" message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
+                    <Textarea label="Metodología" maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
-                    <InfoMessage message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
+                    <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                    <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea rows="4" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
 
@@ -587,7 +586,7 @@
                     <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
                 </div>
                 <div>
-                    <Input id="numero_aprendices" type="number" min="0" max="9999" class="mt-1 block w-full" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
+                    <Input label="Número de aprendices" id="numero_aprendices" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
                 </div>
             </div>
 
@@ -605,7 +604,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -614,7 +613,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea rows="4" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
                 </div>
             </div>
         </fieldset>
@@ -636,10 +635,10 @@
             Eliminar recurso
         </div>
         <div slot="content">
-            <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
+            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
-                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1 block w-full" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
+                <Input label="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto." id="password" type="password" class="mt-1" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">

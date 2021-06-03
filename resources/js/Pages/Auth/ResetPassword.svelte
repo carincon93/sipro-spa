@@ -9,7 +9,6 @@
     import { _ } from 'svelte-i18n'
     import LoadingButton from '@/Components/LoadingButton'
     import Input from '@/Components/Input'
-    import InputError from '@/Components/InputError'
 
     export let email
     export let token
@@ -31,16 +30,15 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} name="email" error={errors.email} required autocomplete="email" />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={form.email} name="email" error={errors.email} required autocomplete="email" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} name="password" error={errors.password} required autocomplete="new-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={form.password} name="password" error={errors.password} required autocomplete="new-password" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Confirm Password')} id="password_confirmation" type="password" class="mt-1 block w-full" bind:value={form.password_confirmation} name="password_confirmation" required autocomplete="new-password" />
-        <InputError message={errors.password_confirmation} />
+        <Input label={$_('Confirm Password')} id="password_confirmation" type="password" class="mt-1" bind:value={form.password_confirmation} name="password_confirmation" error={errors.password_confirmation} required autocomplete="new-password" />
     </div>
 
     <div class="flex items-center justify-end mt-4">

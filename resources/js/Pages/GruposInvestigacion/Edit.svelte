@@ -83,23 +83,23 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Nombre" id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Acrónimo" id="acronimo" type="text" class="mt-1 block w-full" bind:value={$form.acronimo} error={errors.acronimo} required />
+                    <Input label="Acrónimo" id="acronimo" type="text" class="mt-1" bind:value={$form.acronimo} error={errors.acronimo} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Correo electrónico" id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required />
+                    <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Enlace GrupLAC" id="enlace_gruplac" type="url" class="mt-1 block w-full" bind:value={$form.enlace_gruplac} error={errors.enlace_gruplac} required />
+                    <Input label="Enlace GrupLAC" id="enlace_gruplac" type="url" class="mt-1" bind:value={$form.enlace_gruplac} error={errors.enlace_gruplac} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Código Minciencias" id="codigo_minciencias" type="text" class="mt-1 block w-full" bind:value={$form.codigo_minciencias} error={errors.codigo_minciencias} required />
+                    <Input label="Código Minciencias" id="codigo_minciencias" type="text" class="mt-1" bind:value={$form.codigo_minciencias} error={errors.codigo_minciencias} required />
                 </div>
 
                 <div class="mt-4">

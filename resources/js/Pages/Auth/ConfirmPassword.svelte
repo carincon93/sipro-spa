@@ -29,7 +29,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="flex justify-end mt-4">

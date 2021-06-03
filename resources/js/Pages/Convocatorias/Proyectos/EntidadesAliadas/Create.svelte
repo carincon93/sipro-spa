@@ -101,7 +101,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nombre" value="Nombre de la entidad aliada/Centro de formación" />
-                    <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-4">
@@ -115,7 +115,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="NIT" id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
+                    <Input label="NIT" id="nit" type="text" class="mt-1" bind:value={$form.nit} error={errors.nit} required />
                 </div>
 
                 {#if proyecto.idi}
@@ -126,7 +126,7 @@
                     {#if convenio}
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
-                            <Textarea rows="4" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                            <Textarea maxlength="40000" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                         </div>
                     {/if}
 
@@ -137,56 +137,56 @@
                     {#if grupoInvestigacion}
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
-                            <Textarea rows="4" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                            <Textarea maxlength="40000" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                            <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
+                            <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
                     {/if}
                 {:else}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                        <File id="soporte_convenio" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
+                        <File id="soporte_convenio" type="file" accept="application/pdf" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
                     </div>
                 {/if}
 
                 <div class="mt-4">
-                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
+                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="descripcion_recursos_especie" value="Descripción de los recursos en especie aportados" />
-                    <Textarea rows="4" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                    <Textarea maxlength="40000" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="descripcion_recursos_dinero" value="Descripción de la destinación del dinero aportado" />
-                    <Textarea rows="4" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                    <Textarea maxlength="40000" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                 </div>
 
                 {#if proyecto.idi}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
-                        <Textarea rows="4" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                        <Textarea maxlength="40000" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                     </div>
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                        <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
+                        <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
                     </div>
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
+                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
                     </div>
                 {/if}
 

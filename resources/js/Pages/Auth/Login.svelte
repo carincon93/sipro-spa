@@ -51,11 +51,11 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Email')} id="email" type="email" class="mt-1 block w-full" bind:value={form.email} error={errors.email} required autocomplete="email" />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={form.email} error={errors.email} required autocomplete="email" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1 block w-full" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="block mt-4">

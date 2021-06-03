@@ -60,7 +60,7 @@
     {/if}
     <fieldset disabled={(isSuperAdmin && !sending) || (checkRole(74) && !sending) ? undefined : true}>
         <div>
-            <File id="archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.archivo} error={errors?.archivo} required />
+            <File id="archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>
         <div>
             <LoadingButton loading={sending} class="w-full mt-4" type="submit">

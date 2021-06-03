@@ -73,13 +73,13 @@
                         <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                             <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                             <div class="ml-4">
-                                <Input id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$form.fecha_inicio} required />
+                                <Input id="fecha_inicio" type="date" class="mt-1" bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                             <Label required labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                             <div class="ml-4">
-                                <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$form.fecha_finalizacion} required />
+                                <Input id="fecha_finalizacion" type="date" class="mt-1" bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-4 mb-20">
@@ -110,13 +110,13 @@
                         <div class="mt-4 flex {errors.min_fecha_inicio_proyectos ? '' : 'items-center'}">
                             <Label required labelFor="min_fecha_inicio_proyectos" class={errors.min_fecha_inicio_proyectos ? 'top-3.5 relative' : ''} value="Del" />
                             <div class="ml-4">
-                                <Input id="min_fecha_inicio_proyectos" type="date" class="mt-1 block w-full" bind:value={$form.min_fecha_inicio_proyectos} required />
+                                <input id="min_fecha_inicio_proyectos" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos} required />
                             </div>
                         </div>
                         <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos ? '' : 'items-center'}">
                             <Label required labelFor="max_fecha_finalizacion_proyectos" class={errors.max_fecha_finalizacion_proyectos ? 'top-3.5 relative' : ''} value="hasta" />
                             <div class="ml-4">
-                                <Input id="max_fecha_finalizacion_proyectos" type="date" class="mt-1 block w-full" bind:value={$form.max_fecha_finalizacion_proyectos} required />
+                                <input id="max_fecha_finalizacion_proyectos" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos} required />
                             </div>
                         </div>
                     </div>
