@@ -81,7 +81,7 @@
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <div class="p-8">
             <div class="mt-4 flex flex-row">
-                <Input id="search_semillero_investigacion" type="search" placeholder="Escriba el nombre completo del semillero de investigación" class="mt-1 m-auto block flex-1" bind:value={$form.search_semillero_investigacion} minlength="4" autocomplete="off" required />
+                <Input label="Escriba el nombre completo del semillero de investigación" id="search_semillero_investigacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_semillero_investigacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </div>

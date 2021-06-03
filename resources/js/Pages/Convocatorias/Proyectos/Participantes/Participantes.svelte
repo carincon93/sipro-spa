@@ -186,7 +186,7 @@
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <div class="p-8">
             <div class="mt-4 flex flex-row">
-                <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} minlength="4" autocomplete="off" required />
+                <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </div>

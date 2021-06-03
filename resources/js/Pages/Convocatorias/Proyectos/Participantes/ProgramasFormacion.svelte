@@ -81,7 +81,7 @@
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <div class="p-8">
             <div class="mt-4 flex flex-row">
-                <Input id="search_programa_formacion" type="search" placeholder="Escriba el ID o el nombre completo del programa de formación" class="mt-1 m-auto block flex-1" bind:value={$form.search_programa_formacion} minlength="4" autocomplete="off" required />
+                <Input label="Escriba el ID o el nombre completo del programa de formación" id="search_programa_formacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_programa_formacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </div>
@@ -142,7 +142,7 @@
 
             {#if resultados.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
+                    <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
                 </tr>
             {/if}
         </tbody>
