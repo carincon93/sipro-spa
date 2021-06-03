@@ -118,8 +118,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="nombre" value="Nombre de la entidad aliada/Centro de formación" />
-                        <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                        <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                     </div>
 
                     <div class="mt-4">
@@ -143,8 +142,7 @@
                         </div>
                         {#if $form.tiene_convenio}
                             <div class="mt-4">
-                                <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
-                                <Textarea maxlength="40000" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                                <Textarea label="Descipción del convenio" maxlength="40000" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                             </div>
                         {/if}
 
@@ -154,8 +152,7 @@
                         </div>
                         {#if $form.tiene_grupo_investigacion}
                             <div class="mt-4">
-                                <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
-                                <Textarea maxlength="40000" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                                <Textarea label="Grupo de investigación" maxlength="40000" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                             </div>
 
                             <div class="mt-4">
@@ -178,8 +175,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="descripcion_recursos_especie" value="Descripción de los recursos en especie aportados" />
-                        <Textarea maxlength="40000" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                        <Textarea label="Descripción de los recursos en especie aportados" maxlength="40000" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
                     </div>
 
                     <div class="mt-4">
@@ -187,14 +183,12 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="descripcion_recursos_dinero" value="Descripción de la destinación del dinero aportado" />
-                        <Textarea maxlength="40000" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                        <Textarea label="Descripción de la destinación del dinero aportado" maxlength="40000" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                     </div>
 
                     {#if proyecto.idi}
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
-                            <Textarea maxlength="40000" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                            <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="40000" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                         </div>
 
                         <div class="mt-4">

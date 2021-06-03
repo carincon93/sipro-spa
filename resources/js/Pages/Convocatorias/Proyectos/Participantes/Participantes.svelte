@@ -324,7 +324,7 @@
 </DataTable>
 
 <!-- Dialog -->
-<Dialog bind:open={dialogOpen}>
+<Dialog bind:open={dialogOpen} id="participante">
     <div slot="title">
         <div class="mb-10 text-center">
             <div class="text-primary">
@@ -354,7 +354,7 @@
 
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 pg-4" bind:value={$formParticipante.es_autor} required>
+                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$formParticipante.es_autor} required>
                         <option value="1" selected={$formParticipante.es_autor == 1 ? true : false}>Si</option>
                         <option value="0" selected={$formParticipante.es_autor == 0 ? true : false}>No</option>
                     </select>
@@ -451,7 +451,7 @@
 </Dialog>
 
 <style>
-    :global(#nuevo-participante-dialog .mdc-dialog__surface) {
+    :global(#nuevo-participante-dialog .mdc-dialog__surface, #participante-dialog .mdc-dialog__surface) {
         max-width: 1050px;
     }
 </style>

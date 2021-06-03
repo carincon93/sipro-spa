@@ -111,13 +111,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="perfil" value="Perfil" />
-                    <Textarea maxlength="40000" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
+                    <Textarea label="Perfil" maxlength="40000" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
-                    <Textarea maxlength="40000" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
+                    <Textarea label="Mensaje (Regla de negocio)" maxlength="40000" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

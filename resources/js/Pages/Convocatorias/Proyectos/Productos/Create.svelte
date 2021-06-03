@@ -100,8 +100,7 @@
                 <hr />
 
                 <div class="mt-8">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea label="Nombre" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-4">
@@ -112,11 +111,11 @@
                     <Label required labelFor="indicador" value="Indicador" />
 
                     {#if $form.tatp_servicio_tecnologico == true}
-                        <InfoMessage message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                        <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
                     {:else}
-                        <InfoMessage message="Especifique los medios de verificación para validar los logros del proyecto." />
+                        <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
                     {/if}
-                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    <Textarea label="Descripción" maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}

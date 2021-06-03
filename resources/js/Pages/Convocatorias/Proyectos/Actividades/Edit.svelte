@@ -106,8 +106,7 @@
                 </div>
 
                 <div class="mt-20">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
@@ -123,6 +122,9 @@
                                 <span slot="label">{nombre}</span>
                             </FormField>
                         {/each}
+                        {#if productos.length == 0}
+                            <p class="p-4">Sin información registrada</p>
+                        {/if}
                     </div>
                 </div>
 
@@ -156,6 +158,9 @@
                                 </span>
                             </FormField>
                         {/each}
+                        {#if proyectoPresupuesto.length == 0}
+                            <p class="p-4">Sin información registrada</p>
+                        {/if}
                     </div>
                 </div>
             </fieldset>

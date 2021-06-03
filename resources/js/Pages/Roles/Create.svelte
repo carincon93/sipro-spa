@@ -72,8 +72,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="description" value="Descripción" />
-                    <Textarea maxlength="40000" id="description" bind:value={$form.description} error={errors.description} required />
+                    <Textarea label="Descripción" maxlength="40000" id="description" bind:value={$form.description} error={errors.description} required />
                 </div>
             </div>
 

@@ -181,13 +181,14 @@ input:-webkit-autofill:active
  box-shadow: 0 0 0 30px white inset !important;
 }
 
-input[type="date"] {
+input[type="date"], select {
     border-radius: 4px;
     border: 1px solid #dbdbdb;
 }
 
 .items.selectContainer {
     height: 56px !important;
+    border-radius: 4px;
 }
 
 .items.selectContainer input {
