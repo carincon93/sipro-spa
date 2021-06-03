@@ -33,7 +33,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(authUser, [1, 5])
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({

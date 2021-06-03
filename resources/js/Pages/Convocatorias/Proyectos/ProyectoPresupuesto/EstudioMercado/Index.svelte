@@ -167,7 +167,7 @@
 
         <div slot="actions" class="block flex w-full">
             <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
             {/if}
         </div>
