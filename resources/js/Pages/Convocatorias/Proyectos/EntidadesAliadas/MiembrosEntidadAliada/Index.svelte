@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -22,15 +22,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -40,7 +32,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -58,7 +50,7 @@
         <div slot="title">Miembros de la entidad aliada</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
             {/if}
         </div>
@@ -95,7 +87,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if isSuperAdmin || checkRole(74)}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

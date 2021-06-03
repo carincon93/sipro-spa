@@ -6,7 +6,7 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
     import { inertia } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import LoadingButton from '@/Components/LoadingButton'
 

@@ -6,7 +6,7 @@
 
 <script>
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route, links } from '@/Utils'
+    import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import ApplicationLogo from '@/Components/ApplicationLogo'
 
@@ -152,13 +152,81 @@
     </div>
     <div slot="content">
         <div class="grid grid-cols-3 gap-5 p-8">
-            {#each links as link}
-                {#if authUser.can.find((element) => element == link.route + '.index') != undefined || authUser.can.find((element) => element == link.route + '.show') != undefined || authUser.can.find((element) => element == link.route + '.create') != undefined || authUser.can.find((element) => element == link.route + '.edit') != undefined || authUser.can.find((element) => element == link.route + '.delete') != undefined || isSuperAdmin}
-                    <Button on:click={() => Inertia.visit(route(link.route + '.index'))} variant={route().current(link.route + '.*') ? 'raised' : 'outlined'} class="p-2">
-                        {link.name}
-                    </Button>
-                {/if}
-            {/each}
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">Anexos</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">Centros de formación</Button>
+            {/if}
+
+            {#if isSuperAdmin || checkRole(74) || checkRole(102) || checkRole(103)}
+                <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">Convocatorias</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('grupos-investigacion.index'))} variant={route().current('grupos-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Grupos de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('lineas-investigacion.index'))} variant={route().current('lineas-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Líneas de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('lineas-programaticas.index'))} variant={route().current('lineas-programaticas.*') ? 'raised' : 'outlined'} class="p-2">Líneas programáticas</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">Mesas técnicas</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">Programas de formación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('redes-conocimiento.index'))} variant={route().current('redes-conocimiento.*') ? 'raised' : 'outlined'} class="p-2">Redes de conocimiento</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('regionales.index'))} variant={route().current('regionales.*') ? 'raised' : 'outlined'} class="p-2">Regionales</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('roles-sennova.index'))} variant={route().current('roles-sennova.*') ? 'raised' : 'outlined'} class="p-2">Roles SENNOVA</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('sectores-productivos.index'))} variant={route().current('sectores-productivos.*') ? 'raised' : 'outlined'} class="p-2">Sectores productivos</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('semilleros-investigacion.index'))} variant={route().current('semilleros-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Semilleros de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">Tecnoacademias</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('temas-priorizados.index'))} variant={route().current('temas-priorizados.*') ? 'raised' : 'outlined'} class="p-2">Temas priorizados</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.index'))} variant={route().current('tematicas-estrategicas.*') ? 'raised' : 'outlined'} class="p-2">Temáticas estratégicas SENA</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('tipos-proyecto.index'))} variant={route().current('tipos-proyecto.*') ? 'raised' : 'outlined'} class="p-2">Tipos de proyecto</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">Usuarios</Button>
+            {/if}
         </div>
     </div>
     <div slot="actions">

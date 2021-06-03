@@ -1,24 +1,13 @@
 <script>
     import AuthenticatedLayout from '@/Layouts/Authenticated'
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route, links } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Button from '@/Components/Button'
     import { Inertia } from '@inertiajs/inertia'
 
-    /**
-     * Permisos
-     */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 </script>
 
 <AuthenticatedLayout>
@@ -31,7 +20,7 @@
                 </h1>
                 <p class="text-2xl mt-4">Revise las convocatorias y empiece la formulación de proyectos.</p>
 
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
                     <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Revisar convocatorias</Button>
                 {/if}
             </div>
@@ -44,14 +33,81 @@
     </header>
     <div class="py-12">
         <div class="grid grid-cols-3 gap-10">
-            {#each links as link}
-                {#if isSuperAdmin}
-                    <a use:inertia href={route(link.route + '.index')} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col">
-                        <span>ICON</span>
-                        {link.name}
-                    </a>
-                {/if}
-            {/each}
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('anexos.index')}>Anexos</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('centros-formacion.index')}>Centros de formación</a>
+            {/if}
+
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('convocatorias.index')}>Convocatorias</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('grupos-investigacion.index')}>Grupos de investigación</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('lineas-investigacion.index')}>Líneas de investigación</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('lineas-programaticas.index')}>Líneas programáticas</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('mesas-tecnicas.index')}>Mesas técnicas</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('programas-formacion.index')}>Programas de formación</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('redes-conocimiento.index')}>Redes de conocimiento</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('regionales.index')}>Regionales</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('roles-sennova.index')}>Roles SENNOVA</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('roles.index')}>Roles de sistema</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('sectores-productivos.index')}>Sectores productivos</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('semilleros-investigacion.index')}>Semilleros de investigación</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tecnoacademias.index')}>Tecnoacademias</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('temas-priorizados.index')}>Temas priorizados</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tematicas-estrategicas.index')}>Temáticas estratégicas SENA</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tipos-proyecto.index')}>Tipos de proyecto</a>
+            {/if}
+
+            {#if isSuperAdmin}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('users.index')}>Usuarios</a>
+            {/if}
         </div>
     </div>
 </AuthenticatedLayout>

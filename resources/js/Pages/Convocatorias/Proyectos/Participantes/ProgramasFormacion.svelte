@@ -1,7 +1,7 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Input from '@/Components/Input'
     import DataTable from '@/Components/DataTable'
@@ -18,15 +18,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Buscar
@@ -56,25 +48,29 @@
     }
 
     function linkProgramaFormacion(id) {
-        Inertia.post(
-            route('convocatorias.proyectos.participantes.programas-formacion.link', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            { programa_formacion_id: id },
-            { preserveScroll: true },
-        )
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4])) {
+            Inertia.post(
+                route('convocatorias.proyectos.participantes.programas-formacion.link', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                { programa_formacion_id: id },
+                { preserveScroll: true },
+            )
+        }
     }
 
     function removeProgramaFormacion(id) {
-        Inertia.post(
-            route('convocatorias.proyectos.participantes.programas-formacion.unlink', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            { programa_formacion_id: id, _method: 'DELETE' },
-            { preserveScroll: true },
-        )
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4])) {
+            Inertia.post(
+                route('convocatorias.proyectos.participantes.programas-formacion.unlink', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                { programa_formacion_id: id, _method: 'DELETE' },
+                { preserveScroll: true },
+            )
+        }
     }
 </script>
 

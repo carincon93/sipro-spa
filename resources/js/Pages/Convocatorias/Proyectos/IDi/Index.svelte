@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -20,15 +20,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -38,7 +30,7 @@
         <div slot="title">I+D+i</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.idi.create', [convocatoria.id]))} variant="raised">Crear proyecto I+D+i</Button>
             {/if}
         </div>
@@ -66,7 +58,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if isSuperAdmin || checkRole(74)}
+                            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

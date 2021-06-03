@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Button from '@/Components/Button'
@@ -28,15 +28,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let municipios
     let dialogOpen = errors.password != undefined ? true : false
@@ -82,7 +74,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkPermission(authUser, [9, 10])) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -96,7 +88,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkPermission(authUser, [10])) {
             $deleteForm.delete(route('convocatorias.servicios-tecnologicos.destroy', [convocatoria.id, servicioTecnologico.id]), {
                 preserveScroll: true,
             })
@@ -409,10 +401,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkPermission(authUser, [10])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkPermission(authUser, [9, 10])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

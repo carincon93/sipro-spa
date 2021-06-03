@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Components/Label'
@@ -26,15 +26,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -61,7 +53,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])) {
             $form.put(route('convocatorias.proyectos.analisis-riesgos.update', [convocatoria.id, proyecto.id, analisisRiesgo.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -71,7 +63,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [4, 7, 10])) {
             $form.delete(route('convocatorias.proyectos.analisis-riesgos.destroy', [convocatoria.id, proyecto.id, analisisRiesgo.id]))
         }
     }
@@ -82,7 +74,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                         <a use:inertia href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Análisis de riesgos</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -94,7 +86,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10]) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel" value="Nivel de riesgo" />
                     <Select id="nivel" items={nivelesRiesgo} bind:selectedValue={$form.nivel} error={errors.nivel} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
@@ -128,10 +120,10 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkPermission(authUser, [4, 7, 10])}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" tipo="button" on:click={(event) => (dialogOpen = true)}> Eliminar análisis de riesgo </button>
                 {/if}
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" tipo="submit">Editar análisis de riesgo</LoadingButton>
                 {/if}
             </div>

@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Pagination from '@/Components/Pagination'
     import Button from '@/Components/Button'
@@ -20,15 +20,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -40,7 +32,7 @@
     <div class="mb-6 flex justify-end items-center">
         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -53,7 +45,7 @@
 
     <Gantt
         items={productos.data}
-        request={isSuperAdmin || checkRole(74)
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
                   params: [convocatoria.id, proyecto.id],

@@ -1,11 +1,10 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
-    import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
     import Label from '@/Components/Label'
     import InputError from '@/Components/InputError'
     import LoadingButton from '@/Components/LoadingButton'
@@ -38,15 +37,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Mensaje para ítems bloqueados
@@ -101,7 +92,7 @@
     }
 
     function submitImpacto() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formImpacto.post(
                 route('proyectos.impacto', {
                     proyecto: proyecto.id,
@@ -160,7 +151,7 @@
     }
 
     function submitResult() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formResultado.post(
                 route('proyectos.resultado', {
                     proyecto: proyecto.id,
@@ -202,7 +193,7 @@
     }
 
     function submitObjetivoGeneral() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -243,7 +234,7 @@
     }
 
     function submitObjetivoEspecifico() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
                     proyecto: proyecto.id,
@@ -296,7 +287,7 @@
     }
 
     function submitActividad() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formActividad.post(
                 route('proyectos.actividad', {
                     convocatoria: convocatoria.id,
@@ -575,7 +566,7 @@
         <div slot="content">
             {#if showActividadForm}
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
                         <p class="mb-20 whitespace-pre-line">
                             {actividadCausaIndirecta}
@@ -608,7 +599,7 @@
                 </form>
             {:else if showObjetivoEspecificoForm}
                 <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -621,7 +612,7 @@
                 </form>
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -636,7 +627,7 @@
                 </form>
             {:else if showResultadoForm}
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
                         <p class="mb-20 whitespace-pre-line">
                             {resultadoEfectoDirecto}
@@ -661,7 +652,7 @@
                 </form>
             {:else if showImpactoForm}
                 <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
 
                         <p class="mt-4 whitespace-pre-line">
@@ -687,7 +678,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkRole(74) && formId)}
+            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

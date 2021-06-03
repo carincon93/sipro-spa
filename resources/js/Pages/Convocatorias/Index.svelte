@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Button from '@/Components/Button'
     import { Inertia } from '@inertiajs/inertia'
@@ -10,15 +10,7 @@
     export let convocatoriaActiva
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     $title = 'Convocatorias'
 </script>
@@ -35,7 +27,7 @@
                         La convocatoria empezó el {convocatoriaActiva.fecha_inicio_formateado}
                         y finaliza el {convocatoriaActiva.fecha_finalizacion_formateado}.
                     </p>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
                             Convocatoria
                             {convocatoriaActiva.year}
@@ -69,7 +61,7 @@
             </div>
         {/if}
         <div class="grid grid-cols-3 gap-10">
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
                     <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-center items-center flex-col">
                         Convocatoria

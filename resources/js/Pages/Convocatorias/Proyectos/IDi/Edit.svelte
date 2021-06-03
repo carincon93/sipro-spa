@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -40,15 +40,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let municipios
     let dialogOpen = errors.password != undefined ? true : false
@@ -122,7 +114,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [3, 4])) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
@@ -141,7 +133,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [4])) {
             $deleteForm.delete(route('convocatorias.idi.destroy', [convocatoria.id, idi.id]), {
                 preserveScroll: true,
             })
@@ -172,7 +164,7 @@
     <Stepper {convocatoria} proyecto={idi} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [3, 4]) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
                 <Textarea label="Título" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -618,10 +610,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

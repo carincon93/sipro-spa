@@ -1,6 +1,6 @@
 <script>
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     export let canLogin

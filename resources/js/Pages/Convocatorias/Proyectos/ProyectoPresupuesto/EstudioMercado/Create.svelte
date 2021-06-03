@@ -1,6 +1,6 @@
 <script>
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Components/Input'
@@ -23,15 +23,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let form = useForm({
         requiere_tercer_estudio_mercado: false,
@@ -53,7 +45,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),

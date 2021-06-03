@@ -1,6 +1,6 @@
 <script>
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import LoadingButton from '@/Components/LoadingButton'
@@ -19,15 +19,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let form = useForm({
         archivo: null,
@@ -35,7 +27,7 @@
     })
 
     function submit() {
-        if ((isSuperAdmin && !sending) || (checkRole(74) && !sending)) {
+        if ((isSuperAdmin && !sending) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -58,7 +50,7 @@
             {anexo.nombre}
         </a>
     {/if}
-    <fieldset disabled={(isSuperAdmin && !sending) || (checkRole(74) && !sending) ? undefined : true}>
+    <fieldset disabled={(isSuperAdmin && !sending) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
         <div>
             <File id="archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>

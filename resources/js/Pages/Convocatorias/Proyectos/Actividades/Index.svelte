@@ -1,6 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
+    import { checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Stepper from '@/Components/Stepper'
     import Gantt from '@/Components/Gantt'
@@ -16,15 +17,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -38,7 +31,7 @@
 
     <Gantt
         items={actividades.data}
-        request={isSuperAdmin || checkRole(74)
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',
                   params: [convocatoria.id, proyecto.id],

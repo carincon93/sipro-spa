@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import InputError from '@/Components/InputError'
@@ -21,15 +21,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
@@ -51,7 +43,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkPermission(authUser, [8])) {
             $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -66,7 +58,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkPermission(authUser, [8])}
                         <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> Servicios tecnológicos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -228,7 +220,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkPermission(authUser, [8])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>

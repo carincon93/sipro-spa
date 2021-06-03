@@ -2,7 +2,7 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { Inertia } from '@inertiajs/inertia'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Components/Label'
@@ -33,15 +33,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1, 5])
 
     let sending = false
     let form = useForm({
@@ -67,7 +59,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 5])) {
             $form.post(route('convocatorias.proyectos.entidades-aliadas.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -81,7 +73,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 5])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -93,7 +85,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [1, 5]) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                     <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
@@ -207,7 +199,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkPermission(authUser, [1, 5])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear entidad aliada</LoadingButton>
                 {/if}
             </div>

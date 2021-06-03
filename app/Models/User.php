@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -140,8 +139,8 @@ class User extends Authenticatable
     public function getCanAttribute()
     {
         return $this->getAllPermissions()->map(function ($t) {
-            return ['name' => $t['name']];
-        })->pluck('name');
+            return ['id' => $t['id']];
+        })->pluck('id');
     }
 
     /**

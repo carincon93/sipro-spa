@@ -2,7 +2,7 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { Inertia } from '@inertiajs/inertia'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Dialog from '@/Components/Dialog'
 
@@ -23,15 +23,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false

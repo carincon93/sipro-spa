@@ -2,7 +2,7 @@
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import axios from 'axios'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import Input from '@/Components/Input'
     import Label from '@/Components/Label'
@@ -28,15 +28,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Buscar
@@ -69,14 +61,16 @@
     }
 
     function removeParticipante(id) {
-        Inertia.post(
-            route('convocatorias.proyectos.participantes.users.unlink', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            { user_id: id, _method: 'DELETE' },
-            { preserveScroll: true },
-        )
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+            Inertia.post(
+                route('convocatorias.proyectos.participantes.users.unlink', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                { user_id: id, _method: 'DELETE' },
+                { preserveScroll: true },
+            )
+        }
     }
 
     /**
@@ -107,24 +101,26 @@
     }
 
     function submitParticipante() {
-        $formParticipante.post(
-            route('convocatorias.proyectos.participantes.users.link', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            {
-                onStart: () => {
-                    sending = true
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+            $formParticipante.post(
+                route('convocatorias.proyectos.participantes.users.link', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                {
+                    onStart: () => {
+                        sending = true
+                    },
+                    onSuccess: () => {
+                        closeDialog()
+                    },
+                    onFinish: () => {
+                        sending = false
+                    },
+                    preserveScroll: true,
                 },
-                onSuccess: () => {
-                    closeDialog()
-                },
-                onFinish: () => {
-                    sending = false
-                },
-                preserveScroll: true,
-            },
-        )
+            )
+        }
     }
 
     /**
@@ -153,18 +149,20 @@
     }
 
     function submitRegister() {
-        $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
-            onStart: () => {
-                sending = true
-            },
-            onSuccess: () => {
-                closeDialog()
-            },
-            onFinish: () => {
-                sending = false
-            },
-            preserveScroll: true,
-        })
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+            $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
+                onStart: () => {
+                    sending = true
+                },
+                onSuccess: () => {
+                    closeDialog()
+                },
+                onFinish: () => {
+                    sending = false
+                },
+                preserveScroll: true,
+            })
+        }
     }
 
     function reset() {
@@ -180,8 +178,6 @@
         openNuevoParticipanteDialog = false
         sending = false
     }
-
-    console.log(proyecto.participantes)
 </script>
 
 <div class="bg-indigo-100 py-4">

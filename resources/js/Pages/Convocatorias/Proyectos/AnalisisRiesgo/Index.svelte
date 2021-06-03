@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -22,15 +22,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -44,7 +36,7 @@
         <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(74)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgo</Button>
             {/if}
         </div>
@@ -74,7 +66,7 @@
 
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            {#if isSuperAdmin || checkRole(74)}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

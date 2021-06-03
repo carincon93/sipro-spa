@@ -1,8 +1,8 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
-    import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Dialog from '@/Components/Dialog'
@@ -33,15 +33,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Efectos indirectos
@@ -72,7 +64,7 @@
     }
 
     function submitEfectoIndirecto() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formEfectoIndirecto.post(
                 route('proyectos.efecto-indirecto', {
                     proyecto: proyecto.id,
@@ -115,7 +107,7 @@
     }
 
     function submitEfectoDirecto() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formEfectoDirecto.post(
                 route('proyectos.efecto-directo', {
                     proyecto: proyecto.id,
@@ -157,7 +149,7 @@
     }
 
     function submitPlanteamientoProblema() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formPlanteamientoProblema.post(route('proyectos.planteamiento-problema', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -194,7 +186,7 @@
     }
 
     function submitCausaDirecta() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formCausaDirecta.post(
                 route('proyectos.causa-directa', {
                     proyecto: proyecto.id,
@@ -244,7 +236,7 @@
     }
 
     function submitCausaIndirecta() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
             $formCausaIndirecta.post(
                 route('proyectos.causa-indirecta', {
                     proyecto: proyecto.id,
@@ -510,7 +502,7 @@
         <div slot="content">
             {#if showCausaIndirectaForm}
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <div class="mt-4">
                             <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
@@ -518,7 +510,7 @@
                 </form>
             {:else if showCausaDirectaForm}
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <div class="mt-4">
                             <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
@@ -526,7 +518,7 @@
                 </form>
             {:else if showEfectoIndirectoForm}
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <div class="mt-4">
                             <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
@@ -534,7 +526,7 @@
                 </form>
             {:else if showPlanteamientoProblemaForm}
                 <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
 
@@ -555,7 +547,7 @@
                 </form>
             {:else if showEfectoDirectoForm}
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
                         <div class="mt-4">
                             <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
@@ -565,7 +557,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkRole(74) && formId)}
+            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

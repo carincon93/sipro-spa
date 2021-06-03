@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Components/Input'
@@ -26,15 +26,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -62,7 +54,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkRole(3, 4, 6, 7, 9, 10)) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]), {
                     onStart: () => (sending = true),
@@ -78,7 +70,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkRole(4, 7, 10)) {
             $form.delete(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]))
         }
     }
@@ -92,11 +84,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkRole(3, 4, 6, 7, 9, 10)}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkRole(3, 4, 6, 7, 9, 10)}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
@@ -112,7 +104,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(3, 4, 6, 7, 9, 10) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                 </div>
@@ -182,13 +174,13 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkRole(4, 7, 10)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar estudio de mercado </button>
                 {/if}
                 <p class="break-all w-72">
                     Valor promedio: ${average > 0 ? new Intl.NumberFormat('de-DE').format(average) : 0} COP
                 </p>
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkRole(3, 4, 6, 7, 9, 10)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar estudio de mercado</LoadingButton>
                 {/if}
             </div>

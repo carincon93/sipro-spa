@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Components/Input'
@@ -25,15 +25,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let showQtyInput = true
     let sending = false
@@ -52,7 +44,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(74)) {
+        if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.proyecto-presupuesto.store', [convocatoria.id, proyecto.id]), {
                     onStart: () => (sending = true),
@@ -67,7 +59,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(74)}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuestos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -79,7 +71,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(74) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [1, 5, 8]) ? undefined : true}>
                 <div class="mt-4">
                     <DropdownPresupuesto bind:selectedUsoPresupuestal={$form.convocatoria_presupuesto_id} bind:showQtyInput bind:codigoUsoPresupuestal={$form.codigo_uso_presupuestal} message={errors.convocatoria_presupuesto_id} {convocatoria} lineaProgramatica={proyecto.tipo_proyecto.linea_programatica} required />
                 </div>
@@ -144,7 +136,7 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(74)}
+                {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
                     {#if $form.convocatoria_presupuesto_id != '' || $form.convocatoria_presupuesto_id != ''}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear presupuesto</LoadingButton>
                     {/if}
