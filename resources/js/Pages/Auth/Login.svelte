@@ -82,10 +82,10 @@
 
 <div class="flex mt-20">
     <figure>
-        <img src={window.basePath + 'images/sennova-logo.png'} alt="Logo SENNOVA" />
+        <img src={window.basePath + '/images/sennova-logo.png'} alt="Logo SENNOVA" />
     </figure>
 
     <figure class="ml-10">
-        <img src={window.basePath + 'images/grindda.png'} alt="Logo del grupo de investigación GRINDDA" />
+        <img src={window.basePath + '/images/grindda.png'} alt="Logo del grupo de investigación GRINDDA" />
     </figure>
 </div>

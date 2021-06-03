@@ -146,7 +146,7 @@ fieldset[disabled] .selectedItem {
 }
 
 .welcome-wallpaper {
-    background-image: url(/images/welcome.jpg);
+    background-image: url(/images/welcome.jpg), url(/sgpssipro/images/welcome.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
