@@ -167,6 +167,7 @@ return [
 		'titulo' 								=> 'título',
 		'mesa_sectorial_id' 					=> 'mesa sectorial',
 		'muestreo' 								=> '¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?',
+		'recoleccion_especimenes' 				=> 'referente a la recollección de especímenes',
 		'numero_aprendices'     				=> 'número de aprendices beneficiados',
 		'actividades_muestreo'  				=> 'actividad que pretende con la especie nativa',
 		'objetivo_muestreo'     				=> 'finalidad de las actividades a realizar con la especie nativa',

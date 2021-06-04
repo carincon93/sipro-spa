@@ -196,7 +196,7 @@ class ArbolProyectoController extends Controller
             $efectoIndirecto->descripcion = $request->descripcion;
             $efectoIndirecto->save();
         } else {
-            return redirect()->back()->with('error', 'Cannot add more indirect effects.');
+            return redirect()->back()->with('error', 'No se pueden añadir más efectos indirectos.');
         }
 
         if (empty($efectoIndirecto->impacto)) {
@@ -248,7 +248,7 @@ class ArbolProyectoController extends Controller
             $causaIndirecta->descripcion = $request->descripcion;
             $causaIndirecta->save();
         } else {
-            return redirect()->back()->with('error', 'Cannot add more indirect causes.');
+            return redirect()->back()->with('error', 'No se pueden añadir más causas indirectas.');
         }
 
         if (empty($causaIndirecta->actividad)) {
@@ -351,7 +351,7 @@ class ArbolProyectoController extends Controller
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Error updating impact.');
+        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba el impacto. Vuelva a intentar');
     }
 
     /**
@@ -372,7 +372,7 @@ class ArbolProyectoController extends Controller
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Error updating result.');
+        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el resultado. Vuelva a intentar');
     }
 
     /**
@@ -394,7 +394,7 @@ class ArbolProyectoController extends Controller
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Error updating specific objective.');
+        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
     }
 
     /**
@@ -416,6 +416,6 @@ class ArbolProyectoController extends Controller
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Error updating actividad.');
+        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
     }
 }

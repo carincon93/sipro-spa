@@ -45,6 +45,10 @@
     let municipios
     let dialogOpen = errors.password != undefined ? true : false
     let sending = false
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
 
     let lineasTecnologicas = []
     let tieneVideo = idi.video != null
@@ -80,7 +84,10 @@
         muestreo: idi.muestreo,
         actividades_muestreo: idi.actividades_muestreo,
         objetivo_muestreo: idi.objetivo_muestreo,
-
+        recoleccion_especimenes: {
+            value: idi.recoleccion_especimenes,
+            label: opcionesSiNo.find((item) => item.value == idi.recoleccion_especimenes)?.label,
+        },
         relacionado_plan_tecnologico: {
             value: idi.relacionado_plan_tecnologico,
             label: opcionesIDiDropdown.find((item) => item.value == idi.relacionado_plan_tecnologico)?.label,
@@ -425,6 +432,21 @@
                         <span slot="label"> No aplica </span>
                     </FormField>
                 </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label
+                        required
+                        class="mb-4"
+                        labelFor="recoleccion_especimenes"
+                        value="En la ejecución del proyecto se requiere la recolección de especímenes de especies silvestres de la diversidad biológica con fines de elaboración de estudios ambientales (entendiendo como recolección los procesos de remoción o extracción temporal o definitiva de una especie ya sea vegetal o animal del medio natural) Nota: este permiso no se requiere cuando las actividades de recolección se limiten a investigaciones científicas o con fines industriales, comerciales o de prospección biológica."
+                    />
+                </div>
+                <div>
+                    <Select items={opcionesSiNo} id="recoleccion_especimenes" bind:selectedValue={$form.recoleccion_especimenes} error={errors.recoleccion_especimenes} autocomplete="off" placeholder="Seleccione una opción" required />
+                </div>
+                <div />
             </div>
 
             <div class="mt-44 grid grid-cols-2">

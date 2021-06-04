@@ -80,9 +80,15 @@ class IdiController extends Controller
         $idi->impacto_municipios                    = 'Describa el beneficio en los municipios';
         $idi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
 
-        $idi->muestreo                              = null;
-        $idi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
-        $idi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
+        $idi->muestreo                              = 6;
+        $idi->actividades_muestreo                  = null;
+        $idi->objetivo_muestreo                     = null;
+        $idi->recoleccion_especimenes               = 2;
+
+        $idi->relacionado_plan_tecnologico          = 2;
+        $idi->relacionado_agendas_competitividad    = 2;
+        $idi->relacionado_mesas_sectoriales         = 2;
+        $idi->relacionado_tecnoacademia             = 2;
 
         $idi->lineaInvestigacion()->associate($request->linea_investigacion_id);
         $idi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
@@ -172,6 +178,7 @@ class IdiController extends Controller
         $idi->muestreo                              = $request->muestreo;
         $idi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
         $idi->objetivo_muestreo                     = $request->muestreo == 1 ? $request->objetivo_muestreo  : null;
+        $idi->recoleccion_especimenes               = $request->recoleccion_especimenes;
 
         $idi->lineaInvestigacion()->associate($request->linea_investigacion_id);
         $idi->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);

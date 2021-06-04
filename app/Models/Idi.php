@@ -51,9 +51,8 @@ class Idi extends Model
         'muestreo',
         'actividades_muestreo',
         'objetivo_muestreo',
-        'bibliografia',
-        'numero_aprendices',
-        'impacto_',
+        'recoleccion_especimenes',
+        'impacto_municipios',
         'impacto_centro_formacion',
         'objetivo_general',
         'planteamiento_problema',
@@ -61,7 +60,9 @@ class Idi extends Model
         'relacionado_plan_tecnologico',
         'relacionado_agendas_competitividad',
         'relacionado_mesas_sectoriales',
-        'relacionado_tecnoacademia'
+        'relacionado_tecnoacademia',
+        'bibliografia',
+        'numero_aprendices'
     ];
 
     /**

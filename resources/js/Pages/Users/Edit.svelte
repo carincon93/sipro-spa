@@ -14,6 +14,7 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import Dialog from '@/Components/Dialog'
+    import InfoMessage from '@/Components/InfoMessage'
     import DynamicList from '@/Dropdowns/DynamicList'
 
     export let errors
@@ -50,6 +51,7 @@
         },
         centro_formacion_id: usuario.centro_formacion_id,
         role_id: rolesRelacionados,
+        autorizacion_datos: usuario.autorizacion_datos,
     })
 
     function submit() {
@@ -122,6 +124,10 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+
+                <div class="mt-4">
+                    <InfoMessage message={usuario.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
                 </div>
             </fieldset>
         </div>

@@ -49,7 +49,8 @@ class IdiRequest extends FormRequest
                 'justificacion_politica_discapacidad'       => ['nullable', 'string'],
                 'muestreo'                                  => ['required', 'max:191'],
                 'actividades_muestreo'                      => ['nullable', 'max:191'],
-                'muestreo_objective'                        => ['nullable', 'max:191'],
+                'objetivo_muestreo'                         => ['nullable', 'max:191'],
+                'recoleccion_especimenes'                   => ['required', 'min:1', 'max:2', 'integer'],
                 'bibliografia'                              => ['required', 'string'],
                 'numero_aprendices'                         => ['required', 'min:0', 'max:9999', 'integer'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
@@ -94,6 +95,12 @@ class IdiRequest extends FormRequest
         if (is_array($this->centro_formacion_id)) {
             $this->merge([
                 'centro_formacion_id' => $this->centro_formacion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->recoleccion_especimenes)) {
+            $this->merge([
+                'recoleccion_especimenes' => $this->recoleccion_especimenes['value'],
             ]);
         }
 

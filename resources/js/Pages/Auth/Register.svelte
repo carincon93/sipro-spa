@@ -92,7 +92,7 @@
         {#each roles as { id, name }, i}
             <FormField>
                 <Checkbox bind:group={$form.role_id} value={id} />
-                <span slot="label">{name}</span>
+                <span slot="label" class="capitalize">{name}</span>
             </FormField>
         {/each}
     </div>

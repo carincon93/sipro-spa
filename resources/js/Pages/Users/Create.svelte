@@ -10,6 +10,7 @@
     import LoadingButton from '@/Components/LoadingButton'
     import Switch from '@/Components/Switch'
     import Select from '@/Components/Select'
+    import InfoMessage from '@/Components/InfoMessage'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import DynamicList from '@/Dropdowns/DynamicList'
@@ -38,6 +39,7 @@
         tipo_participacion: '',
         centro_formacion_id: null,
         role_id: [],
+        autorizacion_datos: false,
     })
 
     function submit() {
@@ -89,7 +91,7 @@
                     <Input label="Número de celular" id="numero_celular" type="number" min="0" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿El usuario está habilitado para ingresar al sistema?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
@@ -105,11 +107,17 @@
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
 
-                <div>
-                    <p>
-                        La contraseña de este usuario es: {#if $form.numero_documento}
-                            Sena{$form.numero_documento}*{/if}
-                    </p>
+                <div class="mt-4">
+                    <FormField>
+                        <Checkbox bind:checked={$form.autorizacion_datos} />
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?</span>
+                    </FormField>
+                </div>
+
+                <div class="mt-4">
+                    {#if $form.numero_documento}
+                        <InfoMessage message="La contraseña de este usuario es: Sena{$form.numero_documento}*" />
+                    {/if}
                 </div>
             </div>
         </div>
@@ -131,7 +139,7 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear usuario</LoadingButton>
+                <LoadingButton bind:loading={sending} class="btn-indigo" type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
             {/if}
         </div>
     </form>
