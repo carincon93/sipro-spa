@@ -22,7 +22,7 @@ class TematicaEstrategicaController extends Controller
         return Inertia::render('TematicasEstrategicas/Index', [
             'filters'   => request()->all('search'),
             'tematicasEstrategicas' => TematicaEstrategica::orderBy('nombre', 'ASC')
-                ->filterTematicaEstrategica(request()->only('search'))->paginate(),
+                ->filterTematicaEstrategica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

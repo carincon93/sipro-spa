@@ -38,7 +38,7 @@ class ConvocatoriaRolSennovaController extends Controller
                         WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
                     END as nombre")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
                 ->join('lineas_programaticas', 'lineas_programaticas.id', 'convocatoria_rol_sennova.linea_programatica_id')
-                ->filterConvocatoriaRolSennova(request()->only('search'))->paginate(),
+                ->filterConvocatoriaRolSennova(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

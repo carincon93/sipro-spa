@@ -28,7 +28,7 @@ class AnalisisRiesgoController extends Controller
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')
-                ->filterAnalisisRiesgo(request()->only('search'))->paginate(),
+                ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

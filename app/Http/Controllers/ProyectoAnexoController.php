@@ -31,7 +31,7 @@ class ProyectoAnexoController extends Controller
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')
-                ->filterProyectoAnexo(request()->only('search'))->paginate(),
+                ->filterProyectoAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'anexos'            => Anexo::select('id', 'nombre')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->tipoProyecto->lineaProgramatica->id)->paginate()
         ]);
     }

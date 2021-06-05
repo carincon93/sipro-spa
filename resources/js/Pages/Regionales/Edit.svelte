@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="999" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
+                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">

@@ -114,6 +114,8 @@ class User extends Authenticatable
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace(' ', '%%', $search);
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhere('email', 'ilike', '%' . $search . '%');
             $query->orWhere('numero_documento', 'ilike', '%' . $search . '%');

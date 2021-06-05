@@ -106,7 +106,39 @@ class LineaProgramatica extends Model
     public function scopeFilterLineaProgramatica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace(' ', '%%', $search);
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $query->whereRaw("unaccent(programas_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('codigo', 'ilike', '%' . $search . '%');
+            $query->orWhere('categoria_proyecto', 'ilike', '%' . $search . '%');
         });
+    }
+
+    /**
+     * getCategoriaProyectoAttribute
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function getCategoriaProyectoAttribute($value)
+    {
+        switch ($value) {
+            case 1:
+                $value = 'Tecnoacademia-Tecnoparque';
+                break;
+            case 2:
+                $value = 'I+D+i';
+                break;
+            case 3:
+                $value = 'Servicios tecnológicos';
+                break;
+            case 4:
+                $value = 'Otro';
+                break;
+            default:
+                break;
+        }
+        return $value;
     }
 }

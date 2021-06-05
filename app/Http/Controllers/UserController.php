@@ -24,7 +24,7 @@ class UserController extends Controller
         return Inertia::render('Users/Index', [
             'filters'   => request()->all('search'),
             'usuarios'  => User::orderBy('nombre', 'ASC')
-                ->filterUser(request()->only('search'))->paginate(),
+                ->filterUser(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

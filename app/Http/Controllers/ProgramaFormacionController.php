@@ -22,10 +22,10 @@ class ProgramaFormacionController extends Controller
 
         return Inertia::render('ProgramasFormacion/Index', [
             'filters'   => request()->all('search'),
-            'programasFormacion' => ProgramaFormacion::with(['centroFormacion' => function ($query) {
+            'programasFormacion' => ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with(['centroFormacion' => function ($query) {
                 $query->orderBy('nombre', 'ASC');
             }])
-                ->filterProgramaFormacion(request()->only('search'))->paginate(),
+                ->filterProgramaFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

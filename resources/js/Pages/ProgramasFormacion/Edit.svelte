@@ -31,7 +31,7 @@
         codigo: programaFormacion.codigo,
         modalidad: {
             value: programaFormacion.modalidad,
-            label: modalidades.find((item) => item.value == programaFormacion.modalidad)?.label,
+            label: modalidades.find((item) => item.label == programaFormacion.modalidad)?.label,
         },
         centro_formacion_id: programaFormacion.centro_formacion_id,
     })
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="999" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
+                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">

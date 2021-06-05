@@ -66,7 +66,13 @@ class SemilleroInvestigacion extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace(' ', '%%', $search);
-            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $query->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id');
+            $query->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id');
+            $query->whereRaw("unaccent(semilleros_investigacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(lineas_investigacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 

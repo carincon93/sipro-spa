@@ -1,4 +1,8 @@
 <script>
+    import SearchFilter from '@/Components/SearchFilter'
+
+    export let routeParams
+
     $: props = {
         ...$$restProps,
         class: `${$$restProps.class || ''}`,
@@ -12,12 +16,13 @@
     <div class="mb-8">
         <slot name="caption" />
     </div>
-    <div class="mb-6 flex justify-end items-center">
-        <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
+
+    <div class="mb-6 flex justify-between items-center">
+        <SearchFilter {routeParams} class="w-full max-w-md mr-4" />
         <slot name="actions" />
     </div>
     <div class="bg-white rounded shadow">
-        <table class="w-full whitespace-no-wrap data-table">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
             <slot name="thead" />
             <slot name="tbody" />
             <slot name="tfoot" />

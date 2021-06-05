@@ -127,7 +127,13 @@ class CentroFormacion extends Model
     public function scopeFilterCentroFormacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->join('regionales', 'centros_formacion.regional_id', 'regionales.id');
+            $query->whereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('centros_formacion.codigo', 'ilike', '%' . $search . '%');
+            $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

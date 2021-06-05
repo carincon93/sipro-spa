@@ -27,14 +27,14 @@ class ProgramaFormacionRequest extends FormRequest
             return [
                 'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'nombre'                => ['required', 'max:191'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer', 'unique:programas_formacion,codigo,' . $this->route('programa_formacion')->id . ',id'],
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:programas_formacion,codigo,' . $this->route('programa_formacion')->id . ',id'],
                 'modalidad'             => ['required', 'max:191'],
             ];
         } else {
             return [
                 'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'nombre'                => ['required', 'max:191'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer', 'unique:programas_formacion,codigo'],
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:programas_formacion,codigo'],
                 'modalidad'             => ['required', 'max:191'],
             ];
         }

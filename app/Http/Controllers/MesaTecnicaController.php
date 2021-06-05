@@ -21,7 +21,7 @@ class MesaTecnicaController extends Controller
         return Inertia::render('MesasTecnicas/Index', [
             'filters'       => request()->all('search'),
             'mesasTecnicas' => MesaTecnica::orderBy('nombre', 'ASC')
-                ->filterMesaTecnica(request()->only('search'))->paginate(),
+                ->filterMesaTecnica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

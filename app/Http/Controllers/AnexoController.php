@@ -22,7 +22,7 @@ class AnexoController extends Controller
         return Inertia::render('Anexos/Index', [
             'filters'  => request()->all('search'),
             'anexos'   => Anexo::orderBy('nombre', 'ASC')
-                ->filterAnexo(request()->only('search'))->paginate(),
+                ->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -21,8 +21,8 @@ class GrupoInvestigacionController extends Controller
 
         return Inertia::render('GruposInvestigacion/Index', [
             'filters'               => request()->all('search'),
-            'gruposInvestigacion'   => GrupoInvestigacion::with('centroFormacion.regional')
-                ->filterGrupoInvestigacion(request()->only('search'))->paginate(),
+            'gruposInvestigacion'   => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion.regional')
+                ->filterGrupoInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -21,7 +21,7 @@ class TercerGrupoPresupuestalController extends Controller
         return Inertia::render('Presupuesto/TercerGrupoPresupuestal/Index', [
             'filters'                   => request()->all('search'),
             'tercerGrupoPresupuestal'   => TercerGrupoPresupuestal::orderBy('nombre', 'ASC')
-                ->filterTercerGrupoPresupuestal(request()->only('search'))->paginate(),
+                ->filterTercerGrupoPresupuestal(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

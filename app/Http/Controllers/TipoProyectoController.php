@@ -24,7 +24,7 @@ class TipoProyectoController extends Controller
             'tiposProyecto' => TipoProyecto::with(['lineaProgramatica' => function ($query) {
                 $query->orderBy('nombre', 'ASC');
             }])
-                ->filterTipoProyecto(request()->only('search'))->paginate(),
+                ->filterTipoProyecto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

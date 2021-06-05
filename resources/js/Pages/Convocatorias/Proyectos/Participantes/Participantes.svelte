@@ -194,130 +194,132 @@
 </div>
 
 {#if sended}
-    <DataTable class="bg-indigo-100 p-4">
-        <div slot="title">Resultados de la búsqueda de participantes</div>
+    <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de participantes</h1>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each resultados as resultado (resultado.id)}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                {resultado.nombre}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.email}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                            </p>
+                        </td>
+                        <td class="border-t td-actions">
+                            <ResourceMenu>
+                                <Item on:SMUI:action={() => showParticipante(resultado)}>
+                                    <Text>Vincular</Text>
+                                </Item>
+                            </ResourceMenu>
+                        </td>
+                    </tr>
+                {/each}
 
-        <thead slot="thead">
+                {#if resultados.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="4">
+                            {$_('No data recorded')}
+                            <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
+{/if}
+
+<h1 class="mt-24 mb-8 text-center text-3xl">Participantes vinculados</h1>
+<div class="bg-white rounded shadow">
+    <table class="w-full whitespace-no-wrap table-fixed data-table">
+        <thead>
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Meses</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Horas</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
-        <tbody slot="tbody">
-            {#each resultados as resultado (resultado.id)}
+        <tbody>
+            {#each proyecto.participantes as participante (participante.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {resultado.nombre}
+                            {participante.nombre}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {resultado.email}
+                            {participante.email}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
+                            {participante.centro_formacion ? participante.centro_formacion.nombre : ''}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                            {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {participante.pivot.cantidad_meses}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {participante.pivot.cantidad_horas}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <ResourceMenu>
-                            <Item on:SMUI:action={() => showParticipante(resultado)}>
-                                <Text>Vincular</Text>
+                            <Item on:SMUI:action={() => showParticipante(participante)}>
+                                <Text>Editar</Text>
+                            </Item>
+                            <Item on:SMUI:action={() => removeParticipante(participante.id)}>
+                                <Text>Quitar</Text>
                             </Item>
                         </ResourceMenu>
                     </td>
                 </tr>
             {/each}
 
-            {#if resultados.length === 0}
+            {#if proyecto.participantes.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        {$_('No data recorded')}
-                        <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
                 </tr>
             {/if}
         </tbody>
-    </DataTable>
-{/if}
-
-<DataTable class="mt-10">
-    <div slot="title">Participantes vinculados</div>
-
-    <thead slot="thead">
-        <tr class="text-left font-bold">
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Meses</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Horas</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
-        </tr>
-    </thead>
-    <tbody slot="tbody">
-        {#each proyecto.participantes as participante (participante.id)}
-            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                        {participante.nombre}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.email}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.centro_formacion ? participante.centro_formacion.nombre : ''}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.cantidad_meses}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.cantidad_horas}
-                    </p>
-                </td>
-                <td class="border-t td-actions">
-                    <ResourceMenu>
-                        <Item on:SMUI:action={() => showParticipante(participante)}>
-                            <Text>Editar</Text>
-                        </Item>
-                        <Item on:SMUI:action={() => removeParticipante(participante.id)}>
-                            <Text>Quitar</Text>
-                        </Item>
-                    </ResourceMenu>
-                </td>
-            </tr>
-        {/each}
-
-        {#if proyecto.participantes.length === 0}
-            <tr>
-                <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
-            </tr>
-        {/if}
-    </tbody>
-</DataTable>
+    </table>
+</div>
 
 <!-- Dialog -->
 <Dialog bind:open={dialogOpen} id="participante">

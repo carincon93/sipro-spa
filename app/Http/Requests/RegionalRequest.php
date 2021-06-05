@@ -28,14 +28,14 @@ class RegionalRequest extends FormRequest
                 'region_id'             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regiones,id'],
                 'director_regional_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
                 'nombre'                => ['required', 'max:191', 'string'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer', 'unique:regionales,codigo,' . $this->route('regional')->id . ',id'],
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:regionales,codigo,' . $this->route('regional')->id . ',id'],
             ];
         } else {
             return [
                 'region_id'             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regiones,id'],
                 'director_regional_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
                 'nombre'                => ['required', 'max:191', 'string'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer']
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer']
             ];
         }
     }

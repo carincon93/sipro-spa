@@ -21,7 +21,7 @@ class PresupuestoSennovaController extends Controller
         return Inertia::render('PresupuestoSennova/Index', [
             'filters'               => request()->all('search'),
             'presupuestoSennova'    => PresupuestoSennova::orderBy('mensaje', 'ASC')
-                ->filterPresupuestoSennova(request()->only('search'))->paginate(),
+                ->filterPresupuestoSennova(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

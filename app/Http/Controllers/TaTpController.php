@@ -26,7 +26,7 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'filters'       => request()->all('search'),
-            'tatp'          => TaTp::select('id', 'fecha_inicio', 'fecha_finalizacion', 'tecnoacademia_linea_tecnologica_id', 'nodo_tecnoparque_id')->with('tecnoacademiaLineaTecnologica.tecnoacademia', 'nodoTecnoparque')->filterTaTp(request()->only('search'))->paginate(),
+            'tatp'          => TaTp::select('id', 'fecha_inicio', 'fecha_finalizacion', 'tecnoacademia_linea_tecnologica_id', 'nodo_tecnoparque_id')->with('tecnoacademiaLineaTecnologica.tecnoacademia', 'nodoTecnoparque')->filterTaTp(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -27,6 +27,7 @@
     let form = useForm({
         nombre: semilleroInvestigacion.nombre,
         linea_investigacion_id: semilleroInvestigacion.linea_investigacion_id,
+        centro_formacion_id: semilleroInvestigacion.linea_investigacion?.centro_formacion_id,
     })
 
     function submit() {
@@ -69,9 +70,18 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
-                    <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion')} placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                    <div>
+                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    </div>
                 </div>
+
+                {#if $form.centro_formacion_id}
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
+                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                    </div>
+                {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}

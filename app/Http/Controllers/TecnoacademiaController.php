@@ -22,7 +22,7 @@ class TecnoacademiaController extends Controller
         return Inertia::render('Tecnoacademias/Index', [
             'filters'           => request()->all('search'),
             'tecnoacademias'    => Tecnoacademia::orderBy('nombre', 'ASC')
-                ->filterTecnoacademia(request()->only('search'))->paginate(),
+                ->filterTecnoacademia(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

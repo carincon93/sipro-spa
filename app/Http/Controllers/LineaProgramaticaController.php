@@ -21,14 +21,9 @@ class LineaProgramaticaController extends Controller
 
         return Inertia::render('LineasProgramaticas/Index', [
             'filters'               => request()->all('search'),
-            'lineasProgramaticas'   => LineaProgramatica::selectRaw("lineas_programaticas.id, lineas_programaticas.nombre, lineas_programaticas.codigo, CASE lineas_programaticas.categoria_proyecto
-                WHEN '1' THEN	'Tecnoacademia-Tecnoparque'
-                WHEN '2' THEN	'I+D+i'
-                WHEN '3' THEN	'Servicios tecnológicos'
-                WHEN '4' THEN	'Otro'
-            END as categoria_proyecto")
+            'lineasProgramaticas'   => LineaProgramatica::select('lineas_programaticas.id', 'lineas_programaticas.nombre', 'lineas_programaticas.codigo', 'lineas_programaticas.categoria_proyecto')
                 ->orderBy('nombre', 'ASC')
-                ->filterLineaProgramatica(request()->only('search'))->paginate(),
+                ->filterLineaProgramatica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

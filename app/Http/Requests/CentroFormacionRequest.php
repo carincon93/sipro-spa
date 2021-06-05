@@ -27,7 +27,7 @@ class CentroFormacionRequest extends FormRequest
             'regional_id'       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regionales,id'],
             'subdirector_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
             'nombre'            => ['required', 'max:191'],
-            'codigo'            => ['required', 'min:0', 'max:999', 'integer']
+            'codigo'            => ['required', 'min:0', 'max:2147483647', 'integer']
         ];
     }
 

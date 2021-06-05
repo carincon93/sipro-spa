@@ -34,7 +34,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
             'filters'               => request()->all('search'),
             'proyectoLotesEstudioMercado'  => $proyectoPresupuesto->proyectoLoteEstudioMercado()
                 ->with('estudiosMercado')
-                ->filterProyectoLoteEstudioMercado(request()->only('search'))->paginate(),
+                ->filterProyectoLoteEstudioMercado(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoria'                  => $convocatoria->only('id'),
             'proyecto'                      => $proyecto->only('id'),
             'proyectoPresupuesto'           => $proyectoPresupuesto->only('id', 'promedio'),

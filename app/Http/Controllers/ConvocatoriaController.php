@@ -36,7 +36,7 @@ class ConvocatoriaController extends Controller
         return Inertia::render('Convocatorias/Index', [
             'filters'       => request()->all('search'),
             'convocatorias' => Convocatoria::orderBy('fecha_inicio', 'DESC')
-                ->filterConvocatoria(request()->only('search'))->paginate(),
+                ->filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoriaActiva' => Convocatoria::where('esta_activa', 1)->first(),
         ]);
     }

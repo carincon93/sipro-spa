@@ -212,3 +212,7 @@ input[type="date"], select {
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
     color: #4f46e5;
 }
+
+th.th-actions {
+    width: 150px;
+}

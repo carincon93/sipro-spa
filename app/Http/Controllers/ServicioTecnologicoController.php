@@ -28,7 +28,7 @@ class ServicioTecnologicoController extends Controller
             'convocatoria'          => $convocatoria,
             'filters'               => request()->all('search'),
             'serviciosTecnologicos' => ServicioTecnologico::orderBy('titulo', 'ASC')
-                ->filterServicioTecnologico(request()->only('search'))->paginate(),
+                ->filterServicioTecnologico(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

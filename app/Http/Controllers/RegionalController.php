@@ -21,7 +21,7 @@ class RegionalController extends Controller
         return Inertia::render('Regionales/Index', [
             'filters'       => request()->all('search'),
             'regionales'    => Regional::orderBy('nombre', 'ASC')
-                ->filterRegional(request()->only('search'))->paginate(),
+                ->filterRegional(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

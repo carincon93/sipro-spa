@@ -21,7 +21,7 @@ class RolSennovaController extends Controller
         return Inertia::render('RolesSennova/Index', [
             'filters'       => request()->all('search'),
             'rolesSennova'  => RolSennova::orderBy('nombre', 'ASC')
-                ->filterRolSennova(request()->only('search'))->paginate(),
+                ->filterRolSennova(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

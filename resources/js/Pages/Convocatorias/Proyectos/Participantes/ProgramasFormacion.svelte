@@ -89,64 +89,65 @@
 </div>
 
 {#if sended}
-    <DataTable class="bg-indigo-100 p-4">
-        <div slot="title">Resultados de la búsqueda de programas de formación</div>
-
-        <thead slot="thead">
-            <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Código</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Tipo</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
-            </tr>
-        </thead>
-        <tbody slot="tbody">
-            {#each resultados as resultado (resultado.id)}
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {resultado.codigo}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.nombre}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.modalidad}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion.nombre}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion.regional.nombre}
-                        </p>
-                    </td>
-                    <td class="border-t td-actions">
-                        <ResourceMenu>
-                            <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
-                                <Text>Vincular</Text>
-                            </Item>
-                        </ResourceMenu>
-                    </td>
+    <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de programas de formación</h1>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Código</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
                 </tr>
-            {/each}
+            </thead>
+            <tbody>
+                {#each resultados as resultado (resultado.id)}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                {resultado.codigo}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.nombre}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.modalidad}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.centro_formacion.nombre}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 flex items-center">
+                                {resultado.centro_formacion.regional.nombre}
+                            </p>
+                        </td>
+                        <td class="border-t td-actions">
+                            <ResourceMenu>
+                                <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
+                                    <Text>Vincular</Text>
+                                </Item>
+                            </ResourceMenu>
+                        </td>
+                    </tr>
+                {/each}
 
-            {#if resultados.length === 0}
-                <tr>
-                    <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
-                </tr>
-            {/if}
-        </tbody>
-    </DataTable>
+                {#if resultados.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
 {/if}
 
 <DataTable class="mt-10">
@@ -154,12 +155,12 @@
 
     <thead slot="thead">
         <tr class="text-left font-bold">
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Código</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Tipo</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Código</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
         </tr>
     </thead>
     <tbody slot="tbody">

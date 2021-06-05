@@ -29,7 +29,7 @@ class MiembroEntidadAliadaController extends Controller
                 'entidadAliada'         => $entidadAliada,
                 'filters'               => request()->all('search'),
                 'miembrosEntidadAliada' => MiembroEntidadAliada::where('entidad_aliada_id', $entidadAliada->id)->orderBy('nombre', 'ASC')
-                    ->filterMiembroEntidadAliada(request()->only('search'))->paginate()
+                    ->filterMiembroEntidadAliada(request()->only('search'))->paginate()->appends(['search' => request()->search])
             ]);
         }
 

@@ -67,8 +67,31 @@ class ProgramaFormacion extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace(' ', '%%', $search);
-            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhere('codigo', 'ilike', '%' . $search . '%');
+            $query->join('centros_formacion', 'programas_formacion.centro_formacion_id', 'centros_formacion.id');
+            $query->whereRaw("unaccent(programas_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(programas_formacion.codigo) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getModalidadAttribute
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function getModalidadAttribute($value)
+    {
+        switch ($value) {
+            case 1:
+                $value = 'Presencial';
+                break;
+            case 2:
+                $value = 'Virtual';
+                break;
+            default:
+                break;
+        }
+        return $value;
     }
 }

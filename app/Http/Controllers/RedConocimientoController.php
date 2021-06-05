@@ -22,7 +22,7 @@ class RedConocimientoController extends Controller
         return Inertia::render('RedesConocimiento/Index', [
             'filters'           => request()->all('search'),
             'redesConocimiento' => RedConocimiento::orderBy('nombre', 'ASC')
-                ->filterRedConocimiento(request()->only('search'))->paginate(),
+                ->filterRedConocimiento(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
