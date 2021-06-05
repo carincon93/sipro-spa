@@ -128,7 +128,7 @@ class User extends Authenticatable
      */
     public static function makePassword($documentNumber)
     {
-        return bcrypt("Sena$documentNumber*");
+        return bcrypt("sena$documentNumber*");
     }
 
     /**
