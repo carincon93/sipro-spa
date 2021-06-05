@@ -116,7 +116,7 @@
 
                 <div class="mt-4">
                     {#if $form.numero_documento}
-                        <InfoMessage message="La contraseña de este usuario es: Sena{$form.numero_documento}*" />
+                        <InfoMessage message="La contraseña de este usuario es: sena{$form.numero_documento}*" />
                     {/if}
                 </div>
             </div>
