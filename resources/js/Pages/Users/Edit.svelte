@@ -52,6 +52,7 @@
         centro_formacion_id: usuario.centro_formacion_id,
         role_id: rolesRelacionados,
         autorizacion_datos: usuario.autorizacion_datos,
+        default_password: false,
     })
 
     function submit() {
@@ -109,6 +110,7 @@
                 <div class="mt-4">
                     <Input label="Número de celular" id="numero_celular" type="number" min="0" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
+
                 <div class="mt-4">
                     <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
                     <br />
@@ -127,7 +129,19 @@
                 </div>
 
                 <div class="mt-4">
+                    <Label required labelFor="default_password" value="¿Usar contraseña por defecto?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.default_password} />
+                </div>
+
+                <div class="mt-4">
                     <InfoMessage message={usuario.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
+                </div>
+
+                <div class="mt-4">
+                    {#if $form.numero_documento && $form.default_password}
+                        <InfoMessage message="La contraseña de este usuario es: sena{$form.numero_documento}*" />
+                    {/if}
                 </div>
             </fieldset>
         </div>

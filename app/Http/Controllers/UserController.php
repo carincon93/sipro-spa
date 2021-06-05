@@ -125,6 +125,10 @@ class UserController extends Controller
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
+        if ($request->default_password) {
+            $user->password = $user::makePassword($request->numero_documento);
+        }
+
         $user->save();
 
         $user->syncRoles($request->role_id);
