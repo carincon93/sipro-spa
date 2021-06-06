@@ -46,6 +46,7 @@ use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnologicaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
+
 use App\Models\ActividadEconomica;
 use App\Models\LineaInvestigacion;
 use App\Models\TipoProyecto;

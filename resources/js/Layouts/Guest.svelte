@@ -13,7 +13,7 @@
     <title>{$title ? `${$title} - SIPRO-SPA` : 'SIPRO-SPA'}</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 welcome-wallpaper">
     <div>
         <a use:inertia href={route('login')}>
             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />

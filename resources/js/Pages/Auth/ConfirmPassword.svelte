@@ -4,9 +4,10 @@
 </script>
 
 <script>
-    import { Inertia } from '@inertiajs/inertia'
+    import { useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+
     import LoadingButton from '@/Shared/LoadingButton'
     import Input from '@/Shared/Input'
 
@@ -14,12 +15,12 @@
 
     let sending = false
 
-    let form = {
+    let form = useForm({
         password: '',
-    }
+    })
 
     function handleSubmit() {
-        Inertia.post(route('password.confirm', form))
+        $form.post(route('password.confirm'))
     }
 </script>
 
@@ -29,7 +30,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="flex justify-end mt-4">
