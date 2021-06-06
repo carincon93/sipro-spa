@@ -95,14 +95,4 @@ class LineaInvestigacion extends Model
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucwords($value);
-    }
 }

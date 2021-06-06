@@ -144,24 +144,4 @@ class User extends Authenticatable
             return ['id' => $t['id']];
         })->pluck('id');
     }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucwords($value);
-    }
-
-    /**
-     * getNombreUsuarioAttribute
-     *
-     * @return void
-     */
-    public function getNombreUsuarioAttribute()
-    {
-        return ucwords($this->nombre);
-    }
 }

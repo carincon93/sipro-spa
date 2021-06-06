@@ -90,14 +90,4 @@ class GrupoInvestigacion extends Model
             $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucwords($value);
-    }
 }

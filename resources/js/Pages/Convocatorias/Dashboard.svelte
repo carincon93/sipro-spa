@@ -31,7 +31,7 @@
             A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} en la(s) que puede formular proyectos.
         </h1>
         <div class="flex justify-around mt-24">
-            {#if isSuperAdmin || checkRole(authUser, [74])}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                 <a use:inertia href={route('convocatorias.idi.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>
                         <img src={window.basePath + '/images/idi.png'} alt="" class="rounded-full w-52" />
@@ -39,13 +39,13 @@
                     I+D+i
                 </a>
             {/if}
-            {#if isSuperAdmin || checkRole(authUser, [102])}
+            {#if isSuperAdmin || checkPermission(authUser, [8, 9, 10])}
                 <a use:inertia href={route('convocatorias.tatp.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <span>ICON</span>
                     Tecnoacademia - Tecnoparque
                 </a>
             {/if}
-            {#if isSuperAdmin || checkRole(authUser, [103])}
+            {#if isSuperAdmin || checkPermission(authUser, [5, 6, 7])}
                 <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <span>ICON</span>
                     Servicios tecnológicos

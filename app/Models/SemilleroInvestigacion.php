@@ -75,14 +75,4 @@ class SemilleroInvestigacion extends Model
             $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucwords($value);
-    }
 }

@@ -4,7 +4,6 @@
 </script>
 
 <script>
-    import { Inertia } from '@inertiajs/inertia'
     import { inertia } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -20,19 +19,14 @@
     let selection = []
     let sending = false
 
-    let form = {
+    let form = useForm({
         email: '',
         password: '',
         remember: false,
-    }
+    })
 
     function handleSubmit() {
-        const data = {
-            email: form.email,
-            password: form.password,
-            remember: form.remember,
-        }
-        Inertia.post(route('login'), data, {
+        $form.post(route('login'), {
             onStart: () => (sending = true),
             onFinish: () => (sending = false),
         })
@@ -51,16 +45,16 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={form.email} error={errors.email} required autocomplete="email" />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required autocomplete="email" />
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={form.password} error={errors.password} required autocomplete="current-password" />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="block mt-4">
         <FormField>
-            <Checkbox bind:checked={form.remember} value={selection} />
+            <Checkbox bind:checked={$form.remember} value={selection} />
             <span slot="label">{$_('Remember me')}</span>
         </FormField>
     </div>
