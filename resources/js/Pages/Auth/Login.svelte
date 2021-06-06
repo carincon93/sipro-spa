@@ -1,19 +1,21 @@
 <script context="module">
-    import GuestLayout from '@/Layouts/Guest'
+    import GuestLayout, { title } from '@/Layouts/Guest'
     export const layout = GuestLayout
 </script>
 
 <script>
-    import { inertia } from '@inertiajs/inertia-svelte'
+    import { inertia, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Input from '@/Components/Input'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Input from '@/Shared/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
 
     export let status
     export let errors
+
+    $title = 'Iniciar sesión'
 
     let canResetPassword
     let selection = []

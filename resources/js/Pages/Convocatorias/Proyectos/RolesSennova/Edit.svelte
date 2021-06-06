@@ -4,13 +4,13 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import DynamicList from '@/Dropdowns/DynamicList'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
 
     export let convocatoria
     export let proyecto

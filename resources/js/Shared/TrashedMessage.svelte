@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte'
-    import Icon from '@/Components/Icon'
+    import Icon from '@/Shared/Icon'
 
     const dispatch = createEventDispatcher()
 

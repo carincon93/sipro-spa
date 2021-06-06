@@ -64,17 +64,10 @@ class Tecnoacademia extends Model
     public function scopeFilterTecnoacademia($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
-    }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucfirst($value);
     }
 }

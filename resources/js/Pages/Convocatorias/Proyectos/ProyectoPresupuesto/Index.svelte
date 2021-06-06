@@ -5,13 +5,13 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Pagination from '@/Components/Pagination'
-    import Button from '@/Components/Button'
-    import DataTable from '@/Components/DataTable'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Pagination from '@/Shared/Pagination'
+    import Button from '@/Shared/Button'
+    import DataTable from '@/Shared/DataTable'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
 
-    import Stepper from '@/Components/Stepper'
+    import Stepper from '@/Shared/Stepper'
 
     export let convocatoria
     export let proyecto
@@ -32,77 +32,76 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <DataTable class="mt-20">
-        <div slot="title">Presupuesto</div>
+    <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
+    <p class="text-center mt-10 mb-24">
+        Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
+    </p>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
+                </tr>
+            </thead>
 
-        <h2 class="text-center mt-10 mb-24" slot="caption">
-            Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
-        </h2>
+            <tbody>
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Servicios especiales de construcción </td>
+                        <td class="border-t p-4">
+                            El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial * 0.05 : 0)}) del rubro de "MAQUINARIA INDUSTRIAL" (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial : 0)}).
+                        </td>
+                        <td class="border-t p-4">
+                            Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_servicios_especiales_construccion) ? proyecto.total_servicios_especiales_construccion : 0)}
+                            {#if proyecto.total_servicios_especiales_construccion <= proyecto.total_maquinaria_industrial * 0.05}
+                                <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                            {:else}
+                                <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                            {/if}
+                        </td>
+                    </tr>
 
-        <thead slot="thead">
-            <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
-            </tr>
-        </thead>
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Viáticos - Bienestar alumnos </td>
+                        <td class="border-t p-4"> La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000 </td>
+                        <td class="border-t p-4">
+                            Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_viaticos) ? proyecto.total_viaticos : 0)}
+                            {#if proyecto.total_viaticos <= 4460000}
+                                <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                            {:else}
+                                <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                            {/if}
+                        </td>
+                    </tr>
 
-        <tbody slot="tbody">
-            {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t p-4"> Servicios especiales de construcción </td>
-                    <td class="border-t p-4">
-                        El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial * 0.05 : 0)}) del rubro de "MAQUINARIA INDUSTRIAL" (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_maquinaria_industrial) ? proyecto.total_maquinaria_industrial : 0)}).
-                    </td>
-                    <td class="border-t p-4">
-                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_servicios_especiales_construccion) ? proyecto.total_servicios_especiales_construccion : 0)}
-                        {#if proyecto.total_servicios_especiales_construccion <= proyecto.total_maquinaria_industrial * 0.05}
-                            <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
-                        {:else}
-                            <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
-                        {/if}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
+                        <td class="border-t p-4">
+                            El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto * 0.05 : 0)}) del total del proyecto ( ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)}).
+                        </td>
+                        <td class="border-t p-4">
+                            Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
+                            {#if proyecto.total_mantenimiento_maquinaria <= proyecto.precio_proyecto * 0.05}
+                                <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                            {:else}
+                                <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                            {/if}
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="border-t p-4">
+                        <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
                     </td>
                 </tr>
-
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t p-4"> Viáticos - Bienestar alumnos </td>
-                    <td class="border-t p-4"> La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000 </td>
-                    <td class="border-t p-4">
-                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_viaticos) ? proyecto.total_viaticos : 0)}
-                        {#if proyecto.total_viaticos <= 4460000}
-                            <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
-                        {:else}
-                            <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
-                        {/if}
-                    </td>
-                </tr>
-
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
-                    <td class="border-t p-4">
-                        El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto * 0.05 : 0)}) del total del proyecto ( ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)}).
-                    </td>
-                    <td class="border-t p-4">
-                        Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
-                        {#if proyecto.total_mantenimiento_maquinaria <= proyecto.precio_proyecto * 0.05}
-                            <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
-                        {:else}
-                            <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
-                        {/if}
-                    </td>
-                </tr>
-            {/if}
-        </tbody>
-
-        <tfoot slot="tfoot">
-            <tr>
-                <td colspan="3" class="border-t p-4">
-                    <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
-                </td>
-            </tr>
-        </tfoot>
-    </DataTable>
-
+            </tfoot>
+        </table>
+    </div>
     <div class="px-4 mt-20">
         <h1 class="mb-4 text-center">Filtros</h1>
         <ul class="flex flex-wrap">
@@ -117,7 +116,7 @@
         </ul>
     </div>
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="actions">
             {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.create', [convocatoria.id, proyecto.id]))}>

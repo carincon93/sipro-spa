@@ -83,18 +83,4 @@ class TecnoacademiaLineaTecnologica extends Model
     {
         return $this->hasMany(TaTp::class);
     }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterTecnoacademiaLineaTecnologica($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%' . $search . '%');
-        });
-    }
 }

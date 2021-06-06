@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['can', 'nombre_usuario'];
+    protected $appends = ['can'];
 
     /**
      * The attributes that are mass assignable.

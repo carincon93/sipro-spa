@@ -1,5 +1,5 @@
 <script>
-    import Label from '@/Components/Label'
+    import Label from '@/Shared/Label'
     import InputError from './InputError'
     import Textfield from '@smui/textfield'
 

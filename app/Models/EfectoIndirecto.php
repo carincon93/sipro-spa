@@ -74,7 +74,10 @@ class EfectoIndirecto extends Model
     public function scopeFilterIndirectCause($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(descripcion) ilike unaccent('%" . $search . "%')");
         });
     }
 }

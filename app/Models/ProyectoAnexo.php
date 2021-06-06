@@ -75,7 +75,10 @@ class ProyectoAnexo extends Model
     public function scopeFilterProyectoAnexo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->where('anexos.nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

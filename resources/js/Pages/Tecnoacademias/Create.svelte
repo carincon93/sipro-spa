@@ -4,12 +4,12 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
 
     export let errors
     export let lineasTecnologicas

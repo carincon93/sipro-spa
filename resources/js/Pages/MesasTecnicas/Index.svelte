@@ -4,10 +4,10 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Button from '@/Components/Button'
-    import Pagination from '@/Components/Pagination'
-    import DataTable from '@/Components/DataTable'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Button from '@/Shared/Button'
+    import Pagination from '@/Shared/Pagination'
+    import DataTable from '@/Shared/DataTable'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
     import { Inertia } from '@inertiajs/inertia'
 

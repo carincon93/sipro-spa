@@ -4,7 +4,7 @@
     import { _ } from 'svelte-i18n'
 
     import Select from 'svelte-select'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
 
     export let classes = ''
     export let id = ''

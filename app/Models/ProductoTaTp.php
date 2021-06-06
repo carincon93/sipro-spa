@@ -53,18 +53,4 @@ class ProductoTaTp extends Model
     {
         return $this->belongsTo(Producto::class);
     }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterTATPProducto($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('proyectado', 'ilike', '%' . $search . '%');
-        });
-    }
 }

@@ -4,15 +4,15 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import InputError from '@/Components/InputError'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import File from '@/Components/File'
-    import Switch from '@/Components/Switch'
-    import Dialog from '@/Components/Dialog'
-    import PercentageProgress from '@/Components/PercentageProgress'
+    import Input from '@/Shared/Input'
+    import InputError from '@/Shared/InputError'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import File from '@/Shared/File'
+    import Switch from '@/Shared/Switch'
+    import Dialog from '@/Shared/Dialog'
+    import PercentageProgress from '@/Shared/PercentageProgress'
 
     export let errors
     export let convocatoria

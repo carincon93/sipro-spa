@@ -5,12 +5,12 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Pagination from '@/Components/Pagination'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Pagination from '@/Shared/Pagination'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
-    import Button from '@/Components/Button'
-    import DataTable from '@/Components/DataTable'
-    import Stepper from '@/Components/Stepper'
+    import Button from '@/Shared/Button'
+    import DataTable from '@/Shared/DataTable'
+    import Stepper from '@/Shared/Stepper'
 
     export let convocatoria
     export let proyecto
@@ -30,7 +30,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Roles SENNOVA</div>
 
         <h2 class="text-center mt-10 mb-24" slot="caption">

@@ -3,9 +3,9 @@
     import { page } from '@inertiajs/inertia-svelte'
     import { checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Stepper from '@/Components/Stepper'
-    import Gantt from '@/Components/Gantt'
-    import InfoMessage from '@/Components/InfoMessage'
+    import Stepper from '@/Shared/Stepper'
+    import Gantt from '@/Shared/Gantt'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto

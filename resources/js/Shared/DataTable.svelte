@@ -1,5 +1,5 @@
 <script>
-    import SearchFilter from '@/Components/SearchFilter'
+    import SearchFilter from '@/Shared/SearchFilter'
 
     export let routeParams
 

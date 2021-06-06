@@ -3,10 +3,9 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Input from '@/Components/Input'
-    import DataTable from '@/Components/DataTable'
-    import LoadingButton from '@/Components/LoadingButton'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Input from '@/Shared/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -138,49 +137,50 @@
     </div>
 {/if}
 
-<DataTable class="mt-10">
-    <div slot="title">Semilleros de investigación vinculados</div>
-
-    <thead slot="thead">
-        <tr class="text-left font-bold">
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Línea de investigación</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Grupo de investigación</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
-        </tr>
-    </thead>
-    <tbody slot="tbody">
-        {#each proyecto.semillerosInvestigacion as semilleroInvestigacion (semilleroInvestigacion.id)}
-            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                        {semilleroInvestigacion.nombre}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {semilleroInvestigacion.linea_investigacion.nombre}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {semilleroInvestigacion.linea_investigacion.grupo_investigacion.nombre} - {semilleroInvestigacion.linea_investigacion.grupo_investigacion.acronimo}
-                    </p>
-                </td>
-                <td class="border-t td-actions">
-                    <ResourceMenu>
-                        <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
-                            <Text>Quitar</Text>
-                        </Item>
-                    </ResourceMenu>
-                </td>
+<h1 class="mt-24 mb-8 text-center text-3xl">Semilleros de investigación vinculados</h1>
+<div class="bg-white rounded shadow">
+    <table class="w-full whitespace-no-wrap table-fixed data-table">
+        <thead>
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Línea de investigación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Grupo de investigación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
-        {/each}
+        </thead>
+        <tbody>
+            {#each proyecto.semillerosInvestigacion as semilleroInvestigacion (semilleroInvestigacion.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            {semilleroInvestigacion.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {semilleroInvestigacion.linea_investigacion.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 flex items-center">
+                            {semilleroInvestigacion.linea_investigacion.grupo_investigacion.nombre} - {semilleroInvestigacion.linea_investigacion.grupo_investigacion.acronimo}
+                        </p>
+                    </td>
+                    <td class="border-t td-actions">
+                        <ResourceMenu>
+                            <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
+                                <Text>Quitar</Text>
+                            </Item>
+                        </ResourceMenu>
+                    </td>
+                </tr>
+            {/each}
 
-        {#if proyecto.semillerosInvestigacion.length === 0}
-            <tr>
-                <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
-            </tr>
-        {/if}
-    </tbody>
-</DataTable>
+            {#if proyecto.semillerosInvestigacion.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
+                </tr>
+            {/if}
+        </tbody>
+    </table>
+</div>

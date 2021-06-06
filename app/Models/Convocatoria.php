@@ -96,7 +96,10 @@ class Convocatoria extends Model
     public function scopeFilterConvocatoria($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('fecha_inicio', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(descripcion) ilike unaccent('%" . $search . "%')");
         });
     }
 

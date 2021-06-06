@@ -77,9 +77,13 @@ class ProyectoRolSennova extends Model
     public function scopeFilterProyectoRolSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->join('convocatoria_roles_sennova', 'proyecto_roles_sennova.convocatoria_sennova_role_id', 'convocatoria_roles_sennova.id')
-                ->join('roles_sennova', 'convocatoria_roles_sennova.sennova_role_id', 'roles_sennova.id')
-                ->where('convocatoria_roles_sennova.salary', 'ilike', '%' . $search . '%')->orWhere('roles_sennova.nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->join('convocatoria_rol_sennova', 'proyecto_rol_sennova.convocatoria_rol_sennova_id', 'convocatoria_rol_sennova.id');
+            $query->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id');
+            $query->whereRaw("unaccent(roles_sennova.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('convocatoria_rol_sennova.asignacion_mensual', 'ilike', '%' . $search . '%');
         });
     }
 

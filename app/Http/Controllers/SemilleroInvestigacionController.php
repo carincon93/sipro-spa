@@ -80,6 +80,8 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
+        $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
+
         return Inertia::render('SemillerosInvestigacion/Edit', [
             'semilleroInvestigacion'  => $semilleroInvestigacion,
             'lineasInvestigacion'     => LineaInvestigacion::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),

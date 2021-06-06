@@ -8,7 +8,7 @@
     import { inertia } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import LoadingButton from '@/Components/LoadingButton'
+    import LoadingButton from '@/Shared/LoadingButton'
 
     export let status
 

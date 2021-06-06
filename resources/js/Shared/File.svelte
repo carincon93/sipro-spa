@@ -1,6 +1,6 @@
 <script>
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
+    import Label from '@/Shared/Label'
+    import InputError from '@/Shared/InputError'
 
     export let id
     export let value

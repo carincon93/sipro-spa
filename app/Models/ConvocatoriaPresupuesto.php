@@ -73,18 +73,4 @@ class ConvocatoriaPresupuesto extends Model
     {
         return $this->hasMany(ProyectoPresupuesto::class);
     }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterCallBudget($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('convocatoria_id', 'ilike', '%' . $search . '%');
-        });
-    }
 }

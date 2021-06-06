@@ -96,6 +96,9 @@ class Regional extends Model
     public function scopeFilterRegional($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhere('codigo', 'ilike', '%' . $search . '%');
         });

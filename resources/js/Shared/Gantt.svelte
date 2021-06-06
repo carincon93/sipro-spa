@@ -4,9 +4,9 @@
     import { Inertia } from '@inertiajs/inertia'
 
     import Loading from './Loading'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
-    import InfoMessage from '@/Components/InfoMessage'
+    import InfoMessage from '@/Shared/InfoMessage'
     import { onMount } from 'svelte'
 
     export let items

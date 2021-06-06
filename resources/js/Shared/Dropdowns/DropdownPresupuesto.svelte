@@ -1,9 +1,9 @@
 <script>
     import { onMount } from 'svelte'
     import axios from 'axios'
-    import InputError from '@/Components/InputError'
-    import Label from '@/Components/Label'
-    import InfoMessage from '@/Components/InfoMessage'
+    import InputError from '@/Shared/InputError'
+    import Label from '@/Shared/Label'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let classes = ''
     export let message

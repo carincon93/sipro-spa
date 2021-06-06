@@ -5,33 +5,26 @@
 </script>
 
 <script>
-    import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
-    import { _ } from 'svelte-i18n'
-    import ApplicationLogo from '@/Components/ApplicationLogo'
-
-    import Dropdown from '@/Components/Dropdown'
-    import Icon from '@/Components/Icon'
-    import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-    import FlashMessages from '@/Components/FlashMessages'
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
     import { Inertia } from '@inertiajs/inertia'
-    import Loading from '@/Components/Loading.svelte'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
+
+    import { _ } from 'svelte-i18n'
+
+    import ApplicationLogo from '@/Shared/ApplicationLogo'
+    import Dropdown from '@/Shared/Dropdown'
+    import Icon from '@/Shared/Icon'
+    import ResponsiveNavLink from '@/Shared/ResponsiveNavLink'
+    import FlashMessages from '@/Shared/FlashMessages'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import Loading from '@/Shared/Loading'
 
     let dialogOpen = false
     let showingNavigationDropdown = false
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin = checkRole(1)
-
-    function checkRole(roleId) {
-        return (
-            authUser.roles.filter(function (role) {
-                return role.id == roleId
-            }).length > 0
-        )
-    }
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let loading = true
     Inertia.on('start', () => {
@@ -74,7 +67,7 @@
                             <Dropdown class="mt-1" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
-                                        <span>{authUser.nombre_usuario}</span>
+                                        <span class="capitalize">{authUser.nombre}</span>
                                     </div>
                                     <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>
@@ -160,7 +153,7 @@
                 <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">Centros de formación</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(74) || checkRole(102) || checkRole(103)}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">Convocatorias</Button>
             {/if}
 

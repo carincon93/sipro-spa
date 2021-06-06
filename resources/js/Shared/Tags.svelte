@@ -2,7 +2,7 @@
     import Tagify from '@yaireo/tagify'
 
     import '@yaireo/tagify/dist/tagify.css'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
 
     export let error
     export let placeholder

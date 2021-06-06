@@ -5,12 +5,12 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Components/Button'
-    import Pagination from '@/Components/Pagination'
-    import DataTable from '@/Components/DataTable'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Button from '@/Shared/Button'
+    import Pagination from '@/Shared/Pagination'
+    import DataTable from '@/Shared/DataTable'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
-    import Stepper from '@/Components/Stepper'
+    import Stepper from '@/Shared/Stepper'
 
     export let convocatoria
     export let proyecto
@@ -30,7 +30,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Análisis de riesgos</div>
 
         <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
@@ -43,7 +43,7 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nivel</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>

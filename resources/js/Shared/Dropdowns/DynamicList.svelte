@@ -2,7 +2,7 @@
     import { afterUpdate, onMount } from 'svelte'
     import axios from 'axios'
     import Select from 'svelte-select'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
     import { _ } from 'svelte-i18n'
 
     export let classes = ''

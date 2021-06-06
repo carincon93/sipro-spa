@@ -5,7 +5,7 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Components/Button'
+    import Button from '@/Shared/Button'
 
     export let convocatoria
 

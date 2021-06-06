@@ -3,12 +3,12 @@
     import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Pagination from '@/Components/Pagination'
-    import Button from '@/Components/Button'
+    import Pagination from '@/Shared/Pagination'
+    import Button from '@/Shared/Button'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Stepper from '@/Components/Stepper'
-    import Gantt from '@/Components/Gantt'
+    import Stepper from '@/Shared/Stepper'
+    import Gantt from '@/Shared/Gantt'
 
     export let convocatoria
     export let proyecto

@@ -4,11 +4,11 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import Textarea from '@/Components/Textarea'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import Textarea from '@/Shared/Textarea'
 
     export let errors
     export let categoriasProyectos

@@ -4,11 +4,11 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import DynamicList from '@/Dropdowns/DynamicList'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let categoriasMinciencias

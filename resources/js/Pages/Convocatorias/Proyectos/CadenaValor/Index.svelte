@@ -3,8 +3,8 @@
     import { page } from '@inertiajs/inertia-svelte'
     import { _ } from 'svelte-i18n'
 
-    import Stepper from '@/Components/Stepper'
-    import Loading from '@/Components/Loading'
+    import Stepper from '@/Shared/Stepper'
+    import Loading from '@/Shared/Loading'
     import { onDestroy, onMount } from 'svelte'
 
     export let convocatoria

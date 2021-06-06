@@ -1,6 +1,6 @@
 <script>
     import fitTextarea from 'fit-textarea'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
     import Textarea from '@smui/textfield'
     import CharacterCounter from '@smui/textfield/character-counter/index'
     import { onMount } from 'svelte'

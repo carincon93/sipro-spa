@@ -5,11 +5,11 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import ResourceMenu from '@/Shared/ResourceMenu'
     import { Item, Text } from '@smui/list'
-    import DataTable from '@/Components/DataTable'
-    import Button from '@/Components/Button'
-    import Pagination from '@/Components/Pagination'
+    import DataTable from '@/Shared/DataTable'
+    import Button from '@/Shared/Button'
+    import Pagination from '@/Shared/Pagination'
 
     export let convocatoria
     export let proyecto
@@ -46,7 +46,7 @@
         </div>
     </header>
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Miembros de la entidad aliada</div>
 
         <div slot="actions">

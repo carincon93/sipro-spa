@@ -3,12 +3,12 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import InputError from '@/Components/InputError'
-    import Label from '@/Components/Label'
-    import File from '@/Components/File'
-    import Switch from '@/Components/Switch'
-    import PercentageProgress from '@/Components/PercentageProgress'
+    import Input from '@/Shared/Input'
+    import InputError from '@/Shared/InputError'
+    import Label from '@/Shared/Label'
+    import File from '@/Shared/File'
+    import Switch from '@/Shared/Switch'
+    import PercentageProgress from '@/Shared/PercentageProgress'
 
     export let errors
     export let convocatoria

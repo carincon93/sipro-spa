@@ -21,7 +21,7 @@ class TipoProyectoController extends Controller
 
         return Inertia::render('TiposProyecto/Index', [
             'filters'       => request()->all('search'),
-            'tiposProyecto' => TipoProyecto::with(['lineaProgramatica' => function ($query) {
+            'tiposProyecto' => TipoProyecto::select('tipos_proyecto.id', 'tipos_proyecto.nombre', 'tipos_proyecto.linea_programatica_id')->with(['lineaProgramatica' => function ($query) {
                 $query->orderBy('nombre', 'ASC');
             }])
                 ->filterTipoProyecto(request()->only('search'))->paginate()->appends(['search' => request()->search]),

@@ -3,7 +3,7 @@
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Button from '@/Components/Button'
+    import Button from '@/Shared/Button'
     import { Inertia } from '@inertiajs/inertia'
 
     export let convocatorias

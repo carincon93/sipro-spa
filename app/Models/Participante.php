@@ -6,8 +6,18 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Participante extends Pivot
 {
+    /**
+     * table
+     *
+     * @var string
+     */
     protected $table = 'proyecto_participantes';
 
+    /**
+     * appneds
+     *
+     * @var array
+     */
     protected $appneds = ['rol_sennova_participante'];
 
     protected $fillable = [
@@ -47,15 +57,5 @@ class Participante extends Pivot
     public function rol()
     {
         return $this->belongsTo(Role::class);
-    }
-
-    /**
-     * getRolSennovaParticipanteAttribute
-     *
-     * @return void
-     */
-    public function getRolSennovaParticipanteAttribute()
-    {
-        return 'test';
     }
 }

@@ -4,12 +4,12 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import Dialog from '@/Shared/Dialog'
 
     export let errors
     export let temaPriorizado

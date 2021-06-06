@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import Stepper from '@/Components/Stepper'
+    import Stepper from '@/Shared/Stepper'
     import ProgramasFormacion from './ProgramasFormacion'
     import SemillerosInvestigacion from './SemillerosInvestigacion'
     import Participantes from './Participantes'

@@ -6,7 +6,7 @@
 <script>
     import { inertia } from '@inertiajs/inertia-svelte'
     import { route } from '@/Utils'
-    import ApplicationLogo from '@/Components/ApplicationLogo'
+    import ApplicationLogo from '@/Shared/ApplicationLogo'
 </script>
 
 <svelte:head>

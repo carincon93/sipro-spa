@@ -183,7 +183,10 @@ class Idi extends Model
     public function scopeFilterIdi($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('titulo', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(titulo) ilike unaccent('%" . $search . "%')");
         });
     }
 

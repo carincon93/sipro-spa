@@ -22,7 +22,7 @@ class TemaPriorizadoController extends Controller
 
         return Inertia::render('TemasPriorizados/Index', [
             'filters'   => request()->all('search'),
-            'temasPriorizados' => TemaPriorizado::with(['sectorProductivo', 'mesaTecnica'])
+            'temasPriorizados' => TemaPriorizado::select('temas_priorizados.id', 'temas_priorizados.nombre', 'temas_priorizados.sector_productivo_id', 'temas_priorizados.mesa_tecnica_id')->with(['sectorProductivo', 'mesaTecnica'])
                 ->filterTemaPriorizado(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }

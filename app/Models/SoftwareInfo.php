@@ -67,6 +67,9 @@ class SoftwareInfo extends Model
     public function scopeFilterSoftwareInfo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
             $query->where('tipo_licencia', 'ilike', '%' . $search . '%');
         });
     }

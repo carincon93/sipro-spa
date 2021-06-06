@@ -85,7 +85,14 @@ class TemaPriorizado extends Model
     public function scopeFilterTemaPriorizado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->join('sectores_productivos', 'temas_priorizados.sector_productivo_id', 'sectores_productivos.id');
+            $query->join('mesas_tecnicas', 'temas_priorizados.mesa_tecnica_id', 'mesas_tecnicas.id');
+            $query->whereRaw("unaccent(temas_priorizados.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(sectores_productivos.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(mesas_tecnicas.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

@@ -4,14 +4,14 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Dialog from '@/Shared/Dialog'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
 
     export let errors
     export let tecnoacademia

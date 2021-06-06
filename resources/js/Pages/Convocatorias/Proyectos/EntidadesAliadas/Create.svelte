@@ -5,16 +5,16 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import Input from '@/Components/Input'
-    import Switch from '@/Components/Switch'
-    import File from '@/Components/File'
-    import Select from '@/Components/Select'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
+    import File from '@/Shared/File'
+    import Select from '@/Shared/Select'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import InputError from '@/Components/InputError'
+    import InputError from '@/Shared/InputError'
 
     export let errors
     export let convocatoria

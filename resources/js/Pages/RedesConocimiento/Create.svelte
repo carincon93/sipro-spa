@@ -4,8 +4,8 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Input from '@/Shared/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
 
     export let errors
 

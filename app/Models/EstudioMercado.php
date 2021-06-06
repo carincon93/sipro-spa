@@ -66,7 +66,10 @@ class EstudioMercado extends Model
     public function scopeFilterEstudioMercado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('empresa', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(empresa) ilike unaccent('%" . $search . "%')");
         });
     }
 }

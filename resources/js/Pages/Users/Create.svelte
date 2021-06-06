@@ -4,16 +4,16 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Switch from '@/Components/Switch'
-    import Select from '@/Components/Select'
-    import InfoMessage from '@/Components/InfoMessage'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import InputError from '@/Shared/InputError'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Switch from '@/Shared/Switch'
+    import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import DynamicList from '@/Dropdowns/DynamicList'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let tiposDocumento

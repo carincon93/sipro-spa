@@ -3,16 +3,16 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Dialog from '@/Components/Dialog'
+    import Dialog from '@/Shared/Dialog'
 
-    import InputError from '@/Components/InputError'
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
+    import InputError from '@/Shared/InputError'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import Textarea from '@/Components/Textarea'
+    import Textarea from '@/Shared/Textarea'
 
     export let errors
     export let role = {}

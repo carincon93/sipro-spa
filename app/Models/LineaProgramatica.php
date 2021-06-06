@@ -109,7 +109,7 @@ class LineaProgramatica extends Model
             $search = str_replace(' ', '%%', $search);
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
-            $query->whereRaw("unaccent(programas_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhere('codigo', 'ilike', '%' . $search . '%');
             $query->orWhere('categoria_proyecto', 'ilike', '%' . $search . '%');
         });

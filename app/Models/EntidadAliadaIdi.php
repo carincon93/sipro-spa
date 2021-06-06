@@ -59,18 +59,4 @@ class EntidadAliadaIdi extends Model
     {
         return $this->belongsTo(EntidadAliada::class);
     }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterEntidadAliadaIDI($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion_convenio', 'ilike', '%' . $search . '%');
-        });
-    }
 }

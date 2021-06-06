@@ -4,11 +4,11 @@
     import { checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Pagination from '@/Components/Pagination'
-    import DataTable from '@/Components/DataTable'
+    import Pagination from '@/Shared/Pagination'
+    import DataTable from '@/Shared/DataTable'
     import Create from './Create'
 
-    import Stepper from '@/Components/Stepper'
+    import Stepper from '@/Shared/Stepper'
 
     export let convocatoria
     export let proyecto
@@ -31,7 +31,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Anexos</div>
 
         <thead slot="thead">

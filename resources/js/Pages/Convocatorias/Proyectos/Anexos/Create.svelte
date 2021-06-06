@@ -3,9 +3,9 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import LoadingButton from '@/Components/LoadingButton'
-    import File from '@/Components/File'
-    import PercentageProgress from '@/Components/PercentageProgress'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import File from '@/Shared/File'
+    import PercentageProgress from '@/Shared/PercentageProgress'
     import { onMount } from 'svelte'
 
     export let errors
@@ -37,7 +37,9 @@
 
     let proyectoAnexoId
     onMount(() => {
-        proyectoAnexoId = proyectoAnexo.data.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.data.find((item) => item.anexo_id == anexo.id).id : null
+        if (proyectoAnexo.data) {
+            proyectoAnexoId = proyectoAnexo.data.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.data.find((item) => item.anexo_id == anexo.id).id : null
+        }
     })
 </script>
 
@@ -52,7 +54,7 @@
     {/if}
     <fieldset disabled={(isSuperAdmin && !sending) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
         <div>
-            <File id="archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
+            <File type="file" accept="application/pdf" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>
         <div>
             <LoadingButton loading={sending} class="w-full mt-4" type="submit">

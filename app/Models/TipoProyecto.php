@@ -74,7 +74,12 @@ class TipoProyecto extends Model
     public function scopeFilterTipoProyecto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id');
+            $query->whereRaw("unaccent(tipos_proyecto.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(lineas_programaticas.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

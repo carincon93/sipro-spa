@@ -5,13 +5,13 @@
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
 
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import InfoMessage from '@/Components/InfoMessage'
-    import Stepper from '@/Components/Stepper'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Stepper from '@/Shared/Stepper'
 
     import { createPopper } from '@popperjs/core'
 

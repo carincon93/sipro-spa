@@ -7,8 +7,8 @@
     import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Input from '@/Components/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
 
     export let email
     export let token
