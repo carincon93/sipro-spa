@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-    <title>{$title ? `${$title} - SIPRO-SPA` : 'SIPRO-SPA'}</title>
+    <title>{$title ? `${$title} - SGPS-SIPRO` : 'SGPS-SIPRO'}</title>
 </svelte:head>
 
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 welcome-wallpaper">

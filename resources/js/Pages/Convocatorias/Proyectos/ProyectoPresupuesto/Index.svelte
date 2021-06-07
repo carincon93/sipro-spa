@@ -137,41 +137,41 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each proyectoPresupuesto.data as proyectoPresupuesto (proyectoPresupuesto.id)}
+            {#each proyectoPresupuesto.data as presupuesto (presupuesto.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <div class="flex flex-col focus:text-indigo-500 px-6 py-4">
                             <div class="mt-3">
                                 <small>Concepto interno SENA</small>
                                 <p>
-                                    {proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
                                 </p>
                             </div>
                             <div class="mt-3">
                                 <small>Rubro</small>
                                 <p>
-                                    {proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
+                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
                                 </p>
                             </div>
                             <div class="mt-3">
                                 <small>Uso presupuestal</small>
                                 <p>
-                                    {proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
+                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
                                 </p>
                             </div>
                         </div>
                     </td>
                     <td class="border-t">
                         <div class="mt-3">
-                            {#if proyectoPresupuesto.promedio > 0}
-                                ${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.promedio)} COP
-                            {:else if proyectoPresupuesto.totalByBudgetWithoutMarketResearch > 0}
-                                ${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.totalByBudgetWithoutMarketResearch)}
+                            {#if presupuesto.promedio > 0}
+                                ${new Intl.NumberFormat('de-DE').format(presupuesto.promedio)} COP
+                            {:else if presupuesto.totalByBudgetWithoutMarketResearch > 0}
+                                ${new Intl.NumberFormat('de-DE').format(presupuesto.totalByBudgetWithoutMarketResearch)}
                             {:else}
                                 No ha generado el estudio de mercado aún
                             {/if}
                         </div>
-                        {#if !proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto}
+                        {#if !presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto}
                             <span class="text-red-400 text-center text-xs"> Este uso presupuestal NO suma al total del presupuesto </span>
                         {/if}
                     </td>

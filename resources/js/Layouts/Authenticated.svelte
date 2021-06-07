@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-    <title>{$title ? `${$title} - SIPRO-SPA` : 'SIPRO-SPA'}</title>
+    <title>{$title ? `${$title} - SGPS-SIPRO` : 'SGPS-SIPRO'}</title>
 </svelte:head>
 
 <div>
