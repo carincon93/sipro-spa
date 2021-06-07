@@ -4,7 +4,7 @@
     import { Inertia } from '@inertiajs/inertia'
 
     import Loading from './Loading'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import InfoMessage from '@/Shared/InfoMessage'
     import { onMount } from 'svelte'
@@ -102,11 +102,11 @@
                             <p style="max-width: 90%;max-height: 56px;overflow: hidden;">
                                 {item.descripcion ?? item.nombre}
                             </p>
-                            <ResourceMenu>
+                            <DataTableMenu>
                                 <Item on:SMUI:action={() => Inertia.visit(route(request.uri, arrayPush(item.id)))}>
                                     <Text>{$_('View details')}</Text>
                                 </Item>
-                            </ResourceMenu>
+                            </DataTableMenu>
                         {:else}
                             <span style="max-width: 90%;max-height: 50px;overflow: hidden;">{item.descripcion ?? item.nombre}</span>
                         {/if}

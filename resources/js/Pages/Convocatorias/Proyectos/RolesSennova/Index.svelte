@@ -6,7 +6,7 @@
     import { Inertia } from '@inertiajs/inertia'
 
     import Pagination from '@/Shared/Pagination'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import Button from '@/Shared/Button'
     import DataTable from '@/Shared/DataTable'
@@ -65,7 +65,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
@@ -75,7 +75,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

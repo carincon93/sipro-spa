@@ -8,7 +8,7 @@
     import Label from '@/Shared/Label'
     import Select from '@/Shared/Select'
     import LoadingButton from '@/Shared/LoadingButton'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
@@ -229,11 +229,11 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <ResourceMenu class={resultados.data.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={resultados.data.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => showParticipante(resultado)}>
                                     <Text>Vincular</Text>
                                 </Item>
-                            </ResourceMenu>
+                            </DataTableMenu>
                         </td>
                     </tr>
                 {/each}
@@ -299,14 +299,14 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>
                             </Item>
                             <Item on:SMUI:action={() => removeParticipante(participante.id)}>
                                 <Text>Quitar</Text>
                             </Item>
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

@@ -8,7 +8,7 @@
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let gruposInvestigacion
@@ -61,7 +61,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
@@ -71,7 +71,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

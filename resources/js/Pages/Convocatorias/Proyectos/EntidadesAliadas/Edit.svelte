@@ -18,7 +18,7 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Dialog from '@/Shared/Dialog'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import InputError from '@/Shared/InputError'
 
     export let errors
@@ -281,7 +281,7 @@
                         </td>
 
                         <td class="border-t td-actions">
-                            <ResourceMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                         <Text>Ver detalles</Text>
@@ -291,7 +291,7 @@
                                         <Text>No tiene permisos</Text>
                                     </Item>
                                 {/if}
-                            </ResourceMenu>
+                            </DataTableMenu>
                         </td>
                     </tr>
                 {/each}

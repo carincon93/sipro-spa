@@ -5,7 +5,7 @@
     import { _ } from 'svelte-i18n'
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -130,11 +130,11 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <ResourceMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
                                     <Text>Vincular</Text>
                                 </Item>
-                            </ResourceMenu>
+                            </DataTableMenu>
                         </td>
                     </tr>
                 {/each}
@@ -191,11 +191,11 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
                                 <Text>Quitar</Text>
                             </Item>
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

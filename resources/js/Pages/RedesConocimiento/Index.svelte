@@ -7,7 +7,7 @@
 
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
 
@@ -48,7 +48,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={redesConocimiento.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={redesConocimiento.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('redes-conocimiento.edit', redConocimiento.id))}>
                                     <Text>Ver detalles</Text>
@@ -58,7 +58,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

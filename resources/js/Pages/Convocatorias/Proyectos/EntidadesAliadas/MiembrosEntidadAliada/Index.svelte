@@ -5,7 +5,7 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Button from '@/Shared/Button'
@@ -86,7 +86,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <ResourceMenu class={miembrosEntidadAliada.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={miembrosEntidadAliada.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
@@ -96,7 +96,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

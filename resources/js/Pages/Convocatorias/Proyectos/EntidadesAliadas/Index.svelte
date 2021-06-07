@@ -7,7 +7,7 @@
 
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Stepper from '@/Shared/Stepper'
@@ -55,7 +55,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
@@ -65,7 +65,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

@@ -8,7 +8,7 @@
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let sectoresProductivos
@@ -49,7 +49,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu class={sectoresProductivos.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={sectoresProductivos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('sectores-productivos.edit', sectorProductivo.id))}>
                                     <Text>Ver detalles</Text>
@@ -59,7 +59,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

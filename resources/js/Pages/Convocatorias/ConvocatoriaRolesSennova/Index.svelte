@@ -8,7 +8,7 @@
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import Button from '@/Shared/Button'
-    import ResourceMenu from '@/Shared/ResourceMenu'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -66,7 +66,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <ResourceMenu class={convocatoriaRolesSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={convocatoriaRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.edit', [convocatoria.id, convocatoriaRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
@@ -76,7 +76,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}
