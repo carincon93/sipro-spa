@@ -9,6 +9,7 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Select from '@/Shared/Select'
     import InputError from '@/Shared/InputError'
+    import axios from 'axios'
 
     export let errors
     export let convocatoria
@@ -128,14 +129,7 @@
                     <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
                 </div>
                 <div>
-                    <select id="tecnoacademia_linea_tecnologica_id" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tecnoacademia_linea_tecnologica_id} disabled={lineasTecnologicas.length > 0 ? undefined : true} required>
-                        <option value="">Seleccione una línea tecnológica</option>
-                        {#each lineasTecnologicas as { id, nombre }, i}
-                            <option value={id}>{nombre}</option>
-                        {/each}
-                    </select>
-
-                    <InputError message={errors.tecnoacademia_linea_tecnologica_id} />
+                    <Select items={lineasTecnologicas} id="tecnoacademia_linea_tecnologica_id" bind:selectedValue={$form.tecnoacademia_linea_tecnologica_id} error={errors.tecnoacademia_linea_tecnologica_id} autocomplete="off" placeholder="Seleccione una línea tecnológica" required />
                 </div>
             </div>
         </fieldset>

@@ -653,7 +653,7 @@
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
                 <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" />
-                <Input label="Ingrese su contraseña" id="password" type="password" class="mt-4" error={errors.password} placeholder="Escriba su contraseña" bind:value={$deleteForm.password} required />
+                <Input label="Ingrese su contraseña" id="password" type="password" class="mt-4" error={errors.password} bind:value={$deleteForm.password} required />
             </form>
         </div>
         <div slot="actions">

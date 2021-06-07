@@ -142,7 +142,7 @@
                     <Label class="mb-4" labelFor="titulo_proyecto_articulado" value="Título del proyecto de la línea programática con la que se realiza articulación" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
+                    <Textarea label="Título del proyecto" maxlength="40000" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
                 </div>
             </div>
 

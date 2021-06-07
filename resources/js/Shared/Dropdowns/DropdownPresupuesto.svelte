@@ -5,7 +5,6 @@
     import Label from '@/Shared/Label'
     import InfoMessage from '@/Shared/InfoMessage'
 
-    export let classes = ''
     export let message
     export let presupuestoSennova
     export let selectedUsoPresupuestal
@@ -88,7 +87,7 @@
 <div class="mt-4">
     <Label labelFor="segundo_grupo_presupuestal_id" value="Concepto interno SENA" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="segundo_grupo_presupuestal_id" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleSegundoGrupoPresupuestal(e)} required>
+    <select id="segundo_grupo_presupuestal_id" class="default-select w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" on:change={(e) => handleSegundoGrupoPresupuestal(e)} required>
         <option value="">Seleccione el concepto interno SENA</option>
         {#each segundoGrupoPresupuestal as { value, label }}
             <option {value} selected={selectedSegundoGrupoPresupuestalId == value ? true : false}>{label}</option>
@@ -99,7 +98,7 @@
 <div class="mt-4">
     <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="tercer_grupo_presupuestal_id" disabled={!(tercerGrupoPresupuestal.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" on:change={(e) => handleTercerGrupoPresupuestal(e)} required>
+    <select id="tercer_grupo_presupuestal_id" disabled={!(tercerGrupoPresupuestal.length > 0)} class="default-select w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" on:change={(e) => handleTercerGrupoPresupuestal(e)} required>
         <option value="">Seleccione el rubro</option>
         {#each tercerGrupoPresupuestal as { value, label }}
             <option class="shadow p-8 hover:bg-gray-100" {value} selected={selectedTercerGrupoPresupuestalId == value ? true : false}>{label}</option>
@@ -110,7 +109,7 @@
 <div class="mt-4">
     <Label labelFor="uso_presupuestal_id" value="Uso presupuestal" {required} />
     <!-- svelte-ignore a11y-no-onchange -->
-    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 {classes}" bind:value={selectedUsoPresupuestal} on:change={(e) => handlePresupuestoSennova(e)} required>
+    <select id="uso_presupuestal_id" disabled={!(usosPresupuestales.length > 0)} class="default-select w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={selectedUsoPresupuestal} on:change={(e) => handlePresupuestoSennova(e)} required>
         <option value="">Seleccione el uso presupuestal</option>
         {#each usosPresupuestales as { value, label }}
             <option class="shadow p-8 hover:bg-gray-100" {value} selected={seletcedConvocatoriaPresupuestoId == value ? true : false}>{label}</option>
@@ -125,26 +124,3 @@
 {#if mensajeUsoPresupuestal}
     <InfoMessage message={mensajeUsoPresupuestal} />
 {/if}
-
-<style>
-    :global(.presupuesto-info) {
-        border-radius: 4px;
-        border: 1px solid #dbdbdb;
-        height: 56px;
-        padding: 0 10px;
-    }
-
-    :global(.presupuesto-info .listItem) {
-        border-bottom: 1px solid #ccc;
-    }
-
-    :global(.presupuesto-info .item) {
-        height: auto !important;
-        line-height: 1.6 !important;
-        text-overflow: initial !important;
-        overflow: initial !important;
-        white-space: break-spaces !important;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-</style>
