@@ -60,7 +60,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkPermission(authUser, [5])}
-                        <a use:inertia href={route('convocatorias.tatp.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> I+D+i </a>
+                        <a use:inertia href={route('convocatorias.tatp.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> Tecnoacademia - Tecnoparque </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
