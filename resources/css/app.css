@@ -216,3 +216,11 @@ input[type="date"], select {
 th.th-actions {
     width: 150px;
 }
+
+.paragraph-ellipsis {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}

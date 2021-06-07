@@ -376,8 +376,8 @@
                     <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                             <div class="flex-1 efectos-directos relative">
-                                <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
+                                <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                    <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
                                         <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
                                         {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
                                             {efectoIndirecto.descripcion}
@@ -388,8 +388,8 @@
                         {/each}
                         {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
                             <div class="flex-1 efectos-directos relative" on:click={showEfectoindirectoDialog(null, efectoDirecto.id)}>
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                                    <p class="text-sm text-white line-height-1-24" />
                                 </div>
                             </div>
                         {/each}
@@ -404,8 +404,8 @@
                     {/if}
                     <!-- Efecto directo -->
                     <div class="efectos-directos relative flex-1" id={i == 0 ? 'efecto-directo-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showEfectoDirectoDialog(efectoDirecto)} class="{efectoDirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                        <div on:click={showEfectoDirectoDialog(efectoDirecto)} class="{efectoDirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}</small>
                                 {#if efectoDirecto.descripcion != null && efectoDirecto.descripcion.length > 0}
                                     {efectoDirecto.descripcion}
@@ -419,13 +419,13 @@
 
         <!-- Planteamiento del problema -->
         <div id="planteamiento-problema-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-            <small class="block line-height-1">Planteamiento <br /> del problema</small>
+            <small class="block">Planteamiento <br /> del problema</small>
             <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
         </div>
         <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5">
+            <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                 {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
-                    <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                         {proyecto.planteamiento_problema}
                     </p>
                 {/if}
@@ -444,8 +444,8 @@
                         </div>
                     {/if}
                     <div class="causas-directas relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showCausaDirectaDialog(causaDirecta)} class="{causaDirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                        <div on:click={showCausaDirectaDialog(causaDirecta)} class="{causaDirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">CAU-{causaDirecta.id}</small>
                                 {#if causaDirecta.descripcion != null && causaDirecta.descripcion.length > 0}
                                     {causaDirecta.descripcion}
@@ -464,8 +464,8 @@
                     <div class="flex mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
                             <div class="causas-directas relative flex-1">
-                                <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
+                                <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                    <p class="paragraph-ellipsis text-white text-xs line-height-1-24">
                                         <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
                                         {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
                                             {causaIndirecta.descripcion}
@@ -476,8 +476,8 @@
                         {/each}
                         {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
                             <div class="causas-directas relative flex-1">
-                                <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+                                <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                                    <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
                                 </div>
                             </div>
                         {/each}
@@ -584,11 +584,6 @@
         height: 55px;
         background: #d2d6ff;
     }
-
-    .line-height-1 {
-        line-height: 1;
-    }
-
     .tooltip {
         color: white;
         padding: 5px 10px;
@@ -620,7 +615,7 @@
         right: -4px;
     }
 
-    .node {
+    .line-height-1-24 {
         line-height: 1.24;
     }
 
