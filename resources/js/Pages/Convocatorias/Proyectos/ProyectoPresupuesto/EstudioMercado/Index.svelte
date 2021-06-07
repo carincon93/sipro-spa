@@ -124,7 +124,7 @@
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <ResourceMenu>
+                                <ResourceMenu class={proyectoLotesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
                                     {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8])}
                                         <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                             <Text>Ver detalles</Text>

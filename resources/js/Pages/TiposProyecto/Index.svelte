@@ -55,7 +55,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <ResourceMenu class={tiposProyecto.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tipos-proyecto.edit', tipoProyecto.id))}>
                                     <Text>Ver detalles</Text>

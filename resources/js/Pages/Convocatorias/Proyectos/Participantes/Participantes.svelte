@@ -229,7 +229,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <ResourceMenu>
+                            <ResourceMenu class={resultados.data.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => showParticipante(resultado)}>
                                     <Text>Vincular</Text>
                                 </Item>
@@ -299,7 +299,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <ResourceMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>
                             </Item>

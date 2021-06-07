@@ -57,7 +57,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <ResourceMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>

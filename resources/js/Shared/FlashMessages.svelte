@@ -86,7 +86,7 @@
             </svg>
             {#if errorMessage}
                 <div class="p-4 text-white text-sm font-medium">
-                    {$_(errorMessage)}
+                    {errorMessage}
                 </div>
             {:else}
                 <div class="p-4 text-white text-sm font-medium">

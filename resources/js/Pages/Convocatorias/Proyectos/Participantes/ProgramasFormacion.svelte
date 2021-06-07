@@ -130,7 +130,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <ResourceMenu>
+                            <ResourceMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
                                     <Text>Vincular</Text>
                                 </Item>
@@ -191,7 +191,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <ResourceMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
                                 <Text>Quitar</Text>
                             </Item>
