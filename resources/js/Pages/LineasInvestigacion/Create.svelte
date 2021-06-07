@@ -39,7 +39,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
+                <h1 class="overflow-ellipsis overflow-hidden w-1/3 whitespace-nowrap">
                     {#if isSuperAdmin}
                         <a use:inertia href={route('lineas-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
                     {/if}

@@ -25,6 +25,8 @@ class ProyectoController extends Controller
      */
     public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('validar-autor', $proyecto);
+
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
         if ($proyecto->idi()->exists()) {
