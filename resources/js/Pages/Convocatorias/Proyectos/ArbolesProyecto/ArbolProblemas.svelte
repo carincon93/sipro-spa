@@ -488,7 +488,7 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialogOpen}>
+    <Dialog bind:open={dialogOpen} id="arbol-problemas">
         <div slot="title" class="mb-10 text-center">
             <div class="text-primary">
                 {dialogTitle}
@@ -619,16 +619,16 @@
         line-height: 1.24;
     }
 
-    :global(.mdc-dialog__surface) {
+    :global(#arbol-problemas-dialog .mdc-dialog__surface) {
         width: 750px;
         max-width: calc(100vw - 32px) !important;
     }
 
-    :global(.mdc-dialog__content) {
+    :global(#arbol-problemas-dialog .mdc-dialog__content) {
         padding-top: 40px !important;
     }
 
-    :global(.mdc-dialog__title) {
+    :global(#arbol-problemas-dialog .mdc-dialog__title) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         margin-bottom: 0;
     }

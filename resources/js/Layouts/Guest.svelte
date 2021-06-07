@@ -15,8 +15,9 @@
 
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 welcome-wallpaper">
     <div>
-        <a use:inertia href={route('login')}>
+        <a use:inertia href={route('login')} class="flex items-center justify-center text-orangered-600 text-xl">
             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
+            SGPS-SIPRO
         </a>
     </div>
 

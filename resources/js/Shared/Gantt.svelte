@@ -97,9 +97,9 @@
         <aside class="labels" style={items.length > 0 ? 'flex: 0.5' : ''}>
             <ul class="list-unstyled">
                 {#each items as item, i}
-                    <li style="height: 120px; padding: 7px;line-height: 1.2;display: flex;justify-content: space-between;width: 100%;">
+                    <li class="border-b-2 flex p-1.5" style="height:120px; max-height:120px; line-height: 1.2">
                         {#if request}
-                            <p style="max-width: 90%;max-height: 56px;overflow: hidden;">
+                            <p class="paragraph-ellipsis w-full" style="max-width: 90%;">
                                 {item.descripcion ?? item.nombre}
                             </p>
                             <DataTableMenu>
@@ -122,5 +122,10 @@
 <style>
     :global(#chart_div path) {
         fill: #4f46e5;
+    }
+
+    .paragraph-ellipsis {
+        -webkit-line-clamp: 4 !important;
+        height: 75px;
     }
 </style>

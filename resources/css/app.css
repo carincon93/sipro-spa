@@ -146,7 +146,7 @@ fieldset[disabled] .selectedItem {
 }
 
 .welcome-wallpaper {
-    background-image: url(/sgpssipro/images/welcome.jpg), url(/images/welcome.jpg);
+    background-image: url(/sgpssipro/images/welcome-wallpaper.jpg), url(/images/welcome-wallpaper.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -223,4 +223,8 @@ th.th-actions {
     text-overflow: ellipsis;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+}
+
+.w-breadcrumb-ellipsis {
+    max-width: 450px;
 }

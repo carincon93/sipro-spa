@@ -73,7 +73,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1 class="overflow-ellipsis overflow-hidden w-1/3 whitespace-nowrap">
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                         <a use:inertia href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Análisis de riesgos</a>
                     {/if}
@@ -121,10 +121,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkPermission(authUser, [4, 7, 10])}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" tipo="button" on:click={(event) => (dialogOpen = true)}> Eliminar análisis de riesgo </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar análisis de riesgo </button>
                 {/if}
                 {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" tipo="submit">Editar análisis de riesgo</LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar análisis de riesgo</LoadingButton>
                 {/if}
             </div>
         </form>
