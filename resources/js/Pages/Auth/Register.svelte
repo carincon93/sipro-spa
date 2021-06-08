@@ -50,7 +50,7 @@
     </div>
 
     <div class="mt-4">
-        <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required autocomplete="username" />
+        <Input label="Correo electrónico institucional" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required autocomplete="username" />
     </div>
 
     <div class="mt-4">

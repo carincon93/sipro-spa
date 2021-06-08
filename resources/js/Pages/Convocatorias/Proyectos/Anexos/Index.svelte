@@ -53,7 +53,7 @@
                     </td>
                     <td class="border-t">
                         {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
-                            <Create {convocatoria} {proyecto} {anexo} {proyectoAnexo} bind:sending />
+                            <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
                         {/if}
                     </td>
                 </tr>

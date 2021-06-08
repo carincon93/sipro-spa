@@ -10,6 +10,7 @@
     import DataTable from '@/Shared/DataTable'
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
@@ -45,6 +46,8 @@
             </div>
         </div>
     </header>
+
+    <InfoMessage message="Por favor ingrese cada uno de los miembros de la entidad aliada." />
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Miembros de la entidad aliada</div>

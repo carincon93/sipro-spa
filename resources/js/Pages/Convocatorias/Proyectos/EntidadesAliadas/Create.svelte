@@ -140,12 +140,12 @@
                 {:else}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                        <File id="soporte_convenio" type="file" accept="application/pdf" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
+                        <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
                     </div>
                 {/if}
 
                 <div class="mt-4">
-                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
+                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                 </div>
 
                 <div class="mt-4">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
                 </div>
 
                 <div class="mt-4">
@@ -167,12 +167,12 @@
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                        <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
+                        <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
                     </div>
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
+                        <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
                     </div>
                 {/if}
 

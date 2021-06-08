@@ -6,7 +6,6 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import File from '@/Shared/File'
     import PercentageProgress from '@/Shared/PercentageProgress'
-    import { onMount } from 'svelte'
 
     export let errors
     export let convocatoria
@@ -27,7 +26,7 @@
     })
 
     function submit() {
-        if ((isSuperAdmin && !sending) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) && !sending)) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -36,11 +35,9 @@
     }
 
     let proyectoAnexoId
-    onMount(() => {
-        if (proyectoAnexo.data) {
-            proyectoAnexoId = proyectoAnexo.data.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.data.find((item) => item.anexo_id == anexo.id).id : null
-        }
-    })
+    $: if (proyectoAnexo) {
+        proyectoAnexoId = proyectoAnexo.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.find((item) => item.anexo_id == anexo.id).id : null
+    }
 </script>
 
 <form on:submit|preventDefault={submit} class="mt-4 p-4">

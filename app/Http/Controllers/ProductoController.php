@@ -175,7 +175,6 @@ class ProductoController extends Controller
 
         if ($proyecto->idi()->exists()) {
             $request->validate([
-                'medio_verificacion'            => 'required|string',
                 'trl'                           => 'required|integer|between:1,9',
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);

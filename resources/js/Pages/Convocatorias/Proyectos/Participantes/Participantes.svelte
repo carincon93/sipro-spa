@@ -180,77 +180,77 @@
     }
 </script>
 
-<div class="bg-indigo-100 py-4">
+<div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center">Participantes</h1>
     <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <div class="p-8">
+        <fieldset>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
-        </div>
+        </fieldset>
     </form>
+
+    {#if sended}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de participantes</h1>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each resultados as resultado (resultado.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                    {resultado.nombre}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.email}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                                </p>
+                            </td>
+                            <td class="border-t td-actions relative">
+                                <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                    <Item on:SMUI:action={() => showParticipante(resultado)}>
+                                        <Text>Vincular</Text>
+                                    </Item>
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+
+                    {#if resultados.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="4">
+                                {$_('No data recorded')}
+                                <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
+                            </td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
 </div>
-
-{#if sended}
-    <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de participantes</h1>
-    <div class="bg-white rounded shadow">
-        <table class="w-full whitespace-no-wrap table-fixed data-table">
-            <thead>
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each resultados as resultado (resultado.id)}
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {resultado.nombre}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.email}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
-                            </p>
-                        </td>
-                        <td class="border-t td-actions relative">
-                            <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                <Item on:SMUI:action={() => showParticipante(resultado)}>
-                                    <Text>Vincular</Text>
-                                </Item>
-                            </DataTableMenu>
-                        </td>
-                    </tr>
-                {/each}
-
-                {#if resultados.length === 0}
-                    <tr>
-                        <td class="border-t px-6 py-4" colspan="4">
-                            {$_('No data recorded')}
-                            <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
-                        </td>
-                    </tr>
-                {/if}
-            </tbody>
-        </table>
-    </div>
-{/if}
 
 <h1 class="mt-24 mb-8 text-center text-3xl">Participantes vinculados</h1>
 <div class="bg-white rounded shadow">
@@ -339,7 +339,7 @@
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses == 10 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                 </div>
                 <div class="mt-4">
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
@@ -386,7 +386,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Correo electrónico" id="email_nuevo_participante" type="email" class="mt-1" bind:value={$formNuevoParticipante.email} error={errors.email} required />
+                    <Input label="Correo electrónico institucional" id="email_nuevo_participante" type="email" class="mt-1" bind:value={$formNuevoParticipante.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
@@ -395,11 +395,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" min="0" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" input$min="0" input$max="9999999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" min="0" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" input$min="0" input$max="9999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
                 </div>
 
                 <div class="mt-4">
@@ -419,7 +419,7 @@
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses > 11.5 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses == 10 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                 </div>
 
                 <div class="mt-4">

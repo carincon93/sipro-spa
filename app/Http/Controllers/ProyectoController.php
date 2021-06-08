@@ -136,7 +136,7 @@ class ProyectoController extends Controller
                 $query->whereNotIn('id', explode(',', $proyecto->participantes->implode('id', ',')));
             }
 
-            $users = $query->get();
+            $users = $query->get()->take(5);
 
             return $users->makeHidden('can', 'roles', 'user_name', 'permissions')->toJson();
         }
@@ -273,10 +273,10 @@ class ProyectoController extends Controller
                 ->with('lineaInvestigacion.grupoInvestigacion');
 
             if ($proyecto->semillerosInvestigacion->count() > 0) {
-                $query->whereNotIn('id', explode(',', $proyecto->semillerosInvestigacion->implode('id', ',')));
+                $query->whereNotIn('semilleros_investigacion.id', explode(',', $proyecto->semillerosInvestigacion->implode('id', ',')));
             }
 
-            $semillerosInvestigacion = $query->get();
+            $semillerosInvestigacion = $query->get()->take(5);
 
             return $semillerosInvestigacion->makeHidden('created_at', 'updated_at')->toJson();
         }
@@ -349,10 +349,10 @@ class ProyectoController extends Controller
                 ->with('centroFormacion.regional');
 
             if ($proyecto->programasFormacion->count() > 0) {
-                $query->whereNotIn('id', explode(',', $proyecto->programasFormacion->implode('id', ',')));
+                $query->whereNotIn('programas_formacion.id', explode(',', $proyecto->programasFormacion->implode('id', ',')));
             }
 
-            $programasFormacion = $query->get();
+            $programasFormacion = $query->get()->take(5);
 
             return $programasFormacion->makeHidden('created_at', 'updated_at')->toJson();
         }

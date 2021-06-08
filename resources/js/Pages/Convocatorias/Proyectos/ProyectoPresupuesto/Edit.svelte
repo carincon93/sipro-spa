@@ -108,7 +108,7 @@
 
                     {#if showQtyInput != undefined && !showQtyInput}
                         <div class="mt-4">
-                            <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" min="0" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
+                            <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="0" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                         </div>
                         <div class="mt-4">
                             <Input label="Valor" id="valor" type="number" input$min="0" class="mt-1" bind:value={$form.valor} error={errors.valor} required />

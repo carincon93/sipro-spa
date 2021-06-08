@@ -78,7 +78,7 @@ class IdiController extends Controller
         $idi->bibliografia                          = 'Por favor diligencie la bibliografía';
         $idi->numero_aprendices                     = 0;
         $idi->impacto_municipios                    = 'Describa el beneficio en los municipios';
-        $idi->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
+        $idi->impacto_centro_formacion              = 'Describa el impacto en el centro de formación';
 
         $idi->muestreo                              = 6;
         $idi->actividades_muestreo                  = null;

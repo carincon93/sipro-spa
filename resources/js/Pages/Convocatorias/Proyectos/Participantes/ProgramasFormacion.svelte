@@ -75,81 +75,81 @@
     }
 </script>
 
-<div class="bg-indigo-100 py-4">
+<div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center title">Programas de formación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de programas de formación</p>
 
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <div class="p-8">
+        <fieldset>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el ID o el nombre completo del programa de formación" id="search_programa_formacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_programa_formacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
-        </div>
+        </fieldset>
     </form>
+
+    {#if sended}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de programas de formación</h1>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Código</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each resultados as resultado (resultado.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                    {resultado.codigo}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.nombre}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.modalidad}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.centro_formacion.nombre}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center">
+                                    {resultado.centro_formacion.regional.nombre}
+                                </p>
+                            </td>
+                            <td class="border-t td-actions relative">
+                                <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                    <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
+                                        <Text>Vincular</Text>
+                                    </Item>
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+
+                    {#if resultados.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
 </div>
-
-{#if sended}
-    <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de programas de formación</h1>
-    <div class="bg-white rounded shadow">
-        <table class="w-full whitespace-no-wrap table-fixed data-table">
-            <thead>
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Código</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each resultados as resultado (resultado.id)}
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {resultado.codigo}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.nombre}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.modalidad}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.centro_formacion.nombre}
-                            </p>
-                        </td>
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center">
-                                {resultado.centro_formacion.regional.nombre}
-                            </p>
-                        </td>
-                        <td class="border-t td-actions relative">
-                            <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
-                                    <Text>Vincular</Text>
-                                </Item>
-                            </DataTableMenu>
-                        </td>
-                    </tr>
-                {/each}
-
-                {#if resultados.length === 0}
-                    <tr>
-                        <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
-                    </tr>
-                {/if}
-            </tbody>
-        </table>
-    </div>
-{/if}
 
 <h1 class="mt-24 mb-8 text-center text-3xl">Programas de formación vinculados</h1>
 <div class="bg-white rounded shadow">
