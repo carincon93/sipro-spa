@@ -41,7 +41,7 @@
             <fieldset class="p-8">
                 <div class="mt-4">
                     <Input label="Correo electrónico institucional" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
-                    <InfoMessage message="Este atento al correo electrónico, allí se le enviará la respuesta en el menor tiempo posible." />
+                    <InfoMessage message="Este atento (a) al correo electrónico, allí se le enviará la respuesta en el menor tiempo posible." />
                 </div>
                 <div class="mt-4">
                     <Textarea label="Descripción detallada del problema" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
