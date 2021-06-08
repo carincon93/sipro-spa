@@ -9,11 +9,12 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Select from '@/Shared/Select'
     import InputError from '@/Shared/InputError'
-    import axios from 'axios'
 
     export let errors
     export let convocatoria
     export let tecnoacademias
+
+    $: $title = 'Crear proyecto Tecnoacademia - Tecnoparque'
 
     /**
      * Permisos
@@ -21,7 +22,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let lineasTecnologicas = []
     let sending = false
     let form = useForm({
         centro_formacion_id: null,
@@ -40,19 +40,6 @@
             })
         }
     }
-
-    $: selectedTecnoacademia = $form.tecnoacademia_id?.value
-
-    $: if (selectedTecnoacademia) {
-        getLineasTecnologicas(selectedTecnoacademia)
-    }
-
-    async function getLineasTecnologicas(tecnoacademia) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnologicas', [tecnoacademia]))
-        lineasTecnologicas = res.data
-    }
-
-    $: $title = 'Crear proyecto Tecnoacademia - Tecnoparque'
 </script>
 
 <AuthenticatedLayout>
@@ -124,14 +111,16 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+            {#if $form.tecnoacademia_id?.value}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                    </div>
+                    <div>
+                        <DynamicList id="tecnoacademia_linea_tecnologica_id" bind:value={$form.tecnoacademia_linea_tecnologica_id} routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id?.value])} placeholder="Seleccione una línea tecnológica" message={errors.tecnoacademia_linea_tecnologica_id} required />
+                    </div>
                 </div>
-                <div>
-                    <Select items={lineasTecnologicas} id="tecnoacademia_linea_tecnologica_id" bind:selectedValue={$form.tecnoacademia_linea_tecnologica_id} error={errors.tecnoacademia_linea_tecnologica_id} autocomplete="off" placeholder="Seleccione una línea tecnológica" required />
-                </div>
-            </div>
+            {/if}
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

@@ -162,7 +162,7 @@
                         </div>
                     </td>
                     <td class="border-t">
-                        <div class="mt-3">
+                        <div class="mt-3 px-6">
                             {#if presupuesto.promedio > 0}
                                 ${new Intl.NumberFormat('de-DE').format(presupuesto.promedio)} COP
                             {:else if presupuesto.totalByBudgetWithoutMarketResearch > 0}

@@ -59,7 +59,18 @@
     }
 </script>
 
-<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
+<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items w-full {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros o de clic en refrescar" />
+{#if items.length == 0}
+    <div>
+        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+        <button on:click={getItems} type="button" class="flex underline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Refrescar
+        </button>
+    </div>
+{/if}
 <InputError {message} />
 
 <style>

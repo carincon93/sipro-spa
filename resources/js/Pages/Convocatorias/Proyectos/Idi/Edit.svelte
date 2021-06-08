@@ -518,7 +518,7 @@
                         </div>
                         <div>
                             <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
-                            {#if lineasTecnologicas.length > 0}
+                            {#if lineasTecnologicas?.length > 0}
                                 <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
                                     {#each lineasTecnologicas as { value, label }, i}
                                         <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
@@ -527,6 +527,16 @@
                                             <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-indigo-500" />
                                         </div>
                                     {/each}
+                                </div>
+                            {:else}
+                                <div>
+                                    <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                    <button on:click={getLineasTecnologicas} type="button" class="flex underline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                        Refrescar
+                                    </button>
                                 </div>
                             {/if}
                         </div>
@@ -610,6 +620,17 @@
                 </div>
                 <div>
                     <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
+                    {#if municipios?.length == 0}
+                        <div>
+                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                            <button on:click={getMunicipios} type="button" class="flex underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Refrescar
+                            </button>
+                        </div>
+                    {/if}
                 </div>
             </div>
 
