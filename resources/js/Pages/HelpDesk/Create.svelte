@@ -44,7 +44,7 @@
                     <InfoMessage message="Este atento al correo electrónico, allí se le enviará la respuesta en el menor tiempo posible." />
                 </div>
                 <div class="mt-4">
-                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción detallada del problema" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
                 <div class="mt-4">
                     <p>Por favor cargue una captura de pantalla (si son varias capturas de pantalla adjunte un pdf). Se recomienda usar la herramienta de recortes de Windows y por favor asegúrese que las capturas sean de buena calidad.</p>
