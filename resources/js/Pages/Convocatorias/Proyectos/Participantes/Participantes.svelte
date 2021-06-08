@@ -1,9 +1,10 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import axios from 'axios'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
+
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import Select from '@/Shared/Select'
@@ -228,8 +229,8 @@
                                 {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
                             </p>
                         </td>
-                        <td class="border-t td-actions">
-                            <DataTableMenu class={resultados.data.length < 4 ? 'z-50' : ''}>
+                        <td class="border-t td-actions relative">
+                            <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => showParticipante(resultado)}>
                                     <Text>Vincular</Text>
                                 </Item>
@@ -298,7 +299,7 @@
                             {participante.pivot.cantidad_horas}
                         </p>
                     </td>
-                    <td class="border-t td-actions">
+                    <td class="border-t td-actions relative">
                         <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>

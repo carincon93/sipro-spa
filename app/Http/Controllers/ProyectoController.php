@@ -268,7 +268,7 @@ class ProyectoController extends Controller
     public function filterSemillerosInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_semillero_investigacion)) {
-            $query = SemilleroInvestigacion::orderBy('nombre', 'ASC')
+            $query = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->orderBy('semilleros_investigacion.nombre', 'ASC')
                 ->filterSemilleroInvestigacion(['search' => $request->search_semillero_investigacion])
                 ->with('lineaInvestigacion.grupoInvestigacion');
 
@@ -344,7 +344,7 @@ class ProyectoController extends Controller
     public function filterProgramasFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_programa_formacion)) {
-            $query = ProgramaFormacion::orderBy('nombre', 'ASC')
+            $query = ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.modalidad', 'programas_formacion.centro_formacion_id')->orderBy('programas_formacion.nombre', 'ASC')
                 ->filterProgramaFormacion(['search' => $request->search_programa_formacion])
                 ->with('centroFormacion.regional');
 

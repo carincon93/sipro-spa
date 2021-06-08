@@ -3,6 +3,8 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
+
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import DataTableMenu from '@/Shared/DataTableMenu'
@@ -117,7 +119,7 @@
                                 {resultado.linea_investigacion.grupo_investigacion.nombre} - {resultado.linea_investigacion.grupo_investigacion.acronimo}
                             </p>
                         </td>
-                        <td class="border-t td-actions">
+                        <td class="border-t td-actions relative">
                             <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => linkSemilleroInvestigacion(resultado.id)}>
                                     <Text>Vincular</Text>
@@ -166,7 +168,7 @@
                             {semilleroInvestigacion.linea_investigacion.grupo_investigacion.nombre} - {semilleroInvestigacion.linea_investigacion.grupo_investigacion.acronimo}
                         </p>
                     </td>
-                    <td class="border-t td-actions">
+                    <td class="border-t td-actions relative">
                         <DataTableMenu class={proyecto.semillerosInvestigacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
                                 <Text>Quitar</Text>

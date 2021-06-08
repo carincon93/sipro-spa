@@ -51,9 +51,9 @@
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)
-                        document.getElementById('ficha_tecnica').value = null
-                        document.getElementById('primer_archivo').value = null
-                        document.getElementById('segundo_archivo').value = null
+                        document.getElementById('ficha_tecnica') ? (document.getElementById('ficha_tecnica').value = null) : null
+                        document.getElementById('primer_archivo') ? (document.getElementById('primer_archivo').value = null) : null
+                        document.getElementById('segundo_archivo') ? (document.getElementById('segundo_archivo').value = null) : null
                         document.getElementById('tercer_archivo') ? (document.getElementById('tercer_archivo').value = null) : null
                     },
                     onError: () => {

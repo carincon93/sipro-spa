@@ -60,7 +60,7 @@
                             {lineaProgramatica.categoria_proyecto}
                         </p>
                     </td>
-                    <td class="border-t td-actions">
+                    <td class="border-t td-actions relative">
                         <DataTableMenu class={lineasProgramaticas.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-programaticas.edit', lineaProgramatica.id))}>

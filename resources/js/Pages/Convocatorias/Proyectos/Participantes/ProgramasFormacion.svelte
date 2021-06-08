@@ -3,6 +3,8 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
+
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import DataTableMenu from '@/Shared/DataTableMenu'
@@ -29,7 +31,7 @@
     let sended = false
     function submit() {
         sending = true
-        sended = false
+        sended = console.log('here')
         try {
             axios
                 .post(route('convocatorias.proyectos.participantes.programas-formacion', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
@@ -129,7 +131,7 @@
                                 {resultado.centro_formacion.regional.nombre}
                             </p>
                         </td>
-                        <td class="border-t td-actions">
+                        <td class="border-t td-actions relative">
                             <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
                                     <Text>Vincular</Text>
@@ -190,7 +192,7 @@
                             {programaFormacion.centro_formacion.regional.nombre}
                         </p>
                     </td>
-                    <td class="border-t td-actions">
+                    <td class="border-t td-actions relative">
                         <DataTableMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
                                 <Text>Quitar</Text>
@@ -202,7 +204,7 @@
 
             {#if proyecto.programasFormacion.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
+                    <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
                 </tr>
             {/if}
         </tbody>

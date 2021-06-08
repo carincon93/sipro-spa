@@ -48,7 +48,7 @@
                             {sectorProductivo.nombre}
                         </p>
                     </td>
-                    <td class="border-t td-actions">
+                    <td class="border-t td-actions relative">
                         <DataTableMenu class={sectoresProductivos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('sectores-productivos.edit', sectorProductivo.id))}>
