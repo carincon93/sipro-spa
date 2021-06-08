@@ -111,7 +111,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-                    <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
+                    <File id="ficha_tecnica" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id])}>Descargar ficha técnica</a>
                 </div>
 
@@ -127,7 +127,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
-                    <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
+                    <File id="primer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[0].id])}>Descargar soporte</a>
                 </div>
 
@@ -143,7 +143,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
-                    <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
+                    <File id="segundo_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[1].id])}>Descargar soporte</a>
                 </div>
 
@@ -166,7 +166,7 @@
 
                     <div class="mt-4">
                         <Label labelFor="tercer_archivo" value="Soporte" required />
-                        <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
+                        <File id="tercer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} />
                         {#if proyectoLoteEstudioMercado.estudios_mercado[2] != undefined}
                             <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[2].id])} required>Descargar soporte</a>
                         {/if}

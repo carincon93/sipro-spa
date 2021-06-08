@@ -46,6 +46,7 @@ use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnologicaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
+use App\Http\Controllers\HelpDeskController;
 
 use App\Models\ActividadEconomica;
 use App\Models\LineaInvestigacion;
@@ -106,7 +107,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // Redirecciona según el tipo de proyecto
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+    Route::get('reportar-problemas/crear', [HelpDeskController::class, 'create'])->name('reportar-problemas.create');
+    Route::post('reportar-problemas/reportar', [HelpDeskController::class, 'report'])->name('reportar-problemas.report');
 
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes', [ProyectoController::class, 'participantes'])->name('convocatorias.proyectos.participantes');

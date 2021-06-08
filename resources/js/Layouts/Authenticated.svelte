@@ -78,8 +78,18 @@
                                         class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         Mi perfil
                                     </a> -->
-                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
-                                        {$_('Logout')}
+                                    <a use:inertia href={route('reportar-problemas.create')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                        <span class="ml-1.5">Soporte</span>
+                                    </a>
+
+                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="ml-1.5">{$_('Logout')}</span>
                                     </a>
                                 </div>
                             </Dropdown>

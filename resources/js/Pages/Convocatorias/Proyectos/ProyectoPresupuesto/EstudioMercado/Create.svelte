@@ -80,7 +80,7 @@
 
         <div class="mt-4">
             <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-            <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} required />
+            <File id="ficha_tecnica" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} required />
         </div>
 
         <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
@@ -95,7 +95,7 @@
 
         <div class="mt-4">
             <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
-            <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} required />
+            <File id="primer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} required />
         </div>
 
         <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
@@ -110,7 +110,7 @@
 
         <div class="mt-4">
             <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
-            <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} required />
+            <File id="segundo_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} required />
         </div>
 
         <div class="mt-8">
@@ -132,7 +132,7 @@
 
             <div class="mt-4">
                 <Label required class="mb-4" labelFor="tercer_archivo" value="Soporte" />
-                <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} required />
+                <File id="tercer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} required />
             </div>
         {/if}
     </fieldset>
