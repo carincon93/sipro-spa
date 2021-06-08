@@ -23,9 +23,9 @@
         value = event.target.files[0]
     }
 
-    $: value?.size / 1000 < 1000 ? (size = value?.size / 1000 + ' KB') : (size = value?.size / 1000 + ' MB')
+    $: if (value?.size) size = value?.size / 1e6
 
-    $: value?.size / 1000 > maxSize ? (error = `El archivo pesa más de ${maxSize / 1000} MB. Por favor optimice el tamaño.`) : (error = null)
+    $: size > maxSize / 1000 ? (error = `El archivo pesa más de ${maxSize / 1000} MB. Por favor optimice el tamaño.`) : (error = null)
 </script>
 
 <div class={$$restProps.class}>
@@ -34,7 +34,7 @@
     <input {...props} type="file" class="w-full border-gray-300 shadow-sm focus:ring focus:ring-opacity-50{error ? ' ring ring-opacity-50 border-red-200 ring-red-200 focus:border-red-200 focus:ring-red-200' : 'focus:border-indigo-200 focus:ring-indigo-200'}" {id} on:change={(event) => update(event)} />
 
     {#if value?.size}
-        <span class="inline-block mt-4 mb-4">Peso del archivo: {size}</span>
+        <span class="inline-block mt-4 mb-4">Peso del archivo: {size.toFixed(2)} MB</span>
     {/if}
 
     {#if error}
