@@ -41,7 +41,7 @@
                     <Input label="Contraseña actual" id="old_password" type="password" class="mt-1" bind:value={$form.old_password} error={errors.old_password} required />
                 </div>
                 <div class="mt-4">
-                    <Input label={'Nueva ' + $_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="new-password" />
+                    <Input label={'Nueva ' + $_('Password').toLowerCase()} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="new-password" />
                 </div>
 
                 <div class="mt-4">
