@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -153,5 +154,41 @@ class UserController extends Controller
         }
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Show user's change password form.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showChangePasswordForm()
+    {
+        return Inertia::render('Auth/ChangePassword');
+    }
+
+    /**
+     * Change user's password.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:6|different:old_password|confirmed'
+        ]);
+
+        if (Hash::check($request->get('old_password'), auth()->user()->password)) {
+            auth()->user()->password = Hash::make($request->get('password'));
+            auth()->user()->save();
+            $message = 'La contraseña se ha actualizado correctamente.';
+            $status = 'success';
+        } else {
+            $message = 'La contraseña actual no coincide.';
+            $status = 'error';
+        }
+
+        return redirect()->back()->with($status, $message);
     }
 }

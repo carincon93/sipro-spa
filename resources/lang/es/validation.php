@@ -225,6 +225,7 @@ return [
 		'tipo_software' 						=> 'tipo de software',
 		'tipo_licencia' 						=> 'tipo de licencia',
 		'codigo_uso_presupuestal' 				=> 'código del uso presupuestal',
-		'nombre_instituciones' 					=> 'Instituciones donde se implementará el programa que tienen Articulación con la Media'
+		'nombre_instituciones' 					=> 'Instituciones donde se implementará el programa que tienen Articulación con la Media',
+		'old_password' 							=> 'contraseña actual'
 	],
 ];
