@@ -82,7 +82,7 @@
         es_autor: 0,
         cantidad_horas: 0,
         cantidad_meses: 0,
-        rol_id: null,
+        rol_sennova_id: null,
     })
 
     function showParticipante(user) {
@@ -96,7 +96,7 @@
             $formParticipante.es_autor = user.pivot.es_autor ? 1 : 0
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
-            $formParticipante.rol_id = { value: user.pivot.rol_id, label: roles.find((item) => item.value == user.pivot.rol_id)?.label }
+            $formParticipante.rol_sennova_id = { value: user.pivot.rol_sennova_id, label: roles.find((item) => item.value == user.pivot.rol_sennova_id)?.label }
         }
     }
 
@@ -137,7 +137,7 @@
         cantidad_meses: 0,
         cantidad_horas: 0,
         centro_formacion_id: null,
-        rol_id: null,
+        rol_sennova_id: null,
     })
 
     let formNuevoParticipanteId
@@ -348,8 +348,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
-                    <Select id="rol_id" items={roles} bind:selectedValue={$formParticipante.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
+                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$formParticipante.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
                 <div class="mt-4">
@@ -415,8 +415,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
-                    <Select id="rol_id" items={roles} bind:selectedValue={$formNuevoParticipante.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
+                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$formNuevoParticipante.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>

@@ -69,7 +69,7 @@ class User extends Authenticatable
                 'es_autor',
                 'cantidad_meses',
                 'cantidad_horas',
-                'rol_id'
+                'rol_sennova_id'
             ]);
     }
 

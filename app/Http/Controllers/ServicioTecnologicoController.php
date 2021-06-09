@@ -8,8 +8,7 @@ use App\Http\Requests\ServicioTecnologicoRequest;
 use App\Models\Convocatoria;
 use App\Models\MesaTecnica;
 use App\Models\Proyecto;
-use App\Models\Role;
-use App\Models\SectorProductivo;
+use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -45,7 +44,7 @@ class ServicioTecnologicoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
             'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'mesasTecnicas' => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'roles'         => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
+            'roles'         => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
 
@@ -107,7 +106,7 @@ class ServicioTecnologicoController extends Controller
                 'es_autor'          => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_id'            => $request->rol_id,
+                'rol_sennova_id'    => $request->rol_sennova_id,
             ]
         );
 

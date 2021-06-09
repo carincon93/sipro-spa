@@ -227,7 +227,7 @@ class Proyecto extends Model
                 'es_autor',
                 'cantidad_meses',
                 'cantidad_horas',
-                'rol_id'
+                'rol_sennova_id'
             ]);
     }
 

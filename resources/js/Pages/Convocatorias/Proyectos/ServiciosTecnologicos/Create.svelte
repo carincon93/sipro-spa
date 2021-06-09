@@ -44,7 +44,7 @@
         fecha_finalizacion: '',
         cantidad_meses: 0,
         cantidad_horas: 0,
-        rol_id: null,
+        rol_sennova_id: null,
     })
 
     function submit() {
@@ -248,10 +248,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
+                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
                 </div>
                 <div>
-                    <Select id="rol_id" items={roles} bind:selectedValue={$form.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
         </fieldset>
