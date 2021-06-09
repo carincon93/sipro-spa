@@ -261,8 +261,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Meses</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Horas</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Participación</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -291,12 +290,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 flex items-center">
-                            {participante.pivot.cantidad_meses}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {participante.pivot.cantidad_horas}
+                            {participante.pivot.cantidad_meses} meses - {participante.pivot.cantidad_horas} horas semanales
                         </p>
                     </td>
                     <td class="border-t td-actions relative">
@@ -316,7 +310,7 @@
 
             {#if proyecto.participantes.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
+                    <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
                 </tr>
             {/if}
         </tbody>

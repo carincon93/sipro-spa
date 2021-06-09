@@ -93,6 +93,7 @@ class TaTpController extends Controller
             Auth::user()->id,
             [
                 'es_autor'          => true,
+                'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
                 'rol_sennova_id'    => $request->rol_sennova_id,

@@ -225,6 +225,7 @@ class Proyecto extends Model
             ->withPivot([
                 'user_id',
                 'es_autor',
+                'es_formulador',
                 'cantidad_meses',
                 'cantidad_horas',
                 'rol_sennova_id'
@@ -277,6 +278,8 @@ class Proyecto extends Model
 
         if (($fechaInicio->diffInMonths($fechaFinalizacion) + 1) == 11) {
             $diffMeses = 11.5;
+        } else {
+            $diffMeses = $fechaInicio->diffInMonths($fechaFinalizacion) + 1;
         }
 
         return $diffMeses;
