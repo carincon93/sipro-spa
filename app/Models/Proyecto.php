@@ -269,7 +269,14 @@ class Proyecto extends Model
 
         $fechaFinalizacion = Carbon::parse($fechaFinalizacion, 'UTC')->floorMonth();
         $fechaInicio       = Carbon::parse($fechaInicio, 'UTC')->floorMonth();
-        return $fechaInicio->diffInMonths($fechaFinalizacion);
+
+        $diffMeses = 0;
+
+        if (($fechaInicio->diffInMonths($fechaFinalizacion) + 1) == 11) {
+            $diffMeses = 11.5;
+        }
+
+        return $diffMeses;
     }
 
 

@@ -304,9 +304,11 @@
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>
                             </Item>
-                            <Item on:SMUI:action={() => removeParticipante(participante.id)}>
-                                <Text>Quitar</Text>
-                            </Item>
+                            {#if authUser.id != participante.id}
+                                <Item on:SMUI:action={() => removeParticipante(participante.id)}>
+                                    <Text>Quitar</Text>
+                                </Item>
+                            {/if}
                         </DataTableMenu>
                     </td>
                 </tr>
@@ -339,7 +341,7 @@
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses == 10 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                 </div>
                 <div class="mt-4">
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
@@ -419,7 +421,7 @@
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses == 10 ? 11.5 : proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                 </div>
 
                 <div class="mt-4">

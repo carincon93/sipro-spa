@@ -319,7 +319,7 @@
                 </div>
             </div>
 
-            <hr />
+            <hr class="mt-5 mb-5" />
 
             <div>
                 <p class="text-center mt-36 mb-8">¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?</p>

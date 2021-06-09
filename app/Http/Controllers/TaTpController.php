@@ -9,7 +9,9 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaTpRequest;
 use App\Models\Regional;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TaTpController extends Controller
@@ -42,6 +44,7 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'roles'             => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -85,6 +88,16 @@ class TaTpController extends Controller
         $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
 
         $proyecto->taTp()->save($tatp);
+
+        $proyecto->participantes()->attach(
+            Auth::user()->id,
+            [
+                'es_autor'          => true,
+                'cantidad_meses'    => $request->cantidad_meses,
+                'cantidad_horas'    => $request->cantidad_horas,
+                'rol_id'            => $request->rol_id,
+            ]
+        );
 
         return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'El recurso se ha creado correctamente.');
     }

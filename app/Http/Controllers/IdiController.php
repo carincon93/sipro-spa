@@ -8,6 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,8 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto-idi');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos')
+            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'roles'        => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -102,8 +104,9 @@ class IdiController extends Controller
             Auth::user()->id,
             [
                 'es_autor'          => true,
-                'cantidad_meses'    => $proyecto->diff_meses,
-                'cantidad_horas'    => 40
+                'cantidad_meses'    => $request->cantidad_meses,
+                'cantidad_horas'    => $request->cantidad_horas,
+                'rol_id'            => $request->rol_id,
             ]
         );
 

@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import InputError from '@/Shared/InputError'
@@ -10,10 +10,12 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
+    import Input from '@/Shared/Input'
 
     export let errors
     export let convocatoria
     export let mesasTecnicas
+    export let roles
 
     $: $title = 'Crear proyecto de servicios tecnológicos'
 
@@ -40,6 +42,9 @@
         titulo_proyecto_articulado: '',
         fecha_inicio: '',
         fecha_finalizacion: '',
+        cantidad_meses: 0,
+        cantidad_horas: 0,
+        rol_id: null,
     })
 
     function submit() {
@@ -87,13 +92,13 @@
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                         <div class="ml-4">
-                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
+                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
                         </div>
                     </div>
                     <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                         <Label labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                         <div class="ml-4">
-                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion__proyectos} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
+                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                         </div>
                     </div>
                 </div>
@@ -215,6 +220,38 @@
                 </div>
                 <div>
                     <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
+                </div>
+            </div>
+
+            <hr class="mt-5 mb-5" />
+
+            <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
+            {#if $form.fecha_inicio && $form.fecha_finalizacion}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de meses de vinculación" />
+                    </div>
+                    <div>
+                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    </div>
+                </div>
+            {/if}
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
+                </div>
+                <div>
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="rol_id" value="Rol SENNOVA" />
+                </div>
+                <div>
+                    <Select id="rol_id" items={roles} bind:selectedValue={$form.rol_id} error={errors.rol_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
         </fieldset>

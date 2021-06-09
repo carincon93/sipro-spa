@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const route = window.route
 
 export function checkPermission(authUser, permissionsId) {
@@ -19,4 +21,15 @@ export function checkRole(authUser, rolesId) {
     })
 
     return findRoles.find((element) => element == true) == true
+}
+
+export function monthDiff(d1, d2) {
+    let monthDifference = 0
+    monthDifference = Math.floor(moment(new Date(d2)).diff(new Date(d1), 'months', true)) + 1;
+
+    if (monthDifference == 11) {
+        monthDifference = 11.5
+    }
+
+    return monthDifference;
 }

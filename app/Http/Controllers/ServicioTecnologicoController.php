@@ -8,6 +8,7 @@ use App\Http\Requests\ServicioTecnologicoRequest;
 use App\Models\Convocatoria;
 use App\Models\MesaTecnica;
 use App\Models\Proyecto;
+use App\Models\Role;
 use App\Models\SectorProductivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +43,9 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('create', [ServicioTecnologico::class]);
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'mesasTecnicas'  => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'mesasTecnicas' => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'roles'         => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -103,8 +105,9 @@ class ServicioTecnologicoController extends Controller
             Auth::user()->id,
             [
                 'es_autor'          => true,
-                'cantidad_meses'    => $proyecto->diff_meses,
-                'cantidad_horas'    => 40
+                'cantidad_meses'    => $request->cantidad_meses,
+                'cantidad_horas'    => $request->cantidad_horas,
+                'rol_id'            => $request->rol_id,
             ]
         );
 
