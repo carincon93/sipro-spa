@@ -33,6 +33,7 @@ class NuevoProponenteRequest extends FormRequest
             'numero_celular'                => ['required', 'min:0', 'max:9999999999', 'integer'],
             'tipo_participacion'            => ['required', 'max:191'],
             'es_autor'                      => ['required', 'boolean'],
+            'rol_sennova_id'                => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
             'cantidad_horas'                => ['required', 'numeric', 'min:1'],
             'cantidad_meses'                => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
@@ -60,6 +61,12 @@ class NuevoProponenteRequest extends FormRequest
         if (is_array($this->tipo_participacion)) {
             $this->merge([
                 'tipo_participacion' => $this->tipo_participacion['value'],
+            ]);
+        }
+
+        if (is_array($this->rol_sennova_id)) {
+            $this->merge([
+                'rol_sennova_id' => $this->rol_sennova_id['value'],
             ]);
         }
 

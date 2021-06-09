@@ -9,7 +9,7 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaTpRequest;
 use App\Models\Regional;
-use App\Models\Role;
+use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -44,7 +44,7 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'roles'             => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
+            'roles'             => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
 
@@ -95,7 +95,7 @@ class TaTpController extends Controller
                 'es_autor'          => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_id'            => $request->rol_id,
+                'rol_sennova_id'    => $request->rol_sennova_id,
             ]
         );
 

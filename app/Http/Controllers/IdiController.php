@@ -8,7 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
-use App\Models\Role;
+use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +44,7 @@ class IdiController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'roles'        => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
+            'roles'        => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
 
@@ -106,7 +106,7 @@ class IdiController extends Controller
                 'es_autor'          => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_id'            => $request->rol_id,
+                'rol_sennova_id'    => $request->rol_sennova_id,
             ]
         );
 

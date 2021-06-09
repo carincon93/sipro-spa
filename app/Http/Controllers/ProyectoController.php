@@ -8,7 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
-use App\Models\Role;
+use App\Models\RolSennova;
 use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -113,7 +113,7 @@ class ProyectoController extends Controller
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
-            'roles'                 => Role::select('id as value', 'name as label')->where('visible_participantes', 1)->orderBy('name', 'ASC')->get(),
+            'roles'                 => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
 
@@ -154,10 +154,10 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
-        if (is_array($data['rol_id'])) {
-            $data['rol_id'] = $data['rol_id']['value'];
+        if (is_array($data['rol_sennova_id'])) {
+            $data['rol_sennova_id'] = $data['rol_sennova_id']['value'];
         }
 
         try {
@@ -208,7 +208,7 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
@@ -249,9 +249,9 @@ class ProyectoController extends Controller
 
         $user->save();
 
-        $user->assignRole(74);
+        $user->assignRole(14);
 
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_id');
+        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);
