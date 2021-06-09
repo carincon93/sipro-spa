@@ -67,6 +67,7 @@ class User extends Authenticatable
             ->withPivot([
                 'user_id',
                 'es_autor',
+                'es_formulador',
                 'cantidad_meses',
                 'cantidad_horas',
                 'rol_sennova_id'
