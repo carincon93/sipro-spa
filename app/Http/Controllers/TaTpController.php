@@ -167,8 +167,8 @@ class TaTpController extends Controller
         $tatp->pertinencia_territorio               = $request->pertinencia_territorio;
         $tatp->metodologia_local                    = $request->metodologia_local;
 
-        $tatp->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        $tatp->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
+        // $tatp->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
+        // $tatp->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $tatp->proyecto->municipios()->sync($request->municipios);
 
         if ($request->codigo_linea_programatica == 70) {
@@ -198,7 +198,7 @@ class TaTpController extends Controller
     {
         $this->authorize('delete', [TaTp::class, $tatp]);
 
-        $tatp->project()->delete();
+        $tatp->proyecto()->delete();
 
         return redirect()->route('convocatorias.proyectos.tatp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }

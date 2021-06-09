@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LineaProgramaticaRequest;
 use App\Models\LineaProgramatica;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -120,7 +121,11 @@ class LineaProgramaticaController extends Controller
     {
         $this->authorize('delete', [LineaProgramatica::class, $lineaProgramatica]);
 
-        $lineaProgramatica->delete();
+        try {
+            $lineaProgramatica->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

@@ -45,7 +45,7 @@
     })
 
     let showEfectoIndirectoForm = false
-    function showEfectoindirectoDialog(efectoIndirecto, efectoDirectoId) {
+    function showEfectoIndirectoDialog(efectoIndirecto, efectoDirectoId) {
         reset()
         codigo = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
         dialogTitle = 'Efecto indirecto'
@@ -54,11 +54,12 @@
         dialogOpen = true
 
         if (efectoIndirecto != null) {
-            $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
             $formEfectoIndirecto.id = efectoIndirecto.id
+            $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
             $formEfectoIndirecto.efecto_directo_id = efectoIndirecto.efecto_directo_id
         } else {
             $formEfectoIndirecto.id = null
+            $formEfectoIndirecto.descripcion = null
             $formEfectoIndirecto.efecto_directo_id = efectoDirectoId
         }
     }
@@ -138,7 +139,7 @@
     })
 
     let showPlanteamientoProblemaForm = false
-    function showStatementProblemDialog() {
+    function showPlanteamientoProblemaDialog() {
         reset()
         dialogTitle = 'Planteamiento del problema'
         formId = 'planteamiento-problema'
@@ -231,6 +232,7 @@
             $formCausaIndirecta.causa_directa_id = causaIndirecta.causa_directa_id
         } else {
             $formCausaIndirecta.id = null
+            $formCausaIndirecta.descripcion = null
             $formCausaIndirecta.causa_directa_id = causaDirectaId
         }
     }
@@ -376,7 +378,7 @@
                     <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                             <div class="flex-1 efectos-directos relative">
-                                <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                <div on:click={showEfectoIndirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                     <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
                                         <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
                                         {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
@@ -387,7 +389,7 @@
                             </div>
                         {/each}
                         {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                            <div class="flex-1 efectos-directos relative" on:click={showEfectoindirectoDialog(null, efectoDirecto.id)}>
+                            <div class="flex-1 efectos-directos relative" on:click={showEfectoIndirectoDialog(null, efectoDirecto.id)}>
                                 <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
                                     <p class="text-sm text-white line-height-1-24" />
                                 </div>
@@ -423,7 +425,7 @@
             <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
         </div>
         <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+            <div on:click={showPlanteamientoProblemaDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                 {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                         {proyecto.planteamiento_problema}

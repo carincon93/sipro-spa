@@ -14,6 +14,7 @@
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -298,7 +299,7 @@
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>
                             </Item>
-                            {#if authUser.id != participante.id}
+                            {#if authUser.id != participante.id || !participante.formulador}
                                 <Item on:SMUI:action={() => removeParticipante(participante.id)}>
                                     <Text>Quitar</Text>
                                 </Item>
@@ -336,6 +337,7 @@
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
                     <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <InfoMessage message="Valores permitidos: 1 a {proyecto.diff_meses} meses. <br /> Nota: Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
                 </div>
                 <div class="mt-4">
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
@@ -416,6 +418,7 @@
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
                     <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <InfoMessage message="Valores permitidos: 1 a {proyecto.diff_meses} meses. <br /> Nota: Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
                 </div>
 
                 <div class="mt-4">

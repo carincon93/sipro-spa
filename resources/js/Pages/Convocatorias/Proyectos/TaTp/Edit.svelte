@@ -161,14 +161,16 @@
                 {/if}
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Tipo de proyecto" />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Tipo de proyecto" />
+                    </div>
+                    <div>
+                        <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} bind:recurso={codigoLineaProgramatica} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre del tipo de proyecto, línea programática" message={errors.tipo_proyecto_id} required />
+                    </div>
                 </div>
-                <div>
-                    <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} bind:recurso={codigoLineaProgramatica} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre del tipo de proyecto, línea programática" message={errors.tipo_proyecto_id} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
