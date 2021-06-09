@@ -195,8 +195,8 @@ class IdiController extends Controller
         $idi->relacionado_mesas_sectoriales         = $request->relacionado_mesas_sectoriales;
         $idi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
-        $idi->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        $idi->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
+        // $idi->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
+        // $idi->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $idi->proyecto->municipios()->sync($request->municipios);
 
         $idi->save();
@@ -223,7 +223,7 @@ class IdiController extends Controller
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
-        $idi->project()->delete();
+        $idi->proyecto()->delete();
 
         return redirect()->route('convocatorias.idi.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }

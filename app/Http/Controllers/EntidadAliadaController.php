@@ -28,9 +28,9 @@ class EntidadAliadaController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
         /**
-         * Si el proyecto es de la línea programática 23 se prohibe el acceso. No requiere de entidades aliadas
+         * Si el proyecto es de la línea programática 23 o 65 se prohibe el acceso. No requiere de entidades aliadas
          */
-        if ($proyecto->codigo_linea_programatica == 23) {
+        if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65) {
             return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de entidades aliadas');
         }
 

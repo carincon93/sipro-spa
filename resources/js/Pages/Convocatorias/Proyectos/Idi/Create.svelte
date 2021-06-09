@@ -11,6 +11,7 @@
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -168,6 +169,7 @@
                     </div>
                     <div>
                         <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                        <InfoMessage message="Valores permitidos: 1 a {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses. Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
                     </div>
                 </div>
             {/if}

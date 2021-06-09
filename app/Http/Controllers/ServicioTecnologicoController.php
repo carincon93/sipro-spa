@@ -186,8 +186,8 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->redConocimiento()->associate($request->red_conocimiento_id);
         $servicioTecnologico->temaPriorizado()->associate($request->tema_priorizado_id);
 
-        $servicioTecnologico->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        $servicioTecnologico->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
+        // $servicioTecnologico->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
+        // $servicioTecnologico->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
 
         $servicioTecnologico->save();
 
@@ -204,7 +204,7 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('delete', [ServicioTecnologico::class, $servicioTecnologico]);
 
-        $servicioTecnologico->project()->delete();
+        $servicioTecnologico->proyecto()->delete();
 
         return redirect()->route('convocatorias.servicios-tecnologicos.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
