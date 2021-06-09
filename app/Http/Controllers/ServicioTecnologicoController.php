@@ -203,7 +203,7 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('delete', [ServicioTecnologico::class, $servicioTecnologico]);
 
-        $servicioTecnologico->delete();
+        $servicioTecnologico->project()->delete();
 
         return redirect()->route('convocatorias.servicios-tecnologicos.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }

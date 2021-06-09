@@ -222,7 +222,7 @@ class IdiController extends Controller
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
-        $idi->delete();
+        $idi->project()->delete();
 
         return redirect()->route('convocatorias.idi.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }

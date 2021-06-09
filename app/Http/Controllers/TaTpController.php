@@ -197,7 +197,7 @@ class TaTpController extends Controller
     {
         $this->authorize('delete', [TaTp::class, $tatp]);
 
-        $tatp->delete();
+        $tatp->project()->delete();
 
         return redirect()->route('convocatorias.proyectos.tatp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }

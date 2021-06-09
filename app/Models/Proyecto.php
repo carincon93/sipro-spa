@@ -238,6 +238,7 @@ class Proyecto extends Model
      */
     public function getCodigoAttribute()
     {
+        $fechaFinalizacion = null;
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
         if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
         if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
@@ -252,6 +253,8 @@ class Proyecto extends Model
      */
     public function getDiffMesesAttribute()
     {
+        $fechaInicio = null;
+        $fechaFinalizacion = null;
         if ($this->idi()->exists()) {
             $fechaInicio = $this->idi->fecha_inicio;
             $fechaFinalizacion = $this->idi->fecha_finalizacion;
