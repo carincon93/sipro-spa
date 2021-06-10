@@ -231,7 +231,7 @@ class ProyectoController extends Controller
      */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [User::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $user = new User();
 
