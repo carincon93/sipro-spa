@@ -84,11 +84,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento" type="number" input$min="0" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular" type="number" input$min="0" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
                 <div class="mt-4">
                     <Label required labelFor="habilitado" value="¿El usuario está habilitado para ingresar al sistema?" class="inline-block mb-4" />
@@ -108,9 +108,10 @@
                 </div>
 
                 <div class="mt-4">
+                    <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (Acuerdo No. 0009 del 2016)" />
                     <FormField>
                         <Checkbox bind:checked={$form.autorizacion_datos} />
-                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?</span>
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
                     </FormField>
                 </div>
 

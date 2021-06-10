@@ -117,7 +117,7 @@
     </select>
     <InputError {message} />
     {#if sinUsosPresupuestales}
-        <InfoMessage message="No hay usos presupuestales para el filtro seleccionado y la línea programática. Por favor seleccione un filtro diferente." />
+        <InfoMessage message="Los usos presupuestales para el filtro seleccionado no están habilitados para la línea programática de este proyecto. Por favor seleccione un filtro diferente." />
     {/if}
 </div>
 

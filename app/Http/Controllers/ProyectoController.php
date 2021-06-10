@@ -49,7 +49,6 @@ class ProyectoController extends Controller
         }
 
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-
             foreach ($efectoDirecto->resultado->productos as $producto) {
                 $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $efectoDirecto->resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
             }
@@ -83,7 +82,6 @@ class ProyectoController extends Controller
                 return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $proyecto]);
                 break;
             default:
-                # code...
                 break;
         }
     }
@@ -97,7 +95,7 @@ class ProyectoController extends Controller
      */
     public function participantes(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        // $this->authorize('viewAny', [Project::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->participantes;
@@ -245,6 +243,7 @@ class ProyectoController extends Controller
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = 0;
         $user->tipo_participacion   = $request->tipo_participacion;
+        $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();

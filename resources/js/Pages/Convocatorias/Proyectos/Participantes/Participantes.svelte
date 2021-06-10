@@ -15,6 +15,8 @@
     import Button from '@/Shared/Button'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
@@ -139,6 +141,7 @@
         cantidad_horas: 0,
         centro_formacion_id: null,
         rol_sennova_id: null,
+        autorizacion_datos: false,
     })
 
     let formNuevoParticipanteId
@@ -379,59 +382,67 @@
     <div slot="content">
         <form on:submit|preventDefault={submitRegister} id={formNuevoParticipanteId}>
             <fieldset>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Nombre completo" id="nombre_nuevo_participante" type="text" class="mt-1" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Correo electrónico institucional" id="email_nuevo_participante" type="email" class="mt-1" bind:value={$formNuevoParticipante.email} error={errors.email} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo_documento_nuevo_participante" value="Tipo de documento" />
                     <Select id="tipo_documento_nuevo_participante" items={tiposDocumento} bind:selectedValue={$formNuevoParticipante.tipo_documento} error={errors.tipo_documento} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
                 </div>
 
-                <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" input$min="0" input$max="9999999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
+                <div class="mt-8">
+                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
                 </div>
 
-                <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" input$min="0" input$max="9999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
+                <div class="mt-8">
+                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="centro_formacion_id_nuevo_participante" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id_nuevo_participante" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoParticipante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo_participacion_nuevo_participante" value="Tipo de participación" />
                     <Select id="tipo_participacion_nuevo_participante" items={tiposParticipacion} bind:selectedValue={$formNuevoParticipante.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
                     <Select id="rol_sennova_id" items={roles} bind:selectedValue={$formNuevoParticipante.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                     <InfoMessage message="Valores permitidos: 1 a {proyecto.diff_meses} meses. <br /> Nota: Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas_nuevo_participante" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="es_autor" value="¿Es autor?" />
                     <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$formNuevoParticipante.es_autor} required>
                         <option value="">Seleccione una opción</option>
                         <option value="1" selected={$formNuevoParticipante.es_autor == 1 ? true : false}>Si</option>
                         <option value="0" selected={$formNuevoParticipante.es_autor == 0 ? true : false}>No</option>
                     </select>
+                </div>
+
+                <div class="mt-8">
+                    <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
+                    <FormField>
+                        <Checkbox bind:checked={$formNuevoParticipante.autorizacion_datos} />
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
+                    </FormField>
                 </div>
             </fieldset>
         </form>

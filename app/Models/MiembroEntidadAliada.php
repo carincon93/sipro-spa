@@ -27,7 +27,8 @@ class MiembroEntidadAliada extends Model
         'email',
         'tipo_documento',
         'numero_documento',
-        'numero_celular'
+        'numero_celular',
+        'autorizacion_datos'
     ];
 
     /**

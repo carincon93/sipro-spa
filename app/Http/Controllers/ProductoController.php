@@ -26,10 +26,18 @@ class ProductoController extends Controller
         $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
+        $validation = null;
+        if (count($proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
+            $query->where('descripcion', '!=', null);
+        })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')) == 0) {
+            $validation = 'Para poder crear productos debe primero generar los resultados en el \'Árbol de objetivos\'';
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
             'filters'       => request()->all('search'),
+            'validation'   => $validation,
             'productos'     => Producto::whereIn(
                 'resultado_id',
                 $resultado->map(function ($resultado) {

@@ -112,10 +112,7 @@ class ProyectoPresupuestoController extends Controller
 
             $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
         } else if ($request->codigo_uso_presupuestal == '2020200800901') {
-            $request->validate([
-                'servicio_edicion_info' => 'required|integer',
-            ]);
-
+            $request->servicio_edicion_info = $request->servicio_edicion_info['value'];
             $servicioEdicionInfo = new ServicioEdicionInfo();
             $servicioEdicionInfo->info = $request->servicio_edicion_info;
 
@@ -228,10 +225,7 @@ class ProyectoPresupuestoController extends Controller
 
         $servicioEdicionInfo = ServicioEdicionInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
         if ($request->codigo_uso_presupuestal == '2020200800901') {
-            $request->validate([
-                'servicio_edicion_info' => 'required|integer',
-            ]);
-
+            $request->servicio_edicion_info = $request->servicio_edicion_info['value'];
             $proyectoPresupuesto->servicioEdicionInfo()->updateOrCreate(
                 ['id' => $servicioEdicionInfo ? $servicioEdicionInfo->id : null],
                 [

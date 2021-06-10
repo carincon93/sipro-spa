@@ -1,18 +1,15 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
 
     import Stepper from '@/Shared/Stepper'
-    import Loading from '@/Shared/Loading'
-    import { onDestroy, onMount } from 'svelte'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
     export let objetivos
     export let productos
-
-    let loading = false
 
     $title = 'Cadena de valor'
 
@@ -66,9 +63,12 @@
 
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
+    {#if productos.length == 0}
+        <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor sin terminar.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />
+    {/if}
+
     <div class="mt-10">
         <div id="orgchart_div" />
-        <!-- <Loading {loading} bg="transparent" /> -->
     </div>
 </AuthenticatedLayout>
 
