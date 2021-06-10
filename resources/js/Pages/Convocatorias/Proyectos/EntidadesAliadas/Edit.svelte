@@ -243,94 +243,95 @@
     </div>
 
     {#if proyecto.idi}
-        <DataTable class="mt-20">
-            <div slot="title" id="miembros-entidad-aliada">Miembros de entidad aliada</div>
-
-            <div slot="actions">
+        <h1 class="mt-24 mb-8 text-center text-3xl">Miembros de entidad aliada</h1>
+        <div class="mb-6 flex justify-end items-center">
+            <div>
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
             </div>
+        </div>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+                    </tr>
+                </thead>
 
-            <thead slot="thead">
+                <tbody>
+                    {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                    {miembroEntidadAliada.nombre}
+                                </p>
+                            </td>
+
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                    {miembroEntidadAliada.email}
+                                </p>
+                            </td>
+
+                            <td class="border-t">
+                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                    {miembroEntidadAliada.numero_celular}
+                                </p>
+                            </td>
+
+                            <td class="border-t td-actions relative">
+                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+    {/if}
+
+    <h1 class="mt-24 mb-8 text-center text-3xl">Objetivos específicos</h1>
+    <p class="mb-6">
+        A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
+    </p>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
                 <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
                 </tr>
             </thead>
 
-            <tbody slot="tbody">
-                {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+            <tbody>
+                {#each objetivosEspecificosRelacionados as { id, descripcion }}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
                             <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.nombre}
+                                {descripcion}
                             </p>
-                        </td>
-
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.email}
-                            </p>
-                        </td>
-
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.numero_celular}
-                            </p>
-                        </td>
-
-                        <td class="border-t td-actions relative">
-                            <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
-                            </DataTableMenu>
                         </td>
                     </tr>
                 {/each}
+
+                {#if objetivosEspecificosRelacionados.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    </tr>
+                {/if}
             </tbody>
-        </DataTable>
-    {/if}
-
-    <DataTable class="mt-20">
-        <div slot="title" id="objetivos-especificos">Objetivos específicos</div>
-
-        <p class="mb-6" slot="caption">
-            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
-        </p>
-
-        <thead slot="thead">
-            <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
-            </tr>
-        </thead>
-
-        <tbody slot="tbody">
-            {#each objetivosEspecificosRelacionados as { id, descripcion }}
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {descripcion}
-                        </p>
-                    </td>
-                </tr>
-            {/each}
-
-            {#if objetivosEspecificosRelacionados.length === 0}
-                <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
-                </tr>
-            {/if}
-        </tbody>
-    </DataTable>
-
+        </table>
+    </div>
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

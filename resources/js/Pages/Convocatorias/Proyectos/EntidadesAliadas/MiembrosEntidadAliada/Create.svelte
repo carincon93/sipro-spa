@@ -8,6 +8,9 @@
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
@@ -30,6 +33,7 @@
         tipo_documento: '',
         numero_documento: '',
         numero_celular: '',
+        autorizacion_datos: false,
     })
 
     function submit() {
@@ -74,16 +78,23 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento" type="number" input$min="0" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular" type="number" input$min="0" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                </div>
+                <div class="mt-4">
+                    <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
+                    <FormField>
+                        <Checkbox bind:checked={$form.autorizacion_datos} />
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
+                    </FormField>
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkPermission(authUser, [1])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear miembro de la entidad aliada</LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" bind:disabled={$form.autorizacion_datos}>Crear miembro de la entidad aliada</LoadingButton>
                 {/if}
             </div>
         </form>

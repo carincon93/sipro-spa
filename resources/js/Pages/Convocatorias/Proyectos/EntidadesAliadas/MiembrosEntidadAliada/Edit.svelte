@@ -10,6 +10,7 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -37,6 +38,7 @@
         },
         numero_documento: miembroEntidadAliada.numero_documento,
         numero_celular: miembroEntidadAliada.numero_celular,
+        autorizacion_datos: miembroEntidadAliada.autorizacion_datos,
     })
 
     function submit() {
@@ -88,11 +90,15 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de documento" id="numero_documento" type="number" input$min="0" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de celular" id="numero_celular" type="number" input$min="0" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                </div>
+
+                <div class="mt-4">
+                    <InfoMessage message={miembroEntidadAliada.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

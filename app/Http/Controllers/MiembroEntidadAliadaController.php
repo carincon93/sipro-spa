@@ -68,11 +68,12 @@ class MiembroEntidadAliadaController extends Controller
         $this->authorize('validar-autor', $proyecto);
 
         $miembroEntidadAliada = new MiembroEntidadAliada();
-        $miembroEntidadAliada->nombre            = $request->nombre;
-        $miembroEntidadAliada->email             = $request->email;
-        $miembroEntidadAliada->tipo_documento    = $request->tipo_documento;
-        $miembroEntidadAliada->numero_documento  = $request->numero_documento;
-        $miembroEntidadAliada->numero_celular    = $request->numero_celular;
+        $miembroEntidadAliada->nombre               = $request->nombre;
+        $miembroEntidadAliada->email                = $request->email;
+        $miembroEntidadAliada->tipo_documento       = $request->tipo_documento;
+        $miembroEntidadAliada->numero_documento     = $request->numero_documento;
+        $miembroEntidadAliada->numero_celular       = $request->numero_celular;
+        $miembroEntidadAliada->autorizacion_datos   = $request->autorizacion_datos;
         $miembroEntidadAliada->entidadAliada()->associate($entidadAliada);
 
         $miembroEntidadAliada->save();
@@ -125,11 +126,13 @@ class MiembroEntidadAliadaController extends Controller
     {
         $this->authorize('validar-autor', $proyecto);
 
-        $miembroEntidadAliada->nombre            = $request->nombre;
-        $miembroEntidadAliada->email             = $request->email;
-        $miembroEntidadAliada->tipo_documento    = $request->tipo_documento;
-        $miembroEntidadAliada->numero_documento  = $request->numero_documento;
-        $miembroEntidadAliada->numero_celular    = $request->numero_celular;
+        $miembroEntidadAliada->nombre               = $request->nombre;
+        $miembroEntidadAliada->email                = $request->email;
+        $miembroEntidadAliada->tipo_documento       = $request->tipo_documento;
+        $miembroEntidadAliada->numero_documento     = $request->numero_documento;
+        $miembroEntidadAliada->numero_celular       = $request->numero_celular;
+        $miembroEntidadAliada->autorizacion_datos   = $request->autorizacion_datos;
+
         $miembroEntidadAliada->entidadAliada()->associate($entidadAliada);
 
         $miembroEntidadAliada->save();

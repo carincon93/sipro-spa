@@ -3,16 +3,17 @@
     import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Pagination from '@/Shared/Pagination'
-    import Button from '@/Shared/Button'
     import { Inertia } from '@inertiajs/inertia'
 
+    import Button from '@/Shared/Button'
     import Stepper from '@/Shared/Stepper'
     import Gantt from '@/Shared/Gantt'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
     export let productos
+    export let validation
 
     $title = 'Productos'
 
@@ -29,10 +30,15 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl m-24 text-center">Productos</h1>
+
+    {#if validation}
+        <InfoMessage message={validation} class="mt-10 mb-10" />
+    {/if}
+
     <div class="mb-6 flex justify-end items-center">
         <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
-            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+            {#if (isSuperAdmin && validation == null) || (checkPermission(authUser, [1, 5, 8]) && validation == null)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -52,6 +58,4 @@
               }
             : null}
     />
-
-    <Pagination links={productos.links} />
 </AuthenticatedLayout>

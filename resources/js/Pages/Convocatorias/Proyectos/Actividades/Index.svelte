@@ -27,7 +27,7 @@
 
     <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
-    <InfoMessage message="Si desea añadir actividades, por favor diríjase al 'Arbol de objetivos'" />
+    <InfoMessage message="Debe generar las actividades en el 'Arbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor." />
 
     <Gantt
         items={actividades.data}
