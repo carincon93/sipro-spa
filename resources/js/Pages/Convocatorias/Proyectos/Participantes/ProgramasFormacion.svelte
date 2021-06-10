@@ -8,6 +8,7 @@
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import DataTableMenu from '@/Shared/DataTableMenu'
+    import InfoMessage from '@/Shared/InfoMessage'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -90,6 +91,7 @@
 
     {#if sended}
         <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de programas de formación</h1>
+        <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
         <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
                 <thead>

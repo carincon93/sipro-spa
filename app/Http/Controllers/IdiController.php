@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\ProyectoRolSennovaValidationTrait;
 use Inertia\Inertia;
 
 class IdiController extends Controller
@@ -57,6 +58,10 @@ class IdiController extends Controller
     public function store(IdiRequest $request, Convocatoria $convocatoria)
     {
         $this->authorize('formular-proyecto-idi');
+
+        if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->tipo_proyecto_id)) {
+            return redirect()->back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
+        };
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);

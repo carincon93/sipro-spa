@@ -12,11 +12,14 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let resultados
+    export let actividades
 
     $: $title = 'Crear producto'
 
@@ -133,6 +136,25 @@
                         <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
+
+                <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4">
+                        <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
+                        <InputError message={errors.actividad_id} />
+                    </div>
+                    <div class="grid grid-cols-2">
+                        {#each actividades as { id, nombre }, i}
+                            <FormField>
+                                <Checkbox bind:group={$form.actividad_id} value={id} />
+                                <span slot="label">{nombre}</span>
+                            </FormField>
+                        {/each}
+                        {#if actividades.length == 0}
+                            <p class="p-4">Sin información registrada</p>
+                        {/if}
+                    </div>
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}

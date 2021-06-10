@@ -198,6 +198,7 @@
 
     {#if sended}
         <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de participantes</h1>
+        <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
         <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
                 <thead>
@@ -244,7 +245,7 @@
 
                     {#if resultados.length === 0}
                         <tr>
-                            <td class="border-t px-6 py-4" colspan="4">
+                            <td class="border-t px-6 py-4" colspan="5">
                                 {$_('No data recorded')}
                                 <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
                             </td>

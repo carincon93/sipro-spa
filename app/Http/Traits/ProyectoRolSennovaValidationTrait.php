@@ -2,7 +2,9 @@
 
 namespace App\Http\Traits;
 
+use App\Models\CentroFormacion;
 use App\Models\ConvocatoriaRolSennova;
+use App\Models\TipoProyecto;
 
 trait ProyectoRolSennovaValidationTrait
 {
@@ -75,5 +77,35 @@ trait ProyectoRolSennovaValidationTrait
         }
 
         return false;
+    }
+
+    /**
+     * culturaInnovacion
+     *
+     * @param  mixed $centroFormacionId
+     * @param  mixed $tipoProyectoId
+     * @return void
+     */
+    public static function culturaInnovacionNumeroProyectos($centroFormacionId, $tipoProyectoId)
+    {
+        $centroFormacion = CentroFormacion::find($centroFormacionId);
+        $tipoProyecto = TipoProyecto::find($tipoProyectoId);
+
+        if (in_array($centroFormacion->codigo, [9309, 9503, 9124, 9120, 9222, 9116, 9548, 9401, 9403, 9303, 9310, 9529, 9121]) && $tipoProyecto->lineaProgramatica->codigo == 65) {
+            foreach ($centroFormacion->proyectos as $proyecto) {
+                if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 65) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static function culturaInnovacionRoles($centroFormacionId)
+    {
+        // 25 experto temático en producción científica
+        // 26 gestor editorial
+        // 27 auxiliar editorial
     }
 }
