@@ -54,6 +54,16 @@ class ActividadEconomica extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->hasMany(CulturaInnovacion::class);
+    }
+
+    /**
      * Relationship with ServicioTecnologico
      *
      * @return object

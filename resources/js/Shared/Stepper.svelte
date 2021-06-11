@@ -6,7 +6,7 @@
     export let convocatoria
     export let proyecto
 
-    let activeProyecto = route().current('convocatorias.tatp.edit') || route().current('convocatorias.idi.edit') || route().current('convocatorias.servicios-tecnologicos.edit')
+    let activeProyecto = route().current('convocatorias.tatp.edit') || route().current('convocatorias.idi.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion.edit')
 </script>
 
 <!-- Steper -->
@@ -117,7 +117,7 @@
                     12
                 {/if}
             </div>
-            <p class="text-sm text-center">Finalzar formulación</p>
+            <p class="text-sm text-center">Finalizar formulación</p>
         </a>
     </div>
 </div>

@@ -47,6 +47,7 @@ use App\Http\Controllers\LineaTecnologicaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
 use App\Http\Controllers\HelpDeskController;
+use App\Http\Controllers\CulturaInnovacionController;
 
 use App\Models\ActividadEconomica;
 use App\Models\LineaInvestigacion;
@@ -139,6 +140,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor', [ProyectoController::class, 'showCadenaValor'])->name('convocatorias.proyectos.cadena-valor');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/proyecto-lote-estudio-mercado/{proyecto_lote_estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.proyecto-presupuesto.download-soporte');
+
+    // Trae los centros de formación - Cultura innovación
+    Route::get('web-api/cultura-innovacion/centros-formacion', function () {
+        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')
+            ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
+            ->whereIn('centros_formacion.codigo', [
+                9309,
+                9503,
+                9230,
+                9124,
+                9120,
+                9222,
+                9116,
+                9548,
+                9401,
+                9403,
+                9303,
+                9310,
+                9529,
+                9121
+            ])
+            ->orderBy('centros_formacion.nombre', 'ASC')->get());
+    })->name('web-api.cultura-innovacion.centros-formacion');
 
     // Trae los conceptos internos SENA
     Route::get('web-api/segundo-grupo-presupuestal', function () {
@@ -470,6 +494,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
 
     Route::resource('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
+
+    /**
+     * cultura-innovacion - Estrategia Nacional
+     * 
+     */
+    Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
 
     /**
      * TaTp - Estrategia nacional

@@ -41,6 +41,7 @@
         tatp_servicio_tecnologico: proyecto.tatp || proyecto.servicio_tecnologico ? true : false,
         valor_proyectado: null,
         medio_verificacion: '',
+        actividad_id: [],
     })
 
     function submit() {
@@ -77,13 +78,13 @@
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_inicio" value="Del" />
                             <div class="ml-4">
-                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_inicio} required />
+                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_finalizacion" value="hasta" />
                             <div class="ml-4">
-                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_finalizacion} required />
+                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -144,10 +145,10 @@
                         <InputError message={errors.actividad_id} />
                     </div>
                     <div class="grid grid-cols-2">
-                        {#each actividades as { id, nombre }, i}
-                            <FormField>
+                        {#each actividades as { id, descripcion }, i}
+                            <FormField class="border-b border-l py-4">
                                 <Checkbox bind:group={$form.actividad_id} value={id} />
-                                <span slot="label">{nombre}</span>
+                                <span slot="label">{descripcion}</span>
                             </FormField>
                         {/each}
                         {#if actividades.length == 0}

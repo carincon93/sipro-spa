@@ -74,6 +74,16 @@ class Producto extends Model
     }
 
     /**
+     * Relationship with ProductoCulturaInnovacion
+     *
+     * @return object
+     */
+    public function productoCulturaInnovacion()
+    {
+        return $this->hasOne(ProductoCulturaInnovacion::class);
+    }
+
+    /**
      * Relationship with ProductoTaTp
      *
      * @return object

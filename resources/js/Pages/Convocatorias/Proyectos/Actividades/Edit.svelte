@@ -81,13 +81,13 @@
                         <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                             <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                             <div class="ml-4">
-                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_inicio} required />
+                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                             <Label required labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                             <div class="ml-4">
-                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_finalizacion} required />
+                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="grid grid-cols-2">
                         {#each productos as { id, nombre }, i}
-                            <FormField>
+                            <FormField class="border-b border-l py-4">
                                 <Checkbox bind:group={$form.producto_id} value={id} />
                                 <span slot="label">{nombre}</span>
                             </FormField>
