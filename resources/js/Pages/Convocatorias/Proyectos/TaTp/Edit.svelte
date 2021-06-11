@@ -100,7 +100,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [6, 7])) {
+        if (isSuperAdmin || checkPermission(authUser, [9, 10])) {
             $form.put(route('convocatorias.tatp.update', [convocatoria.id, tatp.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -114,7 +114,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(authUser, [7])) {
+        if (isSuperAdmin || checkPermission(authUser, [10])) {
             $deleteForm.delete(route('convocatorias.tatp.destroy', [convocatoria.id, tatp.id]), {
                 preserveScroll: true,
             })
@@ -361,10 +361,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermission(authUser, [7])}
+            {#if isSuperAdmin || checkPermission(authUser, [10])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || checkPermission(authUser, [6, 7])}
+            {#if isSuperAdmin || checkPermission(authUser, [9, 10])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
