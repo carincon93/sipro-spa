@@ -24,7 +24,7 @@ class IdiController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-idi');
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id'),
@@ -40,7 +40,7 @@ class IdiController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-idi');
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -56,7 +56,7 @@ class IdiController extends Controller
      */
     public function store(IdiRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-idi');
+        $this->authorize('formular-proyecto');
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);

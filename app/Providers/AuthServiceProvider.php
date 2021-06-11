@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10])->count() > 0;
         });
 
-        Gate::define('formular-proyecto-idi', function (User $user) {
+        Gate::define('formular-proyecto', function (User $user) {
             return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10])->count() > 0;
         });
 
