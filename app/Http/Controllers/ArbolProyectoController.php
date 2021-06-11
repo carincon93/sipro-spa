@@ -114,6 +114,10 @@ class ArbolProyectoController extends Controller
                 $proyecto->planteamiento_problema = $proyecto->servicioTecnologico->planteamiento_problema;
                 $proyecto->justificacion_problema = $proyecto->servicioTecnologico->justificacion_problema;
                 break;
+            case $proyecto->culturaInnovacion()->exists():
+                $proyecto->planteamiento_problema = $proyecto->culturaInnovacion->planteamiento_problema;
+                $proyecto->justificacion_problema = $proyecto->culturaInnovacion->justificacion_problema;
+                break;
             default:
                 break;
         }
@@ -289,13 +293,17 @@ class ArbolProyectoController extends Controller
                 $proyecto->objetivo_general         = $proyecto->servicioTecnologico->objetivo_general;
                 $proyecto->planteamiento_problema   = $proyecto->servicioTecnologico->planteamiento_problema;
                 break;
+            case $proyecto->culturaInnovacion()->exists():
+                $proyecto->objetivo_general         = $proyecto->culturaInnovacion->objetivo_general;
+                $proyecto->planteamiento_problema   = $proyecto->culturaInnovacion->planteamiento_problema;
+                break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'planteamiento_problema', 'objetivo_general'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'planteamiento_problema', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductoRequest;
+use App\Models\Actividad;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Producto;
+use App\Models\ProductoCulturaInnovacion;
 use App\Models\ProductoIdi;
 use App\Models\ProductoServicioTecnologico;
 use App\Models\ProductoTaTp;
@@ -59,9 +61,17 @@ class ProductoController extends Controller
         $proyecto->idi;
         $proyecto->taTp;
 
+        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
                 $query->where('descripcion', '!=', null);
             })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')
@@ -86,6 +96,8 @@ class ProductoController extends Controller
         $producto->resultado()->associate($request->resultado_id);
         $producto->save();
 
+        $producto->actividades()->attach($request->actividad_id);
+
         // Valida si es un producto de I+D+i
         if ($proyecto->idi()->exists()) {
             $request->validate([
@@ -97,6 +109,19 @@ class ProductoController extends Controller
             $productoIdi->trl = $request->trl;
             $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
             $producto->productoIdi()->save($productoIdi);
+        }
+
+        // Valida si es un producto de cultura innovación
+        if ($proyecto->culturaInnovacion()->exists()) {
+            $request->validate([
+                'trl'                           => 'required|integer|between:1,9',
+                'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
+            ]);
+
+            $productoIdi = new ProductoCulturaInnovacion();
+            $productoIdi->trl = $request->trl;
+            $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
+            $producto->productoCulturaInnovacion()->save($productoIdi);
         }
 
         // Valida si es un producto de TaTp
@@ -149,16 +174,27 @@ class ProductoController extends Controller
 
         $proyecto->idi;
         $producto->productoIdi;
+        $proyecto->culturaInnovacion;
+        $producto->productoCulturaInnovacion;
         $proyecto->taTp;
         $producto->productoTaTp;
         $proyecto->servicioTecnologico;
         $producto->productoServicioTecnologico;
 
+        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'          => $proyecto,
-            'producto'          => $producto,
-            'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
+            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'proyecto'                  => $proyecto,
+            'producto'                  => $producto,
+            'actividades'               => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+            'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
+            'resultados'                => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
                 $query->where('descripcion', '!=', null);
             })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado'),
         ]);
@@ -181,12 +217,22 @@ class ProductoController extends Controller
         $producto->indicador            = $request->indicador;
         $producto->resultado()->associate($request->resultado_id);
 
+        $producto->actividades()->sync($request->actividad_id);
+
         if ($proyecto->idi()->exists()) {
             $request->validate([
                 'trl'                           => 'required|integer|between:1,9',
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);
             $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
+        }
+
+        if ($proyecto->culturaInnovacion()->exists()) {
+            $request->validate([
+                'trl'                           => 'required|integer|between:1,9',
+                'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
+            ]);
+            $producto->productoCulturaInnovacion()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
         }
 
         if ($proyecto->taTp()->exists()) {

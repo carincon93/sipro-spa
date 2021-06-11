@@ -1,0 +1,1 @@
+la función culturaInnovacion del ProyectoRolSennovaValidationTrait debe validar por convocatoria.

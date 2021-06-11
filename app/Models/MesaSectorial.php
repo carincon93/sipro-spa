@@ -54,6 +54,16 @@ class MesaSectorial extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->belongsToMany(CulturaInnovacion::class, 'cultura_innovacion_mesa_sectorial', 'mesa_sectorial_id', 'cultura_innovacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

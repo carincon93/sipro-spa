@@ -31,6 +31,7 @@ class ProductoRequest extends FormRequest
             'fecha_inicio'                  => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
             'fecha_finalizacion'            => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
             'indicador'                     => ['required', 'string'],
+            'actividad_id*'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:actividades,id'],
         ];
     }
 

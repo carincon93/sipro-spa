@@ -39,7 +39,7 @@ class IdiRequest extends FormRequest
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
                 'video'                                     => ['nullable', 'max:191', 'url'],
-                'resumen'                                   => ['required', 'max:2400', 'string'],
+                'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
                 'metodologia'                               => ['required', 'string'],

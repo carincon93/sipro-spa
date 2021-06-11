@@ -41,6 +41,10 @@ class ProyectoController extends Controller
             $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
         }
 
+        if ($proyecto->culturaInnovacion()->exists()) {
+            $objetivoGeneral = $proyecto->culturaInnovacion->objetivo_general;
+        }
+
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
         $productos = collect([]);
 
@@ -80,6 +84,9 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $proyecto]);
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                return redirect()->route('convocatorias.cultura-innovacion.edit', [$convocatoria, $proyecto]);
                 break;
             default:
                 break;
@@ -231,7 +238,7 @@ class ProyectoController extends Controller
      */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [User::class]);
+        $this->authorize('validar-autor', $proyecto);
 
         $user = new User();
 

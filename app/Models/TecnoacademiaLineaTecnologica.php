@@ -75,6 +75,16 @@ class TecnoacademiaLineaTecnologica extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return void
+     */
+    public function culturaInnovacion()
+    {
+        return $this->hasMany(CulturaInnovacion::class);
+    }
+
+    /**
      * Relationship with TaTp
      *
      * @return void

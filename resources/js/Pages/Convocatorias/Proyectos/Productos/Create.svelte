@@ -12,11 +12,14 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let resultados
+    export let actividades
 
     $: $title = 'Crear producto'
 
@@ -38,6 +41,7 @@
         tatp_servicio_tecnologico: proyecto.tatp || proyecto.servicio_tecnologico ? true : false,
         valor_proyectado: null,
         medio_verificacion: '',
+        actividad_id: [],
     })
 
     function submit() {
@@ -74,13 +78,13 @@
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_inicio" value="Del" />
                             <div class="ml-4">
-                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_inicio} required />
+                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex">
                             <Label required labelFor="fecha_finalizacion" value="hasta" />
                             <div class="ml-4">
-                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos} max={convocatoria.max_fecha_finalizacion_proyectos} bind:value={$form.fecha_finalizacion} required />
+                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -133,6 +137,25 @@
                         <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
+
+                <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4">
+                        <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
+                        <InputError message={errors.actividad_id} />
+                    </div>
+                    <div class="grid grid-cols-2">
+                        {#each actividades as { id, descripcion }, i}
+                            <FormField class="border-b border-l py-4">
+                                <Checkbox bind:group={$form.actividad_id} value={id} />
+                                <span slot="label">{descripcion}</span>
+                            </FormField>
+                        {/each}
+                        {#if actividades.length == 0}
+                            <p class="p-4">Sin información registrada</p>
+                        {/if}
+                    </div>
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}

@@ -22,7 +22,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -92,6 +92,16 @@ class Proyecto extends Model
     public function idi()
     {
         return $this->hasOne(Idi::class, 'id');
+    }
+
+    /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->hasOne(CulturaInnovacion::class, 'id');
     }
 
     /**
@@ -243,8 +253,41 @@ class Proyecto extends Model
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
         if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
         if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
+        if ($this->culturaInnovacion()->exists()) $fechaFinalizacion =  $this->culturaInnovacion->fecha_finalizacion;
 
         return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
+    }
+
+    public function getFechaInicioAttribute()
+    {
+        $fechaInicio = null;
+        if ($this->idi()->exists()) {
+            $fechaInicio = $this->idi->fecha_inicio;
+        } else if ($this->taTp()->exists()) {
+            $fechaInicio = $this->taTp->fecha_inicio;
+        } else if ($this->servicioTecnologico()->exists()) {
+            $fechaInicio = $this->servicioTecnologico->fecha_inicio;
+        } else if ($this->culturaInnovacion()->exists()) {
+            $fechaInicio = $this->culturaInnovacion->fecha_inicio;
+        }
+
+        return $fechaInicio;
+    }
+
+    public function getFechaFinalizacionAttribute()
+    {
+        $fechaInicio = null;
+        if ($this->idi()->exists()) {
+            $fechaInicio = $this->idi->fecha_finalizacion;
+        } else if ($this->taTp()->exists()) {
+            $fechaInicio = $this->taTp->fecha_finalizacion;
+        } else if ($this->servicioTecnologico()->exists()) {
+            $fechaInicio = $this->servicioTecnologico->fecha_finalizacion;
+        } else if ($this->culturaInnovacion()->exists()) {
+            $fechaInicio = $this->culturaInnovacion->fecha_finalizacion;
+        }
+
+        return $fechaInicio;
     }
 
     /**

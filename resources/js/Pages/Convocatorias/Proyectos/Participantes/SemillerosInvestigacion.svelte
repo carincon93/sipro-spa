@@ -8,6 +8,7 @@
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import DataTableMenu from '@/Shared/DataTableMenu'
+    import InfoMessage from '@/Shared/InfoMessage'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -78,7 +79,6 @@
 <div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center">Semilleros de investigación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de semilleros de investigación</p>
-
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <fieldset>
             <div class="mt-4 flex flex-row">
@@ -90,6 +90,7 @@
 
     {#if sended}
         <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de semilleros de investigación</h1>
+        <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
         <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
                 <thead>

@@ -64,6 +64,10 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('validar-autor', $proyecto);
 
+        if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
+            return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+        }
+
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
             return redirect()->back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
         }
@@ -124,6 +128,10 @@ class ProyectoRolSennovaController extends Controller
     public function update(ProyectoRolSennovaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoRolSennova $proyectoRolSennova)
     {
         $this->authorize('validar-autor', $proyecto);
+
+        if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
+            return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+        }
 
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
             return redirect()->back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
