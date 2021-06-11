@@ -23,7 +23,7 @@ class TaTpController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [TaTp::class]);
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Index', [
             'convocatoria'  => $convocatoria->only('id'),
@@ -39,7 +39,7 @@ class TaTpController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('create', [TaTp::class]);
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -56,7 +56,7 @@ class TaTpController extends Controller
      */
     public function store(TaTpRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [TaTp::class]);
+        $this->authorize('formular-proyecto');
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
@@ -112,7 +112,7 @@ class TaTpController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('view', [TaTp::class, $tatp]);
+        $this->authorize('formular-proyecto');
     }
 
     /**
@@ -123,7 +123,7 @@ class TaTpController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('update', [TaTp::class, $tatp]);
+        $this->authorize('formular-proyecto');
 
         $tatp->codigo_linea_programatica = $tatp->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $tatp->precio_proyecto           = $tatp->proyecto->precioProyecto;
@@ -148,7 +148,7 @@ class TaTpController extends Controller
      */
     public function update(TaTpRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('update', [TaTp::class, $tatp]);
+        $this->authorize('formular-proyecto');
 
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
@@ -197,7 +197,7 @@ class TaTpController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('delete', [TaTp::class, $tatp]);
+        $this->authorize('formular-proyecto');
 
         $tatp->proyecto()->delete();
 

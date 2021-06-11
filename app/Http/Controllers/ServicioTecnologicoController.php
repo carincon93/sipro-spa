@@ -22,7 +22,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [ServicioTecnologico::class]);
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Index', [
             'convocatoria'          => $convocatoria,
@@ -39,7 +39,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('create', [ServicioTecnologico::class]);
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
             'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -56,7 +56,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function store(ServicioTecnologicoRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('create', [ServicioTecnologico::class]);
+        $this->authorize('formular-proyecto');
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
@@ -123,7 +123,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function show(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('view', [ServicioTecnologico::class, $servicioTecnologico]);
+        $this->authorize('formular-proyecto');
     }
 
     /**
@@ -134,7 +134,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('update', [ServicioTecnologico::class, $servicioTecnologico]);
+        $this->authorize('formular-proyecto');
 
         $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
@@ -156,7 +156,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function update(ServicioTecnologicoRequest $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('update', [ServicioTecnologico::class, $servicioTecnologico]);
+        $this->authorize('formular-proyecto');
 
         $servicioTecnologico->titulo_proyecto_articulado            = $request->titulo_proyecto_articulado;
         $servicioTecnologico->titulo                                = $request->titulo;
@@ -203,7 +203,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('delete', [ServicioTecnologico::class, $servicioTecnologico]);
+        $this->authorize('formular-proyecto');
 
         $servicioTecnologico->proyecto()->delete();
 

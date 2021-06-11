@@ -25,7 +25,7 @@ class CulturaInnovacionController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-cultura-innovacion');
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Index', [
             'convocatoria'      => $convocatoria->only('id'),
@@ -41,7 +41,7 @@ class CulturaInnovacionController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-cultura-innovacion');
+        $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -57,7 +57,7 @@ class CulturaInnovacionController extends Controller
      */
     public function store(CulturaInnovacionRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto-cultura-innovacion');
+        $this->authorize('formular-proyecto');
 
         if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->tipo_proyecto_id)) {
             return redirect()->back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
