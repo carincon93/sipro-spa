@@ -47,21 +47,21 @@
             {#each programasFormacion.data as programaFormacion (programaFormacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {programaFormacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.centro_formacion?.nombre}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={programasFormacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('programas-formacion.edit', programaFormacion.id))}>

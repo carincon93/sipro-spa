@@ -38,7 +38,7 @@
     }
 
     async function getSegundoGrupoPresupuestal() {
-        let res = await axios.get(route('web-api.segundo-grupo-presupuestal'))
+        let res = await axios.get(route('web-api.segundo-grupo-presupuestal', lineaProgramatica))
         segundoGrupoPresupuestal = res.data
     }
 

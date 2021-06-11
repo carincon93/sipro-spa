@@ -214,26 +214,26 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {resultado.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.email}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
                                 </p>
                             </td>
-                            <td class="border-t td-actions relative">
+                            <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                     <Item on:SMUI:action={() => showParticipante(resultado)}>
                                         <Text>Vincular</Text>
@@ -274,31 +274,31 @@
             {#each proyecto.participantes as participante (participante.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {participante.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {participante.email}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {participante.centro_formacion ? participante.centro_formacion.nombre : ''}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {participante.pivot.cantidad_meses} meses - {participante.pivot.cantidad_horas} horas semanales
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>
@@ -340,11 +340,11 @@
             <fieldset>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                    <InfoMessage message="Valores permitidos: 1 a {proyecto.diff_meses} meses. <br /> Nota: Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
                 </div>
                 <div class="mt-4">
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
 
                 <div class="mt-4">
@@ -421,12 +421,25 @@
 
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-8">
-                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.5" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
-                    <InfoMessage message="Valores permitidos: 1 a {proyecto.diff_meses} meses. <br /> Nota: Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
+                    <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
                 </div>
 
                 <div class="mt-8">
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas_nuevo_participante" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
+                    <Input
+                        label="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                        id="cantidad_horas_nuevo_participante"
+                        type="number"
+                        input$step="1"
+                        input$min="1"
+                        input$max="168"
+                        class="mt-1"
+                        bind:value={$formNuevoParticipante.cantidad_horas}
+                        placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                        autocomplete="off"
+                        error={errors.cantidad_horas}
+                        required
+                    />
                 </div>
 
                 <div class="mt-8">

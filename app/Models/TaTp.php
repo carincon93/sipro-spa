@@ -52,7 +52,8 @@ class TaTp extends Model
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
-        'diseno_curricular'
+        'diseno_curricular',
+        'max_meses_ejecucion'
     ];
 
     /**
@@ -130,5 +131,23 @@ class TaTp extends Model
         $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         return "$fecha_inicio al $fecha_finalizacion";
+    }
+
+    public static function getProyectosPorRol($convocatoria)
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $tatp = TaTp::select('ta_tp.id', 'ta_tp.titulo', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+                ->filterTaTp(request()->only('search'))->paginate();
+        } else {
+            $tatp = TaTp::select('ta_tp.id', 'ta_tp.titulo', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
+                ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyecto_participantes.user_id', Auth::user()->id)
+                ->orderBy('titulo', 'ASC')
+                ->filterTaTp(request()->only('search'))->paginate();
+        }
+        $tatp->load('proyecto');
+        return $tatp;
     }
 }

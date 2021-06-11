@@ -37,6 +37,7 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
@@ -47,16 +48,21 @@
             {#each tatp.data as proyecto_tatp}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {proyecto_tatp.proyecto.codigo}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto_tatp.nodo_tecnoparque ? proyecto_tatp.nodo_tecnoparque.nombre : proyecto_tatp.tecnoacademia_linea_tecnologica ? proyecto_tatp.tecnoacademia_linea_tecnologica.tecnoacademia.nombre : null}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {proyecto_tatp.fecha_ejecucion}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={tatp.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tatp.edit', [convocatoria.id, proyecto_tatp.id]))}>

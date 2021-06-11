@@ -73,7 +73,7 @@
 </form>
 
 <p class="text-xs mt-6">
-    Si aún no tiene cuenta puede crear una dilienciando el siguiente <a use:inertia href={route('register')} class="text-indigo-500">formulario</a>
+    Si aún no tiene cuenta puede crear una diligenciando el siguiente <a use:inertia href={route('register')} class="text-indigo-500 underline">formulario</a>
 </p>
 
 <div class="flex mt-20">

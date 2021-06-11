@@ -62,7 +62,8 @@ class Idi extends Model
         'relacionado_mesas_sectoriales',
         'relacionado_tecnoacademia',
         'bibliografia',
-        'numero_aprendices'
+        'numero_aprendices',
+        'max_meses_ejecucion'
     ];
 
     /**
@@ -216,7 +217,7 @@ class Idi extends Model
                 ->orderBy('titulo', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         }
-
+        $idi->load('proyecto');
         return $idi;
     }
 }

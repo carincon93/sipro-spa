@@ -32,9 +32,8 @@ class CulturaInnovacion extends Model
      */
     protected $fillable = [
         'linea_investigacion_id',
-        'disciplina_subarea_conocimiento_id',
+        'area_conocimiento_id',
         'tematica_estrategica_id',
-        'red_conocimiento_id',
         'actividad_economica_id',
         'titulo',
         'fecha_inicio',
@@ -62,7 +61,8 @@ class CulturaInnovacion extends Model
         'relacionado_mesas_sectoriales',
         'relacionado_tecnoacademia',
         'bibliografia',
-        'numero_aprendices'
+        'numero_aprendices',
+        'max_meses_ejecucion'
     ];
 
     /**
@@ -104,13 +104,13 @@ class CulturaInnovacion extends Model
     }
 
     /**
-     * Relationship with DisciplinaSubareaConocimiento
+     * Relationship with AreaConocimiento
      *
      * @return object
      */
-    public function disciplinaSubareaConocimiento()
+    public function areaConocimiento()
     {
-        return $this->belongsTo(DisciplinaSubareaConocimiento::class);
+        return $this->belongsTo(AreaConocimiento::class);
     }
 
     /**
@@ -121,16 +121,6 @@ class CulturaInnovacion extends Model
     public function tematicaEstrategica()
     {
         return $this->belongsTo(TematicaEstrategica::class);
-    }
-
-    /**
-     * Relationship with RedConocimiento
-     *
-     * @return object
-     */
-    public function redConocimiento()
-    {
-        return $this->belongsTo(RedConocimiento::class);
     }
 
     /**
@@ -225,6 +215,7 @@ class CulturaInnovacion extends Model
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         }
 
+        $cultura_innovacion->load('proyecto');
         return $cultura_innovacion;
     }
 }

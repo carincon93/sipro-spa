@@ -54,6 +54,16 @@ class AreaConocimiento extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->hasMany(CulturaInnovacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

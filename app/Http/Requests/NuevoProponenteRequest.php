@@ -35,7 +35,7 @@ class NuevoProponenteRequest extends FormRequest
             'autorizacion_datos'  => ['required', 'boolean'],
             'es_autor'            => ['required', 'boolean'],
             'rol_sennova_id'      => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
-            'cantidad_horas'      => ['required', 'numeric', 'min:1'],
+            'cantidad_horas'      => ['required', 'numeric', 'min:1', 'max:168'],
             'cantidad_meses'      => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
     }

@@ -59,9 +59,8 @@
     let form = useForm({
         centro_formacion_id: culturaInnovacion.proyecto?.centro_formacion_id,
         linea_investigacion_id: culturaInnovacion.linea_investigacion_id,
-        disciplina_subarea_conocimiento_id: culturaInnovacion.disciplina_subarea_conocimiento_id,
+        area_conocimiento_id: culturaInnovacion.area_conocimiento_id,
         tematica_estrategica_id: culturaInnovacion.tematica_estrategica_id,
-        red_conocimiento_id: culturaInnovacion.red_conocimiento_id,
         tipo_proyecto_id: culturaInnovacion.proyecto?.tipo_proyecto_id,
         actividad_economica_id: culturaInnovacion.actividad_economica_id,
         titulo: culturaInnovacion.titulo,
@@ -232,18 +231,10 @@
             </fieldset>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="red_conocimiento_id" value="Red de conocimiento sectorial" />
+                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
                 </div>
                 <div>
-                    <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
-                </div>
-                <div>
-                    <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">

@@ -17,7 +17,7 @@
     export let convocatoria
     export let roles
 
-    $: $title = 'Crear proyecto apropiación de la cultura de la innovación'
+    $: $title = 'Crear proyecto de apropiación de la cultura de la innovación'
 
     /**
      * Permisos
@@ -29,18 +29,22 @@
     let form = useForm({
         centro_formacion_id: null,
         linea_investigacion_id: null,
-        disciplina_subarea_conocimiento_id: null,
+        area_conocimiento_id: null,
         tematica_estrategica_id: null,
-        red_conocimiento_id: null,
         tipo_proyecto_id: null,
         actividad_economica_id: null,
         titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
         fecha_inicio: null,
         fecha_finalizacion: null,
+        max_meses_ejecucion: 0,
         cantidad_meses: 0,
         cantidad_horas: 0,
         rol_sennova_id: null,
     })
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
+    }
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [1])) {
@@ -129,18 +133,10 @@
             </div>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="red_conocimiento_id" value="Red de conocimiento sectorial" />
+                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
                 </div>
                 <div>
-                    <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
-                </div>
-                <div>
-                    <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -169,8 +165,8 @@
                         <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de meses de vinculación" />
                     </div>
                     <div>
-                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                        <InfoMessage message="Valores permitidos: 1 a {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses. Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
+                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                        <InfoMessage message="Valor máximo: {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses." />
                     </div>
                 </div>
             {/if}
@@ -180,7 +176,7 @@
                     <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                 </div>
                 <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </div>
 

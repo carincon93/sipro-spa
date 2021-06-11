@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -50,6 +49,7 @@ use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 
 use App\Models\ActividadEconomica;
+use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
 use App\Models\TipoProyecto;
 use App\Models\RedConocimiento;
@@ -165,8 +165,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.cultura-innovacion.centros-formacion');
 
     // Trae los conceptos internos SENA
-    Route::get('web-api/segundo-grupo-presupuestal', function () {
-        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')->orderBy('nombre', 'ASC')->get());
+    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', function ($lineaProgramatica) {
+        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
+            ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
+            ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
+            ->distinct('segundo_grupo_presupuestal.id')
+            ->orderBy('segundo_grupo_presupuestal.id', 'ASC')->get());
     })->name('web-api.segundo-grupo-presupuestal');
 
     Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function ($segundoGrupoPresupuestal) {
@@ -421,6 +425,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/redes-conocimiento', function () {
         return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.redes-conocimiento');
+
+    /**
+     * Web api
+     * 
+     * Trae las áreas de conocimiento
+     */
+    Route::get('web-api/areas-conocimiento', function () {
+        return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.areas-conocimiento');
+
 
     /**
      * Web api

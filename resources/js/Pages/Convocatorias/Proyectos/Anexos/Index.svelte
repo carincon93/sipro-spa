@@ -46,7 +46,7 @@
                 <tr>
                     <td class="border-t">
                         {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-indigo-500">
                                 {anexo.nombre}
                             </p>
                         {/if}
