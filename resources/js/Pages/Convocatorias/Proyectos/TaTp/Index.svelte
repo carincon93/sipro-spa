@@ -30,7 +30,7 @@
         <div slot="title">Tecnoacademia - Tecnoparque</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [5])}
+            {#if isSuperAdmin || checkPermission(authUser, [8])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.tatp.create', [convocatoria.id]))} variant="raised">Crear proyecto Tecnoacademia - Tecnoparque</Button>
             {/if}
         </div>
