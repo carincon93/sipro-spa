@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ServicioTecnologico extends Model
 {
@@ -181,7 +182,7 @@ class ServicioTecnologico extends Model
      * getProyectosPorRol
      *
      * @param  mixed $convocatoria
-     * @return void
+     * @return object
      */
     public static function getProyectosPorRol($convocatoria)
     {
@@ -198,6 +199,7 @@ class ServicioTecnologico extends Model
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
         }
         $servicioTecnologico->load('proyecto');
+
         return $servicioTecnologico;
     }
 }

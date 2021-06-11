@@ -27,8 +27,7 @@ class ServicioTecnologicoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Index', [
             'convocatoria'          => $convocatoria,
             'filters'               => request()->all('search'),
-            'serviciosTecnologicos' => ServicioTecnologico::orderBy('titulo', 'ASC')
-                ->filterServicioTecnologico(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'serviciosTecnologicos' => ServicioTecnologico::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TaTp extends Model
 {
@@ -133,21 +134,33 @@ class TaTp extends Model
         return "$fecha_inicio al $fecha_finalizacion";
     }
 
+    /**
+     * getProyectosPorRol
+     *
+     * @param  mixed $convocatoria
+     * @return object
+     */
     public static function getProyectosPorRol($convocatoria)
     {
         $user = Auth::user();
         if ($user->hasRole(1)) {
-            $tatp = TaTp::select('ta_tp.id', 'ta_tp.titulo', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
+                ->join('proyectos', 'ta_tp.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->orderBy('ta_tp.id', 'ASC')
                 ->filterTaTp(request()->only('search'))->paginate();
         } else {
-            $tatp = TaTp::select('ta_tp.id', 'ta_tp.titulo', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
+            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
                 ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', Auth::user()->id)
-                ->orderBy('titulo', 'ASC')
+                ->orderBy('ta_tp.id', 'ASC')
                 ->filterTaTp(request()->only('search'))->paginate();
         }
         $tatp->load('proyecto');
+        $tatp->load('nodoTecnoparque');
+        $tatp->load('tecnoacademiaLineaTecnologica.tecnoacademia');
+
         return $tatp;
     }
 }
