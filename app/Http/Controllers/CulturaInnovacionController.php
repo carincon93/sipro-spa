@@ -30,7 +30,7 @@ class CulturaInnovacionController extends Controller
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'filters'           => request()->all('search'),
-            'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria),
+            'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
         ]);
     }
 

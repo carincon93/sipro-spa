@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CulturaInnovacion extends Model
 {
@@ -196,7 +196,7 @@ class CulturaInnovacion extends Model
      * getProyectosPorRol
      *
      * @param  mixed $convocatoria
-     * @return void
+     * @return object
      */
     public static function getProyectosPorRol($convocatoria)
     {

@@ -29,7 +29,7 @@ class IdiController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'filters'       => request()->all('search'),
-            'idi'           => Idi::getProyectosPorRol($convocatoria),
+            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
         ]);
     }
 
