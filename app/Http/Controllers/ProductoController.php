@@ -25,6 +25,8 @@ class ProductoController extends Controller
     {
         $this->authorize('validar-autor', $proyecto);
 
+        dd($proyecto->diff_meses);
+
         $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 

@@ -297,35 +297,23 @@ class Proyecto extends Model
      */
     public function getDiffMesesAttribute()
     {
-        $fechaInicio = null;
-        $fechaFinalizacion = null;
         if ($this->idi()->exists()) {
-            $fechaInicio = $this->idi->fecha_inicio;
-            $fechaFinalizacion = $this->idi->fecha_finalizacion;
+            $cantidadMesesEjecucion = $this->idi->max_meses_ejecucion;
         }
 
         if ($this->tatp()->exists()) {
-            $fechaInicio = $this->tatp->fecha_inicio;
-            $fechaFinalizacion = $this->tatp->fecha_finalizacion;
+            $cantidadMesesEjecucion = $this->tatp->max_meses_ejecucion;
         }
 
         if ($this->servicioTecnologico()->exists()) {
-            $fechaInicio = $this->servicioTecnologico->fecha_inicio;
-            $fechaFinalizacion = $this->servicioTecnologico->fecha_finalizacion;
+            $cantidadMesesEjecucion = $this->servicioTecnologico->max_meses_ejecucion;
         }
 
-        $fechaFinalizacion = Carbon::parse($fechaFinalizacion, 'UTC')->floorMonth();
-        $fechaInicio       = Carbon::parse($fechaInicio, 'UTC')->floorMonth();
-
-        $diffMeses = 0;
-
-        if (($fechaInicio->diffInMonths($fechaFinalizacion) + 1) == 11) {
-            $diffMeses = 11.5;
-        } else {
-            $diffMeses = $fechaInicio->diffInMonths($fechaFinalizacion) + 1;
+        if ($this->culturaInnovacion()->exists()) {
+            $cantidadMesesEjecucion = $this->culturaInnovacion->max_meses_ejecucion;
         }
 
-        return $diffMeses;
+        return $cantidadMesesEjecucion;
     }
 
 

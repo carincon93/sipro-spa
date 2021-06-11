@@ -56,7 +56,8 @@ class ServicioTecnologico extends Model
         'infraestructura_adecuada',
         'especificaciones_area',
         'bibliografia',
-        'video'
+        'video',
+        'max_meses_ejecucion'
     ];
 
     /**
@@ -174,5 +175,29 @@ class ServicioTecnologico extends Model
         $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         return "$fecha_inicio al $fecha_finalizacion";
+    }
+
+    /**
+     * getProyectosPorRol
+     *
+     * @param  mixed $convocatoria
+     * @return void
+     */
+    public static function getProyectosPorRol($convocatoria)
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+                ->filterServicioTecnologico(request()->only('search'))->paginate();
+        } else {
+            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
+                ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyecto_participantes.user_id', Auth::user()->id)
+                ->orderBy('titulo', 'ASC')
+                ->filterServicioTecnologico(request()->only('search'))->paginate();
+        }
+        $servicioTecnologico->load('proyecto');
+        return $servicioTecnologico;
     }
 }

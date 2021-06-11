@@ -29,14 +29,19 @@
     let form = useForm({
         centro_formacion_id: null,
         tipo_proyecto_id: null,
-        fecha_inicio: '',
-        fecha_finalizacion: '',
+        fecha_inicio: null,
+        fecha_finalizacion: null,
+        max_meses_ejecucion: 0,
         tecnoacademia_id: null,
         tecnoacademia_linea_tecnologica_id: [],
         cantidad_meses: 0,
         cantidad_horas: 0,
         rol_sennova_id: null,
     })
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
+    }
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [5])) {
@@ -137,8 +142,8 @@
                         <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de meses de vinculación" />
                     </div>
                     <div>
-                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.5" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                        <InfoMessage message="Valores permitidos: 1 a {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses. Si el tiempo de ejecución del proyecto es de 11 meses por favor seleccione en este campo 11.5" />
+                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                        <InfoMessage message="Valor máximo: {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses." />
                     </div>
                 </div>
             {/if}
@@ -148,7 +153,7 @@
                     <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                 </div>
                 <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </div>
 

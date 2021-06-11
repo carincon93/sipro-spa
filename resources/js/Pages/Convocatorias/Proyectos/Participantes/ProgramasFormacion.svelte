@@ -108,27 +108,27 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {resultado.codigo}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.modalidad}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.centro_formacion.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.centro_formacion.regional.nombre}
                                 </p>
                             </td>
@@ -170,27 +170,27 @@
             {#each proyecto.programasFormacion as programaFormacion (programaFormacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {programaFormacion.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.modalidad}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.centro_formacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {programaFormacion.centro_formacion.regional.nombre}
                         </p>
                     </td>

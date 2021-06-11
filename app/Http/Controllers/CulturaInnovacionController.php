@@ -73,6 +73,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->titulo                                = $request->titulo;
         $culturaInnovacion->fecha_inicio                          = $request->fecha_inicio;
         $culturaInnovacion->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $culturaInnovacion->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $culturaInnovacion->video                                 = null;
         $culturaInnovacion->justificacion_industria_4             = null;
         $culturaInnovacion->justificacion_economia_naranja        = null;
@@ -98,9 +99,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->relacionado_tecnoacademia             = 2;
 
         $culturaInnovacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
-        $culturaInnovacion->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
+        $culturaInnovacion->areaConocimiento()->associate($request->area_conocimiento_id);
         $culturaInnovacion->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $culturaInnovacion->redConocimiento()->associate($request->red_conocimiento_id);
         $culturaInnovacion->actividadEconomica()->associate($request->actividad_economica_id);
 
         $proyecto->culturaInnovacion()->save($culturaInnovacion);
@@ -190,9 +190,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->recoleccion_especimenes               = $request->recoleccion_especimenes;
 
         $culturaInnovacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
-        $culturaInnovacion->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
+        $culturaInnovacion->areaConocimiento()->associate($request->area_conocimiento_id);
         $culturaInnovacion->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $culturaInnovacion->redConocimiento()->associate($request->red_conocimiento_id);
         $culturaInnovacion->actividadEconomica()->associate($request->actividad_economica_id);
 
         $culturaInnovacion->relacionado_plan_tecnologico          = $request->relacionado_plan_tecnologico;

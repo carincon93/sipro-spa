@@ -234,3 +234,7 @@ th.th-actions {
     height: 56px;
     padding: 0 10px;
 }
+
+p:first-letter, .first-letter-uppercase:first-letter {
+    text-transform: uppercase;
+}

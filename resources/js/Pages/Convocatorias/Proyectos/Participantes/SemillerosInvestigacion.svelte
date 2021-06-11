@@ -105,17 +105,17 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {resultado.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.linea_investigacion.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center">
+                                <p class="px-6 py-4">
                                     {resultado.linea_investigacion.grupo_investigacion.nombre} - {resultado.linea_investigacion.grupo_investigacion.acronimo}
                                 </p>
                             </td>
@@ -155,17 +155,17 @@
             {#each proyecto.semillerosInvestigacion as semilleroInvestigacion (semilleroInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {semilleroInvestigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {semilleroInvestigacion.linea_investigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
+                        <p class="px-6 py-4">
                             {semilleroInvestigacion.linea_investigacion.grupo_investigacion.nombre} - {semilleroInvestigacion.linea_investigacion.grupo_investigacion.acronimo}
                         </p>
                     </td>

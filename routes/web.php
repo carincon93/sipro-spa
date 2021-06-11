@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -50,6 +49,7 @@ use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 
 use App\Models\ActividadEconomica;
+use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
 use App\Models\TipoProyecto;
 use App\Models\RedConocimiento;
@@ -421,6 +421,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/redes-conocimiento', function () {
         return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.redes-conocimiento');
+
+    /**
+     * Web api
+     * 
+     * Trae las áreas de conocimiento
+     */
+    Route::get('web-api/areas-conocimiento', function () {
+        return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.areas-conocimiento');
+
 
     /**
      * Web api

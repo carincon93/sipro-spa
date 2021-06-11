@@ -3136,13 +3136,8 @@ function checkRole(authUser, rolesId) {
 }
 function monthDiff(d1, d2) {
   var monthDifference = 0;
-  monthDifference = Math.floor(moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(d2)).diff(new Date(d1), 'months', true)) + 1;
-
-  if (monthDifference == 11) {
-    monthDifference = 11.5;
-  }
-
-  return monthDifference;
+  monthDifference = moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(d2)).diff(new Date(d1), 'months', true);
+  return monthDifference.toFixed(1);
 }
 
 /***/ }),

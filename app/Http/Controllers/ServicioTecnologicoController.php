@@ -69,6 +69,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->titulo_proyecto_articulado    = $request->titulo_proyecto_articulado;
         $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
+        $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
 
         $servicioTecnologico->video                                 = null;
         $servicioTecnologico->justificacion_industria_4             = null;

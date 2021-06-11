@@ -264,19 +264,19 @@
                     {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {miembroEntidadAliada.nombre}
                                 </p>
                             </td>
 
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {miembroEntidadAliada.email}
                                 </p>
                             </td>
 
                             <td class="border-t">
-                                <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-indigo-500">
                                     {miembroEntidadAliada.numero_celular}
                                 </p>
                             </td>
@@ -317,7 +317,7 @@
                 {#each objetivosEspecificosRelacionados as { id, descripcion }}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-indigo-500">
                                 {descripcion}
                             </p>
                         </td>

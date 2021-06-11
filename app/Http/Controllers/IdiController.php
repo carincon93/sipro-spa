@@ -68,6 +68,7 @@ class IdiController extends Controller
         $idi->titulo                                = $request->titulo;
         $idi->fecha_inicio                          = $request->fecha_inicio;
         $idi->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $idi->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $idi->video                                 = null;
         $idi->justificacion_industria_4             = null;
         $idi->justificacion_economia_naranja        = null;

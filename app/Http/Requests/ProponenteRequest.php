@@ -27,7 +27,7 @@ class ProponenteRequest extends FormRequest
             'user_id'        => ['required', 'integer', 'exists:users,id'],
             'rol_sennova_id' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
             'es_autor'       => ['required', 'boolean'],
-            'cantidad_horas' => ['required', 'numeric', 'min:1'],
+            'cantidad_horas' => ['required', 'numeric', 'min:1', 'max:168'],
             'cantidad_meses' => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
     }

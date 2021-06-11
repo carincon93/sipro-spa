@@ -53,8 +53,9 @@ class TaTpRequest extends FormRequest
                 'nodo_tecnoparque_id'                       => ['required_if:codigo_linea_programatica,69', 'exclude_if:codigo_linea_programatica,70', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
+                'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'rol_sennova_id'                            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
-                'cantidad_horas'                            => ['required', 'numeric', 'min:1'],
+                'cantidad_horas'                            => ['required', 'numeric', 'min:1', 'max:168'],
                 'cantidad_meses'                            => ['required', 'numeric', 'min:1', 'max:11.5'],
             ];
         }

@@ -67,6 +67,7 @@ class TaTpController extends Controller
         $tatp = new TaTp();
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
+        $tatp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
         $tatp->resumen                              = 'Por favor diligencie el resumen del proyecto';
         $tatp->antecedentes                         = 'Por favor diligencie los antecedentes del proyecto';
         $tatp->marco_conceptual                     = 'Por favor diligencie el marco conceptual del proyecto';
