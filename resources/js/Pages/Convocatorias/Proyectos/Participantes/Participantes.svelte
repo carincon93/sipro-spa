@@ -233,7 +233,7 @@
                                     {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
                                 </p>
                             </td>
-                            <td class="border-t td-actions relative">
+                            <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                     <Item on:SMUI:action={() => showParticipante(resultado)}>
                                         <Text>Vincular</Text>
@@ -298,7 +298,7 @@
                             {participante.pivot.cantidad_meses} meses - {participante.pivot.cantidad_horas} horas semanales
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => showParticipante(participante)}>
                                 <Text>Editar</Text>

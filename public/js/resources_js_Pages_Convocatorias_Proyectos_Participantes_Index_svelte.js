@@ -10641,9 +10641,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "#main-menu-dialog .mdc-dialog__surface
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -33219,9 +33219,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte":
+/***/ "./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte ***!
+  !*** ./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -33232,7 +33232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_55_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./Participantes.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_56_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./Participantes.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte");
 
             
 
@@ -33241,11 +33241,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_55_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_56_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_55_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_56_css_Participantes_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -55344,7 +55344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_form_field__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @smui/form-field */ "./node_modules/@smui/form-field/index.js");
 /* harmony import */ var C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_55_css_svelte_loader_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_55_css_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!=!svelte-loader?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte");
+/* harmony import */ var C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_56_css_svelte_loader_cssPath_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte_56_css_C_Users_SENNOVA_WebProjects_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Participantes_Participantes_svelte__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!=!svelte-loader?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/SENNOVA/WebProjects/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte.56.css!./resources/js/Pages/Convocatorias/Proyectos/Participantes/Participantes.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Pages\Convocatorias\Proyectos\Participantes\Participantes.svelte generated by Svelte v3.38.2 */
 
@@ -55732,7 +55732,7 @@ function create_each_block_1(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td2, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p3, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td4, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td4, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},
@@ -56233,7 +56233,7 @@ function create_each_block(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p4, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td4, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},
@@ -58614,7 +58614,7 @@ class Participantes extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteC
 		);
 	}
 }
-if (module && module.hot) { if (false) {} Participantes = C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_18__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Pages\\\\Convocatorias\\\\Proyectos\\\\Participantes\\\\Participantes.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Participantes, ProxyAdapter: C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_19__.default, acceptable: true, cssId: "svelte-1yyjukz-style", nonCssHash: "1c9zydr", ignoreCss: true, }); }
+if (module && module.hot) { if (false) {} Participantes = C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_18__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Pages\\\\Convocatorias\\\\Proyectos\\\\Participantes\\\\Participantes.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Participantes, ProxyAdapter: C_Users_SENNOVA_WebProjects_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_19__.default, acceptable: true, cssId: "svelte-1yyjukz-style", nonCssHash: "8cbkdf", ignoreCss: true, }); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Participantes);
 
 if (typeof add_css !== 'undefined' && !document.getElementById("svelte-1yyjukz-style")) add_css();
@@ -59020,7 +59020,7 @@ function create_each_block_1(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p4, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td4, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},
@@ -59302,7 +59302,7 @@ function create_each_block(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p4, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td4, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td5, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},
@@ -60167,7 +60167,7 @@ function create_each_block_1(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p2, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td2, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},
@@ -60425,7 +60425,7 @@ function create_each_block(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p2, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td2, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td3, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},

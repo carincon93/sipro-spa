@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -48,7 +48,7 @@
                             {role.name}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={roles.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('roles.edit', role.id))}>

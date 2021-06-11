@@ -51213,7 +51213,7 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	async function getSegundoGrupoPresupuestal() {
-		let res = await axios__WEBPACK_IMPORTED_MODULE_2___default().get(route("web-api.segundo-grupo-presupuestal"));
+		let res = await axios__WEBPACK_IMPORTED_MODULE_2___default().get(route("web-api.segundo-grupo-presupuestal", lineaProgramatica));
 		$$invalidate(8, segundoGrupoPresupuestal = res.data);
 	}
 

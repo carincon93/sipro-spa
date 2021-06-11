@@ -49204,7 +49204,7 @@ function create_each_block(key_1, ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(datatablemenu.$$.fragment);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "px-6 py-4 focus:text-indigo-500");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td0, "class", "border-t");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t td-actions relative");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t td-actions");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(tr, "class", "hover:bg-gray-100 focus-within:bg-gray-100");
 			this.first = tr;
 		},

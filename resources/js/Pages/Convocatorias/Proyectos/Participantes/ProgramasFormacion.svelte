@@ -132,7 +132,7 @@
                                     {resultado.centro_formacion.regional.nombre}
                                 </p>
                             </td>
-                            <td class="border-t td-actions relative">
+                            <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                     <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
                                         <Text>Vincular</Text>
@@ -194,7 +194,7 @@
                             {programaFormacion.centro_formacion.regional.nombre}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
                                 <Text>Quitar</Text>

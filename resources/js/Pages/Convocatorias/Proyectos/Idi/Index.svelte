@@ -62,7 +62,7 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>

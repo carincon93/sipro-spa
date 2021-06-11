@@ -70,7 +70,7 @@
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>

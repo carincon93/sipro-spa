@@ -119,7 +119,7 @@
                                     {resultado.linea_investigacion.grupo_investigacion.nombre} - {resultado.linea_investigacion.grupo_investigacion.acronimo}
                                 </p>
                             </td>
-                            <td class="border-t td-actions relative">
+                            <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
                                     <Item on:SMUI:action={() => linkSemilleroInvestigacion(resultado.id)}>
                                         <Text>Vincular</Text>
@@ -169,7 +169,7 @@
                             {semilleroInvestigacion.linea_investigacion.grupo_investigacion.nombre} - {semilleroInvestigacion.linea_investigacion.grupo_investigacion.acronimo}
                         </p>
                     </td>
-                    <td class="border-t td-actions relative">
+                    <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.semillerosInvestigacion.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
                                 <Text>Quitar</Text>
