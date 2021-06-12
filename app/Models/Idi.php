@@ -216,14 +216,14 @@ class Idi extends Model
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->orderBy('titulo', 'ASC')
+                ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else {
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', Auth::user()->id)
-                ->orderBy('titulo', 'ASC')
+                ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         }
         $idi->load('proyecto');
