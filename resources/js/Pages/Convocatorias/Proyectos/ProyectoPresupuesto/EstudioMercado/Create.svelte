@@ -47,7 +47,7 @@
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+                $form.post(route('convocatorias.proyectos.presupuesto.lote.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)

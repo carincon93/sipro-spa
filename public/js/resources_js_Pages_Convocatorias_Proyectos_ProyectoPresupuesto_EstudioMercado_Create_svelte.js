@@ -31347,7 +31347,7 @@ function instance($$self, $$props, $$invalidate) {
 		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(authUser, [1, 5, 8])) {
 			
 
-			($$invalidate(6, sending = true), $form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.store", [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+			($$invalidate(6, sending = true), $form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.proyectos.presupuesto.lote.store", [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
 				onStart: () => $$invalidate(6, sending = true),
 				onFinish: () => {
 					

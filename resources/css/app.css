@@ -236,5 +236,6 @@ th.th-actions {
 }
 
 p:first-letter, .first-letter-uppercase:first-letter {
+    display: inherit !important;
     text-transform: uppercase;
 }

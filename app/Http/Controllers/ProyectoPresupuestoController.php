@@ -85,15 +85,15 @@ class ProyectoPresupuestoController extends Controller
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
         }
 
-        $proyectoPresupuesto = new ProyectoPresupuesto();
-        $proyectoPresupuesto->descripcion      = $request->descripcion;
-        $proyectoPresupuesto->justificacion    = $request->justificacion;
-        $proyectoPresupuesto->valor            = $request->valor;
-        $proyectoPresupuesto->numero_items     = $request->numero_items;
+        $presupuesto = new ProyectoPresupuesto();
+        $presupuesto->descripcion      = $request->descripcion;
+        $presupuesto->justificacion    = $request->justificacion;
+        $presupuesto->valor            = $request->valor;
+        $presupuesto->numero_items     = $request->numero_items;
 
-        $proyectoPresupuesto->proyecto()->associate($proyecto);
-        $proyectoPresupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
-        $proyectoPresupuesto->save();
+        $presupuesto->proyecto()->associate($proyecto);
+        $presupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
+        $presupuesto->save();
 
         if ($request->codigo_uso_presupuestal == '2010100600203101') {
             $request->validate([
@@ -110,25 +110,25 @@ class ProyectoPresupuestoController extends Controller
             $softwareInfo->fecha_inicio         = $request->fecha_inicio;
             $softwareInfo->fecha_finalizacion   = $request->fecha_finalizacion;
 
-            $proyectoPresupuesto->softwareInfo()->save($softwareInfo);
+            $presupuesto->softwareInfo()->save($softwareInfo);
         } else if ($request->codigo_uso_presupuestal == '2020200800901') {
             $request->servicio_edicion_info = $request->servicio_edicion_info['value'];
             $servicioEdicionInfo = new ServicioEdicionInfo();
             $servicioEdicionInfo->info = $request->servicio_edicion_info;
 
-            $proyectoPresupuesto->servicioEdicionInfo()->save($servicioEdicionInfo);
+            $presupuesto->servicioEdicionInfo()->save($servicioEdicionInfo);
         }
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [$convocatoria, $proyecto, $proyectoPresupuesto])->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('convocatorias.proyectos.presupuesto.lote.index', [$convocatoria, $proyecto, $presupuesto])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProyectoPresupuesto  $proyectoPresupuesto
+     * @param  \App\Models\ProyectoPresupuesto  $presupuesto
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
+    public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
         $this->authorize('validar-autor', $proyecto);
     }
@@ -136,22 +136,22 @@ class ProyectoPresupuestoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProyectoPresupuesto  $proyectoPresupuesto
+     * @param  \App\Models\ProyectoPresupuesto  $presupuesto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
+    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
         $this->authorize('validar-autor', $proyecto);
 
-        $proyectoPresupuesto->softwareInfo;
-        $proyectoPresupuesto->servicioEdicionInfo;
-        $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
+        $presupuesto->softwareInfo;
+        $presupuesto->servicioEdicionInfo;
+        $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
         $proyecto->tipoProyecto->lineaProgramatica;
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Edit', [
             'convocatoria'              => $convocatoria->only('id'),
             'proyecto'                  => $proyecto,
-            'proyectoPresupuesto'       => $proyectoPresupuesto,
+            'proyectoPresupuesto'       => $presupuesto,
             'tiposLicencia'             => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
             'opcionesServiciosEdicion'  => json_decode(Storage::get('json/opciones-servicios-edicion.json'), true),
             'tiposSoftware'             => json_decode(Storage::get('json/tipos-software.json'), true)
@@ -162,10 +162,10 @@ class ProyectoPresupuestoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProyectoPresupuesto  $proyectoPresupuesto
+     * @param  \App\Models\ProyectoPresupuesto  $presupuesto
      * @return \Illuminate\Http\Response
      */
-    public function update(ProyectoPresupuestoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
+    public function update(ProyectoPresupuestoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
         $this->authorize('validar-autor', $proyecto);
 
@@ -176,7 +176,7 @@ class ProyectoPresupuestoController extends Controller
         }
 
         if ($convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado == false) {
-            foreach ($proyectoPresupuesto->proyectoLoteEstudioMercado as $loteEstudioMercado) {
+            foreach ($presupuesto->proyectoLoteEstudioMercado as $loteEstudioMercado) {
                 Storage::delete($loteEstudioMercado->ficha_tecnica);
 
                 foreach ($loteEstudioMercado->estudiosMercado as $estudioMercado) {
@@ -186,21 +186,21 @@ class ProyectoPresupuestoController extends Controller
                 $loteEstudioMercado->delete();
             }
 
-            $proyectoPresupuesto->valor        = $request->valor;
-            $proyectoPresupuesto->numero_items = $request->numero_items;
+            $presupuesto->valor        = $request->valor;
+            $presupuesto->numero_items = $request->numero_items;
         } else {
-            $proyectoPresupuesto->valor            = null;
-            $proyectoPresupuesto->numero_items     = null;
+            $presupuesto->valor            = null;
+            $presupuesto->numero_items     = null;
         }
 
-        $proyectoPresupuesto->descripcion      = $request->descripcion;
-        $proyectoPresupuesto->justificacion    = $request->justificacion;
+        $presupuesto->descripcion      = $request->descripcion;
+        $presupuesto->justificacion    = $request->justificacion;
 
-        $proyectoPresupuesto->proyecto()->associate($proyecto);
-        $proyectoPresupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
-        $proyectoPresupuesto->save();
+        $presupuesto->proyecto()->associate($proyecto);
+        $presupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
+        $presupuesto->save();
 
-        $softwareInfo = SoftwareInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
+        $softwareInfo = SoftwareInfo::where('proyecto_presupuesto_id', $presupuesto->id)->first();
         if ($request->codigo_uso_presupuestal == '2010100600203101') {
             $request->validate([
                 'tipo_licencia'             => 'required|integer',
@@ -210,7 +210,7 @@ class ProyectoPresupuestoController extends Controller
                 'fecha_finalizacion'        => 'required|date|date_format:Y-m-d|after:fecha_inicio',
             ]);
 
-            $proyectoPresupuesto->softwareInfo()->updateOrCreate(
+            $presupuesto->softwareInfo()->updateOrCreate(
                 ['id' => $softwareInfo ? $softwareInfo->id : null],
                 [
                     'tipo_licencia'      => $request->tipo_licencia,
@@ -220,20 +220,20 @@ class ProyectoPresupuestoController extends Controller
                 ]
             );
         } else {
-            $proyectoPresupuesto->softwareInfo()->delete();
+            $presupuesto->softwareInfo()->delete();
         }
 
-        $servicioEdicionInfo = ServicioEdicionInfo::where('proyecto_presupuesto_id', $proyectoPresupuesto->id)->first();
+        $servicioEdicionInfo = ServicioEdicionInfo::where('proyecto_presupuesto_id', $presupuesto->id)->first();
         if ($request->codigo_uso_presupuestal == '2020200800901') {
             $request->servicio_edicion_info = $request->servicio_edicion_info['value'];
-            $proyectoPresupuesto->servicioEdicionInfo()->updateOrCreate(
+            $presupuesto->servicioEdicionInfo()->updateOrCreate(
                 ['id' => $servicioEdicionInfo ? $servicioEdicionInfo->id : null],
                 [
                     'info' => $request->servicio_edicion_info,
                 ]
             );
         } else {
-            $proyectoPresupuesto->servicioEdicionInfo()->delete();
+            $presupuesto->servicioEdicionInfo()->delete();
         }
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
@@ -242,15 +242,15 @@ class ProyectoPresupuestoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProyectoPresupuesto  $proyectoPresupuesto
+     * @param  \App\Models\ProyectoPresupuesto  $presupuesto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $proyectoPresupuesto)
+    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
         $this->authorize('validar-autor', $proyecto);
 
-        $proyectoPresupuesto->delete();
+        $presupuesto->delete();
 
-        return redirect()->route('convocatorias.proyectos.proyecto-presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

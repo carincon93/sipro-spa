@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegisterRequest $request)
     {
-        Auth::login($user = User::create([
+        $user = User::create([
             'nombre'                => $request->nombre,
             'email'                 => $request->email,
             'password'              => Hash::make($request->password),
@@ -51,12 +51,12 @@ class RegisteredUserController extends Controller
             'tipo_participacion'    => $request->tipo_participacion,
             'autorizacion_datos'    => $request->autorizacion_datos,
             'centro_formacion_id'   => $request->centro_formacion_id
-        ]));
+        ]);
 
         $user->syncRoles($request->role_id);
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->back()->with('success', '¡El registro ha sido exitoso!. Solicite al dinamizador de su centro de formación que lo habilite en la plataforma.');
     }
 }
