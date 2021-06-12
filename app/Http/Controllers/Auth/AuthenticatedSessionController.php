@@ -36,9 +36,14 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()->regenerate();
+        if (Auth::user()->habilitado) {
+            $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        Auth::guard('web')->logout();
+        return redirect()->back()->with('error', 'Su usuario está inhabilitado, solicite al dinamizador de su centro de formación que lo habilite en la plataforma.');
     }
 
     /**

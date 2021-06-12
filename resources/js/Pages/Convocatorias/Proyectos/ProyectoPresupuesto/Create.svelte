@@ -46,7 +46,7 @@
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.store', [convocatoria.id, proyecto.id]), {
+                $form.post(route('convocatorias.proyectos.presupuesto.store', [convocatoria.id, proyecto.id]), {
                     onStart: () => (sending = true),
                     onFinish: () => (sending = false),
                 })
@@ -60,7 +60,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuestos </a>
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuestos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear

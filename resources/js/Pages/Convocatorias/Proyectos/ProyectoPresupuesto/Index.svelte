@@ -4,19 +4,21 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
+    import { fade } from 'svelte/transition'
 
     import Pagination from '@/Shared/Pagination'
     import Button from '@/Shared/Button'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-
     import Stepper from '@/Shared/Stepper'
 
     export let convocatoria
     export let proyecto
     export let proyectoPresupuesto
     export let segundoGrupoPresupuestal
+
+    let filtro = false
 
     $title = 'Presupuesto'
 
@@ -102,24 +104,33 @@
             </tfoot>
         </table>
     </div>
-    <div class="px-4 mt-20">
-        <h1 class="mb-4 text-center">Filtros</h1>
-        <ul class="flex flex-wrap">
-            {#each segundoGrupoPresupuestal as { nombre }}
-                <li class="mr-2 mb-2 inline-flex">
-                    <a class="bg-indigo-100 hover:bg-indigo-200 px-2 py-1 rounded-3xl text-center text-indigo-400" use:inertia={{ preserveScroll: true }} href="?search={nombre}">{nombre}</a>
-                </li>
-            {/each}
-            <li class="mr-2 mb-2 inline-flex">
-                <a class="bg-green-100 hover:bg-green-200 px-2 py-1 rounded-3xl text-center text-green-400" use:inertia={{ preserveScroll: true }} href="?search=">Todos</a>
-            </li>
-        </ul>
+
+    <div class="mt-20">
+        <p>Puede filtrar los rubros presupuestales haciendo clic en <strong>Ver filtros</strong> y a continuación, seleccione un rubro presupuestal.</p>
+        <Button on:click={() => (filtro = !filtro)} class="mt-4">
+            {#if filtro}Ocultar{:else}Ver{/if} filtros
+        </Button>
     </div>
+
+    {#if filtro}
+        <div class="px-4 mt-4" transition:fade>
+            <ul class="flex flex-wrap">
+                {#each segundoGrupoPresupuestal as { nombre }}
+                    <li class="mr-2 mb-2 inline-flex">
+                        <a class="bg-indigo-100 hover:bg-indigo-200 px-2 py-1 rounded-3xl text-center text-indigo-400" use:inertia={{ preserveScroll: true }} href="?search={nombre}">{nombre}</a>
+                    </li>
+                {/each}
+                <li class="mr-2 mb-2 inline-flex">
+                    <a class="bg-green-100 hover:bg-green-200 px-2 py-1 rounded-3xl text-center text-green-400" use:inertia={{ preserveScroll: true }} href="?search=">Todos</a>
+                </li>
+            </ul>
+        </div>
+    {/if}
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="actions">
             {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.create', [convocatoria.id, proyecto.id]))}>
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
                         <span class="hidden md:inline">presupuesto</span>
@@ -178,7 +189,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

@@ -55,7 +55,7 @@
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])) {
-            $form.put(route('convocatorias.proyectos.proyecto-presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
+            $form.put(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -65,7 +65,7 @@
 
     function destroy() {
         if (isSuperAdmin || checkPermission(authUser, [4, 7, 10])) {
-            $form.delete(route('convocatorias.proyectos.proyecto-presupuesto.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))
+            $form.delete(route('convocatorias.proyectos.presupuesto.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))
         }
     }
 </script>
@@ -76,7 +76,7 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
@@ -174,7 +174,7 @@
             <ul>
                 {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.lote.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
                     </li>
                 {/if}
             </ul>

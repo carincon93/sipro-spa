@@ -7,6 +7,7 @@
     import { inertia } from '@inertiajs/inertia-svelte'
     import { route } from '@/Utils'
     import ApplicationLogo from '@/Shared/ApplicationLogo'
+    import FlashMessages from '@/Shared/FlashMessages'
 </script>
 
 <svelte:head>
@@ -24,4 +25,5 @@
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <slot />
     </div>
+    <FlashMessages />
 </div>

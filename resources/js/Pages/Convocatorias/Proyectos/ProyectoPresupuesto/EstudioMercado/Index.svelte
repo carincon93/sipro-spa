@@ -46,11 +46,11 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8])}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {usoPresupuestal.descripcion}
                         </a>
                     {/if}
@@ -108,7 +108,7 @@
                                 <p>
                                     Cantidad de items: {loteEstudioMercado.numero_items}
                                 </p>
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.lote.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
                             </td>
                             <td class="border-t px-6 pt-6 pb-4">
                                 {#each loteEstudioMercado.estudios_mercado as { id, empresa, valor }}
@@ -119,14 +119,14 @@
                                         <strong>Valor: </strong>${new Intl.NumberFormat('de-DE').format(valor)} COP
                                     </div>
 
-                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, id])}>Descargar soporte</a>
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, id])}>Descargar soporte</a>
                                 {/each}
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
                                 <DataTableMenu class={proyectoLotesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
                                     {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8])}
-                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.lote.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                             <Text>Ver detalles</Text>
                                         </Item>
                                     {:else}

@@ -1615,6 +1615,30 @@ function monthDiff(d1, d2) {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".z-index-full.svelte-193iq1{\n  z-index:99999\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte ***!
@@ -23149,6 +23173,36 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
+/***/ "./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte":
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./FlashMessages.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./resources/js/Shared/LoadingButton.svelte.9.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./resources/js/Shared/LoadingButton.svelte.9.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte ***!
@@ -25715,10 +25769,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-svelte */ "./node_modules/@inertiajs/inertia-svelte/src/index.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Utils */ "./resources/js/Utils/index.js");
 /* harmony import */ var _Shared_ApplicationLogo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/ApplicationLogo */ "./resources/js/Shared/ApplicationLogo.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* harmony import */ var _Shared_FlashMessages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/FlashMessages */ "./resources/js/Shared/FlashMessages.svelte");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Layouts\Guest.svelte generated by Svelte v3.38.2 */
+
 
 
 
@@ -25738,6 +25794,8 @@ function create_fragment(ctx) {
 	let inertia_action;
 	let t2;
 	let div1;
+	let t3;
+	let flashmessages;
 	let current;
 	let mounted;
 	let dispose;
@@ -25754,6 +25812,7 @@ function create_fragment(ctx) {
 
 	const default_slot_template = /*#slots*/ ctx[2].default;
 	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
+	flashmessages = new _Shared_FlashMessages__WEBPACK_IMPORTED_MODULE_5__.default({});
 
 	return {
 		c() {
@@ -25766,6 +25825,8 @@ function create_fragment(ctx) {
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (default_slot) default_slot.c();
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(flashmessages.$$.fragment);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "href", a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("login"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "class", "flex items-center justify-center text-orangered-600 text-xl");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg");
@@ -25785,6 +25846,8 @@ function create_fragment(ctx) {
 				default_slot.m(div1, null);
 			}
 
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(flashmessages, div2, null);
 			current = true;
 
 			if (!mounted) {
@@ -25809,11 +25872,13 @@ function create_fragment(ctx) {
 			if (current) return;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(applicationlogo.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(flashmessages.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(applicationlogo.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(flashmessages.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -25821,6 +25886,7 @@ function create_fragment(ctx) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(applicationlogo);
 			if (default_slot) default_slot.d(detaching);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(flashmessages);
 			mounted = false;
 			dispose();
 		}
@@ -25851,7 +25917,7 @@ class Guest extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
 	}
 }
-if (module && module.hot) { if (false) {} Guest = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Layouts\\\\Guest.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Guest, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+if (module && module.hot) { if (false) {} Guest = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Layouts\\\\Guest.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Guest, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Guest);
 
 
@@ -26572,6 +26638,530 @@ if (typeof add_css !== 'undefined' && !document.getElementById("svelte-13i5eew-s
 
 /***/ }),
 
+/***/ "./resources/js/Shared/FlashMessages.svelte":
+/*!**************************************************!*\
+  !*** ./resources/js/Shared/FlashMessages.svelte ***!
+  \**************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-svelte */ "./node_modules/@inertiajs/inertia-svelte/src/index.js");
+/* harmony import */ var svelte_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! svelte-i18n */ "./node_modules/svelte-i18n/dist/runtime.esm.js");
+/* harmony import */ var svelte_transition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! svelte/transition */ "./node_modules/svelte/transition/index.mjs");
+/* harmony import */ var svelte_easing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte/easing */ "./node_modules/svelte/easing/index.mjs");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_23_css_svelte_loader_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_23_css_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/FlashMessages.svelte.23.css!=!svelte-loader?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte */ "./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* resources\js\Shared\FlashMessages.svelte generated by Svelte v3.38.2 */
+
+
+
+
+
+
+
+function create_if_block_3(ctx) {
+	let div2;
+	let div1;
+	let svg;
+	let polygon;
+	let t0;
+	let div0;
+	let t1;
+	let div2_transition;
+	let current;
+
+	return {
+		c() {
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			polygon = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("polygon");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*successMessage*/ ctx[0]);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(polygon, "points", "0 11 2 9 7 14 18 3 20 5 7 18");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "ml-4 mr-2 flex-shrink-0 w-4 h-4 fill-white");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 20 20");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "p-4 text-white text-sm font-medium");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "flex items-center");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mb-8 flex items-center justify-between bg-green-500 rounded max-w-md fixed -bottom-0 z-index-full svelte-193iq1");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, svg);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, polygon);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t1);
+			current = true;
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+			if (!current || dirty & /*successMessage*/ 1) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, /*successMessage*/ ctx[0]);
+		},
+		i(local) {
+			if (current) return;
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(() => {
+				if (!div2_transition) div2_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
+					div2,
+					svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
+					{
+						delay: 250,
+						duration: 300,
+						x: 100,
+						y: 700,
+						opacity: 0.5,
+						easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
+					},
+					true
+				);
+
+				div2_transition.run(1);
+			});
+
+			current = true;
+		},
+		o(local) {
+			if (!div2_transition) div2_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
+				div2,
+				svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
+				{
+					delay: 250,
+					duration: 300,
+					x: 100,
+					y: 700,
+					opacity: 0.5,
+					easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
+				},
+				false
+			);
+
+			div2_transition.run(0);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
+			if (detaching && div2_transition) div2_transition.end();
+		}
+	};
+}
+
+// (67:0) {#if (showErrorMessage && errorMessage) || (Object.keys(errors).length > 0 && showErrorMessage)}
+function create_if_block(ctx) {
+	let div1;
+	let div0;
+	let svg;
+	let path;
+	let t;
+	let div1_transition;
+	let current;
+
+	function select_block_type(ctx, dirty) {
+		if (/*errorMessage*/ ctx[1]) return create_if_block_1;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx, -1);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66\r\n                4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83\r\n                2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "ml-4 mr-2 flex-shrink-0 w-4 h-4 fill-white");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 20 20");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "flex items-center");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl fixed -bottom-0 z-index-full svelte-193iq1");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, svg);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t);
+			if_block.m(div0, null);
+			current = true;
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+
+			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(div0, null);
+				}
+			}
+		},
+		i(local) {
+			if (current) return;
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(() => {
+				if (!div1_transition) div1_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
+					div1,
+					svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
+					{
+						delay: 250,
+						duration: 300,
+						x: 100,
+						y: 700,
+						opacity: 0.5,
+						easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
+					},
+					true
+				);
+
+				div1_transition.run(1);
+			});
+
+			current = true;
+		},
+		o(local) {
+			if (!div1_transition) div1_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
+				div1,
+				svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
+				{
+					delay: 250,
+					duration: 300,
+					x: 100,
+					y: 700,
+					opacity: 0.5,
+					easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
+				},
+				false
+			);
+
+			div1_transition.run(0);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
+			if_block.d();
+			if (detaching && div1_transition) div1_transition.end();
+		}
+	};
+}
+
+// (91:12) {:else}
+function create_else_block(ctx) {
+	let div;
+	let show_if;
+
+	function select_block_type_1(ctx, dirty) {
+		if (show_if == null || dirty & /*errors*/ 4) show_if = !!(Object.keys(/*errors*/ ctx[2]).length === 1);
+		if (show_if) return create_if_block_2;
+		return create_else_block_1;
+	}
+
+	let current_block_type = select_block_type_1(ctx, -1);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "p-4 text-white text-sm font-medium");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			if_block.m(div, null);
+		},
+		p(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(div, null);
+				}
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			if_block.d();
+		}
+	};
+}
+
+// (87:12) {#if errorMessage}
+function create_if_block_1(ctx) {
+	let div;
+	let t;
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*errorMessage*/ ctx[1]);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "p-4 text-white text-sm font-medium");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*errorMessage*/ 2) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, /*errorMessage*/ ctx[1]);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+		}
+	};
+}
+
+// (95:20) {:else}
+function create_else_block_1(ctx) {
+	let span;
+	let t0;
+	let t1_value = Object.keys(/*errors*/ ctx[2]).length + "";
+	let t1;
+	let t2;
+
+	return {
+		c() {
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Hay ");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" errores en el formulario.");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t2);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*errors*/ 4 && t1_value !== (t1_value = Object.keys(/*errors*/ ctx[2]).length + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+		}
+	};
+}
+
+// (93:20) {#if Object.keys(errors).length === 1}
+function create_if_block_2(ctx) {
+	let span;
+
+	return {
+		c() {
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			span.textContent = "Hay un error en el formulario.";
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	let t;
+	let show_if = /*showErrorMessage*/ ctx[4] && /*errorMessage*/ ctx[1] || Object.keys(/*errors*/ ctx[2]).length > 0 && /*showErrorMessage*/ ctx[4];
+	let if_block1_anchor;
+	let current;
+	let if_block0 = /*showSuccessMessage*/ ctx[3] && /*successMessage*/ ctx[0] && create_if_block_3(ctx);
+	let if_block1 = show_if && create_if_block(ctx);
+
+	return {
+		c() {
+			if (if_block0) if_block0.c();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block1) if_block1.c();
+			if_block1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+		},
+		m(target, anchor) {
+			if (if_block0) if_block0.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block1_anchor, anchor);
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (/*showSuccessMessage*/ ctx[3] && /*successMessage*/ ctx[0]) {
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
+
+					if (dirty & /*showSuccessMessage, successMessage*/ 9) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
+					}
+				} else {
+					if_block0 = create_if_block_3(ctx);
+					if_block0.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
+					if_block0.m(t.parentNode, t);
+				}
+			} else if (if_block0) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block0, 1, 1, () => {
+					if_block0 = null;
+				});
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+
+			if (dirty & /*showErrorMessage, errorMessage, errors*/ 22) show_if = /*showErrorMessage*/ ctx[4] && /*errorMessage*/ ctx[1] || Object.keys(/*errors*/ ctx[2]).length > 0 && /*showErrorMessage*/ ctx[4];
+
+			if (show_if) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+
+					if (dirty & /*showErrorMessage, errorMessage, errors*/ 22) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
+					}
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
+					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
+				}
+			} else if (if_block1) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1, 1, 1, () => {
+					if_block1 = null;
+				});
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1);
+			current = false;
+		},
+		d(detaching) {
+			if (if_block0) if_block0.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+			if (if_block1) if_block1.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block1_anchor);
+		}
+	};
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let successMessage;
+	let errorMessage;
+	let errors;
+	let $page;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.page, $$value => $$invalidate(5, $page = $$value));
+	let showSuccessMessage = false;
+	let showErrorMessage = false;
+
+	$$self.$$.update = () => {
+		if ($$self.$$.dirty & /*$page*/ 32) {
+			$: $$invalidate(0, successMessage = $page.props.flash.success);
+		}
+
+		if ($$self.$$.dirty & /*$page*/ 32) {
+			$: $$invalidate(1, errorMessage = $page.props.flash.error);
+		}
+
+		if ($$self.$$.dirty & /*$page*/ 32) {
+			$: $$invalidate(2, errors = $page.props.errors);
+		}
+
+		if ($$self.$$.dirty & /*successMessage*/ 1) {
+			$: if (successMessage) {
+				$$invalidate(3, showSuccessMessage = true);
+
+				setTimeout(
+					() => {
+						$$invalidate(3, showSuccessMessage = false);
+						$$invalidate(0, successMessage = "");
+					},
+					10000
+				);
+			}
+		}
+
+		if ($$self.$$.dirty & /*errorMessage*/ 2) {
+			$: if (errorMessage) {
+				$$invalidate(4, showErrorMessage = true);
+
+				setTimeout(
+					() => {
+						$$invalidate(4, showErrorMessage = false);
+						$$invalidate(1, errorMessage = "");
+					},
+					10000
+				);
+			}
+		}
+
+		if ($$self.$$.dirty & /*errors*/ 4) {
+			$: if (Object.keys(errors).length > 0) {
+				$$invalidate(4, showErrorMessage = true);
+
+				setTimeout(
+					() => {
+						$$invalidate(4, showErrorMessage = false);
+						$$invalidate(2, errors = {});
+					},
+					10000
+				);
+			}
+		}
+
+		if ($$self.$$.dirty & /*$page*/ 32) {
+			$: console.log($page.props.errors);
+		}
+	};
+
+	return [
+		successMessage,
+		errorMessage,
+		errors,
+		showSuccessMessage,
+		showErrorMessage,
+		$page
+	];
+}
+
+class FlashMessages extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
+	}
+}
+if (module && module.hot) { if (false) {} FlashMessages = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\FlashMessages.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: FlashMessages, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__.default, acceptable: true, cssId: "svelte-1g5wf8v-style", nonCssHash: "1vacbqi", ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlashMessages);
+
+if (typeof add_css !== 'undefined' && !document.getElementById("svelte-1g5wf8v-style")) add_css();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Shared/LoadingButton.svelte":
 /*!**************************************************!*\
   !*** ./resources/js/Shared/LoadingButton.svelte ***!
@@ -26820,6 +27410,397 @@ if (module && module.hot) { if (false) {} LoadingButton = C_Users_Camilo_WebProj
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingButton);
 
 if (typeof add_css !== 'undefined' && !document.getElementById("svelte-1f70vb4-style")) add_css();
+
+
+
+/***/ }),
+
+/***/ "./node_modules/svelte/easing/index.mjs":
+/*!**********************************************!*\
+  !*** ./node_modules/svelte/easing/index.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "linear": () => (/* reexport safe */ _internal_index_mjs__WEBPACK_IMPORTED_MODULE_0__.identity),
+/* harmony export */   "backIn": () => (/* binding */ backIn),
+/* harmony export */   "backInOut": () => (/* binding */ backInOut),
+/* harmony export */   "backOut": () => (/* binding */ backOut),
+/* harmony export */   "bounceIn": () => (/* binding */ bounceIn),
+/* harmony export */   "bounceInOut": () => (/* binding */ bounceInOut),
+/* harmony export */   "bounceOut": () => (/* binding */ bounceOut),
+/* harmony export */   "circIn": () => (/* binding */ circIn),
+/* harmony export */   "circInOut": () => (/* binding */ circInOut),
+/* harmony export */   "circOut": () => (/* binding */ circOut),
+/* harmony export */   "cubicIn": () => (/* binding */ cubicIn),
+/* harmony export */   "cubicInOut": () => (/* binding */ cubicInOut),
+/* harmony export */   "cubicOut": () => (/* binding */ cubicOut),
+/* harmony export */   "elasticIn": () => (/* binding */ elasticIn),
+/* harmony export */   "elasticInOut": () => (/* binding */ elasticInOut),
+/* harmony export */   "elasticOut": () => (/* binding */ elasticOut),
+/* harmony export */   "expoIn": () => (/* binding */ expoIn),
+/* harmony export */   "expoInOut": () => (/* binding */ expoInOut),
+/* harmony export */   "expoOut": () => (/* binding */ expoOut),
+/* harmony export */   "quadIn": () => (/* binding */ quadIn),
+/* harmony export */   "quadInOut": () => (/* binding */ quadInOut),
+/* harmony export */   "quadOut": () => (/* binding */ quadOut),
+/* harmony export */   "quartIn": () => (/* binding */ quartIn),
+/* harmony export */   "quartInOut": () => (/* binding */ quartInOut),
+/* harmony export */   "quartOut": () => (/* binding */ quartOut),
+/* harmony export */   "quintIn": () => (/* binding */ quintIn),
+/* harmony export */   "quintInOut": () => (/* binding */ quintInOut),
+/* harmony export */   "quintOut": () => (/* binding */ quintOut),
+/* harmony export */   "sineIn": () => (/* binding */ sineIn),
+/* harmony export */   "sineInOut": () => (/* binding */ sineInOut),
+/* harmony export */   "sineOut": () => (/* binding */ sineOut)
+/* harmony export */ });
+/* harmony import */ var _internal_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../internal/index.mjs */ "./node_modules/svelte/internal/index.mjs");
+
+
+/*
+Adapted from https://github.com/mattdesl
+Distributed under MIT License https://github.com/mattdesl/eases/blob/master/LICENSE.md
+*/
+function backInOut(t) {
+    const s = 1.70158 * 1.525;
+    if ((t *= 2) < 1)
+        return 0.5 * (t * t * ((s + 1) * t - s));
+    return 0.5 * ((t -= 2) * t * ((s + 1) * t + s) + 2);
+}
+function backIn(t) {
+    const s = 1.70158;
+    return t * t * ((s + 1) * t - s);
+}
+function backOut(t) {
+    const s = 1.70158;
+    return --t * t * ((s + 1) * t + s) + 1;
+}
+function bounceOut(t) {
+    const a = 4.0 / 11.0;
+    const b = 8.0 / 11.0;
+    const c = 9.0 / 10.0;
+    const ca = 4356.0 / 361.0;
+    const cb = 35442.0 / 1805.0;
+    const cc = 16061.0 / 1805.0;
+    const t2 = t * t;
+    return t < a
+        ? 7.5625 * t2
+        : t < b
+            ? 9.075 * t2 - 9.9 * t + 3.4
+            : t < c
+                ? ca * t2 - cb * t + cc
+                : 10.8 * t * t - 20.52 * t + 10.72;
+}
+function bounceInOut(t) {
+    return t < 0.5
+        ? 0.5 * (1.0 - bounceOut(1.0 - t * 2.0))
+        : 0.5 * bounceOut(t * 2.0 - 1.0) + 0.5;
+}
+function bounceIn(t) {
+    return 1.0 - bounceOut(1.0 - t);
+}
+function circInOut(t) {
+    if ((t *= 2) < 1)
+        return -0.5 * (Math.sqrt(1 - t * t) - 1);
+    return 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1);
+}
+function circIn(t) {
+    return 1.0 - Math.sqrt(1.0 - t * t);
+}
+function circOut(t) {
+    return Math.sqrt(1 - --t * t);
+}
+function cubicInOut(t) {
+    return t < 0.5 ? 4.0 * t * t * t : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
+}
+function cubicIn(t) {
+    return t * t * t;
+}
+function cubicOut(t) {
+    const f = t - 1.0;
+    return f * f * f + 1.0;
+}
+function elasticInOut(t) {
+    return t < 0.5
+        ? 0.5 *
+            Math.sin(((+13.0 * Math.PI) / 2) * 2.0 * t) *
+            Math.pow(2.0, 10.0 * (2.0 * t - 1.0))
+        : 0.5 *
+            Math.sin(((-13.0 * Math.PI) / 2) * (2.0 * t - 1.0 + 1.0)) *
+            Math.pow(2.0, -10.0 * (2.0 * t - 1.0)) +
+            1.0;
+}
+function elasticIn(t) {
+    return Math.sin((13.0 * t * Math.PI) / 2) * Math.pow(2.0, 10.0 * (t - 1.0));
+}
+function elasticOut(t) {
+    return (Math.sin((-13.0 * (t + 1.0) * Math.PI) / 2) * Math.pow(2.0, -10.0 * t) + 1.0);
+}
+function expoInOut(t) {
+    return t === 0.0 || t === 1.0
+        ? t
+        : t < 0.5
+            ? +0.5 * Math.pow(2.0, 20.0 * t - 10.0)
+            : -0.5 * Math.pow(2.0, 10.0 - t * 20.0) + 1.0;
+}
+function expoIn(t) {
+    return t === 0.0 ? t : Math.pow(2.0, 10.0 * (t - 1.0));
+}
+function expoOut(t) {
+    return t === 1.0 ? t : 1.0 - Math.pow(2.0, -10.0 * t);
+}
+function quadInOut(t) {
+    t /= 0.5;
+    if (t < 1)
+        return 0.5 * t * t;
+    t--;
+    return -0.5 * (t * (t - 2) - 1);
+}
+function quadIn(t) {
+    return t * t;
+}
+function quadOut(t) {
+    return -t * (t - 2.0);
+}
+function quartInOut(t) {
+    return t < 0.5
+        ? +8.0 * Math.pow(t, 4.0)
+        : -8.0 * Math.pow(t - 1.0, 4.0) + 1.0;
+}
+function quartIn(t) {
+    return Math.pow(t, 4.0);
+}
+function quartOut(t) {
+    return Math.pow(t - 1.0, 3.0) * (1.0 - t) + 1.0;
+}
+function quintInOut(t) {
+    if ((t *= 2) < 1)
+        return 0.5 * t * t * t * t * t;
+    return 0.5 * ((t -= 2) * t * t * t * t + 2);
+}
+function quintIn(t) {
+    return t * t * t * t * t;
+}
+function quintOut(t) {
+    return --t * t * t * t * t + 1;
+}
+function sineInOut(t) {
+    return -0.5 * (Math.cos(Math.PI * t) - 1);
+}
+function sineIn(t) {
+    const v = Math.cos(t * Math.PI * 0.5);
+    if (Math.abs(v) < 1e-14)
+        return 1;
+    else
+        return 1 - v;
+}
+function sineOut(t) {
+    return Math.sin((t * Math.PI) / 2);
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/svelte/transition/index.mjs":
+/*!**************************************************!*\
+  !*** ./node_modules/svelte/transition/index.mjs ***!
+  \**************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "blur": () => (/* binding */ blur),
+/* harmony export */   "crossfade": () => (/* binding */ crossfade),
+/* harmony export */   "draw": () => (/* binding */ draw),
+/* harmony export */   "fade": () => (/* binding */ fade),
+/* harmony export */   "fly": () => (/* binding */ fly),
+/* harmony export */   "scale": () => (/* binding */ scale),
+/* harmony export */   "slide": () => (/* binding */ slide)
+/* harmony export */ });
+/* harmony import */ var _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../easing/index.mjs */ "./node_modules/svelte/easing/index.mjs");
+/* harmony import */ var _internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../internal/index.mjs */ "./node_modules/svelte/internal/index.mjs");
+
+
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function blur(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicInOut, amount = 5, opacity = 0 } = {}) {
+    const style = getComputedStyle(node);
+    const target_opacity = +style.opacity;
+    const f = style.filter === 'none' ? '' : style.filter;
+    const od = target_opacity * (1 - opacity);
+    return {
+        delay,
+        duration,
+        easing,
+        css: (_t, u) => `opacity: ${target_opacity - (od * u)}; filter: ${f} blur(${u * amount}px);`
+    };
+}
+function fade(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.linear } = {}) {
+    const o = +getComputedStyle(node).opacity;
+    return {
+        delay,
+        duration,
+        easing,
+        css: t => `opacity: ${t * o}`
+    };
+}
+function fly(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
+    const style = getComputedStyle(node);
+    const target_opacity = +style.opacity;
+    const transform = style.transform === 'none' ? '' : style.transform;
+    const od = target_opacity * (1 - opacity);
+    return {
+        delay,
+        duration,
+        easing,
+        css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+    };
+}
+function slide(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut } = {}) {
+    const style = getComputedStyle(node);
+    const opacity = +style.opacity;
+    const height = parseFloat(style.height);
+    const padding_top = parseFloat(style.paddingTop);
+    const padding_bottom = parseFloat(style.paddingBottom);
+    const margin_top = parseFloat(style.marginTop);
+    const margin_bottom = parseFloat(style.marginBottom);
+    const border_top_width = parseFloat(style.borderTopWidth);
+    const border_bottom_width = parseFloat(style.borderBottomWidth);
+    return {
+        delay,
+        duration,
+        easing,
+        css: t => 'overflow: hidden;' +
+            `opacity: ${Math.min(t * 20, 1) * opacity};` +
+            `height: ${t * height}px;` +
+            `padding-top: ${t * padding_top}px;` +
+            `padding-bottom: ${t * padding_bottom}px;` +
+            `margin-top: ${t * margin_top}px;` +
+            `margin-bottom: ${t * margin_bottom}px;` +
+            `border-top-width: ${t * border_top_width}px;` +
+            `border-bottom-width: ${t * border_bottom_width}px;`
+    };
+}
+function scale(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut, start = 0, opacity = 0 } = {}) {
+    const style = getComputedStyle(node);
+    const target_opacity = +style.opacity;
+    const transform = style.transform === 'none' ? '' : style.transform;
+    const sd = 1 - start;
+    const od = target_opacity * (1 - opacity);
+    return {
+        delay,
+        duration,
+        easing,
+        css: (_t, u) => `
+			transform: ${transform} scale(${1 - (sd * u)});
+			opacity: ${target_opacity - (od * u)}
+		`
+    };
+}
+function draw(node, { delay = 0, speed, duration, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicInOut } = {}) {
+    const len = node.getTotalLength();
+    if (duration === undefined) {
+        if (speed === undefined) {
+            duration = 800;
+        }
+        else {
+            duration = len / speed;
+        }
+    }
+    else if (typeof duration === 'function') {
+        duration = duration(len);
+    }
+    return {
+        delay,
+        duration,
+        easing,
+        css: (t, u) => `stroke-dasharray: ${t * len} ${u * len}`
+    };
+}
+function crossfade(_a) {
+    var { fallback } = _a, defaults = __rest(_a, ["fallback"]);
+    const to_receive = new Map();
+    const to_send = new Map();
+    function crossfade(from, node, params) {
+        const { delay = 0, duration = d => Math.sqrt(d) * 30, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut } = (0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.assign)({}, defaults), params);
+        const to = node.getBoundingClientRect();
+        const dx = from.left - to.left;
+        const dy = from.top - to.top;
+        const dw = from.width / to.width;
+        const dh = from.height / to.height;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        const style = getComputedStyle(node);
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const opacity = +style.opacity;
+        return {
+            delay,
+            duration: (0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.is_function)(duration) ? duration(d) : duration,
+            easing,
+            css: (t, u) => `
+				opacity: ${t * opacity};
+				transform-origin: top left;
+				transform: ${transform} translate(${u * dx}px,${u * dy}px) scale(${t + (1 - t) * dw}, ${t + (1 - t) * dh});
+			`
+        };
+    }
+    function transition(items, counterparts, intro) {
+        return (node, params) => {
+            items.set(params.key, {
+                rect: node.getBoundingClientRect()
+            });
+            return () => {
+                if (counterparts.has(params.key)) {
+                    const { rect } = counterparts.get(params.key);
+                    counterparts.delete(params.key);
+                    return crossfade(rect, node, params);
+                }
+                // if the node is disappearing altogether
+                // (i.e. wasn't claimed by the other list)
+                // then we need to supply an outro
+                items.delete(params.key);
+                return fallback && fallback(node, params, intro);
+            };
+        };
+    }
+    return [
+        transition(to_send, to_receive, false),
+        transition(to_receive, to_send, true)
+    ];
+}
+
 
 
 
