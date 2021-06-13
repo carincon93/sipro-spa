@@ -239,3 +239,38 @@ th.th-actions {
     display: inherit !important;
     text-transform: uppercase;
 }
+
+#informacion-mandatory-content::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #4f46e5;
+}
+
+#informacion-mandatory-content::-webkit-scrollbar
+{
+	width: 12px;
+}
+
+#informacion-mandatory-content::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #3028b2;
+}
+
+#informacion-dialog .mdc-dialog__surface {
+    background-color: #4f46e5;
+}
+
+#informacion-dialog .mdc-button {
+    background-color: #fff;
+}
+
+#informacion-mandatory-content, #informacion-mandatory-title {
+    color: #fff;
+}
+
+#informacion-dialog .mdc-button--raised:not(:disabled) {
+    color: #4f46e5;
+}

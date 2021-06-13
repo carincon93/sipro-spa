@@ -19,6 +19,7 @@
     import Dialog from '@/Shared/Dialog'
     import Tags from '@/Shared/Tags'
     import Select from 'svelte-select'
+    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let convocatoria
@@ -28,11 +29,13 @@
     export let tecnoacademiaRelacionada
     export let proyectoMunicipios
 
-    let dialogOpen = errors.password != undefined ? true : false
+    $: $title = tatp ? tatp.titulo : null
+
     let sending = false
+    let dialogOpen = errors.password != undefined ? true : false
+    let proyectoDialogOpen = true
 
     let municipios = []
-    let lineasTecnologicas = []
     let codigoLineaProgramatica
 
     $: if (codigoLineaProgramatica) {
@@ -127,8 +130,6 @@
             municipios = res.data
         }
     }
-
-    $: $title = tatp ? tatp.titulo : null
 </script>
 
 <AuthenticatedLayout>
@@ -264,7 +265,7 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificacion y pertinencia en el territorio" />
+                    <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
@@ -369,6 +370,43 @@
             {/if}
         </div>
     </form>
+
+    <Dialog bind:open={proyectoDialogOpen} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+            </figure>
+            Código del proyecto: {tatp.proyecto.codigo}
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
+                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                <ul class="list-disc">
+                    <li>Resumen</li>
+                    <li>Complemento - Resumen</li>
+                    <li>Antecedentes</li>
+                    <li>Complemento - Antecedentes regional</li>
+                    <li>Retos y prioridades locales</li>
+                    <li>Justificación y pertinencia en el territorio</li>
+                    <li>Marco conceptual</li>
+                    <li>Metodología</li>
+                    <li>Metodología a nivel local</li>
+                    <li>Propuesta de sostenibilidad</li>
+                    <li>Bibliografía</li>
+                    <li>Número de aprendices beneficiados</li>
+                    <li>Nombre de los municipios beneficiados</li>
+                    <li>Articulación con la media</li>
+                    <li>Impacto en el centro de formación</li>
+                </ul>
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Entendido</Button>
+            </div>
+        </div>
+    </Dialog>
 
     <Dialog bind:open={dialogOpen}>
         <div slot="titulo" class="flex items-center">

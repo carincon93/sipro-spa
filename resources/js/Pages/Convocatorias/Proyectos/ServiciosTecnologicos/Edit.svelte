@@ -16,6 +16,7 @@
     import Select from '@/Shared/Select'
     import Switch from '@/Shared/Switch'
     import Dialog from '@/Shared/Dialog'
+    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let convocatoria
@@ -30,8 +31,8 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let municipios
     let dialogOpen = errors.password != undefined ? true : false
+    let proyectoDialogOpen = true
     let sending = false
 
     let tieneVideo = servicioTecnologico.video != null
@@ -102,7 +103,13 @@
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
             <div class="mt-28">
-                <Textarea label="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Label
+                    required
+                    labelFor="titulo"
+                    class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
+                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué?, ¿Cómo?, ¿Cuándo?, ¿Dónde?, ¿Con quién? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto."
+                />
+                <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -411,6 +418,42 @@
             {/if}
         </div>
     </form>
+
+    <Dialog bind:open={proyectoDialogOpen} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+            </figure>
+            Código del proyecto: {servicioTecnologico.proyecto.codigo}
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
+                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                <ul class="list-disc">
+                    <li>Video</li>
+                    <li>Industria 4.0</li>
+                    <li>Economía naranja</li>
+                    <li>Política Institucional para Atención de las Personas con discapacidad</li>
+                    <li>Resumen</li>
+                    <li>Antecedentes</li>
+                    <li>Pregunta de la formulación del problema</li>
+                    <li>Metodología</li>
+                    <li>Propuesta de sostenibilidad</li>
+                    <li>Bibliografía</li>
+                    <li>Número de aprendices beneficiados</li>
+                    <li>Impacto en el centro de formación</li>
+                    <li>Infraestructura adecuada</li>
+                    <li>Especificaciones del área</li>
+                </ul>
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Entendido</Button>
+            </div>
+        </div>
+    </Dialog>
 
     <Dialog bind:open={dialogOpen}>
         <div slot="titulo" class="flex items-center">
