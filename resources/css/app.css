@@ -235,7 +235,7 @@ th.th-actions {
     padding: 0 10px;
 }
 
-p:first-letter, .first-letter-uppercase:first-letter {
+.first-letter-uppercase:first-letter, .selectContainer .selection:first-letter {
     display: inherit !important;
     text-transform: uppercase;
 }

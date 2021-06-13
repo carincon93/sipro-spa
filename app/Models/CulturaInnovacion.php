@@ -204,8 +204,7 @@ class CulturaInnovacion extends Model
         if ($user->hasRole(1)) {
             $cultura_innovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
-                ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->orderBy('cultura_innovacion.id', 'ASC')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else {
             $cultura_innovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
