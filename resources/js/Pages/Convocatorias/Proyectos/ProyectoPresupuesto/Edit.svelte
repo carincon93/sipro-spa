@@ -12,8 +12,8 @@
     import Textarea from '@/Shared/Textarea'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
-    import DropdownPresupuesto from '@/Shared/Dropdowns/DropdownPresupuesto'
     import Select from '@/Shared/Select'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let convocatoria
@@ -23,8 +23,6 @@
     export let tiposSoftware
     export let opcionesServiciosEdicion
 
-    let presupuestoSennova = proyectoPresupuesto
-
     $: $title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal ? proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion : null
 
     /**
@@ -33,12 +31,15 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let showQtyInput = proyectoPresupuesto.valor != null ? false : true
     let dialogOpen = false
     let sending = false
     let form = useForm({
         codigo_uso_presupuestal: '',
+
+        segundo_grupo_presupuestal_id: proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id,
+        tercer_grupo_presupuestal_id: proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal_id,
         convocatoria_presupuesto_id: proyectoPresupuesto.convocatoria_presupuesto_id,
+
         descripcion: proyectoPresupuesto.descripcion,
         justificacion: proyectoPresupuesto.justificacion,
         valor: proyectoPresupuesto.valor,
@@ -54,7 +55,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])) {
+        if (isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])) {
             $form.put(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -64,9 +65,22 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(authUser, [4, 7, 10])) {
+        if (isSuperAdmin || checkPermission(authUser, [4, 7, 10, 13])) {
             $form.delete(route('convocatorias.proyectos.presupuesto.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))
         }
+    }
+
+    let usoPresupuestal
+
+    let prevSegundoGrupoPresupuestal
+
+    $: {
+        if ($form.segundo_grupo_presupuestal_id != prevSegundoGrupoPresupuestal) {
+            usoPresupuestal = null
+        }
+
+        $form.codigo_uso_presupuestal = usoPresupuestal?.codigo
+        prevSegundoGrupoPresupuestal = $form.segundo_grupo_presupuestal_id
     }
 </script>
 
@@ -75,7 +89,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -88,15 +102,43 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto">
-                <div class="p-8">
+                <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) ? undefined : true}>
                     <div class="mt-4">
-                        <DropdownPresupuesto bind:selectedUsoPresupuestal={$form.convocatoria_presupuesto_id} bind:showQtyInput bind:codigoUsoPresupuestal={$form.codigo_uso_presupuestal} {presupuestoSennova} message={errors.convocatoria_presupuesto_id} {convocatoria} lineaProgramatica={proyecto.tipo_proyecto.linea_programatica} required />
-                        <InputError message={errors.convocatoria_presupuesto_id} />
+                        <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
+                        <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.tipo_proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
                     </div>
 
-                    {#if showQtyInput != undefined && !showQtyInput && proyectoPresupuesto.proyecto_lote_estudio_mercado?.length > 0}
-                        <InfoMessage message="El uso presupuestal seleccionado no requiere de estudio de mercado. Si el ítem a actualizar tenía estudios de mercado generados estos se eliminarán." />
+                    {#if $form.segundo_grupo_presupuestal_id}
+                        <div class="mt-4">
+                            <Label required labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
+                            <DynamicList id="tercer_grupo_presupuestal_id" bind:value={$form.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', $form.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} required />
+                        </div>
                     {/if}
+
+                    {#if $form.segundo_grupo_presupuestal_id && $form.tercer_grupo_presupuestal_id}
+                        <div class="mt-4">
+                            <Label required labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
+                            <DynamicList
+                                id="convocatoria_presupuesto_id"
+                                bind:value={$form.convocatoria_presupuesto_id}
+                                routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.tipo_proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
+                                placeholder="Busque por el nombre del uso presupuestal"
+                                message={errors.convocatoria_presupuesto_id}
+                                bind:recurso={usoPresupuestal}
+                                required
+                            />
+                        </div>
+
+                        {#if usoPresupuestal?.mensaje}
+                            <InfoMessage message={usoPresupuestal.mensaje} />
+                        {/if}
+                    {/if}
+
+                    {#if usoPresupuestal?.requiere_estudio_mercado == false}
+                        <InfoMessage message="<strong>Importante:</strong> El uso presupuestal seleccionado no requiere de estudio de mercado. Si este ítem tiene estudios de mercado generados estos se eliminarán." />
+                    {/if}
+
+                    <hr class="mt-10 mb-10" />
 
                     <div class="mt-4">
                         <Textarea label="Describa el bien o servicio a adquirir. Sea específico" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
@@ -106,7 +148,7 @@
                         <Textarea label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                     </div>
 
-                    {#if showQtyInput != undefined && !showQtyInput}
+                    {#if usoPresupuestal?.requiere_estudio_mercado == false || proyectoPresupuesto.valor != null}
                         <div class="mt-4">
                             <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="0" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                         </div>
@@ -118,7 +160,7 @@
                     {#if $form.codigo_uso_presupuestal == '2010100600203101'}
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
-                            <select id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tipo_licencia} required>
+                            <select id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$form.tipo_licencia} required>
                                 <option value="">Seleccione el tipo de licencia </option>
                                 {#each tiposLicencia as { value, label }}
                                     <option {value}>{label}</option>
@@ -128,7 +170,7 @@
 
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
-                            <select id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$form.tipo_software} required>
+                            <select id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$form.tipo_software} required>
                                 <option value="">Seleccione el tipo de software </option>
                                 {#each tiposSoftware as { value, label }}
                                     <option {value}>{label}</option>
@@ -150,11 +192,11 @@
                         {/if}
                     {:else if $form.codigo_uso_presupuestal == '2020200800901'}
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="servicio_edicion_info" value="Más información" />
+                            <Label required class="mb-4" labelFor="servicio_edicion_info" value="Nodo" />
                             <Select id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={$form.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" required />
                         </div>
                     {/if}
-                </div>
+                </fieldset>
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || checkPermission(authUser, [4, 7, 10])}
