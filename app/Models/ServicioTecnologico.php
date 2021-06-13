@@ -188,14 +188,17 @@ class ServicioTecnologico extends Model
     {
         $user = Auth::user();
         if ($user->hasRole(1)) {
-            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)->orderBy('titulo', 'ASC')
+            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
+                ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
         } else {
             $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
                 ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', Auth::user()->id)
-                ->orderBy('titulo', 'ASC')
+                ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
         }
         $servicioTecnologico->load('proyecto');
