@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    <Dialog bind:open={dialogOpen} id="novedades">
+    <Dialog bind:open={dialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mb-10">
             <figure>
                 <img src={window.basePath + '/images/megaphone.png'} alt="Megafono" />
@@ -162,21 +162,3 @@
         </div>
     </Dialog>
 </AuthenticatedLayout>
-
-<style>
-    :global(#novedades-dialog .mdc-dialog__surface) {
-        background-color: #4f46e5;
-    }
-
-    :global(#novedades-dialog .mdc-button) {
-        background-color: #fff;
-    }
-
-    :global(#novedades-mandatory-content, #novedades-mandatory-title) {
-        color: #fff;
-    }
-
-    :global(#novedades-dialog .mdc-button--raised:not(:disabled)) {
-        color: #4f46e5;
-    }
-</style>

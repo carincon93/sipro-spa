@@ -22,6 +22,7 @@
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
     import Dialog from '@/Shared/Dialog'
+    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let convocatoria
@@ -44,6 +45,7 @@
 
     let municipios
     let dialogOpen = errors.password != undefined ? true : false
+    let proyectoDialogOpen = true
     let sending = false
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
@@ -654,6 +656,46 @@
             {/if}
         </div>
     </form>
+
+    <Dialog bind:open={proyectoDialogOpen} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+            </figure>
+            Código del proyecto: {culturaInnovacion.proyecto.codigo}
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
+                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                <ul class="list-disc">
+                    <li>Video</li>
+                    <li>Industria 4.0</li>
+                    <li>Economía naranja</li>
+                    <li>Política Institucional para Atención de las Personas con discapacidad</li>
+                    <li>Origen de las muestras</li>
+                    <li>Plan tecnológico</li>
+                    <li>Agendas Departamentales de Competitividad e Innovación</li>
+                    <li>Mesas sectoriales</li>
+                    <li>Tecnoacademia</li>
+                    <li>Resumen</li>
+                    <li>Antecedentes</li>
+                    <li>Marco conceptual</li>
+                    <li>Metodología</li>
+                    <li>Propuesta de sostenibilidad</li>
+                    <li>Bibliografía</li>
+                    <li>Número de aprendices beneficiados</li>
+                    <li>Nombre de los municipios beneficiados</li>
+                    <li>Impacto en el centro de formación</li>
+                </ul>
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Entendido</Button>
+            </div>
+        </div>
+    </Dialog>
 
     <Dialog bind:open={dialogOpen}>
         <div slot="titulo" class="flex items-center">

@@ -51,7 +51,6 @@
             $form.post(route('convocatorias.cultura-innovacion.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
-                preserveScroll: true,
             })
         }
     }

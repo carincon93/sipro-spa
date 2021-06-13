@@ -53,7 +53,6 @@
             $form.post(route('convocatorias.idi.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
-                preserveScroll: true,
             })
         }
     }
