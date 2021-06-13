@@ -183,7 +183,7 @@
                             {/if}
                         </div>
                         {#if !presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto}
-                            <span class="text-red-400 text-center text-xs"> Este uso presupuestal NO suma al total del presupuesto </span>
+                            <span class="text-red-400 text-center text-xs px-6"> Este uso presupuestal NO suma al total del presupuesto </span>
                         {/if}
                     </td>
                     <td class="border-t td-actions">

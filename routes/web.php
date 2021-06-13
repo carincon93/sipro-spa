@@ -169,8 +169,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
             ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
             ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
-            ->distinct('segundo_grupo_presupuestal.id')
-            ->orderBy('segundo_grupo_presupuestal.id', 'ASC')->get());
+            ->groupBy('segundo_grupo_presupuestal.id')
+            ->orderBy('segundo_grupo_presupuestal.nombre', 'ASC')
+            ->get());
     })->name('web-api.segundo-grupo-presupuestal');
 
     Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function ($segundoGrupoPresupuestal) {
