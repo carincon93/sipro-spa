@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -89,6 +90,16 @@ class User extends Authenticatable
      *
      * @return object
      */
+    public function dinamizadorCentroFormacion()
+    {
+        return $this->hasOne(CentroFormacion::class, 'dinamizador_sennova_id');
+    }
+
+    /**
+     * Relationship with CentroFormacion
+     *
+     * @return object
+     */
     public function subdirectorCentroFormacion()
     {
         return $this->hasOne(CentroFormacion::class, 'subdirector_id');
@@ -144,5 +155,23 @@ class User extends Authenticatable
         return $this->getAllPermissions()->map(function ($t) {
             return ['id' => $t['id']];
         })->pluck('id');
+    }
+
+    /**
+     * getUsersByRol
+     *
+     * @return object
+     */
+    public static function getUsersByRol()
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $users = User::orderBy('nombre', 'ASC')
+                ->filterUser(request()->only('search'))->paginate();
+        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
+            $users = User::where('centro_formacion_id', $user->dinamizadorCentroFormacion->id)->orderBy('nombre', 'ASC')
+                ->filterUser(request()->only('search'))->paginate();
+        }
+        return $users;
     }
 }

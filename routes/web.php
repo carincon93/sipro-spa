@@ -108,6 +108,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // Notificaciones
+    Route::get('notificaciones', [UserController::class, 'showAllNotifications'])->name('notificaciones.index');
+
     // Redirecciona según el tipo de proyecto
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
 
@@ -229,18 +232,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(Regional::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.regionales');
 
-    /**
-     * Trae los directores de regional
-     */
-    Route::get('web-api/directores-regional', function () {
-        return response(User::select('users.id as value', 'users.nombre as label')
-            ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', 'roles.id')
-            ->where('roles.id', 7)
-            ->orWhere('roles.name', 'ilike', '%director de regional%')
-            ->orderBy('users.nombre', 'ASC')->get());
-    })->name('web-api.directores-regional');
-
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
 
     /**
@@ -248,14 +239,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      * Trae los subdirectores
      */
-    Route::get('web-api/subdirectores', function () {
+    Route::get('web-api/users/{rol}', function ($rol) {
         return response(User::select('users.id as value', 'users.nombre as label')
             ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', 'roles.id')
-            ->where('roles.id', 14)
-            ->orWhere('roles.name', 'ilike', '%subdirector de centro de formación%')
+            ->where('roles.name', 'ilike', '%' . $rol . '%')
             ->orderBy('users.nombre', 'ASC')->get());
-    })->name('web-api.subdirectores');
+    })->name('web-api.users');
 
     Route::resource('centros-formacion', CentroFormacionController::class)->except(['show'])->parameters(['centros-formacion' => 'centro-formacion']);
 
@@ -499,6 +489,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/subtipologias-minciencias', function () {
         return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
     })->name('web-api.subtipologias-minciencias');
+
+
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');
 
     /**
      * Idi - Estrategia regional

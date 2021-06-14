@@ -149,6 +149,14 @@ class TaTp extends Model
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->orderBy('ta_tp.id', 'ASC')
                 ->filterTaTp(request()->only('search'))->paginate();
+        } else if ($user->hasRole(4)) {
+            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
+                ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
+                ->orderBy('ta_tp.id', 'ASC')
+                ->filterTaTp(request()->only('search'))->paginate();
         } else {
             $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
                 ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)

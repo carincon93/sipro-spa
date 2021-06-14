@@ -7,7 +7,6 @@
     import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
-    import Input from '@/Shared/Input'
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -15,6 +14,7 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Password from '@/Shared/Password'
     import SelectMulti from '@/Shared/SelectMulti'
     import Dialog from '@/Shared/Dialog'
     import Tags from '@/Shared/Tags'
@@ -419,8 +419,8 @@
             <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
             <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" />
-                <Input label="Ingrese su contraseña" id="password" type="password" class="mt-4" error={errors.password} bind:value={$deleteForm.password} required />
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
+                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
             </form>
         </div>
         <div slot="actions">

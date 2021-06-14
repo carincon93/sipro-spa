@@ -11,6 +11,7 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
+    import Password from '@/Shared/Password'
 
     export let status
     export let errors
@@ -51,7 +52,7 @@
     </div>
 
     <div class="mt-4">
-        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
+        <Password id="password" class="mt-1 w-full" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
     </div>
 
     <div class="block mt-4">

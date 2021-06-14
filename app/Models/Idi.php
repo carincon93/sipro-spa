@@ -218,6 +218,14 @@ class Idi extends Model
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
+        } else if ($user->hasRole(4)) {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
         } else {
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)

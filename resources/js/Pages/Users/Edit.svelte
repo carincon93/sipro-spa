@@ -56,7 +56,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4])) {
             $form.put(route('users.update', usuario.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -66,7 +66,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4])) {
             $form.delete(route('users.destroy', usuario.id))
         }
     }
@@ -77,7 +77,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [4])}
                         <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -89,7 +89,7 @@
 
     <form on:submit|preventDefault={submit}>
         <div class="bg-white rounded shadow max-w-3xl">
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
@@ -147,7 +147,7 @@
         </div>
 
         <div class="bg-white rounded shadow overflow-hidden mt-20">
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
                 <div class="p-4">
                     <Label required class="mb-4" labelFor="role_id" value="Seleccione algún rol" />
                     <InputError message={errors.role_id} />
@@ -166,10 +166,10 @@
         </div>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
             {/if}
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar usuario</LoadingButton>
             {/if}
         </div>

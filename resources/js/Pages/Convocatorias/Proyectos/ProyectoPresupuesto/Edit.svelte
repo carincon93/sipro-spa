@@ -211,16 +211,16 @@
                 </div>
             </form>
         </div>
-        <div class="px-4">
-            <h1 class="mb-4">Enlaces de interés</h1>
-            <ul>
-                {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
+        {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
+            <div class="px-4">
+                <h1 class="mb-4">Enlaces de interés</h1>
+                <ul>
                     <li>
                         <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.lote.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
                     </li>
-                {/if}
-            </ul>
-        </div>
+                </ul>
+            </div>
+        {/if}
     </div>
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">

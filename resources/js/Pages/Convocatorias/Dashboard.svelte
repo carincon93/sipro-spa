@@ -56,7 +56,7 @@
                 </a>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkPermission(authUser, [11, 12, 13])}
                 <a use:inertia href={route('convocatorias.cultura-innovacion.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>
                         <img src={window.basePath + '/images/cultura-innovacion.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-52 object-contain rounded-full w-52" />
