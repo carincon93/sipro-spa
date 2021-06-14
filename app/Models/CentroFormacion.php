@@ -24,6 +24,7 @@ class CentroFormacion extends Model
     protected $fillable = [
         'regional_id',
         'subdirector_id',
+        'dinamizador_sennova_id',
         'nombre',
         'codigo',
     ];
@@ -56,7 +57,6 @@ class CentroFormacion extends Model
         return $this->belongsTo(Regional::class);
     }
 
-
     /**
      * Relationship with User
      *
@@ -65,6 +65,16 @@ class CentroFormacion extends Model
     public function subdirector()
     {
         return $this->belongsTo(User::class, 'subdirector_id');
+    }
+
+    /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function dinamizadorSennova()
+    {
+        return $this->belongsTo(User::class, 'dinamizador_sennova_id');
     }
 
     /**

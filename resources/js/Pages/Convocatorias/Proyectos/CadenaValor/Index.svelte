@@ -64,7 +64,7 @@
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
     {#if productos.length == 0}
-        <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor sin terminar.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />
+        <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor incompleta.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />
     {/if}
 
     <div class="mt-10">

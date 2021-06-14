@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\User' => 'App\Policies\UserPolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 
     /**
@@ -37,8 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('validar-autor', function (User $user, Proyecto $proyecto) {
-            return
-                $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false;
+            return $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id;
         });
     }
 

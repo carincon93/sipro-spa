@@ -25,6 +25,7 @@
         codigo: '',
         regional_id: null,
         subdirector_id: null,
+        dinamizador_sennova_id: null,
     })
 
     function submit() {
@@ -70,7 +71,12 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="subdirector_id" value="Subdirector" />
-                    <DynamicList id="subdirector_id" bind:value={$form.subdirector_id} routeWebApi={route('web-api.subdirectores')} placeholder="Busque por el nombre de subdirector" message={errors.subdirector_id} required />
+                    <DynamicList id="subdirector_id" bind:value={$form.subdirector_id} routeWebApi={route('web-api.users', 'subdirector')} placeholder="Busque por el nombre de subdirector" message={errors.subdirector_id} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="dinamizador_sennova_id" value="Dinamizador SENNOVA" />
+                    <DynamicList id="dinamizador_sennova_id" bind:value={$form.dinamizador_sennova_id} routeWebApi={route('web-api.users', 'dinamizador')} placeholder="Busque por el nombre de subdirector" message={errors.dinamizador_sennova_id} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

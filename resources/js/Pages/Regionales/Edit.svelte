@@ -81,7 +81,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="director_regional_id" value="Director(a) Regional" />
-                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.directores-regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
+                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.users', 'director regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

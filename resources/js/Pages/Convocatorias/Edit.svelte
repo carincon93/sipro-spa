@@ -12,6 +12,7 @@
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
+    import Password from '@/Shared/Password'
     import Switch from '@/Shared/Switch'
 
     export let errors
@@ -154,7 +155,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
-            Eliminar recurso
+            Eliminar convocatoria
         </div>
         <div slot="content">
             <p>
@@ -163,15 +164,15 @@
                 Una vez eliminada la convocatoria, todos los proyectos y datos asociados se eliminarán de forma permanente.
             </p>
 
-            <form on:submit|preventDefault={destroy} id="delete-rdi" class="mt-20 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente esta convocatoria" />
-                <Input label="Ingrese su contraseña" id="password" type="password" class="mt-4" error={errors.password} bind:value={$deleteForm.password} required />
+            <form on:submit|preventDefault={destroy} id="delete-convocatoria" class="mt-20 mb-28">
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente esta convocatoria" class="mb-4" />
+                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
             </form>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-rdi">Confirmar</Button>
+                <Button variant="raised" form="delete-convocatoria">Confirmar</Button>
             </div>
         </div>
     </Dialog>

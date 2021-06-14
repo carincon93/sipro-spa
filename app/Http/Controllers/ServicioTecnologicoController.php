@@ -133,7 +133,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('validar-autor', [$servicioTecnologico->proyecto]);
 
         $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
@@ -155,7 +155,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function update(ServicioTecnologicoRequest $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('validar-autor', [$servicioTecnologico->proyecto]);
 
         $servicioTecnologico->titulo_proyecto_articulado            = $request->titulo_proyecto_articulado;
         $servicioTecnologico->titulo                                = $request->titulo;
@@ -202,7 +202,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('validar-autor', [$servicioTecnologico->proyecto]);
 
         $servicioTecnologico->proyecto()->delete();
 

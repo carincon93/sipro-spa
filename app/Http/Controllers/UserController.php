@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -24,8 +25,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Index', [
             'filters'   => request()->all('search'),
-            'usuarios'  => User::orderBy('nombre', 'ASC')
-                ->filterUser(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -92,16 +92,23 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
         $this->authorize('update', [User::class, $user]);
+
+        if ($request->notificacion) {
+            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->markAsRead();
+            }
+        }
 
         return Inertia::render('Users/Edit', [
             'usuario'               => $user,
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
-            'roles'                 => Role::select('id', 'name')->get('id')
+            'roles'                 => Role::getRolesByRol()
         ]);
     }
 
@@ -190,5 +197,19 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with($status, $message);
+    }
+
+    /**
+     * showAllNotifications
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showAllNotifications()
+    {
+        return Inertia::render('Users/Notifications/Index', [
+            'filters'           => request()->all('search'),
+            'notificaciones'    => Auth::user()->notifications()->paginate(15)
+        ]);
     }
 }

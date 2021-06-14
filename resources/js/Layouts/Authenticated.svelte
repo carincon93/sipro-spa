@@ -8,7 +8,6 @@
     import { Inertia } from '@inertiajs/inertia'
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
-
     import { _ } from 'svelte-i18n'
 
     import ApplicationLogo from '@/Shared/ApplicationLogo'
@@ -64,6 +63,16 @@
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <!-- Settings Dropdown -->
                         <div class="ml-3 relative">
+                            <a use:inertia href={route('notificaciones.index')} class="flex items-center hover:text-indigo-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                {#if $page.props.auth.numeroNotificaciones > 0}
+                                    <span class="absolute bg-indigo-700 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6" style="top: -10px; left: 10px;">{$page.props.auth.numeroNotificaciones}</span>
+                                {/if}
+                            </a>
+                        </div>
+                        <div class="ml-3 relative">
                             <Dropdown class="mt-1" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
@@ -72,12 +81,6 @@
                                     <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>
                                 <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                    <!-- <a
-                                        use:inertia
-                                        href={route('users.edit', authUser.id)}
-                                        class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
-                                        Mi perfil
-                                    </a> -->
                                     <a use:inertia href={route('reportar-problemas.create')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -234,7 +237,7 @@
                 <Button on:click={() => Inertia.visit(route('tipos-proyecto.index'))} variant={route().current('tipos-proyecto.*') ? 'raised' : 'outlined'} class="p-2">Tipos de proyecto</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4])}
                 <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">Usuarios</Button>
             {/if}
         </div>

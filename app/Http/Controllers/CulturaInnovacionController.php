@@ -127,7 +127,7 @@ class CulturaInnovacionController extends Controller
      */
     public function show(Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('view', [CulturaInnovacion::class, $culturaInnovacion]);
+        $this->authorize('validar-autor', [$culturaInnovacion->proyecto]);
     }
 
     /**

@@ -123,7 +123,7 @@ class IdiController extends Controller
      */
     public function show(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('view', [Idi::class, $idi]);
+        $this->authorize('validar-autor', [$idi->proyecto]);
     }
 
     /**

@@ -11,6 +11,8 @@ use App\Models\Proyecto;
 use App\Models\RolSennova;
 use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -91,6 +93,46 @@ class ProyectoController extends Controller
             default:
                 break;
         }
+    }
+
+    /**
+     * Show summary.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function summary(Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-autor', [$proyecto]);
+
+        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->precio_proyecto           = $proyecto->precioProyecto;
+
+        return Inertia::render('Convocatorias/Proyectos/Summary', [
+            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'proyecto'     => $proyecto,
+        ]);
+    }
+
+    /**
+     * Finsih project.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function finishProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-autor', [$proyecto]);
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
+        $proyecto->finalizado = true;
+        $proyecto->save();
+
+        return redirect()->back()->with('success', 'Se ha finalizado el proyecto exitosamente.');
     }
 
     /**
