@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Button from '@/Shared/Button'
@@ -52,6 +52,7 @@
         titulo_proyecto_articulado: servicioTecnologico.titulo_proyecto_articulado,
         fecha_inicio: servicioTecnologico.fecha_inicio,
         fecha_finalizacion: servicioTecnologico.fecha_finalizacion,
+        max_meses_ejecucion: servicioTecnologico.max_meses_ejecucion,
         video: servicioTecnologico.video,
         justificacion_industria_4: servicioTecnologico.justificacion_industria_4,
         justificacion_economia_naranja: servicioTecnologico.justificacion_economia_naranja,
@@ -95,6 +96,10 @@
                 preserveScroll: true,
             })
         }
+    }
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
 </script>
 

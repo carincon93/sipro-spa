@@ -2,7 +2,7 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { Inertia } from '@inertiajs/inertia'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -70,6 +70,7 @@
         titulo: idi.titulo,
         fecha_inicio: idi.fecha_inicio,
         fecha_finalizacion: idi.fecha_finalizacion,
+        max_meses_ejecucion: idi.max_meses_ejecucion,
         video: idi.video,
         justificacion_industria_4: idi.justificacion_industria_4,
         justificacion_economia_naranja: idi.justificacion_economia_naranja,
@@ -115,6 +116,10 @@
         linea_tecnologica_id: lineasTecnologicasRelacionadas,
         mesa_sectorial_id: mesasSectorialesRelacionadas,
     })
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
+    }
 
     onMount(() => {
         if (tecnoacademia) {

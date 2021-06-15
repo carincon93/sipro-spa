@@ -145,6 +145,50 @@ trait ProyectoRolSennovaValidationTrait
     }
 
     /**
+     * serviciosTecnologicosRoles
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $rolSennovaId
+     * @param  mixed $numeroRoles
+     * @return boolean
+     */
+    public static function serviciosTecnologicosRoles($proyecto, $rolSennovaId, $numeroRoles)
+    {
+        $rolSennova = self::reglasServiciosTecnologicos($rolSennovaId);
+
+        if ($numeroRoles > $rolSennova['cantidad']) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * reglasServiciosTecnologicos
+     *
+     * @param  mixed $rolSennovaId
+     * @return object
+     */
+    public static function reglasServiciosTecnologicos($rolSennovaId)
+    {
+        $convocatoriaRolSennova = ConvocatoriaRolSennova::find($rolSennovaId);
+
+        $reglas = '[
+            { "rolSennovaId": 17, "cantidad": 1},
+            { "rolSennovaId": 18, "cantidad": 1},
+            { "rolSennovaId": 19, "cantidad": 1},
+            { "rolSennovaId": 20, "cantidad": 1},
+            { "rolSennovaId": 21, "cantidad": 4},
+            { "rolSennovaId": 22, "cantidad": 4},
+            { "rolSennovaId": 23, "cantidad": 10},
+            { "rolSennovaId": 24, "cantidad": 10},
+            { "rolSennovaId": 3 , "cantidad": 2}
+       ]';
+
+        return collect(json_decode($reglas, true))->where('rolSennovaId', $convocatoriaRolSennova->rolSennova->id)->first();
+    }
+
+    /**
      * totalRolesSennova
      *
      * Obtiene la cantidad total de un rol sennova

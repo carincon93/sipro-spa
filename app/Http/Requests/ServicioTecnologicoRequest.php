@@ -39,6 +39,7 @@ class ServicioTecnologicoRequest extends FormRequest
                 'titulo_proyecto_articulado'                => ['nullable', 'string'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
+                'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'video'                                     => ['required', 'max:191', 'url'],
                 'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],

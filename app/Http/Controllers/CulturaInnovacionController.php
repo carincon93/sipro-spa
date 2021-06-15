@@ -170,6 +170,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->titulo                                = $request->titulo;
         $culturaInnovacion->fecha_inicio                          = $request->fecha_inicio;
         $culturaInnovacion->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $culturaInnovacion->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $culturaInnovacion->video                                 = $request->video;
         $culturaInnovacion->justificacion_industria_4             = $request->justificacion_industria_4;
         $culturaInnovacion->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
