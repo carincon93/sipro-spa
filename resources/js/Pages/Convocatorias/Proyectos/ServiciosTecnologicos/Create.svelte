@@ -85,7 +85,7 @@
                     required
                     labelFor="titulo"
                     class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
-                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué?, ¿Cómo?, ¿Cuándo?, ¿Dónde?, ¿Con quién? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto."
+                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué se va a hacer?, ¿Sobre qué o quiénes se hará?, ¿Cómo?, ¿Dónde se llevará a cabo? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto. Nota: las respuestas a las preguntas anteriormente formuladas no necesariamente deben responderse en mismo orden en el que aparecen."
                 />
                 <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
@@ -234,7 +234,7 @@
             {#if $form.fecha_inicio && $form.fecha_finalizacion}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de meses de vinculación" />
+                        <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación" />
                     </div>
                     <div>
                         <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
@@ -245,7 +245,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
+                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                 </div>
                 <div>
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />

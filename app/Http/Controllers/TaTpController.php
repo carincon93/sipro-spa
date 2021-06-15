@@ -93,7 +93,6 @@ class TaTpController extends Controller
         $proyecto->participantes()->attach(
             Auth::user()->id,
             [
-                'es_autor'          => true,
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,

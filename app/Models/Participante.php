@@ -23,7 +23,6 @@ class Participante extends Pivot
     protected $fillable = [
         'proyecto_id',
         'user_id',
-        'es_autor',
         'cantidad_meses',
         'cantidad_horas',
         'rol_id'

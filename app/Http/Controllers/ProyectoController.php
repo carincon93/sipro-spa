@@ -159,7 +159,7 @@ class ProyectoController extends Controller
             'convocatoria'          => $convocatoria,
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
@@ -201,7 +201,7 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
         if (is_array($data['rol_sennova_id'])) {
             $data['rol_sennova_id'] = $data['rol_sennova_id']['value'];
@@ -255,7 +255,7 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
@@ -291,7 +291,7 @@ class ProyectoController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = 0;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
@@ -299,7 +299,7 @@ class ProyectoController extends Controller
 
         $user->assignRole(14);
 
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);

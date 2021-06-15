@@ -59,7 +59,6 @@
         justificacion_politica_discapacidad: servicioTecnologico.justificacion_politica_discapacidad,
         resumen: servicioTecnologico.resumen,
         antecedentes: servicioTecnologico.antecedentes,
-        pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
         metodologia: servicioTecnologico.metodologia,
         propuesta_sostenibilidad: servicioTecnologico.propuesta_sostenibilidad,
         bibliografia: servicioTecnologico.bibliografia,
@@ -113,7 +112,7 @@
                     required
                     labelFor="titulo"
                     class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
-                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué?, ¿Cómo?, ¿Cuándo?, ¿Dónde?, ¿Con quién? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto."
+                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué se va a hacer?, ¿Sobre qué o quiénes se hará?, ¿Cómo?, ¿Dónde se llevará a cabo? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto. Nota: las respuestas a las preguntas anteriormente formuladas no necesariamente deben responderse en mismo orden en el que aparecen."
                 />
                 <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
@@ -315,8 +314,10 @@
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    <Label required class="mb-4" labelFor="resumen" value="Resumen ejecutivo" />
+                    <InfoMessage
+                        message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto.<br />Nota: El resumen por lo general se construye al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto."
+                    />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
@@ -327,7 +328,7 @@
                 <div>
                     <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
                     <InfoMessage
-                        message="Identificar y caracterizar el mercado potencial, objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector. Registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales, y precisar la segmentación del mercado, las tendencias de los precios y las gestiones comerciales a realizar. "
+                        message="Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de formación de tal forma que el proyecto no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias de los precios y las gestiones comerciales a realizadas. <br /><strong>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. El no reportarla genera una disminución del 20% de la escala de valoración."
                     />
                 </div>
                 <div>
@@ -337,20 +338,8 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de la formulación del problema" />
-                    <InfoMessage
-                        message="Se debe plantear el problema en forma de pregunta donde se define exactamente ¿cuál es el problema a resolver, investigar o intervenir?. La pregunta debe cumplir las siguientes condiciones: • Debe guardar una estrecha correspondencia con el título del proyecto. • Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor. • La pregunta no debe dar origen a respuestas tales como si o no. De ser así, debe ser reformulada."
-                    />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
                     <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
-                    <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
+                    <InfoMessage message="Se debe evidenciar que la metodología se presente de forma organizada y de manera secuencial, de acuerdo con el ciclo P-H-V-A “Planificar – Hacer – Verificar - Actuar” para alcanzar el objetivo general y cada uno de los objetivos específicos." />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />

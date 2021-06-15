@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
                 'tipo_documento'        => ['required', 'max:2'],
                 'numero_documento'      => ['required', 'min:55555', 'max:9999999999999', 'integer', 'unique:users,numero_documento,' . $this->route('user')->id . ',id'],
                 'numero_celular'        => ['required', 'min:3000000000', 'max:9999999999', 'integer'],
-                'tipo_participacion'    => ['required', 'max:191'],
+                'tipo_vinculacion'      => ['required', 'max:191'],
                 'habilitado'            => ['required', 'boolean'],
                 'autorizacion_datos'    => ['required', 'boolean'],
                 'role_id*'              => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles,id']
@@ -45,7 +45,7 @@ class UserRequest extends FormRequest
                 'tipo_documento'        => ['required', 'max:2'],
                 'numero_documento'      => ['required', 'min:55555', 'unique:users,numero_documento', 'max:9999999999999', 'integer'],
                 'numero_celular'        => ['required', 'min:3000000000', 'max:9999999999', 'integer'],
-                'tipo_participacion'    => ['required', 'max:191'],
+                'tipo_vinculacion'      => ['required', 'max:191'],
                 'habilitado'            => ['required', 'boolean'],
                 'autorizacion_datos'    => ['required', 'boolean'],
                 'role_id*'              => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles,id']
@@ -66,9 +66,9 @@ class UserRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->tipo_participacion)) {
+        if (is_array($this->tipo_vinculacion)) {
             $this->merge([
-                'tipo_participacion' => $this->tipo_participacion['value'],
+                'tipo_vinculacion' => $this->tipo_vinculacion['value'],
             ]);
         }
 

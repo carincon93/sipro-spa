@@ -113,6 +113,7 @@ class ArbolProyectoController extends Controller
             case $proyecto->servicioTecnologico()->exists():
                 $proyecto->planteamiento_problema = $proyecto->servicioTecnologico->planteamiento_problema;
                 $proyecto->justificacion_problema = $proyecto->servicioTecnologico->justificacion_problema;
+                $proyecto->pregunta_formulacion_problema = $proyecto->servicioTecnologico->pregunta_formulacion_problema;
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $proyecto->planteamiento_problema = $proyecto->culturaInnovacion->planteamiento_problema;
@@ -124,7 +125,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
         ]);
@@ -142,16 +143,25 @@ class ArbolProyectoController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
-            'planteamiento_problema' => 'required|string|max:1200',
+            'planteamiento_problema' => 'required|string|max:40000',
+            'justificacion_problema' => 'required|string|max:40000',
         ]);
 
         switch ($proyecto) {
-            case $proyecto->Idi()->exists():
-                $idi = $proyecto->Idi;
+            case $proyecto->idi()->exists():
+                $idi = $proyecto->idi;
                 $idi->planteamiento_problema = $request->planteamiento_problema;
                 $idi->justificacion_problema = $request->justificacion_problema;
 
                 $idi->save();
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $proyecto->servicioTecnologico;
+                $servicioTecnologico->planteamiento_problema = $request->planteamiento_problema;
+                $servicioTecnologico->justificacion_problema = $request->justificacion_problema;
+                $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
+
+                $servicioTecnologico->save();
                 break;
             default:
                 break;

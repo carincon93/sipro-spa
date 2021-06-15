@@ -136,6 +136,7 @@
     let formPlanteamientoProblema = useForm({
         planteamiento_problema: proyecto.planteamiento_problema,
         justificacion_problema: proyecto.justificacion_problema,
+        pregunta_formulacion_problema: proyecto.pregunta_formulacion_problema,
     })
 
     let showPlanteamientoProblemaForm = false
@@ -147,6 +148,7 @@
         dialogOpen = true
         $formPlanteamientoProblema.planteamiento_problema = proyecto.planteamiento_problema
         $formPlanteamientoProblema.justificacion_problema = proyecto.justificacion_problema
+        $formPlanteamientoProblema.pregunta_formulacion_problema = proyecto.pregunta_formulacion_problema
     }
 
     function submitPlanteamientoProblema() {
@@ -529,20 +531,59 @@
             {:else if showPlanteamientoProblemaForm}
                 <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <div class="mt-4">
-                            <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
+                        <div class="mt-10">
+                            <Label required class="mb-4" labelFor="planteamiento_problema" value="Identificación y descripción problema" />
 
-                            <InfoMessage
-                                class="mb-2"
-                                message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
-                            />
+                            {#if proyecto.codigo_linea_programatica == 68}
+                                <InfoMessage
+                                    class="mb-2"
+                                    message="Se debe evidenciar la descripción de la realidad objeto de estudio. Luego de identificar el problema central y de haber separado las causas que lo generan de los efectos que produce, se procede a describirlo concretamente, partiendo de lo general a lo específico (a nivel mundial, a nivel nacional, a nivel regional) alineados con los objetivos de desarrollo sostenible, los documentos CONPES (Consejo Nacional de Política económica y social) que le aplique(n), las agendas departamentales de competitividad e innovación y considerando la situación actual. Se deben referenciar los datos estadísticos entre otros datos relevantes.<br /><strong>Nota:</strong>La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros, y citarla utilizando normas APA sexta edición. Evite adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor."
+                                />
+                            {:else}
+                                <InfoMessage
+                                    class="mb-2"
+                                    message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                                />
+                            {/if}
 
                             <Textarea label="Descripción" maxlength="40000" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
                         </div>
 
-                        <div class="mt-4">
+                        {#if proyecto.codigo_linea_programatica == 68}
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
+                                <InfoMessage class="mb-2">
+                                    <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
+                                    La pregunta debe cumplir las siguientes condiciones:
+                                    <ul>
+                                        <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
+                                        <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
+                                        <li>• No debe dar origen a respuestas tales como si o no.</li>
+                                    </ul>
+                                    <br />
+                                    <strong>Nota:</strong>Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
+                                </InfoMessage>
+                                <Textarea maxlength="40000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$formPlanteamientoProblema.pregunta_formulacion_problema} required />
+                            </div>
+                        {/if}
+
+                        <div class="mt-10">
                             <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                            <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+                            {#if proyecto.codigo_linea_programatica == 68}
+                                <InfoMessage class="mb-2">
+                                    <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
+                                    <ul>
+                                        <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
+                                        <li>• ¿Qué resultados se lograrán?</li>
+                                        <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
+                                        <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
+                                    </ul>
+                                    <strong>Nota:</strong>La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
+                                </InfoMessage>
+                            {:else}
+                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+                            {/if}
+
                             <Textarea label="Descripción" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formPlanteamientoProblema.justificacion_problema} required />
                         </div>
                     </fieldset>
