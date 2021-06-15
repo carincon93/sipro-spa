@@ -68,11 +68,16 @@ class ProyectoLoteEstudioMercadoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+        /**
+         * Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+         */
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_lote_estudio_mercado && $presupuesto->proyectoLoteEstudioMercado->count() > 0 || !$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
             return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto]);
         }
 
+        /**
+         * Línea 66
+         */
         if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
@@ -85,6 +90,9 @@ class ProyectoLoteEstudioMercadoController extends Controller
             }
         }
 
+        /**
+         * Línea 23
+         */
         if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
@@ -163,7 +171,9 @@ class ProyectoLoteEstudioMercadoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+        /**
+         * Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+         */
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
             return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
@@ -190,11 +200,16 @@ class ProyectoLoteEstudioMercadoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+        /**
+         * Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
+         */
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
             return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto]);
         }
 
+        /**
+         * Línea 66
+         */
         if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
@@ -207,6 +222,9 @@ class ProyectoLoteEstudioMercadoController extends Controller
             }
         }
 
+        /**
+         * Línea 23
+         */
         if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
