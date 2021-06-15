@@ -25,7 +25,7 @@ class MiembroEntidadAliadaController extends Controller
         if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Index', [
                 'convocatoria'          => $convocatoria->only('id'),
-                'proyecto'              => $proyecto->only('id'),
+                'proyecto'              => $proyecto->only('id', 'modificable'),
                 'entidadAliada'         => $entidadAliada,
                 'filters'               => request()->all('search'),
                 'miembrosEntidadAliada' => MiembroEntidadAliada::where('entidad_aliada_id', $entidadAliada->id)->orderBy('nombre', 'ASC')
@@ -48,7 +48,7 @@ class MiembroEntidadAliadaController extends Controller
         if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Create', [
                 'convocatoria'    => $convocatoria->only('id'),
-                'proyecto'        => $proyecto->only('id'),
+                'proyecto'        => $proyecto->only('id', 'modificable'),
                 'entidadAliada'   => $entidadAliada->only('id'),
                 'tiposDocumento'  => json_decode(Storage::get('json/tipos-documento.json'), true),
             ]);
@@ -105,7 +105,7 @@ class MiembroEntidadAliadaController extends Controller
         if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Edit', [
                 'convocatoria'         => $convocatoria->only('id'),
-                'proyecto'             => $proyecto->only('id'),
+                'proyecto'             => $proyecto->only('id', 'modificable'),
                 'miembroEntidadAliada' => $miembroEntidadAliada,
                 'tiposDocumento'       => json_decode(Storage::get('json/tipos-documento.json'), true),
                 'entidadAliada'        => $entidadAliada->only('id'),

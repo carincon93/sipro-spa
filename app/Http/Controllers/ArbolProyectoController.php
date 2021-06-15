@@ -124,7 +124,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'codigo_linea_programatica', 'modificable'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
         ]);

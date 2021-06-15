@@ -1,5 +1,11 @@
 [
     { "value": 1, "label": "Planta" },
     { "value": 2, "label": "Planta temporal" },
-    { "value": 3, "label": "Contratista" }
+    { "value": 3, "label": "Contratista" },
+    { "value": 4, "label": "Carrera Administrativa"},
+    { "value": 5, "label": "Apoyo Mixto"},
+    { "value": 6, "label": "Profesional grado 8"},
+    { "value": 7, "label": "Profesional grado 9"},
+    { "value": 8, "label": "Subdirector (a)"},
+    { "value": 9, "label": "Coordinador académico"} 
 ]

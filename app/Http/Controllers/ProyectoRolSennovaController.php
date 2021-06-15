@@ -49,7 +49,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
             'convocatoria'       => $convocatoria->only('id'),
-            'proyecto'           => $proyecto->only('id', 'diff_meses'),
+            'proyecto'           => $proyecto->only('id', 'diff_meses', 'modificable'),
             'lineaProgramatica'  => $proyecto->tipoProyecto->lineaProgramatica->only('id')
         ]);
     }
@@ -111,7 +111,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
-            'proyecto'              => $proyecto->only('id', 'diff_meses'),
+            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
             'lineaProgramatica'     => $proyecto->tipoProyecto->lineaProgramatica->only('id')
