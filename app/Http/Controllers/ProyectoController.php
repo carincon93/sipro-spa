@@ -27,7 +27,7 @@ class ProyectoController extends Controller
      */
     public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
@@ -103,7 +103,7 @@ class ProyectoController extends Controller
      */
     public function summary(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', [$proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
@@ -122,7 +122,7 @@ class ProyectoController extends Controller
      */
     public function finishProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', [$proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
@@ -144,7 +144,7 @@ class ProyectoController extends Controller
      */
     public function participantes(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->participantes;
@@ -280,7 +280,7 @@ class ProyectoController extends Controller
      */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $user = new User();
 
