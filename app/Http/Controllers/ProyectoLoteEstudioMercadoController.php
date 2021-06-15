@@ -36,7 +36,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
                 ->with('estudiosMercado')
                 ->filterProyectoLoteEstudioMercado(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoria'                  => $convocatoria->only('id'),
-            'proyecto'                      => $proyecto->only('id'),
+            'proyecto'                      => $proyecto->only('id', 'modificable'),
             'proyectoPresupuesto'           => $presupuesto->only('id', 'promedio'),
             'presupuestoSennova'            => $presupuesto->convocatoriaPresupuesto->presupuestoSennova,
             'usoPresupuestal'               => $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal,
@@ -173,7 +173,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Edit', [
             'convocatoria'               => $convocatoria->only('id'),
-            'proyecto'                   => $proyecto->only('id'),
+            'proyecto'                   => $proyecto->only('id', 'modificable'),
             'proyectoPresupuesto'        => $presupuesto,
             'proyectoLoteEstudioMercado' => $lote
         ]);
