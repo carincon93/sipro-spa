@@ -13,7 +13,7 @@
     export let convocatoria
     export let proyecto
     export let productos
-    export let validation
+    export let validacionResultados
 
     $title = 'Productos'
 
@@ -22,8 +22,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -31,14 +29,13 @@
 
     <h1 class="text-3xl m-24 text-center">Productos</h1>
 
-    {#if validation}
-        <InfoMessage message={validation} class="mt-10 mb-10" />
+    {#if validacionResultados}
+        <InfoMessage message={validacionResultados} class="mt-10 mb-10" />
     {/if}
 
     <div class="mb-6 flex justify-end items-center">
-        <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
         <div>
-            {#if (isSuperAdmin && validation == null) || (checkPermission(authUser, [1, 5, 8]) && validation == null)}
+            {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11]) && validacionResultados == null && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -51,7 +48,7 @@
 
     <Gantt
         items={productos.data}
-        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
                   params: [convocatoria.id, proyecto.id],

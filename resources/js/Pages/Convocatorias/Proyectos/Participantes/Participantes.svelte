@@ -45,26 +45,28 @@
     let sending = false
     let sended = false
     function submit() {
-        sending = true
-        sended = false
-        try {
-            axios
-                .post(route('convocatorias.proyectos.participantes.users', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
-                .then((response) => {
-                    resultados = response.data
-                    sending = false
-                    sended = true
-                })
-                .catch((error) => {
-                    sending = false
-                })
-        } catch (error) {
-            sending = false
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
+            sending = true
+            sended = false
+            try {
+                axios
+                    .post(route('convocatorias.proyectos.participantes.users', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
+                    .then((response) => {
+                        resultados = response.data
+                        sending = false
+                        sended = true
+                    })
+                    .catch((error) => {
+                        sending = false
+                    })
+            } catch (error) {
+                sending = false
+            }
         }
     }
 
     function removeParticipante(id) {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.users.unlink', {
                     proyecto: proyecto.id,
@@ -104,7 +106,7 @@
     }
 
     function submitParticipante() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formParticipante.post(
                 route('convocatorias.proyectos.participantes.users.link', {
                     proyecto: proyecto.id,
@@ -153,7 +155,7 @@
     }
 
     function submitRegister() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
                 onStart: () => {
                     sending = true
@@ -188,7 +190,7 @@
     <h1 class="text-4xl text-center">Participantes</h1>
     <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <fieldset>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
@@ -300,12 +302,18 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
-                            <Item on:SMUI:action={() => showParticipante(participante)}>
-                                <Text>Editar</Text>
-                            </Item>
-                            {#if authUser.id != participante.id || !participante.formulador}
-                                <Item on:SMUI:action={() => removeParticipante(participante.id)}>
-                                    <Text>Quitar</Text>
+                            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)}
+                                <Item on:SMUI:action={() => showParticipante(participante)}>
+                                    <Text>Editar</Text>
+                                </Item>
+                                {#if authUser.id != participante.id || !participante.formulador}
+                                    <Item on:SMUI:action={() => removeParticipante(participante.id)}>
+                                        <Text>Quitar</Text>
+                                    </Item>
+                                {/if}
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>
@@ -337,7 +345,7 @@
     </div>
     <div slot="content">
         <form on:submit|preventDefault={submitParticipante} id="participante-form">
-            <fieldset>
+            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
                     <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
@@ -382,7 +390,7 @@
     </div>
     <div slot="content">
         <form on:submit|preventDefault={submitRegister} id={formNuevoParticipanteId}>
-            <fieldset>
+            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8">
                     <Input label="Nombre completo" id="nombre_nuevo_participante" type="text" class="mt-1" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
                 </div>

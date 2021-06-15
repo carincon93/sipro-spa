@@ -19,7 +19,7 @@ class ActividadController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
@@ -44,7 +44,7 @@ class ActividadController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -55,7 +55,7 @@ class ActividadController extends Controller
      */
     public function store(ActividadRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $actividad = new Actividad();
         $actividad->fieldName = $request->fieldName;
@@ -75,7 +75,7 @@ class ActividadController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -86,7 +86,7 @@ class ActividadController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -108,7 +108,7 @@ class ActividadController extends Controller
      */
     public function update(ActividadRequest $request,  Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $actividad->descripcion         = $request->descripcion;
         $actividad->fecha_inicio        = $request->fecha_inicio;
@@ -130,7 +130,7 @@ class ActividadController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $actividad->delete();
 

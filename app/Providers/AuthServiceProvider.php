@@ -36,8 +36,16 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])->count() > 0;
         });
 
-        Gate::define('validar-autor', function (User $user, Proyecto $proyecto) {
+        Gate::define('visualizar-proyecto-autor', function (User $user, Proyecto $proyecto) {
             return $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id;
+        });
+
+        Gate::define('modificar-proyecto-autor', function (User $user, Proyecto $proyecto) {
+            return $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false && $proyecto->finalizado == false && $proyecto->radicado == false || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->radicado == false;
+        });
+
+        Gate::define('validar-dinamizador', function (User $user, Proyecto $proyecto) {
+            return $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id;
         });
     }
 

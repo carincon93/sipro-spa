@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Proyecto extends Model
 {
@@ -33,7 +34,9 @@ class Proyecto extends Model
         'convocatoria_id',
         'centro_formacion_id',
         'tipo_proyecto_id',
-        'esta_finalizado'
+        'finalizado',
+        'modificable',
+        'radicado'
     ];
 
     /**
@@ -240,6 +243,11 @@ class Proyecto extends Model
                 'cantidad_horas',
                 'rol_sennova_id'
             ]);
+    }
+
+    public static function getLog($proyectoId)
+    {
+        return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->orderBy('created_at', 'DESC')->get();
     }
 
     /**

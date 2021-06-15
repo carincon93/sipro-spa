@@ -212,4 +212,16 @@ class UserController extends Controller
             'notificaciones'    => Auth::user()->notifications()->paginate(15)
         ]);
     }
+
+    public function markAsReadNotification(Request $request)
+    {
+        if ($request->notificacion) {
+            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->markAsRead();
+            }
+        }
+
+        return redirect()->back();
+    }
 }

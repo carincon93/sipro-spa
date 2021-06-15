@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProyectoFinalizado extends Notification
+class ProyectoRadicado extends Notification
 {
     use Queueable;
 
@@ -16,10 +16,10 @@ class ProyectoFinalizado extends Notification
      *
      * @return void
      */
-    public function __construct($convocatoria, $proyecto)
+    public function __construct($proyecto, $user)
     {
-        $this->convocatoria = $convocatoria;
-        $this->proyecto     = $proyecto;
+        $this->proyecto = $proyecto;
+        $this->user = $user;
     }
 
     /**
@@ -57,9 +57,8 @@ class ProyectoFinalizado extends Notification
     {
         return [
             "proyectoId"    => $this->proyecto->id,
-            "subject"       => "Proyecto se ha finalizado",
-            "message"       => "El proyecto {$this->proyecto->codigo} ha sido finalizado. Por favor verifique que la información este completa y de ser así radique el proyecto haciendo clic en los tres puntos, luego clic en 'Ver detalles', a continuación, debe dirigirse al paso de 'Finalizar formulación' y dar clic en 'Radicar'.",
-            "action"        => "convocatorias/{$this->convocatoria->id}/proyectos/{$this->proyecto->id}/editar?notificacion={$this->id}"
+            "subject"       => "El proyecto ha sido radicado",
+            "message"       => "{$this->user->nombre} ha radicado su proyecto.",
         ];
     }
 }

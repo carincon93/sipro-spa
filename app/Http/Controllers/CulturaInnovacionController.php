@@ -127,7 +127,7 @@ class CulturaInnovacionController extends Controller
      */
     public function show(Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('validar-autor', [$culturaInnovacion->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$culturaInnovacion->proyecto]);
     }
 
     /**
@@ -138,7 +138,7 @@ class CulturaInnovacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('validar-autor', [$culturaInnovacion->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         $culturaInnovacion->codigo_linea_programatica = $culturaInnovacion->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $culturaInnovacion->precio_proyecto           = $culturaInnovacion->proyecto->precioProyecto;
@@ -165,7 +165,7 @@ class CulturaInnovacionController extends Controller
      */
     public function update(CulturaInnovacionRequest $request, Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('validar-autor', [$culturaInnovacion->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         $culturaInnovacion->titulo                                = $request->titulo;
         $culturaInnovacion->fecha_inicio                          = $request->fecha_inicio;
@@ -218,7 +218,7 @@ class CulturaInnovacionController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('validar-autor', [$culturaInnovacion->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()

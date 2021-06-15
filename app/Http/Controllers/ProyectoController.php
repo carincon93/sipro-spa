@@ -10,6 +10,9 @@ use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
 use App\Models\RolSennova;
 use App\Models\SemilleroInvestigacion;
+use App\Notifications\ComentarioProyecto;
+use App\Notifications\ProyectoFinalizado;
+use App\Notifications\ProyectoRadicado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +30,7 @@ class ProyectoController extends Controller
      */
     public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
@@ -75,8 +78,17 @@ class ProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function edit(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function edit(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        if ($request->notificacion) {
+            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->markAsRead();
+            }
+        }
+
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 return redirect()->route('convocatorias.idi.edit', [$convocatoria, $proyecto]);
@@ -103,10 +115,12 @@ class ProyectoController extends Controller
      */
     public function summary(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', [$proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
+
+        $proyecto->logs = $proyecto::getLog($proyecto->id);
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -122,7 +136,7 @@ class ProyectoController extends Controller
      */
     public function finishProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', [$proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
@@ -130,9 +144,59 @@ class ProyectoController extends Controller
         }
 
         $proyecto->finalizado = true;
+        $proyecto->modificable = false;
         $proyecto->save();
 
+        $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
+
         return redirect()->back()->with('success', 'Se ha finalizado el proyecto exitosamente.');
+    }
+
+    /**
+     * Finsih project.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function sendProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-dinamizador', [$proyecto]);
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
+        $proyecto->radicado = true;
+        $proyecto->finalizado = true;
+        $proyecto->modificable = false;
+        $proyecto->save();
+
+        $user = $proyecto->participantes()->where('es_formulador', true)->first();
+        $user->notify(new ProyectoRadicado($proyecto, Auth::user()));
+
+        return redirect()->back()->with('success', 'Se ha radicado el proyecto exitosamente.');
+    }
+
+    /**
+     * Finsih project.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function returnProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-dinamizador', [$proyecto]);
+
+        $proyecto->radicado = false;
+        $proyecto->finalizado = false;
+        $proyecto->modificable = true;
+        $proyecto->save();
+
+        $user = $proyecto->participantes()->where('es_formulador', true)->first();
+        $user->notify(new ComentarioProyecto($convocatoria, $proyecto, $request->comentario));
+
+        return redirect()->back()->with('success', 'Se ha notificado al proponente.');
     }
 
     /**
@@ -144,7 +208,7 @@ class ProyectoController extends Controller
      */
     public function participantes(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         $proyecto->participantes;
@@ -280,7 +344,7 @@ class ProyectoController extends Controller
      */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $user = new User();
 

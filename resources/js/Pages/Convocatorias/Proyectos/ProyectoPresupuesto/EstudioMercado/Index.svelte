@@ -9,7 +9,6 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Pagination from '@/Shared/Pagination'
     import Button from '@/Shared/Button'
-    import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import Dialog from '@/Shared/Dialog'
@@ -25,10 +24,6 @@
     export let convocatoriaPresupuesto
     export let presupuestoSennova
 
-    let dialogOpen
-    $: dialogOpen = Object.keys(errors).length > 0 ? true : false
-    let sending = false
-
     $title = 'Estudios de mercado'
 
     /**
@@ -37,7 +32,9 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let filters = {}
+    let sending = false
+    let dialogOpen
+    $: dialogOpen = Object.keys(errors).length > 0 ? true : false
 </script>
 
 <AuthenticatedLayout>
@@ -45,11 +42,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8, 11])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {usoPresupuestal.descripcion}
                         </a>
@@ -85,8 +82,7 @@
         <div>
             {#if (!requiereLoteEstudioMercado && requiereEstudioMercado && proyectoLotesEstudioMercado.data.length < 1) || (requiereEstudioMercado && requiereLoteEstudioMercado)}
                 <div class="mb-6 flex justify-end items-center">
-                    <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)}
                         <Button on:click={() => (dialogOpen = true)} variant="raised">Añadir estudio de mercado</Button>
                     {/if}
                 </div>
@@ -125,7 +121,7 @@
 
                             <td class="border-t px-6 pt-6 pb-4">
                                 <DataTableMenu class={proyectoLotesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8])}
+                                    {#if isSuperAdmin || (checkPermission(authUser, [3, 5, 8, 11]) && proyecto.modificable == true)}
                                         <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.lote.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                             <Text>Ver detalles</Text>
                                         </Item>
@@ -167,7 +163,7 @@
 
             <div slot="actions" class="block flex w-full">
                 <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
-                {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
                 {/if}
             </div>

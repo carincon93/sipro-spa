@@ -110,9 +110,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Notificaciones
     Route::get('notificaciones', [UserController::class, 'showAllNotifications'])->name('notificaciones.index');
+    Route::post('notificaciones/marcar-leido', [UserController::class, 'markAsReadNotification'])->name('notificaciones.marcar-leido');
 
     // Redirecciona según el tipo de proyecto
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/editar', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
 
     // Reportar problemas
     Route::get('reportar-problemas/crear', [HelpDeskController::class, 'create'])->name('reportar-problemas.create');
@@ -493,6 +494,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/radicar-proyecto', [ProyectoController::class, 'sendProject'])->name('convocatorias.proyectos.send');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'returnProject'])->name('convocatorias.proyectos.return-project');
 
     /**
      * Idi - Estrategia regional

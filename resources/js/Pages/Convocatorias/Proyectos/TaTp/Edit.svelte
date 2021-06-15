@@ -103,7 +103,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && tatp.proyecto.modificable == true)) {
             $form.put(route('convocatorias.tatp.update', [convocatoria.id, tatp.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -117,7 +117,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(authUser, [10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [10]) && tatp.proyecto.modificable == true)) {
             $deleteForm.delete(route('convocatorias.tatp.destroy', [convocatoria.id, tatp.id]), {
                 preserveScroll: true,
             })
@@ -136,7 +136,7 @@
     <Stepper {convocatoria} proyecto={tatp} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && tatp.proyecto.modificable == true) ? undefined : true}>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
@@ -362,10 +362,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermission(authUser, [10])}
+            {#if isSuperAdmin || (checkPermission(authUser, [10]) && tatp.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || checkPermission(authUser, [9, 10])}
+            {#if isSuperAdmin || (checkPermission(authUser, [9, 10]) && tatp.proyecto.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -403,7 +403,8 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Entendido</Button>
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

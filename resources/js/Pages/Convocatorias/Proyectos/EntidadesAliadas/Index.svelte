@@ -23,8 +23,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -34,7 +32,7 @@
         <div slot="title">Entidades aliadas</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 5])}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear entidad aliada</Button>
             {/if}
         </div>

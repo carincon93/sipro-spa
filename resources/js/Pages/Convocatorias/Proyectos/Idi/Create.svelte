@@ -63,7 +63,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1])}
                         <a use:inertia href={route('convocatorias.idi.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> I+D+i </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -200,7 +200,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+            {#if isSuperAdmin || checkPermission(authUser, [1])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
