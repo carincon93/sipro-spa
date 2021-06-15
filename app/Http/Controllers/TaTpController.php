@@ -152,6 +152,7 @@ class TaTpController extends Controller
 
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
+        $tatp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
         $tatp->resumen                              = $request->resumen;
         $tatp->antecedentes                         = $request->antecedentes;
         $tatp->marco_conceptual                     = $request->marco_conceptual;
@@ -168,8 +169,6 @@ class TaTpController extends Controller
         $tatp->pertinencia_territorio               = $request->pertinencia_territorio;
         $tatp->metodologia_local                    = $request->metodologia_local;
 
-        // $tatp->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        // $tatp->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $tatp->proyecto->municipios()->sync($request->municipios);
 
         if ($request->codigo_linea_programatica == 70) {

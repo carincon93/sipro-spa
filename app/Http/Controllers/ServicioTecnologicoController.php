@@ -172,6 +172,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->numero_aprendices                     = $request->numero_aprendices;
         $servicioTecnologico->fecha_inicio                          = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
         $servicioTecnologico->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
         $servicioTecnologico->impacto_centro_formacion              = $request->impacto_centro_formacion;
         $servicioTecnologico->infraestructura_adecuada              = $request->infraestructura_adecuada;

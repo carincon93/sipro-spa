@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -57,6 +57,7 @@
         tipo_proyecto_id: tatp.proyecto.tipo_proyecto_id,
         fecha_inicio: tatp.fecha_inicio,
         fecha_finalizacion: tatp.fecha_finalizacion,
+        max_meses_ejecucion: tatp.max_meses_ejecucion,
         resumen: tatp.resumen,
         resumen_regional: tatp.resumen_regional,
         antecedentes: tatp.antecedentes,
@@ -129,6 +130,10 @@
         if (res.status == '200') {
             municipios = res.data
         }
+    }
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
 </script>
 

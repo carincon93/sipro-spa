@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -69,6 +69,7 @@
         titulo: culturaInnovacion.titulo,
         fecha_inicio: culturaInnovacion.fecha_inicio,
         fecha_finalizacion: culturaInnovacion.fecha_finalizacion,
+        max_meses_ejecucion: culturaInnovacion.max_meses_ejecucion,
         video: culturaInnovacion.video,
         justificacion_industria_4: culturaInnovacion.justificacion_industria_4,
         justificacion_economia_naranja: culturaInnovacion.justificacion_economia_naranja,
@@ -121,6 +122,10 @@
         }
         getMunicipios()
     })
+
+    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
+        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
+    }
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
