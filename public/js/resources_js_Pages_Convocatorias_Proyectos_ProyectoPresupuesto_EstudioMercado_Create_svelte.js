@@ -30458,7 +30458,7 @@ function create_if_block_1(ctx) {
 	let current;
 
 	function input0_value_binding_1(value) {
-		/*input0_value_binding_1*/ ctx[20](value);
+		/*input0_value_binding_1*/ ctx[22](value);
 	}
 
 	let input0_props = {
@@ -30471,15 +30471,15 @@ function create_if_block_1(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].tercer_valor !== void 0) {
-		input0_props.value = /*$form*/ ctx[1].tercer_valor;
+	if (/*$form*/ ctx[2].tercer_valor !== void 0) {
+		input0_props.value = /*$form*/ ctx[2].tercer_valor;
 	}
 
 	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, "value", input0_value_binding_1));
 
 	function input1_value_binding_1(value) {
-		/*input1_value_binding_1*/ ctx[21](value);
+		/*input1_value_binding_1*/ ctx[23](value);
 	}
 
 	let input1_props = {
@@ -30491,8 +30491,8 @@ function create_if_block_1(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].tercer_empresa !== void 0) {
-		input1_props.value = /*$form*/ ctx[1].tercer_empresa;
+	if (/*$form*/ ctx[2].tercer_empresa !== void 0) {
+		input1_props.value = /*$form*/ ctx[2].tercer_empresa;
 	}
 
 	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input1_props });
@@ -30508,7 +30508,7 @@ function create_if_block_1(ctx) {
 		});
 
 	function file_value_binding(value) {
-		/*file_value_binding*/ ctx[22](value);
+		/*file_value_binding*/ ctx[24](value);
 	}
 
 	let file_props = {
@@ -30521,8 +30521,8 @@ function create_if_block_1(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].tercer_archivo !== void 0) {
-		file_props.value = /*$form*/ ctx[1].tercer_archivo;
+	if (/*$form*/ ctx[2].tercer_archivo !== void 0) {
+		file_props.value = /*$form*/ ctx[2].tercer_archivo;
 	}
 
 	file = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file_props });
@@ -30567,9 +30567,9 @@ function create_if_block_1(ctx) {
 			const input0_changes = {};
 			if (dirty & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].tercer_valor;
 
-			if (!updating_value && dirty & /*$form*/ 2) {
+			if (!updating_value && dirty & /*$form*/ 4) {
 				updating_value = true;
-				input0_changes.value = /*$form*/ ctx[1].tercer_valor;
+				input0_changes.value = /*$form*/ ctx[2].tercer_valor;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -30577,9 +30577,9 @@ function create_if_block_1(ctx) {
 			const input1_changes = {};
 			if (dirty & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].tercer_empresa;
 
-			if (!updating_value_1 && dirty & /*$form*/ 2) {
+			if (!updating_value_1 && dirty & /*$form*/ 4) {
 				updating_value_1 = true;
-				input1_changes.value = /*$form*/ ctx[1].tercer_empresa;
+				input1_changes.value = /*$form*/ ctx[2].tercer_empresa;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
 			}
 
@@ -30587,9 +30587,9 @@ function create_if_block_1(ctx) {
 			const file_changes = {};
 			if (dirty & /*errors*/ 1) file_changes.error = /*errors*/ ctx[0].tercer_archivo;
 
-			if (!updating_value_2 && dirty & /*$form*/ 2) {
+			if (!updating_value_2 && dirty & /*$form*/ 4) {
 				updating_value_2 = true;
-				file_changes.value = /*$form*/ ctx[1].tercer_archivo;
+				file_changes.value = /*$form*/ ctx[2].tercer_archivo;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_2 = false);
 			}
 
@@ -30633,7 +30633,7 @@ function create_if_block(ctx) {
 
 	percentageprogress = new _Shared_PercentageProgress__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
-				percentage: /*$form*/ ctx[1].progress.percentage
+				percentage: /*$form*/ ctx[2].progress.percentage
 			}
 		});
 
@@ -30647,7 +30647,7 @@ function create_if_block(ctx) {
 		},
 		p(ctx, dirty) {
 			const percentageprogress_changes = {};
-			if (dirty & /*$form*/ 2) percentageprogress_changes.percentage = /*$form*/ ctx[1].progress.percentage;
+			if (dirty & /*$form*/ 4) percentageprogress_changes.percentage = /*$form*/ ctx[2].progress.percentage;
 			percentageprogress.$set(percentageprogress_changes);
 		},
 		i(local) {
@@ -30720,13 +30720,14 @@ function create_fragment(ctx) {
 	let t17;
 	let inputerror;
 	let t18;
+	let fieldset_disabled_value;
 	let t19;
 	let div9;
 	let p;
 	let t20;
 
-	let t21_value = (/*average*/ ctx[2] > 0
-	? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[2])
+	let t21_value = (/*average*/ ctx[3] > 0
+	? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[3])
 	: 0) + "";
 
 	let t21;
@@ -30738,7 +30739,7 @@ function create_fragment(ctx) {
 	let dispose;
 
 	function input0_value_binding(value) {
-		/*input0_value_binding*/ ctx[11](value);
+		/*input0_value_binding*/ ctx[13](value);
 	}
 
 	let input0_props = {
@@ -30751,8 +30752,8 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].numero_items !== void 0) {
-		input0_props.value = /*$form*/ ctx[1].numero_items;
+	if (/*$form*/ ctx[2].numero_items !== void 0) {
+		input0_props.value = /*$form*/ ctx[2].numero_items;
 	}
 
 	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input0_props });
@@ -30768,7 +30769,7 @@ function create_fragment(ctx) {
 		});
 
 	function file0_value_binding(value) {
-		/*file0_value_binding*/ ctx[12](value);
+		/*file0_value_binding*/ ctx[14](value);
 	}
 
 	let file0_props = {
@@ -30781,15 +30782,15 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].ficha_tecnica !== void 0) {
-		file0_props.value = /*$form*/ ctx[1].ficha_tecnica;
+	if (/*$form*/ ctx[2].ficha_tecnica !== void 0) {
+		file0_props.value = /*$form*/ ctx[2].ficha_tecnica;
 	}
 
 	file0 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file0, "value", file0_value_binding));
 
 	function input1_value_binding(value) {
-		/*input1_value_binding*/ ctx[13](value);
+		/*input1_value_binding*/ ctx[15](value);
 	}
 
 	let input1_props = {
@@ -30802,15 +30803,15 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].primer_valor !== void 0) {
-		input1_props.value = /*$form*/ ctx[1].primer_valor;
+	if (/*$form*/ ctx[2].primer_valor !== void 0) {
+		input1_props.value = /*$form*/ ctx[2].primer_valor;
 	}
 
 	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input1, "value", input1_value_binding));
 
 	function input2_value_binding(value) {
-		/*input2_value_binding*/ ctx[14](value);
+		/*input2_value_binding*/ ctx[16](value);
 	}
 
 	let input2_props = {
@@ -30822,8 +30823,8 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].primer_empresa !== void 0) {
-		input2_props.value = /*$form*/ ctx[1].primer_empresa;
+	if (/*$form*/ ctx[2].primer_empresa !== void 0) {
+		input2_props.value = /*$form*/ ctx[2].primer_empresa;
 	}
 
 	input2 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input2_props });
@@ -30839,7 +30840,7 @@ function create_fragment(ctx) {
 		});
 
 	function file1_value_binding(value) {
-		/*file1_value_binding*/ ctx[15](value);
+		/*file1_value_binding*/ ctx[17](value);
 	}
 
 	let file1_props = {
@@ -30852,15 +30853,15 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].primer_archivo !== void 0) {
-		file1_props.value = /*$form*/ ctx[1].primer_archivo;
+	if (/*$form*/ ctx[2].primer_archivo !== void 0) {
+		file1_props.value = /*$form*/ ctx[2].primer_archivo;
 	}
 
 	file1 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file1, "value", file1_value_binding));
 
 	function input3_value_binding(value) {
-		/*input3_value_binding*/ ctx[16](value);
+		/*input3_value_binding*/ ctx[18](value);
 	}
 
 	let input3_props = {
@@ -30873,15 +30874,15 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].segundo_valor !== void 0) {
-		input3_props.value = /*$form*/ ctx[1].segundo_valor;
+	if (/*$form*/ ctx[2].segundo_valor !== void 0) {
+		input3_props.value = /*$form*/ ctx[2].segundo_valor;
 	}
 
 	input3 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input3, "value", input3_value_binding));
 
 	function input4_value_binding(value) {
-		/*input4_value_binding*/ ctx[17](value);
+		/*input4_value_binding*/ ctx[19](value);
 	}
 
 	let input4_props = {
@@ -30893,8 +30894,8 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].segunda_empresa !== void 0) {
-		input4_props.value = /*$form*/ ctx[1].segunda_empresa;
+	if (/*$form*/ ctx[2].segunda_empresa !== void 0) {
+		input4_props.value = /*$form*/ ctx[2].segunda_empresa;
 	}
 
 	input4 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input4_props });
@@ -30910,7 +30911,7 @@ function create_fragment(ctx) {
 		});
 
 	function file2_value_binding(value) {
-		/*file2_value_binding*/ ctx[18](value);
+		/*file2_value_binding*/ ctx[20](value);
 	}
 
 	let file2_props = {
@@ -30923,8 +30924,8 @@ function create_fragment(ctx) {
 		required: true
 	};
 
-	if (/*$form*/ ctx[1].segundo_archivo !== void 0) {
-		file2_props.value = /*$form*/ ctx[1].segundo_archivo;
+	if (/*$form*/ ctx[2].segundo_archivo !== void 0) {
+		file2_props.value = /*$form*/ ctx[2].segundo_archivo;
 	}
 
 	file2 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file2_props });
@@ -30939,13 +30940,13 @@ function create_fragment(ctx) {
 		});
 
 	function switch_1_checked_binding(value) {
-		/*switch_1_checked_binding*/ ctx[19](value);
+		/*switch_1_checked_binding*/ ctx[21](value);
 	}
 
 	let switch_1_props = {};
 
-	if (/*$form*/ ctx[1].requiere_tercer_estudio_mercado !== void 0) {
-		switch_1_props.checked = /*$form*/ ctx[1].requiere_tercer_estudio_mercado;
+	if (/*$form*/ ctx[2].requiere_tercer_estudio_mercado !== void 0) {
+		switch_1_props.checked = /*$form*/ ctx[2].requiere_tercer_estudio_mercado;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_8__.default({ props: switch_1_props });
@@ -30957,8 +30958,8 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = /*$form*/ ctx[1].requiere_tercer_estudio_mercado && create_if_block_1(ctx);
-	let if_block1 = /*$form*/ ctx[1].progress && create_if_block(ctx);
+	let if_block0 = /*$form*/ ctx[2].requiere_tercer_estudio_mercado && create_if_block_1(ctx);
+	let if_block1 = /*$form*/ ctx[2].progress && create_if_block(ctx);
 
 	return {
 		c() {
@@ -31031,6 +31032,11 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div8, "class", "mt-8");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(fieldset, "class", "p-8");
+
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[5] || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(/*authUser*/ ctx[4], [1, 5, 8, 11]) && /*proyecto*/ ctx[1].modificable == true
+			? undefined
+			: true;
+
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div9, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(form_1, "id", "form-estudio-mercado");
 		},
@@ -31093,7 +31099,7 @@ function create_fragment(ctx) {
 			current = true;
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*submit*/ ctx[4]));
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*submit*/ ctx[7]));
 				mounted = true;
 			}
 		},
@@ -31101,9 +31107,9 @@ function create_fragment(ctx) {
 			const input0_changes = {};
 			if (dirty & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].numero_items;
 
-			if (!updating_value && dirty & /*$form*/ 2) {
+			if (!updating_value && dirty & /*$form*/ 4) {
 				updating_value = true;
-				input0_changes.value = /*$form*/ ctx[1].numero_items;
+				input0_changes.value = /*$form*/ ctx[2].numero_items;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -31111,9 +31117,9 @@ function create_fragment(ctx) {
 			const file0_changes = {};
 			if (dirty & /*errors*/ 1) file0_changes.error = /*errors*/ ctx[0].ficha_tecnica;
 
-			if (!updating_value_1 && dirty & /*$form*/ 2) {
+			if (!updating_value_1 && dirty & /*$form*/ 4) {
 				updating_value_1 = true;
-				file0_changes.value = /*$form*/ ctx[1].ficha_tecnica;
+				file0_changes.value = /*$form*/ ctx[2].ficha_tecnica;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
 			}
 
@@ -31121,9 +31127,9 @@ function create_fragment(ctx) {
 			const input1_changes = {};
 			if (dirty & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].primer_valor;
 
-			if (!updating_value_2 && dirty & /*$form*/ 2) {
+			if (!updating_value_2 && dirty & /*$form*/ 4) {
 				updating_value_2 = true;
-				input1_changes.value = /*$form*/ ctx[1].primer_valor;
+				input1_changes.value = /*$form*/ ctx[2].primer_valor;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_2 = false);
 			}
 
@@ -31131,9 +31137,9 @@ function create_fragment(ctx) {
 			const input2_changes = {};
 			if (dirty & /*errors*/ 1) input2_changes.error = /*errors*/ ctx[0].primer_empresa;
 
-			if (!updating_value_3 && dirty & /*$form*/ 2) {
+			if (!updating_value_3 && dirty & /*$form*/ 4) {
 				updating_value_3 = true;
-				input2_changes.value = /*$form*/ ctx[1].primer_empresa;
+				input2_changes.value = /*$form*/ ctx[2].primer_empresa;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_3 = false);
 			}
 
@@ -31141,9 +31147,9 @@ function create_fragment(ctx) {
 			const file1_changes = {};
 			if (dirty & /*errors*/ 1) file1_changes.error = /*errors*/ ctx[0].primer_archivo;
 
-			if (!updating_value_4 && dirty & /*$form*/ 2) {
+			if (!updating_value_4 && dirty & /*$form*/ 4) {
 				updating_value_4 = true;
-				file1_changes.value = /*$form*/ ctx[1].primer_archivo;
+				file1_changes.value = /*$form*/ ctx[2].primer_archivo;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_4 = false);
 			}
 
@@ -31151,9 +31157,9 @@ function create_fragment(ctx) {
 			const input3_changes = {};
 			if (dirty & /*errors*/ 1) input3_changes.error = /*errors*/ ctx[0].segundo_valor;
 
-			if (!updating_value_5 && dirty & /*$form*/ 2) {
+			if (!updating_value_5 && dirty & /*$form*/ 4) {
 				updating_value_5 = true;
-				input3_changes.value = /*$form*/ ctx[1].segundo_valor;
+				input3_changes.value = /*$form*/ ctx[2].segundo_valor;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_5 = false);
 			}
 
@@ -31161,9 +31167,9 @@ function create_fragment(ctx) {
 			const input4_changes = {};
 			if (dirty & /*errors*/ 1) input4_changes.error = /*errors*/ ctx[0].segunda_empresa;
 
-			if (!updating_value_6 && dirty & /*$form*/ 2) {
+			if (!updating_value_6 && dirty & /*$form*/ 4) {
 				updating_value_6 = true;
-				input4_changes.value = /*$form*/ ctx[1].segunda_empresa;
+				input4_changes.value = /*$form*/ ctx[2].segunda_empresa;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_6 = false);
 			}
 
@@ -31171,18 +31177,18 @@ function create_fragment(ctx) {
 			const file2_changes = {};
 			if (dirty & /*errors*/ 1) file2_changes.error = /*errors*/ ctx[0].segundo_archivo;
 
-			if (!updating_value_7 && dirty & /*$form*/ 2) {
+			if (!updating_value_7 && dirty & /*$form*/ 4) {
 				updating_value_7 = true;
-				file2_changes.value = /*$form*/ ctx[1].segundo_archivo;
+				file2_changes.value = /*$form*/ ctx[2].segundo_archivo;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_7 = false);
 			}
 
 			file2.$set(file2_changes);
 			const switch_1_changes = {};
 
-			if (!updating_checked && dirty & /*$form*/ 2) {
+			if (!updating_checked && dirty & /*$form*/ 4) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$form*/ ctx[1].requiere_tercer_estudio_mercado;
+				switch_1_changes.checked = /*$form*/ ctx[2].requiere_tercer_estudio_mercado;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
@@ -31191,11 +31197,11 @@ function create_fragment(ctx) {
 			if (dirty & /*errors*/ 1) inputerror_changes.message = /*errors*/ ctx[0].requiere_tercer_estudio_mercado;
 			inputerror.$set(inputerror_changes);
 
-			if (/*$form*/ ctx[1].requiere_tercer_estudio_mercado) {
+			if (/*$form*/ ctx[2].requiere_tercer_estudio_mercado) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
-					if (dirty & /*$form*/ 2) {
+					if (dirty & /*$form*/ 4) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
@@ -31214,15 +31220,21 @@ function create_fragment(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if ((!current || dirty & /*average*/ 4) && t21_value !== (t21_value = (/*average*/ ctx[2] > 0
-			? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[2])
+			if (!current || dirty & /*proyecto*/ 2 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[5] || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(/*authUser*/ ctx[4], [1, 5, 8, 11]) && /*proyecto*/ ctx[1].modificable == true
+			? undefined
+			: true)) {
+				fieldset.disabled = fieldset_disabled_value;
+			}
+
+			if ((!current || dirty & /*average*/ 8) && t21_value !== (t21_value = (/*average*/ ctx[3] > 0
+			? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[3])
 			: 0) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t21, t21_value);
 
-			if (/*$form*/ ctx[1].progress) {
+			if (/*$form*/ ctx[2].progress) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 
-					if (dirty & /*$form*/ 2) {
+					if (dirty & /*$form*/ 4) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
@@ -31309,7 +31321,7 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let $page;
 	let $form;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.page, $$value => $$invalidate(23, $page = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.page, $$value => $$invalidate(25, $page = $$value));
 	let { errors } = $$props;
 	let { convocatoria } = $$props;
 	let { proyecto } = $$props;
@@ -31341,17 +31353,17 @@ function instance($$self, $$props, $$invalidate) {
 		tercer_archivo: null
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(1, $form = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(2, $form = value));
 
 	function submit() {
-		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(authUser, [1, 5, 8])) {
+		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) {
 			
 
-			($$invalidate(6, sending = true), $form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.proyectos.presupuesto.lote.store", [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
-				onStart: () => $$invalidate(6, sending = true),
+			($$invalidate(9, sending = true), $form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.proyectos.presupuesto.lote.store", [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+				onStart: () => $$invalidate(9, sending = true),
 				onFinish: () => {
 					
-					($$invalidate(6, sending = false), $$invalidate(5, dialogOpen = false));
+					($$invalidate(9, sending = false), $$invalidate(8, dialogOpen = false));
 
 					document.getElementById("ficha_tecnica")
 					? document.getElementById("ficha_tecnica").value = null
@@ -31475,17 +31487,17 @@ function instance($$self, $$props, $$invalidate) {
 
 	$$self.$$set = $$props => {
 		if ("errors" in $$props) $$invalidate(0, errors = $$props.errors);
-		if ("convocatoria" in $$props) $$invalidate(7, convocatoria = $$props.convocatoria);
-		if ("proyecto" in $$props) $$invalidate(8, proyecto = $$props.proyecto);
-		if ("proyectoPresupuesto" in $$props) $$invalidate(9, proyectoPresupuesto = $$props.proyectoPresupuesto);
-		if ("convocatoriaPresupuesto" in $$props) $$invalidate(10, convocatoriaPresupuesto = $$props.convocatoriaPresupuesto);
-		if ("dialogOpen" in $$props) $$invalidate(5, dialogOpen = $$props.dialogOpen);
-		if ("sending" in $$props) $$invalidate(6, sending = $$props.sending);
+		if ("convocatoria" in $$props) $$invalidate(10, convocatoria = $$props.convocatoria);
+		if ("proyecto" in $$props) $$invalidate(1, proyecto = $$props.proyecto);
+		if ("proyectoPresupuesto" in $$props) $$invalidate(11, proyectoPresupuesto = $$props.proyectoPresupuesto);
+		if ("convocatoriaPresupuesto" in $$props) $$invalidate(12, convocatoriaPresupuesto = $$props.convocatoriaPresupuesto);
+		if ("dialogOpen" in $$props) $$invalidate(8, dialogOpen = $$props.dialogOpen);
+		if ("sending" in $$props) $$invalidate(9, sending = $$props.sending);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*$form*/ 2) {
-			$: $$invalidate(2, average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0
+		if ($$self.$$.dirty & /*$form*/ 4) {
+			$: $$invalidate(3, average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0
 			? parseInt($form.tercer_valor)
 			: 0)) / (parseInt($form.tercer_valor) > 0 ? 3 : 2));
 		}
@@ -31493,14 +31505,16 @@ function instance($$self, $$props, $$invalidate) {
 
 	return [
 		errors,
+		proyecto,
 		$form,
 		average,
+		authUser,
+		isSuperAdmin,
 		form,
 		submit,
 		dialogOpen,
 		sending,
 		convocatoria,
-		proyecto,
 		proyectoPresupuesto,
 		convocatoriaPresupuesto,
 		input0_value_binding,
@@ -31524,12 +31538,12 @@ class Create extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponen
 
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
 			errors: 0,
-			convocatoria: 7,
-			proyecto: 8,
-			proyectoPresupuesto: 9,
-			convocatoriaPresupuesto: 10,
-			dialogOpen: 5,
-			sending: 6
+			convocatoria: 10,
+			proyecto: 1,
+			proyectoPresupuesto: 11,
+			convocatoriaPresupuesto: 12,
+			dialogOpen: 8,
+			sending: 9
 		});
 	}
 }

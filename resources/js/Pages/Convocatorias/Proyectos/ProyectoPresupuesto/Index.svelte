@@ -18,8 +18,6 @@
     export let proyectoPresupuesto
     export let segundoGrupoPresupuestal
 
-    let filtro = false
-
     $title = 'Presupuesto'
 
     /**
@@ -28,28 +26,28 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let filters = {}
+    let filtro = false
 </script>
 
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
-    <p class="text-center mt-10 mb-24">
-        Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
-    </p>
-    <div class="bg-white rounded shadow">
-        <table class="w-full whitespace-no-wrap table-fixed data-table">
-            <thead>
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
-                </tr>
-            </thead>
+    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
+        <p class="text-center mt-10 mb-24">
+            Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
+        </p>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                <tbody>
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t p-4"> Servicios especiales de construcción </td>
                         <td class="border-t p-4">
@@ -92,18 +90,18 @@
                             {/if}
                         </td>
                     </tr>
-                {/if}
-            </tbody>
+                </tbody>
 
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="border-t p-4">
-                        <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="border-t p-4">
+                            <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    {/if}
 
     <div class="mt-20">
         <p>Puede filtrar los rubros presupuestales haciendo clic en <strong>Ver filtros</strong> y a continuación, seleccione un rubro presupuestal.</p>
@@ -129,7 +127,7 @@
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -188,7 +186,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

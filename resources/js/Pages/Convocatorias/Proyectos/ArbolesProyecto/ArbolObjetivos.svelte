@@ -92,7 +92,7 @@
     }
 
     function submitImpacto() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formImpacto.post(
                 route('proyectos.impacto', {
                     proyecto: proyecto.id,
@@ -151,7 +151,7 @@
     }
 
     function submitResult() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formResultado.post(
                 route('proyectos.resultado', {
                     proyecto: proyecto.id,
@@ -193,7 +193,7 @@
     }
 
     function submitObjetivoGeneral() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -234,7 +234,7 @@
     }
 
     function submitObjetivoEspecifico() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
                     proyecto: proyecto.id,
@@ -287,7 +287,7 @@
     }
 
     function submitActividad() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
             $formActividad.post(
                 route('proyectos.actividad', {
                     convocatoria: convocatoria.id,
@@ -566,7 +566,7 @@
         <div slot="content">
             {#if showActividadForm}
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
                         <p class="mb-20 whitespace-pre-line">
                             {actividadCausaIndirecta}
@@ -599,7 +599,7 @@
                 </form>
             {:else if showObjetivoEspecificoForm}
                 <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -612,7 +612,7 @@
                 </form>
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
 
                         <p class="mb-20 whitespace-pre-line">
@@ -627,7 +627,7 @@
                 </form>
             {:else if showResultadoForm}
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
-                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
                         <p class="mb-20 whitespace-pre-line">
                             {resultadoEfectoDirecto}
@@ -652,7 +652,7 @@
                 </form>
             {:else if showImpactoForm}
                 <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
 
                         <p class="mt-4 whitespace-pre-line">
@@ -678,7 +678,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) && formId)}
+            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

@@ -31,26 +31,28 @@
     let sending = false
     let sended = false
     function submit() {
-        sending = true
-        sended = console.log('here')
-        try {
-            axios
-                .post(route('convocatorias.proyectos.participantes.programas-formacion', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
-                .then((response) => {
-                    resultados = response.data
-                    sending = false
-                    sended = true
-                })
-                .catch((error) => {
-                    sending = false
-                })
-        } catch (error) {
-            sending = false
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)) {
+            sending = true
+            sended = console.log('here')
+            try {
+                axios
+                    .post(route('convocatorias.proyectos.participantes.programas-formacion', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
+                    .then((response) => {
+                        resultados = response.data
+                        sending = false
+                        sended = true
+                    })
+                    .catch((error) => {
+                        sending = false
+                    })
+            } catch (error) {
+                sending = false
+            }
         }
     }
 
     function linkProgramaFormacion(id) {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.programas-formacion.link', {
                     proyecto: proyecto.id,
@@ -63,7 +65,7 @@
     }
 
     function removeProgramaFormacion(id) {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.programas-formacion.unlink', {
                     proyecto: proyecto.id,
@@ -81,7 +83,7 @@
     <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de programas de formación</p>
 
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <fieldset>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el ID o el nombre completo del programa de formación" id="search_programa_formacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_programa_formacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
@@ -134,9 +136,15 @@
                             </td>
                             <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                    <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
-                                        <Text>Vincular</Text>
-                                    </Item>
+                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)}
+                                        <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
+                                            <Text>Vincular</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
                                 </DataTableMenu>
                             </td>
                         </tr>

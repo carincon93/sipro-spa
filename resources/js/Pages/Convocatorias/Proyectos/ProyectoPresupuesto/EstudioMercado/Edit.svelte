@@ -54,7 +54,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10)) {
+        if (isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true)) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.presupuesto.lote.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]), {
                     onStart: () => (sending = true),
@@ -70,7 +70,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(4, 7, 10)) {
+        if (isSuperAdmin || (checkPermission(4, 7, 10, 13) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.presupuesto.lote.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]))
         }
     }
@@ -84,11 +84,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10)}
+                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10, 12, 13)}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10)}
+                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10, 12, 13)}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.lote.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
@@ -104,7 +104,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
                 </div>
@@ -174,13 +174,13 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(4, 7, 10)}
+                {#if isSuperAdmin || (checkPermission(4, 7, 10, 13) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar estudio de mercado </button>
                 {/if}
                 <p class="break-all w-72">
                     Valor promedio: ${average > 0 ? new Intl.NumberFormat('de-DE').format(average) : 0} COP
                 </p>
-                {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10)}
+                {#if isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar estudio de mercado</LoadingButton>
                 {/if}
             </div>

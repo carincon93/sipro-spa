@@ -23,8 +23,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -38,7 +36,7 @@
         </h2>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
@@ -72,7 +70,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

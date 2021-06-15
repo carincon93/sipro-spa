@@ -37,7 +37,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [1])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.store', [convocatoria.id, proyecto.id, entidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -63,7 +63,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [1]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
@@ -93,7 +93,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [1])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" bind:disabled={$form.autorizacion_datos}>Crear miembro de la entidad aliada</LoadingButton>
                 {/if}
             </div>

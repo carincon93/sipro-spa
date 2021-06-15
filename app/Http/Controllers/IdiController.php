@@ -123,7 +123,7 @@ class IdiController extends Controller
      */
     public function show(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('validar-autor', [$idi->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
     }
 
     /**
@@ -134,7 +134,7 @@ class IdiController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('validar-autor', [$idi->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
 
         $idi->codigo_linea_programatica = $idi->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
@@ -161,7 +161,7 @@ class IdiController extends Controller
      */
     public function update(IdiRequest $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('validar-autor', [$idi->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
         $idi->titulo                                = $request->titulo;
         $idi->fecha_inicio                          = $request->fecha_inicio;
@@ -196,8 +196,6 @@ class IdiController extends Controller
         $idi->relacionado_mesas_sectoriales         = $request->relacionado_mesas_sectoriales;
         $idi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
-        // $idi->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        // $idi->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
         $idi->proyecto->municipios()->sync($request->municipios);
 
         $idi->save();
@@ -217,7 +215,7 @@ class IdiController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('validar-autor', [$idi->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()

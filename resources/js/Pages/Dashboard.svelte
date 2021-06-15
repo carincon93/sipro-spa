@@ -1,5 +1,5 @@
 <script>
-    import AuthenticatedLayout from '@/Layouts/Authenticated'
+    import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -7,6 +7,8 @@
 
     import Button from '@/Shared/Button'
     import Dialog from '@/Shared/Dialog'
+
+    $title = 'Panel de control'
 
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

@@ -18,8 +18,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -27,11 +25,11 @@
 
     <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
-    <InfoMessage message="Debe generar las actividades en el 'Arbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor." />
+    <InfoMessage message="Debe generar las actividades en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor." />
 
     <Gantt
         items={actividades.data}
-        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',
                   params: [convocatoria.id, proyecto.id],

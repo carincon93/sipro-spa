@@ -55,7 +55,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.productos.update', [convocatoria.id, proyecto.id, producto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -65,7 +65,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(authUser, [4, 7, 10])) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.productos.destroy', [convocatoria.id, proyecto.id, producto.id]))
         }
     }
@@ -76,7 +76,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])}
                         <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Productos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -88,7 +88,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8 mb-8">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -112,14 +112,14 @@
 
                 <hr />
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Textarea label="Nombre" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required labelFor="indicador" value="Indicador" />
 
                     {#if $form.tatp_servicio_tecnologico == true}
@@ -131,22 +131,22 @@
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
                         <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="mt-2" error={errors.trl} bind:value={$form.trl} required />
                     </div>
                 {:else if proyecto.ta_tp}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 
                 {#if $form.tatp_servicio_tecnologico == true}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required labelFor="medio_verificacion" value="Medio de verificación" />
 
                         <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
@@ -160,24 +160,39 @@
                         <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
                         <InputError message={errors.actividad_id} />
                     </div>
-                    <div class="grid grid-cols-2">
-                        {#each actividades as { id, descripcion }, i}
-                            <FormField class="border-b border-l py-4">
-                                <Checkbox bind:group={$form.actividad_id} value={id} />
-                                <span slot="label">{descripcion}</span>
-                            </FormField>
-                        {/each}
-                        {#if actividades.length == 0}
-                            <p class="p-4">Sin información registrada</p>
-                        {/if}
-                    </div>
+                    {#if proyecto.modificable == true}
+                        <div class="grid grid-cols-2">
+                            {#each actividades as { id, descripcion }, i}
+                                <FormField class="border-b border-l py-4">
+                                    <Checkbox bind:group={$form.actividad_id} value={id} />
+                                    <span slot="label">{descripcion}</span>
+                                </FormField>
+                            {/each}
+
+                            {#if actividades.length == 0}
+                                <p class="p-4">Sin información registrada</p>
+                            {/if}
+                        </div>
+                    {:else}
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each actividades as { id, descripcion }, i}
+                                    {#each $form.actividad_id as actividad}
+                                        {#if id == actividad}
+                                            <li class="first-letter-uppercase mb-4">{descripcion}</li>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </ul>
+                        </div>
+                    {/if}
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [4, 7, 10])}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar producto </button>
                 {/if}
-                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar producto</LoadingButton>
                 {/if}
             </div>

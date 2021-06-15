@@ -45,7 +45,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.presupuesto.lote.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
@@ -73,7 +73,7 @@
 </script>
 
 <form on:submit|preventDefault={submit} id="form-estudio-mercado">
-    <fieldset class="p-8">
+    <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
         <div class="mt-4">
             <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
         </div>

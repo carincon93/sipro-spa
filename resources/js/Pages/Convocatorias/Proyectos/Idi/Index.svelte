@@ -28,7 +28,7 @@
         <div slot="title">I+D+i</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+            {#if isSuperAdmin || checkPermission(authUser, [1])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.idi.create', [convocatoria.id]))} variant="raised">Crear proyecto I+D+i</Button>
             {/if}
         </div>
@@ -62,7 +62,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

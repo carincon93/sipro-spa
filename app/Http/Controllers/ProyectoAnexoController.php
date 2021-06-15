@@ -21,7 +21,7 @@ class ProyectoAnexoController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
@@ -43,7 +43,7 @@ class ProyectoAnexoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Create', [
             'convocatoria'  => $convocatoria->only('id'),
@@ -60,7 +60,7 @@ class ProyectoAnexoController extends Controller
      */
     public function store(ProyectoAnexoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $anexo = Anexo::select('id', 'nombre')->where('id', $request->anexo_id)->first();
 
@@ -89,7 +89,7 @@ class ProyectoAnexoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -100,7 +100,7 @@ class ProyectoAnexoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Edit', [
             'convocatoria'  => $convocatoria,
@@ -119,7 +119,7 @@ class ProyectoAnexoController extends Controller
      */
     public function update(ProyectoAnexoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $proyectoAnexo->fieldName = $request->fieldName;
         $proyectoAnexo->fieldName = $request->fieldName;
@@ -138,7 +138,7 @@ class ProyectoAnexoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $proyectoAnexo->delete();
 
@@ -155,6 +155,8 @@ class ProyectoAnexoController extends Controller
      */
     public function download(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
         return response()->download(storage_path("app/$proyectoAnexo->archivo"));
     }
 }

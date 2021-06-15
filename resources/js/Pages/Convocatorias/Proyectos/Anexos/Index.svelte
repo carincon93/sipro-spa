@@ -45,14 +45,12 @@
             {#each anexos.data as anexo (anexo.id)}
                 <tr>
                     <td class="border-t">
-                        {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
-                            <p class="px-6 py-4 focus:text-indigo-500">
-                                {anexo.nombre}
-                            </p>
-                        {/if}
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {anexo.nombre}
+                        </p>
                     </td>
                     <td class="border-t">
-                        {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+                        {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
                             <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
                         {/if}
                     </td>
@@ -63,7 +61,7 @@
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
-            {:else if !isSuperAdmin || !checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10])}
+            {:else if !isSuperAdmin || (!checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == false)}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">No tiene permisos</td>
                 </tr>

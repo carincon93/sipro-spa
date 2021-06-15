@@ -23,7 +23,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function index(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes de estudio de mercado y ya hay un estudio de mercado guardado o si el rubro no requiere de estudios de mercado.
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -53,7 +53,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return redirect()->route('convocatorias.proyectos.presupuesto.lote.index', [$convocatoria, $proyecto, $presupuesto]);
     }
@@ -66,7 +66,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function store(ProyectoLoteEstudioMercadoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_lote_estudio_mercado && $presupuesto->proyectoLoteEstudioMercado->count() > 0 || !$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -150,7 +150,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, ProyectoLoteEstudioMercado $lote)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -161,7 +161,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, ProyectoLoteEstudioMercado $lote)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -188,7 +188,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function update(ProyectoLoteEstudioMercadoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, ProyectoLoteEstudioMercado $lote)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         // Denega si el rubro no requiere lotes y ya hay un estudio de mercado guardado o si el rubro no requiere de estudio de mercado.
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
@@ -285,7 +285,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, ProyectoLoteEstudioMercado $lote)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         foreach ($lote->estudiosMercado as $estudioMercado) {
             Storage::delete($estudioMercado->soporte);
@@ -307,6 +307,8 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function download(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, ProyectoLoteEstudioMercado $lote)
     {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
         return response()->download(storage_path("app/$lote->ficha_tecnica"));
     }
 
@@ -321,6 +323,8 @@ class ProyectoLoteEstudioMercadoController extends Controller
      */
     public function downloadSoporte(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, EstudioMercado $estudioMercado)
     {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
         return response()->download(storage_path("app/$estudioMercado->soporte"));
     }
 }

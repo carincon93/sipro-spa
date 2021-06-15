@@ -23,7 +23,7 @@ class EntidadAliadaController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
@@ -50,7 +50,7 @@ class EntidadAliadaController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
@@ -80,7 +80,7 @@ class EntidadAliadaController extends Controller
      */
     public function store(EntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $entidadAliada = new EntidadAliada();
         $entidadAliada->tipo                                    = $request->tipo;
@@ -154,7 +154,7 @@ class EntidadAliadaController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -165,7 +165,7 @@ class EntidadAliadaController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $objetivoEspecificos = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
@@ -202,7 +202,7 @@ class EntidadAliadaController extends Controller
      */
     public function update(EntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $entidadAliada->tipo                                        = $request->tipo;
         $entidadAliada->nombre                                      = $request->nombre;
@@ -278,7 +278,7 @@ class EntidadAliadaController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         Storage::delete($entidadAliada->carta_intencion);
         Storage::delete($entidadAliada->propiedad_intelectual);

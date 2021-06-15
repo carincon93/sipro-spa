@@ -26,7 +26,7 @@
     })
 
     function submit() {
-        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) && !sending)) {
+        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true && !sending)) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -49,7 +49,7 @@
             {anexo.nombre}
         </a>
     {/if}
-    <fieldset disabled={(isSuperAdmin && !sending) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10]) ? undefined : true}>
+    <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
         <div>
             <File type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>

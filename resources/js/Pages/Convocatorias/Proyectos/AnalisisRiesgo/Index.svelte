@@ -23,8 +23,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -36,7 +34,7 @@
         <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgo</Button>
             {/if}
         </div>
@@ -66,7 +64,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={analisisRiesgos.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

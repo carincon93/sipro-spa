@@ -30,7 +30,7 @@
         <div slot="title">Apropiación de la cultura de la innovación</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+            {#if isSuperAdmin || checkPermission(authUser, [11])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.cultura-innovacion.create', [convocatoria.id]))} variant="raised">Crear proyecto Apropiación de la cultura de la innovación</Button>
             {/if}
         </div>
@@ -64,7 +64,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+                            {#if isSuperAdmin || checkPermission(authUser, [12, 13])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

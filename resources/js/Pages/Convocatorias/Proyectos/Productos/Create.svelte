@@ -45,7 +45,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 5, 8])) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.productos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -59,7 +59,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8, 11])}
                         <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Productos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -71,7 +71,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [1, 5, 8]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8 mb-8">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -99,11 +99,11 @@
                     <Textarea label="Nombre" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required labelFor="indicador" value="Indicador" />
 
                     {#if $form.tatp_servicio_tecnologico == true}
@@ -115,22 +115,22 @@
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
                         <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
                     </div>
                 {:else if proyecto.ta_tp}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 
                 {#if $form.tatp_servicio_tecnologico == true}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required labelFor="medio_verificacion" value="Medio de verificación" />
 
                         <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
@@ -158,7 +158,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear producto</LoadingButton>
                 {/if}
             </div>

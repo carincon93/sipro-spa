@@ -95,7 +95,7 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $this->generateTree($proyecto);
         $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
@@ -139,7 +139,7 @@ class ArbolProyectoController extends Controller
      */
     public function updatePlanteamientoProblema(Request $request, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
             'planteamiento_problema' => 'required|string|max:1200',
@@ -170,7 +170,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateEfectoDirecto(EfectoDirectoRequest $request, Proyecto $proyecto, EfectoDirecto $efectoDirecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $efectoDirecto->descripcion = $request->descripcion;
 
@@ -189,7 +189,7 @@ class ArbolProyectoController extends Controller
      */
     public function createOrUpdateEfectoIndirecto(EfectoIndirectoRequest $request, Proyecto $proyecto, EfectoDirecto $efectoDirecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         if (empty($request->id) && $efectoDirecto->efectosIndirectos()->count() < 3) {
             $efectoIndirecto = new EfectoIndirecto();
@@ -222,7 +222,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateCausaDirecta(CausaDirectaRequest $request, Proyecto $proyecto, CausaDirecta $causaDirecta)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $causaDirecta->descripcion = $request->descripcion;
 
@@ -241,7 +241,7 @@ class ArbolProyectoController extends Controller
      */
     public function createOrUpdateCausaIndirecta(CausaIndirectaRequest $request, Proyecto $proyecto, CausaDirecta $causaDirecta)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         if (empty($request->id) && $causaDirecta->causasIndirectas()->count() < 3) {
             $causaIndirecta = new CausaIndirecta();
@@ -273,7 +273,7 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $this->generateTree($proyecto);
 
@@ -320,7 +320,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateObjetivoGeneral(Request $request, Proyecto $proyecto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
             'objetivo_general' => 'required|string|max:1200',
@@ -350,7 +350,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateImpacto(ImpactoRequest $request, Proyecto $proyecto, Impacto $impacto)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $impacto->descripcion    = $request->descripcion;
         $impacto->tipo           = $request->tipo;
@@ -372,7 +372,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateResultado(ResultadoRequest $request, Proyecto $proyecto, Resultado $resultado)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $resultado->fill($request->all());
 
@@ -393,7 +393,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateObjetivoEspecifico(ObjetivoEspecificoRequest $request, Proyecto $proyecto, ObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $objetivoEspecifico->descripcion = $request->descripcion;
         $objetivoEspecifico->numero      = $request->numero;
@@ -416,7 +416,7 @@ class ArbolProyectoController extends Controller
      */
     public function updateActividad(ActividadRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
-        $this->authorize('validar-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $actividad->fill($request->all());
 

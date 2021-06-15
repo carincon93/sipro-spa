@@ -1,9 +1,10 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
+    import moment from 'moment'
 
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
@@ -15,13 +16,32 @@
 
     $title = 'Notificaciones'
 
-    console.log(notificaciones)
-
     /**
      * Permisos
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    function showMore(id) {
+        document.getElementById(id).classList.toggle('paragraph-ellipsis')
+        if (document.getElementById(id).classList.contains('paragraph-ellipsis')) {
+            document.querySelector('#button-id-' + id + ' .mdc-button__label').innerHTML = 'Ver más'
+        } else {
+            document.querySelector('#button-id-' + id + ' .mdc-button__label').innerHTML = 'Ver menos'
+        }
+    }
+
+    function marcarLeido(notificacionId) {
+        Inertia.post(
+            route('notificaciones.marcar-leido'),
+            {
+                notificacion: notificacionId,
+            },
+            {
+                preserveScroll: true,
+            },
+        )
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -39,14 +59,27 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <div class="px-6 py-4">
-                            {#if notificacion.read_at}
-                                <span class="bg-green-500 focus:text-indigo-500 px-4 rounded-full text-center text-white text-xs"> Leído </span>
-                            {:else}
-                                <span class="bg-red-500 focus:text-indigo-500 px-4 rounded-full text-center text-white text-xs"> Sin leer </span>
-                            {/if}
-                            <p class="focus:text-indigo-500">
+                            <div class="flex items-center">
+                                <small class="mr-2">{moment(notificacion.created_at).locale('es').fromNow()}</small> |
+                                {#if notificacion.read_at}
+                                    <span class="bg-green-500 focus:text-indigo-500 px-4 rounded text-center text-white text-xs ml-2"> Leído </span>
+                                {:else}
+                                    <span class="bg-red-500 focus:text-indigo-500 px-4 rounded text-center text-white text-xs ml-2 mr-2"> Sin leer </span>
+                                    <Button on:click={() => marcarLeido(notificacion.id)} variant={null}>Marcar como leído</Button>
+                                {/if}
+                            </div>
+                            <p id={notificacion.id} class="focus:text-indigo-500 whitespace-pre-wrap mt-10{notificacion.data.message.length > 521 ? ' paragraph-ellipsis' : ''}">
+                                {#if notificacion.data.proyectoId}
+                                    Código del proyecto: SGPS-{notificacion.data.proyectoId + 8000}-SIPRO
+                                    <br />
+                                {/if}
                                 {notificacion.data.message}
                             </p>
+                            {#if notificacion.data.message.length > 521}
+                                <div class="text-center justify-center mt-4">
+                                    <Button on:click={() => showMore(notificacion.id)} id={'button-id-' + notificacion.id} variant={null}>Ver más</Button>
+                                </div>
+                            {/if}
                         </div>
                     </td>
                     <td class="border-t td-actions">

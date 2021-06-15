@@ -33,7 +33,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 8, 9, 10])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -53,7 +53,7 @@
         <div slot="title">Miembros de la entidad aliada</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1])}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 8]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Crear miembro de la entidad aliada</Button>
             {/if}
         </div>
@@ -90,7 +90,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={miembrosEntidadAliada.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -112,7 +112,7 @@ class TaTpController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('validar-autor', [$tatp->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$tatp->proyecto]);
     }
 
     /**
@@ -123,7 +123,7 @@ class TaTpController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('validar-autor', [$tatp->proyecto]);
+        $this->authorize('visualizar-proyecto-autor', [$tatp->proyecto]);
 
         $tatp->codigo_linea_programatica = $tatp->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $tatp->precio_proyecto           = $tatp->proyecto->precioProyecto;
@@ -148,7 +148,7 @@ class TaTpController extends Controller
      */
     public function update(TaTpRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('validar-autor', [$tatp->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$tatp->proyecto]);
 
         $tatp->fecha_inicio                         = $request->fecha_inicio;
         $tatp->fecha_finalizacion                   = $request->fecha_finalizacion;
@@ -197,7 +197,7 @@ class TaTpController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, TaTp $tatp)
     {
-        $this->authorize('validar-autor', [$tatp->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$tatp->proyecto]);
 
         $tatp->proyecto()->delete();
 

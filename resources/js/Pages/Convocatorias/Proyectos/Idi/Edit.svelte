@@ -124,7 +124,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [3, 4])) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
@@ -143,7 +143,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || checkPermission(authUser, [4])) {
+        if (isSuperAdmin || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true)) {
             $deleteForm.delete(route('convocatorias.idi.destroy', [convocatoria.id, idi.id]), {
                 preserveScroll: true,
             })
@@ -174,7 +174,7 @@
     <Stepper {convocatoria} proyecto={idi} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || checkPermission(authUser, [3, 4]) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
                 <Textarea label="Título" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -481,25 +481,42 @@
                 </div>
             </div>
             {#if $form.relacionado_mesas_sectoriales?.value == 1}
-                <div class="bg-indigo-100 p-5 mt-10">
-                    <InputError message={errors.mesa_sectorial_id} />
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <p class="text-indigo-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
-                        </div>
-                        <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
-                            {#each mesasSectoriales as { id, nombre }, i}
-                                <FormField>
-                                    <Checkbox bind:group={$form.mesa_sectorial_id} value={id} />
-                                    <span slot="label">{nombre}</span>
-                                </FormField>
-                            {/each}
+                {#if idi.proyecto.modificable == true}
+                    <div class="bg-indigo-100 p-5 mt-10">
+                        <InputError message={errors.mesa_sectorial_id} />
+                        <div class="grid grid-cols-2">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <p class="text-indigo-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
+                            </div>
+                            <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
+                                {#each mesasSectoriales as { id, nombre }, i}
+                                    <FormField>
+                                        <Checkbox bind:group={$form.mesa_sectorial_id} value={id} />
+                                        <span slot="label">{nombre}</span>
+                                    </FormField>
+                                {/each}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {:else}
+                    <div class="grid grid-cols-2">
+                        <div>Mesas sectoriales relacionadas:</div>
+                        <div>
+                            <ul class="list-disc p-4">
+                                {#each mesasSectoriales as { id, nombre }, i}
+                                    {#each $form.mesa_sectorial_id as mesaSectorialRelacionada}
+                                        {#if id == mesaSectorialRelacionada}
+                                            <li>{nombre}</li>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </ul>
+                        </div>
+                    </div>
+                {/if}
             {/if}
 
             <div class="mt-40 grid grid-cols-2">
@@ -512,42 +529,65 @@
             </div>
 
             {#if $form.relacionado_tecnoacademia?.value == 1}
-                <div class="bg-indigo-100 p-5 mt-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                {#if idi.proyecto.modificable == true}
+                    <div class="bg-indigo-100 p-5 mt-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
 
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <p class="text-indigo-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                        <div class="grid grid-cols-2">
+                            <div>
+                                <p class="text-indigo-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                            </div>
+                            <div>
+                                <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
+                                {#if lineasTecnologicas?.length > 0}
+                                    <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
+                                        {#each lineasTecnologicas as { value, label }, i}
+                                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
+
+                                            <div class="border-b border-t flex items-center justify-center">
+                                                <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-indigo-500" />
+                                            </div>
+                                        {/each}
+                                    </div>
+                                {:else}
+                                    <div>
+                                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                        <button on:click={getLineasTecnologicas} type="button" class="flex underline">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                            </svg>
+                                            Refrescar
+                                        </button>
+                                    </div>
+                                {/if}
+                            </div>
                         </div>
+                        <InputError message={errors.linea_tecnologica_id} />
+                    </div>
+                {:else}
+                    <div class="grid grid-cols-2">
+                        <div>Tecnoacademia relacionada</div>
                         <div>
                             <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
-                            {#if lineasTecnologicas?.length > 0}
-                                <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
-                                    {#each lineasTecnologicas as { value, label }, i}
-                                        <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
-
-                                        <div class="border-b border-t flex items-center justify-center">
-                                            <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-indigo-500" />
-                                        </div>
-                                    {/each}
-                                </div>
-                            {:else}
-                                <div>
-                                    <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                    <button on:click={getLineasTecnologicas} type="button" class="flex underline">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                        </svg>
-                                        Refrescar
-                                    </button>
-                                </div>
-                            {/if}
                         </div>
                     </div>
-                    <InputError message={errors.linea_tecnologica_id} />
-                </div>
+                    <div class="grid grid-cols-2">
+                        <div>Líneas tecnológicas relacionadas:</div>
+                        <div>
+                            <ul class="list-disc p-4">
+                                {#each lineasTecnologicas as { value, label }, i}
+                                    {#each $form.linea_tecnologica_id as lineaTecnologica}
+                                        {#if value == lineaTecnologica}
+                                            <li>{label}</li>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </ul>
+                        </div>
+                    </div>
+                {/if}
             {/if}
 
             <div class="mt-40 grid grid-cols-1">
@@ -658,10 +698,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+            {#if isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+            {#if isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -702,7 +742,8 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Entendido</Button>
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

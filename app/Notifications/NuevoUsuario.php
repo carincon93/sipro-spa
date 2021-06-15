@@ -55,9 +55,9 @@ class NuevoUsuario extends Notification
     public function toArray($notifiable)
     {
         return [
-            "subject" => "Se ha registrado un nuevo usuario",
-            "message" => "{$this->user->nombre} se ha registrado. Por favor verifique que esta persona pertenezca a la institución y de ser así habilite el usuario en la plataforma haciendo clic en los tres puntos y luego en 'Ver detalles'.",
-            "action"  => 'users/' . $this->user->id . '/editar?notificacion=' . $this->id
+            "subject" => "Nuevo usuario registrado",
+            "message" => "{$this->user->nombre} se ha registrado en SGPS-SIPRO. Por favor verifique que esta persona pertenezca a la institución y de ser así habilite el usuario en la plataforma haciendo clic en los tres puntos y luego en 'Ver detalles'.",
+            "action"  => "users/{$this->user->id}/editar?notificacion={$this->id}"
         ];
     }
 }
