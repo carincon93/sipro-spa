@@ -32,7 +32,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
             'convocatoria'           => $convocatoria->only('id'),
-            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'total_roles_sennova'),
+            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova'),
             'filters'                => request()->all('search'),
             'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova')->paginate(),
         ]);

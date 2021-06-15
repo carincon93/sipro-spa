@@ -90,7 +90,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion'),
+            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
             'productos'                      => $proyecto->efectosDirectos()->with('resultado.productos')->get()->pluck('resultado.productos')->flatten(),
             'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
             'actividad'                      => $actividad,

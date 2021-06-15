@@ -132,14 +132,15 @@
     <div>
         <InfoMessage>
             <h1><strong>Historial de acciones</strong></h1>
-            <ul>
-                {#each proyecto.logs as log}
-                    <li>{log.created_at} - {JSON.parse(log.data).subject}</li>
-                {/each}
-                {#if proyecto.logs.length == 0}
-                    <li>No se ha generado un historial aún</li>
-                {/if}
-            </ul>
+            {#if proyecto.logs}
+                <ul>
+                    {#each proyecto.logs as log}
+                        <li>{log.created_at} - {JSON.parse(log.data).subject}</li>
+                    {/each}
+                </ul>
+            {:else}
+                <p>No se ha generado un historial aún</p>
+            {/if}
         </InfoMessage>
     </div>
 
