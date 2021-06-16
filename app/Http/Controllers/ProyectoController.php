@@ -33,18 +33,22 @@ class ProyectoController extends Controller
 
         if ($proyecto->idi()->exists()) {
             $objetivoGeneral = $proyecto->idi->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->idi->propuesta_sostenibilidad;
         }
 
         if ($proyecto->taTp()->exists()) {
-            $objetivoGeneral = $proyecto->tatp->objetivo_general;
+            $objetivoGeneral = $proyecto->taTp->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->taTp->propuesta_sostenibilidad;
         }
 
         if ($proyecto->servicioTecnologico()->exists()) {
             $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
         }
 
         if ($proyecto->culturaInnovacion()->exists()) {
             $objetivoGeneral = $proyecto->culturaInnovacion->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->culturaInnovacion->propuesta_sostenibilidad;
         }
 
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
@@ -62,10 +66,50 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'modificable'),
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);
+    }
+
+    public function updatePropuestaSostenibilidad(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $request->validate([
+            'propuesta_sostenibilidad' => 'required|string|max:10000',
+        ]);
+
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $idi                            = $proyecto->idi;
+                $idi->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
+
+                $idi->save();
+                break;
+            case $proyecto->taTp()->exists():
+                $tatp                           = $proyecto->taTp;
+                $tatp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
+
+                $tatp->save();
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $culturaInnovacion                              = $proyecto->culturaInnovacion;
+                $culturaInnovacion->propuesta_sostenibilidad    = $request->propuesta_sostenibilidad;
+
+                $culturaInnovacion->save();
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico                            = $proyecto->servicioTecnologico;
+                $servicioTecnologico->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
+
+                $servicioTecnologico->save();
+                break;
+            default:
+                break;
+        }
+
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**

@@ -217,7 +217,7 @@ return [
 		'justificacion_industria_4'             => 'industria 4.0',
 		'justificacion_economia_naranja'        => 'economía naranja',
 		'justificacion_politica_discapacidad'   => 'Política Institucional para Atención de las Personas con discapacidad',
-		'planteamiento_problema'                => 'planteamiento del problema',
+		'problema_central'                		=> 'problema central',
 		'justificacion_problema'                => 'justificación',
 		'permission_id'     					=> 'permisos',
 		'password'          					=> 'contraseña',
@@ -227,6 +227,7 @@ return [
 		'codigo_uso_presupuestal' 				=> 'código del uso presupuestal',
 		'nombre_instituciones' 					=> 'Instituciones donde se implementará el programa que tienen Articulación con la Media',
 		'old_password' 							=> 'contraseña actual',
-		'rol_id' 								=> 'rol'
+		'rol_id' 								=> 'rol',
+		'max_meses_ejecucion' 					=> 'fecha de ejecución'
 	],
 ];

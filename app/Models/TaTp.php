@@ -37,7 +37,7 @@ class TaTp extends Model
         'resumen_regional',
         'antecedentes',
         'antecedentes_regional',
-        'planteamiento_problema',
+        'problema_central',
         'justificacion_problema',
         'retos_oportunidades',
         'pertinencia_territorio',

@@ -41,6 +41,8 @@
         tatp_servicio_tecnologico: proyecto.tatp || proyecto.servicio_tecnologico ? true : false,
         valor_proyectado: null,
         medio_verificacion: '',
+        nombre_indicador: '',
+        formula_indicador: '',
         actividad_id: [],
     })
 
@@ -72,17 +74,18 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
+                <InfoMessage class="mb-10" message="Los productos se entienden como los bienes o servicios que se generan y entregan en un proceso productivo. Los productos materializan los objetivos específicos de los proyectos. De esta forma, los productos de un proyecto deben agotar los objetivos específicos del mismo y deben cumplir a cabalidad con el objetivo general del proyecto." />
                 <div class="mt-8 mb-8">
-                    <p class="text-center">Fecha de ejecución</p>
+                    <Label class="text-center" required value="Fecha de ejecución" />
                     <div class="mt-4 flex items-start justify-around">
                         <div class="mt-4 flex">
-                            <Label required labelFor="fecha_inicio" value="Del" />
+                            <Label labelFor="fecha_inicio" value="Del" />
                             <div class="ml-4">
                                 <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex">
-                            <Label required labelFor="fecha_finalizacion" value="hasta" />
+                            <Label labelFor="fecha_finalizacion" value="hasta" />
                             <div class="ml-4">
                                 <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                             </div>
@@ -96,7 +99,20 @@
                 <hr />
 
                 <div class="mt-8">
-                    <Textarea label="Nombre" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    {#if $form.tatp_servicio_tecnologico == true}
+                        <InfoMessage>
+                            <p>
+                                Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
+                                <br />
+                                El producto debe cumplir con la siguiente estructura:
+                                <br />
+                                Cuando el producto es un bien: nombre del bien + la condición deseada. Ejemplo: Vía construida.
+                                <br />
+                                Cuando el producto es un servicio: nombre del servicio + el complemento. Ejemplo: Servicio de asistencia técnica para el mejoramiento de hábitos alimentarios
+                            </p>
+                        </InfoMessage>
+                    {/if}
+                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-8">
@@ -133,8 +149,31 @@
                     <div class="mt-8">
                         <Label required labelFor="medio_verificacion" value="Medio de verificación" />
 
-                        <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                        {#if proyecto.servicio_tecnologico}
+                            <InfoMessage message="Los medios de verificación corresponden a las evidencias y/o fuentes de información en las que está disponibles los registros, la información necesaria y suficiente. Dichos medios pueden ser documentos oficiales, informes, evaluaciones, encuestas, documentos o reportes internos que genera el proyecto, entre otros." />
+                        {:else}
+                            <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                        {/if}
+
                         <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
+                    </div>
+                {/if}
+
+                {#if proyecto.servicio_tecnologico}
+                    <div class="mt-8">
+                        <Label required labelFor="nombre_indicador" value="Nombre del Indicador del producto" />
+
+                        <InfoMessage message="El indicador debe mantener una estructura coherente. Esta se compone de dos elementos: en primer lugar, debe ir el objeto a cuantificar, descrito por un sujeto y posteriormente la condición deseada, definida a través de un verbo en participio. Por ejemplo: Kilómetros de red vial nacional construidos." />
+                        <Textarea maxlength="40000" id="nombre_indicador" error={errors.nombre_indicador} bind:value={$form.nombre_indicador} required />
+                    </div>
+
+                    <div class="mt-8">
+                        <Label required labelFor="formula_indicador" value="Fórmula del Indicador del producto" />
+
+                        <InfoMessage
+                            message="El método de cálculo debe ser una expresión matemática definida de manera adecuada y de fácil comprensión, es decir, deben quedar claras cuáles son las variables utilizadas. Los métodos de cálculo más comunes son el porcentaje, la tasa de variación, la razón y el número índice. Aunque éstos no son las únicas expresiones para los indicadores, sí son las más frecuentes."
+                        />
+                        <Textarea maxlength="40000" id="formula_indicador" error={errors.formula_indicador} bind:value={$form.formula_indicador} required />
                     </div>
                 {/if}
 

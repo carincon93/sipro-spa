@@ -103,20 +103,20 @@ class ArbolProyectoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         switch ($proyecto) {
             case $proyecto->idi()->exists():
-                $proyecto->planteamiento_problema = $proyecto->idi->planteamiento_problema;
+                $proyecto->problema_central = $proyecto->idi->problema_central;
                 $proyecto->justificacion_problema = $proyecto->idi->justificacion_problema;
                 break;
             case $proyecto->taTp()->exists():
-                $proyecto->planteamiento_problema = $proyecto->tatp->planteamiento_problema;
+                $proyecto->problema_central = $proyecto->tatp->problema_central;
                 $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                $proyecto->planteamiento_problema = $proyecto->servicioTecnologico->planteamiento_problema;
+                $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
                 $proyecto->justificacion_problema = $proyecto->servicioTecnologico->justificacion_problema;
                 $proyecto->pregunta_formulacion_problema = $proyecto->servicioTecnologico->pregunta_formulacion_problema;
                 break;
             case $proyecto->culturaInnovacion()->exists():
-                $proyecto->planteamiento_problema = $proyecto->culturaInnovacion->planteamiento_problema;
+                $proyecto->problema_central = $proyecto->culturaInnovacion->problema_central;
                 $proyecto->justificacion_problema = $proyecto->culturaInnovacion->justificacion_problema;
                 break;
             default:
@@ -125,7 +125,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'planteamiento_problema', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
         ]);
@@ -138,27 +138,44 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function updatePlanteamientoProblema(Request $request, Proyecto $proyecto)
+    public function updateProblemaCentral(Request $request, Proyecto $proyecto)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
-            'planteamiento_problema' => 'required|string|max:40000',
+            'problema_central' => 'required|string|max:40000',
             'justificacion_problema' => 'required|string|max:40000',
         ]);
 
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $idi = $proyecto->idi;
-                $idi->planteamiento_problema = $request->planteamiento_problema;
-                $idi->justificacion_problema = $request->justificacion_problema;
+                $idi->identificacion_problema   = $request->identificacion_problema;
+                $idi->problema_central          = $request->problema_central;
+                $idi->justificacion_problema    = $request->justificacion_problema;
 
                 $idi->save();
                 break;
+            case $proyecto->taTp()->exists():
+                $tatp = $proyecto->taTp;
+                $tatp->identificacion_problema  = $request->identificacion_problema;
+                $tatp->problema_central         = $request->problema_central;
+                $tatp->justificacion_problema   = $request->justificacion_problema;
+
+                $tatp->save();
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $culturaInnovacion = $proyecto->culturaInnovacion;
+                $culturaInnovacion->identificacion_problema  = $request->identificacion_problema;
+                $culturaInnovacion->problema_central         = $request->problema_central;
+                $culturaInnovacion->justificacion_problema   = $request->justificacion_problema;
+
+                $culturaInnovacion->save();
+                break;
             case $proyecto->servicioTecnologico()->exists():
-                $servicioTecnologico = $proyecto->servicioTecnologico;
-                $servicioTecnologico->planteamiento_problema = $request->planteamiento_problema;
-                $servicioTecnologico->justificacion_problema = $request->justificacion_problema;
+                $servicioTecnologico                                = $proyecto->servicioTecnologico;
+                $servicioTecnologico->problema_central              = $request->problema_central;
+                $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
                 $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
 
                 $servicioTecnologico->save();
@@ -292,20 +309,23 @@ class ArbolProyectoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
         switch ($proyecto) {
             case $proyecto->idi()->exists():
+                $proyecto->problema_central         = $proyecto->idi->problema_central;
+                $proyecto->identificacion_problema  = $proyecto->idi->identificacion_problema;
                 $proyecto->objetivo_general         = $proyecto->idi->objetivo_general;
-                $proyecto->planteamiento_problema   = $proyecto->idi->planteamiento_problema;
                 break;
             case $proyecto->taTp()->exists():
+                $proyecto->problema_central         = $proyecto->tatp->problema_central;
+                $proyecto->identificacion_problema  = $proyecto->tatp->identificacion_problema;
                 $proyecto->objetivo_general         = $proyecto->tatp->objetivo_general;
-                $proyecto->planteamiento_problema   = $proyecto->tatp->planteamiento_problema;
-                break;
-            case $proyecto->servicioTecnologico()->exists():
-                $proyecto->objetivo_general         = $proyecto->servicioTecnologico->objetivo_general;
-                $proyecto->planteamiento_problema   = $proyecto->servicioTecnologico->planteamiento_problema;
                 break;
             case $proyecto->culturaInnovacion()->exists():
+                $proyecto->problema_central         = $proyecto->culturaInnovacion->problema_central;
+                $proyecto->identificacion_problema  = $proyecto->culturaInnovacion->identificacion_problema;
                 $proyecto->objetivo_general         = $proyecto->culturaInnovacion->objetivo_general;
-                $proyecto->planteamiento_problema   = $proyecto->culturaInnovacion->planteamiento_problema;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $proyecto->objetivo_general   = $proyecto->servicioTecnologico->objetivo_general;
+                $proyecto->problema_central   = $proyecto->servicioTecnologico->problema_central;
                 break;
             default:
                 break;
@@ -313,7 +333,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'planteamiento_problema', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),
@@ -337,11 +357,29 @@ class ArbolProyectoController extends Controller
         ]);
 
         switch ($proyecto) {
-            case $proyecto->Idi()->exists():
-                $idi                   = $proyecto->Idi;
+            case $proyecto->idi()->exists():
+                $idi                   = $proyecto->idi;
                 $idi->objetivo_general = $request->objetivo_general;
 
                 $idi->save();
+                break;
+            case $proyecto->taTp()->exists():
+                $tatp                   = $proyecto->taTp;
+                $tatp->objetivo_general = $request->objetivo_general;
+
+                $tatp->save();
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $culturaInnovacion                   = $proyecto->culturaInnovacion;
+                $culturaInnovacion->objetivo_general = $request->objetivo_general;
+
+                $culturaInnovacion->save();
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico                   = $proyecto->servicioTecnologico;
+                $servicioTecnologico->objetivo_general = $request->objetivo_general;
+
+                $servicioTecnologico->save();
                 break;
             default:
                 break;

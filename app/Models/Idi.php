@@ -55,7 +55,7 @@ class Idi extends Model
         'impacto_municipios',
         'impacto_centro_formacion',
         'objetivo_general',
-        'planteamiento_problema',
+        'problema_central',
         'justificacion_problema',
         'relacionado_plan_tecnologico',
         'relacionado_agendas_competitividad',

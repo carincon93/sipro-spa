@@ -57,33 +57,23 @@ class LineaProgramatica extends Model
     }
 
     /**
-     * Relationship with SennovaBudget
+     * Relationship with PresupuestoSennova
      *
      * @return object
      */
-    public function sennovaBudgets()
+    public function presupuestoSennova()
     {
-        return $this->hasMany(SennovaBudget::class);
+        return $this->hasMany(PresupuestoSennova::class);
     }
 
     /**
-     * Relationship with CallRolSennova
+     * Relationship with ConvocatoriaRolSennova
      *
      * @return object
      */
-    public function callRolSennovas()
+    public function convocatoriaRolSennova()
     {
-        return $this->hasMany(CallRolSennova::class);
-    }
-
-    /**
-     * Relationship with ServicioTecnologico
-     *
-     * @return object
-     */
-    public function serviciosTecnologicos()
-    {
-        return $this->hasMany(ServicioTecnologico::class);
+        return $this->hasMany(ConvocatoriaRolSennova::class);
     }
 
     /**

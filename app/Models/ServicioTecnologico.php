@@ -31,33 +31,22 @@ class ServicioTecnologico extends Model
      * @var array
      */
     protected $fillable = [
-        'disciplina_subarea_conocimiento_id',
-        'tematica_estrategica_id',
-        'linea_programatica_id',
-        'red_conocimiento_id',
-        'tema_priorizado_id',
-        'actividad_economica_id',
-        'titulo_proyecto_articulado',
+        'mesa_tecnica_sector_productivo_id',
         'titulo',
-        'justificacion_industria_4',
-        'justificacion_economia_naranja',
-        'justificacion_politica_discapacidad',
         'resumen',
         'antecedentes',
-        'planteamiento_problema',
+        'problema_central',
         'justificacion_problema',
         'pregunta_formulacion_problema',
         'objetivo_general',
         'metodologia',
-        'numero_aprendices',
+        'numero_aprendices', // Eliminar
         'fecha_inicio',
         'fecha_finalizacion',
         'propuesta_sostenibilidad',
-        'impacto_centro_formacion',
-        'infraestructura_adecuada',
+        'impacto_centro_formacion', // Eliminar
         'especificaciones_area',
         'bibliografia',
-        'video',
         'max_meses_ejecucion'
     ];
 
@@ -90,63 +79,13 @@ class ServicioTecnologico extends Model
     }
 
     /**
-     * Relationship with DisciplinaSubareaConocimiento
+     * Relationship with MesaTecnicaSectorProductivo
      *
      * @return object
      */
-    public function disciplinaSubareaConocimiento()
+    public function mesaTecnicaSectorProductivo()
     {
-        return $this->belongsTo(DisciplinaSubareaConocimiento::class);
-    }
-
-    /**
-     * Relationship with TematicaEstrategica
-     *
-     * @return object
-     */
-    public function tematicaEstrategica()
-    {
-        return $this->belongsTo(TematicaEstrategica::class);
-    }
-
-    /**
-     * Relationship with RedConocimiento
-     *
-     * @return object
-     */
-    public function redConocimiento()
-    {
-        return $this->belongsTo(RedConocimiento::class);
-    }
-
-    /**
-     * Relationship with ActividadEconomica
-     *
-     * @return object
-     */
-    public function actividadEconomica()
-    {
-        return $this->belongsTo(ActividadEconomica::class);
-    }
-
-    /**
-     * Relationship with LineaProgramatica
-     *
-     * @return object
-     */
-    public function lineaProgramatica()
-    {
-        return $this->belongsTo(LineaProgramatica::class);
-    }
-
-    /**
-     * Relationship with TemaPriorizado
-     *
-     * @return object
-     */
-    public function temaPriorizado()
-    {
-        return $this->belongsTo(TemaPriorizado::class);
+        return $this->belongsTo(MesaTecnicaSectorProductivo::class);
     }
 
     /**

@@ -43,8 +43,6 @@ class IdiRequest extends FormRequest
                 'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
-                'metodologia'                               => ['required', 'string'],
-                'propuesta_sostenibilidad'                  => ['required', 'string'],
                 'justificacion_industria_4'                 => ['nullable', 'string'],
                 'justificacion_economia_naranja'            => ['nullable', 'string'],
                 'justificacion_politica_discapacidad'       => ['nullable', 'string'],

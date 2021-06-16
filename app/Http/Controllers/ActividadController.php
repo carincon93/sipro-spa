@@ -24,9 +24,27 @@ class ActividadController extends Controller
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
 
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $proyecto->metodologia = $proyecto->idi->metodologia;
+                break;
+            case $proyecto->taTp()->exists():
+                $proyecto->metodologia = $proyecto->tatp->metodologia;
+                $proyecto->metodologia_local = $proyecto->tatp->metodologia_local;
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $proyecto->metodologia = $proyecto->culturaInnovacion->metodologia;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $proyecto->metodologia = $proyecto->servicioTecnologico->metodologia;
+                break;
+            default:
+                break;
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
             'convocatoria'   => $convocatoria->only('id'),
-            'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
             'filters'        => request()->all('search'),
             'actividades'    => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -135,5 +153,53 @@ class ActividadController extends Controller
         $actividad->delete();
 
         return redirect()->route('convocatorias.proyectos.actividades.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * updateMetodologia
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMetodologia(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $request->validate([
+            'metodologia' => 'required|string|max:10000',
+        ]);
+
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $idi              = $proyecto->idi;
+                $idi->metodologia = $request->metodologia;
+
+                $idi->save();
+                break;
+            case $proyecto->taTp()->exists():
+                $tatp              = $proyecto->taTp;
+                $tatp->metodologia = $request->metodologia;
+                $tatp->metodologia_local = $request->metodologia_local;
+
+                $tatp->save();
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $culturaInnovacion              = $proyecto->culturaInnovacion;
+                $culturaInnovacion->metodologia = $request->metodologia;
+
+                $culturaInnovacion->save();
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico              = $proyecto->servicioTecnologico;
+                $servicioTecnologico->metodologia = $request->metodologia;
+
+                $servicioTecnologico->save();
+                break;
+            default:
+                break;
+        }
+
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 }

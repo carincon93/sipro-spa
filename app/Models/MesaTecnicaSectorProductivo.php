@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TemaPriorizado extends Model
+class MesaTecnicaSectorProductivo extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class TemaPriorizado extends Model
      *
      * @var string
      */
-    protected $table = 'temas_priorizados';
+    protected $table = 'mesa_tecnica_sector_productivo';
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +22,8 @@ class TemaPriorizado extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre',
-        'sector_productivo_id',
-        'mesa_tecnica_id'
+        'mesa_tecnica_id',
+        'sector_productivo_id'
     ];
 
     /**
@@ -48,7 +47,7 @@ class TemaPriorizado extends Model
     /**
      * Relationship with SectorProductivo
      *
-     * @return object
+     * @return void
      */
     public function sectorProductivo()
     {
@@ -58,7 +57,7 @@ class TemaPriorizado extends Model
     /**
      * Relationship with MesaTecnica
      *
-     * @return object
+     * @return void
      */
     public function mesaTecnica()
     {
@@ -82,17 +81,10 @@ class TemaPriorizado extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTemaPriorizado($query, array $filters)
+    public function scopeFilterMesaTecnicaSectorProductivo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $search = str_replace('"', "", $search);
-            $search = str_replace("'", "", $search);
-            $search = str_replace(' ', '%%', $search);
-            $query->join('sectores_productivos', 'temas_priorizados.sector_productivo_id', 'sectores_productivos.id');
-            $query->join('mesas_tecnicas', 'temas_priorizados.mesa_tecnica_id', 'mesas_tecnicas.id');
-            $query->whereRaw("unaccent(temas_priorizados.nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhereRaw("unaccent(sectores_productivos.nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhereRaw("unaccent(mesas_tecnicas.nombre) ilike unaccent('%" . $search . "%')");
+            $query->where('replace', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -65,19 +65,14 @@ class ServicioTecnologicoController extends Controller
 
         $servicioTecnologico = new ServicioTecnologico();
         $servicioTecnologico->titulo                        = $request->titulo;
-        $servicioTecnologico->titulo_proyecto_articulado    = $request->titulo_proyecto_articulado;
         $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
         $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
 
-        $servicioTecnologico->video                                 = null;
-        $servicioTecnologico->justificacion_industria_4             = null;
-        $servicioTecnologico->justificacion_economia_naranja        = null;
-        $servicioTecnologico->justificacion_politica_discapacidad   = null;
         $servicioTecnologico->resumen                               = 'Por favor diligencie el resumen del proyecto';
         $servicioTecnologico->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
         $servicioTecnologico->objetivo_general                      = null;
-        $servicioTecnologico->planteamiento_problema                = null;
+        $servicioTecnologico->problema_central                = null;
         $servicioTecnologico->justificacion_problema                = null;
         $servicioTecnologico->metodologia                           = 'Por favor diligencie la metodología del proyecto';
         $servicioTecnologico->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
@@ -89,14 +84,8 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->infraestructura_adecuada              = false;
         $servicioTecnologico->especificaciones_area                 = 'Describa las especificaciones del área';
         $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
-        $servicioTecnologico->video                                 = 'https://www.youtube.com/';
 
-        $servicioTecnologico->actividadEconomica()->associate($request->actividad_economica_id);
-        $servicioTecnologico->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
-        $servicioTecnologico->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $servicioTecnologico->lineaProgramatica()->associate($request->linea_programatica_id);
-        $servicioTecnologico->redConocimiento()->associate($request->red_conocimiento_id);
-        $servicioTecnologico->temaPriorizado()->associate($request->tema_priorizado_id);
+        $servicioTecnologico->mesaTecnicaSectorProductivo()->associate($request->mesa_tecnica_sector_productivo_id);
 
         $proyecto->servicioTecnologico()->save($servicioTecnologico);
 
@@ -136,7 +125,7 @@ class ServicioTecnologicoController extends Controller
 
         $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->tipoProyecto->lineaProgramatica->codigo;
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
-        $servicioTecnologico->load('temaPriorizado.sectorProductivo', 'temaPriorizado.mesaTecnica');
+        $servicioTecnologico->load('mesaTecnicaSectorProductivo.mesaTecnica', 'mesaTecnicaSectorProductivo.sectorProductivo');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
@@ -156,38 +145,17 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
-        $servicioTecnologico->titulo_proyecto_articulado            = $request->titulo_proyecto_articulado;
         $servicioTecnologico->titulo                                = $request->titulo;
-        $servicioTecnologico->justificacion_industria_4             = $request->justificacion_industria_4;
-        $servicioTecnologico->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
-        $servicioTecnologico->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
         $servicioTecnologico->resumen                               = $request->resumen;
         $servicioTecnologico->antecedentes                          = $request->antecedentes;
-        $servicioTecnologico->planteamiento_problema                = $request->planteamiento_problema;
-        $servicioTecnologico->justificacion_problema                = $request->justificacion_problema;
-        $servicioTecnologico->pregunta_formulacion_problema         = $request->pregunta_formulacion_problema;
-        $servicioTecnologico->objetivo_general                      = $request->objetivo_general;
         $servicioTecnologico->metodologia                           = $request->metodologia;
-        $servicioTecnologico->numero_aprendices                     = $request->numero_aprendices;
         $servicioTecnologico->fecha_inicio                          = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion                    = $request->fecha_finalizacion;
-        $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
-        $servicioTecnologico->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
-        $servicioTecnologico->impacto_centro_formacion              = $request->impacto_centro_formacion;
-        $servicioTecnologico->infraestructura_adecuada              = $request->infraestructura_adecuada;
+        $servicioTecnologico->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $servicioTecnologico->especificaciones_area                 = $request->especificaciones_area;
         $servicioTecnologico->bibliografia                          = $request->bibliografia;
-        $servicioTecnologico->video                                 = $request->video;
 
-        $servicioTecnologico->actividadEconomica()->associate($request->actividad_economica_id);
-        $servicioTecnologico->disciplinaSubareaConocimiento()->associate($request->disciplina_subarea_conocimiento_id);
-        $servicioTecnologico->tematicaEstrategica()->associate($request->tematica_estrategica_id);
-        $servicioTecnologico->lineaProgramatica()->associate($request->linea_programatica_id);
-        $servicioTecnologico->redConocimiento()->associate($request->red_conocimiento_id);
-        $servicioTecnologico->temaPriorizado()->associate($request->tema_priorizado_id);
-
-        // $servicioTecnologico->proyecto()->update(['tipo_proyecto_id' => $request->tipo_proyecto_id]);
-        // $servicioTecnologico->proyecto()->update(['centro_formacion_id' => $request->centro_formacion_id]);
+        $servicioTecnologico->mesaTecnicaSectorProductivo()->associate($request->mesa_tecnica_sector_productivo_id);
 
         $servicioTecnologico->save();
 
