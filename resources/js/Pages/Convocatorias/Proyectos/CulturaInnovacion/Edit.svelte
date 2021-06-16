@@ -198,10 +198,11 @@
                         </div>
                     </div>
                 </div>
-                {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                    <div class="mb-20 flex">
+                {#if errors.fecha_inicio || errors.fecha_finalizacion || errors.max_meses_ejecucion}
+                    <div class="mb-20 flex justify-center mt-4">
                         <InputError classes="text-center" message={errors.fecha_inicio} />
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
+                        <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
             </div>
@@ -705,8 +706,6 @@
                     <li>Resumen</li>
                     <li>Antecedentes</li>
                     <li>Marco conceptual</li>
-                    <li>Metodología</li>
-                    <li>Propuesta de sostenibilidad</li>
                     <li>Bibliografía</li>
                     <li>Número de aprendices beneficiados</li>
                     <li>Nombre de los municipios beneficiados</li>
