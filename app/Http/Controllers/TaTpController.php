@@ -93,7 +93,6 @@ class TaTpController extends Controller
         $proyecto->participantes()->attach(
             Auth::user()->id,
             [
-                'es_autor'          => true,
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
@@ -156,8 +155,6 @@ class TaTpController extends Controller
         $tatp->resumen                              = $request->resumen;
         $tatp->antecedentes                         = $request->antecedentes;
         $tatp->marco_conceptual                     = $request->marco_conceptual;
-        $tatp->metodologia                          = $request->metodologia;
-        $tatp->propuesta_sostenibilidad             = $request->propuesta_sostenibilidad;
         $tatp->bibliografia                         = $request->bibliografia;
         $tatp->impacto_municipios                   = $request->impacto_municipios;
         $tatp->impacto_centro_formacion             = $request->impacto_centro_formacion;

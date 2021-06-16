@@ -23,7 +23,9 @@ class ProductoServicioTecnologico extends Model
      */
     protected $fillable = [
         'producto_id',
-        'medio_verificacion'
+        'medio_verificacion',
+        'nombre_indicador',
+        'formula_indicador'
     ];
 
     /**

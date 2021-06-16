@@ -181,14 +181,14 @@
     })
 
     let showObjetivoGeneralForm = false
-    let planteamientoProblema
+    let problemaCentral
     function showObjetivoGeneralDialog() {
         reset()
         dialogTitle = 'Objetivo general'
         dialogOpen = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
-        planteamientoProblema = proyecto.planteamiento_problema
+        problemaCentral = proyecto.problema_central
         $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general
     }
 
@@ -412,7 +412,7 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
-    <p class="text-center">Debe generar el árbol de objetivos iniciando desde el objetivo general, los respectivos objetivos específicos, resultados, actividades e impactos.</p>
+    <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problema manteniendo la misma estructura y niveles de jerarquía.</p>
 
     <div class="mt-16">
         <div class="flex mb-14">
@@ -565,12 +565,18 @@
         </div>
         <div slot="content">
             {#if showActividadForm}
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
+                <p class="mb-20 whitespace-pre-line">
+                    {actividadCausaIndirecta}
+                </p>
+                <InfoMessage class="mb-2">
+                    Se debe evidenciar que la descripción de las actividades se realice de manera secuencial y de forma coherente con los productos a las cuales están asociadas para alcanzar el logro de cada uno de los objetivos específicos.
+                    <br />
+                    Las actividades deben redactarse en verbos en modo infinitivo, es decir, en palabras que expresen acciones y terminen en “ar”, “er” o “ir”, estos no deben hacer referencia a objetivos específicos o generales. Algunos ejemplos de verbos inadecuados para describir actividades son: apropiar, asegurar, colaborar, consolidar, desarrollar, fomentar, fortalecer, garantizar, implementar,
+                    impulsar, mejorar, movilizar, proponer, promover, entre otros.
+                </InfoMessage>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {actividadCausaIndirecta}
-                        </p>
                         <p class="mt-1 text-center">Fecha de ejecución</p>
                         <div class="mt-1 mb-20 flex items-start justify-around">
                             <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
@@ -606,6 +612,16 @@
                             {causaDirectaObjetivoEspecifico}
                         </p>
                         <div>
+                            {#if proyecto.codigo_linea_programatica == 68}
+                                <InfoMessage class="mb-2">
+                                    <p>
+                                        Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas.
+                                        <br />
+                                        La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
+                                    </p>
+                                </InfoMessage>
+                            {/if}
+
                             <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
                         </div>
                     </fieldset>
@@ -613,33 +629,47 @@
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
+                        <p class="block font-medium mb-2 text-gray-700 text-sm">Problema central</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {planteamientoProblema ? planteamientoProblema : 'Sin información registrada'}
+                            {problemaCentral ? problemaCentral : 'Sin información registrada'}
                         </p>
                         <div>
                             <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <InfoMessage class="mb-2" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
+
+                            {#if proyecto.codigo_linea_programatica == 68}
+                                <InfoMessage class="mb-2">
+                                    <p>
+                                        El objetivo general se origina al convertir en positivo el problema principal (tronco) identificado en el árbol de problemas.
+                                        <br />
+                                        La redacción deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
+                                        <br />
+                                        El objetivo general debe expresar el fin concreto del proyecto en correspondencia directa con el título del proyecto y la pregunta de la formulación del problema, el cual debe ser claro, medible, alcanzable y consistente con el proyecto que está formulando. Debe responde al ¿Qué?, ¿Cómo? y el ¿Para qué?
+                                    </p>
+                                </InfoMessage>
+                            {:else}
+                                <InfoMessage class="mb-2" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
+                            {/if}
                             <Textarea label="Descripción" maxlength="40000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showResultadoForm}
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
+                <p class="mb-20 whitespace-pre-line">
+                    {resultadoEfectoDirecto}
+                </p>
+
+                <p class="block font-medium mb-2 text-gray-700 text-sm">
+                    {descripcionObjetivoEspecifico.numero}
+                </p>
+                <p class="mb-20 whitespace-pre-line">
+                    {descripcionObjetivoEspecifico.descripcion}
+                </p>
+
+                <InfoMessage class="mb-2">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {resultadoEfectoDirecto}
-                        </p>
-
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">
-                            {descripcionObjetivoEspecifico.numero}
-                        </p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {descripcionObjetivoEspecifico.descripcion}
-                        </p>
-
                         <div class="mb-20">
                             <Textarea label="Descripción" maxlength="40000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                         </div>
@@ -651,16 +681,30 @@
                     </fieldset>
                 </form>
             {:else if showImpactoForm}
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
+
+                <p class="mt-4 whitespace-pre-line">
+                    {impactoEfectoIndirecto}
+                </p>
+
+                <InfoMessage class="mb-2">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: ambiental, social, centro de formación, sector productivo</InfoMessage>
                 <form on:submit|preventDefault={submitImpacto} id="impacto-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
-
-                        <p class="mt-4 whitespace-pre-line">
-                            {impactoEfectoIndirecto}
-                        </p>
                         <div class="mt-4">
                             <Label labelFor="tipo-impacto" value="Tipo" />
                             <Select id="tipo-impacto" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                            //Ambiental
+                            <InfoMessage
+                                message="Se busca minimizar y/o evitar los impactos negativos sobre el medio ambiente, tales como contaminación del aire, contaminación de corrientes de agua naturales, ruido, destrucción del paisaje, separación de comunidades que operan como unidades, etc. Por otro lado, se busca identificar diversas acciones de impacto ambiental positivo, tales como: producción limpia y sustentable, protección medioambiental, uso de residuos y reciclaje."
+                            />
+                            //Tecnológico
+                            <InfoMessage
+                                message="Se busca medir la contribución potencial del proyecto en cualquiera de los siguientes ámbitos: generación y aplicación de nuevos conocimientos y tecnologías, desarrollo de infraestructura científico- tecnológica, articulación de diferentes proyectos para lograr un objetivo común, mejoramiento de la infraestructura, desarrollo de capacidades de gestión tecnológica."
+                            />
+                            // Social - Centro de formación
+                            <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)" />
+                            // Social - Sector productivo
+                            <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto." />
                         </div>
                         <div class="mt-4">
                             <Textarea label="Descripción" maxlength="40000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />

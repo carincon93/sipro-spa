@@ -108,7 +108,6 @@ class CulturaInnovacionController extends Controller
         $proyecto->participantes()->attach(
             Auth::user()->id,
             [
-                'es_autor'          => true,
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
@@ -178,8 +177,6 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->resumen                               = $request->resumen;
         $culturaInnovacion->antecedentes                          = $request->antecedentes;
         $culturaInnovacion->marco_conceptual                      = $request->marco_conceptual;
-        $culturaInnovacion->metodologia                           = $request->metodologia;
-        $culturaInnovacion->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
         $culturaInnovacion->bibliografia                          = $request->bibliografia;
         $culturaInnovacion->numero_aprendices                     = $request->numero_aprendices;
         $culturaInnovacion->impacto_municipios                    = $request->impacto_municipios;

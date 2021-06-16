@@ -104,7 +104,6 @@ class IdiController extends Controller
         $proyecto->participantes()->attach(
             Auth::user()->id,
             [
-                'es_autor'          => true,
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
@@ -174,8 +173,6 @@ class IdiController extends Controller
         $idi->resumen                               = $request->resumen;
         $idi->antecedentes                          = $request->antecedentes;
         $idi->marco_conceptual                      = $request->marco_conceptual;
-        $idi->metodologia                           = $request->metodologia;
-        $idi->propuesta_sostenibilidad              = $request->propuesta_sostenibilidad;
         $idi->bibliografia                          = $request->bibliografia;
         $idi->numero_aprendices                     = $request->numero_aprendices;
         $idi->impacto_municipios                    = $request->impacto_municipios;

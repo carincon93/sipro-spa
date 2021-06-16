@@ -141,6 +141,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes/semilleros-investigacion/link', [ProyectoController::class, 'linkSemilleroInvestigacion'])->name('convocatorias.proyectos.participantes.semilleros-investigacion.link');
     Route::delete('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes/semilleros-investigacion/unlink', [ProyectoController::class, 'unlinkSemilleroInvestigacion'])->name('convocatorias.proyectos.participantes.semilleros-investigacion.unlink');
 
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor/propuesta-sostenibilidad', [ProyectoController::class, 'updatePropuestaSostenibilidad'])->name('convocatorias.proyectos.propuesta-sostenibilidad');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor', [ProyectoController::class, 'showCadenaValor'])->name('convocatorias.proyectos.cadena-valor');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/lote/{lote}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.lote.download');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.presupuesto.download-soporte');
@@ -267,12 +268,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('sectores-productivos', SectorProductivoController::class)->parameters(['sectores-productivos' => 'sector-productivo'])->except(['show']);
-
-    /**
-     * Temas priorizados
-     * 
-     */
-    Route::resource('temas-priorizados', TemaPriorizadoController::class)->parameters(['temas-priorizados' => 'tema-priorizado'])->except(['show']);
 
     /**
      * Mesas técnicas
@@ -470,17 +465,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae los sectores productivos
      */
     Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
-        return response(SectorProductivo::selectRaw('id as value, nombre as label')->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
+        return response(SectorProductivo::selectRaw('sectores_productivos.id as value, sectores_productivos.nombre as label')->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
     })->name('web-api.sectores-productivos');
-
-    /**
-     * Web api
-     * 
-     * Trae los temas priorizados
-     */
-    Route::get('web-api/temas-priorizados/{mesa_tecnica}/{sector_productivo}', function ($mesaTecnica, $sectorProductivo) {
-        return response(TemaPriorizado::selectRaw('id as value, nombre as label')->where('mesa_tecnica_id', $mesaTecnica)->where('sector_productivo_id', $sectorProductivo)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.temas-priorizados');
 
     /**
      * Web api
@@ -555,7 +541,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-problemas', [ArbolProyectoController::class, 'showArbolProblemas'])->name('convocatorias.proyectos.arbol-problemas');
     // Actualiza el problema general del proyecto en el arbol de problemas
-    Route::post('proyectos/{proyecto}/planteamiento-problema', [ArbolProyectoController::class, 'updatePlanteamientoProblema'])->name('proyectos.planteamiento-problema');
+    Route::post('proyectos/{proyecto}/problema-central', [ArbolProyectoController::class, 'updateProblemaCentral'])->name('proyectos.problema-central');
     // Actualiza efecto directo en el arbol de problemas
     Route::post('proyectos/{proyecto}/efecto-directo/{efecto_directo}', [ArbolProyectoController::class, 'updateEfectoDirecto'])->name('proyectos.efecto-directo');
     // Crea o Actualiza efecto indirecto en el arbol de problemas
@@ -575,6 +561,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Actividades
      * 
      */
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/actividades/metodologia', [ActividadController::class, 'updateMetodologia'])->name('convocatorias.proyectos.metodologia');
     Route::resource('convocatorias.proyectos.actividades', ActividadController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'actividades' => 'actividad'])->except(['show']);
 
     /**

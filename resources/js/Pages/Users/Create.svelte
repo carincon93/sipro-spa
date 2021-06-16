@@ -17,7 +17,7 @@
 
     export let errors
     export let tiposDocumento
-    export let tiposParticipacion
+    export let tiposVinculacion
     export let roles
 
     $: $title = 'Crear usuario'
@@ -36,7 +36,7 @@
         numero_documento: '',
         numero_celular: '',
         habilitado: '',
-        tipo_participacion: '',
+        tipo_vinculacion: '',
         centro_formacion_id: null,
         role_id: [],
         autorizacion_datos: false,
@@ -98,8 +98,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="tipo_participacion" value="Tipo de participación" />
-                    <Select id="tipo_participacion" items={tiposParticipacion} bind:selectedValue={$form.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_vinculacion" value="Tipo de vinculación" />
+                    <Select id="tipo_vinculacion" items={tiposVinculacion} bind:selectedValue={$form.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
                 <div class="mt-4">

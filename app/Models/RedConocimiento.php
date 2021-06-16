@@ -55,16 +55,6 @@ class RedConocimiento extends Model
     }
 
     /**
-     * Relationship with ServicioTecnologico
-     *
-     * @return object
-     */
-    public function serviciosTecnologicos()
-    {
-        return $this->hasMany(ServicioTecnologico::class);
-    }
-
-    /**
      * Filtrar registros
      *
      * @param  mixed $query

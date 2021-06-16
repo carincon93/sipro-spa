@@ -226,10 +226,6 @@
             {/if}
 
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('temas-priorizados.index'))} variant={route().current('temas-priorizados.*') ? 'raised' : 'outlined'} class="p-2">Temas priorizados</Button>
-            {/if}
-
-            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.index'))} variant={route().current('tematicas-estrategicas.*') ? 'raised' : 'outlined'} class="p-2">Temáticas estratégicas SENA</Button>
             {/if}
 

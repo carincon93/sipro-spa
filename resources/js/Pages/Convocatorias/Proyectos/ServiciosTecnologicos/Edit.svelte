@@ -15,7 +15,6 @@
     import InfoMessage from '@/Shared/InfoMessage'
     import Password from '@/Shared/Password'
     import Select from '@/Shared/Select'
-    import Switch from '@/Shared/Switch'
     import Dialog from '@/Shared/Dialog'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -36,44 +35,22 @@
     let proyectoDialogOpen = true
     let sending = false
 
-    let tieneVideo = servicioTecnologico.video != null
-    let requiereJustificacionIndustria4 = servicioTecnologico.justificacion_industria_4 != null
-    let requiereJustificacionEconomiaNaranja = servicioTecnologico.justificacion_economia_naranja != null
-    let requiereJustificacionPoliticaDiscapacidad = servicioTecnologico.justificacion_politica_discapacidad != null
-
     let form = useForm({
         centro_formacion_id: servicioTecnologico.proyecto?.centro_formacion_id,
         tipo_proyecto_id: servicioTecnologico.proyecto?.tipo_proyecto_id,
-        disciplina_subarea_conocimiento_id: servicioTecnologico.disciplina_subarea_conocimiento_id,
-        tematica_estrategica_id: servicioTecnologico.tematica_estrategica_id,
-        red_conocimiento_id: servicioTecnologico.red_conocimiento_id,
-        actividad_economica_id: servicioTecnologico.actividad_economica_id,
         titulo: servicioTecnologico.titulo,
-        titulo_proyecto_articulado: servicioTecnologico.titulo_proyecto_articulado,
         fecha_inicio: servicioTecnologico.fecha_inicio,
         fecha_finalizacion: servicioTecnologico.fecha_finalizacion,
         max_meses_ejecucion: servicioTecnologico.max_meses_ejecucion,
-        video: servicioTecnologico.video,
-        justificacion_industria_4: servicioTecnologico.justificacion_industria_4,
-        justificacion_economia_naranja: servicioTecnologico.justificacion_economia_naranja,
-        justificacion_politica_discapacidad: servicioTecnologico.justificacion_politica_discapacidad,
         resumen: servicioTecnologico.resumen,
         antecedentes: servicioTecnologico.antecedentes,
-        pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
-        metodologia: servicioTecnologico.metodologia,
-        propuesta_sostenibilidad: servicioTecnologico.propuesta_sostenibilidad,
         bibliografia: servicioTecnologico.bibliografia,
-        numero_aprendices: servicioTecnologico.numero_aprendices,
-        impacto_centro_formacion: servicioTecnologico.impacto_centro_formacion,
-        infraestructura_adecuada: servicioTecnologico.infraestructura_adecuada ? true : false,
         especificaciones_area: servicioTecnologico.especificaciones_area,
-        linea_programatica_id: servicioTecnologico.linea_programatica_id,
         mesa_tecnica_id: {
-            value: servicioTecnologico.tema_priorizado.mesa_tecnica.id,
-            label: mesasTecnicas.find((item) => item.value == servicioTecnologico.tema_priorizado.mesa_tecnica.id)?.label,
+            value: servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica.id,
+            label: mesasTecnicas.find((item) => item.value == servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica.id)?.label,
         },
-        sector_productivo_id: servicioTecnologico.tema_priorizado.sector_productivo.id,
-        tema_priorizado_id: servicioTecnologico.tema_priorizado_id,
+        mesa_tecnica_sector_productivo_id: servicioTecnologico.mesa_tecnica_sector_productivo_id,
     })
 
     function submit() {
@@ -113,7 +90,7 @@
                     required
                     labelFor="titulo"
                     class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
-                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué?, ¿Cómo?, ¿Cuándo?, ¿Dónde?, ¿Con quién? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto."
+                    value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué se va a hacer?, ¿Sobre qué o quiénes se hará?, ¿Cómo?, ¿Dónde se llevará a cabo? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto. Nota: las respuestas a las preguntas anteriormente formuladas no necesariamente deben responderse en mismo orden en el que aparecen."
                 />
                 <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
@@ -134,10 +111,11 @@
                         </div>
                     </div>
                 </div>
-                {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                    <div class="mb-20 flex">
+                {#if errors.fecha_inicio || errors.fecha_finalizacion || errors.max_meses_ejecucion}
+                    <div class="mb-20 flex justify-center mt-4">
                         <InputError classes="text-center" message={errors.fecha_inicio} />
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
+                        <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
             </div>
@@ -163,33 +141,10 @@
                 </div>
             </fieldset>
 
-            <div class="mt-44 text-center">
-                <h1 class="text-2xl">Articulación con otras estrategias SENNOVA</h1>
-                <p>Si el proyecto necesita articularse con otra línea programática para su desarrollo, Por favor registre la siguiente información:</p>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
-                </div>
-                <div>
-                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas')} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="titulo_proyecto_articulado" value="Título del proyecto de la línea programática con la que se realiza articulación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="titulo_proyecto_articulado" bind:value={$form.titulo_proyecto_articulado} error={errors.titulo_proyecto_articulado} />
-                </div>
-            </div>
-
             <hr class="mt-32" />
 
             <div class="mt-10">
-                <h1 class="text-2xl text-center">Mesa sectorial a la que se encuentra articulado el proyecto</h1>
+                <h1 class="text-2xl text-center">Mesa técnica a la que pertenece el proyecto</h1>
             </div>
             <div class="mt-44 grid grid-cols-2">
                 <div>
@@ -203,206 +158,59 @@
             {#if $form.mesa_tecnica_id?.value}
                 <div class="mt-10 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="sector_productivo_id" value="Sector productivo" />
+                        <Label required class="mb-4" labelFor="mesa_tecnica_sector_productivo_id" value="Sectores priorizados de Colombia productiva" />
                     </div>
                     <div>
-                        <DynamicList id="sector_productivo_id" bind:value={$form.sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.sector_productivo_id} required />
+                        <DynamicList id="mesa_tecnica_sector_productivo_id" bind:value={$form.mesa_tecnica_sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.mesa_tecnica_sector_productivo_id} required />
                     </div>
                 </div>
             {/if}
 
-            {#if $form.mesa_tecnica_id?.value && $form.sector_productivo_id}
-                <div class="mt-10 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tema_priorizado_id" value="Tema priorizado" />
-                    </div>
+            <hr class="mt-32 mb-32" />
 
-                    <div>
-                        <DynamicList id="tema_priorizado_id" bind:value={$form.tema_priorizado_id} routeWebApi={route('web-api.temas-priorizados', [$form.mesa_tecnica_id.value, $form.sector_productivo_id])} classes="min-h" placeholder="Busque por el nombre del tema priorizado" message={errors.tema_priorizado_id} required />
-                    </div>
-                </div>
-            {/if}
-
-            <hr class="mt-32" />
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="red_conocimiento_id" value="Red de conocimiento sectorial" />
-                </div>
-                <div>
-                    <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
-                </div>
-                <div>
-                    <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />
-                </div>
-                <div>
-                    <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Temática estratégica SENA" />
-                </div>
-                <div>
-                    <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="video" value="Video" />
-                </div>
-                <div>
-                    <InfoMessage message="Video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" />
-                    <Input id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label id="justificacion_industria_4" value="¿El proyecto está relacionado con la industria 4.0?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionIndustria4} />
-                    </div>
-
-                    {#if requiereJustificacionIndustria4}
-                        <InfoMessage message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="justificacion_economia_naranja" value="¿El proyecto está relacionado con la economía naranja?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionEconomiaNaranja} />
-                    </div>
-                    {#if requiereJustificacionEconomiaNaranja}
-                        <InfoMessage message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
-                        <Textarea maxlength="40000" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="justificacion_politica_discapacidad" value="¿El proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionPoliticaDiscapacidad} />
-                    </div>
-                    {#if requiereJustificacionPoliticaDiscapacidad}
-                        <InfoMessage message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
-                        <Textarea maxlength="40000" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
-                    {/if}
-                </div>
-            </div>
+            <h1 class="text-2xl text-center">Estructura del proyecto</h1>
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    <Label required class="mb-4" labelFor="resumen" value="Resumen ejecutivo" />
+                    <InfoMessage class="mb-2">
+                        <p>
+                            Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto.
+                            <br />
+                            <strong>Nota:</strong> El resumen por lo general se construye al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres).
+                        </p>
+                    </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage
-                        message="Identificar y caracterizar el mercado potencial, objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector. Registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales, y precisar la segmentación del mercado, las tendencias de los precios y las gestiones comerciales a realizar. "
-                    />
+                    <InfoMessage class="mb-2">
+                        <p>
+                            Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de formación de tal forma que el proyecto
+                            no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias de los precios y las
+                            gestiones comerciales a realizadas.
+                            <br />
+                            <strong>>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
+                        </p>
+                    </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de la formulación del problema" />
-                    <InfoMessage
-                        message="Se debe plantear el problema en forma de pregunta donde se define exactamente ¿cuál es el problema a resolver, investigar o intervenir?. La pregunta debe cumplir las siguientes condiciones: • Debe guardar una estrecha correspondencia con el título del proyecto. • Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor. • La pregunta no debe dar origen a respuestas tales como si o no. De ser así, debe ser reformulada."
-                    />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
-                    <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
-                    <InfoMessage message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                    <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Séptima edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
-                </div>
-                <div>
-                    <Input id="numero_aprendices" type="number" input$tmin="0" input$max="9999" class="mt-1" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required labelFor="justificacion_politica_discapacidad" value="Cuenta con infraestructura adecuada y propia para el funcionamiento de la línea servicios tecnológicos en el centro de formación?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={$form.infraestructura_adecuada} />
-                    </div>
                 </div>
             </div>
 
@@ -437,19 +245,12 @@
                 <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
                 <p class="text-center mb-4">Si ya están completos omita esta información.</p>
                 <ul class="list-disc">
-                    <li>Video</li>
-                    <li>Industria 4.0</li>
-                    <li>Economía naranja</li>
-                    <li>Política Institucional para Atención de las Personas con discapacidad</li>
                     <li>Resumen</li>
                     <li>Antecedentes</li>
-                    <li>Pregunta de la formulación del problema</li>
                     <li>Metodología</li>
                     <li>Propuesta de sostenibilidad</li>
                     <li>Bibliografía</li>
-                    <li>Número de aprendices beneficiados</li>
                     <li>Impacto en el centro de formación</li>
-                    <li>Infraestructura adecuada</li>
                     <li>Especificaciones del área</li>
                 </ul>
             </div>

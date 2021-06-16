@@ -131,27 +131,31 @@
     }
 
     /**
-     * Planteamiento del problema
+     * Problema central
      */
-    let formPlanteamientoProblema = useForm({
-        planteamiento_problema: proyecto.planteamiento_problema,
+    let formProblemaCentral = useForm({
+        identificacion_problema: proyecto.identificacion_problema,
+        problema_central: proyecto.problema_central,
         justificacion_problema: proyecto.justificacion_problema,
+        pregunta_formulacion_problema: proyecto.pregunta_formulacion_problema,
     })
 
-    let showPlanteamientoProblemaForm = false
-    function showPlanteamientoProblemaDialog() {
+    let showProblemaCentralForm = false
+    function showProblemaCentralDialog() {
         reset()
-        dialogTitle = 'Planteamiento del problema'
-        formId = 'planteamiento-problema'
-        showPlanteamientoProblemaForm = true
+        dialogTitle = 'Problema central'
+        formId = 'problema-central'
+        showProblemaCentralForm = true
         dialogOpen = true
-        $formPlanteamientoProblema.planteamiento_problema = proyecto.planteamiento_problema
-        $formPlanteamientoProblema.justificacion_problema = proyecto.justificacion_problema
+        $formProblemaCentral.identificacion_problema = proyecto.identificacion_problema
+        $formProblemaCentral.problema_central = proyecto.problema_central
+        $formProblemaCentral.justificacion_problema = proyecto.justificacion_problema
+        $formProblemaCentral.pregunta_formulacion_problema = proyecto.pregunta_formulacion_problema
     }
 
-    function submitPlanteamientoProblema() {
+    function submitProblemaCentral() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
-            $formPlanteamientoProblema.post(route('proyectos.planteamiento-problema', proyecto.id), {
+            $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
                 onStart: () => {
                     sending = true
                 },
@@ -263,7 +267,7 @@
     function reset() {
         showEfectoIndirectoForm = false
         showEfectoDirectoForm = false
-        showPlanteamientoProblemaForm = false
+        showProblemaCentralForm = false
         showCausaDirectaForm = false
         showCausaIndirectaForm = false
         dialogTitle = ''
@@ -272,7 +276,7 @@
 
         $formCausaIndirecta.reset()
         $formCausaDirecta.reset()
-        $formPlanteamientoProblema.reset()
+        $formProblemaCentral.reset()
         $formEfectoDirecto.reset()
         $formEfectoIndirecto.reset()
     }
@@ -291,9 +295,9 @@
         const efectoDirectoTooltip = document.querySelector('#efecto-directo-tooltip')
         const arrowEfectoDirecto = document.querySelector('#arrow-efecto-directo')
 
-        const planteamientoProblema = document.querySelector('#planteamiento-problema-tooltip-placement')
-        const planteamientoProblemaTooltip = document.querySelector('#planteamiento-problema-tooltip')
-        const arrowPlanteamientoProblema = document.querySelector('#arrow-planteamiento-problema')
+        const problemaCentral = document.querySelector('#problema-central-tooltip-placement')
+        const problemaCentralTooltip = document.querySelector('#problema-central-tooltip')
+        const arrowProblemaCentral = document.querySelector('#arrow-problema-central')
 
         const causaDirecta = document.querySelector('#causa-directa-tooltip-placement')
         const causaDirectaTooltip = document.querySelector('#causa-directa-tooltip')
@@ -320,9 +324,9 @@
             },
             {
                 element: {
-                    target: planteamientoProblema,
-                    tooltip: planteamientoProblemaTooltip,
-                    arrow: arrowPlanteamientoProblema,
+                    target: problemaCentral,
+                    tooltip: problemaCentralTooltip,
+                    arrow: arrowProblemaCentral,
                 },
             },
             {
@@ -361,7 +365,9 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
-    <p class="text-center">Debe generar el árbol de problemas iniciando con el planteamiento del problema, relacionando sus causas y efectos.</p>
+    <p class="text-center">
+        Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).{#if proyecto.codigo_linea_programatica == 68}Si es proyecto tipo A, habilitar 3 causas directas y si es proyecto tipo B habilitar 4 objetivos.{/if}
+    </p>
 
     <div class="mt-16">
         <!-- Efectos -->
@@ -419,16 +425,16 @@
             {/each}
         </div>
 
-        <!-- Planteamiento del problema -->
-        <div id="planteamiento-problema-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-            <small class="block">Planteamiento <br /> del problema</small>
-            <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
+        <!-- Problema central -->
+        <div id="problema-central-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+            <small class="block">Problema <br /> central</small>
+            <div id="arrow-problema-central" class="arrow" data-popper-arrow />
         </div>
-        <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showPlanteamientoProblemaDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
-                {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
+        <div class="problema-central relative" id="problema-central-tooltip-placement" aria-describedby="tooltip">
+            <div on:click={showProblemaCentralDialog} class="h-36 {proyecto.problema_central != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                {#if proyecto.problema_central != null && proyecto.problema_central.length > 0}
                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
-                        {proyecto.planteamiento_problema}
+                        {proyecto.problema_central}
                     </p>
                 {/if}
             </div>
@@ -506,6 +512,7 @@
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
+                            <InfoMessage class="mb-2" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
                             <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
                     </fieldset>
@@ -514,6 +521,7 @@
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
+                            <InfoMessage class="mb-2" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
                             <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
                     </fieldset>
@@ -522,28 +530,68 @@
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
+                            <InfoMessage class="mb-2" message="Corresponden a situaciones negativas generadas por los efectos directos." />
                             <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
-            {:else if showPlanteamientoProblemaForm}
-                <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
+            {:else if showProblemaCentralForm}
+                <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <div class="mt-4">
-                            <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
-
+                        <div class="mt-10">
+                            <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
                             <InfoMessage
                                 class="mb-2"
                                 message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                             />
-
-                            <Textarea label="Descripción" maxlength="40000" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
+                            <Textarea label="Problema central" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-10">
+                            <Label required class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
+                            <InfoMessage
+                                class="mb-2"
+                                message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
+                            />
+                            <Textarea label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
+                        </div>
+
+                        {#if proyecto.codigo_linea_programatica == 68}
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
+                                <InfoMessage class="mb-2">
+                                    <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
+                                    La pregunta debe cumplir las siguientes condiciones:
+                                    <ul>
+                                        <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
+                                        <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
+                                        <li>• No debe dar origen a respuestas tales como si o no.</li>
+                                    </ul>
+                                    <br />
+                                    <strong>Nota:</strong>Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
+                                </InfoMessage>
+                                <Textarea label="Pregunta formulación del problema" maxlength="5000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$formProblemaCentral.pregunta_formulacion_problema} required />
+                            </div>
+                        {/if}
+
+                        <div class="mt-10">
                             <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                            <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
-                            <Textarea label="Descripción" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formPlanteamientoProblema.justificacion_problema} required />
+                            {#if proyecto.codigo_linea_programatica == 68}
+                                <InfoMessage class="mb-2">
+                                    <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
+                                    <ul>
+                                        <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
+                                        <li>• ¿Qué resultados se lograrán?</li>
+                                        <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
+                                        <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
+                                    </ul>
+                                    <strong>Nota:</strong>La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
+                                </InfoMessage>
+                            {:else}
+                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+                            {/if}
+
+                            <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
                         </div>
                     </fieldset>
                 </form>
@@ -551,6 +599,7 @@
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
+                            <InfoMessage class="mb-2" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
                             <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
                     </fieldset>

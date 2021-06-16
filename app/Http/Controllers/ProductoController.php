@@ -144,7 +144,9 @@ class ProductoController extends Controller
             ]);
             $productoServicioTecnologico = new ProductoServicioTecnologico();
             $productoServicioTecnologico->producto()->associate($producto->id);
-            $productoServicioTecnologico->medio_verificacion = $request->medio_verificacion;
+            $productoServicioTecnologico->medio_verificacion    = $request->medio_verificacion;
+            $productoServicioTecnologico->nombre_indicador      = $request->nombre_indicador;
+            $productoServicioTecnologico->formula_indicador      = $request->formula_indicador;
             $producto->productoServicioTecnologico()->save($productoServicioTecnologico);
         }
 
@@ -247,7 +249,11 @@ class ProductoController extends Controller
             $request->validate([
                 'medio_verificacion' => 'required|string',
             ]);
-            $producto->productoServicioTecnologico()->update(['medio_verificacion' => $request->medio_verificacion]);
+            $producto->productoServicioTecnologico()->update([
+                'medio_verificacion' => $request->medio_verificacion,
+                'nombre_indicador'   => $request->nombre_indicador,
+                'formula_indicador'  => $request->formula_indicador,
+            ]);
         }
 
         $producto->save();

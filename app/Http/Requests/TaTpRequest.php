@@ -37,8 +37,6 @@ class TaTpRequest extends FormRequest
                 'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
-                'metodologia'                               => ['required', 'string'],
-                'propuesta_sostenibilidad'                  => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'impacto_municipios'                        => ['required', 'string'],

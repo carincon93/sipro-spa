@@ -40,7 +40,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Create', [
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => Role::select('id', 'name')->get('id')
         ]);
     }
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
@@ -106,7 +106,7 @@ class UserController extends Controller
         return Inertia::render('Users/Edit', [
             'usuario'               => $user,
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
             'roles'                 => Role::getRolesByRol()
         ]);
@@ -129,7 +129,7 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 

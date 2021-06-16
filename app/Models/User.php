@@ -33,7 +33,7 @@ class User extends Authenticatable
         'numero_documento',
         'numero_celular',
         'habilitado',
-        'tipo_participacion',
+        'tipo_vinculacion',
         'centro_formacion_id',
         'autorizacion_datos'
     ];
@@ -67,7 +67,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyecto::class, 'proyecto_participantes', 'user_id', 'proyecto_id')
             ->withPivot([
                 'user_id',
-                'es_autor',
                 'es_formulador',
                 'cantidad_meses',
                 'cantidad_horas',

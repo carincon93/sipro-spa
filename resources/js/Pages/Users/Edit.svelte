@@ -20,7 +20,7 @@
     export let errors
     export let usuario
     export let tiposDocumento
-    export let tiposParticipacion
+    export let tiposVinculacion
     export let roles
     export let rolesRelacionados
 
@@ -45,9 +45,9 @@
         numero_documento: usuario.numero_documento,
         numero_celular: usuario.numero_celular,
         habilitado: usuario.habilitado,
-        tipo_participacion: {
-            value: usuario.tipo_participacion,
-            label: tiposParticipacion.find((item) => item.value == usuario.tipo_participacion)?.label,
+        tipo_vinculacion: {
+            value: usuario.tipo_vinculacion,
+            label: tiposVinculacion.find((item) => item.value == usuario.tipo_vinculacion)?.label,
         },
         centro_formacion_id: usuario.centro_formacion_id,
         role_id: rolesRelacionados,
@@ -119,8 +119,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="tipo_participacion" value="Tipo de participación" />
-                    <Select id="tipo_participacion" items={tiposParticipacion} bind:selectedValue={$form.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_vinculacion" value="Tipo de vinculación" />
+                    <Select id="tipo_vinculacion" items={tiposVinculacion} bind:selectedValue={$form.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
                 <div class="mt-4">

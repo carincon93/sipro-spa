@@ -78,8 +78,6 @@
         resumen: idi.resumen,
         antecedentes: idi.antecedentes,
         marco_conceptual: idi.marco_conceptual,
-        metodologia: idi.metodologia,
-        propuesta_sostenibilidad: idi.propuesta_sostenibilidad,
         bibliografia: idi.bibliografia,
         numero_aprendices: idi.numero_aprendices,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
@@ -627,28 +625,8 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
-                    <InfoMessage class="mb-2" message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
-                </div>
-                <div>
-                    <Textarea label="Metodología" maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
-                    <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
-                </div>
-                <div>
-                    <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Séptima edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />

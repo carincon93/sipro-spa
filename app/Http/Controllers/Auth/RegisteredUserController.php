@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
         return Inertia::render('Auth/Register', [
             'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->get(),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
         ]);
     }
 
@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'numero_documento'      => $request->numero_documento,
             'numero_celular'        => $request->numero_celular,
             'habilitado'            => false,
-            'tipo_participacion'    => $request->tipo_participacion,
+            'tipo_vinculacion'    => $request->tipo_vinculacion,
             'autorizacion_datos'    => $request->autorizacion_datos,
             'centro_formacion_id'   => $request->centro_formacion_id
         ]);

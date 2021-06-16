@@ -33,18 +33,22 @@ class ProyectoController extends Controller
 
         if ($proyecto->idi()->exists()) {
             $objetivoGeneral = $proyecto->idi->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->idi->propuesta_sostenibilidad;
         }
 
         if ($proyecto->taTp()->exists()) {
-            $objetivoGeneral = $proyecto->tatp->objetivo_general;
+            $objetivoGeneral = $proyecto->taTp->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->taTp->propuesta_sostenibilidad;
         }
 
         if ($proyecto->servicioTecnologico()->exists()) {
             $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
         }
 
         if ($proyecto->culturaInnovacion()->exists()) {
             $objetivoGeneral = $proyecto->culturaInnovacion->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->culturaInnovacion->propuesta_sostenibilidad;
         }
 
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
@@ -62,10 +66,50 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'modificable'),
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);
+    }
+
+    public function updatePropuestaSostenibilidad(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $request->validate([
+            'propuesta_sostenibilidad' => 'required|string|max:10000',
+        ]);
+
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $idi                            = $proyecto->idi;
+                $idi->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
+
+                $idi->save();
+                break;
+            case $proyecto->taTp()->exists():
+                $tatp                           = $proyecto->taTp;
+                $tatp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
+
+                $tatp->save();
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $culturaInnovacion                              = $proyecto->culturaInnovacion;
+                $culturaInnovacion->propuesta_sostenibilidad    = $request->propuesta_sostenibilidad;
+
+                $culturaInnovacion->save();
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico                            = $proyecto->servicioTecnologico;
+                $servicioTecnologico->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
+
+                $servicioTecnologico->save();
+                break;
+            default:
+                break;
+        }
+
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -159,7 +203,7 @@ class ProyectoController extends Controller
             'convocatoria'          => $convocatoria,
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
@@ -201,7 +245,7 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
         if (is_array($data['rol_sennova_id'])) {
             $data['rol_sennova_id'] = $data['rol_sennova_id']['value'];
@@ -255,7 +299,7 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
@@ -291,7 +335,7 @@ class ProyectoController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = 0;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
@@ -299,7 +343,7 @@ class ProyectoController extends Controller
 
         $user->assignRole(14);
 
-        $data = $request->only('es_autor', 'cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);

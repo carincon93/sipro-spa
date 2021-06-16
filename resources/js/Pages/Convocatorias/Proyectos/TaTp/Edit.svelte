@@ -65,12 +65,9 @@
         retos_oportunidades: tatp.retos_oportunidades,
         pertinencia_territorio: tatp.pertinencia_territorio,
         marco_conceptual: tatp.marco_conceptual,
-        metodologia: tatp.metodologia,
-        metodologia_local: tatp.metodologia_local,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
         impacto_municipios: tatp.impacto_municipios,
         nombre_instituciones: tatp.nombre_instituciones,
-        propuesta_sostenibilidad: tatp.propuesta_sostenibilidad,
         impacto_centro_formacion: tatp.impacto_centro_formacion,
         bibliografia: tatp.bibliografia,
         tecnoacademia_id: tecnoacademiaRelacionada,
@@ -287,25 +284,6 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="metodologia" value="Descripción de la metodología" />
-                    <InfoMessage message="Describir la (s) metodología (s) a utilizar en el desarrollo del proyecto." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="metodologia_local" value="Descripcion de la metodología aplicada a nivel local" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="metodologia_local" error={errors.metodologia_local} bind:value={$form.metodologia_local} required />
-                </div>
-            </div>
-
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
@@ -339,16 +317,6 @@
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
-                    <InfoMessage message="Identificar los efectos que tiene el desarrollo del proyecto de ya sea positivos o negativos.  Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
@@ -359,7 +327,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Sexta edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Séptima edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />

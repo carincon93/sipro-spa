@@ -22,7 +22,7 @@
     export let convocatoria
     export let proyecto
     export let tiposDocumento
-    export let tiposParticipacion
+    export let tiposVinculacion
     export let roles
 
     let resultados = []
@@ -84,7 +84,6 @@
     let formParticipante = useForm({
         _method: null,
         user_id: 0,
-        es_autor: 0,
         cantidad_horas: 0,
         cantidad_meses: 0,
         rol_sennova_id: null,
@@ -98,7 +97,6 @@
         $formParticipante.user_id = user.id
         if (user.pivot) {
             $formParticipante._method = 'PUT'
-            $formParticipante.es_autor = user.pivot.es_autor ? 1 : 0
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
             $formParticipante.rol_sennova_id = { value: user.pivot.rol_sennova_id, label: roles.find((item) => item.value == user.pivot.rol_sennova_id)?.label }
@@ -137,8 +135,7 @@
         tipo_documento: '',
         numero_documento: '',
         numero_celular: '',
-        tipo_participacion: '',
-        es_autor: 0,
+        tipo_vinculacion: '',
         cantidad_meses: 0,
         cantidad_horas: 0,
         centro_formacion_id: null,
@@ -359,14 +356,6 @@
                     <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
                     <Select id="rol_sennova_id" items={roles} bind:selectedValue={$formParticipante.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
-
-                <div class="mt-4">
-                    <Label class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$formParticipante.es_autor} required>
-                        <option value="1" selected={$formParticipante.es_autor == 1 ? true : false}>Si</option>
-                        <option value="0" selected={$formParticipante.es_autor == 0 ? true : false}>No</option>
-                    </select>
-                </div>
             </fieldset>
         </form>
     </div>
@@ -418,8 +407,8 @@
                 </div>
 
                 <div class="mt-8">
-                    <Label required class="mb-4" labelFor="tipo_participacion_nuevo_participante" value="Tipo de participación" />
-                    <Select id="tipo_participacion_nuevo_participante" items={tiposParticipacion} bind:selectedValue={$formNuevoParticipante.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_vinculacion_nuevo_participante" value="Tipo de vinculación" />
+                    <Select id="tipo_vinculacion_nuevo_participante" items={tiposVinculacion} bind:selectedValue={$formNuevoParticipante.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
                 <div class="mt-8">
@@ -448,15 +437,6 @@
                         error={errors.cantidad_horas}
                         required
                     />
-                </div>
-
-                <div class="mt-8">
-                    <Label required class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" bind:value={$formNuevoParticipante.es_autor} required>
-                        <option value="">Seleccione una opción</option>
-                        <option value="1" selected={$formNuevoParticipante.es_autor == 1 ? true : false}>Si</option>
-                        <option value="0" selected={$formNuevoParticipante.es_autor == 0 ? true : false}>No</option>
-                    </select>
                 </div>
 
                 <div class="mt-8">

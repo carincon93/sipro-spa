@@ -30,7 +30,7 @@ class UserRegisterRequest extends FormRequest
             'email'                 => ['required', 'string', new Email, 'email', 'max:255', 'unique:users'],
             'password'              => ['required', 'string', 'confirmed', 'min:8'],
             'tipo_documento'        => ['required', 'max:2'],
-            'tipo_participacion'    => ['required', 'max:191'],
+            'tipo_vinculacion'      => ['required', 'max:191'],
             'numero_documento'      => ['required', 'min:0', 'unique:users,numero_documento', 'max:9999999999999', 'integer'],
             'numero_celular'        => ['required', 'min:0', 'max:9999999999', 'integer'],
             'autorizacion_datos'    => ['required', 'boolean'],
@@ -51,9 +51,9 @@ class UserRegisterRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->tipo_participacion)) {
+        if (is_array($this->tipo_vinculacion)) {
             $this->merge([
-                'tipo_participacion' => $this->tipo_participacion['value'],
+                'tipo_vinculacion' => $this->tipo_vinculacion['value'],
             ]);
         }
 

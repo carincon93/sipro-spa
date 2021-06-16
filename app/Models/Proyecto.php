@@ -237,7 +237,6 @@ class Proyecto extends Model
         return $this->belongsToMany(User::class, 'proyecto_participantes', 'proyecto_id', 'user_id')
             ->withPivot([
                 'user_id',
-                'es_autor',
                 'es_formulador',
                 'cantidad_meses',
                 'cantidad_horas',

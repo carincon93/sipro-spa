@@ -1,17 +1,45 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
+    import { checkRole, checkPermission } from '@/Utils'
 
     import Stepper from '@/Shared/Stepper'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Label from '@/Shared/Label'
+    import Textarea from '@/Shared/Textarea'
+    import LoadingButton from '@/Shared/LoadingButton'
 
+    export let errors
     export let convocatoria
     export let proyecto
     export let objetivos
     export let productos
 
     $title = 'Cadena de valor'
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin = checkRole(authUser, [1])
+
+    let sending = false
+
+    let form = useForm({
+        propuesta_sostenibilidad: proyecto.propuesta_sostenibilidad,
+    })
+
+    function submit() {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)) {
+            $form.put(route('convocatorias.proyectos.propuesta-sostenibilidad', [convocatoria.id, proyecto.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 
     onMount(() => {
         google.charts.setOnLoadCallback(drawChart)
@@ -62,6 +90,23 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
+
+    <form on:submit|preventDefault={submit}>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
+            <div class="mt-4">
+                <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
+                <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
+                <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+            </div>
+        </fieldset>
+        <div class="mt-4 bg-gray-100 border-t border-gray-200 flex items-center">
+            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)}
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+            {/if}
+        </div>
+    </form>
+
+    <hr class="mb-20 mt-20" />
 
     {#if productos.length == 0}
         <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor incompleta.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />
