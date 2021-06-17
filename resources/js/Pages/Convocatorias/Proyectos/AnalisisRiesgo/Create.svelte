@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="mt-8">
-                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="800" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-8">
@@ -103,11 +103,11 @@
                 </div>
 
                 <div class="mt-8">
-                    <Textarea label="Efectos" maxlength="40000" id="efectos" error={errors.efectos} bind:value={$form.efectos} required />
+                    <Textarea label="Efectos" maxlength="800" id="efectos" error={errors.efectos} bind:value={$form.efectos} required />
                 </div>
 
                 <div class="mt-8">
-                    <Textarea label="Medidas de mitigación" maxlength="40000" id="medidas_mitigacion" error={errors.medidas_mitigacion} bind:value={$form.medidas_mitigacion} required />
+                    <Textarea label="Medidas de mitigación" maxlength="800" id="medidas_mitigacion" error={errors.medidas_mitigacion} bind:value={$form.medidas_mitigacion} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

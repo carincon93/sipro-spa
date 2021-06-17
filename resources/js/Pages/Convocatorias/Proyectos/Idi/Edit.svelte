@@ -642,7 +642,7 @@
                     <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                 </div>
                 <div>
-                    <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                 </div>
             </div>
 

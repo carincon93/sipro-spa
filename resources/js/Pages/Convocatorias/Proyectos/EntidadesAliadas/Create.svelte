@@ -116,7 +116,7 @@
                     </div>
                     {#if convenio}
                         <div class="mt-4">
-                            <Textarea label="Descipción del convenio" maxlength="40000" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                            <Textarea label="Descipción del convenio" maxlength="400" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                         </div>
                     {/if}
 
@@ -126,7 +126,7 @@
                     </div>
                     {#if grupoInvestigacion}
                         <div class="mt-4">
-                            <Textarea label="Grupo de investigación" maxlength="40000" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                            <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                         </div>
 
                         <div class="mt-4">
@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Textarea label="Descripción de los recursos en especie aportados" maxlength="40000" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                    <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
                 </div>
 
                 <div class="mt-4">
@@ -157,12 +157,12 @@
                 </div>
 
                 <div class="mt-4">
-                    <Textarea label="Descripción de la destinación del dinero aportado" maxlength="40000" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                    <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                 </div>
 
                 {#if proyecto.idi}
                     <div class="mt-4">
-                        <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="40000" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                        <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                     </div>
 
                     <div class="mt-4">

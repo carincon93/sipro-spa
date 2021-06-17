@@ -601,7 +601,7 @@
                             </div>
                         {/if}
                         <div>
-                            <Textarea label="Descripción" maxlength="40000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -650,7 +650,7 @@
                         </p>
                         <div>
                             <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <Textarea label="Descripción" maxlength="40000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Textarea label="Descripción" maxlength="400" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
@@ -671,7 +671,7 @@
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mb-20">
-                            <Textarea label="Descripción" maxlength="40000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
+                            <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                         </div>
 
                         <div class="mb-20">
@@ -709,7 +709,7 @@
                             {/if}
                         </div>
                         <div class="mt-4">
-                            <Textarea label="Descripción" maxlength="40000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
+                            <Textarea label="Descripción" maxlength="10000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
