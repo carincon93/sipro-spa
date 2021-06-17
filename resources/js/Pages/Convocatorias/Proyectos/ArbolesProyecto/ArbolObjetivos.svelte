@@ -567,13 +567,13 @@
         </div>
         <div slot="content">
             {#if showActividadForm}
-                <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
                 <InfoMessage class="mb-4">
                     Se debe evidenciar que la descripción de las actividades se realice de manera secuencial y de forma coherente con los productos a las cuales están asociadas para alcanzar el logro de cada uno de los objetivos específicos.
                     <br />
                     Las actividades deben redactarse en verbos en modo infinitivo, es decir, en palabras que expresen acciones y terminen en “ar”, “er” o “ir”, estos no deben hacer referencia a objetivos específicos o generales. Algunos ejemplos de verbos inadecuados para describir actividades son: apropiar, asegurar, colaborar, consolidar, desarrollar, fomentar, fortalecer, garantizar, implementar,
                     impulsar, mejorar, movilizar, proponer, promover, entre otros.
                 </InfoMessage>
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
                 <p class="mb-20 whitespace-pre-line">
                     {actividadCausaIndirecta}
                 </p>
