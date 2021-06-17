@@ -62,9 +62,10 @@
             label: tiposProyectoST.find((item) => item.value == servicioTecnologico.estado_sistema_gestion.tipo_proyecto_st_id)?.label,
         },
         estado_sistema_gestion_id: servicioTecnologico.estado_sistema_gestion.id,
+        identificacion_problema: servicioTecnologico.identificacion_problema,
+        pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
+        justificacion_problema: servicioTecnologico.justificacion_problema,
     })
-
-    console.log(servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica_id)
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
@@ -221,7 +222,7 @@
 
             <hr class="mt-32 mb-32" />
 
-            <h1 class="text-2xl text-center">Estructura del proyecto</h1>
+            <h1 class="text-2xl text-center" id="estructura-proyecto">Estructura del proyecto</h1>
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
@@ -259,6 +260,58 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
+                    <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
+                    <InfoMessage
+                        class="mb-2"
+                        message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                    />
+                </div>
+
+                <div>
+                    <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$form.identificacion_problema} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
+                    <InfoMessage class="mb-2">
+                        <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
+                        La pregunta debe cumplir las siguientes condiciones:
+                        <ul>
+                            <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
+                            <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
+                            <li>• No debe dar origen a respuestas tales como si o no.</li>
+                        </ul>
+                        <br />
+                        <strong>Nota:</strong>Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
+                    </InfoMessage>
+                </div>
+                <div>
+                    <Textarea label="Pregunta formulación del problema" maxlength="5000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
+                </div>
+            </div>
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                    <InfoMessage class="mb-2">
+                        <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
+                        <ul>
+                            <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
+                            <li>• ¿Qué resultados se lograrán?</li>
+                            <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
+                            <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
+                        </ul>
+                        <strong>Nota:</strong>La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
+                    </InfoMessage>
+                </div>
+                <div>
+                    <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Séptima edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
@@ -291,6 +344,9 @@
                 <ul class="list-disc">
                     <li>Resumen</li>
                     <li>Antecedentes</li>
+                    <li>Identificación y descripción del problema</li>
+                    <li>Pregunta de formulación del problema</li>
+                    <li>Justificación</li>
                     <li>Bibliografía</li>
                 </ul>
             </div>
@@ -298,7 +354,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#estructura-proyecto')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="mt-20">
-                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <h6 class="mt-20 mb-12 text-2xl">Productos</h6>

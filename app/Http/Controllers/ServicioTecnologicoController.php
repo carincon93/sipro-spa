@@ -79,10 +79,11 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->objetivo_general                      = null;
         $servicioTecnologico->problema_central                      = null;
         $servicioTecnologico->justificacion_problema                = null;
+        $servicioTecnologico->identificacion_problema               = null;
+        $servicioTecnologico->pregunta_formulacion_problema         = 'Describa la pregunta de la formulación del problema';
         $servicioTecnologico->metodologia                           = 'Por favor diligencie la metodología del proyecto';
         $servicioTecnologico->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
-        $servicioTecnologico->pregunta_formulacion_problema         = 'Describa la pregunta de la formulación del problema';
         $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
 
         $servicioTecnologico->subclasificacionTipologiaSt()->associate($request->subclasificacion_tipologia_st_id);
@@ -152,14 +153,17 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
-        $servicioTecnologico->titulo              = $request->titulo;
-        $servicioTecnologico->resumen             = $request->resumen;
-        $servicioTecnologico->antecedentes        = $request->antecedentes;
-        $servicioTecnologico->metodologia         = $request->metodologia;
-        $servicioTecnologico->fecha_inicio        = $request->fecha_inicio;
-        $servicioTecnologico->fecha_finalizacion  = $request->fecha_finalizacion;
-        $servicioTecnologico->max_meses_ejecucion = $request->max_meses_ejecucion;
-        $servicioTecnologico->bibliografia        = $request->bibliografia;
+        $servicioTecnologico->titulo                        = $request->titulo;
+        $servicioTecnologico->resumen                       = $request->resumen;
+        $servicioTecnologico->antecedentes                  = $request->antecedentes;
+        $servicioTecnologico->metodologia                   = $request->metodologia;
+        $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
+        $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
+        $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
+        $servicioTecnologico->identificacion_problema       = $request->identificacion_problema;
+        $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
+        $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
+        $servicioTecnologico->bibliografia                  = $request->bibliografia;
 
         $servicioTecnologico->subclasificacionTipologiaSt()->associate($request->subclasificacion_tipologia_st_id);
         $servicioTecnologico->estadoSistemaGestion()->associate($request->estado_sistema_gestion_id);
