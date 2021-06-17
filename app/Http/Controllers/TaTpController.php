@@ -12,6 +12,7 @@ use App\Models\Regional;
 use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TaTpController extends Controller
@@ -44,7 +45,8 @@ class TaTpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'roles'             => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'rolesTa'           => collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true)),
+            'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
             'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
     }
@@ -76,9 +78,9 @@ class TaTpController extends Controller
         $tatp->propuesta_sostenibilidad             = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $tatp->bibliografia                         = 'Por favor diligencie la bibliografía';
         $tatp->impacto_municipios                   = 'Describa el beneficio en los municipios';
-        $tatp->impacto_centro_formacion             = 'Describa el beneficio en los municipios';
+        $tatp->impacto_centro_formacion             = 'Describa el beneficio en el centro de formación';
+        $tatp->identificacion_problema              = 'Describa la identificación del problema';
 
-        $tatp->impacto_municipios                   = 'Por favor diligencie el impacto en los municipios';
         $tatp->resumen_regional                     = 'Por favor diligencie el resumen regional';
         $tatp->antecedentes_regional                = 'Por favor diligencie los antecedentes regional';
         $tatp->retos_oportunidades                  = 'Descripción de Retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto';
@@ -88,6 +90,9 @@ class TaTpController extends Controller
         $tatp->nombre_instituciones                 = null;
 
         $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
+        if ($request->codigo_linea_programatica == 69) {
+            $tatp->nodoTecnoparque()->associate($request->nodo_tecnoparque_id);
+        }
 
         $proyecto->taTp()->save($tatp);
 
@@ -161,7 +166,6 @@ class TaTpController extends Controller
         $tatp->impacto_municipios                   = $request->impacto_municipios;
         $tatp->impacto_centro_formacion             = $request->impacto_centro_formacion;
 
-        $tatp->impacto_municipios                   = $request->impacto_municipios;
         $tatp->resumen_regional                     = $request->resumen_regional;
         $tatp->antecedentes_regional                = $request->antecedentes_regional;
         $tatp->retos_oportunidades                  = $request->retos_oportunidades;

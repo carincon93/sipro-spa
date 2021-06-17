@@ -8,8 +8,10 @@ use App\Models\Convocatoria;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
-use App\Models\RolSennova;
 use App\Models\SemilleroInvestigacion;
+use App\Notifications\ComentarioProyecto;
+use App\Notifications\ProyectoFinalizado;
+use App\Notifications\ProyectoRadicado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -173,10 +175,58 @@ class ProyectoController extends Controller
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
+        $proyecto->modificable = false;
         $proyecto->finalizado = true;
         $proyecto->save();
 
         return redirect()->back()->with('success', 'Se ha finalizado el proyecto exitosamente.');
+    }
+
+    /**
+     * Finsih project.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function sendProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-dinamizador', [$proyecto]);
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
+        $proyecto->radicado = true;
+        $proyecto->finalizado = true;
+        $proyecto->modificable = false;
+        $proyecto->save();
+
+        $user = $proyecto->participantes()->where('es_formulador', true)->first();
+        $user->notify(new ProyectoRadicado($proyecto, Auth::user()));
+
+        return redirect()->back()->with('success', 'Se ha radicado el proyecto exitosamente.');
+    }
+
+    /**
+     * Finsih project.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function returnProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('validar-dinamizador', [$proyecto]);
+
+        $proyecto->radicado = false;
+        $proyecto->finalizado = false;
+        $proyecto->modificable = true;
+        $proyecto->save();
+
+        $user = $proyecto->participantes()->where('es_formulador', true)->first();
+        $user->notify(new ComentarioProyecto($convocatoria, $proyecto, $request->comentario));
+
+        return redirect()->back()->with('success', 'Se ha notificado al proponente.');
     }
 
     /**
