@@ -21,7 +21,7 @@ class AnalisisRiesgoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
             'convocatoria'    => $convocatoria->only('id'),

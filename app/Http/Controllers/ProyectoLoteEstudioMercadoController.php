@@ -78,7 +78,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         /**
          * Línea 66
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66) {
+        if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeMaquinariaIndustrial} COP) del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
@@ -93,7 +93,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         /**
          * Línea 23
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 23) {
+        if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
             }
@@ -210,7 +210,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         /**
          * Línea 66
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66) {
+        if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeMaquinariaIndustrial} COP) del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
@@ -225,7 +225,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         /**
          * Línea 23
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 23) {
+        if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
             }

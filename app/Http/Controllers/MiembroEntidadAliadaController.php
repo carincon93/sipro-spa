@@ -22,7 +22,7 @@ class MiembroEntidadAliadaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Index', [
                 'convocatoria'          => $convocatoria->only('id'),
                 'proyecto'              => $proyecto->only('id', 'modificable'),
@@ -45,7 +45,7 @@ class MiembroEntidadAliadaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Create', [
                 'convocatoria'    => $convocatoria->only('id'),
                 'proyecto'        => $proyecto->only('id', 'modificable'),
@@ -102,7 +102,7 @@ class MiembroEntidadAliadaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Edit', [
                 'convocatoria'         => $convocatoria->only('id'),
                 'proyecto'             => $proyecto->only('id', 'modificable'),

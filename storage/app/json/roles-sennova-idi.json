@@ -1,0 +1,5 @@
+[
+    { "value": 1, "label": "Dinamizador SENNOVA", "maxHoras": 48 },
+    { "value": 2, "label": "Investigador experto", "maxHoras": 48 },
+    { "value": 3, "label": "Instructor investigador", "maxHoras": 16 }
+]

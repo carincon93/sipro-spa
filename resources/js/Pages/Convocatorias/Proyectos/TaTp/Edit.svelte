@@ -54,7 +54,7 @@
 
     let form = useForm({
         centro_formacion_id: tatp.proyecto.centro_formacion_id,
-        tipo_proyecto_id: tatp.proyecto.tipo_proyecto_id,
+        linea_programatica_id: tatp.proyecto.linea_programatica_id,
         fecha_inicio: tatp.fecha_inicio,
         fecha_finalizacion: tatp.fecha_finalizacion,
         max_meses_ejecucion: tatp.max_meses_ejecucion,
@@ -168,10 +168,10 @@
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Tipo de proyecto" />
+                        <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} bind:recurso={codigoLineaProgramatica} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre del tipo de proyecto, línea programática" message={errors.tipo_proyecto_id} required />
+                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} bind:recurso={codigoLineaProgramatica} routeWebApi={route('web-api.tipos-proyecto', 1)} placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                     </div>
                 </div>
             </fieldset>
@@ -182,7 +182,7 @@
                     <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
                 <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    {tatp.proyecto.centro_formacion.nombre}
                 </div>
             </div>
 

@@ -10,10 +10,8 @@ use App\Http\Controllers\ProgramaFormacionController;
 use App\Http\Controllers\LineaProgramaticaController;
 use App\Http\Controllers\RedConocimientoController;
 use App\Http\Controllers\TematicaEstrategicaController;
-use App\Http\Controllers\TipoProyectoController;
 use App\Http\Controllers\SectorProductivoController;
 use App\Http\Controllers\MesaTecnicaController;
-use App\Http\Controllers\TemaPriorizadoController;
 use App\Http\Controllers\GrupoInvestigacionController;
 use App\Http\Controllers\LineaInvestigacionController;
 use App\Http\Controllers\SemilleroInvestigacionController;
@@ -51,7 +49,6 @@ use App\Http\Controllers\CulturaInnovacionController;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
-use App\Models\TipoProyecto;
 use App\Models\RedConocimiento;
 use App\Models\DisciplinaSubareaConocimiento;
 use App\Models\TematicaEstrategica;
@@ -62,6 +59,7 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
+use App\Models\EstadoSistemaGestion;
 use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
@@ -70,6 +68,8 @@ use App\Models\LineaTecnologica;
 use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\SectorProductivo;
+use App\Models\SubareaConocimiento;
+use App\Models\SubclasificacionTipologiaSt;
 use App\Models\TemaPriorizado;
 use App\Models\User;
 
@@ -237,6 +237,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
 
     /**
+     * Trae los centros de formación por regional
+     */
+    Route::get('web-api/regional/{regional}/centros-formacion', function ($regional) {
+        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $regional)->orderBy('centros_formacion.nombre', 'ASC')->get());
+    })->name('web-api.centros-formacion-ejecutor');
+
+    /**
      * Centros de formación
      * 
      * Trae los subdirectores
@@ -335,12 +342,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
     /**
-     * Tipos de proyecto
-     * 
-     */
-    Route::resource('tipos-proyecto', TipoProyectoController::class)->parameters(['tipos-proyecto' => 'tipo-proyecto'])->except(['show']);
-
-    /**
      * Mesas sectoriales
      * 
      */
@@ -395,14 +396,35 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae los tipos de proyectos
+     * Trae las líneas programáticas
      */
-    Route::get('web-api/tipos-proyecto/{categoria_proyecto}', function ($categoriaProyecto) {
-        return response(TipoProyecto::selectRaw('tipos_proyecto.id as value, concat(tipos_proyecto.nombre, chr(10), \'∙ Línea programática: \', lineas_programaticas.codigo, \' - \', lineas_programaticas.nombre) as label, lineas_programaticas.codigo as codigo')
-            ->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id')
-            ->where('categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
+    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', function ($categoriaProyecto) {
+        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label')
+            ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
             ->get());
-    })->name('web-api.tipos-proyecto');
+    })->name('web-api.lineas-programaticas');
+
+    /**
+     * Web api
+     * 
+     * Trae las subclasificaciones de tipología ST
+     */
+    Route::get('web-api/tipologia-st/{tipologia_st}/web-api.subclasificacion-tipologia-st', function ($tipologiaSt) {
+        return response(SubclasificacionTipologiaSt::select('id as value', 'subclasificacion as label')
+            ->where('tipologia_st_id', '=', $tipologiaSt)
+            ->get());
+    })->name('web-api.subclasificacion-tipologia-st');
+
+    /**
+     * Web api
+     * 
+     * Trae los estados del sistema de gestión
+     */
+    Route::get('web-api/tipos-proyecto-st/{tipo_proyecto_st}/estados-sistema-gestion', function ($tipoProyectoSt) {
+        return response(EstadoSistemaGestion::select('id as value', 'estado as label')
+            ->where('tipo_proyecto_st_id', '=', $tipoProyectoSt)
+            ->get());
+    })->name('web-api.estados-sistema-gestion');
 
     /**
      * Web api
@@ -422,14 +444,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.areas-conocimiento');
 
+    /**
+     * Web api
+     * 
+     * Trae las subáreas de conocimiento
+     */
+    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', function ($areaConocimiento) {
+        return response(SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label')->where('subareas_conocimiento.area_conocimiento_id', $areaConocimiento)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.subareas-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las disciplinas de subáreas de conocimiento
      */
-    Route::get('web-api/disciplinas-subarea-conocimiento', function () {
-        return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', function ($subareaConocimiento) {
+        return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->where('disciplinas_subarea_conocimiento.subarea_conocimiento_id', $subareaConocimiento)->orderBy('nombre', 'ASC')->get());
     })->name('web-api.disciplinas-subarea-conocimiento');
 
     /**
@@ -453,19 +483,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae las líneas programáticas
-     */
-    Route::get('web-api/lineas-programaticas', function () {
-        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.lineas-programaticas');
-
-    /**
-     * Web api
-     * 
      * Trae los sectores productivos
      */
     Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
-        return response(SectorProductivo::selectRaw('sectores_productivos.id as value, sectores_productivos.nombre as label')->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
+        return response(SectorProductivo::selectRaw('mesa_tecnica_sector_productivo.id as value, sectores_productivos.nombre as label')
+            ->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')
+            ->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
     })->name('web-api.sectores-productivos');
 
     /**
@@ -476,7 +499,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/subtipologias-minciencias', function () {
         return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
     })->name('web-api.subtipologias-minciencias');
-
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');

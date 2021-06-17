@@ -365,9 +365,7 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
-    <p class="text-center">
-        Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).{#if proyecto.codigo_linea_programatica == 68}Si es proyecto tipo A, habilitar 3 causas directas y si es proyecto tipo B habilitar 4 objetivos.{/if}
-    </p>
+    <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
     <div class="mt-16">
         <!-- Efectos -->

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoProyecto extends Model
+class SubclasificacionTipologiaSt extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class TipoProyecto extends Model
      *
      * @var string
      */
-    protected $table = 'tipos_proyecto';
+    protected $table = 'subclasificacion_tipologia_st';
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +22,8 @@ class TipoProyecto extends Model
      * @var array
      */
     protected $fillable = [
-        'linea_programatica_id',
-        'nombre',
+        'subclasificacion',
+        'tipologia_st_id'
     ];
 
     /**
@@ -45,23 +45,23 @@ class TipoProyecto extends Model
     ];
 
     /**
-     * Relationship with LineaProgramatica
+     * Relationship with TipologiaSt
      *
      * @return object
      */
-    public function lineaProgramatica()
+    public function tipologiaSt()
     {
-        return $this->belongsTo(LineaProgramatica::class);
+        return $this->belongsTo(TipologiaSt::class);
     }
 
     /**
-     * Relationship with Proyecto
+     * Relationship with ServicioTecnologico
      *
      * @return object
      */
-    public function proyectos()
+    public function servicioTecnologico()
     {
-        return $this->belongsTo(Proyecto::class);
+        return $this->hasMany(ServicioTecnologico::class);
     }
 
     /**
@@ -71,15 +71,10 @@ class TipoProyecto extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTipoProyecto($query, array $filters)
+    public function scopeFilterSubclasificacionTipologiaSt($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $search = str_replace('"', "", $search);
-            $search = str_replace("'", "", $search);
-            $search = str_replace(' ', '%%', $search);
-            $query->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id');
-            $query->whereRaw("unaccent(tipos_proyecto.nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhereRaw("unaccent(lineas_programaticas.nombre) ilike unaccent('%" . $search . "%')");
+            $query->where('replace', 'ilike', '%' . $search . '%');
         });
     }
 }

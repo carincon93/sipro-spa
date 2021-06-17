@@ -26,7 +26,7 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica                = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica                = $proyecto->lineaProgramatica->codigo;
         $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040115');
         $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2042186');
         $proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040516');
@@ -55,7 +55,7 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->tipoProyecto->lineaProgramatica->only('id');
+        $proyecto->lineaProgramatica->only('id');
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Create', [
             'convocatoria'              => $convocatoria->only('id'),
@@ -81,7 +81,7 @@ class ProyectoPresupuestoController extends Controller
         /**
          * Línea 66 y 82
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->lineaProgramatica->codigo == 66 || $proyecto->lineaProgramatica->codigo == 82) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
                 return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
             }
@@ -148,7 +148,7 @@ class ProyectoPresupuestoController extends Controller
         $presupuesto->softwareInfo;
         $presupuesto->servicioEdicionInfo;
         $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
-        $proyecto->tipoProyecto->lineaProgramatica;
+        $proyecto->lineaProgramatica;
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Edit', [
             'convocatoria'              => $convocatoria->only('id'),
@@ -176,7 +176,7 @@ class ProyectoPresupuestoController extends Controller
         /**
          * Línea 66 y 82
          */
-        if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->lineaProgramatica->codigo == 66 || $proyecto->lineaProgramatica->codigo == 82) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
                 return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
             }

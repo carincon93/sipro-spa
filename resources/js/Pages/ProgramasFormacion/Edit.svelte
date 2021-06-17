@@ -94,7 +94,7 @@
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar programa de formación </button>
                 {/if}
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar Programa de formación</LoadingButton>
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar programa de formación</LoadingButton>
                 {/if}
             </div>
         </form>

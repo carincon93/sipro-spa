@@ -60,7 +60,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovicatoria</p>
+                    <p class="text-center">Fecha de la conovocatoria</p>
                     <div class="mt-4 flex items-start justify-around">
                         <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                             <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />

@@ -26,7 +26,7 @@ class ProductoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         $validacionResultados = null;
         if (count($proyecto->efectosDirectos()->whereHas('resultado', function ($query) {

@@ -44,8 +44,9 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
-            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'roles'        => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
+            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
     }
 
@@ -59,13 +60,13 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('formular-proyecto');
 
-        if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->tipo_proyecto_id)) {
+        if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->linea_programatica_id)) {
             return redirect()->back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
         };
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
-        $proyecto->tipoProyecto()->associate($request->tipo_proyecto_id);
+        $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
@@ -111,7 +112,7 @@ class CulturaInnovacionController extends Controller
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_sennova_id'    => $request->rol_sennova_id,
+                'rol_sennova'       => $request->rol_sennova,
             ]
         );
 
@@ -139,8 +140,9 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
-        $culturaInnovacion->codigo_linea_programatica = $culturaInnovacion->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $culturaInnovacion->codigo_linea_programatica = $culturaInnovacion->proyecto->lineaProgramatica->codigo;
         $culturaInnovacion->precio_proyecto           = $culturaInnovacion->proyecto->precioProyecto;
+        $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
             'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),

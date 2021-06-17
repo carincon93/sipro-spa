@@ -29,7 +29,7 @@ class ProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         if ($proyecto->idi()->exists()) {
             $objetivoGeneral = $proyecto->idi->objetivo_general;
@@ -149,7 +149,7 @@ class ProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
@@ -190,10 +190,20 @@ class ProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->participantes;
         $proyecto->programasFormacion;
         $proyecto->semillerosInvestigacion;
+
+        if ($proyecto->codigo_linea_programatica == 62 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82 || $proyecto->codigo_linea_programatica == 65) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
+        } elseif ($proyecto->codigo_linea_programatica == 70) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
+        } elseif ($proyecto->codigo_linea_programatica == 69) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true));
+        } elseif ($proyecto->codigo_linea_programatica == 68) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-st.json'), true));
+        }
 
         $proyecto->load('participantes.centroFormacion.regional');
         $proyecto->load('programasFormacion.centroFormacion.regional');
@@ -203,8 +213,8 @@ class ProyectoController extends Controller
             'convocatoria'          => $convocatoria,
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
-            'roles'                 => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'roles'                 => $rolesSennova,
         ]);
     }
 

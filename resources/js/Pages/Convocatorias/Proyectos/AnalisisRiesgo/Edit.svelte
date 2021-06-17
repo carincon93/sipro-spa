@@ -10,6 +10,7 @@
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -95,6 +96,19 @@
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de riesgo" />
                     <Select id="tipo" items={tiposRiesgo} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
+                    {#if $form.tipo?.value == 1}
+                        <InfoMessage message="Es la probabilidad de variaciones en las condiciones del mercado como el precio, la calidad y la disponibilidad de los materiales e insumos, la competencia (oferta/demanda) del producto/servicios ofrecidos, la tasa de cambiaria y los asociados a la tecnología utilizada (obsolescencia)." />
+                    {:else if $form.tipo?.value == 2}
+                        <InfoMessage message="Es toda posible contingencia que pueda provocar pérdidas en el desarrollo del proyecto por causa de errores humanos, de errores tecnológicos, de procesos internos defectuosos o fallidos. Esta clase de riesgo es inherente a todos los sistemas y procesos realizados por humanos." />
+                    {:else if $form.tipo?.value == 3}
+                        <InfoMessage
+                            message="Son los obstáculos legales o normativos que pueden afectar el desarrollo del proyecto. Por ejemplo: nuevos requisitos legales, cambios reglamentarios o gubernamentales directamente relacionados con el entorno que se desarrolla el proyecto, ausencia y/o deficiencia de documentación, errores en los contratos, incapacidad del proyecto de cumplir lo pactado."
+                        />
+                    {:else if $form.tipo?.value == 4}
+                        <InfoMessage
+                            message="Es la probabilidad de incurrir en pérdidas originadas por la deficiencia en la planeación, procesos, controles y/o falta de idoneidad y competencia del personal. Por ejemplo: falta de planeación del proyecto, estructura organizacional incoherente, falta de liderazgo, falta de integración entre la dirección y la parte operativa y/o productiva, ineficiencia en la adaptación a los cambios del entorno, toma de decisiones por información incompleta."
+                        />
+                    {/if}
                 </div>
 
                 <div class="mt-8">

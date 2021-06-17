@@ -12,11 +12,11 @@
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
     import InfoMessage from '@/Shared/InfoMessage'
-    import { loop_guard } from 'svelte/internal'
 
     export let errors
     export let convocatoria
     export let roles
+    export let authUserRegional
 
     $: $title = 'Crear proyecto I+D+i'
 
@@ -33,7 +33,7 @@
         disciplina_subarea_conocimiento_id: null,
         tematica_estrategica_id: null,
         red_conocimiento_id: null,
-        tipo_proyecto_id: null,
+        linea_programatica_id: null,
         actividad_economica_id: null,
         titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
         fecha_inicio: null,
@@ -97,10 +97,11 @@
                         </div>
                     </div>
                 </div>
-                {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                    <div class="mb-20 flex">
+                {#if errors.fecha_inicio || errors.fecha_finalizacion || errors.max_meses_ejecucion}
+                    <div class="mb-20 flex justify-center mt-4">
                         <InputError classes="text-center" message={errors.fecha_inicio} />
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
+                        <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
             </div>
@@ -110,7 +111,7 @@
                     <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
                 <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </div>
 
@@ -126,10 +127,10 @@
             {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Código dependencia presupuestal (SIIF)" />
+                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} routeWebApi={route('web-api.tipos-proyecto', 2)} classes="min-h" placeholder="Busque por el nombre de la dependencia presupuestal, línea programática" message={errors.tipo_proyecto_id} required />
+                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 2)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -142,15 +143,35 @@
             </div>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
                 </div>
                 <div>
-                    <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
                 </div>
             </div>
+            {#if $form.area_conocimiento_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} required />
+                    </div>
+                </div>
+            {/if}
+            {#if $form.subarea_conocimiento_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+                    </div>
+                </div>
+            {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />
+                    <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto?" />
                 </div>
                 <div>
                     <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
@@ -168,6 +189,14 @@
             <hr class="mt-5 mb-5" />
 
             <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
+                </div>
+                <div>
+                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                </div>
+            </div>
             {#if $form.fecha_inicio && $form.fecha_finalizacion}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
@@ -185,16 +214,7 @@
                     <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                 </div>
                 <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
-                </div>
-                <div>
-                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova_id?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </div>
         </fieldset>

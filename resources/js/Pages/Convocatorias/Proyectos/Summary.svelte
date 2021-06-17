@@ -86,12 +86,38 @@
             })
         }
     }
+
+    let minimoEmpresas = 0
+    if (proyecto.codigo_linea_programatica == 68) {
+        if (proyecto.precio_proyecto >= 199999999) {
+            minimoEmpresas = 16
+        } else if (proyecto.precio_proyecto >= 200000000 && proyecto.precio_proyecto <= 499999999) {
+            minimoEmpresas = 35
+        } else if (proyecto.precio_proyecto >= 500000000) {
+            minimoEmpresas = 50
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
     <div class="mt-20">
+        {#if proyecto.codigo_linea_programatica == 68}
+            <InfoMessage class="mb-2">
+                <h1><strong>Información importante</strong></h1>
+                <p>De acuerdo con el presupuesto solicitado el proyecto se compromete a cumplir adicionalmente las siguientes metas, las cuales están alineadas al cumplimento del Plan Nacional de Desarrollo y de los CONPES:</p>
+                <ul>
+                    {#if minimoEmpresas > 0}
+                        <li>- Empresas atendidas por producción de centro: mínimo {minimoEmpresas}</li>
+                    {/if}
+                    <li>- Aprendices atendidos (visitas presenciales/virtuales, transferencia de conocimiento): 50 mínimo</li>
+                    <li>- Emprendedores y empresarios atendidos (visitas presenciales/virtuales, transferencia de conocimiento): 50 mínimo</li>
+                </ul>
+                <p>Al momento de <strong>finalizar el proyecto</strong> está aceptando los compromisos establecidos para el cumplimiento de las metas la vigencia 2022</p>
+            </InfoMessage>
+        {/if}
+
         {#if proyecto.finalizado == true && !checkRole(authUser, [4])}
             <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
         {:else if proyecto.radicado == true}

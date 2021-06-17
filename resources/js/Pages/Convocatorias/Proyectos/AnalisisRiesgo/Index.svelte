@@ -31,7 +31,11 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Análisis de riesgos</div>
 
-        <h2 class="text-center mt-10 mb-24" slot="caption">Debe ingresar mínimo un análisis de riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos).</h2>
+        <p class="text-center mt-10 mb-24" slot="caption">
+            Los riesgos son eventos inciertos que pueden llegar a suceder en el futuro, dentro del horizonte de la ejecución del proyecto y representaran efectos de diferente magnitud en uno o más de sus objetivos.
+            <br />
+            Se deben establecer dos riesgos por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos). Estos riesgos podrán ser clasificados conforme los siguientes tipos: mercados, operacionales, legales, administrativos.
+        </p>
 
         <div slot="actions">
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
@@ -43,6 +47,7 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nivel</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo de riesgo</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -51,14 +56,20 @@
             {#each analisisRiesgos.data as analisisRiesgo (analisisRiesgo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.descripcion}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.nivel}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                            {analisisRiesgo.tipo}
                         </p>
                     </td>
 

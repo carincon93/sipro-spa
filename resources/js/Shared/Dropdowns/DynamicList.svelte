@@ -61,7 +61,7 @@
     }
 </script>
 
-<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items w-full {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros o de clic en refrescar" />
+<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items w-full{items.length > 6 ? ' height-select' : ''} {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros o de clic en refrescar" />
 {#if items.length == 0}
     <InfoMessage class="mt-4">
         <p class="mb-4">Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -90,7 +90,7 @@
         padding-bottom: 10px;
     }
 
-    :global(.min-h .listContainer) {
+    :global(.height-select .listContainer) {
         min-height: 50vh;
     }
 </style>

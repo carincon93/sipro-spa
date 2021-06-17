@@ -40,14 +40,13 @@ class ServicioTecnologico extends Model
         'pregunta_formulacion_problema',
         'objetivo_general',
         'metodologia',
-        'numero_aprendices', // Eliminar
         'fecha_inicio',
         'fecha_finalizacion',
         'propuesta_sostenibilidad',
-        'impacto_centro_formacion', // Eliminar
-        'especificaciones_area',
         'bibliografia',
-        'max_meses_ejecucion'
+        'max_meses_ejecucion',
+        'estado_sistema_gestion_id',
+        'subclasificacion_tipologia_st_id'
     ];
 
     /**
@@ -86,6 +85,26 @@ class ServicioTecnologico extends Model
     public function mesaTecnicaSectorProductivo()
     {
         return $this->belongsTo(MesaTecnicaSectorProductivo::class);
+    }
+
+    /**
+     * Relationship with EstadoSistemaGestion
+     *
+     * @return object
+     */
+    public function estadoSistemaGestion()
+    {
+        return $this->belongsTo(EstadoSistemaGestion::class);
+    }
+
+    /**
+     * Relationship with SubclasificacionTipologiaSt
+     *
+     * @return object
+     */
+    public function subclasificacionTipologiaSt()
+    {
+        return $this->belongsTo(SubclasificacionTipologiaSt::class);
     }
 
     /**
