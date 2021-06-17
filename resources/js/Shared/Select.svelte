@@ -50,8 +50,4 @@
         padding-top: 10px;
         padding-bottom: 10px;
     }
-
-    :global(.min-h .listContainer) {
-        min-height: 50vh;
-    }
 </style>

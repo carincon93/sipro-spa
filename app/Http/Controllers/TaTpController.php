@@ -45,6 +45,7 @@ class TaTpController extends Controller
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'roles'             => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
     }
 
@@ -60,7 +61,7 @@ class TaTpController extends Controller
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
-        $proyecto->tipoProyecto()->associate($request->tipo_proyecto_id);
+        $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
@@ -96,7 +97,7 @@ class TaTpController extends Controller
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_sennova_id'    => $request->rol_sennova_id,
+                'rol_sennova'       => $request->rol_sennova,
             ]
         );
 
@@ -124,8 +125,9 @@ class TaTpController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$tatp->proyecto]);
 
-        $tatp->codigo_linea_programatica = $tatp->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $tatp->codigo_linea_programatica = $tatp->proyecto->lineaProgramatica->codigo;
         $tatp->precio_proyecto           = $tatp->proyecto->precioProyecto;
+        $tatp->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Edit', [
             'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),

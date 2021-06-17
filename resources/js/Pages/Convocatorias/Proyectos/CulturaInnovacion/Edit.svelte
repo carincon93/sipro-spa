@@ -64,7 +64,7 @@
         linea_investigacion_id: culturaInnovacion.linea_investigacion_id,
         area_conocimiento_id: culturaInnovacion.area_conocimiento_id,
         tematica_estrategica_id: culturaInnovacion.tematica_estrategica_id,
-        tipo_proyecto_id: culturaInnovacion.proyecto?.tipo_proyecto_id,
+        linea_programatica_id: culturaInnovacion.proyecto?.linea_programatica_id,
         actividad_economica_id: culturaInnovacion.actividad_economica_id,
         titulo: culturaInnovacion.titulo,
         fecha_inicio: culturaInnovacion.fecha_inicio,
@@ -213,7 +213,7 @@
                         <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                     </div>
                     <div>
-                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                        {culturaInnovacion.proyecto.centro_formacion.nombre}
                     </div>
                 </div>
 
@@ -229,10 +229,10 @@
                 {/if}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Código dependencia presupuestal (SIIF)" />
+                        <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} routeWebApi={route('web-api.tipos-proyecto', 5)} classes="min-h" placeholder="Busque por el nombre de la dependencia presupuestal, línea programática" message={errors.tipo_proyecto_id} required />
+                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 5)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                     </div>
                 </div>
             </fieldset>
@@ -244,6 +244,26 @@
                     <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
                 </div>
             </div>
+            {#if $form.area_conocimiento_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} required />
+                    </div>
+                </div>
+            {/if}
+            {#if $form.subarea_conocimiento_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+                    </div>
+                </div>
+            {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />

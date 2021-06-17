@@ -43,8 +43,9 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'roles'        => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
+            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
     }
 
@@ -60,7 +61,7 @@ class IdiController extends Controller
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
-        $proyecto->tipoProyecto()->associate($request->tipo_proyecto_id);
+        $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
@@ -107,7 +108,7 @@ class IdiController extends Controller
                 'es_formulador'     => true,
                 'cantidad_meses'    => $request->cantidad_meses,
                 'cantidad_horas'    => $request->cantidad_horas,
-                'rol_sennova_id'    => $request->rol_sennova_id,
+                'rol_sennova'       => $request->rol_sennova,
             ]
         );
 
@@ -135,8 +136,10 @@ class IdiController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
 
-        $idi->codigo_linea_programatica = $idi->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
+        $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
+        $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
             'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),

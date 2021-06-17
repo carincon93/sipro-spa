@@ -161,7 +161,7 @@ return [
 		'codigo_minciencias'    				=> 'código Minciencias',
 		'categoria_minciencias' 				=> 'categoría Minciencias',
 		'year' 									=> 'año',
-		'tipo_proyecto_id' 						=> 'tipo de proyecto',
+		'linea_programatica_id' 						=> 'tipo de proyecto',
 		'actividad_economica_id'				=> 'actividad económica',
 		'linea_tecnologica_id'  				=> 'línea tecnológica',
 		'titulo' 								=> 'título',
@@ -228,6 +228,7 @@ return [
 		'nombre_instituciones' 					=> 'Instituciones donde se implementará el programa que tienen Articulación con la Media',
 		'old_password' 							=> 'contraseña actual',
 		'rol_id' 								=> 'rol',
-		'max_meses_ejecucion' 					=> 'fecha de ejecución'
+		'max_meses_ejecucion' 					=> 'fecha de ejecución',
+		'mesa_tecnica_sector_productivo_id'     => 'mesa técnica'
 	],
 ];

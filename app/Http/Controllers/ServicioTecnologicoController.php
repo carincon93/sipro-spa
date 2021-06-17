@@ -8,9 +8,11 @@ use App\Http\Requests\ServicioTecnologicoRequest;
 use App\Models\Convocatoria;
 use App\Models\MesaTecnica;
 use App\Models\Proyecto;
-use App\Models\RolSennova;
+use App\Models\TipologiaSt;
+use App\Models\TipoProyectoSt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ServicioTecnologicoController extends Controller
@@ -41,9 +43,12 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'mesasTecnicas' => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'roles'         => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'mesasTecnicas'     => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
+            'tipologiasSt'      => TipologiaSt::select('id as value', 'tipologia as label')->orderBy('tipologia', 'ASC')->get(),
+            'tiposProyectoST'   => TipoProyectoSt::select('id as value', 'tipo as label')->orderBy('tipo', 'ASC')->get(),
+            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
     }
 
@@ -59,7 +64,7 @@ class ServicioTecnologicoController extends Controller
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
-        $proyecto->tipoProyecto()->associate($request->tipo_proyecto_id);
+        $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
@@ -72,19 +77,16 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->resumen                               = 'Por favor diligencie el resumen del proyecto';
         $servicioTecnologico->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
         $servicioTecnologico->objetivo_general                      = null;
-        $servicioTecnologico->problema_central                = null;
+        $servicioTecnologico->problema_central                      = null;
         $servicioTecnologico->justificacion_problema                = null;
         $servicioTecnologico->metodologia                           = 'Por favor diligencie la metodología del proyecto';
         $servicioTecnologico->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
-        $servicioTecnologico->numero_aprendices                     = 0;
-        $servicioTecnologico->impacto_centro_formacion              = 'Describa el beneficio en los municipios';
         $servicioTecnologico->pregunta_formulacion_problema         = 'Describa la pregunta de la formulación del problema';
-        $servicioTecnologico->impacto_centro_formacion              = 'Describa el impacto en el centro de formación';
-        $servicioTecnologico->infraestructura_adecuada              = false;
-        $servicioTecnologico->especificaciones_area                 = 'Describa las especificaciones del área';
         $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
 
+        $servicioTecnologico->subclasificacionTipologiaSt()->associate($request->subclasificacion_tipologia_st_id);
+        $servicioTecnologico->estadoSistemaGestion()->associate($request->estado_sistema_gestion_id);
         $servicioTecnologico->mesaTecnicaSectorProductivo()->associate($request->mesa_tecnica_sector_productivo_id);
 
         $proyecto->servicioTecnologico()->save($servicioTecnologico);
@@ -93,9 +95,9 @@ class ServicioTecnologicoController extends Controller
             Auth::user()->id,
             [
                 'es_formulador'     => true,
-                'cantidad_meses'    => $request->cantidad_meses,
-                'cantidad_horas'    => $request->cantidad_horas,
-                'rol_sennova_id'    => $request->rol_sennova_id,
+                'cantidad_meses'    => $request->max_meses_ejecucion,
+                'cantidad_horas'    => 48,
+                'rol_sennova'       => $request->rol_sennova,
             ]
         );
 
@@ -123,13 +125,18 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
-        $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
+        $servicioTecnologico->proyecto->centroFormacion;
+        $servicioTecnologico->estadoSistemaGestion;
+        $servicioTecnologico->subclasificacionTipologiaSt;
         $servicioTecnologico->load('mesaTecnicaSectorProductivo.mesaTecnica', 'mesaTecnicaSectorProductivo.sectorProductivo');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'servicioTecnologico'   => $servicioTecnologico,
+            'tipologiasSt'          => TipologiaSt::select('id as value', 'tipologia as label')->orderBy('tipologia', 'ASC')->get(),
+            'tiposProyectoST'       => TipoProyectoSt::select('id as value', 'tipo as label')->orderBy('tipo', 'ASC')->get(),
             'mesasTecnicas'         => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
         ]);
     }
@@ -145,16 +152,17 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
-        $servicioTecnologico->titulo                                = $request->titulo;
-        $servicioTecnologico->resumen                               = $request->resumen;
-        $servicioTecnologico->antecedentes                          = $request->antecedentes;
-        $servicioTecnologico->metodologia                           = $request->metodologia;
-        $servicioTecnologico->fecha_inicio                          = $request->fecha_inicio;
-        $servicioTecnologico->fecha_finalizacion                    = $request->fecha_finalizacion;
-        $servicioTecnologico->max_meses_ejecucion                   = $request->max_meses_ejecucion;
-        $servicioTecnologico->especificaciones_area                 = $request->especificaciones_area;
-        $servicioTecnologico->bibliografia                          = $request->bibliografia;
+        $servicioTecnologico->titulo              = $request->titulo;
+        $servicioTecnologico->resumen             = $request->resumen;
+        $servicioTecnologico->antecedentes        = $request->antecedentes;
+        $servicioTecnologico->metodologia         = $request->metodologia;
+        $servicioTecnologico->fecha_inicio        = $request->fecha_inicio;
+        $servicioTecnologico->fecha_finalizacion  = $request->fecha_finalizacion;
+        $servicioTecnologico->max_meses_ejecucion = $request->max_meses_ejecucion;
+        $servicioTecnologico->bibliografia        = $request->bibliografia;
 
+        $servicioTecnologico->subclasificacionTipologiaSt()->associate($request->subclasificacion_tipologia_st_id);
+        $servicioTecnologico->estadoSistemaGestion()->associate($request->estado_sistema_gestion_id);
         $servicioTecnologico->mesaTecnicaSectorProductivo()->associate($request->mesa_tecnica_sector_productivo_id);
 
         $servicioTecnologico->save();

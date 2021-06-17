@@ -1,0 +1,15 @@
+[
+    { "value": 4, "label": "Facilitador tecnoacademia (alternativa 1)", "maxHoras": 48 },
+    { "value": 5, "label": "Facilitador tecnoacademia (alternativa 2)", "maxHoras": 48 },
+    { "value": 6, "label": "Infocenter tecnoparque", "maxHoras": 48 },
+    { "value": 7, "label": "Dinamizador tecnoacademia (alternativa 1)", "maxHoras": 48 },
+    { "value": 8, "label": "Dinamizador tecnoacademia (alternativa 2)", "maxHoras": 48 },
+    { "value": 9, "label": "Psicopedagogo tecnoacademia (alternativa 1)", "maxHoras": 48 },
+    { "value": 10, "label": "Psicopedagogo tecnoacademia (alternativa 2)", "maxHoras": 48 }
+]
+
+
+
+
+
+

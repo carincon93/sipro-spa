@@ -10,13 +10,14 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
-    import Input from '@/Shared/Input'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
     export let mesasTecnicas
     export let roles
+    export let authUserRegional
+    export let tipologiasSt
+    export let tiposProyectoST
 
     $: $title = 'Crear proyecto de servicios tecnológicos'
 
@@ -29,16 +30,20 @@
     let sending = false
     let form = useForm({
         centro_formacion_id: null,
-        tipo_proyecto_id: null,
+        linea_programatica_id: null,
         mesa_tecnica_id: null,
-        sector_productivo_id: null,
+        mesa_tecnica_sector_productivo_id: null,
         titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
         fecha_inicio: '',
         fecha_finalizacion: '',
         max_meses_ejecucion: 0,
         cantidad_meses: 0,
         cantidad_horas: 0,
-        rol_sennova_id: null,
+        rol_sennova: null,
+        tipo_proyecto_st: null,
+        estado_sistema_gestion_id: null,
+        tipologia_st: null,
+        subclasificacion_tipologia_st_id: null,
     })
 
     $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
@@ -99,10 +104,11 @@
                         </div>
                     </div>
                 </div>
-                {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                    <div class="mb-20 flex">
+                {#if errors.fecha_inicio || errors.fecha_finalizacion || errors.max_meses_ejecucion}
+                    <div class="mb-20 flex justify-center mt-4">
                         <InputError classes="text-center" message={errors.fecha_inicio} />
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
+                        <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
             </div>
@@ -112,18 +118,58 @@
                     <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
                 <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Código dependencia presupuestal (SIIF)" />
+                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} routeWebApi={route('web-api.tipos-proyecto', 3)} classes="min-h" placeholder="Busque por el nombre de la dependencia presupuestal, línea programática" message={errors.tipo_proyecto_id} required />
+                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                 </div>
             </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="tipologia_st" value="Tipología ST" />
+                </div>
+                <div>
+                    <Select id="tipologia_st" items={tipologiasSt} bind:selectedValue={$form.tipologia_st} error={errors.tipologia_st} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+                </div>
+            </div>
+
+            {#if $form.tipologia_st?.value}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="subclasificacion_tipologia_st_id" value="Subclasificación de tipología ST" />
+                    </div>
+                    <div>
+                        <DynamicList id="subclasificacion_tipologia_st_id" bind:value={$form.subclasificacion_tipologia_st_id} routeWebApi={route('web-api.subclasificacion-tipologia-st', $form.tipologia_st?.value)} classes="min-h" placeholder="Busque por el de la subclasificación de tipología ST" message={errors.subclasificacion_tipologia_st_id} required />
+                    </div>
+                </div>
+            {/if}
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="tipo_proyecto_st" value="Tipo de proyecto" />
+                </div>
+                <div>
+                    <Select id="tipo_proyecto_st" items={tiposProyectoST} bind:selectedValue={$form.tipo_proyecto_st} error={errors.tipo_proyecto_st} autocomplete="off" placeholder="Seleccione un tipo de proyecto ST" required />
+                </div>
+            </div>
+
+            {#if $form.tipo_proyecto_st?.value}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
+                    </div>
+                    <div>
+                        <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st?.value)} classes="min-h" placeholder="Busque por el nombre del estado de sistema de gestión" message={errors.estado_sistema_gestion_id} required />
+                    </div>
+                </div>
+            {/if}
 
             <hr class="mt-32" />
 
@@ -142,10 +188,10 @@
             {#if $form.mesa_tecnica_id?.value}
                 <div class="mt-10 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="sector_productivo_id" value="Sector productivo" />
+                        <Label required class="mb-4" labelFor="mesa_tecnica_sector_productivo_id" value="Sector productivo" />
                     </div>
                     <div>
-                        <DynamicList id="sector_productivo_id" bind:value={$form.sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.sector_productivo_id} required />
+                        <DynamicList id="mesa_tecnica_sector_productivo_id" bind:value={$form.mesa_tecnica_sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.mesa_tecnica_sector_productivo_id} required />
                     </div>
                 </div>
             {/if}
@@ -153,33 +199,12 @@
             <hr class="mt-32" />
 
             <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
-            {#if $form.fecha_inicio && $form.fecha_finalizacion}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación" />
-                    </div>
-                    <div>
-                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                        <InfoMessage message="Valor máximo: {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses." />
-                    </div>
-                </div>
-            {/if}
-
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                 </div>
                 <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
-                </div>
-                <div>
-                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
         </fieldset>

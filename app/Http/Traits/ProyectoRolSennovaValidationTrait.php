@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 use App\Models\CentroFormacion;
 use App\Models\ConvocatoriaRolSennova;
-use App\Models\TipoProyecto;
+use App\Models\LineaProgramatica;
 
 trait ProyectoRolSennovaValidationTrait
 {
@@ -83,17 +83,17 @@ trait ProyectoRolSennovaValidationTrait
      * culturaInnovacion
      *
      * @param  mixed $centroFormacionId
-     * @param  mixed $tipoProyectoId
+     * @param  mixed $lineaProgramaticaId
      * @return void
      */
-    public static function culturaInnovacionNumeroProyectos($centroFormacionId, $tipoProyectoId)
+    public static function culturaInnovacionNumeroProyectos($centroFormacionId, $lineaProgramaticaId)
     {
         $centroFormacion = CentroFormacion::find($centroFormacionId);
-        $tipoProyecto = TipoProyecto::find($tipoProyectoId);
+        $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
-        if (in_array($centroFormacion->codigo, [9309, 9503, 9124, 9120, 9222, 9116, 9548, 9401, 9403, 9303, 9310, 9529, 9121]) && $tipoProyecto->lineaProgramatica->codigo == 65) {
+        if (in_array($centroFormacion->codigo, [9309, 9503, 9124, 9120, 9222, 9116, 9548, 9401, 9403, 9303, 9310, 9529, 9121]) && $lineaProgramatica->lineaProgramatica->codigo == 65) {
             foreach ($centroFormacion->proyectos as $proyecto) {
-                if ($proyecto->tipoProyecto->lineaProgramatica->codigo == 65) {
+                if ($proyecto->lineaProgramatica->codigo == 65) {
                     return true;
                 }
             }

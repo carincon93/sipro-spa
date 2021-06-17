@@ -5,7 +5,6 @@
     import { _ } from 'svelte-i18n'
 
     import Button from '@/Shared/Button'
-    import Input from '@/Shared/Input'
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -22,6 +21,8 @@
     export let convocatoria
     export let servicioTecnologico
     export let mesasTecnicas
+    export let tipologiasSt
+    export let tiposProyectoST
 
     $: $title = servicioTecnologico ? servicioTecnologico.titulo : null
 
@@ -37,7 +38,7 @@
 
     let form = useForm({
         centro_formacion_id: servicioTecnologico.proyecto?.centro_formacion_id,
-        tipo_proyecto_id: servicioTecnologico.proyecto?.tipo_proyecto_id,
+        linea_programatica_id: servicioTecnologico.proyecto?.linea_programatica_id,
         titulo: servicioTecnologico.titulo,
         fecha_inicio: servicioTecnologico.fecha_inicio,
         fecha_finalizacion: servicioTecnologico.fecha_finalizacion,
@@ -47,11 +48,23 @@
         bibliografia: servicioTecnologico.bibliografia,
         especificaciones_area: servicioTecnologico.especificaciones_area,
         mesa_tecnica_id: {
-            value: servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica.id,
-            label: mesasTecnicas.find((item) => item.value == servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica.id)?.label,
+            value: servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica_id,
+            label: mesasTecnicas.find((item) => item.value == servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica_id)?.label,
         },
         mesa_tecnica_sector_productivo_id: servicioTecnologico.mesa_tecnica_sector_productivo_id,
+        tipologia_st: {
+            value: servicioTecnologico.subclasificacion_tipologia_st.tipologia_st_id,
+            label: tipologiasSt.find((item) => item.value == servicioTecnologico.subclasificacion_tipologia_st.tipologia_st_id)?.label,
+        },
+        subclasificacion_tipologia_st_id: servicioTecnologico.subclasificacion_tipologia_st.tipologia_st_id,
+        tipo_proyecto_st: {
+            value: servicioTecnologico.estado_sistema_gestion.tipo_proyecto_st_id,
+            label: tiposProyectoST.find((item) => item.value == servicioTecnologico.estado_sistema_gestion.tipo_proyecto_st_id)?.label,
+        },
+        estado_sistema_gestion_id: servicioTecnologico.estado_sistema_gestion.id,
     })
+
+    console.log(servicioTecnologico.mesa_tecnica_sector_productivo.mesa_tecnica_id)
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
@@ -127,18 +140,58 @@
                         <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                     </div>
                     <div>
-                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                        {servicioTecnologico.proyecto.centro_formacion.nombre}
                     </div>
                 </div>
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tipo_proyecto_id" value="Código dependencia presupuestal (SIIF)" />
+                        <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList id="tipo_proyecto_id" bind:value={$form.tipo_proyecto_id} routeWebApi={route('web-api.tipos-proyecto', 3)} classes="min-h" placeholder="Busque por el nombre de la dependencia presupuestal, línea programática" message={errors.tipo_proyecto_id} required />
+                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                     </div>
                 </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tipologia_st" value="Tipología ST" />
+                    </div>
+                    <div>
+                        <Select id="tipologia_st" items={tipologiasSt} bind:selectedValue={$form.tipologia_st} error={errors.tipologia_st} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+                    </div>
+                </div>
+
+                {#if $form.tipologia_st?.value}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="subclasificacion_tipologia_st_id" value="Subclasificación de tipología ST" />
+                        </div>
+                        <div>
+                            <DynamicList id="subclasificacion_tipologia_st_id" bind:value={$form.subclasificacion_tipologia_st_id} routeWebApi={route('web-api.subclasificacion-tipologia-st', $form.tipologia_st?.value)} classes="min-h" placeholder="Busque por el de la subclasificación de tipología ST" message={errors.subclasificacion_tipologia_st_id} required />
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tipo_proyecto_st" value="Tipo de proyecto" />
+                    </div>
+                    <div>
+                        <Select id="tipo_proyecto_st" items={tiposProyectoST} bind:selectedValue={$form.tipo_proyecto_st} error={errors.tipo_proyecto_st} autocomplete="off" placeholder="Seleccione un tipo de proyecto ST" required />
+                    </div>
+                </div>
+
+                {#if $form.tipo_proyecto_st?.value}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
+                        </div>
+                        <div>
+                            <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st?.value)} classes="min-h" placeholder="Busque por el nombre del estado de sistema de gestión" message={errors.estado_sistema_gestion_id} required />
+                        </div>
+                    </div>
+                {/if}
             </fieldset>
 
             <hr class="mt-32" />
@@ -195,7 +248,7 @@
                             no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias de los precios y las
                             gestiones comerciales a realizadas.
                             <br />
-                            <strong>>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
+                            <strong>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
                         </p>
                     </InfoMessage>
                 </div>
@@ -211,15 +264,6 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="especificaciones_area" value="Relacione las especificaciones del área donde se desarrollan las actividades de servicios tecnológicos en el centro de formación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="especificaciones_area" error={errors.especificaciones_area} bind:value={$form.especificaciones_area} required />
                 </div>
             </div>
         </fieldset>
@@ -247,11 +291,7 @@
                 <ul class="list-disc">
                     <li>Resumen</li>
                     <li>Antecedentes</li>
-                    <li>Metodología</li>
-                    <li>Propuesta de sostenibilidad</li>
                     <li>Bibliografía</li>
-                    <li>Impacto en el centro de formación</li>
-                    <li>Especificaciones del área</li>
                 </ul>
             </div>
         </div>

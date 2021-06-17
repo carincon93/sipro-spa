@@ -47,13 +47,13 @@ class LineaProgramatica extends Model
     ];
 
     /**
-     * Relationship with TipoProyecto
+     * Relationship with Proyecto
      *
      * @return object
      */
-    public function tiposProyecto()
+    public function proyectos()
     {
-        return $this->hasMany(TipoProyecto::class);
+        return $this->belongsTo(Proyecto::class);
     }
 
     /**

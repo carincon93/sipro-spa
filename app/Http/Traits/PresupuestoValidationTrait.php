@@ -47,7 +47,7 @@ trait PresupuestoValidationTrait
     public static function viaticosValidation($proyecto, $segundoGrupoPresupuestalCodigo, $valor, $numeroItems)
     {
         if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102') {
-            if ($proyecto->tipoProyecto->lineaProgramatica->codigo != 66 || $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
+            if ($proyecto->lineaProgramatica->codigo != 66 || $proyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
                 return false;
             }
 

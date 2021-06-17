@@ -29,8 +29,10 @@ class ServicioTecnologicoRequest extends FormRequest
         if ($this->isMethod('PUT')) {
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
+                'linea_programatica_id'                     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
                 'mesa_tecnica_sector_productivo_id'         => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:mesa_tecnica_sector_productivo,id'],
+                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
+                'subclasificacion_tipologia_st_id'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:subclasificacion_tipologia_st,id'],
                 'titulo'                                    => ['required', new MaxWords],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
@@ -38,20 +40,19 @@ class ServicioTecnologicoRequest extends FormRequest
                 'resumen'                                   => ['required', 'max:1000', 'string'],
                 'antecedentes'                              => ['required', 'max:10000', 'string'],
                 'bibliografia'                              => ['required', 'string'],
-                'especificaciones_area'                     => ['required', 'string'],
             ];
         } else {
             return [
                 'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'tipo_proyecto_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto,id'],
+                'linea_programatica_id'                     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
                 'mesa_tecnica_sector_productivo_id'         => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:mesa_tecnica_sector_productivo,id'],
+                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
+                'subclasificacion_tipologia_st_id'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:subclasificacion_tipologia_st,id'],
                 'titulo'                                    => ['required', new MaxWords],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
-                'rol_sennova_id'                            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
-                'cantidad_horas'                            => ['required', 'numeric', 'min:1', 'max:168'],
-                'cantidad_meses'                            => ['required', 'numeric', 'min:1', 'max:11.5'],
+                'rol_sennova'                               => ['required', 'min:0', 'max:2147483647', 'integer'],
             ];
         }
     }
@@ -75,9 +76,9 @@ class ServicioTecnologicoRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->rol_sennova_id)) {
+        if (is_array($this->rol_sennova)) {
             $this->merge([
-                'rol_sennova_id' => $this->rol_sennova_id['value'],
+                'rol_sennova' => $this->rol_sennova['value'],
             ]);
         }
     }

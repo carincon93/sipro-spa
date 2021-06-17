@@ -33,7 +33,7 @@ class Proyecto extends Model
     protected $fillable = [
         'convocatoria_id',
         'centro_formacion_id',
-        'tipo_proyecto_id',
+        'linea_programatica_id',
         'finalizado',
         'modificable',
         'radicado'
@@ -68,13 +68,13 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with TipoProyecto
+     * Relationship with LineaProgramatica
      *
      * @return object
      */
-    public function tipoProyecto()
+    public function lineaProgramatica()
     {
-        return $this->belongsTo(TipoProyecto::class);
+        return $this->belongsTo(LineaProgramatica::class);
     }
 
     /**
