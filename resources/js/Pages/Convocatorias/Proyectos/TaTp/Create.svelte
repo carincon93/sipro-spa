@@ -15,8 +15,9 @@
     export let errors
     export let convocatoria
     export let tecnoacademias
-    export let roles
     export let authUserRegional
+    export let rolesTa
+    export let rolesTp
 
     $: $title = 'Crear proyecto Tecnoacademia - Tecnoparque'
 
@@ -38,7 +39,17 @@
         cantidad_meses: 0,
         cantidad_horas: 0,
         rol_sennova_id: null,
+        nodo_tecnoparque_id: null,
     })
+
+    let roles = []
+    $: {
+        if ($form.linea_programatica_id == 5 || $form.linea_programatica_id == 6) {
+            roles = rolesTa
+        } else if ($form.linea_programatica_id == 4) {
+            roles = rolesTp
+        }
+    }
 
     $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
         $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
@@ -98,6 +109,14 @@
             </div>
             <div class="mt-44 grid grid-cols-2">
                 <div>
+                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
+                </div>
+                <div>
+                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                </div>
+            </div>
+            <div class="mt-44 grid grid-cols-2">
+                <div>
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
@@ -105,32 +124,33 @@
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
-                </div>
-                <div>
-                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
-                </div>
-                <div>
-                    <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una Tecnoacademia" required />
-                </div>
-            </div>
-
-            {#if $form.tecnoacademia_id?.value}
+            {#if $form.linea_programatica_id == 70 && $form.centro_formacion_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
                     </div>
                     <div>
-                        <DynamicList id="tecnoacademia_linea_tecnologica_id" bind:value={$form.tecnoacademia_linea_tecnologica_id} routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id?.value])} placeholder="Seleccione una línea tecnológica" message={errors.tecnoacademia_linea_tecnologica_id} required />
+                        <DynamicList id="tecnoacademia_id" bind:value={$form.tecnoacademia_id} routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])} placeholder="Busque por el nombre de la Tecnoacademia" message={errors.tecnoacademia_id} required />
+                    </div>
+                </div>
+
+                {#if $form.tecnoacademia_id}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                        </div>
+                        <div>
+                            <DynamicList id="tecnoacademia_linea_tecnologica_id" bind:value={$form.tecnoacademia_linea_tecnologica_id} routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])} placeholder="Busque por el nombre de la línea tecnológica" message={errors.tecnoacademia_linea_tecnologica_id} required />
+                        </div>
+                    </div>
+                {/if}
+            {:else if $form.linea_programatica_id == 69 && $form.centro_formacion_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
+                    </div>
+                    <div>
+                        <DynamicList id="nodo_tecnoparque_id" bind:value={$form.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', $form.centro_formacion_id)} message={errors.nodo_tecnoparque_id} required />
                     </div>
                 </div>
             {/if}
