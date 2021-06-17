@@ -240,7 +240,7 @@ class Proyecto extends Model
                 'es_formulador',
                 'cantidad_meses',
                 'cantidad_horas',
-                'rol_sennova_id'
+                'rol_sennova'
             ]);
     }
 
