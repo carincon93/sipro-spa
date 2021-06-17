@@ -37,6 +37,7 @@ class ServicioTecnologico extends Model
         'antecedentes',
         'problema_central',
         'justificacion_problema',
+        'identificacion_problema',
         'pregunta_formulacion_problema',
         'objetivo_general',
         'metodologia',

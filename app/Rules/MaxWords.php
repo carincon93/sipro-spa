@@ -11,9 +11,9 @@ class MaxWords implements Rule
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($maxWords)
     {
-        //
+        $this->maxWords = $maxWords;
     }
 
     /**
@@ -28,7 +28,7 @@ class MaxWords implements Rule
         $words      = explode(' ', $value);
         $nbWords    = count($words);
 
-        return ($nbWords >= 0 && $nbWords <= 20);
+        return ($nbWords >= 0 && $nbWords <= $this->maxWords);
     }
 
     /**
@@ -38,6 +38,6 @@ class MaxWords implements Rule
      */
     public function message()
     {
-        return 'El título del proyecto debe tener máximo 20 palabras.';
+        return "Este campo debe tener máximo {$this->maxWords} palabras.";
     }
 }

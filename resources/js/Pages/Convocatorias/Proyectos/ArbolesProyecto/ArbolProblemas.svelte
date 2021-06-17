@@ -536,14 +536,22 @@
             {:else if showProblemaCentralForm}
                 <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        <div class="mt-10">
-                            <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
-                            <InfoMessage
-                                class="mb-2"
-                                message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
-                            />
-                            <Textarea label="Problema central" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
-                        </div>
+                        {#if proyecto.codigo_linea_programatica != 68}
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
+                                <InfoMessage
+                                    class="mb-2"
+                                    message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                                />
+                                <Textarea label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
+                            </div>
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+
+                                <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
+                            </div>
+                        {/if}
 
                         <div class="mt-10">
                             <Label required class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
@@ -552,44 +560,6 @@
                                 message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
                             />
                             <Textarea label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
-                        </div>
-
-                        {#if proyecto.codigo_linea_programatica == 68}
-                            <div class="mt-10">
-                                <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
-                                <InfoMessage class="mb-2">
-                                    <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
-                                    La pregunta debe cumplir las siguientes condiciones:
-                                    <ul>
-                                        <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
-                                        <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
-                                        <li>• No debe dar origen a respuestas tales como si o no.</li>
-                                    </ul>
-                                    <br />
-                                    <strong>Nota:</strong>Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
-                                </InfoMessage>
-                                <Textarea label="Pregunta formulación del problema" maxlength="5000" id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$formProblemaCentral.pregunta_formulacion_problema} required />
-                            </div>
-                        {/if}
-
-                        <div class="mt-10">
-                            <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                            {#if proyecto.codigo_linea_programatica == 68}
-                                <InfoMessage class="mb-2">
-                                    <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
-                                    <ul>
-                                        <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
-                                        <li>• ¿Qué resultados se lograrán?</li>
-                                        <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
-                                        <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
-                                    </ul>
-                                    <strong>Nota:</strong>La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
-                                </InfoMessage>
-                            {:else}
-                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
-                            {/if}
-
-                            <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
                         </div>
                     </fieldset>
                 </form>

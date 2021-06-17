@@ -152,7 +152,7 @@
             {#if $form.area_conocimiento_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                        <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
                     </div>
                     <div>
                         <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} required />
