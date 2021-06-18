@@ -399,7 +399,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas programáticas
      */
     Route::get('web-api/lineas-programaticas/{categoria_proyecto}', function ($categoriaProyecto) {
-        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label')
+        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
             ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
             ->get());
     })->name('web-api.lineas-programaticas');
