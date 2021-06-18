@@ -179,6 +179,8 @@ class ProyectoController extends Controller
         $proyecto->finalizado = true;
         $proyecto->save();
 
+        $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
+
         return redirect()->back()->with('success', 'Se ha finalizado el proyecto exitosamente.');
     }
 
