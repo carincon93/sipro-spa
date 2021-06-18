@@ -309,10 +309,10 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova');
 
-        if (is_array($data['rol_sennova_id'])) {
-            $data['rol_sennova_id'] = $data['rol_sennova_id']['value'];
+        if (is_array($data['rol_sennova'])) {
+            $data['rol_sennova'] = $data['rol_sennova']['value'];
         }
 
         try {
@@ -363,7 +363,7 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova');
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
@@ -407,7 +407,7 @@ class ProyectoController extends Controller
 
         $user->assignRole(14);
 
-        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova_id');
+        $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova');
         $data['user_id'] = $user->id;
 
         return $this->linkParticipante(new ProponenteRequest($data), $convocatoria, $proyecto);

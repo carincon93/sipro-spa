@@ -24,10 +24,10 @@ class ProponenteRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'        => ['required', 'integer', 'exists:users,id'],
-            'rol_sennova_id' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
-            'cantidad_horas' => ['required', 'numeric', 'min:1', 'max:168'],
-            'cantidad_meses' => ['required', 'numeric', 'min:1', 'max:11.5'],
+            'user_id'           => ['required', 'integer', 'exists:users,id'],
+            'rol_sennova'       => ['required', 'min:0', 'max:2147483647', 'integer'],
+            'cantidad_horas'    => ['required', 'numeric', 'min:1', 'max:168'],
+            'cantidad_meses'    => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
     }
 
@@ -38,9 +38,9 @@ class ProponenteRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if (is_array($this->rol_sennova_id)) {
+        if (is_array($this->rol_sennova)) {
             $this->merge([
-                'rol_sennova_id' => $this->rol_sennova_id['value'],
+                'rol_sennova' => $this->rol_sennova['value'],
             ]);
         }
     }

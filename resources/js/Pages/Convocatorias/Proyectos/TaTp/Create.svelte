@@ -37,7 +37,7 @@
         tecnoacademia_linea_tecnologica_id: [],
         cantidad_meses: 0,
         cantidad_horas: 0,
-        rol_sennova_id: null,
+        rol_sennova: null,
         nodo_tecnoparque_id: null,
     })
 
@@ -159,10 +159,10 @@
             <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="rol_sennova_id" value="Rol SENNOVA" />
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                 </div>
                 <div>
-                    <Select id="rol_sennova_id" items={roles} bind:selectedValue={$form.rol_sennova_id} error={errors.rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
             {#if $form.fecha_inicio && $form.fecha_finalizacion}
@@ -182,7 +182,7 @@
                     <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
                 </div>
                 <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova_id?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </div>
         </fieldset>

@@ -33,7 +33,7 @@ class NuevoProponenteRequest extends FormRequest
             'numero_celular'        => ['required', 'min:3000000000', 'max:9999999999', 'integer'],
             'tipo_vinculacion'      => ['required', 'max:191'],
             'autorizacion_datos'    => ['required', 'boolean'],
-            'rol_sennova_id'        => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
+            'rol_sennova'           => ['required', 'min:0', 'max:2147483647', 'integer'],
             'cantidad_horas'        => ['required', 'numeric', 'min:1', 'max:168'],
             'cantidad_meses'        => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
@@ -58,9 +58,9 @@ class NuevoProponenteRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->rol_sennova_id)) {
+        if (is_array($this->rol_sennova)) {
             $this->merge([
-                'rol_sennova_id' => $this->rol_sennova_id['value'],
+                'rol_sennova' => $this->rol_sennova['value'],
             ]);
         }
 
