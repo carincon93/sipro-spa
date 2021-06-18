@@ -16,6 +16,10 @@
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Pagination from '@/Shared/Pagination'
+    import DataTableMenu from '@/Shared/DataTableMenu'
+    import { Item, Text } from '@smui/list'
+    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let usuario
@@ -23,6 +27,7 @@
     export let tiposVinculacion
     export let roles
     export let rolesRelacionados
+    export let proyectos
 
     $: $title = usuario ? usuario.nombre : null
 
@@ -174,6 +179,71 @@
             {/if}
         </div>
     </form>
+
+    <h1 class="mt-24 mb-8 text-center text-3xl">Proyectos asociados</h1>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {#each proyectos as proyecto}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {proyecto.codigo}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {proyecto.idi
+                                    ? proyecto.idi.titulo
+                                    : proyecto.cultura_innovacion
+                                    ? proyecto.cultura_innovacion.titulo
+                                    : proyecto.servicio_tecnologico
+                                    ? proyecto.servicio_tecnologico.titulo
+                                    : proyecto.ta_tp.nodo_tecnoparque
+                                    ? proyecto.ta_tp.nodo_tecnoparque.nombre
+                                    : proyecto.ta_tp.tecnoacademia_linea_tecnologica
+                                    ? proyecto.ta_tp.tecnoacademia_linea_tecnologica.tecnoacademia.nombre
+                                    : null}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta_tp ? proyecto.ta_tp.fecha_ejecucion : null}
+                            </p>
+                        </td>
+                        <td class="border-t td-actions">
+                            <DataTableMenu class={proyecto.length < 4 ? 'z-50' : ''}>
+                                {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id]))}>
+                                        <Text>Ver detalles</Text>
+                                    </Item>
+                                {:else}
+                                    <Item>
+                                        <Text>No tiene permisos</Text>
+                                    </Item>
+                                {/if}
+                            </DataTableMenu>
+                        </td>
+                    </tr>
+                {/each}
+
+                {#if proyectos.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
 
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
