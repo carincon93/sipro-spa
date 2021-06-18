@@ -14,7 +14,6 @@
 
     export let errors
     export let convocatoria
-    export let tecnoacademias
     export let authUserRegional
     export let rolesTa
     export let rolesTp
