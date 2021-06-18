@@ -53,7 +53,7 @@ class TaTpRequest extends FormRequest
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'))],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'))],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
-                'rol_sennova_id'                            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
+                'rol_sennova'                               => ['required', 'min:0', 'max:2147483647', 'integer'],
                 'cantidad_horas'                            => ['required', 'numeric', 'min:1', 'max:168'],
                 'cantidad_meses'                            => ['required', 'numeric', 'min:1', 'max:11.5'],
             ];
@@ -95,9 +95,9 @@ class TaTpRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->rol_sennova_id)) {
+        if (is_array($this->rol_sennova)) {
             $this->merge([
-                'rol_sennova_id' => $this->rol_sennova_id['value'],
+                'rol_sennova' => $this->rol_sennova['value'],
             ]);
         }
 
