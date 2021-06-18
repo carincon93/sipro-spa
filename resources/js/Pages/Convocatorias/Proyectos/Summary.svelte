@@ -118,7 +118,7 @@
             </InfoMessage>
         {/if}
 
-        {#if proyecto.finalizado == true && !checkRole(authUser, [4])}
+        {#if proyecto.finalizado == true && !checkRole(authUser, [1, 4])}
             <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
         {:else if proyecto.radicado == true}
             <InfoMessage class="mb-2" message="El proyecto se ha radicado con éxito." />
