@@ -184,13 +184,21 @@
                     </div>
                 </div>
 
-                {#if $form.codigo_linea_programatica == 70 && $form.centro_formacion_id}
+                {#if ($form.codigo_linea_programatica == 5 && $form.centro_formacion_id) || ($form.codigo_linea_programatica == 6 && $form.centro_formacion_id)}
                     <div class="mt-44 grid grid-cols-2">
                         <div>
                             <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
                         </div>
                         <div>
-                            <DynamicList id="tecnoacademia_id" bind:value={$form.tecnoacademia_id} routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])} placeholder="Busque por el nombre de la Tecnoacademia" message={errors.tecnoacademia_id} required />
+                            <DynamicList
+                                id="tecnoacademia_id"
+                                bind:value={$form.tecnoacademia_id}
+                                noOptionsText="No hay tecnoacademias registradas para este centro de formación. Por favor seleccione un centro de formación diferente."
+                                routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])}
+                                placeholder="Busque por el nombre de la Tecnoacademia"
+                                message={errors.tecnoacademia_id}
+                                required
+                            />
                         </div>
                     </div>
 
@@ -200,11 +208,19 @@
                                 <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
                             </div>
                             <div>
-                                <DynamicList id="tecnoacademia_linea_tecnologica_id" bind:value={$form.tecnoacademia_linea_tecnologica_id} routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])} placeholder="Busque por el nombre de la línea tecnológica" message={errors.tecnoacademia_linea_tecnologica_id} required />
+                                <DynamicList
+                                    id="tecnoacademia_linea_tecnologica_id"
+                                    bind:value={$form.tecnoacademia_linea_tecnologica_id}
+                                    noOptionsText="No hay nodos tecnoparque registrados para este centro de formación. Por favor seleccione un centro de formación diferente."
+                                    routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])}
+                                    placeholder="Busque por el nombre de la línea tecnológica"
+                                    message={errors.tecnoacademia_linea_tecnologica_id}
+                                    required
+                                />
                             </div>
                         </div>
                     {/if}
-                {:else if $form.codigo_linea_programatica == 69 && $form.centro_formacion_id}
+                {:else if $form.codigo_linea_programatica == 4 && $form.centro_formacion_id}
                     <div class="mt-44 grid grid-cols-2">
                         <div>
                             <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
