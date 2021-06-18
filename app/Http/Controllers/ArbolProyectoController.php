@@ -105,12 +105,12 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $proyecto->problema_central = $proyecto->idi->problema_central;
                 $proyecto->justificacion_problema = $proyecto->idi->justificacion_problema;
-                $proyecto->justificacion_problema = $proyecto->idi->identificacion_problema;
+                $proyecto->identificacion_problema = $proyecto->idi->identificacion_problema;
                 break;
             case $proyecto->taTp()->exists():
                 $proyecto->problema_central = $proyecto->tatp->problema_central;
                 $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
-                $proyecto->justificacion_problema = $proyecto->tatp->identificacion_problema;
+                $proyecto->identificacion_problema = $proyecto->tatp->identificacion_problema;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
@@ -118,7 +118,7 @@ class ArbolProyectoController extends Controller
             case $proyecto->culturaInnovacion()->exists():
                 $proyecto->problema_central = $proyecto->culturaInnovacion->problema_central;
                 $proyecto->justificacion_problema = $proyecto->culturaInnovacion->justificacion_problema;
-                $proyecto->justificacion_problema = $proyecto->culturaInnovacion->identificacion_problema;
+                $proyecto->identificacion_problema = $proyecto->culturaInnovacion->identificacion_problema;
                 break;
             default:
                 break;
