@@ -154,6 +154,8 @@ class ProyectoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
 
+        $proyecto->logs = $proyecto::getLog($proyecto->id);
+
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'     => $proyecto,

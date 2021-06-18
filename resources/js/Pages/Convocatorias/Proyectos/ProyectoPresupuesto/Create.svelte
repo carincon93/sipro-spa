@@ -86,7 +86,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                    <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.tipo_proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
+                    <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
                 </div>
 
                 {#if $form.segundo_grupo_presupuestal_id}
@@ -102,7 +102,7 @@
                         <DynamicList
                             id="convocatoria_presupuesto_id"
                             bind:value={$form.convocatoria_presupuesto_id}
-                            routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.tipo_proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
+                            routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
                             placeholder="Busque por el nombre del uso presupuestal"
                             message={errors.convocatoria_presupuesto_id}
                             bind:recurso={usoPresupuestal}
