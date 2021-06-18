@@ -304,6 +304,7 @@ class Proyecto extends Model
      */
     public function getDiffMesesAttribute()
     {
+        $cantidadMesesEjecucion = 0;
         if ($this->idi()->exists()) {
             $cantidadMesesEjecucion = $this->idi->max_meses_ejecucion;
         }

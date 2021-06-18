@@ -106,9 +106,11 @@ class UserController extends Controller
         return Inertia::render('Users/Edit', [
             'usuario'               => $user,
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
-            'roles'                 => Role::getRolesByRol()
+            'roles'                 => Role::getRolesByRol(),
+            'proyectos'             => $user->proyectos->load('idi', 'taTp.nodoTecnoparque', 'taTp.tecnoacademiaLineaTecnologica.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+
         ]);
     }
 
