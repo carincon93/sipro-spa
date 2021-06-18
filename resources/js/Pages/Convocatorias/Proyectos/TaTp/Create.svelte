@@ -39,6 +39,7 @@
         cantidad_horas: 0,
         rol_sennova: null,
         nodo_tecnoparque_id: null,
+        linea_programatica: null,
     })
 
     let roles = []
@@ -62,6 +63,8 @@
             })
         }
     }
+
+    $: console.log($form.linea_programatica)
 </script>
 
 <AuthenticatedLayout>
@@ -111,7 +114,7 @@
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} bind:recurso={$form.linea_programatica} routeWebApi={route('web-api.lineas-programaticas', 1)} placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -123,7 +126,7 @@
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
             </div>
-            {#if ($form.linea_programatica_id == 5 && $form.centro_formacion_id) || ($form.linea_programatica_id == 6 && $form.centro_formacion_id)}
+            {#if $form.linea_programatica?.codigo == 70 && $form.centro_formacion_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
@@ -159,7 +162,7 @@
                         </div>
                     </div>
                 {/if}
-            {:else if $form.linea_programatica_id == 4 && $form.centro_formacion_id}
+            {:else if $form.linea_programatica?.codigo == 69 && $form.centro_formacion_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
