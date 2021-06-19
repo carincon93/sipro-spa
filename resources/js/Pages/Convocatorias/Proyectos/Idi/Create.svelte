@@ -204,7 +204,7 @@
                     </div>
                     <div>
                         <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                        <InfoMessage message="Valor máximo: {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses." />
+                        <InfoMessage message="Valor minimo 1 mes - Valor máximo: {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses." />
                     </div>
                 </div>
             {/if}

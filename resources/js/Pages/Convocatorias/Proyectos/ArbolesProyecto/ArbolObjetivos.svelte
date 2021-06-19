@@ -24,8 +24,15 @@
     export let causasDirectas
     export let tiposImpacto
     export let tiposResultado
+    let cantidadCeldasActividades = 3
 
-    console.log(tiposImpacto)
+    if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
+        cantidadCeldasActividades = 3
+    } else if (proyecto.codigo_linea_programatica == 68) {
+        cantidadCeldasActividades = 14
+    } else if (proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70) {
+        cantidadCeldasActividades = 10
+    }
 
     let formId
     let sending = false
@@ -430,7 +437,16 @@
                     <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                             <div class="flex-1 resultados relative">
-                                <div on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultado.id)} class="{efectoIndirecto.impacto && efectoIndirecto.impacto.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                <div
+                                    on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultado.id)}
+                                    class="{efectoIndirecto.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                        : efectoIndirecto.descripcion == null && i % 2 == 0
+                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        : efectoIndirecto.descripcion != null && i % 2 != 0
+                                        ? 'bg-orangered-500 hover:bg-orangered-600'
+                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                >
                                     <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
                                         {#if efectoIndirecto.impacto}
                                             <small class="title block font-bold mb-2">
@@ -462,7 +478,16 @@
                         </div>
                     {/if}
                     <div class="resultados relative flex-1" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showResultadoDialog(efectoDirecto)} class="{efectoDirecto.resultado.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                        <div
+                            on:click={showResultadoDialog(efectoDirecto)}
+                            class="{efectoDirecto.descripcion != null && i % 2 == 0
+                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                : efectoDirecto.descripcion == null && i % 2 == 0
+                                ? 'bg-gray-300 hover:bg-gray-400'
+                                : efectoDirecto.descripcion != null && i % 2 != 0
+                                ? 'bg-orangered-500 hover:bg-orangered-600'
+                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                        >
                             <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">RES-{efectoDirecto.resultado.id}</small>
                                 {#if efectoDirecto.resultado.descripcion != null && efectoDirecto.resultado.descripcion.length > 0}
@@ -481,7 +506,7 @@
             <div id="arrow-objetivo-general" class="arrow" data-popper-arrow />
         </div>
         <div class="objetivo-general relative" id="objetivo-general-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showObjetivoGeneralDialog} class="{proyecto.objetivo_general != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+            <div on:click={showObjetivoGeneralDialog} class="{proyecto.objetivo_general != null ? 'bg-orangered-400 hover:bg-orangered-500' : 'bg-gray-300 hover:bg-gray-400'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                 {#if proyecto.objetivo_general != null && proyecto.objetivo_general.length > 0}
                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                         {proyecto.objetivo_general}
@@ -503,7 +528,10 @@
                         </div>
                     {/if}
                     <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)} class="{causaDirecta.objetivo_especifico.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                        <div
+                            on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
+                            class="{causaDirecta.descripcion != null && i % 2 == 0 ? 'bg-orangered-400 hover:bg-orangered-500' : causaDirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaDirecta.descripcion != null && i % 2 != 0 ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                        >
                             <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">
                                     OBJ-ESP-{causaDirecta.objetivo_especifico.id}
@@ -521,10 +549,19 @@
                             <div id="arrow-actividad" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div class="flex mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            <div class="objetivo-especificos relative flex-1">
-                                <div on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)} class="{causaIndirecta.actividad && causaIndirecta.actividad.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                            <div class="mb-4" style="flex: 1 0 33.333%">
+                                <div
+                                    on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
+                                    class="{causaIndirecta.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                        : causaIndirecta.descripcion == null && i % 2 == 0
+                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        : causaIndirecta.descripcion != null && i % 2 != 0
+                                        ? 'bg-orangered-500 hover:bg-orangered-600'
+                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                >
                                     <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
                                         {#if causaIndirecta.actividad}
                                             <small class="title block font-bold mb-2">
@@ -538,9 +575,9 @@
                                 </div>
                             </div>
                         {/each}
-                        {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
-                            <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="objetivo-especificos relative flex-1">
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                        {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
+                            <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                     <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
                                 </div>
                             </div>
@@ -650,7 +687,7 @@
                         </p>
                         <div>
                             <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <Textarea label="Descripción" maxlength="400" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Textarea label="Descripción" maxlength="10000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
@@ -725,7 +762,7 @@
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
             {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true && formId)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
+                <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>
     </Dialog>
@@ -734,7 +771,7 @@
 <style>
     .resultados.relative.flex-1:before {
         content: '';
-        bottom: -40%;
+        bottom: -57px;
         position: absolute;
         right: 50%;
         width: 2px;
@@ -742,9 +779,9 @@
         background: #ff906e;
     }
 
-    .objetivo-especificos.relative.flex-1:before {
+    .objetivo-especificos.relative:before {
         content: '';
-        top: -38%;
+        top: -55px;
         position: absolute;
         right: 50%;
         width: 2px;

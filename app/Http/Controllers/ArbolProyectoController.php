@@ -37,8 +37,26 @@ class ArbolProyectoController extends Controller
     {
         $objetivosEspecificos = $proyecto->causasDirectas()->with('objetivoEspecifico')->count() > 0 ? $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten() : [];
 
-        if ($proyecto->causasDirectas()->count() < 4) {
-            for ($i = 0; $i < 4; $i++) {
+        $numeroCeldas = 4;
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $numeroCeldas = 4;
+                break;
+            case $proyecto->taTp()->exists():
+                $numeroCeldas = 6;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $numeroCeldas = 4;
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $numeroCeldas = 4;
+                break;
+            default:
+                break;
+        }
+
+        if ($proyecto->causasDirectas()->count() < $numeroCeldas) {
+            for ($i = 0; $i < $numeroCeldas; $i++) {
                 $causaDirecta = $proyecto->causasDirectas()->create([
                     ['descripcion' => null],
                 ]);
@@ -52,13 +70,13 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->efectosDirectos()->count() < 4) {
-            for ($i = 0; $i < 4; $i++) {
+        if ($proyecto->efectosDirectos()->count() < $numeroCeldas) {
+            for ($i = 0; $i < $numeroCeldas; $i++) {
                 $efectoDirecto = $proyecto->efectosDirectos()->create([
                     ['descripcion' => null],
                 ]);
 
-                $resultado = $efectoDirecto->resultado()->create([
+                $efectoDirecto->resultado()->create([
                     'descripcion'            => null,
                     'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
                 ]);
@@ -68,7 +86,7 @@ class ArbolProyectoController extends Controller
         foreach ($proyecto->efectosDirectos()->get() as $efectoDirecto) {
             foreach ($efectoDirecto->efectosIndirectos as $efectoIndirecto) {
                 if (empty($efectoIndirecto->impacto)) {
-                    $impacto = $efectoIndirecto->impacto()->create([
+                    $efectoIndirecto->impacto()->create([
                         ['descripcion' => null],
                     ]);
                 }
@@ -78,7 +96,7 @@ class ArbolProyectoController extends Controller
         foreach ($proyecto->causasDirectas()->get() as $causaDirecta) {
             foreach ($causaDirecta->causasIndirectas as $causaIndirecta) {
                 if (empty($causaIndirecta->actividad)) {
-                    $actividad = $causaIndirecta->actividad()->create([
+                    $causaIndirecta->actividad()->create([
                         ['descripcion' => null],
                     ]);
                 }
@@ -219,7 +237,25 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        if (empty($request->id) && $efectoDirecto->efectosIndirectos()->count() < 3) {
+        $numeroCeldas = 3;
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $numeroCeldas = 3;
+                break;
+            case $proyecto->taTp()->exists():
+                $numeroCeldas = 3;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $numeroCeldas = 3;
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $numeroCeldas = 3;
+                break;
+            default:
+                break;
+        }
+
+        if (empty($request->id) && $efectoDirecto->efectosIndirectos()->count() < $numeroCeldas) {
             $efectoIndirecto = new EfectoIndirecto();
             $efectoIndirecto->fill($request->all());
             $efectoIndirecto->save();
@@ -271,7 +307,25 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        if (empty($request->id) && $causaDirecta->causasIndirectas()->count() < 3) {
+        $numeroCeldas = 4;
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $numeroCeldas = 4;
+                break;
+            case $proyecto->taTp()->exists():
+                $numeroCeldas = 10;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $numeroCeldas = 14;
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $numeroCeldas = 4;
+                break;
+            default:
+                break;
+        }
+
+        if (empty($request->id) && $causaDirecta->causasIndirectas()->count() < $numeroCeldas) {
             $causaIndirecta = new CausaIndirecta();
             $causaIndirecta->fill($request->all());
             $causaIndirecta->save();

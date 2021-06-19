@@ -167,7 +167,7 @@ class ActividadController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
-            'metodologia' => 'required|string|max:10000',
+            'metodologia' => 'required|string|max:20000',
         ]);
 
         switch ($proyecto) {
