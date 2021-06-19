@@ -8,7 +8,6 @@ use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
-use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;

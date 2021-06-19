@@ -9,7 +9,6 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaTpRequest;
 use App\Models\Regional;
-use App\Models\RolSennova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -203,6 +202,6 @@ class TaTpController extends Controller
 
         $tatp->proyecto()->delete();
 
-        return redirect()->route('convocatorias.proyectos.tatp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.tatp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }
