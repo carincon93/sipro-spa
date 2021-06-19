@@ -59,9 +59,9 @@ class EfectoDirecto extends Model
      *
      * @return object
      */
-    public function resultado()
+    public function resultados()
     {
-        return $this->hasOne(Resultado::class);
+        return $this->hasMany(Resultado::class)->orderBy('id', 'ASC');
     }
 
     /**

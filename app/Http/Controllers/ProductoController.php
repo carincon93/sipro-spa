@@ -25,14 +25,22 @@ class ProductoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $resultado = $proyecto->efectosDirectos()->with('resultado')->get()->pluck('resultado')->flatten()->filter();
+        $resultado = $proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         $validacionResultados = null;
-        if (count($proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
+        $cantidadActividades = $proyecto->causasDirectas->map(function ($causaDirecta) {
+            return $causaDirecta->causasIndirectas->map(function ($causasIndirecta) {
+                return $causasIndirecta->actividad;
+            });
+        })->flatten()->count();
+
+        $cantidadResultados = $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
             $query->where('descripcion', '!=', null);
-        })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')) == 0) {
-            $validacionResultados = 'Para poder crear productos debe primero generar los resultados en el \'Árbol de objetivos\'';
+        })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->count();
+
+        if ($cantidadActividades > 0 && $cantidadResultados) {
+            $validacionResultados = 'Para poder crear productos debe primero generar los resultados y/o actividades en el \'Árbol de objetivos\'';
         }
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
@@ -72,9 +80,9 @@ class ProductoController extends Controller
                     return $objetivoEspecifico->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
-            'resultados'        => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
+            'resultados'        => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
                 $query->where('descripcion', '!=', null);
-            })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado')
+            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten()
         ]);
     }
 
@@ -196,9 +204,9 @@ class ProductoController extends Controller
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
-            'resultados'                => $proyecto->efectosDirectos()->whereHas('resultado', function ($query) {
+            'resultados'                => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
                 $query->where('descripcion', '!=', null);
-            })->with('resultado:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultado'),
+            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados'),
         ]);
     }
 

@@ -76,10 +76,19 @@ class ArbolProyectoController extends Controller
                     ['descripcion' => null],
                 ]);
 
-                $efectoDirecto->resultado()->create([
-                    'descripcion'            => null,
-                    'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
-                ]);
+                if ($proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'A' && $i == 0) {
+                    for ($j = 0; $j < 5; $j++) {
+                        $efectoDirecto->resultados()->create([
+                            'descripcion'            => null,
+                            'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
+                        ]);
+                    }
+                } else {
+                    $efectoDirecto->resultados()->create([
+                        'descripcion'            => null,
+                        'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
+                    ]);
+                }
             }
         }
 
@@ -359,7 +368,7 @@ class ArbolProyectoController extends Controller
 
         $this->generateTree($proyecto);
 
-        $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultado')->get();
+        $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
         $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         switch ($proyecto) {

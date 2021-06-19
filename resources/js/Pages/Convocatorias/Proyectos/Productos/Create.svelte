@@ -74,7 +74,6 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
-                <InfoMessage class="mb-10" message="Los productos se entienden como los bienes o servicios que se generan y entregan en un proceso productivo. Los productos materializan los objetivos específicos de los proyectos. De esta forma, los productos de un proyecto deben agotar los objetivos específicos del mismo y deben cumplir a cabalidad con el objetivo general del proyecto." />
                 <div class="mt-8 mb-8">
                     <Label class="text-center" required value="Fecha de ejecución" />
                     <div class="mt-4 flex items-start justify-around">
@@ -112,7 +111,7 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-8">
@@ -127,7 +126,7 @@
                     {:else}
                         <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
                     {/if}
-                    <Textarea label="Descripción" maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}

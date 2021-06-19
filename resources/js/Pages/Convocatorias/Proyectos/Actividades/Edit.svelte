@@ -74,7 +74,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset class="p-8" disabled>
                 <div class="mt-4">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -99,7 +99,8 @@
                 <div class="mt-20">
                     <Textarea label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
-
+            </fieldset>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4">
@@ -108,7 +109,7 @@
                     </div>
                     {#if proyecto.modificable == true}
                         <div class="grid grid-cols-2">
-                            {#each productos as { id, nombre }, i}
+                            {#each productos as { id, nombre }}
                                 <FormField class="border-b border-l py-4">
                                     <Checkbox bind:group={$form.producto_id} value={id} />
                                     <span slot="label">{nombre}</span>
@@ -121,7 +122,7 @@
                     {:else}
                         <div class="p-2">
                             <ul class="list-disc p-4">
-                                {#each productos as { id, nombre }, i}
+                                {#each productos as { id, nombre }}
                                     {#each $form.producto_id as producto}
                                         {#if id == producto}
                                             <li class="first-letter-uppercase mb-4">{nombre}</li>
@@ -141,7 +142,7 @@
                     </div>
                     {#if proyecto.modificable == true}
                         <div class="grid grid-cols-2">
-                            {#each proyectoPresupuesto as presupuesto, i}
+                            {#each proyectoPresupuesto as presupuesto}
                                 <FormField class="border-b border-l">
                                     <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
                                     <span slot="label">
@@ -171,7 +172,7 @@
                     {:else}
                         <div class="p-2">
                             <ul class="list-disc p-4">
-                                {#each proyectoPresupuesto as presupuesto, i}
+                                {#each proyectoPresupuesto as presupuesto}
                                     {#each $form.proyecto_presupuesto_id as proyectoPresupuesto}
                                         {#if presupuesto.id == proyectoPresupuesto}
                                             <li class="mb-4">

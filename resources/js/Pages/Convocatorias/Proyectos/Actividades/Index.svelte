@@ -44,7 +44,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="text-3xl m-24 text-center">Actividades</h1>
+    <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
     <form on:submit|preventDefault={submit}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
@@ -72,6 +72,8 @@
     </form>
 
     <hr class="mb-20 mt-20" />
+
+    <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
     <InfoMessage message="Debe generar las actividades en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor." />
 

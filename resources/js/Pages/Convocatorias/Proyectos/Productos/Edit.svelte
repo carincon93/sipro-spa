@@ -129,7 +129,7 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
@@ -143,7 +143,7 @@
                     {:else}
                         <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
                     {/if}
-                    <Textarea label="Descripción" maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                 </div>
 
                 {#if $form.tatp_servicio_tecnologico == false}
