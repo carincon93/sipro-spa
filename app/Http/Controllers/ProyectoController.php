@@ -251,7 +251,7 @@ class ProyectoController extends Controller
         $proyecto->programasFormacion;
         $proyecto->semillerosInvestigacion;
 
-        if ($proyecto->codigo_linea_programatica == 62 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82 || $proyecto->codigo_linea_programatica == 65) {
+        if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82) {
             $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
         } elseif ($proyecto->codigo_linea_programatica == 70) {
             $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
