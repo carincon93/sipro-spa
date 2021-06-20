@@ -23,9 +23,13 @@
                     <h1 class="font-bold text-5xl">
                         Convocatoria {convocatoriaActiva.year}
                     </h1>
-                    <p class="text-2xl mt-4">
-                        {convocatoriaActiva.fechas_idi}
-                    </p>
+                    <p class="mt-8">Fechas de convocatoria de las diferentes líneas programáticas:</p>
+                    <ul class="mt-4 list-disc">
+                        <li>{convocatoriaActiva.fechas_idi}</li>
+                        <li>{convocatoriaActiva.fechas_cultura}</li>
+                        <li>{convocatoriaActiva.fechas_st}</li>
+                        <li>{convocatoriaActiva.fechas_tatp}</li>
+                    </ul>
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
                             Convocatoria
