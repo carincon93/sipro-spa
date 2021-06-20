@@ -39,7 +39,7 @@
 
         <div slot="actions">
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgo</Button>
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgos</Button>
             {/if}
         </div>
 

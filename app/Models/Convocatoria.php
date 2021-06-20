@@ -22,7 +22,7 @@ class Convocatoria extends Model
      *
      * @var array
      */
-    public $appends = ['year', 'fechas_idi'];
+    public $appends = ['year', 'fechas_idi', 'fechas_st', 'fechas_tatp', 'fechas_cultura'];
 
     /**
      * The attributes that are mass assignable.
@@ -132,15 +132,36 @@ class Convocatoria extends Model
      */
     public function getFechasIdiAttribute()
     {
-        return "La convocatoria empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+        return "La convocatoria de proyectos I+D+i empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
     }
 
     /**
-     * getFechaFinalizacionFormateadoAttribute
+     * getFechasStAttribute
      *
      * @return void
      */
-    public function getFechaFinalizacionFormateadoAttribute()
+    public function getFechasStAttribute()
     {
+        return "La convocatoria de proyectos de servicios tecnológicos empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_st, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_st, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechasStAttribute
+     *
+     * @return void
+     */
+    public function getFechasTatpAttribute()
+    {
+        return "La convocatoria de proyectos de Tecnoacademia-Tecnoparque empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_tatp, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_tatp, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechasStAttribute
+     *
+     * @return void
+     */
+    public function getFechasCulturaAttribute()
+    {
+        return "La convocatoria de proyectos de la cultura de la innovación empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_cultura, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_cultura, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
     }
 }

@@ -345,16 +345,15 @@
             <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-4">
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                </div>
+                <div class="mt-4">
                     <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
                     <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
                 </div>
                 <div class="mt-4">
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max="168" class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
-                    <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$formParticipante.rol_sennova?.maxHoras} class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </fieldset>
         </form>
@@ -411,12 +410,12 @@
                     <Select id="tipo_vinculacion_nuevo_participante" items={tiposVinculacion} bind:selectedValue={$formNuevoParticipante.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
+                <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                     <Select id="rol_sennova" items={roles} bind:selectedValue={$formNuevoParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
 
-                <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
                 <div class="mt-8">
                     <Input label="Número de meses de vinculación" id="cantidad_meses_nuevo_participante" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
                     <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
@@ -429,12 +428,11 @@
                         type="number"
                         input$step="1"
                         input$min="1"
-                        input$max="168"
+                        input$max={$formNuevoParticipante.rol_sennova?.maxHoras}
                         class="mt-1"
                         bind:value={$formNuevoParticipante.cantidad_horas}
                         placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto"
                         autocomplete="off"
-                        error={errors.cantidad_horas}
                         required
                     />
                 </div>
