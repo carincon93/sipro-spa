@@ -39,7 +39,7 @@ class ProductoController extends Controller
             $query->where('descripcion', '!=', null);
         })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->count();
 
-        if ($cantidadActividades > 0 && $cantidadResultados) {
+        if ($cantidadActividades == 0 && $cantidadResultados == 0) {
             $validacionResultados = 'Para poder crear productos debe primero generar los resultados y/o actividades en el \'Árbol de objetivos\'';
         }
 
