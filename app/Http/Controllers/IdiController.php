@@ -42,7 +42,7 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
@@ -141,7 +141,7 @@ class IdiController extends Controller
         $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                               => $idi,
             'mesasSectorialesRelacionadas'      => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnologicasRelacionadas'    => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),

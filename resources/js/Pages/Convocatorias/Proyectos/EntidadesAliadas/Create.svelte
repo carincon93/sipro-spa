@@ -86,91 +86,91 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 8]) && proyecto.modificable == true) ? undefined : true}>
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                     <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="naturaleza" value="Naturaleza de la entidad" />
                     <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo_empresa" value="Tipo de empresa" />
                     <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione la probabilidad" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="NIT" id="nit" type="text" class="mt-1" bind:value={$form.nit} error={errors.nit} required />
                 </div>
 
                 {#if proyecto.idi}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <p>¿Hay convenio?</p>
                         <Switch bind:checked={convenio} />
                     </div>
                     {#if convenio}
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Textarea label="Descipción del convenio" maxlength="400" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                         </div>
                     {/if}
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <p>¿La entidad aliada tiene grupo de investigación?</p>
                         <Switch bind:checked={grupoInvestigacion} />
                     </div>
                     {#if grupoInvestigacion}
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
                     {/if}
                 {:else}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
                         <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
                     </div>
                 {/if}
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                 </div>
 
                 {#if proyecto.idi}
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
                         <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
                         <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
                     </div>

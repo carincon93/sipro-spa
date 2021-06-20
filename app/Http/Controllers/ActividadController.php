@@ -10,6 +10,8 @@ use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use function PHPSTORM_META\map;
+
 class ActividadController extends Controller
 {
     /**
@@ -75,13 +77,6 @@ class ActividadController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $actividad = new Actividad();
-        $actividad->fieldName = $request->fieldName;
-        $actividad->fieldName = $request->fieldName;
-        $actividad->fieldName = $request->fieldName;
-
-        $actividad->save();
-
         return redirect()->route('convocatorias.proyectos.actividades.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
@@ -106,10 +101,18 @@ class ActividadController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $resultados = $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
+            $query->where('descripcion', '!=', null);
+        })->with('resultados')->get()->pluck('resultados')->flatten();
+
+        $productos = $resultados->map(function ($resultado) {
+            return $resultado->productos;
+        })->flatten();
+
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
-            'productos'                      => $proyecto->efectosDirectos()->with('resultado.productos')->get()->pluck('resultado.productos')->flatten(),
+            'productos'                      => $productos,
             'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
             'actividad'                      => $actividad,
             'productosRelacionados'          => $actividad->productos()->pluck('id'),

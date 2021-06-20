@@ -29,6 +29,8 @@
 
     <h1 class="text-3xl m-24 text-center">Productos</h1>
 
+    <p class="text-center mb-10">Los productos se entienden como los bienes o servicios que se generan y entregan en un proceso productivo. Los productos materializan los objetivos específicos de los proyectos. De esta forma, los productos de un proyecto deben agotar los objetivos específicos del mismo y deben cumplir a cabalidad con el objetivo general del proyecto.</p>
+
     {#if validacionResultados}
         <InfoMessage message={validacionResultados} class="mt-10 mb-10" />
     {/if}

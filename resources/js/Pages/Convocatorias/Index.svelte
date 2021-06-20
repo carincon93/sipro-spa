@@ -24,8 +24,7 @@
                         Convocatoria {convocatoriaActiva.year}
                     </h1>
                     <p class="text-2xl mt-4">
-                        La convocatoria empezó el {convocatoriaActiva.fecha_inicio_formateado}
-                        y finaliza el {convocatoriaActiva.fecha_finalizacion_formateado}.
+                        {convocatoriaActiva.fechas_idi}
                     </p>
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">

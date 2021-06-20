@@ -280,11 +280,38 @@ class EntidadAliadaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        Storage::delete($entidadAliada->carta_intencion);
-        Storage::delete($entidadAliada->propiedad_intelectual);
+        if ($proyecto->taTp()->exists()) {
+            Storage::delete($entidadAliada->entidadAliadaTaTp->soporte_convenio);
+        } elseif ($proyecto->idi()->exists()) {
+            Storage::delete($entidadAliada->entidadAliadaIdi->carta_intencion);
+            Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
+        }
 
         $entidadAliada->delete();
 
         return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * download
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $proyectoAnexo
+     * @return void
+     */
+    public function download(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
+    {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        if ($proyecto->taTp()->exists() && $request->archivo == 'soporte_convenio') {
+            $ruta = $entidadAliada->entidadAliadaTaTp->soporte_convenio;
+        } elseif ($proyecto->idi()->exists() && $request->archivo == 'carta_intencion') {
+            $ruta = $entidadAliada->entidadAliadaIdi->carta_intencion;
+        } elseif ($proyecto->idi()->exists() && $request->archivo == 'carta_propiedad_intelectual') {
+            $ruta = $entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual;
+        }
+
+        return response()->download(storage_path("app/$ruta"));
     }
 }

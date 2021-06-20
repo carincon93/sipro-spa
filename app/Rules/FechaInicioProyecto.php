@@ -13,9 +13,10 @@ class FechaInicioProyecto implements Rule
      *
      * @return void
      */
-    public function __construct($convocatoria)
+    public function __construct($convocatoria, $tipoProyecto)
     {
         $this->convocatoria = $convocatoria;
+        $this->tipoProyecto = $tipoProyecto;
     }
 
     /**
@@ -27,7 +28,24 @@ class FechaInicioProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ($value >= $this->convocatoria->min_fecha_inicio_proyectos);
+        switch ($this->tipoProyecto) {
+            case 'st':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+                break;
+            case 'tatp':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
+                break;
+            case 'idi':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+                break;
+            case 'cultura':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
+                break;
+            default:
+                break;
+        }
+
+        return ($value >= $minFechaFinalizacionProyectos);
     }
 
     /**
@@ -37,7 +55,24 @@ class FechaInicioProyecto implements Rule
      */
     public function message()
     {
-        $minFechaIncioProyectos = date('d-m-Y', strtotime($this->convocatoria->min_fecha_inicio_proyectos));
-        return "La fecha de inicio no debe ser menor a {$minFechaIncioProyectos}.";
+        switch ($this->tipoProyecto) {
+            case 'st':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+                break;
+            case 'tatp':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
+                break;
+            case 'idi':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+                break;
+            case 'cultura':
+                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
+                break;
+            default:
+                break;
+        }
+
+        $minFechaFinalizacionProyectos = date('d-m-Y', strtotime($minFechaFinalizacionProyectos));
+        return "La fecha de inicio no debe ser menor a {$minFechaFinalizacionProyectos}.";
     }
 }

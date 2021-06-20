@@ -43,7 +43,7 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'authUserRegional'  => Auth::user()->centroFormacion->regional->id
         ]);
@@ -144,7 +144,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
             'culturaInnovacion'                 => $culturaInnovacion,
             'mesasSectorialesRelacionadas'      => $culturaInnovacion->mesasSectoriales()->pluck('id'),
             'lineasTecnologicasRelacionadas'    => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->pluck('id'),

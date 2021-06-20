@@ -42,7 +42,7 @@ class TaTpController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tatp', 'max_fecha_finalizacion_proyectos_tatp'),
             'tecnoacademias'    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'rolesTa'           => collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true)),
             'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
@@ -134,7 +134,7 @@ class TaTpController extends Controller
         $tatp->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/TaTp/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tatp', 'max_fecha_finalizacion_proyectos_tatp'),
             'tatp'                              => $tatp,
             'tecnoacademiaRelacionada'          => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->tecnoacademia->id : null,
             'lineaTecnologicaRelacionada'       => $tatp->tecnoacademiaLineaTecnologica()->exists() ? $tatp->tecnoacademiaLineaTecnologica->id : null,

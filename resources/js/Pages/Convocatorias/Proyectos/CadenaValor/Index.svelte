@@ -89,7 +89,7 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
+    <h1 class="text-3xl m-24 text-center">Propuesta de sostenibilidad</h1>
 
     <form on:submit|preventDefault={submit}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
@@ -115,6 +115,8 @@
     </form>
 
     <hr class="mb-20 mt-20" />
+
+    <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
     {#if productos.length == 0}
         <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor incompleta.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />

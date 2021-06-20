@@ -104,92 +104,110 @@
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit}>
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true) ? undefined : true}>
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                         <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="naturaleza" value="Naturaleza de la entidad" />
                         <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="tipo_empresa" value="Tipo de empresa" />
                         <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione la probabilidad" required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="NIT" id="nit" type="text" class="mt-1" bind:value={$form.nit} error={errors.nit} required />
                     </div>
 
                     {#if proyecto.idi}
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <p>¿Hay convenio?</p>
                             <Switch bind:checked={$form.tiene_convenio} />
                         </div>
                         {#if $form.tiene_convenio}
-                            <div class="mt-4">
+                            <div class="mt-8">
                                 <Textarea label="Descipción del convenio" maxlength="400" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                             </div>
                         {/if}
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <p>¿La entidad aliada tiene grupo de investigación?</p>
                             <Switch bind:checked={$form.tiene_grupo_investigacion} />
                         </div>
                         {#if $form.tiene_grupo_investigacion}
-                            <div class="mt-4">
+                            <div class="mt-8">
                                 <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                             </div>
 
-                            <div class="mt-4">
+                            <div class="mt-8">
                                 <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
                             </div>
 
-                            <div class="mt-4">
+                            <div class="mt-8">
                                 <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
                             </div>
                         {/if}
                     {:else}
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Label class="mb-4" labelFor="soporte_convenio" value="Convenio" />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar soporte del convenio
+                            </a>
                             <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} />
                         </div>
                     {/if}
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
                     </div>
 
                     {#if proyecto.idi}
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de intención
+                            </a>
                             <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de propiedad intelectual
+                            </a>
                             <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
                         </div>
                     {/if}
@@ -246,18 +264,18 @@
             <ul>
                 {#if proyecto.idi}
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Miembros de entidad aliada </a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Crear miembro de la entidad aliada </a>
                     </li>
                 {/if}
                 <li class="mt-6">
-                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específcos relacionados </a>
+                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específicos relacionados </a>
                 </li>
             </ul>
         </div>
     </div>
 
     {#if proyecto.idi}
-        <h1 class="mt-24 mb-8 text-center text-3xl">Miembros de entidad aliada</h1>
+        <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
         <div class="mb-6 flex justify-end items-center">
             <div>
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
@@ -315,7 +333,7 @@
         </div>
     {/if}
 
-    <h1 class="mt-24 mb-8 text-center text-3xl">Objetivos específicos</h1>
+    <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
     <p class="mb-6">
         A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
     </p>

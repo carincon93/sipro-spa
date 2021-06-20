@@ -4,6 +4,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
+    import { createPopper } from '@popperjs/core'
 
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
@@ -15,8 +16,6 @@
     import Button from '@/Shared/Button'
     import Stepper from '@/Shared/Stepper'
 
-    import { createPopper } from '@popperjs/core'
-
     export let errors
     export let convocatoria
     export let proyecto
@@ -24,8 +23,8 @@
     export let causasDirectas
     export let tiposImpacto
     export let tiposResultado
-    let cantidadCeldasActividades = 3
 
+    let cantidadCeldasActividades = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
         cantidadCeldasActividades = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
@@ -135,27 +134,27 @@
     let descripcionObjetivoEspecifico = []
     let resultadoEfectoDirecto
     $: causasDirectas
-    function showResultadoDialog(efectoDirecto) {
+    function showResultadoDialog(efectoDirecto, resultado) {
         reset()
-        let objetivoEspecifico = causasDirectas.find((causaDirecta) => causaDirecta.objetivo_especifico.id == efectoDirecto.resultado.objetivo_especifico_id)
+        let objetivoEspecifico = causasDirectas.find((causaDirecta) => causaDirecta.objetivo_especifico.id == resultado.objetivo_especifico_id)
         descripcionObjetivoEspecifico = {
             descripcion: objetivoEspecifico.objetivo_especifico?.descripcion ? objetivoEspecifico.objetivo_especifico?.descripcion : 'Sin información registrada',
             numero: objetivoEspecifico.objetivo_especifico?.numero,
         }
-        codigo = 'RES-' + efectoDirecto.resultado.id
+        codigo = 'RES-' + resultado.id
         dialogTitle = 'Resultado'
         dialogOpen = true
         showResultadoForm = true
         formId = 'resultado-form'
-        $formResultado.id = efectoDirecto.resultado.id
-        $formResultado.descripcion = efectoDirecto.resultado.descripcion
+        $formResultado.id = resultado.id
+        $formResultado.descripcion = resultado.descripcion
         $formResultado.tipo = {
-            value: efectoDirecto.resultado.tipo,
-            label: tiposResultado.find((item) => item.value == efectoDirecto.resultado.tipo)?.label,
+            value: resultado.tipo,
+            label: tiposResultado.find((item) => item.value == resultado.tipo)?.label,
         }
-        $formResultado.trl = efectoDirecto.resultado.trl
-        $formResultado.indicador = efectoDirecto.resultado.indicador
-        $formResultado.medios_verificacion = efectoDirecto.resultado.medios_verificacion
+        $formResultado.trl = resultado.trl
+        $formResultado.indicador = resultado.indicador
+        $formResultado.medios_verificacion = resultado.medios_verificacion
         resultadoEfectoDirecto = efectoDirecto.descripcion ?? 'Sin información registrada'
     }
 
@@ -421,7 +420,7 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
-    <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problema manteniendo la misma estructura y niveles de jerarquía.</p>
+    <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
     <div class="mt-16">
         <div class="flex mb-14">
@@ -438,7 +437,7 @@
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
                             <div class="flex-1 resultados relative">
                                 <div
-                                    on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultado.id)}
+                                    on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
                                     class="{efectoIndirecto.descripcion != null && i % 2 == 0
                                         ? 'bg-orangered-400 hover:bg-orangered-500'
                                         : efectoIndirecto.descripcion == null && i % 2 == 0
@@ -450,7 +449,9 @@
                                     <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
                                         {#if efectoIndirecto.impacto}
                                             <small class="title block font-bold mb-2">
-                                                RES-{efectoDirecto.resultado.id}
+                                                RES{#each efectoDirecto.resultados as { id }}
+                                                    -{id}
+                                                {/each}
                                                 -IMP-
                                                 {efectoIndirecto.impacto.id}
                                             </small>
@@ -477,24 +478,27 @@
                             <div id="arrow-resultado" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div class="resultados relative flex-1" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div
-                            on:click={showResultadoDialog(efectoDirecto)}
-                            class="{efectoDirecto.descripcion != null && i % 2 == 0
-                                ? 'bg-orangered-400 hover:bg-orangered-500'
-                                : efectoDirecto.descripcion == null && i % 2 == 0
-                                ? 'bg-gray-300 hover:bg-gray-400'
-                                : efectoDirecto.descripcion != null && i % 2 != 0
-                                ? 'bg-orangered-500 hover:bg-orangered-600'
-                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                        >
-                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
-                                <small class="title block font-bold mb-2">RES-{efectoDirecto.resultado.id}</small>
-                                {#if efectoDirecto.resultado.descripcion != null && efectoDirecto.resultado.descripcion.length > 0}
-                                    {efectoDirecto.resultado.descripcion}
-                                {/if}
-                            </p>
-                        </div>
+                    <div class="{i == 0 ? 'resultados' : 'resultados-line'} relative flex-1 flex flex-wrap" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        {#each efectoDirecto.resultados as resultado, j}
+                            <div
+                                on:click={showResultadoDialog(efectoDirecto, resultado)}
+                                class="{efectoDirecto.descripcion != null && i % 2 == 0
+                                    ? 'bg-orangered-400 hover:bg-orangered-500'
+                                    : efectoDirecto.descripcion == null && i % 2 == 0
+                                    ? 'bg-gray-300 hover:bg-gray-400'
+                                    : efectoDirecto.descripcion != null && i % 2 != 0
+                                    ? 'bg-orangered-500 hover:bg-orangered-600'
+                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{j != 4 ? ' mb-4' : ''}"
+                                style="flex: 1 0 33.333%"
+                            >
+                                <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                    <small class="title block font-bold mb-2">RES-{resultado.id}</small>
+                                    {#if resultado.descripcion != null && resultado.descripcion.length > 0}
+                                        {resultado.descripcion}
+                                    {/if}
+                                </p>
+                            </div>
+                        {/each}
                     </div>
                 </div>
             {/each}
@@ -776,6 +780,16 @@
         right: 50%;
         width: 2px;
         height: 57px;
+        background: #ff906e;
+    }
+
+    .resultados-line:before {
+        content: '';
+        bottom: -364px;
+        position: absolute;
+        right: 50%;
+        width: 2px;
+        height: 380px;
         background: #ff906e;
     }
 
