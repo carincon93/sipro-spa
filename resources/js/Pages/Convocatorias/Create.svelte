@@ -24,11 +24,23 @@
     let sending = false
     let form = useForm({
         descripcion: '',
-        fecha_finalizacion: '',
-        fecha_inicio: '',
         esta_activa: false,
-        min_fecha_inicio_proyectos: '',
-        max_fecha_finalizacion_proyectos: '',
+        min_fecha_inicio_proyectos_idi: '',
+        max_fecha_finalizacion_proyectos_idi: '',
+        fecha_inicio_convocatoria_idi: '',
+        fecha_finalizacion_convocatoria_idi: '',
+        min_fecha_inicio_proyectos_cultura: '',
+        max_fecha_finalizacion_proyectos_cultura: '',
+        min_fecha_inicio_proyectos_st: '',
+        max_fecha_finalizacion_proyectos_st: '',
+        min_fecha_inicio_proyectos_tatp: '',
+        max_fecha_finalizacion_proyectos_tatp: '',
+        fecha_inicio_convocatoria_cultura: '',
+        fecha_finalizacion_convocatoria_cultura: '',
+        fecha_inicio_convocatoria_st: '',
+        fecha_finalizacion_convocatoria_st: '',
+        fecha_inicio_convocatoria_tatp: '',
+        fecha_finalizacion_convocatoria_tatp: '',
     })
 
     function submit() {

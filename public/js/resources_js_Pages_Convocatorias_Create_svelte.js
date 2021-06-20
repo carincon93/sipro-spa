@@ -44775,7 +44775,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (115:16) {#if errors.min_fecha_inicio_proyectos || errors.max_fecha_finalizacion_proyectos}
+// (127:16) {#if errors.min_fecha_inicio_proyectos || errors.max_fecha_finalizacion_proyectos}
 function create_if_block_2(ctx) {
 	let inputerror;
 	let current;
@@ -44814,7 +44814,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (120:16) {#if isSuperAdmin}
+// (132:16) {#if isSuperAdmin}
 function create_if_block_1(ctx) {
 	let loadingbutton;
 	let current;
@@ -44862,7 +44862,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (121:20) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (133:20) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -44879,7 +44879,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (44:0) <AuthenticatedLayout>
+// (56:0) <AuthenticatedLayout>
 function create_default_slot(ctx) {
 	let div15;
 	let form_1;
@@ -45450,7 +45450,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (49:20) {#if isSuperAdmin}
+// (61:20) {#if isSuperAdmin}
 function create_if_block(ctx) {
 	let a;
 	let t;
@@ -45484,7 +45484,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (45:4) 
+// (57:4) 
 function create_header_slot(ctx) {
 	let header;
 	let div1;
@@ -45595,11 +45595,23 @@ function instance($$self, $$props, $$invalidate) {
 
 	let form = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({
 		descripcion: "",
-		fecha_finalizacion: "",
-		fecha_inicio: "",
 		esta_activa: false,
-		min_fecha_inicio_proyectos: "",
-		max_fecha_finalizacion_proyectos: ""
+		min_fecha_inicio_proyectos_idi: "",
+		max_fecha_finalizacion_proyectos_idi: "",
+		fecha_inicio_convocatoria_idi: "",
+		fecha_finalizacion_convocatoria_idi: "",
+		min_fecha_inicio_proyectos_cultura: "",
+		max_fecha_finalizacion_proyectos_cultura: "",
+		min_fecha_inicio_proyectos_st: "",
+		max_fecha_finalizacion_proyectos_st: "",
+		min_fecha_inicio_proyectos_tatp: "",
+		max_fecha_finalizacion_proyectos_tatp: "",
+		fecha_inicio_convocatoria_cultura: "",
+		fecha_finalizacion_convocatoria_cultura: "",
+		fecha_inicio_convocatoria_st: "",
+		fecha_finalizacion_convocatoria_st: "",
+		fecha_inicio_convocatoria_tatp: "",
+		fecha_finalizacion_convocatoria_tatp: ""
 	});
 
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(2, $form = value));

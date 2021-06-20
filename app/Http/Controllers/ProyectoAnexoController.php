@@ -121,12 +121,6 @@ class ProyectoAnexoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $proyectoAnexo->fieldName = $request->fieldName;
-        $proyectoAnexo->fieldName = $request->fieldName;
-        $proyectoAnexo->fieldName = $request->fieldName;
-
-        $proyectoAnexo->save();
-
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 

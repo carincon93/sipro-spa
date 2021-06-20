@@ -48687,8 +48687,8 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "id", "fecha_inicio");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "type", "date");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "class", "mt-1 block w-full p-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "min", input0_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "max", input0_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "min", input0_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos_idi);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "max", input0_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos_idi);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "error", input0_error_value = /*errors*/ ctx[0].fecha_inicio);
 			input0.required = true;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "ml-4");
@@ -48696,8 +48696,8 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "id", "fecha_finalizacion");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "type", "date");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "class", "mt-1 block w-full p-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "min", input1_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "max", input1_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "min", input1_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos_idi);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "max", input1_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos_idi);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "error", input1_error_value = /*errors*/ ctx[0].fecha_finalizacion);
 			input1.required = true;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "ml-4");
@@ -48851,11 +48851,11 @@ function create_default_slot(ctx) {
 			if (dirty & /*errors*/ 1) label1_changes.class = /*errors*/ ctx[0].fecha_inicio ? "top-3.5 relative" : "";
 			label1.$set(label1_changes);
 
-			if (!current || dirty & /*convocatoria*/ 2 && input0_min_value !== (input0_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos)) {
+			if (!current || dirty & /*convocatoria*/ 2 && input0_min_value !== (input0_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos_idi)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "min", input0_min_value);
 			}
 
-			if (!current || dirty & /*convocatoria*/ 2 && input0_max_value !== (input0_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos)) {
+			if (!current || dirty & /*convocatoria*/ 2 && input0_max_value !== (input0_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos_idi)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input0, "max", input0_max_value);
 			}
 
@@ -48879,11 +48879,11 @@ function create_default_slot(ctx) {
 
 			label2.$set(label2_changes);
 
-			if (!current || dirty & /*convocatoria*/ 2 && input1_min_value !== (input1_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos)) {
+			if (!current || dirty & /*convocatoria*/ 2 && input1_min_value !== (input1_min_value = /*convocatoria*/ ctx[1].min_fecha_inicio_proyectos_idi)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "min", input1_min_value);
 			}
 
-			if (!current || dirty & /*convocatoria*/ 2 && input1_max_value !== (input1_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos)) {
+			if (!current || dirty & /*convocatoria*/ 2 && input1_max_value !== (input1_max_value = /*convocatoria*/ ctx[1].max_fecha_finalizacion_proyectos_idi)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(input1, "max", input1_max_value);
 			}
 

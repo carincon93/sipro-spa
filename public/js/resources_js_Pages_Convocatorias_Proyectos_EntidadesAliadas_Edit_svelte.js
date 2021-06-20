@@ -61046,7 +61046,13 @@ function get_each_context_2(ctx, list, i) {
 function create_else_block_2(ctx) {
 	let div;
 	let label;
-	let t;
+	let t0;
+	let a;
+	let svg;
+	let path;
+	let t1;
+	let a_href_value;
+	let t2;
 	let file;
 	let updating_value;
 	let current;
@@ -61083,18 +61089,57 @@ function create_else_block_2(ctx) {
 		c() {
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label.$$.fragment);
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			a = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                                Descargar soporte del convenio");
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "h-6 w-6 mr-2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "target", "_blank");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "class", "text-indigo-400 underline inline-block mb-4 flex");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "download", "");
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "href", a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"soporte_convenio"
+			]));
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-8");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label, div, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, a);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a, svg);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file, div, null);
 			current = true;
 		},
 		p(ctx, dirty) {
+			if (!current || dirty[0] & /*convocatoria, proyecto, entidadAliada*/ 14 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"soporte_convenio"
+			]))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "href", a_href_value);
+			}
+
 			const file_changes = {};
 			if (dirty[0] & /*errors*/ 1) file_changes.error = /*errors*/ ctx[0].soporte_convenio;
 
@@ -61189,8 +61234,8 @@ function create_if_block_11(ctx) {
 			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block1) if_block1.c();
 			if_block1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-8");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div0, anchor);
@@ -61336,7 +61381,7 @@ function create_if_block_13(ctx) {
 		c() {
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(textarea.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-8");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
@@ -61461,9 +61506,9 @@ function create_if_block_12(ctx) {
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input1.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-8");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div0, anchor);
@@ -61534,7 +61579,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (181:20) {#if proyecto.idi}
+// (187:20) {#if proyecto.idi}
 function create_if_block_10(ctx) {
 	let div0;
 	let textarea;
@@ -61543,12 +61588,24 @@ function create_if_block_10(ctx) {
 	let div1;
 	let label0;
 	let t1;
+	let a0;
+	let svg0;
+	let path0;
+	let t2;
+	let a0_href_value;
+	let t3;
 	let file0;
 	let updating_value_1;
-	let t2;
+	let t4;
 	let div2;
 	let label1;
-	let t3;
+	let t5;
+	let a1;
+	let svg1;
+	let path1;
+	let t6;
+	let a1_href_value;
+	let t7;
 	let file1;
 	let updating_value_2;
 	let current;
@@ -61636,15 +61693,65 @@ function create_if_block_10(ctx) {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label0.$$.fragment);
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			a0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
+			svg0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                                Descargar carta de intención");
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file0.$$.fragment);
-			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label1.$$.fragment);
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			a1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
+			svg1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                                Descargar carta de propiedad intelectual");
+			t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file1.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "d", "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg0, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg0, "class", "h-6 w-6 mr-2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg0, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg0, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg0, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "target", "_blank");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "class", "text-indigo-400 underline inline-block mb-4 flex");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "download", "");
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "href", a0_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"carta_intencion"
+			]));
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "d", "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg1, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg1, "class", "h-6 w-6 mr-2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg1, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg1, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg1, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "target", "_blank");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "class", "text-indigo-400 underline inline-block mb-4 flex");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "download", "");
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "href", a1_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"carta_propiedad_intelectual"
+			]));
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-8");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div0, anchor);
@@ -61653,11 +61760,21 @@ function create_if_block_10(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label0, div1, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, a0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a0, svg0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg0, path0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a0, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t3);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file0, div1, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t4, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label1, div2, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t5);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, a1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a1, svg1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg1, path1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a1, t6);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t7);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file1, div2, null);
 			current = true;
 		},
@@ -61672,6 +61789,16 @@ function create_if_block_10(ctx) {
 			}
 
 			textarea.$set(textarea_changes);
+
+			if (!current || dirty[0] & /*convocatoria, proyecto, entidadAliada*/ 14 && a0_href_value !== (a0_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"carta_intencion"
+			]))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "href", a0_href_value);
+			}
+
 			const file0_changes = {};
 			if (dirty[0] & /*errors*/ 1) file0_changes.error = /*errors*/ ctx[0].carta_intencion;
 
@@ -61682,6 +61809,16 @@ function create_if_block_10(ctx) {
 			}
 
 			file0.$set(file0_changes);
+
+			if (!current || dirty[0] & /*convocatoria, proyecto, entidadAliada*/ 14 && a1_href_value !== (a1_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)("convocatorias.proyectos.entidades-aliadas.download", [
+				/*convocatoria*/ ctx[1].id,
+				/*proyecto*/ ctx[2].id,
+				/*entidadAliada*/ ctx[3].id,
+				"carta_propiedad_intelectual"
+			]))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "href", a1_href_value);
+			}
+
 			const file1_changes = {};
 			if (dirty[0] & /*errors*/ 1) file1_changes.error = /*errors*/ ctx[0].carta_propiedad_intelectual;
 
@@ -61717,7 +61854,7 @@ function create_if_block_10(ctx) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file0);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t2);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t4);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label1);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file1);
@@ -61725,7 +61862,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (197:20) {#if $form.progress}
+// (215:20) {#if $form.progress}
 function create_if_block_9(ctx) {
 	let progress;
 	let t0_value = /*$form*/ ctx[11].progress.percentage + "";
@@ -61760,7 +61897,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (219:24) {:else}
+// (237:24) {:else}
 function create_else_block_1(ctx) {
 	let div;
 	let ul;
@@ -61824,7 +61961,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (210:24) {#if proyecto.modificable == true}
+// (228:24) {#if proyecto.modificable == true}
 function create_if_block_7(ctx) {
 	let div;
 	let current;
@@ -61911,7 +62048,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (224:44) {#if id == actividad}
+// (242:44) {#if id == actividad}
 function create_if_block_8(ctx) {
 	let li;
 	let t_value = /*descripcion*/ ctx[46] + "";
@@ -61936,7 +62073,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (223:40) {#each $form.actividad_id as actividad}
+// (241:40) {#each $form.actividad_id as actividad}
 function create_each_block_4(ctx) {
 	let if_block_anchor;
 	let if_block = /*id*/ ctx[45] == /*actividad*/ ctx[55] && create_if_block_8(ctx);
@@ -61971,7 +62108,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (222:36) {#each actividades as { id, descripcion }
+// (240:36) {#each actividades as { id, descripcion }
 function create_each_block_3(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*$form*/ ctx[11].actividad_id;
@@ -62027,7 +62164,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (213:36) <FormField>
+// (231:36) <FormField>
 function create_default_slot_10(ctx) {
 	let checkbox;
 	let updating_group;
@@ -62085,7 +62222,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (215:40) 
+// (233:40) 
 function create_label_slot(ctx) {
 	let span;
 	let t_value = /*descripcion*/ ctx[46] + "";
@@ -62110,7 +62247,7 @@ function create_label_slot(ctx) {
 	};
 }
 
-// (212:32) {#each actividades as { id, descripcion }
+// (230:32) {#each actividades as { id, descripcion }
 function create_each_block_2(ctx) {
 	let formfield;
 	let current;
@@ -62157,7 +62294,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (235:20) {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
+// (253:20) {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
 function create_if_block_6(ctx) {
 	let button;
 	let mounted;
@@ -62188,7 +62325,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (238:20) {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)}
+// (256:20) {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)}
 function create_if_block_5(ctx) {
 	let loadingbutton;
 	let current;
@@ -62236,7 +62373,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (239:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (257:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_9(ctx) {
 	let t;
 
@@ -62253,14 +62390,14 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (247:16) {#if proyecto.idi}
+// (265:16) {#if proyecto.idi}
 function create_if_block_4(ctx) {
 	let li;
 
 	return {
 		c() {
 			li = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("li");
-			li.innerHTML = `<a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada">Miembros de entidad aliada</a>`;
+			li.innerHTML = `<a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada">Crear miembro de la entidad aliada</a>`;
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, li, anchor);
@@ -62271,7 +62408,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (259:4) {#if proyecto.idi}
+// (277:4) {#if proyecto.idi}
 function create_if_block_2(ctx) {
 	let h1;
 	let t1;
@@ -62309,7 +62446,7 @@ function create_if_block_2(ctx) {
 	return {
 		c() {
 			h1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
-			h1.textContent = "Miembros de entidad aliada";
+			h1.textContent = "Miembros de la entidad aliada";
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
@@ -62332,6 +62469,7 @@ function create_if_block_2(ctx) {
 			}
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "mt-24 mb-8 text-center text-3xl");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "id", "miembros-entidad-aliada");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-6 flex justify-end items-center");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(table, "class", "w-full whitespace-no-wrap table-fixed data-table");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "bg-white rounded shadow");
@@ -62405,7 +62543,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (263:16) <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">
+// (281:16) <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">
 function create_default_slot_8(ctx) {
 	let t;
 
@@ -62422,7 +62560,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (304:36) {:else}
+// (322:36) {:else}
 function create_else_block(ctx) {
 	let item;
 	let current;
@@ -62466,7 +62604,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (300:36) {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+// (318:36) {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
 function create_if_block_3(ctx) {
 	let item;
 	let current;
@@ -62517,7 +62655,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (306:44) <Text>
+// (324:44) <Text>
 function create_default_slot_7(ctx) {
 	let t;
 
@@ -62534,7 +62672,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (305:40) <Item>
+// (323:40) <Item>
 function create_default_slot_6(ctx) {
 	let text_1;
 	let current;
@@ -62578,7 +62716,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (302:44) <Text>
+// (320:44) <Text>
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -62595,7 +62733,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (301:40) <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+// (319:40) <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
 function create_default_slot_4(ctx) {
 	let text_1;
 	let current;
@@ -62639,7 +62777,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (299:32) <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+// (317:32) <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
 function create_default_slot_3(ctx) {
 	let show_if;
 	let current_block_type_index;
@@ -62686,7 +62824,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (278:20) {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+// (296:20) {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
 function create_each_block_1(key_1, ctx) {
 	let tr;
 	let td0;
@@ -62801,7 +62939,7 @@ function create_each_block_1(key_1, ctx) {
 	};
 }
 
-// (331:16) {#each objetivosEspecificosRelacionados as { id, descripcion }}
+// (349:16) {#each objetivosEspecificosRelacionados as { id, descripcion }}
 function create_each_block(ctx) {
 	let tr;
 	let td;
@@ -62834,7 +62972,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (341:16) {#if objetivosEspecificosRelacionados.length === 0}
+// (359:16) {#if objetivosEspecificosRelacionados.length === 0}
 function create_if_block_1(ctx) {
 	let tr;
 
@@ -62852,7 +62990,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (350:8) 
+// (368:8) 
 function create_title_slot(ctx) {
 	let div;
 
@@ -62875,7 +63013,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (356:8) 
+// (374:8) 
 function create_content_slot(ctx) {
 	let div;
 
@@ -62900,7 +63038,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (367:16) <Button on:click={(event) => (dialogOpen = false)} variant={null}>
+// (385:16) <Button on:click={(event) => (dialogOpen = false)} variant={null}>
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -62917,7 +63055,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (368:16) <Button variant="raised" on:click={destroy}>
+// (386:16) <Button variant="raised" on:click={destroy}>
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -62934,7 +63072,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (365:8) 
+// (383:8) 
 function create_actions_slot(ctx) {
 	let div1;
 	let div0;
@@ -63456,7 +63594,7 @@ function create_default_slot(ctx) {
 			if (if_block6) if_block6.c();
 			t24 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			li = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("li");
-			li.innerHTML = `<a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos">Objetivos específcos relacionados</a>`;
+			li.innerHTML = `<a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos">Objetivos específicos relacionados</a>`;
 			t26 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block7) if_block7.c();
 			t27 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
@@ -63481,15 +63619,15 @@ function create_default_slot(ctx) {
 			if (if_block8) if_block8.c();
 			t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(dialog.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div8, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div8, "class", "mt-8");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h6, "class", "mt-20 mb-12 text-2xl");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h6, "id", "actividades");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div9, "class", "p-4");
@@ -63507,6 +63645,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div13, "class", "px-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div14, "class", "flex");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h11, "class", "mt-24 mb-8 text-center text-3xl");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h11, "id", "objetivos-especificos");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "mb-6");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(table, "class", "w-full whitespace-no-wrap table-fixed data-table");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div15, "class", "bg-white rounded shadow");

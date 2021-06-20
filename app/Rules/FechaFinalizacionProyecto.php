@@ -13,9 +13,10 @@ class FechaFinalizacionProyecto implements Rule
      *
      * @return void
      */
-    public function __construct($convocatoria)
+    public function __construct($convocatoria, $tipoProyecto)
     {
         $this->convocatoria = $convocatoria;
+        $this->tipoProyecto = $tipoProyecto;
     }
 
     /**
@@ -27,7 +28,24 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ($value <= $this->convocatoria->max_fecha_finalizacion_proyectos);
+        switch ($this->tipoProyecto) {
+            case 'st':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+                break;
+            case 'tatp':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
+                break;
+            case 'idi':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
+                break;
+            case 'cultura':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
+                break;
+            default:
+                break;
+        }
+
+        return ($value <= $maxFechaFinalizacionProyectos);
     }
 
     /**
@@ -37,7 +55,24 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function message()
     {
-        $maxFechaFinalizacionProyectos = date('d-m-Y', strtotime($this->convocatoria->max_fecha_finalizacion_proyectos));
+        switch ($this->tipoProyecto) {
+            case 'st':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+                break;
+            case 'tatp':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
+                break;
+            case 'idi':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
+                break;
+            case 'cultura':
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
+                break;
+            default:
+                break;
+        }
+
+        $maxFechaFinalizacionProyectos = date('d-m-Y', strtotime($maxFechaFinalizacionProyectos));
 
         return "La fecha de cierre no debe sobrepasar {$maxFechaFinalizacionProyectos}.";
     }

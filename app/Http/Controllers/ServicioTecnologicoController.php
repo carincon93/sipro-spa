@@ -43,7 +43,7 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('formular-proyecto');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st'),
             'mesasTecnicas'     => MesaTecnica::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
             'tipologiasSt'      => TipologiaSt::select('id as value', 'tipologia as label')->orderBy('tipologia', 'ASC')->get(),
@@ -134,7 +134,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->load('mesaTecnicaSectorProductivo.mesaTecnica', 'mesaTecnicaSectorProductivo.sectorProductivo');
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st'),
             'servicioTecnologico'   => $servicioTecnologico,
             'tipologiasSt'          => TipologiaSt::select('id as value', 'tipologia as label')->orderBy('tipologia', 'ASC')->get(),
             'tiposProyectoST'       => TipoProyectoSt::select('id as value', 'tipo as label')->orderBy('tipo', 'ASC')->get(),

@@ -37341,7 +37341,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (55:8) {#if isSuperAdmin}
+// (54:8) {#if isSuperAdmin}
 function create_if_block_5(ctx) {
 	let div1;
 	let p;
@@ -37404,7 +37404,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (59:20) <Button on:click={() => Inertia.visit(route('convocatorias.create'))} class="mt-8 mb-20" variant="raised">
+// (58:20) <Button on:click={() => Inertia.visit(route('convocatorias.create'))} class="mt-8 mb-20" variant="raised">
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -37421,7 +37421,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (64:12) {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
+// (63:12) {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
 function create_if_block_3(ctx) {
 	let each_blocks = [];
 	let each_1_lookup = new Map();
@@ -37466,7 +37466,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (71:24) {#if convocatoria.active}
+// (70:24) {#if convocatoria.active}
 function create_if_block_4(ctx) {
 	let small;
 
@@ -37484,7 +37484,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (65:16) {#each convocatorias.data as convocatoria (convocatoria.id)}
+// (64:16) {#each convocatorias.data as convocatoria (convocatoria.id)}
 function create_each_block(key_1, ctx) {
 	let a;
 	let t0;
@@ -37608,7 +37608,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (36:16) {:else}
+// (35:16) {:else}
 function create_else_block(ctx) {
 	let h1;
 	let t1;
@@ -37676,14 +37676,9 @@ function create_if_block(ctx) {
 	let t1;
 	let t2;
 	let p;
+	let t3_value = /*convocatoriaActiva*/ ctx[1].fechas_idi + "";
 	let t3;
-	let t4_value = /*convocatoriaActiva*/ ctx[1].fecha_inicio_formateado + "";
 	let t4;
-	let t5;
-	let t6_value = /*convocatoriaActiva*/ ctx[1].fecha_finalizacion_formateado + "";
-	let t6;
-	let t7;
-	let t8;
 	let show_if = /*isSuperAdmin*/ ctx[3] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[2], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
 	let if_block_anchor;
 	let current;
@@ -37696,12 +37691,8 @@ function create_if_block(ctx) {
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("La convocatoria empezó el ");
-			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t4_value);
-			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                        y finaliza el ");
-			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t6_value);
-			t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(".");
-			t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t3_value);
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block) if_block.c();
 			if_block_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "font-bold text-5xl");
@@ -37714,19 +37705,14 @@ function create_if_block(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t2, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t4);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t5);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t6);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t7);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t8, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t4, anchor);
 			if (if_block) if_block.m(target, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 			current = true;
 		},
 		p(ctx, dirty) {
 			if ((!current || dirty & /*convocatoriaActiva*/ 2) && t1_value !== (t1_value = /*convocatoriaActiva*/ ctx[1].year + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
-			if ((!current || dirty & /*convocatoriaActiva*/ 2) && t4_value !== (t4_value = /*convocatoriaActiva*/ ctx[1].fecha_inicio_formateado + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t4, t4_value);
-			if ((!current || dirty & /*convocatoriaActiva*/ 2) && t6_value !== (t6_value = /*convocatoriaActiva*/ ctx[1].fecha_finalizacion_formateado + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t6, t6_value);
+			if ((!current || dirty & /*convocatoriaActiva*/ 2) && t3_value !== (t3_value = /*convocatoriaActiva*/ ctx[1].fechas_idi + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
 			if (show_if) if_block.p(ctx, dirty);
 		},
 		i(local) {
@@ -37742,14 +37728,14 @@ function create_if_block(ctx) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h1);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t2);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t8);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t4);
 			if (if_block) if_block.d(detaching);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block_anchor);
 		}
 	};
 }
 
-// (39:20) {#if isSuperAdmin}
+// (38:20) {#if isSuperAdmin}
 function create_if_block_2(ctx) {
 	let a;
 	let span0;
@@ -37792,7 +37778,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (30:20) {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
+// (29:20) {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
 function create_if_block_1(ctx) {
 	let button;
 	let current;
@@ -37840,7 +37826,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (31:24) <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
+// (30:24) <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
 function create_default_slot(ctx) {
 	let t0;
 	let t1_value = /*convocatoriaActiva*/ ctx[1].year + "";
