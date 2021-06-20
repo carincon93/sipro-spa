@@ -199,7 +199,7 @@
                         <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
                         <InputError message={errors.actividad_id} />
                     </div>
-                    {#if proyecto.modificable == true}
+                    {#if isSuperAdmin || proyecto.modificable == true}
                         <div class="grid grid-cols-2">
                             {#each actividades as { id, descripcion }, i}
                                 <FormField class="border-b border-l py-4">

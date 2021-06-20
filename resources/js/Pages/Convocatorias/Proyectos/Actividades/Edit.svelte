@@ -107,7 +107,7 @@
                         <Label required class="mb-4" labelFor="producto_id" value="Relacione algún producto" />
                         <InputError message={errors.producto_id} />
                     </div>
-                    {#if proyecto.modificable == true}
+                    {#if isSuperAdmin || proyecto.modificable == true}
                         <div class="grid grid-cols-2">
                             {#each productos as { id, nombre }}
                                 <FormField class="border-b border-l py-4">
@@ -140,7 +140,7 @@
                         <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Relacione algún rubro" />
                         <InputError message={errors.proyecto_presupuesto_id} />
                     </div>
-                    {#if proyecto.modificable == true}
+                    {#if isSuperAdmin || proyecto.modificable == true}
                         <div class="grid grid-cols-2">
                             {#each proyectoPresupuesto as presupuesto}
                                 <FormField class="border-b border-l">
