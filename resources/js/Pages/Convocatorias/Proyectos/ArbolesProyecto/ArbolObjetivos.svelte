@@ -23,6 +23,7 @@
     export let causasDirectas
     export let tiposImpacto
     export let tiposResultado
+    export let tipoProyectoA
 
     let cantidadCeldasActividades = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
@@ -478,7 +479,7 @@
                             <div id="arrow-resultado" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div class="{i == 0 ? 'resultados' : 'resultados-line'} relative flex-1 flex flex-wrap" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div class="{i == 0 ? 'resultados' : tipoProyectoA ? 'resultados-line' : 'resultados'} relative flex-1 flex flex-wrap" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.resultados as resultado, j}
                             <div
                                 on:click={showResultadoDialog(efectoDirecto, resultado)}
@@ -488,7 +489,7 @@
                                     ? 'bg-gray-300 hover:bg-gray-400'
                                     : efectoDirecto.descripcion != null && i % 2 != 0
                                     ? 'bg-orangered-500 hover:bg-orangered-600'
-                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{j != 4 ? ' mb-4' : ''}"
+                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{j != 4 && tipoProyectoA ? ' mb-4' : ''}"
                                 style="flex: 1 0 33.333%"
                             >
                                 <p class="paragraph-ellipsis text-white text-sm line-height-1-24">

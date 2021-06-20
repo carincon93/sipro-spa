@@ -371,6 +371,7 @@ class ArbolProyectoController extends Controller
         $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
         $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+        $tipoProyectoA = false;
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $proyecto->problema_central         = $proyecto->idi->problema_central;
@@ -394,6 +395,7 @@ class ArbolProyectoController extends Controller
                 $proyecto->objetivo_general   = $proyecto->servicioTecnologico->objetivo_general;
                 $proyecto->problema_central   = $proyecto->servicioTecnologico->problema_central;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto-st.json'), true);
+                $tipoProyectoA = $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'A';
                 break;
             default:
                 break;
@@ -406,6 +408,7 @@ class ArbolProyectoController extends Controller
             'causasDirectas'  => $causasDirectas,
             'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),
             'tiposImpacto'    => $tiposImpacto,
+            'tipoProyectoA'   => $tipoProyectoA
         ]);
     }
 
