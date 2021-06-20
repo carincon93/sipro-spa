@@ -13,10 +13,11 @@ class FechaFinalizacionProyecto implements Rule
      *
      * @return void
      */
-    public function __construct($convocatoria, $tipoProyecto)
+    public function __construct($convocatoria, $tipoProyecto, $proyecto)
     {
         $this->convocatoria = $convocatoria;
         $this->tipoProyecto = $tipoProyecto;
+        $this->proyecto     = $proyecto;
     }
 
     /**
@@ -28,21 +29,17 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        switch ($this->tipoProyecto) {
-            case 'st':
-                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
-                break;
-            case 'tatp':
-                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
-                break;
-            case 'idi':
+
+        if ($this->proyecto) {
+            if ($this->proyecto->idi()->exists() || $this->tipoProyecto == 'st') {
                 $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
-                break;
-            case 'cultura':
+            } elseif ($this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
+            } elseif ($this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'idi') {
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+            } elseif ($this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
                 $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
-                break;
-            default:
-                break;
+            }
         }
 
         return ($value <= $maxFechaFinalizacionProyectos);
@@ -55,21 +52,16 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function message()
     {
-        switch ($this->tipoProyecto) {
-            case 'st':
-                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
-                break;
-            case 'tatp':
-                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
-                break;
-            case 'idi':
+        if ($this->proyecto) {
+            if ($this->proyecto->idi()->exists() || $this->tipoProyecto == 'st') {
                 $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
-                break;
-            case 'cultura':
+            } elseif ($this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tatp;
+            } elseif ($this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'idi') {
+                $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+            } elseif ($this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
                 $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
-                break;
-            default:
-                break;
+            }
         }
 
         $maxFechaFinalizacionProyectos = date('d-m-Y', strtotime($maxFechaFinalizacionProyectos));
