@@ -113,6 +113,12 @@ class ObjetivoEspecifico extends Model
             case 4:
                 $value = 'Cuarto objetivo específico';
                 break;
+            case 5:
+                $value = 'Quinto objetivo específico';
+                break;
+            case 6:
+                $value = 'Sexto objetivo específico';
+                break;
             default:
                 break;
         }

@@ -274,3 +274,7 @@ th.th-actions {
 #informacion-dialog .mdc-button--raised:not(:disabled) {
     color: #4f46e5;
 }
+
+.overflow-x-scroll {
+    overflow-x: scroll;
+}

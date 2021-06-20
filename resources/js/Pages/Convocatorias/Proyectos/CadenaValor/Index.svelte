@@ -123,12 +123,17 @@
     {/if}
 
     <div class="mt-10">
-        <div id="orgchart_div" />
+        <div id="orgchart_div" class="overflow-x-scroll" style="margin: 0 -100px;" />
     </div>
 </AuthenticatedLayout>
 
 <style>
     :global(#orgchart_div table) {
         border-collapse: unset;
+    }
+
+    :global(#orgchart_div table td.google-visualization-orgchart-node-small > div) {
+        margin: auto;
+        width: 150px;
     }
 </style>
