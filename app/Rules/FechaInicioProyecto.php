@@ -29,16 +29,14 @@ class FechaInicioProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        if ($this->proyecto) {
-            if ($this->proyecto->idi()->exists() || $this->tipoProyecto == 'st') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
-            } elseif ($this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
-            } elseif ($this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'idi') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
-            } elseif ($this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
-            }
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
         }
 
         return ($value >= $minFechaFinalizacionProyectos);
@@ -51,16 +49,14 @@ class FechaInicioProyecto implements Rule
      */
     public function message()
     {
-        if ($this->proyecto) {
-            if ($this->proyecto->idi()->exists() || $this->tipoProyecto == 'st') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
-            } elseif ($this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
-            } elseif ($this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'idi') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
-            } elseif ($this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
-                $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
-            }
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->taTp()->exists() || $this->tipoProyecto == 'tatp') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tatp;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
         }
 
         $minFechaFinalizacionProyectos = date('d-m-Y', strtotime($minFechaFinalizacionProyectos));
