@@ -22,6 +22,7 @@ use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
 use App\Http\Requests\ActividadRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -111,6 +112,10 @@ class ArbolProyectoController extends Controller
                 }
             }
         }
+
+        // if ($proyecto->taTp()->exists()) {
+        //     DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ',' . $objetivoEspecifico . ', -1)');
+        // }
     }
 
     /**
@@ -170,13 +175,14 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $request->validate([
-            'problema_central' => 'required|string|max:40000',
-            'justificacion_problema' => 'required|string|max:40000',
-        ]);
-
         switch ($proyecto) {
             case $proyecto->idi()->exists():
+                $request->validate([
+                    'identificacion_problema'  => 'required|string|max:40000',
+                    'problema_central'          => 'required|string|max:40000',
+                    'justificacion_problema'    => 'required|string|max:40000',
+                ]);
+
                 $idi = $proyecto->idi;
                 $idi->identificacion_problema   = $request->identificacion_problema;
                 $idi->problema_central          = $request->problema_central;
@@ -185,6 +191,13 @@ class ArbolProyectoController extends Controller
                 $idi->save();
                 break;
             case $proyecto->taTp()->exists():
+                $request->validate([
+                    'identificacion_problema'  => 'required|string|max:40000',
+                    'problema_central'          => 'required|string|max:40000',
+                    'justificacion_problema'    => 'required|string|max:40000',
+                ]);
+
+
                 $tatp = $proyecto->taTp;
                 $tatp->identificacion_problema  = $request->identificacion_problema;
                 $tatp->problema_central         = $request->problema_central;
@@ -193,6 +206,12 @@ class ArbolProyectoController extends Controller
                 $tatp->save();
                 break;
             case $proyecto->culturaInnovacion()->exists():
+                $request->validate([
+                    'identificacion_problema'  => 'required|string|max:40000',
+                    'problema_central'          => 'required|string|max:40000',
+                    'justificacion_problema'    => 'required|string|max:40000',
+                ]);
+
                 $culturaInnovacion = $proyecto->culturaInnovacion;
                 $culturaInnovacion->identificacion_problema  = $request->identificacion_problema;
                 $culturaInnovacion->problema_central         = $request->problema_central;
@@ -201,11 +220,11 @@ class ArbolProyectoController extends Controller
                 $culturaInnovacion->save();
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                $servicioTecnologico                                = $proyecto->servicioTecnologico;
-                $servicioTecnologico->problema_central              = $request->problema_central;
-                $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
-                $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
-
+                $request->validate([
+                    'problema_central' => 'required|string|max:40000',
+                ]);
+                $servicioTecnologico                   = $proyecto->servicioTecnologico;
+                $servicioTecnologico->problema_central = $request->problema_central;
                 $servicioTecnologico->save();
                 break;
             default:
