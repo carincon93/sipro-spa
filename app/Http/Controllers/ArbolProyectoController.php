@@ -150,9 +150,11 @@ class ArbolProyectoController extends Controller
                 $proyecto->identificacion_problema = $proyecto->idi->identificacion_problema;
                 break;
             case $proyecto->taTp()->exists():
+                if ($proyecto->codigo_linea_programatica == 69) {
+                    $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
+                    $proyecto->identificacion_problema = $proyecto->tatp->identificacion_problema;
+                }
                 $proyecto->problema_central = $proyecto->tatp->problema_central;
-                $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
-                $proyecto->identificacion_problema = $proyecto->tatp->identificacion_problema;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
@@ -201,17 +203,21 @@ class ArbolProyectoController extends Controller
                 $idi->save();
                 break;
             case $proyecto->taTp()->exists():
-                $request->validate([
-                    'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
-                ]);
-
-
                 $tatp = $proyecto->taTp;
-                $tatp->identificacion_problema  = $request->identificacion_problema;
-                $tatp->problema_central         = $request->problema_central;
-                $tatp->justificacion_problema   = $request->justificacion_problema;
+                if ($proyecto->codigo_linea_programatica == 69) {
+                    $request->validate([
+                        'identificacion_problema'  => 'required|string|max:40000',
+                        'problema_central'          => 'required|string|max:40000',
+                        'justificacion_problema'    => 'required|string|max:40000',
+                    ]);
+                    $tatp->identificacion_problema  = $request->identificacion_problema;
+                    $tatp->justificacion_problema   = $request->justificacion_problema;
+                } else {
+                    $request->validate([
+                        'problema_central'          => 'required|string|max:40000',
+                    ]);
+                }
+                $tatp->problema_central = $request->problema_central;
 
                 $tatp->save();
                 break;
