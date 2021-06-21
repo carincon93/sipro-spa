@@ -11,6 +11,7 @@ use App\Http\Requests\TaTpRequest;
 use App\Models\Regional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -104,6 +105,8 @@ class TaTpController extends Controller
                 'rol_sennova'       => $request->rol_sennova,
             ]
         );
+
+        DB::select('SELECT public."generalidades_ta"(' . $proyecto->id . ')');
 
         return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'El recurso se ha creado correctamente.');
     }
