@@ -557,7 +557,7 @@
             {:else if showProblemaCentralForm}
                 <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                        {#if proyecto.codigo_linea_programatica != 68}
+                        {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
                             <div class="mt-10">
                                 <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
                                 <InfoMessage
