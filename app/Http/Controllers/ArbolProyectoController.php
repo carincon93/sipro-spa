@@ -71,7 +71,6 @@ class ArbolProyectoController extends Controller
             }
 
             if ($proyecto->taTp()->exists()) {
-                //
                 DB::select('SELECT public."crear_causas_indirectas_ta"(' . $proyecto->id . ')');
             }
         }
@@ -119,6 +118,7 @@ class ArbolProyectoController extends Controller
         }
 
         if ($proyecto->taTp()->exists()) {
+            DB::select('SELECT public."objetivos_especificos_ta"(' . $proyecto->id . ')');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 240, 2, 19)');
