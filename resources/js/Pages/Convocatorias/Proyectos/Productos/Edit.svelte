@@ -44,7 +44,7 @@
         fecha_inicio: producto.fecha_inicio,
         fecha_finalizacion: producto.fecha_finalizacion,
         indicador: producto.indicador,
-        medio_verificacion: producto.ta_tp ? producto.producto_ta_tp?.medio_verificacion : producto.producto_servicio_tecnologico?.medio_verificacion,
+        medio_verificacion: producto.producto_ta_tp ? producto.producto_ta_tp?.medio_verificacion : producto.producto_servicio_tecnologico?.medio_verificacion,
 
         nombre_indicador: producto.producto_servicio_tecnologico?.nombre_indicador,
         formula_indicador: producto.producto_servicio_tecnologico?.formula_indicador,
@@ -157,7 +157,7 @@
                     </div>
                 {:else if proyecto.ta_tp}
                     <div class="mt-8">
-                        <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" bind:value={$form.valor_proyectado} required />
+                        <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" error={errors.valor_proyectado} bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 
@@ -174,7 +174,6 @@
                         <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
-
                 {#if proyecto.servicio_tecnologico}
                     <div class="mt-8">
                         <Label required labelFor="nombre_indicador" value="Nombre del Indicador del producto" />
