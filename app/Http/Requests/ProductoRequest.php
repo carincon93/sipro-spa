@@ -27,7 +27,7 @@ class ProductoRequest extends FormRequest
     {
         return [
             'resultado_id'                  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:resultados,id'],
-            'nombre'                        => ['required', 'max:191'],
+            'nombre'                        => ['required', 'string'],
             'fecha_inicio'                  => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), null, $this->route('proyecto'))],
             'fecha_finalizacion'            => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), null, $this->route('proyecto'))],
             'indicador'                     => ['required', 'string'],
