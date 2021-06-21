@@ -69,6 +69,11 @@ class ArbolProyectoController extends Controller
 
                 array_push($objetivosEspecificos, $objetivoEspecifico);
             }
+
+            if ($proyecto->taTp()->exists()) {
+                //
+                DB::select('SELECT public."crear_causas_indirectas_ta"(' . $proyecto->id . ')');
+            }
         }
 
         if ($proyecto->efectosDirectos()->count() < $numeroCeldas) {
@@ -113,9 +118,14 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        // if ($proyecto->taTp()->exists()) {
-        //     DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ',' . $objetivoEspecifico . ', -1)');
-        // }
+        if ($proyecto->taTp()->exists()) {
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 240, 2, 19)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 241, 3, 25)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 242, 4, 32)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 243, 5, 38)');
+        }
     }
 
     /**

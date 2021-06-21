@@ -25,7 +25,7 @@ class ImpactoRequest extends FormRequest
     {
         return [
             'descripcion'   => ['required', 'max:1200', 'string'],
-            'tipo'          => ['required', 'integer', 'between:1,4'],
+            'tipo'          => ['required', 'integer', 'between:1,6'],
         ];
     }
 
