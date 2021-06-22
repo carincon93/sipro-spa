@@ -284,7 +284,7 @@
                             <li>• No debe dar origen a respuestas tales como si o no.</li>
                         </ul>
                         <br />
-                        <strong>Nota:</strong>Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
+                        <strong>Nota:</strong> Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
                     </InfoMessage>
                 </div>
                 <div>
