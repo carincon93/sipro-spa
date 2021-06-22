@@ -78,7 +78,7 @@
     <InfoMessage message="Debe generar las actividades en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor." />
 
     <Gantt
-        items={actividades.data}
+        items={actividades}
         request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',

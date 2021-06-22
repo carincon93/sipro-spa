@@ -53,7 +53,7 @@ class ProductoController extends Controller
                 $resultado->map(function ($resultado) {
                     return $resultado->id;
                 })
-            )->orderBy('fecha_inicio', 'ASC')->filterProducto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            )->orderBy('fecha_inicio', 'ASC')->get(),
         ]);
     }
 
