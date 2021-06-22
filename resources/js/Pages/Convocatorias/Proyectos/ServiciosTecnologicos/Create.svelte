@@ -188,7 +188,7 @@
             {#if $form.mesa_tecnica_id?.value}
                 <div class="mt-10 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="mesa_tecnica_sector_productivo_id" value="Sector productivo" />
+                        <Label required class="mb-4" labelFor="mesa_tecnica_sector_productivo_id" value="Sectores priorizados de Colombia productiva" />
                     </div>
                     <div>
                         <DynamicList id="mesa_tecnica_sector_productivo_id" bind:value={$form.mesa_tecnica_sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.mesa_tecnica_sector_productivo_id} required />

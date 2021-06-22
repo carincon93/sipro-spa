@@ -71,7 +71,12 @@ class ArbolProyectoController extends Controller
             }
 
             if ($proyecto->taTp()->exists()) {
-                DB::select('SELECT public."crear_causas_indirectas_ta"(' . $proyecto->id . ')');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 0)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 1)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 2)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 3)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 4)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 5)');
             }
         }
 

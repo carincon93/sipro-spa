@@ -140,7 +140,7 @@
                     </div>
                 {:else if proyecto.ta_tp}
                     <div class="mt-8">
-                        <Input label="Valor proyectado" id="valor_proyectado" type="number" input$min="0" input$max="100" class="mt-1" error={errors.valor_proyectado} bind:value={$form.valor_proyectado} required />
+                        <Textarea label="Meta" maxlength="40000" id="valor_proyectado" error={errors.valor_proyectado} bind:value={$form.valor_proyectado} required />
                     </div>
                 {/if}
 
