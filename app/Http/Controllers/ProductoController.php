@@ -136,7 +136,7 @@ class ProductoController extends Controller
         if ($proyecto->taTp()->exists()) {
             $request->validate([
                 'medio_verificacion' => 'required|string',
-                'valor_proyectado'   => 'required|integer|between:1,100',
+                'valor_proyectado'   => 'required|string',
             ]);
             $productoTaTp = new ProductoTaTp();
             $productoTaTp->producto()->associate($producto->id);
@@ -248,7 +248,7 @@ class ProductoController extends Controller
         if ($proyecto->taTp()->exists()) {
             $request->validate([
                 'medio_verificacion' => 'required|string',
-                'valor_proyectado'   => 'required|integer|between:1,100',
+                'valor_proyectado'   => 'required|string',
             ]);
             $producto->productoTaTp()->update(['valor_proyectado' => $request->valor_proyectado, 'medio_verificacion' => $request->medio_verificacion]);
         }
