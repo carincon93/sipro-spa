@@ -49,7 +49,7 @@
     </div>
 
     <Gantt
-        items={productos.data}
+        items={productos}
         request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
