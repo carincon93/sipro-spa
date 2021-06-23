@@ -163,6 +163,7 @@ class TaTpController extends Controller
         $tatp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
         $tatp->resumen                              = $request->resumen;
         $tatp->antecedentes                         = $request->antecedentes;
+        $tatp->justificacion                        = $request->justificacion;
         $tatp->marco_conceptual                     = $request->marco_conceptual;
         $tatp->bibliografia                         = $request->bibliografia;
         $tatp->impacto_municipios                   = $request->impacto_municipios;
