@@ -61,6 +61,7 @@
         resumen: tatp.resumen,
         resumen_regional: tatp.resumen_regional,
         antecedentes: tatp.antecedentes,
+        justificacion: tatp.justificacion,
         antecedentes_regional: tatp.antecedentes_regional,
         retos_oportunidades: tatp.retos_oportunidades,
         pertinencia_territorio: tatp.pertinencia_territorio,
@@ -274,6 +275,15 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
+                    <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
+                </div>
+                <div>
+                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
                 </div>
                 <div>
@@ -376,6 +386,7 @@
                     <li>Complemento - Resumen</li>
                     <li>Antecedentes</li>
                     <li>Complemento - Antecedentes regional</li>
+                    <li>Justificación</li>
                     <li>Retos y prioridades locales</li>
                     <li>Justificación y pertinencia en el territorio</li>
                     <li>Marco conceptual</li>

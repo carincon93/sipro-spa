@@ -35,6 +35,7 @@ class TaTp extends Model
         'nodo_tecnoparque_id',
         'resumen',
         'resumen_regional',
+        'justificacion',
         'antecedentes',
         'antecedentes_regional',
         'problema_central',
