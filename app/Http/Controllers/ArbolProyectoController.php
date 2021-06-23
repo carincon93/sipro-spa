@@ -69,15 +69,6 @@ class ArbolProyectoController extends Controller
 
                 array_push($objetivosEspecificos, $objetivoEspecifico);
             }
-
-            if ($proyecto->taTp()->exists()) {
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 0)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 1)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 2)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 3)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 4)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 5)');
-            }
         }
 
         if ($proyecto->efectosDirectos()->count() < $numeroCeldas) {
@@ -99,6 +90,16 @@ class ArbolProyectoController extends Controller
                         'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
                     ]);
                 }
+            }
+
+
+            if ($proyecto->taTp()->exists()) {
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 0)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 1)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 2)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 240, 3)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 241, 4)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 242, 5)');
             }
         }
 
