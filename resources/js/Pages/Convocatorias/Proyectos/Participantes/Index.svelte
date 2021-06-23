@@ -1,7 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import Stepper from '@/Shared/Stepper'
-    import ProgramasFormacion from './ProgramasFormacion'
     import SemillerosInvestigacion from './SemillerosInvestigacion'
     import Participantes from './Participantes'
 
@@ -26,12 +25,6 @@
         {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 || proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70 || proyecto.codigo_linea_programatica == 65}
             <div>
                 <SemillerosInvestigacion {convocatoria} {proyecto} {errors} />
-            </div>
-        {/if}
-        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 || proyecto.codigo_linea_programatica == 65}
-            <hr class="my-16" />
-            <div>
-                <ProgramasFormacion {convocatoria} {proyecto} {errors} />
             </div>
         {/if}
     </div>

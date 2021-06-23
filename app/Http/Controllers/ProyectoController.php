@@ -265,12 +265,11 @@ class ProyectoController extends Controller
         }
 
         $proyecto->load('participantes.centroFormacion.regional');
-        $proyecto->load('programasFormacion.centroFormacion.regional');
         $proyecto->load('semillerosInvestigacion.lineaInvestigacion.grupoInvestigacion');
 
         return Inertia::render('Convocatorias/Proyectos/Participantes/Index', [
             'convocatoria'          => $convocatoria,
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'programasFormacion', 'semillerosInvestigacion'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => $rolesSennova,

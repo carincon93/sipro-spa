@@ -25,7 +25,8 @@ class ProgramaFormacion extends Model
         'centro_formacion_id',
         'nombre',
         'codigo',
-        'modalidad'
+        'modalidad',
+        'nivel_formacion',
     ];
 
     /**
@@ -94,26 +95,5 @@ class ProgramaFormacion extends Model
             $query->orWhere('programas_formacion.codigo', 'ilike', '%' . $search . '%');
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
-    }
-
-    /**
-     * getModalidadAttribute
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function getModalidadAttribute($value)
-    {
-        switch ($value) {
-            case 1:
-                $value = 'Presencial';
-                break;
-            case 2:
-                $value = 'Virtual';
-                break;
-            default:
-                break;
-        }
-        return $value;
     }
 }

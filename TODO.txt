@@ -50,7 +50,7 @@ ALTER TABLE "public"."programas_formacion"
 ALTER TABLE "public"."proyecto_programa_formacion" RENAME TO "proyecto_programa_formacion_impactados";
 
 
-  INSERT INTO programas_formacion(centro_formacion_id, codigo, nombre, nivel_formacion, modalidad, registro_calificado) VALUES((SELECT centros_formacion.id FROM centros_formacion WHERE centros_formacion.codigo = 9517),	112005,	'TECNOLOGO EN GESTION DEL TALENTO HUMANO',	1,	1, true);
+INSERT INTO programas_formacion(centro_formacion_id, codigo, nombre, nivel_formacion, modalidad, registro_calificado) VALUES((SELECT centros_formacion.id FROM centros_formacion WHERE centros_formacion.codigo = 9517),	112005,	'TECNOLOGO EN GESTION DEL TALENTO HUMANO',	1,	1, true);
 INSERT INTO programas_formacion(centro_formacion_id, codigo, nombre, nivel_formacion, modalidad, registro_calificado) VALUES((SELECT centros_formacion.id FROM centros_formacion WHERE centros_formacion.codigo = 9517),	122133,	'TECNOLOGO EN GESTION DE NEGOCIOS',	1,	1, true);
 INSERT INTO programas_formacion(centro_formacion_id, codigo, nombre, nivel_formacion, modalidad, registro_calificado) VALUES((SELECT centros_formacion.id FROM centros_formacion WHERE centros_formacion.codigo = 9517),	123101,	'TECNOLOGO EN GESTION CONTABLE Y DE INFORMACION FINANCIERA',	1,	1, true);
 INSERT INTO programas_formacion(centro_formacion_id, codigo, nombre, nivel_formacion, modalidad, registro_calificado) VALUES((SELECT centros_formacion.id FROM centros_formacion WHERE centros_formacion.codigo = 9517),	417205,	'ESPECIALISTA TECNOLOGICO EN GESTION DEL ECOTURISMO',	3,	1, true);

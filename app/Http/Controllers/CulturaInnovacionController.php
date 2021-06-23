@@ -144,15 +144,17 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
-            'culturaInnovacion'                 => $culturaInnovacion,
-            'mesasSectorialesRelacionadas'      => $culturaInnovacion->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'    => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                     => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first() ? $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
-            'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'opcionesAplicaNoAplica'            => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
-            'proyectoMunicipios'                => $culturaInnovacion->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
+            'culturaInnovacion'                         => $culturaInnovacion,
+            'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
+            'lineasTecnologicasRelacionadas'            => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->pluck('id'),
+            'tecnoacademia'                             => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first() ? $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
+            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'opcionesAplicaNoAplica'                    => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
+            'proyectoMunicipios'                        => $culturaInnovacion->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoProgramasFormacion'                => $culturaInnovacion->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados'     => $culturaInnovacion->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
         ]);
     }
 
@@ -199,6 +201,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
         $culturaInnovacion->proyecto->municipios()->sync($request->municipios);
+        $culturaInnovacion->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
+        $culturaInnovacion->proyecto->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
 
         $culturaInnovacion->save();
 
