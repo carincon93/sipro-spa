@@ -30,7 +30,7 @@
         cantidadCeldasActividades = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
         cantidadCeldasActividades = 14
-    } else if (proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70) {
+    } else if (proyecto.codigo_linea_programatica == 70) {
         cantidadCeldasActividades = 10
     }
 

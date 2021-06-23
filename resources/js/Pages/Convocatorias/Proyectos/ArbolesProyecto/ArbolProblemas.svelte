@@ -32,7 +32,7 @@
         cantidadCeldasCausasIndirectas = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
         cantidadCeldasCausasIndirectas = 14
-    } else if (proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70) {
+    } else if (proyecto.codigo_linea_programatica == 70) {
         cantidadCeldasCausasIndirectas = 10
     }
 

@@ -43,7 +43,7 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $numeroCeldas = 4;
                 break;
-            case $proyecto->taTp()->exists():
+            case $proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70:
                 $numeroCeldas = 6;
                 break;
             case $proyecto->servicioTecnologico()->exists():
@@ -92,7 +92,7 @@ class ArbolProyectoController extends Controller
                 }
             }
 
-            if ($proyecto->taTp()->exists()) {
+            if ($proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70) {
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 237, 0)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 238, 1)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 239, 2)');
@@ -122,7 +122,7 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->taTp()->exists()) {
+        if ($proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70) {
             DB::select('SELECT public."objetivos_especificos_ta"(' . $proyecto->id . ')');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
@@ -361,7 +361,7 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $numeroCeldas = 4;
                 break;
-            case $proyecto->taTp()->exists():
+            case $proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70:
                 $numeroCeldas = 10;
                 break;
             case $proyecto->servicioTecnologico()->exists():

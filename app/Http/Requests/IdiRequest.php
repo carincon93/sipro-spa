@@ -53,6 +53,8 @@ class IdiRequest extends FormRequest
                 'bibliografia'                              => ['required', 'string'],
                 'numero_aprendices'                         => ['required', 'min:0', 'max:9999', 'integer'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
+                'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
+                'programas_formacion_articulados*'          => ['nullable', 'integer', 'exists:programas_formacion,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'impacto_centro_formacion'                  => ['required', 'string'],
                 'relacionado_plan_tecnologico'              => ['required', 'min:0', 'max:3', 'integer'],
@@ -150,6 +152,38 @@ class IdiRequest extends FormRequest
                     }
                 }
                 $this->merge(['municipios' => $municipios]);
+            }
+        }
+
+        if (is_array($this->programas_formacion)) {
+            if (isset($this->programas_formacion['value']) && is_numeric($this->programas_formacion['value'])) {
+                $this->merge([
+                    'programas_formacion' => $this->programas_formacion['value'],
+                ]);
+            } else {
+                $programasFormacion = [];
+                foreach ($this->programas_formacion as $programaFormacion) {
+                    if (is_array($programaFormacion)) {
+                        array_push($programasFormacion, $programaFormacion['value']);
+                    }
+                }
+                $this->merge(['programas_formacion' => $programasFormacion]);
+            }
+        }
+
+        if (is_array($this->programas_formacion_articulados)) {
+            if (isset($this->programas_formacion_articulados['value']) && is_numeric($this->programas_formacion_articulados['value'])) {
+                $this->merge([
+                    'programas_formacion_articulados' => $this->programas_formacion_articulados['value'],
+                ]);
+            } else {
+                $programasFormacionArticulados = [];
+                foreach ($this->programas_formacion_articulados as $programaFormacion) {
+                    if (is_array($programaFormacion)) {
+                        array_push($programasFormacionArticulados, $programaFormacion['value']);
+                    }
+                }
+                $this->merge(['programas_formacion_articulados' => $programasFormacionArticulados]);
             }
         }
     }

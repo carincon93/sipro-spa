@@ -63,6 +63,9 @@ class ProyectoController extends Controller
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 foreach ($resultado->productos as $producto) {
+                    if ($producto->id == 196) {
+                        dd($producto);
+                    }
                     $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
                 }
             }
