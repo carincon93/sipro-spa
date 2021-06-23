@@ -84,7 +84,7 @@ class TaTpRequest extends FormRequest
             }
         }
 
-        if (is_array($this->tecnoacademia_linea_tecnologica_id)) {
+        if (is_array($this->tecnoacademia_linea_tecnologica_id) && count($this->tecnoacademia_linea_tecnologica_id) > 0) {
             $this->merge([
                 'tecnoacademia_linea_tecnologica_id' => $this->tecnoacademia_linea_tecnologica_id['value'],
             ]);

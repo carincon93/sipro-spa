@@ -141,15 +141,17 @@ class IdiController extends Controller
         $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
-            'idi'                               => $idi,
-            'mesasSectorialesRelacionadas'      => $idi->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'    => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                     => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
-            'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                    => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'opcionesIDiDropdown'               => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
-            'proyectoMunicipios'                => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'idi'                                       => $idi,
+            'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
+            'lineasTecnologicasRelacionadas'            => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),
+            'tecnoacademia'                             => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
+            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
+            'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
         ]);
     }
 
@@ -197,6 +199,8 @@ class IdiController extends Controller
         $idi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
         $idi->proyecto->municipios()->sync($request->municipios);
+        $idi->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
+        $idi->proyecto->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
 
         $idi->save();
 

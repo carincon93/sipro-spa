@@ -15,6 +15,7 @@
     export let errors
     export let programaFormacion
     export let modalidades
+    export let nivelesFormacion
 
     $: $title = programaFormacion ? programaFormacion.nombre : null
 
@@ -31,8 +32,13 @@
         codigo: programaFormacion.codigo,
         modalidad: {
             value: programaFormacion.modalidad,
-            label: modalidades.find((item) => item.label == programaFormacion.modalidad)?.label,
+            label: modalidades.find((item) => item.value == programaFormacion.modalidad)?.label,
         },
+        nivel_formacion: {
+            value: programaFormacion.nivel_formacion,
+            label: nivelesFormacion.find((item) => item.value == programaFormacion.nivel_formacion)?.label,
+        },
+        registro_calificado: programaFormacion.registro_calificado,
         centro_formacion_id: programaFormacion.centro_formacion_id,
     })
 
@@ -82,6 +88,11 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="modalidad" value="Modalidad de estudio" />
                     <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad de estudio" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="nivel_formacion" value="Nivel de formación" />
+                    <Select id="nivel_formacion" items={nivelesFormacion} bind:selectedValue={$form.nivel_formacion} error={errors.nivel_formacion} autocomplete="off" placeholder="Seleccione un nivel de formación" required />
                 </div>
 
                 <div class="mt-4">

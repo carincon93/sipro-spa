@@ -1,6 +1,5 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { Inertia } from '@inertiajs/inertia'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -13,6 +12,7 @@
 
     export let errors
     export let modalidades
+    export let nivelesFormacion
 
     $: $title = 'Crear programa de formación'
 
@@ -27,6 +27,8 @@
         nombre: '',
         codigo: '',
         modalidad: '',
+        nivel_formacion: '',
+        registro_calificado: '',
         centro_formacion_id: null,
     })
 
@@ -69,6 +71,11 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="modalidad" value="Modalidad de estudio" />
                     <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad de estudio" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="nivel_formacion" value="Nivel de formación" />
+                    <Select id="nivel_formacion" items={nivelesFormacion} bind:selectedValue={$form.nivel_formacion} error={errors.nivel_formacion} autocomplete="off" placeholder="Seleccione un nivel de formación" required />
                 </div>
 
                 <div class="mt-4">

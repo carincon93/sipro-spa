@@ -89,9 +89,10 @@ class TaTpController extends Controller
         $tatp->numero_instituciones                 = 0;
         $tatp->nombre_instituciones                 = null;
 
-        $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
-        if ($request->codigo_linea_programatica == 69) {
+        if ($proyecto->lineaProgramatica->codigo == 69) {
             $tatp->nodoTecnoparque()->associate($request->nodo_tecnoparque_id);
+        } else if ($proyecto->lineaProgramatica->codigo == 70) {
+            $tatp->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
         }
 
         $proyecto->taTp()->save($tatp);
@@ -106,7 +107,9 @@ class TaTpController extends Controller
             ]
         );
 
-        DB::select('SELECT public."generalidades_ta"(' . $proyecto->id . ')');
+        if ($proyecto->lineaProgramatica->codigo == 70) {
+            DB::select('SELECT public."generalidades_ta"(' . $proyecto->id . ')');
+        }
 
         return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $tatp])->with('success', 'El recurso se ha creado correctamente.');
     }

@@ -35,6 +35,8 @@
     export let tecnoacademia
     export let opcionesAplicaNoAplica
     export let proyectoMunicipios
+    export let proyectoProgramasFormacion
+    export let proyectoProgramasFormacionArticulados
 
     $: $title = culturaInnovacion ? culturaInnovacion.titulo : null
 
@@ -45,6 +47,8 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let municipios
+    let programasFormacion
+    let programasFormacionArticular
     let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
     let sending = false
@@ -80,6 +84,8 @@
         bibliografia: culturaInnovacion.bibliografia,
         numero_aprendices: culturaInnovacion.numero_aprendices,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
+        programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
+        programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
         impacto_municipios: culturaInnovacion.impacto_municipios,
         impacto_centro_formacion: culturaInnovacion.impacto_centro_formacion,
         muestreo: culturaInnovacion.muestreo,
@@ -119,6 +125,8 @@
             getLineasTecnologicas(tecnoacademia)
         }
         getMunicipios()
+        getProgramasFormacion()
+        getProgramasFormacionArticular()
     })
 
     $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
@@ -132,7 +140,7 @@
                 lineasTecnologicas = []
             }
 
-            $form.put(route('convocatorias.culturaInnovacion.update', [convocatoria.id, culturaInnovacion.id]), {
+            $form.put(route('convocatorias.cultura-innovacion.update', [convocatoria.id, culturaInnovacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -146,7 +154,7 @@
 
     function destroy() {
         if (isSuperAdmin || (checkPermission(authUser, [13]) && culturaInnovacion.proyecto.modificable == true)) {
-            $deleteForm.delete(route('convocatorias.culturaInnovacion.destroy', [convocatoria.id, culturaInnovacion.id]), {
+            $deleteForm.delete(route('convocatorias.cultura-innovacion.destroy', [convocatoria.id, culturaInnovacion.id]), {
                 preserveScroll: true,
             })
         }
@@ -168,6 +176,20 @@
         let res = await axios.get(route('web-api.municipios'))
         if (res.status == '200') {
             municipios = res.data
+        }
+    }
+
+    async function getProgramasFormacion() {
+        let res = await axios.get(route('web-api.programas-formacion', $form.centro_formacion_id))
+        if (res.status == '200') {
+            programasFormacion = res.data
+        }
+    }
+
+    async function getProgramasFormacionArticular() {
+        let res = await axios.get(route('web-api.programas-formacion-articulados', $form.centro_formacion_id))
+        if (res.status == '200') {
+            programasFormacionArticular = res.data
         }
     }
 </script>
@@ -689,6 +711,46 @@
                 </div>
                 <div>
                     <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación a impactar" />
+                </div>
+                <div>
+                    <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
+                    {#if programasFormacion?.length == 0}
+                        <div>
+                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Refrescar
+                            </button>
+                        </div>
+                    {/if}
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" for="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
+                </div>
+                <div>
+                    <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" />
+                    {#if programasFormacionArticular?.length == 0}
+                        <div>
+                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Refrescar
+                            </button>
+                        </div>
+                    {/if}
                 </div>
             </div>
         </fieldset>

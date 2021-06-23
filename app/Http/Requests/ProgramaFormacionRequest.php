@@ -23,21 +23,13 @@ class ProgramaFormacionRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('PUT')) {
-            return [
-                'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'nombre'                => ['required', 'max:191'],
-                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:programas_formacion,codigo,' . $this->route('programa_formacion')->id . ',id'],
-                'modalidad'             => ['required', 'max:191'],
-            ];
-        } else {
-            return [
-                'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'nombre'                => ['required', 'max:191'],
-                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:programas_formacion,codigo'],
-                'modalidad'             => ['required', 'max:191'],
-            ];
-        }
+        return [
+            'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
+            'nombre'                => ['required', 'max:191'],
+            'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer'],
+            'modalidad'             => ['required', 'integer', 'min:0', 'max:10'],
+            'nivel_formacion'       => ['required', 'integer', 'min:0', 'max:10'],
+        ];
     }
 
     /**
@@ -50,6 +42,12 @@ class ProgramaFormacionRequest extends FormRequest
         if (is_array($this->modalidad)) {
             $this->merge([
                 'modalidad' => $this->modalidad['value'],
+            ]);
+        }
+
+        if (is_array($this->nivel_formacion)) {
+            $this->merge([
+                'nivel_formacion' => $this->nivel_formacion['value'],
             ]);
         }
 

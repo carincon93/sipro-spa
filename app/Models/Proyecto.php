@@ -212,9 +212,19 @@ class Proyecto extends Model
      *
      * @return object
      */
-    public function programasFormacion()
+    public function programasFormacionImpactados()
     {
-        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion', 'proyecto_id', 'programa_formacion_id');
+        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion_impactados', 'proyecto_id', 'programa_formacion_id');
+    }
+
+    /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function programasFormacionArticulados()
+    {
+        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion_articulados', 'proyecto_id', 'programa_formacion_id');
     }
 
     /**
