@@ -733,7 +733,7 @@
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" />
-                    {#if programasFormacion?.length == 0}
+                    {#if programasFormacionArticular?.length == 0}
                         <div>
                             <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
                             <button on:click={getProgramasFormacion} type="button" class="flex underline">
