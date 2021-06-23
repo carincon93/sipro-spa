@@ -92,14 +92,13 @@ class ArbolProyectoController extends Controller
                 }
             }
 
-
             if ($proyecto->taTp()->exists()) {
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 0)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 1)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 2)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 240, 3)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 241, 4)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 242, 5)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 237, 0)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 238, 1)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 239, 2)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 240, 240, 3)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 241, 241, 4)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 242, 242, 5)');
             }
         }
 
