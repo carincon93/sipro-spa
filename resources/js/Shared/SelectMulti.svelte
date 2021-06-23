@@ -26,5 +26,21 @@
     }
 </script>
 
-<SelectMulti inputAttributes={{ id: id }} bind:selectedValue {items} isMulti={true} {groupBy} {placeholder} />
+<SelectMulti inputAttributes={{ id: id }} bind:selectedValue {items} containerClasses="items" isMulti={true} {groupBy} {placeholder} />
 <InputError message={error} />
+
+<style>
+    :global(.items .listItem) {
+        border-bottom: 1px solid #ccc;
+    }
+
+    :global(.items .item) {
+        height: auto !important;
+        line-height: 1.6 !important;
+        text-overflow: initial !important;
+        overflow: initial !important;
+        white-space: break-spaces !important;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+</style>
