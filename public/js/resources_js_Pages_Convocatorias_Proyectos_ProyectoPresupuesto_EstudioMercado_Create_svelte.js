@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Auth_ForgotPassword_svelte"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Convocatorias_Proyectos_ProyectoPresupuesto_EstudioMercado_Create_svelte"],{
 
 /***/ "./node_modules/@material/base/foundation.js":
 /*!***************************************************!*\
@@ -424,6 +424,147 @@ var MDCFloatingLabelFoundation = /** @class */ (function (_super) {
 
 // tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MDCFloatingLabelFoundation);
+//# sourceMappingURL=foundation.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/form-field/constants.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@material/form-field/constants.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cssClasses": () => (/* binding */ cssClasses),
+/* harmony export */   "strings": () => (/* binding */ strings)
+/* harmony export */ });
+/**
+ * @license
+ * Copyright 2017 Google Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+var cssClasses = {
+    ROOT: 'mdc-form-field',
+};
+var strings = {
+    LABEL_SELECTOR: '.mdc-form-field > label',
+};
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/form-field/foundation.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material/form-field/foundation.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MDCFormFieldFoundation": () => (/* binding */ MDCFormFieldFoundation),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _material_base_foundation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material/base/foundation */ "./node_modules/@material/base/foundation.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./node_modules/@material/form-field/constants.js");
+/**
+ * @license
+ * Copyright 2017 Google Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+
+
+var MDCFormFieldFoundation = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__extends)(MDCFormFieldFoundation, _super);
+    function MDCFormFieldFoundation(adapter) {
+        var _this = _super.call(this, (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_0__.__assign)({}, MDCFormFieldFoundation.defaultAdapter), adapter)) || this;
+        _this.click = function () {
+            _this.handleClick();
+        };
+        return _this;
+    }
+    Object.defineProperty(MDCFormFieldFoundation, "cssClasses", {
+        get: function () {
+            return _constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MDCFormFieldFoundation, "strings", {
+        get: function () {
+            return _constants__WEBPACK_IMPORTED_MODULE_1__.strings;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MDCFormFieldFoundation, "defaultAdapter", {
+        get: function () {
+            return {
+                activateInputRipple: function () { return undefined; },
+                deactivateInputRipple: function () { return undefined; },
+                deregisterInteractionHandler: function () { return undefined; },
+                registerInteractionHandler: function () { return undefined; },
+            };
+        },
+        enumerable: false,
+        configurable: true
+    });
+    MDCFormFieldFoundation.prototype.init = function () {
+        this.adapter.registerInteractionHandler('click', this.click);
+    };
+    MDCFormFieldFoundation.prototype.destroy = function () {
+        this.adapter.deregisterInteractionHandler('click', this.click);
+    };
+    MDCFormFieldFoundation.prototype.handleClick = function () {
+        var _this = this;
+        this.adapter.activateInputRipple();
+        requestAnimationFrame(function () {
+            _this.adapter.deactivateInputRipple();
+        });
+    };
+    return MDCFormFieldFoundation;
+}(_material_base_foundation__WEBPACK_IMPORTED_MODULE_2__.MDCFoundation));
+
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MDCFormFieldFoundation);
 //# sourceMappingURL=foundation.js.map
 
 /***/ }),
@@ -1359,6 +1500,179 @@ function getNormalizedEventCoords(evt, pageOffset, clientRect) {
 
 /***/ }),
 
+/***/ "./node_modules/@material/switch/constants.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@material/switch/constants.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cssClasses": () => (/* binding */ cssClasses),
+/* harmony export */   "strings": () => (/* binding */ strings)
+/* harmony export */ });
+/**
+ * @license
+ * Copyright 2018 Google Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+/** CSS classes used by the switch. */
+var cssClasses = {
+    /** Class used for a switch that is in the "checked" (on) position. */
+    CHECKED: 'mdc-switch--checked',
+    /** Class used for a switch that is disabled. */
+    DISABLED: 'mdc-switch--disabled',
+};
+/** String constants used by the switch. */
+var strings = {
+    /** Aria attribute for checked or unchecked state of switch */
+    ARIA_CHECKED_ATTR: 'aria-checked',
+    /** A CSS selector used to locate the native HTML control for the switch.  */
+    NATIVE_CONTROL_SELECTOR: '.mdc-switch__native-control',
+    /** A CSS selector used to locate the ripple surface element for the switch. */
+    RIPPLE_SURFACE_SELECTOR: '.mdc-switch__thumb-underlay',
+};
+
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/switch/foundation.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material/switch/foundation.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MDCSwitchFoundation": () => (/* binding */ MDCSwitchFoundation),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _material_base_foundation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material/base/foundation */ "./node_modules/@material/base/foundation.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./node_modules/@material/switch/constants.js");
+/**
+ * @license
+ * Copyright 2018 Google Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+
+
+var MDCSwitchFoundation = /** @class */ (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__extends)(MDCSwitchFoundation, _super);
+    function MDCSwitchFoundation(adapter) {
+        return _super.call(this, (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__assign)((0,tslib__WEBPACK_IMPORTED_MODULE_0__.__assign)({}, MDCSwitchFoundation.defaultAdapter), adapter)) || this;
+    }
+    Object.defineProperty(MDCSwitchFoundation, "strings", {
+        /** The string constants used by the switch. */
+        get: function () {
+            return _constants__WEBPACK_IMPORTED_MODULE_1__.strings;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MDCSwitchFoundation, "cssClasses", {
+        /** The CSS classes used by the switch. */
+        get: function () {
+            return _constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MDCSwitchFoundation, "defaultAdapter", {
+        /** The default Adapter for the switch. */
+        get: function () {
+            return {
+                addClass: function () { return undefined; },
+                removeClass: function () { return undefined; },
+                setNativeControlChecked: function () { return undefined; },
+                setNativeControlDisabled: function () { return undefined; },
+                setNativeControlAttr: function () { return undefined; },
+            };
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /** Sets the checked state of the switch. */
+    MDCSwitchFoundation.prototype.setChecked = function (checked) {
+        this.adapter.setNativeControlChecked(checked);
+        this.updateAriaChecked_(checked);
+        this.updateCheckedStyling_(checked);
+    };
+    /** Sets the disabled state of the switch. */
+    MDCSwitchFoundation.prototype.setDisabled = function (disabled) {
+        this.adapter.setNativeControlDisabled(disabled);
+        if (disabled) {
+            this.adapter.addClass(_constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses.DISABLED);
+        }
+        else {
+            this.adapter.removeClass(_constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses.DISABLED);
+        }
+    };
+    /** Handles the change event for the switch native control. */
+    MDCSwitchFoundation.prototype.handleChange = function (evt) {
+        var nativeControl = evt.target;
+        this.updateAriaChecked_(nativeControl.checked);
+        this.updateCheckedStyling_(nativeControl.checked);
+    };
+    /** Updates the styling of the switch based on its checked state. */
+    MDCSwitchFoundation.prototype.updateCheckedStyling_ = function (checked) {
+        if (checked) {
+            this.adapter.addClass(_constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses.CHECKED);
+        }
+        else {
+            this.adapter.removeClass(_constants__WEBPACK_IMPORTED_MODULE_1__.cssClasses.CHECKED);
+        }
+    };
+    MDCSwitchFoundation.prototype.updateAriaChecked_ = function (checked) {
+        this.adapter.setNativeControlAttr(_constants__WEBPACK_IMPORTED_MODULE_1__.strings.ARIA_CHECKED_ATTR, "" + !!checked);
+    };
+    return MDCSwitchFoundation;
+}(_material_base_foundation__WEBPACK_IMPORTED_MODULE_2__.MDCFoundation));
+
+// tslint:disable-next-line:no-default-export Needed for backward compatibility with MDC Web v0.44.0 and earlier.
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MDCSwitchFoundation);
+//# sourceMappingURL=foundation.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@material/textfield/constants.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@material/textfield/constants.js ***!
@@ -1995,70 +2309,6 @@ var MDCTextFieldFoundation = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./node_modules/@smui/button/GroupItem.js":
-/*!************************************************!*\
-  !*** ./node_modules/@smui/button/GroupItem.js ***!
-  \************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ GroupItem)
-/* harmony export */ });
-function GroupItem(
-  node,
-  {
-    addClass = (className) => node.classList.add(className),
-    removeClass = (className) => node.classList.remove(className),
-  } = {}
-) {
-  addClass('smui-button__group-item');
-
-  return {
-    destroy() {
-      removeClass('smui-button__group-item');
-    },
-  };
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/button/index.js":
-/*!********************************************!*\
-  !*** ./node_modules/@smui/button/index.js ***!
-  \********************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "Group": () => (/* reexport safe */ _Group_svelte__WEBPACK_IMPORTED_MODULE_1__.default),
-/* harmony export */   "GroupItem": () => (/* reexport safe */ _GroupItem_js__WEBPACK_IMPORTED_MODULE_2__.default),
-/* harmony export */   "Label": () => (/* reexport safe */ _smui_common_CommonLabel_svelte__WEBPACK_IMPORTED_MODULE_3__.default),
-/* harmony export */   "Icon": () => (/* reexport safe */ _smui_common_CommonIcon_svelte__WEBPACK_IMPORTED_MODULE_4__.default)
-/* harmony export */ });
-/* harmony import */ var _Button_svelte__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Button.svelte */ "./node_modules/@smui/button/Button.svelte");
-/* harmony import */ var _Group_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Group.svelte */ "./node_modules/@smui/button/Group.svelte");
-/* harmony import */ var _GroupItem_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GroupItem.js */ "./node_modules/@smui/button/GroupItem.js");
-/* harmony import */ var _smui_common_CommonLabel_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @smui/common/CommonLabel.svelte */ "./node_modules/@smui/common/CommonLabel.svelte");
-/* harmony import */ var _smui_common_CommonIcon_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @smui/common/CommonIcon.svelte */ "./node_modules/@smui/common/CommonIcon.svelte");
-
-
-
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Button_svelte__WEBPACK_IMPORTED_MODULE_0__.default);
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@smui/common/classAdderBuilder.js":
 /*!********************************************************!*\
   !*** ./node_modules/@smui/common/classAdderBuilder.js ***!
@@ -2463,6 +2713,25 @@ function useActions(node, actions) {
 
 /***/ }),
 
+/***/ "./node_modules/@smui/form-field/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/@smui/form-field/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FormField_svelte__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormField.svelte */ "./node_modules/@smui/form-field/FormField.svelte");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_FormField_svelte__WEBPACK_IMPORTED_MODULE_0__.default);
+
+
+/***/ }),
+
 /***/ "./node_modules/@smui/ripple/Ripple.js":
 /*!*********************************************!*\
   !*** ./node_modules/@smui/ripple/Ripple.js ***!
@@ -2697,6 +2966,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/@smui/switch/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/@smui/switch/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Switch_svelte__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Switch.svelte */ "./node_modules/@smui/switch/Switch.svelte");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Switch_svelte__WEBPACK_IMPORTED_MODULE_0__.default);
+
+
+/***/ }),
+
 /***/ "./node_modules/@smui/textfield/HelperLine.js":
 /*!****************************************************!*\
   !*** ./node_modules/@smui/textfield/HelperLine.js ***!
@@ -2851,130 +3139,6 @@ function monthDiff(d1, d2) {
   monthDifference = moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(d2)).diff(new Date(d1), 'months', true);
   return monthDifference.toFixed(1);
 }
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ".z-index-full.svelte-193iq1{\n  z-index:99999\n}", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{\n  height:auto;\n  min-height:36px\n}", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-module.exports = function (cssWithMappingToString) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join("");
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === "string") {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, ""]];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
 
 /***/ }),
 
@@ -24412,1308 +24576,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
-/***/ "./resources/js/Shared/FlashMessages.svelte.19.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/FlashMessages.svelte.19.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_19_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./FlashMessages.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_19_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_19_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./resources/js/Shared/LoadingButton.svelte.9.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte":
-/*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte.9.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte ***!
-  \******************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte_9_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte_9_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte_9_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \****************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var isOldIE = function isOldIE() {
-  var memo;
-  return function memorize() {
-    if (typeof memo === 'undefined') {
-      // Test for IE <= 9 as proposed by Browserhacks
-      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-      // Tests for existence of standard globals is to allow style-loader
-      // to operate correctly into non-standard environments
-      // @see https://github.com/webpack-contrib/style-loader/issues/177
-      memo = Boolean(window && document && document.all && !window.atob);
-    }
-
-    return memo;
-  };
-}();
-
-var getTarget = function getTarget() {
-  var memo = {};
-  return function memorize(target) {
-    if (typeof memo[target] === 'undefined') {
-      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
-
-      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-        try {
-          // This will throw an exception if access to iframe is blocked
-          // due to cross-origin restrictions
-          styleTarget = styleTarget.contentDocument.head;
-        } catch (e) {
-          // istanbul ignore next
-          styleTarget = null;
-        }
-      }
-
-      memo[target] = styleTarget;
-    }
-
-    return memo[target];
-  };
-}();
-
-var stylesInDom = [];
-
-function getIndexByIdentifier(identifier) {
-  var result = -1;
-
-  for (var i = 0; i < stylesInDom.length; i++) {
-    if (stylesInDom[i].identifier === identifier) {
-      result = i;
-      break;
-    }
-  }
-
-  return result;
-}
-
-function modulesToDom(list, options) {
-  var idCountMap = {};
-  var identifiers = [];
-
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i];
-    var id = options.base ? item[0] + options.base : item[0];
-    var count = idCountMap[id] || 0;
-    var identifier = "".concat(id, " ").concat(count);
-    idCountMap[id] = count + 1;
-    var index = getIndexByIdentifier(identifier);
-    var obj = {
-      css: item[1],
-      media: item[2],
-      sourceMap: item[3]
-    };
-
-    if (index !== -1) {
-      stylesInDom[index].references++;
-      stylesInDom[index].updater(obj);
-    } else {
-      stylesInDom.push({
-        identifier: identifier,
-        updater: addStyle(obj, options),
-        references: 1
-      });
-    }
-
-    identifiers.push(identifier);
-  }
-
-  return identifiers;
-}
-
-function insertStyleElement(options) {
-  var style = document.createElement('style');
-  var attributes = options.attributes || {};
-
-  if (typeof attributes.nonce === 'undefined') {
-    var nonce =  true ? __webpack_require__.nc : 0;
-
-    if (nonce) {
-      attributes.nonce = nonce;
-    }
-  }
-
-  Object.keys(attributes).forEach(function (key) {
-    style.setAttribute(key, attributes[key]);
-  });
-
-  if (typeof options.insert === 'function') {
-    options.insert(style);
-  } else {
-    var target = getTarget(options.insert || 'head');
-
-    if (!target) {
-      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
-    }
-
-    target.appendChild(style);
-  }
-
-  return style;
-}
-
-function removeStyleElement(style) {
-  // istanbul ignore if
-  if (style.parentNode === null) {
-    return false;
-  }
-
-  style.parentNode.removeChild(style);
-}
-/* istanbul ignore next  */
-
-
-var replaceText = function replaceText() {
-  var textStore = [];
-  return function replace(index, replacement) {
-    textStore[index] = replacement;
-    return textStore.filter(Boolean).join('\n');
-  };
-}();
-
-function applyToSingletonTag(style, index, remove, obj) {
-  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
-
-  /* istanbul ignore if  */
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = replaceText(index, css);
-  } else {
-    var cssNode = document.createTextNode(css);
-    var childNodes = style.childNodes;
-
-    if (childNodes[index]) {
-      style.removeChild(childNodes[index]);
-    }
-
-    if (childNodes.length) {
-      style.insertBefore(cssNode, childNodes[index]);
-    } else {
-      style.appendChild(cssNode);
-    }
-  }
-}
-
-function applyToTag(style, options, obj) {
-  var css = obj.css;
-  var media = obj.media;
-  var sourceMap = obj.sourceMap;
-
-  if (media) {
-    style.setAttribute('media', media);
-  } else {
-    style.removeAttribute('media');
-  }
-
-  if (sourceMap && typeof btoa !== 'undefined') {
-    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
-  } // For old IE
-
-  /* istanbul ignore if  */
-
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    while (style.firstChild) {
-      style.removeChild(style.firstChild);
-    }
-
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var singleton = null;
-var singletonCounter = 0;
-
-function addStyle(obj, options) {
-  var style;
-  var update;
-  var remove;
-
-  if (options.singleton) {
-    var styleIndex = singletonCounter++;
-    style = singleton || (singleton = insertStyleElement(options));
-    update = applyToSingletonTag.bind(null, style, styleIndex, false);
-    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-  } else {
-    style = insertStyleElement(options);
-    update = applyToTag.bind(null, style, options);
-
-    remove = function remove() {
-      removeStyleElement(style);
-    };
-  }
-
-  update(obj);
-  return function updateStyle(newObj) {
-    if (newObj) {
-      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
-        return;
-      }
-
-      update(obj = newObj);
-    } else {
-      remove();
-    }
-  };
-}
-
-module.exports = function (list, options) {
-  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-  // tags it will allow on a page
-
-  if (!options.singleton && typeof options.singleton !== 'boolean') {
-    options.singleton = isOldIE();
-  }
-
-  list = list || [];
-  var lastIdentifiers = modulesToDom(list, options);
-  return function update(newList) {
-    newList = newList || [];
-
-    if (Object.prototype.toString.call(newList) !== '[object Array]') {
-      return;
-    }
-
-    for (var i = 0; i < lastIdentifiers.length; i++) {
-      var identifier = lastIdentifiers[i];
-      var index = getIndexByIdentifier(identifier);
-      stylesInDom[index].references--;
-    }
-
-    var newLastIdentifiers = modulesToDom(newList, options);
-
-    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
-      var _identifier = lastIdentifiers[_i];
-
-      var _index = getIndexByIdentifier(_identifier);
-
-      if (stylesInDom[_index].references === 0) {
-        stylesInDom[_index].updater();
-
-        stylesInDom.splice(_index, 1);
-      }
-    }
-
-    lastIdentifiers = newLastIdentifiers;
-  };
-};
-
-/***/ }),
-
-/***/ "./node_modules/@smui/button/Button.svelte":
-/*!*************************************************!*\
-  !*** ./node_modules/@smui/button/Button.svelte ***!
-  \*************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
-/* harmony import */ var _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @smui/common/internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var _smui_ripple__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @smui/ripple */ "./node_modules/@smui/ripple/index.js");
-/* harmony import */ var _smui_common_A_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @smui/common/A.svelte */ "./node_modules/@smui/common/A.svelte");
-/* harmony import */ var _smui_common_Button_svelte__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @smui/common/Button.svelte */ "./node_modules/@smui/common/Button.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\button\Button.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-
-
-
-
-
-function create_if_block(ctx) {
-	let div;
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mdc-button__touch");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-		}
-	};
-}
-
-// (1:0) <svelte:component   this={component}   bind:this={element}   use={[     [       Ripple,       {         ripple,         unbounded: false,         color,         disabled: !!$$restProps.disabled,         addClass,         removeClass,         addStyle,       },     ],     forwardEvents,     ...use,   ]}   class={classMap({     [className]: true,     'mdc-button': true,     'mdc-button--raised': variant === 'raised',     'mdc-button--unelevated': variant === 'unelevated',     'mdc-button--outlined': variant === 'outlined',     'smui-button--color-secondary': color === 'secondary',     'mdc-button--touch': touch,     'mdc-card__action': context === 'card:action',     'mdc-card__action--button': context === 'card:action',     'mdc-dialog__button': context === 'dialog:action',     'mdc-top-app-bar__navigation-icon': context === 'top-app-bar:navigation',     'mdc-top-app-bar__action-item': context === 'top-app-bar:action',     'mdc-snackbar__action': context === 'snackbar:actions',     'mdc-banner__secondary-action': context === 'banner' && secondary,     'mdc-banner__primary-action': context === 'banner' && !secondary,     'mdc-tooltip__action': context === 'tooltip:rich-actions',     ...internalClasses,   })}   style={Object.entries(internalStyles)     .map(([name, value]) => `${name}: ${value};`)     .concat([style])     .join(' ')}   {...actionProp}   {...defaultProp}   {...secondaryProp}   {href}   on:click={handleClick}   {...$$restProps}   >
-function create_default_slot(ctx) {
-	let div;
-	let t;
-	let if_block_anchor;
-	let current;
-	const default_slot_template = /*#slots*/ ctx[26].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[28], null);
-	let if_block = /*touch*/ ctx[6] && create_if_block(ctx);
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if (default_slot) default_slot.c();
-			if (if_block) if_block.c();
-			if_block_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mdc-button__ripple");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-
-			if (default_slot) {
-				default_slot.m(target, anchor);
-			}
-
-			if (if_block) if_block.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
-			current = true;
-		},
-		p(ctx, dirty) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 268435456)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[28], dirty, null, null);
-				}
-			}
-
-			if (/*touch*/ ctx[6]) {
-				if (if_block) {
-					
-				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					if_block.m(if_block_anchor.parentNode, if_block_anchor);
-				}
-			} else if (if_block) {
-				if_block.d(1);
-				if_block = null;
-			}
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-			if (default_slot) default_slot.d(detaching);
-			if (if_block) if_block.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block_anchor);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let switch_instance;
-	let switch_instance_anchor;
-	let current;
-
-	const switch_instance_spread_levels = [
-		{
-			use: [
-				[
-					_smui_ripple__WEBPACK_IMPORTED_MODULE_3__.default,
-					{
-						ripple: /*ripple*/ ctx[3],
-						unbounded: false,
-						color: /*color*/ ctx[4],
-						disabled: !!/*$$restProps*/ ctx[22].disabled,
-						addClass: /*addClass*/ ctx[18],
-						removeClass: /*removeClass*/ ctx[19],
-						addStyle: /*addStyle*/ ctx[20]
-					}
-				],
-				/*forwardEvents*/ ctx[16],
-				.../*use*/ ctx[0]
-			]
-		},
-		{
-			class: (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-				[/*className*/ ctx[1]]: true,
-				"mdc-button": true,
-				"mdc-button--raised": /*variant*/ ctx[5] === "raised",
-				"mdc-button--unelevated": /*variant*/ ctx[5] === "unelevated",
-				"mdc-button--outlined": /*variant*/ ctx[5] === "outlined",
-				"smui-button--color-secondary": /*color*/ ctx[4] === "secondary",
-				"mdc-button--touch": /*touch*/ ctx[6],
-				"mdc-card__action": /*context*/ ctx[17] === "card:action",
-				"mdc-card__action--button": /*context*/ ctx[17] === "card:action",
-				"mdc-dialog__button": /*context*/ ctx[17] === "dialog:action",
-				"mdc-top-app-bar__navigation-icon": /*context*/ ctx[17] === "top-app-bar:navigation",
-				"mdc-top-app-bar__action-item": /*context*/ ctx[17] === "top-app-bar:action",
-				"mdc-snackbar__action": /*context*/ ctx[17] === "snackbar:actions",
-				"mdc-banner__secondary-action": /*context*/ ctx[17] === "banner" && /*secondary*/ ctx[8],
-				"mdc-banner__primary-action": /*context*/ ctx[17] === "banner" && !/*secondary*/ ctx[8],
-				"mdc-tooltip__action": /*context*/ ctx[17] === "tooltip:rich-actions",
-				.../*internalClasses*/ ctx[11]
-			})
-		},
-		{
-			style: Object.entries(/*internalStyles*/ ctx[12]).map(func).concat([/*style*/ ctx[2]]).join(" ")
-		},
-		/*actionProp*/ ctx[13],
-		/*defaultProp*/ ctx[14],
-		/*secondaryProp*/ ctx[15],
-		{ href: /*href*/ ctx[7] },
-		/*$$restProps*/ ctx[22]
-	];
-
-	var switch_value = /*component*/ ctx[9];
-
-	function switch_props(ctx) {
-		let switch_instance_props = {
-			$$slots: { default: [create_default_slot] },
-			$$scope: { ctx }
-		};
-
-		for (let i = 0; i < switch_instance_spread_levels.length; i += 1) {
-			switch_instance_props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(switch_instance_props, switch_instance_spread_levels[i]);
-		}
-
-		return { props: switch_instance_props };
-	}
-
-	if (switch_value) {
-		switch_instance = new switch_value(switch_props(ctx));
-		/*switch_instance_binding*/ ctx[27](switch_instance);
-		switch_instance.$on("click", /*handleClick*/ ctx[21]);
-	}
-
-	return {
-		c() {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-			switch_instance_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
-		},
-		m(target, anchor) {
-			if (switch_instance) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, target, anchor);
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, switch_instance_anchor, anchor);
-			current = true;
-		},
-		p(ctx, [dirty]) {
-			const switch_instance_changes = (dirty & /*Ripple, ripple, color, $$restProps, addClass, removeClass, addStyle, forwardEvents, use, classMap, className, variant, touch, context, secondary, internalClasses, Object, internalStyles, style, actionProp, defaultProp, secondaryProp, href*/ 6289919)
-			? (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(switch_instance_spread_levels, [
-					dirty & /*Ripple, ripple, color, $$restProps, addClass, removeClass, addStyle, forwardEvents, use*/ 6094873 && {
-						use: [
-							[
-								_smui_ripple__WEBPACK_IMPORTED_MODULE_3__.default,
-								{
-									ripple: /*ripple*/ ctx[3],
-									unbounded: false,
-									color: /*color*/ ctx[4],
-									disabled: !!/*$$restProps*/ ctx[22].disabled,
-									addClass: /*addClass*/ ctx[18],
-									removeClass: /*removeClass*/ ctx[19],
-									addStyle: /*addStyle*/ ctx[20]
-								}
-							],
-							/*forwardEvents*/ ctx[16],
-							.../*use*/ ctx[0]
-						]
-					},
-					dirty & /*classMap, className, variant, color, touch, context, secondary, internalClasses*/ 133490 && {
-						class: (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-							[/*className*/ ctx[1]]: true,
-							"mdc-button": true,
-							"mdc-button--raised": /*variant*/ ctx[5] === "raised",
-							"mdc-button--unelevated": /*variant*/ ctx[5] === "unelevated",
-							"mdc-button--outlined": /*variant*/ ctx[5] === "outlined",
-							"smui-button--color-secondary": /*color*/ ctx[4] === "secondary",
-							"mdc-button--touch": /*touch*/ ctx[6],
-							"mdc-card__action": /*context*/ ctx[17] === "card:action",
-							"mdc-card__action--button": /*context*/ ctx[17] === "card:action",
-							"mdc-dialog__button": /*context*/ ctx[17] === "dialog:action",
-							"mdc-top-app-bar__navigation-icon": /*context*/ ctx[17] === "top-app-bar:navigation",
-							"mdc-top-app-bar__action-item": /*context*/ ctx[17] === "top-app-bar:action",
-							"mdc-snackbar__action": /*context*/ ctx[17] === "snackbar:actions",
-							"mdc-banner__secondary-action": /*context*/ ctx[17] === "banner" && /*secondary*/ ctx[8],
-							"mdc-banner__primary-action": /*context*/ ctx[17] === "banner" && !/*secondary*/ ctx[8],
-							"mdc-tooltip__action": /*context*/ ctx[17] === "tooltip:rich-actions",
-							.../*internalClasses*/ ctx[11]
-						})
-					},
-					dirty & /*Object, internalStyles, style*/ 4100 && {
-						style: Object.entries(/*internalStyles*/ ctx[12]).map(func).concat([/*style*/ ctx[2]]).join(" ")
-					},
-					dirty & /*actionProp*/ 8192 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*actionProp*/ ctx[13]),
-					dirty & /*defaultProp*/ 16384 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*defaultProp*/ ctx[14]),
-					dirty & /*secondaryProp*/ 32768 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*secondaryProp*/ ctx[15]),
-					dirty & /*href*/ 128 && { href: /*href*/ ctx[7] },
-					dirty & /*$$restProps*/ 4194304 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*$$restProps*/ ctx[22])
-				])
-			: {};
-
-			if (dirty & /*$$scope, touch*/ 268435520) {
-				switch_instance_changes.$$scope = { dirty, ctx };
-			}
-
-			if (switch_value !== (switch_value = /*component*/ ctx[9])) {
-				if (switch_instance) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
-					const old_component = switch_instance;
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(old_component.$$.fragment, 1, 0, () => {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(old_component, 1);
-					});
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
-				}
-
-				if (switch_value) {
-					switch_instance = new switch_value(switch_props(ctx));
-					/*switch_instance_binding*/ ctx[27](switch_instance);
-					switch_instance.$on("click", /*handleClick*/ ctx[21]);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, 1);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
-				} else {
-					switch_instance = null;
-				}
-			} else if (switch_value) {
-				switch_instance.$set(switch_instance_changes);
-			}
-		},
-		i(local) {
-			if (current) return;
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_instance.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			/*switch_instance_binding*/ ctx[27](null);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(switch_instance_anchor);
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_instance, detaching);
-		}
-	};
-}
-
-const func = ([name, value]) => `${name}: ${value};`;
-
-function instance($$self, $$props, $$invalidate) {
-	let actionProp;
-	let defaultProp;
-	let secondaryProp;
-
-	const omit_props_names = [
-		"use","class","style","ripple","color","variant","touch","href","action","default","secondary","component","getElement"
-	];
-
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	const forwardEvents = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let { use = [] } = $$props;
-	let { class: className = "" } = $$props;
-	let { style = "" } = $$props;
-	let { ripple = true } = $$props;
-	let { color = "primary" } = $$props;
-	let { variant = "text" } = $$props;
-	let { touch = false } = $$props;
-	let { href = null } = $$props;
-	let { action = "close" } = $$props;
-	let { default: defaultAction = false } = $$props;
-	let { secondary = false } = $$props;
-	let element;
-	let internalClasses = {};
-	let internalStyles = {};
-	let context = (0,svelte__WEBPACK_IMPORTED_MODULE_1__.getContext)("SMUI:button:context");
-	let { component = href == null ? _smui_common_Button_svelte__WEBPACK_IMPORTED_MODULE_5__.default : _smui_common_A_svelte__WEBPACK_IMPORTED_MODULE_4__.default } = $$props;
-	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.setContext)("SMUI:label:context", "button");
-	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.setContext)("SMUI:icon:context", "button");
-
-	function addClass(className) {
-		if (!internalClasses[className]) {
-			$$invalidate(11, internalClasses[className] = true, internalClasses);
-		}
-	}
-
-	function removeClass(className) {
-		if (!(className in internalClasses) || internalClasses[className]) {
-			$$invalidate(11, internalClasses[className] = false, internalClasses);
-		}
-	}
-
-	function addStyle(name, value) {
-		if (internalStyles[name] != value) {
-			if (value === "" || value == null) {
-				delete internalStyles[name];
-				$$invalidate(12, internalStyles);
-			} else {
-				$$invalidate(12, internalStyles[name] = value, internalStyles);
-			}
-		}
-	}
-
-	function handleClick() {
-		if (context === "banner") {
-			(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.dispatch)(getElement(), secondary
-			? "SMUI:banner:button:secondaryActionClick"
-			: "SMUI:banner:button:primaryActionClick");
-		}
-	}
-
-	function getElement() {
-		return element.getElement();
-	}
-
-	function switch_instance_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(10, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$invalidate(29, $$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props)));
-		$$invalidate(22, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("class" in $$new_props) $$invalidate(1, className = $$new_props.class);
-		if ("style" in $$new_props) $$invalidate(2, style = $$new_props.style);
-		if ("ripple" in $$new_props) $$invalidate(3, ripple = $$new_props.ripple);
-		if ("color" in $$new_props) $$invalidate(4, color = $$new_props.color);
-		if ("variant" in $$new_props) $$invalidate(5, variant = $$new_props.variant);
-		if ("touch" in $$new_props) $$invalidate(6, touch = $$new_props.touch);
-		if ("href" in $$new_props) $$invalidate(7, href = $$new_props.href);
-		if ("action" in $$new_props) $$invalidate(23, action = $$new_props.action);
-		if ("default" in $$new_props) $$invalidate(24, defaultAction = $$new_props.default);
-		if ("secondary" in $$new_props) $$invalidate(8, secondary = $$new_props.secondary);
-		if ("component" in $$new_props) $$invalidate(9, component = $$new_props.component);
-		if ("$$scope" in $$new_props) $$invalidate(28, $$scope = $$new_props.$$scope);
-	};
-
-	$$self.$$.update = () => {
-		$: $$invalidate(13, actionProp = context === "dialog:action" && action != null
-		? { "data-mdc-dialog-action": action }
-		: { action: $$props.action });
-
-		$: $$invalidate(14, defaultProp = context === "dialog:action" && defaultAction
-		? { "data-mdc-dialog-button-default": "" }
-		: { default: $$props.default });
-
-		$: $$invalidate(15, secondaryProp = context === "banner"
-		? {}
-		: { secondary: $$props.secondary });
-	};
-
-	$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$props);
-
-	return [
-		use,
-		className,
-		style,
-		ripple,
-		color,
-		variant,
-		touch,
-		href,
-		secondary,
-		component,
-		element,
-		internalClasses,
-		internalStyles,
-		actionProp,
-		defaultProp,
-		secondaryProp,
-		forwardEvents,
-		context,
-		addClass,
-		removeClass,
-		addStyle,
-		handleClick,
-		$$restProps,
-		action,
-		defaultAction,
-		getElement,
-		slots,
-		switch_instance_binding,
-		$$scope
-	];
-}
-
-class Button_1 extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-			use: 0,
-			class: 1,
-			style: 2,
-			ripple: 3,
-			color: 4,
-			variant: 5,
-			touch: 6,
-			href: 7,
-			action: 23,
-			default: 24,
-			secondary: 8,
-			component: 9,
-			getElement: 25
-		});
-	}
-
-	get getElement() {
-		return this.$$.ctx[25];
-	}
-}
-if (module && module.hot) { if (false) {} Button_1 = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\button\\\\Button.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Button_1, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button_1);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/button/Group.svelte":
-/*!************************************************!*\
-  !*** ./node_modules/@smui/button/Group.svelte ***!
-  \************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/common/internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\button\Group.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-function create_fragment(ctx) {
-	let div;
-	let div_class_value;
-	let useActions_action;
-	let forwardEvents_action;
-	let current;
-	let mounted;
-	let dispose;
-	const default_slot_template = /*#slots*/ ctx[8].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[7], null);
-
-	let div_levels = [
-		{
-			class: div_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_1__.classMap)({
-				[/*className*/ ctx[1]]: true,
-				"smui-button__group": true,
-				"smui-button__group--raised": /*variant*/ ctx[2] === "raised"
-			})
-		},
-		/*$$restProps*/ ctx[5]
-	];
-
-	let div_data = {};
-
-	for (let i = 0; i < div_levels.length; i += 1) {
-		div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(div_data, div_levels[i]);
-	}
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			if (default_slot) default_slot.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-
-			if (default_slot) {
-				default_slot.m(div, null);
-			}
-
-			/*div_binding*/ ctx[9](div);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_1__.useActions.call(null, div, /*use*/ ctx[0])),
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[4].call(null, div))
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 128)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[7], dirty, null, null);
-				}
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(div_levels, [
-				(!current || dirty & /*className, variant*/ 6 && div_class_value !== (div_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_1__.classMap)({
-					[/*className*/ ctx[1]]: true,
-					"smui-button__group": true,
-					"smui-button__group--raised": /*variant*/ ctx[2] === "raised"
-				}))) && { class: div_class_value },
-				dirty & /*$$restProps*/ 32 && /*$$restProps*/ ctx[5]
-			]));
-
-			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*use*/ 1) useActions_action.update.call(null, /*use*/ ctx[0]);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-			if (default_slot) default_slot.d(detaching);
-			/*div_binding*/ ctx[9](null);
-			mounted = false;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","class","variant","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	const forwardEvents = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_1__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let { use = [] } = $$props;
-	let { class: className = "" } = $$props;
-	let { variant = "text" } = $$props;
-	let element;
-
-	function getElement() {
-		return element;
-	}
-
-	function div_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(3, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(5, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("class" in $$new_props) $$invalidate(1, className = $$new_props.class);
-		if ("variant" in $$new_props) $$invalidate(2, variant = $$new_props.variant);
-		if ("$$scope" in $$new_props) $$invalidate(7, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		className,
-		variant,
-		element,
-		forwardEvents,
-		$$restProps,
-		getElement,
-		$$scope,
-		slots,
-		div_binding
-	];
-}
-
-class Group extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-			use: 0,
-			class: 1,
-			variant: 2,
-			getElement: 6
-		});
-	}
-
-	get getElement() {
-		return this.$$.ctx[6];
-	}
-}
-if (module && module.hot) { if (false) {} Group = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\button\\\\Group.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Group, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Group);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/common/A.svelte":
-/*!********************************************!*\
-  !*** ./node_modules/@smui/common/A.svelte ***!
-  \********************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\A.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-function create_fragment(ctx) {
-	let a;
-	let useActions_action;
-	let forwardEvents_action;
-	let current;
-	let mounted;
-	let dispose;
-	const default_slot_template = /*#slots*/ ctx[7].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[6], null);
-	let a_levels = [{ href: /*href*/ ctx[0] }, /*$$restProps*/ ctx[4]];
-	let a_data = {};
-
-	for (let i = 0; i < a_levels.length; i += 1) {
-		a_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(a_data, a_levels[i]);
-	}
-
-	return {
-		c() {
-			a = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
-			if (default_slot) default_slot.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(a, a_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, a, anchor);
-
-			if (default_slot) {
-				default_slot.m(a, null);
-			}
-
-			/*a_binding*/ ctx[8](a);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _internal_js__WEBPACK_IMPORTED_MODULE_1__.useActions.call(null, a, /*use*/ ctx[1])),
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[3].call(null, a))
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 64)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[6], dirty, null, null);
-				}
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(a, a_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(a_levels, [
-				(!current || dirty & /*href*/ 1) && { href: /*href*/ ctx[0] },
-				dirty & /*$$restProps*/ 16 && /*$$restProps*/ ctx[4]
-			]));
-
-			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*use*/ 2) useActions_action.update.call(null, /*use*/ ctx[1]);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(a);
-			if (default_slot) default_slot.d(detaching);
-			/*a_binding*/ ctx[8](null);
-			mounted = false;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["href","use","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	let { href = "javascript:void(0);" } = $$props;
-	let { use = [] } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_1__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let element = null;
-
-	function getElement() {
-		return element;
-	}
-
-	function a_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(2, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(4, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("href" in $$new_props) $$invalidate(0, href = $$new_props.href);
-		if ("use" in $$new_props) $$invalidate(1, use = $$new_props.use);
-		if ("$$scope" in $$new_props) $$invalidate(6, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		href,
-		use,
-		element,
-		forwardEvents,
-		$$restProps,
-		getElement,
-		$$scope,
-		slots,
-		a_binding
-	];
-}
-
-class A extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { href: 0, use: 1, getElement: 5 });
-	}
-
-	get getElement() {
-		return this.$$.ctx[5];
-	}
-}
-if (module && module.hot) { if (false) {} A = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\A.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: A, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (A);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/common/Button.svelte":
-/*!*************************************************!*\
-  !*** ./node_modules/@smui/common/Button.svelte ***!
-  \*************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\Button.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-function create_fragment(ctx) {
-	let button;
-	let useActions_action;
-	let forwardEvents_action;
-	let current;
-	let mounted;
-	let dispose;
-	const default_slot_template = /*#slots*/ ctx[6].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
-	let button_levels = [/*$$restProps*/ ctx[3]];
-	let button_data = {};
-
-	for (let i = 0; i < button_levels.length; i += 1) {
-		button_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(button_data, button_levels[i]);
-	}
-
-	return {
-		c() {
-			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
-			if (default_slot) default_slot.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(button, button_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, button, anchor);
-
-			if (default_slot) {
-				default_slot.m(button, null);
-			}
-
-			/*button_binding*/ ctx[7](button);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _internal_js__WEBPACK_IMPORTED_MODULE_1__.useActions.call(null, button, /*use*/ ctx[0])),
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[2].call(null, button))
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 32)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[5], dirty, null, null);
-				}
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(button, button_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(button_levels, [dirty & /*$$restProps*/ 8 && /*$$restProps*/ ctx[3]]));
-			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*use*/ 1) useActions_action.update.call(null, /*use*/ ctx[0]);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(button);
-			if (default_slot) default_slot.d(detaching);
-			/*button_binding*/ ctx[7](null);
-			mounted = false;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	let { use = [] } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_1__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let element = null;
-
-	function getElement() {
-		return element;
-	}
-
-	function button_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(1, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(3, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("$$scope" in $$new_props) $$invalidate(5, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		element,
-		forwardEvents,
-		$$restProps,
-		getElement,
-		$$scope,
-		slots,
-		button_binding
-	];
-}
-
-class Button extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { use: 0, getElement: 4 });
-	}
-
-	get getElement() {
-		return this.$$.ctx[4];
-	}
-}
-if (module && module.hot) { if (false) {} Button = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\Button.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Button, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@smui/common/ClassAdder.svelte":
 /*!*****************************************************!*\
   !*** ./node_modules/@smui/common/ClassAdder.svelte ***!
@@ -26006,550 +24868,6 @@ if (module && module.hot) { if (false) {} ClassAdder = C_Users_Camilo_WebProject
 
 /***/ }),
 
-/***/ "./node_modules/@smui/common/CommonIcon.svelte":
-/*!*****************************************************!*\
-  !*** ./node_modules/@smui/common/CommonIcon.svelte ***!
-  \*****************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var _I_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./I.svelte */ "./node_modules/@smui/common/I.svelte");
-/* harmony import */ var _Svg_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Svg.svelte */ "./node_modules/@smui/common/Svg.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\CommonIcon.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-
-
-function create_default_slot(ctx) {
-	let current;
-	const default_slot_template = /*#slots*/ ctx[9].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[11], null);
-
-	return {
-		c() {
-			if (default_slot) default_slot.c();
-		},
-		m(target, anchor) {
-			if (default_slot) {
-				default_slot.m(target, anchor);
-			}
-
-			current = true;
-		},
-		p(ctx, dirty) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 2048)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[11], dirty, null, null);
-				}
-			}
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (default_slot) default_slot.d(detaching);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let switch_instance;
-	let switch_instance_anchor;
-	let current;
-
-	const switch_instance_spread_levels = [
-		{
-			use: [/*forwardEvents*/ ctx[5], .../*use*/ ctx[0]]
-		},
-		{
-			class: (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-				[/*className*/ ctx[1]]: true,
-				"mdc-button__icon": /*context*/ ctx[6] === "button",
-				"mdc-fab__icon": /*context*/ ctx[6] === "fab",
-				"mdc-icon-button__icon": /*context*/ ctx[6] === "icon-button",
-				"mdc-icon-button__icon--on": /*context*/ ctx[6] === "icon-button" && /*on*/ ctx[2],
-				"mdc-tab__icon": /*context*/ ctx[6] === "tab",
-				"mdc-banner__icon": /*context*/ ctx[6] === "banner",
-				"mdc-segmented-button__icon": /*context*/ ctx[6] === "segmented-button"
-			})
-		},
-		{ "aria-hidden": "true" },
-		/*component*/ ctx[3] === _Svg_svelte__WEBPACK_IMPORTED_MODULE_4__.default
-		? { focusable: "false", tabindex: "-1" }
-		: {},
-		/*$$restProps*/ ctx[7]
-	];
-
-	var switch_value = /*component*/ ctx[3];
-
-	function switch_props(ctx) {
-		let switch_instance_props = {
-			$$slots: { default: [create_default_slot] },
-			$$scope: { ctx }
-		};
-
-		for (let i = 0; i < switch_instance_spread_levels.length; i += 1) {
-			switch_instance_props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(switch_instance_props, switch_instance_spread_levels[i]);
-		}
-
-		return { props: switch_instance_props };
-	}
-
-	if (switch_value) {
-		switch_instance = new switch_value(switch_props(ctx));
-		/*switch_instance_binding*/ ctx[10](switch_instance);
-	}
-
-	return {
-		c() {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-			switch_instance_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
-		},
-		m(target, anchor) {
-			if (switch_instance) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, target, anchor);
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, switch_instance_anchor, anchor);
-			current = true;
-		},
-		p(ctx, [dirty]) {
-			const switch_instance_changes = (dirty & /*forwardEvents, use, classMap, className, context, on, component, Svg, $$restProps*/ 239)
-			? (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(switch_instance_spread_levels, [
-					dirty & /*forwardEvents, use*/ 33 && {
-						use: [/*forwardEvents*/ ctx[5], .../*use*/ ctx[0]]
-					},
-					dirty & /*classMap, className, context, on*/ 70 && {
-						class: (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-							[/*className*/ ctx[1]]: true,
-							"mdc-button__icon": /*context*/ ctx[6] === "button",
-							"mdc-fab__icon": /*context*/ ctx[6] === "fab",
-							"mdc-icon-button__icon": /*context*/ ctx[6] === "icon-button",
-							"mdc-icon-button__icon--on": /*context*/ ctx[6] === "icon-button" && /*on*/ ctx[2],
-							"mdc-tab__icon": /*context*/ ctx[6] === "tab",
-							"mdc-banner__icon": /*context*/ ctx[6] === "banner",
-							"mdc-segmented-button__icon": /*context*/ ctx[6] === "segmented-button"
-						})
-					},
-					switch_instance_spread_levels[2],
-					dirty & /*component, Svg*/ 8 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*component*/ ctx[3] === _Svg_svelte__WEBPACK_IMPORTED_MODULE_4__.default
-					? { focusable: "false", tabindex: "-1" }
-					: {}),
-					dirty & /*$$restProps*/ 128 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*$$restProps*/ ctx[7])
-				])
-			: {};
-
-			if (dirty & /*$$scope*/ 2048) {
-				switch_instance_changes.$$scope = { dirty, ctx };
-			}
-
-			if (switch_value !== (switch_value = /*component*/ ctx[3])) {
-				if (switch_instance) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
-					const old_component = switch_instance;
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(old_component.$$.fragment, 1, 0, () => {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(old_component, 1);
-					});
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
-				}
-
-				if (switch_value) {
-					switch_instance = new switch_value(switch_props(ctx));
-					/*switch_instance_binding*/ ctx[10](switch_instance);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, 1);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
-				} else {
-					switch_instance = null;
-				}
-			} else if (switch_value) {
-				switch_instance.$set(switch_instance_changes);
-			}
-		},
-		i(local) {
-			if (current) return;
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_instance.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			/*switch_instance_binding*/ ctx[10](null);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(switch_instance_anchor);
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_instance, detaching);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","class","on","component","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let { use = [] } = $$props;
-	let { class: className = "" } = $$props;
-	let { on = false } = $$props;
-	let element;
-	let { component = _I_svelte__WEBPACK_IMPORTED_MODULE_3__.default } = $$props;
-	const context = (0,svelte__WEBPACK_IMPORTED_MODULE_1__.getContext)("SMUI:icon:context");
-
-	function getElement() {
-		return element.getElement();
-	}
-
-	function switch_instance_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(4, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(7, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("class" in $$new_props) $$invalidate(1, className = $$new_props.class);
-		if ("on" in $$new_props) $$invalidate(2, on = $$new_props.on);
-		if ("component" in $$new_props) $$invalidate(3, component = $$new_props.component);
-		if ("$$scope" in $$new_props) $$invalidate(11, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		className,
-		on,
-		component,
-		element,
-		forwardEvents,
-		context,
-		$$restProps,
-		getElement,
-		slots,
-		switch_instance_binding,
-		$$scope
-	];
-}
-
-class CommonIcon extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-			use: 0,
-			class: 1,
-			on: 2,
-			component: 3,
-			getElement: 8
-		});
-	}
-
-	get getElement() {
-		return this.$$.ctx[8];
-	}
-}
-if (module && module.hot) { if (false) {} CommonIcon = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\CommonIcon.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: CommonIcon, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommonIcon);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/common/CommonLabel.svelte":
-/*!******************************************************!*\
-  !*** ./node_modules/@smui/common/CommonLabel.svelte ***!
-  \******************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var _Span_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Span.svelte */ "./node_modules/@smui/common/Span.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\CommonLabel.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-
-function create_default_slot(ctx) {
-	let current;
-	const default_slot_template = /*#slots*/ ctx[9].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[11], null);
-
-	return {
-		c() {
-			if (default_slot) default_slot.c();
-		},
-		m(target, anchor) {
-			if (default_slot) {
-				default_slot.m(target, anchor);
-			}
-
-			current = true;
-		},
-		p(ctx, dirty) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 2048)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[11], dirty, null, null);
-				}
-			}
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (default_slot) default_slot.d(detaching);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let switch_instance;
-	let switch_instance_anchor;
-	let current;
-
-	const switch_instance_spread_levels = [
-		{
-			use: [/*forwardEvents*/ ctx[4], .../*use*/ ctx[0]]
-		},
-		{
-			class: (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-				[/*className*/ ctx[1]]: true,
-				"mdc-button__label": /*context*/ ctx[5] === "button",
-				"mdc-fab__label": /*context*/ ctx[5] === "fab",
-				"mdc-tab__text-label": /*context*/ ctx[5] === "tab",
-				"mdc-image-list__label": /*context*/ ctx[5] === "image-list",
-				"mdc-snackbar__label": /*context*/ ctx[5] === "snackbar",
-				"mdc-banner__text": /*context*/ ctx[5] === "banner",
-				"mdc-segmented-button__label": /*context*/ ctx[5] === "segmented-button",
-				"mdc-data-table__pagination-rows-per-page-label": /*context*/ ctx[5] === "data-table:pagination",
-				"mdc-data-table__header-cell-label": /*context*/ ctx[5] === "data-table:sortable-header-cell"
-			})
-		},
-		/*context*/ ctx[5] === "snackbar"
-		? { "aria-atomic": "false" }
-		: {},
-		{ tabindex: /*tabindex*/ ctx[6] },
-		/*$$restProps*/ ctx[7]
-	];
-
-	var switch_value = /*component*/ ctx[2];
-
-	function switch_props(ctx) {
-		let switch_instance_props = {
-			$$slots: { default: [create_default_slot] },
-			$$scope: { ctx }
-		};
-
-		for (let i = 0; i < switch_instance_spread_levels.length; i += 1) {
-			switch_instance_props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(switch_instance_props, switch_instance_spread_levels[i]);
-		}
-
-		return { props: switch_instance_props };
-	}
-
-	if (switch_value) {
-		switch_instance = new switch_value(switch_props(ctx));
-		/*switch_instance_binding*/ ctx[10](switch_instance);
-	}
-
-	return {
-		c() {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-			switch_instance_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
-		},
-		m(target, anchor) {
-			if (switch_instance) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, target, anchor);
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, switch_instance_anchor, anchor);
-			current = true;
-		},
-		p(ctx, [dirty]) {
-			const switch_instance_changes = (dirty & /*forwardEvents, use, classMap, className, context, tabindex, $$restProps*/ 243)
-			? (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(switch_instance_spread_levels, [
-					dirty & /*forwardEvents, use*/ 17 && {
-						use: [/*forwardEvents*/ ctx[4], .../*use*/ ctx[0]]
-					},
-					dirty & /*classMap, className, context*/ 34 && {
-						class: (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
-							[/*className*/ ctx[1]]: true,
-							"mdc-button__label": /*context*/ ctx[5] === "button",
-							"mdc-fab__label": /*context*/ ctx[5] === "fab",
-							"mdc-tab__text-label": /*context*/ ctx[5] === "tab",
-							"mdc-image-list__label": /*context*/ ctx[5] === "image-list",
-							"mdc-snackbar__label": /*context*/ ctx[5] === "snackbar",
-							"mdc-banner__text": /*context*/ ctx[5] === "banner",
-							"mdc-segmented-button__label": /*context*/ ctx[5] === "segmented-button",
-							"mdc-data-table__pagination-rows-per-page-label": /*context*/ ctx[5] === "data-table:pagination",
-							"mdc-data-table__header-cell-label": /*context*/ ctx[5] === "data-table:sortable-header-cell"
-						})
-					},
-					dirty & /*context*/ 32 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*context*/ ctx[5] === "snackbar"
-					? { "aria-atomic": "false" }
-					: {}),
-					dirty & /*tabindex*/ 64 && { tabindex: /*tabindex*/ ctx[6] },
-					dirty & /*$$restProps*/ 128 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*$$restProps*/ ctx[7])
-				])
-			: {};
-
-			if (dirty & /*$$scope*/ 2048) {
-				switch_instance_changes.$$scope = { dirty, ctx };
-			}
-
-			if (switch_value !== (switch_value = /*component*/ ctx[2])) {
-				if (switch_instance) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
-					const old_component = switch_instance;
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(old_component.$$.fragment, 1, 0, () => {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(old_component, 1);
-					});
-
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
-				}
-
-				if (switch_value) {
-					switch_instance = new switch_value(switch_props(ctx));
-					/*switch_instance_binding*/ ctx[10](switch_instance);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_instance.$$.fragment);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, 1);
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
-				} else {
-					switch_instance = null;
-				}
-			} else if (switch_value) {
-				switch_instance.$set(switch_instance_changes);
-			}
-		},
-		i(local) {
-			if (current) return;
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_instance.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_instance.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			/*switch_instance_binding*/ ctx[10](null);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(switch_instance_anchor);
-			if (switch_instance) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_instance, detaching);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","class","component","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_2__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let { use = [] } = $$props;
-	let { class: className = "" } = $$props;
-	let element;
-	let { component = _Span_svelte__WEBPACK_IMPORTED_MODULE_3__.default } = $$props;
-	const context = (0,svelte__WEBPACK_IMPORTED_MODULE_1__.getContext)("SMUI:label:context");
-	const tabindex = (0,svelte__WEBPACK_IMPORTED_MODULE_1__.getContext)("SMUI:label:tabindex");
-
-	function getElement() {
-		return element.getElement();
-	}
-
-	function switch_instance_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(3, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(7, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("class" in $$new_props) $$invalidate(1, className = $$new_props.class);
-		if ("component" in $$new_props) $$invalidate(2, component = $$new_props.component);
-		if ("$$scope" in $$new_props) $$invalidate(11, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		className,
-		component,
-		element,
-		forwardEvents,
-		context,
-		tabindex,
-		$$restProps,
-		getElement,
-		slots,
-		switch_instance_binding,
-		$$scope
-	];
-}
-
-class CommonLabel extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-			use: 0,
-			class: 1,
-			component: 2,
-			getElement: 8
-		});
-	}
-
-	get getElement() {
-		return this.$$.ctx[8];
-	}
-}
-if (module && module.hot) { if (false) {} CommonLabel = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\CommonLabel.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: CommonLabel, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommonLabel);
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@smui/common/ContextFragment.svelte":
 /*!**********************************************************!*\
   !*** ./node_modules/@smui/common/ContextFragment.svelte ***!
@@ -26799,153 +25117,6 @@ if (module && module.hot) { if (false) {} Div = C_Users_Camilo_WebProjects_senno
 
 /***/ }),
 
-/***/ "./node_modules/@smui/common/I.svelte":
-/*!********************************************!*\
-  !*** ./node_modules/@smui/common/I.svelte ***!
-  \********************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\I.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-function create_fragment(ctx) {
-	let i;
-	let useActions_action;
-	let forwardEvents_action;
-	let current;
-	let mounted;
-	let dispose;
-	const default_slot_template = /*#slots*/ ctx[6].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
-	let i_levels = [/*$$restProps*/ ctx[3]];
-	let i_data = {};
-
-	for (let i = 0; i < i_levels.length; i += 1) {
-		i_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(i_data, i_levels[i]);
-	}
-
-	return {
-		c() {
-			i = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("i");
-			if (default_slot) default_slot.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(i, i_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, i, anchor);
-
-			if (default_slot) {
-				default_slot.m(i, null);
-			}
-
-			/*i_binding*/ ctx[7](i);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _internal_js__WEBPACK_IMPORTED_MODULE_1__.useActions.call(null, i, /*use*/ ctx[0])),
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[2].call(null, i))
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 32)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[5], dirty, null, null);
-				}
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(i, i_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(i_levels, [dirty & /*$$restProps*/ 8 && /*$$restProps*/ ctx[3]]));
-			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*use*/ 1) useActions_action.update.call(null, /*use*/ ctx[0]);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(i);
-			if (default_slot) default_slot.d(detaching);
-			/*i_binding*/ ctx[7](null);
-			mounted = false;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	let { use = [] } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_1__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let element = null;
-
-	function getElement() {
-		return element;
-	}
-
-	function i_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(1, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(3, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("$$scope" in $$new_props) $$invalidate(5, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		element,
-		forwardEvents,
-		$$restProps,
-		getElement,
-		$$scope,
-		slots,
-		i_binding
-	];
-}
-
-class I extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { use: 0, getElement: 4 });
-	}
-
-	get getElement() {
-		return this.$$.ctx[4];
-	}
-}
-if (module && module.hot) { if (false) {} I = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\I.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: I, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (I);
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@smui/common/Span.svelte":
 /*!***********************************************!*\
   !*** ./node_modules/@smui/common/Span.svelte ***!
@@ -27088,153 +25259,6 @@ class Span extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent 
 }
 if (module && module.hot) { if (false) {} Span = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\Span.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Span, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Span);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@smui/common/Svg.svelte":
-/*!**********************************************!*\
-  !*** ./node_modules/@smui/common/Svg.svelte ***!
-  \**********************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@smui/common/internal.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* node_modules\@smui\common\Svg.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-function create_fragment(ctx) {
-	let svg;
-	let useActions_action;
-	let forwardEvents_action;
-	let current;
-	let mounted;
-	let dispose;
-	const default_slot_template = /*#slots*/ ctx[6].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
-	let svg_levels = [/*$$restProps*/ ctx[3]];
-	let svg_data = {};
-
-	for (let i = 0; i < svg_levels.length; i += 1) {
-		svg_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(svg_data, svg_levels[i]);
-	}
-
-	return {
-		c() {
-			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
-			if (default_slot) default_slot.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_svg_attributes)(svg, svg_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, svg, anchor);
-
-			if (default_slot) {
-				default_slot.m(svg, null);
-			}
-
-			/*svg_binding*/ ctx[7](svg);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _internal_js__WEBPACK_IMPORTED_MODULE_1__.useActions.call(null, svg, /*use*/ ctx[0])),
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[2].call(null, svg))
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 32)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[5], dirty, null, null);
-				}
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_svg_attributes)(svg, svg_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(svg_levels, [dirty & /*$$restProps*/ 8 && /*$$restProps*/ ctx[3]]));
-			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*use*/ 1) useActions_action.update.call(null, /*use*/ ctx[0]);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(svg);
-			if (default_slot) default_slot.d(detaching);
-			/*svg_binding*/ ctx[7](null);
-			mounted = false;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	const omit_props_names = ["use","getElement"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	let { use = [] } = $$props;
-	const forwardEvents = (0,_internal_js__WEBPACK_IMPORTED_MODULE_1__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
-	let element = null;
-
-	function getElement() {
-		return element;
-	}
-
-	function svg_binding($$value) {
-		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
-			element = $$value;
-			$$invalidate(1, element);
-		});
-	}
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(3, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
-		if ("$$scope" in $$new_props) $$invalidate(5, $$scope = $$new_props.$$scope);
-	};
-
-	return [
-		use,
-		element,
-		forwardEvents,
-		$$restProps,
-		getElement,
-		$$scope,
-		slots,
-		svg_binding
-	];
-}
-
-class Svg extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { use: 0, getElement: 4 });
-	}
-
-	get getElement() {
-		return this.$$.ctx[4];
-	}
-}
-if (module && module.hot) { if (false) {} Svg = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\common\\\\Svg.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Svg, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Svg);
 
 
 
@@ -27770,6 +25794,298 @@ class FloatingLabel extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteC
 }
 if (module && module.hot) { if (false) {} FloatingLabel = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\floating-label\\\\FloatingLabel.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: FloatingLabel, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FloatingLabel);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@smui/form-field/FormField.svelte":
+/*!********************************************************!*\
+  !*** ./node_modules/@smui/form-field/FormField.svelte ***!
+  \********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var _material_form_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material/form-field */ "./node_modules/@material/form-field/foundation.js");
+/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
+/* harmony import */ var _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @smui/common/internal.js */ "./node_modules/@smui/common/internal.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* node_modules\@smui\form-field\FormField.svelte generated by Svelte v3.38.2 */
+
+
+
+
+
+
+
+
+const get_label_slot_changes = dirty => ({});
+const get_label_slot_context = ctx => ({});
+
+function create_fragment(ctx) {
+	let div;
+	let t;
+	let label_1;
+	let useActions_action;
+	let div_class_value;
+	let useActions_action_1;
+	let forwardEvents_action;
+	let current;
+	let mounted;
+	let dispose;
+	const default_slot_template = /*#slots*/ ctx[13].default;
+	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[12], null);
+	const label_slot_template = /*#slots*/ ctx[13].label;
+	const label_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(label_slot_template, ctx, /*$$scope*/ ctx[12], get_label_slot_context);
+	let label_1_levels = [{ for: /*inputId*/ ctx[4] }, (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.prefixFilter)(/*$$restProps*/ ctx[10], "label$")];
+	let label_1_data = {};
+
+	for (let i = 0; i < label_1_levels.length; i += 1) {
+		label_1_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(label_1_data, label_1_levels[i]);
+	}
+
+	let div_levels = [
+		{
+			class: div_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+				[/*className*/ ctx[1]]: true,
+				"mdc-form-field": true,
+				"mdc-form-field--align-end": /*align*/ ctx[2] === "end",
+				"mdc-form-field--nowrap": /*noWrap*/ ctx[3]
+			})
+		},
+		(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.exclude)(/*$$restProps*/ ctx[10], ["label$"])
+	];
+
+	let div_data = {};
+
+	for (let i = 0; i < div_levels.length; i += 1) {
+		div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(div_data, div_levels[i]);
+	}
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (default_slot) default_slot.c();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			label_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
+			if (label_slot) label_slot.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(label_1, label_1_data);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+
+			if (default_slot) {
+				default_slot.m(div, null);
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, label_1);
+
+			if (label_slot) {
+				label_slot.m(label_1, null);
+			}
+
+			/*label_1_binding*/ ctx[14](label_1);
+			/*div_binding*/ ctx[15](div);
+			current = true;
+
+			if (!mounted) {
+				dispose = [
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.useActions.call(null, label_1, /*label$use*/ ctx[5])),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action_1 = _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.useActions.call(null, div, /*use*/ ctx[0])),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[9].call(null, div)),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div, "SMUI:generic:input:mount", /*SMUI_generic_input_mount_handler*/ ctx[16]),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div, "SMUI:generic:input:unmount", /*SMUI_generic_input_unmount_handler*/ ctx[17])
+				];
+
+				mounted = true;
+			}
+		},
+		p(ctx, [dirty]) {
+			if (default_slot) {
+				if (default_slot.p && (!current || dirty & /*$$scope*/ 4096)) {
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[12], dirty, null, null);
+				}
+			}
+
+			if (label_slot) {
+				if (label_slot.p && (!current || dirty & /*$$scope*/ 4096)) {
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(label_slot, label_slot_template, ctx, /*$$scope*/ ctx[12], dirty, get_label_slot_changes, get_label_slot_context);
+				}
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(label_1, label_1_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(label_1_levels, [
+				(!current || dirty & /*inputId*/ 16) && { for: /*inputId*/ ctx[4] },
+				dirty & /*$$restProps*/ 1024 && (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.prefixFilter)(/*$$restProps*/ ctx[10], "label$")
+			]));
+
+			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty & /*label$use*/ 32) useActions_action.update.call(null, /*label$use*/ ctx[5]);
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(div_levels, [
+				(!current || dirty & /*className, align, noWrap*/ 14 && div_class_value !== (div_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+					[/*className*/ ctx[1]]: true,
+					"mdc-form-field": true,
+					"mdc-form-field--align-end": /*align*/ ctx[2] === "end",
+					"mdc-form-field--nowrap": /*noWrap*/ ctx[3]
+				}))) && { class: div_class_value },
+				dirty & /*$$restProps*/ 1024 && (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.exclude)(/*$$restProps*/ ctx[10], ["label$"])
+			]));
+
+			if (useActions_action_1 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action_1.update) && dirty & /*use*/ 1) useActions_action_1.update.call(null, /*use*/ ctx[0]);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label_slot, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			if (default_slot) default_slot.d(detaching);
+			if (label_slot) label_slot.d(detaching);
+			/*label_1_binding*/ ctx[14](null);
+			/*div_binding*/ ctx[15](null);
+			mounted = false;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
+		}
+	};
+}
+
+let counter = 0;
+
+function instance_1($$self, $$props, $$invalidate) {
+	const omit_props_names = ["use","class","align","noWrap","inputId","label$use","getElement"];
+	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
+	let { $$slots: slots = {}, $$scope } = $$props;
+	const forwardEvents = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
+	let { use = [] } = $$props;
+	let { class: className = "" } = $$props;
+	let { align = "start" } = $$props;
+	let { noWrap = false } = $$props;
+	let { inputId = "SMUI-form-field-" + counter++ } = $$props;
+	let { label$use = [] } = $$props;
+	let element;
+	let instance;
+	let label;
+	let input;
+	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.setContext)("SMUI:generic:input:props", { id: inputId });
+
+	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.onMount)(() => {
+		instance = new _material_form_field__WEBPACK_IMPORTED_MODULE_3__.MDCFormFieldFoundation({
+				activateInputRipple: () => {
+					if (input) {
+						input.activateRipple();
+					}
+				},
+				deactivateInputRipple: () => {
+					if (input) {
+						input.deactivateRipple();
+					}
+				},
+				deregisterInteractionHandler: (evtType, handler) => {
+					label.removeEventListener(evtType, handler);
+				},
+				registerInteractionHandler: (evtType, handler) => {
+					label.addEventListener(evtType, handler);
+				}
+			});
+
+		instance.init();
+
+		return () => {
+			instance.destroy();
+		};
+	});
+
+	function getElement() {
+		return element;
+	}
+
+	function label_1_binding($$value) {
+		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
+			label = $$value;
+			$$invalidate(7, label);
+		});
+	}
+
+	function div_binding($$value) {
+		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
+			element = $$value;
+			$$invalidate(6, element);
+		});
+	}
+
+	const SMUI_generic_input_mount_handler = event => $$invalidate(8, input = event.detail);
+	const SMUI_generic_input_unmount_handler = () => $$invalidate(8, input = undefined);
+
+	$$self.$$set = $$new_props => {
+		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
+		$$invalidate(10, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
+		if ("use" in $$new_props) $$invalidate(0, use = $$new_props.use);
+		if ("class" in $$new_props) $$invalidate(1, className = $$new_props.class);
+		if ("align" in $$new_props) $$invalidate(2, align = $$new_props.align);
+		if ("noWrap" in $$new_props) $$invalidate(3, noWrap = $$new_props.noWrap);
+		if ("inputId" in $$new_props) $$invalidate(4, inputId = $$new_props.inputId);
+		if ("label$use" in $$new_props) $$invalidate(5, label$use = $$new_props.label$use);
+		if ("$$scope" in $$new_props) $$invalidate(12, $$scope = $$new_props.$$scope);
+	};
+
+	return [
+		use,
+		className,
+		align,
+		noWrap,
+		inputId,
+		label$use,
+		element,
+		label,
+		input,
+		forwardEvents,
+		$$restProps,
+		getElement,
+		$$scope,
+		slots,
+		label_1_binding,
+		div_binding,
+		SMUI_generic_input_mount_handler,
+		SMUI_generic_input_unmount_handler
+	];
+}
+
+class FormField extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance_1, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
+			use: 0,
+			class: 1,
+			align: 2,
+			noWrap: 3,
+			inputId: 4,
+			label$use: 5,
+			getElement: 11
+		});
+	}
+
+	get getElement() {
+		return this.$$.ctx[11];
+	}
+}
+if (module && module.hot) { if (false) {} FormField = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\form-field\\\\FormField.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: FormField, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormField);
 
 
 
@@ -28387,6 +26703,542 @@ class NotchedOutline extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.Svelte
 }
 if (module && module.hot) { if (false) {} NotchedOutline = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\notched-outline\\\\NotchedOutline.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: NotchedOutline, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotchedOutline);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@smui/switch/Switch.svelte":
+/*!*************************************************!*\
+  !*** ./node_modules/@smui/switch/Switch.svelte ***!
+  \*************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var _material_switch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material/switch */ "./node_modules/@material/switch/foundation.js");
+/* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
+/* harmony import */ var _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @smui/common/internal.js */ "./node_modules/@smui/common/internal.js");
+/* harmony import */ var _smui_ripple__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @smui/ripple */ "./node_modules/@smui/ripple/index.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* node_modules\@smui\switch\Switch.svelte generated by Svelte v3.38.2 */
+
+
+
+
+
+
+
+
+
+
+function create_fragment(ctx) {
+	let div3;
+	let div0;
+	let t0;
+	let div2;
+	let div1;
+	let t1;
+	let input;
+	let input_class_value;
+	let input_aria_checked_value;
+	let input_value_value;
+	let useActions_action;
+	let div2_class_value;
+	let Ripple_action;
+	let div3_class_value;
+	let useActions_action_1;
+	let forwardEvents_action;
+	let mounted;
+	let dispose;
+
+	let input_levels = [
+		{
+			class: input_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+				[/*input$class*/ ctx[7]]: true,
+				"mdc-switch__native-control": true
+			})
+		},
+		{ type: "checkbox" },
+		{ role: "switch" },
+		/*inputProps*/ ctx[17],
+		{ disabled: /*disabled*/ ctx[0] },
+		{
+			"aria-checked": input_aria_checked_value = /*nativeChecked*/ ctx[8] ? "true" : "false"
+		},
+		{
+			__value: input_value_value = /*valueKey*/ ctx[5] === /*uninitializedValue*/ ctx[16]
+			? /*value*/ ctx[4]
+			: /*valueKey*/ ctx[5]
+		},
+		/*nativeControlAttrs*/ ctx[13],
+		(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.prefixFilter)(/*$$restProps*/ ctx[20], "input$")
+	];
+
+	let input_data = {};
+
+	for (let i = 0; i < input_levels.length; i += 1) {
+		input_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(input_data, input_levels[i]);
+	}
+
+	let div3_levels = [
+		{
+			class: div3_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+				[/*className*/ ctx[2]]: true,
+				"mdc-switch": true,
+				"mdc-switch--disabled": /*disabled*/ ctx[0],
+				"mdc-switch--checked": /*nativeChecked*/ ctx[8],
+				"smui-switch--color-primary": /*color*/ ctx[3] === "primary",
+				.../*internalClasses*/ ctx[11]
+			})
+		},
+		(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.exclude)(/*$$restProps*/ ctx[20], ["input$"])
+	];
+
+	let div3_data = {};
+
+	for (let i = 0; i < div3_levels.length; i += 1) {
+		div3_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(div3_data, div3_levels[i]);
+	}
+
+	return {
+		c() {
+			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			input = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mdc-switch__track");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mdc-switch__thumb");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(input, input_data);
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+				"mdc-switch__thumb-underlay": true,
+				.../*thumbUnderlayClasses*/ ctx[12]
+			}));
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div3, div3_data);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div3, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, div2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, input);
+			/*input_binding*/ ctx[31](input);
+			input.checked = /*nativeChecked*/ ctx[8];
+			/*div3_binding*/ ctx[33](div3);
+
+			if (!mounted) {
+				dispose = [
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action = _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.useActions.call(null, input, /*input$use*/ ctx[6])),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input, "change", /*input_change_handler*/ ctx[32]),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input, "blur", /*blur_handler*/ ctx[29]),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input, "focus", /*focus_handler*/ ctx[30]),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(Ripple_action = _smui_ripple__WEBPACK_IMPORTED_MODULE_3__.default.call(null, div2, {
+						unbounded: true,
+						color: /*color*/ ctx[3],
+						active: /*rippleActive*/ ctx[14],
+						addClass: /*addThumbUnderlayClass*/ ctx[18],
+						removeClass: /*removeThumbUnderlayClass*/ ctx[19],
+						// Don't need addStyle, since we don't set style prop.
+						eventTarget: /*checkbox*/ ctx[10]
+					})),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(useActions_action_1 = _smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.useActions.call(null, div3, /*use*/ ctx[1])),
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(forwardEvents_action = /*forwardEvents*/ ctx[15].call(null, div3))
+				];
+
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(input, input_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(input_levels, [
+				dirty[0] & /*input$class*/ 128 && input_class_value !== (input_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+					[/*input$class*/ ctx[7]]: true,
+					"mdc-switch__native-control": true
+				})) && { class: input_class_value },
+				{ type: "checkbox" },
+				{ role: "switch" },
+				/*inputProps*/ ctx[17],
+				dirty[0] & /*disabled*/ 1 && { disabled: /*disabled*/ ctx[0] },
+				dirty[0] & /*nativeChecked*/ 256 && input_aria_checked_value !== (input_aria_checked_value = /*nativeChecked*/ ctx[8] ? "true" : "false") && { "aria-checked": input_aria_checked_value },
+				dirty[0] & /*valueKey, value*/ 48 && input_value_value !== (input_value_value = /*valueKey*/ ctx[5] === /*uninitializedValue*/ ctx[16]
+				? /*value*/ ctx[4]
+				: /*valueKey*/ ctx[5]) && { __value: input_value_value },
+				dirty[0] & /*nativeControlAttrs*/ 8192 && /*nativeControlAttrs*/ ctx[13],
+				dirty[0] & /*$$restProps*/ 1048576 && (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.prefixFilter)(/*$$restProps*/ ctx[20], "input$")
+			]));
+
+			if (useActions_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action.update) && dirty[0] & /*input$use*/ 64) useActions_action.update.call(null, /*input$use*/ ctx[6]);
+
+			if (dirty[0] & /*nativeChecked*/ 256) {
+				input.checked = /*nativeChecked*/ ctx[8];
+			}
+
+			if (dirty[0] & /*thumbUnderlayClasses*/ 4096 && div2_class_value !== (div2_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+				"mdc-switch__thumb-underlay": true,
+				.../*thumbUnderlayClasses*/ ctx[12]
+			}))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value);
+			}
+
+			if (Ripple_action && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(Ripple_action.update) && dirty[0] & /*color, rippleActive, checkbox*/ 17416) Ripple_action.update.call(null, {
+				unbounded: true,
+				color: /*color*/ ctx[3],
+				active: /*rippleActive*/ ctx[14],
+				addClass: /*addThumbUnderlayClass*/ ctx[18],
+				removeClass: /*removeThumbUnderlayClass*/ ctx[19],
+				// Don't need addStyle, since we don't set style prop.
+				eventTarget: /*checkbox*/ ctx[10]
+			});
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div3, div3_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(div3_levels, [
+				dirty[0] & /*className, disabled, nativeChecked, color, internalClasses*/ 2317 && div3_class_value !== (div3_class_value = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.classMap)({
+					[/*className*/ ctx[2]]: true,
+					"mdc-switch": true,
+					"mdc-switch--disabled": /*disabled*/ ctx[0],
+					"mdc-switch--checked": /*nativeChecked*/ ctx[8],
+					"smui-switch--color-primary": /*color*/ ctx[3] === "primary",
+					.../*internalClasses*/ ctx[11]
+				})) && { class: div3_class_value },
+				dirty[0] & /*$$restProps*/ 1048576 && (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.exclude)(/*$$restProps*/ ctx[20], ["input$"])
+			]));
+
+			if (useActions_action_1 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(useActions_action_1.update) && dirty[0] & /*use*/ 2) useActions_action_1.update.call(null, /*use*/ ctx[1]);
+		},
+		i: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		o: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div3);
+			/*input_binding*/ ctx[31](null);
+			/*div3_binding*/ ctx[33](null);
+			mounted = false;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.run_all)(dispose);
+		}
+	};
+}
+
+function instance_1($$self, $$props, $$invalidate) {
+	const omit_props_names = [
+		"use","class","disabled","color","group","checked","value","valueKey","input$use","input$class","getId","getElement"
+	];
+
+	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
+	const forwardEvents = (0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.forwardEventsBuilder)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_current_component)());
+
+	let uninitializedValue = () => {
+		
+	};
+
+	let { use = [] } = $$props;
+	let { class: className = "" } = $$props;
+	let { disabled = false } = $$props;
+	let { color = "secondary" } = $$props;
+	let { group = uninitializedValue } = $$props;
+	let { checked = uninitializedValue } = $$props;
+	let { value = null } = $$props;
+	let { valueKey = uninitializedValue } = $$props;
+	let { input$use = [] } = $$props;
+	let { input$class = "" } = $$props;
+	let element;
+	let instance;
+	let checkbox;
+	let internalClasses = {};
+	let thumbUnderlayClasses = {};
+	let nativeControlAttrs = {};
+	let rippleActive = false;
+	let inputProps = (0,svelte__WEBPACK_IMPORTED_MODULE_1__.getContext)("SMUI:generic:input:props") || {};
+
+	let nativeChecked = group === uninitializedValue
+	? checked === uninitializedValue ? false : checked
+	: group.indexOf(value) !== -1;
+
+	let previousChecked = checked;
+	let previousGroup = group === uninitializedValue ? [] : [...group];
+	let previousNativeChecked = nativeChecked;
+
+	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.onMount)(() => {
+		$$invalidate(25, instance = new _material_switch__WEBPACK_IMPORTED_MODULE_4__.MDCSwitchFoundation({
+				addClass,
+				removeClass,
+				setNativeControlChecked: checked => $$invalidate(8, nativeChecked = checked),
+				setNativeControlDisabled: disabledValue => $$invalidate(0, disabled = disabledValue),
+				setNativeControlAttr: addNativeControlAttr
+			}));
+
+		const accessor = {
+			get element() {
+				return getElement();
+			},
+			get checked() {
+				return nativeChecked;
+			},
+			set checked(checked) {
+				if (nativeChecked !== value) {
+					$$invalidate(8, nativeChecked = value);
+				}
+			},
+			activateRipple() {
+				if (!disabled) {
+					$$invalidate(14, rippleActive = true);
+				}
+			},
+			deactivateRipple() {
+				$$invalidate(14, rippleActive = false);
+			}
+		};
+
+		(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.dispatch)(element, "SMUI:generic:input:mount", accessor);
+		instance.init();
+
+		return () => {
+			(0,_smui_common_internal_js__WEBPACK_IMPORTED_MODULE_2__.dispatch)(element, "SMUI:generic:input:unmount", accessor);
+			instance.destroy();
+		};
+	});
+
+	function addClass(className) {
+		if (!internalClasses[className]) {
+			$$invalidate(11, internalClasses[className] = true, internalClasses);
+		}
+	}
+
+	function removeClass(className) {
+		if (!(className in internalClasses) || internalClasses[className]) {
+			$$invalidate(11, internalClasses[className] = false, internalClasses);
+		}
+	}
+
+	function addThumbUnderlayClass(className) {
+		if (!thumbUnderlayClasses[className]) {
+			$$invalidate(12, thumbUnderlayClasses[className] = true, thumbUnderlayClasses);
+		}
+	}
+
+	function removeThumbUnderlayClass(className) {
+		if (!(className in thumbUnderlayClasses) || thumbUnderlayClasses[className]) {
+			$$invalidate(12, thumbUnderlayClasses[className] = false, thumbUnderlayClasses);
+		}
+	}
+
+	function addNativeControlAttr(name, value) {
+		if (nativeControlAttrs[name] !== value) {
+			$$invalidate(13, nativeControlAttrs[name] = value, nativeControlAttrs);
+		}
+	}
+
+	function getId() {
+		return inputProps && inputProps.id;
+	}
+
+	function getElement() {
+		return element;
+	}
+
+	function blur_handler(event) {
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bubble)($$self, event);
+	}
+
+	function focus_handler(event) {
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bubble)($$self, event);
+	}
+
+	function input_binding($$value) {
+		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
+			checkbox = $$value;
+			$$invalidate(10, checkbox);
+		});
+	}
+
+	function input_change_handler() {
+		nativeChecked = this.checked;
+		(((((((($$invalidate(8, nativeChecked), $$invalidate(21, group)), $$invalidate(16, uninitializedValue)), $$invalidate(28, previousNativeChecked)), $$invalidate(4, value)), $$invalidate(27, previousGroup)), $$invalidate(22, checked)), $$invalidate(26, previousChecked)), $$invalidate(25, instance));
+	}
+
+	function div3_binding($$value) {
+		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
+			element = $$value;
+			$$invalidate(9, element);
+		});
+	}
+
+	$$self.$$set = $$new_props => {
+		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
+		$$invalidate(20, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
+		if ("use" in $$new_props) $$invalidate(1, use = $$new_props.use);
+		if ("class" in $$new_props) $$invalidate(2, className = $$new_props.class);
+		if ("disabled" in $$new_props) $$invalidate(0, disabled = $$new_props.disabled);
+		if ("color" in $$new_props) $$invalidate(3, color = $$new_props.color);
+		if ("group" in $$new_props) $$invalidate(21, group = $$new_props.group);
+		if ("checked" in $$new_props) $$invalidate(22, checked = $$new_props.checked);
+		if ("value" in $$new_props) $$invalidate(4, value = $$new_props.value);
+		if ("valueKey" in $$new_props) $$invalidate(5, valueKey = $$new_props.valueKey);
+		if ("input$use" in $$new_props) $$invalidate(6, input$use = $$new_props.input$use);
+		if ("input$class" in $$new_props) $$invalidate(7, input$class = $$new_props.input$class);
+	};
+
+	$$self.$$.update = () => {
+		if ($$self.$$.dirty[0] & /*group, previousNativeChecked, nativeChecked, value, previousGroup, checked, previousChecked, instance*/ 509608208) {
+			$: {
+				// This is a substitute for an on:change listener that is
+				// smarter about when it calls the instance's handler. I do
+				// this so that a group of changes will only trigger one
+				// handler call, since the handler will reset currently
+				// running animations.
+				let callHandleChange = false;
+
+				// First check for group state.
+				if (group !== uninitializedValue) {
+					if (previousNativeChecked !== nativeChecked) {
+						// The change needs to flow up.
+						const idx = group.indexOf(value);
+
+						if (nativeChecked && idx === -1) {
+							group.push(value);
+							(((((((($$invalidate(21, group), $$invalidate(16, uninitializedValue)), $$invalidate(28, previousNativeChecked)), $$invalidate(8, nativeChecked)), $$invalidate(4, value)), $$invalidate(27, previousGroup)), $$invalidate(22, checked)), $$invalidate(26, previousChecked)), $$invalidate(25, instance));
+						} else if (!nativeChecked && idx !== -1) {
+							group.splice(idx, 1);
+							(((((((($$invalidate(21, group), $$invalidate(16, uninitializedValue)), $$invalidate(28, previousNativeChecked)), $$invalidate(8, nativeChecked)), $$invalidate(4, value)), $$invalidate(27, previousGroup)), $$invalidate(22, checked)), $$invalidate(26, previousChecked)), $$invalidate(25, instance));
+						}
+
+						callHandleChange = true;
+					} else {
+						// Potential changes need to flow down.
+						const idxPrev = previousGroup.indexOf(value);
+
+						const idx = group.indexOf(value);
+
+						if (idxPrev > -1 && idx === -1) {
+							// The checkbox was removed from the group.
+							$$invalidate(8, nativeChecked = false);
+
+							callHandleChange = true;
+						} else if (idx > -1 && idxPrev === -1) {
+							// The checkbox was added to the group.
+							$$invalidate(8, nativeChecked = true);
+
+							callHandleChange = true;
+						}
+					}
+				}
+
+				// Now check individual state.
+				if (checked === uninitializedValue) {
+					if (previousNativeChecked !== nativeChecked) {
+						// The checkbox was clicked by the user.
+						callHandleChange = true;
+					}
+				} else if (checked !== nativeChecked) {
+					if (checked === previousChecked) {
+						// The checkbox was clicked by the user
+						// and the change needs to flow up.
+						$$invalidate(22, checked = nativeChecked);
+					} else {
+						// The checkbox was changed programmatically
+						// and the change needs to flow down.
+						$$invalidate(8, nativeChecked = checked);
+					}
+
+					callHandleChange = true;
+				}
+
+				$$invalidate(26, previousChecked = checked);
+				$$invalidate(27, previousGroup = group === uninitializedValue ? [] : [...group]);
+				$$invalidate(28, previousNativeChecked = nativeChecked);
+
+				if (callHandleChange && instance) {
+					instance.handleChange({ target: { checked: nativeChecked } });
+				}
+			}
+		}
+	};
+
+	return [
+		disabled,
+		use,
+		className,
+		color,
+		value,
+		valueKey,
+		input$use,
+		input$class,
+		nativeChecked,
+		element,
+		checkbox,
+		internalClasses,
+		thumbUnderlayClasses,
+		nativeControlAttrs,
+		rippleActive,
+		forwardEvents,
+		uninitializedValue,
+		inputProps,
+		addThumbUnderlayClass,
+		removeThumbUnderlayClass,
+		$$restProps,
+		group,
+		checked,
+		getId,
+		getElement,
+		instance,
+		previousChecked,
+		previousGroup,
+		previousNativeChecked,
+		blur_handler,
+		focus_handler,
+		input_binding,
+		input_change_handler,
+		div3_binding
+	];
+}
+
+class Switch extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(
+			this,
+			options,
+			instance_1,
+			create_fragment,
+			svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal,
+			{
+				use: 1,
+				class: 2,
+				disabled: 0,
+				color: 3,
+				group: 21,
+				checked: 22,
+				value: 4,
+				valueKey: 5,
+				input$use: 6,
+				input$class: 7,
+				getId: 23,
+				getElement: 24
+			},
+			[-1, -1]
+		);
+	}
+
+	get getId() {
+		return this.$$.ctx[23];
+	}
+
+	get getElement() {
+		return this.$$.ctx[24];
+	}
+}
+if (module && module.hot) { if (false) {} Switch = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__.applyHmr({ m: module, id: "\"node_modules\\\\@smui\\\\switch\\\\Switch.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Switch, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Switch);
 
 
 
@@ -31550,946 +30402,10 @@ if (module && module.hot) { if (false) {} Textfield = C_Users_Camilo_WebProjects
 
 /***/ }),
 
-/***/ "./resources/js/Layouts/Guest.svelte":
-/*!*******************************************!*\
-  !*** ./resources/js/Layouts/Guest.svelte ***!
-  \*******************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "title": () => (/* binding */ title)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var svelte_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/store */ "./node_modules/svelte/store/index.mjs");
-/* harmony import */ var _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-svelte */ "./node_modules/@inertiajs/inertia-svelte/src/index.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Utils */ "./resources/js/Utils/index.js");
-/* harmony import */ var _Shared_ApplicationLogo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/ApplicationLogo */ "./resources/js/Shared/ApplicationLogo.svelte");
-/* harmony import */ var _Shared_FlashMessages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/FlashMessages */ "./resources/js/Shared/FlashMessages.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* resources\js\Layouts\Guest.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-
-
-function create_fragment(ctx) {
-	let title_value;
-	let t0;
-	let div2;
-	let div0;
-	let a;
-	let applicationlogo;
-	let t1;
-	let a_href_value;
-	let inertia_action;
-	let t2;
-	let div1;
-	let t3;
-	let flashmessages;
-	let current;
-	let mounted;
-	let dispose;
-
-	document.title = title_value = /*$title*/ ctx[0]
-	? `${/*$title*/ ctx[0]} - SGPS-SIPRO`
-	: "SGPS-SIPRO";
-
-	applicationlogo = new _Shared_ApplicationLogo__WEBPACK_IMPORTED_MODULE_4__.default({
-			props: {
-				class: "w-20 h-20 fill-current text-gray-500"
-			}
-		});
-
-	const default_slot_template = /*#slots*/ ctx[2].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
-	flashmessages = new _Shared_FlashMessages__WEBPACK_IMPORTED_MODULE_5__.default({});
-
-	return {
-		c() {
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			a = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(applicationlogo.$$.fragment);
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n            SGPS-SIPRO");
-			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			if (default_slot) default_slot.c();
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(flashmessages.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "href", a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("login"));
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "class", "flex items-center justify-center text-orangered-600 text-xl");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 welcome-wallpaper");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, a);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(applicationlogo, a, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a, t1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
-
-			if (default_slot) {
-				default_slot.m(div1, null);
-			}
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(flashmessages, div2, null);
-			current = true;
-
-			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.action_destroyer)(inertia_action = _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.inertia.call(null, a));
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if ((!current || dirty & /*$title*/ 1) && title_value !== (title_value = /*$title*/ ctx[0]
-			? `${/*$title*/ ctx[0]} - SGPS-SIPRO`
-			: "SGPS-SIPRO")) {
-				document.title = title_value;
-			}
-
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[1], dirty, null, null);
-				}
-			}
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(applicationlogo.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(flashmessages.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(applicationlogo.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(flashmessages.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(applicationlogo);
-			if (default_slot) default_slot.d(detaching);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(flashmessages);
-			mounted = false;
-			dispose();
-		}
-	};
-}
-
-const title = (0,svelte_store__WEBPACK_IMPORTED_MODULE_1__.writable)(null);
-
-function instance($$self, $$props, $$invalidate) {
-	let $title,
-		$$unsubscribe_title = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		$$subscribe_title = () => ($$unsubscribe_title(), $$unsubscribe_title = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.subscribe)(title, $$value => $$invalidate(0, $title = $$value)), title);
-
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, title, $$value => $$invalidate(0, $title = $$value));
-	$$self.$$.on_destroy.push(() => $$unsubscribe_title());
-	let { $$slots: slots = {}, $$scope } = $$props;
-
-	$$self.$$set = $$props => {
-		if ("$$scope" in $$props) $$invalidate(1, $$scope = $$props.$$scope);
-	};
-
-	return [$title, $$scope, slots];
-}
-
-class Guest extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
-	}
-}
-if (module && module.hot) { if (false) {} Guest = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_6__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Layouts\\\\Guest.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Guest, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_7__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Guest);
-
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Auth/ForgotPassword.svelte":
-/*!*******************************************************!*\
-  !*** ./resources/js/Pages/Auth/ForgotPassword.svelte ***!
-  \*******************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "layout": () => (/* binding */ layout)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _Layouts_Guest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Guest */ "./resources/js/Layouts/Guest.svelte");
-/* harmony import */ var _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-svelte */ "./node_modules/@inertiajs/inertia-svelte/src/index.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Utils */ "./resources/js/Utils/index.js");
-/* harmony import */ var svelte_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte-i18n */ "./node_modules/svelte-i18n/dist/runtime.esm.js");
-/* harmony import */ var _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.svelte");
-/* harmony import */ var _Shared_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/Input */ "./resources/js/Shared/Input.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* resources\js\Pages\Auth\ForgotPassword.svelte generated by Svelte v3.38.2 */
-
-
-
-
-
-
-
-
-
-function create_if_block(ctx) {
-	let div;
-	let t;
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*status*/ ctx[0]);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mb-4 font-medium text-sm text-green-600");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*status*/ 1) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, /*status*/ ctx[0]);
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-		}
-	};
-}
-
-// (44:8) <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">
-function create_default_slot(ctx) {
-	let t_value = /*$_*/ ctx[4]("Email Password Reset Link") + "";
-	let t;
-
-	return {
-		c() {
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*$_*/ 16 && t_value !== (t_value = /*$_*/ ctx[4]("Email Password Reset Link") + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let div0;
-	let t0_value = /*$_*/ ctx[4]("Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.") + "";
-	let t0;
-	let t1;
-	let t2;
-	let form_1;
-	let div1;
-	let input;
-	let updating_value;
-	let t3;
-	let div2;
-	let loadingbutton;
-	let updating_loading;
-	let current;
-	let mounted;
-	let dispose;
-	let if_block = /*status*/ ctx[0] && create_if_block(ctx);
-
-	function input_value_binding(value) {
-		/*input_value_binding*/ ctx[7](value);
-	}
-
-	let input_props = {
-		label: /*$_*/ ctx[4]("Email"),
-		id: "email",
-		type: "email",
-		class: "mt-1",
-		error: /*errors*/ ctx[1].email,
-		name: "email",
-		required: true,
-		autocomplete: "email"
-	};
-
-	if (/*$form*/ ctx[3].email !== void 0) {
-		input_props.value = /*$form*/ ctx[3].email;
-	}
-
-	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_6__.default({ props: input_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding));
-
-	function loadingbutton_loading_binding(value) {
-		/*loadingbutton_loading_binding*/ ctx[8](value);
-	}
-
-	let loadingbutton_props = {
-		class: "btn-indigo",
-		type: "submit",
-		$$slots: { default: [create_default_slot] },
-		$$scope: { ctx }
-	};
-
-	if (/*sending*/ ctx[2] !== void 0) {
-		loadingbutton_props.loading = /*sending*/ ctx[2];
-	}
-
-	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_5__.default({ props: loadingbutton_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(loadingbutton, "loading", loadingbutton_loading_binding));
-
-	return {
-		c() {
-			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t0_value);
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if (if_block) if_block.c();
-			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			form_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
-			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input.$$.fragment);
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(loadingbutton.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mb-4 text-sm text-gray-600");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "flex items-center justify-end mt-4");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div0, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t1, anchor);
-			if (if_block) if_block.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t2, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, form_1, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input, div1, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(loadingbutton, div2, null);
-			current = true;
-
-			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*handleSubmit*/ ctx[6]));
-				mounted = true;
-			}
-		},
-		p(ctx, [dirty]) {
-			if ((!current || dirty & /*$_*/ 16) && t0_value !== (t0_value = /*$_*/ ctx[4]("Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.") + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, t0_value);
-
-			if (/*status*/ ctx[0]) {
-				if (if_block) {
-					if_block.p(ctx, dirty);
-				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					if_block.m(t2.parentNode, t2);
-				}
-			} else if (if_block) {
-				if_block.d(1);
-				if_block = null;
-			}
-
-			const input_changes = {};
-			if (dirty & /*$_*/ 16) input_changes.label = /*$_*/ ctx[4]("Email");
-			if (dirty & /*errors*/ 2) input_changes.error = /*errors*/ ctx[1].email;
-
-			if (!updating_value && dirty & /*$form*/ 8) {
-				updating_value = true;
-				input_changes.value = /*$form*/ ctx[3].email;
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
-			}
-
-			input.$set(input_changes);
-			const loadingbutton_changes = {};
-
-			if (dirty & /*$$scope, $_*/ 528) {
-				loadingbutton_changes.$$scope = { dirty, ctx };
-			}
-
-			if (!updating_loading && dirty & /*sending*/ 4) {
-				updating_loading = true;
-				loadingbutton_changes.loading = /*sending*/ ctx[2];
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_loading = false);
-			}
-
-			loadingbutton.$set(loadingbutton_changes);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(loadingbutton.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(loadingbutton.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div0);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t1);
-			if (if_block) if_block.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t2);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(form_1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(loadingbutton);
-			mounted = false;
-			dispose();
-		}
-	};
-}
-
-const layout = _Layouts_Guest__WEBPACK_IMPORTED_MODULE_1__.default;
-
-function instance($$self, $$props, $$invalidate) {
-	let $form;
-	let $_;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, svelte_i18n__WEBPACK_IMPORTED_MODULE_4__._, $$value => $$invalidate(4, $_ = $$value));
-	let { status } = $$props;
-	let { errors } = $$props;
-	let sending = false;
-	let form = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({ email: "" });
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(3, $form = value));
-
-	function handleSubmit() {
-		$form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("password.email"));
-	}
-
-	function input_value_binding(value) {
-		if ($$self.$$.not_equal($form.email, value)) {
-			$form.email = value;
-			form.set($form);
-		}
-	}
-
-	function loadingbutton_loading_binding(value) {
-		sending = value;
-		$$invalidate(2, sending);
-	}
-
-	$$self.$$set = $$props => {
-		if ("status" in $$props) $$invalidate(0, status = $$props.status);
-		if ("errors" in $$props) $$invalidate(1, errors = $$props.errors);
-	};
-
-	return [
-		status,
-		errors,
-		sending,
-		$form,
-		$_,
-		form,
-		handleSubmit,
-		input_value_binding,
-		loadingbutton_loading_binding
-	];
-}
-
-class ForgotPassword extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { status: 0, errors: 1 });
-	}
-}
-if (module && module.hot) { if (false) {} ForgotPassword = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_7__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Pages\\\\Auth\\\\ForgotPassword.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: ForgotPassword, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_8__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ForgotPassword);
-
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Shared/ApplicationLogo.svelte":
-/*!****************************************************!*\
-  !*** ./resources/js/Shared/ApplicationLogo.svelte ***!
-  \****************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _inertiajs_inertia_svelte_src_App_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-svelte/src/App.svelte */ "./node_modules/@inertiajs/inertia-svelte/src/App.svelte");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* module decorator */ module = __webpack_require__.hmd(module);
-/* resources\js\Shared\ApplicationLogo.svelte generated by Svelte v3.38.2 */
-
-
-
-
-function create_fragment(ctx) {
-	let svg;
-	let defs;
-	let style;
-	let t;
-	let linearGradient0;
-	let stop0;
-	let stop1;
-	let linearGradient1;
-	let stop2;
-	let stop3;
-	let linearGradient2;
-	let linearGradient3;
-	let stop4;
-	let stop5;
-	let linearGradient4;
-	let linearGradient5;
-	let linearGradient6;
-	let linearGradient7;
-	let linearGradient8;
-	let linearGradient9;
-	let linearGradient10;
-	let stop6;
-	let stop7;
-	let linearGradient11;
-	let linearGradient12;
-	let linearGradient13;
-	let linearGradient14;
-	let linearGradient15;
-	let linearGradient16;
-	let stop8;
-	let stop9;
-	let linearGradient17;
-	let linearGradient18;
-	let g5;
-	let g4;
-	let g3;
-	let path0;
-	let path1;
-	let g0;
-	let path2;
-	let path3;
-	let path4;
-	let path5;
-	let path6;
-	let path7;
-	let path8;
-	let path9;
-	let path10;
-	let path11;
-	let path12;
-	let path13;
-	let path14;
-	let path15;
-	let path16;
-	let g1;
-	let path17;
-	let path18;
-	let g2;
-	let path19;
-	let path20;
-
-	let svg_levels = [
-		{ xmlns: "http://www.w3.org/2000/svg" },
-		{
-			"xmlns:xlink": "http://www.w3.org/1999/xlink"
-		},
-		{ viewBox: "0 0 327 306.62" },
-		/*props*/ ctx[0]
-	];
-
-	let svg_data = {};
-
-	for (let i = 0; i < svg_levels.length; i += 1) {
-		svg_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(svg_data, svg_levels[i]);
-	}
-
-	return {
-		c() {
-			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
-			defs = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("defs");
-			style = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("style");
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(".cls-1 {\r\n                isolation: isolate;\r\n            }\r\n            .cls-2 {\r\n                fill: url(#linear-gradient);\r\n            }\r\n            .cls-3 {\r\n                fill: url(#linear-gradient-2);\r\n            }\r\n            .cls-12,\r\n            .cls-4,\r\n            .cls-9 {\r\n                opacity: 0.3;\r\n                mix-blend-mode: multiply;\r\n            }\r\n            .cls-5 {\r\n                fill: url(#linear-gradient-3);\r\n            }\r\n            .cls-6 {\r\n                fill: url(#linear-gradient-4);\r\n            }\r\n            .cls-7 {\r\n                fill: #eff2f6;\r\n            }\r\n            .cls-8 {\r\n                fill: url(#linear-gradient-5);\r\n            }\r\n            .cls-9 {\r\n                fill: url(#linear-gradient-6);\r\n            }\r\n            .cls-10 {\r\n                fill: url(#linear-gradient-7);\r\n            }\r\n            .cls-11 {\r\n                fill: url(#linear-gradient-8);\r\n            }\r\n            .cls-12 {\r\n                fill: url(#linear-gradient-9);\r\n            }\r\n            .cls-13 {\r\n                fill: url(#linear-gradient-10);\r\n            }\r\n            .cls-14 {\r\n                fill: url(#linear-gradient-11);\r\n            }\r\n            .cls-15 {\r\n                fill: url(#linear-gradient-12);\r\n            }\r\n            .cls-16 {\r\n                fill: url(#linear-gradient-13);\r\n            }\r\n            .cls-17 {\r\n                fill: url(#linear-gradient-14);\r\n            }\r\n            .cls-18 {\r\n                fill: url(#linear-gradient-15);\r\n            }\r\n            .cls-19 {\r\n                fill: url(#linear-gradient-16);\r\n            }\r\n            .cls-20 {\r\n                fill: url(#linear-gradient-17);\r\n            }\r\n            .cls-21 {\r\n                fill: url(#linear-gradient-18);\r\n            }\r\n            .cls-22 {\r\n                fill: url(#linear-gradient-19);\r\n            }\r\n        ");
-			linearGradient0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			stop0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			stop1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			linearGradient1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			stop2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			stop3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			linearGradient2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			stop4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			stop5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			linearGradient4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			stop6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			stop7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			linearGradient11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient13 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			stop8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			stop9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("stop");
-			linearGradient17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			linearGradient18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("linearGradient");
-			g5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			g4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			g3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			path0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			g0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			path2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path13 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			g1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			path17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			g2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("g");
-			path19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			path20 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop0, "offset", "0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop0, "stop-color", "#ab316d");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop1, "offset", "1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop1, "stop-color", "#792d3d");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "id", "linear-gradient");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "x1", "1108.86");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "y1", "42.61");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "x2", "994.34");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "y2", "439.04");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "gradientTransform", "translate(-936.65)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient0, "gradientUnits", "userSpaceOnUse");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop2, "offset", "0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop2, "stop-color", "#ffc444");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop3, "offset", "1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop3, "stop-color", "#f36f56");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "id", "linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "x1", "1116.22");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "y1", "42.61");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "x2", "1001.7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "y2", "439.04");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "gradientTransform", "translate(-936.65)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient1, "gradientUnits", "userSpaceOnUse");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient2, "id", "linear-gradient-3");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient2, "x1", "1104.05");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient2, "y1", "32.89");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient2, "x2", "986.99");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient2, "y2", "438.1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient2, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop4, "offset", "0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop4, "stop-color", "#fff");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop5, "offset", "1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop5, "stop-color", "#ebeff2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "id", "linear-gradient-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "x1", "1114.11");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "y1", "54.98");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "x2", "1011.08");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "y2", "411.64");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "gradientTransform", "translate(-936.65)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient3, "gradientUnits", "userSpaceOnUse");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient4, "id", "linear-gradient-5");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient4, "x1", "1109.44");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient4, "y1", "79.68");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient4, "x2", "1029.34");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient4, "y2", "356.93");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient4, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient5, "id", "linear-gradient-6");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient5, "x1", "1072.7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient5, "y1", "132.54");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient5, "x2", "1018.55");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient5, "y2", "319.99");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient5, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient6, "id", "linear-gradient-7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient6, "x1", "1104.16");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient6, "y1", "104.35");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient6, "x2", "1046.97");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient6, "y2", "302.3");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient6, "xlink:href", "#linear-gradient-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient7, "id", "linear-gradient-8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient7, "x1", "1098.26");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient7, "y1", "129");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient7, "x2", "1063.96");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient7, "y2", "247.74");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient7, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient8, "id", "linear-gradient-9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient8, "x1", "1084.81");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient8, "y1", "143.24");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient8, "x2", "1057.92");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient8, "y2", "236.34");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient8, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "id", "linear-gradient-10");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "x1", "107.36");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "y1", "206.95");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "x2", "161.43");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "y2", "206.95");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient9, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient9, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop6, "offset", "0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop6, "stop-color", "#444b8c");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop7, "offset", "1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop7, "stop-color", "#26264f");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "id", "linear-gradient-11");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "x1", "-158.31");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "y1", "198.89");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "x2", "-102.71");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "y2", "198.89");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "gradientTransform", "matrix(0.75, -0.66, 0.66, 0.75, 141.33, -94.52)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient10, "gradientUnits", "userSpaceOnUse");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "id", "linear-gradient-12");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "x1", "106.73");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "y1", "237.47");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "x2", "159.98");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "y2", "237.47");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient11, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient11, "xlink:href", "#linear-gradient-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "id", "linear-gradient-13");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "x1", "103.38");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "y1", "238.91");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "x2", "159.91");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "y2", "238.91");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient12, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient12, "xlink:href", "#linear-gradient");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "id", "linear-gradient-14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "x1", "104.01");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "y1", "205.17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "x2", "161.43");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "y2", "205.17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient13, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient13, "xlink:href", "#linear-gradient");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "id", "linear-gradient-15");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "x1", "13.06");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "y1", "201.9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "x2", "14.14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "y2", "251.23");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient14, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient14, "xlink:href", "#linear-gradient");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "id", "linear-gradient-16");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "x1", "12.53");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "y1", "201.91");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "x2", "13.61");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "y2", "251.24");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient15, "gradientTransform", "matrix(0.72, -0.69, 0.69, 0.72, 43.15, -34.11)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient15, "xlink:href", "#linear-gradient");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop8, "offset", "0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop8, "stop-color", "#aa80f9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop9, "offset", "1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(stop9, "stop-color", "#6165d7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "id", "linear-gradient-17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "x1", "-18.8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "y1", "-105.9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "x2", "94.8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "y2", "-105.9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "gradientTransform", "translate(255.32 183.5) rotate(-19.53)");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient16, "gradientUnits", "userSpaceOnUse");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient17, "id", "linear-gradient-18");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient17, "x1", "-14.1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient17, "y1", "-102.14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient17, "x2", "94.8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient17, "y2", "-102.14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient17, "xlink:href", "#linear-gradient-17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient18, "id", "linear-gradient-19");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient18, "x1", "89.1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient18, "y1", "-130.8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient18, "x2", "95.54");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(linearGradient18, "y2", "-130.8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.xlink_attr)(linearGradient18, "xlink:href", "#linear-gradient-17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "class", "cls-2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path0, "d", "M273.27,164.51c0,73.41-56,136.77-129,141.79C66.64,311.63,0,249.68,0,167.6s66.64-145.54,144.25-142C217.23,29,273.27,91.1,273.27,164.51Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "class", "cls-3");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path1, "d", "M280.63,164.51c0,73.41-56,136.77-129,141.79C74,311.63,7.36,249.68,7.36,167.6S74,22.06,151.62,25.64C224.59,29,280.63,91.1,280.63,164.51Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path2, "class", "cls-5");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path2, "d", "M177.29,259.23c-26.35-30-1.45-68.39-29.06-105.71-25.63-34.62-61.7-22.37-89.48-58.87A91.41,91.41,0,0,1,45.43,69.84,143.56,143.56,0,0,0,7.36,167.6c0,82.08,66.64,144,144.26,138.7a135.1,135.1,0,0,0,71.57-26.59C200.58,277.64,186.36,269.54,177.29,259.23Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g0, "class", "cls-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path3, "class", "cls-6");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path3, "d", "M268.34,164.65c0,66.42-50.85,123.47-116.72,127.62C82,296.65,22.55,240.86,22.55,167.43S82,36.86,151.62,39.67C217.49,42.33,268.34,98.23,268.34,164.65Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path4, "class", "cls-7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path4, "d", "M151.62,292.27a121,121,0,0,0,53-16.06c-12.33-3.76-21.09-9.84-27.37-17-26.35-30-1.45-68.39-29.06-105.71-25.63-34.62-61.7-22.37-89.48-58.87a88.67,88.67,0,0,1-6.55-9.94,129.3,129.3,0,0,0-29.65,82.72C22.55,240.86,82,296.65,151.62,292.27Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path5, "class", "cls-8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path5, "d", "M243.38,164.93c0,52.22-40.22,96.61-91.76,99.27C97.8,267,52.4,223.54,52.4,167.09S97.8,66.18,151.62,67.74C203.16,69.23,243.38,112.72,243.38,164.93Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path6, "class", "cls-9");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path6, "d", "M148.23,153.52c-21.86-29.54-51.29-25-76.74-45.63a100.6,100.6,0,0,0-19.09,59.2c0,56.45,45.4,99.88,99.22,97.11a93.42,93.42,0,0,0,25.67-5h0C150.94,229.28,175.84,190.84,148.23,153.52Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path7, "class", "cls-10");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path7, "d", "M217.87,165.22c0,37.7-29.21,69.43-66.25,70.91-38.21,1.53-70.06-29.51-70.06-69.37s31.85-71.62,70.06-71C188.66,96.45,217.87,127.52,217.87,165.22Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path8, "class", "cls-7");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path8, "d", "M97.05,122a71.9,71.9,0,0,0-15.49,44.73c0,39.86,31.85,70.9,70.06,69.37a66.77,66.77,0,0,0,13.72-2c-4.89-25,3.33-53-17.11-80.63C133.43,133.53,115.19,129.16,97.05,122Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path9, "class", "cls-11");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path9, "d", "M191.81,165.51c0,22.87-17.83,41.92-40.19,42.56-22.78.65-41.56-18-41.56-41.63s18.78-42.71,41.56-42.57C174,124,191.81,142.65,191.81,165.51Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path10, "class", "cls-12");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path10, "d", "M163.21,206c-.55-17.06-1.9-34.8-15-52.49a67.61,67.61,0,0,0-23.09-19.91,43,43,0,0,0-15.08,32.83c0,23.64,18.78,42.28,41.56,41.63A40.39,40.39,0,0,0,163.21,206Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path11, "class", "cls-13");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path11, "d", "M291.31,26.69c.09-.17-23.51,18.74-23.51,18.74l2.33-19.53c.78-6.56,23.28-22.51,29-25.9l1.23,1.38Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path12, "class", "cls-14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path12, "d", "M199,125.73l-41.54,34.38a1.12,1.12,0,0,1-1.51-1.64l37.74-38.68a.61.61,0,0,1,.89,0l4.49,5A.6.6,0,0,1,199,125.73Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path13, "class", "cls-15");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path13, "d", "M301.07,36.42c.17-.07-21.61,22.12-21.61,22.12l19.33-.41C305.29,58,323.12,36.8,327,31.3l-1.22-1.37Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path14, "class", "cls-16");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path14, "d", "M298.5,38.77c.16-.07-21.51,22-21.51,22l19.26-.39a20.37,20.37,0,0,0,16.25-8.63L327,31.3Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path15, "class", "cls-17");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path15, "d", "M289,28.13c.09-.17-23.68,19.59-23.68,19.59l2.3-19.47a20.87,20.87,0,0,1,10.05-15.6L299.16,0Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path16, "class", "cls-18");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path16, "d", "M223.69,115.14l-13.33,12c-4.68,4.24-12.19,3.43-16.82-1.78h0c-4.63-5.2-4.67-12.89-.07-17.21l13.11-12.3Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path17, "class", "cls-19");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path17, "d", "M208.07,117.41a35.17,35.17,0,0,1-17.63,2.16,13.82,13.82,0,0,0,3.1,5.84h0c4.63,5.21,12.14,6,16.82,1.78l13.33-12-5-5.65A26.49,26.49,0,0,1,208.07,117.41Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g1, "class", "cls-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path18, "class", "cls-20");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path18, "d", "M303,34.29l-79.3,80.85c-5.24,4.66-22.35-14.58-17.11-19.24l87.58-71.54Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path19, "class", "cls-21");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path19, "d", "M275.65,55.75c-17.16,14.16-23.22,12.18-36.93,26.69-12.63,13.36-15.79,23.84-23.39,30.49,3.26,2.55,6.53,3.83,8.36,2.21L303,34.29l-3.44-3.86A142.33,142.33,0,0,1,275.65,55.75Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g2, "class", "cls-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path20, "class", "cls-22");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path20, "d", "M300.22,27.88c2.46,2.76,3.73,5.67,2.83,6.48s-3.6-.76-6.05-3.52-3.73-5.66-2.84-6.48S297.76,25.11,300.22,27.88Z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g3, "id", "OBJECTS");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g4, "id", "Capa_2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g4, "data-name", "Capa 2");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(g5, "class", "cls-1");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_svg_attributes)(svg, svg_data);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, svg, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, defs);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, style);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(style, t);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient0, stop0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient0, stop1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient1, stop2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient1, stop3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient3, stop4);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient3, stop5);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient4);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient5);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient6);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient7);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient8);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient9);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient10);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient10, stop6);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient10, stop7);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient11);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient12);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient13);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient14);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient15);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient16);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient16, stop8);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(linearGradient16, stop9);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient17);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(defs, linearGradient18);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, g5);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g5, g4);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g4, g3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, g0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g0, path2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path3);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path4);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path5);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path6);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path7);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path8);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path9);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path10);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path11);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path12);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path13);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path14);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path15);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path16);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, g1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g1, path17);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path18);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, g2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g2, path19);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(g3, path20);
-		},
-		p(ctx, [dirty]) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_svg_attributes)(svg, svg_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(svg_levels, [
-				{ xmlns: "http://www.w3.org/2000/svg" },
-				{
-					"xmlns:xlink": "http://www.w3.org/1999/xlink"
-				},
-				{ viewBox: "0 0 327 306.62" },
-				dirty & /*props*/ 1 && /*props*/ ctx[0]
-			]));
-		},
-		i: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		o: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(svg);
-		}
-	};
-}
-
-function instance($$self, $$props, $$invalidate) {
-	let props;
-	const omit_props_names = [];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(1, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-	};
-
-	$$self.$$.update = () => {
-		$: $$invalidate(0, props = { ...$$restProps });
-	};
-
-	return [props];
-}
-
-class ApplicationLogo extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
-	constructor(options) {
-		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
-	}
-}
-if (module && module.hot) { if (false) {} ApplicationLogo = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\ApplicationLogo.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: ApplicationLogo, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: "svelte-13i5eew-style", nonCssHash: "mqd0vl", ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ApplicationLogo);
-
-if (typeof add_css !== 'undefined' && !document.getElementById("svelte-13i5eew-style")) add_css();
-
-
-/***/ }),
-
-/***/ "./resources/js/Shared/FlashMessages.svelte":
-/*!**************************************************!*\
-  !*** ./resources/js/Shared/FlashMessages.svelte ***!
-  \**************************************************/
+/***/ "./resources/js/Pages/Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Create.svelte":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/Pages/Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Create.svelte ***!
+  \*****************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -32499,14 +30415,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-svelte */ "./node_modules/@inertiajs/inertia-svelte/src/index.js");
-/* harmony import */ var svelte_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! svelte-i18n */ "./node_modules/svelte-i18n/dist/runtime.esm.js");
-/* harmony import */ var svelte_transition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! svelte/transition */ "./node_modules/svelte/transition/index.mjs");
-/* harmony import */ var svelte_easing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte/easing */ "./node_modules/svelte/easing/index.mjs");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_19_css_svelte_loader_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte_19_css_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/FlashMessages.svelte.19.css!=!svelte-loader?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte */ "./resources/js/Shared/FlashMessages.svelte.19.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/FlashMessages.svelte.19.css!./resources/js/Shared/FlashMessages.svelte");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Utils */ "./resources/js/Utils/index.js");
+/* harmony import */ var svelte_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! svelte-i18n */ "./node_modules/svelte-i18n/dist/runtime.esm.js");
+/* harmony import */ var _Shared_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/Input */ "./resources/js/Shared/Input.svelte");
+/* harmony import */ var _Shared_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/InputError */ "./resources/js/Shared/InputError.svelte");
+/* harmony import */ var _Shared_Label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/Label */ "./resources/js/Shared/Label.svelte");
+/* harmony import */ var _Shared_File__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/File */ "./resources/js/Shared/File.svelte");
+/* harmony import */ var _Shared_Switch__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/Switch */ "./resources/js/Shared/Switch.svelte");
+/* harmony import */ var _Shared_PercentageProgress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Shared/PercentageProgress */ "./resources/js/Shared/PercentageProgress.svelte");
+/* harmony import */ var _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Shared/InfoMessage */ "./resources/js/Shared/InfoMessage.svelte");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
-/* resources\js\Shared\FlashMessages.svelte generated by Svelte v3.38.2 */
+/* resources\js\Pages\Convocatorias\Proyectos\ProyectoPresupuesto\EstudioMercado\Create.svelte generated by Svelte v3.38.2 */
 
 
 
@@ -32514,352 +30435,806 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function create_if_block_3(ctx) {
-	let div2;
-	let div1;
-	let svg;
-	let polygon;
-	let t0;
-	let div0;
-	let t1;
-	let div2_transition;
-	let current;
 
-	return {
-		c() {
-			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
-			polygon = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("polygon");
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*successMessage*/ ctx[0]);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(polygon, "points", "0 11 2 9 7 14 18 3 20 5 7 18");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "ml-4 mr-2 flex-shrink-0 w-4 h-4 fill-white");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 20 20");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "p-4 text-white text-sm font-medium");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "flex items-center");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mb-8 flex items-center justify-between bg-green-500 rounded max-w-md fixed -bottom-0 z-index-full svelte-193iq1");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, svg);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, polygon);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t1);
-			current = true;
-		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-			if (!current || dirty & /*successMessage*/ 1) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, /*successMessage*/ ctx[0]);
-		},
-		i(local) {
-			if (current) return;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(() => {
-				if (!div2_transition) div2_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
-					div2,
-					svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
-					{
-						delay: 250,
-						duration: 300,
-						x: 100,
-						y: 700,
-						opacity: 0.5,
-						easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
-					},
-					true
-				);
 
-				div2_transition.run(1);
-			});
 
-			current = true;
-		},
-		o(local) {
-			if (!div2_transition) div2_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
-				div2,
-				svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
-				{
-					delay: 250,
-					duration: 300,
-					x: 100,
-					y: 700,
-					opacity: 0.5,
-					easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
-				},
-				false
-			);
 
-			div2_transition.run(0);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
-			if (detaching && div2_transition) div2_transition.end();
-		}
-	};
-}
 
-// (67:0) {#if (showErrorMessage && errorMessage) || (Object.keys(errors).length > 0 && showErrorMessage)}
-function create_if_block(ctx) {
-	let div1;
-	let div0;
-	let svg;
-	let path;
-	let t;
-	let div1_transition;
-	let current;
-
-	function select_block_type(ctx, dirty) {
-		if (/*errorMessage*/ ctx[1]) return create_if_block_1;
-		return create_else_block;
-	}
-
-	let current_block_type = select_block_type(ctx, -1);
-	let if_block = current_block_type(ctx);
-
-	return {
-		c() {
-			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
-			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if_block.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66\r\n                4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83\r\n                2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "ml-4 mr-2 flex-shrink-0 w-4 h-4 fill-white");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 20 20");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "flex items-center");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl fixed -bottom-0 z-index-full svelte-193iq1");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, svg);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t);
-			if_block.m(div0, null);
-			current = true;
-		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-
-			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
-				if_block.p(ctx, dirty);
-			} else {
-				if_block.d(1);
-				if_block = current_block_type(ctx);
-
-				if (if_block) {
-					if_block.c();
-					if_block.m(div0, null);
-				}
-			}
-		},
-		i(local) {
-			if (current) return;
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_render_callback)(() => {
-				if (!div1_transition) div1_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
-					div1,
-					svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
-					{
-						delay: 250,
-						duration: 300,
-						x: 100,
-						y: 700,
-						opacity: 0.5,
-						easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
-					},
-					true
-				);
-
-				div1_transition.run(1);
-			});
-
-			current = true;
-		},
-		o(local) {
-			if (!div1_transition) div1_transition = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_bidirectional_transition)(
-				div1,
-				svelte_transition__WEBPACK_IMPORTED_MODULE_3__.fly,
-				{
-					delay: 250,
-					duration: 300,
-					x: 100,
-					y: 700,
-					opacity: 0.5,
-					easing: svelte_easing__WEBPACK_IMPORTED_MODULE_4__.quintOut
-				},
-				false
-			);
-
-			div1_transition.run(0);
-			current = false;
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
-			if_block.d();
-			if (detaching && div1_transition) div1_transition.end();
-		}
-	};
-}
-
-// (91:12) {:else}
-function create_else_block(ctx) {
-	let div;
-	let show_if;
-
-	function select_block_type_1(ctx, dirty) {
-		if (show_if == null || dirty & /*errors*/ 4) show_if = !!(Object.keys(/*errors*/ ctx[2]).length === 1);
-		if (show_if) return create_if_block_2;
-		return create_else_block_1;
-	}
-
-	let current_block_type = select_block_type_1(ctx, -1);
-	let if_block = current_block_type(ctx);
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			if_block.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "p-4 text-white text-sm font-medium");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-			if_block.m(div, null);
-		},
-		p(ctx, dirty) {
-			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block) {
-				if_block.p(ctx, dirty);
-			} else {
-				if_block.d(1);
-				if_block = current_block_type(ctx);
-
-				if (if_block) {
-					if_block.c();
-					if_block.m(div, null);
-				}
-			}
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-			if_block.d();
-		}
-	};
-}
-
-// (87:12) {#if errorMessage}
 function create_if_block_1(ctx) {
-	let div;
-	let t;
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*errorMessage*/ ctx[1]);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "p-4 text-white text-sm font-medium");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*errorMessage*/ 2) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, /*errorMessage*/ ctx[1]);
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-		}
-	};
-}
-
-// (95:20) {:else}
-function create_else_block_1(ctx) {
-	let span;
-	let t0;
-	let t1_value = Object.keys(/*errors*/ ctx[2]).length + "";
+	let h1;
 	let t1;
+	let div0;
+	let input0;
+	let updating_value;
 	let t2;
+	let div1;
+	let input1;
+	let updating_value_1;
+	let t3;
+	let div2;
+	let label;
+	let t4;
+	let file;
+	let updating_value_2;
+	let current;
+
+	function input0_value_binding_1(value) {
+		/*input0_value_binding_1*/ ctx[22](value);
+	}
+
+	let input0_props = {
+		label: "Valor (incluido IVA)",
+		id: "tercer_valor",
+		type: "number",
+		input$min: "0",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].tercer_valor,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].tercer_valor !== void 0) {
+		input0_props.value = /*$form*/ ctx[2].tercer_valor;
+	}
+
+	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input0_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, "value", input0_value_binding_1));
+
+	function input1_value_binding_1(value) {
+		/*input1_value_binding_1*/ ctx[23](value);
+	}
+
+	let input1_props = {
+		label: "Nombre de la empresa",
+		id: "tercer_empresa",
+		type: "text",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].tercer_empresa,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].tercer_empresa !== void 0) {
+		input1_props.value = /*$form*/ ctx[2].tercer_empresa;
+	}
+
+	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input1, "value", input1_value_binding_1));
+
+	label = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				required: true,
+				class: "mb-4",
+				labelFor: "tercer_archivo",
+				value: "Soporte"
+			}
+		});
+
+	function file_value_binding(value) {
+		/*file_value_binding*/ ctx[24](value);
+	}
+
+	let file_props = {
+		id: "tercer_archivo",
+		type: "file",
+		accept: "application/pdf",
+		maxSize: "10000",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].tercer_archivo,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].tercer_archivo !== void 0) {
+		file_props.value = /*$form*/ ctx[2].tercer_archivo;
+	}
+
+	file = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file, "value", file_value_binding));
 
 	return {
 		c() {
-			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Hay ");
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
-			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" errores en el formulario.");
+			h1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
+			h1.textContent = "Tercer estudio de mercado";
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input0.$$.fragment);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input1.$$.fragment);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label.$$.fragment);
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file.$$.fragment);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "text-center mt-20 mb-20");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
 		},
 		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, h1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input0, div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input1, div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t3, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label, div2, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file, div2, null);
+			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty & /*errors*/ 4 && t1_value !== (t1_value = Object.keys(/*errors*/ ctx[2]).length + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+			const input0_changes = {};
+			if (dirty & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].tercer_valor;
+
+			if (!updating_value && dirty & /*$form*/ 4) {
+				updating_value = true;
+				input0_changes.value = /*$form*/ ctx[2].tercer_valor;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
+			}
+
+			input0.$set(input0_changes);
+			const input1_changes = {};
+			if (dirty & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].tercer_empresa;
+
+			if (!updating_value_1 && dirty & /*$form*/ 4) {
+				updating_value_1 = true;
+				input1_changes.value = /*$form*/ ctx[2].tercer_empresa;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
+			}
+
+			input1.$set(input1_changes);
+			const file_changes = {};
+			if (dirty & /*errors*/ 1) file_changes.error = /*errors*/ ctx[0].tercer_archivo;
+
+			if (!updating_value_2 && dirty & /*$form*/ 4) {
+				updating_value_2 = true;
+				file_changes.value = /*$form*/ ctx[2].tercer_archivo;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_2 = false);
+			}
+
+			file.$set(file_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(file.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(file.$$.fragment, local);
+			current = false;
 		},
 		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t2);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t3);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file);
 		}
 	};
 }
 
-// (93:20) {#if Object.keys(errors).length === 1}
-function create_if_block_2(ctx) {
-	let span;
+// (149:0) {#if $form.progress}
+function create_if_block(ctx) {
+	let percentageprogress;
+	let current;
+
+	percentageprogress = new _Shared_PercentageProgress__WEBPACK_IMPORTED_MODULE_9__.default({
+			props: {
+				percentage: /*$form*/ ctx[2].progress.percentage
+			}
+		});
 
 	return {
 		c() {
-			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
-			span.textContent = "Hay un error en el formulario.";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(percentageprogress.$$.fragment);
 		},
 		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(percentageprogress, target, anchor);
+			current = true;
 		},
-		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		p(ctx, dirty) {
+			const percentageprogress_changes = {};
+			if (dirty & /*$form*/ 4) percentageprogress_changes.percentage = /*$form*/ ctx[2].progress.percentage;
+			percentageprogress.$set(percentageprogress_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(percentageprogress.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(percentageprogress.$$.fragment, local);
+			current = false;
+		},
 		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(percentageprogress, detaching);
 		}
 	};
 }
 
 function create_fragment(ctx) {
-	let t;
-	let show_if = /*showErrorMessage*/ ctx[4] && /*errorMessage*/ ctx[1] || Object.keys(/*errors*/ ctx[2]).length > 0 && /*showErrorMessage*/ ctx[4];
+	let form_1;
+	let fieldset;
+	let div0;
+	let infomessage;
+	let t0;
+	let label0;
+	let t1;
+	let input0;
+	let updating_value;
+	let t2;
+	let div1;
+	let label1;
+	let t3;
+	let file0;
+	let updating_value_1;
+	let t4;
+	let h10;
+	let t6;
+	let div2;
+	let input1;
+	let updating_value_2;
+	let t7;
+	let div3;
+	let input2;
+	let updating_value_3;
+	let t8;
+	let div4;
+	let label2;
+	let t9;
+	let file1;
+	let updating_value_4;
+	let t10;
+	let h11;
+	let t12;
+	let div5;
+	let input3;
+	let updating_value_5;
+	let t13;
+	let div6;
+	let input4;
+	let updating_value_6;
+	let t14;
+	let div7;
+	let label3;
+	let t15;
+	let file2;
+	let updating_value_7;
+	let t16;
+	let div8;
+	let label4;
+	let t17;
+	let br;
+	let t18;
+	let switch_1;
+	let updating_checked;
+	let t19;
+	let inputerror;
+	let t20;
+	let fieldset_disabled_value;
+	let t21;
+	let div9;
+	let p;
+	let t22;
+
+	let t23_value = (/*average*/ ctx[3] > 0
+	? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[3])
+	: 0) + "";
+
+	let t23;
+	let t24;
+	let t25;
 	let if_block1_anchor;
 	let current;
-	let if_block0 = /*showSuccessMessage*/ ctx[3] && /*successMessage*/ ctx[0] && create_if_block_3(ctx);
-	let if_block1 = show_if && create_if_block(ctx);
+	let mounted;
+	let dispose;
+
+	infomessage = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_10__.default({
+			props: {
+				class: "mb-2",
+				message: "Diligencie los campos de <strong>Cantidad</strong> y <strong>Ficha técnica</strong> solo si este rubro es de maquinaria/equipos."
+			}
+		});
+
+	label0 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				class: "mb-4",
+				labelFor: "numero_items",
+				value: "Indique la cantidad de maquinaria/equipos referenciado en el ANEXO 2 Fichas técnicas para maquinaria y equipos"
+			}
+		});
+
+	function input0_value_binding(value) {
+		/*input0_value_binding*/ ctx[13](value);
+	}
+
+	let input0_props = {
+		label: "Cantidad",
+		id: "numero_items",
+		type: "number",
+		input$min: "1",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].numero_items
+	};
+
+	if (/*$form*/ ctx[2].numero_items !== void 0) {
+		input0_props.value = /*$form*/ ctx[2].numero_items;
+	}
+
+	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input0_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, "value", input0_value_binding));
+
+	label1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				class: "mb-4",
+				labelFor: "ficha_tecnica",
+				value: "ANEXO 2. Fichas técnicas para maquinaria y equipos"
+			}
+		});
+
+	function file0_value_binding(value) {
+		/*file0_value_binding*/ ctx[14](value);
+	}
+
+	let file0_props = {
+		id: "ficha_tecnica",
+		type: "file",
+		accept: "application/pdf",
+		maxSize: "10000",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].ficha_tecnica
+	};
+
+	if (/*$form*/ ctx[2].ficha_tecnica !== void 0) {
+		file0_props.value = /*$form*/ ctx[2].ficha_tecnica;
+	}
+
+	file0 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file0_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file0, "value", file0_value_binding));
+
+	function input1_value_binding(value) {
+		/*input1_value_binding*/ ctx[15](value);
+	}
+
+	let input1_props = {
+		label: "Valor (incluido IVA)",
+		id: "primer_valor",
+		type: "number",
+		input$min: "1",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].primer_valor,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].primer_valor !== void 0) {
+		input1_props.value = /*$form*/ ctx[2].primer_valor;
+	}
+
+	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input1, "value", input1_value_binding));
+
+	function input2_value_binding(value) {
+		/*input2_value_binding*/ ctx[16](value);
+	}
+
+	let input2_props = {
+		label: "Nombre de la empresa",
+		id: "primer_empresa",
+		type: "text",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].primer_empresa,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].primer_empresa !== void 0) {
+		input2_props.value = /*$form*/ ctx[2].primer_empresa;
+	}
+
+	input2 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input2_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input2, "value", input2_value_binding));
+
+	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				required: true,
+				class: "mb-4",
+				labelFor: "primer_archivo",
+				value: "Soporte"
+			}
+		});
+
+	function file1_value_binding(value) {
+		/*file1_value_binding*/ ctx[17](value);
+	}
+
+	let file1_props = {
+		id: "primer_archivo",
+		type: "file",
+		accept: "application/pdf",
+		maxSize: "10000",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].primer_archivo,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].primer_archivo !== void 0) {
+		file1_props.value = /*$form*/ ctx[2].primer_archivo;
+	}
+
+	file1 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file1, "value", file1_value_binding));
+
+	function input3_value_binding(value) {
+		/*input3_value_binding*/ ctx[18](value);
+	}
+
+	let input3_props = {
+		label: "Valor (incluido IVA)",
+		id: "segundo_valor",
+		type: "number",
+		input$min: "1",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].segundo_valor,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].segundo_valor !== void 0) {
+		input3_props.value = /*$form*/ ctx[2].segundo_valor;
+	}
+
+	input3 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input3_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input3, "value", input3_value_binding));
+
+	function input4_value_binding(value) {
+		/*input4_value_binding*/ ctx[19](value);
+	}
+
+	let input4_props = {
+		label: "Nombre de la empresa",
+		id: "segunda_empresa",
+		type: "text",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].segunda_empresa,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].segunda_empresa !== void 0) {
+		input4_props.value = /*$form*/ ctx[2].segunda_empresa;
+	}
+
+	input4 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_4__.default({ props: input4_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input4, "value", input4_value_binding));
+
+	label3 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				required: true,
+				class: "mb-4",
+				labelFor: "segundo_archivo",
+				value: "Soporte"
+			}
+		});
+
+	function file2_value_binding(value) {
+		/*file2_value_binding*/ ctx[20](value);
+	}
+
+	let file2_props = {
+		id: "segundo_archivo",
+		type: "file",
+		accept: "application/pdf",
+		maxSize: "10000",
+		class: "mt-1",
+		error: /*errors*/ ctx[0].segundo_archivo,
+		required: true
+	};
+
+	if (/*$form*/ ctx[2].segundo_archivo !== void 0) {
+		file2_props.value = /*$form*/ ctx[2].segundo_archivo;
+	}
+
+	file2 = new _Shared_File__WEBPACK_IMPORTED_MODULE_7__.default({ props: file2_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(file2, "value", file2_value_binding));
+
+	label4 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				labelFor: "requiere_tercer_estudio_mercado",
+				value: "¿Requiere de un tercer estudio de mercado?",
+				class: "inline-block mb-4"
+			}
+		});
+
+	function switch_1_checked_binding(value) {
+		/*switch_1_checked_binding*/ ctx[21](value);
+	}
+
+	let switch_1_props = {};
+
+	if (/*$form*/ ctx[2].requiere_tercer_estudio_mercado !== void 0) {
+		switch_1_props.checked = /*$form*/ ctx[2].requiere_tercer_estudio_mercado;
+	}
+
+	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_8__.default({ props: switch_1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding));
+
+	inputerror = new _Shared_InputError__WEBPACK_IMPORTED_MODULE_5__.default({
+			props: {
+				message: /*errors*/ ctx[0].requiere_tercer_estudio_mercado
+			}
+		});
+
+	let if_block0 = /*$form*/ ctx[2].requiere_tercer_estudio_mercado && create_if_block_1(ctx);
+	let if_block1 = /*$form*/ ctx[2].progress && create_if_block(ctx);
 
 	return {
 		c() {
+			form_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
+			fieldset = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("fieldset");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label0.$$.fragment);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input0.$$.fragment);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label1.$$.fragment);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file0.$$.fragment);
+			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			h10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
+			h10.textContent = "Primer estudio de mercado";
+			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input1.$$.fragment);
+			t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input2.$$.fragment);
+			t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label2.$$.fragment);
+			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file1.$$.fragment);
+			t10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			h11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
+			h11.textContent = "Segundo estudio de mercado";
+			t12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input3.$$.fragment);
+			t13 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input4.$$.fragment);
+			t14 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label3.$$.fragment);
+			t15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(file2.$$.fragment);
+			t16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label4.$$.fragment);
+			t17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			br = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
+			t18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_1.$$.fragment);
+			t19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(inputerror.$$.fragment);
+			t20 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block0) if_block0.c();
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t21 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			t22 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Valor promedio: $");
+			t23 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t23_value);
+			t24 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" COP");
+			t25 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block1) if_block1.c();
 			if_block1_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h10, "class", "text-center mt-20 mb-20");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h11, "class", "text-center mt-20 mb-20");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div7, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div8, "class", "mt-8");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(fieldset, "class", "p-8");
+
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[5] || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(/*authUser*/ ctx[4], [1, 5, 8, 11]) && /*proyecto*/ ctx[1].modificable == true
+			? undefined
+			: true;
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div9, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(form_1, "id", "form-estudio-mercado");
 		},
 		m(target, anchor) {
-			if (if_block0) if_block0.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, form_1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, fieldset);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label0, div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input0, div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label1, div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file0, div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, h10);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t6);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input1, div2, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t7);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input2, div3, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t8);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label2, div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, t9);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file1, div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t10);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, h11);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t12);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div5);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input3, div5, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t13);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div6);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input4, div6, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t14);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div7);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label3, div7, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div7, t15);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(file2, div7, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t16);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div8);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label4, div8, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div8, t17);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div8, br);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div8, t18);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_1, div8, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div8, t19);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(inputerror, div8, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t20);
+			if (if_block0) if_block0.m(fieldset, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t21);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div9);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div9, p);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t22);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t23);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t24);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t25, anchor);
 			if (if_block1) if_block1.m(target, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block1_anchor, anchor);
 			current = true;
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*submit*/ ctx[7]));
+				mounted = true;
+			}
 		},
 		p(ctx, [dirty]) {
-			if (/*showSuccessMessage*/ ctx[3] && /*successMessage*/ ctx[0]) {
+			const input0_changes = {};
+			if (dirty & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].numero_items;
+
+			if (!updating_value && dirty & /*$form*/ 4) {
+				updating_value = true;
+				input0_changes.value = /*$form*/ ctx[2].numero_items;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
+			}
+
+			input0.$set(input0_changes);
+			const file0_changes = {};
+			if (dirty & /*errors*/ 1) file0_changes.error = /*errors*/ ctx[0].ficha_tecnica;
+
+			if (!updating_value_1 && dirty & /*$form*/ 4) {
+				updating_value_1 = true;
+				file0_changes.value = /*$form*/ ctx[2].ficha_tecnica;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
+			}
+
+			file0.$set(file0_changes);
+			const input1_changes = {};
+			if (dirty & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].primer_valor;
+
+			if (!updating_value_2 && dirty & /*$form*/ 4) {
+				updating_value_2 = true;
+				input1_changes.value = /*$form*/ ctx[2].primer_valor;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_2 = false);
+			}
+
+			input1.$set(input1_changes);
+			const input2_changes = {};
+			if (dirty & /*errors*/ 1) input2_changes.error = /*errors*/ ctx[0].primer_empresa;
+
+			if (!updating_value_3 && dirty & /*$form*/ 4) {
+				updating_value_3 = true;
+				input2_changes.value = /*$form*/ ctx[2].primer_empresa;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_3 = false);
+			}
+
+			input2.$set(input2_changes);
+			const file1_changes = {};
+			if (dirty & /*errors*/ 1) file1_changes.error = /*errors*/ ctx[0].primer_archivo;
+
+			if (!updating_value_4 && dirty & /*$form*/ 4) {
+				updating_value_4 = true;
+				file1_changes.value = /*$form*/ ctx[2].primer_archivo;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_4 = false);
+			}
+
+			file1.$set(file1_changes);
+			const input3_changes = {};
+			if (dirty & /*errors*/ 1) input3_changes.error = /*errors*/ ctx[0].segundo_valor;
+
+			if (!updating_value_5 && dirty & /*$form*/ 4) {
+				updating_value_5 = true;
+				input3_changes.value = /*$form*/ ctx[2].segundo_valor;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_5 = false);
+			}
+
+			input3.$set(input3_changes);
+			const input4_changes = {};
+			if (dirty & /*errors*/ 1) input4_changes.error = /*errors*/ ctx[0].segunda_empresa;
+
+			if (!updating_value_6 && dirty & /*$form*/ 4) {
+				updating_value_6 = true;
+				input4_changes.value = /*$form*/ ctx[2].segunda_empresa;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_6 = false);
+			}
+
+			input4.$set(input4_changes);
+			const file2_changes = {};
+			if (dirty & /*errors*/ 1) file2_changes.error = /*errors*/ ctx[0].segundo_archivo;
+
+			if (!updating_value_7 && dirty & /*$form*/ 4) {
+				updating_value_7 = true;
+				file2_changes.value = /*$form*/ ctx[2].segundo_archivo;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_7 = false);
+			}
+
+			file2.$set(file2_changes);
+			const switch_1_changes = {};
+
+			if (!updating_checked && dirty & /*$form*/ 4) {
+				updating_checked = true;
+				switch_1_changes.checked = /*$form*/ ctx[2].requiere_tercer_estudio_mercado;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
+			}
+
+			switch_1.$set(switch_1_changes);
+			const inputerror_changes = {};
+			if (dirty & /*errors*/ 1) inputerror_changes.message = /*errors*/ ctx[0].requiere_tercer_estudio_mercado;
+			inputerror.$set(inputerror_changes);
+
+			if (/*$form*/ ctx[2].requiere_tercer_estudio_mercado) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
-					if (dirty & /*showSuccessMessage, successMessage*/ 9) {
+					if (dirty & /*$form*/ 4) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_3(ctx);
+					if_block0 = create_if_block_1(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
-					if_block0.m(t.parentNode, t);
+					if_block0.m(fieldset, null);
 				}
 			} else if (if_block0) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
@@ -32871,13 +31246,21 @@ function create_fragment(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (dirty & /*showErrorMessage, errorMessage, errors*/ 22) show_if = /*showErrorMessage*/ ctx[4] && /*errorMessage*/ ctx[1] || Object.keys(/*errors*/ ctx[2]).length > 0 && /*showErrorMessage*/ ctx[4];
+			if (!current || dirty & /*proyecto*/ 2 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[5] || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(/*authUser*/ ctx[4], [1, 5, 8, 11]) && /*proyecto*/ ctx[1].modificable == true
+			? undefined
+			: true)) {
+				fieldset.disabled = fieldset_disabled_value;
+			}
 
-			if (show_if) {
+			if ((!current || dirty & /*average*/ 8) && t23_value !== (t23_value = (/*average*/ ctx[3] > 0
+			? new Intl.NumberFormat("de-DE").format(/*average*/ ctx[3])
+			: 0) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t23, t23_value);
+
+			if (/*$form*/ ctx[2].progress) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 
-					if (dirty & /*showErrorMessage, errorMessage, errors*/ 22) {
+					if (dirty & /*$form*/ 4) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
@@ -32898,113 +31281,821 @@ function create_fragment(ctx) {
 		},
 		i(local) {
 			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(file0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(file1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(file2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(inputerror.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1);
 			current = true;
 		},
 		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(file0.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(file1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(file2.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(inputerror.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1);
 			current = false;
 		},
 		d(detaching) {
-			if (if_block0) if_block0.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(form_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(file2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(inputerror);
+			if (if_block0) if_block0.d();
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t25);
 			if (if_block1) if_block1.d(detaching);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block1_anchor);
+			mounted = false;
+			dispose();
 		}
 	};
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let successMessage;
-	let errorMessage;
-	let errors;
 	let $page;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.page, $$value => $$invalidate(5, $page = $$value));
-	let showSuccessMessage = false;
-	let showErrorMessage = false;
+	let $form;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.page, $$value => $$invalidate(25, $page = $$value));
+	let { errors } = $$props;
+	let { convocatoria } = $$props;
+	let { proyecto } = $$props;
+	let { proyectoPresupuesto } = $$props;
+	let { convocatoriaPresupuesto } = $$props;
+	let { dialogOpen } = $$props;
+	let { sending = false } = $$props;
+
+	/**
+ * Permisos
+ */
+	let authUser = $page.props.auth.user;
+
+	let isSuperAdmin = (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkRole)(authUser, [1]);
+
+	let form = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_1__.useForm)({
+		requiere_tercer_estudio_mercado: false,
+		convocatoria_presupuesto_id: convocatoriaPresupuesto.id,
+		numero_items: "",
+		ficha_tecnica: null,
+		primer_valor: "",
+		primer_empresa: "",
+		primer_archivo: null,
+		segundo_valor: "",
+		segunda_empresa: "",
+		segundo_archivo: null,
+		tercer_valor: "",
+		tercer_empresa: "",
+		tercer_archivo: null
+	});
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(2, $form = value));
+
+	function submit() {
+		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.checkPermission)(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) {
+			
+
+			($$invalidate(9, sending = true), $form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.proyectos.presupuesto.lote.store", [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+				onStart: () => $$invalidate(9, sending = true),
+				onFinish: () => {
+					
+					($$invalidate(9, sending = false), $$invalidate(8, dialogOpen = false));
+
+					document.getElementById("ficha_tecnica")
+					? document.getElementById("ficha_tecnica").value = null
+					: null;
+
+					document.getElementById("primer_archivo")
+					? document.getElementById("primer_archivo").value = null
+					: null;
+
+					document.getElementById("segundo_archivo")
+					? document.getElementById("segundo_archivo").value = null
+					: null;
+
+					document.getElementById("tercer_archivo")
+					? document.getElementById("tercer_archivo").value = null
+					: null;
+				},
+				onError: () => {
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
+						form,
+						$form.requiere_tercer_estudio_mercado = errors.tercer_valor || errors.tercer_empresa || errors.tercer_archivo
+						? true
+						: false,
+						$form
+					);
+				},
+				onSuccess: () => {
+					if (!$page.props.flash.error) {
+						$form.reset();
+					}
+				}
+			}));
+		}
+	}
+
+	let average;
+
+	function input0_value_binding(value) {
+		if ($$self.$$.not_equal($form.numero_items, value)) {
+			$form.numero_items = value;
+			form.set($form);
+		}
+	}
+
+	function file0_value_binding(value) {
+		if ($$self.$$.not_equal($form.ficha_tecnica, value)) {
+			$form.ficha_tecnica = value;
+			form.set($form);
+		}
+	}
+
+	function input1_value_binding(value) {
+		if ($$self.$$.not_equal($form.primer_valor, value)) {
+			$form.primer_valor = value;
+			form.set($form);
+		}
+	}
+
+	function input2_value_binding(value) {
+		if ($$self.$$.not_equal($form.primer_empresa, value)) {
+			$form.primer_empresa = value;
+			form.set($form);
+		}
+	}
+
+	function file1_value_binding(value) {
+		if ($$self.$$.not_equal($form.primer_archivo, value)) {
+			$form.primer_archivo = value;
+			form.set($form);
+		}
+	}
+
+	function input3_value_binding(value) {
+		if ($$self.$$.not_equal($form.segundo_valor, value)) {
+			$form.segundo_valor = value;
+			form.set($form);
+		}
+	}
+
+	function input4_value_binding(value) {
+		if ($$self.$$.not_equal($form.segunda_empresa, value)) {
+			$form.segunda_empresa = value;
+			form.set($form);
+		}
+	}
+
+	function file2_value_binding(value) {
+		if ($$self.$$.not_equal($form.segundo_archivo, value)) {
+			$form.segundo_archivo = value;
+			form.set($form);
+		}
+	}
+
+	function switch_1_checked_binding(value) {
+		if ($$self.$$.not_equal($form.requiere_tercer_estudio_mercado, value)) {
+			$form.requiere_tercer_estudio_mercado = value;
+			form.set($form);
+		}
+	}
+
+	function input0_value_binding_1(value) {
+		if ($$self.$$.not_equal($form.tercer_valor, value)) {
+			$form.tercer_valor = value;
+			form.set($form);
+		}
+	}
+
+	function input1_value_binding_1(value) {
+		if ($$self.$$.not_equal($form.tercer_empresa, value)) {
+			$form.tercer_empresa = value;
+			form.set($form);
+		}
+	}
+
+	function file_value_binding(value) {
+		if ($$self.$$.not_equal($form.tercer_archivo, value)) {
+			$form.tercer_archivo = value;
+			form.set($form);
+		}
+	}
+
+	$$self.$$set = $$props => {
+		if ("errors" in $$props) $$invalidate(0, errors = $$props.errors);
+		if ("convocatoria" in $$props) $$invalidate(10, convocatoria = $$props.convocatoria);
+		if ("proyecto" in $$props) $$invalidate(1, proyecto = $$props.proyecto);
+		if ("proyectoPresupuesto" in $$props) $$invalidate(11, proyectoPresupuesto = $$props.proyectoPresupuesto);
+		if ("convocatoriaPresupuesto" in $$props) $$invalidate(12, convocatoriaPresupuesto = $$props.convocatoriaPresupuesto);
+		if ("dialogOpen" in $$props) $$invalidate(8, dialogOpen = $$props.dialogOpen);
+		if ("sending" in $$props) $$invalidate(9, sending = $$props.sending);
+	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*$page*/ 32) {
-			$: $$invalidate(0, successMessage = $page.props.flash.success);
-		}
-
-		if ($$self.$$.dirty & /*$page*/ 32) {
-			$: $$invalidate(1, errorMessage = $page.props.flash.error);
-		}
-
-		if ($$self.$$.dirty & /*$page*/ 32) {
-			$: $$invalidate(2, errors = $page.props.errors);
-		}
-
-		if ($$self.$$.dirty & /*successMessage*/ 1) {
-			$: if (successMessage) {
-				$$invalidate(3, showSuccessMessage = true);
-
-				setTimeout(
-					() => {
-						$$invalidate(3, showSuccessMessage = false);
-						$$invalidate(0, successMessage = "");
-					},
-					10000
-				);
-			}
-		}
-
-		if ($$self.$$.dirty & /*errorMessage*/ 2) {
-			$: if (errorMessage) {
-				$$invalidate(4, showErrorMessage = true);
-
-				setTimeout(
-					() => {
-						$$invalidate(4, showErrorMessage = false);
-						$$invalidate(1, errorMessage = "");
-					},
-					10000
-				);
-			}
-		}
-
-		if ($$self.$$.dirty & /*errors*/ 4) {
-			$: if (Object.keys(errors).length > 0) {
-				$$invalidate(4, showErrorMessage = true);
-
-				setTimeout(
-					() => {
-						$$invalidate(4, showErrorMessage = false);
-						$$invalidate(2, errors = {});
-					},
-					10000
-				);
-			}
-		}
-
-		if ($$self.$$.dirty & /*$page*/ 32) {
-			$: console.log($page.props.errors);
+		if ($$self.$$.dirty & /*$form*/ 4) {
+			$: $$invalidate(3, average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0
+			? parseInt($form.tercer_valor)
+			: 0)) / (parseInt($form.tercer_valor) > 0 ? 3 : 2));
 		}
 	};
 
 	return [
-		successMessage,
-		errorMessage,
 		errors,
-		showSuccessMessage,
-		showErrorMessage,
-		$page
+		proyecto,
+		$form,
+		average,
+		authUser,
+		isSuperAdmin,
+		form,
+		submit,
+		dialogOpen,
+		sending,
+		convocatoria,
+		proyectoPresupuesto,
+		convocatoriaPresupuesto,
+		input0_value_binding,
+		file0_value_binding,
+		input1_value_binding,
+		input2_value_binding,
+		file1_value_binding,
+		input3_value_binding,
+		input4_value_binding,
+		file2_value_binding,
+		switch_1_checked_binding,
+		input0_value_binding_1,
+		input1_value_binding_1,
+		file_value_binding
 	];
 }
 
-class FlashMessages extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+class Create extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
 	constructor(options) {
 		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {});
+
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
+			errors: 0,
+			convocatoria: 10,
+			proyecto: 1,
+			proyectoPresupuesto: 11,
+			convocatoriaPresupuesto: 12,
+			dialogOpen: 8,
+			sending: 9
+		});
 	}
 }
-if (module && module.hot) { if (false) {} FlashMessages = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\FlashMessages.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: FlashMessages, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__.default, acceptable: true, cssId: "svelte-1g5wf8v-style", nonCssHash: "1vacbqi", ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlashMessages);
+if (module && module.hot) { if (false) {} Create = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_11__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Pages\\\\Convocatorias\\\\Proyectos\\\\ProyectoPresupuesto\\\\EstudioMercado\\\\Create.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Create, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_12__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Create);
 
-if (typeof add_css !== 'undefined' && !document.getElementById("svelte-1g5wf8v-style")) add_css();
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/File.svelte":
+/*!*****************************************!*\
+  !*** ./resources/js/Shared/File.svelte ***!
+  \*****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var _Shared_Label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/Label */ "./resources/js/Shared/Label.svelte");
+/* harmony import */ var _Shared_InputError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/InputError */ "./resources/js/Shared/InputError.svelte");
+/* harmony import */ var _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/InfoMessage */ "./resources/js/Shared/InfoMessage.svelte");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* resources\js\Shared\File.svelte generated by Svelte v3.38.2 */
+
+
+
+
+
+
+function create_if_block_1(ctx) {
+	let span;
+	let t0;
+	let t1_value = /*size*/ ctx[5].toFixed(2) + "";
+	let t1;
+	let t2;
+
+	return {
+		c() {
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Peso del archivo: ");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(" MB");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "inline-block mt-4 mb-4");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t2);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*size*/ 32 && t1_value !== (t1_value = /*size*/ ctx[5].toFixed(2) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+		}
+	};
+}
+
+// (42:4) {#if error}
+function create_if_block(ctx) {
+	let inputerror;
+	let current;
+	inputerror = new _Shared_InputError__WEBPACK_IMPORTED_MODULE_2__.default({ props: { message: /*error*/ ctx[1] } });
+
+	return {
+		c() {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(inputerror.$$.fragment);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(inputerror, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const inputerror_changes = {};
+			if (dirty & /*error*/ 2) inputerror_changes.message = /*error*/ ctx[1];
+			inputerror.$set(inputerror_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(inputerror.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(inputerror.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(inputerror, detaching);
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	let div;
+	let label_1;
+	let t0;
+	let input_1;
+	let input_1_class_value;
+	let t1;
+	let infomessage;
+	let t2;
+	let t3;
+	let div_class_value;
+	let current;
+	let mounted;
+	let dispose;
+
+	label_1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_1__.default({
+			props: {
+				label: /*label*/ ctx[3],
+				id: /*id*/ ctx[2]
+			}
+		});
+
+	let input_1_levels = [
+		/*props*/ ctx[6],
+		{ type: "file" },
+		{
+			class: input_1_class_value = "w-full border-gray-300 shadow-sm focus:ring focus:ring-opacity-50" + (/*error*/ ctx[1]
+			? " ring ring-opacity-50 border-red-200 ring-red-200 focus:border-red-200 focus:ring-red-200"
+			: "focus:border-indigo-200 focus:ring-indigo-200")
+		},
+		{ id: /*id*/ ctx[2] }
+	];
+
+	let input_1_data = {};
+
+	for (let i = 0; i < input_1_levels.length; i += 1) {
+		input_1_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(input_1_data, input_1_levels[i]);
+	}
+
+	infomessage = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_3__.default({
+			props: {
+				message: "El archivo debe pesar máximo " + /*maxSize*/ ctx[4] / 1000 + " MB"
+			}
+		});
+
+	let if_block0 = /*value*/ ctx[0]?.size && create_if_block_1(ctx);
+	let if_block1 = /*error*/ ctx[1] && create_if_block(ctx);
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label_1.$$.fragment);
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			input_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("input");
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block0) if_block0.c();
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block1) if_block1.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(input_1, input_1_data);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = /*$$restProps*/ ctx[8].class);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label_1, div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, input_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
+			if (if_block0) if_block0.m(div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t3);
+			if (if_block1) if_block1.m(div, null);
+			current = true;
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(input_1, "change", /*change_handler*/ ctx[11]);
+				mounted = true;
+			}
+		},
+		p(ctx, [dirty]) {
+			const label_1_changes = {};
+			if (dirty & /*label*/ 8) label_1_changes.label = /*label*/ ctx[3];
+			if (dirty & /*id*/ 4) label_1_changes.id = /*id*/ ctx[2];
+			label_1.$set(label_1_changes);
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(input_1, input_1_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(input_1_levels, [
+				dirty & /*props*/ 64 && /*props*/ ctx[6],
+				{ type: "file" },
+				(!current || dirty & /*error*/ 2 && input_1_class_value !== (input_1_class_value = "w-full border-gray-300 shadow-sm focus:ring focus:ring-opacity-50" + (/*error*/ ctx[1]
+				? " ring ring-opacity-50 border-red-200 ring-red-200 focus:border-red-200 focus:ring-red-200"
+				: "focus:border-indigo-200 focus:ring-indigo-200"))) && { class: input_1_class_value },
+				(!current || dirty & /*id*/ 4) && { id: /*id*/ ctx[2] }
+			]));
+
+			const infomessage_changes = {};
+			if (dirty & /*maxSize*/ 16) infomessage_changes.message = "El archivo debe pesar máximo " + /*maxSize*/ ctx[4] / 1000 + " MB";
+			infomessage.$set(infomessage_changes);
+
+			if (/*value*/ ctx[0]?.size) {
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
+				} else {
+					if_block0 = create_if_block_1(ctx);
+					if_block0.c();
+					if_block0.m(div, t3);
+				}
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
+			}
+
+			if (/*error*/ ctx[1]) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+
+					if (dirty & /*error*/ 2) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
+					}
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
+					if_block1.m(div, null);
+				}
+			} else if (if_block1) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1, 1, 1, () => {
+					if_block1 = null;
+				});
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+
+			if (!current || dirty & /*$$restProps*/ 256 && div_class_value !== (div_class_value = /*$$restProps*/ ctx[8].class)) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value);
+			}
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage);
+			if (if_block0) if_block0.d();
+			if (if_block1) if_block1.d();
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let props;
+	const omit_props_names = ["id","value","label","error","maxSize","focus","select"];
+	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
+	let { id } = $$props;
+	let { value } = $$props;
+	let { label } = $$props;
+	let { error } = $$props;
+	let { maxSize } = $$props;
+	let input;
+	let size;
+	const focus = () => input.focus();
+	const select = () => input.select();
+
+	function update(event) {
+		$$invalidate(0, value = event.target.files[0]);
+	}
+
+	const change_handler = event => update(event);
+
+	$$self.$$set = $$new_props => {
+		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
+		$$invalidate(8, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
+		if ("id" in $$new_props) $$invalidate(2, id = $$new_props.id);
+		if ("value" in $$new_props) $$invalidate(0, value = $$new_props.value);
+		if ("label" in $$new_props) $$invalidate(3, label = $$new_props.label);
+		if ("error" in $$new_props) $$invalidate(1, error = $$new_props.error);
+		if ("maxSize" in $$new_props) $$invalidate(4, maxSize = $$new_props.maxSize);
+	};
+
+	$$self.$$.update = () => {
+		$: $$invalidate(6, props = {
+			...$$restProps,
+			class: `w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ${$$restProps.class || ""}`
+		});
+
+		if ($$self.$$.dirty & /*value*/ 1) {
+			$: if (value?.size) $$invalidate(5, size = value?.size / 1000000);
+		}
+
+		if ($$self.$$.dirty & /*size, maxSize*/ 48) {
+			$: size > maxSize / 1000
+			? $$invalidate(1, error = `El archivo pesa más de ${maxSize / 1000} MB. Por favor optimice el tamaño.`)
+			: $$invalidate(1, error = null);
+		}
+	};
+
+	return [
+		value,
+		error,
+		id,
+		label,
+		maxSize,
+		size,
+		props,
+		update,
+		$$restProps,
+		focus,
+		select,
+		change_handler
+	];
+}
+
+class File extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
+			id: 2,
+			value: 0,
+			label: 3,
+			error: 1,
+			maxSize: 4,
+			focus: 9,
+			select: 10
+		});
+	}
+
+	get focus() {
+		return this.$$.ctx[9];
+	}
+
+	get select() {
+		return this.$$.ctx[10];
+	}
+}
+if (module && module.hot) { if (false) {} File = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\File.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: File, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (File);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/InfoMessage.svelte":
+/*!************************************************!*\
+  !*** ./resources/js/Shared/InfoMessage.svelte ***!
+  \************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* resources\js\Shared\InfoMessage.svelte generated by Svelte v3.38.2 */
+
+
+function create_if_block(ctx) {
+	let p;
+
+	return {
+		c() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "whitespace-pre-wrap");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p, anchor);
+			p.innerHTML = /*message*/ ctx[0];
+		},
+		p(ctx, dirty) {
+			if (dirty & /*message*/ 1) p.innerHTML = /*message*/ ctx[0];;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	let div;
+	let svg;
+	let path;
+	let t0;
+	let t1;
+	let current;
+	let if_block = /*message*/ ctx[0] && create_if_block(ctx);
+	const default_slot_template = /*#slots*/ ctx[3].default;
+	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
+	let div_levels = [/*props*/ ctx[1]];
+	let div_data = {};
+
+	for (let i = 0; i < div_levels.length; i += 1) {
+		div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(div_data, div_levels[i]);
+	}
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block) if_block.c();
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (default_slot) default_slot.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "w-5");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(svg, "transform", "translateX(-44px)");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(svg, "position", "absolute");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, svg);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t0);
+			if (if_block) if_block.m(div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t1);
+
+			if (default_slot) {
+				default_slot.m(div, null);
+			}
+
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (/*message*/ ctx[0]) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+				} else {
+					if_block = create_if_block(ctx);
+					if_block.c();
+					if_block.m(div, t1);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+
+			if (default_slot) {
+				if (default_slot.p && (!current || dirty & /*$$scope*/ 4)) {
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[2], dirty, null, null);
+				}
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(div_levels, [dirty & /*props*/ 2 && /*props*/ ctx[1]]));
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			if (if_block) if_block.d();
+			if (default_slot) default_slot.d(detaching);
+		}
+	};
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let props;
+	const omit_props_names = ["message"];
+	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
+	let { $$slots: slots = {}, $$scope } = $$props;
+	let { message } = $$props;
+
+	$$self.$$set = $$new_props => {
+		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
+		$$invalidate(4, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
+		if ("message" in $$new_props) $$invalidate(0, message = $$new_props.message);
+		if ("$$scope" in $$new_props) $$invalidate(2, $$scope = $$new_props.$$scope);
+	};
+
+	$$self.$$.update = () => {
+		$: $$invalidate(1, props = {
+			...$$restProps,
+			class: `relative bg-indigo-100 p-5 text-indigo-600 ${$$restProps.class || ""}`
+		});
+	};
+
+	return [message, props, $$scope, slots];
+}
+
+class InfoMessage extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { message: 0 });
+	}
+}
+if (module && module.hot) { if (false) {} InfoMessage = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\InfoMessage.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: InfoMessage, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InfoMessage);
 
 
 
@@ -33548,10 +32639,10 @@ if (module && module.hot) { if (false) {} Label = C_Users_Camilo_WebProjects_sen
 
 /***/ }),
 
-/***/ "./resources/js/Shared/LoadingButton.svelte":
-/*!**************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte ***!
-  \**************************************************/
+/***/ "./resources/js/Shared/PercentageProgress.svelte":
+/*!*******************************************************!*\
+  !*** ./resources/js/Shared/PercentageProgress.svelte ***!
+  \*******************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -33560,633 +32651,282 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
-/* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte_9_css_svelte_loader_cssPath_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte_9_css_C_Users_Camilo_WebProjects_sennova_workspace_sipro_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.9.css!=!svelte-loader?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.9.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/Users/Camilo/WebProjects/sennova-workspace/sipro/resources/js/Shared/LoadingButton.svelte.9.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
-/* resources\js\Shared\LoadingButton.svelte generated by Svelte v3.38.2 */
+/* resources\js\Shared\PercentageProgress.svelte generated by Svelte v3.38.2 */
 
 
-
-
-function create_if_block(ctx) {
-	let div;
+function create_fragment(ctx) {
+	let span;
+	let t0;
+	let t1;
 
 	return {
 		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "btn-spinner mr-2");
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*percentage*/ ctx[0]);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("%");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "fixed bottom-4 right-20 text-indigo-600");
 		},
 		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t1);
 		},
+		p(ctx, [dirty]) {
+			if (dirty & /*percentage*/ 1) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, /*percentage*/ ctx[0]);
+		},
+		i: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		o: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
 		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
 		}
 	};
 }
 
-// (21:4) <Label>
-function create_default_slot_1(ctx) {
+function instance($$self, $$props, $$invalidate) {
+	let { percentage } = $$props;
+
+	$$self.$$set = $$props => {
+		if ("percentage" in $$props) $$invalidate(0, percentage = $$props.percentage);
+	};
+
+	return [percentage];
+}
+
+class PercentageProgress extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+	constructor(options) {
+		super();
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { percentage: 0 });
+	}
+}
+if (module && module.hot) { if (false) {} PercentageProgress = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\PercentageProgress.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: PercentageProgress, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PercentageProgress);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Switch.svelte":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/Switch.svelte ***!
+  \*******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
+/* harmony import */ var _smui_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/switch */ "./node_modules/@smui/switch/index.js");
+/* harmony import */ var _smui_form_field__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @smui/form-field */ "./node_modules/@smui/form-field/index.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
+/* harmony import */ var C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+/* resources\js\Shared\Switch.svelte generated by Svelte v3.38.2 */
+
+
+
+
+
+function create_default_slot(ctx) {
+	let switch_1;
+	let updating_checked;
 	let current;
-	const default_slot_template = /*#slots*/ ctx[4].default;
-	const default_slot = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_slot)(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
+
+	function switch_1_checked_binding(value) {
+		/*switch_1_checked_binding*/ ctx[1](value);
+	}
+
+	let switch_1_props = {};
+
+	if (/*checked*/ ctx[0] !== void 0) {
+		switch_1_props.checked = /*checked*/ ctx[0];
+	}
+
+	switch_1 = new _smui_switch__WEBPACK_IMPORTED_MODULE_1__.default({ props: switch_1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding));
 
 	return {
 		c() {
-			if (default_slot) default_slot.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_1.$$.fragment);
 		},
 		m(target, anchor) {
-			if (default_slot) {
-				default_slot.m(target, anchor);
-			}
-
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_1, target, anchor);
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 32)) {
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.update_slot)(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[5], dirty, null, null);
-				}
+			const switch_1_changes = {};
+
+			if (!updating_checked && dirty & /*checked*/ 1) {
+				updating_checked = true;
+				switch_1_changes.checked = /*checked*/ ctx[0];
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
+
+			switch_1.$set(switch_1_changes);
 		},
 		i(local) {
 			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_1.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(default_slot, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_1.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			if (default_slot) default_slot.d(detaching);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_1, detaching);
 		}
 	};
 }
 
-// (16:0) <Button {...props} disabled={loading} action={null} {variant}>
-function create_default_slot(ctx) {
+// (12:26) {:else}
+function create_else_block(ctx) {
 	let t;
-	let label;
-	let current;
-	let if_block = /*loading*/ ctx[0] && /*disabled*/ ctx[2] && create_if_block(ctx);
 
-	label = new _smui_button__WEBPACK_IMPORTED_MODULE_1__.Label({
+	return {
+		c() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("No");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+		}
+	};
+}
+
+// (12:9) {#if checked}
+function create_if_block(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Si");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+		}
+	};
+}
+
+// (11:4) 
+function create_label_slot(ctx) {
+	let span;
+
+	function select_block_type(ctx, dirty) {
+		if (/*checked*/ ctx[0]) return create_if_block;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx, -1);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "slot", "label");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+			if_block.m(span, null);
+		},
+		p(ctx, dirty) {
+			if (current_block_type !== (current_block_type = select_block_type(ctx, dirty))) {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(span, null);
+				}
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+			if_block.d();
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	let formfield;
+	let current;
+
+	formfield = new _smui_form_field__WEBPACK_IMPORTED_MODULE_2__.default({
 			props: {
-				$$slots: { default: [create_default_slot_1] },
+				$$slots: {
+					label: [create_label_slot],
+					default: [create_default_slot]
+				},
 				$$scope: { ctx }
 			}
 		});
 
 	return {
 		c() {
-			if (if_block) if_block.c();
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label.$$.fragment);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(formfield.$$.fragment);
 		},
 		m(target, anchor) {
-			if (if_block) if_block.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label, target, anchor);
-			current = true;
-		},
-		p(ctx, dirty) {
-			if (/*loading*/ ctx[0] && /*disabled*/ ctx[2]) {
-				if (if_block) {
-					
-				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					if_block.m(t.parentNode, t);
-				}
-			} else if (if_block) {
-				if_block.d(1);
-				if_block = null;
-			}
-
-			const label_changes = {};
-
-			if (dirty & /*$$scope*/ 32) {
-				label_changes.$$scope = { dirty, ctx };
-			}
-
-			label.$set(label_changes);
-		},
-		i(local) {
-			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			if (if_block) if_block.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label, detaching);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let button;
-	let current;
-
-	const button_spread_levels = [
-		/*props*/ ctx[3],
-		{ disabled: /*loading*/ ctx[0] },
-		{ action: null },
-		{ variant: /*variant*/ ctx[1] }
-	];
-
-	let button_props = {
-		$$slots: { default: [create_default_slot] },
-		$$scope: { ctx }
-	};
-
-	for (let i = 0; i < button_spread_levels.length; i += 1) {
-		button_props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)(button_props, button_spread_levels[i]);
-	}
-
-	button = new _smui_button__WEBPACK_IMPORTED_MODULE_1__.default({ props: button_props });
-
-	return {
-		c() {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(button.$$.fragment);
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(button, target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(formfield, target, anchor);
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			const button_changes = (dirty & /*props, loading, variant*/ 11)
-			? (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(button_spread_levels, [
-					dirty & /*props*/ 8 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*props*/ ctx[3]),
-					dirty & /*loading*/ 1 && { disabled: /*loading*/ ctx[0] },
-					button_spread_levels[2],
-					dirty & /*variant*/ 2 && { variant: /*variant*/ ctx[1] }
-				])
-			: {};
+			const formfield_changes = {};
 
-			if (dirty & /*$$scope, loading, disabled*/ 37) {
-				button_changes.$$scope = { dirty, ctx };
+			if (dirty & /*$$scope, checked*/ 5) {
+				formfield_changes.$$scope = { dirty, ctx };
 			}
 
-			button.$set(button_changes);
+			formfield.$set(formfield_changes);
 		},
 		i(local) {
 			if (current) return;
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(button.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(formfield.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(button.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(formfield.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(button, detaching);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(formfield, detaching);
 		}
 	};
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let props;
-	const omit_props_names = ["loading","variant","disabled"];
-	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
-	let { $$slots: slots = {}, $$scope } = $$props;
-	let { loading = false } = $$props;
-	let { variant = "raised" } = $$props;
-	let { disabled = true } = $$props;
+	let { checked = false } = $$props;
+	checked
 
-	$$self.$$set = $$new_props => {
-		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(6, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
-		if ("loading" in $$new_props) $$invalidate(0, loading = $$new_props.loading);
-		if ("variant" in $$new_props) $$invalidate(1, variant = $$new_props.variant);
-		if ("disabled" in $$new_props) $$invalidate(2, disabled = $$new_props.disabled);
-		if ("$$scope" in $$new_props) $$invalidate(5, $$scope = $$new_props.$$scope);
+	function switch_1_checked_binding(value) {
+		checked = value;
+		$$invalidate(0, checked);
+	}
+
+	$$self.$$set = $$props => {
+		if ("checked" in $$props) $$invalidate(0, checked = $$props.checked);
 	};
 
-	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*disabled*/ 4) {
-			$: disabled
-			? $$invalidate(0, loading = false)
-			: $$invalidate(0, loading = true);
-		}
-
-		$: $$invalidate(3, props = {
-			...$$restProps,
-			class: `inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 ${$$restProps.class || ""}`
-		});
-	};
-
-	return [loading, variant, disabled, props, slots, $$scope];
+	return [checked, switch_1_checked_binding];
 }
 
-class LoadingButton extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
+class Switch_1 extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
 	constructor(options) {
 		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { loading: 0, variant: 1, disabled: 2 });
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { checked: 0 });
 	}
 }
-if (module && module.hot) { if (false) {} LoadingButton = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\LoadingButton.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: LoadingButton, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__.default, acceptable: true, cssId: "svelte-1f70vb4-style", nonCssHash: "1iz36kj", ignoreCss: true, }); }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingButton);
-
-if (typeof add_css !== 'undefined' && !document.getElementById("svelte-1f70vb4-style")) add_css();
-
-
-
-/***/ }),
-
-/***/ "./node_modules/svelte/easing/index.mjs":
-/*!**********************************************!*\
-  !*** ./node_modules/svelte/easing/index.mjs ***!
-  \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "linear": () => (/* reexport safe */ _internal_index_mjs__WEBPACK_IMPORTED_MODULE_0__.identity),
-/* harmony export */   "backIn": () => (/* binding */ backIn),
-/* harmony export */   "backInOut": () => (/* binding */ backInOut),
-/* harmony export */   "backOut": () => (/* binding */ backOut),
-/* harmony export */   "bounceIn": () => (/* binding */ bounceIn),
-/* harmony export */   "bounceInOut": () => (/* binding */ bounceInOut),
-/* harmony export */   "bounceOut": () => (/* binding */ bounceOut),
-/* harmony export */   "circIn": () => (/* binding */ circIn),
-/* harmony export */   "circInOut": () => (/* binding */ circInOut),
-/* harmony export */   "circOut": () => (/* binding */ circOut),
-/* harmony export */   "cubicIn": () => (/* binding */ cubicIn),
-/* harmony export */   "cubicInOut": () => (/* binding */ cubicInOut),
-/* harmony export */   "cubicOut": () => (/* binding */ cubicOut),
-/* harmony export */   "elasticIn": () => (/* binding */ elasticIn),
-/* harmony export */   "elasticInOut": () => (/* binding */ elasticInOut),
-/* harmony export */   "elasticOut": () => (/* binding */ elasticOut),
-/* harmony export */   "expoIn": () => (/* binding */ expoIn),
-/* harmony export */   "expoInOut": () => (/* binding */ expoInOut),
-/* harmony export */   "expoOut": () => (/* binding */ expoOut),
-/* harmony export */   "quadIn": () => (/* binding */ quadIn),
-/* harmony export */   "quadInOut": () => (/* binding */ quadInOut),
-/* harmony export */   "quadOut": () => (/* binding */ quadOut),
-/* harmony export */   "quartIn": () => (/* binding */ quartIn),
-/* harmony export */   "quartInOut": () => (/* binding */ quartInOut),
-/* harmony export */   "quartOut": () => (/* binding */ quartOut),
-/* harmony export */   "quintIn": () => (/* binding */ quintIn),
-/* harmony export */   "quintInOut": () => (/* binding */ quintInOut),
-/* harmony export */   "quintOut": () => (/* binding */ quintOut),
-/* harmony export */   "sineIn": () => (/* binding */ sineIn),
-/* harmony export */   "sineInOut": () => (/* binding */ sineInOut),
-/* harmony export */   "sineOut": () => (/* binding */ sineOut)
-/* harmony export */ });
-/* harmony import */ var _internal_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../internal/index.mjs */ "./node_modules/svelte/internal/index.mjs");
-
-
-/*
-Adapted from https://github.com/mattdesl
-Distributed under MIT License https://github.com/mattdesl/eases/blob/master/LICENSE.md
-*/
-function backInOut(t) {
-    const s = 1.70158 * 1.525;
-    if ((t *= 2) < 1)
-        return 0.5 * (t * t * ((s + 1) * t - s));
-    return 0.5 * ((t -= 2) * t * ((s + 1) * t + s) + 2);
-}
-function backIn(t) {
-    const s = 1.70158;
-    return t * t * ((s + 1) * t - s);
-}
-function backOut(t) {
-    const s = 1.70158;
-    return --t * t * ((s + 1) * t + s) + 1;
-}
-function bounceOut(t) {
-    const a = 4.0 / 11.0;
-    const b = 8.0 / 11.0;
-    const c = 9.0 / 10.0;
-    const ca = 4356.0 / 361.0;
-    const cb = 35442.0 / 1805.0;
-    const cc = 16061.0 / 1805.0;
-    const t2 = t * t;
-    return t < a
-        ? 7.5625 * t2
-        : t < b
-            ? 9.075 * t2 - 9.9 * t + 3.4
-            : t < c
-                ? ca * t2 - cb * t + cc
-                : 10.8 * t * t - 20.52 * t + 10.72;
-}
-function bounceInOut(t) {
-    return t < 0.5
-        ? 0.5 * (1.0 - bounceOut(1.0 - t * 2.0))
-        : 0.5 * bounceOut(t * 2.0 - 1.0) + 0.5;
-}
-function bounceIn(t) {
-    return 1.0 - bounceOut(1.0 - t);
-}
-function circInOut(t) {
-    if ((t *= 2) < 1)
-        return -0.5 * (Math.sqrt(1 - t * t) - 1);
-    return 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1);
-}
-function circIn(t) {
-    return 1.0 - Math.sqrt(1.0 - t * t);
-}
-function circOut(t) {
-    return Math.sqrt(1 - --t * t);
-}
-function cubicInOut(t) {
-    return t < 0.5 ? 4.0 * t * t * t : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
-}
-function cubicIn(t) {
-    return t * t * t;
-}
-function cubicOut(t) {
-    const f = t - 1.0;
-    return f * f * f + 1.0;
-}
-function elasticInOut(t) {
-    return t < 0.5
-        ? 0.5 *
-            Math.sin(((+13.0 * Math.PI) / 2) * 2.0 * t) *
-            Math.pow(2.0, 10.0 * (2.0 * t - 1.0))
-        : 0.5 *
-            Math.sin(((-13.0 * Math.PI) / 2) * (2.0 * t - 1.0 + 1.0)) *
-            Math.pow(2.0, -10.0 * (2.0 * t - 1.0)) +
-            1.0;
-}
-function elasticIn(t) {
-    return Math.sin((13.0 * t * Math.PI) / 2) * Math.pow(2.0, 10.0 * (t - 1.0));
-}
-function elasticOut(t) {
-    return (Math.sin((-13.0 * (t + 1.0) * Math.PI) / 2) * Math.pow(2.0, -10.0 * t) + 1.0);
-}
-function expoInOut(t) {
-    return t === 0.0 || t === 1.0
-        ? t
-        : t < 0.5
-            ? +0.5 * Math.pow(2.0, 20.0 * t - 10.0)
-            : -0.5 * Math.pow(2.0, 10.0 - t * 20.0) + 1.0;
-}
-function expoIn(t) {
-    return t === 0.0 ? t : Math.pow(2.0, 10.0 * (t - 1.0));
-}
-function expoOut(t) {
-    return t === 1.0 ? t : 1.0 - Math.pow(2.0, -10.0 * t);
-}
-function quadInOut(t) {
-    t /= 0.5;
-    if (t < 1)
-        return 0.5 * t * t;
-    t--;
-    return -0.5 * (t * (t - 2) - 1);
-}
-function quadIn(t) {
-    return t * t;
-}
-function quadOut(t) {
-    return -t * (t - 2.0);
-}
-function quartInOut(t) {
-    return t < 0.5
-        ? +8.0 * Math.pow(t, 4.0)
-        : -8.0 * Math.pow(t - 1.0, 4.0) + 1.0;
-}
-function quartIn(t) {
-    return Math.pow(t, 4.0);
-}
-function quartOut(t) {
-    return Math.pow(t - 1.0, 3.0) * (1.0 - t) + 1.0;
-}
-function quintInOut(t) {
-    if ((t *= 2) < 1)
-        return 0.5 * t * t * t * t * t;
-    return 0.5 * ((t -= 2) * t * t * t * t + 2);
-}
-function quintIn(t) {
-    return t * t * t * t * t;
-}
-function quintOut(t) {
-    return --t * t * t * t * t + 1;
-}
-function sineInOut(t) {
-    return -0.5 * (Math.cos(Math.PI * t) - 1);
-}
-function sineIn(t) {
-    const v = Math.cos(t * Math.PI * 0.5);
-    if (Math.abs(v) < 1e-14)
-        return 1;
-    else
-        return 1 - v;
-}
-function sineOut(t) {
-    return Math.sin((t * Math.PI) / 2);
-}
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/svelte/transition/index.mjs":
-/*!**************************************************!*\
-  !*** ./node_modules/svelte/transition/index.mjs ***!
-  \**************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "blur": () => (/* binding */ blur),
-/* harmony export */   "crossfade": () => (/* binding */ crossfade),
-/* harmony export */   "draw": () => (/* binding */ draw),
-/* harmony export */   "fade": () => (/* binding */ fade),
-/* harmony export */   "fly": () => (/* binding */ fly),
-/* harmony export */   "scale": () => (/* binding */ scale),
-/* harmony export */   "slide": () => (/* binding */ slide)
-/* harmony export */ });
-/* harmony import */ var _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../easing/index.mjs */ "./node_modules/svelte/easing/index.mjs");
-/* harmony import */ var _internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../internal/index.mjs */ "./node_modules/svelte/internal/index.mjs");
-
-
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
-function blur(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicInOut, amount = 5, opacity = 0 } = {}) {
-    const style = getComputedStyle(node);
-    const target_opacity = +style.opacity;
-    const f = style.filter === 'none' ? '' : style.filter;
-    const od = target_opacity * (1 - opacity);
-    return {
-        delay,
-        duration,
-        easing,
-        css: (_t, u) => `opacity: ${target_opacity - (od * u)}; filter: ${f} blur(${u * amount}px);`
-    };
-}
-function fade(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.linear } = {}) {
-    const o = +getComputedStyle(node).opacity;
-    return {
-        delay,
-        duration,
-        easing,
-        css: t => `opacity: ${t * o}`
-    };
-}
-function fly(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
-    const style = getComputedStyle(node);
-    const target_opacity = +style.opacity;
-    const transform = style.transform === 'none' ? '' : style.transform;
-    const od = target_opacity * (1 - opacity);
-    return {
-        delay,
-        duration,
-        easing,
-        css: (t, u) => `
-			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
-			opacity: ${target_opacity - (od * u)}`
-    };
-}
-function slide(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut } = {}) {
-    const style = getComputedStyle(node);
-    const opacity = +style.opacity;
-    const height = parseFloat(style.height);
-    const padding_top = parseFloat(style.paddingTop);
-    const padding_bottom = parseFloat(style.paddingBottom);
-    const margin_top = parseFloat(style.marginTop);
-    const margin_bottom = parseFloat(style.marginBottom);
-    const border_top_width = parseFloat(style.borderTopWidth);
-    const border_bottom_width = parseFloat(style.borderBottomWidth);
-    return {
-        delay,
-        duration,
-        easing,
-        css: t => 'overflow: hidden;' +
-            `opacity: ${Math.min(t * 20, 1) * opacity};` +
-            `height: ${t * height}px;` +
-            `padding-top: ${t * padding_top}px;` +
-            `padding-bottom: ${t * padding_bottom}px;` +
-            `margin-top: ${t * margin_top}px;` +
-            `margin-bottom: ${t * margin_bottom}px;` +
-            `border-top-width: ${t * border_top_width}px;` +
-            `border-bottom-width: ${t * border_bottom_width}px;`
-    };
-}
-function scale(node, { delay = 0, duration = 400, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut, start = 0, opacity = 0 } = {}) {
-    const style = getComputedStyle(node);
-    const target_opacity = +style.opacity;
-    const transform = style.transform === 'none' ? '' : style.transform;
-    const sd = 1 - start;
-    const od = target_opacity * (1 - opacity);
-    return {
-        delay,
-        duration,
-        easing,
-        css: (_t, u) => `
-			transform: ${transform} scale(${1 - (sd * u)});
-			opacity: ${target_opacity - (od * u)}
-		`
-    };
-}
-function draw(node, { delay = 0, speed, duration, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicInOut } = {}) {
-    const len = node.getTotalLength();
-    if (duration === undefined) {
-        if (speed === undefined) {
-            duration = 800;
-        }
-        else {
-            duration = len / speed;
-        }
-    }
-    else if (typeof duration === 'function') {
-        duration = duration(len);
-    }
-    return {
-        delay,
-        duration,
-        easing,
-        css: (t, u) => `stroke-dasharray: ${t * len} ${u * len}`
-    };
-}
-function crossfade(_a) {
-    var { fallback } = _a, defaults = __rest(_a, ["fallback"]);
-    const to_receive = new Map();
-    const to_send = new Map();
-    function crossfade(from, node, params) {
-        const { delay = 0, duration = d => Math.sqrt(d) * 30, easing = _easing_index_mjs__WEBPACK_IMPORTED_MODULE_0__.cubicOut } = (0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.assign)((0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.assign)({}, defaults), params);
-        const to = node.getBoundingClientRect();
-        const dx = from.left - to.left;
-        const dy = from.top - to.top;
-        const dw = from.width / to.width;
-        const dh = from.height / to.height;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        const style = getComputedStyle(node);
-        const transform = style.transform === 'none' ? '' : style.transform;
-        const opacity = +style.opacity;
-        return {
-            delay,
-            duration: (0,_internal_index_mjs__WEBPACK_IMPORTED_MODULE_1__.is_function)(duration) ? duration(d) : duration,
-            easing,
-            css: (t, u) => `
-				opacity: ${t * opacity};
-				transform-origin: top left;
-				transform: ${transform} translate(${u * dx}px,${u * dy}px) scale(${t + (1 - t) * dw}, ${t + (1 - t) * dh});
-			`
-        };
-    }
-    function transition(items, counterparts, intro) {
-        return (node, params) => {
-            items.set(params.key, {
-                rect: node.getBoundingClientRect()
-            });
-            return () => {
-                if (counterparts.has(params.key)) {
-                    const { rect } = counterparts.get(params.key);
-                    counterparts.delete(params.key);
-                    return crossfade(rect, node, params);
-                }
-                // if the node is disappearing altogether
-                // (i.e. wasn't claimed by the other list)
-                // then we need to supply an outro
-                items.delete(params.key);
-                return fallback && fallback(node, params, intro);
-            };
-        };
-    }
-    return [
-        transition(to_send, to_receive, false),
-        transition(to_receive, to_send, true)
-    ];
-}
-
+if (module && module.hot) { if (false) {} Switch_1 = C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_3__.applyHmr({ m: module, id: "\"resources\\\\js\\\\Shared\\\\Switch.svelte\"", hotOptions: {"preserveLocalState":false,"noPreserveStateKey":["@hmr:reset","@!hmr"],"preserveAllLocalStateKey":"@hmr:keep-all","preserveLocalStateKey":"@hmr:keep","noReload":false,"optimistic":true,"acceptNamedExports":true,"acceptAccessors":true,"injectCss":true,"cssEjectDelay":100,"native":false,"compatVite":false,"importAdapterName":"___SVELTE_HMR_HOT_API_PROXY_ADAPTER","absoluteImports":true,"noOverlay":false}, Component: Switch_1, ProxyAdapter: C_Users_Camilo_WebProjects_sennova_workspace_sipro_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_4__.default, acceptable: true, cssId: undefined, nonCssHash: undefined, ignoreCss: true, }); }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Switch_1);
 
 
 

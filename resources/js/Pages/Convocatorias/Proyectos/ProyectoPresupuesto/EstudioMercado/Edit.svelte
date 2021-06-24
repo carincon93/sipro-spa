@@ -13,6 +13,7 @@
     import Switch from '@/Shared/Switch'
     import Dialog from '@/Shared/Dialog'
     import PercentageProgress from '@/Shared/PercentageProgress'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -106,11 +107,14 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
+                    <InfoMessage class="mb-2" message="Diligencie los campos de <strong>Cantidad</strong> y <strong>Ficha técnica</strong> solo si este rubro es de maquinaria/equipos." />
+
+                    <Label class="mb-4" labelFor="numero_items" value="Indique la cantidad de maquinaria/equipos referenciado en el ANEXO 2 Fichas técnicas para maquinaria y equipos" />
+                    <Input label="Cantidad" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
+                    <Label class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
                     <File id="ficha_tecnica" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.lote.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id])}>Descargar ficha técnica</a>
                 </div>
@@ -126,7 +130,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
+                    <Label class="mb-4" labelFor="primer_archivo" value="Soporte" />
                     <File id="primer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[0].id])}>Descargar soporte</a>
                 </div>
@@ -142,7 +146,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
+                    <Label class="mb-4" labelFor="segundo_archivo" value="Soporte" />
                     <File id="segundo_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} />
                     <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.estudios_mercado[1].id])}>Descargar soporte</a>
                 </div>
