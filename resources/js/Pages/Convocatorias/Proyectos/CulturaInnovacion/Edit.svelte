@@ -187,7 +187,7 @@
     }
 
     async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion-articulados', $form.centro_formacion_id))
+        let res = await axios.get(route('web-api.programas-formacion-articulados'))
         if (res.status == '200') {
             programasFormacionArticular = res.data
         }
@@ -716,7 +716,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación a impactar" />
+                    <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con registro calificado a impactar" />
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />

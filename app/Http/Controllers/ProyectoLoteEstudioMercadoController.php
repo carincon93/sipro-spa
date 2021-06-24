@@ -100,17 +100,19 @@ class ProyectoLoteEstudioMercadoController extends Controller
         }
 
         $lote = new ProyectoLoteEstudioMercado();
-        $lote->numero_items = $request->numero_items;
-        $segundoGrupoPresupuestal   = Str::slug(substr($presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, 0, 30), '-');
+        if ($request->hasFile('ficha_tecnica')) {
+            $lote->numero_items = $request->numero_items;
+            $segundoGrupoPresupuestal   = Str::slug(substr($presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, 0, 30), '-');
 
-        $random = Str::random(5);
-        $fichaTecnica = $request->ficha_tecnica;
-        $nombreArchivoFichaTecnica  = "$proyecto->codigo-ficha-tecnica-$segundoGrupoPresupuestal-cod$random." . $fichaTecnica->extension();
-        $archivoFichaTecnica        = $fichaTecnica->storeAs(
-            'fichas-tecnicas',
-            $nombreArchivoFichaTecnica
-        );
-        $lote->ficha_tecnica = $archivoFichaTecnica;
+            $random = Str::random(5);
+            $fichaTecnica = $request->ficha_tecnica;
+            $nombreArchivoFichaTecnica  = "$proyecto->codigo-ficha-tecnica-$segundoGrupoPresupuestal-cod$random." . $fichaTecnica->extension();
+            $archivoFichaTecnica        = $fichaTecnica->storeAs(
+                'fichas-tecnicas',
+                $nombreArchivoFichaTecnica
+            );
+            $lote->ficha_tecnica = $archivoFichaTecnica;
+        }
 
         $lote->proyectoPresupuesto()->associate($presupuesto);
         $lote->save();
@@ -231,8 +233,9 @@ class ProyectoLoteEstudioMercadoController extends Controller
             }
         }
 
-        $lote->numero_items = $request->numero_items;
         if ($request->hasFile('ficha_tecnica')) {
+
+            $lote->numero_items = $request->numero_items;
             Storage::delete($lote->ficha_tecnica);
             $segundoGrupoPresupuestal   = Str::slug(substr($presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, 0, 30), '-');
             $random                     = Str::random(5);

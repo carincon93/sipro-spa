@@ -101,10 +101,12 @@
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t px-6 pt-6 pb-4">
                                 <h1>Estudio de mercado #{i + 1}</h1>
-                                <p>
-                                    Cantidad de items: {loteEstudioMercado.numero_items}
-                                </p>
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.lote.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
+                                {#if loteEstudioMercado.numero_items}
+                                    <p>
+                                        Cantidad de items: {loteEstudioMercado.numero_items}
+                                    </p>
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.lote.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
+                                {/if}
                             </td>
                             <td class="border-t px-6 pt-6 pb-4">
                                 {#each loteEstudioMercado.estudios_mercado as { id, empresa, valor }}
