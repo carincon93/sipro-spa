@@ -349,8 +349,12 @@ class ProyectoLoteEstudioMercadoController extends Controller
     {
         $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
         $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+
+        $cleanProyectoCodigo = str_replace(' ', '', substr($codigoProyecto, 0, 30));
+        $cleanProyectoCodigo = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanProyectoCodigo);
+
         $random    = Str::random(5);
 
-        return "{$codigoProyecto}{$cleanName}cod{$random}." . $fichaTecnica->extension();
+        return "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $fichaTecnica->extension();
     }
 }
