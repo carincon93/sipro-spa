@@ -31,7 +31,7 @@ class ProyectoAnexoController extends Controller
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
-            'anexos'            => Anexo::select('id', 'nombre')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
+            'anexos'            => Anexo::select('id', 'nombre', 'archivo')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
                 ->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search])
         ]);
     }
@@ -64,11 +64,8 @@ class ProyectoAnexoController extends Controller
 
         $anexo = Anexo::select('id', 'nombre')->where('id', $request->anexo_id)->first();
 
-        $anexoName          = Str::slug(substr($anexo->nombre, 0, 30), '-');
-        $random             = Str::random(5);
-        $requestFile        = $request->archivo;
-        $nombreArchivo      = "$proyecto->codigo-$anexoName-cod$random." . $requestFile->extension();
-        $archivo = $requestFile->storeAs(
+        $nombreArchivo = $this->cleanFileName($proyecto->codigo, $anexo->nombre, $request->archivo);
+        $archivo = $request->archivo->storeAs(
             'anexos',
             $nombreArchivo
         );
@@ -152,5 +149,20 @@ class ProyectoAnexoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return response()->download(storage_path("app/$proyectoAnexo->archivo"));
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($codigoProyecto, $nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+        $random    = Str::random(5);
+
+        return "{$codigoProyecto}{$cleanName}cod{$random}." . $archivo->extension();
     }
 }

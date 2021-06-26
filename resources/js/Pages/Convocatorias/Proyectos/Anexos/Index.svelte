@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Pagination from '@/Shared/Pagination'
@@ -24,8 +24,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
@@ -47,6 +45,14 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {anexo.nombre}
+                            {#if anexo.archivo}
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('anexos.download', [anexo.id])}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    Descargar formato
+                                </a>
+                            {/if}
                         </p>
                     </td>
                     <td class="border-t">

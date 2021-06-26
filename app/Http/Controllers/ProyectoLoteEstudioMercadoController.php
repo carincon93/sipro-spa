@@ -102,12 +102,9 @@ class ProyectoLoteEstudioMercadoController extends Controller
         $lote = new ProyectoLoteEstudioMercado();
         if ($request->hasFile('ficha_tecnica')) {
             $lote->numero_items = $request->numero_items;
-            $segundoGrupoPresupuestal   = Str::slug(substr($presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, 0, 30), '-');
 
-            $random = Str::random(5);
-            $fichaTecnica = $request->ficha_tecnica;
-            $nombreArchivoFichaTecnica  = "$proyecto->codigo-ficha-tecnica-$segundoGrupoPresupuestal-cod$random." . $fichaTecnica->extension();
-            $archivoFichaTecnica        = $fichaTecnica->storeAs(
+            $nombreArchivoFichaTecnica  = $this->cleanFileName($proyecto->codigo, $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, $request->ficha_tecnica);
+            $archivoFichaTecnica        = $request->ficha_tecnica->storeAs(
                 'fichas-tecnicas',
                 $nombreArchivoFichaTecnica
             );
@@ -139,9 +136,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         $estudioMercado->valor      = $valor;
         $estudioMercado->empresa    = $empresa;
 
-        $nombrePrimerEmpresa        = Str::slug(substr($empresa, 0, 30), '-');
-
-        $nombreArchivo = "$proyecto->codigo-estudio-de-mercado-$nombrePrimerEmpresa-cod" . Str::random(5) . "." . $archivo->extension();
+        $nombreArchivo = $this->cleanFileName($proyecto->codigo, $empresa, $archivo);
         $ruta = $archivo->storeAs(
             'estudios-mercado',
             $nombreArchivo
@@ -234,14 +229,10 @@ class ProyectoLoteEstudioMercadoController extends Controller
         }
 
         if ($request->hasFile('ficha_tecnica')) {
-
             $lote->numero_items = $request->numero_items;
             Storage::delete($lote->ficha_tecnica);
-            $segundoGrupoPresupuestal   = Str::slug(substr($presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, 0, 30), '-');
-            $random                     = Str::random(5);
-            $fichaTecnica               = $request->ficha_tecnica;
-            $nombreArchivoFichaTecnica  = "$proyecto->codigo-ficha-tecnica-$segundoGrupoPresupuestal-cod$random." . $fichaTecnica->extension();
-            $archivoFichaTecnica        = $fichaTecnica->storeAs(
+            $nombreArchivoFichaTecnica  = $this->cleanFileName($proyecto->codigo, $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, $request->ficha_tecnica);
+            $archivoFichaTecnica        = $request->ficha_tecnica->storeAs(
                 'fichas-tecnicas',
                 $nombreArchivoFichaTecnica
             );
@@ -270,8 +261,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         $estudioMercado = $lote->estudiosMercado()->where('id', $estudioMercadoId)->first();
         if ($archivo) {
             Storage::delete($estudioMercado->soporte);
-            $nombreEmpresa  = Str::slug(substr($empresa, 0, 30), '-');
-            $ruta           = "$proyecto->codigo-estudio-de-mercado-$nombreEmpresa-cod" . Str::random(5) . "." . $archivo->extension();
+            $ruta       = $this->cleanFileName($proyecto->codigo, $empresa, $archivo);
             $soporte    = $archivo->storeAs(
                 'estudios-mercado',
                 $ruta
@@ -347,5 +337,20 @@ class ProyectoLoteEstudioMercadoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return response()->download(storage_path("app/$estudioMercado->soporte"));
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($codigoProyecto, $nombre, $fichaTecnica)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+        $random    = Str::random(5);
+
+        return "{$codigoProyecto}{$cleanName}cod{$random}." . $fichaTecnica->extension();
     }
 }

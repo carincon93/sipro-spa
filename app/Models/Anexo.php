@@ -25,7 +25,8 @@ class Anexo extends Model
     protected $fillable = [
         'linea_programatica_id',
         'nombre',
-        'descripcion'
+        'descripcion',
+        'archivo'
     ];
 
     /**

@@ -1,6 +1,5 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { Inertia } from '@inertiajs/inertia'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -97,12 +96,12 @@
 
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="naturaleza" value="Naturaleza de la entidad" />
-                    <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
+                    <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione la naturaleza de la entidad" required />
                 </div>
 
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo_empresa" value="Tipo de empresa" />
-                    <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione la probabilidad" required />
+                    <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione el tipo de empresa" required />
                 </div>
 
                 <div class="mt-8">

@@ -186,7 +186,7 @@ input[type="date"], select {
     border: 1px solid #dbdbdb;
 }
 
-.items.selectContainer {
+/* .items.selectContainer {
     height: 56px !important;
     border-radius: 4px;
 }
@@ -207,7 +207,7 @@ input[type="date"], select {
 .selectContainer.focused.svelte-17qb5ew.svelte-17qb5ew {
     border-color: var(--borderFocusColor, #4f46e5) !important;
     border-width: 2px;
-}
+} */
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
     color: #4f46e5;

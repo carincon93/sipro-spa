@@ -146,6 +146,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor', [ProyectoController::class, 'showCadenaValor'])->name('convocatorias.proyectos.cadena-valor');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/lote/{lote}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.lote.download');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.presupuesto.download-soporte');
+    Route::get('anexos/{anexo}/download', [AnexoController::class, 'download'])->name('anexos.download');
 
     // Trae los centros de formación - Cultura innovación
     Route::get('web-api/cultura-innovacion/centros-formacion', function () {

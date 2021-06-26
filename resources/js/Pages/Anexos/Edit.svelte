@@ -6,6 +6,7 @@
     import Dialog from '@/Shared/Dialog'
 
     import Textarea from '@/Shared/Textarea'
+    import File from '@/Shared/File'
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -31,6 +32,7 @@
         nombre: anexo.nombre,
         descripcion: anexo.descripcion,
         linea_programatica_id: anexoLineasProgramaticas,
+        archivo: anexo.archivo,
     })
 
     function submit() {
@@ -74,6 +76,23 @@
 
                 <div class="mt-4">
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
+
+                    <File type="file" id="archivo" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
+
+                    {#if $form.archivo}
+                        <div class="mt-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('anexos.download', [anexo.id])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar formato
+                            </a>
+                        </div>
+                    {/if}
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">
