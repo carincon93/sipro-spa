@@ -149,6 +149,19 @@ class AnexoController extends Controller
     }
 
     /**
+     * download
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $proyectoAnexo
+     * @return void
+     */
+    public function download(Anexo $anexo)
+    {
+        return response()->download(storage_path("app/$anexo->archivo"));
+    }
+
+    /**
      * cleanFileName
      *
      * @param  mixed $nombre
@@ -161,18 +174,5 @@ class AnexoController extends Controller
         $random    = Str::random(5);
 
         return "formato{$cleanName}cod{$random}." . $archivo->extension();
-    }
-
-    /**
-     * download
-     *
-     * @param  mixed $convocatoria
-     * @param  mixed $proyecto
-     * @param  mixed $proyectoAnexo
-     * @return void
-     */
-    public function download(Anexo $anexo)
-    {
-        return response()->download(storage_path("app/$anexo->archivo"));
     }
 }
