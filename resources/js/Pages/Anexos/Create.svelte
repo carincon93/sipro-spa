@@ -1,6 +1,5 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { Inertia } from '@inertiajs/inertia'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
@@ -11,6 +10,7 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
+    import File from '@/Shared/File'
 
     export let errors
     export let lineasProgramaticas
@@ -27,6 +27,7 @@
     let form = useForm({
         nombre: '',
         descripcion: '',
+        archivo: null,
         linea_programatica_id: [],
     })
 
@@ -64,6 +65,12 @@
 
                 <div class="mt-4">
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
+
+                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">

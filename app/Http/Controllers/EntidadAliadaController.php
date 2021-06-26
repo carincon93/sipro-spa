@@ -99,8 +99,6 @@ class EntidadAliadaController extends Controller
 
         $entidadAliada->actividades()->attach($request->actividad_id);
 
-        $nombreEmpresa  = Str::slug(substr($request->nombre, 0, 30), '-');
-        $random         = Str::random(5);
         if ($proyecto->idi()->exists()) {
 
             $entidadAliadaIdi = new EntidadAliadaIdi();
@@ -110,31 +108,29 @@ class EntidadAliadaController extends Controller
             $entidadAliadaIdi->enlace_gruplac                          = $request->enlace_gruplac;
             $entidadAliadaIdi->actividades_transferencia_conocimiento  = $request->actividades_transferencia_conocimiento;
 
-            $cartaIntencion = $request->carta_intencion;
-            $nombreArchivoCartaIntencion = "{$proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random." . $cartaIntencion->extension();
-            $archivoCartaIntencion = $cartaIntencion->storeAs(
+            $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
+            $rutaCartaIntencion          = $request->carta_intencion->storeAs(
                 'cartas-intencion',
                 $nombreArchivoCartaIntencion
             );
-            $entidadAliadaIdi->carta_intencion = $archivoCartaIntencion;
+            $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
 
-            $cartaPropiedadIntelectual = $request->carta_propiedad_intelectual;
-            $nombreArchivoPropiedadIntelectual = "{$proyecto->codigo}-propiedad-intelectual-$nombreEmpresa." . $cartaPropiedadIntelectual->extension();
-            $archivoPropiedadIntelectual = $cartaPropiedadIntelectual->storeAs(
+            $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
+            $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
                 'cartas-propiedad-intelectual',
                 $nombreArchivoPropiedadIntelectual
             );
 
-            $entidadAliadaIdi->carta_propiedad_intelectual = $archivoPropiedadIntelectual;
+            $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
 
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
 
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
         } elseif ($proyecto->taTp()->exists()) {
             $entidadAliadaTaTp = new EntidadAliadaTaTp();
-            $soporteConvenio        = $request->soporte_convenio;
-            $nombreSoporteConvenio  = "{$proyecto->codigo}-soporte-convenio-$nombreEmpresa-cod$random." . $soporteConvenio->extension();
-            $rutaSoporteConvenio        = $soporteConvenio->storeAs(
+            $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
+
+            $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
                 'soportes-convenio',
                 $nombreSoporteConvenio
             );
@@ -214,8 +210,6 @@ class EntidadAliadaController extends Controller
         $entidadAliada->recursos_dinero                             = $request->recursos_dinero;
         $entidadAliada->descripcion_recursos_dinero                 = $request->descripcion_recursos_dinero;
 
-        $nombreEmpresa  = Str::slug(substr($request->nombre, 0, 30), '-');
-        $random         = Str::random(5);
         if ($entidadAliada->entidadAliadaIdi()->exists()) {
             $entidadAliada->entidadAliadaIdi()->update([
                 'descripcion_convenio'                        => $request->tiene_convenio ? $request->descripcion_convenio : null,
@@ -227,9 +221,8 @@ class EntidadAliadaController extends Controller
 
             if ($request->hasFile('carta_intencion')) {
                 Storage::delete($entidadAliada->entidadAliadaIdi->carta_intencion);
-                $cartaIntencion                 = $request->carta_intencion;
-                $nombreArchivoCartaIntencion    = "{$proyecto->codigo}-carta-de-intencion-$nombreEmpresa-cod$random." . $cartaIntencion->extension();
-                $rutaCartaIntencion          = $cartaIntencion->storeAs(
+                $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
+                $rutaCartaIntencion          = $request->carta_intencion->storeAs(
                     'cartas-intencion',
                     $nombreArchivoCartaIntencion
                 );
@@ -239,9 +232,9 @@ class EntidadAliadaController extends Controller
 
             if ($request->hasFile('carta_propiedad_intelectual')) {
                 Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
-                $cartaPropiedadIntelectual          = $request->carta_propiedad_intelectual;
-                $nombreArchivoPropiedadIntelectual  = "{$proyecto->codigo}-propiedad-intelectual-$nombreEmpresa-cod$random." . $cartaPropiedadIntelectual->extension();
-                $rutaPropiedadIntelectual        = $cartaPropiedadIntelectual->storeAs(
+                $nombreArchivoPropiedadIntelectual = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
+
+                $rutaPropiedadIntelectual        = $request->carta_propiedad_intelectual->storeAs(
                     'cartas-propiedad-intelectual',
                     $nombreArchivoPropiedadIntelectual
                 );
@@ -251,9 +244,9 @@ class EntidadAliadaController extends Controller
         } elseif ($proyecto->taTp()->exists()) {
             if ($request->hasFile('soporte_convenio')) {
                 Storage::delete($entidadAliada->entidadAliadaTaTp->soporte_convenio);
-                $soporteConvenio        = $request->soporte_convenio;
-                $nombreSoporteConvenio  = "{$proyecto->codigo}-soporte-convenio-$nombreEmpresa-cod$random." . $soporteConvenio->extension();
-                $rutaSoporteConvenio    = $soporteConvenio->storeAs(
+                $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
+
+                $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
                     'soportes-convenio',
                     $nombreSoporteConvenio
                 );
@@ -313,5 +306,20 @@ class EntidadAliadaController extends Controller
         }
 
         return response()->download(storage_path("app/$ruta"));
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($codigoProyecto, $nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+        $random    = Str::random(5);
+
+        return "{$codigoProyecto}{$cleanName}cod{$random}." . $archivo->extension();
     }
 }
