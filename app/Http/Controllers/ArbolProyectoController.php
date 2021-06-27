@@ -43,8 +43,11 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $numeroCeldas = 4;
                 break;
-            case $proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70:
+            case $proyecto->ta()->exists():
                 $numeroCeldas = 6;
+                break;
+            case $proyecto->tp()->exists():
+                $numeroCeldas = 4;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 4;
@@ -92,7 +95,7 @@ class ArbolProyectoController extends Controller
                 }
             }
 
-            if ($proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70) {
+            if ($proyecto->ta()->exists()) {
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 237, 0)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 238, 1)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 239, 2)');
@@ -122,7 +125,7 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70) {
+        if ($proyecto->ta()->exists()) {
             DB::select('SELECT public."objetivos_especificos_ta"(' . $proyecto->id . ')');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
@@ -151,23 +154,24 @@ class ArbolProyectoController extends Controller
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $proyecto->problema_central = $proyecto->idi->problema_central;
-                $proyecto->justificacion_problema = $proyecto->idi->justificacion_problema;
-                $proyecto->identificacion_problema = $proyecto->idi->identificacion_problema;
+                $proyecto->justificacion_problema   = $proyecto->idi->justificacion_problema;
+                $proyecto->identificacion_problema  = $proyecto->idi->identificacion_problema;
                 break;
-            case $proyecto->taTp()->exists():
-                if ($proyecto->codigo_linea_programatica == 69) {
-                    $proyecto->justificacion_problema = $proyecto->tatp->justificacion_problema;
-                    $proyecto->identificacion_problema = $proyecto->tatp->identificacion_problema;
-                }
-                $proyecto->problema_central = $proyecto->tatp->problema_central;
+            case $proyecto->ta()->exists():
+                $proyecto->problema_central = $proyecto->ta->problema_central;
                 break;
+            case $proyecto->tp()->exists():
+                $proyecto->justificacion_problema   = $proyecto->tp->justificacion_problema;
+                $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
+                $proyecto->problema_central         = $proyecto->tp->problema_central;
+
             case $proyecto->servicioTecnologico()->exists():
                 $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
                 break;
             case $proyecto->culturaInnovacion()->exists():
-                $proyecto->problema_central = $proyecto->culturaInnovacion->problema_central;
-                $proyecto->justificacion_problema = $proyecto->culturaInnovacion->justificacion_problema;
-                $proyecto->identificacion_problema = $proyecto->culturaInnovacion->identificacion_problema;
+                $proyecto->problema_central         = $proyecto->culturaInnovacion->problema_central;
+                $proyecto->justificacion_problema   = $proyecto->culturaInnovacion->justificacion_problema;
+                $proyecto->identificacion_problema  = $proyecto->culturaInnovacion->identificacion_problema;
                 break;
             default:
                 break;
@@ -196,8 +200,8 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
+                    'problema_central'         => 'required|string|max:40000',
+                    'justificacion_problema'   => 'required|string|max:40000',
                 ]);
 
                 $idi = $proyecto->idi;
@@ -207,25 +211,28 @@ class ArbolProyectoController extends Controller
 
                 $idi->save();
                 break;
-            case $proyecto->taTp()->exists():
-                $tatp = $proyecto->taTp;
-                if ($proyecto->codigo_linea_programatica == 69) {
-                    $request->validate([
-                        'identificacion_problema'  => 'required|string|max:40000',
-                        'problema_central'          => 'required|string|max:40000',
-                        'justificacion_problema'    => 'required|string|max:40000',
-                    ]);
-                    $tatp->identificacion_problema  = $request->identificacion_problema;
-                    $tatp->justificacion_problema   = $request->justificacion_problema;
-                } else {
-                    $request->validate([
-                        'problema_central'          => 'required|string|max:40000',
-                    ]);
-                }
-                $tatp->problema_central = $request->problema_central;
+            case $proyecto->ta()->exists():
+                $ta = $proyecto->ta;
 
-                $tatp->save();
+                $request->validate([
+                    'problema_central'          => 'required|string|max:40000',
+                ]);
+                $ta->problema_central = $request->problema_central;
+
+                $ta->save();
                 break;
+            case $proyecto->tp()->exists():
+                $tp = $proyecto->tp;
+                $request->validate([
+                    'identificacion_problema'  => 'required|string|max:40000',
+                    'problema_central'          => 'required|string|max:40000',
+                    'justificacion_problema'    => 'required|string|max:40000',
+                ]);
+                $tp->identificacion_problema  = $request->identificacion_problema;
+                $tp->justificacion_problema   = $request->justificacion_problema;
+                $tp->problema_central = $request->problema_central;
+                break;
+
             case $proyecto->culturaInnovacion()->exists():
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
@@ -291,7 +298,10 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $numeroCeldas = 3;
                 break;
-            case $proyecto->taTp()->exists():
+            case $proyecto->ta()->exists():
+                $numeroCeldas = 3;
+                break;
+            case $proyecto->tp()->exists():
                 $numeroCeldas = 3;
                 break;
             case $proyecto->servicioTecnologico()->exists():
@@ -361,8 +371,11 @@ class ArbolProyectoController extends Controller
             case $proyecto->idi()->exists():
                 $numeroCeldas = 4;
                 break;
-            case $proyecto->taTp()->exists() && $proyecto->lineaProgramatica->codigo == 70:
+            case $proyecto->ta()->exists():
                 $numeroCeldas = 10;
+                break;
+            case $proyecto->tp()->exists():
+                $numeroCeldas = 4;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 14;
@@ -419,10 +432,16 @@ class ArbolProyectoController extends Controller
                 $proyecto->objetivo_general         = $proyecto->idi->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 break;
-            case $proyecto->taTp()->exists():
-                $proyecto->problema_central         = $proyecto->tatp->problema_central;
-                $proyecto->identificacion_problema  = $proyecto->tatp->identificacion_problema;
-                $proyecto->objetivo_general         = $proyecto->tatp->objetivo_general;
+            case $proyecto->ta()->exists():
+                $proyecto->problema_central         = $proyecto->ta->problema_central;
+                $proyecto->identificacion_problema  = $proyecto->ta->identificacion_problema;
+                $proyecto->objetivo_general         = $proyecto->ta->objetivo_general;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+                break;
+            case $proyecto->tp()->exists():
+                $proyecto->problema_central         = $proyecto->tp->problema_central;
+                $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
+                $proyecto->objetivo_general         = $proyecto->tp->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 break;
             case $proyecto->culturaInnovacion()->exists():
@@ -474,11 +493,17 @@ class ArbolProyectoController extends Controller
 
                 $idi->save();
                 break;
-            case $proyecto->taTp()->exists():
-                $tatp                   = $proyecto->taTp;
-                $tatp->objetivo_general = $request->objetivo_general;
+            case $proyecto->ta()->exists():
+                $ta                   = $proyecto->ta;
+                $ta->objetivo_general = $request->objetivo_general;
 
-                $tatp->save();
+                $ta->save();
+                break;
+            case $proyecto->tp()->exists():
+                $tp                   = $proyecto->tp;
+                $tp->objetivo_general = $request->objetivo_general;
+
+                $tp->save();
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $culturaInnovacion                   = $proyecto->culturaInnovacion;
@@ -573,9 +598,13 @@ class ArbolProyectoController extends Controller
      * @param  mixed $actividad
      * @return void
      */
-    public function updateActividad(ActividadRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
+    public function updateActividad(Request $request, Convocatoria $convocatoria, Proyecto $proyecto, Actividad $actividad)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $request->validate(
+            ['descripcion' => 'required|string']
+        );
 
         $actividad->fill($request->all());
 

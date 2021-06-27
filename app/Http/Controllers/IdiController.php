@@ -137,6 +137,7 @@ class IdiController extends Controller
 
         $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
+
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;
 

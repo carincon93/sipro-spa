@@ -118,13 +118,23 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with TATP
+     * Relationship with Ta
      *
      * @return object
      */
-    public function taTp()
+    public function ta()
     {
-        return $this->hasOne(TaTp::class, 'id');
+        return $this->hasOne(Ta::class, 'id');
+    }
+
+    /**
+     * Relationship with Tp
+     *
+     * @return object
+     */
+    public function tp()
+    {
+        return $this->hasOne(Tp::class, 'id');
     }
 
     /**
@@ -268,7 +278,8 @@ class Proyecto extends Model
     {
         $fechaFinalizacion = null;
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
-        if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
+        if ($this->ta()->exists()) $fechaFinalizacion =  $this->ta->fecha_finalizacion;
+        if ($this->tp()->exists()) $fechaFinalizacion =  $this->tp->fecha_finalizacion;
         if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
         if ($this->culturaInnovacion()->exists()) $fechaFinalizacion =  $this->culturaInnovacion->fecha_finalizacion;
 
@@ -280,8 +291,10 @@ class Proyecto extends Model
         $fechaInicio = null;
         if ($this->idi()->exists()) {
             $fechaInicio = $this->idi->fecha_inicio;
-        } else if ($this->taTp()->exists()) {
-            $fechaInicio = $this->taTp->fecha_inicio;
+        } else if ($this->ta()->exists()) {
+            $fechaInicio = $this->ta->fecha_inicio;
+        } else if ($this->tp()->exists()) {
+            $fechaInicio = $this->tp->fecha_inicio;
         } else if ($this->servicioTecnologico()->exists()) {
             $fechaInicio = $this->servicioTecnologico->fecha_inicio;
         } else if ($this->culturaInnovacion()->exists()) {
@@ -296,8 +309,10 @@ class Proyecto extends Model
         $fechaInicio = null;
         if ($this->idi()->exists()) {
             $fechaInicio = $this->idi->fecha_finalizacion;
-        } else if ($this->taTp()->exists()) {
-            $fechaInicio = $this->taTp->fecha_finalizacion;
+        } else if ($this->ta()->exists()) {
+            $fechaInicio = $this->ta->fecha_finalizacion;
+        } else if ($this->tp()->exists()) {
+            $fechaInicio = $this->tp->fecha_finalizacion;
         } else if ($this->servicioTecnologico()->exists()) {
             $fechaInicio = $this->servicioTecnologico->fecha_finalizacion;
         } else if ($this->culturaInnovacion()->exists()) {
@@ -319,8 +334,12 @@ class Proyecto extends Model
             $cantidadMesesEjecucion = $this->idi->max_meses_ejecucion;
         }
 
-        if ($this->tatp()->exists()) {
-            $cantidadMesesEjecucion = $this->tatp->max_meses_ejecucion;
+        if ($this->ta()->exists()) {
+            $cantidadMesesEjecucion = $this->ta->max_meses_ejecucion;
+        }
+
+        if ($this->tp()->exists()) {
+            $cantidadMesesEjecucion = $this->tp->max_meses_ejecucion;
         }
 
         if ($this->servicioTecnologico()->exists()) {

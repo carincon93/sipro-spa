@@ -67,7 +67,8 @@ class ProductoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->idi;
-        $proyecto->taTp;
+        $proyecto->ta;
+        $proyecto->tp;
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
@@ -133,7 +134,7 @@ class ProductoController extends Controller
         }
 
         // Valida si es un producto de TaTp
-        if ($proyecto->taTp()->exists()) {
+        if ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
                 'medio_verificacion' => 'required|string',
                 'valor_proyectado'   => 'required|string',
@@ -145,7 +146,7 @@ class ProductoController extends Controller
             $producto->productoTaTp()->save($productoTaTp);
         }
 
-        // Valida si es un producto de TaTp
+        // Valida si es un producto de Servicios tecnológicos
         if ($proyecto->servicioTecnologico()->exists()) {
             $request->validate([
                 'medio_verificacion' => 'required|string',
@@ -186,7 +187,8 @@ class ProductoController extends Controller
         $producto->productoIdi;
         $proyecto->culturaInnovacion;
         $producto->productoCulturaInnovacion;
-        $proyecto->taTp;
+        $proyecto->ta;
+        $proyecto->tp;
         $producto->productoTaTp;
         $proyecto->servicioTecnologico;
         $producto->productoServicioTecnologico;
@@ -245,7 +247,7 @@ class ProductoController extends Controller
             $producto->productoCulturaInnovacion()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
         }
 
-        if ($proyecto->taTp()->exists()) {
+        if ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
                 'medio_verificacion' => 'required|string',
                 'valor_proyectado'   => 'required|string',

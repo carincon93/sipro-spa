@@ -736,7 +736,7 @@
                     {#if programasFormacionArticular?.length == 0}
                         <div>
                             <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                            <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                 </svg>
@@ -824,7 +824,7 @@
         <div slot="content">
             <InfoMessage class="mb-2" message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
-            <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
+            <form on:submit|preventDefault={destroy} id="delete-idi" class="mt-10 mb-28">
                 <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
             </form>
@@ -832,7 +832,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-tatp">Confirmar</Button>
+                <Button variant="raised" form="delete-idi">Confirmar</Button>
             </div>
         </div>
     </Dialog>

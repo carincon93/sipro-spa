@@ -55,13 +55,13 @@ class NodoTecnoparque extends Model
     }
 
     /**
-     * Relationship with TaTp
+     * Relationship with Tp
      *
      * @return void
      */
-    public function taTp()
+    public function tp()
     {
-        return $this->hasOne(TaTp::class);
+        return $this->hasOne(Tp::class);
     }
 
     /**

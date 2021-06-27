@@ -85,12 +85,12 @@ class TecnoacademiaLineaTecnologica extends Model
     }
 
     /**
-     * Relationship with TaTp
+     * Relationship with Ta
      *
      * @return void
      */
-    public function taTp()
+    public function ta()
     {
-        return $this->hasMany(TaTp::class);
+        return $this->hasMany(Ta::class);
     }
 }

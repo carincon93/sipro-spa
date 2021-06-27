@@ -32,7 +32,7 @@
         descripcion: lineaProgramatica.descripcion,
         categoria_proyecto: {
             value: lineaProgramatica.categoria_proyecto,
-            label: categoriasProyectos.find((item) => item.label == lineaProgramatica.categoria_proyecto)?.label,
+            label: categoriasProyectos.find((item) => item.value == lineaProgramatica.categoria_proyecto)?.label,
         },
     })
 

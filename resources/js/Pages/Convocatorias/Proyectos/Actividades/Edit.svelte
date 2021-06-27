@@ -17,9 +17,9 @@
     export let convocatoria
     export let proyecto
     export let actividad
-    export let productos
+    // export let productos
+    // export let productosRelacionados
     export let proyectoPresupuesto
-    export let productosRelacionados
     export let proyectoPresupuestoRelacionado
 
     $: $title = actividad ? actividad.nombre : null
@@ -36,7 +36,7 @@
         descripcion: actividad.descripcion,
         fecha_inicio: actividad.fecha_inicio,
         fecha_finalizacion: actividad.fecha_finalizacion,
-        producto_id: productosRelacionados,
+        // producto_id: productosRelacionados,
         proyecto_presupuesto_id: proyectoPresupuestoRelacionado,
     })
 
@@ -74,7 +74,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -99,9 +99,7 @@
                 <div class="mt-20">
                     <Textarea label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
-            </fieldset>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-                <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
+                <!-- <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4">
                         <Label required class="mb-4" labelFor="producto_id" value="Relacione algún producto" />
@@ -132,7 +130,7 @@
                             </ul>
                         </div>
                     {/if}
-                </div>
+                </div> -->
 
                 <h6 class="mt-20 mb-12 text-2xl">Rubros presupuestales</h6>
                 <div class="bg-white rounded shadow overflow-hidden">

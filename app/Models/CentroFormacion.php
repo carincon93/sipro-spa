@@ -128,6 +128,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with Tecnoacademia
+     *
+     * @return object
+     */
+    public function tecnoacademias()
+    {
+        return $this->hasMany(Tecnoacademia::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

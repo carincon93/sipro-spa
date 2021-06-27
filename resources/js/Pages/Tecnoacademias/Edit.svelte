@@ -12,10 +12,13 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
+    import Select from '@/Shared/Select'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let tecnoacademia
     export let lineasTecnologicas
+    export let modalidades
     export let lineasTecnologicasRelacionadas
 
     $: $title = tecnoacademia ? tecnoacademia.nombre : null
@@ -30,6 +33,11 @@
     let sending = false
     let form = useForm({
         nombre: tecnoacademia.nombre,
+        modalidad: {
+            value: tecnoacademia.modalidad,
+            label: modalidades.find((item) => item.value == tecnoacademia.modalidad)?.label,
+        },
+        centro_formacion_id: tecnoacademia.centro_formacion_id,
         linea_tecnologica_id: lineasTecnologicasRelacionadas,
     })
 
@@ -70,6 +78,16 @@
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="modalidad" value="Modalidad" />
+                    <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad" required />
                 </div>
 
                 <div class="mt-10">

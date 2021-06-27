@@ -30,9 +30,13 @@ class ActividadController extends Controller
             case $proyecto->idi()->exists():
                 $proyecto->metodologia = $proyecto->idi->metodologia;
                 break;
-            case $proyecto->taTp()->exists():
-                $proyecto->metodologia = $proyecto->tatp->metodologia;
-                $proyecto->metodologia_local = $proyecto->tatp->metodologia_local;
+            case $proyecto->ta()->exists():
+                $proyecto->metodologia = $proyecto->ta->metodologia;
+                $proyecto->metodologia_local = $proyecto->ta->metodologia_local;
+                break;
+            case $proyecto->tp()->exists():
+                $proyecto->metodologia = $proyecto->tp->metodologia;
+                $proyecto->metodologia_local = $proyecto->tp->metodologia_local;
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $proyecto->metodologia = $proyecto->culturaInnovacion->metodologia;
@@ -180,12 +184,19 @@ class ActividadController extends Controller
 
                 $idi->save();
                 break;
-            case $proyecto->taTp()->exists():
-                $tatp              = $proyecto->taTp;
-                $tatp->metodologia = $request->metodologia;
-                $tatp->metodologia_local = $request->metodologia_local;
+            case $proyecto->ta()->exists():
+                $ta                     = $proyecto->ta;
+                $ta->metodologia        = $request->metodologia;
+                $ta->metodologia_local  = $request->metodologia_local;
 
-                $tatp->save();
+                $ta->save();
+                break;
+            case $proyecto->tp()->exists():
+                $tp                     = $proyecto->tp;
+                $tp->metodologia        = $request->metodologia;
+                $tp->metodologia_local  = $request->metodologia_local;
+
+                $tp->save();
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $culturaInnovacion              = $proyecto->culturaInnovacion;

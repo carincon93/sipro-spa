@@ -23,6 +23,12 @@ class ProyectoRolSennovaController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
+        if ($proyecto->codigo_linea_programatica == 70) {
+            $proyecto->cantidad_instructores_planta = $proyecto->ta->cantidad_instructores_planta;
+            $proyecto->cantidad_dinamizadores_planta = $proyecto->ta->cantidad_dinamizadores_planta;
+            $proyecto->cantidad_psicopedagogos_planta = $proyecto->ta->cantidad_psicopedagogos_planta;
+        }
+
         /**
          * Si el proyecto es de la línea programática 23 se prohibe el acceso. No requiere de roles SENNOVA
          */
@@ -32,7 +38,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
             'convocatoria'           => $convocatoria->only('id'),
-            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova'),
+            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta'),
             'filters'                => request()->all('search'),
             'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova')->paginate(),
         ]);

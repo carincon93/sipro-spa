@@ -380,7 +380,7 @@
         <!-- Efectos -->
         <div class="flex mb-14">
             {#each efectosDirectos as efectoDirecto, i}
-                <div class="flex-1">
+                <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
                     {#if i == 0}
                         <!-- Efectos indirectos -->
                         <div id="efecto-indirecto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
@@ -390,27 +390,31 @@
                     {/if}
                     <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                            <div class="flex-1 efectos-directos relative">
-                                <div
-                                    on:click={showEfectoIndirectoDialog(efectoIndirecto, efectoDirecto.id)}
-                                    class="{efectoIndirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoIndirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoIndirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                >
-                                    <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
-                                        <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
-                                        {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
-                                            {efectoIndirecto.descripcion}
-                                        {/if}
-                                    </p>
+                            {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="flex-1 efectos-directos relative">
+                                    <div
+                                        on:click={showEfectoIndirectoDialog(efectoIndirecto, efectoDirecto.id)}
+                                        class="{efectoIndirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoIndirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoIndirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
+                                            <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
+                                            {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
+                                                {efectoIndirecto.descripcion}
+                                            {/if}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                            <div class="flex-1 efectos-directos relative" on:click={showEfectoIndirectoDialog(null, efectoDirecto.id)}>
-                                <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
-                                    <p class="text-sm text-white line-height-1-24" />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                <div class="flex-1 efectos-directos relative" on:click={showEfectoIndirectoDialog(null, efectoDirecto.id)}>
+                                    <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {/if}
                     </div>
 
                     {#if i == 0}
@@ -485,29 +489,34 @@
                         </div>
                     {/if}
                     <!-- Causas indirectas -->
-                    <div class="flex flex-wrap causas-directas-line relative mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div class="flex flex-wrap relative mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            <div class="mb-4" style="flex: 1 0 33.333%">
-                                <div
-                                    on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)}
-                                    class="{causaIndirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaIndirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaIndirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                >
-                                    <p class="paragraph-ellipsis text-white text-xs line-height-1-24">
-                                        <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
-                                        {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
-                                            {causaIndirecta.descripcion}
-                                        {/if}
-                                    </p>
+                            {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="mb-4 causas-directas-line relative" style="flex: 1 0 33.333%">
+                                    <div
+                                        on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)}
+                                        class="{causaIndirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaIndirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaIndirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-white text-xs line-height-1-24">
+                                            <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
+                                            {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
+                                                {causaIndirecta.descripcion}
+                                            {/if}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: cantidadCeldasCausasIndirectas - causaDirecta.causas_indirectas.length } as _empty}
-                            <div class="mb-4" style="flex: 1 0 33.333%">
-                                <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
-                                    <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#each { length: cantidadCeldasCausasIndirectas - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 causas-directas-line relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {/if}
                     </div>
                 </div>
             {/each}

@@ -3,11 +3,13 @@
 
     import '@yaireo/tagify/dist/tagify.css'
     import InputError from '@/Shared/InputError'
+    import { onMount } from 'svelte'
 
     export let error
     export let placeholder
     export let whitelist
     export let tags
+    export let id
 
     let inputElm, tagify
 
@@ -21,25 +23,27 @@
             .join(',')
     }
 
-    function init() {
-        inputElm = document.querySelector('input[name=tags]')
+    onMount(() => {
+        inputElm = document.getElementById(id)
 
         // initialize Tagify on the above input node reference
-        tagify = new Tagify(inputElm, {
-            enforceWhitelist: true,
+        if (inputElm) {
+            tagify = new Tagify(inputElm, {
+                enforceWhitelist: true,
 
-            // make an array from the initial input value
-            whitelist: inputElm.value.trim().split(/\s*,\s*/),
-        })
+                // make an array from the initial input value
+                whitelist: inputElm.value.trim().split(/\s*,\s*/),
+            })
 
-        // Chainable event listeners
-        tagify
-            .on('add', onAddTag)
-            .on('remove', onRemoveTag)
-            .on('input', onInput)
-            .on('edit', onTagEdit)
-            .on('dropdown:hide dropdown:show', (e) => console.log(e.type))
-    }
+            // Chainable event listeners
+            tagify
+                .on('add', onAddTag)
+                .on('remove', onRemoveTag)
+                .on('input', onInput)
+                .on('edit', onTagEdit)
+                .on('dropdown:hide dropdown:show', (e) => console.log(e.type))
+        }
+    })
 
     var mockAjax = (function mockAjax() {
         var timeout
@@ -90,8 +94,7 @@
     }
 </script>
 
-<input on:load={init()} name="tags" {...props} {placeholder} value={selectedValues} />
-
+<input {id} name="tags" {...props} {placeholder} value={selectedValues} />
 <InputError message={error} />
 
 <style>

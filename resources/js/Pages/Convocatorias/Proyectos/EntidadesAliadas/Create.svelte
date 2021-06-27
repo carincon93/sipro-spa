@@ -53,7 +53,8 @@
         carta_intencion: null,
         carta_propiedad_intelectual: null,
         soporte_convenio: null,
-        idi: proyecto.idi ? true : false,
+        fecha_inicio_convenio: '',
+        fecha_fin_convenio: '',
         actividad_id: [],
     })
 
@@ -108,7 +109,7 @@
                     <Input label="NIT" id="nit" type="text" class="mt-1" bind:value={$form.nit} error={errors.nit} required />
                 </div>
 
-                {#if proyecto.idi}
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                     <div class="mt-8">
                         <p>¿Hay convenio?</p>
                         <Switch bind:checked={convenio} />
@@ -136,30 +137,22 @@
                             <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!grupoInvestigacion ? undefined : 'required'} />
                         </div>
                     {/if}
-                {:else}
                     <div class="mt-8">
-                        <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                        <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
+                        <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                     </div>
-                {/if}
 
-                <div class="mt-8">
-                    <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
-                </div>
+                    <div class="mt-8">
+                        <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                    </div>
 
-                <div class="mt-8">
-                    <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
-                </div>
+                    <div class="mt-8">
+                        <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                    </div>
 
-                <div class="mt-8">
-                    <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
-                </div>
+                    <div class="mt-8">
+                        <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                    </div>
 
-                <div class="mt-8">
-                    <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
-                </div>
-
-                {#if proyecto.idi}
                     <div class="mt-8">
                         <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                     </div>
@@ -173,6 +166,32 @@
                         <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
                         <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
                     </div>
+                {:else if proyecto.codigo_linea_programatica == 70}
+                    <div class="mt-8">
+                        <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
+                        <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-center">Fecha del convenio</p>
+                        <div class="mt-4 flex items-start justify-around">
+                            <div class="mt-4 flex {errors.fecha_inicio_convenio ? '' : 'items-center'}">
+                                <Label required labelFor="fecha_inicio_convenio" class={errors.fecha_inicio_convenio ? 'top-3.5 relative' : ''} value="Del" />
+                                <div class="ml-4">
+                                    <input id="fecha_inicio_convenio" type="date" class="mt-1 block w-full p-4" bind:value={$form.fecha_inicio_convenio} required />
+                                </div>
+                            </div>
+                            <div class="mt-4 flex {errors.fecha_fin_convenio ? '' : 'items-center'}">
+                                <Label required labelFor="fecha_fin_convenio" class={errors.fecha_fin_convenio ? 'top-3.5 relative' : ''} value="hasta" />
+                                <div class="ml-4">
+                                    <input id="fecha_fin_convenio" type="date" class="mt-1 block w-full p-4" bind:value={$form.fecha_fin_convenio} required />
+                                </div>
+                            </div>
+                        </div>
+                        {#if errors.fecha_inicio_convenio || errors.fecha_fin_convenio}
+                            <InputError message={errors.fecha_inicio_convenio || errors.fecha_fin_convenio} />
+                        {/if}
+                    </div>
                 {/if}
 
                 {#if $form.progress}
@@ -181,21 +200,23 @@
                     </progress>
                 {/if}
 
-                <h6 class="mt-20">Actividades</h6>
-                <div class="bg-white rounded shadow overflow-hidden">
-                    <div class="p-4">
-                        <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
-                        <InputError message={errors.actividad_id} />
+                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                    <h6 class="mt-20">Actividades</h6>
+                    <div class="bg-white rounded shadow overflow-hidden">
+                        <div class="p-4">
+                            <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
+                            <InputError message={errors.actividad_id} />
+                        </div>
+                        <div class="grid grid-cols-2">
+                            {#each actividades as { id, descripcion }, i}
+                                <FormField>
+                                    <Checkbox bind:group={$form.actividad_id} value={id} />
+                                    <span slot="label">{descripcion}</span>
+                                </FormField>
+                            {/each}
+                        </div>
                     </div>
-                    <div class="grid grid-cols-2">
-                        {#each actividades as { id, descripcion }, i}
-                            <FormField>
-                                <Checkbox bind:group={$form.actividad_id} value={id} />
-                                <span slot="label">{descripcion}</span>
-                            </FormField>
-                        {/each}
-                    </div>
-                </div>
+                {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [1, 8]) && proyecto.modificable == true)}

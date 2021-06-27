@@ -23,7 +23,10 @@ class Tecnoacademia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'modalidad',
+        'linea_tecnologica_id',
+        'centro_formacion_id'
     ];
 
     /**
@@ -43,6 +46,16 @@ class Tecnoacademia extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Relationship with CentroFormacion
+     *
+     * @return object
+     */
+    public function centroFormacion()
+    {
+        return $this->belongsTo(CentroFormacion::class);
+    }
 
     /**
      * Relationship with LineaTecnologica

@@ -104,31 +104,4 @@ class LineaProgramatica extends Model
             $query->orWhere('categoria_proyecto', 'ilike', '%' . $search . '%');
         });
     }
-
-    /**
-     * getCategoriaProyectoAttribute
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function getCategoriaProyectoAttribute($value)
-    {
-        switch ($value) {
-            case 1:
-                $value = 'Tecnoacademia-Tecnoparque';
-                break;
-            case 2:
-                $value = 'I+D+i';
-                break;
-            case 3:
-                $value = 'Servicios tecnológicos';
-                break;
-            case 4:
-                $value = 'Otro';
-                break;
-            default:
-                break;
-        }
-        return $value;
-    }
 }

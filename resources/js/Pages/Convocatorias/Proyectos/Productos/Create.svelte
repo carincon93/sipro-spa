@@ -38,7 +38,7 @@
         fecha_finalizacion: '',
         indicador: '',
         trl: null,
-        tatp_servicio_tecnologico: proyecto.tatp || proyecto.servicio_tecnologico ? true : false,
+        tatp_servicio_tecnologico: proyecto.ta || proyecto.tp || proyecto.servicio_tecnologico ? true : false,
         valor_proyectado: null,
         medio_verificacion: '',
         nombre_indicador: '',
@@ -138,7 +138,7 @@
                     <div class="mt-8">
                         <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
                     </div>
-                {:else if proyecto.ta_tp}
+                {:else if proyecto.ta || proyecto.tp}
                     <div class="mt-8">
                         <Textarea label="Meta" maxlength="40000" id="valor_proyectado" error={errors.valor_proyectado} bind:value={$form.valor_proyectado} required />
                     </div>

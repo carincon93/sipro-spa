@@ -34,7 +34,8 @@ use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
-use App\Http\Controllers\TaTpController;
+use App\Http\Controllers\TaController;
+use App\Http\Controllers\TpController;
 use App\Http\Controllers\ProyectoAnexoController;
 use App\Http\Controllers\UsoPresupuestalController;
 use App\Http\Controllers\ProyectoLoteEstudioMercadoController;
@@ -392,7 +393,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las tecnoacademias
      */
     Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', function ($centroFormacion) {
-        return response(Tecnoacademia::select('tecnoacademias.id as value', 'tecnoacademias.nombre as label')->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
+        return response(Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+            ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+            ->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
     })->name('web-api.centros-formacion.tecnoacademias');
 
     /**
@@ -542,11 +549,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
 
+
     /**
-     * TaTp - Estrategia nacional
+     * Tp - Estrategia nacional
      * 
      */
-    Route::resource('convocatorias.tatp', TaTpController::class)->parameters(['convocatorias' => 'convocatoria', 'tatp' => 'tatp'])->except(['show']);
+    Route::resource('convocatorias.tp', TpController::class)->parameters(['convocatorias' => 'convocatoria', 'tp' => 'tp'])->except(['show']);
+
+    /**
+     * Ta - Estrategia nacional
+     * 
+     */
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/rol/sennova/ta', [TaController::class, 'updateCantidadRolesTa'])->name('convocatorias.proyectos.rol-sennova-ta.update');
+    Route::resource('convocatorias.ta', TaController::class)->parameters(['convocatorias' => 'convocatoria', 'ta' => 'ta'])->except(['show']);
 
     /**
      * Servicios tecnológicos - Estrategia  nacional
@@ -608,7 +623,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.proyectos.actividades', ActividadController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'actividades' => 'actividad'])->except(['show']);
 
     /**
-     * Mesas sectoriales
+     * Roles SENNOVA de proyecto
      * 
      */
     Route::resource('convocatorias.proyectos.proyecto-rol-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-rol-sennova' => 'proyecto-rol-sennova'])->except(['show']);

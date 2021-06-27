@@ -30,7 +30,7 @@
         <h1 class="text-4xl text-center">
             A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} en la(s) que puede formular proyectos.
         </h1>
-        <div class="flex justify-around mt-24 gap-10">
+        <div class="flex justify-around mt-24 gap-4">
             {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4])}
                 <a use:inertia href={route('convocatorias.idi.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>
@@ -40,13 +40,21 @@
                 </a>
             {/if}
             {#if isSuperAdmin || checkPermission(authUser, [8, 9, 10])}
-                <a use:inertia href={route('convocatorias.tatp.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                <a use:inertia href={route('convocatorias.ta.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>
-                        <img src={window.basePath + '/images/ta-tp.png'} alt="Línea programática - Tecnoacademia - Tecnoparque" class="bg-white h-52 object-contain rounded-full w-52" />
+                        <img src={window.basePath + '/images/ta.png'} alt="Línea programática - Tecnoacademia" class="bg-white h-52 object-contain rounded-full w-52" />
                     </figure>
-                    Tecnoacademia - Tecnoparque
+                    Tecnoacademia
                 </a>
             {/if}
+
+            <a use:inertia href={route('convocatorias.tp.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                <figure>
+                    <img src={window.basePath + '/images/tp.png'} alt="Línea programática - Tecnoparque" class="bg-white h-52 object-contain rounded-full w-52" />
+                </figure>
+                Tecnoparque
+            </a>
+
             {#if isSuperAdmin || checkPermission(authUser, [5, 6, 7])}
                 <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>

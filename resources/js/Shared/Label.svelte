@@ -11,7 +11,7 @@
 
 {#if value}
     <label {...props} for={labelFor}>
-        {value}
+        {@html value}
         {#if required}
             <small class="label-required text-red-400">* Campo obligatorio</small>
         {/if}

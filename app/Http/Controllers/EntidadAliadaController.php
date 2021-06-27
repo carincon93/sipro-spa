@@ -8,7 +8,7 @@ use App\Models\Proyecto;
 use App\Models\EntidadAliada;
 use App\Models\Actividad;
 use App\Models\EntidadAliadaIdi;
-use App\Models\EntidadAliadaTaTp;
+use App\Models\EntidadAliadaTa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -30,7 +30,7 @@ class EntidadAliadaController extends Controller
         /**
          * Si el proyecto es de la línea programática 23 o 65 se prohibe el acceso. No requiere de entidades aliadas
          */
-        if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65) {
+        if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65 || $proyecto->codigo_linea_programatica == 68 || $proyecto->codigo_linea_programatica == 69) {
             return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de entidades aliadas');
         }
 
@@ -54,12 +54,11 @@ class EntidadAliadaController extends Controller
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
-        $proyecto->idi;
-        $proyecto->ta_tp;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Create', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto,
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica'),
             'actividades'   => Actividad::whereIn(
                 'objetivo_especifico_id',
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
@@ -88,25 +87,38 @@ class EntidadAliadaController extends Controller
         $entidadAliada->naturaleza                              = $request->naturaleza;
         $entidadAliada->tipo_empresa                            = $request->tipo_empresa;
         $entidadAliada->nit                                     = $request->nit;
-        $entidadAliada->recursos_especie                        = $request->recursos_especie;
-        $entidadAliada->descripcion_recursos_especie            = $request->descripcion_recursos_especie;
-        $entidadAliada->recursos_dinero                         = $request->recursos_dinero;
-        $entidadAliada->descripcion_recursos_dinero             = $request->descripcion_recursos_dinero;
 
         $entidadAliada->proyecto()->associate($proyecto);
 
         $entidadAliada->save();
 
-        $entidadAliada->actividades()->attach($request->actividad_id);
-
         if ($proyecto->idi()->exists()) {
 
+            $request->validate([
+                'descripcion_convenio'                      => 'nullable|string',
+                'grupo_investigacion'                       => 'nullable|max:191',
+                'codigo_gruplac'                            => 'nullable|max:191',
+                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'actividades_transferencia_conocimiento'    => 'required|max:10000',
+                'carta_intencion'                           => 'required|max:10000000|file|mimetypes:application/pdf',
+                'carta_propiedad_intelectual'               => 'required|max:10000000|file|mimetypes:application/pdf',
+                'recursos_especie'                          => 'required|numeric',
+                'descripcion_recursos_especie'              => 'required|string',
+                'recursos_dinero'                           => 'required|numeric',
+                'descripcion_recursos_dinero'               => 'required|string',
+                'actividad_id*'                             => 'required|min:0|max:2147483647|integer|exists:actividades,id',
+            ]);
+
             $entidadAliadaIdi = new EntidadAliadaIdi();
-            $entidadAliadaIdi->descripcion_convenio                    = $request->descripcion_convenio;
-            $entidadAliadaIdi->grupo_investigacion                     = $request->grupo_investigacion;
-            $entidadAliadaIdi->codigo_gruplac                          = $request->codigo_gruplac;
-            $entidadAliadaIdi->enlace_gruplac                          = $request->enlace_gruplac;
-            $entidadAliadaIdi->actividades_transferencia_conocimiento  = $request->actividades_transferencia_conocimiento;
+            $entidadAliadaIdi->descripcion_convenio                     = $request->descripcion_convenio;
+            $entidadAliadaIdi->grupo_investigacion                      = $request->grupo_investigacion;
+            $entidadAliadaIdi->codigo_gruplac                           = $request->codigo_gruplac;
+            $entidadAliadaIdi->enlace_gruplac                           = $request->enlace_gruplac;
+            $entidadAliadaIdi->actividades_transferencia_conocimiento   = $request->actividades_transferencia_conocimiento;
+            $entidadAliadaIdi->recursos_especie                         = $request->recursos_especie;
+            $entidadAliadaIdi->descripcion_recursos_especie             = $request->descripcion_recursos_especie;
+            $entidadAliadaIdi->recursos_dinero                          = $request->recursos_dinero;
+            $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
 
             $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
             $rutaCartaIntencion          = $request->carta_intencion->storeAs(
@@ -123,20 +135,29 @@ class EntidadAliadaController extends Controller
 
             $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
 
+            $entidadAliada->actividades()->attach($request->actividad_id);
+
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
 
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
-        } elseif ($proyecto->taTp()->exists()) {
-            $entidadAliadaTaTp = new EntidadAliadaTaTp();
+        } elseif ($proyecto->ta()->exists()) {
+            $request->validate([
+                'soporte_convenio'      => 'required|max:10000000|file|mimetypes:application/pdf',
+                'fecha_inicio_convenio' => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
+                'fecha_fin_convenio'    => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+            ]);
+            $entidadAliadaTa = new EntidadAliadaTa();
             $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
 
             $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
                 'soportes-convenio',
                 $nombreSoporteConvenio
             );
-            $entidadAliadaTaTp->soporte_convenio = $rutaSoporteConvenio;
+            $entidadAliadaTa->soporte_convenio = $rutaSoporteConvenio;
+            $entidadAliadaTa->fecha_inicio_convenio     = $request->fecha_inicio_convenio;
+            $entidadAliadaTa->fecha_fin_convenio        = $request->fecha_fin_convenio;
 
-            $entidadAliada->entidadAliadaTaTp()->save($entidadAliadaTaTp);
+            $entidadAliada->entidadAliadaTa()->save($entidadAliadaTa);
 
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
@@ -167,13 +188,13 @@ class EntidadAliadaController extends Controller
 
         $entidadAliada->miembrosEntidadAliada->only('id', 'nombre', 'email', 'numero_celular');
         $entidadAliada->entidadAliadaIdi;
-        $entidadAliada->entidadAliadaTaTp;
-        $proyecto->idi;
-        $proyecto->ta_tp;
+        $entidadAliada->entidadAliadaTa;
+
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Edit', [
             'convocatoria'    => $convocatoria->only('id'),
-            'proyecto'        => $proyecto,
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica'),
             'entidadAliada'   => $entidadAliada,
             'actividades'     => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -205,18 +226,33 @@ class EntidadAliadaController extends Controller
         $entidadAliada->naturaleza                                  = $request->naturaleza;
         $entidadAliada->tipo_empresa                                = $request->tipo_empresa;
         $entidadAliada->nit                                         = $request->nit;
-        $entidadAliada->recursos_especie                            = $request->recursos_especie;
-        $entidadAliada->descripcion_recursos_especie                = $request->descripcion_recursos_especie;
-        $entidadAliada->recursos_dinero                             = $request->recursos_dinero;
-        $entidadAliada->descripcion_recursos_dinero                 = $request->descripcion_recursos_dinero;
 
         if ($entidadAliada->entidadAliadaIdi()->exists()) {
+            $request->validate([
+                'descripcion_convenio'                      => 'nullable|string',
+                'grupo_investigacion'                       => 'nullable|max:191',
+                'codigo_gruplac'                            => 'nullable|max:191',
+                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'actividades_transferencia_conocimiento'    => 'required|max:10000',
+                'carta_intencion'                           => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'carta_propiedad_intelectual'               => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'recursos_especie'                          => 'required|numeric',
+                'descripcion_recursos_especie'              => 'required|string',
+                'recursos_dinero'                           => 'required|numeric',
+                'descripcion_recursos_dinero'               => 'required|string',
+                'actividad_id*'                             => 'required|min:0|max:2147483647|integer|exists:actividades,id',
+            ]);
+
             $entidadAliada->entidadAliadaIdi()->update([
                 'descripcion_convenio'                        => $request->tiene_convenio ? $request->descripcion_convenio : null,
                 'grupo_investigacion'                         => $request->tiene_grupo_investigacion ? $request->grupo_investigacion : null,
                 'codigo_gruplac'                              => $request->tiene_grupo_investigacion ? $request->codigo_gruplac : null,
                 'enlace_gruplac'                              => $request->tiene_grupo_investigacion ? $request->enlace_gruplac : null,
                 'actividades_transferencia_conocimiento'      => $request->actividades_transferencia_conocimiento,
+                'recursos_especie'                            => $request->recursos_especie,
+                'descripcion_recursos_especie'                => $request->descripcion_recursos_especie,
+                'recursos_dinero'                             => $request->recursos_dinero,
+                'descripcion_recursos_dinero'                 => $request->descripcion_recursos_dinero
             ]);
 
             if ($request->hasFile('carta_intencion')) {
@@ -241,9 +277,22 @@ class EntidadAliadaController extends Controller
 
                 $entidadAliada->entidadAliadaIdi()->update(['carta_propiedad_intelectual' => $rutaPropiedadIntelectual]);
             }
-        } elseif ($proyecto->taTp()->exists()) {
+
+            $entidadAliada->actividades()->sync($request->actividad_id);
+        } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
+            $request->validate([
+                'soporte_convenio'      => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'fecha_inicio_convenio' => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
+                'fecha_fin_convenio'    => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+            ]);
+
+            $entidadAliada->entidadAliadaTa()->update([
+                'fecha_inicio_convenio'      => $request->fecha_inicio_convenio,
+                'fecha_fin_convenio'         => $request->fecha_fin_convenio,
+            ]);
+
             if ($request->hasFile('soporte_convenio')) {
-                Storage::delete($entidadAliada->entidadAliadaTaTp->soporte_convenio);
+                Storage::delete($entidadAliada->entidadAliadaTa->soporte_convenio);
                 $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
 
                 $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
@@ -251,12 +300,11 @@ class EntidadAliadaController extends Controller
                     $nombreSoporteConvenio
                 );
 
-                $entidadAliada->entidadAliadaTaTp()->update(['soporte_convenio' => $rutaSoporteConvenio]);
+                $entidadAliada->entidadAliadaTa()->update(['soporte_convenio' => $rutaSoporteConvenio]);
             }
         }
 
         $entidadAliada->proyecto()->associate($proyecto);
-        $entidadAliada->actividades()->sync($request->actividad_id);
 
         $entidadAliada->save();
 
@@ -273,9 +321,9 @@ class EntidadAliadaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        if ($proyecto->taTp()->exists()) {
-            Storage::delete($entidadAliada->entidadAliadaTaTp->soporte_convenio);
-        } elseif ($proyecto->idi()->exists()) {
+        if ($entidadAliada->entidadAliadaTa()->exists()) {
+            Storage::delete($entidadAliada->entidadAliadaTa->soporte_convenio);
+        } elseif ($entidadAliada->entidadAliadaIdi()->exists()) {
             Storage::delete($entidadAliada->entidadAliadaIdi->carta_intencion);
             Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
         }
@@ -297,8 +345,8 @@ class EntidadAliadaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->taTp()->exists() && $request->archivo == 'soporte_convenio') {
-            $ruta = $entidadAliada->entidadAliadaTaTp->soporte_convenio;
+        if ($proyecto->ta()->exists() && $request->archivo == 'soporte_convenio') {
+            $ruta = $entidadAliada->entidadAliadaTa->soporte_convenio;
         } elseif ($proyecto->idi()->exists() && $request->archivo == 'carta_intencion') {
             $ruta = $entidadAliada->entidadAliadaIdi->carta_intencion;
         } elseif ($proyecto->idi()->exists() && $request->archivo == 'carta_propiedad_intelectual') {

@@ -15,7 +15,6 @@
     export let errors
     export let convocatoria
     export let authUserRegional
-    export let rolesTa
     export let rolesTp
 
     $: $title = 'Crear proyecto Tecnoacademia - Tecnoparque'
@@ -42,22 +41,13 @@
         linea_programatica: null,
     })
 
-    let roles = []
-    $: {
-        if ($form.linea_programatica_id == 5 || $form.linea_programatica_id == 6) {
-            roles = rolesTa
-        } else if ($form.linea_programatica_id == 4) {
-            roles = rolesTp
-        }
-    }
-
     $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
         $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [8])) {
-            $form.post(route('convocatorias.tatp.store', [convocatoria.id]), {
+            $form.post(route('convocatorias.tp.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
@@ -73,7 +63,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkPermission(authUser, [8])}
-                        <a use:inertia href={route('convocatorias.tatp.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> Tecnoacademia - Tecnoparque </a>
+                        <a use:inertia href={route('convocatorias.tp.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> Tecnoacademia - Tecnoparque </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -91,13 +81,13 @@
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                         <div class="ml-4">
-                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tatp} max={convocatoria.max_fecha_finalizacion_proyectos_tatp} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
+                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
                         </div>
                     </div>
                     <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                         <Label labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                         <div class="ml-4">
-                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tatp} max={convocatoria.max_fecha_finalizacion_proyectos_tatp} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
+                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                         </div>
                     </div>
                 </div>
@@ -181,7 +171,7 @@
                     <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                 </div>
                 <div>
-                    <Select id="rol_sennova" items={roles} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    <Select id="rol_sennova" items={rolesTp} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
             {#if $form.fecha_inicio && $form.fecha_finalizacion}

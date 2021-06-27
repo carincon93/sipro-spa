@@ -29,6 +29,9 @@
 
     let form = useForm({
         propuesta_sostenibilidad: proyecto.propuesta_sostenibilidad,
+        propuesta_sostenibilidad_social: proyecto.propuesta_sostenibilidad_social,
+        propuesta_sostenibilidad_ambiental: proyecto.propuesta_sostenibilidad_ambiental,
+        propuesta_sostenibilidad_financiera: proyecto.propuesta_sostenibilidad_financiera,
     })
 
     function submit() {
@@ -98,19 +101,31 @@
 
     <form on:submit|preventDefault={submit}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
-            <div class="mt-4">
-                <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
-                {#if proyecto.codigo_linea_programatica == 68}
-                    <InfoMessage class="mb-2">
-                        Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
-                        <br />
-                        Para definir la propuesta de sostenibilidad se deben tener en cuenta los impactos definidos en el árbol de objetivos (ambiental, social - en el centro de formación, social - en el sector productivo, tecnológico)
-                    </InfoMessage>
-                {:else}
-                    <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
-                {/if}
-                <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
-            </div>
+            {#if proyecto.codigo_linea_programatica != 70}
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
+                    {#if proyecto.codigo_linea_programatica == 68}
+                        <InfoMessage class="mb-2">
+                            Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
+                            <br />
+                            Para definir la propuesta de sostenibilidad se deben tener en cuenta los impactos definidos en el árbol de objetivos (ambiental, social - en el centro de formación, social - en el sector productivo, tecnológico)
+                        </InfoMessage>
+                    {:else}
+                        <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
+                    {/if}
+                    <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                </div>
+            {:else if proyecto.codigo_linea_programatica == 70}
+                <div class="mt-4">
+                    <Textarea label="Propuesta de sostenibilidad social" maxlength="40000" id="propuesta_sostenibilidad_social" error={errors.propuesta_sostenibilidad_social} bind:value={$form.propuesta_sostenibilidad_social} required />
+                </div>
+                <div class="mt-4">
+                    <Textarea label="Propuesta de sostenibilidad ambiental" maxlength="40000" id="propuesta_sostenibilidad_ambiental" error={errors.propuesta_sostenibilidad_ambiental} bind:value={$form.propuesta_sostenibilidad_ambiental} required />
+                </div>
+                <div class="mt-4">
+                    <Textarea label="Propuesta de sostenibilidad financiera" maxlength="40000" id="propuesta_sostenibilidad_financiera" error={errors.propuesta_sostenibilidad_financiera} bind:value={$form.propuesta_sostenibilidad_financiera} required />
+                </div>
+            {/if}
         </fieldset>
         <div class="mt-4 bg-gray-100 border-t border-gray-200 flex items-center">
             {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)}
