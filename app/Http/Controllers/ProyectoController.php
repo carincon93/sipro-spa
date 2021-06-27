@@ -38,9 +38,16 @@ class ProyectoController extends Controller
             $proyecto->propuesta_sostenibilidad = $proyecto->idi->propuesta_sostenibilidad;
         }
 
-        if ($proyecto->taTp()->exists()) {
-            $objetivoGeneral = $proyecto->taTp->objetivo_general;
-            $proyecto->propuesta_sostenibilidad = $proyecto->taTp->propuesta_sostenibilidad;
+        if ($proyecto->ta()->exists()) {
+            $objetivoGeneral = $proyecto->ta->objetivo_general;
+            $proyecto->propuesta_sostenibilidad_social      = $proyecto->ta->propuesta_sostenibilidad_social;
+            $proyecto->propuesta_sostenibilidad_ambiental   = $proyecto->ta->propuesta_sostenibilidad_ambiental;
+            $proyecto->propuesta_sostenibilidad_financiera  = $proyecto->ta->propuesta_sostenibilidad_financiera;
+        }
+
+        if ($proyecto->tp()->exists()) {
+            $objetivoGeneral = $proyecto->tp->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->tp->propuesta_sostenibilidad;
         }
 
         if ($proyecto->servicioTecnologico()->exists()) {
@@ -70,7 +77,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'modificable'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable'),
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);
@@ -80,30 +87,51 @@ class ProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $request->validate([
-            'propuesta_sostenibilidad' => 'required|string|max:10000',
-        ]);
-
         switch ($proyecto) {
             case $proyecto->idi()->exists():
+                $request->validate([
+                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                ]);
                 $idi                            = $proyecto->idi;
                 $idi->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
 
                 $idi->save();
                 break;
-            case $proyecto->taTp()->exists():
-                $tatp                           = $proyecto->taTp;
-                $tatp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
+            case $proyecto->ta()->exists():
+                $request->validate([
+                    'propuesta_sostenibilidad_social'       => 'required|string|max:10000',
+                    'propuesta_sostenibilidad_ambiental'    => 'required|string|max:10000',
+                    'propuesta_sostenibilidad_financiera'   => 'required|string|max:10000',
+                ]);
+                $ta = $proyecto->ta;
+                $ta->propuesta_sostenibilidad_social        = $request->propuesta_sostenibilidad_social;
+                $ta->propuesta_sostenibilidad_ambiental     = $request->propuesta_sostenibilidad_ambiental;
+                $ta->propuesta_sostenibilidad_financiera    = $request->propuesta_sostenibilidad_financiera;
 
-                $tatp->save();
+                $ta->save();
+                break;
+            case $proyecto->tp()->exists():
+                $request->validate([
+                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                ]);
+                $tp                           = $proyecto->tp;
+                $tp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
+
+                $tp->save();
                 break;
             case $proyecto->culturaInnovacion()->exists():
+                $request->validate([
+                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                ]);
                 $culturaInnovacion                              = $proyecto->culturaInnovacion;
                 $culturaInnovacion->propuesta_sostenibilidad    = $request->propuesta_sostenibilidad;
 
                 $culturaInnovacion->save();
                 break;
             case $proyecto->servicioTecnologico()->exists():
+                $request->validate([
+                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                ]);
                 $servicioTecnologico                            = $proyecto->servicioTecnologico;
                 $servicioTecnologico->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
 
@@ -129,8 +157,11 @@ class ProyectoController extends Controller
             case $proyecto->idi()->exists():
                 return redirect()->route('convocatorias.idi.edit', [$convocatoria, $proyecto]);
                 break;
-            case $proyecto->taTp()->exists():
-                return redirect()->route('convocatorias.tatp.edit', [$convocatoria, $proyecto]);
+            case $proyecto->ta()->exists():
+                return redirect()->route('convocatorias.ta.edit', [$convocatoria, $proyecto]);
+                break;
+            case $proyecto->tp()->exists():
+                return redirect()->route('convocatorias.tp.edit', [$convocatoria, $proyecto]);
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $proyecto]);
@@ -250,6 +281,10 @@ class ProyectoController extends Controller
         $proyecto->participantes;
         $proyecto->programasFormacion;
         $proyecto->semillerosInvestigacion;
+
+        if ($proyecto->codigo_linea_programatica == 70) {
+            return redirect()->route('convocatorias.ta.edit', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de participantes');
+        }
 
         if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82) {
             $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));

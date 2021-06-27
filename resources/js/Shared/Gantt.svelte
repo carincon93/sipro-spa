@@ -29,7 +29,7 @@
         data.addColumn('string', 'Dependencies')
 
         items.map(function (item) {
-            data.addRows([['itemID-' + item.id, '', new Date(item.year_inicio, item.mes_inicio - 1, item.dia_inicio), new Date(item.year_finalizacion, item.mes_finalizacion - 1, item.dia_finalizacion), null, 100, null]])
+            data.addRows([['itemID-' + item.id, '', item.year_inicio > 1999 ? new Date(item.year_inicio, item.mes_inicio - 1, item.dia_inicio) : null, item.year_finalizacion > 1999 ? new Date(item.year_finalizacion, item.mes_finalizacion - 1, item.dia_finalizacion) : null, null, 100, null]])
         })
 
         let trackHeight = 120
@@ -99,9 +99,14 @@
                 {#each items as item, i}
                     <li class="border-b-2 flex p-1.5" style="height:120px; max-height:120px; line-height: 1.2">
                         {#if request}
-                            <p class="paragraph-ellipsis w-full" style="max-width: 90%;">
-                                {item.descripcion ?? item.nombre}
-                            </p>
+                            <div class="w-full">
+                                <p class="paragraph-ellipsis w-full" style="max-width: 90%;">
+                                    {item.descripcion ?? item.nombre}
+                                </p>
+                                {#if item.year_inicio < 1999}
+                                    <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center inline-block mt-2 mb-2">Sin fechas definidas</span>
+                                {/if}
+                            </div>
                             <DataTableMenu>
                                 <Item on:SMUI:action={() => Inertia.visit(route(request.uri, arrayPush(item.id)))}>
                                     <Text>{$_('View details')}</Text>

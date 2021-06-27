@@ -11,6 +11,7 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Stepper from '@/Shared/Stepper'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
@@ -30,6 +31,12 @@
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Entidades aliadas</div>
+
+        <div slot="caption">
+            {#if proyecto.codigo_linea_programatica == 70}
+                <InfoMessage message="En caso de tener un acuerdo para operación de la Tecnoacademia en una infraestructura que no es propia debe adjuntar el soporte al momento de crear la entidad." />
+            {/if}
+        </div>
 
         <div slot="actions">
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5]) && proyecto.modificable == true)}

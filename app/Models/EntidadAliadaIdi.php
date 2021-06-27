@@ -30,6 +30,10 @@ class EntidadAliadaIdi extends Model
         'actividades_transferencia_conocimiento',
         'carta_intencion',
         'carta_propiedad_intelectual',
+        'recursos_especie',
+        'descripcion_recursos_especie',
+        'recursos_dinero',
+        'descripcion_recursos_dinero',
     ];
 
     /**

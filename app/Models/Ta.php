@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class TaTp extends Model
+class Ta extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class TaTp extends Model
      *
      * @var string
      */
-    protected $table = 'ta_tp';
+    protected $table = 'ta';
 
     /**
      * appends
@@ -32,12 +32,11 @@ class TaTp extends Model
      */
     protected $fillable = [
         'tecnoacademia_linea_tecnologica_id',
-        'nodo_tecnoparque_id',
         'resumen',
         'resumen_regional',
         'justificacion',
         'antecedentes',
-        'antecedentes_regional',
+        'antecedentes_tecnoacademia',
         'problema_central',
         'justificacion_problema',
         'retos_oportunidades',
@@ -49,13 +48,19 @@ class TaTp extends Model
         'impacto_municipios',
         'fecha_inicio',
         'fecha_finalizacion',
-        'propuesta_sostenibilidad',
-        'impacto_centro_formacion',
+        'propuesta_sostenibilidad_social',
+        'propuesta_sostenibilidad_financiera',
+        'propuesta_sostenibilidad_ambiental',
+        'articulacion_centro_formacion',
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
+        'nombre_instituciones_programas',
         'diseno_curricular',
-        'max_meses_ejecucion'
+        'max_meses_ejecucion',
+        'cantidad_instructores_planta',
+        'cantidad_dinamizadores_planta',
+        'cantidad_psicopedagogos_planta'
     ];
 
     /**
@@ -97,23 +102,13 @@ class TaTp extends Model
     }
 
     /**
-     * Relationship with NodoTecnoparque
-     *
-     * @return object
-     */
-    public function nodoTecnoparque()
-    {
-        return $this->belongsTo(NodoTecnoparque::class)->orderBy('nombre');
-    }
-
-    /**
      * Filtrar registros
      *
      * @param  mixed $query
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTaTp($query, array $filters)
+    public function scopeFilterTa($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);
@@ -145,31 +140,30 @@ class TaTp extends Model
     {
         $user = Auth::user();
         if ($user->hasRole(1)) {
-            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
-                ->join('proyectos', 'ta_tp.id', 'proyectos.id')
+            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->orderBy('ta_tp.id', 'ASC')
-                ->filterTaTp(request()->only('search'))->paginate();
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
         } else if ($user->hasRole(4)) {
-            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
-                ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
-                ->orderBy('ta_tp.id', 'ASC')
-                ->filterTaTp(request()->only('search'))->paginate();
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
         } else {
-            $tatp = TaTp::select('ta_tp.id', 'ta_tp.tecnoacademia_linea_tecnologica_id', 'ta_tp.nodo_tecnoparque_id', 'ta_tp.fecha_inicio', 'ta_tp.fecha_finalizacion')
-                ->join('proyectos', 'ta_tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', Auth::user()->id)
-                ->orderBy('ta_tp.id', 'ASC')
-                ->filterTaTp(request()->only('search'))->paginate();
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
         }
-        $tatp->load('proyecto');
-        $tatp->load('nodoTecnoparque');
-        $tatp->load('tecnoacademiaLineaTecnologica.tecnoacademia');
+        $ta->load('proyecto');
+        $ta->load('tecnoacademiaLineaTecnologica.tecnoacademia');
 
-        return $tatp;
+        return $ta;
     }
 }

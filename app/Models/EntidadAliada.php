@@ -22,17 +22,11 @@ class EntidadAliada extends Model
      * @var array
      */
     protected $fillable = [
-        'idi_id',
         'tipo',
         'nombre',
         'naturaleza',
         'tipo_empresa',
-        'nit',
-        'recursos_especie',
-        'descripcion_recursos_especie',
-        'recursos_dinero',
-        'descripcion_recursos_dinero',
-        'soporte_convenio'
+        'nit'
     ];
 
     /**
@@ -74,13 +68,13 @@ class EntidadAliada extends Model
     }
 
     /**
-     * Relationship with EntidadAliadaTaTp
+     * Relationship with EntidadAliadaTa
      *
      * @return object
      */
-    public function entidadAliadaTaTp()
+    public function entidadAliadaTa()
     {
-        return $this->hasOne(EntidadAliadaTaTp::class);
+        return $this->hasOne(EntidadAliadaTa::class);
     }
 
     /**

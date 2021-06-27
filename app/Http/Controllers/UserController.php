@@ -39,9 +39,9 @@ class UserController extends Controller
         $this->authorize('create', [User::class]);
 
         return Inertia::render('Users/Create', [
-            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposDocumento'      => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
-            'roles'                 => Role::select('id', 'name')->get('id')
+            'roles'               => Role::select('id', 'name')->get('id')
         ]);
     }
 
@@ -109,7 +109,7 @@ class UserController extends Controller
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
             'roles'                 => Role::getRolesByRol(),
-            'proyectos'             => $user->proyectos->load('idi', 'taTp.nodoTecnoparque', 'taTp.tecnoacademiaLineaTecnologica.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'ta.tecnoacademiaLineaTecnologica.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
 
         ]);
     }

@@ -67,11 +67,11 @@ class LineaTecnologica extends Model
     }
 
     /**
-     * Relationship with TaTp
+     * Relationship with Ta
      *
      * @return object
      */
-    public function tatp()
+    public function ta()
     {
         return $this->hasMany('tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_linea_tecnologica_id');
     }

@@ -273,8 +273,6 @@
         causa_indirecta_id: 0,
         objetivo_especifico_id: 0,
         descripcion: '',
-        fecha_inicio: '',
-        fecha_finalizacion: '',
     })
 
     let showActividadForm = false
@@ -290,8 +288,6 @@
         $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         $formActividad.objetivo_especifico_id = objetivoEspecifico
         $formActividad.descripcion = causaIndirecta.actividad.descripcion
-        $formActividad.fecha_inicio = causaIndirecta.actividad.fecha_inicio
-        $formActividad.fecha_finalizacion = causaIndirecta.actividad.fecha_finalizacion
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
     }
 
@@ -426,7 +422,7 @@
     <div class="mt-16">
         <div class="flex mb-14">
             {#each efectosDirectos as efectoDirecto, i}
-                <div class="flex-1">
+                <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
                     <!-- Impactos -->
                     {#if i == 0}
                         <div id="impacto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
@@ -436,41 +432,45 @@
                     {/if}
                     <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                            <div class="flex-1 resultados relative">
-                                <div
-                                    on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
-                                    class="{efectoIndirecto.descripcion != null && i % 2 == 0
-                                        ? 'bg-orangered-400 hover:bg-orangered-500'
-                                        : efectoIndirecto.descripcion == null && i % 2 == 0
-                                        ? 'bg-gray-300 hover:bg-gray-400'
-                                        : efectoIndirecto.descripcion != null && i % 2 != 0
-                                        ? 'bg-orangered-500 hover:bg-orangered-600'
-                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                >
-                                    <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
-                                        {#if efectoIndirecto.impacto}
-                                            <small class="title block font-bold mb-2">
-                                                RES{#each efectoDirecto.resultados as { id }}
-                                                    -{id}
-                                                {/each}
-                                                -IMP-
-                                                {efectoIndirecto.impacto.id}
-                                            </small>
-                                            {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
-                                                {efectoIndirecto.impacto.descripcion}
+                            {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="flex-1 resultados relative">
+                                    <div
+                                        on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
+                                        class="{efectoIndirecto.descripcion != null && i % 2 == 0
+                                            ? 'bg-orangered-400 hover:bg-orangered-500'
+                                            : efectoIndirecto.descripcion == null && i % 2 == 0
+                                            ? 'bg-gray-300 hover:bg-gray-400'
+                                            : efectoIndirecto.descripcion != null && i % 2 != 0
+                                            ? 'bg-orangered-500 hover:bg-orangered-600'
+                                            : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                            {#if efectoIndirecto.impacto}
+                                                <small class="title block font-bold mb-2">
+                                                    RES{#each efectoDirecto.resultados as { id }}
+                                                        -{id}
+                                                    {/each}
+                                                    -IMP-
+                                                    {efectoIndirecto.impacto.id}
+                                                </small>
+                                                {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
+                                                    {efectoIndirecto.impacto.descripcion}
+                                                {/if}
                                             {/if}
-                                        {/if}
-                                    </p>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                            <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
-                                    <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
+                                    <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {/if}
                     </div>
                     <!-- Resultado -->
                     {#if i == 0}
@@ -556,37 +556,41 @@
                     {/if}
                     <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            <div class="mb-4" style="flex: 1 0 33.333%">
-                                <div
-                                    on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
-                                    class="{causaIndirecta.descripcion != null && i % 2 == 0
-                                        ? 'bg-orangered-400 hover:bg-orangered-500'
-                                        : causaIndirecta.descripcion == null && i % 2 == 0
-                                        ? 'bg-gray-300 hover:bg-gray-400'
-                                        : causaIndirecta.descripcion != null && i % 2 != 0
-                                        ? 'bg-orangered-500 hover:bg-orangered-600'
-                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                >
-                                    <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
-                                        {#if causaIndirecta.actividad}
-                                            <small class="title block font-bold mb-2">
-                                                OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
-                                            </small>
-                                            {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
-                                                {causaIndirecta.actividad.descripcion}
+                            {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="mb-4" style="flex: 1 0 33.333%">
+                                    <div
+                                        on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
+                                        class="{causaIndirecta.descripcion != null && i % 2 == 0
+                                            ? 'bg-orangered-400 hover:bg-orangered-500'
+                                            : causaIndirecta.descripcion == null && i % 2 == 0
+                                            ? 'bg-gray-300 hover:bg-gray-400'
+                                            : causaIndirecta.descripcion != null && i % 2 != 0
+                                            ? 'bg-orangered-500 hover:bg-orangered-600'
+                                            : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                            {#if causaIndirecta.actividad}
+                                                <small class="title block font-bold mb-2">
+                                                    OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
+                                                </small>
+                                                {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
+                                                    {causaIndirecta.actividad.descripcion}
+                                                {/if}
                                             {/if}
-                                        {/if}
-                                    </p>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
-                            <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
-                                <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
-                                    <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
+                                <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                    <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {/if}
                     </div>
                 </div>
             {/each}
@@ -622,26 +626,6 @@
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                         <p class="mt-1 text-center">Fecha de ejecución</p>
-                        <div class="mt-1 mb-20 flex items-start justify-around">
-                            <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
-                                <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
-                                <div class="ml-4">
-                                    <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$formActividad.fecha_inicio} required />
-                                </div>
-                            </div>
-                            <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
-                                <Label labelFor="fecha_finalizacion" class="ml-4 {errors.fecha_finalizacion ? 'top-3.5 relative' : ''}" value="hasta" />
-                                <div class="ml-4">
-                                    <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$formActividad.fecha_finalizacion} required />
-                                </div>
-                            </div>
-                        </div>
-                        {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                            <div class="mb-20">
-                                <InputError classes="text-center" message={errors.fecha_inicio} />
-                                <InputError classes="text-center" message={errors.fecha_finalizacion} />
-                            </div>
-                        {/if}
                         <div>
                             <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>

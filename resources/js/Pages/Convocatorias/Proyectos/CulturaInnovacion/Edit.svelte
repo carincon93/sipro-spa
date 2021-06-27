@@ -813,7 +813,7 @@
         <div slot="content">
             <InfoMessage class="mb-2" message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
 
-            <form on:submit|preventDefault={destroy} id="delete-tatp" class="mt-10 mb-28">
+            <form on:submit|preventDefault={destroy} id="delete-cultura-innovacion" class="mt-10 mb-28">
                 <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
             </form>
@@ -821,7 +821,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-tatp">Confirmar</Button>
+                <Button variant="raised" form="delete-cultura-innovacion">Confirmar</Button>
             </div>
         </div>
     </Dialog>

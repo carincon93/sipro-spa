@@ -24,8 +24,10 @@ class TecnoacademiaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'                => ['required', 'max:255'],
+            'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
             'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnologicas,id'],
+            'nombre'                => ['required', 'max:255'],
+            'modalidad'             => ['required', 'max:2'],
         ];
     }
 
@@ -36,6 +38,18 @@ class TecnoacademiaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        if (is_array($this->centro_formacion_id)) {
+            $this->merge([
+                'centro_formacion_id' => $this->centro_formacion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->modalidad)) {
+            $this->merge([
+                'modalidad' => $this->modalidad['value'],
+            ]);
+        }
+
         $this->merge([
             'nombre' => mb_strtolower($this->nombre),
         ]);

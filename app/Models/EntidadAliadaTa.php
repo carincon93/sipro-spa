@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EntidadAliadaTaTp extends Model
+class EntidadAliadaTa extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class EntidadAliadaTaTp extends Model
      *
      * @var string
      */
-    protected $table = 'entidad_aliada_ta_tp';
+    protected $table = 'entidad_aliada_ta';
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +23,8 @@ class EntidadAliadaTaTp extends Model
      */
     protected $fillable = [
         'soporte_convenio',
+        'fecha_inicio_convenio',
+        'fecha_fin_convenio'
     ];
 
     /**

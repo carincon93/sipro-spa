@@ -16,7 +16,6 @@
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
-    import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import { Inertia } from '@inertiajs/inertia'
@@ -202,22 +201,12 @@
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4 focus:text-indigo-500">
-                                {proyecto.idi
-                                    ? proyecto.idi.titulo
-                                    : proyecto.cultura_innovacion
-                                    ? proyecto.cultura_innovacion.titulo
-                                    : proyecto.servicio_tecnologico
-                                    ? proyecto.servicio_tecnologico.titulo
-                                    : proyecto.ta_tp.nodo_tecnoparque
-                                    ? proyecto.ta_tp.nodo_tecnoparque.nombre
-                                    : proyecto.ta_tp.tecnoacademia_linea_tecnologica
-                                    ? proyecto.ta_tp.tecnoacademia_linea_tecnologica.tecnoacademia.nombre
-                                    : null}
+                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp.nodo_tecnoparque ? proyecto.tp.nodo_tecnoparque.nombre : proyecto.ta.tecnoacademia_linea_tecnologica ? proyecto.ta.tecnoacademia_linea_tecnologica.tecnoacademia.nombre : null}
                             </p>
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4">
-                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta_tp ? proyecto.ta_tp.fecha_ejecucion : null}
+                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta ? proyecto.ta.fecha_ejecucion : proyecto.tp ? proyecto.tp.fecha_ejecucion : null}
                             </p>
                         </td>
                         <td class="border-t td-actions">

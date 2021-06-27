@@ -32493,8 +32493,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function create_if_block(ctx) {
 	let label;
-	let t0;
-	let t1;
+	let html_tag;
+	let t;
 	let if_block = /*required*/ ctx[2] && create_if_block_1(ctx);
 	let label_levels = [/*props*/ ctx[3], { for: /*labelFor*/ ctx[0] }];
 	let label_data = {};
@@ -32506,19 +32506,19 @@ function create_if_block(ctx) {
 	return {
 		c() {
 			label = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("label");
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*value*/ ctx[1]);
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block) if_block.c();
+			html_tag = new svelte_internal__WEBPACK_IMPORTED_MODULE_0__.HtmlTag(t);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(label, label_data);
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, label, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(label, t0);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(label, t1);
+			html_tag.m(/*value*/ ctx[1], label);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(label, t);
 			if (if_block) if_block.m(label, null);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*value*/ 2) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, /*value*/ ctx[1]);
+			if (dirty & /*value*/ 2) html_tag.p(/*value*/ ctx[1]);
 
 			if (/*required*/ ctx[2]) {
 				if (if_block) {

@@ -35,6 +35,10 @@
         <InfoMessage message={validacionResultados} class="mt-10 mb-10" />
     {/if}
 
+    {#if proyecto.codigo_linea_programatica == 70}
+        <InfoMessage message="Debe asociar las fechas a cada uno de los productos haciendo clic en los tres puntos, a continuación, clic en 'Ver detalles'. (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>)." />
+    {/if}
+
     <div class="mb-6 flex justify-end items-center">
         <div>
             {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11]) && validacionResultados == null && proyecto.modificable == true)}
