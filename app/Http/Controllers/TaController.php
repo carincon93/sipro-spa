@@ -73,7 +73,6 @@ class TaController extends Controller
         $ta->antecedentes                         = 'Por favor diligencie los antecedentes del proyecto';
         $ta->marco_conceptual                     = 'Por favor diligencie el marco conceptual del proyecto';
         $ta->metodologia                          = 'Por favor diligencie la metodología del proyecto';
-        $ta->propuesta_sostenibilidad             = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
         $ta->bibliografia                         = 'Por favor diligencie la bibliografía';
         $ta->impacto_municipios                   = 'Describa el beneficio en los municipios';
         $ta->articulacion_centro_formacion        = 'Describa la articulación con el centro de formación';
