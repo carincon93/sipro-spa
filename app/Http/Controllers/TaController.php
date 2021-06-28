@@ -219,4 +219,17 @@ class TaController extends Controller
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    public function showArticulacionSennova(Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('visualizar-proyecto-autor', [$proyecto]);
+
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+        $proyecto->precio_proyecto           = $proyecto->precioProyecto;
+
+        return Inertia::render('Convocatorias/Proyectos/ArticulacionSennova/Index', [
+            'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'proyecto'      => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica'),
+        ]);
+    }
 }
