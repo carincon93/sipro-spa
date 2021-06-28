@@ -62,6 +62,14 @@
                 </a>
             </div>
         {/if}
+        {#if proyecto.codigo_linea_programatica == 70}
+            <div class="w-10/12 step ml-5">
+                <a use:inertia active={route().current('convocatorias.proyectos.edt.index')} href={route('convocatorias.proyectos.edt.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
+                    <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
+                    <p class="text-sm text-center">EDT</p>
+                </a>
+            </div>
+        {/if}
         <div class="w-10/12 step{proyecto.codigo_linea_programatica != 23 ? ' ml-5' : ''}">
             <a use:inertia active={route().current('convocatorias.proyectos.presupuesto.index')} href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />

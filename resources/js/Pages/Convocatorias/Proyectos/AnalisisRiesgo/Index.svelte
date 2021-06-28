@@ -91,7 +91,7 @@
 
             {#if analisisRiesgos.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

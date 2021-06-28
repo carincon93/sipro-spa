@@ -123,13 +123,13 @@ class AnalisisRiesgoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $analisisRiesgo->nivel                = $request->nivel;
-        $analisisRiesgo->tipo                 = $request->tipo;
-        $analisisRiesgo->descripcion          = $request->descripcion;
-        $analisisRiesgo->probabilidad          = $request->probabilidad;
-        $analisisRiesgo->impacto               = $request->impacto;
-        $analisisRiesgo->efectos              = $request->efectos;
-        $analisisRiesgo->medidas_mitigacion  = $request->medidas_mitigacion;
+        $analisisRiesgo->nivel              = $request->nivel;
+        $analisisRiesgo->tipo               = $request->tipo;
+        $analisisRiesgo->descripcion        = $request->descripcion;
+        $analisisRiesgo->probabilidad       = $request->probabilidad;
+        $analisisRiesgo->impacto            = $request->impacto;
+        $analisisRiesgo->efectos            = $request->efectos;
+        $analisisRiesgo->medidas_mitigacion = $request->medidas_mitigacion;
         $analisisRiesgo->proyecto()->associate($proyecto);
 
         $analisisRiesgo->save();
