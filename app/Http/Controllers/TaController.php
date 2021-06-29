@@ -7,12 +7,15 @@ use App\Models\Proyecto;
 use App\Models\Ta;
 use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaRequest;
+use App\Models\GrupoInvestigacion;
+use App\Models\LineaInvestigacion;
 use App\Models\Regional;
+use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TaController extends Controller
@@ -201,6 +204,14 @@ class TaController extends Controller
         return redirect()->route('convocatorias.ta.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
+    /**
+     * updateCantidadRolesTa
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function updateCantidadRolesTa(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('modificar-proyecto-autor', [$proyecto]);
@@ -220,6 +231,13 @@ class TaController extends Controller
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
+    /**
+     * showArticulacionSennova
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
     public function showArticulacionSennova(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
@@ -228,8 +246,32 @@ class TaController extends Controller
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
 
         return Inertia::render('Convocatorias/Proyectos/ArticulacionSennova/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'proyecto'      => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica'),
+            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica'),
+            'lineasInvestigacion'       => LineaInvestigacion::select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
+            'gruposInvestigacion'       => GrupoInvestigacion::select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
+            'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
+
+            'gruposInvestigacionRelacionados'       => $proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
+            'lineasInvestigacionRelacionadas'       => $proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
+            'semillerosInvestigacionRelacionados'   => $proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
         ]);
+    }
+
+    /**
+     * storeArticulacionSennova
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function storeArticulacionSennova(ArticulacionSennovaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
+        $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
+        $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 }

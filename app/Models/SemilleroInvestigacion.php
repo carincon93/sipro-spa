@@ -56,6 +56,16 @@ class SemilleroInvestigacion extends Model
     }
 
     /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_semillero_investigacion', 'semillero_investigacion_id', 'proyecto_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
