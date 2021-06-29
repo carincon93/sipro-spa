@@ -238,6 +238,26 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with GrupoInvestigacion
+     *
+     * @return object
+     */
+    public function gruposInvestigacion()
+    {
+        return $this->belongsToMany(GrupoInvestigacion::class, 'proyecto_grupo_investigacion', 'proyecto_id', 'grupo_investigacion_id');
+    }
+
+    /**
+     * Relationship with LineaInvestigacion
+     *
+     * @return object
+     */
+    public function lineasInvestigacion()
+    {
+        return $this->belongsToMany(LineaInvestigacion::class, 'proyecto_linea_investigacion', 'proyecto_id', 'linea_investigacion_id');
+    }
+
+    /**
      * Relationship with SemilleroInvestigacion
      *
      * @return object
@@ -392,6 +412,12 @@ class Proyecto extends Model
      */
     public function getPrecioProyectoAttribute()
     {
-        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
+        $totalEDT = 0;
+        if ($this->ta()->exists() && $this->lineaProgramatica->codigo == 70) {
+            foreach ($this->ta->edt as $evento) {
+                $totalEDT += $evento->presupuesto;
+            }
+        }
+        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute() + $totalEDT;
     }
 }

@@ -71,6 +71,16 @@ class GrupoInvestigacion extends Model
     }
 
     /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_grupo_investigacion', 'grupo_investigacion_id', 'proyecto_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
