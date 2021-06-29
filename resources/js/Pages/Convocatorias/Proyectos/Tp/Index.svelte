@@ -28,7 +28,7 @@
         <div slot="title">Tecnoparque</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [8])}
+            {#if isSuperAdmin || checkPermission(authUser, [17])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.tp.create', [convocatoria.id]))} variant="raised">Crear proyecto Tecnoparque</Button>
             {/if}
         </div>
@@ -62,7 +62,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [9, 10])}
+                            {#if isSuperAdmin || checkPermission(authUser, [18, 19])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, proyecto_tp.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

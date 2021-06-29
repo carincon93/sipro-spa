@@ -59,7 +59,7 @@ class TpController extends Controller
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
-        $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
+        $proyecto->lineaProgramatica()->associate(4);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
 
@@ -79,7 +79,7 @@ class TpController extends Controller
 
         $tp->resumen_regional                     = 'Por favor diligencie el resumen regional';
         $tp->antecedentes_regional                = 'Por favor diligencie los antecedentes regional';
-        $tp->retos_oportunidades                  = 'Descripción de Retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto';
+        $tp->retos_oportunidades                  = 'Descripción de Retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto';
         $tp->pertinencia_territorio               = 'Justificacion y pertinencia en el territorio';
         $tp->metodologia_local                    = 'Descripcion de La Metodología aplicada a nivel local';
         $tp->numero_instituciones                 = 0;
@@ -128,11 +128,10 @@ class TpController extends Controller
         $tp->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
-            'convocatoria'                      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
-            'tp'                              => $tp,
-            'lineaTecnologicaRelacionada'       => $tp->tecnoacademiaLineaTecnologica()->exists() ? $tp->tecnoacademiaLineaTecnologica->id : null,
-            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
-            'proyectoMunicipios'                => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
+            'tp'                 => $tp,
+            'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
         ]);
     }
 

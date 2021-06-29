@@ -31,7 +31,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.metodologia', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -47,7 +47,7 @@
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4">
                 <div>
                     <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
@@ -65,7 +65,7 @@
             {/if}
         </fieldset>
         <div class="mt-4 bg-gray-100 border-t border-gray-200 flex items-center">
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -83,7 +83,7 @@
 
     <Gantt
         items={actividades}
-        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',
                   params: [convocatoria.id, proyecto.id],

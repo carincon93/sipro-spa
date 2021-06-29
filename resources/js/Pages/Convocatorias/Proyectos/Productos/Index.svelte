@@ -41,7 +41,7 @@
 
     <div class="mb-6 flex justify-end items-center">
         <div>
-            {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11]) && validacionResultados == null && proyecto.modificable == true)}
+            {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11, 17]) && validacionResultados == null && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))}>
                     <div>
                         <span>Crear</span>
@@ -54,7 +54,7 @@
 
     <Gantt
         items={productos}
-        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13])
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])
             ? {
                   uri: 'convocatorias.proyectos.productos.edit',
                   params: [convocatoria.id, proyecto.id],

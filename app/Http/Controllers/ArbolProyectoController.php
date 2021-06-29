@@ -151,6 +151,7 @@ class ArbolProyectoController extends Controller
         $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
         $causasDirectas  = $proyecto->causasDirectas()->with('causasIndirectas')->get();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $proyecto->problema_central = $proyecto->idi->problema_central;
@@ -164,8 +165,10 @@ class ArbolProyectoController extends Controller
                 $proyecto->justificacion_problema   = $proyecto->tp->justificacion_problema;
                 $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
                 $proyecto->problema_central         = $proyecto->tp->problema_central;
-
+                break;
             case $proyecto->servicioTecnologico()->exists():
+                dd($proyecto->servicioTecnologico()->exists());
+
                 $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
                 break;
             case $proyecto->culturaInnovacion()->exists():

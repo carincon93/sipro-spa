@@ -94,7 +94,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && tp.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
             $form.put(route('convocatorias.tp.update', [convocatoria.id, tp.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -108,7 +108,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [10]) && tp.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)) {
             $deleteForm.delete(route('convocatorias.tp.destroy', [convocatoria.id, tp.id]), {
                 preserveScroll: true,
             })
@@ -131,7 +131,7 @@
     <Stepper {convocatoria} proyecto={tp} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && tp.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true) ? undefined : true}>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
@@ -164,7 +164,7 @@
                         <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 6)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                     </div>
                 </div>
                 <div class="mt-44 grid grid-cols-2">
@@ -238,7 +238,7 @@
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
+                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
@@ -302,10 +302,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [10]) && tp.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [9, 10]) && tp.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
