@@ -46,7 +46,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.presupuesto.lote.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
@@ -74,7 +74,7 @@
 </script>
 
 <form on:submit|preventDefault={submit} id="form-estudio-mercado">
-    <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11]) && proyecto.modificable == true) ? undefined : true}>
+    <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
         <div class="mt-4">
             <InfoMessage class="mb-2" message="Diligencie los campos de <strong>Cantidad</strong> y <strong>Ficha técnica</strong> solo si este rubro es de maquinaria/equipos." />
 
