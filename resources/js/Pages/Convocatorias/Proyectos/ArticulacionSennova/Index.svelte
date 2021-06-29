@@ -3,7 +3,6 @@
     import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import { Inertia } from '@inertiajs/inertia'
 
     import Stepper from '@/Shared/Stepper'
     import Label from '@/Shared/Label'
@@ -30,9 +29,9 @@
 
     let sending = false
     let form = useForm({
-        lineas_investigacion: lineasInvestigacionRelacionadas,
-        grupos_investigacion: gruposInvestigacionRelacionados,
-        semilleros_investigacion: semillerosInvestigacionRelacionados,
+        lineas_investigacion: lineasInvestigacionRelacionadas.length > 0 ? lineasInvestigacionRelacionadas : null,
+        grupos_investigacion: gruposInvestigacionRelacionados.length > 0 ? gruposInvestigacionRelacionados : null,
+        semilleros_investigacion: semillerosInvestigacionRelacionados.length > 0 ? semillerosInvestigacionRelacionados : null,
     })
 
     function submit() {
