@@ -34,6 +34,7 @@ use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\ReglasRolTaController;
 use App\Http\Controllers\TaController;
 use App\Http\Controllers\TpController;
 use App\Http\Controllers\ProyectoAnexoController;
@@ -427,9 +428,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas programáticas
      */
     Route::get('web-api/lineas-programaticas/{categoria_proyecto}', function ($categoriaProyecto) {
-        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
-            ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
-            ->get());
+        if ($categoriaProyecto) {
+            return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
+                ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
+                ->get());
+        } else {
+            return response(LineaProgramatica::select('id as value', 'nombre as label')
+                ->get());
+        }
     })->name('web-api.lineas-programaticas');
 
     /**
@@ -565,6 +571,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'showArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'storeArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova.store');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/rol/sennova/ta', [TaController::class, 'updateCantidadRolesTa'])->name('convocatorias.proyectos.rol-sennova-ta.update');
+    Route::resource('reglas-roles-ta', ReglasRolTaController::class)->parameters(['reglas-roles-ta' => 'regla-rol-ta'])->except(['show']);
     Route::resource('convocatorias.proyectos.edt', EdtController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'edt' => 'edt'])->except(['show']);
     Route::resource('convocatorias.ta', TaController::class)->parameters(['convocatorias' => 'convocatoria', 'ta' => 'ta'])->except(['show']);
 

@@ -28,7 +28,7 @@
     })
 
     async function getLineaProgramatica() {
-        let res = await axios.get(route('web-api.lineas-programaticas'))
+        let res = await axios.get(route('web-api.lineas-programaticas', 0))
         lineasProgramaticas = res.data
         selectLineaProgramatica()
     }

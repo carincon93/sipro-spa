@@ -21,12 +21,10 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id]}>
         <div slot="title">Roles SENNOVA</div>
 
         <div slot="actions">
