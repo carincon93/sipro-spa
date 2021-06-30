@@ -68,6 +68,16 @@ class Tecnoacademia extends Model
     }
 
     /**
+     * Relationship with ReglaRolTa
+     *
+     * @return void
+     */
+    public function reglasRolesTa()
+    {
+        return $this->hasMany(ReglaRolTa::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

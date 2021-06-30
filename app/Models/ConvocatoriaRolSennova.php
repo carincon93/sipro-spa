@@ -106,46 +106,4 @@ class ConvocatoriaRolSennova extends Model
             $query->whereRaw("unaccent(mensaje) ilike unaccent('%" . $search . "%')");
         });
     }
-
-    /**
-     * getTipoAttribute
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function getNivelAcademicoAttribute($value)
-    {
-        switch ($value) {
-            case 1:
-                $value = 'técnico';
-                break;
-            case 2:
-                $value = 'tecnólogo';
-                break;
-            case 3:
-                $value = 'pregrado';
-                break;
-            case 4:
-                $value = 'especalización';
-                break;
-            case 5:
-                $value = 'maestría';
-                break;
-            case 6:
-                $value = 'doctorado';
-                break;
-            case 7:
-                $value = 'ninguno';
-                break;
-            case 8:
-                $value = 'técnico con especialización';
-                break;
-            case 9:
-                $value = 'tecnólogo con especialización';
-                break;
-            default:
-                break;
-        }
-        return $value;
-    }
 }

@@ -103,7 +103,7 @@ trait PresupuestoValidationTrait
     /**
      * serviciosMantenimientoValidation
      *
-     * REQ-LINEA-23 Antes de diligenciar este rubro en el aplicativo SGPS – SIPRO de tenga en cuenta que NO debe superar el 5% del valor total del proyecto, sin incluir el valor de los contratos de aprendizaje.
+     * REQ-LINEA-23 Antes de diligenciar este rubro en el aplicativo SGPS – SIPRO tenga en cuenta que NO debe superar el 5% del valor total del proyecto, sin incluir el valor de los contratos de aprendizaje.
      * 
      * @param  mixed $proyecto
      * @param  mixed $proyectoPresupuesto
