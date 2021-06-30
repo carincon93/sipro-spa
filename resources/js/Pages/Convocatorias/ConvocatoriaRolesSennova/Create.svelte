@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Número de meses de experiencia requerida" id="experiencia" type="number" input$min="0" class="mt-1" bind:value={$form.experiencia} error={errors.experiencia} />
+                    <Input label="Meses de experiencia requerida" id="experiencia" type="text" class="mt-1" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
