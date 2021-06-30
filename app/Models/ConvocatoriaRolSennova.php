@@ -103,7 +103,7 @@ class ConvocatoriaRolSennova extends Model
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
-            $query->whereRaw("unaccent(mensaje) ilike unaccent('%" . $search . "%')");
+            $query->whereRaw("unaccent(roles_sennova.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

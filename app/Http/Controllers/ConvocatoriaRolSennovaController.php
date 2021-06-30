@@ -24,8 +24,7 @@ class ConvocatoriaRolSennovaController extends Controller
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Index', [
             'filters'   => request()->all('search'),
             'convocatoria' => $convocatoria,
-            'convocatoriaRolesSennova' =>
-            $convocatoria->convocatoriaRolesSennova()
+            'convocatoriaRolesSennova' => $convocatoria->convocatoriaRolesSennova()
                 ->selectRaw("convocatoria_rol_sennova.id, lineas_programaticas.nombre as linea_programatica_nombre, convocatoria_rol_sennova.asignacion_mensual, CASE convocatoria_rol_sennova.nivel_academico
                         WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                         WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
