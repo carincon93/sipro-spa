@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -8,6 +8,7 @@
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
+    import InfoMessage from '@/Shared/InfoMessage'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
@@ -20,13 +21,19 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let filters = {}
 </script>
 
 <AuthenticatedLayout>
     <DataTable class="mt-20">
         <div slot="title">Roles SENNOVA</div>
+
+        <div slot="caption">
+            <InfoMessage>
+                Para modificar las reglas de negocio de los roles de Tecnoacademia haga clic en el siguiente botón:
+
+                <Button on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas de roles TA</Button>
+            </InfoMessage>
+        </div>
 
         <div slot="actions">
             {#if isSuperAdmin}
