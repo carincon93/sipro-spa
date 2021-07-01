@@ -25,7 +25,7 @@ class ReglaRolTaRequest extends FormRequest
     {
         return [
             'tecnoacademia_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
-            'rol_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:rol_sennova,id'],
+            'rol_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
             'maximo'            => ['required', 'min:0', 'max:32767', 'integer'],
         ];
     }

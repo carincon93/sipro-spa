@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ReglaRolTa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReglaRolTaRequest;
+use App\Models\RolSennova;
+use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -35,7 +37,10 @@ class ReglaRolTaController extends Controller
     {
         $this->authorize('create', [ReglaRolTa::class]);
 
-        return Inertia::render('ReglasRolesTa/Create');
+        return Inertia::render('ReglasRolesTa/Create', [
+            'rolesTa'           => RolSennova::select('id as value', 'nombre as label')->whereIn('id', [3, 9, 10, 11, 12, 13, 14, 28])->get(),
+            'tecnoacademias'    => Tecnoacademia::select('id as value', 'nombre as label')->get()
+        ]);
     }
 
     /**
@@ -55,7 +60,7 @@ class ReglaRolTaController extends Controller
 
         $reglaRolTa->save();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('reglas-roles-ta.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -80,7 +85,9 @@ class ReglaRolTaController extends Controller
         $this->authorize('update', [ReglaRolTa::class, $reglaRolTa]);
 
         return Inertia::render('ReglasRolesTa/Edit', [
-            'reglasRolesTa' => $reglaRolTa
+            'reglaRolTa'        => $reglaRolTa,
+            'rolesTa'           => RolSennova::select('id as value', 'nombre as label')->whereIn('id', [3, 9, 10, 11, 12, 13, 14, 28])->get(),
+            'tecnoacademias'    => Tecnoacademia::select('id as value', 'nombre as label')->get()
         ]);
     }
 
@@ -116,6 +123,6 @@ class ReglaRolTaController extends Controller
 
         $reglaRolTa->delete();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('reglas-roles-ta.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

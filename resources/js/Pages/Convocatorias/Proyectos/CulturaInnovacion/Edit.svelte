@@ -630,7 +630,7 @@
             <div class="mt-40 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
                     <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
@@ -640,7 +640,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA sexta edición." />
+                    <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
                 </div>
                 <div>
                     <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
@@ -660,7 +660,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Séptima edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
