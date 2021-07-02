@@ -33,7 +33,7 @@
         linea_programatica_id: null,
         mesa_tecnica_id: null,
         mesa_tecnica_sector_productivo_id: null,
-        titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
+        titulo: '',
         fecha_inicio: '',
         fecha_finalizacion: '',
         max_meses_ejecucion: 0,

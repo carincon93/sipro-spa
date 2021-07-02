@@ -35,7 +35,7 @@
         red_conocimiento_id: null,
         linea_programatica_id: null,
         actividad_economica_id: null,
-        titulo: 'Escriba aquí el título del proyecto. No mayor a 20 palabras.',
+        titulo: '',
         fecha_inicio: null,
         fecha_finalizacion: null,
         max_meses_ejecucion: 0,

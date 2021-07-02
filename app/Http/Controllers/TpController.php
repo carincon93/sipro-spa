@@ -67,21 +67,21 @@ class TpController extends Controller
         $tp->fecha_inicio                         = $request->fecha_inicio;
         $tp->fecha_finalizacion                   = $request->fecha_finalizacion;
         $tp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
-        $tp->resumen                              = 'Por favor diligencie el resumen del proyecto';
-        $tp->antecedentes                         = 'Por favor diligencie los antecedentes del proyecto';
-        $tp->marco_conceptual                     = 'Por favor diligencie el marco conceptual del proyecto';
-        $tp->metodologia                          = 'Por favor diligencie la metodología del proyecto';
-        $tp->propuesta_sostenibilidad             = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
-        $tp->bibliografia                         = 'Por favor diligencie la bibliografía';
-        $tp->impacto_municipios                   = 'Describa el beneficio en los municipios';
-        $tp->impacto_centro_formacion             = 'Describa el beneficio en el centro de formación';
-        $tp->identificacion_problema              = 'Describa la identificación del problema';
+        $tp->resumen                              = '';
+        $tp->antecedentes                         = '';
+        $tp->marco_conceptual                     = '';
+        $tp->metodologia                          = '';
+        $tp->propuesta_sostenibilidad             = '';
+        $tp->bibliografia                         = '';
+        $tp->impacto_municipios                   = '';
+        $tp->impacto_centro_formacion             = '';
+        $tp->identificacion_problema              = '';
 
-        $tp->resumen_regional                     = 'Por favor diligencie el resumen regional';
-        $tp->antecedentes_regional                = 'Por favor diligencie los antecedentes regional';
-        $tp->retos_oportunidades                  = 'Descripción de Retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto';
-        $tp->pertinencia_territorio               = 'Justificacion y pertinencia en el territorio';
-        $tp->metodologia_local                    = 'Descripcion de La Metodología aplicada a nivel local';
+        $tp->resumen_regional                     = '';
+        $tp->antecedentes_regional                = '';
+        $tp->retos_oportunidades                  = '';
+        $tp->pertinencia_territorio               = '';
+        $tp->metodologia_local                    = '';
         $tp->numero_instituciones                 = 0;
         $tp->nombre_instituciones                 = null;
 

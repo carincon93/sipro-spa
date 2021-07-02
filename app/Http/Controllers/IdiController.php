@@ -73,15 +73,15 @@ class IdiController extends Controller
         $idi->justificacion_industria_4             = null;
         $idi->justificacion_economia_naranja        = null;
         $idi->justificacion_politica_discapacidad   = null;
-        $idi->resumen                               = 'Por favor diligencie el resumen del proyecto';
-        $idi->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
-        $idi->marco_conceptual                      = 'Por favor diligencie el marco conceptual del proyecto';
-        $idi->metodologia                           = 'Por favor diligencie la metodología del proyecto';
-        $idi->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
-        $idi->bibliografia                          = 'Por favor diligencie la bibliografía';
+        $idi->resumen                               = '';
+        $idi->antecedentes                          = '';
+        $idi->marco_conceptual                      = '';
+        $idi->metodologia                           = '';
+        $idi->propuesta_sostenibilidad              = '';
+        $idi->bibliografia                          = '';
         $idi->numero_aprendices                     = 0;
-        $idi->impacto_municipios                    = 'Describa el beneficio en los municipios';
-        $idi->impacto_centro_formacion              = 'Describa el impacto en el centro de formación';
+        $idi->impacto_municipios                    = '';
+        $idi->impacto_centro_formacion              = '';
 
         $idi->muestreo                              = 6;
         $idi->actividades_muestreo                  = null;
