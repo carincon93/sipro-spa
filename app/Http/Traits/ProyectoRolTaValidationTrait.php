@@ -43,7 +43,7 @@ trait ProyectoRolTaValidationTrait
         if (count($proyectoRolesSennova) > 0) {
             foreach ($proyectoRolesSennova as $proyectoRolSennova) {
                 if ($proyectoRolSennovaBd && $proyectoRolSennovaBd->id == $proyectoRolSennova->id) {
-                    // $proyectoRolSennova->numero_roles = 0;
+                    $proyectoRolSennova->numero_roles = 0;
                 }
                 $cantidadRoles += $proyectoRolSennova->numero_roles;
             }
