@@ -41,6 +41,43 @@
             })
         }
     }
+
+    function nivelAcademico(numeroNivel) {
+        let nivelAcademico = ''
+        switch (numeroNivel) {
+            case 1:
+                nivelAcademico = 'técnico'
+                break
+            case 2:
+                nivelAcademico = 'tecnólogo'
+                break
+            case 3:
+                nivelAcademico = 'pregrado'
+                break
+            case 4:
+                nivelAcademico = 'especalización'
+                break
+            case 5:
+                nivelAcademico = 'maestría'
+                break
+            case 6:
+                nivelAcademico = 'doctorado'
+                break
+            case 7:
+                nivelAcademico = 'ninguno'
+                break
+            case 8:
+                nivelAcademico = 'técnico con especialización'
+                break
+            case 9:
+                nivelAcademico = 'tecnólogo con especialización'
+                break
+            default:
+                break
+        }
+
+        return nivelAcademico
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -106,7 +143,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyectoRolSennova?.convocatoria_rol_sennova?.nivel_academico}
+                            {nivelAcademico(proyectoRolSennova?.convocatoria_rol_sennova?.nivel_academico)}
                         </p>
                     </td>
                     <td class="border-t">
