@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use App\Models\ConvocatoriaRolSennova;
 use App\Models\ProyectoRolSennova;
 use App\Models\ReglaRolTa;
-use Illuminate\Support\Facades\Log;
 
 trait ProyectoRolTaValidationTrait
 {

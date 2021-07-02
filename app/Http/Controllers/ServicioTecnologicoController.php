@@ -74,17 +74,16 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
         $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
 
-        $servicioTecnologico->resumen                               = 'Por favor diligencie el resumen del proyecto';
-        $servicioTecnologico->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
+        $servicioTecnologico->resumen                               = '';
+        $servicioTecnologico->antecedentes                          = '';
         $servicioTecnologico->objetivo_general                      = null;
         $servicioTecnologico->problema_central                      = null;
         $servicioTecnologico->justificacion_problema                = null;
         $servicioTecnologico->identificacion_problema               = null;
-        $servicioTecnologico->pregunta_formulacion_problema         = 'Describa la pregunta de la formulación del problema';
-        $servicioTecnologico->metodologia                           = 'Por favor diligencie la metodología del proyecto';
-        $servicioTecnologico->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
-        $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
-        $servicioTecnologico->bibliografia                          = 'Por favor diligencie la bibliografía';
+        $servicioTecnologico->pregunta_formulacion_problema         = '';
+        $servicioTecnologico->metodologia                           = '';
+        $servicioTecnologico->propuesta_sostenibilidad              = '';
+        $servicioTecnologico->bibliografia                          = '';
 
         $servicioTecnologico->subclasificacionTipologiaSt()->associate($request->subclasificacion_tipologia_st_id);
         $servicioTecnologico->estadoSistemaGestion()->associate($request->estado_sistema_gestion_id);

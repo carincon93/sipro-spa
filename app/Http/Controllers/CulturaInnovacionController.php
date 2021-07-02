@@ -78,15 +78,15 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->justificacion_industria_4             = null;
         $culturaInnovacion->justificacion_economia_naranja        = null;
         $culturaInnovacion->justificacion_politica_discapacidad   = null;
-        $culturaInnovacion->resumen                               = 'Por favor diligencie el resumen del proyecto';
-        $culturaInnovacion->antecedentes                          = 'Por favor diligencie los antecedentes del proyecto';
-        $culturaInnovacion->marco_conceptual                      = 'Por favor diligencie el marco conceptual del proyecto';
-        $culturaInnovacion->metodologia                           = 'Por favor diligencie la metodología del proyecto';
-        $culturaInnovacion->propuesta_sostenibilidad              = 'Por favor diligencie la propuesta de sotenibilidad del proyecto';
-        $culturaInnovacion->bibliografia                          = 'Por favor diligencie la bibliografía';
+        $culturaInnovacion->resumen                               = '';
+        $culturaInnovacion->antecedentes                          = '';
+        $culturaInnovacion->marco_conceptual                      = '';
+        $culturaInnovacion->metodologia                           = '';
+        $culturaInnovacion->propuesta_sostenibilidad              = '';
+        $culturaInnovacion->bibliografia                          = '';
         $culturaInnovacion->numero_aprendices                     = 0;
-        $culturaInnovacion->impacto_municipios                    = 'Describa el beneficio en los municipios';
-        $culturaInnovacion->impacto_centro_formacion              = 'Describa el impacto en el centro de formación';
+        $culturaInnovacion->impacto_municipios                    = '';
+        $culturaInnovacion->impacto_centro_formacion              = '';
 
         $culturaInnovacion->muestreo                              = 6;
         $culturaInnovacion->actividades_muestreo                  = null;
