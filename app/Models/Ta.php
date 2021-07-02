@@ -163,6 +163,13 @@ class Ta extends Model
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
+        } else if ($user->hasRole(5)) {
+            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
         } else {
             $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)

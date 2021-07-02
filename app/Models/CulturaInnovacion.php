@@ -214,6 +214,13 @@ class CulturaInnovacion extends Model
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
+        } else if ($user->hasRole(20)) {
+            $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->orderBy('cultura_innovacion.id', 'ASC')
+                ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else {
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)

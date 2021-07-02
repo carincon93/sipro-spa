@@ -9,9 +9,11 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
+    import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let categoriasProyectos
+    export let lideres
 
     $: $title = 'Líneas programáticas'
 
@@ -27,6 +29,7 @@
         descripcion: '',
         codigo: '',
         categoria_proyecto: null,
+        lideres: null,
     })
 
     function submit() {
@@ -72,6 +75,10 @@
 
                 <div class="mt-4">
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+                <div class="mt-4">
+                    <Label required class="mb-4" for="lideres" value="Nombre de los lideres" />
+                    <SelectMulti id="lideres" bind:selectedValue={$form.lideres} items={lideres} isMulti={true} error={errors.municipios} placeholder="Buscar lideres" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

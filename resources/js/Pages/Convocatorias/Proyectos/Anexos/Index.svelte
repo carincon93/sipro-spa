@@ -1,21 +1,22 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
+    import Button from '@/Shared/Button'
+    import Input from '@/Shared/Input'
     import Create from './Create'
 
     import Stepper from '@/Shared/Stepper'
 
+    export let errors
     export let convocatoria
     export let proyecto
     export let proyectoAnexo
     export let anexos
-
-    let sending = false
 
     $title = 'Anexos'
 
@@ -24,10 +25,40 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let sending = false
+    let form = useForm({
+        video: proyecto.video,
+    })
+
+    function submit() {
+        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true && !sending)) {
+            $form.put(route('convocatorias.servicios-tecnologicos.video', [convocatoria.id, proyecto.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
+
+    {#if proyecto.codigo_linea_programatica == 68}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Video</h1>
+        <p class="text-center">Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)</p>
+
+        <form on:submit|preventDefault={submit} class="mt-4 p-4">
+            <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true) ? undefined : true}>
+                <div>
+                    <Input label="Enlace del video" type="url" class="mt-1" bind:value={$form.video} error={errors?.video} required />
+                </div>
+                <div class="w-1/12">
+                    <Button loading={sending} class="w-full mt-4" type="submit">Guardar</Button>
+                </div>
+            </fieldset>
+        </form>
+    {/if}
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Anexos</div>

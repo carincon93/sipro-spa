@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserPolicy
 {
@@ -64,7 +65,31 @@ class UserPolicy
      */
     public function update(User $user, $proponente)
     {
-        if ($user->dinamizadorCentroFormacion->id == $proponente->centroFormacion->id) {
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%líder i+d+i%')->where('users.id', $user->id);
+        })->first() && $proponente) {
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%líder cultura de la innovación%')->where('users.id', $user->id);
+        })->first() && $proponente) {
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%líder tecnoacademia%')->where('users.id', $user->id);
+        })->first() && $proponente) {
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%líder tecnoparque%')->where('users.id', $user->id);
+        })->first() && $proponente) {
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%líder servicios tecnológicos%')->where('users.id', $user->id);
+        })->first() && $proponente) {
+        }
+        if ($user->dinamizadorCentroFormacion && $user->dinamizadorCentroFormacion->id == $proponente->centroFormacion->id) {
             return true;
         }
 

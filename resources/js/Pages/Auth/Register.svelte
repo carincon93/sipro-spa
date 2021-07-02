@@ -91,7 +91,7 @@
     </div>
     <div class="grid grid-cols-2">
         {#each roles as { id, name }, i}
-            <FormField>
+            <FormField class="mt-2 border-r border-t">
                 <Checkbox bind:group={$form.role_id} value={id} />
                 <span slot="label" class="first-letter-uppercase inline-block">{name}</span>
             </FormField>

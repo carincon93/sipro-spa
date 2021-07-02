@@ -167,8 +167,6 @@ class ArbolProyectoController extends Controller
                 $proyecto->problema_central         = $proyecto->tp->problema_central;
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                dd($proyecto->servicioTecnologico()->exists());
-
                 $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
                 break;
             case $proyecto->culturaInnovacion()->exists():

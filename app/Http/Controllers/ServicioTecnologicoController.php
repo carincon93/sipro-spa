@@ -187,4 +187,27 @@ class ServicioTecnologicoController extends Controller
 
         return redirect()->route('convocatorias.servicios-tecnologicos.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
+
+    /**
+     * updateVideo
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $servicioTecnologico
+     * @return void
+     */
+    public function updateVideo(Request $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
+    {
+        $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
+
+        $request->validate([
+            'video' => 'nullable|max:255|url',
+        ]);
+
+        $servicioTecnologico->update([
+            'video' => $request->video
+        ]);
+
+        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+    }
 }

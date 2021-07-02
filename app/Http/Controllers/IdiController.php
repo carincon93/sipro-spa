@@ -208,7 +208,6 @@ class IdiController extends Controller
         $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
         $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnologicas()->detach();
 
-
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
