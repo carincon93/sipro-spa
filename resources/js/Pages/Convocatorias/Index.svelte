@@ -31,7 +31,7 @@
                         <li>{convocatoriaActiva.fechas_ta}</li>
                         <li>{convocatoriaActiva.fechas_tp}</li>
                     </ul>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
                             Convocatoria
                             {convocatoriaActiva.year}
@@ -65,7 +65,7 @@
             </div>
         {/if}
         <div class="grid grid-cols-3 gap-4">
-            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])}
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
                     <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-center items-center flex-col">
                         Convocatoria

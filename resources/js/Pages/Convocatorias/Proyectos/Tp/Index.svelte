@@ -62,7 +62,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [18, 19])}
+                            {#if isSuperAdmin || checkPermission(authUser, [18, 19, 20])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, proyecto_tp.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

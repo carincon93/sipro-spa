@@ -87,6 +87,16 @@ class LineaProgramatica extends Model
     }
 
     /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function lideres()
+    {
+        return $this->belongsToMany(User::class, 'lider_linea_programatica', 'linea_programatica_id', 'user_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

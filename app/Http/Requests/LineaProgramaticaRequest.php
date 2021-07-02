@@ -47,5 +47,21 @@ class LineaProgramaticaRequest extends FormRequest
         $this->merge([
             'nombre' => mb_strtolower($this->nombre),
         ]);
+
+        if (is_array($this->lideres)) {
+            if (isset($this->lideres['value']) && is_numeric($this->lideres['value'])) {
+                $this->merge([
+                    'lideres' => $this->lideres['value'],
+                ]);
+            } else {
+                $lideres = [];
+                foreach ($this->lideres as $lider) {
+                    if (is_array($lider)) {
+                        array_push($lideres, $lider['value']);
+                    }
+                }
+                $this->merge(['lideres' => $lideres]);
+            }
+        }
     }
 }

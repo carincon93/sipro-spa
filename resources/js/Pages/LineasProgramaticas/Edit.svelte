@@ -11,10 +11,13 @@
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
     import Dialog from '@/Shared/Dialog'
+    import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let lineaProgramatica
     export let categoriasProyectos
+    export let lideres
+    export let lideresLineaProgramatica
 
     $: $title = lineaProgramatica ? lineaProgramatica.nombre : null
 
@@ -30,6 +33,7 @@
         nombre: lineaProgramatica.nombre,
         codigo: lineaProgramatica.codigo,
         descripcion: lineaProgramatica.descripcion,
+        lideres: lideresLineaProgramatica.length > 0 ? lideresLineaProgramatica : null,
         categoria_proyecto: {
             value: lineaProgramatica.categoria_proyecto,
             label: categoriasProyectos.find((item) => item.value == lineaProgramatica.categoria_proyecto)?.label,
@@ -86,6 +90,11 @@
 
                 <div class="mt-4">
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" for="lideres" value="Nombre de los lideres" />
+                    <SelectMulti id="lideres" bind:selectedValue={$form.lideres} items={lideres} isMulti={true} error={errors.municipios} placeholder="Buscar lideres" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

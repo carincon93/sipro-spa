@@ -115,6 +115,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function lideresLineaProgramatica()
+    {
+        return $this->belongsToMany(LineaProgramatica::class, 'lider_linea_programatica', 'user_id', 'linea_programatica_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

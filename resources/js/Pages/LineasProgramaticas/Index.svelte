@@ -38,7 +38,6 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Categoría </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -53,11 +52,6 @@
                     <td class="border-t">
                         <p class="px-6 py-4">
                             {lineaProgramatica.codigo}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4">
-                            {lineaProgramatica.categoria_proyecto}
                         </p>
                     </td>
                     <td class="border-t td-actions">

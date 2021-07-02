@@ -47,7 +47,8 @@ class ServicioTecnologico extends Model
         'bibliografia',
         'max_meses_ejecucion',
         'estado_sistema_gestion_id',
-        'subclasificacion_tipologia_st_id'
+        'subclasificacion_tipologia_st_id',
+        'video'
     ];
 
     /**
@@ -158,6 +159,13 @@ class ServicioTecnologico extends Model
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
+                ->orderBy('servicios_tecnologicos.id', 'ASC')
+                ->filterServicioTecnologico(request()->only('search'))->paginate();
+        } else if ($user->hasRole(19)) {
+            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
+                ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
         } else {
