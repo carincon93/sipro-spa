@@ -75,7 +75,8 @@ class ReglaRolTa extends Model
     public function scopeFilterReglaRolTa($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%' . $search . '%');
+            $query->where('roles_sennova.nombre', 'ilike', '%' . $search . '%');
+            $query->orWhere('tecnoacademias.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }
