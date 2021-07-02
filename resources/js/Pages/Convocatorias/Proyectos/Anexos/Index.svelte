@@ -8,6 +8,9 @@
     import DataTable from '@/Shared/DataTable'
     import Button from '@/Shared/Button'
     import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Switch from '@/Shared/Switch'
+    import Textarea from '@/Shared/Textarea'
     import Create from './Create'
 
     import Stepper from '@/Shared/Stepper'
@@ -29,11 +32,13 @@
     let sending = false
     let form = useForm({
         video: proyecto.video,
+        infraestructura_adecuada: proyecto.infraestructura_adecuada,
+        especificaciones_area: proyecto.especificaciones_area,
     })
 
     function submit() {
         if ((isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true && !sending)) {
-            $form.put(route('convocatorias.servicios-tecnologicos.video', [convocatoria.id, proyecto.id]), {
+            $form.put(route('convocatorias.servicios-tecnologicos.infraestructura', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
@@ -45,12 +50,21 @@
     <Stepper {convocatoria} {proyecto} />
 
     {#if proyecto.codigo_linea_programatica == 68}
-        <h1 class="mt-24 mb-8 text-center text-3xl">Video</h1>
-        <p class="text-center">Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)</p>
+        <h1 class="mt-24 mb-8 text-center text-3xl">Especificaciones e infraestructura</h1>
 
         <form on:submit|preventDefault={submit} class="mt-4 p-4">
             <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true) ? undefined : true}>
-                <div>
+                <div class="mt-4">
+                    <Label required labelFor="infraestructura_adecuada" value="¿Cuenta con infraestructura adecuada y propia para el funcionamiento de la línea servicios tecnológicos en el centro de formación?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.infraestructura_adecuada} />
+                </div>
+                <div class="mt-4">
+                    <Label required labelFor="especificaciones_area" value="Relacione las especificaciones del área donde se desarrollan las actividades de servicios tecnológicos en el centro de formación" class="inline-block mb-4" />
+                    <Textarea label="Especificaciones del área" maxlength="40000" id="especificaciones_area" error={errors.especificaciones_area} bind:value={$form.especificaciones_area} required />
+                </div>
+                <div class="mt-4">
+                    <Label required labelFor="video" value="Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" class="inline-block mb-4" />
                     <Input label="Enlace del video" type="url" class="mt-1" bind:value={$form.video} error={errors?.video} required />
                 </div>
                 <div class="w-1/12">

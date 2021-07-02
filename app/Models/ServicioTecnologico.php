@@ -48,7 +48,9 @@ class ServicioTecnologico extends Model
         'max_meses_ejecucion',
         'estado_sistema_gestion_id',
         'subclasificacion_tipologia_st_id',
-        'video'
+        'video',
+        'especificaciones_area',
+        'infraestructura_adecuada'
     ];
 
     /**

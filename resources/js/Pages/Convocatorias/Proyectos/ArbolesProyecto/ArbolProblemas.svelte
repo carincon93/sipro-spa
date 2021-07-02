@@ -489,10 +489,10 @@
                         </div>
                     {/if}
                     <!-- Causas indirectas -->
-                    <div class="flex flex-wrap relative mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div class="flex flex-wrap causas-directas-line relative mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
                             {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-                                <div class="mb-4 causas-directas-line relative" style="flex: 1 0 33.333%">
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
                                     <div
                                         on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)}
                                         class="{causaIndirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaIndirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaIndirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
@@ -510,7 +510,7 @@
 
                         {#if proyecto.codigo_linea_programatica != 70}
                             {#each { length: cantidadCeldasCausasIndirectas - causaDirecta.causas_indirectas.length } as _empty}
-                                <div class="mb-4 causas-directas-line relative" style="flex: 1 0 33.333%">
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
                                     <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                         <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
                                     </div>
