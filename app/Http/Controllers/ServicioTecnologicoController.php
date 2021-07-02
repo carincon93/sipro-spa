@@ -189,23 +189,27 @@ class ServicioTecnologicoController extends Controller
     }
 
     /**
-     * updateVideo
+     * updateEspecificacionesInfraestructura
      *
      * @param  mixed $request
      * @param  mixed $convocatoria
      * @param  mixed $servicioTecnologico
      * @return void
      */
-    public function updateVideo(Request $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
+    public function updateEspecificacionesInfraestructura(Request $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
         $request->validate([
-            'video' => 'nullable|max:255|url',
+            'especificaciones_area'     => 'required|string|max:40000',
+            'infraestructura_adecuada'  => 'required|boolean',
+            'video'                     => 'nullable|max:255|url',
         ]);
 
         $servicioTecnologico->update([
-            'video' => $request->video
+            'especificaciones_area'     => $request->especificaciones_area,
+            'infraestructura_adecuada'  => $request->infraestructura_adecuada,
+            'video'                     => $request->video
         ]);
 
         return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');

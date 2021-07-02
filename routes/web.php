@@ -579,7 +579,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Servicios tecnológicos - Estrategia  nacional
      * 
      */
-    Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/video', [ServicioTecnologicoController::class, 'updateVideo'])->name('convocatorias.servicios-tecnologicos.video');
+    Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/infraestructura', [ServicioTecnologicoController::class, 'updateEspecificacionesInfraestructura'])->name('convocatorias.servicios-tecnologicos.infraestructura');
     Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
 
     /**
