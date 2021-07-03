@@ -91,9 +91,9 @@ class LineaProgramatica extends Model
      *
      * @return object
      */
-    public function lideres()
+    public function activadores()
     {
-        return $this->belongsToMany(User::class, 'lider_linea_programatica', 'linea_programatica_id', 'user_id');
+        return $this->belongsToMany(User::class, 'activador_linea_programatica', 'linea_programatica_id', 'user_id');
     }
 
     /**

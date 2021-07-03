@@ -13,7 +13,7 @@
 
     export let errors
     export let categoriasProyectos
-    export let lideres
+    export let activadores
 
     $: $title = 'Líneas programáticas'
 
@@ -29,7 +29,7 @@
         descripcion: '',
         codigo: '',
         categoria_proyecto: null,
-        lideres: null,
+        activadores: null,
     })
 
     function submit() {
@@ -77,8 +77,8 @@
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
                 <div class="mt-4">
-                    <Label required class="mb-4" for="lideres" value="Nombre de los lideres" />
-                    <SelectMulti id="lideres" bind:selectedValue={$form.lideres} items={lideres} isMulti={true} error={errors.municipios} placeholder="Buscar lideres" required />
+                    <Label required class="mb-4" for="activadores" value="Nombre de los activadores" />
+                    <SelectMulti id="activadores" bind:selectedValue={$form.activadores} items={activadores} isMulti={true} error={errors.municipios} placeholder="Buscar activadores" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

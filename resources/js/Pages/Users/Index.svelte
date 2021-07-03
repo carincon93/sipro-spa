@@ -56,7 +56,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={usuarios.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
+                            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('users.edit', usuario.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
@@ -72,7 +72,7 @@
 
             {#if usuarios.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

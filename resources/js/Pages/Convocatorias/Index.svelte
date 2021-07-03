@@ -1,10 +1,12 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
+    import { Inertia } from '@inertiajs/inertia'
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+
     import Button from '@/Shared/Button'
-    import { Inertia } from '@inertiajs/inertia'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatorias
     export let convocatoriaActiva
@@ -21,19 +23,12 @@
             <div>
                 {#if convocatoriaActiva}
                     <h1 class="font-bold text-5xl">
-                        Convocatoria {convocatoriaActiva.year}
+                        Convocatoria activa: {convocatoriaActiva.year}
                     </h1>
-                    <p class="mt-8">Fechas de convocatoria de las diferentes líneas programáticas:</p>
-                    <ul class="mt-4 list-disc">
-                        <li>{convocatoriaActiva.fechas_idi}</li>
-                        <li>{convocatoriaActiva.fechas_cultura}</li>
-                        <li>{convocatoriaActiva.fechas_st}</li>
-                        <li>{convocatoriaActiva.fechas_ta}</li>
-                        <li>{convocatoriaActiva.fechas_tp}</li>
-                    </ul>
+
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
-                            Convocatoria
+                            Revisar convocatoria
                             {convocatoriaActiva.year}
                         </Button>
                     {/if}
@@ -55,7 +50,7 @@
             </div>
         </div>
     </header>
-    <div class="py-12">
+    <div class={isSuperAdmin ? 'py-12' : ''}>
         {#if isSuperAdmin}
             <div class="flex justify-center items-center flex-col">
                 <p>A continuación, se listan todas las convocatorias, si desea crear una nueva de clic en el siguiente botón.</p>
@@ -64,6 +59,21 @@
                 </div>
             </div>
         {/if}
+        <div>
+            <h1 class="text-3xl mb-10 text-center">Fechas de convocatoria de las diferentes líneas programáticas:</h1>
+            <InfoMessage>
+                <ul class="list-disc p-4">
+                    <li>{convocatoriaActiva.fechas_idi}</li>
+                    <li>{convocatoriaActiva.fechas_cultura}</li>
+                    <li>{convocatoriaActiva.fechas_st}</li>
+                    <li>{convocatoriaActiva.fechas_ta}</li>
+                    <li>{convocatoriaActiva.fechas_tp}</li>
+                </ul>
+            </InfoMessage>
+        </div>
+
+        <h1 class="text-3xl m-10 text-center">Lista de convocatorias</h1>
+
         <div class="grid grid-cols-3 gap-4">
             {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}

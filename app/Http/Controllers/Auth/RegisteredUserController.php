@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
             return $query->where('name', 'ilike', '%proponente i+d+i%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder i+d+i%');
+                return $query->where('name', 'ilike', '%activador i+d+i%');
             })->get();
         }
 
@@ -74,7 +74,7 @@ class RegisteredUserController extends Controller
             return $query->where('name', 'ilike', '%proponente cultura de la innovación%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder cultura de la innovación%');
+                return $query->where('name', 'ilike', '%activador cultura de la innovación%');
             })->get();
         }
 
@@ -82,7 +82,7 @@ class RegisteredUserController extends Controller
             return $query->where('name', 'ilike', '%proponente tecnoacademia%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder tecnoacademia%');
+                return $query->where('name', 'ilike', '%activador tecnoacademia%');
             })->get();
         }
 
@@ -90,7 +90,7 @@ class RegisteredUserController extends Controller
             return $query->where('name', 'ilike', '%proponente tecnoparque%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder tecnoparque%');
+                return $query->where('name', 'ilike', '%activador tecnoparque%');
             })->get();
         }
 
@@ -98,7 +98,7 @@ class RegisteredUserController extends Controller
             return $query->where('name', 'ilike', '%proponente servicios tecnológicos%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder servicios tecnológicos%');
+                return $query->where('name', 'ilike', '%activador servicios tecnológicos%');
             })->get();
         }
 

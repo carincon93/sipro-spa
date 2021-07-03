@@ -16,8 +16,8 @@
     export let errors
     export let lineaProgramatica
     export let categoriasProyectos
-    export let lideres
-    export let lideresLineaProgramatica
+    export let activadores
+    export let activadoresLineaProgramatica
 
     $: $title = lineaProgramatica ? lineaProgramatica.nombre : null
 
@@ -33,7 +33,7 @@
         nombre: lineaProgramatica.nombre,
         codigo: lineaProgramatica.codigo,
         descripcion: lineaProgramatica.descripcion,
-        lideres: lideresLineaProgramatica.length > 0 ? lideresLineaProgramatica : null,
+        activadores: activadoresLineaProgramatica.length > 0 ? activadoresLineaProgramatica : null,
         categoria_proyecto: {
             value: lineaProgramatica.categoria_proyecto,
             label: categoriasProyectos.find((item) => item.value == lineaProgramatica.categoria_proyecto)?.label,
@@ -93,8 +93,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" for="lideres" value="Nombre de los lideres" />
-                    <SelectMulti id="lideres" bind:selectedValue={$form.lideres} items={lideres} isMulti={true} error={errors.municipios} placeholder="Buscar lideres" required />
+                    <Label required class="mb-4" for="activadores" value="Nombre de los activadores" />
+                    <SelectMulti id="activadores" bind:selectedValue={$form.activadores} items={activadores} isMulti={true} error={errors.municipios} placeholder="Buscar activadores" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
