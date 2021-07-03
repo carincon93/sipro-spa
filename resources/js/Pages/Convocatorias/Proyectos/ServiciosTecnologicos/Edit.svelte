@@ -302,7 +302,7 @@
                             <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
                             <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
                         </ul>
-                        <strong>Nota:</strong>La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
+                        <strong>Nota:</strong> La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
                     </InfoMessage>
                 </div>
                 <div>

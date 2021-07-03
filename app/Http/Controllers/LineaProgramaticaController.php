@@ -41,8 +41,8 @@ class LineaProgramaticaController extends Controller
 
         return Inertia::render('LineasProgramaticas/Create', [
             'categoriasProyectos' => json_decode(Storage::get('json/categorias-proyectos.json'), true),
-            'lideres'             => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder%');
+            'activadores'         => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%activador%');
             })->get(),
         ]);
     }
@@ -65,7 +65,7 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->save();
 
-        $lineaProgramatica->lideres()->sync($request->lideres);
+        $lineaProgramatica->activadores()->sync($request->activadores);
 
         return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -94,10 +94,10 @@ class LineaProgramaticaController extends Controller
         return Inertia::render('LineasProgramaticas/Edit', [
             'lineaProgramatica'         => $lineaProgramatica->only('id', 'nombre', 'descripcion', 'codigo', 'categoria_proyecto', 'descripcion'),
             'categoriasProyectos'       => json_decode(Storage::get('json/categorias-proyectos.json'), true),
-            'lideres'                   => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
-                return $query->where('name', 'ilike', '%líder%');
+            'activadores'               => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%activador%');
             })->get(),
-            'lideresLineaProgramatica'  => $lineaProgramatica->lideres()->select('users.id as value', 'users.nombre as label')->get(),
+            'activadoresLineaProgramatica'  => $lineaProgramatica->activadores()->select('users.id as value', 'users.nombre as label')->get(),
         ]);
     }
 
@@ -119,7 +119,7 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->save();
 
-        $lineaProgramatica->lideres()->sync($request->lideres);
+        $lineaProgramatica->activadores()->sync($request->activadores);
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

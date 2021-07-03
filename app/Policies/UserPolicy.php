@@ -18,7 +18,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole(4)) {
+        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -34,7 +34,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        if ($user->hasRole(4)) {
+        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -49,7 +49,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasRole(4)) {
+        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -65,30 +65,10 @@ class UserPolicy
      */
     public function update(User $user, $proponente)
     {
-        if ($user->whereHas('roles', function (Builder $query) use ($user) {
-            return $query->where('name', 'ilike', '%líder i+d+i%')->where('users.id', $user->id);
-        })->first() && $proponente) {
+        if ($this->checkRole($user, 'activador i+d+i') && $this->checkRole($proponente, 'proponente i+d+i') || $this->checkRole($user, 'activador cultura de la innovación') && $this->checkRole($proponente, 'proponente cultura de la innovación') || $this->checkRole($user, 'activador tecnoacademia') && $this->checkRole($proponente, 'proponente tecnoacademia') || $this->checkRole($user, 'activador tecnoparque') && $this->checkRole($proponente, 'proponente tecnoparque') || $this->checkRole($user, 'activador servicios tecnológicos') && $this->checkRole($proponente, 'proponente servicios tecnológicos')) {
+            return true;
         }
 
-        if ($user->whereHas('roles', function (Builder $query) use ($user) {
-            return $query->where('name', 'ilike', '%líder cultura de la innovación%')->where('users.id', $user->id);
-        })->first() && $proponente) {
-        }
-
-        if ($user->whereHas('roles', function (Builder $query) use ($user) {
-            return $query->where('name', 'ilike', '%líder tecnoacademia%')->where('users.id', $user->id);
-        })->first() && $proponente) {
-        }
-
-        if ($user->whereHas('roles', function (Builder $query) use ($user) {
-            return $query->where('name', 'ilike', '%líder tecnoparque%')->where('users.id', $user->id);
-        })->first() && $proponente) {
-        }
-
-        if ($user->whereHas('roles', function (Builder $query) use ($user) {
-            return $query->where('name', 'ilike', '%líder servicios tecnológicos%')->where('users.id', $user->id);
-        })->first() && $proponente) {
-        }
         if ($user->dinamizadorCentroFormacion && $user->dinamizadorCentroFormacion->id == $proponente->centroFormacion->id) {
             return true;
         }
@@ -105,10 +85,6 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        if ($user->hasPermissionTo('model.delete')) {
-            return true;
-        }
-
         return false;
     }
 
@@ -134,5 +110,14 @@ class UserPolicy
     public function forceDelete(User $user)
     {
         //
+    }
+
+    public function checkRole($user, $rol)
+    {
+        $userRole = $user->whereHas('roles', function (Builder $query) use ($user, $rol) {
+            return $query->where('name', 'ilike', '%' . $rol . '%')->where('users.id', $user->id);
+        })->first();
+
+        return $userRole && $userRole->exists() ? true : false;
     }
 }
