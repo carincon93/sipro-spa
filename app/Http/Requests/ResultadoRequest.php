@@ -25,21 +25,7 @@ class ResultadoRequest extends FormRequest
     {
         return [
             'descripcion' => ['required', 'string'],
-            'tipo'        => ['required', 'between:1,4'],
+            'trl'         => 'required|integer|between:1,9',
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        if (is_array($this->tipo)) {
-            $this->merge([
-                'tipo' => $this->tipo['value'],
-            ]);
-        }
     }
 }

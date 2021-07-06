@@ -12,6 +12,7 @@ use App\Models\ProductoIdi;
 use App\Models\ProductoServicioTecnologico;
 use App\Models\ProductoTaTp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductoController extends Controller
@@ -83,7 +84,8 @@ class ProductoController extends Controller
             )->orderBy('fecha_inicio', 'ASC')->get(),
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
                 $query->where('descripcion', '!=', null);
-            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten()
+            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten(),
+            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
 
@@ -110,12 +112,12 @@ class ProductoController extends Controller
         // Valida si es un producto de I+D+i
         if ($proyecto->idi()->exists()) {
             $request->validate([
-                'trl'                           => 'required|integer|between:1,9',
+                'tipo'        => ['required', 'between:1,4'],
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);
 
             $productoIdi = new ProductoIdi();
-            $productoIdi->trl = $request->trl;
+            $productoIdi->tipo = $request->tipo;
             $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
             $producto->productoIdi()->save($productoIdi);
         }
@@ -123,12 +125,12 @@ class ProductoController extends Controller
         // Valida si es un producto de cultura innovación
         if ($proyecto->culturaInnovacion()->exists()) {
             $request->validate([
-                'trl'                           => 'required|integer|between:1,9',
+                'tipo'        => ['required', 'between:1,4'],
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);
 
             $productoIdi = new ProductoCulturaInnovacion();
-            $productoIdi->trl = $request->trl;
+            $productoIdi->tipo = $request->tipo;
             $productoIdi->subtipologiaMinciencias()->associate($request->subtipologia_minciencias_id);
             $producto->productoCulturaInnovacion()->save($productoIdi);
         }
@@ -208,7 +210,8 @@ class ProductoController extends Controller
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
                 $query->where('descripcion', '!=', null);
-            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten()
+            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten(),
+            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
 
@@ -233,18 +236,18 @@ class ProductoController extends Controller
 
         if ($proyecto->idi()->exists()) {
             $request->validate([
-                'trl'                           => 'required|integer|between:1,9',
+                'tipo'                          => 'required|integer|between:1,4',
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);
-            $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
+            $producto->productoIdi()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'tipo' => $request->tipo]);
         }
 
         if ($proyecto->culturaInnovacion()->exists()) {
             $request->validate([
-                'trl'                           => 'required|integer|between:1,9',
+                'tipo'                          => 'required|integer|between:1,4',
                 'subtipologia_minciencias_id'   => 'required|min:0|max:2147483647|integer|exists:subtipologias_minciencias,id'
             ]);
-            $producto->productoCulturaInnovacion()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'trl' => $request->trl]);
+            $producto->productoCulturaInnovacion()->update(['subtipologia_minciencias_id' => $request->subtipologia_minciencias_id, 'tipo' => $request->tipo]);
         }
 
         if ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {

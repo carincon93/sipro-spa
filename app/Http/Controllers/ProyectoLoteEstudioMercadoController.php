@@ -30,6 +30,8 @@ class ProyectoLoteEstudioMercadoController extends Controller
             return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');
         }
 
+        $presupuesto->codigo_segundo_grupo = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Index', [
             'filters'               => request()->all('search'),
             'proyectoLotesEstudioMercado'  => $presupuesto->proyectoLoteEstudioMercado()
@@ -37,7 +39,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
                 ->filterProyectoLoteEstudioMercado(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoria'                  => $convocatoria->only('id'),
             'proyecto'                      => $proyecto->only('id', 'modificable'),
-            'proyectoPresupuesto'           => $presupuesto->only('id', 'promedio'),
+            'proyectoPresupuesto'           => $presupuesto->only('id', 'promedio', 'codigo_segundo_grupo'),
             'presupuestoSennova'            => $presupuesto->convocatoriaPresupuesto->presupuestoSennova,
             'usoPresupuestal'               => $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal,
             'convocatoriaPresupuesto'       => $presupuesto->convocatoriaPresupuesto->only('id'),
@@ -80,12 +82,11 @@ class ProyectoLoteEstudioMercadoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeMaquinariaIndustrial} COP) del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                $porcentajeProyecto = $proyecto->getTotalProyectoPresupuestoAttribute() * 0.05;
+                $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
@@ -176,6 +177,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
         }
 
         $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
+        $presupuesto->codigo_segundo_grupo = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
         $lote->estudiosMercado;
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Edit', [
@@ -209,12 +211,11 @@ class ProyectoLoteEstudioMercadoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                $porcentajeMaquinariaIndustrial = PresupuestoValidationTrait::porcentajeMaquinariaIndustrial($proyecto);
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeMaquinariaIndustrial} COP) del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
-                $porcentajeProyecto = $proyecto->getTotalProyectoPresupuestoAttribute() * 0.05;
+                $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$porcentajeProyecto}) COP total del proyecto. Vuelva a diligenciar.");
             }
         }
@@ -228,8 +229,8 @@ class ProyectoLoteEstudioMercadoController extends Controller
             }
         }
 
+        $lote->numero_items = $request->numero_items;
         if ($request->hasFile('ficha_tecnica')) {
-            $lote->numero_items = $request->numero_items;
             Storage::delete($lote->ficha_tecnica);
             $nombreArchivoFichaTecnica  = $this->cleanFileName($proyecto->codigo, $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre, $request->ficha_tecnica);
             $archivoFichaTecnica        = $request->ficha_tecnica->storeAs(

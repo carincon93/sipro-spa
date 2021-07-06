@@ -466,7 +466,6 @@ class ArbolProyectoController extends Controller
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
-            'tiposResultado'  => json_decode(Storage::get('json/tipos-resultados.json'), true),
             'tiposImpacto'    => $tiposImpacto,
             'tipoProyectoA'   => $tipoProyectoA
         ]);

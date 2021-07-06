@@ -20,6 +20,7 @@
     export let proyecto
     export let resultados
     export let actividades
+    export let tiposProducto
 
     $: $title = 'Crear producto'
 
@@ -37,7 +38,7 @@
         fecha_inicio: '',
         fecha_finalizacion: '',
         indicador: '',
-        trl: null,
+        tipo: null,
         tatp_servicio_tecnologico: proyecto.ta || proyecto.tp || proyecto.servicio_tecnologico ? true : false,
         valor_proyectado: null,
         medio_verificacion: '',
@@ -111,7 +112,7 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-8">
@@ -136,7 +137,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$form.trl} required />
+                        <Select id="tipo-producto" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                     </div>
                 {:else if proyecto.ta || proyecto.tp}
                     <div class="mt-8">
