@@ -234,7 +234,7 @@ class Proyecto extends Model
      */
     public function programasFormacionArticulados()
     {
-        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion_articulados', 'proyecto_id', 'programa_formacion_id');
+        return $this->belongsToMany(ProgramaFormacionArticulado::class, 'proyecto_programa_formacion_articulados', 'proyecto_id', 'programa_formacion_articulado_id');
     }
 
     /**
@@ -298,8 +298,8 @@ class Proyecto extends Model
     {
         $fechaFinalizacion = null;
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
-        if ($this->ta()->exists()) $fechaFinalizacion =  $this->ta->fecha_finalizacion;
-        if ($this->tp()->exists()) $fechaFinalizacion =  $this->tp->fecha_finalizacion;
+        if ($this->ta()->exists()) $fechaFinalizacion  =  $this->ta->fecha_finalizacion;
+        if ($this->tp()->exists()) $fechaFinalizacion  =  $this->tp->fecha_finalizacion;
         if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
         if ($this->culturaInnovacion()->exists()) $fechaFinalizacion =  $this->culturaInnovacion->fecha_finalizacion;
 

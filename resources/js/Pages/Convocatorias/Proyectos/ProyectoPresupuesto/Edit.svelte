@@ -181,9 +181,11 @@
                         <div class="mt-8">
                             <p>Periodo de uso</p>
                             <div class="mt-4">
+                                <Label required class="mb-4" labelFor="fecha_inicio" value="Fecha de inicio" />
                                 <input label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1 p-4" bind:value={$form.fecha_inicio} required />
                             </div>
                             <div class="mt-4">
+                                <Label required class="mb-4" labelFor="fecha_finalizacion" value="Fecha de finalización (Cuando aplique)" />
                                 <input label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1 p-4" bind:value={$form.fecha_finalizacion} />
                             </div>
                         </div>

@@ -22,9 +22,10 @@
             <div class="max-w-2xl">
                 <h1 class="text-4xl">
                     ¡Bienvenido(a)
-                    <span class="capitalize">{$page.props.auth.user.nombre}</span>! Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque y de Servicios Tecnológicos
+                    <span class="capitalize">{$page.props.auth.user.nombre}</span>!
                 </h1>
-                <p class="text-2xl mt-4">Revise las convocatorias y empiece la formulación de proyectos.</p>
+                <p class="text-2xl mt-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
+                <p class="mt-4">Revise las convocatorias haciendo clic en el botón <strong>Revisar convocatorias</strong> y empiece la formulación de proyectos.</p>
 
                 {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                     <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Revisar convocatorias</Button>

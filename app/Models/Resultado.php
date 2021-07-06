@@ -18,7 +18,7 @@ class Resultado extends Model
         'efecto_directo_id',
         'objetivo_especifico_id',
         'descripcion',
-        'tipo',
+        'trl'
     ];
 
     /**

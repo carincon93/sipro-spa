@@ -24,6 +24,7 @@
     export let resultados
     export let actividades
     export let actividadesRelacionadas
+    export let tiposProducto
 
     $: $title = producto ? producto.nombre : null
 
@@ -49,7 +50,10 @@
         nombre_indicador: producto.producto_servicio_tecnologico?.nombre_indicador,
         formula_indicador: producto.producto_servicio_tecnologico?.formula_indicador,
 
-        trl: producto.producto_idi ? producto.producto_idi?.trl : producto.producto_cultura_innovacion?.trl,
+        tipo: {
+            value: producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo,
+            label: tiposProducto.find((item) => item.value == (producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo))?.label,
+        },
         subtipologia_minciencias_id: producto.producto_idi ? producto.producto_idi?.subtipologia_minciencias_id : producto.producto_cultura_innovacion?.subtipologia_minciencias_id,
 
         valor_proyectado: producto.producto_ta_tp?.valor_proyectado,
@@ -129,7 +133,7 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
@@ -153,7 +157,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="mt-2" error={errors.trl} bind:value={$form.trl} required />
+                        <Select id="tipo-producto" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                     </div>
                 {:else if proyecto.ta || proyecto.tp}
                     <div class="mt-8">

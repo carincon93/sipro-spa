@@ -68,16 +68,6 @@ class ProgramaFormacion extends Model
     }
 
     /**
-     * Relationship with Proyecto
-     *
-     * @return object
-     */
-    public function proyectosArticulados()
-    {
-        return $this->belongsToMany(Proyecto::class, 'proyecto_programa_formacion_articulados', 'programa_formacion_id', 'proyecto_id');
-    }
-
-    /**
      * Filtrar registros
      *
      * @param  mixed $query

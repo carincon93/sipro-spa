@@ -7,7 +7,7 @@
     import { createPopper } from '@popperjs/core'
 
     import Label from '@/Shared/Label'
-    import InputError from '@/Shared/InputError'
+    import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
@@ -22,7 +22,6 @@
     export let efectosDirectos
     export let causasDirectas
     export let tiposImpacto
-    export let tiposResultado
     export let tipoProyectoA
 
     let cantidadCeldasActividades = 3
@@ -128,7 +127,7 @@
      */
     let formResultado = useForm({
         descripcion: '',
-        tipo: '',
+        trl: '',
     })
 
     let showResultadoForm = false
@@ -149,13 +148,7 @@
         formId = 'resultado-form'
         $formResultado.id = resultado.id
         $formResultado.descripcion = resultado.descripcion
-        $formResultado.tipo = {
-            value: resultado.tipo,
-            label: tiposResultado.find((item) => item.value == resultado.tipo)?.label,
-        }
         $formResultado.trl = resultado.trl
-        $formResultado.indicador = resultado.indicador
-        $formResultado.medios_verificacion = resultado.medios_verificacion
         resultadoEfectoDirecto = efectoDirecto.descripcion ?? 'Sin información registrada'
     }
 
@@ -620,12 +613,11 @@
                     impulsar, mejorar, movilizar, proponer, promover, entre otros.
                 </InfoMessage>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
-                <p class="mb-20 whitespace-pre-line">
+                <p class="mb-10 whitespace-pre-line">
                     {actividadCausaIndirecta}
                 </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="mt-1 text-center">Fecha de ejecución</p>
                         <div>
                             <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
@@ -696,18 +688,18 @@
 
                 <form on:submit|preventDefault={submitResult} id="resultado-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                        {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                            <div class="mb-10">
+                                <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
+                            </div>
+                        {/if}
                         <div class="mb-20">
                             <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
-                        </div>
-
-                        <div class="mb-20">
-                            <Label required labelFor="tipo-resultado" value="Tipo" />
-                            <Select id="tipo-resultado" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showImpactoForm}
-                <InfoMessage class="mb-4">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: ambiental, social, centro de formación, sector productivo</InfoMessage>
+                <InfoMessage class="mb-4">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: tecnológico, económico, ambiental, social, centro de formación, sector productivo</InfoMessage>
 
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
 

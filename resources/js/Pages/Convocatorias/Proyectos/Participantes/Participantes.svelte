@@ -294,7 +294,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {participante.pivot.cantidad_meses} meses - {participante.pivot.cantidad_horas} horas semanales
+                            {participante.pivot.cantidad_meses.replace('.', ',')} meses - {participante.pivot.cantidad_horas} horas semanales
                         </p>
                     </td>
                     <td class="border-t td-actions">
@@ -350,7 +350,7 @@
                 </div>
                 <div class="mt-4">
                     <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                    <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
+                    <InfoMessage message="Valor máximo: {proyecto.diff_meses.replace('.', ',')} meses." />
                 </div>
                 <div class="mt-4">
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$formParticipante.rol_sennova?.maxHoras} class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />

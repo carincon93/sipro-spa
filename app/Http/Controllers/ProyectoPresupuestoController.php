@@ -28,7 +28,7 @@ class ProyectoPresupuestoController extends Controller
 
         $proyecto->codigo_linea_programatica                = $proyecto->lineaProgramatica->codigo;
         $proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040115');
-        $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2042186');
+        $proyecto->total_viaticos                           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2042186') + PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2041102');
         $proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040516');
         $proyecto->total_servicios_especiales_construccion  = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2045110');
         $proyecto->total_equipo_sistemas                    = PresupuestoValidationTrait::totalUsoPresupuestal($proyecto, '2040106');
@@ -41,7 +41,7 @@ class ProyectoPresupuestoController extends Controller
             'convocatoria'              => $convocatoria->only('id'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria'),
             'filters'                   => request()->all('search'),
-            'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
+            'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre,codigo', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
             'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),
         ]);
     }

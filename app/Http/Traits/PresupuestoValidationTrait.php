@@ -76,8 +76,8 @@ trait PresupuestoValidationTrait
      */
     public static function serviciosEspecialesConstruccionValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
     {
-        $porcentajeMaquinariaIndustrial         = self::totalUsoPresupuestal($proyecto, '2020200500405') * 0.05;
-        $totalServiciosEspecialesConstruccion   = self::totalUsoPresupuestal($proyecto, '2020200500405');
+        $porcentajeMaquinariaIndustrial         = self::totalUsoPresupuestal($proyecto, '2040115') * 0.05;
+        $totalServiciosEspecialesConstruccion   = self::totalUsoPresupuestal($proyecto, '2045110');
 
         if ($porcentajeMaquinariaIndustrial == 0) {
             return false;
@@ -115,7 +115,7 @@ trait PresupuestoValidationTrait
      */
     public static function serviciosMantenimientoValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
     {
-        if ($proyecto->getTotalProyectoPresupuestoAttribute() == 0) {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
             return false;
         }
 
@@ -126,13 +126,12 @@ trait PresupuestoValidationTrait
 
         $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
         $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
-
-        $totalMantenimientoMaquinaria = self::totalUsoPresupuestal($proyecto, '020202008');
+        $totalMantenimientoMaquinaria = self::totalUsoPresupuestal($proyecto, '2040516');
 
         $promedioPresupuestoTotal = $promedio + ($totalMantenimientoMaquinaria - $promedioPresupuestoGuardado);
 
-        if ($codigoUsoPresupuestal == '020202008') {
-            return $promedioPresupuestoTotal > ($proyecto->getTotalProyectoPresupuestoAttribute() * 0.05) ? true : false;
+        if ($codigoUsoPresupuestal == '2040516') {
+            return $promedioPresupuestoTotal > ($proyecto->getPrecioProyectoAttribute() * 0.05) ? true : false;
         }
 
         return false;

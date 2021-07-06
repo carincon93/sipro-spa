@@ -64,7 +64,7 @@
                     </tr>
 
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t p-4"> Viáticos - Bienestar alumnos </td>
+                        <td class="border-t p-4"> Viáticos </td>
                         <td class="border-t p-4"> La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000 </td>
                         <td class="border-t p-4">
                             Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_viaticos) ? proyecto.total_viaticos : 0)}
