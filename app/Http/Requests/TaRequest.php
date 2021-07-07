@@ -44,7 +44,9 @@ class TaRequest extends FormRequest
                 'articulacion_centro_formacion'             => ['required', 'string'],
                 'nombre_instituciones'                      => ['required', 'json'],
                 'nombre_instituciones_programas'            => ['required', 'json'],
-                'diseno_curricular'                         => ['required']
+                'diseno_curricular'                         => ['required'],
+                'pertinencia_territorio'                    => ['required', 'max:40000', 'string'],
+                'retos_oportunidades'                    => ['required', 'max:40000', 'string'],
             ];
         } else {
             return [
