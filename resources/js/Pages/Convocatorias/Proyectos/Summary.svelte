@@ -17,6 +17,21 @@
     export let errors
     export let convocatoria
     export let proyecto
+    export let problemaCentral
+    export let efectosDirectos
+    export let causasIndirectas
+    export let causasDirectas
+    export let efectosIndirectos
+    export let objetivoGeneral
+    export let resultados
+    export let objetivosEspecificos
+    export let actividades
+    export let impactos
+    export let actividadesPresupuesto
+    export let resultadoProducto
+    export let analisisRiesgo
+    export let anexos
+    export let generalidades
 
     $: $title = 'Finalizar proyecto'
 
@@ -148,9 +163,60 @@
                 {/if}
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-            {#if proyecto.finalizado == false}
+            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && actividadesPresupuesto && resultadoProducto && analisisRiesgo && anexos && generalidades}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
+            {:else}
+                <InfoMessage class="mb-2" alertMsg={true}>
+                    <p>La información del proyecto está incompleta. Revise y complete los siguientes ítems:</p>
+                    <ul class="list-disc p-4">
+                        {#if !generalidades}
+                            <li>Generalidades</li>
+                        {/if}
+                        {#if !problemaCentral}
+                            <li>Problema central</li>
+                        {/if}
+                        {#if !efectosDirectos}
+                            <li>Efectos directos</li>
+                        {/if}
+                        {#if !efectosIndirectos}
+                            <li>Efectos indirectos</li>
+                        {/if}
+                        {#if !causasDirectas}
+                            <li>Causas directas</li>
+                        {/if}
+                        {#if !causasIndirectas}
+                            <li>Causas indirectas</li>
+                        {/if}
+                        {#if !objetivoGeneral}
+                            <li>Objetivo general</li>
+                        {/if}
+                        {#if !resultados}
+                            <li>Resultados</li>
+                        {/if}
+                        {#if !objetivosEspecificos}
+                            <li>Objetivos específicos</li>
+                        {/if}
+                        {#if !actividades}
+                            <li>Actividades</li>
+                        {/if}
+                        {#if !impactos}
+                            <li>Impactos</li>
+                        {/if}
+                        {#if !actividadesPresupuesto}
+                            <li>Hay actividades sin presupuesto relacionado</li>
+                        {/if}
+                        {#if !resultadoProducto}
+                            <li>Hay resultados sin productos relacionados</li>
+                        {/if}
+                        {#if !analisisRiesgo}
+                            <li>Faltan análisis de riesgos</li>
+                        {/if}
+                        {#if !anexos}
+                            <li>No se han cargado todos los anexos</li>
+                        {/if}
+                    </ul>
+                </InfoMessage>
             {/if}
         {/if}
     </div>
