@@ -151,6 +151,7 @@ class Tp extends Model
                 ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct('tp.id')
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
         } else {
