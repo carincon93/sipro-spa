@@ -219,6 +219,7 @@ class CulturaInnovacion extends Model
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct('cultura_innovacion.id')
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else {

@@ -181,39 +181,46 @@ class User extends Authenticatable
         } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
             $users = User::where('centro_formacion_id', $user->dinamizadorCentroFormacion->id)->orderBy('nombre', 'ASC')
                 ->filterUser(request()->only('search'))->paginate();
-        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
-            $users = User::where('centro_formacion_id', $user->dinamizadorCentroFormacion->id)->orderBy('nombre', 'ASC')
-                ->filterUser(request()->only('search'))->paginate();
-        } else if ($user->whereHas('roles', function (Builder $query) use ($user) {
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
             return $query->where('name', 'ilike', '%activador i+d+i%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
                 return $query->where('name', 'ilike', '%proponente i+d+i%');
-            })->filterUser(request()->only('search'))->paginate();;
-        } else if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
             return $query->where('name', 'ilike', '%activador cultura de la innovación%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
                 return $query->where('name', 'ilike', '%proponente cultura de la innovación%');
-            })->filterUser(request()->only('search'))->paginate();;
-        } else if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
             return $query->where('name', 'ilike', '%activador tecnoacademia%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
                 return $query->where('name', 'ilike', '%proponente tecnoacademia%');
-            })->filterUser(request()->only('search'))->paginate();;
-        } else if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
             return $query->where('name', 'ilike', '%activador tecnoparque%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
                 return $query->where('name', 'ilike', '%proponente tecnoparque%');
-            })->filterUser(request()->only('search'))->paginate();;
-        } else if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
             return $query->where('name', 'ilike', '%activador servicios tecnológicos%')->where('users.id', $user->id);
         })->first()) {
             $users = User::whereHas('roles', function (Builder $query) {
                 return $query->where('name', 'ilike', '%proponente servicios tecnológicos%');
-            })->filterUser(request()->only('search'))->paginate();;
+            })->filterUser(request()->only('search'))->paginate();
         }
 
         return $users;

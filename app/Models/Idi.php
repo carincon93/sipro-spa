@@ -231,6 +231,7 @@ class Idi extends Model
                 ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct('idi.id')
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else {

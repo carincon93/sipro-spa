@@ -168,6 +168,7 @@ class ServicioTecnologico extends Model
                 ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct('servicios_tecnologicos.id')
                 ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
         } else {
