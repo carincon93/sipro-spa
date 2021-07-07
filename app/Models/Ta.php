@@ -60,7 +60,8 @@ class Ta extends Model
         'max_meses_ejecucion',
         'cantidad_instructores_planta',
         'cantidad_dinamizadores_planta',
-        'cantidad_psicopedagogos_planta'
+        'cantidad_psicopedagogos_planta',
+        'modificable'
     ];
 
     /**

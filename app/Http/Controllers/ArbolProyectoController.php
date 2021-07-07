@@ -95,7 +95,7 @@ class ArbolProyectoController extends Controller
                 }
             }
 
-            if ($proyecto->ta()->exists()) {
+            if ($proyecto->ta()->exists() && $proyecto->ta->modificable == false) {
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 237, 0)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 238, 1)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 239, 2)');
@@ -125,7 +125,7 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->ta()->exists()) {
+        if ($proyecto->ta()->exists() && $proyecto->ta->modificable == false) {
             DB::select('SELECT public."objetivos_especificos_ta"(' . $proyecto->id . ')');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
@@ -133,6 +133,10 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 241, 3, 25)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 242, 4, 32)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 243, 5, 38)');
+
+            $proyecto->ta->update([
+                'modificable' => true
+            ]);
         }
     }
 
