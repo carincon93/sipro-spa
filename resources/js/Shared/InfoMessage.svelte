@@ -1,9 +1,10 @@
 <script>
     export let message
+    export let alertMsg
 
     $: props = {
         ...$$restProps,
-        class: `relative bg-indigo-100 p-5 text-indigo-600 ${$$restProps.class || ''}`,
+        class: `relative ${alertMsg ? 'bg-red-100 text-red-600' : 'bg-indigo-100 text-indigo-600'} p-5 ${$$restProps.class || ''}`,
     }
 </script>
 

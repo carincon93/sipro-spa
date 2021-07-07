@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NuevoProponenteRequest;
 use App\Http\Requests\ProponenteRequest;
+use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
@@ -190,8 +191,23 @@ class ProyectoController extends Controller
         $proyecto->logs = $proyecto::getLog($proyecto->id);
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
-            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'     => $proyecto,
+            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'radicado'),
+            'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
+            'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
+            'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
+            'causasDirectas'            => ProyectoValidationTrait::causasDirectas($proyecto),
+            'efectosIndirectos'         => ProyectoValidationTrait::efectosIndirectos($proyecto),
+            'objetivoGeneral'           => ProyectoValidationTrait::objetivoGeneral($proyecto),
+            'resultados'                => ProyectoValidationTrait::resultados($proyecto),
+            'objetivosEspecificos'      => ProyectoValidationTrait::objetivosEspecificos($proyecto),
+            'actividades'               => ProyectoValidationTrait::actividades($proyecto),
+            'impactos'                  => ProyectoValidationTrait::impactos($proyecto),
+            'actividadesPresupuesto'    => ProyectoValidationTrait::actividadesPresupuesto($proyecto),
+            'resultadoProducto'         => ProyectoValidationTrait::resultadoProducto($proyecto),
+            'analisisRiesgo'            => ProyectoValidationTrait::analisisRiesgo($proyecto),
+            'anexos'                    => ProyectoValidationTrait::anexos($proyecto),
+            'generalidades'             => ProyectoValidationTrait::generalidades($proyecto),
         ]);
     }
 
