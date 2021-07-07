@@ -238,6 +238,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function taProgramasFormacion()
+    {
+        return $this->belongsToMany(ProgramaFormacion::class, 'ta_programa_formacion', 'proyecto_id', 'programa_formacion_id');
+    }
+
+    /**
      * Relationship with GrupoInvestigacion
      *
      * @return object

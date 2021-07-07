@@ -158,7 +158,7 @@
 
     let programasFormacionArticular
     async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion-articulados'))
+        let res = await axios.get(route('web-api.programas-formacion'))
         if (res.status == '200') {
             programasFormacionArticular = res.data
         }

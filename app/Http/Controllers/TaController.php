@@ -144,7 +144,7 @@ class TaController extends Controller
             'regionales'                            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                        => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                    => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacionArticulados' => $ta->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
         ]);
     }
 
@@ -181,7 +181,7 @@ class TaController extends Controller
         $ta->nombre_instituciones_programas       = $request->nombre_instituciones_programas;
 
         $ta->proyecto->municipios()->sync($request->municipios);
-        $ta->proyecto->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
+        $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
         $ta->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
 
         $ta->save();
