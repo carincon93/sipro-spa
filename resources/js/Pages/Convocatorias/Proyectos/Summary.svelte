@@ -34,6 +34,8 @@
     export let generalidades
     export let metodologia
     export let propuestaSostenibilidad
+    export let productosActividades
+    export let articulacionSennova
 
     $: $title = 'Finalizar proyecto'
 
@@ -175,6 +177,9 @@
                         {#if !generalidades}
                             <li>Generalidades</li>
                         {/if}
+                        {#if !articulacionSennova && proyecto.codigo_linea_programatica == 70}
+                            <li>Articulación SENNOVA</li>
+                        {/if}
                         {#if !problemaCentral}
                             <li>Problema central</li>
                         {/if}
@@ -213,6 +218,9 @@
                         {/if}
                         {#if !actividadesPresupuesto}
                             <li>Hay actividades sin presupuesto relacionado</li>
+                        {/if}
+                        {#if !productosActividades}
+                            <li>Hay productos sin actividades relacionadas</li>
                         {/if}
                         {#if !resultadoProducto}
                             <li>Hay resultados sin productos relacionados</li>

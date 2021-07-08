@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Models\Anexo;
 use App\Models\Proyecto;
+use Illuminate\Support\Facades\Log;
 
 trait ProyectoValidationTrait
 {
@@ -252,6 +253,29 @@ trait ProyectoValidationTrait
 
     /**
      * 
+     * Valida que las actividades tengan presupuesto asignado
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function productosActividades(Proyecto $proyecto)
+    {
+        $countProductoActividad = 0;
+        foreach ($proyecto->efectosDirectos as $efectoDirecto) {
+            foreach ($efectoDirecto->resultados as $resultado) {
+                foreach ($resultado->productos as $producto) {
+                    if ($producto->actividades()->count() == 0) {
+                        $countProductoActividad++;
+                    }
+                }
+            }
+        }
+
+        return $countProductoActividad == 0 ? true : false;
+    }
+
+    /**
+     * 
      * Valida que los resultados tengan al menos un producto asignado
      * 
      * @param  mixed $proyecto
@@ -367,7 +391,7 @@ trait ProyectoValidationTrait
             case $proyecto->idi()->exists() && $proyecto->idi->metodologia == '':
                 return false;
                 break;
-            case $proyecto->ta()->exists() && $proyecto->ta->metodologia == '':
+            case $proyecto->ta()->exists() && $proyecto->ta->metodologia_local == '':
                 return false;
                 break;
             case $proyecto->tp()->exists() && $proyecto->tp->metodologia == '':
@@ -416,5 +440,17 @@ trait ProyectoValidationTrait
         }
 
         return true;
+    }
+
+    /**
+     * 
+     * Valida que la articulación SENNOvA este completa
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function articulacionSennova(Proyecto $proyecto)
+    {
+        return $proyecto->lineasInvestigacion()->count() > 0 ? true : false;
     }
 }
