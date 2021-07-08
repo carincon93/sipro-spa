@@ -80,8 +80,22 @@ class ArbolProyectoController extends Controller
                     ['descripcion' => null],
                 ]);
 
-                if ($proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'A' && $i == 0) {
-                    for ($j = 0; $j < 5; $j++) {
+                if ($proyecto->servicioTecnologico()->exists() && $i == 0) {
+                    for ($j = 0; $j < 9; $j++) {
+                        $efectoDirecto->resultados()->create([
+                            'descripcion'            => null,
+                            'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
+                        ]);
+                    }
+                } else if ($proyecto->servicioTecnologico()->exists() && $i == 1 || $proyecto->servicioTecnologico()->exists() && $i == 2) {
+                    for ($j = 0; $j < 3; $j++) {
+                        $efectoDirecto->resultados()->create([
+                            'descripcion'            => null,
+                            'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
+                        ]);
+                    }
+                } else if ($proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'B' && $i == 3) {
+                    for ($j = 0; $j < 2; $j++) {
                         $efectoDirecto->resultados()->create([
                             'descripcion'            => null,
                             'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
