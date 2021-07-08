@@ -208,6 +208,8 @@ class ProyectoController extends Controller
             'analisisRiesgo'            => ProyectoValidationTrait::analisisRiesgo($proyecto),
             'anexos'                    => ProyectoValidationTrait::anexos($proyecto),
             'generalidades'             => ProyectoValidationTrait::generalidades($proyecto),
+            'metodologia'               => ProyectoValidationTrait::metodologia($proyecto),
+            'propuestaSostenibilidad'   => ProyectoValidationTrait::propuestaSostenibilidad($proyecto)
         ]);
     }
 

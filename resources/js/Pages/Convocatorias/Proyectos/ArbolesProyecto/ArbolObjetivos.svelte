@@ -624,27 +624,31 @@
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}
-                {#if proyecto.codigo_linea_programatica == 68}
-                    <InfoMessage class="mb-4">
-                        <p>
-                            Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas.
-                            <br />
-                            La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
-                        </p>
-                    </InfoMessage>
-                {/if}
-                <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
+                {#if causaDirectaObjetivoEspecifico != 'Sin información registrada'}
+                    {#if proyecto.codigo_linea_programatica == 68}
+                        <InfoMessage class="mb-4">
+                            <p>
+                                Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas.
+                                <br />
+                                La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
+                            </p>
+                        </InfoMessage>
+                    {/if}
+                    <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
+                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                            <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
-                        <p class="mb-20 whitespace-pre-line">
-                            {causaDirectaObjetivoEspecifico}
-                        </p>
-                        <div>
-                            <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
-                        </div>
-                    </fieldset>
-                </form>
+                            <p class="mb-20 whitespace-pre-line">
+                                {causaDirectaObjetivoEspecifico}
+                            </p>
+                            <div>
+                                <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
+                            </div>
+                        </fieldset>
+                    </form>
+                {:else}
+                    <InfoMessage class="mb-4" message="Debe generar primero la causa directa en el árbol de problemas" />
+                {/if}
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
@@ -673,31 +677,35 @@
                     </fieldset>
                 </form>
             {:else if showResultadoForm}
-                <InfoMessage class="mb-4">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
-                <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
-                <p class="mb-20 whitespace-pre-line">
-                    {resultadoEfectoDirecto}
-                </p>
+                {#if resultadoEfectoDirecto != 'Sin información registrada'}
+                    <InfoMessage class="mb-4">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
+                    <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
+                    <p class="mb-20 whitespace-pre-line">
+                        {resultadoEfectoDirecto}
+                    </p>
 
-                <p class="block font-medium mb-2 text-gray-700 text-sm">
-                    {descripcionObjetivoEspecifico.numero}
-                </p>
-                <p class="mb-20 whitespace-pre-line">
-                    {descripcionObjetivoEspecifico.descripcion}
-                </p>
+                    <p class="block font-medium mb-2 text-gray-700 text-sm">
+                        {descripcionObjetivoEspecifico.numero}
+                    </p>
+                    <p class="mb-20 whitespace-pre-line">
+                        {descripcionObjetivoEspecifico.descripcion}
+                    </p>
 
-                <form on:submit|preventDefault={submitResult} id="resultado-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                            <div class="mb-10">
-                                <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
+                    <form on:submit|preventDefault={submitResult} id="resultado-form">
+                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                            {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                                <div class="mb-10">
+                                    <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
+                                </div>
+                            {/if}
+                            <div class="mb-20">
+                                <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                             </div>
-                        {/if}
-                        <div class="mb-20">
-                            <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
-                        </div>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                {:else}
+                    <InfoMessage class="mb-4" message="Debe generar primero el efecto directo en el árbol de problemas" />
+                {/if}
             {:else if showImpactoForm}
                 <InfoMessage class="mb-4">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: tecnológico, económico, ambiental, social, centro de formación, sector productivo</InfoMessage>
 

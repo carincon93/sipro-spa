@@ -60,24 +60,21 @@ trait ProyectoValidationTrait
 
     /**
      * 
-     * Valida que hayan al menos una causas indirecta con descripción por causa directa
+     * Valida que hayan al menos un efecto indirecto con descripción por efecto directo
      * 
      * @param  mixed $proyecto
      * @return bool
      */
-    public static function causasIndirectas(Proyecto $proyecto)
+    public static function efectosIndirectos(Proyecto $proyecto)
     {
-        $countCausaIndirecta = 0;
-        foreach ($proyecto->causasDirectas as $causaDirecta) {
-            if ($causaDirecta->descripcion == '') {
-                $countCausaIndirecta++;
-            }
-            if ($causaDirecta->descripcion != '' && $causaDirecta->causasIndirectas()->count() == 0) {
-                $countCausaIndirecta++;
+        $countEfectoIndirecto = 0;
+        foreach ($proyecto->efectosDirectos as $efectoDirecto) {
+            if ($efectoDirecto->descripcion != '' && $efectoDirecto->efectosIndirectos()->count() == 0) {
+                $countEfectoIndirecto++;
             }
         }
 
-        return $countCausaIndirecta == 0 ? true : false;
+        return $countEfectoIndirecto == 0 ? true : false;
     }
 
     /**
@@ -101,24 +98,21 @@ trait ProyectoValidationTrait
 
     /**
      * 
-     * Valida que hayan al menos un efecto indirecto con descripción por efecto directo
+     * Valida que hayan al menos una causas indirecta con descripción por causa directa
      * 
      * @param  mixed $proyecto
      * @return bool
      */
-    public static function efectosIndirectos(Proyecto $proyecto)
+    public static function causasIndirectas(Proyecto $proyecto)
     {
-        $countEfectoIndirecto = 0;
-        foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-            if ($efectoDirecto->descripcion == '') {
-                $countEfectoIndirecto++;
-            }
-            if ($efectoDirecto->descripcion != '' && $efectoDirecto->efectosIndirectos()->count() == 0) {
-                $countEfectoIndirecto++;
+        $countCausaIndirecta = 0;
+        foreach ($proyecto->causasDirectas as $causaDirecta) {
+            if ($causaDirecta->descripcion != '' && $causaDirecta->causasIndirectas()->count() == 0) {
+                $countCausaIndirecta++;
             }
         }
 
-        return $countEfectoIndirecto == 0 ? true : false;
+        return $countCausaIndirecta == 0 ? true : false;
     }
 
     /**
@@ -164,9 +158,6 @@ trait ProyectoValidationTrait
     {
         $countResultado = 0;
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-            if ($efectoDirecto->descripcion == '') {
-                $countResultado++;
-            }
             foreach ($efectoDirecto->resultados as $resultado) {
                 if ($efectoDirecto->descripcion != '' && $resultado->descripcion == '') {
                     $countResultado++;
@@ -188,9 +179,6 @@ trait ProyectoValidationTrait
     {
         $countObjetivoEspecifico = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
-            if ($causaDirecta->descripcion == '') {
-                $countObjetivoEspecifico++;
-            }
             if ($causaDirecta->descripcion != '' && $causaDirecta->objetivoEspecifico->descripcion == '') {
                 $countObjetivoEspecifico++;
             }
@@ -210,14 +198,8 @@ trait ProyectoValidationTrait
     {
         $countActividad = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
-            if ($causaDirecta->descripcion == '') {
-                $countActividad++;
-            }
             foreach ($causaDirecta->causasIndirectas as $causaIndirecta) {
-                if ($causaIndirecta->descripcion == '') {
-                    $countActividad++;
-                }
-                if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad()->count() == 0) {
+                if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad->descripcion == null) {
                     $countActividad++;
                 }
             }
@@ -237,14 +219,8 @@ trait ProyectoValidationTrait
     {
         $countImpacto = 0;
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-            if ($efectoDirecto->descripcion == '') {
-                $countImpacto++;
-            }
             foreach ($efectoDirecto->efectosIndirectos as $efectoIndirecto) {
-                if ($efectoIndirecto->descripcion == '') {
-                    $countImpacto++;
-                }
-                if ($efectoIndirecto->descripcion != '' && $efectoIndirecto->impacto()->count() == 0) {
+                if ($efectoIndirecto->descripcion != '' && $efectoIndirecto->impacto->descripcion == null) {
                     $countImpacto++;
                 }
             }
@@ -264,13 +240,7 @@ trait ProyectoValidationTrait
     {
         $countActividadPresupuesto = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
-            if ($causaDirecta->descripcion == '') {
-                $countActividadPresupuesto++;
-            }
             foreach ($causaDirecta->causasIndirectas as $causaIndirecta) {
-                if ($causaIndirecta->descripcion == '') {
-                    $countActividadPresupuesto++;
-                }
                 if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad->proyectoPresupuesto()->count() == 0) {
                     $countActividadPresupuesto++;
                 }
@@ -292,7 +262,7 @@ trait ProyectoValidationTrait
         $countResultadoProducto = 0;
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
-                if ($resultado->productos()->count() == 0) {
+                if ($resultado->descripcion != '' && $resultado->productos()->count() == 0) {
                     $countResultadoProducto++;
                 }
             }
@@ -375,6 +345,70 @@ trait ProyectoValidationTrait
                 return false;
                 break;
             case $proyecto->culturaInnovacion()->exists() && $proyecto->culturaInnovacion->bibliografia == '':
+                return false;
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     * Valida que la metodología este completa
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function metodologia(Proyecto $proyecto)
+    {
+        switch ($proyecto) {
+            case $proyecto->idi()->exists() && $proyecto->idi->metodologia == '':
+                return false;
+                break;
+            case $proyecto->ta()->exists() && $proyecto->ta->metodologia == '':
+                return false;
+                break;
+            case $proyecto->tp()->exists() && $proyecto->tp->metodologia == '':
+                return false;
+                break;
+            case $proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->metodologia == '':
+                return false;
+                break;
+            case $proyecto->culturaInnovacion()->exists() && $proyecto->culturaInnovacion->metodologia == '':
+                return false;
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     * Valida que la propuesta de sostenibilidad este completa
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function propuestaSostenibilidad(Proyecto $proyecto)
+    {
+        switch ($proyecto) {
+            case $proyecto->idi()->exists() && $proyecto->idi->propuesta_sostenibilidad == '':
+                return false;
+                break;
+            case $proyecto->ta()->exists() && $proyecto->ta->propuesta_sostenibilidad_social == '':
+                return false;
+                break;
+            case $proyecto->tp()->exists() && $proyecto->tp->propuesta_sostenibilidad == '':
+                return false;
+                break;
+            case $proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->propuesta_sostenibilidad == '':
+                return false;
+                break;
+            case $proyecto->culturaInnovacion()->exists() && $proyecto->culturaInnovacion->propuesta_sostenibilidad == '':
                 return false;
                 break;
             default:
