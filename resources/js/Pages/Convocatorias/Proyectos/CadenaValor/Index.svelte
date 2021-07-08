@@ -127,7 +127,7 @@
                 </div>
             {/if}
         </fieldset>
-        <div class="mt-4 bg-gray-100 border-t border-gray-200 flex items-center">
+        <div class="mt-4 flex items-center">
             {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
