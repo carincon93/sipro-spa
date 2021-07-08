@@ -415,86 +415,92 @@
     <div class="mt-16">
         <div class="flex mb-14">
             {#each efectosDirectos as efectoDirecto, i}
-                <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
-                    <!-- Impactos -->
-                    {#if i == 0}
-                        <div id="impacto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Impactos</small>
-                            <div id="arrow-impacto" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                            {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-                                <div class="flex-1 resultados relative">
-                                    <div
-                                        on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
-                                        class="{efectoIndirecto.descripcion != null && i % 2 == 0
-                                            ? 'bg-orangered-400 hover:bg-orangered-500'
-                                            : efectoIndirecto.descripcion == null && i % 2 == 0
-                                            ? 'bg-gray-300 hover:bg-gray-400'
-                                            : efectoIndirecto.descripcion != null && i % 2 != 0
-                                            ? 'bg-orangered-500 hover:bg-orangered-600'
-                                            : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                    >
-                                        <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
-                                            {#if efectoIndirecto.impacto}
-                                                <small class="title block font-bold mb-2">
-                                                    RES{#each efectoDirecto.resultados as { id }}
-                                                        -{id}
-                                                    {/each}
-                                                    -IMP-
-                                                    {efectoIndirecto.impacto.id}
-                                                </small>
-                                                {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
-                                                    {efectoIndirecto.impacto.descripcion}
+                {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+                    <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
+                        <!-- Impactos -->
+                        {#if i == 0}
+                            <div id="impacto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Impactos</small>
+                                <div id="arrow-impacto" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
+                                {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                    <div class="flex-1 resultados relative">
+                                        <div
+                                            on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
+                                            class="{efectoIndirecto.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                                : efectoIndirecto.descripcion == null && i % 2 == 0
+                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                : efectoIndirecto.descripcion != null && i % 2 != 0
+                                                ? 'bg-orangered-500 hover:bg-orangered-600'
+                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        >
+                                            <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                                {#if efectoIndirecto.impacto}
+                                                    <small class="title block font-bold mb-2">
+                                                        RES{#each efectoDirecto.resultados as { id }}
+                                                            -{id}
+                                                        {/each}
+                                                        -IMP-
+                                                        {efectoIndirecto.impacto.id}
+                                                    </small>
+                                                    {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
+                                                        {efectoIndirecto.impacto.descripcion}
+                                                    {/if}
                                                 {/if}
-                                            {/if}
-                                        </p>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                {/if}
+                            {/each}
+                            {#if proyecto.codigo_linea_programatica != 70}
+                                {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                    <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
+                                        <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
                             {/if}
-                        {/each}
-                        {#if proyecto.codigo_linea_programatica != 70}
-                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                                <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
-                                    <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
-                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
-                                    </div>
+                        </div>
+                        <!-- Resultado -->
+                        {#if i == 0}
+                            <div id="resultado-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Resultados</small>
+                                <div id="arrow-resultado" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div
+                            class="{i == 0 ? 'resultados' : (proyecto.codigo_linea_programatica == 68 && i == 1) || (proyecto.codigo_linea_programatica == 68 && i == 2) ? 'resultados-line' : proyecto.codigo_linea_programatica == 68 && i == 3 ? 'resultados-line-4' : 'resultados'} relative flex-1 flex flex-wrap"
+                            id={i == 0 ? 'resultado-tooltip-placement' : ''}
+                            aria-describedby={i == 0 ? 'tooltip' : ''}
+                        >
+                            {#each efectoDirecto.resultados as resultado, j}
+                                <div
+                                    on:click={showResultadoDialog(efectoDirecto, resultado)}
+                                    class="{efectoDirecto.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                        : efectoDirecto.descripcion == null && i % 2 == 0
+                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        : efectoDirecto.descripcion != null && i % 2 != 0
+                                        ? 'bg-orangered-500 hover:bg-orangered-600'
+                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 ? ' mb-4' : ''}"
+                                    style="flex: 1 0 33.333%"
+                                >
+                                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                        <small class="title block font-bold mb-2">RES-{resultado.id}</small>
+                                        {#if resultado.descripcion != null && resultado.descripcion.length > 0}
+                                            {resultado.descripcion}
+                                        {/if}
+                                    </p>
                                 </div>
                             {/each}
-                        {/if}
-                    </div>
-                    <!-- Resultado -->
-                    {#if i == 0}
-                        <div id="resultado-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Resultados</small>
-                            <div id="arrow-resultado" class="arrow" data-popper-arrow />
                         </div>
-                    {/if}
-                    <div class="{i == 0 ? 'resultados' : tipoProyectoA ? 'resultados-line' : 'resultados'} relative flex-1 flex flex-wrap" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        {#each efectoDirecto.resultados as resultado, j}
-                            <div
-                                on:click={showResultadoDialog(efectoDirecto, resultado)}
-                                class="{efectoDirecto.descripcion != null && i % 2 == 0
-                                    ? 'bg-orangered-400 hover:bg-orangered-500'
-                                    : efectoDirecto.descripcion == null && i % 2 == 0
-                                    ? 'bg-gray-300 hover:bg-gray-400'
-                                    : efectoDirecto.descripcion != null && i % 2 != 0
-                                    ? 'bg-orangered-500 hover:bg-orangered-600'
-                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{j != 4 && tipoProyectoA ? ' mb-4' : ''}"
-                                style="flex: 1 0 33.333%"
-                            >
-                                <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
-                                    <small class="title block font-bold mb-2">RES-{resultado.id}</small>
-                                    {#if resultado.descripcion != null && resultado.descripcion.length > 0}
-                                        {resultado.descripcion}
-                                    {/if}
-                                </p>
-                            </div>
-                        {/each}
                     </div>
-                </div>
+                {/if}
             {/each}
         </div>
 
@@ -515,77 +521,117 @@
 
         <div class="flex mt-14">
             {#each causasDirectas as causaDirecta, i}
-                <div class="flex-1">
-                    <!-- Objetivo específico -->
-                    {#if i == 0}
-                        <div id="objetivo-especifico-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small class="block line-height-1-24">
-                                Objetivos <br /> específicos
-                            </small>
-                            <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div
-                            on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
-                            class="{causaDirecta.descripcion != null && i % 2 == 0 ? 'bg-orangered-400 hover:bg-orangered-500' : causaDirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaDirecta.descripcion != null && i % 2 != 0 ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                        >
-                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
-                                <small class="title block font-bold mb-2">
-                                    OBJ-ESP-{causaDirecta.objetivo_especifico.id}
+                {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+                    <div class="flex-1">
+                        <!-- Objetivo específico -->
+                        {#if i == 0}
+                            <div id="objetivo-especifico-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small class="block line-height-1-24">
+                                    Objetivos <br /> específicos
                                 </small>
-                                {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
-                                    {causaDirecta.objetivo_especifico.descripcion}
-                                {/if}
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Actividades -->
-                    {#if i == 0}
-                        <div id="actividad-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Actividades</small>
-                            <div id="arrow-actividad" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-                                <div class="mb-4" style="flex: 1 0 33.333%">
-                                    <div
-                                        on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
-                                        class="{causaIndirecta.descripcion != null && i % 2 == 0
-                                            ? 'bg-orangered-400 hover:bg-orangered-500'
-                                            : causaIndirecta.descripcion == null && i % 2 == 0
-                                            ? 'bg-gray-300 hover:bg-gray-400'
-                                            : causaIndirecta.descripcion != null && i % 2 != 0
-                                            ? 'bg-orangered-500 hover:bg-orangered-600'
-                                            : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
-                                    >
-                                        <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
-                                            {#if causaIndirecta.actividad}
-                                                <small class="title block font-bold mb-2">
-                                                    OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
-                                                </small>
-                                                {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
-                                                    {causaIndirecta.actividad.descripcion}
-                                                {/if}
-                                            {/if}
-                                        </p>
-                                    </div>
-                                </div>
-                            {/if}
-                        {/each}
-                        {#if proyecto.codigo_linea_programatica != 70}
-                            {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
-                                <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
-                                    <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
-                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
-                                    </div>
-                                </div>
-                            {/each}
+                                <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
+                            </div>
                         {/if}
+                        <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            <div
+                                on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
+                                class="{causaDirecta.descripcion != null && i % 2 == 0
+                                    ? 'bg-orangered-400 hover:bg-orangered-500'
+                                    : causaDirecta.descripcion == null && i % 2 == 0
+                                    ? 'bg-gray-300 hover:bg-gray-400'
+                                    : causaDirecta.descripcion != null && i % 2 != 0
+                                    ? 'bg-orangered-500 hover:bg-orangered-600'
+                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                            >
+                                <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                    <small class="title block font-bold mb-2">
+                                        OBJ-ESP-{causaDirecta.objetivo_especifico.id}
+                                    </small>
+                                    {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
+                                        {causaDirecta.objetivo_especifico.descripcion}
+                                    {/if}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Actividades -->
+                        {#if i == 0}
+                            <div id="actividad-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Actividades</small>
+                                <div id="arrow-actividad" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            {#each causaDirecta.causas_indirectas as causaIndirecta}
+                                {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                    <div class="mb-4" style="flex: 1 0 33.333%">
+                                        <div
+                                            on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
+                                            class="{causaIndirecta.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                                : causaIndirecta.descripcion == null && i % 2 == 0
+                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                : causaIndirecta.descripcion != null && i % 2 != 0
+                                                ? 'bg-orangered-500 hover:bg-orangered-600'
+                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        >
+                                            <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                                {#if causaIndirecta.actividad}
+                                                    <small class="title block font-bold mb-2">
+                                                        OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
+                                                    </small>
+                                                    {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
+                                                        {causaIndirecta.actividad.descripcion}
+                                                    {/if}
+                                                {/if}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {/if}
+                            {/each}
+                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                                {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 0}
+                                {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 1}
+                                {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 2}
+                                {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
+                                {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {/if}
+                        </div>
                     </div>
-                </div>
+                {/if}
             {/each}
         </div>
     </div>
@@ -770,11 +816,21 @@
 
     .resultados-line:before {
         content: '';
-        bottom: -364px;
+        bottom: -536px;
         position: absolute;
         right: 50%;
         width: 2px;
-        height: 380px;
+        height: 552px;
+        background: #ff906e;
+    }
+
+    .resultados-line-4:before {
+        content: '';
+        bottom: -696px;
+        position: absolute;
+        right: 50%;
+        width: 2px;
+        height: 710px;
         background: #ff906e;
     }
 

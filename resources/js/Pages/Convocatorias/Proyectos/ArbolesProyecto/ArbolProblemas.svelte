@@ -508,8 +508,40 @@
                             {/if}
                         {/each}
 
-                        {#if proyecto.codigo_linea_programatica != 70}
+                        {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
                             {#each { length: cantidadCeldasCausasIndirectas - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 0}
+                            {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 1}
+                            {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 2}
+                            {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
+                            {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty}
                                 <div class="mb-4 relative" style="flex: 1 0 33.333%">
                                     <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                         <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
