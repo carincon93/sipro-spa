@@ -32,8 +32,8 @@ class InventarioEquipoRequest extends FormRequest
             'estado'                    => ['required', 'integer'],
             'uso_st'                    => ['required', 'integer'],
             'uso_otra_dependencia'      => ['required', 'integer'],
-            'dependencia'               => ['required', 'string', 'max:255'],
-            'descripcion'               => ['nullable', 'string', 'max:10000'],
+            'dependencia'               => ['nullable', 'string', 'max:255'],
+            'descripcion'               => ['required', 'string', 'max:10000'],
             'mantenimiento_prox_year'   => ['required', 'integer'],
             'calibracion_prox_year'     => ['required', 'integer'],
         ];
