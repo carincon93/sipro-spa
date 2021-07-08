@@ -63,7 +63,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10, 21, 14, 15])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">Miembros de la entidad aliada</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>

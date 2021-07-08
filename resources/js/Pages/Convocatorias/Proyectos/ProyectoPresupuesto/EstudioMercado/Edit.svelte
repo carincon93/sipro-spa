@@ -13,7 +13,6 @@
     import Switch from '@/Shared/Switch'
     import Dialog from '@/Shared/Dialog'
     import PercentageProgress from '@/Shared/PercentageProgress'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -55,7 +54,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)) {
             ;(sending = true),
                 $form.post(route('convocatorias.proyectos.presupuesto.lote.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]), {
                     onStart: () => (sending = true),
@@ -71,15 +70,13 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(4, 7, 10, 13) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.presupuesto.lote.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, proyectoLoteEstudioMercado.id]))
         }
     }
 
     let average
     $: average = (parseInt($form.primer_valor) + parseInt($form.segundo_valor) + (parseInt($form.tercer_valor) > 0 && $form.requiere_tercer_estudio_mercado ? parseInt($form.tercer_valor) : 0)) / (parseInt($form.tercer_valor) > 0 && $form.requiere_tercer_estudio_mercado ? 3 : 2)
-
-    console.log(proyectoPresupuesto)
 </script>
 
 <AuthenticatedLayout>
@@ -87,11 +84,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10, 12, 13)}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 21, 14, 16, 15, 20])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin || checkPermission(3, 4, 6, 7, 9, 10, 12, 13)}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 21, 14, 16, 15, 20])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.lote.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
@@ -107,7 +104,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
                 {#if proyectoPresupuesto.codigo_segundo_grupo == 2040106 || proyectoPresupuesto.codigo_segundo_grupo == 2040115 || proyectoPresupuesto.codigo_segundo_grupo == 2040125}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad de maquinaria/equipos referenciado en el ANEXO 2 Fichas técnicas para maquinaria y equipos" />
@@ -180,13 +177,13 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(4, 7, 10, 13) && proyecto.modificable == true)}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar estudio de mercado </button>
                 {/if}
                 <p class="break-all w-72">
                     Valor promedio: ${average > 0 ? new Intl.NumberFormat('de-DE').format(average) : 0} COP
                 </p>
-                {#if isSuperAdmin || (checkPermission(3, 4, 6, 7, 9, 10, 12, 13) && proyecto.modificable == true)}
+                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar estudio de mercado</LoadingButton>
                 {/if}
             </div>
