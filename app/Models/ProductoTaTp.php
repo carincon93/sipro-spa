@@ -22,6 +22,7 @@ class ProductoTaTp extends Model
      * @var array
      */
     protected $fillable = [
+        'producto_id',
         'valor_proyectado'
     ];
 
@@ -51,19 +52,5 @@ class ProductoTaTp extends Model
     public function producto()
     {
         return $this->belongsTo(Producto::class);
-    }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterTATPProducto($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('proyectado', 'ilike', '%' . $search . '%');
-        });
     }
 }

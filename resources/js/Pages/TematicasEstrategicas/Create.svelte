@@ -1,29 +1,23 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Input from '@/Shared/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
 
     export let errors
 
     $: $title = 'Crear temática estratégica SENA'
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
         nombre: '',
     })
-
-    console.log($page.props.auth.user.can)
 
     function submit() {
         if (isSuperAdmin) {
@@ -54,8 +48,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

@@ -1,16 +1,16 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import DynamicList from '@/Dropdowns/DynamicList'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
 
     export let errors
     export let grupoInvestigacion
@@ -22,10 +22,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -63,7 +60,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
                         <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
                     {/if}
@@ -78,28 +75,23 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="acronimo" value="Acrónimo" />
-                    <Input id="acronimo" type="text" class="mt-1 block w-full" bind:value={$form.acronimo} error={errors.acronimo} required />
+                    <Input label="Acrónimo" id="acronimo" type="text" class="mt-1" bind:value={$form.acronimo} error={errors.acronimo} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="email" value="Correo electrónico" />
-                    <Input id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required />
+                    <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace GrupLAC" />
-                    <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" bind:value={$form.enlace_gruplac} error={errors.enlace_gruplac} required />
+                    <Input label="Enlace GrupLAC" id="enlace_gruplac" type="url" class="mt-1" bind:value={$form.enlace_gruplac} error={errors.enlace_gruplac} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="codigo_minciencias" value="Código Minciencias" />
-                    <Input id="codigo_minciencias" type="text" class="mt-1 block w-full" bind:value={$form.codigo_minciencias} error={errors.codigo_minciencias} required />
+                    <Input label="Código Minciencias" id="codigo_minciencias" type="text" class="mt-1" bind:value={$form.codigo_minciencias} error={errors.codigo_minciencias} required />
                 </div>
 
                 <div class="mt-4">

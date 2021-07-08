@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\Convocatoria;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,6 @@ class ConvocatoriaController extends Controller
      */
     public function dashboard(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [Convocatoria::class]);
-
         return Inertia::render('Convocatorias/Dashboard', [
             'convocatoria' => $convocatoria
         ]);
@@ -32,14 +31,12 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [Convocatoria::class]);
+        $this->authorize('listar-convocatorias');
 
         return Inertia::render('Convocatorias/Index', [
-            'filters'       => request()->all('search'),
-            'convocatorias' => Convocatoria::orderBy('fecha_inicio', 'DESC')
-                ->filterConvocatoria(request()->only('search'))->paginate(),
-            'convocatoriaActiva' => Convocatoria::where('esta_activa', 1)->first(),
-
+            'filters'               => request()->all('search'),
+            'convocatorias'         => Convocatoria::filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'convocatoriaActiva'    => Convocatoria::where('esta_activa', 1)->first(),
         ]);
     }
 
@@ -66,11 +63,27 @@ class ConvocatoriaController extends Controller
         $this->authorize('create', [Convocatoria::class]);
 
         $convocatoria = new Convocatoria();
-        $convocatoria->descripcion                      = $request->descripcion;
-        $convocatoria->fecha_inicio                     = $request->fecha_inicio;
-        $convocatoria->fecha_finalizacion               = $request->fecha_finalizacion;
-        $convocatoria->min_fecha_inicio_proyectos       = $request->min_fecha_inicio_proyectos;
-        $convocatoria->max_fecha_finalizacion_proyectos = $request->max_fecha_finalizacion_proyectos;
+        $convocatoria->descripcion                              = $request->descripcion;
+        $convocatoria->fecha_inicio_convocatoria_idi            = $request->fecha_inicio_convocatoria_idi;
+        $convocatoria->fecha_finalizacion_convocatoria_idi      = $request->fecha_finalizacion_convocatoria_idi;
+        $convocatoria->fecha_inicio_convocatoria_cultura        = $request->fecha_inicio_convocatoria_cultura;
+        $convocatoria->fecha_finalizacion_convocatoria_cultura  = $request->fecha_finalizacion_convocatoria_cultura;
+        $convocatoria->fecha_inicio_convocatoria_st             = $request->fecha_inicio_convocatoria_st;
+        $convocatoria->fecha_finalizacion_convocatoria_st       = $request->fecha_finalizacion_convocatoria_st;
+        $convocatoria->fecha_inicio_convocatoria_ta             = $request->fecha_inicio_convocatoria_ta;
+        $convocatoria->fecha_inicio_convocatoria_tp             = $request->fecha_inicio_convocatoria_tp;
+        $convocatoria->fecha_finalizacion_convocatoria_ta       = $request->fecha_finalizacion_convocatoria_ta;
+        $convocatoria->fecha_finalizacion_convocatoria_tp       = $request->fecha_finalizacion_convocatoria_tp;
+        $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
+        $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
+        $convocatoria->min_fecha_inicio_proyectos_cultura       = $request->min_fecha_inicio_proyectos_cultura;
+        $convocatoria->max_fecha_finalizacion_proyectos_cultura = $request->max_fecha_finalizacion_proyectos_cultura;
+        $convocatoria->min_fecha_inicio_proyectos_st            = $request->min_fecha_inicio_proyectos_st;
+        $convocatoria->max_fecha_finalizacion_proyectos_st      = $request->max_fecha_finalizacion_proyectos_st;
+        $convocatoria->min_fecha_inicio_proyectos_ta            = $request->min_fecha_inicio_proyectos_ta;
+        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
+        $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
+        $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             $convocatoriaPrevActiva->esta_activa = false;
@@ -120,14 +133,30 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
-        $convocatoria->descripcion                      = $request->descripcion;
-        $convocatoria->fecha_inicio                     = $request->fecha_inicio;
-        $convocatoria->fecha_finalizacion               = $request->fecha_finalizacion;
-        $convocatoria->min_fecha_inicio_proyectos       = $request->min_fecha_inicio_proyectos;
-        $convocatoria->max_fecha_finalizacion_proyectos = $request->max_fecha_finalizacion_proyectos;
+        $convocatoria->descripcion                              = $request->descripcion;
+        $convocatoria->fecha_inicio_convocatoria_idi            = $request->fecha_inicio_convocatoria_idi;
+        $convocatoria->fecha_finalizacion_convocatoria_idi      = $request->fecha_finalizacion_convocatoria_idi;
+        $convocatoria->fecha_inicio_convocatoria_cultura        = $request->fecha_inicio_convocatoria_cultura;
+        $convocatoria->fecha_finalizacion_convocatoria_cultura  = $request->fecha_finalizacion_convocatoria_cultura;
+        $convocatoria->fecha_inicio_convocatoria_st             = $request->fecha_inicio_convocatoria_st;
+        $convocatoria->fecha_finalizacion_convocatoria_st       = $request->fecha_finalizacion_convocatoria_st;
+        $convocatoria->fecha_inicio_convocatoria_ta             = $request->fecha_inicio_convocatoria_ta;
+        $convocatoria->fecha_inicio_convocatoria_tp             = $request->fecha_inicio_convocatoria_tp;
+        $convocatoria->fecha_finalizacion_convocatoria_ta       = $request->fecha_finalizacion_convocatoria_ta;
+        $convocatoria->fecha_finalizacion_convocatoria_tp       = $request->fecha_finalizacion_convocatoria_tp;
+        $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
+        $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
+        $convocatoria->min_fecha_inicio_proyectos_cultura       = $request->min_fecha_inicio_proyectos_cultura;
+        $convocatoria->max_fecha_finalizacion_proyectos_cultura = $request->max_fecha_finalizacion_proyectos_cultura;
+        $convocatoria->min_fecha_inicio_proyectos_st            = $request->min_fecha_inicio_proyectos_st;
+        $convocatoria->max_fecha_finalizacion_proyectos_st      = $request->max_fecha_finalizacion_proyectos_st;
+        $convocatoria->min_fecha_inicio_proyectos_ta            = $request->min_fecha_inicio_proyectos_ta;
+        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
+        $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
+        $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
-            if ($convocatoriaPrevActiva) {
+            if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {
                 $convocatoriaPrevActiva->esta_activa = false;
                 $convocatoriaPrevActiva->save();
             }

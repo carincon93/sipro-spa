@@ -30,6 +30,10 @@ class EntidadAliadaIdi extends Model
         'actividades_transferencia_conocimiento',
         'carta_intencion',
         'carta_propiedad_intelectual',
+        'recursos_especie',
+        'descripcion_recursos_especie',
+        'recursos_dinero',
+        'descripcion_recursos_dinero',
     ];
 
     /**
@@ -58,19 +62,5 @@ class EntidadAliadaIdi extends Model
     public function entidadAliada()
     {
         return $this->belongsTo(EntidadAliada::class);
-    }
-
-    /**
-     * Filtrar registros
-     *
-     * @param  mixed $query
-     * @param  mixed $filters
-     * @return void
-     */
-    public function scopeFilterEntidadAliadaIDI($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion_convenio', 'ilike', '%' . $search . '%');
-        });
     }
 }

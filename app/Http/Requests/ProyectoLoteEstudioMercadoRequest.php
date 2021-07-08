@@ -25,7 +25,7 @@ class ProyectoLoteEstudioMercadoRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'numero_items'    => ['required', 'numeric', 'min:1'],
+                'numero_items'    => ['nullable', 'numeric', 'min:1'],
                 'ficha_tecnica'   => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
 
                 'primer_valor'    => ['required', 'numeric', 'min:0'],
@@ -42,9 +42,9 @@ class ProyectoLoteEstudioMercadoRequest extends FormRequest
             ];
         } else {
             return [
-                'numero_items'    => ['required', 'numeric', 'min:1'],
-                'ficha_tecnica'   => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
-                
+                'numero_items'    => ['nullable', 'numeric', 'min:1'],
+                'ficha_tecnica'   => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+
                 'primer_valor'    => ['required', 'numeric', 'min:0'],
                 'primer_empresa'  => ['required', 'max:255'],
                 'primer_archivo'  => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],

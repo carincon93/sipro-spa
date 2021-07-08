@@ -63,7 +63,10 @@ class TipologiaMinciencias extends Model
     public function scopeFilterTipologiaMinciencias($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

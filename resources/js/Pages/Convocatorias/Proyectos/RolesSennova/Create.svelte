@@ -1,14 +1,15 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import DropdownProyectoRolSennova from '@/Dropdowns/DropdownProyectoRolSennova'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let convocatoria
     export let proyecto
@@ -23,10 +24,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
@@ -37,7 +35,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.proyecto-rol-sennova.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -51,7 +49,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8, 11, 17])}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -63,20 +61,21 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DropdownProyectoRolSennova id="convocatoria_rol_sennova_id" {convocatoria} {lineaProgramatica} bind:formProyectRolSennova={$form.convocatoria_rol_sennova_id} bind:infoRolSennova message={errors.convocatoria_rol_sennova_id} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    {#if infoRolSennova?.perfil}
+                        <div class="mt-10">
+                            <h1>Perfil:</h1>
+                            <InfoMessage message={infoRolSennova.perfil} />
+                        </div>
+                    {/if}
                 </div>
 
                 {#if infoRolSennova?.experiencia}
                     <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
+                        <p class="block font-medium text-sm text-gray-700 whitespace-pre-wrap">
                             Experiencia (meses)
                             <span class="block border-gray-300 p-4 rounded-md shadow-sm">
                                 {infoRolSennova.experiencia}
@@ -86,17 +85,19 @@
                 {/if}
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_meses" value="Número de meses que requiere el apoyo" />
-                    <Input id="numero_meses" type="number" min="1" max={proyecto.diff_meses} class="mt-1 block w-full" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_roles" value="Número de personas requeridas" />
-                    <Input id="numero_roles" type="number" min="1" class="mt-1 block w-full" error={errors.numero_roles} bind:value={$form.numero_roles} required />
+                    <Input label="Número de meses que requiere el apoyo" id="numero_meses" type="number" input$min="1" input$step="0.5" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear rol SENNOVA</LoadingButton>
                 {/if}
             </div>

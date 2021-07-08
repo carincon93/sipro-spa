@@ -6,6 +6,7 @@ use App\Http\Requests\TecnoacademiaRequest;
 use App\Models\LineaTecnologica;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TecnoacademiaController extends Controller
@@ -22,7 +23,7 @@ class TecnoacademiaController extends Controller
         return Inertia::render('Tecnoacademias/Index', [
             'filters'           => request()->all('search'),
             'tecnoacademias'    => Tecnoacademia::orderBy('nombre', 'ASC')
-                ->filterTecnoacademia(request()->only('search'))->paginate(),
+                ->filterTecnoacademia(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -36,7 +37,8 @@ class TecnoacademiaController extends Controller
         $this->authorize('create', [Tecnoacademia::class]);
 
         return Inertia::render('Tecnoacademias/Create', [
-            'lineasTecnologicas' => LineaTecnologica::orderBy('nombre', 'ASC')->get()
+            'lineasTecnologicas'    => LineaTecnologica::orderBy('nombre', 'ASC')->get(),
+            'modalidades'           => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
         ]);
     }
 
@@ -51,8 +53,9 @@ class TecnoacademiaController extends Controller
         $this->authorize('create', [Tecnoacademia::class]);
 
         $tecnoacademia = new Tecnoacademia();
-        $tecnoacademia->nombre = $request->nombre;
-
+        $tecnoacademia->nombre      = $request->nombre;
+        $tecnoacademia->modalidad   = $request->modalidad;
+        $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->save();
 
         $tecnoacademia->lineasTecnologicas()->attach($request->linea_tecnologica_id);
@@ -84,7 +87,8 @@ class TecnoacademiaController extends Controller
         return Inertia::render('Tecnoacademias/Edit', [
             'tecnoacademia'                     => $tecnoacademia,
             'lineasTecnologicas'                => LineaTecnologica::orderBy('nombre', 'ASC')->get(),
-            'lineasTecnologicasRelacionadas'    => $tecnoacademia->lineasTecnologicas()->pluck('lineas_tecnologicas.id')
+            'lineasTecnologicasRelacionadas'    => $tecnoacademia->lineasTecnologicas()->pluck('lineas_tecnologicas.id'),
+            'modalidades'                       => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
         ]);
     }
 
@@ -99,7 +103,9 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('update', [Tecnoacademia::class, $tecnoacademia]);
 
-        $tecnoacademia->nombre = $request->nombre;
+        $tecnoacademia->nombre      = $request->nombre;
+        $tecnoacademia->modalidad   = $request->modalidad;
+        $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->lineasTecnologicas()->sync($request->linea_tecnologica_id);
         $tecnoacademia->save();
 

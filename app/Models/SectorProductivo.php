@@ -44,13 +44,13 @@ class SectorProductivo extends Model
     ];
 
     /**
-     * Relationship with TemaPriorizado
+     * Relationship with MesaTecnica
      *
      * @return object
      */
-    public function temaPriorizados()
+    public function mesasTecnicas()
     {
-        return $this->hasMany(TemaPriorizado::class);
+        return $this->hasMany(MesaTecnicaSectorProductivo::class);
     }
 
     /**
@@ -63,7 +63,10 @@ class SectorProductivo extends Model
     public function scopeFilterSectorProductivo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

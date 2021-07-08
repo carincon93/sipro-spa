@@ -1,12 +1,11 @@
 <script>
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import LoadingButton from '@/Components/LoadingButton'
-    import File from '@/Components/File'
-    import PercentageProgress from '@/Components/PercentageProgress'
-    import { onMount } from 'svelte'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import File from '@/Shared/File'
+    import PercentageProgress from '@/Shared/PercentageProgress'
 
     export let errors
     export let convocatoria
@@ -19,10 +18,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let form = useForm({
         archivo: null,
@@ -30,7 +26,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin && !sending) {
+        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && !sending)) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -39,9 +35,9 @@
     }
 
     let proyectoAnexoId
-    onMount(() => {
-        proyectoAnexoId = proyectoAnexo.data.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.data.find((item) => item.anexo_id == anexo.id).id : null
-    })
+    $: if (proyectoAnexo) {
+        proyectoAnexoId = proyectoAnexo.find((item) => item.anexo_id == anexo.id) ? proyectoAnexo.find((item) => item.anexo_id == anexo.id).id : null
+    }
 </script>
 
 <form on:submit|preventDefault={submit} class="mt-4 p-4">
@@ -53,9 +49,9 @@
             {anexo.nombre}
         </a>
     {/if}
-    <fieldset disabled={isSuperAdmin && !sending ? undefined : true}>
+    <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
         <div>
-            <File id="archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.archivo} error={errors?.archivo} required />
+            <File type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>
         <div>
             <LoadingButton loading={sending} class="w-full mt-4" type="submit">

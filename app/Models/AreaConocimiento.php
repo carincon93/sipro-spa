@@ -54,6 +54,16 @@ class AreaConocimiento extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->hasMany(CulturaInnovacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -63,7 +73,10 @@ class AreaConocimiento extends Model
     public function scopeFilterAreaConocimiento($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

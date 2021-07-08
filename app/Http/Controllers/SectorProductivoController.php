@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SectorProductivoRequest;
+use App\Models\MesaTecnica;
 use App\Models\SectorProductivo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,7 +22,7 @@ class SectorProductivoController extends Controller
         return Inertia::render('SectoresProductivos/Index', [
             'filters'   => request()->all('search'),
             'sectoresProductivos' => SectorProductivo::orderBy('nombre', 'ASC')
-                ->filterSectorProductivo(request()->only('search'))->paginate(),
+                ->filterSectorProductivo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

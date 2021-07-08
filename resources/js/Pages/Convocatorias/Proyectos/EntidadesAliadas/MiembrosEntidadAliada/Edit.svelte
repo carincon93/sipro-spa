@@ -1,15 +1,16 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -24,10 +25,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -40,10 +38,11 @@
         },
         numero_documento: miembroEntidadAliada.numero_documento,
         numero_celular: miembroEntidadAliada.numero_celular,
+        autorizacion_datos: miembroEntidadAliada.autorizacion_datos,
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.update', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,7 +52,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.destroy', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))
         }
     }
@@ -63,8 +62,8 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">Miembros de la entidad aliada</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -76,15 +75,13 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="email" value="Correo electrónico" />
-                    <Input id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required />
+                    <Input label="Correo electrónico" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
@@ -93,20 +90,22 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_documento" value="Número de documento" />
-                    <Input id="numero_documento" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_celular" value="Número de celular" />
-                    <Input id="numero_celular" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                </div>
+
+                <div class="mt-4">
+                    <InfoMessage message={miembroEntidadAliada.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar miembro de la entidad aliada </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar miembro de la entidad aliada</LoadingButton>
                 {/if}
             </div>

@@ -1,14 +1,15 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Dialog from '@/Components/Dialog'
+    import Dialog from '@/Shared/Dialog'
 
-    import Textarea from '@/Components/Textarea'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import File from '@/Shared/File'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
 
@@ -23,10 +24,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -34,6 +32,7 @@
         nombre: anexo.nombre,
         descripcion: anexo.descripcion,
         linea_programatica_id: anexoLineasProgramaticas,
+        archivo: anexo.archivo,
     })
 
     function submit() {
@@ -57,7 +56,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
                         <a use:inertia href={route('anexos.index')} class="text-indigo-400 hover:text-indigo-600"> Anexos </a>
                     {/if}
@@ -72,13 +71,28 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre del anexo" />
-                    <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea label="Nombre del anexo" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
+
+                    <File type="file" id="archivo" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
+
+                    {#if $form.archivo}
+                        <div class="mt-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('anexos.download', [anexo.id])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar formato
+                            </a>
+                        </div>
+                    {/if}
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">

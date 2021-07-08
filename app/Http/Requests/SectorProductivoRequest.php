@@ -27,4 +27,16 @@ class SectorProductivoRequest extends FormRequest
             'nombre' => ['required', 'max:191', 'string']
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
+    }
 }

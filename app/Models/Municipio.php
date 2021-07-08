@@ -23,7 +23,7 @@ class Municipio extends Model
      * @var array
      */
     protected $fillable = [
-        'departamento_id ',
+        'regional_id ',
         'nombre',
         'area',
         'latitud',
@@ -49,13 +49,13 @@ class Municipio extends Model
     ];
 
     /**
-     * Relationship with Departamento
+     * Relationship with Regional
      *
      * @return object
      */
-    public function departamento()
+    public function regional()
     {
-        return $this->belongsTo(Departamento::class);
+        return $this->belongsTo(Regional::class);
     }
 
     /**
@@ -78,7 +78,10 @@ class Municipio extends Model
     public function scopeFilterMunicipio($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

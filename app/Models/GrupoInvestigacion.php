@@ -71,6 +71,16 @@ class GrupoInvestigacion extends Model
     }
 
     /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_grupo_investigacion', 'grupo_investigacion_id', 'proyecto_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -80,7 +90,14 @@ class GrupoInvestigacion extends Model
     public function scopeFilterGrupoInvestigacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace(' ', '%%', $search);
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $query->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id');
+            $query->join('regionales', 'centros_formacion.regional_id', 'regionales.id');
+            $query->whereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

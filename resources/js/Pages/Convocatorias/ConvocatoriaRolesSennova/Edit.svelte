@@ -1,17 +1,17 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import Textarea from '@/Components/Textarea'
-    import Dialog from '@/Components/Dialog'
-    import DropdownLineaProgramatica from '@/Dropdowns/DropdownLineaProgramatica'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import Textarea from '@/Shared/Textarea'
+    import Dialog from '@/Shared/Dialog'
+    import DropdownLineaProgramatica from '@/Shared/Dropdowns/DropdownLineaProgramatica'
 
     export let errors
     export let convocatoria
@@ -25,10 +25,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -44,6 +41,7 @@
             value: convocatoriaRolSennova.rol_sennova_id,
             label: rolesSennova.find((item) => item.value == convocatoriaRolSennova.rol_sennova_id)?.label,
         },
+        perfil: convocatoriaRolSennova.perfil,
         mensaje: convocatoriaRolSennova.mensaje,
     })
 
@@ -68,7 +66,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
                         <a use:inertia href={route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id)} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
@@ -88,13 +86,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="asignacion_mensual" value="Asignación mensual" />
-                    <Input id="asignacion_mensual" type="number" min="0" class="mt-1 block w-full" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
+                    <Input label="Asignación mensual" id="asignacion_mensual" type="number" input$min="0" class="mt-1" bind:value={$form.asignacion_mensual} error={errors.asignacion_mensual} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="experiencia" value="Número de meses de experiencia requerida" />
-                    <Input id="experiencia" type="number" min="0" class="mt-1 block w-full" bind:value={$form.experiencia} error={errors.experiencia} />
+                    <Input label="Meses de experiencia requerida" id="experiencia" type="text" class="mt-1" bind:value={$form.experiencia} error={errors.experiencia} />
                 </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Línea programática" />
@@ -107,8 +103,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="mensaje" value="Mensaje (Regla de negocio)" />
-                    <Textarea rows="4" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
+                    <Textarea label="Perfil" maxlength="40000" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
+                </div>
+
+                <div class="mt-4">
+                    <Textarea label="Mensaje (Regla de negocio)" maxlength="40000" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

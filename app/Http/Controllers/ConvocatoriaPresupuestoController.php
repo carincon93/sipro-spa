@@ -21,7 +21,7 @@ class ConvocatoriaPresupuestoController extends Controller
         return Inertia::render('ConvocatoriaPresupuesto/Index', [
             'filters'                   => request()->all('search'),
             'convocatoriaPresupuesto'   => ConvocatoriaPresupuesto::orderBy('', 'ASC')
-                ->filterConvocatoriaPresupuesto(request()->only('search'))->paginate(),
+                ->filterConvocatoriaPresupuesto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -1,27 +1,32 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Switch from '@/Components/Switch'
-    import Button from '@/Components/Button'
-    import Select from '@/Components/Select'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import InputError from '@/Shared/InputError'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Switch from '@/Shared/Switch'
+    import Button from '@/Shared/Button'
+    import Select from '@/Shared/Select'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import Dialog from '@/Components/Dialog'
-    import DynamicList from '@/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import DataTableMenu from '@/Shared/DataTableMenu'
+    import { Item, Text } from '@smui/list'
+    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let usuario
     export let tiposDocumento
-    export let tiposParticipacion
+    export let tiposVinculacion
     export let roles
     export let rolesRelacionados
+    export let proyectos
 
     $: $title = usuario ? usuario.nombre : null
 
@@ -29,10 +34,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -47,16 +49,18 @@
         numero_documento: usuario.numero_documento,
         numero_celular: usuario.numero_celular,
         habilitado: usuario.habilitado,
-        tipo_participacion: {
-            value: usuario.tipo_participacion,
-            label: tiposParticipacion.find((item) => item.value == usuario.tipo_participacion)?.label,
+        tipo_vinculacion: {
+            value: usuario.tipo_vinculacion,
+            label: tiposVinculacion.find((item) => item.value == usuario.tipo_vinculacion)?.label,
         },
         centro_formacion_id: usuario.centro_formacion_id,
         role_id: rolesRelacionados,
+        autorizacion_datos: usuario.autorizacion_datos,
+        default_password: false,
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])) {
             $form.put(route('users.update', usuario.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -66,7 +70,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])) {
             $form.delete(route('users.destroy', usuario.id))
         }
     }
@@ -76,8 +80,8 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                         <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -89,15 +93,13 @@
 
     <form on:submit|preventDefault={submit}>
         <div class="bg-white rounded shadow max-w-3xl">
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre completo" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="email" value="Correo electrónico" />
-                    <Input id="email" type="email" class="mt-1 block w-full" bind:value={$form.email} error={errors.email} required />
+                    <Input label="Correo electrónico institucional" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required />
                 </div>
 
                 <div class="mt-4">
@@ -106,14 +108,13 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_documento" value="Número de documento" />
-                    <Input id="numero_documento" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_documento} error={errors.numero_documento} required />
+                    <Input label="Número de documento" id="numero_documento" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$form.numero_documento} error={errors.numero_documento} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_celular" value="Número de celular" />
-                    <Input id="numero_celular" type="number" min="0" class="mt-1 block w-full" bind:value={$form.numero_celular} error={errors.numero_celular} required />
+                    <Input label="Número de celular" id="numero_celular" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$form.numero_celular} error={errors.numero_celular} required />
                 </div>
+
                 <div class="mt-4">
                     <Label required labelFor="habilitado" value="¿Usuario habilitado para ingresar al sistema?" class="inline-block mb-4" />
                     <br />
@@ -122,45 +123,125 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="tipo_participacion" value="Tipo de participación" />
-                    <Select id="tipo_participacion" items={tiposParticipacion} bind:selectedValue={$form.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
+                    <Label required class="mb-4" labelFor="tipo_vinculacion" value="Tipo de vinculación" />
+                    <Select id="tipo_vinculacion" items={tiposVinculacion} bind:selectedValue={$form.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="default_password" value="¿Usar contraseña por defecto?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.default_password} />
+                </div>
+
+                <div class="mt-4">
+                    <InfoMessage message={usuario.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
+                </div>
+
+                <div class="mt-4">
+                    {#if $form.numero_documento && $form.default_password}
+                        <InfoMessage message="La contraseña de este usuario es: sena{$form.numero_documento}*" />
+                    {/if}
+                </div>
             </fieldset>
         </div>
 
         <div class="bg-white rounded shadow overflow-hidden mt-20">
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="p-4">
                     <Label required class="mb-4" labelFor="role_id" value="Seleccione algún rol" />
                     <InputError message={errors.role_id} />
                 </div>
                 <div class="grid grid-cols-2">
                     {#each roles as { id, name }, i}
-                        <div class="pt-8 pb-8 border-t">
-                            <FormField>
-                                <Checkbox bind:group={$form.role_id} value={id} />
-                                <span slot="label">{name}</span>
-                            </FormField>
-                        </div>
+                        {#if (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && (name == 'proponente cultura de la innovación') | checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente i+d+i') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente servicios tecnológicos') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoacademia') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoparque')}
+                            <div class="pt-8 pb-8 border-t">
+                                <FormField>
+                                    <Checkbox bind:group={$form.role_id} value={id} />
+                                    <span slot="label">{name}</span>
+                                </FormField>
+                            </div>
+                        {:else if isSuperAdmin}
+                            <div class="pt-8 pb-8 border-t">
+                                <FormField>
+                                    <Checkbox bind:group={$form.role_id} value={id} />
+                                    <span slot="label">{name}</span>
+                                </FormField>
+                            </div>
+                        {/if}
                     {/each}
                 </div>
             </fieldset>
         </div>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
             {/if}
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar usuario</LoadingButton>
             {/if}
         </div>
     </form>
+
+    <h1 class="mt-24 mb-8 text-center text-3xl">Proyectos asociados</h1>
+    <div class="bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {#each proyectos as proyecto}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {proyecto.codigo}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp.nodo_tecnoparque ? proyecto.tp.nodo_tecnoparque.nombre : proyecto.ta.tecnoacademia_linea_tecnologica ? proyecto.ta.tecnoacademia_linea_tecnologica.tecnoacademia.nombre : null}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta ? proyecto.ta.fecha_ejecucion : proyecto.tp ? proyecto.tp.fecha_ejecucion : null}
+                            </p>
+                        </td>
+                        <td class="border-t td-actions">
+                            <DataTableMenu class={proyecto.length < 4 ? 'z-50' : ''}>
+                                {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id]))}>
+                                        <Text>Ver detalles</Text>
+                                    </Item>
+                                {:else}
+                                    <Item>
+                                        <Text>No tiene permisos</Text>
+                                    </Item>
+                                {/if}
+                            </DataTableMenu>
+                        </td>
+                    </tr>
+                {/each}
+
+                {#if proyectos.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
+    </div>
 
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">

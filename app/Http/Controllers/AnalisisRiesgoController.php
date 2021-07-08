@@ -19,16 +19,16 @@ class AnalisisRiesgoController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('viewAny', [AnalisisRiesgo::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
             'convocatoria'    => $convocatoria->only('id'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')
-                ->filterAnalisisRiesgo(request()->only('search'))->paginate(),
+                ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -39,7 +39,7 @@ class AnalisisRiesgoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [AnalisisRiesgo::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Create', [
             'convocatoria'          => $convocatoria,
@@ -59,7 +59,7 @@ class AnalisisRiesgoController extends Controller
      */
     public function store(AnalisisRiesgoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [AnalisisRiesgo::class]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $analisisRiesgo = new AnalisisRiesgo();
         $analisisRiesgo->nivel               = $request->nivel;
@@ -84,7 +84,7 @@ class AnalisisRiesgoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, AnalisisRiesgo $analisisRiesgo)
     {
-        $this->authorize('view', [AnalisisRiesgo::class, $analisisRiesgo]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Show', [
             'analisisRiesgo' => $analisisRiesgo
@@ -99,7 +99,7 @@ class AnalisisRiesgoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, AnalisisRiesgo $analisisRiesgo)
     {
-        $this->authorize('update', [AnalisisRiesgo::class, $analisisRiesgo]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Edit', [
             'convocatoria'         => $convocatoria,
@@ -121,15 +121,15 @@ class AnalisisRiesgoController extends Controller
      */
     public function update(AnalisisRiesgoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, AnalisisRiesgo $analisisRiesgo)
     {
-        $this->authorize('update', [AnalisisRiesgo::class, $analisisRiesgo]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $analisisRiesgo->nivel                = $request->nivel;
-        $analisisRiesgo->tipo                 = $request->tipo;
-        $analisisRiesgo->descripcion          = $request->descripcion;
-        $analisisRiesgo->probabilidad          = $request->probabilidad;
-        $analisisRiesgo->impacto               = $request->impacto;
-        $analisisRiesgo->efectos              = $request->efectos;
-        $analisisRiesgo->medidas_mitigacion  = $request->medidas_mitigacion;
+        $analisisRiesgo->nivel              = $request->nivel;
+        $analisisRiesgo->tipo               = $request->tipo;
+        $analisisRiesgo->descripcion        = $request->descripcion;
+        $analisisRiesgo->probabilidad       = $request->probabilidad;
+        $analisisRiesgo->impacto            = $request->impacto;
+        $analisisRiesgo->efectos            = $request->efectos;
+        $analisisRiesgo->medidas_mitigacion = $request->medidas_mitigacion;
         $analisisRiesgo->proyecto()->associate($proyecto);
 
         $analisisRiesgo->save();
@@ -145,7 +145,7 @@ class AnalisisRiesgoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, AnalisisRiesgo $analisisRiesgo)
     {
-        $this->authorize('delete', [AnalisisRiesgo::class, $analisisRiesgo]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $analisisRiesgo->delete();
 

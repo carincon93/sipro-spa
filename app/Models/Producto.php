@@ -74,6 +74,16 @@ class Producto extends Model
     }
 
     /**
+     * Relationship with ProductoCulturaInnovacion
+     *
+     * @return object
+     */
+    public function productoCulturaInnovacion()
+    {
+        return $this->hasOne(ProductoCulturaInnovacion::class);
+    }
+
+    /**
      * Relationship with ProductoTaTp
      *
      * @return object
@@ -81,6 +91,16 @@ class Producto extends Model
     public function productoTaTp()
     {
         return $this->hasOne(ProductoTaTp::class);
+    }
+
+    /**
+     * Relationship with ProductoServicioTecnologico
+     *
+     * @return object
+     */
+    public function productoServicioTecnologico()
+    {
+        return $this->hasOne(ProductoServicioTecnologico::class);
     }
 
     /**
@@ -103,7 +123,10 @@ class Producto extends Model
     public function scopeFilterProducto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 

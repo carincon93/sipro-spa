@@ -24,11 +24,12 @@ class MiembroEntidadAliadaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'            => ['required', 'max:255', 'string'],
-            'email'             => ['required', 'max:255', 'email'],
-            'tipo_documento'    => ['required', 'max:2'],
-            'numero_documento'  => ['required', 'min:0', 'max:99999999999', 'integer'],
-            'numero_celular'    => ['required', 'min:0', 'max:3800000000', 'integer'],
+            'nombre'                => ['required', 'max:255', 'string'],
+            'email'                 => ['required', 'max:255', 'email'],
+            'tipo_documento'        => ['required', 'max:2'],
+            'numero_documento'      => ['required', 'min:55555', 'max:99999999999', 'integer'],
+            'numero_celular'        => ['required', 'min:3000000000', 'max:3800000000', 'integer'],
+            'autorizacion_datos'    => ['required', 'boolean']
         ];
     }
 
@@ -39,10 +40,18 @@ class MiembroEntidadAliadaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->tipo_documento) ) {
+        if (is_array($this->tipo_documento)) {
             $this->merge([
                 'tipo_documento' => $this->tipo_documento['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
+
+        $this->merge([
+            'email' => mb_strtolower($this->email),
+        ]);
     }
 }

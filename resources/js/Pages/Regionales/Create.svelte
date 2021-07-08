@@ -1,13 +1,13 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import DynamicList from '@/Dropdowns/DynamicList'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
 
@@ -17,10 +17,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
@@ -59,13 +56,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="codigo" value="Código" />
-                    <Input id="codigo" type="number" min="0" max="999" class="mt-1 block w-full" bind:value={$form.codigo} error={errors.codigo} required />
+                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">
@@ -75,7 +70,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="director_regional_id" value="Director(a) Regional" />
-                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.directores-regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
+                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.users', 'director regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

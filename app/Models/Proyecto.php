@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Proyecto extends Model
 {
@@ -22,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -32,8 +33,10 @@ class Proyecto extends Model
     protected $fillable = [
         'convocatoria_id',
         'centro_formacion_id',
-        'tipo_proyecto_id',
-        'esta_finalizado'
+        'linea_programatica_id',
+        'finalizado',
+        'modificable',
+        'radicado'
     ];
 
     /**
@@ -65,13 +68,13 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with TipoProyecto
+     * Relationship with LineaProgramatica
      *
      * @return object
      */
-    public function tipoProyecto()
+    public function lineaProgramatica()
     {
-        return $this->belongsTo(TipoProyecto::class);
+        return $this->belongsTo(LineaProgramatica::class);
     }
 
     /**
@@ -95,13 +98,43 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with TATP
+     * Relationship with CulturaInnovacion
      *
      * @return object
      */
-    public function taTp()
+    public function culturaInnovacion()
     {
-        return $this->hasOne(TaTp::class, 'id');
+        return $this->hasOne(CulturaInnovacion::class, 'id');
+    }
+
+    /**
+     * Relationship with ServicioTecnologico
+     *
+     * @return object
+     */
+    public function servicioTecnologico()
+    {
+        return $this->hasOne(ServicioTecnologico::class, 'id');
+    }
+
+    /**
+     * Relationship with Ta
+     *
+     * @return object
+     */
+    public function ta()
+    {
+        return $this->hasOne(Ta::class, 'id');
+    }
+
+    /**
+     * Relationship with Tp
+     *
+     * @return object
+     */
+    public function tp()
+    {
+        return $this->hasOne(Tp::class, 'id');
     }
 
     /**
@@ -189,9 +222,49 @@ class Proyecto extends Model
      *
      * @return object
      */
-    public function programasFormacion()
+    public function programasFormacionImpactados()
     {
-        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion', 'proyecto_id', 'programa_formacion_id');
+        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion_impactados', 'proyecto_id', 'programa_formacion_id');
+    }
+
+    /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function programasFormacionArticulados()
+    {
+        return $this->belongsToMany(ProgramaFormacionArticulado::class, 'proyecto_programa_formacion_articulados', 'proyecto_id', 'programa_formacion_articulado_id');
+    }
+
+    /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function taProgramasFormacion()
+    {
+        return $this->belongsToMany(ProgramaFormacion::class, 'ta_programa_formacion', 'proyecto_id', 'programa_formacion_id');
+    }
+
+    /**
+     * Relationship with GrupoInvestigacion
+     *
+     * @return object
+     */
+    public function gruposInvestigacion()
+    {
+        return $this->belongsToMany(GrupoInvestigacion::class, 'proyecto_grupo_investigacion', 'proyecto_id', 'grupo_investigacion_id');
+    }
+
+    /**
+     * Relationship with LineaInvestigacion
+     *
+     * @return object
+     */
+    public function lineasInvestigacion()
+    {
+        return $this->belongsToMany(LineaInvestigacion::class, 'proyecto_linea_investigacion', 'proyecto_id', 'linea_investigacion_id');
     }
 
     /**
@@ -214,10 +287,16 @@ class Proyecto extends Model
         return $this->belongsToMany(User::class, 'proyecto_participantes', 'proyecto_id', 'user_id')
             ->withPivot([
                 'user_id',
-                'es_autor',
+                'es_formulador',
                 'cantidad_meses',
-                'cantidad_horas'
+                'cantidad_horas',
+                'rol_sennova'
             ]);
+    }
+
+    public static function getLog($proyectoId)
+    {
+        return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->orderBy('created_at', 'DESC')->get();
     }
 
     /**
@@ -227,10 +306,50 @@ class Proyecto extends Model
      */
     public function getCodigoAttribute()
     {
+        $fechaFinalizacion = null;
         if ($this->idi()->exists()) $fechaFinalizacion =  $this->idi->fecha_finalizacion;
-        if ($this->tatp()->exists()) $fechaFinalizacion =  $this->tatp->fecha_finalizacion;
+        if ($this->ta()->exists()) $fechaFinalizacion  =  $this->ta->fecha_finalizacion;
+        if ($this->tp()->exists()) $fechaFinalizacion  =  $this->tp->fecha_finalizacion;
+        if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
+        if ($this->culturaInnovacion()->exists()) $fechaFinalizacion =  $this->culturaInnovacion->fecha_finalizacion;
 
         return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
+    }
+
+    public function getFechaInicioAttribute()
+    {
+        $fechaInicio = null;
+        if ($this->idi()->exists()) {
+            $fechaInicio = $this->idi->fecha_inicio;
+        } else if ($this->ta()->exists()) {
+            $fechaInicio = $this->ta->fecha_inicio;
+        } else if ($this->tp()->exists()) {
+            $fechaInicio = $this->tp->fecha_inicio;
+        } else if ($this->servicioTecnologico()->exists()) {
+            $fechaInicio = $this->servicioTecnologico->fecha_inicio;
+        } else if ($this->culturaInnovacion()->exists()) {
+            $fechaInicio = $this->culturaInnovacion->fecha_inicio;
+        }
+
+        return $fechaInicio;
+    }
+
+    public function getFechaFinalizacionAttribute()
+    {
+        $fechaInicio = null;
+        if ($this->idi()->exists()) {
+            $fechaInicio = $this->idi->fecha_finalizacion;
+        } else if ($this->ta()->exists()) {
+            $fechaInicio = $this->ta->fecha_finalizacion;
+        } else if ($this->tp()->exists()) {
+            $fechaInicio = $this->tp->fecha_finalizacion;
+        } else if ($this->servicioTecnologico()->exists()) {
+            $fechaInicio = $this->servicioTecnologico->fecha_finalizacion;
+        } else if ($this->culturaInnovacion()->exists()) {
+            $fechaInicio = $this->culturaInnovacion->fecha_finalizacion;
+        }
+
+        return $fechaInicio;
     }
 
     /**
@@ -240,19 +359,28 @@ class Proyecto extends Model
      */
     public function getDiffMesesAttribute()
     {
+        $cantidadMesesEjecucion = 0;
         if ($this->idi()->exists()) {
-            $fechaInicio = $this->idi->fecha_inicio;
-            $fechaFinalizacion = $this->idi->fecha_finalizacion;
+            $cantidadMesesEjecucion = $this->idi->max_meses_ejecucion;
         }
 
-        if ($this->tatp()->exists()) {
-            $fechaInicio = $this->tatp->fecha_inicio;
-            $fechaFinalizacion = $this->tatp->fecha_finalizacion;
+        if ($this->ta()->exists()) {
+            $cantidadMesesEjecucion = $this->ta->max_meses_ejecucion;
         }
 
-        $fechaFinalizacion = Carbon::parse($fechaFinalizacion, 'UTC')->floorMonth();
-        $fechaInicio       = Carbon::parse($fechaInicio, 'UTC')->floorMonth();
-        return $fechaInicio->diffInMonths($fechaFinalizacion);
+        if ($this->tp()->exists()) {
+            $cantidadMesesEjecucion = $this->tp->max_meses_ejecucion;
+        }
+
+        if ($this->servicioTecnologico()->exists()) {
+            $cantidadMesesEjecucion = $this->servicioTecnologico->max_meses_ejecucion;
+        }
+
+        if ($this->culturaInnovacion()->exists()) {
+            $cantidadMesesEjecucion = $this->culturaInnovacion->max_meses_ejecucion;
+        }
+
+        return $cantidadMesesEjecucion;
     }
 
 
@@ -294,6 +422,12 @@ class Proyecto extends Model
      */
     public function getPrecioProyectoAttribute()
     {
-        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
+        $totalEDT = 0;
+        if ($this->ta()->exists() && $this->lineaProgramatica->codigo == 70) {
+            foreach ($this->ta->edt as $evento) {
+                $totalEDT += $evento->presupuesto;
+            }
+        }
+        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute() + $totalEDT;
     }
 }

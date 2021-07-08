@@ -45,13 +45,13 @@ class MesaTecnica extends Model
     ];
 
     /**
-     * Relationship with TemaPriorizado
+     * Relationship with MesaTecnicaSectorProductivo
      *
      * @return object
      */
-    public function temasPriorizados()
+    public function sectoresProductivos()
     {
-        return $this->hasMany(TemaPriorizado::class);
+        return $this->belongsToMany(MesaTecnicaSectorProductivo::class);
     }
 
     /**
@@ -64,7 +64,10 @@ class MesaTecnica extends Model
     public function scopeFilterMesaTecnica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

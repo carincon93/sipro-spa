@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -11,10 +10,8 @@ use App\Http\Controllers\ProgramaFormacionController;
 use App\Http\Controllers\LineaProgramaticaController;
 use App\Http\Controllers\RedConocimientoController;
 use App\Http\Controllers\TematicaEstrategicaController;
-use App\Http\Controllers\TipoProyectoController;
 use App\Http\Controllers\SectorProductivoController;
 use App\Http\Controllers\MesaTecnicaController;
-use App\Http\Controllers\TemaPriorizadoController;
 use App\Http\Controllers\GrupoInvestigacionController;
 use App\Http\Controllers\LineaInvestigacionController;
 use App\Http\Controllers\SemilleroInvestigacionController;
@@ -37,7 +34,9 @@ use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
-use App\Http\Controllers\TaTpController;
+use App\Http\Controllers\ReglaRolTaController;
+use App\Http\Controllers\TaController;
+use App\Http\Controllers\TpController;
 use App\Http\Controllers\ProyectoAnexoController;
 use App\Http\Controllers\UsoPresupuestalController;
 use App\Http\Controllers\ProyectoLoteEstudioMercadoController;
@@ -45,10 +44,14 @@ use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnologicaController;
 use App\Http\Controllers\MesaSectorialController;
+use App\Http\Controllers\ServicioTecnologicoController;
+use App\Http\Controllers\HelpDeskController;
+use App\Http\Controllers\CulturaInnovacionController;
+use App\Http\Controllers\EdtController;
 
 use App\Models\ActividadEconomica;
+use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
-use App\Models\TipoProyecto;
 use App\Models\RedConocimiento;
 use App\Models\DisciplinaSubareaConocimiento;
 use App\Models\TematicaEstrategica;
@@ -59,12 +62,20 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
+use App\Models\EstadoSistemaGestion;
 use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
 use App\Models\Tecnoacademia;
 use App\Models\LineaTecnologica;
 use App\Models\Municipio;
+use App\Models\NodoTecnoparque;
+use App\Models\ProgramaFormacion;
+use App\Models\ProgramaFormacionArticulado;
+use App\Models\SectorProductivo;
+use App\Models\SubareaConocimiento;
+use App\Models\SubclasificacionTipologiaSt;
+use App\Models\TemaPriorizado;
 use App\Models\User;
 
 /*
@@ -89,13 +100,33 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+/**
+ * Trae los centros de formación
+ */
+Route::get('web-api/centros-formacion', function () {
+    return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
+})->name('web-api.centros-formacion');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/edit', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+    // Notificaciones
+    Route::get('notificaciones', [UserController::class, 'showAllNotifications'])->name('notificaciones.index');
+    Route::post('notificaciones/marcar-leido', [UserController::class, 'markAsReadNotification'])->name('notificaciones.marcar-leido');
+
+    // Redirecciona según el tipo de proyecto
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/editar', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+
+    // Reportar problemas
+    Route::get('reportar-problemas/crear', [HelpDeskController::class, 'create'])->name('reportar-problemas.create');
+    Route::post('reportar-problemas/reportar', [HelpDeskController::class, 'report'])->name('reportar-problemas.report');
+
+    // Cambiar contraseña
+    Route::put('/users/cambiar-password', [UserController::class, 'changePassword'])->name('users.change-password');
+    Route::get('/users/cambiar-password', [UserController::class, 'showChangePasswordForm'])->name('users.change-password-form');
 
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes', [ProyectoController::class, 'participantes'])->name('convocatorias.proyectos.participantes');
@@ -115,16 +146,43 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes/semilleros-investigacion/link', [ProyectoController::class, 'linkSemilleroInvestigacion'])->name('convocatorias.proyectos.participantes.semilleros-investigacion.link');
     Route::delete('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes/semilleros-investigacion/unlink', [ProyectoController::class, 'unlinkSemilleroInvestigacion'])->name('convocatorias.proyectos.participantes.semilleros-investigacion.unlink');
 
-
-
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor/propuesta-sostenibilidad', [ProyectoController::class, 'updatePropuestaSostenibilidad'])->name('convocatorias.proyectos.propuesta-sostenibilidad');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor', [ProyectoController::class, 'showCadenaValor'])->name('convocatorias.proyectos.cadena-valor');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/proyecto-lote-estudio-mercado/{proyecto_lote_estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/proyecto-presupuesto/{proyecto_presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.proyecto-presupuesto.download-soporte');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/lote/{lote}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.lote.download');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.presupuesto.download-soporte');
+    Route::get('anexos/{anexo}/download', [AnexoController::class, 'download'])->name('anexos.download');
 
+    // Trae los centros de formación - Cultura innovación
+    Route::get('web-api/cultura-innovacion/centros-formacion', function () {
+        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')
+            ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
+            ->whereIn('centros_formacion.codigo', [
+                9309,
+                9503,
+                9230,
+                9124,
+                9120,
+                9222,
+                9116,
+                9548,
+                9401,
+                9403,
+                9303,
+                9310,
+                9529,
+                9121
+            ])
+            ->orderBy('centros_formacion.nombre', 'ASC')->get());
+    })->name('web-api.cultura-innovacion.centros-formacion');
 
     // Trae los conceptos internos SENA
-    Route::get('web-api/segundo-grupo-presupuestal', function () {
-        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')->orderBy('nombre', 'ASC')->get());
+    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', function ($lineaProgramatica) {
+        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
+            ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
+            ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
+            ->groupBy('segundo_grupo_presupuestal.id')
+            ->orderBy('segundo_grupo_presupuestal.nombre', 'ASC')
+            ->get());
     })->name('web-api.segundo-grupo-presupuestal');
 
     Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function ($segundoGrupoPresupuestal) {
@@ -147,7 +205,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.usos-presupuestales');
 
     Route::get('web-api/convocatorias/{convocatoria}/{linea_programatica}/roles-sennova', function ($convocatoria, $lineaProgramatica) {
-        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.mensaje,
+        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.perfil, convocatoria_rol_sennova.mensaje,
         CASE nivel_academico
 				WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico', chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
@@ -167,6 +225,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.convocatorias.roles-sennova');
 
     /**
+     * Programas de formación
+     * 
+     */
+    Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', function ($centroFormacion) {
+        return response(ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $centroFormacion)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.programas-formacion');
+
+    /**
+     * Programas de formación
+     * 
+     */
+    Route::get('web-api/programas-formacion-articulados', function () {
+        return response(ProgramaFormacionArticulado::selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')
+            ->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.programas-formacion-articulados');
+
+    /**
      * Regionales
      * 
      * Trae las regiones
@@ -182,45 +257,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(Regional::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.regionales');
 
-    /**
-     * Trae los directores de regional
-     */
-    Route::get('web-api/directores-regional', function () {
-        return response(User::select('users.id as value', 'users.nombre as label')
-            ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', 'roles.id')
-            ->where('roles.id', 7)
-            ->orWhere('roles.name', 'ilike', '%director de regional%')
-            ->orderBy('users.nombre', 'ASC')->get());
-    })->name('web-api.directores-regional');
-
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
+
+    /**
+     * Trae los centros de formación por regional
+     */
+    Route::get('web-api/regional/{regional}/centros-formacion', function ($regional) {
+        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $regional)->orderBy('centros_formacion.nombre', 'ASC')->get());
+    })->name('web-api.centros-formacion-ejecutor');
 
     /**
      * Centros de formación
      * 
      * Trae los subdirectores
      */
-    Route::get('web-api/subdirectores', function () {
+    Route::get('web-api/users/{rol}', function ($rol) {
         return response(User::select('users.id as value', 'users.nombre as label')
             ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', 'roles.id')
-            ->where('roles.id', 14)
-            ->orWhere('roles.name', 'ilike', '%subdirector de centro de formación%')
+            ->where('roles.name', 'ilike', '%' . $rol . '%')
             ->orderBy('users.nombre', 'ASC')->get());
-    })->name('web-api.subdirectores');
+    })->name('web-api.users');
 
     Route::resource('centros-formacion', CentroFormacionController::class)->except(['show'])->parameters(['centros-formacion' => 'centro-formacion']);
 
     /**
      * Programas de formación
      * 
-     * Trae los centros de formación
      */
-    Route::get('web-api/centros-formacion', function () {
-        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
-    })->name('web-api.centros-formacion');
-
     Route::resource('programas-formacion', ProgramaFormacionController::class)->parameters(['programas-formacion' => 'programa-formacion'])->except(['show']);
 
     /**
@@ -234,12 +298,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('sectores-productivos', SectorProductivoController::class)->parameters(['sectores-productivos' => 'sector-productivo'])->except(['show']);
-
-    /**
-     * Temas priorizados
-     * 
-     */
-    Route::resource('temas-priorizados', TemaPriorizadoController::class)->parameters(['temas-priorizados' => 'tema-priorizado'])->except(['show']);
 
     /**
      * Mesas técnicas
@@ -300,17 +358,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      * Trae las líneas de investigación
      */
-    Route::get('web-api/lineas-investigacion', function () {
-        return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10), \'∙ Centro de formación: \', centros_formacion.nombre, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get());
+    Route::get('web-api/lineas-investigacion/{centro_formacion}', function ($centroFormacion) {
+        return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
     })->name('web-api.lineas-investigacion');
 
     Route::resource('semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
-
-    /**
-     * Tipos de proyecto
-     * 
-     */
-    Route::resource('tipos-proyecto', TipoProyectoController::class)->parameters(['tipos-proyecto' => 'tipo-proyecto'])->except(['show']);
 
     /**
      * Mesas sectoriales
@@ -323,8 +375,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('web-api/municipios', function () {
-        return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'departamentos.nombre as group')
-            ->join('departamentos', 'departamentos.id', 'municipios.departamento_id')
+        return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')
+            ->join('regionales', 'regionales.id', 'municipios.regional_id')
             ->get());
     })->name('web-api.municipios');
 
@@ -343,7 +395,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las tecnoacademias
      */
     Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', function ($centroFormacion) {
-        return response(Tecnoacademia::select('tecnoacademias.id', 'tecnoacademias.nombre')->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
+        return response(Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+            ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+            ->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
     })->name('web-api.centros-formacion.tecnoacademias');
 
     /**
@@ -352,20 +410,55 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas tecnológicas
      */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {
-        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id', 'lineas_tecnologicas.nombre')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
+        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id as value', 'lineas_tecnologicas.nombre as label')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
     })->name('web-api.tecnoacademias.lineas-tecnologicas');
 
     /**
      * Web api
      * 
-     * Trae los tipos de proyectos
+     * Trae los nodos tecnoparque
      */
-    Route::get('web-api/tipos-proyecto/{tipo_proyecto}', function ($tipoProyecto) {
-        return response(TipoProyecto::selectRaw('tipos_proyecto.id as value, concat(tipos_proyecto.nombre, chr(10), \'∙ Línea programática: \', lineas_programaticas.codigo, \' - \', lineas_programaticas.nombre) as label')
-            ->join('lineas_programaticas', 'tipos_proyecto.linea_programatica_id', 'lineas_programaticas.id')
-            ->where('categoria_proyecto', 'ilike', '%' . $tipoProyecto . '%')
+    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', function ($centroFormacion) {
+        return response(NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->where('nodos_tecnoparque.centro_formacion_id', $centroFormacion)->get());
+    })->name('web-api.nodos-tecnoparque');
+
+    /**
+     * Web api
+     * 
+     * Trae las líneas programáticas
+     */
+    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', function ($categoriaProyecto) {
+        if ($categoriaProyecto) {
+            return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
+                ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
+                ->get());
+        } else {
+            return response(LineaProgramatica::select('id as value', 'nombre as label')
+                ->get());
+        }
+    })->name('web-api.lineas-programaticas');
+
+    /**
+     * Web api
+     * 
+     * Trae las subclasificaciones de tipología ST
+     */
+    Route::get('web-api/tipologia-st/{tipologia_st}/web-api.subclasificacion-tipologia-st', function ($tipologiaSt) {
+        return response(SubclasificacionTipologiaSt::select('id as value', 'subclasificacion as label')
+            ->where('tipologia_st_id', '=', $tipologiaSt)
             ->get());
-    })->name('web-api.tipos-proyecto');
+    })->name('web-api.subclasificacion-tipologia-st');
+
+    /**
+     * Web api
+     * 
+     * Trae los estados del sistema de gestión
+     */
+    Route::get('web-api/tipos-proyecto-st/{tipo_proyecto_st}/estados-sistema-gestion', function ($tipoProyectoSt) {
+        return response(EstadoSistemaGestion::select('id as value', 'estado as label')
+            ->where('tipo_proyecto_st_id', '=', $tipoProyectoSt)
+            ->get());
+    })->name('web-api.estados-sistema-gestion');
 
     /**
      * Web api
@@ -379,10 +472,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
+     * Trae las áreas de conocimiento
+     */
+    Route::get('web-api/areas-conocimiento', function () {
+        return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.areas-conocimiento');
+
+    /**
+     * Web api
+     * 
+     * Trae las subáreas de conocimiento
+     */
+    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', function ($areaConocimiento) {
+        return response(SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label')->where('subareas_conocimiento.area_conocimiento_id', $areaConocimiento)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.subareas-conocimiento');
+
+    /**
+     * Web api
+     * 
      * Trae las disciplinas de subáreas de conocimiento
      */
-    Route::get('web-api/disciplinas-subarea-conocimiento', function () {
-        return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', function ($subareaConocimiento) {
+        return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->where('disciplinas_subarea_conocimiento.subarea_conocimiento_id', $subareaConocimiento)->orderBy('nombre', 'ASC')->get());
     })->name('web-api.disciplinas-subarea-conocimiento');
 
     /**
@@ -406,11 +517,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae las líneas programáticas
+     * Trae los sectores productivos
      */
-    Route::get('web-api/lineas-programaticas', function () {
-        return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.lineas-programaticas');
+    Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
+        return response(SectorProductivo::selectRaw('mesa_tecnica_sector_productivo.id as value, sectores_productivos.nombre as label')
+            ->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')
+            ->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
+    })->name('web-api.sectores-productivos');
 
     /**
      * Web api
@@ -421,10 +534,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
     })->name('web-api.subtipologias-minciencias');
 
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/radicar-proyecto', [ProyectoController::class, 'sendProject'])->name('convocatorias.proyectos.send');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'returnProject'])->name('convocatorias.proyectos.return-project');
+
     /**
      * Idi - Estrategia regional
      * 
      */
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/entidades-aliadas/{entidad_aliada}/{archivo}/download', [EntidadAliadaController::class, 'download'])->name('convocatorias.proyectos.entidades-aliadas.download');
     Route::resource('convocatorias.idi', IdiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi'])->except(['show']);
 
     Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
@@ -432,10 +551,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
 
     /**
-     * TaTp - Estrategia nacional
+     * cultura-innovacion - Estrategia Nacional
      * 
      */
-    Route::resource('convocatorias.tatp', TaTpController::class)->parameters(['convocatorias' => 'convocatoria', 'tatp' => 'tatp'])->except(['show']);
+    Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
+
+
+    /**
+     * Tp - Estrategia nacional
+     * 
+     */
+    Route::resource('convocatorias.tp', TpController::class)->parameters(['convocatorias' => 'convocatoria', 'tp' => 'tp'])->except(['show']);
+
+    /**
+     * Ta - Estrategia nacional
+     * 
+     */
+
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'showArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova');
+    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'storeArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova.store');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/rol/sennova/ta', [TaController::class, 'updateCantidadRolesTa'])->name('convocatorias.proyectos.rol-sennova-ta.update');
+    Route::resource('reglas-roles-ta', ReglaRolTaController::class)->parameters(['reglas-roles-ta' => 'regla-rol-ta'])->except(['show']);
+    Route::resource('convocatorias.proyectos.edt', EdtController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'edt' => 'edt'])->except(['show']);
+    Route::resource('convocatorias.ta', TaController::class)->parameters(['convocatorias' => 'convocatoria', 'ta' => 'ta'])->except(['show']);
+
+    /**
+     * Servicios tecnológicos - Estrategia  nacional
+     * 
+     */
+    Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/infraestructura', [ServicioTecnologicoController::class, 'updateEspecificacionesInfraestructura'])->name('convocatorias.servicios-tecnologicos.infraestructura');
+    Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
 
     /**
      * Convocatorias
@@ -467,7 +612,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/arbol-problemas', [ArbolProyectoController::class, 'showArbolProblemas'])->name('convocatorias.proyectos.arbol-problemas');
     // Actualiza el problema general del proyecto en el arbol de problemas
-    Route::post('proyectos/{proyecto}/planteamiento-problema', [ArbolProyectoController::class, 'updatePlanteamientoProblema'])->name('proyectos.planteamiento-problema');
+    Route::post('proyectos/{proyecto}/problema-central', [ArbolProyectoController::class, 'updateProblemaCentral'])->name('proyectos.problema-central');
     // Actualiza efecto directo en el arbol de problemas
     Route::post('proyectos/{proyecto}/efecto-directo/{efecto_directo}', [ArbolProyectoController::class, 'updateEfectoDirecto'])->name('proyectos.efecto-directo');
     // Crea o Actualiza efecto indirecto en el arbol de problemas
@@ -487,10 +632,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Actividades
      * 
      */
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/actividades/metodologia', [ActividadController::class, 'updateMetodologia'])->name('convocatorias.proyectos.metodologia');
     Route::resource('convocatorias.proyectos.actividades', ActividadController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'actividades' => 'actividad'])->except(['show']);
 
     /**
-     * Mesas sectoriales
+     * Roles SENNOVA de proyecto
      * 
      */
     Route::resource('convocatorias.proyectos.proyecto-rol-sennova', ProyectoRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-rol-sennova' => 'proyecto-rol-sennova'])->except(['show']);
@@ -512,9 +658,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Presupuesto de proyecto
      * 
      */
-    Route::resource('convocatorias.proyectos.proyecto-presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto'])->except(['show']);
+    Route::resource('convocatorias.proyectos.presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto'])->except(['show']);
 
-    Route::resource('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado', ProyectoLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'proyecto-presupuesto' => 'proyecto-presupuesto', 'proyecto-lote-estudio-mercado' => 'proyecto-lote-estudio-mercado'])->except(['show']);
+    Route::resource('convocatorias.proyectos.presupuesto.lote', ProyectoLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto', 'lote' => 'lote'])->except(['show']);
 
 
     /**

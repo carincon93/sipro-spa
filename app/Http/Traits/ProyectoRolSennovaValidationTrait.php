@@ -2,7 +2,9 @@
 
 namespace App\Http\Traits;
 
+use App\Models\CentroFormacion;
 use App\Models\ConvocatoriaRolSennova;
+use App\Models\LineaProgramatica;
 
 trait ProyectoRolSennovaValidationTrait
 {
@@ -75,5 +77,136 @@ trait ProyectoRolSennovaValidationTrait
         }
 
         return false;
+    }
+
+    /**
+     * culturaInnovacion
+     *
+     * @param  mixed $centroFormacionId
+     * @param  mixed $lineaProgramaticaId
+     * @return void
+     */
+    public static function culturaInnovacionNumeroProyectos($centroFormacionId, $lineaProgramaticaId)
+    {
+        $centroFormacion = CentroFormacion::find($centroFormacionId);
+        $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
+
+        if (in_array($centroFormacion->codigo, [9309, 9503, 9124, 9120, 9222, 9116, 9548, 9401, 9403, 9303, 9310, 9529, 9121]) && $lineaProgramatica->lineaProgramatica->codigo == 65) {
+            foreach ($centroFormacion->proyectos as $proyecto) {
+                if ($proyecto->lineaProgramatica->codigo == 65) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static function culturaInnovacionRoles($proyecto, $rolSennovaId, $numeroRoles)
+    {
+        $reglas = '[
+            {"centroFormacionId": 9309, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
+            {"centroFormacionId": 9503, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9230, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
+            {"centroFormacionId": 9124, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
+            {"centroFormacionId": 9120, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9222, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9116, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9548, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
+            {"centroFormacionId": 9401, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9403, "auxiliarEditorial": 1, "gestorEditorial": 0, "expertoTecnico": 0},
+            {"centroFormacionId": 9303, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
+            {"centroFormacionId": 9310, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9529, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
+            {"centroFormacionId": 9121, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0}
+        ]';
+
+        $centroFormacion = collect(json_decode($reglas, true))->where('centroFormacionId', $proyecto->centroFormacion->codigo)->first();
+        $convocatoriaRolSennova = ConvocatoriaRolSennova::find($rolSennovaId);
+
+        if ($centroFormacion && $convocatoriaRolSennova) {
+            // 27 auxiliar editorial
+            if ($convocatoriaRolSennova->rolSennova->id == 27 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['auxiliarEditorial']) {
+                return true;
+            }
+
+            // 26 gestor editorial
+            if ($convocatoriaRolSennova->rolSennova->id == 26 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['gestorEditorial']) {
+                return true;
+            }
+
+            // 25 experto temático en producción científica
+            if ($convocatoriaRolSennova->rolSennova->id == 25 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['expertoTecnico']) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * serviciosTecnologicosRoles
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $rolSennovaId
+     * @param  mixed $numeroRoles
+     * @return boolean
+     */
+    public static function serviciosTecnologicosRoles($proyecto, $rolSennovaId, $numeroRoles)
+    {
+        $rolSennova = self::reglasServiciosTecnologicos($rolSennovaId);
+
+        if ($numeroRoles > $rolSennova['cantidad']) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * reglasServiciosTecnologicos
+     *
+     * @param  mixed $rolSennovaId
+     * @return object
+     */
+    public static function reglasServiciosTecnologicos($rolSennovaId)
+    {
+        $convocatoriaRolSennova = ConvocatoriaRolSennova::find($rolSennovaId);
+
+        $reglas = '[
+            { "rolSennovaId": 17, "cantidad": 1},
+            { "rolSennovaId": 18, "cantidad": 1},
+            { "rolSennovaId": 19, "cantidad": 1},
+            { "rolSennovaId": 20, "cantidad": 1},
+            { "rolSennovaId": 21, "cantidad": 4},
+            { "rolSennovaId": 22, "cantidad": 4},
+            { "rolSennovaId": 23, "cantidad": 10},
+            { "rolSennovaId": 24, "cantidad": 10},
+            { "rolSennovaId": 3 , "cantidad": 2}
+       ]';
+
+        return collect(json_decode($reglas, true))->where('rolSennovaId', $convocatoriaRolSennova->rolSennova->id)->first();
+    }
+
+    /**
+     * totalRolesSennova
+     *
+     * Obtiene la cantidad total de un rol sennova
+     * 
+     * @param  mixed $proyecto
+     * @param  mixed $codigo
+     * @return int
+     */
+    public static function totalRolesSennova($proyecto, $rolSennovaId)
+    {
+        $total = 0;
+
+        foreach ($proyecto->proyectoRolesSennova as $rolSennova) {
+            if ($rolSennova->convocatoriaRolSennova->rolSennova->id == $rolSennovaId) {
+                $total++;
+            }
+        }
+
+        return $total;
     }
 }

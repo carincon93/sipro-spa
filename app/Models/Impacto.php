@@ -65,6 +65,9 @@ class Impacto extends Model
     public function scopeFilterImpacto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
             $query->where('tipo', 'ilike', '%' . $search . '%');
         });
     }

@@ -24,8 +24,7 @@ class ConvocatoriaRolSennovaController extends Controller
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Index', [
             'filters'   => request()->all('search'),
             'convocatoria' => $convocatoria,
-            'convocatoriaRolesSennova' =>
-            $convocatoria->convocatoriaRolesSennova()
+            'convocatoriaRolesSennova' => $convocatoria->convocatoriaRolesSennova()
                 ->selectRaw("convocatoria_rol_sennova.id, lineas_programaticas.nombre as linea_programatica_nombre, convocatoria_rol_sennova.asignacion_mensual, CASE convocatoria_rol_sennova.nivel_academico
                         WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                         WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
@@ -38,7 +37,7 @@ class ConvocatoriaRolSennovaController extends Controller
                         WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
                     END as nombre")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
                 ->join('lineas_programaticas', 'lineas_programaticas.id', 'convocatoria_rol_sennova.linea_programatica_id')
-                ->filterConvocatoriaRolSennova(request()->only('search'))->paginate(),
+                ->filterConvocatoriaRolSennova(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -71,6 +70,7 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova = new ConvocatoriaRolSennova();
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->perfil                 = $request->perfil;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
         $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);
@@ -106,22 +106,10 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova->rolSennova;
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Edit', [
-            'convocatoria'            => $convocatoria->only('id'),
-            'convocatoriaRolSennova'  => $convocatoriaRolSennova,
-            'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
-            'rolesSennova'      => ConvocatoriaRolSennova::selectRaw("roles_sennova.id as value, CASE convocatoria_rol_sennova.nivel_academico
-                WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
-                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
-                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
-                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
-                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
-                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
-                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
-                WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
-                WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
-            END as label")
-                ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-                ->orderBy('roles_sennova.nombre', 'ASC')->get()
+            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoriaRolSennova'    => $convocatoriaRolSennova,
+            'nivelesAcademicos'         => json_decode(Storage::get('json/niveles-academicos.json'), true),
+            'rolesSennova'              => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
         ]);
     }
 
@@ -138,6 +126,7 @@ class ConvocatoriaRolSennovaController extends Controller
 
         $convocatoriaRolSennova->asignacion_mensual     = $request->asignacion_mensual;
         $convocatoriaRolSennova->nivel_academico        = $request->nivel_academico;
+        $convocatoriaRolSennova->perfil                 = $request->perfil;
         $convocatoriaRolSennova->mensaje                = $request->mensaje;
         $convocatoriaRolSennova->experiencia            = $request->experiencia;
         $convocatoriaRolSennova->convocatoria()->associate($convocatoria);

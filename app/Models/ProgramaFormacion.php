@@ -25,7 +25,8 @@ class ProgramaFormacion extends Model
         'centro_formacion_id',
         'nombre',
         'codigo',
-        'modalidad'
+        'modalidad',
+        'nivel_formacion',
     ];
 
     /**
@@ -57,6 +58,26 @@ class ProgramaFormacion extends Model
     }
 
     /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyectosImpactados()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_programa_formacion_impactados', 'programa_formacion_id', 'proyecto_id');
+    }
+
+    /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function taArticulados()
+    {
+        return $this->belongsToMany(Proyecto::class, 'ta_programa_formacion', 'programa_formacion_id', 'proyecto_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -66,9 +87,13 @@ class ProgramaFormacion extends Model
     public function scopeFilterProgramaFormacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
-            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhere('codigo', 'ilike', '%' . $search . '%');
+            $query->join('centros_formacion', 'programas_formacion.centro_formacion_id', 'centros_formacion.id');
+            $query->whereRaw("unaccent(programas_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('programas_formacion.codigo', 'ilike', '%' . $search . '%');
+            $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

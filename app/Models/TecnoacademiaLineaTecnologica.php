@@ -75,26 +75,22 @@ class TecnoacademiaLineaTecnologica extends Model
     }
 
     /**
-     * Relationship with TaTp
+     * Relationship with CulturaInnovacion
      *
      * @return void
      */
-    public function taTp()
+    public function culturaInnovacion()
     {
-        return $this->hasMany(TaTp::class);
+        return $this->hasMany(CulturaInnovacion::class);
     }
 
     /**
-     * Filtrar registros
+     * Relationship with Ta
      *
-     * @param  mixed $query
-     * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterTecnoacademiaLineaTecnologica($query, array $filters)
+    public function ta()
     {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%' . $search . '%');
-        });
+        return $this->hasMany(Ta::class);
     }
 }

@@ -21,18 +21,21 @@ class ProyectoAnexoController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('viewAny', [ProyectoAnexo::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        $proyecto->codigo_linea_programatica = $proyecto->tipoProyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+        $proyecto->codigo_linea_programatica == 68 ? $proyecto->infraestructura_adecuada = $proyecto->servicioTecnologico->infraestructura_adecuada : $proyecto->infraestructura_adecuada = null;
+        $proyecto->codigo_linea_programatica == 68 ? $proyecto->especificaciones_area = $proyecto->servicioTecnologico->especificaciones_area : $proyecto->especificaciones_area = null;
+        $proyecto->codigo_linea_programatica == 68 ? $proyecto->video = $proyecto->servicioTecnologico->video : $proyecto->video = null;
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Index', [
             'filters'           => request()->all('search'),
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
-                ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')
-                ->filterProyectoAnexo(request()->only('search'))->paginate(),
-            'anexos'            => Anexo::select('id', 'nombre')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->tipoProyecto->lineaProgramatica->id)->paginate()
+                ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
+            'anexos'            => Anexo::select('id', 'nombre', 'archivo')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
+                ->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search])
         ]);
     }
 
@@ -43,12 +46,12 @@ class ProyectoAnexoController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoAnexo::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Create', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id'),
-            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->tipoProyecto->lineaProgramatica->id)->get()
+            'proyecto'      => $proyecto->only('id', 'modificable'),
+            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get()
         ]);
     }
 
@@ -60,15 +63,12 @@ class ProyectoAnexoController extends Controller
      */
     public function store(ProyectoAnexoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('create', [ProyectoAnexo::class]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $anexo = Anexo::select('id', 'nombre')->where('id', $request->anexo_id)->first();
 
-        $anexoName          = Str::slug(substr($anexo->nombre, 0, 30), '-');
-        $random             = Str::random(5);
-        $requestFile        = $request->archivo;
-        $nombreArchivo      = "$proyecto->codigo-$anexoName-cod$random." . $requestFile->extension();
-        $archivo = $requestFile->storeAs(
+        $nombreArchivo = $this->cleanFileName($proyecto->codigo, $anexo->nombre, $request->archivo);
+        $archivo = $request->archivo->storeAs(
             'anexos',
             $nombreArchivo
         );
@@ -89,7 +89,7 @@ class ProyectoAnexoController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('view', [ProyectoAnexo::class, $proyectoAnexo]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -100,13 +100,13 @@ class ProyectoAnexoController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('update', [ProyectoAnexo::class, $proyectoAnexo]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Edit', [
             'convocatoria'  => $convocatoria,
             'proyecto'      => $proyecto,
             'proyectoAnexo' => $proyectoAnexo,
-            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->tipoProyecto->lineaProgramatica->id)->get()
+            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get()
         ]);
     }
 
@@ -119,13 +119,7 @@ class ProyectoAnexoController extends Controller
      */
     public function update(ProyectoAnexoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('update', [ProyectoAnexo::class, $proyectoAnexo]);
-
-        $proyectoAnexo->fieldName = $request->fieldName;
-        $proyectoAnexo->fieldName = $request->fieldName;
-        $proyectoAnexo->fieldName = $request->fieldName;
-
-        $proyectoAnexo->save();
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -138,7 +132,7 @@ class ProyectoAnexoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
-        $this->authorize('delete', [ProyectoAnexo::class, $proyectoAnexo]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $proyectoAnexo->delete();
 
@@ -155,6 +149,27 @@ class ProyectoAnexoController extends Controller
      */
     public function download(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoAnexo $proyectoAnexo)
     {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
         return response()->download(storage_path("app/$proyectoAnexo->archivo"));
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($codigoProyecto, $nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+
+        $cleanProyectoCodigo = str_replace(' ', '', substr($codigoProyecto, 0, 30));
+        $cleanProyectoCodigo = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanProyectoCodigo);
+
+        $random    = Str::random(5);
+
+        return "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension();
     }
 }

@@ -1,14 +1,15 @@
 <script>
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import InputError from '@/Components/InputError'
-    import Label from '@/Components/Label'
-    import File from '@/Components/File'
-    import Switch from '@/Components/Switch'
-    import PercentageProgress from '@/Components/PercentageProgress'
+    import Input from '@/Shared/Input'
+    import InputError from '@/Shared/InputError'
+    import Label from '@/Shared/Label'
+    import File from '@/Shared/File'
+    import Switch from '@/Shared/Switch'
+    import PercentageProgress from '@/Shared/PercentageProgress'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -23,10 +24,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let form = useForm({
         requiere_tercer_estudio_mercado: false,
@@ -48,15 +46,15 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
             ;(sending = true),
-                $form.post(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
+                $form.post(route('convocatorias.proyectos.presupuesto.lote.store', [convocatoria.id, proyecto.id, proyectoPresupuesto]), {
                     onStart: () => (sending = true),
                     onFinish: () => {
                         ;(sending = false), (dialogOpen = false)
-                        document.getElementById('ficha_tecnica').value = null
-                        document.getElementById('primer_archivo').value = null
-                        document.getElementById('segundo_archivo').value = null
+                        document.getElementById('ficha_tecnica') ? (document.getElementById('ficha_tecnica').value = null) : null
+                        document.getElementById('primer_archivo') ? (document.getElementById('primer_archivo').value = null) : null
+                        document.getElementById('segundo_archivo') ? (document.getElementById('segundo_archivo').value = null) : null
                         document.getElementById('tercer_archivo') ? (document.getElementById('tercer_archivo').value = null) : null
                     },
                     onError: () => {
@@ -76,49 +74,47 @@
 </script>
 
 <form on:submit|preventDefault={submit} id="form-estudio-mercado">
-    <fieldset class="p-8">
-        <div class="mt-4">
-            <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad requerida del producto o servicio relacionado" />
-            <Input id="numero_items" type="number" min="1" class="mt-1 block w-full" bind:value={$form.numero_items} error={errors.numero_items} required />
-        </div>
+    <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
+        {#if proyectoPresupuesto.codigo_segundo_grupo == 2040106 || proyectoPresupuesto.codigo_segundo_grupo == 2040115 || proyectoPresupuesto.codigo_segundo_grupo == 2040125}
+            <div class="mt-4">
+                <Label required class="mb-4" labelFor="numero_items" value="Indique la cantidad de maquinaria/equipos referenciado en el ANEXO 2 Fichas técnicas para maquinaria y equipos" />
+                <Input label="Cantidad" id="numero_items" type="number" input$min="1" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
+            </div>
 
-        <div class="mt-4">
-            <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
-            <File id="ficha_tecnica" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} required />
-        </div>
+            <div class="mt-4">
+                <Label required class="mb-4" labelFor="ficha_tecnica" value="ANEXO 2. Fichas técnicas para maquinaria y equipos" />
+                <File id="ficha_tecnica" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.ficha_tecnica} error={errors.ficha_tecnica} required />
+            </div>
+        {/if}
 
         <h1 class="text-center mt-20 mb-20">Primer estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="primer_valor" value="Valor (incluido IVA)" />
-            <Input id="primer_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.primer_valor} error={errors.primer_valor} required />
+            <Input label="Valor (incluido IVA)" id="primer_valor" type="number" input$min="1" class="mt-1" bind:value={$form.primer_valor} error={errors.primer_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="primer_empresa" value="Nombre de la empresa" />
-            <Input id="primer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
+            <Input label="Nombre de la empresa" id="primer_empresa" type="text" class="mt-1" bind:value={$form.primer_empresa} error={errors.primer_empresa} required />
         </div>
 
         <div class="mt-4">
             <Label required class="mb-4" labelFor="primer_archivo" value="Soporte" />
-            <File id="primer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.primer_archivo} error={errors.primer_archivo} required />
+            <File id="primer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.primer_archivo} error={errors.primer_archivo} required />
         </div>
 
         <h1 class="text-center mt-20 mb-20">Segundo estudio de mercado</h1>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="segundo_valor" value="Valor (incluido IVA)" />
-            <Input id="segundo_valor" type="number" min="1" class="mt-1 block w-full" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
+            <Input label="Valor (incluido IVA)" id="segundo_valor" type="number" input$min="1" class="mt-1" bind:value={$form.segundo_valor} error={errors.segundo_valor} required />
         </div>
 
         <div class="mt-4">
-            <Label required class="mb-4" labelFor="segunda_empresa" value="Nombre de la empresa" />
-            <Input id="segunda_empresa" type="text" class="mt-1 block w-full" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
+            <Input label="Nombre de la empresa" id="segunda_empresa" type="text" class="mt-1" bind:value={$form.segunda_empresa} error={errors.segunda_empresa} required />
         </div>
 
         <div class="mt-4">
             <Label required class="mb-4" labelFor="segundo_archivo" value="Soporte" />
-            <File id="segundo_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} required />
+            <File id="segundo_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.segundo_archivo} error={errors.segundo_archivo} required />
         </div>
 
         <div class="mt-8">
@@ -131,18 +127,16 @@
         {#if $form.requiere_tercer_estudio_mercado}
             <h1 class="text-center mt-20 mb-20">Tercer estudio de mercado</h1>
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="tercer_valor" value="Valor (incluido IVA)" />
-                <Input id="tercer_valor" type="number" min="0" class="mt-1 block w-full" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
+                <Input label="Valor (incluido IVA)" id="tercer_valor" type="number" input$min="0" class="mt-1" bind:value={$form.tercer_valor} error={errors.tercer_valor} required />
             </div>
 
             <div class="mt-4">
-                <Label required class="mb-4" labelFor="tercer_empresa" value="Nombre de la empresa" />
-                <Input id="tercer_empresa" type="text" class="mt-1 block w-full" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
+                <Input label="Nombre de la empresa" id="tercer_empresa" type="text" class="mt-1" bind:value={$form.tercer_empresa} error={errors.tercer_empresa} required />
             </div>
 
             <div class="mt-4">
                 <Label required class="mb-4" labelFor="tercer_archivo" value="Soporte" />
-                <File id="tercer_archivo" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} required />
+                <File id="tercer_archivo" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.tercer_archivo} error={errors.tercer_archivo} required />
             </div>
         {/if}
     </fieldset>

@@ -1,25 +1,29 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import axios from 'axios'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Select from '@/Components/Select'
-    import DataTable from '@/Components/DataTable'
-    import LoadingButton from '@/Components/LoadingButton'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import axios from 'axios'
+
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Select from '@/Shared/Select'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
-    import DynamicList from '@/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Checkbox from '@smui/checkbox'
+    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let tiposDocumento
-    export let tiposParticipacion
+    export let tiposVinculacion
+    export let roles
 
     let resultados = []
 
@@ -27,10 +31,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Buscar
@@ -44,33 +45,37 @@
     let sending = false
     let sended = false
     function submit() {
-        sending = true
-        sended = false
-        try {
-            axios
-                .post(route('convocatorias.proyectos.participantes.users', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
-                .then((response) => {
-                    resultados = response.data
-                    sending = false
-                    sended = true
-                })
-                .catch((error) => {
-                    sending = false
-                })
-        } catch (error) {
-            sending = false
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            sending = true
+            sended = false
+            try {
+                axios
+                    .post(route('convocatorias.proyectos.participantes.users', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
+                    .then((response) => {
+                        resultados = response.data
+                        sending = false
+                        sended = true
+                    })
+                    .catch((error) => {
+                        sending = false
+                    })
+            } catch (error) {
+                sending = false
+            }
         }
     }
 
     function removeParticipante(id) {
-        Inertia.post(
-            route('convocatorias.proyectos.participantes.users.unlink', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            { user_id: id, _method: 'DELETE' },
-            { preserveScroll: true },
-        )
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            Inertia.post(
+                route('convocatorias.proyectos.participantes.users.unlink', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                { user_id: id, _method: 'DELETE' },
+                { preserveScroll: true },
+            )
+        }
     }
 
     /**
@@ -79,9 +84,9 @@
     let formParticipante = useForm({
         _method: null,
         user_id: 0,
-        es_autor: 0,
         cantidad_horas: 0,
         cantidad_meses: 0,
+        rol_sennova: null,
     })
 
     function showParticipante(user) {
@@ -92,31 +97,33 @@
         $formParticipante.user_id = user.id
         if (user.pivot) {
             $formParticipante._method = 'PUT'
-            $formParticipante.es_autor = user.pivot.es_autor ? 1 : 0
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
+            $formParticipante.rol_sennova = { value: user.pivot.rol_sennova, label: roles.find((item) => item.value == user.pivot.rol_sennova)?.label }
         }
     }
 
     function submitParticipante() {
-        $formParticipante.post(
-            route('convocatorias.proyectos.participantes.users.link', {
-                proyecto: proyecto.id,
-                convocatoria: convocatoria.id,
-            }),
-            {
-                onStart: () => {
-                    sending = true
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            $formParticipante.post(
+                route('convocatorias.proyectos.participantes.users.link', {
+                    proyecto: proyecto.id,
+                    convocatoria: convocatoria.id,
+                }),
+                {
+                    onStart: () => {
+                        sending = true
+                    },
+                    onSuccess: () => {
+                        closeDialog()
+                    },
+                    onFinish: () => {
+                        sending = false
+                    },
+                    preserveScroll: true,
                 },
-                onSuccess: () => {
-                    closeDialog()
-                },
-                onFinish: () => {
-                    sending = false
-                },
-                preserveScroll: true,
-            },
-        )
+            )
+        }
     }
 
     /**
@@ -128,223 +135,200 @@
         tipo_documento: '',
         numero_documento: '',
         numero_celular: '',
-        tipo_participacion: '',
-        centro_formacion_id: '',
-        es_autor: 0,
+        tipo_vinculacion: '',
         cantidad_meses: 0,
         cantidad_horas: 0,
+        centro_formacion_id: null,
+        rol_sennova: null,
+        autorizacion_datos: false,
     })
 
     let formNuevoParticipanteId
-    let open_dialog_register = false
+    let openNuevoParticipanteDialog = false
     function showRegister() {
         reset()
-        open_dialog_register = true
+        openNuevoParticipanteDialog = true
         formNuevoParticipanteId = 'nuevo-participante-form'
     }
 
     function submitRegister() {
-        $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
-            onStart: () => {
-                sending = true
-            },
-            onSuccess: () => {
-                closeDialog()
-            },
-            onFinish: () => {
-                sending = false
-            },
-            preserveScroll: true,
-        })
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
+                onStart: () => {
+                    sending = true
+                },
+                onSuccess: () => {
+                    closeDialog()
+                },
+                onFinish: () => {
+                    sending = false
+                },
+                preserveScroll: true,
+            })
+        }
     }
 
     function reset() {
-        //participant form
-        $formParticipante.user_id = 0
-        $formParticipante.es_autor = 0
-        $formParticipante.cantidad_meses = 0
-        $formParticipante.cantidad_horas = 0
-        $formParticipante._method = null
-        //participant register form
-        $formNuevoParticipante.nombre = ''
-        $formNuevoParticipante.email = ''
-        $formNuevoParticipante.tipo_documento = ''
-        $formNuevoParticipante.numero_documento = ''
-        $formNuevoParticipante.numero_celular = ''
-        $formNuevoParticipante.tipo_participacion = ''
-        $formNuevoParticipante.centro_formacion_id = ''
-        $formNuevoParticipante.es_autor = 0
-        $formNuevoParticipante.cantidad_meses = 0
-        $formNuevoParticipante.cantidad_horas = 0
+        //Participante - form
+        $formParticipante.reset()
+        //Nuevo participante - form
+        $formNuevoParticipante.reset()
     }
 
     function closeDialog() {
         reset()
         dialogOpen = false
-        open_dialog_register = false
+        openNuevoParticipanteDialog = false
         sending = false
     }
 </script>
 
-<div class="bg-indigo-100 py-4">
+<div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center">Participantes</h1>
-    <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de participantes por número de documento o por el correo electrónico institucional</p>
+    <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <div class="p-8">
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
-                <Input id="search_participante" type="search" placeholder="Escriba el número de documento o el correo electrónico instiucional" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} minlength="4" autocomplete="off" required />
+                <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
-        </div>
+        </fieldset>
     </form>
+
+    {#if sended}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de participantes</h1>
+        <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each resultados as resultado (resultado.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {resultado.nombre}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4">
+                                    {resultado.email}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4">
+                                    {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
+                                </p>
+                            </td>
+                            <td class="border-t">
+                                <p class="px-6 py-4">
+                                    {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                                </p>
+                            </td>
+                            <td class="border-t td-actions">
+                                <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                    <Item on:SMUI:action={() => showParticipante(resultado)}>
+                                        <Text>Vincular</Text>
+                                    </Item>
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+
+                    {#if resultados.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="5">
+                                {$_('No data recorded')}
+                                <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
+                            </td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
 </div>
 
-{#if sended}
-    <DataTable class="bg-indigo-100 p-4">
-        <div slot="title">Resultados de la búsqueda de participantes</div>
-
-        <thead slot="thead">
+<h1 class="mt-24 mb-8 text-center text-3xl">Participantes vinculados</h1>
+<div class="bg-white rounded shadow">
+    <table class="w-full whitespace-no-wrap table-fixed data-table">
+        <thead>
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Documento</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Celular</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Participación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
-        <tbody slot="tbody">
-            {#each resultados as resultado (resultado.id)}
+        <tbody>
+            {#each proyecto.participantes as participante (participante.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {resultado.nombre}
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {participante.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.email}
+                        <p class="px-6 py-4">
+                            {participante.email}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.numero_documento}
+                        <p class="px-6 py-4">
+                            {participante.centro_formacion ? participante.centro_formacion.nombre : ''}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.numero_celular}
+                        <p class="px-6 py-4">
+                            {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center">
-                            {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                        <p class="px-6 py-4">
+                            {participante.pivot.cantidad_meses.replace('.', ',')} meses - {participante.pivot.cantidad_horas} horas semanales
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
-                            <Item on:SMUI:action={() => showParticipante(resultado)}>
-                                <Text>Vincular</Text>
-                            </Item>
-                        </ResourceMenu>
+                        <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
+                            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                                <Item on:SMUI:action={() => showParticipante(participante)}>
+                                    <Text>Editar</Text>
+                                </Item>
+                                {#if authUser.id != participante.id || !participante.formulador}
+                                    <Item on:SMUI:action={() => removeParticipante(participante.id)}>
+                                        <Text>Quitar</Text>
+                                    </Item>
+                                {/if}
+                            {:else}
+                                <Item>
+                                    <Text>No tiene permisos</Text>
+                                </Item>
+                            {/if}
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}
 
-            {#if resultados.length === 0}
+            {#if proyecto.participantes.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">
-                        {$_('No data recorded')}
-                        <Button on:click={() => showRegister()} type="button" variant={null}>Crear participante</Button>
-                    </td>
+                    <td class="border-t px-6 py-4" colspan="6">{$_('No data recorded')}</td>
                 </tr>
             {/if}
         </tbody>
-    </DataTable>
-{/if}
-
-<DataTable class="mt-10">
-    <div slot="title">Participantes vinculados</div>
-
-    <thead slot="thead">
-        <tr class="text-left font-bold">
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Correo electrónico</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Centro de formación</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Regional</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">¿Es autor?</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Meses</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Horas</th>
-            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
-        </tr>
-    </thead>
-    <tbody slot="tbody">
-        {#each proyecto.participantes as participante (participante.id)}
-            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                        {participante.nombre}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.email}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.centro_formacion ? participante.centro_formacion.nombre : ''}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.centro_formacion ? participante.centro_formacion.regional.nombre : ''}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.es_autor ? 'Si' : 'No'}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.cantidad_meses}
-                    </p>
-                </td>
-                <td class="border-t">
-                    <p class="px-6 py-4 flex items-center">
-                        {participante.pivot.cantidad_horas}
-                    </p>
-                </td>
-                <td class="border-t td-actions">
-                    <ResourceMenu>
-                        <Item on:SMUI:action={() => showParticipante(participante)}>
-                            <Text>Editar</Text>
-                        </Item>
-                        <Item on:SMUI:action={() => removeParticipante(participante.id)}>
-                            <Text>Quitar</Text>
-                        </Item>
-                    </ResourceMenu>
-                </td>
-            </tr>
-        {/each}
-
-        {#if proyecto.participantes.length === 0}
-            <tr>
-                <td class="border-t px-6 py-4" colspan="4">{$_('No data recorded')}</td>
-            </tr>
-        {/if}
-    </tbody>
-</DataTable>
+    </table>
+</div>
 
 <!-- Dialog -->
-<Dialog bind:open={dialogOpen}>
+<Dialog bind:open={dialogOpen} id="participante">
     <div slot="title">
         <div class="mb-10 text-center">
             <div class="text-primary">
@@ -358,22 +342,18 @@
     </div>
     <div slot="content">
         <form on:submit|preventDefault={submitParticipante} id="participante-form">
-            <fieldset>
+            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
-                <div class="mb-2">
-                    <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación*" />
-                    <Input id="cantidad_meses" type="number" step="0.5" min="1" max="11.5" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
-                <div class="mb-2">
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto*" />
-                    <Input id="cantidad_horas" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                <div class="mt-4">
+                    <Input label="Número de meses de vinculación al proyecto" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    <InfoMessage message="Valor máximo: {proyecto.diff_meses.replace('.', ',')} meses." />
                 </div>
-                <div class="mb-2">
-                    <Label class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="presupuesto-info w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formParticipante.es_autor} required>
-                        <option value="1" selected={$formParticipante.es_autor == 1 ? true : false}>Si</option>
-                        <option value="0" selected={$formParticipante.es_autor == 0 ? true : false}>No</option>
-                    </select>
+                <div class="mt-4">
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$formParticipante.rol_sennova?.maxHoras} class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
                 </div>
             </fieldset>
         </form>
@@ -390,7 +370,7 @@
 </Dialog>
 
 <!-- Dialog Register -->
-<Dialog bind:open={open_dialog_register} id="nuevo-participante">
+<Dialog bind:open={openNuevoParticipanteDialog} id="nuevo-participante">
     <div slot="title">
         <div class="mb-10 text-center">
             <div class="text-primary">Registar nuevo participante</div>
@@ -398,57 +378,71 @@
     </div>
     <div slot="content">
         <form on:submit|preventDefault={submitRegister} id={formNuevoParticipanteId}>
-            <fieldset>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre_nuevo_participante" value="Nombre completo" />
-                    <Input id="nombre_nuevo_participante" type="text" class="mt-1 block w-full" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
+            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <div class="mt-8">
+                    <Input label="Nombre completo" id="nombre_nuevo_participante" type="text" class="mt-1" bind:value={$formNuevoParticipante.nombre} error={errors.nombre} required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="email_nuevo_participante" value="Correo electrónico" />
-                    <Input id="email_nuevo_participante" type="email" class="mt-1 block w-full" bind:value={$formNuevoParticipante.email} error={errors.email} required />
+                <div class="mt-8">
+                    <Input label="Correo electrónico institucional" id="email_nuevo_participante" type="email" class="mt-1" bind:value={$formNuevoParticipante.email} error={errors.email} required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo_documento_nuevo_participante" value="Tipo de documento" />
                     <Select id="tipo_documento_nuevo_participante" items={tiposDocumento} bind:selectedValue={$formNuevoParticipante.tipo_documento} error={errors.tipo_documento} autocomplete="off" placeholder="Seleccione un tipo de documento" required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_documento_nuevo_participante" value="Número de documento" />
-                    <Input id="numero_documento_nuevo_participante" type="number" min="0" class="mt-1 block w-full" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
+                <div class="mt-8">
+                    <Input label="Número de documento" id="numero_documento_nuevo_participante" type="number" input$min="55555" input$max="9999999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_documento} error={errors.numero_documento} required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_celular_nuevo_participante" value="Número de celular" />
-                    <Input id="numero_celular_nuevo_participante" type="number" min="0" class="mt-1 block w-full" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
+                <div class="mt-8">
+                    <Input label="Número de celular" id="numero_celular_nuevo_participante" type="number" input$min="3000000000" input$max="9999999999" class="mt-1" bind:value={$formNuevoParticipante.numero_celular} error={errors.numero_celular} required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="tipo_participacion_nuevo_participante" value="Tipo de participación" />
-                    <Select id="tipo_participacion_nuevo_participante" items={tiposParticipacion} bind:selectedValue={$formNuevoParticipante.tipo_participacion} error={errors.tipo_participacion} autocomplete="off" placeholder="Seleccione el tipo de participación" required />
-                </div>
-
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="centro_formacion_id_nuevo_participante" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id_nuevo_participante" bind:value={$formNuevoParticipante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <DynamicList id="centro_formacion_id_nuevo_participante" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoParticipante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
                 </div>
+
+                <div class="mt-8">
+                    <Label required class="mb-4" labelFor="tipo_vinculacion_nuevo_participante" value="Tipo de vinculación" />
+                    <Select id="tipo_vinculacion_nuevo_participante" items={tiposVinculacion} bind:selectedValue={$formNuevoParticipante.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
+                </div>
+
                 <p class="block font-medium mt-10 mb-10 text-gray-700 text-sm">Por favor diligencie la siguiente información sobre la vinculación del participante.</p>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="cantidad_meses_nuevo_participante" value="Número de meses de vinculación" />
-                    <Input id="cantidad_meses_nuevo_participante" type="number" step="0.5" min="1" max="11.5" class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                <div class="mt-8">
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$formNuevoParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="cantidad_horas_nuevo_participante" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
-                    <Input id="cantidad_horas_nuevo_participante" type="number" step="1" min="1" class="mt-1 block w-full" bind:value={$formNuevoParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" error={errors.cantidad_horas} required />
+
+                <div class="mt-8">
+                    <Input label="Número de meses de vinculación al proyecto" id="cantidad_meses_nuevo_participante" type="number" input$step="0.1" input$min="1" input$max={proyecto.diff_meses} class="mt-1" bind:value={$formNuevoParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    <InfoMessage message="Valor máximo: {proyecto.diff_meses} meses." />
                 </div>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="es_autor" value="¿Es autor?" />
-                    <select id="es_autor" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200" bind:value={$formNuevoParticipante.es_autor} required>
-                        <option value="">Seleccione una opción</option>
-                        <option value="1" selected={$formNuevoParticipante.es_autor == 1 ? true : false}>Si</option>
-                        <option value="0" selected={$formNuevoParticipante.es_autor == 0 ? true : false}>No</option>
-                    </select>
+
+                <div class="mt-8">
+                    <Input
+                        label="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                        id="cantidad_horas_nuevo_participante"
+                        type="number"
+                        input$step="1"
+                        input$min="1"
+                        input$max={$formNuevoParticipante.rol_sennova?.maxHoras}
+                        class="mt-1"
+                        bind:value={$formNuevoParticipante.cantidad_horas}
+                        placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                        autocomplete="off"
+                        required
+                    />
+                </div>
+
+                <div class="mt-8">
+                    <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
+                    <FormField>
+                        <Checkbox bind:checked={$formNuevoParticipante.autorizacion_datos} />
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
+                    </FormField>
                 </div>
             </fieldset>
         </form>
@@ -465,7 +459,7 @@
 </Dialog>
 
 <style>
-    :global(#nuevo-participante-dialog .mdc-dialog__surface) {
-        max-width: 750px;
+    :global(#nuevo-participante-dialog .mdc-dialog__surface, #participante-dialog .mdc-dialog__surface) {
+        max-width: 1050px;
     }
 </style>

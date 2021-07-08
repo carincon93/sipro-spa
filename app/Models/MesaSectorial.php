@@ -54,6 +54,16 @@ class MesaSectorial extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacion
+     *
+     * @return object
+     */
+    public function culturaInnovacion()
+    {
+        return $this->belongsToMany(CulturaInnovacion::class, 'cultura_innovacion_mesa_sectorial', 'mesa_sectorial_id', 'cultura_innovacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -63,7 +73,10 @@ class MesaSectorial extends Model
     public function scopeFilterMesaSectorial($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 

@@ -1,16 +1,16 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import DropdownProyectoRolSennova from '@/Dropdowns/DropdownProyectoRolSennova'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
 
     export let convocatoria
     export let proyecto
@@ -27,10 +27,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -42,7 +39,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.proyecto-rol-sennova.update', [convocatoria.id, proyecto.id, proyectoRolSennova.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -52,7 +49,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.proyecto-rol-sennova.destroy', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))
         }
     }
@@ -62,8 +59,8 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
                         <a use:inertia href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -75,15 +72,14 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DropdownProyectoRolSennova id="convocatoria_rol_sennova_id" {convocatoria} {lineaProgramatica} bind:formProyectRolSennova={$form.convocatoria_rol_sennova_id} bind:infoRolSennova message={errors.convocatoria_rol_sennova_id} required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 {#if infoRolSennova?.experiencia}
@@ -98,20 +94,18 @@
                 {/if}
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_meses" value="Número de meses que requiere el apoyo" />
-                    <Input id="numero_meses" type="number" min="1" max={proyecto.diff_meses} class="mt-1 block w-full" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                    <Input label="Número de meses que requiere el apoyo" id="numero_meses" type="number" input$min="1" input$step="0.5" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="numero_roles" value="Número de personas requeridas" />
-                    <Input id="numero_roles" type="number" min="1" class="mt-1 block w-full" error={errors.numero_roles} bind:value={$form.numero_roles} required />
+                    <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
                 {/if}
             </div>

@@ -21,7 +21,7 @@ class LineaTecnologicaController extends Controller
         return Inertia::render('LineasTecnologicas/Index', [
             'filters'            => request()->all('search'),
             'lineasTecnologicas' => LineaTecnologica::orderBy('nombre', 'ASC')
-                ->filterLineaTecnologica(request()->only('search'))->paginate(),
+                ->filterLineaTecnologica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -1,16 +1,17 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Components/Button'
-    import Pagination from '@/Components/Pagination'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Button from '@/Shared/Button'
+    import Pagination from '@/Shared/Pagination'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import DataTable from '@/Components/DataTable'
-    import Stepper from '@/Components/Stepper'
+    import DataTable from '@/Shared/DataTable'
+    import Stepper from '@/Shared/Stepper'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
@@ -22,30 +23,31 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
-
-    let filters = {}
+    let isSuperAdmin = checkRole(authUser, [1])
 </script>
 
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Entidades aliadas</div>
 
+        <div slot="caption">
+            {#if proyecto.codigo_linea_programatica == 70}
+                <InfoMessage message="En caso de tener un acuerdo para operación de la Tecnoacademia en una infraestructura que no es propia debe adjuntar el soporte al momento de crear la entidad." />
+            {/if}
+        </div>
+
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear entidad aliada</Button>
             {/if}
         </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
 
@@ -53,13 +55,13 @@
             {#each entidadesAliadas.data as entidadAliada (entidadAliada.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {entidadAliada.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
-                            {#if isSuperAdmin}
+                        <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
@@ -68,7 +70,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

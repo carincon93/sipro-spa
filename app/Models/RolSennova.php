@@ -56,6 +56,16 @@ class RolSennova extends Model
     }
 
     /**
+     * Relationship with ReglaRolTa
+     *
+     * @return void
+     */
+    public function reglasRolesTa()
+    {
+        return $this->hasMany(ReglaRolTa::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -65,7 +75,10 @@ class RolSennova extends Model
     public function scopeFilterRolSennova($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 

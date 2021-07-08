@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -22,8 +25,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Index', [
             'filters'   => request()->all('search'),
-            'usuarios'  => User::orderBy('nombre', 'ASC')
-                ->filterUser(request()->only('search'))->paginate(),
+            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -37,9 +39,9 @@ class UserController extends Controller
         $this->authorize('create', [User::class]);
 
         return Inertia::render('Users/Create', [
-            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
-            'roles'                 => Role::select('id', 'name')->get('id')
+            'tiposDocumento'      => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'roles'               => Role::select('id', 'name')->get('id')
         ]);
     }
 
@@ -62,7 +64,8 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
+        $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
         $user->save();
@@ -89,16 +92,25 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
         $this->authorize('update', [User::class, $user]);
+
+        if ($request->notificacion) {
+            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->markAsRead();
+            }
+        }
 
         return Inertia::render('Users/Edit', [
             'usuario'               => $user,
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposParticipacion'    => json_decode(Storage::get('json/tipos-participacion.json'), true),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
-            'roles'                 => Role::select('id', 'name')->get('id')
+            'roles'                 => Role::getRolesByRol(),
+            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'ta.tecnoacademiaLineaTecnologica.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+
         ]);
     }
 
@@ -119,8 +131,13 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_participacion   = $request->tipo_participacion;
+        $user->tipo_vinculacion   = $request->tipo_vinculacion;
+        $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
+
+        if ($request->default_password) {
+            $user->password = $user::makePassword($request->numero_documento);
+        }
 
         $user->save();
 
@@ -139,8 +156,74 @@ class UserController extends Controller
     {
         $this->authorize('delete', [User::class, $user]);
 
-        $user->delete();
+        try {
+            $user->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Show user's change password form.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showChangePasswordForm()
+    {
+        return Inertia::render('Auth/ChangePassword');
+    }
+
+    /**
+     * Change user's password.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:6|different:old_password|confirmed'
+        ]);
+
+        if (Hash::check($request->get('old_password'), auth()->user()->password)) {
+            auth()->user()->password = Hash::make($request->get('password'));
+            auth()->user()->save();
+            $message = 'La contraseña se ha actualizado correctamente.';
+            $status = 'success';
+        } else {
+            $message = 'La contraseña actual no coincide.';
+            $status = 'error';
+        }
+
+        return redirect()->back()->with($status, $message);
+    }
+
+    /**
+     * showAllNotifications
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showAllNotifications()
+    {
+        return Inertia::render('Users/Notifications/Index', [
+            'filters'           => request()->all('search'),
+            'notificaciones'    => Auth::user()->notifications()->paginate(15)
+        ]);
+    }
+
+    public function markAsReadNotification(Request $request)
+    {
+        if ($request->notificacion) {
+            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            if ($notificacion) {
+                $notificacion->markAsRead();
+            }
+        }
+
+        return redirect()->back();
     }
 }

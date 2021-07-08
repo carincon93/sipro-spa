@@ -85,7 +85,10 @@ class ObjetivoEspecifico extends Model
     public function scopeFilterObjetivoEspecifico($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(descripcion) ilike unaccent('%" . $search . "%')");
         });
     }
 
@@ -109,6 +112,12 @@ class ObjetivoEspecifico extends Model
                 break;
             case 4:
                 $value = 'Cuarto objetivo específico';
+                break;
+            case 5:
+                $value = 'Quinto objetivo específico';
+                break;
+            case 6:
+                $value = 'Sexto objetivo específico';
                 break;
             default:
                 break;

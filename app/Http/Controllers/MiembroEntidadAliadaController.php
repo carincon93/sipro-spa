@@ -20,16 +20,16 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function index(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('viewAny', [MiembroEntidadAliada::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Index', [
                 'convocatoria'          => $convocatoria->only('id'),
-                'proyecto'              => $proyecto->only('id'),
+                'proyecto'              => $proyecto->only('id', 'modificable'),
                 'entidadAliada'         => $entidadAliada,
                 'filters'               => request()->all('search'),
                 'miembrosEntidadAliada' => MiembroEntidadAliada::where('entidad_aliada_id', $entidadAliada->id)->orderBy('nombre', 'ASC')
-                    ->filterMiembroEntidadAliada(request()->only('search'))->paginate()
+                    ->filterMiembroEntidadAliada(request()->only('search'))->paginate()->appends(['search' => request()->search])
             ]);
         }
 
@@ -43,12 +43,12 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function create(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('create', [MiembroEntidadAliada::class]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Create', [
                 'convocatoria'    => $convocatoria->only('id'),
-                'proyecto'        => $proyecto->only('id'),
+                'proyecto'        => $proyecto->only('id', 'modificable'),
                 'entidadAliada'   => $entidadAliada->only('id'),
                 'tiposDocumento'  => json_decode(Storage::get('json/tipos-documento.json'), true),
             ]);
@@ -65,14 +65,15 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function store(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
-        $this->authorize('create', [MiembroEntidadAliada::class]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $miembroEntidadAliada = new MiembroEntidadAliada();
-        $miembroEntidadAliada->nombre            = $request->nombre;
-        $miembroEntidadAliada->email             = $request->email;
-        $miembroEntidadAliada->tipo_documento    = $request->tipo_documento;
-        $miembroEntidadAliada->numero_documento  = $request->numero_documento;
-        $miembroEntidadAliada->numero_celular    = $request->numero_celular;
+        $miembroEntidadAliada->nombre               = $request->nombre;
+        $miembroEntidadAliada->email                = $request->email;
+        $miembroEntidadAliada->tipo_documento       = $request->tipo_documento;
+        $miembroEntidadAliada->numero_documento     = $request->numero_documento;
+        $miembroEntidadAliada->numero_celular       = $request->numero_celular;
+        $miembroEntidadAliada->autorizacion_datos   = $request->autorizacion_datos;
         $miembroEntidadAliada->entidadAliada()->associate($entidadAliada);
 
         $miembroEntidadAliada->save();
@@ -88,7 +89,7 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function show(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
-        $this->authorize('view', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
     }
 
     /**
@@ -99,12 +100,12 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
-        $this->authorize('update', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
 
-        if ($proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->tipoProyecto->lineaProgramatica->codigo == 82) {
+        if ($proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 66 || $proyecto->idi()->exists() && $proyecto->lineaProgramatica->codigo == 82) {
             return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/MiembrosEntidadAliada/Edit', [
                 'convocatoria'         => $convocatoria->only('id'),
-                'proyecto'             => $proyecto->only('id'),
+                'proyecto'             => $proyecto->only('id', 'modificable'),
                 'miembroEntidadAliada' => $miembroEntidadAliada,
                 'tiposDocumento'       => json_decode(Storage::get('json/tipos-documento.json'), true),
                 'entidadAliada'        => $entidadAliada->only('id'),
@@ -123,13 +124,15 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function update(MiembroEntidadAliadaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
-        $this->authorize('update', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $miembroEntidadAliada->nombre            = $request->nombre;
-        $miembroEntidadAliada->email             = $request->email;
-        $miembroEntidadAliada->tipo_documento    = $request->tipo_documento;
-        $miembroEntidadAliada->numero_documento  = $request->numero_documento;
-        $miembroEntidadAliada->numero_celular    = $request->numero_celular;
+        $miembroEntidadAliada->nombre               = $request->nombre;
+        $miembroEntidadAliada->email                = $request->email;
+        $miembroEntidadAliada->tipo_documento       = $request->tipo_documento;
+        $miembroEntidadAliada->numero_documento     = $request->numero_documento;
+        $miembroEntidadAliada->numero_celular       = $request->numero_celular;
+        $miembroEntidadAliada->autorizacion_datos   = $request->autorizacion_datos;
+
         $miembroEntidadAliada->entidadAliada()->associate($entidadAliada);
 
         $miembroEntidadAliada->save();
@@ -145,7 +148,7 @@ class MiembroEntidadAliadaController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada, MiembroEntidadAliada $miembroEntidadAliada)
     {
-        $this->authorize('delete', [MiembroEntidadAliada::class, $miembroEntidadAliada]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $miembroEntidadAliada->delete();
 

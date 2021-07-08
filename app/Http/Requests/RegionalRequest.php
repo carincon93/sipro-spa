@@ -28,14 +28,14 @@ class RegionalRequest extends FormRequest
                 'region_id'             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regiones,id'],
                 'director_regional_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
                 'nombre'                => ['required', 'max:191', 'string'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer', 'unique:regionales,codigo,'.$this->route('regional')->id.',id'],
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:regionales,codigo,' . $this->route('regional')->id . ',id'],
             ];
         } else {
             return [
                 'region_id'             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regiones,id'],
                 'director_regional_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
                 'nombre'                => ['required', 'max:191', 'string'],
-                'codigo'                => ['required', 'min:0', 'max:999', 'integer']
+                'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer']
             ];
         }
     }
@@ -47,16 +47,20 @@ class RegionalRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->region_id) ) {
+        if (is_array($this->region_id)) {
             $this->merge([
                 'region_id' => $this->region_id['value'],
             ]);
         }
 
-        if( is_array($this->director_regional_id) ) {
+        if (is_array($this->director_regional_id)) {
             $this->merge([
                 'director_regional_id' => $this->director_regional_id['value'],
             ]);
         }
+
+        $this->merge([
+            'nombre' => mb_strtolower($this->nombre),
+        ]);
     }
 }

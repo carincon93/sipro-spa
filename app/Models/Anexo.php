@@ -25,7 +25,8 @@ class Anexo extends Model
     protected $fillable = [
         'linea_programatica_id',
         'nombre',
-        'descripcion'
+        'descripcion',
+        'archivo'
     ];
 
     /**
@@ -76,7 +77,10 @@ class Anexo extends Model
     public function scopeFilterAnexo($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

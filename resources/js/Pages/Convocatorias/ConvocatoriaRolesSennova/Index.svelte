@@ -1,14 +1,14 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Pagination from '@/Components/Pagination'
-    import DataTable from '@/Components/DataTable'
-    import Button from '@/Components/Button'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Pagination from '@/Shared/Pagination'
+    import DataTable from '@/Shared/DataTable'
+    import Button from '@/Shared/Button'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -20,16 +20,11 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
-
-    let filters = {}
+    let isSuperAdmin = checkRole(authUser, [1])
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" routeParams={[convocatoria.id]}>
         <div slot="title">Roles SENNOVA</div>
 
         <div slot="actions">
@@ -40,10 +35,10 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Asignación mensual</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Línea programática</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl">Acciones</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Asignación mensual</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Línea programática</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
 
@@ -51,25 +46,25 @@
             {#each convocatoriaRolesSennova.data as convocatoriaRolSennova (convocatoriaRolSennova.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {convocatoriaRolSennova.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {convocatoriaRolSennova.asignacion_mensual}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {convocatoriaRolSennova.linea_programatica_nombre}
                         </p>
                     </td>
 
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <DataTableMenu class={convocatoriaRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.edit', [convocatoria.id, convocatoriaRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
@@ -79,7 +74,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

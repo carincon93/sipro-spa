@@ -5,7 +5,7 @@ module.exports = {
 		'./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
 		'./storage/framework/views/*.php',
 		'./resources/views/**/*.blade.php',
-		'./resources/js/**/*.vue',
+		'./resources/js/**/*.svelte',
 	],
 
 	theme: {
@@ -20,7 +20,7 @@ module.exports = {
 					500: '#fb7b50',
 					600: '#ff6f3e',
 					900: '#ff5019',
-					DEFAULT: '#4f46e5',
+					DEFAULT: '#ffccba',
 				},
 			},
 			textColor: {
@@ -44,5 +44,4 @@ module.exports = {
 		},
 	},
 
-	plugins: [require('@tailwindcss/forms')],
 }

@@ -21,10 +21,11 @@ class CentroFormacionController extends Controller
 
         return Inertia::render('CentrosFormacion/Index', [
             'filters'   => request()->all('search'),
-            'centrosFormacion' => CentroFormacion::with(['regional' => function ($query) {
-                $query->orderBy('nombre', 'ASC');
-            }])
-                ->filterCentroFormacion(request()->only('search'))->paginate(),
+            'centrosFormacion' => CentroFormacion::select('centros_formacion.id', 'centros_formacion.nombre', 'centros_formacion.codigo', 'centros_formacion.regional_id')
+                ->with(['regional' => function ($query) {
+                    $query->orderBy('nombre', 'ASC');
+                }])
+                ->filterCentroFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -57,6 +58,7 @@ class CentroFormacionController extends Controller
         $centroFormacion->codigo = $request->codigo;
         $centroFormacion->regional()->associate($request->regional_id);
         $centroFormacion->subdirector()->associate($request->subdirector_id);
+        $centroFormacion->dinamizadorSennova()->associate($request->dinamizador_sennova_id);
 
         $centroFormacion->save();
 
@@ -85,7 +87,7 @@ class CentroFormacionController extends Controller
         $this->authorize('update', [CentroFormacion::class, $centroFormacion]);
 
         return Inertia::render('CentrosFormacion/Edit', [
-            'centroFormacion' => $centroFormacion->only(['id', 'nombre', 'codigo', 'regional_id', 'subdirector_id']),
+            'centroFormacion' => $centroFormacion->only(['id', 'nombre', 'codigo', 'regional_id', 'subdirector_id', 'dinamizador_sennova_id']),
             'regional'        => Regional::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
         ]);
     }
@@ -105,6 +107,7 @@ class CentroFormacionController extends Controller
         $centroFormacion->codigo = $request->codigo;
         $centroFormacion->regional()->associate($request->regional_id);
         $centroFormacion->subdirector()->associate($request->subdirector_id);
+        $centroFormacion->dinamizadorSennova()->associate($request->dinamizador_sennova_id);
 
         $centroFormacion->save();
 

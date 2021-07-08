@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    protected $appends = ['can', 'nombre_usuario'];
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['can'];
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +34,9 @@ class User extends Authenticatable
         'numero_documento',
         'numero_celular',
         'habilitado',
-        'tipo_participacion',
-        'centro_formacion_id'
+        'tipo_vinculacion',
+        'centro_formacion_id',
+        'autorizacion_datos'
     ];
 
     /**
@@ -59,9 +67,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Proyecto::class, 'proyecto_participantes', 'user_id', 'proyecto_id')
             ->withPivot([
-                'es_autor',
+                'user_id',
+                'es_formulador',
                 'cantidad_meses',
-                'cantidad_horas'
+                'cantidad_horas',
+                'rol_sennova'
             ]);
     }
 
@@ -73,6 +83,16 @@ class User extends Authenticatable
     public function centroFormacion()
     {
         return $this->belongsTo(CentroFormacion::class);
+    }
+
+    /**
+     * Relationship with CentroFormacion
+     *
+     * @return object
+     */
+    public function dinamizadorCentroFormacion()
+    {
+        return $this->hasOne(CentroFormacion::class, 'dinamizador_sennova_id');
     }
 
     /**
@@ -96,6 +116,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function activadoresLineaProgramatica()
+    {
+        return $this->belongsToMany(LineaProgramatica::class, 'activador_linea_programatica', 'user_id', 'linea_programatica_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -106,6 +136,8 @@ class User extends Authenticatable
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace(' ', '%%', $search);
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhere('email', 'ilike', '%' . $search . '%');
             $query->orWhere('numero_documento', 'ilike', '%' . $search . '%');
@@ -120,7 +152,7 @@ class User extends Authenticatable
      */
     public static function makePassword($documentNumber)
     {
-        return bcrypt("Sena$documentNumber*");
+        return bcrypt("sena$documentNumber*");
     }
 
     /**
@@ -131,27 +163,66 @@ class User extends Authenticatable
     public function getCanAttribute()
     {
         return $this->getAllPermissions()->map(function ($t) {
-            return ['name' => $t['name']];
-        })->pluck('name');
+            return ['id' => $t['id']];
+        })->pluck('id');
     }
 
     /**
-     * getNombreAttribute
+     * getUsersByRol
      *
-     * @return void
+     * @return object
      */
-    public function getNombreAttribute($value)
+    public static function getUsersByRol()
     {
-        return ucwords($value);
-    }
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $users = User::orderBy('nombre', 'ASC')
+                ->filterUser(request()->only('search'))->paginate();
+        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
+            $users = User::where('centro_formacion_id', $user->dinamizadorCentroFormacion->id)->orderBy('nombre', 'ASC')
+                ->filterUser(request()->only('search'))->paginate();
+        }
 
-    /**
-     * getNombreUsuarioAttribute
-     *
-     * @return void
-     */
-    public function getNombreUsuarioAttribute()
-    {
-        return ucwords($this->nombre);
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%activador i+d+i%')->where('users.id', $user->id);
+        })->first()) {
+            $users = User::whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%proponente i+d+i%');
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%activador cultura de la innovación%')->where('users.id', $user->id);
+        })->first()) {
+            $users = User::whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%proponente cultura de la innovación%');
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%activador tecnoacademia%')->where('users.id', $user->id);
+        })->first()) {
+            $users = User::whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%proponente tecnoacademia%');
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%activador tecnoparque%')->where('users.id', $user->id);
+        })->first()) {
+            $users = User::whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%proponente tecnoparque%');
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        if ($user->whereHas('roles', function (Builder $query) use ($user) {
+            return $query->where('name', 'ilike', '%activador servicios tecnológicos%')->where('users.id', $user->id);
+        })->first()) {
+            $users = User::whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%proponente servicios tecnológicos%');
+            })->filterUser(request()->only('search'))->paginate();
+        }
+
+        return $users;
     }
 }

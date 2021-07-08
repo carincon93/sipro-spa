@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProgramaFormacionRequest;
-use App\Models\Regional;
 use App\Models\ProgramaFormacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,10 +21,10 @@ class ProgramaFormacionController extends Controller
 
         return Inertia::render('ProgramasFormacion/Index', [
             'filters'   => request()->all('search'),
-            'programasFormacion' => ProgramaFormacion::with(['centroFormacion' => function ($query) {
+            'programasFormacion' => ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with(['centroFormacion' => function ($query) {
                 $query->orderBy('nombre', 'ASC');
             }])
-                ->filterProgramaFormacion(request()->only('search'))->paginate(),
+                ->filterProgramaFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -39,7 +38,8 @@ class ProgramaFormacionController extends Controller
         $this->authorize('create', [ProgramaFormacion::class]);
 
         return Inertia::render('ProgramasFormacion/Create', [
-            'modalidades' => json_decode(Storage::get('json/modalidades-estudio.json'), true)
+            'modalidades'       => json_decode(Storage::get('json/modalidades-estudio.json'), true),
+            'nivelesFormacion'  => json_decode(Storage::get('json/nivel-formacion.json'), true)
         ]);
     }
 
@@ -54,9 +54,10 @@ class ProgramaFormacionController extends Controller
         $this->authorize('create', [ProgramaFormacion::class]);
 
         $programaFormacion = new ProgramaFormacion();
-        $programaFormacion->nombre      = $request->nombre;
-        $programaFormacion->codigo      = $request->codigo;
-        $programaFormacion->modalidad   = $request->modalidad;
+        $programaFormacion->nombre              = $request->nombre;
+        $programaFormacion->codigo              = $request->codigo;
+        $programaFormacion->modalidad           = $request->modalidad;
+        $programaFormacion->nivel_formacion     = $request->nivel_formacion;
         $programaFormacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $programaFormacion->save();
@@ -86,8 +87,9 @@ class ProgramaFormacionController extends Controller
         $this->authorize('update', [ProgramaFormacion::class, $programaFormacion]);
 
         return Inertia::render('ProgramasFormacion/Edit', [
-            'programaFormacion'   => $programaFormacion->only(['id', 'nombre', 'codigo', 'modalidad', 'centro_formacion_id']),
-            'modalidades'         => json_decode(Storage::get('json/modalidades-estudio.json'), true)
+            'programaFormacion'     => $programaFormacion->only(['id', 'nombre', 'codigo', 'modalidad', 'nivel_formacion', 'centro_formacion_id']),
+            'modalidades'           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
+            'nivelesFormacion'      => json_decode(Storage::get('json/nivel-formacion.json'), true)
         ]);
     }
 
@@ -102,9 +104,10 @@ class ProgramaFormacionController extends Controller
     {
         $this->authorize('update', [ProgramaFormacion::class, $programaFormacion]);
 
-        $programaFormacion->nombre      = $request->nombre;
-        $programaFormacion->codigo      = $request->codigo;
-        $programaFormacion->modalidad   = $request->modalidad;
+        $programaFormacion->nombre              = $request->nombre;
+        $programaFormacion->codigo              = $request->codigo;
+        $programaFormacion->modalidad           = $request->modalidad;
+        $programaFormacion->nivel_formacion     = $request->nivel_formacion;
         $programaFormacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $programaFormacion->save();

@@ -21,7 +21,7 @@ class SegundoGrupoPresupuestalController extends Controller
         return Inertia::render('Presupuesto/SegundoGrupoPresupuestal/Index', [
             'filters'   => request()->all('search'),
             'segundoGrupoPresupuestal' => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')
-                ->filterSegundoGrupoPresupuestal(request()->only('search'))->paginate(),
+                ->filterSegundoGrupoPresupuestal(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

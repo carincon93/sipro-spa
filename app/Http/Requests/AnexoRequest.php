@@ -26,7 +26,8 @@ class AnexoRequest extends FormRequest
         return [
             'linea_programatica_id*'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
             'nombre'                    => ['required', 'max:191', 'string'],
-            'descripcion'               => ['required', 'string']
+            'descripcion'               => ['required', 'string'],
+            'archivo'                   => ['nullable', 'max:10000000', 'file'],
         ];
     }
 }

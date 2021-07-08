@@ -4,25 +4,24 @@
 </script>
 
 <script>
-    import { Inertia } from '@inertiajs/inertia'
-    import { route } from '@/Utils'
+    import { useForm } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
+
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
 
     export let status
     export let errors
 
     let sending = false
 
-    let form = {
+    let form = useForm({
         email: '',
-    }
+    })
 
     function handleSubmit() {
-        Inertia.post(route('password.email'), form)
+        $form.post(route('password.email'))
     }
 </script>
 
@@ -38,9 +37,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Label required class="mb-4" labelFor="email" value={$_('Email')} />
-        <Input id="email" type="email" class="mt-1 block w-full" bind:value={form.email} name="email" required autocomplete="email" />
-        <InputError message={errors.email} />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} name="email" required autocomplete="email" />
     </div>
 
     <div class="flex items-center justify-end mt-4">

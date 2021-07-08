@@ -1,17 +1,17 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
-    import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import InfoMessage from '@/Components/InfoMessage'
-    import Stepper from '@/Components/Stepper'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Stepper from '@/Shared/Stepper'
 
     import { createPopper } from '@popperjs/core'
 
@@ -22,10 +22,19 @@
     export let causasDirectas
 
     let formId
+    let dialogTitle
+    let codigo
     let sending = false
     let dialogOpen = false
-    let dialogTitle
-    let code
+    let cantidadCeldasCausasIndirectas = 3
+
+    if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
+        cantidadCeldasCausasIndirectas = 3
+    } else if (proyecto.codigo_linea_programatica == 68) {
+        cantidadCeldasCausasIndirectas = 14
+    } else if (proyecto.codigo_linea_programatica == 70) {
+        cantidadCeldasCausasIndirectas = 10
+    }
 
     $: $title = 'Árbol de problemas'
 
@@ -33,10 +42,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Efectos indirectos
@@ -48,26 +54,27 @@
     })
 
     let showEfectoIndirectoForm = false
-    function showEfectoindirectoDialog(efectoIndirecto, efectoDirectoId) {
+    function showEfectoIndirectoDialog(efectoIndirecto, efectoDirectoId) {
         reset()
-        code = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
+        codigo = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
         dialogTitle = 'Efecto indirecto'
         formId = 'efecto-indirecto'
         showEfectoIndirectoForm = true
         dialogOpen = true
 
         if (efectoIndirecto != null) {
-            $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
             $formEfectoIndirecto.id = efectoIndirecto.id
+            $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
             $formEfectoIndirecto.efecto_directo_id = efectoIndirecto.efecto_directo_id
         } else {
             $formEfectoIndirecto.id = null
+            $formEfectoIndirecto.descripcion = null
             $formEfectoIndirecto.efecto_directo_id = efectoDirectoId
         }
     }
 
     function submitEfectoIndirecto() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formEfectoIndirecto.post(
                 route('proyectos.efecto-indirecto', {
                     proyecto: proyecto.id,
@@ -100,7 +107,7 @@
     let showEfectoDirectoForm = false
     function showEfectoDirectoDialog(efectoDirecto) {
         reset()
-        code = 'EFE-' + efectoDirecto.id
+        codigo = 'EFE-' + efectoDirecto.id
         dialogTitle = 'Efecto directo'
         formId = 'efecto-directo'
         showEfectoDirectoForm = true
@@ -110,7 +117,7 @@
     }
 
     function submitEfectoDirecto() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formEfectoDirecto.post(
                 route('proyectos.efecto-directo', {
                     proyecto: proyecto.id,
@@ -133,27 +140,31 @@
     }
 
     /**
-     * Planteamiento del problema
+     * Problema central
      */
-    let formPlanteamientoProblema = useForm({
-        planteamiento_problema: proyecto.planteamiento_problema,
+    let formProblemaCentral = useForm({
+        identificacion_problema: proyecto.identificacion_problema,
+        problema_central: proyecto.problema_central,
         justificacion_problema: proyecto.justificacion_problema,
+        pregunta_formulacion_problema: proyecto.pregunta_formulacion_problema,
     })
 
-    let showPlanteamientoProblemaForm = false
-    function showStatementProblemDialog() {
+    let showProblemaCentralForm = false
+    function showProblemaCentralDialog() {
         reset()
-        dialogTitle = 'Planteamiento del problema'
-        formId = 'planteamiento-problema'
-        showPlanteamientoProblemaForm = true
+        dialogTitle = 'Problema central'
+        formId = 'problema-central'
+        showProblemaCentralForm = true
         dialogOpen = true
-        $formPlanteamientoProblema.planteamiento_problema = proyecto.planteamiento_problema
-        $formPlanteamientoProblema.justificacion_problema = proyecto.justificacion_problema
+        $formProblemaCentral.identificacion_problema = proyecto.identificacion_problema
+        $formProblemaCentral.problema_central = proyecto.problema_central
+        $formProblemaCentral.justificacion_problema = proyecto.justificacion_problema
+        $formProblemaCentral.pregunta_formulacion_problema = proyecto.pregunta_formulacion_problema
     }
 
-    function submitPlanteamientoProblema() {
-        if (isSuperAdmin) {
-            $formPlanteamientoProblema.post(route('proyectos.planteamiento-problema', proyecto.id), {
+    function submitProblemaCentral() {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
                 onStart: () => {
                     sending = true
                 },
@@ -179,7 +190,7 @@
     let showCausaDirectaForm = false
     function showCausaDirectaDialog(causaDirecta) {
         reset()
-        code = 'CAU-' + causaDirecta.id
+        codigo = 'CAU-' + causaDirecta.id
         dialogTitle = 'Causa directa'
         formId = 'causa-directa'
         showCausaDirectaForm = true
@@ -189,7 +200,7 @@
     }
 
     function submitCausaDirecta() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formCausaDirecta.post(
                 route('proyectos.causa-directa', {
                     proyecto: proyecto.id,
@@ -223,7 +234,7 @@
     let showCausaIndirectaForm = false
     function showCausaIndirectaDialog(causaIndirecta, causaDirectaId) {
         reset()
-        code = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
+        codigo = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
         dialogTitle = 'Causa indirecta'
         formId = 'causa-indirecta'
         showCausaIndirectaForm = true
@@ -234,12 +245,13 @@
             $formCausaIndirecta.causa_directa_id = causaIndirecta.causa_directa_id
         } else {
             $formCausaIndirecta.id = null
+            $formCausaIndirecta.descripcion = null
             $formCausaIndirecta.causa_directa_id = causaDirectaId
         }
     }
 
     function submitCausaIndirecta() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formCausaIndirecta.post(
                 route('proyectos.causa-indirecta', {
                     proyecto: proyecto.id,
@@ -264,16 +276,16 @@
     function reset() {
         showEfectoIndirectoForm = false
         showEfectoDirectoForm = false
-        showPlanteamientoProblemaForm = false
+        showProblemaCentralForm = false
         showCausaDirectaForm = false
         showCausaIndirectaForm = false
         dialogTitle = ''
-        code = ''
+        codigo = ''
         formId = ''
 
         $formCausaIndirecta.reset()
         $formCausaDirecta.reset()
-        $formPlanteamientoProblema.reset()
+        $formProblemaCentral.reset()
         $formEfectoDirecto.reset()
         $formEfectoIndirecto.reset()
     }
@@ -292,9 +304,9 @@
         const efectoDirectoTooltip = document.querySelector('#efecto-directo-tooltip')
         const arrowEfectoDirecto = document.querySelector('#arrow-efecto-directo')
 
-        const planteamientoProblema = document.querySelector('#planteamiento-problema-tooltip-placement')
-        const planteamientoProblemaTooltip = document.querySelector('#planteamiento-problema-tooltip')
-        const arrowPlanteamientoProblema = document.querySelector('#arrow-planteamiento-problema')
+        const problemaCentral = document.querySelector('#problema-central-tooltip-placement')
+        const problemaCentralTooltip = document.querySelector('#problema-central-tooltip')
+        const arrowProblemaCentral = document.querySelector('#arrow-problema-central')
 
         const causaDirecta = document.querySelector('#causa-directa-tooltip-placement')
         const causaDirectaTooltip = document.querySelector('#causa-directa-tooltip')
@@ -321,9 +333,9 @@
             },
             {
                 element: {
-                    target: planteamientoProblema,
-                    tooltip: planteamientoProblemaTooltip,
-                    arrow: arrowPlanteamientoProblema,
+                    target: problemaCentral,
+                    tooltip: problemaCentralTooltip,
+                    arrow: arrowProblemaCentral,
                 },
             },
             {
@@ -362,13 +374,13 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
-    <p class="text-center">Debe generar el árbol de problemas iniciando con el planteamiento del problema, relacionando sus causas y efectos.</p>
+    <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
     <div class="mt-16">
         <!-- Efectos -->
         <div class="flex mb-14">
             {#each efectosDirectos as efectoDirecto, i}
-                <div class="flex-1">
+                <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
                     {#if i == 0}
                         <!-- Efectos indirectos -->
                         <div id="efecto-indirecto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
@@ -378,24 +390,31 @@
                     {/if}
                     <div class="flex mb-14" id={i == 0 ? 'efecto-indirecto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                            <div class="flex-1 efectos-directos relative">
-                                <div on:click={showEfectoindirectoDialog(efectoIndirecto, efectoDirecto.id)} class="{efectoIndirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
-                                        <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
-                                        {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
-                                            {efectoIndirecto.descripcion}
-                                        {/if}
-                                    </p>
+                            {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="flex-1 efectos-directos relative">
+                                    <div
+                                        on:click={showEfectoIndirectoDialog(efectoIndirecto, efectoDirecto.id)}
+                                        class="{efectoIndirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoIndirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoIndirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
+                                            <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
+                                            {#if efectoIndirecto.descripcion != null && efectoIndirecto.descripcion.length > 0}
+                                                {efectoIndirecto.descripcion}
+                                            {/if}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                            <div class="flex-1 efectos-directos relative" on:click={showEfectoindirectoDialog(null, efectoDirecto.id)}>
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                <div class="flex-1 efectos-directos relative" on:click={showEfectoIndirectoDialog(null, efectoDirecto.id)}>
+                                    <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {/if}
                     </div>
 
                     {#if i == 0}
@@ -407,8 +426,11 @@
                     {/if}
                     <!-- Efecto directo -->
                     <div class="efectos-directos relative flex-1" id={i == 0 ? 'efecto-directo-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showEfectoDirectoDialog(efectoDirecto)} class="{efectoDirecto.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                        <div
+                            on:click={showEfectoDirectoDialog(efectoDirecto)}
+                            class="{efectoDirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoDirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoDirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                        >
+                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}</small>
                                 {#if efectoDirecto.descripcion != null && efectoDirecto.descripcion.length > 0}
                                     {efectoDirecto.descripcion}
@@ -420,16 +442,16 @@
             {/each}
         </div>
 
-        <!-- Planteamiento del problema -->
-        <div id="planteamiento-problema-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-            <small class="block line-height-1">Planteamiento <br /> del problema</small>
-            <div id="arrow-planteamiento-problema" class="arrow" data-popper-arrow />
+        <!-- Problema central -->
+        <div id="problema-central-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+            <small class="block">Problema <br /> central</small>
+            <div id="arrow-problema-central" class="arrow" data-popper-arrow />
         </div>
-        <div class="planteamiento-problema relative" id="planteamiento-problema-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showStatementProblemDialog} class="h-36 {proyecto.planteamiento_problema != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5">
-                {#if proyecto.planteamiento_problema != null && proyecto.planteamiento_problema.length > 0}
-                    <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                        {proyecto.planteamiento_problema}
+        <div class="problema-central relative" id="problema-central-tooltip-placement" aria-describedby="tooltip">
+            <div on:click={showProblemaCentralDialog} class="h-36 {proyecto.problema_central != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                {#if proyecto.problema_central != null && proyecto.problema_central.length > 0}
+                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                        {proyecto.problema_central}
                     </p>
                 {/if}
             </div>
@@ -446,9 +468,12 @@
                             <div id="arrow-causa-directa" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div class="causas-directas relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showCausaDirectaDialog(causaDirecta)} class="{causaDirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-36 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                    <div class="causas-directas-line relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div
+                            on:click={showCausaDirectaDialog(causaDirecta)}
+                            class="{causaDirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaDirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaDirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                        >
+                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">CAU-{causaDirecta.id}</small>
                                 {#if causaDirecta.descripcion != null && causaDirecta.descripcion.length > 0}
                                     {causaDirecta.descripcion}
@@ -464,26 +489,66 @@
                         </div>
                     {/if}
                     <!-- Causas indirectas -->
-                    <div class="flex mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div class="flex flex-wrap causas-directas-line relative mt-14" id={i == 0 ? 'causa-indirecta-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            <div class="causas-directas relative flex-1">
-                                <div on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)} class="{causaIndirecta.descripcion != null ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-indigo-300 hover:bg-indigo-400'} h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-xs node text-white">
-                                        <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
-                                        {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
-                                            {causaIndirecta.descripcion}
-                                        {/if}
-                                    </p>
+                            {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div
+                                        on:click={showCausaIndirectaDialog(causaIndirecta, causaDirecta.id)}
+                                        class="{causaIndirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaIndirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaIndirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                    >
+                                        <p class="paragraph-ellipsis text-white text-xs line-height-1-24">
+                                            <small class="title block font-bold mb-2">CAU-{causaDirecta.id}-IND-{causaIndirecta.id}</small>
+                                            {#if causaIndirecta.descripcion != null && causaIndirecta.descripcion.length > 0}
+                                                {causaIndirecta.descripcion}
+                                            {/if}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            {/if}
                         {/each}
-                        {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
-                            <div class="causas-directas relative flex-1">
-                                <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-36 line-height-1 overflow-y-hidden p-2.5 text-sm text-white" />
+
+                        {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                            {#each { length: cantidadCeldasCausasIndirectas - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
                                 </div>
-                            </div>
-                        {/each}
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 0}
+                            {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 1}
+                            {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 2}
+                            {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
+                            {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty}
+                                <div class="mb-4 relative" style="flex: 1 0 33.333%">
+                                    <div on:click={showCausaIndirectaDialog(null, causaDirecta.id)} class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                        <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                    </div>
+                                </div>
+                            {/each}
+                        {/if}
                     </div>
                 </div>
             {/each}
@@ -491,73 +556,81 @@
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialogOpen}>
+    <Dialog bind:open={dialogOpen} id="arbol-problemas">
         <div slot="title" class="mb-10 text-center">
             <div class="text-primary">
                 {dialogTitle}
             </div>
-            {#if code}
+            {#if codigo}
                 <small class="block text-primary-light">
-                    Código: {code}
+                    Código: {codigo}
                 </small>
             {/if}
         </div>
         <div slot="content">
             {#if showCausaIndirectaForm}
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
+                            <InfoMessage class="mb-2" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
+                            <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showCausaDirectaForm}
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
+                            <InfoMessage class="mb-2" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
+                            <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showEfectoIndirectoForm}
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
+                            <InfoMessage class="mb-2" message="Corresponden a situaciones negativas generadas por los efectos directos." />
+                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
-            {:else if showPlanteamientoProblemaForm}
-                <form on:submit|preventDefault={submitPlanteamientoProblema} id="planteamiento-problema">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <div class="mt-4">
-                            <Label required class="mb-4" labelFor="planteamiento_problema" value="Planteamiento del problema" />
+            {:else if showProblemaCentralForm}
+                <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                        {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
+                                <InfoMessage
+                                    class="mb-2"
+                                    message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                                />
+                                <Textarea label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
+                            </div>
+                            <div class="mt-10">
+                                <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
 
+                                <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
+                            </div>
+                        {/if}
+
+                        <div class="mt-10">
+                            <Label required class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
                             <InfoMessage
-                                message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnologógico y/o agendas departamentales de innovación y competitividad.
-                            <br>
-                            2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA sexta edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                                class="mb-2"
+                                message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
                             />
-
-                            <Textarea rows="4" id="planteamiento_problema" error={errors.planteamiento_problema} bind:value={$formPlanteamientoProblema.planteamiento_problema} required />
-                        </div>
-
-                        <div class="mt-4">
-                            <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                            <InfoMessage message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
-                            <Textarea rows="4" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formPlanteamientoProblema.justificacion_problema} required />
+                            <Textarea label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showEfectoDirectoForm}
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={!isSuperAdmin}>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
+                            <InfoMessage class="mb-2" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
+                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -565,7 +638,7 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin && formId}
+            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>
@@ -575,7 +648,7 @@
 <style>
     .efectos-directos.relative.flex-1:before {
         content: '';
-        bottom: -40%;
+        bottom: -57px;
         position: absolute;
         right: 50%;
         width: 2px;
@@ -583,20 +656,15 @@
         background: #d2d6ff;
     }
 
-    .causas-directas.relative.flex-1:before {
+    .causas-directas-line.relative:before {
         content: '';
-        top: -38%;
         position: absolute;
+        top: -55px;
+        height: 55px;
         right: 50%;
         width: 2px;
-        height: 55px;
         background: #d2d6ff;
     }
-
-    .line-height-1 {
-        line-height: 1;
-    }
-
     .tooltip {
         color: white;
         padding: 5px 10px;
@@ -628,20 +696,20 @@
         right: -4px;
     }
 
-    .node {
+    .line-height-1-24 {
         line-height: 1.24;
     }
 
-    :global(.mdc-dialog__surface) {
+    :global(#arbol-problemas-dialog .mdc-dialog__surface) {
         width: 750px;
         max-width: calc(100vw - 32px) !important;
     }
 
-    :global(.mdc-dialog__content) {
+    :global(#arbol-problemas-dialog .mdc-dialog__content) {
         padding-top: 40px !important;
     }
 
-    :global(.mdc-dialog__title) {
+    :global(#arbol-problemas-dialog .mdc-dialog__title) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         margin-bottom: 0;
     }

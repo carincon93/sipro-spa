@@ -27,7 +27,8 @@ class MiembroEntidadAliada extends Model
         'email',
         'tipo_documento',
         'numero_documento',
-        'numero_celular'
+        'numero_celular',
+        'autorizacion_datos'
     ];
 
     /**
@@ -68,7 +69,10 @@ class MiembroEntidadAliada extends Model
     public function scopeFilterMiembroEntidadAliada($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

@@ -1,8 +1,6 @@
-require('./bootstrap')
-
 // Import modules...
 import { addMessages, init } from 'svelte-i18n'
-import { App } from '@inertiajs/inertia-svelte'
+import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 
 import es from '../lang/es.json'
@@ -13,14 +11,11 @@ init({
     initialLocale: 'es',
 })
 
-const el = document.getElementById('app')
+InertiaProgress.init({ color: '#f98e3c' })
 
-new App({
-    target: el,
-    props: {
-        initialPage: JSON.parse(el.dataset.page),
-        resolveComponent: (name) => require(`./Pages/${name}.svelte`),
-    },
+createInertiaApp({
+  resolve: (name) => import(`@/Pages/${name}.svelte`),
+  setup({ el, App, props }) {
+    new App({ target: el, props })
+  },
 })
-
-InertiaProgress.init({ color: '#4B5563' })

@@ -24,6 +24,7 @@ class CentroFormacion extends Model
     protected $fillable = [
         'regional_id',
         'subdirector_id',
+        'dinamizador_sennova_id',
         'nombre',
         'codigo',
     ];
@@ -56,7 +57,6 @@ class CentroFormacion extends Model
         return $this->belongsTo(Regional::class);
     }
 
-
     /**
      * Relationship with User
      *
@@ -65,6 +65,16 @@ class CentroFormacion extends Model
     public function subdirector()
     {
         return $this->belongsTo(User::class, 'subdirector_id');
+    }
+
+    /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function dinamizadorSennova()
+    {
+        return $this->belongsTo(User::class, 'dinamizador_sennova_id');
     }
 
     /**
@@ -98,6 +108,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with NodoTecnoparque
+     *
+     * @return object
+     */
+    public function nodosTecnoparque()
+    {
+        return $this->hasMany(NodoTecnoparque::class);
+    }
+
+    /**
      * Relationship with User
      *
      * @return object
@@ -105,6 +125,16 @@ class CentroFormacion extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * Relationship with Tecnoacademia
+     *
+     * @return object
+     */
+    public function tecnoacademias()
+    {
+        return $this->hasMany(Tecnoacademia::class);
     }
 
     /**
@@ -117,7 +147,13 @@ class CentroFormacion extends Model
     public function scopeFilterCentroFormacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->join('regionales', 'centros_formacion.regional_id', 'regionales.id');
+            $query->whereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('centros_formacion.codigo', 'ilike', '%' . $search . '%');
+            $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

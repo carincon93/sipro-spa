@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Inertia\Inertia;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -28,15 +29,20 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
+    public function render($request, Throwable $e)
     {
-        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            return abort(404);
-        });
+        $response = parent::render($request, $e);
+
+        if (!app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
+            return Inertia::render('Error', ['status' => $response->status()])
+                ->toResponse($request)
+                ->setStatusCode($response->status());
+        } else if ($response->status() === 419) {
+            return back()->with([
+                'message' => 'The page expired, please try again.',
+            ]);
+        }
+
+        return $response;
     }
 }

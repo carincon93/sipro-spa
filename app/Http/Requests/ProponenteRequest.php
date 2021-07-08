@@ -25,9 +25,23 @@ class ProponenteRequest extends FormRequest
     {
         return [
             'user_id'           => ['required', 'integer', 'exists:users,id'],
-            'es_autor'          => ['required', 'boolean'],
-            'cantidad_horas'    => ['required', 'numeric', 'min:1'],
+            'rol_sennova'       => ['required', 'min:0', 'max:2147483647', 'integer'],
+            'cantidad_horas'    => ['required', 'numeric', 'min:1', 'max:168'],
             'cantidad_meses'    => ['required', 'numeric', 'min:1', 'max:11.5'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->rol_sennova)) {
+            $this->merge([
+                'rol_sennova' => $this->rol_sennova['value'],
+            ]);
+        }
     }
 }

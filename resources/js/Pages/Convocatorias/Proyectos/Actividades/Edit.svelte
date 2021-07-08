@@ -1,26 +1,25 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import Textarea from '@/Components/Textarea'
-    import InputError from '@/Components/InputError'
-    import Dialog from '@/Components/Dialog'
+    import Textarea from '@/Shared/Textarea'
+    import InputError from '@/Shared/InputError'
+    import Dialog from '@/Shared/Dialog'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let actividad
-    export let productos
+    // export let productos
+    // export let productosRelacionados
     export let proyectoPresupuesto
-    export let productosRelacionados
     export let proyectoPresupuestoRelacionado
 
     $: $title = actividad ? actividad.nombre : null
@@ -29,10 +28,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -40,12 +36,12 @@
         descripcion: actividad.descripcion,
         fecha_inicio: actividad.fecha_inicio,
         fecha_finalizacion: actividad.fecha_finalizacion,
-        producto_id: productosRelacionados,
+        // producto_id: productosRelacionados,
         proyecto_presupuesto_id: proyectoPresupuestoRelacionado,
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.actividades.update', [convocatoria.id, proyecto.id, actividad.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -55,7 +51,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.actividades.destroy', [convocatoria.id, proyecto.id, actividad.id]))
         }
     }
@@ -65,8 +61,8 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
                         <a use:inertia href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Actividades </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -78,20 +74,20 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
                         <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                             <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
                             <div class="ml-4">
-                                <Input id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$form.fecha_inicio} required />
+                                <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
                         <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
                             <Label required labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
                             <div class="ml-4">
-                                <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$form.fecha_finalizacion} required />
+                                <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
                             </div>
                         </div>
                     </div>
@@ -101,25 +97,40 @@
                 </div>
 
                 <div class="mt-20">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
-
-                <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
+                <!-- <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4">
                         <Label required class="mb-4" labelFor="producto_id" value="Relacione algún producto" />
                         <InputError message={errors.producto_id} />
                     </div>
-                    <div class="grid grid-cols-2">
-                        {#each productos as { id, nombre }, i}
-                            <FormField>
-                                <Checkbox bind:group={$form.producto_id} value={id} />
-                                <span slot="label">{nombre}</span>
-                            </FormField>
-                        {/each}
-                    </div>
-                </div>
+                    {#if isSuperAdmin || proyecto.modificable == true}
+                        <div class="grid grid-cols-2">
+                            {#each productos as { id, nombre }}
+                                <FormField class="border-b border-l py-4">
+                                    <Checkbox bind:group={$form.producto_id} value={id} />
+                                    <span slot="label">{nombre}</span>
+                                </FormField>
+                            {/each}
+                            {#if productos.length == 0}
+                                <p class="p-4">Sin información registrada</p>
+                            {/if}
+                        </div>
+                    {:else}
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each productos as { id, nombre }}
+                                    {#each $form.producto_id as producto}
+                                        {#if id == producto}
+                                            <li class="first-letter-uppercase mb-4">{nombre}</li>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </ul>
+                        </div>
+                    {/if}
+                </div> -->
 
                 <h6 class="mt-20 mb-12 text-2xl">Rubros presupuestales</h6>
                 <div class="bg-white rounded shadow overflow-hidden">
@@ -127,38 +138,72 @@
                         <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Relacione algún rubro" />
                         <InputError message={errors.proyecto_presupuesto_id} />
                     </div>
-                    <div class="grid grid-cols-2">
-                        {#each proyectoPresupuesto as presupuesto, i}
-                            <FormField class="border-b border-l">
-                                <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
-                                <span slot="label">
-                                    <div class="mb-8 mt-4">
-                                        <small class="block">Concepto interno SENA</small>
-                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
-                                    </div>
-                                    <div class="mb-8">
-                                        <small class="block">Rubro</small>
-                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
-                                    </div>
-                                    <div class="mb-8">
-                                        <small class="block">Uso presupuestal</small>
-                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
-                                    </div>
-                                    <div class="mb-8">
-                                        <small class="block">Descripción</small>
-                                        {presupuesto.descripcion}
-                                    </div>
-                                </span>
-                            </FormField>
-                        {/each}
-                    </div>
+                    {#if isSuperAdmin || proyecto.modificable == true}
+                        <div class="grid grid-cols-2">
+                            {#each proyectoPresupuesto as presupuesto}
+                                <FormField class="border-b border-l">
+                                    <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
+                                    <span slot="label">
+                                        <div class="mb-8 mt-4">
+                                            <small class="block">Concepto interno SENA</small>
+                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                        </div>
+                                        <div class="mb-8">
+                                            <small class="block">Rubro</small>
+                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
+                                        </div>
+                                        <div class="mb-8">
+                                            <small class="block">Uso presupuestal</small>
+                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
+                                        </div>
+                                        <div class="mb-8">
+                                            <small class="block">Descripción</small>
+                                            {presupuesto.descripcion}
+                                        </div>
+                                    </span>
+                                </FormField>
+                            {/each}
+                            {#if proyectoPresupuesto.length == 0}
+                                <p class="p-4">Sin información registrada</p>
+                            {/if}
+                        </div>
+                    {:else}
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each proyectoPresupuesto as presupuesto}
+                                    {#each $form.proyecto_presupuesto_id as proyectoPresupuesto}
+                                        {#if presupuesto.id == proyectoPresupuesto}
+                                            <li class="mb-4">
+                                                <div class="mb-8 mt-4">
+                                                    <small class="block">Concepto interno SENA</small>
+                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                                </div>
+                                                <div class="mb-8">
+                                                    <small class="block">Rubro</small>
+                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
+                                                </div>
+                                                <div class="mb-8">
+                                                    <small class="block">Uso presupuestal</small>
+                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
+                                                </div>
+                                                <div class="mb-8">
+                                                    <small class="block">Descripción</small>
+                                                    {presupuesto.descripcion}
+                                                </div>
+                                            </li>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </ul>
+                        </div>
+                    {/if}
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar actividad </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar actividad</LoadingButton>
                 {/if}
             </div>

@@ -29,6 +29,7 @@ class ConvocatoriaRolSennovaRequest extends FormRequest
             'asignacion_mensual'    => ['required', 'min:0', 'max:2147483647'],
             'nivel_academico'       => ['required', 'integer'],
             'experiencia'           => ['nullable', 'string'],
+            'perfil'                => ['nullable', 'string'],
             'mensaje'               => ['nullable', 'string'],
         ];
     }

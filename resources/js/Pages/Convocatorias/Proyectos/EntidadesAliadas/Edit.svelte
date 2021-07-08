@@ -2,24 +2,23 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { Inertia } from '@inertiajs/inertia'
     import { inertia, page, useForm } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Button from '@/Components/Button'
-    import Textarea from '@/Components/Textarea'
-    import Input from '@/Components/Input'
-    import Switch from '@/Components/Switch'
-    import File from '@/Components/File'
-    import Select from '@/Components/Select'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Button from '@/Shared/Button'
+    import Textarea from '@/Shared/Textarea'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
+    import File from '@/Shared/File'
+    import Select from '@/Shared/Select'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import { Item, Text } from '@smui/list'
-    import DataTable from '@/Components/DataTable'
-    import Dialog from '@/Components/Dialog'
-    import ResourceMenu from '@/Components/ResourceMenu'
-    import InputError from '@/Components/InputError'
+    import Dialog from '@/Shared/Dialog'
+    import DataTableMenu from '@/Shared/DataTableMenu'
+    import InputError from '@/Shared/InputError'
 
     export let errors
     export let convocatoria
@@ -38,10 +37,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -60,19 +56,20 @@
         codigo_gruplac: entidadAliada.entidad_aliada_idi?.codigo_gruplac,
         enlace_gruplac: entidadAliada.entidad_aliada_idi?.enlace_gruplac,
         actividades_transferencia_conocimiento: entidadAliada.entidad_aliada_idi?.actividades_transferencia_conocimiento,
-        recursos_especie: entidadAliada.recursos_especie,
-        descripcion_recursos_especie: entidadAliada.descripcion_recursos_especie,
-        recursos_dinero: entidadAliada.recursos_dinero,
-        descripcion_recursos_dinero: entidadAliada.descripcion_recursos_dinero,
+        recursos_especie: entidadAliada.entidad_aliada_idi?.recursos_especie,
+        descripcion_recursos_especie: entidadAliada.entidad_aliada_idi?.descripcion_recursos_especie,
+        recursos_dinero: entidadAliada.entidad_aliada_idi?.recursos_dinero,
+        descripcion_recursos_dinero: entidadAliada.entidad_aliada_idi?.descripcion_recursos_dinero,
         carta_intencion: null,
         carta_propiedad_intelectual: null,
-        idi: proyecto.idi ? true : false,
-        soporte_convenio: null,
         actividad_id: actividadesRelacionadas,
+        soporte_convenio: null,
+        fecha_inicio_convenio: entidadAliada.entidad_aliada_ta?.fecha_inicio_convenio,
+        fecha_fin_convenio: entidadAliada.entidad_aliada_ta?.fecha_fin_convenio,
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.entidades-aliadas.update', [convocatoria.id, proyecto.id, entidadAliada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -82,7 +79,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.entidades-aliadas.destroy', [convocatoria.id, proyecto.id, entidadAliada.id]))
         }
     }
@@ -92,8 +89,8 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -106,105 +103,131 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit}>
-                <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
-                    <div class="mt-4">
+                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true) ? undefined : true}>
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                         <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
                     </div>
 
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="nombre" value="Nombre de la entidad aliada/Centro de formación" />
-                        <Textarea rows="4" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <div class="mt-8">
+                        <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="naturaleza" value="Naturaleza de la entidad" />
-                        <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione el tipo de riesgo" required />
+                        <Select id="naturaleza" items={naturalezaEntidadAliada} bind:selectedValue={$form.naturaleza} error={errors.naturaleza} autocomplete="off" placeholder="Seleccione la naturaleza de la entidad" required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-8">
                         <Label required class="mb-4" labelFor="tipo_empresa" value="Tipo de empresa" />
-                        <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione la probabilidad" required />
+                        <Select id="tipo_empresa" items={tiposEmpresa} bind:selectedValue={$form.tipo_empresa} error={errors.tipo_empresa} autocomplete="off" placeholder="Seleccione el tipo de empresa" required />
                     </div>
 
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="nit" value="NIT" />
-                        <Input id="nit" type="text" class="mt-1 block w-full" bind:value={$form.nit} error={errors.nit} required />
+                    <div class="mt-8">
+                        <Input label="NIT" id="nit" type="text" class="mt-1" bind:value={$form.nit} error={errors.nit} required />
                     </div>
 
-                    {#if proyecto.idi}
-                        <div class="mt-4">
+                    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                        <div class="mt-8">
                             <p>¿Hay convenio?</p>
                             <Switch bind:checked={$form.tiene_convenio} />
                         </div>
                         {#if $form.tiene_convenio}
-                            <div class="mt-4">
-                                <Label required class="mb-4" labelFor="descripcion_convenio" value="Descipción del convenio" />
-                                <Textarea rows="4" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
+                            <div class="mt-8">
+                                <Textarea label="Descipción del convenio" maxlength="400" id="descripcion_convenio" error={errors.descripcion_convenio} bind:value={$form.descripcion_convenio} required />
                             </div>
                         {/if}
 
-                        <div class="mt-4">
+                        <div class="mt-8">
                             <p>¿La entidad aliada tiene grupo de investigación?</p>
                             <Switch bind:checked={$form.tiene_grupo_investigacion} />
                         </div>
                         {#if $form.tiene_grupo_investigacion}
-                            <div class="mt-4">
-                                <Label required class="mb-4" labelFor="grupo_investigacion" value="Grupo de investigación" />
-                                <Textarea rows="4" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                            <div class="mt-8">
+                                <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                             </div>
 
-                            <div class="mt-4">
-                                <Label required class="mb-4" labelFor="codigo_gruplac" value="Código del GrupLAC" />
-                                <Input id="codigo_gruplac" type="text" class="mt-1 block w-full" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
+                            <div class="mt-8">
+                                <Input label="Código del GrupLAC" id="codigo_gruplac" type="text" class="mt-1" error={errors.codigo_gruplac} placeholder="Ejemplo: COL0000000" bind:value={$form.codigo_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
                             </div>
 
-                            <div class="mt-4">
-                                <Label required class="mb-4" labelFor="enlace_gruplac" value="Enlace del GrupLAC" />
-                                <Input id="enlace_gruplac" type="url" class="mt-1 block w-full" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
+                            <div class="mt-8">
+                                <Input label="Enlace del GrupLAC" id="enlace_gruplac" type="url" class="mt-1" error={errors.enlace_gruplac} placeholder="Ejemplo: https://scienti.minciencias.gov.co/gruplac/jsp/Medicion/graficas/verPerfiles.jsp?id_convocatoria=0nroIdGrupo=0000000" bind:value={$form.enlace_gruplac} required={!form.tiene_grupo_investigacion ? undefined : 'required'} />
                             </div>
                         {/if}
-                    {:else}
-                        <div class="mt-4">
-                            <Label class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                            <File id="soporte_convenio" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} />
-                        </div>
-                    {/if}
 
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="recursos_especie" value="Recursos en especie entidad aliada ($COP)" />
-                        <Input id="recursos_especie" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
-                    </div>
-
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="descripcion_recursos_especie" value="Descripción de los recursos en especie aportados" />
-                        <Textarea rows="4" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
-                    </div>
-
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="recursos_dinero" value="Recursos en dinero entidad aliada ($COP)" />
-                        <Input id="recursos_dinero" type="number" min="0" class="mt-1 block w-full" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
-                    </div>
-
-                    <div class="mt-4">
-                        <Label required class="mb-4" labelFor="descripcion_recursos_dinero" value="Descripción de la destinación del dinero aportado" />
-                        <Textarea rows="4" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
-                    </div>
-
-                    {#if proyecto.idi}
-                        <div class="mt-4">
-                            <Label required class="mb-4" labelFor="actividades_transferencia_conocimiento" value="Metodología o actividades de transferencia al centro de formación" />
-                            <Textarea rows="4" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                        <div class="mt-8">
+                            <Input label="Recursos en especie entidad aliada ($COP)" id="recursos_especie" type="number" input$min="0" class="mt-1" error={errors.recursos_especie} placeholder="COP" bind:value={$form.recursos_especie} required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-8">
+                            <Textarea label="Descripción de los recursos en especie aportados" maxlength="2500" id="descripcion_recursos_especie" error={errors.descripcion_recursos_especie} bind:value={$form.descripcion_recursos_especie} required />
+                        </div>
+
+                        <div class="mt-8">
+                            <Input label="Recursos en dinero entidad aliada ($COP)" id="recursos_dinero" type="number" input$min="0" class="mt-1" error={errors.recursos_dinero} placeholder="COP" bind:value={$form.recursos_dinero} required />
+                        </div>
+
+                        <div class="mt-8">
+                            <Textarea label="Descripción de la destinación del dinero aportado" maxlength="2500" id="descripcion_recursos_dinero" error={errors.descripcion_recursos_dinero} bind:value={$form.descripcion_recursos_dinero} required />
+                        </div>
+
+                        <div class="mt-8">
+                            <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
+                        </div>
+
+                        <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                            <File id="carta_intencion" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de intención
+                            </a>
+                            <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
+                        </div>
+
+                        <div class="mt-8">
+                            <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de propiedad intelectual
+                            </a>
+                            <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
+                        </div>
+                    {:else if proyecto.codigo_linea_programatica == 70}
+                        <div class="mt-8">
+                            <Label class="mb-4" labelFor="soporte_convenio" value="Convenio" />
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar soporte del convenio
+                            </a>
+                            <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} />
                         </div>
 
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                            <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" class="mt-1 block w-full" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
+                            <p class="text-center">Fecha del convenio</p>
+                            <div class="mt-4 flex items-start justify-around">
+                                <div class="mt-4 flex {errors.fecha_inicio_convenio ? '' : 'items-center'}">
+                                    <Label required labelFor="fecha_inicio_convenio" class={errors.fecha_inicio_convenio ? 'top-3.5 relative' : ''} value="Del" />
+                                    <div class="ml-4">
+                                        <input id="fecha_inicio_convenio" type="date" class="mt-1 block w-full p-4" bind:value={$form.fecha_inicio_convenio} required />
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex {errors.fecha_fin_convenio ? '' : 'items-center'}">
+                                    <Label required labelFor="fecha_fin_convenio" class={errors.fecha_fin_convenio ? 'top-3.5 relative' : ''} value="hasta" />
+                                    <div class="ml-4">
+                                        <input id="fecha_fin_convenio" type="date" class="mt-1 block w-full p-4" bind:value={$form.fecha_fin_convenio} required />
+                                    </div>
+                                </div>
+                            </div>
+                            {#if errors.fecha_inicio_convenio || errors.fecha_fin_convenio}
+                                <InputError message={errors.fecha_inicio_convenio || errors.fecha_fin_convenio} />
+                            {/if}
                         </div>
                     {/if}
 
@@ -214,136 +237,154 @@
                         </progress>
                     {/if}
 
-                    <h6 class="mt-20 mb-12 text-2xl" id="actividades">Actividades</h6>
+                    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                        <h6 class="mt-20 mb-12 text-2xl" id="actividades">Actividades</h6>
 
-                    <div class="bg-white rounded shadow overflow-hidden">
-                        <div class="p-4">
-                            <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
-                            <InputError message={errors.actividad_id} />
+                        <div class="bg-white rounded shadow overflow-hidden">
+                            <div class="p-4">
+                                <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
+                                <InputError message={errors.actividad_id} />
+                            </div>
+                            {#if isSuperAdmin || proyecto.modificable == true}
+                                <div class="grid grid-cols-2">
+                                    {#each actividades as { id, descripcion }, i}
+                                        <FormField>
+                                            <Checkbox bind:group={$form.actividad_id} value={id} />
+                                            <span slot="label">{descripcion}</span>
+                                        </FormField>
+                                    {/each}
+                                </div>
+                            {:else}
+                                <div class="p-2">
+                                    <ul class="list-disc p-4">
+                                        {#each actividades as { id, descripcion }, i}
+                                            {#each $form.actividad_id as actividad}
+                                                {#if id == actividad}
+                                                    <li class="first-letter-uppercase mb-4">{descripcion}</li>
+                                                {/if}
+                                            {/each}
+                                        {/each}
+                                    </ul>
+                                </div>
+                            {/if}
                         </div>
-                        <div class="grid grid-cols-2">
-                            {#each actividades as { id, descripcion }, i}
-                                <FormField>
-                                    <Checkbox bind:group={$form.actividad_id} value={id} />
-                                    <span slot="label">{descripcion}</span>
-                                </FormField>
-                            {/each}
-                        </div>
-                    </div>
+                    {/if}
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar entidad aliada </button>
                     {/if}
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar entidad aliada</LoadingButton>
                     {/if}
                 </div>
             </form>
         </div>
-        <div class="px-4">
-            <h1 class="mb-4">Enlaces de interés</h1>
-            <ul>
-                {#if proyecto.idi}
+        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+            <div class="px-4">
+                <h1 class="mb-4">Enlaces de interés</h1>
+                <ul>
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Miembros de entidad aliada </a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Crear miembro de la entidad aliada </a>
                     </li>
-                {/if}
-                <li class="mt-6">
-                    <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específcos relacionados </a>
-                </li>
-            </ul>
-        </div>
+                    <li class="mt-6">
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específicos relacionados </a>
+                    </li>
+                </ul>
+            </div>
+        {/if}
     </div>
 
-    {#if proyecto.idi}
-        <DataTable class="mt-20">
-            <div slot="title" id="miembros-entidad-aliada">Miembros de entidad aliada</div>
-
-            <div slot="actions">
+    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
+        <div class="mb-6 flex justify-end items-center">
+            <div>
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
             </div>
-
-            <thead slot="thead">
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Correo electrónico </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Número de celular </th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
-                </tr>
-            </thead>
-
-            <tbody slot="tbody">
-                {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.nombre}
-                            </p>
-                        </td>
-
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.email}
-                            </p>
-                        </td>
-
-                        <td class="border-t">
-                            <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                                {miembroEntidadAliada.cellphone_number}
-                            </p>
-                        </td>
-
-                        <td class="border-t td-actions">
-                            <ResourceMenu>
-                                {#if isSuperAdmin}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
-                            </ResourceMenu>
-                        </td>
+        </div>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
                     </tr>
-                {/each}
-            </tbody>
-        </DataTable>
-    {/if}
+                </thead>
 
-    <DataTable class="mt-20">
-        <div slot="title" id="objetivos-especificos">Objetivos específicos</div>
+                <tbody>
+                    {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.nombre}
+                                </p>
+                            </td>
 
-        <p class="mb-6" slot="caption">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.email}
+                                </p>
+                            </td>
+
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.numero_celular}
+                                </p>
+                            </td>
+
+                            <td class="border-t td-actions">
+                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+
+        <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
+        <p class="mb-6">
             A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
         </p>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
+                    </tr>
+                </thead>
 
-        <thead slot="thead">
-            <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Descripción </th>
-            </tr>
-        </thead>
+                <tbody>
+                    {#each objetivosEspecificosRelacionados as { id, descripcion }}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {descripcion}
+                                </p>
+                            </td>
+                        </tr>
+                    {/each}
 
-        <tbody slot="tbody">
-            {#each objetivosEspecificosRelacionados as { id, descripcion }}
-                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                    <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
-                            {descripcion}
-                        </p>
-                    </td>
-                </tr>
-            {/each}
-
-            {#if objetivosEspecificosRelacionados.length === 0}
-                <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
-                </tr>
-            {/if}
-        </tbody>
-    </DataTable>
+                    {#if objetivosEspecificosRelacionados.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
 
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">

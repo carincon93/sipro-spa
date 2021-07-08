@@ -1,19 +1,18 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
-    import { _ } from 'svelte-i18n'
-    import Button from '@/Components/Button'
     import { Inertia } from '@inertiajs/inertia'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+
+    import Button from '@/Shared/Button'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatorias
     export let convocatoriaActiva
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     $title = 'Convocatorias'
 </script>
@@ -24,15 +23,12 @@
             <div>
                 {#if convocatoriaActiva}
                     <h1 class="font-bold text-5xl">
-                        Convocatoria {convocatoriaActiva.year}
+                        Convocatoria activa: {convocatoriaActiva.year}
                     </h1>
-                    <p class="text-2xl mt-4">
-                        La convocatoria empezó el {convocatoriaActiva.fecha_inicio_formateado}
-                        y finaliza el {convocatoriaActiva.fecha_finalizacion_formateado}.
-                    </p>
-                    {#if isSuperAdmin}
+
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                         <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
-                            Convocatoria
+                            Revisar convocatoria
                             {convocatoriaActiva.year}
                         </Button>
                     {/if}
@@ -54,7 +50,7 @@
             </div>
         </div>
     </header>
-    <div class="py-12">
+    <div class={isSuperAdmin ? 'py-12' : ''}>
         {#if isSuperAdmin}
             <div class="flex justify-center items-center flex-col">
                 <p>A continuación, se listan todas las convocatorias, si desea crear una nueva de clic en el siguiente botón.</p>
@@ -63,13 +59,29 @@
                 </div>
             </div>
         {/if}
-        <div class="grid grid-cols-3 gap-10">
-            {#if isSuperAdmin}
+        <div>
+            <h1 class="text-3xl mb-10 text-center">Fechas de convocatoria de las diferentes líneas programáticas:</h1>
+            <InfoMessage>
+                <ul class="list-disc p-4">
+                    <li>{convocatoriaActiva.fechas_idi}</li>
+                    <li>{convocatoriaActiva.fechas_cultura}</li>
+                    <li>{convocatoriaActiva.fechas_st}</li>
+                    <li>{convocatoriaActiva.fechas_ta}</li>
+                    <li>{convocatoriaActiva.fechas_tp}</li>
+                </ul>
+            </InfoMessage>
+        </div>
+
+        <h1 class="text-3xl m-10 text-center">Lista de convocatorias</h1>
+
+        <div class="grid grid-cols-3 gap-4">
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
-                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col">
-                        <span>ICON</span>
+                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-center items-center flex-col">
                         Convocatoria
-                        {convocatoria.year}
+                        <h1 class="text-4xl text-center mt-6">
+                            {convocatoria.year}
+                        </h1>
                         {#if convocatoria.active}
                             <small>Convocatoria activa</small>
                         {/if}

@@ -47,33 +47,33 @@ class LineaProgramatica extends Model
     ];
 
     /**
-     * Relationship with TipoProyecto
+     * Relationship with Proyecto
      *
      * @return object
      */
-    public function tiposProyecto()
+    public function proyectos()
     {
-        return $this->hasMany(TipoProyecto::class);
+        return $this->belongsTo(Proyecto::class);
     }
 
     /**
-     * Relationship with SennovaBudget
+     * Relationship with PresupuestoSennova
      *
      * @return object
      */
-    public function sennovaBudgets()
+    public function presupuestoSennova()
     {
-        return $this->hasMany(SennovaBudget::class);
+        return $this->hasMany(PresupuestoSennova::class);
     }
 
     /**
-     * Relationship with CallRolSennova
+     * Relationship with ConvocatoriaRolSennova
      *
      * @return object
      */
-    public function callRolSennovas()
+    public function convocatoriaRolSennova()
     {
-        return $this->hasMany(CallRolSennova::class);
+        return $this->hasMany(ConvocatoriaRolSennova::class);
     }
 
     /**
@@ -87,6 +87,16 @@ class LineaProgramatica extends Model
     }
 
     /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function activadores()
+    {
+        return $this->belongsToMany(User::class, 'activador_linea_programatica', 'linea_programatica_id', 'user_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -96,7 +106,12 @@ class LineaProgramatica extends Model
     public function scopeFilterLineaProgramatica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace(' ', '%%', $search);
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhere('codigo', 'ilike', '%' . $search . '%');
+            $query->orWhere('categoria_proyecto', 'ilike', '%' . $search . '%');
         });
     }
 }

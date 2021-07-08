@@ -2,17 +2,16 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import CreateEstudioMercado from '@/Pages/Convocatorias/Proyectos/ProyectoPresupuesto/EstudioMercado/Create'
     import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import LoadingButton from '@/Components/LoadingButton'
-    import Pagination from '@/Components/Pagination'
-    import Button from '@/Components/Button'
-    import DataTable from '@/Components/DataTable'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Pagination from '@/Shared/Pagination'
+    import Button from '@/Shared/Button'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Dialog from '@/Components/Dialog'
+    import Dialog from '@/Shared/Dialog'
 
     export let errors
     export let convocatoria
@@ -25,35 +24,30 @@
     export let convocatoriaPresupuesto
     export let presupuestoSennova
 
-    let dialogOpen
-    $: dialogOpen = Object.keys(errors).length > 0 ? true : false
-    let sending = false
-
     $title = 'Estudios de mercado'
 
     /**
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
-    let filters = {}
+    let sending = false
+    let dialogOpen
+    $: dialogOpen = Object.keys(errors).length > 0 ? true : false
 </script>
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.proyectos.proyecto-presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8, 11])}
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {usoPresupuestal.descripcion}
                         </a>
                     {/if}
@@ -83,101 +77,100 @@
             {/if}
         {/if}
 
-        <DataTable class="mt-20">
-            <div slot="title">Estudios de mercado</div>
+        <h1 class="mt-24 mb-8 text-center text-3xl">Estudios de mercado</h1>
 
-            <div slot="actions">
-                {#if (!requiereLoteEstudioMercado && requiereEstudioMercado && proyectoLotesEstudioMercado.data.length < 1) || (requiereEstudioMercado && requiereLoteEstudioMercado)}
-                    <div class="mb-6 flex justify-end items-center">
-                        <!-- <SearchFilter class="w-full max-w-md mr-4" bind:filters /> -->
-                        {#if isSuperAdmin}
-                            <Button on:click={() => (dialogOpen = true)} variant="raised">Añadir estudio de mercado</Button>
-                        {/if}
-                    </div>
-                {/if}
-            </div>
-
-            <thead slot="thead">
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl" colspan="3">Estudio(s) de mercado</th>
-                </tr>
-            </thead>
-
-            <tbody slot="tbody">
-                {#each proyectoLotesEstudioMercado.data as loteEstudioMercado, i}
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4">
-                            <h1>Estudio de mercado #{i + 1}</h1>
-                            <p>
-                                Cantidad de items: {loteEstudioMercado.numero_items}
-                            </p>
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
-                        </td>
-                        <td class="border-t px-6 pt-6 pb-4">
-                            {#each loteEstudioMercado.estudios_mercado as { id, empresa, valor }}
-                                <div>
-                                    <strong>Nombre de la compañía: </strong>{empresa}
-                                </div>
-                                <div>
-                                    <strong>Valor: </strong>${new Intl.NumberFormat('de-DE').format(valor)} COP
-                                </div>
-
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.proyecto-presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, id])}>Descargar soporte</a>
-                            {/each}
-                        </td>
-
-                        <td class="border-t px-6 pt-6 pb-4">
-                            <ResourceMenu>
-                                {#if isSuperAdmin}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-presupuesto.proyecto-lote-estudio-mercado.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
-                            </ResourceMenu>
-                        </td>
-                    </tr>
-                {/each}
-
-                {#if proyectoLotesEstudioMercado.data.length === 0}
-                    <tr>
-                        <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
-                    </tr>
-                {/if}
-            </tbody>
-
-            <tfoot slot="tfoot">
-                <tr>
-                    <td class="border-t px-6 pt-6 pb-4" colspan="3">
-                        <h1>
-                            Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.promedio)} COP</strong>
-                        </h1>
-                    </td>
-                </tr>
-            </tfoot>
-        </DataTable>
-    </div>
-
-    <!-- Dialog -->
-    <Dialog bind:open={dialogOpen} id="estudio-mercado">
-        <div slot="title" />
-        <div slot="content">
-            <CreateEstudioMercado bind:dialogOpen {sending} {errors} {convocatoria} {proyecto} {proyectoPresupuesto} {proyectoLotesEstudioMercado} {convocatoriaPresupuesto} />
-        </div>
-
-        <div slot="actions" class="block flex w-full">
-            <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
+        <div>
+            {#if (!requiereLoteEstudioMercado && requiereEstudioMercado && proyectoLotesEstudioMercado.data.length < 1) || (requiereEstudioMercado && requiereLoteEstudioMercado)}
+                <div class="mb-6 flex justify-end items-center">
+                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                        <Button on:click={() => (dialogOpen = true)} variant="raised">Añadir estudio de mercado</Button>
+                    {/if}
+                </div>
             {/if}
         </div>
-    </Dialog>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full" colspan="3">Estudio(s) de mercado</th>
+                    </tr>
+                </thead>
 
-    <Pagination links={proyectoLotesEstudioMercado.links} />
-</AuthenticatedLayout>
+                <tbody>
+                    {#each proyectoLotesEstudioMercado.data as loteEstudioMercado, i}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t px-6 pt-6 pb-4">
+                                <h1>Estudio de mercado #{i + 1}</h1>
+                                {#if proyectoPresupuesto.codigo_segundo_grupo == 2040106 || proyectoPresupuesto.codigo_segundo_grupo == 2040115 || proyectoPresupuesto.codigo_segundo_grupo == 2040125}
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.lote.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id])}>Descargar ficha técnica</a>
+                                {/if}
+                            </td>
+                            <td class="border-t px-6 pt-6 pb-4">
+                                {#each loteEstudioMercado.estudios_mercado as { id, empresa, valor }}
+                                    <div>
+                                        <strong>Nombre de la compañía: </strong>{empresa}
+                                    </div>
+                                    <div>
+                                        <strong>Valor: </strong>${new Intl.NumberFormat('de-DE').format(valor)} COP
+                                    </div>
+
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download-soporte', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, id])}>Descargar soporte</a>
+                                {/each}
+                            </td>
+
+                            <td class="border-t px-6 pt-6 pb-4">
+                                <DataTableMenu class={proyectoLotesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
+                                    {#if isSuperAdmin || (checkPermission(authUser, [3, 5, 8, 11]) && proyecto.modificable == true)}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.lote.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+
+                    {#if proyectoLotesEstudioMercado.data.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
+                        </tr>
+                    {/if}
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td class="border-t px-6 pt-6 pb-4" colspan="3">
+                            <h1>
+                                Valor promedio del estudio de mercado: <strong>${new Intl.NumberFormat('de-DE').format(proyectoPresupuesto.promedio)} COP</strong>
+                            </h1>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Dialog -->
+        <Dialog bind:open={dialogOpen} id="estudio-mercado">
+            <div slot="title" />
+            <div slot="content">
+                <CreateEstudioMercado bind:dialogOpen {sending} {errors} {convocatoria} {proyecto} {proyectoPresupuesto} {proyectoLotesEstudioMercado} {convocatoriaPresupuesto} />
+            </div>
+
+            <div slot="actions" class="block flex w-full">
+                <Button on:click={() => (dialogOpen = false)} type="button" variant={null}>Cancelar</Button>
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form="form-estudio-mercado">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </Dialog>
+
+        <Pagination links={proyectoLotesEstudioMercado.links} />
+    </div></AuthenticatedLayout
+>
 
 <style>
     :global(#estudio-mercado-dialog .mdc-dialog__surface) {

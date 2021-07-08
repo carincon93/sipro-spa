@@ -6,6 +6,8 @@ use App\Http\Requests\AnexoRequest;
 use App\Models\Anexo;
 use App\Models\LineaProgramatica;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class AnexoController extends Controller
@@ -22,7 +24,7 @@ class AnexoController extends Controller
         return Inertia::render('Anexos/Index', [
             'filters'  => request()->all('search'),
             'anexos'   => Anexo::orderBy('nombre', 'ASC')
-                ->filterAnexo(request()->only('search'))->paginate(),
+                ->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -53,6 +55,16 @@ class AnexoController extends Controller
         $anexo = new Anexo();
         $anexo->nombre         = $request->nombre;
         $anexo->descripcion    = $request->descripcion;
+
+        if ($request->hasFile('archivo')) {
+            $nombreArchivo     = $this->cleanFileName($request->nombre, $request->archivo);
+            $archivo = $request->archivo->storeAs(
+                'anexos',
+                $nombreArchivo
+            );
+
+            $anexo->archivo = $archivo;
+        }
 
         $anexo->save();
 
@@ -105,6 +117,17 @@ class AnexoController extends Controller
         $anexo->descripcion    = $request->descripcion;
         $anexo->lineasProgramaticas()->sync($request->linea_programatica_id);
 
+        if ($request->hasFile('archivo')) {
+            Storage::delete($anexo->archivo);
+            $nombreArchivo     = $this->cleanFileName($request->nombre, $request->archivo);
+            $archivo = $request->archivo->storeAs(
+                'anexos',
+                $nombreArchivo
+            );
+
+            $anexo->archivo = $archivo;
+        }
+
         $anexo->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
@@ -123,5 +146,33 @@ class AnexoController extends Controller
         $anexo->delete();
 
         return redirect()->route('anexos.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * download
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $proyectoAnexo
+     * @return void
+     */
+    public function download(Anexo $anexo)
+    {
+        return response()->download(storage_path("app/$anexo->archivo"));
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+        $random    = Str::random(5);
+
+        return "formato{$cleanName}cod{$random}." . $archivo->extension();
     }
 }

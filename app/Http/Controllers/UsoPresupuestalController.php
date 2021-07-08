@@ -21,7 +21,7 @@ class UsoPresupuestalController extends Controller
         return Inertia::render('Presupuesto/UsosPresupuestales/Index', [
             'filters'               => request()->all('search'),
             'UsosPresupuestales'    => UsoPresupuestal::orderBy('descripcion', 'ASC')
-                ->filterUsoPresupuestal(request()->only('search'))->paginate(),
+                ->filterUsoPresupuestal(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

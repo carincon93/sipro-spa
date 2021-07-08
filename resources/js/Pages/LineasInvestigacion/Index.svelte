@@ -1,14 +1,14 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Components/Button'
-    import Pagination from '@/Components/Pagination'
-    import DataTable from '@/Components/DataTable'
-    import ResourceMenu from '@/Components/ResourceMenu'
+    import Button from '@/Shared/Button'
+    import Pagination from '@/Shared/Pagination'
+    import DataTable from '@/Shared/DataTable'
+    import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
     export let lineasInvestigacion
@@ -19,10 +19,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
 </script>
@@ -39,32 +36,32 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Nombre </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Centro de formación </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Regional </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl"> Acciones </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Grupo de investigación </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Centro de formación </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
         <tbody slot="tbody">
             {#each lineasInvestigacion.data as lineaInvestigacion (lineaInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {lineaInvestigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {lineaInvestigacion.grupo_investigacion?.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 flex items-center focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {lineaInvestigacion.grupo_investigacion?.centro_formacion?.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <ResourceMenu>
+                        <DataTableMenu class={lineasInvestigacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-investigacion.edit', lineaInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
@@ -74,7 +71,7 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
-                        </ResourceMenu>
+                        </DataTableMenu>
                     </td>
                 </tr>
             {/each}

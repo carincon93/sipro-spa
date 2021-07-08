@@ -5,28 +5,25 @@
 </script>
 
 <script>
-    import { inertia, page } from '@inertiajs/inertia-svelte'
-    import { route, links } from '@/Utils'
-    import { _ } from 'svelte-i18n'
-    import ApplicationLogo from '@/Components/ApplicationLogo'
-
-    import Dropdown from '@/Components/Dropdown'
-    import Icon from '@/Components/Icon'
-    import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-    import FlashMessages from '@/Components/FlashMessages'
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
     import { Inertia } from '@inertiajs/inertia'
-    import Loading from '@/Components/Loading.svelte'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
+    import { _ } from 'svelte-i18n'
+
+    import ApplicationLogo from '@/Shared/ApplicationLogo'
+    import Dropdown from '@/Shared/Dropdown'
+    import Icon from '@/Shared/Icon'
+    import ResponsiveNavLink from '@/Shared/ResponsiveNavLink'
+    import FlashMessages from '@/Shared/FlashMessages'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import Loading from '@/Shared/Loading'
 
     let dialogOpen = false
     let showingNavigationDropdown = false
 
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let loading = true
     Inertia.on('start', () => {
@@ -38,7 +35,7 @@
 </script>
 
 <svelte:head>
-    <title>{$title ? `${$title} - SIPRO-SPA` : 'SIPRO-SPA'}</title>
+    <title>{$title ? `${$title} - SGPS-SIPRO` : 'SGPS-SIPRO'}</title>
 </svelte:head>
 
 <div>
@@ -66,22 +63,43 @@
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <!-- Settings Dropdown -->
                         <div class="ml-3 relative">
+                            <a use:inertia href={route('notificaciones.index')} class="flex items-center hover:text-indigo-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                {#if $page.props.auth.numeroNotificaciones > 0}
+                                    <span class="absolute bg-indigo-700 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6" style="top: -10px; left: 10px;">{$page.props.auth.numeroNotificaciones}</span>
+                                {/if}
+                            </a>
+                        </div>
+                        <div class="ml-3 relative">
                             <Dropdown class="mt-1" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
-                                        <span>{authUser.nombre_usuario}</span>
+                                        <span class="capitalize">{authUser.nombre}</span>
                                     </div>
                                     <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>
                                 <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                    <!-- <a
-                                        use:inertia
-                                        href={route('users.edit', authUser.id)}
-                                        class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
-                                        Mi perfil
-                                    </a> -->
-                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">
-                                        {$_('Logout')}
+                                    <a use:inertia href={route('reportar-problemas.create')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                        <span class="ml-1.5">Soporte</span>
+                                    </a>
+
+                                    <a use:inertia href={route('users.change-password')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                        <span class="ml-1.5">Cambiar contraseña</span>
+                                    </a>
+
+                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="ml-1.5">{$_('Logout')}</span>
                                     </a>
                                 </div>
                             </Dropdown>
@@ -147,13 +165,73 @@
     </div>
     <div slot="content">
         <div class="grid grid-cols-3 gap-5 p-8">
-            {#each links as link}
-                {#if authUser.can.find((element) => element == link.route + '.index') != undefined || authUser.can.find((element) => element == link.route + '.show') != undefined || authUser.can.find((element) => element == link.route + '.create') != undefined || authUser.can.find((element) => element == link.route + '.edit') != undefined || authUser.can.find((element) => element == link.route + '.delete') != undefined || isSuperAdmin}
-                    <Button on:click={() => Inertia.visit(route(link.route + '.index'))} variant={route().current(link.route + '.*') ? 'raised' : 'outlined'} class="p-2">
-                        {link.name}
-                    </Button>
-                {/if}
-            {/each}
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">Anexos</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">Centros de formación</Button>
+            {/if}
+
+            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 14, 16, 15, 20, 21])}
+                <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">Convocatorias</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('grupos-investigacion.index'))} variant={route().current('grupos-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Grupos de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('lineas-investigacion.index'))} variant={route().current('lineas-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Líneas de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('lineas-programaticas.index'))} variant={route().current('lineas-programaticas.*') ? 'raised' : 'outlined'} class="p-2">Líneas programáticas</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">Mesas técnicas</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">Programas de formación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('redes-conocimiento.index'))} variant={route().current('redes-conocimiento.*') ? 'raised' : 'outlined'} class="p-2">Redes de conocimiento</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('regionales.index'))} variant={route().current('regionales.*') ? 'raised' : 'outlined'} class="p-2">Regionales</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('roles-sennova.index'))} variant={route().current('roles-sennova.*') ? 'raised' : 'outlined'} class="p-2">Roles SENNOVA</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('sectores-productivos.index'))} variant={route().current('sectores-productivos.*') ? 'raised' : 'outlined'} class="p-2">Sectores productivos</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('semilleros-investigacion.index'))} variant={route().current('semilleros-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Semilleros de investigación</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">Tecnoacademias</Button>
+            {/if}
+
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.index'))} variant={route().current('tematicas-estrategicas.*') ? 'raised' : 'outlined'} class="p-2">Temáticas estratégicas SENA</Button>
+            {/if}
+
+            {#if isSuperAdmin || checkRole(authUser, [4, 18, 19, 5, 17])}
+                <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">Usuarios</Button>
+            {/if}
         </div>
     </div>
     <div slot="actions">

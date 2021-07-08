@@ -67,11 +67,11 @@ class LineaTecnologica extends Model
     }
 
     /**
-     * Relationship with TaTp
+     * Relationship with Ta
      *
      * @return object
      */
-    public function tatp()
+    public function ta()
     {
         return $this->hasMany('tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_linea_tecnologica_id');
     }
@@ -86,7 +86,10 @@ class LineaTecnologica extends Model
     public function scopeFilterLineaTecnologica($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 }

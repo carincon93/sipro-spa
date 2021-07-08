@@ -1,15 +1,15 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import Button from '@/Components/Button'
-    import LoadingButton from '@/Components/LoadingButton'
-    import DynamicList from '@/Dropdowns/DynamicList'
-    import Dialog from '@/Components/Dialog'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Dialog from '@/Shared/Dialog'
 
     export let errors
     export let centroFormacion
@@ -20,10 +20,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
     let sending = false
@@ -32,6 +29,7 @@
         codigo: centroFormacion.codigo,
         regional_id: centroFormacion.regional_id,
         subdirector_id: centroFormacion.subdirector_id,
+        dinamizador_sennova_id: centroFormacion.dinamizador_sennova_id,
     })
 
     function submit() {
@@ -55,7 +53,7 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1>
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
                         <a use:inertia href={route('centros-formacion.index')} class="text-indigo-400 hover:text-indigo-600"> Centros de formación </a>
                     {/if}
@@ -70,13 +68,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="codigo" value="Código" />
-                    <Input id="codigo" type="number" min="0" max="999" class="mt-1 block w-full" bind:value={$form.codigo} error={errors.codigo} required />
+                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">
@@ -86,7 +82,12 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="subdirector_id" value="Subdirector" />
-                    <DynamicList id="subdirector_id" bind:value={$form.subdirector_id} routeWebApi={route('web-api.subdirectores')} placeholder="Busque por el nombre de subdirector" message={errors.subdirector_id} required />
+                    <DynamicList id="subdirector_id" bind:value={$form.subdirector_id} routeWebApi={route('web-api.users', 'subdirector')} placeholder="Busque por el nombre de subdirector" message={errors.subdirector_id} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="dinamizador_sennova_id" value="Dinamizador SENNOVA" />
+                    <DynamicList id="dinamizador_sennova_id" bind:value={$form.dinamizador_sennova_id} routeWebApi={route('web-api.users', 'dinamizador')} placeholder="Busque por el nombre de subdirector" message={errors.dinamizador_sennova_id} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

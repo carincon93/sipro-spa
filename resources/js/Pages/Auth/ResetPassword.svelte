@@ -4,13 +4,12 @@
 </script>
 
 <script>
-    import { Inertia } from '@inertiajs/inertia'
-    import { route } from '@/Utils'
+    import { useForm } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
+
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
 
     export let email
     export let token
@@ -18,35 +17,29 @@
 
     let sending = false
 
-    let form = {
+    let form = useForm({
         token: token,
         email: email,
         password: '',
         password_confirmation: '',
-    }
+    })
 
     function handleSubmit() {
-        Inertia.post(route('password.update', form))
+        $form.post(route('password.update'))
     }
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
     <div>
-        <Label required class="mb-4" labelFor="email" value={$_('Email')} />
-        <Input id="email" type="email" class="mt-1 block w-full" bind:value={form.email} name="email" required autocomplete="email" />
-        <InputError message={errors.email} />
+        <Input label={$_('Email')} id="email" type="email" class="mt-1" bind:value={$form.email} name="email" error={errors.email} required autocomplete="email" />
     </div>
 
     <div class="mt-4">
-        <Label required class="mb-4" labelFor="password" value={$_('Password')} />
-        <Input id="password" type="password" class="mt-1 block w-full" bind:value={form.password} name="password" required autocomplete="new-password" />
-        <InputError message={errors.password} />
+        <Input label={$_('Password')} id="password" type="password" class="mt-1" bind:value={$form.password} name="password" error={errors.password} required autocomplete="new-password" />
     </div>
 
     <div class="mt-4">
-        <Label required class="mb-4" labelFor="password_confirmation" value={$_('Confirm Password')} />
-        <Input id="password_confirmation" type="password" class="mt-1 block w-full" bind:value={form.password_confirmation} name="password_confirmation" required autocomplete="new-password" />
-        <InputError message={errors.password_confirmation} />
+        <Input label={$_('Confirm Password')} id="password_confirmation" type="password" class="mt-1" bind:value={$form.password_confirmation} name="password_confirmation" error={errors.password_confirmation} required autocomplete="new-password" />
     </div>
 
     <div class="flex items-center justify-end mt-4">

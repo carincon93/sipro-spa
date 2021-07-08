@@ -13,9 +13,11 @@ class FechaInicioProyecto implements Rule
      *
      * @return void
      */
-    public function __construct($convocatoria)
+    public function __construct($convocatoria, $tipoProyecto, $proyecto)
     {
         $this->convocatoria = $convocatoria;
+        $this->tipoProyecto = $tipoProyecto;
+        $this->proyecto     = $proyecto;
     }
 
     /**
@@ -27,7 +29,19 @@ class FechaInicioProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ($value >= $this->convocatoria->min_fecha_inicio_proyectos);
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->ta()->exists() || $this->tipoProyecto == 'ta') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_ta;
+        } elseif ($this->proyecto && $this->proyecto->tp()->exists() || $this->tipoProyecto == 'tp') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tp;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
+        }
+
+        return ($value >= $minFechaFinalizacionProyectos);
     }
 
     /**
@@ -37,7 +51,19 @@ class FechaInicioProyecto implements Rule
      */
     public function message()
     {
-        $minFechaIncioProyectos = date('d-m-Y', strtotime($this->convocatoria->min_fecha_inicio_proyectos));
-        return "La fecha de inicio no debe ser menor a {$minFechaIncioProyectos}.";
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->ta()->exists() || $this->tipoProyecto == 'ta') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_ta;
+        } elseif ($this->proyecto && $this->proyecto->tp()->exists() || $this->tipoProyecto == 'tp') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_tp;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $minFechaFinalizacionProyectos = $this->convocatoria->min_fecha_finalizacion_proyectos_cultura;
+        }
+
+        $minFechaFinalizacionProyectos = date('d-m-Y', strtotime($minFechaFinalizacionProyectos));
+        return "La fecha de inicio no debe ser menor a {$minFechaFinalizacionProyectos}.";
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Idi extends Model
 {
@@ -50,17 +51,19 @@ class Idi extends Model
         'muestreo',
         'actividades_muestreo',
         'objetivo_muestreo',
-        'bibliografia',
-        'numero_aprendices',
-        'impacto_',
+        'recoleccion_especimenes',
+        'impacto_municipios',
         'impacto_centro_formacion',
         'objetivo_general',
-        'planteamiento_problema',
+        'problema_central',
         'justificacion_problema',
         'relacionado_plan_tecnologico',
         'relacionado_agendas_competitividad',
         'relacionado_mesas_sectoriales',
-        'relacionado_tecnoacademia'
+        'relacionado_tecnoacademia',
+        'bibliografia',
+        'numero_aprendices',
+        'max_meses_ejecucion'
     ];
 
     /**
@@ -181,7 +184,10 @@ class Idi extends Model
     public function scopeFilterIdi($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('titulo', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(titulo) ilike unaccent('%" . $search . "%')");
         });
     }
 
@@ -195,5 +201,48 @@ class Idi extends Model
         $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
         return "$fecha_inicio al $fecha_finalizacion";
+    }
+
+    /**
+     * getProyectosPorRol
+     *
+     * @param  mixed $convocatoria
+     * @return object
+     */
+    public static function getProyectosPorRol($convocatoria)
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else if ($user->hasRole(4)) {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else if ($user->hasRole(18)) {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct('idi.id')
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else {
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyecto_participantes.user_id', Auth::user()->id)
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        }
+        $idi->load('proyecto');
+        return $idi;
     }
 }

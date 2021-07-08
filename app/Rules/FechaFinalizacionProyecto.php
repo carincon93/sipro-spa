@@ -13,9 +13,11 @@ class FechaFinalizacionProyecto implements Rule
      *
      * @return void
      */
-    public function __construct($convocatoria)
+    public function __construct($convocatoria, $tipoProyecto, $proyecto)
     {
         $this->convocatoria = $convocatoria;
+        $this->tipoProyecto = $tipoProyecto;
+        $this->proyecto     = $proyecto;
     }
 
     /**
@@ -27,7 +29,20 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ($value <= $this->convocatoria->max_fecha_finalizacion_proyectos);
+
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->ta()->exists() || $this->tipoProyecto == 'ta') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_ta;
+        } elseif ($this->proyecto && $this->proyecto->tp()->exists() || $this->tipoProyecto == 'tp') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_tp;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
+        }
+
+        return ($value <= $maxFechaFinalizacionProyectos);
     }
 
     /**
@@ -37,7 +52,19 @@ class FechaFinalizacionProyecto implements Rule
      */
     public function message()
     {
-        $maxFechaFinalizacionProyectos = date('d-m-Y', strtotime($this->convocatoria->max_fecha_finalizacion_proyectos));
+        if ($this->proyecto && $this->proyecto->idi()->exists() || $this->tipoProyecto == 'idi') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_idi;
+        } elseif ($this->proyecto && $this->proyecto->ta()->exists() || $this->tipoProyecto == 'ta') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_ta;
+        } elseif ($this->proyecto && $this->proyecto->tp()->exists() || $this->tipoProyecto == 'tp') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_ta;
+        } elseif ($this->proyecto && $this->proyecto->servicioTecnologico()->exists() || $this->tipoProyecto == 'st') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_st;
+        } elseif ($this->proyecto && $this->proyecto->culturaInnovacion()->exists() || $this->tipoProyecto == 'cultura') {
+            $maxFechaFinalizacionProyectos = $this->convocatoria->max_fecha_finalizacion_proyectos_cultura;
+        }
+
+        $maxFechaFinalizacionProyectos = date('d-m-Y', strtotime($maxFechaFinalizacionProyectos));
 
         return "La fecha de cierre no debe sobrepasar {$maxFechaFinalizacionProyectos}.";
     }

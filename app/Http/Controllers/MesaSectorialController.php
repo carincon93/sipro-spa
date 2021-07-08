@@ -21,7 +21,7 @@ class MesaSectorialController extends Controller
         return Inertia::render('MesasSectoriales/Index', [
             'filters'           => request()->all('search'),
             'mesasSectoriales'  => MesaSectorial::orderBy('nombre', 'ASC')
-                ->filterMesaSectorial(request()->only('search'))->paginate(),
+                ->filterMesaSectorial(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LineaProgramaticaRequest;
 use App\Models\LineaProgramatica;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -21,14 +24,9 @@ class LineaProgramaticaController extends Controller
 
         return Inertia::render('LineasProgramaticas/Index', [
             'filters'               => request()->all('search'),
-            'lineasProgramaticas'   => LineaProgramatica::selectRaw("lineas_programaticas.id, lineas_programaticas.nombre, lineas_programaticas.codigo, CASE lineas_programaticas.categoria_proyecto
-                WHEN '1' THEN	'Tecnoacademia-Tecnoparque'
-                WHEN '2' THEN	'I+D+i'
-                WHEN '3' THEN	'Servicios tecnológicos'
-                WHEN '4' THEN	'Otro'
-            END as categoria_proyecto")
+            'lineasProgramaticas'   => LineaProgramatica::select('lineas_programaticas.id', 'lineas_programaticas.nombre', 'lineas_programaticas.codigo', 'lineas_programaticas.categoria_proyecto')
                 ->orderBy('nombre', 'ASC')
-                ->filterLineaProgramatica(request()->only('search'))->paginate(),
+                ->filterLineaProgramatica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -43,6 +41,9 @@ class LineaProgramaticaController extends Controller
 
         return Inertia::render('LineasProgramaticas/Create', [
             'categoriasProyectos' => json_decode(Storage::get('json/categorias-proyectos.json'), true),
+            'activadores'         => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%activador%');
+            })->get(),
         ]);
     }
 
@@ -63,6 +64,8 @@ class LineaProgramaticaController extends Controller
         $lineaProgramatica->descripcion          = $request->descripcion;
 
         $lineaProgramatica->save();
+
+        $lineaProgramatica->activadores()->sync($request->activadores);
 
         return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -89,8 +92,12 @@ class LineaProgramaticaController extends Controller
         $this->authorize('update', [LineaProgramatica::class, $lineaProgramatica]);
 
         return Inertia::render('LineasProgramaticas/Edit', [
-            'lineaProgramatica'   => $lineaProgramatica->only('id', 'nombre', 'descripcion', 'codigo', 'categoria_proyecto', 'descripcion'),
-            'categoriasProyectos' => json_decode(Storage::get('json/categorias-proyectos.json'), true),
+            'lineaProgramatica'         => $lineaProgramatica->only('id', 'nombre', 'descripcion', 'codigo', 'categoria_proyecto', 'descripcion'),
+            'categoriasProyectos'       => json_decode(Storage::get('json/categorias-proyectos.json'), true),
+            'activadores'               => User::select('id as value', 'nombre as label')->whereHas('roles', function (Builder $query) {
+                return $query->where('name', 'ilike', '%activador%');
+            })->get(),
+            'activadoresLineaProgramatica'  => $lineaProgramatica->activadores()->select('users.id as value', 'users.nombre as label')->get(),
         ]);
     }
 
@@ -112,6 +119,8 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->save();
 
+        $lineaProgramatica->activadores()->sync($request->activadores);
+
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
@@ -125,7 +134,11 @@ class LineaProgramaticaController extends Controller
     {
         $this->authorize('delete', [LineaProgramatica::class, $lineaProgramatica]);
 
-        $lineaProgramatica->delete();
+        try {
+            $lineaProgramatica->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

@@ -1,17 +1,19 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Select from '@/Components/Select'
-    import Textarea from '@/Components/Textarea'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
+    import Textarea from '@/Shared/Textarea'
+    import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let categoriasProyectos
+    export let activadores
 
     $: $title = 'Líneas programáticas'
 
@@ -19,10 +21,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
@@ -30,6 +29,7 @@
         descripcion: '',
         codigo: '',
         categoria_proyecto: null,
+        activadores: null,
     })
 
     function submit() {
@@ -61,13 +61,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="nombre" value="Nombre" />
-                    <Input id="nombre" type="text" class="mt-1 block w-full" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="codigo" value="Código" />
-                    <Input id="codigo" type="number" min="0" max="999" class="mt-1 block w-full" bind:value={$form.codigo} error={errors.codigo} required />
+                    <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$form.codigo} error={errors.codigo} required />
                 </div>
 
                 <div class="mt-4">
@@ -76,8 +74,11 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="descripcion" value="Descripción" />
-                    <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                </div>
+                <div class="mt-4">
+                    <Label required class="mb-4" for="activadores" value="Nombre de los activadores" />
+                    <SelectMulti id="activadores" bind:selectedValue={$form.activadores} items={activadores} isMulti={true} error={errors.municipios} placeholder="Buscar activadores" required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

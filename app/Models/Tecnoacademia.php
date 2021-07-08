@@ -23,7 +23,10 @@ class Tecnoacademia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'modalidad',
+        'linea_tecnologica_id',
+        'centro_formacion_id'
     ];
 
     /**
@@ -45,6 +48,16 @@ class Tecnoacademia extends Model
     ];
 
     /**
+     * Relationship with CentroFormacion
+     *
+     * @return object
+     */
+    public function centroFormacion()
+    {
+        return $this->belongsTo(CentroFormacion::class);
+    }
+
+    /**
      * Relationship with LineaTecnologica
      *
      * @return object
@@ -52,6 +65,16 @@ class Tecnoacademia extends Model
     public function lineasTecnologicas()
     {
         return $this->belongsToMany(LineaTecnologica::class, 'tecnoacademia_linea_tecnologica', 'tecnoacademia_id', 'linea_tecnologica_id');
+    }
+
+    /**
+     * Relationship with ReglaRolTa
+     *
+     * @return void
+     */
+    public function reglasRolesTa()
+    {
+        return $this->hasMany(ReglaRolTa::class);
     }
 
     /**
@@ -64,17 +87,10 @@ class Tecnoacademia extends Model
     public function scopeFilterTecnoacademia($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('nombre', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
-    }
-
-    /**
-     * getNombreAttribute
-     *
-     * @return void
-     */
-    public function getNombreAttribute($value)
-    {
-        return ucfirst($value);
     }
 }

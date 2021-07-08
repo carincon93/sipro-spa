@@ -21,8 +21,8 @@ class SemilleroInvestigacionController extends Controller
 
         return Inertia::render('SemillerosInvestigacion/Index', [
             'filters'   => request()->all('search'),
-            'semillerosInvestigacion' => SemilleroInvestigacion::with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')
-                ->filterSemilleroInvestigacion(request()->only('search'))->paginate(),
+            'semillerosInvestigacion' => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')
+                ->filterSemilleroInvestigacion(request()->only('search'))->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -79,6 +79,8 @@ class SemilleroInvestigacionController extends Controller
     public function edit(SemilleroInvestigacion $semilleroInvestigacion)
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
+
+        $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
 
         return Inertia::render('SemillerosInvestigacion/Edit', [
             'semilleroInvestigacion'  => $semilleroInvestigacion,

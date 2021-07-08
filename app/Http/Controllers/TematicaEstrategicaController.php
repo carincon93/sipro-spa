@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TematicaEstrategicaRequest;
 use App\Models\TematicaEstrategica;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -21,7 +22,7 @@ class TematicaEstrategicaController extends Controller
         return Inertia::render('TematicasEstrategicas/Index', [
             'filters'   => request()->all('search'),
             'tematicasEstrategicas' => TematicaEstrategica::orderBy('nombre', 'ASC')
-                ->filterTematicaEstrategica(request()->only('search'))->paginate(),
+                ->filterTematicaEstrategica(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -109,7 +110,11 @@ class TematicaEstrategicaController extends Controller
     {
         $this->authorize('delete', [TematicaEstrategica::class, $tematicaEstrategica]);
 
-        $tematicaEstrategica->delete();
+        try {
+            $tematicaEstrategica->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+        }
 
         return redirect()->route('tematicas-estrategicas.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

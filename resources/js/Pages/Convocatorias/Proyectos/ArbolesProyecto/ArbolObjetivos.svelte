@@ -1,22 +1,20 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
-    import { route } from '@/Utils'
     import { _ } from 'svelte-i18n'
-
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import InputError from '@/Components/InputError'
-    import LoadingButton from '@/Components/LoadingButton'
-    import Textarea from '@/Components/Textarea'
-    import Select from '@/Components/Select'
-    import InfoMessage from '@/Components/InfoMessage'
-    import Dialog from '@/Components/Dialog'
-    import Button from '@/Components/Button'
-    import Stepper from '@/Components/Stepper'
-
     import { createPopper } from '@popperjs/core'
+
+    import Label from '@/Shared/Label'
+    import Input from '@/Shared/Input'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
+    import Stepper from '@/Shared/Stepper'
 
     export let errors
     export let convocatoria
@@ -24,7 +22,16 @@
     export let efectosDirectos
     export let causasDirectas
     export let tiposImpacto
-    export let tiposResultado
+    export let tipoProyectoA
+
+    let cantidadCeldasActividades = 3
+    if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
+        cantidadCeldasActividades = 3
+    } else if (proyecto.codigo_linea_programatica == 68) {
+        cantidadCeldasActividades = 14
+    } else if (proyecto.codigo_linea_programatica == 70) {
+        cantidadCeldasActividades = 10
+    }
 
     let formId
     let sending = false
@@ -38,10 +45,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     /**
      * Mensaje para ítems bloqueados
@@ -96,7 +100,7 @@
     }
 
     function submitImpacto() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formImpacto.post(
                 route('proyectos.impacto', {
                     proyecto: proyecto.id,
@@ -123,39 +127,33 @@
      */
     let formResultado = useForm({
         descripcion: '',
-        tipo: '',
+        trl: '',
     })
 
     let showResultadoForm = false
     let descripcionObjetivoEspecifico = []
     let resultadoEfectoDirecto
     $: causasDirectas
-    function showResultadoDialog(efectoDirecto) {
+    function showResultadoDialog(efectoDirecto, resultado) {
         reset()
-        let objetivoEspecifico = causasDirectas.find((causaDirecta) => causaDirecta.objetivo_especifico.id == efectoDirecto.resultado.objetivo_especifico_id)
+        let objetivoEspecifico = causasDirectas.find((causaDirecta) => causaDirecta.objetivo_especifico.id == resultado.objetivo_especifico_id)
         descripcionObjetivoEspecifico = {
             descripcion: objetivoEspecifico.objetivo_especifico?.descripcion ? objetivoEspecifico.objetivo_especifico?.descripcion : 'Sin información registrada',
             numero: objetivoEspecifico.objetivo_especifico?.numero,
         }
-        codigo = 'RES-' + efectoDirecto.resultado.id
+        codigo = 'RES-' + resultado.id
         dialogTitle = 'Resultado'
         dialogOpen = true
         showResultadoForm = true
         formId = 'resultado-form'
-        $formResultado.id = efectoDirecto.resultado.id
-        $formResultado.descripcion = efectoDirecto.resultado.descripcion
-        $formResultado.tipo = {
-            value: efectoDirecto.resultado.tipo,
-            label: tiposResultado.find((item) => item.value == efectoDirecto.resultado.tipo)?.label,
-        }
-        $formResultado.trl = efectoDirecto.resultado.trl
-        $formResultado.indicador = efectoDirecto.resultado.indicador
-        $formResultado.medios_verificacion = efectoDirecto.resultado.medios_verificacion
+        $formResultado.id = resultado.id
+        $formResultado.descripcion = resultado.descripcion
+        $formResultado.trl = resultado.trl
         resultadoEfectoDirecto = efectoDirecto.descripcion ?? 'Sin información registrada'
     }
 
     function submitResult() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formResultado.post(
                 route('proyectos.resultado', {
                     proyecto: proyecto.id,
@@ -185,19 +183,19 @@
     })
 
     let showObjetivoGeneralForm = false
-    let planteamientoProblema
+    let problemaCentral
     function showObjetivoGeneralDialog() {
         reset()
         dialogTitle = 'Objetivo general'
         dialogOpen = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
-        planteamientoProblema = proyecto.planteamiento_problema
+        problemaCentral = proyecto.problema_central
         $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general
     }
 
     function submitObjetivoGeneral() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
                 onStart: () => {
                     sending = true
@@ -238,7 +236,7 @@
     }
 
     function submitObjetivoEspecifico() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
                     proyecto: proyecto.id,
@@ -268,8 +266,6 @@
         causa_indirecta_id: 0,
         objetivo_especifico_id: 0,
         descripcion: '',
-        fecha_inicio: '',
-        fecha_finalizacion: '',
     })
 
     let showActividadForm = false
@@ -285,13 +281,11 @@
         $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         $formActividad.objetivo_especifico_id = objetivoEspecifico
         $formActividad.descripcion = causaIndirecta.actividad.descripcion
-        $formActividad.fecha_inicio = causaIndirecta.actividad.fecha_inicio
-        $formActividad.fecha_finalizacion = causaIndirecta.actividad.fecha_finalizacion
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
     }
 
     function submitActividad() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formActividad.post(
                 route('proyectos.actividad', {
                     convocatoria: convocatoria.id,
@@ -416,64 +410,97 @@
     <Stepper {convocatoria} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
-    <p class="text-center">Debe generar el árbol de objetivos iniciando desde el objetivo general, los respectivos objetivos específicos, resultados, actividades e impactos.</p>
+    <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
     <div class="mt-16">
         <div class="flex mb-14">
             {#each efectosDirectos as efectoDirecto, i}
-                <div class="flex-1">
-                    <!-- Impactos -->
-                    {#if i == 0}
-                        <div id="impacto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Impactos</small>
-                            <div id="arrow-impacto" class="arrow" data-popper-arrow />
+                {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+                    <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
+                        <!-- Impactos -->
+                        {#if i == 0}
+                            <div id="impacto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Impactos</small>
+                                <div id="arrow-impacto" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
+                                {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                    <div class="flex-1 resultados relative">
+                                        <div
+                                            on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
+                                            class="{efectoIndirecto.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                                : efectoIndirecto.descripcion == null && i % 2 == 0
+                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                : efectoIndirecto.descripcion != null && i % 2 != 0
+                                                ? 'bg-orangered-500 hover:bg-orangered-600'
+                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        >
+                                            <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                                {#if efectoIndirecto.impacto}
+                                                    <small class="title block font-bold mb-2">
+                                                        RES{#each efectoDirecto.resultados as { id }}
+                                                            -{id}
+                                                        {/each}
+                                                        -IMP-
+                                                        {efectoIndirecto.impacto.id}
+                                                    </small>
+                                                    {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
+                                                        {efectoIndirecto.impacto.descripcion}
+                                                    {/if}
+                                                {/if}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {/if}
+                            {/each}
+                            {#if proyecto.codigo_linea_programatica != 70}
+                                {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                    <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
+                                        <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {/if}
                         </div>
-                    {/if}
-                    <div class="flex mb-14" id={i == 0 ? 'impacto-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
-                            <div class="flex-1 resultados relative">
-                                <div on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultado.id)} class="{efectoIndirecto.impacto && efectoIndirecto.impacto.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-32 overflow-y-hidden p-2.5 text-xs node text-white">
-                                        {#if efectoIndirecto.impacto}
-                                            <small class="title block font-bold mb-2 line-height-1">
-                                                RES-{efectoDirecto.resultado.id}
-                                                -IMP-
-                                                {efectoIndirecto.impacto.id}
-                                            </small>
-                                            {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
-                                                {efectoIndirecto.impacto.descripcion}
-                                            {/if}
+                        <!-- Resultado -->
+                        {#if i == 0}
+                            <div id="resultado-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Resultados</small>
+                                <div id="arrow-resultado" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div
+                            class="{i == 0 ? 'resultados' : (proyecto.codigo_linea_programatica == 68 && i == 1) || (proyecto.codigo_linea_programatica == 68 && i == 2) ? 'resultados-line' : proyecto.codigo_linea_programatica == 68 && i == 3 ? 'resultados-line-4' : 'resultados'} relative flex-1 flex flex-wrap"
+                            id={i == 0 ? 'resultado-tooltip-placement' : ''}
+                            aria-describedby={i == 0 ? 'tooltip' : ''}
+                        >
+                            {#each efectoDirecto.resultados as resultado, j}
+                                <div
+                                    on:click={showResultadoDialog(efectoDirecto, resultado)}
+                                    class="{efectoDirecto.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                        : efectoDirecto.descripcion == null && i % 2 == 0
+                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        : efectoDirecto.descripcion != null && i % 2 != 0
+                                        ? 'bg-orangered-500 hover:bg-orangered-600'
+                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 ? ' mb-4' : ''}"
+                                    style="flex: 1 0 33.333%"
+                                >
+                                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                        <small class="title block font-bold mb-2">RES-{resultado.id}</small>
+                                        {#if resultado.descripcion != null && resultado.descripcion.length > 0}
+                                            {resultado.descripcion}
                                         {/if}
                                     </p>
                                 </div>
-                            </div>
-                        {/each}
-                        {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
-                            <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-32 overflow-y-hidden p-2.5 text-sm text-white" />
-                                </div>
-                            </div>
-                        {/each}
-                    </div>
-                    <!-- Resultado -->
-                    {#if i == 0}
-                        <div id="resultado-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Resultados</small>
-                            <div id="arrow-resultado" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="resultados relative flex-1" id={i == 0 ? 'resultado-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showResultadoDialog(efectoDirecto)} class="{efectoDirecto.resultado.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-32 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                                <small class="title block font-bold mb-2 line-height-1">RES-{efectoDirecto.resultado.id}</small>
-                                {#if efectoDirecto.resultado.descripcion != null && efectoDirecto.resultado.descripcion.length > 0}
-                                    {efectoDirecto.resultado.descripcion}
-                                {/if}
-                            </p>
+                            {/each}
                         </div>
                     </div>
-                </div>
+                {/if}
             {/each}
         </div>
 
@@ -483,9 +510,9 @@
             <div id="arrow-objetivo-general" class="arrow" data-popper-arrow />
         </div>
         <div class="objetivo-general relative" id="objetivo-general-tooltip-placement" aria-describedby="tooltip">
-            <div on:click={showObjetivoGeneralDialog} class="{proyecto.objetivo_general != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
+            <div on:click={showObjetivoGeneralDialog} class="{proyecto.objetivo_general != null ? 'bg-orangered-400 hover:bg-orangered-500' : 'bg-gray-300 hover:bg-gray-400'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                 {#if proyecto.objetivo_general != null && proyecto.objetivo_general.length > 0}
-                    <p class="h-32 overflow-hidden text-white p-2.5 text-sm line-height-1">
+                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                         {proyecto.objetivo_general}
                     </p>
                 {/if}
@@ -494,67 +521,123 @@
 
         <div class="flex mt-14">
             {#each causasDirectas as causaDirecta, i}
-                <div class="flex-1">
-                    <!-- Objetivo específico -->
-                    {#if i == 0}
-                        <div id="objetivo-especifico-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small class="block line-height-1">
-                                Objetivos <br /> específicos
-                            </small>
-                            <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        <div on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)} class="{causaDirecta.objetivo_especifico.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                            <p class="h-32 overflow-hidden text-white p-2.5 text-sm line-height-1">
-                                <small class="title block font-bold mb-2 line-height-1">
-                                    OBJ-ESP-{causaDirecta.objetivo_especifico.id}
+                {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+                    <div class="flex-1">
+                        <!-- Objetivo específico -->
+                        {#if i == 0}
+                            <div id="objetivo-especifico-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small class="block line-height-1-24">
+                                    Objetivos <br /> específicos
                                 </small>
-                                {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
-                                    {causaDirecta.objetivo_especifico.descripcion}
+                                <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            <div
+                                on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
+                                class="{causaDirecta.descripcion != null && i % 2 == 0
+                                    ? 'bg-orangered-400 hover:bg-orangered-500'
+                                    : causaDirecta.descripcion == null && i % 2 == 0
+                                    ? 'bg-gray-300 hover:bg-gray-400'
+                                    : causaDirecta.descripcion != null && i % 2 != 0
+                                    ? 'bg-orangered-500 hover:bg-orangered-600'
+                                    : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                            >
+                                <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                    <small class="title block font-bold mb-2">
+                                        OBJ-ESP-{causaDirecta.objetivo_especifico.id}
+                                    </small>
+                                    {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
+                                        {causaDirecta.objetivo_especifico.descripcion}
+                                    {/if}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Actividades -->
+                        {#if i == 0}
+                            <div id="actividad-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
+                                <small>Actividades</small>
+                                <div id="arrow-actividad" class="arrow" data-popper-arrow />
+                            </div>
+                        {/if}
+                        <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                            {#each causaDirecta.causas_indirectas as causaIndirecta}
+                                {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+                                    <div class="mb-4" style="flex: 1 0 33.333%">
+                                        <div
+                                            on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
+                                            class="{causaIndirecta.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                                : causaIndirecta.descripcion == null && i % 2 == 0
+                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                : causaIndirecta.descripcion != null && i % 2 != 0
+                                                ? 'bg-orangered-500 hover:bg-orangered-600'
+                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        >
+                                            <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
+                                                {#if causaIndirecta.actividad}
+                                                    <small class="title block font-bold mb-2">
+                                                        OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
+                                                    </small>
+                                                    {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
+                                                        {causaIndirecta.actividad.descripcion}
+                                                    {/if}
+                                                {/if}
+                                            </p>
+                                        </div>
+                                    </div>
                                 {/if}
-                            </p>
+                            {/each}
+                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                                {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 0}
+                                {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 1}
+                                {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 2}
+                                {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
+                                {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {/if}
                         </div>
                     </div>
-                    <!-- Actividades -->
-                    {#if i == 0}
-                        <div id="actividad-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Actividades</small>
-                            <div id="arrow-actividad" class="arrow" data-popper-arrow />
-                        </div>
-                    {/if}
-                    <div class="flex mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
-                        {#each causaDirecta.causas_indirectas as causaIndirecta}
-                            <div class="objetivo-especificos relative flex-1">
-                                <div on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)} class="{causaIndirecta.actividad && causaIndirecta.actividad.descripcion != null ? 'bg-orangered-500 hover:bg-orangered-600' : 'bg-orangered-400 hover:bg-orangered-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5">
-                                    <p class="h-32 overflow-y-hidden p-2.5 text-xs node text-white">
-                                        {#if causaIndirecta.actividad}
-                                            <small class="title block font-bold mb-2 line-height-1">
-                                                OBJ-ESP-{causaDirecta.objetivo_especifico.id}-ACT-{causaIndirecta.actividad.id}
-                                            </small>
-                                            {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
-                                                {causaIndirecta.actividad.descripcion}
-                                            {/if}
-                                        {/if}
-                                    </p>
-                                </div>
-                            </div>
-                        {/each}
-                        {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
-                            <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="objetivo-especificos relative flex-1">
-                                <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5">
-                                    <p class="h-32 overflow-y-hidden p-2.5 text-sm text-white" />
-                                </div>
-                            </div>
-                        {/each}
-                    </div>
-                </div>
+                {/if}
             {/each}
         </div>
     </div>
 
     <!-- Dialog -->
-    <Dialog bind:open={dialogOpen}>
+    <Dialog bind:open={dialogOpen} id="arbol-objetivos">
         <div slot="title">
             <div class="mb-10 text-center">
                 <div class="text-primary">
@@ -569,109 +652,136 @@
         </div>
         <div slot="content">
             {#if showActividadForm}
+                <InfoMessage class="mb-4">
+                    Se debe evidenciar que la descripción de las actividades se realice de manera secuencial y de forma coherente con los productos a las cuales están asociadas para alcanzar el logro de cada uno de los objetivos específicos.
+                    <br />
+                    Las actividades deben redactarse en verbos en modo infinitivo, es decir, en palabras que expresen acciones y terminen en “ar”, “er” o “ir”, estos no deben hacer referencia a objetivos específicos o generales. Algunos ejemplos de verbos inadecuados para describir actividades son: apropiar, asegurar, colaborar, consolidar, desarrollar, fomentar, fortalecer, garantizar, implementar,
+                    impulsar, mejorar, movilizar, proponer, promover, entre otros.
+                </InfoMessage>
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
+                <p class="mb-10 whitespace-pre-line">
+                    {actividadCausaIndirecta}
+                </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Causa indirecta</p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {actividadCausaIndirecta}
-                        </p>
-                        <p class="mt-1 text-center">Fecha de ejecución</p>
-                        <div class="mt-1 mb-20 flex items-start justify-around">
-                            <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
-                                <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
-                                <div class="ml-4">
-                                    <Input id="fecha_inicio" type="date" class="mt-1 block w-full" bind:value={$formActividad.fecha_inicio} required />
-                                </div>
-                            </div>
-                            <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
-                                <Label labelFor="fecha_finalizacion" class="ml-4 {errors.fecha_finalizacion ? 'top-3.5 relative' : ''}" value="hasta" />
-                                <div class="ml-4">
-                                    <Input id="fecha_finalizacion" type="date" class="mt-1 block w-full" bind:value={$formActividad.fecha_finalizacion} required />
-                                </div>
-                            </div>
-                        </div>
-                        {#if errors.fecha_inicio || errors.fecha_finalizacion}
-                            <div class="mb-20">
-                                <InputError classes="text-center" message={errors.fecha_inicio} />
-                                <InputError classes="text-center" message={errors.fecha_finalizacion} />
-                            </div>
-                        {/if}
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div>
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}
-                <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
+                {#if causaDirectaObjetivoEspecifico != 'Sin información registrada'}
+                    {#if proyecto.codigo_linea_programatica == 68}
+                        <InfoMessage class="mb-4">
+                            <p>
+                                Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas.
+                                <br />
+                                La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
+                            </p>
+                        </InfoMessage>
+                    {/if}
+                    <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
+                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                            <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
-                        <p class="mb-20 whitespace-pre-line">
-                            {causaDirectaObjetivoEspecifico}
-                        </p>
-                        <div>
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
-                        </div>
-                    </fieldset>
-                </form>
+                            <p class="mb-20 whitespace-pre-line">
+                                {causaDirectaObjetivoEspecifico}
+                            </p>
+                            <div>
+                                <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
+                            </div>
+                        </fieldset>
+                    </form>
+                {:else}
+                    <InfoMessage class="mb-4" message="Debe generar primero la causa directa en el árbol de problemas" />
+                {/if}
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Planteamiento del problema</p>
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                        {#if proyecto.codigo_linea_programatica == 68}
+                            <InfoMessage class="mb-4">
+                                <p>
+                                    El objetivo general se origina al convertir en positivo el problema principal (tronco) identificado en el árbol de problemas.
+                                    <br />
+                                    La redacción deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en "ar", "er" o "ir". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos.
+                                    <br />
+                                    El objetivo general debe expresar el fin concreto del proyecto en correspondencia directa con el título del proyecto y la pregunta de la formulación del problema, el cual debe ser claro, medible, alcanzable y consistente con el proyecto que está formulando. Debe responde al ¿Qué?, ¿Cómo? y el ¿Para qué?
+                                </p>
+                            </InfoMessage>
+                        {:else}
+                            <InfoMessage class="mb-2" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
+                        {/if}
+                        <p class="block font-medium mb-2 text-gray-700 text-sm">Problema central</p>
 
                         <p class="mb-20 whitespace-pre-line">
-                            {planteamientoProblema}
+                            {problemaCentral ? problemaCentral : 'Sin información registrada'}
                         </p>
                         <div>
-                            <Label class="mb-4" labelFor="objetivo_general" value="Objetivo general" />
-                            <InfoMessage message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
-                            <Textarea rows="4" id="objetivo_general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
+                            <Textarea label="Descripción" maxlength="10000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showResultadoForm}
-                <form on:submit|preventDefault={submitResult} id="resultado-form">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {resultadoEfectoDirecto}
-                        </p>
+                {#if resultadoEfectoDirecto != 'Sin información registrada'}
+                    <InfoMessage class="mb-4">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
+                    <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
+                    <p class="mb-20 whitespace-pre-line">
+                        {resultadoEfectoDirecto}
+                    </p>
 
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">
-                            {descripcionObjetivoEspecifico.numero}
-                        </p>
-                        <p class="mb-20 whitespace-pre-line">
-                            {descripcionObjetivoEspecifico.descripcion}
-                        </p>
+                    <p class="block font-medium mb-2 text-gray-700 text-sm">
+                        {descripcionObjetivoEspecifico.numero}
+                    </p>
+                    <p class="mb-20 whitespace-pre-line">
+                        {descripcionObjetivoEspecifico.descripcion}
+                    </p>
 
-                        <div class="mb-20">
-                            <Label labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" maxlength="200" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
-                        </div>
-
-                        <div class="mb-20">
-                            <Label required labelFor="tipo" value="Tipo" />
-                            <Select id="tipo" items={tiposResultado} bind:selectedValue={$formResultado.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
-                        </div>
-                    </fieldset>
-                </form>
+                    <form on:submit|preventDefault={submitResult} id="resultado-form">
+                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                            {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                                <div class="mb-10">
+                                    <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
+                                </div>
+                            {/if}
+                            <div class="mb-20">
+                                <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
+                            </div>
+                        </fieldset>
+                    </form>
+                {:else}
+                    <InfoMessage class="mb-4" message="Debe generar primero el efecto directo en el árbol de problemas" />
+                {/if}
             {:else if showImpactoForm}
-                <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={!isSuperAdmin}>
-                        <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
+                <InfoMessage class="mb-4">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: tecnológico, económico, ambiental, social, centro de formación, sector productivo</InfoMessage>
 
-                        <p class="mt-4 whitespace-pre-line">
-                            {impactoEfectoIndirecto}
-                        </p>
+                <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
+
+                <p class="mt-4 whitespace-pre-line">
+                    {impactoEfectoIndirecto}
+                </p>
+
+                <form on:submit|preventDefault={submitImpacto} id="impacto-form">
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Label labelFor="tipo" value="Tipo" />
-                            <Select id="tipo" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                            <Label labelFor="tipo-impacto" value="Tipo" />
+                            <Select id="tipo-impacto" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                            {#if $formImpacto.tipo?.value == 4}
+                                <InfoMessage
+                                    message="Se busca minimizar y/o evitar los impactos negativos sobre el medio ambiente, tales como contaminación del aire, contaminación de corrientes de agua naturales, ruido, destrucción del paisaje, separación de comunidades que operan como unidades, etc. Por otro lado, se busca identificar diversas acciones de impacto ambiental positivo, tales como: producción limpia y sustentable, protección medioambiental, uso de residuos y reciclaje."
+                                />
+                            {:else if $formImpacto.tipo?.value == 2}
+                                <InfoMessage
+                                    message="Se busca medir la contribución potencial del proyecto en cualquiera de los siguientes ámbitos: generación y aplicación de nuevos conocimientos y tecnologías, desarrollo de infraestructura científico- tecnológica, articulación de diferentes proyectos para lograr un objetivo común, mejoramiento de la infraestructura, desarrollo de capacidades de gestión tecnológica."
+                                />
+                            {:else if $formImpacto.tipo?.value == 5}
+                                <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)" />
+                            {:else if $formImpacto.tipo?.value == 6}
+                                <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto." />
+                            {/if}
                         </div>
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="descripcion" value="Descripción" />
-                            <Textarea rows="4" id="descripcion" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
+                            <Textarea label="Descripción" maxlength="10000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -686,8 +796,8 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if isSuperAdmin && formId}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
+            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
+                <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>
     </Dialog>
@@ -696,7 +806,7 @@
 <style>
     .resultados.relative.flex-1:before {
         content: '';
-        bottom: -40%;
+        bottom: -57px;
         position: absolute;
         right: 50%;
         width: 2px;
@@ -704,9 +814,29 @@
         background: #ff906e;
     }
 
-    .objetivo-especificos.relative.flex-1:before {
+    .resultados-line:before {
         content: '';
-        top: -38%;
+        bottom: -536px;
+        position: absolute;
+        right: 50%;
+        width: 2px;
+        height: 552px;
+        background: #ff906e;
+    }
+
+    .resultados-line-4:before {
+        content: '';
+        bottom: -696px;
+        position: absolute;
+        right: 50%;
+        width: 2px;
+        height: 710px;
+        background: #ff906e;
+    }
+
+    .objetivo-especificos.relative:before {
+        content: '';
+        top: -55px;
         position: absolute;
         right: 50%;
         width: 2px;
@@ -714,7 +844,7 @@
         background: #ff906e;
     }
 
-    .line-height-1 {
+    .line-height-1-24 {
         line-height: 1.2;
     }
 
@@ -753,16 +883,16 @@
         line-height: 1.24;
     }
 
-    :global(.mdc-dialog__surface) {
+    :global(#arbol-objetivos-dialog .mdc-dialog__surface) {
         width: 750px;
         max-width: calc(100vw - 32px) !important;
     }
 
-    :global(.mdc-dialog__content) {
+    :global(#arbol-objetivos-dialog .mdc-dialog__content) {
         padding-top: 40px !important;
     }
 
-    :global(.mdc-dialog__title) {
+    :global(#arbol-objetivos-dialog .mdc-dialog__title) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         margin-bottom: 0;
     }

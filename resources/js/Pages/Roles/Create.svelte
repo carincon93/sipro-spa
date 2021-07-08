@@ -1,16 +1,16 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import InputError from '@/Components/InputError'
-    import Input from '@/Components/Input'
-    import Label from '@/Components/Label'
-    import LoadingButton from '@/Components/LoadingButton'
+    import InputError from '@/Shared/InputError'
+    import Input from '@/Shared/Input'
+    import Label from '@/Shared/Label'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import Textarea from '@/Components/Textarea'
+    import Textarea from '@/Shared/Textarea'
 
     export let errors
     export let allPermissions
@@ -21,10 +21,7 @@
      * Permisos
      */
     let authUser = $page.props.auth.user
-    let isSuperAdmin =
-        authUser.roles.filter(function (role) {
-            return role.id == 1
-        }).length > 0
+    let isSuperAdmin = checkRole(authUser, [1])
 
     let sending = false
     let form = useForm({
@@ -63,13 +60,11 @@
         <fieldset disabled={isSuperAdmin ? undefined : true}>
             <div class="bg-white rounded shadow max-w-3xl p-8">
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="name" value="Nombre" />
-                    <Input id="name" type="text" class="mt-1 block w-full" bind:value={$form.name} error={errors.name} required />
+                    <Input label="Nombre" id="name" type="text" class="mt-1" bind:value={$form.name} error={errors.name} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="description" value="Descripción" />
-                    <Textarea rows="4" id="description" bind:value={$form.description} error={errors.description} required />
+                    <Textarea label="Descripción" maxlength="40000" id="description" bind:value={$form.description} error={errors.description} required />
                 </div>
             </div>
 
@@ -79,16 +74,11 @@
                     <InputError message={errors.permission_id} />
                 </div>
                 <div class="grid grid-cols-6">
-                    {#each allPermissions as { id, only_name, method }, i}
-                        {#if i % 5 === 0}
-                            <div class="p-3 border-t border-b flex items-center text-sm">
-                                {$_(only_name + '.plural')}
-                            </div>
-                        {/if}
+                    {#each allPermissions as { id, name }, i}
                         <div class="pt-8 pb-8 border-t border-b flex flex-col-reverse items-center justify-between">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={id} />
-                                <span slot="label">{$_(method)}</span>
+                                <span slot="label">{name}</span>
                             </FormField>
                         </div>
                     {/each}

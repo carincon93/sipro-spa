@@ -59,9 +59,9 @@ class EfectoDirecto extends Model
      *
      * @return object
      */
-    public function resultado()
+    public function resultados()
     {
-        return $this->hasOne(Resultado::class);
+        return $this->hasMany(Resultado::class)->orderBy('id', 'ASC');
     }
 
     /**
@@ -84,7 +84,10 @@ class EfectoDirecto extends Model
     public function scopeFilterEfectoDirecto($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('descripcion', 'ilike', '%' . $search . '%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(descripcion) ilike unaccent('%" . $search . "%')");
         });
     }
 }
