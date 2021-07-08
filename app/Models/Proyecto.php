@@ -218,6 +218,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with InventarioEquipo
+     *
+     * @return object
+     */
+    public function inventarioEquipos()
+    {
+        return $this->hasMany(InventarioEquipo::class);
+    }
+
+    /**
      * Relationship with ProgramaFormacion
      *
      * @return object

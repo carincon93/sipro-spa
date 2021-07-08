@@ -83,7 +83,7 @@
 
     <Gantt
         items={actividades}
-        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])
+        request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])
             ? {
                   uri: 'convocatorias.proyectos.actividades.edit',
                   params: [convocatoria.id, proyecto.id],
