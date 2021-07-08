@@ -342,7 +342,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Continuar diligenciando</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#nodo_tecnoparque_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

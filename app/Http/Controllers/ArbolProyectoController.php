@@ -236,6 +236,8 @@ class ArbolProyectoController extends Controller
                 $tp->identificacion_problema  = $request->identificacion_problema;
                 $tp->justificacion_problema   = $request->justificacion_problema;
                 $tp->problema_central = $request->problema_central;
+
+                $tp->save();
                 break;
 
             case $proyecto->culturaInnovacion()->exists():
@@ -258,6 +260,7 @@ class ArbolProyectoController extends Controller
                 ]);
                 $servicioTecnologico                   = $proyecto->servicioTecnologico;
                 $servicioTecnologico->problema_central = $request->problema_central;
+
                 $servicioTecnologico->save();
                 break;
             default:
