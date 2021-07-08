@@ -47,15 +47,5 @@ class ProductoRequest extends FormRequest
                 'resultado_id' => $this->resultado_id['value'],
             ]);
         }
-
-        if (is_array($this->tipo)) {
-            $this->merge([
-                'tipo' => $this->tipo['value'],
-            ]);
-        }
-
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
     }
 }
