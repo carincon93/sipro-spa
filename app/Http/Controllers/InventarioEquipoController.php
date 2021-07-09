@@ -22,6 +22,8 @@ class InventarioEquipoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
