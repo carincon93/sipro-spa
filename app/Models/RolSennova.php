@@ -58,7 +58,7 @@ class RolSennova extends Model
     /**
      * Relationship with ReglaRolTa
      *
-     * @return void
+     * @return object
      */
     public function reglasRolesTa()
     {
