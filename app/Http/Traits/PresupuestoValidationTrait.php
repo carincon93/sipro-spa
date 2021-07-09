@@ -46,13 +46,13 @@ trait PresupuestoValidationTrait
      */
     public static function viaticosValidation($proyecto, $segundoGrupoPresupuestalCodigo, $valor, $numeroItems)
     {
-        if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102') {
-            if ($proyecto->lineaProgramatica->codigo != 66 || $proyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
+        if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102' || $segundoGrupoPresupuestalCodigo == '2041104') {
+            if ($proyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
                 return false;
             }
 
             $total = 0;
-            $total += ($valor * $numeroItems) + self::totalUsoPresupuestal($proyecto, '2041101');
+            $total += ($valor * $numeroItems) + self::totalUsoPresupuestal($proyecto, '2042186') + self::totalUsoPresupuestal($proyecto, '2041101') + self::totalUsoPresupuestal($proyecto, '2041102') + +self::totalUsoPresupuestal($proyecto, '2041104');
 
             return ($total > 4460000) ? true : false;
         }
