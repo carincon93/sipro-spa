@@ -171,4 +171,63 @@ trait PresupuestoValidationTrait
 
         return false;
     }
+
+    public static function primerReglaTp($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2045110' || $codigoSegundoPresupuestal == '2040106' || $codigoSegundoPresupuestal == '2040516' || $codigoSegundoPresupuestal == '2040115' || $codigoSegundoPresupuestal == '2040125' || $codigoSegundoPresupuestal == '2040108') {
+
+            $tercerValor  = $tercerValor ?? 0;
+
+            $division = ($tercerValor > 0) ? 3 : 2;
+            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+
+            $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
+
+            // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
+            $total = self::totalUsoPresupuestal($proyecto, '2045110') + self::totalUsoPresupuestal($proyecto, '2040106') + self::totalUsoPresupuestal($proyecto, '2040516') + self::totalUsoPresupuestal($proyecto, '2040115') + self::totalUsoPresupuestal($proyecto, '2040125') + self::totalUsoPresupuestal($proyecto, '2040108');
+            $promedioPresupuestoTotal = $promedio + ($total - $promedioPresupuestoGuardado);
+
+
+            if ($promedioPresupuestoTotal > 200000000) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function segundaReglaTp($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2040424') {
+            $tercerValor  = $tercerValor ?? 0;
+
+            $division = ($tercerValor > 0) ? 3 : 2;
+            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+
+            $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
+
+            // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "materiales para la formación"
+            $total = self::totalUsoPresupuestal($proyecto, '2040424');
+            $promedioPresupuestoTotal = $promedio + ($total - $promedioPresupuestoGuardado);
+
+
+            if ($promedioPresupuestoTotal > 120000000) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
