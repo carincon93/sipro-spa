@@ -49,6 +49,7 @@ use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 use App\Http\Controllers\EdtController;
 use App\Http\Controllers\InventarioEquipoController;
+use App\Http\Controllers\ReglaRolTpController;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
@@ -568,6 +569,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Tp - Estrategia nacional
      * 
      */
+    Route::resource('reglas-roles-tp', ReglaRolTpController::class)->parameters(['reglas-roles-tp' => 'regla-rol-tp'])->except(['show']);
     Route::resource('convocatorias.tp', TpController::class)->parameters(['convocatorias' => 'convocatoria', 'tp' => 'tp'])->except(['show']);
 
     /**

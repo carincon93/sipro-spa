@@ -47,7 +47,7 @@ class NodoTecnoparque extends Model
     /**
      * Relationship with CentroFormacion
      *
-     * @return void
+     * @return object
      */
     public function centroFormacion()
     {
@@ -57,12 +57,23 @@ class NodoTecnoparque extends Model
     /**
      * Relationship with Tp
      *
-     * @return void
+     * @return object
      */
     public function tp()
     {
         return $this->hasOne(Tp::class);
     }
+
+    /**
+     * Relationship with ReglaRolTp
+     *
+     * @return object
+     */
+    public function reglasRolesTp()
+    {
+        return $this->hasMany(ReglaRolTp::class);
+    }
+
 
     /**
      * Filtrar registros

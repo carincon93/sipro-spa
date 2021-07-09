@@ -8,28 +8,6 @@ use App\Models\ReglaRolTa;
 
 trait ProyectoRolTaValidationTrait
 {
-    /**
-     * totalRolesSennova
-     *
-     * Obtiene la cantidad total de un rol sennova
-     * 
-     * @param  mixed $proyecto
-     * @param  mixed $codigo
-     * @return int
-     */
-    public static function totalRolesSennova($proyecto, $rolSennovaId)
-    {
-        $total = 0;
-
-        foreach ($proyecto->proyectoRolesSennova as $rolSennova) {
-            if ($rolSennova->convocatoriaRolSennova->rolSennova->id == $rolSennovaId) {
-                $total++;
-            }
-        }
-
-        return $total;
-    }
-
     public static function rolTaValidation($proyecto, $tecnoacademiaId, $convocatoriaRolSennovaId, $proyectoRolSennovaId, $cantidadRoles)
     {
         $tecnoacademiaRoles = ReglaRolTa::where('tecnoacademia_id', $tecnoacademiaId)->get();
