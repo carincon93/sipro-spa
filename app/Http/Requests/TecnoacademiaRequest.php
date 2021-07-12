@@ -28,6 +28,8 @@ class TecnoacademiaRequest extends FormRequest
             'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnoacademia,id'],
             'nombre'                => ['required', 'max:255'],
             'modalidad'             => ['required', 'max:2'],
+            'foco'                  => ['required', 'string'],
+            'fecha_creacion'        => ['required', 'date', 'date_format:Y-m-d'],
         ];
     }
 

@@ -3,11 +3,13 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
 
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import InputError from '@/Shared/InputError'
+    import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let convocatoria
@@ -29,7 +31,7 @@
         max_meses_ejecucion: 0,
         tecnoacademia_id: null,
         centro_formacion_id: null,
-        tecnoacademia_linea_tecnologica_id: [],
+        tecnoacademia_linea_tecnoacademia_id: [],
         linea_programatica: null,
     })
 
@@ -47,6 +49,17 @@
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
+        }
+    }
+
+    let lineasTecnoaAcademia
+    $: if ($form.tecnoacademia_id) {
+        getLineasTecnoacademia()
+    }
+    async function getLineasTecnoacademia() {
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+        if (res.status == '200') {
+            lineasTecnoaAcademia = res.data
         }
     }
 </script>
@@ -115,18 +128,21 @@
             {#if $form.tecnoacademia_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
+                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas TecnoAcademia" />
                     </div>
                     <div>
-                        <DynamicList
-                            id="tecnoacademia_linea_tecnologica_id"
-                            bind:value={$form.tecnoacademia_linea_tecnologica_id}
-                            noOptionsText="No hay nodos tecnoparque registrados para este centro de formación. Por favor seleccione un centro de formación diferente."
-                            routeWebApi={route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id])}
-                            placeholder="Busque por el nombre de la línea tecnológica"
-                            message={errors.tecnoacademia_linea_tecnologica_id}
-                            required
-                        />
+                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                        {#if lineasTecnoaAcademia?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
                     </div>
                 </div>
             {/if}

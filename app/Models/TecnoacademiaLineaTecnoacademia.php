@@ -65,13 +65,13 @@ class TecnoacademiaLineaTecnoacademia extends Model
     }
 
     /**
-     * Relationship with Idi
+     * Relationship with Proyecto
      *
      * @return void
      */
-    public function idi()
+    public function proyecto()
     {
-        return $this->hasMany(Idi::class);
+        return $this->hasMany(Proyecto::class);
     }
 
     /**
@@ -82,15 +82,5 @@ class TecnoacademiaLineaTecnoacademia extends Model
     public function culturaInnovacion()
     {
         return $this->hasMany(CulturaInnovacion::class);
-    }
-
-    /**
-     * Relationship with Ta
-     *
-     * @return void
-     */
-    public function ta()
-    {
-        return $this->hasMany(Ta::class);
     }
 }

@@ -288,6 +288,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with TecnoacademiaLineaTecnoacademia
+     *
+     * @return object
+     */
+    public function tecnoacademiaLineasTecnoacademia()
+    {
+        return $this->belongsToMany(TecnoacademiaLineaTecnoacademia::class, 'proyecto_linea_tecnoacademia', 'proyecto_id', 'tecnoacademia_linea_tecnoacademia_id');
+    }
+
+    /**
      * Relationship with participantes
      *
      * @return object
