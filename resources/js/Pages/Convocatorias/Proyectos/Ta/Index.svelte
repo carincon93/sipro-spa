@@ -52,7 +52,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyecto_ta.tecnoacademia_linea_tecnologica.tecnoacademia.nombre}
+                            {proyecto_ta.proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre}
                         </p>
                     </td>
                     <td class="border-t">

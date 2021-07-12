@@ -53,8 +53,10 @@ class TecnoacademiaController extends Controller
         $this->authorize('create', [Tecnoacademia::class]);
 
         $tecnoacademia = new Tecnoacademia();
-        $tecnoacademia->nombre      = $request->nombre;
-        $tecnoacademia->modalidad   = $request->modalidad;
+        $tecnoacademia->nombre          = $request->nombre;
+        $tecnoacademia->modalidad       = $request->modalidad;
+        $tecnoacademia->fecha_creacion  = $request->fecha_creacion;
+        $tecnoacademia->foco            = $request->foco;
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->save();
 
@@ -103,8 +105,10 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('update', [Tecnoacademia::class, $tecnoacademia]);
 
-        $tecnoacademia->nombre      = $request->nombre;
-        $tecnoacademia->modalidad   = $request->modalidad;
+        $tecnoacademia->nombre          = $request->nombre;
+        $tecnoacademia->modalidad       = $request->modalidad;
+        $tecnoacademia->fecha_creacion  = $request->fecha_creacion;
+        $tecnoacademia->foco            = $request->foco;
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnologica_id);
         $tecnoacademia->save();

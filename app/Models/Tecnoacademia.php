@@ -25,6 +25,8 @@ class Tecnoacademia extends Model
     protected $fillable = [
         'nombre',
         'modalidad',
+        'fecha_creacion',
+        'foco',
         'linea_tecnoacademia_id',
         'centro_formacion_id'
     ];

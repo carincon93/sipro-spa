@@ -408,7 +408,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae las líneas tecnológicas
+     * Trae las líneas tecnoacademia
      */
     Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', function ($tecnoacademia) {
         return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());

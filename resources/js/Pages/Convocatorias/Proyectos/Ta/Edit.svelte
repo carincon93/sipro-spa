@@ -25,7 +25,7 @@
     export let convocatoria
     export let ta
     export let regionales
-    export let lineaTecnologicaRelacionada
+    export let lineasTecnoacademiaRelacionadas
     export let tecnoacademiaRelacionada
     export let proyectoMunicipios
     export let proyectoProgramasFormacionArticulados
@@ -72,7 +72,7 @@
         articulacion_centro_formacion: ta.articulacion_centro_formacion,
         bibliografia: ta.bibliografia,
         tecnoacademia_id: tecnoacademiaRelacionada,
-        tecnoacademia_linea_tecnologica_id: lineaTecnologicaRelacionada,
+        tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         nodo_tecnoparque_id: ta.nodo_tecnoparque_id,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
@@ -121,6 +121,7 @@
     onMount(() => {
         getMunicipios()
         getProgramasFormacionArticular()
+        getLineasTecnoacademia()
     })
 
     function submit() {
@@ -158,9 +159,17 @@
 
     let programasFormacionArticular
     async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion'))
+        let res = await axios.get(route('web-api.programas-formacion', ta.proyecto.centro_formacion_id))
         if (res.status == '200') {
             programasFormacionArticular = res.data
+        }
+    }
+
+    let lineasTecnoaAcademia
+    async function getLineasTecnoacademia() {
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+        if (res.status == '200') {
+            lineasTecnoaAcademia = res.data
         }
     }
 </script>
@@ -231,26 +240,28 @@
                         />
                     </div>
                 </div>
-
-                {#if $form.tecnoacademia_id}
-                    <div class="mt-44 grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
-                        </div>
-                        <div>
-                            <DynamicList
-                                id="tecnoacademia_linea_tecnologica_id"
-                                bind:value={$form.tecnoacademia_linea_tecnologica_id}
-                                noOptionsText="No hay nodos tecnoparque registrados para este centro de formación. Por favor seleccione un centro de formación diferente."
-                                routeWebApi={route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id])}
-                                placeholder="Busque por el nombre de la línea tecnológica"
-                                message={errors.tecnoacademia_linea_tecnologica_id}
-                                required
-                            />
-                        </div>
-                    </div>
-                {/if}
             </fieldset>
+            {#if $form.tecnoacademia_id && lineasTecnoaAcademia}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas TecnoAcademia" />
+                    </div>
+                    <div>
+                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                        {#if lineasTecnoaAcademia?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            {/if}
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
@@ -450,7 +461,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Continuar diligenciando</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnoacademia_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

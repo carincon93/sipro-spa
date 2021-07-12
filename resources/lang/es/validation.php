@@ -192,7 +192,7 @@ return [
 		'max_fecha_finalizacion_proyectos' 		=> 'rango de fechas de ejecución de proyectos',
 		'centro_formacion_id'    				=> 'centro de formación',
 		'nodo_tecnoparque_id' 					=> 'nodo Tecnoparque',
-		'tecnoacademia_linea_tecnologica_id'    => 'línea tecnológica',
+		'tecnoacademia_linea_tecnoacademia_id'    => 'línea tecnológica',
 		'email'                 				=> 'correo electrónico',
 		'role_id'               				=> 'rol',
 		'trl'                   				=> 'TRL',
