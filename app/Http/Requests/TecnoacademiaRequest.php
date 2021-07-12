@@ -25,7 +25,7 @@ class TecnoacademiaRequest extends FormRequest
     {
         return [
             'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-            'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnologicas,id'],
+            'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnoacademia,id'],
             'nombre'                => ['required', 'max:255'],
             'modalidad'             => ['required', 'max:2'],
         ];

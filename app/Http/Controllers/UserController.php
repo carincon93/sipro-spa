@@ -109,7 +109,7 @@ class UserController extends Controller
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
             'roles'                 => Role::getRolesByRol(),
-            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'ta.tecnoacademiaLineaTecnologica.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'ta.tecnoacademiaLineaTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
 
         ]);
     }

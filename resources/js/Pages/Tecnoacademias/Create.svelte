@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="mt-10">
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas tecnológicas" />
+                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas de TecnoAcademia" />
                     <div class="mt-10 grid grid-cols-2">
                         {#each lineasTecnologicas as { id, nombre }, i}
                             <FormField>

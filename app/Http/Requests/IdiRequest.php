@@ -62,7 +62,7 @@ class IdiRequest extends FormRequest
                 'relacionado_mesas_sectoriales'             => ['required', 'min:0', 'max:3', 'integer'],
                 'relacionado_tecnoacademia'                 => ['required', 'min:0', 'max:3', 'integer'],
                 'mesa_sectorial_id*'                        => ['required_if:relacionado_mesas_sectoriales,1', 'min:0', 'max:2147483647', 'exists:mesas_sectoriales,id'],
-                'linea_tecnologica_id*'                     => ['required_if:relacionado_tecnoacademia,1', 'min:0', 'max:2147483647', 'exists:lineas_tecnologicas,id']
+                'linea_tecnologica_id*'                     => ['required_if:relacionado_tecnoacademia,1', 'min:0', 'max:2147483647', 'exists:lineas_tecnoacademia,id']
             ];
         } else {
             return [

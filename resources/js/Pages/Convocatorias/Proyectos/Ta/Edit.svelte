@@ -242,7 +242,7 @@
                                 id="tecnoacademia_linea_tecnologica_id"
                                 bind:value={$form.tecnoacademia_linea_tecnologica_id}
                                 noOptionsText="No hay nodos tecnoparque registrados para este centro de formación. Por favor seleccione un centro de formación diferente."
-                                routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])}
+                                routeWebApi={route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id])}
                                 placeholder="Busque por el nombre de la línea tecnológica"
                                 message={errors.tecnoacademia_linea_tecnologica_id}
                                 required

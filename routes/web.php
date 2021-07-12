@@ -42,7 +42,7 @@ use App\Http\Controllers\UsoPresupuestalController;
 use App\Http\Controllers\ProyectoLoteEstudioMercadoController;
 use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
-use App\Http\Controllers\LineaTecnologicaController;
+use App\Http\Controllers\LineaTecnoacademiaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
 use App\Http\Controllers\HelpDeskController;
@@ -68,7 +68,7 @@ use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
 use App\Models\Tecnoacademia;
-use App\Models\LineaTecnologica;
+use App\Models\LineaTecnoacademia;
 use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
@@ -331,10 +331,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('tecnoacademias', TecnoacademiaController::class)->parameters(['tecnoacademias' => 'tecnoacademia'])->except(['show']);
 
     /**
-     * Líenas tecnológicas
+     * Líneas tecnoacadedmia
      * 
      */
-    Route::resource('lineas-tecnologicas', LineaTecnologicaController::class)->parameters(['lineas-tecnologicas' => 'linea-tecnologica'])->except(['show']);
+    Route::resource('lineas-tecnoacademia', LineaTecnoacademiaController::class)->parameters(['lineas-tecnoacademia' => 'linea-tecnoacademia'])->except(['show']);
 
     /**
      * Grupos de investigación
@@ -410,9 +410,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      * Trae las líneas tecnológicas
      */
-    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {
-        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id as value', 'lineas_tecnologicas.nombre as label')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
-    })->name('web-api.tecnoacademias.lineas-tecnologicas');
+    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', function ($tecnoacademia) {
+        return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());
+    })->name('web-api.tecnoacademias.lineas-tecnoacademia');
 
     /**
      * Web api

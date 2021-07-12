@@ -90,7 +90,7 @@ class TaController extends Controller
         $ta->nombre_instituciones                 = null;
         $ta->nombre_instituciones_programas       = null;
 
-        $ta->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
+        $ta->tecnoacademiaLineaTecnoacademia()->associate($request->tecnoacademia_linea_tecnologica_id);
 
         $proyecto->ta()->save($ta);
 
@@ -139,8 +139,8 @@ class TaController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
             'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
             'ta'                                    => $ta,
-            'tecnoacademiaRelacionada'              => $ta->tecnoacademiaLineaTecnologica()->exists() ? $ta->tecnoacademiaLineaTecnologica->tecnoacademia->id : null,
-            'lineaTecnologicaRelacionada'           => $ta->tecnoacademiaLineaTecnologica()->exists() ? $ta->tecnoacademiaLineaTecnologica->id : null,
+            'tecnoacademiaRelacionada'              => $ta->tecnoacademiaLineaTecnoacademia()->exists() ? $ta->tecnoacademiaLineaTecnoacademia->tecnoacademia->id : null,
+            'lineaTecnologicaRelacionada'           => $ta->tecnoacademiaLineaTecnoacademia()->exists() ? $ta->tecnoacademiaLineaTecnoacademia->id : null,
             'regionales'                            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                        => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                    => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
@@ -182,7 +182,7 @@ class TaController extends Controller
 
         $ta->proyecto->municipios()->sync($request->municipios);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
-        $ta->tecnoacademiaLineaTecnologica()->associate($request->tecnoacademia_linea_tecnologica_id);
+        $ta->tecnoacademiaLineaTecnoacademia()->associate($request->tecnoacademia_linea_tecnologica_id);
 
         $ta->save();
 

@@ -147,8 +147,8 @@ class CulturaInnovacionController extends Controller
             'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
             'culturaInnovacion'                         => $culturaInnovacion,
             'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'            => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                             => $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first() ? $culturaInnovacion->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'lineasTecnoacademiaRelacionadas'           => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->pluck('id'),
+            'tecnoacademia'                             => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->first() ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesAplicaNoAplica'                    => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
@@ -207,7 +207,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->save();
 
         $request->relacionado_mesas_sectoriales == 1 ? $culturaInnovacion->mesasSectoriales()->sync($request->mesa_sectorial_id) : $culturaInnovacion->mesasSectoriales()->detach();
-        $request->relacionado_tecnoacademia == 1 ? $culturaInnovacion->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $culturaInnovacion->tecnoacademiaLineasTecnologicas()->detach();
+        $request->relacionado_tecnoacademia == 1 ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->detach();
 
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
