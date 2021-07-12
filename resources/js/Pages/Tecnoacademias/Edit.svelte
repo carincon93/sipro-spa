@@ -17,9 +17,9 @@
 
     export let errors
     export let tecnoacademia
-    export let lineasTecnologicas
+    export let lineasTecnoacademia
     export let modalidades
-    export let lineasTecnologicasRelacionadas
+    export let lineasTecnoacademiaRelacionadas
 
     $: $title = tecnoacademia ? tecnoacademia.nombre : null
 
@@ -38,7 +38,7 @@
             label: modalidades.find((item) => item.value == tecnoacademia.modalidad)?.label,
         },
         centro_formacion_id: tecnoacademia.centro_formacion_id,
-        linea_tecnologica_id: lineasTecnologicasRelacionadas,
+        linea_tecnologica_id: lineasTecnoacademiaRelacionadas,
     })
 
     function submit() {
@@ -91,9 +91,9 @@
                 </div>
 
                 <div class="mt-10">
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas tecnológicas" />
+                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas de TecnoAcademia" />
                     <div class="mt-10 grid grid-cols-2">
-                        {#each lineasTecnologicas as { id, nombre }, i}
+                        {#each lineasTecnoacademia as { id, nombre }, i}
                             <FormField>
                                 <Checkbox bind:group={$form.linea_tecnologica_id} value={id} />
                                 <span slot="label">{nombre}</span>

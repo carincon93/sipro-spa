@@ -11,6 +11,7 @@
     import Label from '@/Shared/Label'
     import Switch from '@/Shared/Switch'
     import Textarea from '@/Shared/Textarea'
+    import InfoMessage from '@/Shared/InfoMessage'
     import Create from './Create'
 
     import Stepper from '@/Shared/Stepper'
@@ -66,6 +67,7 @@
                 <div class="mt-4">
                     <Label required labelFor="video" value="Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" class="inline-block mb-4" />
                     <Input label="Enlace del video" type="url" class="mt-1" bind:value={$form.video} error={errors?.video} required />
+                    <InfoMessage message="El vídeo debe incluir durante el recorrido en las instalaciones, una voz en off que justifique puntualmente el proyecto e incluya: el impacto a la formación, al sector productivo y a la política nacional de ciencia, tecnología e innovación." />
                 </div>
                 <div class="w-1/12">
                     <Button loading={sending} class="w-full mt-4" type="submit">Guardar</Button>

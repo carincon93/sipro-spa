@@ -134,13 +134,13 @@ class CulturaInnovacion extends Model
     }
 
     /**
-     * Relationship with TecnoacademiaLineaTecnologica
+     * Relationship with TecnoacademiaLineaTecnoacademia
      *
      * @return object
      */
-    public function tecnoacademiaLineasTecnologicas()
+    public function tecnoacademiaLineasTecnoacademia()
     {
-        return $this->belongsToMany(TecnoacademiaLineaTecnologica::class, 'cultura_innovacion_linea_tecnologica', 'cultura_innovacion_id', 'tecnoacademia_linea_tecnologica_id');
+        return $this->belongsToMany(TecnoacademiaLineaTecnoacademia::class, 'cultura_innovacion_linea_tecnoacademia', 'cultura_innovacion_id', 'tecnoacademia_linea_tecnoacademia_id');
     }
 
     /**

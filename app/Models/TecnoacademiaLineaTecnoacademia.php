@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TecnoacademiaLineaTecnologica extends Model
+class TecnoacademiaLineaTecnoacademia extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class TecnoacademiaLineaTecnologica extends Model
      *
      * @var string
      */
-    protected $table = 'tecnoacademia_linea_tecnologica';
+    protected $table = 'tecnoacademia_linea_tecnoacademia';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class TecnoacademiaLineaTecnologica extends Model
      */
     protected $fillable = [
         'tecnoacademia_id',
-        'linea_tecnologica_id'
+        'linea_tecnoacademia_id'
     ];
 
     /**
@@ -55,13 +55,13 @@ class TecnoacademiaLineaTecnologica extends Model
     }
 
     /**
-     * Relationship with LineaTecnologica
+     * Relationship with LineaTecnoacademia
      *
      * @return void
      */
-    public function lineaTecnologica()
+    public function lineaTecnoacademia()
     {
-        return $this->belongsTo(LineaTecnologica::class);
+        return $this->belongsTo(LineaTecnoacademia::class);
     }
 
     /**

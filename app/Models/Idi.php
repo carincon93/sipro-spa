@@ -145,13 +145,13 @@ class Idi extends Model
     }
 
     /**
-     * Relationship with TecnoacademiaLineaTecnologica
+     * Relationship with TecnoacademiaLineaTecnoacademia
      *
      * @return object
      */
-    public function tecnoacademiaLineasTecnologicas()
+    public function tecnoacademiaLineasTecnoacademia()
     {
-        return $this->belongsToMany(TecnoacademiaLineaTecnologica::class, 'idi_linea_tecnologica', 'idi_id', 'tecnoacademia_linea_tecnologica_id');
+        return $this->belongsToMany(TecnoacademiaLineaTecnoacademia::class, 'idi_linea_tecnoacademia', 'idi_id', 'tecnoacademia_linea_tecnoacademia_id');
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineaTecnologica extends Model
+class LineaTecnoacademia extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class LineaTecnologica extends Model
      *
      * @var string
      */
-    protected $table = 'lineas_tecnologicas';
+    protected $table = 'lineas_tecnoacademia';
 
 
     /**
@@ -52,7 +52,7 @@ class LineaTecnologica extends Model
      */
     public function tecnoacademias()
     {
-        return $this->belongsToMany(Tecnoacademia::class, 'tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_id');
+        return $this->belongsToMany(Tecnoacademia::class, 'tecnoacademia_linea_tecnoacademia', 'linea_tecnoacademia_id', 'tecnoacademia_id');
     }
 
     /**
@@ -63,7 +63,7 @@ class LineaTecnologica extends Model
 
     public function idi()
     {
-        return $this->belongsToMany(Idi::class, 'idi_linea_tecnologica', 'tecnoacademia_linea_tecnologica_id', 'idi_id');
+        return $this->belongsToMany(Idi::class, 'idi_linea_tecnoacademia', 'tecnoacademia_linea_tecnoacademia_id', 'idi_id');
     }
 
     /**
@@ -73,7 +73,7 @@ class LineaTecnologica extends Model
      */
     public function ta()
     {
-        return $this->hasMany('tecnoacademia_linea_tecnologica', 'linea_tecnologica_id', 'tecnoacademia_linea_tecnologica_id');
+        return $this->hasMany(Ta::class);
     }
 
     /**
@@ -83,7 +83,7 @@ class LineaTecnologica extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterLineaTecnologica($query, array $filters)
+    public function scopeFilterLineaTecnoacademia($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);

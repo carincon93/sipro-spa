@@ -30,7 +30,7 @@
     export let culturaInnovacion
     export let mesasSectoriales
     export let mesasSectorialesRelacionadas
-    export let lineasTecnologicasRelacionadas
+    export let lineasTecnoacademiaRelacionadas
     export let tecnoacademias
     export let tecnoacademia
     export let opcionesAplicaNoAplica
@@ -116,7 +116,7 @@
             label: tecnoacademias.find((item) => item.value == tecnoacademia?.id)?.label,
         },
 
-        linea_tecnologica_id: lineasTecnologicasRelacionadas,
+        linea_tecnologica_id: lineasTecnoacademiaRelacionadas,
         mesa_sectorial_id: mesasSectorialesRelacionadas,
     })
 
@@ -167,8 +167,8 @@
     }
 
     async function getLineasTecnologicas(tecnoacademia) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnologicas', [tecnoacademia]))
-        res.status == '200' ? ($form.linea_tecnologica_id = lineasTecnologicasRelacionadas) : null
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademia]))
+        res.status == '200' ? ($form.linea_tecnologica_id = lineasTecnoacademiaRelacionadas) : null
         lineasTecnologicas = res.data
     }
 

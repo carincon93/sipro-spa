@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TecnoacademiaRequest;
-use App\Models\LineaTecnologica;
+use App\Models\LineaTecnoacademia;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +37,7 @@ class TecnoacademiaController extends Controller
         $this->authorize('create', [Tecnoacademia::class]);
 
         return Inertia::render('Tecnoacademias/Create', [
-            'lineasTecnologicas'    => LineaTecnologica::orderBy('nombre', 'ASC')->get(),
+            'lineasTecnoacademia'   => LineaTecnoacademia::orderBy('nombre', 'ASC')->get(),
             'modalidades'           => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
         ]);
     }
@@ -58,7 +58,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->save();
 
-        $tecnoacademia->lineasTecnologicas()->attach($request->linea_tecnologica_id);
+        $tecnoacademia->lineasTecnoacademia()->attach($request->linea_tecnologica_id);
 
         return redirect()->route('tecnoacademias.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -86,8 +86,8 @@ class TecnoacademiaController extends Controller
 
         return Inertia::render('Tecnoacademias/Edit', [
             'tecnoacademia'                     => $tecnoacademia,
-            'lineasTecnologicas'                => LineaTecnologica::orderBy('nombre', 'ASC')->get(),
-            'lineasTecnologicasRelacionadas'    => $tecnoacademia->lineasTecnologicas()->pluck('lineas_tecnologicas.id'),
+            'lineasTecnoacademia'               => LineaTecnoacademia::orderBy('nombre', 'ASC')->get(),
+            'lineasTecnoacademiaRelacionadas'   => $tecnoacademia->lineasTecnoacademia()->pluck('lineas_tecnoacademia.id'),
             'modalidades'                       => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
         ]);
     }
@@ -106,7 +106,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->nombre      = $request->nombre;
         $tecnoacademia->modalidad   = $request->modalidad;
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
-        $tecnoacademia->lineasTecnologicas()->sync($request->linea_tecnologica_id);
+        $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnologica_id);
         $tecnoacademia->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');

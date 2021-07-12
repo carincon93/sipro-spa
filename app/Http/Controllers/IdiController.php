@@ -145,8 +145,8 @@ class IdiController extends Controller
             'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'            => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                             => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'lineasTecnoacademiaRelacionadas'           => $idi->tecnoacademiaLineasTecnoacademia()->pluck('id'),
+            'tecnoacademia'                             => $idi->tecnoacademiaLineasTecnoacademia()->first() ? $idi->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
@@ -206,7 +206,7 @@ class IdiController extends Controller
         $idi->save();
 
         $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
-        $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnologicas()->detach();
+        $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnoacademia()->detach();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
