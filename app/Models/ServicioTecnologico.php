@@ -31,7 +31,7 @@ class ServicioTecnologico extends Model
      * @var array
      */
     protected $fillable = [
-        'mesa_tecnica_sector_productivo_id',
+        'tipo_proyecto_st_id',
         'titulo',
         'resumen',
         'antecedentes',
@@ -46,8 +46,6 @@ class ServicioTecnologico extends Model
         'propuesta_sostenibilidad',
         'bibliografia',
         'max_meses_ejecucion',
-        'estado_sistema_gestion_id',
-        'subclasificacion_tipologia_st_id',
         'video',
         'especificaciones_area',
         'infraestructura_adecuada'
@@ -82,33 +80,13 @@ class ServicioTecnologico extends Model
     }
 
     /**
-     * Relationship with MesaTecnicaSectorProductivo
+     * Relationship with TipoProyectoSt
      *
      * @return object
      */
-    public function mesaTecnicaSectorProductivo()
+    public function tipoProyectoSt()
     {
-        return $this->belongsTo(MesaTecnicaSectorProductivo::class);
-    }
-
-    /**
-     * Relationship with EstadoSistemaGestion
-     *
-     * @return object
-     */
-    public function estadoSistemaGestion()
-    {
-        return $this->belongsTo(EstadoSistemaGestion::class);
-    }
-
-    /**
-     * Relationship with SubclasificacionTipologiaSt
-     *
-     * @return object
-     */
-    public function subclasificacionTipologiaSt()
-    {
-        return $this->belongsTo(SubclasificacionTipologiaSt::class);
+        return $this->belongsTo(TipoProyectoSt::class);
     }
 
     /**

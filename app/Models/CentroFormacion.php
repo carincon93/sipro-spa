@@ -138,6 +138,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with TipoProyectoSt
+     *
+     * @return object
+     */
+    public function tiposProyectoSt()
+    {
+        return $this->hasMany(TipoProyectoSt::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

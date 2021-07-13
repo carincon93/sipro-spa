@@ -28,11 +28,6 @@ class ServicioTecnologicoRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'linea_programatica_id'                     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
-                'mesa_tecnica_sector_productivo_id'         => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:mesa_tecnica_sector_productivo,id'],
-                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
-                'subclasificacion_tipologia_st_id'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:subclasificacion_tipologia_st,id'],
                 'titulo'                                    => ['required', 'string', new MaxWords(40)],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'st', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'st', null)],
@@ -46,11 +41,7 @@ class ServicioTecnologicoRequest extends FormRequest
             ];
         } else {
             return [
-                'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-                'linea_programatica_id'                     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
-                'mesa_tecnica_sector_productivo_id'         => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:mesa_tecnica_sector_productivo,id'],
-                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
-                'subclasificacion_tipologia_st_id'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:subclasificacion_tipologia_st,id'],
+                'tipo_proyecto_st_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto_st,id'],
                 'titulo'                                    => ['required', 'string', new MaxWords(40)],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'st', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'st', null)],
@@ -73,9 +64,9 @@ class ServicioTecnologicoRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->centro_formacion_id)) {
+        if (is_array($this->tipo_proyecto_st_id)) {
             $this->merge([
-                'centro_formacion_id' => $this->centro_formacion_id['value'],
+                'tipo_proyecto_st_id' => $this->tipo_proyecto_st_id['value'],
             ]);
         }
 

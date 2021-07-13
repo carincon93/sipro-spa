@@ -22,7 +22,11 @@ class TipoProyectoSt extends Model
      * @var array
      */
     protected $fillable = [
-        'tipo'
+        'centro_formacion_id',
+        'tipologia',
+        'subclasificacion',
+        'mesa_tecnica_id',
+        'tipo_proyecto',
     ];
 
     /**
@@ -44,13 +48,33 @@ class TipoProyectoSt extends Model
     ];
 
     /**
-     * Relationship with EstadoSistemaGestion
+     * Relationship with CentroFormacion
      *
      * @return void
      */
-    public function estadosSistemaGestion()
+    public function centroFormacion()
     {
-        return $this->hasMany(EstadoSistemaGestion::class);
+        return $this->belongsTo(CentroFormacion::class);
+    }
+
+    /**
+     * Relationship with MesaTecnica
+     *
+     * @return void
+     */
+    public function mesaTecnica()
+    {
+        return $this->belongsTo(MesaTecnica::class);
+    }
+
+    /**
+     * Relationship with ServicioTecnologico
+     *
+     * @return object
+     */
+    public function serviciosTecnologicos()
+    {
+        return $this->hasMany(ServicioTecnologico::class);
     }
 
     /**
@@ -63,7 +87,7 @@ class TipoProyectoSt extends Model
     public function scopeFilterTipoProyectoSt($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('tipo', 'ilike', '%' . $search . '%');
+            $query->where('tipologia', 'ilike', '%' . $search . '%');
         });
     }
 }

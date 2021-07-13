@@ -10,7 +10,6 @@ use App\Http\Controllers\ProgramaFormacionController;
 use App\Http\Controllers\LineaProgramaticaController;
 use App\Http\Controllers\RedConocimientoController;
 use App\Http\Controllers\TematicaEstrategicaController;
-use App\Http\Controllers\SectorProductivoController;
 use App\Http\Controllers\MesaTecnicaController;
 use App\Http\Controllers\GrupoInvestigacionController;
 use App\Http\Controllers\LineaInvestigacionController;
@@ -64,8 +63,6 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
-use App\Models\DisCurricular;
-use App\Models\EstadoSistemaGestion;
 use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
@@ -75,10 +72,7 @@ use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
 use App\Models\ProgramaFormacionArticulado;
-use App\Models\SectorProductivo;
 use App\Models\SubareaConocimiento;
-use App\Models\SubclasificacionTipologiaSt;
-use App\Models\TemaPriorizado;
 use App\Models\User;
 
 /*
@@ -297,12 +291,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('tematicas-estrategicas', TematicaEstrategicaController::class)->parameters(['tematicas-estrategicas' => 'tematica-estrategica'])->except(['show']);
 
     /**
-     * Sectores productivos
-     * 
-     */
-    Route::resource('sectores-productivos', SectorProductivoController::class)->parameters(['sectores-productivos' => 'sector-productivo'])->except(['show']);
-
-    /**
      * Mesas técnicas
      * 
      */
@@ -444,28 +432,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae las subclasificaciones de tipología ST
-     */
-    Route::get('web-api/tipologia-st/{tipologia_st}/web-api.subclasificacion-tipologia-st', function ($tipologiaSt) {
-        return response(SubclasificacionTipologiaSt::select('id as value', 'subclasificacion as label')
-            ->where('tipologia_st_id', '=', $tipologiaSt)
-            ->get());
-    })->name('web-api.subclasificacion-tipologia-st');
-
-    /**
-     * Web api
-     * 
-     * Trae los estados del sistema de gestión
-     */
-    Route::get('web-api/tipos-proyecto-st/{tipo_proyecto_st}/estados-sistema-gestion', function ($tipoProyectoSt) {
-        return response(EstadoSistemaGestion::select('id as value', 'estado as label')
-            ->where('tipo_proyecto_st_id', '=', $tipoProyectoSt)
-            ->get());
-    })->name('web-api.estados-sistema-gestion');
-
-    /**
-     * Web api
-     * 
      * Trae las redes de conocimiento 
      */
     Route::get('web-api/redes-conocimiento', function () {
@@ -516,17 +482,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/tematicas-estrategicas', function () {
         return response(TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('nombre', 'ASC')->get());
     })->name('web-api.tematicas-estrategicas');
-
-    /**
-     * Web api
-     * 
-     * Trae los sectores productivos
-     */
-    Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
-        return response(SectorProductivo::selectRaw('mesa_tecnica_sector_productivo.id as value, sectores_productivos.nombre as label')
-            ->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')
-            ->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.sectores-productivos');
 
     /**
      * Web api
