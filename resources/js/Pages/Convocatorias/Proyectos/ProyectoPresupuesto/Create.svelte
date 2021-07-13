@@ -171,7 +171,7 @@
                     {/if}
                 {:else if $form.codigo_uso_presupuestal == '2020200800901'}
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="servicio_edicion_info" value="Nodo" />
+                        <Label required class="mb-4" labelFor="servicio_edicion_info" value="Nodo editorial" />
                         <Select id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={$form.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" required />
                     </div>
                 {/if}
