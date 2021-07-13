@@ -9,6 +9,7 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaRequest;
+use App\Models\DisCurricular;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
 use App\Models\Regional;
@@ -143,7 +144,10 @@ class TaController extends Controller
             'regionales'                            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                        => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                    => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoMunicipiosImpactar'            => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoDisCurriculares'               => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get()
         ]);
     }
 
@@ -158,30 +162,33 @@ class TaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
-        $ta->fecha_inicio                         = $request->fecha_inicio;
-        $ta->fecha_finalizacion                   = $request->fecha_finalizacion;
-        $ta->max_meses_ejecucion                  = $request->max_meses_ejecucion;
-        $ta->resumen                              = $request->resumen;
-        $ta->antecedentes                         = $request->antecedentes;
-        $ta->justificacion                        = $request->justificacion;
-        $ta->marco_conceptual                     = $request->marco_conceptual;
-        $ta->bibliografia                         = $request->bibliografia;
-        $ta->impacto_municipios                   = $request->impacto_municipios;
-        $ta->articulacion_centro_formacion        = $request->articulacion_centro_formacion;
+        $ta->fecha_inicio                       = $request->fecha_inicio;
+        $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
+        $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
+        $ta->resumen                            = $request->resumen;
+        $ta->antecedentes                       = $request->antecedentes;
+        $ta->justificacion                      = $request->justificacion;
+        $ta->marco_conceptual                   = $request->marco_conceptual;
+        $ta->bibliografia                       = $request->bibliografia;
+        $ta->impacto_municipios                 = $request->impacto_municipios;
+        $ta->articulacion_centro_formacion      = $request->articulacion_centro_formacion;
 
-        $ta->resumen_regional                     = $request->resumen_regional;
-        $ta->antecedentes_tecnoacademia           = $request->antecedentes_tecnoacademia;
-        $ta->retos_oportunidades                  = $request->retos_oportunidades;
-        $ta->pertinencia_territorio               = $request->pertinencia_territorio;
-        $ta->metodologia_local                    = $request->metodologia_local;
+        $ta->resumen_regional                   = $request->resumen_regional;
+        $ta->antecedentes_tecnoacademia         = $request->antecedentes_tecnoacademia;
+        $ta->retos_oportunidades                = $request->retos_oportunidades;
+        $ta->pertinencia_territorio             = $request->pertinencia_territorio;
+        $ta->metodologia_local                  = $request->metodologia_local;
 
-        $ta->numero_instituciones                 = count(json_decode($request->nombre_instituciones));
-        $ta->nombre_instituciones                 = $request->nombre_instituciones;
-        $ta->nombre_instituciones_programas       = $request->nombre_instituciones_programas;
+        $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
+        $ta->nombre_instituciones               = $request->nombre_instituciones;
+        $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
+        $ta->nuevas_instituciones               = $request->nuevas_instituciones;
 
         $ta->proyecto->municipios()->sync($request->municipios);
+        $ta->proyecto->municipiosAImpactar()->sync($request->municipios_impactar);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
         $ta->proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->tecnoacademia_linea_tecnoacademia_id);
+        $ta->proyecto->disCurriculares()->sync($request->dis_curricular_id);
 
         $ta->save();
 
@@ -243,10 +250,11 @@ class TaController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->precio_proyecto           = $proyecto->precioProyecto;
+        $proyecto->proyectos_ejecucion       = $proyecto->ta->proyectos_ejecucion;
 
         return Inertia::render('Convocatorias/Proyectos/ArticulacionSennova/Index', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica'),
+            'convocatoria'              => $convocatoria->only('id', 'year', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion'),
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
             'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
@@ -270,6 +278,10 @@ class TaController extends Controller
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
         $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+
+        $proyecto->ta->update([
+            'proyectos_ejecucion' => $request->proyectos_ejecucion
+        ]);
 
         return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
     }

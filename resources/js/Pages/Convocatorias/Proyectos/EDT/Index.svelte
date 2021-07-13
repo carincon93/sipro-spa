@@ -31,6 +31,10 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">EDT</div>
 
+        <div slot="caption">
+            <p class="mb-20 text-center">A continuación, proyecte los EDTs que se realizarán durante la vigencia del proyecto:</p>
+        </div>
+
         <div slot="actions">
             {#if isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.edt.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear EDT</Button>

@@ -60,7 +60,8 @@ class Ta extends Model
         'cantidad_instructores_planta',
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
-        'modificable'
+        'modificable',
+        'proyectos_ejecucion'
     ];
 
     /**

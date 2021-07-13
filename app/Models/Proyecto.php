@@ -158,6 +158,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with Municipio
+     *
+     * @return object
+     */
+    public function municipiosAImpactar()
+    {
+        return $this->belongsToMany(Municipio::class, 'proyecto_municipio_impactar', 'proyecto_id', 'municipio_id')->orderBy('municipios.nombre', 'ASC');
+    }
+
+    /**
      * Relationship with CausaDirecta
      *
      * @return object
@@ -295,6 +305,16 @@ class Proyecto extends Model
     public function tecnoacademiaLineasTecnoacademia()
     {
         return $this->belongsToMany(TecnoacademiaLineaTecnoacademia::class, 'proyecto_linea_tecnoacademia', 'proyecto_id', 'tecnoacademia_linea_tecnoacademia_id');
+    }
+
+    /**
+     * Relationship with DisCurricular
+     *
+     * @return object
+     */
+    public function disCurriculares()
+    {
+        return $this->belongsToMany(DisCurricular::class, 'proyecto_dis_curricular', 'proyecto_id', 'dis_curricular_id');
     }
 
     /**
