@@ -20,9 +20,7 @@
     export let errors
     export let convocatoria
     export let servicioTecnologico
-    export let mesasTecnicas
-    export let tipologiasSt
-    export let tiposProyectoST
+    export let tiposProyectoSt
 
     $: $title = servicioTecnologico ? servicioTecnologico.titulo : null
 
@@ -36,8 +34,12 @@
     let proyectoDialogOpen = true
     let sending = false
 
+    console.log(tiposProyectoSt)
     let form = useForm({
-        centro_formacion_id: servicioTecnologico.proyecto?.centro_formacion_id,
+        tipo_proyecto_st_id: {
+            value: servicioTecnologico.tipo_proyecto_st_id,
+            label: tiposProyectoSt.find((item) => item.value == servicioTecnologico.tipo_proyecto_st_id)?.label,
+        },
         linea_programatica_id: servicioTecnologico.proyecto?.linea_programatica_id,
         titulo: servicioTecnologico.titulo,
         fecha_inicio: servicioTecnologico.fecha_inicio,
@@ -46,22 +48,7 @@
         resumen: servicioTecnologico.resumen,
         antecedentes: servicioTecnologico.antecedentes,
         bibliografia: servicioTecnologico.bibliografia,
-        especificaciones_area: servicioTecnologico.especificaciones_area,
-        mesa_tecnica_id: {
-            value: servicioTecnologico?.mesa_tecnica_sector_productivo?.mesa_tecnica_id,
-            label: mesasTecnicas.find((item) => item.value == servicioTecnologico?.mesa_tecnica_sector_productivo?.mesa_tecnica_id)?.label,
-        },
-        mesa_tecnica_sector_productivo_id: servicioTecnologico.mesa_tecnica_sector_productivo_id,
-        tipologia_st: {
-            value: servicioTecnologico?.subclasificacion_tipologia_st?.tipologia_st_id,
-            label: tipologiasSt.find((item) => item.value == servicioTecnologico?.subclasificacion_tipologia_st?.tipologia_st_id)?.label,
-        },
-        subclasificacion_tipologia_st_id: servicioTecnologico?.subclasificacion_tipologia_st?.tipologia_st_id,
-        tipo_proyecto_st: {
-            value: servicioTecnologico?.estado_sistema_gestion?.tipo_proyecto_st_id,
-            label: tiposProyectoST.find((item) => item.value == servicioTecnologico?.estado_sistema_gestion?.tipo_proyecto_st_id)?.label,
-        },
-        estado_sistema_gestion_id: servicioTecnologico?.estado_sistema_gestion?.id,
+
         identificacion_problema: servicioTecnologico.identificacion_problema,
         pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
         justificacion_problema: servicioTecnologico.justificacion_problema,
@@ -137,11 +124,10 @@
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                        <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Tipo de proyecto" />
                     </div>
                     <div>
-                        {servicioTecnologico.proyecto.centro_formacion.nombre}
+                        <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={$form.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
                     </div>
                 </div>
 
@@ -153,72 +139,7 @@
                         <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
                     </div>
                 </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tipologia_st" value="Tipología ST" />
-                    </div>
-                    <div>
-                        <Select id="tipologia_st" items={tipologiasSt} bind:selectedValue={$form.tipologia_st} error={errors.tipologia_st} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
-                    </div>
-                </div>
-
-                {#if $form.tipologia_st?.value}
-                    <div class="mt-44 grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="subclasificacion_tipologia_st_id" value="Subclasificación de tipología ST" />
-                        </div>
-                        <div>
-                            <DynamicList id="subclasificacion_tipologia_st_id" bind:value={$form.subclasificacion_tipologia_st_id} routeWebApi={route('web-api.subclasificacion-tipologia-st', $form.tipologia_st?.value)} classes="min-h" placeholder="Busque por el de la subclasificación de tipología ST" message={errors.subclasificacion_tipologia_st_id} required />
-                        </div>
-                    </div>
-                {/if}
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tipo_proyecto_st" value="Tipo de proyecto" />
-                    </div>
-                    <div>
-                        <Select id="tipo_proyecto_st" items={tiposProyectoST} bind:selectedValue={$form.tipo_proyecto_st} error={errors.tipo_proyecto_st} autocomplete="off" placeholder="Seleccione un tipo de proyecto ST" required />
-                    </div>
-                </div>
-
-                {#if $form.tipo_proyecto_st?.value}
-                    <div class="mt-44 grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
-                        </div>
-                        <div>
-                            <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st?.value)} classes="min-h" placeholder="Busque por el nombre del estado de sistema de gestión" message={errors.estado_sistema_gestion_id} required />
-                        </div>
-                    </div>
-                {/if}
             </fieldset>
-
-            <hr class="mt-32" />
-
-            <div class="mt-10">
-                <h1 class="text-2xl text-center">Mesa técnica a la que pertenece el proyecto</h1>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="mesa_tecnica_id" value="Mesa técnica ST" />
-                </div>
-                <div>
-                    <Select id="mesa_tecnica_id" items={mesasTecnicas} bind:selectedValue={$form.mesa_tecnica_id} error={errors.mesa_tecnica_id} autocomplete="off" placeholder="Seleccione una mesa técnica" required />
-                </div>
-            </div>
-
-            {#if $form.mesa_tecnica_id?.value}
-                <div class="mt-10 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="mesa_tecnica_sector_productivo_id" value="Sectores priorizados de Colombia productiva" />
-                    </div>
-                    <div>
-                        <DynamicList id="mesa_tecnica_sector_productivo_id" bind:value={$form.mesa_tecnica_sector_productivo_id} routeWebApi={route('web-api.sectores-productivos', [$form.mesa_tecnica_id?.value])} classes="min-h" placeholder="Busque por el nombre del sector productivo" message={errors.mesa_tecnica_sector_productivo_id} required />
-                    </div>
-                </div>
-            {/if}
 
             <hr class="mt-32 mb-32" />
 
