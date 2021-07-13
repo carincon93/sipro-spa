@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <p class="text-center">Fecha del convenio</p>
+                        <p class="text-center">Fechas de vigencia Convenio/Acuerdos</p>
                         <div class="mt-4 flex items-start justify-around">
                             <div class="mt-4 flex {errors.fecha_inicio_convenio ? '' : 'items-center'}">
                                 <Label required labelFor="fecha_inicio_convenio" class={errors.fecha_inicio_convenio ? 'top-3.5 relative' : ''} value="Del" />

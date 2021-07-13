@@ -34,7 +34,7 @@
 
         <div slot="caption">
             {#if proyecto.codigo_linea_programatica == 70}
-                <InfoMessage message="En caso de tener un acuerdo para operación de la Tecnoacademia en una infraestructura que no es propia debe adjuntar el soporte al momento de crear la entidad." />
+                <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
             {/if}
         </div>
 

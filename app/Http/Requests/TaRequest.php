@@ -40,11 +40,14 @@ class TaRequest extends FormRequest
                 'marco_conceptual'                          => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
+                'municipios_impactar*'                      => ['required', 'integer', 'exists:municipios,id'],
+                'programas_formacion_articulados*'          => ['required', 'integer', 'exists:programas_formacion,id'],
+                'dis_curricular_id*'                        => ['required', 'integer', 'exists:dis_curriculares,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'articulacion_centro_formacion'             => ['required', 'string'],
                 'nombre_instituciones'                      => ['required', 'json'],
                 'nombre_instituciones_programas'            => ['required', 'json'],
-                'diseno_curricular'                         => ['required'],
+                'nuevas_instituciones'                      => ['required', 'json'],
                 'pertinencia_territorio'                    => ['required', 'max:40000', 'string'],
                 'retos_oportunidades'                       => ['required', 'max:40000', 'string'],
             ];
@@ -82,6 +85,22 @@ class TaRequest extends FormRequest
             }
         }
 
+        if (is_array($this->municipios_impactar)) {
+            if (isset($this->municipios_impactar['value']) && is_numeric($this->municipios_impactar['value'])) {
+                $this->merge([
+                    'municipios_impactar' => $this->municipios_impactar['value'],
+                ]);
+            } else {
+                $municipiosImpactar = [];
+                foreach ($this->municipios_impactar as $municipio) {
+                    if (is_array($municipio)) {
+                        array_push($municipiosImpactar, $municipio['value']);
+                    }
+                }
+                $this->merge(['municipios_impactar' => $municipiosImpactar]);
+            }
+        }
+
         if (is_array($this->programas_formacion_articulados)) {
             if (isset($this->programas_formacion_articulados['value']) && is_numeric($this->programas_formacion_articulados['value'])) {
                 $this->merge([
@@ -95,6 +114,22 @@ class TaRequest extends FormRequest
                     }
                 }
                 $this->merge(['programas_formacion_articulados' => $programasFormacionArticulados]);
+            }
+        }
+
+        if (is_array($this->dis_curricular_id)) {
+            if (isset($this->dis_curricular_id['value']) && is_numeric($this->dis_curricular_id['value'])) {
+                $this->merge([
+                    'dis_curricular_id' => $this->dis_curricular_id['value'],
+                ]);
+            } else {
+                $programasDisCurricular = [];
+                foreach ($this->dis_curricular_id as $programaFormacion) {
+                    if (is_array($programaFormacion)) {
+                        array_push($programasDisCurricular, $programaFormacion['value']);
+                    }
+                }
+                $this->merge(['dis_curricular_id' => $programasDisCurricular]);
             }
         }
 
@@ -119,9 +154,5 @@ class TaRequest extends FormRequest
                 'linea_programatica' => $this->linea_programatica['codigo'],
             ]);
         }
-
-        $this->merge([
-            'diseno_curricular' => 0
-        ]);
     }
 }

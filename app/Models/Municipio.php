@@ -69,6 +69,16 @@ class Municipio extends Model
     }
 
     /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyectosImpactados()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyecto_municipio_impactar', 'municipio_id', 'proyecto_id')->orderBy('municipios.nombre', 'ASC');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

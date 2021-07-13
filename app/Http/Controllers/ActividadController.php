@@ -49,10 +49,17 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
-            'convocatoria'   => $convocatoria->only('id'),
-            'proyecto'       => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
-            'filters'        => request()->all('search'),
-            'actividades'    => Actividad::whereIn(
+            'convocatoria'      => $convocatoria->only('id'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
+            'filters'           => request()->all('search'),
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->with('objetivoEspecifico')->orderBy('created_at', 'ASC')
+                ->filterActividad(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'actividadesGantt'  => Actividad::whereIn(
                 'objetivo_especifico_id',
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;

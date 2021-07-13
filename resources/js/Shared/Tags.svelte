@@ -36,12 +36,7 @@
             })
 
             // Chainable event listeners
-            tagify
-                .on('add', onAddTag)
-                .on('remove', onRemoveTag)
-                .on('input', onInput)
-                .on('edit', onTagEdit)
-                .on('dropdown:hide dropdown:show', (e) => console.log(e.type))
+            tagify.on('add', onAddTag).on('remove', onRemoveTag).on('input', onInput).on('edit', onTagEdit).on('dropdown:hide dropdown:show')
         }
     })
 
