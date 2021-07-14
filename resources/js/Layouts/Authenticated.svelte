@@ -218,10 +218,6 @@
             {/if}
 
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('sectores-productivos.index'))} variant={route().current('sectores-productivos.*') ? 'raised' : 'outlined'} class="p-2">Sectores productivos</Button>
-            {/if}
-
-            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('semilleros-investigacion.index'))} variant={route().current('semilleros-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Semilleros de investigación</Button>
             {/if}
 
