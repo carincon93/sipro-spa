@@ -46,10 +46,27 @@ class TaController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        if (auth()->user()->hasRole(12)) {
+            $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+        } else {
+            $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Ta/Create', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'tecnoacademias'            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'authUserCentroFormacion'   => Auth::user()->centroFormacion->id
+            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'tecnoAcademias' => $tecnoAcademias
         ]);
     }
 
@@ -136,6 +153,24 @@ class TaController extends Controller
         $ta->precio_proyecto           = $ta->proyecto->precioProyecto;
         $ta->proyecto->centroFormacion;
 
+        if (auth()->user()->hasRole(12)) {
+            $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+        } else {
+            $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
             'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
             'ta'                                    => $ta,
@@ -147,7 +182,8 @@ class TaController extends Controller
             'proyectoMunicipiosImpactar'            => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
             'proyectoDisCurriculares'               => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get()
+            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'tecnoAcademias'                        => $tecnoAcademias
         ]);
     }
 

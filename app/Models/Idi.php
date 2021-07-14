@@ -216,7 +216,7 @@ class Idi extends Model
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
-        } else if ($user->hasRole(18)) {
+        } else if ($user->getAllPermissions()->where('id', 14)->first()) {
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')

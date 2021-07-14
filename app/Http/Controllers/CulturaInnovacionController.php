@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\ProyectoRolSennovaValidationTrait;
+use App\Models\CentroFormacion;
 use Inertia\Inertia;
 
 class CulturaInnovacionController extends Controller
@@ -42,10 +43,16 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        if (auth()->user()->hasRole(15)) {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
+        } else {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
+            'centrosFormacion'  => $centrosFormacion
         ]);
     }
 

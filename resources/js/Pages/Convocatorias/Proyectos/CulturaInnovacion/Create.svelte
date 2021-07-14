@@ -16,7 +16,7 @@
     export let errors
     export let convocatoria
     export let roles
-    export let authUserRegional
+    export let centrosFormacion
 
     $: $title = 'Crear proyecto de apropiación de la cultura de la innovación'
 
@@ -110,17 +110,17 @@
                     <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
                 <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
             </div>
 
-            {#if $form.centro_formacion_id}
+            {#if $form.centro_formacion_id?.value}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
                     </div>
                     <div>
-                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id?.value)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
                     </div>
                 </div>
             {/if}
