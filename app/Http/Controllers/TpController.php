@@ -7,6 +7,7 @@ use App\Models\Proyecto;
 use App\Models\Tp;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TpRequest;
+use App\Models\NodoTecnoparque;
 use App\Models\Regional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class TpController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Tp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
             'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
-            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
+            'nodosTecnoParque'  => NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get()
         ]);
     }
 
@@ -57,8 +58,10 @@ class TpController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        $nodoTecnoParque = NodoTecnoparque::find($request->nodo_tecnoparque_id);
+
         $proyecto = new Proyecto();
-        $proyecto->centroFormacion()->associate($request->centro_formacion_id);
+        $proyecto->centroFormacion()->associate($nodoTecnoParque->centro_formacion_id);
         $proyecto->lineaProgramatica()->associate(4);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
@@ -132,6 +135,7 @@ class TpController extends Controller
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'nodosTecnoParque'   => NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get()
         ]);
     }
 

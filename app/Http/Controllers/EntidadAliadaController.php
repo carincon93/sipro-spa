@@ -58,7 +58,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Create', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'modificable'),
             'actividades'   => Actividad::whereIn(
                 'objetivo_especifico_id',
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {

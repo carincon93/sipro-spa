@@ -27,7 +27,6 @@ class TpRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'nodo_tecnoparque_id'                       => ['required', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'tp', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'tp', null)],
@@ -43,7 +42,6 @@ class TpRequest extends FormRequest
             ];
         } else {
             return [
-                'centro_formacion_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
                 'nodo_tecnoparque_id'                       => ['required', 'min:0', 'max:2147483647', 'exists:nodos_tecnoparque,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'tp', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'tp', null)],
