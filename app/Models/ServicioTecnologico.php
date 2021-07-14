@@ -141,7 +141,7 @@ class ServicioTecnologico extends Model
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
                 ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
-        } else if ($user->hasRole(19)) {
+        } else if ($user->getAllPermissions()->where('id', 16)->first()) {
             $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
                 ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')

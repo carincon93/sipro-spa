@@ -7,15 +7,15 @@
 
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Select from '@/Shared/Select'
     import InputError from '@/Shared/InputError'
     import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let convocatoria
-    export let authUserCentroFormacion
+    export let tecnoAcademias
 
-    $: $title = 'Crear proyecto Tecnoacademia - Tecnoparque'
+    $: $title = 'Crear proyecto TecnoAcademia'
 
     /**
      * Permisos
@@ -53,13 +53,18 @@
     }
 
     let lineasTecnoaAcademia
-    $: if ($form.tecnoacademia_id) {
-        getLineasTecnoacademia()
+    let oldTecnoAcademiaValue = null
+
+    $: if ($form.tecnoacademia_id?.value) {
+        if (oldTecnoAcademiaValue != $form.tecnoacademia_id?.value) {
+            getLineasTecnoacademia($form.tecnoacademia_id?.value)
+        }
     }
-    async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+    async function getLineasTecnoacademia(tes) {
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tes]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
+            oldTecnoAcademiaValue = $form.tecnoacademia_id?.value
         }
     }
 </script>
@@ -109,40 +114,20 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
+                    <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                 </div>
                 <div>
-                    <DynamicList
-                        id="tecnoacademia_id"
-                        bind:value={$form.tecnoacademia_id}
-                        noOptionsText="No hay tecnoacademias registradas para este centro de formación. Por favor seleccione un centro de formación diferente."
-                        routeWebApi={route('web-api.centros-formacion.tecnoacademias', [authUserCentroFormacion])}
-                        placeholder="Busque por el nombre de la Tecnoacademia"
-                        message={errors.tecnoacademia_id}
-                        bind:recurso={tecnoacademia}
-                        required
-                    />
+                    <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
                 </div>
             </div>
 
-            {#if $form.tecnoacademia_id}
+            {#if $form.tecnoacademia_id?.value}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                     </div>
                     <div>
                         <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
-                        {#if lineasTecnoaAcademia?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
                     </div>
                 </div>
             {/if}

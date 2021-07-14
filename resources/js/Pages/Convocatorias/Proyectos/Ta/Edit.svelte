@@ -32,6 +32,7 @@
     export let proyectoProgramasFormacionArticulados
     export let proyectoDisCurriculares
     export let disCurriculares
+    export let tecnoAcademias
 
     $: $title = ta ? ta.titulo : null
 
@@ -76,7 +77,10 @@
         nuevas_instituciones: ta.nuevas_instituciones,
         articulacion_centro_formacion: ta.articulacion_centro_formacion,
         bibliografia: ta.bibliografia,
-        tecnoacademia_id: tecnoacademiaRelacionada,
+        tecnoacademia_id: {
+            value: tecnoacademiaRelacionada,
+            label: tecnoAcademias.find((item) => item.value == tecnoacademiaRelacionada)?.label,
+        },
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
@@ -172,7 +176,7 @@
 
     let lineasTecnoaAcademia
     async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
         }
@@ -245,18 +249,10 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
+                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                     </div>
                     <div>
-                        <DynamicList
-                            id="tecnoacademia_id"
-                            bind:value={$form.tecnoacademia_id}
-                            noOptionsText="No hay tecnoacademias registradas para este centro de formación. Por favor seleccione un centro de formación diferente."
-                            routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])}
-                            placeholder="Busque por el nombre de la Tecnoacademia"
-                            message={errors.tecnoacademia_id}
-                            required
-                        />
+                        <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
                     </div>
                 </div>
             </fieldset>

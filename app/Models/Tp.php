@@ -146,7 +146,7 @@ class Tp extends Model
                 ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
-        } else if ($user->hasRole(17)) {
+        } else if ($user->getAllPermissions()->where('id', 20)->first()) {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
                 ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')

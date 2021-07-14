@@ -8,6 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
+use App\Models\CentroFormacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -41,10 +42,16 @@ class IdiController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        if (auth()->user()->hasRole(6)) {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
+        } else {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'authUserRegional'  => Auth::user()->centroFormacion->regional->id
+            'centrosFormacion'  => $centrosFormacion
         ]);
     }
 

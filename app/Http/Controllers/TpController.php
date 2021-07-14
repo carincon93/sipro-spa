@@ -41,10 +41,16 @@ class TpController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        if (auth()->user()->hasRole(16)) {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+        } else {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Tp/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
             'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
-            'nodosTecnoParque'  => NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get()
+            'nodosTecnoParque'  => $nodosTecnoParque
         ]);
     }
 
@@ -130,12 +136,18 @@ class TpController extends Controller
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;
 
+        if (auth()->user()->hasRole(16)) {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+        } else {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
+        }
+
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
             'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'nodosTecnoParque'   => NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get()
+            'nodosTecnoParque'   => $nodosTecnoParque
         ]);
     }
 
