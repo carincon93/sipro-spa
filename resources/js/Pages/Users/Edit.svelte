@@ -210,12 +210,12 @@
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4 focus:text-indigo-500">
-                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp.nodo_tecnoparque ? proyecto.tp.nodo_tecnoparque.nombre : proyecto.ta.tecnoacademia_linea_tecnologica ? proyecto.ta.tecnoacademia_linea_tecnologica.tecnoacademia.nombre : null}
+                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp?.nodo_tecnoparque ? proyecto.tp?.nodo_tecnoparque.nombre : proyecto.tecnoacademia_lineas_tecnoacademia ? proyecto.tecnoacademia_lineas_tecnoacademia[0].tecnoacademia.nombre : null}
                             </p>
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4">
-                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta ? proyecto.ta.fecha_ejecucion : proyecto.tp ? proyecto.tp.fecha_ejecucion : null}
+                                {proyecto.idi ? proyecto.idi.fecha_ejecucion : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.fecha_ejecucion : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.fecha_ejecucion : proyecto.ta ? proyecto.ta.fecha_ejecucion : proyecto.tp ? proyecto.tp?.fecha_ejecucion : null}
                             </p>
                         </td>
                         <td class="border-t td-actions">

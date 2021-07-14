@@ -37,7 +37,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.articulacion-sennova.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -55,7 +55,7 @@
     <p class="text-center mb-8">A continuación, registre la información relacionada con la articulación de la línea de TecnoAcademia con las otras líneas de SENNOVA en el centro y la regional:</p>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && proyecto.modificable == true) ? undefined : true}>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" for="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
@@ -89,12 +89,12 @@
                 <div>
                     <Textarea label="Proyectos / Iniciativas" maxlength="40000" id="proyectos_ejecucion" error={errors.proyectos_ejecucion} bind:value={$form.proyectos_ejecucion} required />
                 </div>
-                <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                    {/if}
-                </div>
             </div>
         </fieldset>
+        <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            {#if isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true)}
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+            {/if}
+        </div>
     </form>
 </AuthenticatedLayout>

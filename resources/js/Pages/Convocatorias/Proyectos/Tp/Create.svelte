@@ -6,7 +6,6 @@
 
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Select from '@/Shared/Select'
     import InputError from '@/Shared/InputError'
     import Input from '@/Shared/Input'
@@ -14,7 +13,7 @@
 
     export let errors
     export let convocatoria
-    export let authUserRegional
+    export let nodosTecnoParque
     export let rolesTp
 
     $: $title = 'Crear proyecto Tecnoparque'
@@ -97,24 +96,19 @@
                     </div>
                 {/if}
             </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                </div>
-                <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
-                </div>
-            </div>
 
-            {#if $form.centro_formacion_id}
+            {#if nodosTecnoParque.length > 0}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
                     </div>
                     <div>
-                        <DynamicList id="nodo_tecnoparque_id" bind:value={$form.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', $form.centro_formacion_id)} message={errors.nodo_tecnoparque_id} required />
+                        <Select id="nodo_tecnoparque_id" items={nodosTecnoParque} bind:selectedValue={$form.nodo_tecnoparque_id} error={errors.nodo_tecnoparque_id} autocomplete="off" placeholder="Seleccione un nodo TecnoParque" required />
                     </div>
+                </div>
+            {:else}
+                <div class="mt-44">
+                    <InfoMessage message="Su regional no cuenta con nodos TecnoParque." alertMsg={true} />
                 </div>
             {/if}
 
@@ -143,7 +137,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034 - 04/03/2021 03:46:07 p.m" />
+                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034" />
                 </div>
                 <div>
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
