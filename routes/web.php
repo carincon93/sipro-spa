@@ -33,6 +33,7 @@ use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\ReglaRolStController;
 use App\Http\Controllers\ReglaRolTaController;
 use App\Http\Controllers\TaController;
 use App\Http\Controllers\TpController;
@@ -546,6 +547,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Servicios tecnológicos - Estrategia  nacional
      * 
      */
+    Route::resource('reglas-roles-st', ReglaRolStController::class)->parameters(['reglas-roles-st' => 'regla-rol-st'])->except(['show']);
     Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/infraestructura', [ServicioTecnologicoController::class, 'updateEspecificacionesInfraestructura'])->name('convocatorias.servicios-tecnologicos.infraestructura');
     Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
 
