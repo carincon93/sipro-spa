@@ -60,8 +60,10 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        $tipoProyectoSt = TipoProyectoSt::find($request->tipo_proyecto_st_id);
+
         $proyecto = new Proyecto();
-        $proyecto->centroFormacion()->associate($request->centro_formacion_id);
+        $proyecto->centroFormacion()->associate($tipoProyectoSt->centro_formacion_id);
         $proyecto->lineaProgramatica()->associate(10);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
