@@ -25,7 +25,9 @@ class Tecnoacademia extends Model
     protected $fillable = [
         'nombre',
         'modalidad',
-        'linea_tecnologica_id',
+        'fecha_creacion',
+        'foco',
+        'linea_tecnoacademia_id',
         'centro_formacion_id'
     ];
 
@@ -58,13 +60,13 @@ class Tecnoacademia extends Model
     }
 
     /**
-     * Relationship with LineaTecnologica
+     * Relationship with LineaTecnoacademia
      *
      * @return object
      */
-    public function lineasTecnologicas()
+    public function lineasTecnoacademia()
     {
-        return $this->belongsToMany(LineaTecnologica::class, 'tecnoacademia_linea_tecnologica', 'tecnoacademia_id', 'linea_tecnologica_id');
+        return $this->belongsToMany(LineaTecnoacademia::class, 'tecnoacademia_linea_tecnoacademia', 'tecnoacademia_id', 'linea_tecnoacademia_id');
     }
 
     /**

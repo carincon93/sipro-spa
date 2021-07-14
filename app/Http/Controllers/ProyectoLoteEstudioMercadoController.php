@@ -85,7 +85,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
-            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
@@ -95,8 +95,21 @@ class ProyectoLoteEstudioMercadoController extends Controller
          * Línea 23
          */
         if ($proyecto->lineaProgramatica->codigo == 23) {
-            if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+            if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+            }
+        }
+
+        /**
+         * Línea 69
+         */
+        if ($proyecto->lineaProgramatica->codigo == 69) {
+            if (PresupuestoValidationTrait::primerReglaTp($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria de rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+            }
+
+            if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
             }
         }
 
@@ -214,7 +227,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
-            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto,  $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
                 return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$porcentajeProyecto}) COP total del proyecto. Vuelva a diligenciar.");
             }
@@ -224,8 +237,21 @@ class ProyectoLoteEstudioMercadoController extends Controller
          * Línea 23
          */
         if ($proyecto->lineaProgramatica->codigo == 23) {
-            if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto,  $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+            if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+            }
+        }
+
+        /**
+         * Línea 69
+         */
+        if ($proyecto->lineaProgramatica->codigo == 69) {
+            if (PresupuestoValidationTrait::primerReglaTp($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria de los rubros: adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+            }
+
+            if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
             }
         }
 
@@ -254,7 +280,7 @@ class ProyectoLoteEstudioMercadoController extends Controller
             $this->updateEstudioMercado($proyecto, $lote, $request->tercer_estudio_mercado_id, $request->tercer_empresa,  $request->tercer_valor, $request->tercer_archivo, true);
         }
 
-        return redirect()->route('convocatorias.proyectos.presupuesto.lote.index', [$convocatoria, $proyecto, $presupuesto])->with('success', 'El recurso se ha actualizado correctamente.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     public function updateEstudioMercado($proyecto, $lote, $estudioMercadoId, $empresa, $valor, $archivo, $tercerEstudioMercado)

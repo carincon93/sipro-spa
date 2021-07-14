@@ -13,13 +13,14 @@
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
+    import Textarea from '@/Shared/Textarea'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let tecnoacademia
-    export let lineasTecnologicas
+    export let lineasTecnoacademia
     export let modalidades
-    export let lineasTecnologicasRelacionadas
+    export let lineasTecnoacademiaRelacionadas
 
     $: $title = tecnoacademia ? tecnoacademia.nombre : null
 
@@ -38,7 +39,9 @@
             label: modalidades.find((item) => item.value == tecnoacademia.modalidad)?.label,
         },
         centro_formacion_id: tecnoacademia.centro_formacion_id,
-        linea_tecnologica_id: lineasTecnologicasRelacionadas,
+        fecha_creacion: tecnoacademia.fecha_creacion,
+        foco: tecnoacademia.foco,
+        linea_tecnologica_id: lineasTecnoacademiaRelacionadas,
     })
 
     function submit() {
@@ -90,10 +93,19 @@
                     <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad" required />
                 </div>
 
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="fecha_creacion" value="Fecha de creación" />
+                    <input label="Fecha de creación" id="fecha_creacion" type="date" class="mt-1 p-4" bind:value={$form.fecha_creacion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Textarea label="Foco de la TecnoAcademia" maxlength="40000" id="foco" bind:value={$form.foco} error={errors.foco} required />
+                </div>
+
                 <div class="mt-10">
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas tecnológicas" />
+                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas de TecnoAcademia" />
                     <div class="mt-10 grid grid-cols-2">
-                        {#each lineasTecnologicas as { id, nombre }, i}
+                        {#each lineasTecnoacademia as { id, nombre }, i}
                             <FormField>
                                 <Checkbox bind:group={$form.linea_tecnologica_id} value={id} />
                                 <span slot="label">{nombre}</span>

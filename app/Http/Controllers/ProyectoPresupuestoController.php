@@ -78,13 +78,8 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        /**
-         * Línea 66 y 82
-         */
-        if ($proyecto->lineaProgramatica->codigo == 66 || $proyecto->lineaProgramatica->codigo == 82) {
-            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
-            }
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
         }
 
         $presupuesto = new ProyectoPresupuesto();
@@ -173,13 +168,8 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        /**
-         * Línea 66 y 82
-         */
-        if ($proyecto->lineaProgramatica->codigo == 66 || $proyecto->lineaProgramatica->codigo == 82) {
-            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
-            }
+        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
         }
 
         if ($convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado == false) {

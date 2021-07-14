@@ -10,7 +10,6 @@ use App\Http\Controllers\ProgramaFormacionController;
 use App\Http\Controllers\LineaProgramaticaController;
 use App\Http\Controllers\RedConocimientoController;
 use App\Http\Controllers\TematicaEstrategicaController;
-use App\Http\Controllers\SectorProductivoController;
 use App\Http\Controllers\MesaTecnicaController;
 use App\Http\Controllers\GrupoInvestigacionController;
 use App\Http\Controllers\LineaInvestigacionController;
@@ -34,6 +33,7 @@ use App\Http\Controllers\ProyectoPresupuestoController;
 use App\Http\Controllers\AnalisisRiesgoController;
 use App\Http\Controllers\EntidadAliadaController;
 use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\ReglaRolStController;
 use App\Http\Controllers\ReglaRolTaController;
 use App\Http\Controllers\TaController;
 use App\Http\Controllers\TpController;
@@ -42,13 +42,15 @@ use App\Http\Controllers\UsoPresupuestalController;
 use App\Http\Controllers\ProyectoLoteEstudioMercadoController;
 use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
-use App\Http\Controllers\LineaTecnologicaController;
+use App\Http\Controllers\LineaTecnoacademiaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
 use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
+use App\Http\Controllers\DisCurricularController;
 use App\Http\Controllers\EdtController;
-
+use App\Http\Controllers\InventarioEquipoController;
+use App\Http\Controllers\ReglaRolTpController;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
@@ -62,20 +64,16 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
-use App\Models\EstadoSistemaGestion;
 use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
 use App\Models\Tecnoacademia;
-use App\Models\LineaTecnologica;
+use App\Models\LineaTecnoacademia;
 use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
 use App\Models\ProgramaFormacionArticulado;
-use App\Models\SectorProductivo;
 use App\Models\SubareaConocimiento;
-use App\Models\SubclasificacionTipologiaSt;
-use App\Models\TemaPriorizado;
 use App\Models\User;
 
 /*
@@ -294,12 +292,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('tematicas-estrategicas', TematicaEstrategicaController::class)->parameters(['tematicas-estrategicas' => 'tematica-estrategica'])->except(['show']);
 
     /**
-     * Sectores productivos
-     * 
-     */
-    Route::resource('sectores-productivos', SectorProductivoController::class)->parameters(['sectores-productivos' => 'sector-productivo'])->except(['show']);
-
-    /**
      * Mesas técnicas
      * 
      */
@@ -330,10 +322,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('tecnoacademias', TecnoacademiaController::class)->parameters(['tecnoacademias' => 'tecnoacademia'])->except(['show']);
 
     /**
-     * Líenas tecnológicas
+     * Líneas tecnoacadedmia
      * 
      */
-    Route::resource('lineas-tecnologicas', LineaTecnologicaController::class)->parameters(['lineas-tecnologicas' => 'linea-tecnologica'])->except(['show']);
+    Route::resource('lineas-tecnoacademia', LineaTecnoacademiaController::class)->parameters(['lineas-tecnoacademia' => 'linea-tecnoacademia'])->except(['show']);
 
     /**
      * Grupos de investigación
@@ -407,11 +399,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae las líneas tecnológicas
+     * Trae las líneas tecnoacademia
      */
-    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnologicas', function ($tecnoacademia) {
-        return response(LineaTecnologica::select('tecnoacademia_linea_tecnologica.id as value', 'lineas_tecnologicas.nombre as label')->join('tecnoacademia_linea_tecnologica', 'lineas_tecnologicas.id', 'tecnoacademia_linea_tecnologica.linea_tecnologica_id')->where('tecnoacademia_linea_tecnologica.tecnoacademia_id', $tecnoacademia)->get());
-    })->name('web-api.tecnoacademias.lineas-tecnologicas');
+    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', function ($tecnoacademia) {
+        return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());
+    })->name('web-api.tecnoacademias.lineas-tecnoacademia');
 
     /**
      * Web api
@@ -437,28 +429,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 ->get());
         }
     })->name('web-api.lineas-programaticas');
-
-    /**
-     * Web api
-     * 
-     * Trae las subclasificaciones de tipología ST
-     */
-    Route::get('web-api/tipologia-st/{tipologia_st}/web-api.subclasificacion-tipologia-st', function ($tipologiaSt) {
-        return response(SubclasificacionTipologiaSt::select('id as value', 'subclasificacion as label')
-            ->where('tipologia_st_id', '=', $tipologiaSt)
-            ->get());
-    })->name('web-api.subclasificacion-tipologia-st');
-
-    /**
-     * Web api
-     * 
-     * Trae los estados del sistema de gestión
-     */
-    Route::get('web-api/tipos-proyecto-st/{tipo_proyecto_st}/estados-sistema-gestion', function ($tipoProyectoSt) {
-        return response(EstadoSistemaGestion::select('id as value', 'estado as label')
-            ->where('tipo_proyecto_st_id', '=', $tipoProyectoSt)
-            ->get());
-    })->name('web-api.estados-sistema-gestion');
 
     /**
      * Web api
@@ -517,17 +487,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     /**
      * Web api
      * 
-     * Trae los sectores productivos
-     */
-    Route::get('web-api/sectores-productivos/{mesa_tecnica}', function ($mesaTecnica) {
-        return response(SectorProductivo::selectRaw('mesa_tecnica_sector_productivo.id as value, sectores_productivos.nombre as label')
-            ->join('mesa_tecnica_sector_productivo', 'sectores_productivos.id', 'mesa_tecnica_sector_productivo.sector_productivo_id')
-            ->where('mesa_tecnica_sector_productivo.mesa_tecnica_id', $mesaTecnica)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.sectores-productivos');
-
-    /**
-     * Web api
-     * 
      * Trae las subtipologías Minciencias
      */
     Route::get('web-api/subtipologias-minciencias', function () {
@@ -538,6 +497,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/radicar-proyecto', [ProyectoController::class, 'sendProject'])->name('convocatorias.proyectos.send');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'returnProject'])->name('convocatorias.proyectos.return-project');
+
+    /**
+     * Inventario equipos - Estrategia regional
+     * 
+     */
+    Route::resource('convocatorias.proyectos.inventario-equipos', InventarioEquipoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'inventario-equipos' => 'inventario-equipo'])->except(['show']);
+
 
     /**
      * Idi - Estrategia regional
@@ -551,7 +517,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada', MiembroEntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada', 'miembros-entidad-aliada' => 'miembro-entidad-aliada'])->except(['show']);
 
     /**
-     * cultura-innovacion - Estrategia Nacional
+     * Cultura innovacion - Estrategia Nacional
      * 
      */
     Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
@@ -561,6 +527,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Tp - Estrategia nacional
      * 
      */
+    Route::resource('reglas-roles-tp', ReglaRolTpController::class)->parameters(['reglas-roles-tp' => 'regla-rol-tp'])->except(['show']);
     Route::resource('convocatorias.tp', TpController::class)->parameters(['convocatorias' => 'convocatoria', 'tp' => 'tp'])->except(['show']);
 
     /**
@@ -570,6 +537,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'showArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'storeArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova.store');
+    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/discurriculares', [DisCurricularController::class, 'storeDisCurricular'])->name('convocatorias.proyectos.dis-curriculares.store');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/rol/sennova/ta', [TaController::class, 'updateCantidadRolesTa'])->name('convocatorias.proyectos.rol-sennova-ta.update');
     Route::resource('reglas-roles-ta', ReglaRolTaController::class)->parameters(['reglas-roles-ta' => 'regla-rol-ta'])->except(['show']);
     Route::resource('convocatorias.proyectos.edt', EdtController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'edt' => 'edt'])->except(['show']);
@@ -579,6 +547,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Servicios tecnológicos - Estrategia  nacional
      * 
      */
+    Route::resource('reglas-roles-st', ReglaRolStController::class)->parameters(['reglas-roles-st' => 'regla-rol-st'])->except(['show']);
     Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/infraestructura', [ServicioTecnologicoController::class, 'updateEspecificacionesInfraestructura'])->name('convocatorias.servicios-tecnologicos.infraestructura');
     Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
 

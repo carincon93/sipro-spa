@@ -6,7 +6,6 @@
     import Dialog from '@/Shared/Dialog'
 
     import Input from '@/Shared/Input'
-    import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
 

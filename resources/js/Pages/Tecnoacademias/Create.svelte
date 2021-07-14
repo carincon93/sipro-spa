@@ -11,6 +11,7 @@
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
+    import Textarea from '@/Shared/Textarea'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
@@ -28,6 +29,8 @@
     let sending = false
     let form = useForm({
         nombre: '',
+        foco: '',
+        fecha_creacion: '',
         modalidad: null,
         centro_formacion_id: null,
         linea_tecnologica_id: [],
@@ -74,8 +77,17 @@
                     <Select id="modalidad" items={modalidades} bind:selectedValue={$form.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad" required />
                 </div>
 
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="fecha_creacion" value="Fecha de creación" />
+                    <input label="Fecha de creación" id="fecha_creacion" type="date" class="mt-1 p-4" bind:value={$form.fecha_creacion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Textarea label="Foco de la TecnoAcademia" maxlength="40000" id="foco" bind:value={$form.foco} error={errors.foco} required />
+                </div>
+
                 <div class="mt-10">
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas tecnológicas" />
+                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas de TecnoAcademia" />
                     <div class="mt-10 grid grid-cols-2">
                         {#each lineasTecnologicas as { id, nombre }, i}
                             <FormField>

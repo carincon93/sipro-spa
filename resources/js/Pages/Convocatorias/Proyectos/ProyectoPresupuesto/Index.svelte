@@ -186,7 +186,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -42,11 +42,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 21, 14, 16, 15, 20])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8, 11])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 5, 8, 11, 21, 14, 16, 15, 20])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600">
                             {usoPresupuestal.descripcion}
                         </a>
@@ -120,7 +120,7 @@
 
                             <td class="border-t px-6 pt-6 pb-4">
                                 <DataTableMenu class={proyectoLotesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (checkPermission(authUser, [3, 5, 8, 11]) && proyecto.modificable == true)}
+                                    {#if isSuperAdmin || (checkPermission(authUser, [3, 5, 8, 11, 21, 14, 16, 15, 20]) && proyecto.modificable == true)}
                                         <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.lote.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, loteEstudioMercado.id]))}>
                                             <Text>Ver detalles</Text>
                                         </Item>

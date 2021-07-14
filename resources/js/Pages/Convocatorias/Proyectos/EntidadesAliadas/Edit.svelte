@@ -90,7 +90,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10, 21, 14, 15])}
                         <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -210,7 +210,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <p class="text-center">Fecha del convenio</p>
+                            <p class="text-center">Fechas de vigencia Convenio/Acuerdos</p>
                             <div class="mt-4 flex items-start justify-around">
                                 <div class="mt-4 flex {errors.fecha_inicio_convenio ? '' : 'items-center'}">
                                     <Label required labelFor="fecha_inicio_convenio" class={errors.fecha_inicio_convenio ? 'top-3.5 relative' : ''} value="Del" />

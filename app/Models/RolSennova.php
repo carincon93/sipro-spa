@@ -58,11 +58,21 @@ class RolSennova extends Model
     /**
      * Relationship with ReglaRolTa
      *
-     * @return void
+     * @return object
      */
     public function reglasRolesTa()
     {
         return $this->hasMany(ReglaRolTa::class);
+    }
+
+    /**
+     * Relationship with ReglaRolSt
+     *
+     * @return object
+     */
+    public function reglasRolesSt()
+    {
+        return $this->hasMany(ReglaRolSt::class);
     }
 
     /**

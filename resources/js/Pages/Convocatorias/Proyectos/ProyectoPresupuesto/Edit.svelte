@@ -89,7 +89,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
+                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
                         <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -194,7 +194,7 @@
                         {/if}
                     {:else if $form.codigo_uso_presupuestal == '2020200800901'}
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="servicio_edicion_info" value="Nodo" />
+                            <Label required class="mb-4" labelFor="servicio_edicion_info" value="Nodo editorial" />
                             <Select id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={$form.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" required />
                         </div>
                     {/if}

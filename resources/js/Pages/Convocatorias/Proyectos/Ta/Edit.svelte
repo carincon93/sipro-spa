@@ -25,10 +25,13 @@
     export let convocatoria
     export let ta
     export let regionales
-    export let lineaTecnologicaRelacionada
+    export let lineasTecnoacademiaRelacionadas
     export let tecnoacademiaRelacionada
     export let proyectoMunicipios
+    export let proyectoMunicipiosImpactar
     export let proyectoProgramasFormacionArticulados
+    export let proyectoDisCurriculares
+    export let disCurriculares
 
     $: $title = ta ? ta.titulo : null
 
@@ -66,16 +69,18 @@
         pertinencia_territorio: ta.pertinencia_territorio,
         marco_conceptual: ta.marco_conceptual,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
+        municipios_impactar: proyectoMunicipiosImpactar.length > 0 ? proyectoMunicipiosImpactar : null,
         impacto_municipios: ta.impacto_municipios,
         nombre_instituciones: ta.nombre_instituciones,
         nombre_instituciones_programas: ta.nombre_instituciones_programas,
+        nuevas_instituciones: ta.nuevas_instituciones,
         articulacion_centro_formacion: ta.articulacion_centro_formacion,
         bibliografia: ta.bibliografia,
         tecnoacademia_id: tecnoacademiaRelacionada,
-        tecnoacademia_linea_tecnologica_id: lineaTecnologicaRelacionada,
+        tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
-        nodo_tecnoparque_id: ta.nodo_tecnoparque_id,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
+        dis_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
     })
 
     let regionalIEArticulacion
@@ -121,6 +126,7 @@
     onMount(() => {
         getMunicipios()
         getProgramasFormacionArticular()
+        getLineasTecnoacademia()
     })
 
     function submit() {
@@ -158,9 +164,31 @@
 
     let programasFormacionArticular
     async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion'))
+        let res = await axios.get(route('web-api.programas-formacion', ta.proyecto.centro_formacion_id))
         if (res.status == '200') {
             programasFormacionArticular = res.data
+        }
+    }
+
+    let lineasTecnoaAcademia
+    async function getLineasTecnoacademia() {
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+        if (res.status == '200') {
+            lineasTecnoaAcademia = res.data
+        }
+    }
+
+    let disCurricularDialogOpen = false
+    let formDisCurricular = useForm({
+        nombre: '',
+    })
+    function submitDisCurricular() {
+        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+            $formDisCurricular.post(route('convocatorias.proyectos.dis-curriculares.store', [convocatoria.id, ta.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
         }
     }
 </script>
@@ -231,36 +259,40 @@
                         />
                     </div>
                 </div>
-
-                {#if $form.tecnoacademia_id}
-                    <div class="mt-44 grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnologica_id" value="Línea tecnológica" />
-                        </div>
-                        <div>
-                            <DynamicList
-                                id="tecnoacademia_linea_tecnologica_id"
-                                bind:value={$form.tecnoacademia_linea_tecnologica_id}
-                                noOptionsText="No hay nodos tecnoparque registrados para este centro de formación. Por favor seleccione un centro de formación diferente."
-                                routeWebApi={route('web-api.tecnoacademias.lineas-tecnologicas', [$form.tecnoacademia_id])}
-                                placeholder="Busque por el nombre de la línea tecnológica"
-                                message={errors.tecnoacademia_linea_tecnologica_id}
-                                required
-                            />
-                        </div>
-                    </div>
-                {/if}
             </fieldset>
+            {#if $form.tecnoacademia_id && lineasTecnoaAcademia}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
+                    </div>
+                    <div>
+                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                        {#if lineasTecnoaAcademia?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            {/if}
 
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+            <fieldset disabled>
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
+                        <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
@@ -271,17 +303,19 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage
-                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
-                    />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                        <InfoMessage
+                            message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                        />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
@@ -292,14 +326,16 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
@@ -319,28 +355,39 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                        <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                    <Label required class="mb-4" for="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
                 </div>
             </div>
 
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
+                </div>
+                <div>
+                    <SelectMulti id="municipios_impactar" bind:selectedValue={$form.municipios_impactar} items={municipios} isMulti={true} error={errors.municipios_impactar} placeholder="Buscar municipios" required />
+                </div>
+            </div>
+
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
+                    <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
@@ -349,21 +396,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                    <Label required class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
                 </div>
                 <div>
-                    <Select id="departamento" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
-
-                    <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas" />
-                </div>
-                <div>
-                    <Select bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+                    <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
                     <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required />
                 </div>
@@ -371,7 +407,29 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
+                    <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                </div>
+                <div>
+                    <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                    <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                </div>
+                <div>
+                    <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
+
+                    <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
@@ -398,6 +456,17 @@
                 </div>
             </div>
 
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+                </div>
+                <div>
+                    <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
+
+                    <Button on:click={(event) => (disCurricularDialogOpen = true)} variant={null} type="button">Añadir programa</Button>
+                </div>
+            </div>
+
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
@@ -417,6 +486,26 @@
             {/if}
         </div>
     </form>
+
+    <Dialog bind:open={disCurricularDialogOpen} id="dis-curricular">
+        <div slot="content">
+            <form on:submit|preventDefault={submitDisCurricular} id="dis-curricular-form">
+                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
+                    <div>
+                        <Label required class="mb-4" labelFor="nombre" value="Nombre del programa" />
+                        <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (disCurricularDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" form="dis-curricular-form">Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
 
     <Dialog bind:open={proyectoDialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mt-4">
@@ -450,7 +539,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnologica_id')}>Continuar diligenciando</Button>
+                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnoacademia_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>

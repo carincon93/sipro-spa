@@ -33,6 +33,18 @@
 
                 <Button on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas de roles TA</Button>
             </InfoMessage>
+
+            <InfoMessage>
+                Para modificar las reglas de negocio de los roles de Tecnoparque haga clic en el siguiente botón:
+
+                <Button on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas de roles TP</Button>
+            </InfoMessage>
+
+            <InfoMessage>
+                Para modificar las reglas de negocio de los roles de Servicios Tecnológicos haga clic en el siguiente botón:
+
+                <Button on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas de roles ST</Button>
+            </InfoMessage>
         </div>
 
         <div slot="actions">

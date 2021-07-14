@@ -50,7 +50,11 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 4;
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                $numeroCeldas = 4;
+                if ($proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1) {
+                    $numeroCeldas = 3;
+                } else {
+                    $numeroCeldas = 4;
+                }
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $numeroCeldas = 4;
@@ -94,7 +98,7 @@ class ArbolProyectoController extends Controller
                             'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
                         ]);
                     }
-                } else if ($proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'B' && $i == 3) {
+                } else if ($proyecto->servicioTecnologico()->exists() && $proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 2 && $i == 3) {
                     for ($j = 0; $j < 2; $j++) {
                         $efectoDirecto->resultados()->create([
                             'descripcion'            => null,
@@ -476,7 +480,7 @@ class ArbolProyectoController extends Controller
                 $proyecto->objetivo_general   = $proyecto->servicioTecnologico->objetivo_general;
                 $proyecto->problema_central   = $proyecto->servicioTecnologico->problema_central;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto-st.json'), true);
-                $tipoProyectoA = $proyecto->servicioTecnologico->estadoSistemaGestion->tipoProyectoSt->tipo == 'A';
+                $tipoProyectoA = $proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1;
                 break;
             default:
                 break;

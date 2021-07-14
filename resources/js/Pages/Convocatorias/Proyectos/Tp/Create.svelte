@@ -32,7 +32,6 @@
         fecha_finalizacion: null,
         max_meses_ejecucion: 0,
         tecnoacademia_id: null,
-        tecnoacademia_linea_tecnologica_id: [],
         cantidad_meses: 0,
         cantidad_horas: 0,
         rol_sennova: null,

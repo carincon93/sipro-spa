@@ -34,7 +34,7 @@
 
         <div slot="caption">
             {#if proyecto.codigo_linea_programatica == 70}
-                <InfoMessage message="En caso de tener un acuerdo para operación de la Tecnoacademia en una infraestructura que no es propia debe adjuntar el soporte al momento de crear la entidad." />
+                <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
             {/if}
         </div>
 
@@ -61,7 +61,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 21, 14, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -144,7 +144,7 @@ class EdtController extends Controller
 
         $edt->save();
 
-        return redirect()->route('convocatorias.proyectos.edt.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha modificado correctamente.');
+        return redirect()->route('convocatorias.proyectos.edt.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

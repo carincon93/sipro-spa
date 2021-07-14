@@ -28,8 +28,8 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return Inertia::render('Auth/Register', [
-            'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->get(),
-            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'roles'               => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->get(),
+            'tiposDocumento'      => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
         ]);
     }

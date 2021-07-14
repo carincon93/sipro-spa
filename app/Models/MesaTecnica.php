@@ -45,13 +45,13 @@ class MesaTecnica extends Model
     ];
 
     /**
-     * Relationship with MesaTecnicaSectorProductivo
+     * Relationship with TipoProyectoSt
      *
      * @return object
      */
-    public function sectoresProductivos()
+    public function tiposProyectoSt()
     {
-        return $this->belongsToMany(MesaTecnicaSectorProductivo::class);
+        return $this->hasMany(TipoProyectoSt::class);
     }
 
     /**

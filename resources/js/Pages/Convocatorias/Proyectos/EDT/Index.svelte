@@ -31,8 +31,12 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">EDT</div>
 
+        <div slot="caption">
+            <p class="mb-20 text-center">A continuación, proyecte los EDTs que se realizarán durante la vigencia del proyecto:</p>
+        </div>
+
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.edt.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear EDT</Button>
             {/if}
         </div>
@@ -68,7 +72,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={eventos.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
+                            {#if isSuperAdmin || checkPermission(authUser, [6, 7, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.edt.edit', [convocatoria.id, proyecto.id, evento.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

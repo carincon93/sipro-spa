@@ -62,6 +62,7 @@ class IdiController extends Controller
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
         $proyecto->lineaProgramatica()->associate($request->linea_programatica_id);
         $proyecto->convocatoria()->associate($convocatoria);
+        $proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->tecnoacademia_linea_tecnoacademia_id);
         $proyecto->save();
 
         $idi = new Idi();
@@ -145,8 +146,8 @@ class IdiController extends Controller
             'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
-            'lineasTecnologicasRelacionadas'            => $idi->tecnoacademiaLineasTecnologicas()->pluck('id'),
-            'tecnoacademia'                             => $idi->tecnoacademiaLineasTecnologicas()->first() ? $idi->tecnoacademiaLineasTecnologicas()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
+            'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
@@ -206,7 +207,7 @@ class IdiController extends Controller
         $idi->save();
 
         $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
-        $request->relacionado_tecnoacademia == 1 ? $idi->tecnoacademiaLineasTecnologicas()->sync($request->linea_tecnologica_id) : $idi->tecnoacademiaLineasTecnologicas()->detach();
+        $request->relacionado_tecnoacademia == 1 ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $idi->proyecto->tecnoacademiaLineasTecnoacademia()->detach();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

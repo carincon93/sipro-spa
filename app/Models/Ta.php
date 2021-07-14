@@ -31,7 +31,6 @@ class Ta extends Model
      * @var array
      */
     protected $fillable = [
-        'tecnoacademia_linea_tecnologica_id',
         'resumen',
         'resumen_regional',
         'justificacion',
@@ -61,7 +60,8 @@ class Ta extends Model
         'cantidad_instructores_planta',
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
-        'modificable'
+        'modificable',
+        'proyectos_ejecucion'
     ];
 
     /**
@@ -90,16 +90,6 @@ class Ta extends Model
     public function proyecto()
     {
         return $this->belongsTo(Proyecto::class, 'id');
-    }
-
-    /**
-     * Relationship with TecnoacademiaLineaTecnologica
-     *
-     * @return object
-     */
-    public function tecnoacademiaLineaTecnologica()
-    {
-        return $this->belongsTo(TecnoacademiaLineaTecnologica::class);
     }
 
     /**
@@ -151,13 +141,13 @@ class Ta extends Model
     {
         $user = Auth::user();
         if ($user->hasRole(1)) {
-            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else if ($user->hasRole(4)) {
-            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
@@ -165,7 +155,7 @@ class Ta extends Model
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else if ($user->hasRole(5)) {
-            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
@@ -173,7 +163,7 @@ class Ta extends Model
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else {
-            $ta = Ta::select('ta.id', 'ta.tecnoacademia_linea_tecnologica_id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', Auth::user()->id)
@@ -181,7 +171,7 @@ class Ta extends Model
                 ->filterTa(request()->only('search'))->paginate();
         }
         $ta->load('proyecto');
-        $ta->load('tecnoacademiaLineaTecnologica.tecnoacademia');
+        $ta->load('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia');
 
         return $ta;
     }

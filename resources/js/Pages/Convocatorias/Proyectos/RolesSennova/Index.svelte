@@ -153,7 +153,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19])}
+                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -190,6 +190,10 @@
             {/if}
 
             {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('lineas-tecnoacademia.index'))} variant={route().current('lineas-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">Líneas TecnoAcademia</Button>
+            {/if}
+
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">Mesas técnicas</Button>
             {/if}
 
@@ -211,10 +215,6 @@
 
             {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
-            {/if}
-
-            {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('sectores-productivos.index'))} variant={route().current('sectores-productivos.*') ? 'raised' : 'outlined'} class="p-2">Sectores productivos</Button>
             {/if}
 
             {#if isSuperAdmin}

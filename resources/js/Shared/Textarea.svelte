@@ -9,6 +9,7 @@
     export let id
     export let value
     export let label
+    export let sinContador = false
     export let maxlength = 2000
 
     let container
@@ -28,9 +29,13 @@
 </script>
 
 <div bind:this={container}>
-    <Textarea textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update}>
-        <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
-    </Textarea>
+    {#if sinContador == true}
+        <Textarea textarea bind:value {label} {...props} {id} on:input={update} />
+    {:else}
+        <Textarea textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update}>
+            <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
+        </Textarea>
+    {/if}
 </div>
 
 {#if error}
