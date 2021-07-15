@@ -28,9 +28,9 @@
     let sending = false
     let form = useForm({
         maximo: reglaRolTa.maximo,
-        conovocatoria_rol_sennova_id: {
-            value: reglaRolTa.conovocatoria_rol_sennova_id,
-            label: rolesTa.find((item) => item.value == reglaRolTa.conovocatoria_rol_sennova_id)?.label,
+        convocatoria_rol_sennova_id: {
+            value: reglaRolTa.convocatoria_rol_sennova_id,
+            label: rolesTa.find((item) => item.value == reglaRolTa.convocatoria_rol_sennova_id)?.label,
         },
         tecnoacademia_id: {
             value: reglaRolTa.tecnoacademia_id,
@@ -77,8 +77,8 @@
                     <Input label="Máximo de roles" id="maximo" type="number" input$min="0" class="mt-1" bind:value={$form.maximo} error={errors.maximo} required />
                 </div>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="conovocatoria_rol_sennova_id" value="Rol TA" />
-                    <Select id="conovocatoria_rol_sennova_id" items={rolesTa} bind:selectedValue={$form.conovocatoria_rol_sennova_id} error={errors.conovocatoria_rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol" required />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol TA" />
+                    <Select id="convocatoria_rol_sennova_id" items={rolesTa} bind:selectedValue={$form.convocatoria_rol_sennova_id} error={errors.convocatoria_rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol" required />
                 </div>
 
                 <div class="mt-4">
