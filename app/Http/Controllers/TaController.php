@@ -80,8 +80,10 @@ class TaController extends Controller
     {
         $this->authorize('formular-proyecto');
 
+        $tecnoAcademia = TecnoAcademia::find($request->tecnoacademia_id['value']);
+
         $proyecto = new Proyecto();
-        $proyecto->centroFormacion()->associate($request->centro_formacion_id);
+        $proyecto->centroFormacion()->associate($tecnoAcademia->centro_formacion_id);
         $proyecto->lineaProgramatica()->associate(5);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();

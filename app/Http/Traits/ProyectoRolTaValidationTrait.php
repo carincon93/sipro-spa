@@ -26,11 +26,13 @@ trait ProyectoRolTaValidationTrait
             }
         }
 
+        dd($tecnoacademiaRoles);
+
         if ($tecnoacademiaRoles) {
             $count = 0;
             // Valida si el rol ta está en el array
             foreach ($tecnoacademiaRoles as $tecnoacademiaRol) {
-                if ($convocatoriaRolSennova->rolSennova->id == $tecnoacademiaRol->rol_sennova_id) {
+                if ($convocatoriaRolSennova->rolSennova->id == $tecnoacademiaRol->convocatoriaRolSennova->rol_sennova_id) {
                     $count--;
                 } else {
                     $count++;
@@ -38,7 +40,7 @@ trait ProyectoRolTaValidationTrait
             }
 
             foreach ($tecnoacademiaRoles as $rol) {
-                if ($convocatoriaRolSennova->rolSennova->id == $rol->rol_sennova_id && $cantidadRoles > $rol->maximo) {
+                if ($convocatoriaRolSennova->rolSennova->id == $rol->convocatoriaRolSennova->rol_sennova_id && $cantidadRoles > $rol->maximo) {
                     return true;
                 }
             }
