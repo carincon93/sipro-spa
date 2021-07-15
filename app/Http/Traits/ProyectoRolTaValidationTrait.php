@@ -26,8 +26,6 @@ trait ProyectoRolTaValidationTrait
             }
         }
 
-        dd($tecnoacademiaRoles);
-
         if ($tecnoacademiaRoles) {
             $count = 0;
             // Valida si el rol ta está en el array
