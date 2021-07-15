@@ -43,13 +43,24 @@
         }
     }
 
-    $: if ($form.convocatoria_rol_sennova_id && proyecto.codigo_linea_programatica == 68) {
-        $form.descripcion = infoRolSennova?.perfil == null ? 'Sin descripción' : infoRolSennova?.perfil
-        $form.numero_roles = 1
-        if ($form.convocatoria_rol_sennova_id == 108) {
-            $form.numero_meses = 6
-        } else {
-            $form.numero_meses = proyecto.max_meses_ejecucion
+    let diff_meses = proyecto.diff_meses
+    $: if ($form.convocatoria_rol_sennova_id) {
+        if (proyecto.codigo_linea_programatica == 68) {
+            $form.descripcion = infoRolSennova?.perfil == null ? 'Sin descripción' : infoRolSennova?.perfil
+            $form.numero_roles = 1
+            if ($form.convocatoria_rol_sennova_id == 108) {
+                $form.numero_meses = 6
+            } else {
+                $form.numero_meses = proyecto.max_meses_ejecucion
+            }
+        }
+
+        if (proyecto.codigo_linea_programatica == 70) {
+            if (($form.convocatoria_rol_sennova_id == 51 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 52 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 53 && proyecto.diff_meses >= 11)) {
+                diff_meses = 11
+            } else {
+                diff_meses = proyecto.diff_meses
+            }
         }
     }
 </script>
@@ -94,8 +105,8 @@
                     </div>
 
                     <div class="mt-4">
-                        <Input label="Número de meses que requiere el apoyo. (Máximo {proyecto.diff_meses.replace('.', ',')})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
-                        <InfoMessage>Este proyecto será ejecutado en {proyecto.diff_meses.replace('.', ',')} meses.</InfoMessage>
+                        <Input label="Número de meses que requiere el apoyo. (Máximo {diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                        <InfoMessage>Este proyecto será ejecutado en {diff_meses} meses.</InfoMessage>
                     </div>
 
                     <div class="mt-4">
