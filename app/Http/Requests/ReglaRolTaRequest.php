@@ -24,9 +24,9 @@ class ReglaRolTaRequest extends FormRequest
     public function rules()
     {
         return [
-            'tecnoacademia_id'  => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
-            'rol_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
-            'maximo'            => ['required', 'min:0', 'max:32767', 'integer'],
+            'tecnoacademia_id'              => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
+            'convocatoria_rol_sennova_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:convocatoria_rol_sennova,id'],
+            'maximo'                        => ['required', 'min:0', 'max:32767', 'integer'],
         ];
     }
 
@@ -43,9 +43,9 @@ class ReglaRolTaRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->rol_sennova_id)) {
+        if (is_array($this->convocatoria_rol_sennova_id)) {
             $this->merge([
-                'rol_sennova_id' => $this->rol_sennova_id['value'],
+                'convocatoria_rol_sennova_id' => $this->convocatoria_rol_sennova_id['value'],
             ]);
         }
     }
