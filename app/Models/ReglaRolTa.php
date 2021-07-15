@@ -22,7 +22,7 @@ class ReglaRolTa extends Model
      * @var array
      */
     protected $fillable = [
-        'rol_sennova_id',
+        'convocatoria_rol_sennova_id',
         'tecnoacademia_id',
         'maximo'
     ];
@@ -56,13 +56,13 @@ class ReglaRolTa extends Model
     }
 
     /**
-     * Relationship with RolSennova
+     * Relationship with ConvocatoriaRolSennova
      *
      * @return object
      */
-    public function rolSennova()
+    public function convocatoriaRolSennova()
     {
-        return $this->belongsTo(RolSennova::class);
+        return $this->belongsTo(ConvocatoriaRolSennova::class);
     }
 
     /**

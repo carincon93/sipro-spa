@@ -58,7 +58,7 @@ class ReglaRolTpController extends Controller
                 WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
-            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [6, 8, 15, 5, 7])->get(),
+            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [6, 8, 15, 5, 7])->where('convocatoria_rol_sennova.linea_programatica_id', 4)->get(),
             'nodosTecnoparque'  => NodoTecnoparque::select('id as value', 'nombre as label')->get()
         ]);
     }
@@ -106,7 +106,17 @@ class ReglaRolTpController extends Controller
 
         return Inertia::render('ReglasRolesTp/Edit', [
             'reglaRolTp'        => $reglaRolTp,
-            'rolesTp'           => ConvocatoriaRolSennova::select('convocatoria_rol_sennova.id as value', 'roles_sennova.nombre as label')->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [6, 8, 15, 5, 7])->get(),
+            'rolesTp'           => ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, CASE convocatoria_rol_sennova.nivel_academico
+                WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
+                WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
+                WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
+                WHEN '3' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Pregrado')
+                WHEN '4' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Especalización')
+                WHEN '5' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Maestría')
+                WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
+                WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
+                WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
+            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [6, 8, 15, 5, 7])->where('convocatoria_rol_sennova.linea_programatica_id', 4)->get(),
             'nodos_tecnoparque' => NodoTecnoparque::select('id as value', 'nombre as label')->get()
         ]);
     }
