@@ -41,7 +41,12 @@
         centro_formacion_id: tecnoacademia.centro_formacion_id,
         fecha_creacion: tecnoacademia.fecha_creacion,
         foco: tecnoacademia.foco,
-        linea_tecnologica_id: lineasTecnoacademiaRelacionadas,
+        linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
+        max_valor_materiales_formacion: tecnoacademia.max_valor_materiales_formacion,
+        max_valor_bienestar_alumnos: tecnoacademia.max_valor_bienestar_alumnos,
+        max_valor_viaticos_interior: tecnoacademia.max_valor_viaticos_interior,
+        max_valor_edt: tecnoacademia.max_valor_edt,
+        max_valor_mantenimiento_equipos: tecnoacademia.max_valor_mantenimiento_equipos,
     })
 
     function submit() {
@@ -102,17 +107,37 @@
                     <Textarea label="Foco de la TecnoAcademia" maxlength="40000" id="foco" bind:value={$form.foco} error={errors.foco} required />
                 </div>
 
+                <div class="mt-4">
+                    <Input label="Valor máximo: Materiales formación" id="max_valor_materiales_formacion" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_materiales_formacion} error={errors.max_valor_materiales_formacion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Bienestar alumnos" id="max_valor_bienestar_alumnos" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_bienestar_alumnos} error={errors.max_valor_bienestar_alumnos} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Viáticos interior formación profesional" id="max_valor_viaticos_interior" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_viaticos_interior} error={errors.max_valor_viaticos_interior} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: EDT" id="max_valor_edt" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_edt} error={errors.max_valor_edt} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Mantenimiento de equipos" id="max_valor_mantenimiento_equipos" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_mantenimiento_equipos} error={errors.max_valor_mantenimiento_equipos} required />
+                </div>
+
                 <div class="mt-10">
-                    <Label required class="mb-4" labelFor="linea_tecnologica_id" value="Líneas de TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="linea_tecnoacademia_id" value="Líneas de TecnoAcademia" />
                     <div class="mt-10 grid grid-cols-2">
                         {#each lineasTecnoacademia as { id, nombre }, i}
                             <FormField>
-                                <Checkbox bind:group={$form.linea_tecnologica_id} value={id} />
+                                <Checkbox bind:group={$form.linea_tecnoacademia_id} value={id} />
                                 <span slot="label">{nombre}</span>
                             </FormField>
                         {/each}
                     </div>
-                    <InputError message={errors.linea_tecnologica_id} />
+                    <InputError message={errors.linea_tecnoacademia_id} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

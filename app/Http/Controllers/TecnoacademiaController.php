@@ -57,14 +57,20 @@ class TecnoacademiaController extends Controller
         $this->authorize('create', [Tecnoacademia::class]);
 
         $tecnoacademia = new Tecnoacademia();
-        $tecnoacademia->nombre          = $request->nombre;
-        $tecnoacademia->modalidad       = $request->modalidad;
-        $tecnoacademia->fecha_creacion  = $request->fecha_creacion;
-        $tecnoacademia->foco            = $request->foco;
+        $tecnoacademia->nombre                          = $request->nombre;
+        $tecnoacademia->modalidad                       = $request->modalidad;
+        $tecnoacademia->fecha_creacion                  = $request->fecha_creacion;
+        $tecnoacademia->foco                            = $request->foco;
+        $tecnoacademia->max_valor_materiales_formacion  = $request->max_valor_materiales_formacion;
+        $tecnoacademia->max_valor_bienestar_alumnos     = $request->max_valor_bienestar_alumnos;
+        $tecnoacademia->max_valor_viaticos_interior     = $request->max_valor_viaticos_interior;
+        $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
+        $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;
+
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->save();
 
-        $tecnoacademia->lineasTecnoacademia()->attach($request->linea_tecnologica_id);
+        $tecnoacademia->lineasTecnoacademia()->attach($request->linea_tecnoacademia_id);
 
         return redirect()->route('tecnoacademias.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -109,12 +115,17 @@ class TecnoacademiaController extends Controller
     {
         $this->authorize('update', [Tecnoacademia::class, $tecnoacademia]);
 
-        $tecnoacademia->nombre          = $request->nombre;
-        $tecnoacademia->modalidad       = $request->modalidad;
-        $tecnoacademia->fecha_creacion  = $request->fecha_creacion;
-        $tecnoacademia->foco            = $request->foco;
+        $tecnoacademia->nombre                          = $request->nombre;
+        $tecnoacademia->modalidad                       = $request->modalidad;
+        $tecnoacademia->fecha_creacion                  = $request->fecha_creacion;
+        $tecnoacademia->foco                            = $request->foco;
+        $tecnoacademia->max_valor_materiales_formacion  = $request->max_valor_materiales_formacion;
+        $tecnoacademia->max_valor_bienestar_alumnos     = $request->max_valor_bienestar_alumnos;
+        $tecnoacademia->max_valor_viaticos_interior     = $request->max_valor_viaticos_interior;
+        $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
+        $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
-        $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnologica_id);
+        $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnoacademia_id);
         $tecnoacademia->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');

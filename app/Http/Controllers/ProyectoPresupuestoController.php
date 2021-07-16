@@ -78,8 +78,16 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+        if ($proyecto->lineaProgramatica->codigo != 70 && PresupuestoValidationTrait::viaticosValidation($proyecto, null, null, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+        }
+
+        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::bienestarAlumnos($proyecto, null, null, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos);
+        }
+
+        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::viaticosInterior($proyecto, null, null, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
         }
 
         $presupuesto = new ProyectoPresupuesto();
@@ -168,8 +176,16 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+        if ($proyecto->lineaProgramatica->codigo != 70 && PresupuestoValidationTrait::viaticosValidation($proyecto, $presupuesto, $convocatoriaPresupuesto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
             return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+        }
+
+        if ($proyecto->lineaProgramatica->codigo == 70  && PresupuestoValidationTrait::bienestarAlumnos($proyecto, $presupuesto, $convocatoriaPresupuesto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos);
+        }
+
+        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::viaticosInterior($proyecto, $presupuesto, $convocatoriaPresupuesto, $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo, $request->valor, $request->numero_items)) {
+            return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
         }
 
         if ($convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado == false) {
