@@ -172,7 +172,7 @@
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
             {:else}
                 <InfoMessage class="mb-2" alertMsg={true}>
-                    <p>La información del proyecto está incompleta. Revise y complete los siguientes ítems:</p>
+                    <p><strong>La información del proyecto está incompleta. Para poder finalizar el proyecto debe completar los siguientes ítems:</strong></p>
                     <ul class="list-disc p-4">
                         {#if !generalidades}
                             <li>Generalidades</li>

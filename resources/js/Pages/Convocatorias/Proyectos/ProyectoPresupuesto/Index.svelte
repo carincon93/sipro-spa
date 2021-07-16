@@ -34,9 +34,6 @@
 
     {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
-        <p class="text-center mt-10 mb-24">
-            Ingrese cada uno de los rubros que requiere el proyecto. Actualmente el total del costo de los productos o servicios requeridos es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
-        </p>
         <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
                 <thead>
@@ -102,7 +99,8 @@
             </table>
         </div>
     {:else if proyecto.codigo_linea_programatica == 70}
-        <div class="mt-24 bg-white rounded shadow">
+        <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
+        <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
                 <thead>
                     <tr class="text-left font-bold">
@@ -262,6 +260,14 @@
                 </tr>
             {/if}
         </tbody>
+
+        <tfoot slot="tfoot">
+            <tr>
+                <td colspan="3" class="border-t p-4">
+                    <strong>Actualmente el total del costo de los productos o servicios requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
+                </td>
+            </tr>
+        </tfoot>
     </DataTable>
     <Pagination links={proyectoPresupuesto.links} />
 </AuthenticatedLayout>
