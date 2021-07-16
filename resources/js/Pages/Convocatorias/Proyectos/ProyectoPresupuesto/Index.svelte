@@ -101,6 +101,62 @@
                 </tfoot>
             </table>
         </div>
+    {:else if proyecto.codigo_linea_programatica == 70}
+        <div class="mt-24 bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Materiales para formación profesional </td>
+                        <td class="border-t p-4">
+                            Valor máximo: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_materiales_formacion)}
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Gastos bienestar alumnos </td>
+                        <td class="border-t p-4">
+                            Valor máximo: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_bienestar_alumnos)}
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Viáticos y gastos de viaje al interior formación profesional </td>
+                        <td class="border-t p-4">
+                            Valor máximo: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_viaticos_interior)}
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> EDT </td>
+                        <td class="border-t p-4">
+                            Valor máximo: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_edt)}
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Equipo de sistemas, adecuaciones y construcciones, mantenimiento de maquinaria, equipo, transporte y sofware, maquinaria industrial, otras compras de equipos.</td>
+                        <td class="border-t p-4">
+                            Valor máximo: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_mantenimiento_equipos)}
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="border-t p-4">
+                            <strong>Máximo presupuesto asignado para la TecnoAcademia:</strong> ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_proyecto)}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     {/if}
 
     <div class="mt-20">

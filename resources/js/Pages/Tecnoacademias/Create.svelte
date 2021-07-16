@@ -39,6 +39,7 @@
         max_valor_viaticos_interior: 0,
         max_valor_edt: 0,
         max_valor_mantenimiento_equipos: 0,
+        max_valor_roles: 0,
     })
 
     function submit() {
@@ -109,6 +110,10 @@
 
                 <div class="mt-4">
                     <Input label="Valor máximo: Mantenimiento de equipos" id="max_valor_mantenimiento_equipos" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_mantenimiento_equipos} error={errors.max_valor_mantenimiento_equipos} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Roles" id="max_valor_roles" type="number" input$min="1" class="mt-1" bind:value={$form.max_valor_roles} error={errors.max_valor_roles} required />
                 </div>
 
                 <div class="mt-10">
