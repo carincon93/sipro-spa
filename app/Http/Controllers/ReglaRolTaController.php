@@ -34,7 +34,7 @@ class ReglaRolTaController extends Controller
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
             END as nombre_rol, tecnoacademias.nombre as nombre_tecnoacademia")->join('convocatoria_rol_sennova', 'reglas_roles_ta.convocatoria_rol_sennova_id', 'convocatoria_rol_sennova.id')->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->join('tecnoacademias', 'reglas_roles_ta.tecnoacademia_id', 'tecnoacademias.id')->orderBy('roles_sennova.nombre', 'ASC')
-                ->filterReglaRolTa(request()->only('search'))->paginate(),
+                ->filterReglaRolTa(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

@@ -50,6 +50,7 @@ use App\Http\Controllers\CulturaInnovacionController;
 use App\Http\Controllers\DisCurricularController;
 use App\Http\Controllers\EdtController;
 use App\Http\Controllers\InventarioEquipoController;
+use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
@@ -520,6 +521,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Cultura innovacion - Estrategia Nacional
      * 
      */
+    Route::resource('reglas-roles-cultura', ReglaRolCulturaController::class)->parameters(['reglas-roles-cultura' => 'regla-rol-cultura'])->except(['show']);
     Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
 
 

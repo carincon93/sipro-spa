@@ -27,7 +27,7 @@ class ReglaRolStController extends Controller
                 WHEN '1' THEN	'A'
                 WHEN '2' THEN	'B'
             END as tipo_proyecto")->join('roles_sennova', 'reglas_roles_st.rol_sennova_id', 'roles_sennova.id')->join('tipos_proyecto_st', 'reglas_roles_st.tipo_proyecto_st_id', 'tipos_proyecto_st.id')->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->orderBy('roles_sennova.nombre', 'ASC')
-                ->filterReglaRolSt(request()->only('search'))->paginate(),
+                ->filterReglaRolSt(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

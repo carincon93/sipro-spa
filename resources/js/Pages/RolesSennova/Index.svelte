@@ -45,6 +45,12 @@
 
                 <Button on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas de roles ST</Button>
             </InfoMessage>
+
+            <InfoMessage>
+                Para modificar las reglas de negocio de los roles de Cultura de la innovación haga clic en el siguiente botón:
+
+                <Button on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas de roles Cultura de la innovación</Button>
+            </InfoMessage>
         </div>
 
         <div slot="actions">
