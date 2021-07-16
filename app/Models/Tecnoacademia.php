@@ -28,7 +28,13 @@ class Tecnoacademia extends Model
         'fecha_creacion',
         'foco',
         'linea_tecnoacademia_id',
-        'centro_formacion_id'
+        'centro_formacion_id',
+        'max_valor_materiales_formacion',
+        'max_valor_bienestar_alumnos',
+        'max_valor_viaticos_interior',
+        'max_valor_edt',
+        'max_valor_mantenimiento_equipos',
+
     ];
 
     /**

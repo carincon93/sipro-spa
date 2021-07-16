@@ -113,6 +113,19 @@ class ProyectoLoteEstudioMercadoController extends Controller
             }
         }
 
+        /**
+         * Línea 70
+         */
+        if ($proyecto->lineaProgramatica->codigo == 70) {
+            if (PresupuestoValidationTrait::materialesFormacion($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion);
+            }
+
+            if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $presupuesto, 'store', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
+            }
+        }
+
         $lote = new ProyectoLoteEstudioMercado();
         if ($request->hasFile('ficha_tecnica')) {
             $lote->numero_items = $request->numero_items;
@@ -252,6 +265,20 @@ class ProyectoLoteEstudioMercadoController extends Controller
 
             if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
                 return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
+            }
+        }
+
+        /**
+         * Línea 70
+         */
+        if ($proyecto->lineaProgramatica->codigo == 70) {
+
+            if (PresupuestoValidationTrait::materialesFormacion($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion);
+            }
+
+            if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $presupuesto, 'update', $request->primer_valor, $request->segundo_valor, $request->tercer_valor)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
             }
         }
 

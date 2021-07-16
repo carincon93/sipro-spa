@@ -24,12 +24,17 @@ class TecnoacademiaRequest extends FormRequest
     public function rules()
     {
         return [
-            'centro_formacion_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
-            'linea_tecnologica_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnoacademia,id'],
-            'nombre'                => ['required', 'max:255'],
-            'modalidad'             => ['required', 'max:2'],
-            'foco'                  => ['required', 'string'],
-            'fecha_creacion'        => ['required', 'date', 'date_format:Y-m-d'],
+            'centro_formacion_id'               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id'],
+            'linea_tecnologica_id*'             => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_tecnoacademia,id'],
+            'nombre'                            => ['required', 'max:255'],
+            'modalidad'                         => ['required', 'max:2'],
+            'foco'                              => ['required', 'string'],
+            'fecha_creacion'                    => ['required', 'date', 'date_format:Y-m-d'],
+            'max_valor_materiales_formacion'    => ['required', 'numeric', 'min:1'],
+            'max_valor_bienestar_alumnos'       => ['required', 'numeric', 'min:1'],
+            'max_valor_viaticos_interior'       => ['required', 'numeric', 'min:1'],
+            'max_valor_edt'                     => ['required', 'numeric', 'min:1'],
+            'max_valor_mantenimiento_equipos'   => ['required', 'numeric', 'min:1'],
         ];
     }
 
