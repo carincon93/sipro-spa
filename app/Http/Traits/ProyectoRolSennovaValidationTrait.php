@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use App\Models\CentroFormacion;
 use App\Models\ConvocatoriaRolSennova;
 use App\Models\LineaProgramatica;
+use App\Models\ReglaRolCultura;
 
 trait ProyectoRolSennovaValidationTrait
 {
@@ -91,7 +92,7 @@ trait ProyectoRolSennovaValidationTrait
         $centroFormacion = CentroFormacion::find($centroFormacionId);
         $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
-        if (in_array($centroFormacion->codigo, [9309, 9503, 9124, 9120, 9222, 9116, 9548, 9401, 9403, 9303, 9310, 9529, 9121]) && $lineaProgramatica->lineaProgramatica->codigo == 65) {
+        if (in_array($centroFormacion->codigo, [9309, 9503, 9230, 9124, 9525, 9222, 9212, 9116, 9517, 9401, 9403, 9303, 9310, 9529, 9308]) && $lineaProgramatica->codigo == 65) {
             foreach ($centroFormacion->proyectos as $proyecto) {
                 if ($proyecto->lineaProgramatica->codigo == 65) {
                     return true;
@@ -104,39 +105,22 @@ trait ProyectoRolSennovaValidationTrait
 
     public static function culturaInnovacionRoles($proyecto, $rolSennovaId, $numeroRoles)
     {
-        $reglas = '[
-            {"centroFormacionId": 9309, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
-            {"centroFormacionId": 9503, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9230, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
-            {"centroFormacionId": 9124, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
-            {"centroFormacionId": 9120, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9222, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9116, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9548, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
-            {"centroFormacionId": 9401, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9403, "auxiliarEditorial": 1, "gestorEditorial": 0, "expertoTecnico": 0},
-            {"centroFormacionId": 9303, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0},
-            {"centroFormacionId": 9310, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9529, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 1},
-            {"centroFormacionId": 9121, "auxiliarEditorial": 1, "gestorEditorial": 1, "expertoTecnico": 0}
-        ]';
-
-        $centroFormacion = collect(json_decode($reglas, true))->where('centroFormacionId', $proyecto->centroFormacion->codigo)->first();
+        $centroFormacion = ReglaRolCultura::where('centro_formacion_id', $proyecto->centroFormacion->id)->first();
         $convocatoriaRolSennova = ConvocatoriaRolSennova::find($rolSennovaId);
 
         if ($centroFormacion && $convocatoriaRolSennova) {
             // 27 auxiliar editorial
-            if ($convocatoriaRolSennova->rolSennova->id == 27 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['auxiliarEditorial']) {
+            if ($convocatoriaRolSennova->rolSennova->id == 27 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->auxiliar_editorial) {
                 return true;
             }
 
             // 26 gestor editorial
-            if ($convocatoriaRolSennova->rolSennova->id == 26 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['gestorEditorial']) {
+            if ($convocatoriaRolSennova->rolSennova->id == 26 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->gestor_editorial) {
                 return true;
             }
 
             // 25 experto temático en producción científica
-            if ($convocatoriaRolSennova->rolSennova->id == 25 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion['expertoTecnico']) {
+            if ($convocatoriaRolSennova->rolSennova->id == 25 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->experto_tematico) {
                 return true;
             }
         }
