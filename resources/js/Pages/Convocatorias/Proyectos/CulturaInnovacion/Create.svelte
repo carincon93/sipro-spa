@@ -75,8 +75,8 @@
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8">
             <div class="mt-28">
-                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
+                <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -104,15 +104,22 @@
                     </div>
                 {/if}
             </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+
+            {#if centrosFormacion.length > 0}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                    </div>
+                    <div>
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                    </div>
                 </div>
-                <div>
-                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+            {:else}
+                <div class="mt-44">
+                    <InfoMessage message="No hay centros de formación disponibles para la formulación de proyectos de la línea 65." alertMsg={true} />
                 </div>
-            </div>
+            {/if}
 
             {#if $form.centro_formacion_id?.value}
                 <div class="mt-44 grid grid-cols-2">

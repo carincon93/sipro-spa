@@ -35,6 +35,7 @@ class TecnoacademiaRequest extends FormRequest
             'max_valor_viaticos_interior'       => ['required', 'numeric', 'min:1'],
             'max_valor_edt'                     => ['required', 'numeric', 'min:1'],
             'max_valor_mantenimiento_equipos'   => ['required', 'numeric', 'min:1'],
+            'max_valor_roles'                   => ['required', 'numeric', 'min:1'],
         ];
     }
 
