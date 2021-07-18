@@ -157,13 +157,6 @@
         </div>
     {/if}
 
-    <div class="mt-20">
-        <p>Puede filtrar los rubros presupuestales haciendo clic en <strong>Ver filtros</strong> y a continuación, seleccione un rubro presupuestal.</p>
-        <Button on:click={() => (filtro = !filtro)} class="mt-4">
-            {#if filtro}Ocultar{:else}Ver{/if} filtros
-        </Button>
-    </div>
-
     {#if filtro}
         <div class="px-4 mt-4" transition:fade>
             <ul class="flex flex-wrap">
@@ -181,6 +174,9 @@
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="actions">
+            <Button on:click={() => (filtro = !filtro)}>
+                {#if filtro}Ocultar{:else}Ver{/if} filtros
+            </Button>
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.create', [convocatoria.id, proyecto.id]))}>
                     <div>
@@ -226,13 +222,7 @@
                     </td>
                     <td class="border-t">
                         <div class="mt-3 px-6">
-                            {#if presupuesto.promedio > 0}
-                                ${new Intl.NumberFormat('de-DE').format(presupuesto.promedio)} COP
-                            {:else if presupuesto.totalByBudgetWithoutMarketResearch > 0}
-                                ${new Intl.NumberFormat('de-DE').format(presupuesto.totalByBudgetWithoutMarketResearch)}
-                            {:else}
-                                No ha generado el estudio de mercado aún
-                            {/if}
+                            ${new Intl.NumberFormat('de-DE').format(presupuesto.valor_total)} COP
                         </div>
                         {#if !presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto}
                             <span class="text-red-400 text-center text-xs px-6"> Este uso presupuestal NO suma al total del presupuesto </span>

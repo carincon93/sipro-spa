@@ -7,8 +7,10 @@
     import Stepper from '@/Shared/Stepper'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
+    import Select from '@/Shared/Select'
     import SelectMulti from '@/Shared/SelectMulti'
     import Textarea from '@/Shared/Textarea'
+    import Tags from '@/Shared/Tags'
 
     export let errors
     export let convocatoria
@@ -28,12 +30,21 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
     let sending = false
     let form = useForm({
         lineas_investigacion: lineasInvestigacionRelacionadas.length > 0 ? lineasInvestigacionRelacionadas : null,
         grupos_investigacion: gruposInvestigacionRelacionados.length > 0 ? gruposInvestigacionRelacionados : null,
         semilleros_investigacion: semillerosInvestigacionRelacionados.length > 0 ? semillerosInvestigacionRelacionados : null,
         proyectos_ejecucion: proyecto.proyectos_ejecucion,
+        semilleros_en_formalizacion: proyecto.semilleros_en_formalizacion,
+        articulacion_semillero: {
+            value: proyecto.articulacion_semillero,
+            label: opcionesSiNo.find((item) => item.value == proyecto.articulacion_semillero)?.label,
+        },
     })
 
     function submit() {
@@ -76,18 +87,38 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="articulacion_semillero" value="¿Está la TecnoAcademia articulada con un semillero?" />
                 </div>
                 <div>
-                    <SelectMulti id="semilleros_investigacion" bind:selectedValue={$form.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" required />
+                    <Select items={opcionesSiNo} id="articulacion_semillero" bind:selectedValue={$form.articulacion_semillero} error={errors.articulacion_semillero} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
             </div>
+
+            {#if $form.articulacion_semillero?.value == 1}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" for="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
+                    </div>
+                    <div>
+                        <SelectMulti id="semilleros_investigacion" bind:selectedValue={$form.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" required />
+                    </div>
+                </div>
+            {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" for="proyectos_ejecucion" value="Proyectos o iniciativas en ejecución en el año {convocatoria.year - 1}" />
                 </div>
                 <div>
                     <Textarea label="Proyectos / Iniciativas" maxlength="40000" id="proyectos_ejecucion" error={errors.proyectos_ejecucion} bind:value={$form.proyectos_ejecucion} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="semilleros_en_formalizacion" value="Semilleros en proceso de formalización (Separados por coma)" />
+                </div>
+                <div>
+                    <Tags id="semilleros_en_formalizacion" class="mt-4" enforceWhitelist={false} bind:tags={$form.semilleros_en_formalizacion} placeholder="Nombre del semillero" error={errors.semilleros_en_formalizacion} required />
                 </div>
             </div>
         </fieldset>

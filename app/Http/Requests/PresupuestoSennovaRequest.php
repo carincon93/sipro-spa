@@ -29,7 +29,6 @@ class PresupuestoSennovaRequest extends FormRequest
             'tercer_grupo_presupuestal_id'     => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:tercer_grupo_presupuestal,id'],
             'uso_presupuestal_id'              => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:usos_presupuestales,id'],
             'linea_programatica_id'            => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_programaticas,id'],
-            'requiere_lote_estudio_mercado'    => ['required', 'boolean'],
             'requiere_estudio_mercado'         => ['required', 'boolean'],
             'sumar_al_presupuesto'             => ['required', 'boolean'],
             'mensaje'                          => ['nullable', 'string'],

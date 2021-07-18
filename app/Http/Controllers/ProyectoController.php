@@ -211,7 +211,8 @@ class ProyectoController extends Controller
             'metodologia'               => ProyectoValidationTrait::metodologia($proyecto),
             'propuestaSostenibilidad'   => ProyectoValidationTrait::propuestaSostenibilidad($proyecto),
             'productosActividades'      => ProyectoValidationTrait::productosActividades($proyecto),
-            'articulacionSennova'       => ProyectoValidationTrait::articulacionSennova($proyecto)
+            'articulacionSennova'       => ProyectoValidationTrait::articulacionSennova($proyecto),
+            'soportesEstudioMercado'    => ProyectoValidationTrait::soportesEstudioMercado($proyecto)
         ]);
     }
 

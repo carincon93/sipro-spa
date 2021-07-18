@@ -23,7 +23,7 @@ class Ta extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion'];
+    protected $appends = ['fecha_ejecucion', 'meta_aprendices', 'max_material_formacion', 'max_bienestar_aprendiz'];
 
     /**
      * The attributes that are mass assignable.
@@ -61,7 +61,14 @@ class Ta extends Model
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
         'modificable',
-        'proyectos_ejecucion'
+        'proyectos_ejecucion',
+        'proyectos_macro',
+        'lineas_medulares_centro',
+        'lineas_tecnologicas_centro',
+        'proyeccion_nuevas_tecnoacademias',
+        'proyeccion_articulacion_media',
+        'articulacion_semillero',
+        'semilleros_en_formalizacion',
     ];
 
     /**
@@ -174,5 +181,43 @@ class Ta extends Model
         $ta->load('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia');
 
         return $ta;
+    }
+
+    public function getMetaAprendicesAttribute()
+    {
+        $valorEstandarizado = 0;
+
+        if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 1) {
+            $valorEstandarizado = 460000;
+        } else if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 2) {
+            $valorEstandarizado = 490000;
+        } else if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 3) {
+            $valorEstandarizado = 520000;
+        }
+
+        $total = 0;
+        if ($valorEstandarizado > 0) {
+            $total = $this->proyecto->getPrecioProyectoAttribute() / $valorEstandarizado;
+        }
+        return round($total);
+    }
+
+    public function getMaxMaterialFormacionAttribute()
+    {
+        $valorAprendiz = 0;
+
+        if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 1) {
+            $valorAprendiz = 20000;
+        } else if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 2) {
+            $valorAprendiz = 35000;
+        } else if ($this->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 3) {
+            $valorAprendiz = 63000;
+        }
+        return round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+    }
+
+    public function getMaxBienestarAprendizAttribute()
+    {
+        return round($this->getMetaAprendicesAttribute() * 10200);
     }
 }

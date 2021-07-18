@@ -11,6 +11,7 @@
     import Textarea from '@/Shared/Textarea'
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
+    import File from '@/Shared/File'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
@@ -33,7 +34,7 @@
         convocatoria_presupuesto_id: null,
         descripcion: '',
         justificacion: '',
-        valor: '',
+        valor_total: '',
         numero_items: '',
         tipo_software: '',
         tipo_licencia: '',
@@ -41,6 +42,7 @@
         fecha_finalizacion: '',
         codigo_uso_presupuestal: '',
         servicio_edicion_info: '',
+        formato_estudio_mercado: '',
     })
 
     function submit() {
@@ -125,12 +127,15 @@
                     <Textarea label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
 
-                {#if usoPresupuestal?.requiere_estudio_mercado == false}
+                <div class="mt-4">
+                    <Input label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" bind:value={$form.valor_total} error={errors.valor_total} required />
+                </div>
+                {#if usoPresupuestal?.requiere_estudio_mercado}
+                    <InfoMessage message="Por favor indique el valor total que arrojó el Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
+
                     <div class="mt-4">
-                        <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="0" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
-                    </div>
-                    <div class="mt-4">
-                        <Input label="Valor" id="valor" type="number" input$min="0" class="mt-1" bind:value={$form.valor} error={errors.valor} required />
+                        <Label required class="mb-4" labelFor="formato_estudio_mercado" value="Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
+                        <File id="formato_estudio_mercado" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} required />
                     </div>
                 {/if}
 

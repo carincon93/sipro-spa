@@ -10,6 +10,7 @@
     export let whitelist
     export let tags
     export let id
+    export let enforceWhitelist = true
 
     let inputElm, tagify
 
@@ -29,7 +30,7 @@
         // initialize Tagify on the above input node reference
         if (inputElm) {
             tagify = new Tagify(inputElm, {
-                enforceWhitelist: true,
+                enforceWhitelist: enforceWhitelist,
 
                 // make an array from the initial input value
                 whitelist: inputElm.value.trim().split(/\s*,\s*/),

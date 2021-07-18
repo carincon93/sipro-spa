@@ -91,25 +91,28 @@ class TaController extends Controller
         $proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->tecnoacademia_linea_tecnoacademia_id);
 
         $ta = new Ta();
-        $ta->fecha_inicio                         = $request->fecha_inicio;
-        $ta->fecha_finalizacion                   = $request->fecha_finalizacion;
-        $ta->max_meses_ejecucion                  = $request->max_meses_ejecucion;
-        $ta->resumen                              = '';
-        $ta->antecedentes                         = '';
-        $ta->marco_conceptual                     = '';
-        $ta->metodologia                          = '';
-        $ta->bibliografia                         = '';
-        $ta->impacto_municipios                   = '';
-        $ta->articulacion_centro_formacion        = '';
-        $ta->identificacion_problema              = '';
-        $ta->resumen_regional                     = '';
-        $ta->antecedentes_tecnoacademia           = '';
-        $ta->retos_oportunidades                  = '';
-        $ta->pertinencia_territorio               = '';
-        $ta->metodologia_local                    = '';
-        $ta->numero_instituciones                 = 0;
-        $ta->nombre_instituciones                 = null;
-        $ta->nombre_instituciones_programas       = null;
+        $ta->fecha_inicio                       = $request->fecha_inicio;
+        $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
+        $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
+        $ta->resumen                            = '';
+        $ta->antecedentes                       = '';
+        $ta->marco_conceptual                   = '';
+        $ta->metodologia                        = '';
+        $ta->bibliografia                       = '';
+        $ta->impacto_municipios                 = '';
+        $ta->articulacion_centro_formacion      = '';
+        $ta->identificacion_problema            = '';
+        $ta->resumen_regional                   = '';
+        $ta->antecedentes_tecnoacademia         = '';
+        $ta->retos_oportunidades                = '';
+        $ta->pertinencia_territorio             = '';
+        $ta->metodologia_local                  = '';
+        $ta->numero_instituciones               = 0;
+        $ta->nombre_instituciones               = null;
+        $ta->nombre_instituciones_programas     = null;
+        $ta->proyeccion_nuevas_tecnoacademias   = 1;
+        $ta->proyeccion_articulacion_media      = 1;
+        $ta->articulacion_semillero             = 1;
 
         $proyecto->ta()->save($ta);
 
@@ -222,6 +225,12 @@ class TaController extends Controller
         $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
         $ta->nuevas_instituciones               = $request->nuevas_instituciones;
 
+        $ta->proyectos_macro                    = $request->proyectos_macro;
+        $ta->lineas_medulares_centro            = $request->lineas_medulares_centro;
+        $ta->lineas_tecnologicas_centro         = $request->lineas_tecnologicas_centro;
+        $ta->proyeccion_nuevas_tecnoacademias   = $request->proyeccion_nuevas_tecnoacademias;
+        $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
+
         $ta->proyecto->municipios()->sync($request->municipios);
         $ta->proyecto->municipiosAImpactar()->sync($request->municipios_impactar);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
@@ -286,13 +295,15 @@ class TaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
-        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
-        $proyecto->precio_proyecto           = $proyecto->precioProyecto;
-        $proyecto->proyectos_ejecucion       = $proyecto->ta->proyectos_ejecucion;
+        $proyecto->codigo_linea_programatica            = $proyecto->lineaProgramatica->codigo;
+        $proyecto->precio_proyecto                      = $proyecto->precioProyecto;
+        $proyecto->proyectos_ejecucion                  = $proyecto->ta->proyectos_ejecucion;
+        $proyecto->articulacion_semillero               = $proyecto->ta->articulacion_semillero;
+        $proyecto->semilleros_en_formalizacion          = $proyecto->ta->semilleros_en_formalizacion;
 
         return Inertia::render('Convocatorias/Proyectos/ArticulacionSennova/Index', [
             'convocatoria'              => $convocatoria->only('id', 'year', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion', 'modificable'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion', 'modificable', 'articulacion_semillero', 'semilleros_en_formalizacion'),
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
             'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
@@ -315,10 +326,16 @@ class TaController extends Controller
     {
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
-        $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+        if ($request->semilleros_en_formalizacion == 1) {
+            $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+        } else {
+            $proyecto->semillerosInvestigacion()->sync([]);
+        }
 
         $proyecto->ta->update([
-            'proyectos_ejecucion' => $request->proyectos_ejecucion
+            'proyectos_ejecucion'           => $request->proyectos_ejecucion,
+            'articulacion_semillero'        => $request->articulacion_semillero,
+            'semilleros_en_formalizacion'   => $request->semilleros_en_formalizacion
         ]);
 
         return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');

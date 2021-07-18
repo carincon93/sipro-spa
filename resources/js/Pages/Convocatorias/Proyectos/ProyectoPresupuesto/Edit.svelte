@@ -13,6 +13,7 @@
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
+    import File from '@/Shared/File'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
@@ -34,6 +35,7 @@
     let dialogOpen = false
     let sending = false
     let form = useForm({
+        _method: 'put',
         codigo_uso_presupuestal: '',
 
         segundo_grupo_presupuestal_id: proyectoPresupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal_id,
@@ -42,7 +44,7 @@
 
         descripcion: proyectoPresupuesto.descripcion,
         justificacion: proyectoPresupuesto.justificacion,
-        valor: proyectoPresupuesto.valor,
+        valor_total: proyectoPresupuesto.valor_total,
         numero_items: proyectoPresupuesto.numero_items,
         tipo_software: proyectoPresupuesto.software_info?.tipo_software,
         tipo_licencia: proyectoPresupuesto.software_info?.tipo_licencia,
@@ -52,6 +54,7 @@
             value: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.value,
             label: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.label,
         },
+        formato_estudio_mercado: '',
     })
 
     function submit() {
@@ -148,12 +151,14 @@
                         <Textarea label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                     </div>
 
-                    {#if usoPresupuestal?.requiere_estudio_mercado == false || proyectoPresupuesto.valor != null}
+                    <div class="mt-4">
+                        <Input label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" bind:value={$form.valor_total} error={errors.valor_total} required />
+                    </div>
+                    {#if usoPresupuestal?.requiere_estudio_mercado}
+                        <InfoMessage message="Por favor indique el valor total que arrojó el Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
                         <div class="mt-4">
-                            <Input label="Indique la cantidad requerida del producto o servicio relacionado" id="numero_items" type="number" input$min="0" class="mt-1" bind:value={$form.numero_items} error={errors.numero_items} required />
-                        </div>
-                        <div class="mt-4">
-                            <Input label="Valor" id="valor" type="number" input$min="0" class="mt-1" bind:value={$form.valor} error={errors.valor} required />
+                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
+                            <File id="formato_estudio_mercado" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
                         </div>
                     {/if}
 
@@ -215,15 +220,46 @@
         </div>
         {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
             <div class="px-4">
-                <h1 class="mb-4">Enlaces de interés</h1>
+                <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
                 <ul>
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.lote.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Estudios de mercado</a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Soportes</a>
                     </li>
                 </ul>
             </div>
         {/if}
     </div>
+
+    {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
+        <h1 class="text-2xl mt-10">Archivos</h1>
+        <div class="mt-4 bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre archivo</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t px-6 pt-6 pb-4"> Formato estudio de mercado </td>
+
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Descargar formato de estudio de mercado</a>
+                        </td>
+                    </tr>
+
+                    {#if !proyectoPresupuesto.formato_estudio_mercado}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="2">Sin información registrada</td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
+
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -453,4 +453,23 @@ trait ProyectoValidationTrait
     {
         return $proyecto->lineasInvestigacion()->count() > 0 ? true : false;
     }
+
+    /**
+     * 
+     * Valida que los estudios de mercado tengan al menos dos soportes
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function soportesEstudioMercado(Proyecto $proyecto)
+    {
+        $countSoportes = 0;
+        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->soportesEstudioMercado()->count() < 2) {
+                $countSoportes++;
+            }
+        }
+
+        return $countSoportes > 0 ? false : true;
+    }
 }
