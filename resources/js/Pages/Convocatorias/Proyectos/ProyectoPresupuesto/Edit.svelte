@@ -59,7 +59,7 @@
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
-            $form.put(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
+            $form.post(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -242,17 +242,17 @@
                 </thead>
 
                 <tbody>
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4"> Formato estudio de mercado </td>
-
-                        <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Descargar formato de estudio de mercado</a>
-                        </td>
-                    </tr>
-
                     {#if !proyectoPresupuesto.formato_estudio_mercado}
                         <tr>
                             <td class="border-t px-6 py-4" colspan="2">Sin información registrada</td>
+                        </tr>
+                    {:else}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t px-6 pt-6 pb-4"> Formato estudio de mercado </td>
+
+                            <td class="border-t px-6 pt-6 pb-4">
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Descargar formato de estudio de mercado</a>
+                            </td>
                         </tr>
                     {/if}
                 </tbody>
