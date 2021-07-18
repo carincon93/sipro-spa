@@ -178,34 +178,16 @@
 
                         <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                </svg>
-                                Descargar carta de intención
-                            </a>
                             <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
                         </div>
 
                         <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                </svg>
-                                Descargar carta de propiedad intelectual
-                            </a>
                             <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
                         </div>
                     {:else if proyecto.codigo_linea_programatica == 70}
                         <div class="mt-8">
                             <Label class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                </svg>
-                                Descargar soporte del convenio
-                            </a>
                             <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} />
                         </div>
 
@@ -295,118 +277,166 @@
         {/if}
     </div>
 
-    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-        <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
-        <div class="mb-6 flex justify-end items-center">
-            <div>
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
+    <h1 class="text-2xl mt-10">Archivos</h1>
+    <div class="mt-4 bg-white rounded shadow">
+        <table class="w-full whitespace-no-wrap table-fixed data-table">
+            <thead>
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {#if proyecto.codigo_linea_programatica == 70}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar soporte del convenio
+                            </a>
+                        </td>
+                    </tr>
+                {:else}
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de intención
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Descargar carta de propiedad intelectual
+                            </a>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
+
+        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+            <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
+            <div class="mb-6 flex justify-end items-center">
+                <div>
+                    <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
+                </div>
             </div>
-        </div>
-        <div class="bg-white rounded shadow">
-            <table class="w-full whitespace-no-wrap table-fixed data-table">
-                <thead>
-                    <tr class="text-left font-bold">
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
-                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                            <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
-                                    {miembroEntidadAliada.nombre}
-                                </p>
-                            </td>
-
-                            <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
-                                    {miembroEntidadAliada.email}
-                                </p>
-                            </td>
-
-                            <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
-                                    {miembroEntidadAliada.numero_celular}
-                                </p>
-                            </td>
-
-                            <td class="border-t td-actions">
-                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
-                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
-                                            <Text>Ver detalles</Text>
-                                        </Item>
-                                    {:else}
-                                        <Item>
-                                            <Text>No tiene permisos</Text>
-                                        </Item>
-                                    {/if}
-                                </DataTableMenu>
-                            </td>
+            <div class="bg-white rounded shadow">
+                <table class="w-full whitespace-no-wrap table-fixed data-table">
+                    <thead>
+                        <tr class="text-left font-bold">
+                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
+                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
+                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
                         </tr>
-                    {/each}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
 
-        <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
-        <p class="mb-6">
-            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
-        </p>
-        <div class="bg-white rounded shadow">
-            <table class="w-full whitespace-no-wrap table-fixed data-table">
-                <thead>
-                    <tr class="text-left font-bold">
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
-                    </tr>
-                </thead>
+                    <tbody>
+                        {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+                            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                <td class="border-t">
+                                    <p class="px-6 py-4 focus:text-indigo-500">
+                                        {miembroEntidadAliada.nombre}
+                                    </p>
+                                </td>
 
-                <tbody>
-                    {#each objetivosEspecificosRelacionados as { id, descripcion }}
-                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                            <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
-                                    {descripcion}
-                                </p>
-                            </td>
-                        </tr>
-                    {/each}
+                                <td class="border-t">
+                                    <p class="px-6 py-4 focus:text-indigo-500">
+                                        {miembroEntidadAliada.email}
+                                    </p>
+                                </td>
 
-                    {#if objetivosEspecificosRelacionados.length === 0}
-                        <tr>
-                            <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
-                        </tr>
-                    {/if}
-                </tbody>
-            </table>
-        </div>
-    {/if}
+                                <td class="border-t">
+                                    <p class="px-6 py-4 focus:text-indigo-500">
+                                        {miembroEntidadAliada.numero_celular}
+                                    </p>
+                                </td>
 
-    <Dialog bind:open={dialogOpen}>
-        <div slot="title" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <p>
-                ¿Está seguro(a) que desea eliminar este recurso?
-                <br />
-                Todos los datos se eliminarán de forma permanente.
-                <br />
-                Está acción no se puede deshacer.
+                                <td class="border-t td-actions">
+                                    <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                                        {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+                                            <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                                <Text>Ver detalles</Text>
+                                            </Item>
+                                        {:else}
+                                            <Item>
+                                                <Text>No tiene permisos</Text>
+                                            </Item>
+                                        {/if}
+                                    </DataTableMenu>
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+
+            <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
+            <p class="mb-6">
+                A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
             </p>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" on:click={destroy}>Confirmar</Button>
+            <div class="bg-white rounded shadow">
+                <table class="w-full whitespace-no-wrap table-fixed data-table">
+                    <thead>
+                        <tr class="text-left font-bold">
+                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {#each objetivosEspecificosRelacionados as { id, descripcion }}
+                            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                <td class="border-t">
+                                    <p class="px-6 py-4 focus:text-indigo-500">
+                                        {descripcion}
+                                    </p>
+                                </td>
+                            </tr>
+                        {/each}
+
+                        {#if objetivosEspecificosRelacionados.length === 0}
+                            <tr>
+                                <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                            </tr>
+                        {/if}
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </Dialog>
-</AuthenticatedLayout>
+        {/if}
+
+        <Dialog bind:open={dialogOpen}>
+            <div slot="title" class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Eliminar recurso
+            </div>
+            <div slot="content">
+                <p>
+                    ¿Está seguro(a) que desea eliminar este recurso?
+                    <br />
+                    Todos los datos se eliminarán de forma permanente.
+                    <br />
+                    Está acción no se puede deshacer.
+                </p>
+            </div>
+            <div slot="actions">
+                <div class="p-4">
+                    <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                    <Button variant="raised" on:click={destroy}>Confirmar</Button>
+                </div>
+            </div>
+        </Dialog>
+    </div></AuthenticatedLayout
+>

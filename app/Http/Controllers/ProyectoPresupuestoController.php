@@ -402,6 +402,19 @@ class ProyectoPresupuestoController extends Controller
     }
 
     /**
+     * download
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $presupuesto
+     * @return void
+     */
+    public function downloadFormatoEstudioMercado(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
+    {
+        return response()->download(storage_path("app/anexos/formatoGuia4EstudioMercado.xlsx"));
+    }
+
+    /**
      * cleanFileName
      *
      * @param  mixed $nombre
