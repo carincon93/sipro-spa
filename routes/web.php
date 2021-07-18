@@ -627,7 +627,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Presupuesto de proyecto
      * 
      */
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/formato-estudio-mercado', [ProyectoPresupuestoController::class, 'downloadFormatoEstudioMercado'])->name('convocatorias.proyectos.presupuesto.download-formato-estudio-mercado');
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/formato-estudio-mercado', [ProyectoPresupuestoController::class, 'downloadFormatoEstudioMercado'])->name('convocatorias.proyectos.presupuesto.download-formato-estudio-mercado');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/download', [ProyectoPresupuestoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.download');
     Route::resource('convocatorias.proyectos.presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto'])->except(['show']);
 
