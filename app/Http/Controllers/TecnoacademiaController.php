@@ -61,8 +61,6 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->modalidad                       = $request->modalidad;
         $tecnoacademia->fecha_creacion                  = $request->fecha_creacion;
         $tecnoacademia->foco                            = $request->foco;
-        $tecnoacademia->max_valor_materiales_formacion  = $request->max_valor_materiales_formacion;
-        $tecnoacademia->max_valor_bienestar_alumnos     = $request->max_valor_bienestar_alumnos;
         $tecnoacademia->max_valor_viaticos_interior     = $request->max_valor_viaticos_interior;
         $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
         $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;
@@ -120,8 +118,6 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->modalidad                       = $request->modalidad;
         $tecnoacademia->fecha_creacion                  = $request->fecha_creacion;
         $tecnoacademia->foco                            = $request->foco;
-        $tecnoacademia->max_valor_materiales_formacion  = $request->max_valor_materiales_formacion;
-        $tecnoacademia->max_valor_bienestar_alumnos     = $request->max_valor_bienestar_alumnos;
         $tecnoacademia->max_valor_viaticos_interior     = $request->max_valor_viaticos_interior;
         $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
         $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;

@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'max_material_formacion', 'max_bienestar_aprendiz'];
 
     /**
      * The attributes that are mass assignable.
@@ -469,5 +469,45 @@ class Proyecto extends Model
             }
         }
         return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute() + $totalEDT;
+    }
+
+    public function getMetaAprendicesAttribute()
+    {
+        $valorEstandarizado = 0;
+        $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
+        if ($modalidad == 1) {
+            $valorEstandarizado = 460000;
+        } else if ($modalidad == 2) {
+            $valorEstandarizado = 490000;
+        } else if ($modalidad == 3) {
+            $valorEstandarizado = 520000;
+        }
+
+        $total = 0;
+        if ($valorEstandarizado > 0) {
+            $total = $this->getPrecioProyectoAttribute() / $valorEstandarizado;
+        }
+
+        return round($total);
+    }
+
+    public function getMaxMaterialFormacionAttribute()
+    {
+        $valorAprendiz = 0;
+
+        $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
+        if ($modalidad == 1) {
+            $valorAprendiz = 20000;
+        } else if ($modalidad == 2) {
+            $valorAprendiz = 35000;
+        } else if ($modalidad == 3) {
+            $valorAprendiz = 63000;
+        }
+        return round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+    }
+
+    public function getMaxBienestarAprendizAttribute()
+    {
+        return round($this->getMetaAprendicesAttribute() * 10200);
     }
 }

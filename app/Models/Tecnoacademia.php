@@ -21,7 +21,7 @@ class Tecnoacademia extends Model
      *
      * @var array
      */
-    protected $appends = ['max_valor_proyecto'];
+    protected $appends = ['suma_max_valores'];
 
 
     /**
@@ -36,8 +36,6 @@ class Tecnoacademia extends Model
         'foco',
         'linea_tecnoacademia_id',
         'centro_formacion_id',
-        'max_valor_materiales_formacion',
-        'max_valor_bienestar_alumnos',
         'max_valor_viaticos_interior',
         'max_valor_edt',
         'max_valor_mantenimiento_equipos',
@@ -110,8 +108,8 @@ class Tecnoacademia extends Model
         });
     }
 
-    public function getMaxValorProyectoAttribute()
+    public function getSumaMaxValoresAttribute()
     {
-        return $this->max_valor_materiales_formacion + $this->max_valor_bienestar_alumnos + $this->max_valor_viaticos_interior + $this->max_valor_edt + $this->max_valor_mantenimiento_equipos + $this->max_valor_roles;
+        return $this->max_valor_viaticos_interior + $this->max_valor_edt + $this->max_valor_mantenimiento_equipos + $this->max_valor_roles;
     }
 }
