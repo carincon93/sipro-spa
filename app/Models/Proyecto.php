@@ -474,13 +474,15 @@ class Proyecto extends Model
     public function getMetaAprendicesAttribute()
     {
         $valorEstandarizado = 0;
-        $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
-        if ($modalidad == 1) {
-            $valorEstandarizado = 460000;
-        } else if ($modalidad == 2) {
-            $valorEstandarizado = 490000;
-        } else if ($modalidad == 3) {
-            $valorEstandarizado = 520000;
+        if ($this->ta()->exists()) {
+            $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
+            if ($modalidad == 1) {
+                $valorEstandarizado = 460000;
+            } else if ($modalidad == 2) {
+                $valorEstandarizado = 490000;
+            } else if ($modalidad == 3) {
+                $valorEstandarizado = 520000;
+            }
         }
 
         $total = 0;
@@ -494,20 +496,25 @@ class Proyecto extends Model
     public function getMaxMaterialFormacionAttribute()
     {
         $valorAprendiz = 0;
-
-        $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
-        if ($modalidad == 1) {
-            $valorAprendiz = 20000;
-        } else if ($modalidad == 2) {
-            $valorAprendiz = 35000;
-        } else if ($modalidad == 3) {
-            $valorAprendiz = 63000;
+        if ($this->ta()->exists()) {
+            $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
+            if ($modalidad == 1) {
+                $valorAprendiz = 20000;
+            } else if ($modalidad == 2) {
+                $valorAprendiz = 35000;
+            } else if ($modalidad == 3) {
+                $valorAprendiz = 63000;
+            }
         }
         return round($this->getMetaAprendicesAttribute() * $valorAprendiz);
     }
 
     public function getMaxBienestarAprendizAttribute()
     {
-        return round($this->getMetaAprendicesAttribute() * 10200);
+        $total = 0;
+        if ($this->ta()->exists()) {
+            $total = round($this->getMetaAprendicesAttribute() * 10200);
+        }
+        return $total;
     }
 }
