@@ -39,12 +39,12 @@ class ProyectoPresupuestoController extends Controller
         $proyecto->viaticos_interior                        = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041102');
 
         if ($proyecto->codigo_linea_programatica == 70) {
-            $proyecto->max_valor_materiales_formacion   = $proyecto->ta->max_material_formacion;
-            $proyecto->max_valor_bienestar_alumnos      = $proyecto->ta->max_bienestar_aprendiz;
+            $proyecto->max_valor_materiales_formacion   = $proyecto->max_material_formacion;
+            $proyecto->max_valor_bienestar_alumnos      = $proyecto->max_bienestar_aprendiz;
             $proyecto->max_valor_viaticos_interior      = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior;
             $proyecto->max_valor_edt                    = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
             $proyecto->max_valor_mantenimiento_equipos  = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
-            $proyecto->max_valor_proyecto               = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_proyecto;
+            $proyecto->max_valor_proyecto               = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $proyecto->max_material_formacion + $proyecto->max_bienestar_aprendiz;
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Index', [

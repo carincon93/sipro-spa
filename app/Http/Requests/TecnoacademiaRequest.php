@@ -30,8 +30,6 @@ class TecnoacademiaRequest extends FormRequest
             'modalidad'                         => ['required', 'max:2'],
             'foco'                              => ['required', 'string'],
             'fecha_creacion'                    => ['required', 'date', 'date_format:Y-m-d'],
-            'max_valor_materiales_formacion'    => ['required', 'numeric', 'min:1'],
-            'max_valor_bienestar_alumnos'       => ['required', 'numeric', 'min:1'],
             'max_valor_viaticos_interior'       => ['required', 'numeric', 'min:1'],
             'max_valor_edt'                     => ['required', 'numeric', 'min:1'],
             'max_valor_mantenimiento_equipos'   => ['required', 'numeric', 'min:1'],

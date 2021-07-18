@@ -42,8 +42,6 @@
         fecha_creacion: tecnoacademia.fecha_creacion,
         foco: tecnoacademia.foco,
         linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
-        max_valor_materiales_formacion: tecnoacademia.max_valor_materiales_formacion,
-        max_valor_bienestar_alumnos: tecnoacademia.max_valor_bienestar_alumnos,
         max_valor_viaticos_interior: tecnoacademia.max_valor_viaticos_interior,
         max_valor_edt: tecnoacademia.max_valor_edt,
         max_valor_mantenimiento_equipos: tecnoacademia.max_valor_mantenimiento_equipos,
@@ -106,14 +104,6 @@
 
                 <div class="mt-4">
                     <Textarea label="Foco de la TecnoAcademia" maxlength="40000" id="foco" bind:value={$form.foco} error={errors.foco} required />
-                </div>
-
-                <div class="mt-4">
-                    <Input label="Valor máximo: Materiales formación" id="max_valor_materiales_formacion" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_materiales_formacion} error={errors.max_valor_materiales_formacion} required />
-                </div>
-
-                <div class="mt-4">
-                    <Input label="Valor máximo: Bienestar alumnos" id="max_valor_bienestar_alumnos" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_bienestar_alumnos} error={errors.max_valor_bienestar_alumnos} required />
                 </div>
 
                 <div class="mt-4">
