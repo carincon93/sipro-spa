@@ -39,7 +39,6 @@ use App\Http\Controllers\TaController;
 use App\Http\Controllers\TpController;
 use App\Http\Controllers\ProyectoAnexoController;
 use App\Http\Controllers\UsoPresupuestalController;
-use App\Http\Controllers\ProyectoLoteEstudioMercadoController;
 use App\Http\Controllers\MiembroEntidadAliadaController;
 use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnoacademiaController;
@@ -52,6 +51,7 @@ use App\Http\Controllers\EdtController;
 use App\Http\Controllers\InventarioEquipoController;
 use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
+use App\Http\Controllers\SoporteEstudioMercadoController;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
@@ -147,8 +147,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor/propuesta-sostenibilidad', [ProyectoController::class, 'updatePropuestaSostenibilidad'])->name('convocatorias.proyectos.propuesta-sostenibilidad');
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/cadena-valor', [ProyectoController::class, 'showCadenaValor'])->name('convocatorias.proyectos.cadena-valor');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/lote/{lote}/download', [ProyectoLoteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.lote.download');
-    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/estudio-mercado/{estudio_mercado}/download', [ProyectoLoteEstudioMercadoController::class, 'downloadSoporte'])->name('convocatorias.proyectos.presupuesto.download-soporte');
     Route::get('anexos/{anexo}/download', [AnexoController::class, 'download'])->name('anexos.download');
 
     // Trae los centros de formación - Cultura innovación
@@ -629,16 +627,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Presupuesto de proyecto
      * 
      */
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/download', [ProyectoPresupuestoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.download');
     Route::resource('convocatorias.proyectos.presupuesto', ProyectoPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto'])->except(['show']);
 
-    Route::resource('convocatorias.proyectos.presupuesto.lote', ProyectoLoteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto', 'lote' => 'lote'])->except(['show']);
-
+    /**
+     * Soportes de estudio de mercado
+     * 
+     */
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/presupuesto/{presupuesto}/soportes/{soporte}/download', [SoporteEstudioMercadoController::class, 'download'])->name('convocatorias.proyectos.presupuesto.soportes.download');
+    Route::resource('convocatorias.proyectos.presupuesto.soportes', SoporteEstudioMercadoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'presupuesto' => 'presupuesto', 'soportes' => 'soporte'])->except(['show']);
 
     /**
      * Rol SENNOVA de convocatoria
      * 
      */
-
     Route::resource('convocatorias.convocatoria-rol-sennova',  ConvocatoriaRolSennovaController::class)->parameters(['convocatorias' => 'convocatoria', 'convocatoria-rol-sennova' => 'convocatoria-rol-sennova'])->except(['show']);
 
     /**

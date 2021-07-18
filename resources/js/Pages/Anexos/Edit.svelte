@@ -32,7 +32,7 @@
         nombre: anexo.nombre,
         descripcion: anexo.descripcion,
         linea_programatica_id: anexoLineasProgramaticas,
-        archivo: anexo.archivo,
+        archivo: '',
     })
 
     function submit() {

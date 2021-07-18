@@ -24,9 +24,11 @@ class ArticulacionSennovaRequest extends FormRequest
     public function rules()
     {
         return [
-            'lineas_investigacion*'     => ['required', 'integer', 'exists:lineas_investigacion,id'],
-            'grupos_investigacion*'     => ['required', 'integer', 'exists:grupos_investigacion,id'],
-            'semilleros_investigacion*' => ['required', 'integer', 'exists:semilleros_investigacion,id'],
+            'lineas_investigacion*'         => ['required', 'integer', 'exists:lineas_investigacion,id'],
+            'grupos_investigacion*'         => ['required', 'integer', 'exists:grupos_investigacion,id'],
+            'semilleros_investigacion*'     => ['required', 'integer', 'exists:semilleros_investigacion,id'],
+            'articulacion_semillero'        => ['required', 'min:0', 'max:3', 'integer'],
+            'semilleros_en_formalizacion'   => ['nullable', 'json'],
         ];
     }
 
@@ -83,6 +85,12 @@ class ArticulacionSennovaRequest extends FormRequest
                 }
                 $this->merge(['semilleros_investigacion' => $semillerosInvestigacion]);
             }
+        }
+
+        if (is_array($this->articulacion_semillero)) {
+            $this->merge([
+                'articulacion_semillero' => $this->articulacion_semillero['value'],
+            ]);
         }
     }
 }

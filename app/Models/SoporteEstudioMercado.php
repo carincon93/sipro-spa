@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EstudioMercado extends Model
+class SoporteEstudioMercado extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class EstudioMercado extends Model
      *
      * @var string
      */
-    protected $table = 'estudios_mercado';
+    protected $table = 'soportes_estudio_mercado';
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +22,7 @@ class EstudioMercado extends Model
      * @var array
      */
     protected $fillable = [
-        'proyecto_lote_estudio_mercado_id',
-        'valor',
+        'proyecto_presupuesto_id',
         'empresa',
         'soporte'
     ];
@@ -47,13 +46,13 @@ class EstudioMercado extends Model
     ];
 
     /**
-     * Relationship with ProyectoLoteEstudioMercado
+     * Relationship with ProyectoPresupuesto
      *
      * @return object
      */
-    public function proyectoLoteEstudioMercado()
+    public function ProyectoPresupuesto()
     {
-        return $this->belongsTo(ProyectoLoteEstudioMercado::class);
+        return $this->belongsTo(ProyectoPresupuesto::class);
     }
 
     /**
@@ -63,7 +62,7 @@ class EstudioMercado extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterEstudioMercado($query, array $filters)
+    public function scopeFilterSoporteEstudioMercado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);

@@ -57,7 +57,7 @@ class ActividadController extends Controller
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
                 })
-            )->with('objetivoEspecifico')->orderBy('created_at', 'ASC')
+            )->with('objetivoEspecifico')->orderBy('objetivo_especifico_id', 'ASC')
                 ->filterActividad(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'actividadesGantt'  => Actividad::whereIn(
                 'objetivo_especifico_id',

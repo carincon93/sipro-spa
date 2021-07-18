@@ -27,8 +27,8 @@ class ProyectoPresupuestoRequest extends FormRequest
             'convocatoria_presupuesto_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:convocatoria_presupuesto,id'],
             'descripcion'                   => ['required', 'string'],
             'justificacion'                 => ['required'],
-            'valor'                         => ['nullable', 'min:0', 'numeric'],
-            'numero_items'                  => ['nullable', 'min:0', 'numeric'],
+            'valor_total'                   => ['nullable', 'min:0', 'numeric'],
+            'formato_estudio_mercado'       => ['nullable', 'max:10000000', 'file'],
         ];
     }
 }

@@ -54,7 +54,7 @@ class ProductoController extends Controller
                 $resultado->map(function ($resultado) {
                     return $resultado->id;
                 })
-            )->with('resultado.objetivoEspecifico')->orderBy('fecha_inicio', 'ASC')
+            )->with('resultado.objetivoEspecifico')->orderBy('resultado_id', 'ASC')
                 ->filterProducto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'productosGantt'        => Producto::whereIn(
                 'resultado_id',

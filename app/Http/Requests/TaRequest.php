@@ -44,11 +44,16 @@ class TaRequest extends FormRequest
                 'dis_curricular_id*'                        => ['required', 'integer', 'exists:dis_curriculares,id'],
                 'impacto_municipios'                        => ['required', 'string'],
                 'articulacion_centro_formacion'             => ['required', 'string'],
-                'nombre_instituciones'                      => ['required', 'json'],
+                'nombre_instituciones'                      => ['nullable', 'json'],
                 'nombre_instituciones_programas'            => ['required', 'json'],
-                'nuevas_instituciones'                      => ['required', 'json'],
+                'nuevas_instituciones'                      => ['nullable', 'json'],
                 'pertinencia_territorio'                    => ['required', 'max:40000', 'string'],
                 'retos_oportunidades'                       => ['required', 'max:40000', 'string'],
+                'proyectos_macro'                           => ['nullable', 'string'],
+                'lineas_medulares_centro'                   => ['nullable', 'string'],
+                'lineas_tecnologicas_centro'                => ['nullable', 'string'],
+                'proyeccion_nuevas_tecnoacademias'          => ['required', 'min:0', 'max:3', 'integer'],
+                'proyeccion_articulacion_media'             => ['required', 'min:0', 'max:3', 'integer'],
             ];
         } else {
             return [

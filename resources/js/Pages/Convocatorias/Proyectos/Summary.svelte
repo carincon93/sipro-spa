@@ -36,6 +36,7 @@
     export let propuestaSostenibilidad
     export let productosActividades
     export let articulacionSennova
+    export let soportesEstudioMercado
 
     $: $title = 'Finalizar proyecto'
 
@@ -230,6 +231,9 @@
                         {/if}
                         {#if !anexos}
                             <li>No se han cargado todos los anexos</li>
+                        {/if}
+                        {#if !soportesEstudioMercado}
+                            <li>Hay estudios de mercado con menos de dos soportes</li>
                         {/if}
                     </ul>
                 </InfoMessage>

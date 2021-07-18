@@ -156,7 +156,7 @@ class Actividad extends Model
         $total = 0;
 
         foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
-            $total += $proyectoPresupuesto->getPromedioAttribute();
+            $total += $proyectoPresupuesto->valor_total;
         }
 
         return $total;

@@ -430,7 +430,7 @@ class Proyecto extends Model
 
         foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
-                $total += $proyectoPresupuesto->getPromedioAttribute();
+                $total += $proyectoPresupuesto->valor_total;
             }
         }
 
