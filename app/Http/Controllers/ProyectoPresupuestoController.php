@@ -143,7 +143,7 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->ta->max_material_formacion);
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
@@ -300,7 +300,7 @@ class ProyectoPresupuestoController extends Controller
         if ($proyecto->lineaProgramatica->codigo == 70) {
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->ta->max_material_formacion);
+                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
@@ -315,9 +315,20 @@ class ProyectoPresupuestoController extends Controller
             }
         }
 
-        $presupuesto->valor_total      = $request->valor_total;
         $presupuesto->descripcion      = $request->descripcion;
         $presupuesto->justificacion    = $request->justificacion;
+        $presupuesto->valor_total      = $request->valor_total;
+
+        if ($request->hasFile('formato_estudio_mercado')) {
+            $nombreArchivo = $this->cleanFileName($proyecto->codigo, $convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal, $request->formato_estudio_mercado);
+            Storage::delete($presupuesto->formato_estudio_mercado);
+            $archivo = $request->formato_estudio_mercado->storeAs(
+                'estudios-mercado',
+                $nombreArchivo
+            );
+
+            $presupuesto->formato_estudio_mercado = $archivo;
+        }
 
         $presupuesto->proyecto()->associate($proyecto);
         $presupuesto->convocatoriaPresupuesto()->associate($convocatoriaPresupuesto);
