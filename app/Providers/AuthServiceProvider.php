@@ -40,9 +40,12 @@ class AuthServiceProvider extends ServiceProvider
 
             if ($lineaProgramatica && $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])->count() > 0) {
                 $fechaActual = date('Y-m-d');
-
                 $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
                 if ($lineaProgramatica->id == 1 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($lineaProgramatica->id == 2 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($lineaProgramatica->id == 3 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
                     return true;
                 } else if ($lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
                     return true;
