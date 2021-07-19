@@ -55,6 +55,7 @@ class AnexoController extends Controller
         $anexo = new Anexo();
         $anexo->nombre         = $request->nombre;
         $anexo->descripcion    = $request->descripcion;
+        $anexo->obligatorio    = $request->obligatorio;
 
         if ($request->hasFile('archivo')) {
             $nombreArchivo     = $this->cleanFileName($request->nombre, $request->archivo);
@@ -115,6 +116,7 @@ class AnexoController extends Controller
 
         $anexo->nombre         = $request->nombre;
         $anexo->descripcion    = $request->descripcion;
+        $anexo->obligatorio    = $request->obligatorio;
         $anexo->lineasProgramaticas()->sync($request->linea_programatica_id);
 
         if ($request->hasFile('archivo')) {

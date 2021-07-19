@@ -25,7 +25,7 @@ class ProyectoAnexoRequest extends FormRequest
     {
         return [
             'anexo_id'  => ['required', 'min:0', 'max:9999999999', 'integer', 'exists:anexos,id'],
-            'archivo'   => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+            'archivo'   => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel'],
         ];
     }
 }
