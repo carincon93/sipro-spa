@@ -51,7 +51,7 @@
     {/if}
     <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
         <div>
-            <File type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
+            <File type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
         </div>
         <div>
             <LoadingButton loading={sending} class="w-full mt-4" type="submit">
