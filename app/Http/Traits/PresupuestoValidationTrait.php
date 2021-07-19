@@ -150,15 +150,20 @@ trait PresupuestoValidationTrait
      */
     public static function adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        $promedio = 0;
-
         $salarioMinimo = json_decode(Storage::get('json/salario-minimo.json'), true);
 
         $codigoUsoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
 
-        if ($codigoUsoPresupuestal == '2020200500406' || $codigoUsoPresupuestal == '2020200500407' || $codigoUsoPresupuestal == '2020200500405' || $codigoUsoPresupuestal == '20202005004023') {
+        $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110');
 
-            if ($promedio > ($salarioMinimo['value'] * 100)) {
+        if ($codigoUsoPresupuestal == '2020200500406' || $codigoUsoPresupuestal == '2020200500407' || $codigoUsoPresupuestal == '2020200500405' || $codigoUsoPresupuestal == '20202005004023') {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
+
+            if ($total > ($salarioMinimo['value'] * 100)) {
                 return true;
             }
         }
