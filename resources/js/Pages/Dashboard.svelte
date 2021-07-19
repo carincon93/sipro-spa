@@ -14,6 +14,8 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = true
+
+    console.log(window.basePath)
 </script>
 
 <AuthenticatedLayout>
