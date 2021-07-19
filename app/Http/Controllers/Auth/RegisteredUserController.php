@@ -51,15 +51,15 @@ class RegisteredUserController extends Controller
 
         $fechaActual = date('Y-m-d');
 
-        if ($request->role_id == 6 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+        if (in_array(6, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
             $habilitado = true;
-        } else if ($request->role_id == 15 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
+        } else if (in_array(15, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
             $habilitado = true;
-        } else if ($request->role_id == 13 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
+        } else if (in_array(13, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
             $habilitado = true;
-        } else if ($request->role_id == 12 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
+        } else if (in_array(12, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
             $habilitado = true;
-        } else if ($request->role_id == 16 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
+        } else if (in_array(16, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
             $habilitado = true;
         }
 
