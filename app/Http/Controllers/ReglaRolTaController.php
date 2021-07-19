@@ -58,7 +58,7 @@ class ReglaRolTaController extends Controller
                 WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
-            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 9, 10, 11, 12, 13, 14, 28])->where('convocatoria_rol_sennova.linea_programatica_id', 5)->get(),
+            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 9, 10, 11, 12, 13, 14, 16, 28])->where('convocatoria_rol_sennova.linea_programatica_id', 5)->get(),
             'tecnoacademias'    => Tecnoacademia::select('id as value', 'nombre as label')->get()
         ]);
     }
@@ -116,7 +116,7 @@ class ReglaRolTaController extends Controller
                 WHEN '6' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Doctorado')
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
-            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 9, 10, 11, 12, 13, 14, 28])->where('convocatoria_rol_sennova.linea_programatica_id', 5)->get(),
+            END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 9, 10, 11, 12, 13, 14, 16, 28])->where('convocatoria_rol_sennova.linea_programatica_id', 5)->get(),
             'tecnoacademias'    => Tecnoacademia::select('id as value', 'nombre as label')->get()
         ]);
     }
