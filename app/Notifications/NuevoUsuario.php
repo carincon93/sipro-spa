@@ -56,7 +56,7 @@ class NuevoUsuario extends Notification
     {
         return [
             "subject" => "Nuevo usuario registrado",
-            "message" => "{$this->user->nombre} se ha registrado en SGPS-SIPRO. Por favor verifique que esta persona pertenezca a la institución y de ser así habilite el usuario en la plataforma haciendo clic en los tres puntos y luego en 'Ver detalles'.",
+            "message" => "{$this->user->nombre} se ha registrado en SGPS-SIPRO. Por favor verifique que esta persona pertenezca a la institución, de no ser así inhabilite el usuario en la plataforma haciendo clic en los tres puntos y luego en 'Ver detalles'.",
             "action"  => "users/{$this->user->id}/editar?notificacion={$this->id}"
         ];
     }

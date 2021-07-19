@@ -73,16 +73,16 @@
         }
     }
 
-    let usoPresupuestal
+    let presupuestoSennova
 
     let prevSegundoGrupoPresupuestal
 
     $: {
         if ($form.segundo_grupo_presupuestal_id != prevSegundoGrupoPresupuestal) {
-            usoPresupuestal = null
+            presupuestoSennova = null
         }
 
-        $form.codigo_uso_presupuestal = usoPresupuestal?.codigo
+        $form.codigo_uso_presupuestal = presupuestoSennova?.codigo
         prevSegundoGrupoPresupuestal = $form.segundo_grupo_presupuestal_id
     }
 </script>
@@ -127,17 +127,17 @@
                                 routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
                                 placeholder="Busque por el nombre del uso presupuestal"
                                 message={errors.convocatoria_presupuesto_id}
-                                bind:recurso={usoPresupuestal}
+                                bind:recurso={presupuestoSennova}
                                 required
                             />
                         </div>
 
-                        {#if usoPresupuestal?.mensaje}
-                            <InfoMessage message={usoPresupuestal.mensaje} />
+                        {#if presupuestoSennova?.mensaje}
+                            <InfoMessage message={presupuestoSennova.mensaje} />
                         {/if}
                     {/if}
 
-                    {#if usoPresupuestal?.requiere_estudio_mercado == false}
+                    {#if presupuestoSennova?.requiere_estudio_mercado == false}
                         <InfoMessage message="<strong>Importante:</strong> El uso presupuestal seleccionado no requiere de estudio de mercado. Si este ítem tiene estudios de mercado generados estos se eliminarán." />
                     {/if}
 
@@ -154,11 +154,11 @@
                     <div class="mt-4">
                         <Input label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" bind:value={$form.valor_total} error={errors.valor_total} required />
                     </div>
-                    {#if usoPresupuestal?.requiere_estudio_mercado}
+                    {#if presupuestoSennova?.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
                         <InfoMessage message="Por favor indique el valor total que arrojó el Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
                         <div class="mt-4">
                             <Label class="mb-4" labelFor="formato_estudio_mercado" value="Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
-                            <File id="formato_estudio_mercado" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
+                            <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
                         </div>
                     {/if}
 
@@ -218,7 +218,7 @@
                 </div>
             </form>
         </div>
-        {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
+        {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
             <div class="px-4">
                 <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
                 <ul>
@@ -238,7 +238,7 @@
         {/if}
     </div>
 
-    {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado}
+    {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
         <h1 class="text-2xl mt-10">Archivos</h1>
         <div class="mt-4 bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">

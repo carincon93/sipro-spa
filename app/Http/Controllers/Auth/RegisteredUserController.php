@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\CentroFormacion;
+use App\Models\Convocatoria;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\NuevoUsuario;
@@ -12,6 +13,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
@@ -44,18 +46,35 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegisterRequest $request)
     {
-        $user = User::create([
+        $habilitado = false;
+        $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
+
+        $fechaActual = date('Y-m-d');
+
+        if ($request->role_id == 6 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+            $habilitado = true;
+        } else if ($request->role_id == 15 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
+            $habilitado = true;
+        } else if ($request->role_id == 13 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
+            $habilitado = true;
+        } else if ($request->role_id == 12 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
+            $habilitado = true;
+        } else if ($request->role_id == 16 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
+            $habilitado = true;
+        }
+
+        Auth::login($user = User::create([
             'nombre'                => $request->nombre,
             'email'                 => $request->email,
             'password'              => Hash::make($request->password),
             'tipo_documento'        => $request->tipo_documento,
             'numero_documento'      => $request->numero_documento,
             'numero_celular'        => $request->numero_celular,
-            'habilitado'            => false,
+            'habilitado'            => $habilitado,
             'tipo_vinculacion'      => $request->tipo_vinculacion,
             'autorizacion_datos'    => $request->autorizacion_datos,
             'centro_formacion_id'   => $request->centro_formacion_id
-        ]);
+        ]));
 
         $user->syncRoles($request->role_id);
 
@@ -109,6 +128,6 @@ class RegisteredUserController extends Controller
         $centroFormacion = CentroFormacion::find($request->centro_formacion_id);
         $centroFormacion->dinamizadorSennova->notify(new NuevoUsuario($user));
 
-        return redirect()->back()->with('success', '¡El registro ha sido exitoso!. Solicite al dinamizador de su centro de formación que lo habilite en la plataforma.');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

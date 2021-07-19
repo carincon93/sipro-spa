@@ -110,6 +110,16 @@ class ProyectoPresupuesto extends Model
     }
 
     /**
+     * Relationship with Edt
+     *
+     * @return object
+     */
+    public function edt()
+    {
+        return $this->hasMany(Edt::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

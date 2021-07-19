@@ -38,7 +38,6 @@
         publico_objetivo: edt.publico_objetivo,
         numero_asistentes: edt.numero_asistentes,
         estrategia_comunicacion: edt.estrategia_comunicacion,
-        presupuesto: edt.presupuesto,
     })
 
     function submit() {
@@ -99,10 +98,6 @@
 
                 <div class="mt-8">
                     <Input label="Estrategia de comunicación" id="estrategia_comunicacion" type="text" class="mt-1" error={errors.estrategia_comunicacion} bind:value={$form.estrategia_comunicacion} required />
-                </div>
-
-                <div class="mt-8">
-                    <Input label="Presupuesto" id="presupuesto" type="number" input$min="0" class="mt-1" error={errors.presupuesto} placeholder="Escriba el presupuesto" bind:value={$form.presupuesto} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

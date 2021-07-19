@@ -14,6 +14,7 @@
     export let proyecto
     export let errors
     export let tiposEvento
+    export let proyectoPresupuesto
 
     $: $title = 'Crear EDT'
 
@@ -31,7 +32,7 @@
         publico_objetivo: '',
         numero_asistentes: '',
         estrategia_comunicacion: '',
-        presupuesto: '',
+        proyecto_presupuesto_id: null,
     })
 
     function submit() {
@@ -63,6 +64,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
+                    <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Presupuesto" />
+                    <Select id="proyecto_presupuesto_id" items={proyectoPresupuesto} bind:selectedValue={$form.proyecto_presupuesto_id} error={errors.proyecto_presupuesto_id} autocomplete="off" placeholder="Seleccione el presupuesto" required />
+                </div>
+
+                <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo_evento" value="Tipo de evento" />
                     <Select id="tipo_evento" items={tiposEvento} bind:selectedValue={$form.tipo_evento} error={errors.tipo_evento} autocomplete="off" placeholder="Seleccione el tipo de evento" required />
                 </div>
@@ -85,10 +91,6 @@
 
                 <div class="mt-8">
                     <Input label="Estrategia de comunicación" id="estrategia_comunicacion" type="text" class="mt-1" error={errors.estrategia_comunicacion} bind:value={$form.estrategia_comunicacion} required />
-                </div>
-
-                <div class="mt-8">
-                    <Input label="Presupuesto" id="presupuesto" type="number" input$min="0" class="mt-1" error={errors.presupuesto} placeholder="Escriba el presupuesto" bind:value={$form.presupuesto} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

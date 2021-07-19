@@ -23,13 +23,13 @@ class Edt extends Model
      */
     protected $fillable = [
         'ta_id',
+        'proyecto_presupuesto_id',
         'tipo_evento',
         'descripcion_evento',
         'descripcion_participacion_entidad',
         'publico_objetivo',
         'numero_asistentes',
         'estrategia_comunicacion',
-        'presupuesto'
     ];
 
     /**
@@ -58,6 +58,16 @@ class Edt extends Model
     public function ta()
     {
         return $this->belongsTo(Ta::class);
+    }
+
+    /**
+     * Relationship with ProyectoPresupuesto
+     *
+     * @return object
+     */
+    public function proyectoPresupuesto()
+    {
+        return $this->belongsTo(ProyectoPresupuesto::class);
     }
 
     /**

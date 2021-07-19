@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Convocatoria;
+use App\Models\LineaProgramatica;
 use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -32,8 +34,30 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])->count() > 0;
         });
 
-        Gate::define('formular-proyecto', function (User $user) {
-            return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])->count() > 0;
+        Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
+
+            $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
+
+            if ($lineaProgramatica && $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])->count() > 0) {
+                $fechaActual = date('Y-m-d');
+
+                $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
+                if ($lineaProgramatica->id == 1 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
+                    return true;
+                } else if ($lineaProgramatica->id == 10 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
+                    return true;
+                } else if ($lineaProgramatica->id == 5 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
+                    return true;
+                } else if ($lineaProgramatica->id == 4 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
+                    return true;
+                }
+            } else {
+                return $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15, 20, 21])->count() > 0;
+            }
+
+            return false;
         });
 
         Gate::define('visualizar-proyecto-autor', function (User $user, Proyecto $proyecto) {
@@ -41,7 +65,28 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('modificar-proyecto-autor', function (User $user, Proyecto $proyecto) {
-            return $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false && $proyecto->finalizado == false && $proyecto->radicado == false || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->radicado == false;
+            if ($proyecto->finalizado == true || $proyecto->radicado == true) {
+                return false;
+            }
+
+            if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->radicado == false) {
+                $fechaActual = date('Y-m-d');
+
+                $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
+                if ($proyecto->lineaProgramatica->id == 1 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 10 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 5 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 4 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
+                    return true;
+                }
+            }
+
+            return false;
         });
 
         Gate::define('validar-dinamizador', function (User $user, Proyecto $proyecto) {

@@ -462,13 +462,7 @@ class Proyecto extends Model
      */
     public function getPrecioProyectoAttribute()
     {
-        $totalEDT = 0;
-        if ($this->ta()->exists() && $this->lineaProgramatica->codigo == 70) {
-            foreach ($this->ta->edt as $evento) {
-                $totalEDT += $evento->presupuesto;
-            }
-        }
-        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute() + $totalEDT;
+        return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
     }
 
     public function getMetaAprendicesAttribute()
