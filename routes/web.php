@@ -503,7 +503,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::resource('convocatorias.proyectos.inventario-equipos', InventarioEquipoController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'inventario-equipos' => 'inventario-equipo'])->except(['show']);
 
-
     /**
      * Idi - Estrategia regional
      * 
@@ -522,7 +521,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('reglas-roles-cultura', ReglaRolCulturaController::class)->parameters(['reglas-roles-cultura' => 'regla-rol-cultura'])->except(['show']);
     Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
 
-
     /**
      * Tp - Estrategia nacional
      * 
@@ -534,7 +532,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Ta - Estrategia nacional
      * 
      */
-
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'showArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'storeArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova.store');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/discurriculares', [DisCurricularController::class, 'storeDisCurricular'])->name('convocatorias.proyectos.dis-curriculares.store');
