@@ -47,6 +47,8 @@ class AuthServiceProvider extends ServiceProvider
                     return true;
                 } else if ($lineaProgramatica->id == 3 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
                     return true;
+                } else if ($lineaProgramatica->id == 29 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
                 } else if ($lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
                     return true;
                 } else if ($lineaProgramatica->id == 10 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
@@ -81,6 +83,8 @@ class AuthServiceProvider extends ServiceProvider
                 } else if ($proyecto->lineaProgramatica->id == 2 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
                     return true;
                 } else if ($proyecto->lineaProgramatica->id == 3 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 29 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
                     return true;
                 } else if ($proyecto->lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
                     return true;
