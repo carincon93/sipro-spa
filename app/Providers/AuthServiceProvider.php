@@ -78,6 +78,10 @@ class AuthServiceProvider extends ServiceProvider
                 $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
                 if ($proyecto->lineaProgramatica->id == 1 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
                     return true;
+                } else if ($proyecto->lineaProgramatica->id == 2 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
+                } else if ($proyecto->lineaProgramatica->id == 3 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
+                    return true;
                 } else if ($proyecto->lineaProgramatica->id == 9 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
                     return true;
                 } else if ($proyecto->lineaProgramatica->id == 10 && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
