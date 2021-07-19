@@ -91,7 +91,7 @@
                 {#if proyecto.codigo_linea_programatica == 70}
                     Ingrese el número de instructores de planta, dinamizadores de planta y psicopedagógos de planta que requiere el proyecto.
                 {:else}
-                    Ingrese cada uno de los roles SENNOVA que requiere el proyecto. Actualmente el total del costo de los roles SENNOVA es: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP
+                    Ingrese cada uno de los roles SENNOVA que requiere el proyecto.
                 {/if}
             </h2>
             {#if proyecto.codigo_linea_programatica == 70}
@@ -173,6 +173,13 @@
                 </tr>
             {/if}
         </tbody>
+        <tfoot slot="tfoot">
+            <tr>
+                <td colspan="4" class="border-t p-4">
+                    <strong>Actualmente el total del costo de los roles requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP
+                </td>
+            </tr>
+        </tfoot>
     </DataTable>
     <Pagination links={proyectoRolesSennova.links} />
 </AuthenticatedLayout>

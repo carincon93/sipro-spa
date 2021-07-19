@@ -28,7 +28,7 @@ class TaController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Index', [
             'convocatoria'  => $convocatoria->only('id'),
@@ -44,7 +44,7 @@ class TaController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
 
         if (auth()->user()->hasRole(12)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
@@ -78,7 +78,7 @@ class TaController extends Controller
      */
     public function store(TaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [5]);
 
         $tecnoAcademia = TecnoAcademia::find($request->tecnoacademia_id['value']);
 

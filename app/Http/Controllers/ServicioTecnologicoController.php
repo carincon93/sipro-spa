@@ -22,7 +22,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Index', [
             'convocatoria'          => $convocatoria,
@@ -38,7 +38,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
 
         if (auth()->user()->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE tipos_proyecto_st.tipo_proyecto
@@ -67,7 +67,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function store(ServicioTecnologicoRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [10]);
 
         $tipoProyectoSt = TipoProyectoSt::find($request->tipo_proyecto_st_id);
 

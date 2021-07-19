@@ -31,6 +31,7 @@
         asignacion_mensual: '',
         experiencia: '',
         nivel_academico: '',
+        perfil: '',
         mensaje: '',
     })
 
@@ -82,6 +83,10 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel_academico" value="Nivel académico" />
                     <Select id="nivel_academico" items={nivelesAcademicos} bind:selectedValue={$form.nivel_academico} error={errors.nivel_academico} autocomplete="off" placeholder="Seleccione un nivel académico" required />
+                </div>
+
+                <div class="mt-4">
+                    <Textarea label="Perfil" maxlength="40000" id="perfil" bind:value={$form.perfil} error={errors.perfil} />
                 </div>
 
                 <div class="mt-4">

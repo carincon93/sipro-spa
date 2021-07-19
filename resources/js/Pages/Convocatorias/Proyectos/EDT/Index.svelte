@@ -11,6 +11,7 @@
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import Stepper from '@/Shared/Stepper'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let proyecto
@@ -32,11 +33,15 @@
         <div slot="title">EDT</div>
 
         <div slot="caption">
-            <p class="mb-20 text-center">A continuación, proyecte los EDTs que se realizarán durante la vigencia del proyecto:</p>
+            {#if proyecto.servicios_organizacion == false}
+                <InfoMessage message="Para poder agregar un EDT debe generar primero el uso presupuestal 'Servicios de organización y asistencia de convenciones y ferias'." />
+            {:else}
+                <p class="mb-20 text-center">A continuación, proyecte los EDTs que se realizarán durante la vigencia del proyecto:</p>
+            {/if}
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)}
+            {#if (isSuperAdmin && proyecto.servicios_organizacion) || (checkPermission(authUser, [8]) && proyecto.modificable == true && proyecto.servicios_organizacion)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.edt.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear EDT</Button>
             {/if}
         </div>
@@ -64,9 +69,10 @@
                             {evento.numero_asistentes}
                         </p>
                     </td>
+
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
-                            ${new Intl.NumberFormat('de-DE').format(evento.presupuesto)}
+                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                            ${new Intl.NumberFormat('de-DE').format(!isNaN(evento.proyecto_presupuesto.valor_total) ? evento.proyecto_presupuesto.valor_total : 0)}
                         </p>
                     </td>
 
