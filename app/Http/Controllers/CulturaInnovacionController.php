@@ -230,6 +230,10 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
+        if ($culturaInnovacion->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
                 ->withErrors(['password' => __('The password is incorrect.')]);

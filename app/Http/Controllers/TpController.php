@@ -11,6 +11,7 @@ use App\Models\NodoTecnoparque;
 use App\Models\Regional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -60,7 +61,7 @@ class TpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TpRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function store(TpRequest $request, Convocatoria $convocatoria, Tp $tp)
     {
         $this->authorize('formular-proyecto', [4]);
 
@@ -117,7 +118,7 @@ class TpController extends Controller
      * @param  \App\Models\Tp  $tp
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, Proyecto $proyecto, Tp $tp)
+    public function show(Convocatoria $convocatoria, Tp $tp)
     {
         $this->authorize('visualizar-proyecto-autor', [$tp->proyecto]);
     }
@@ -128,7 +129,7 @@ class TpController extends Controller
      * @param  \App\Models\Tp  $tp
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Tp $tp)
+    public function edit(Convocatoria $convocatoria, Tp $tp)
     {
         $this->authorize('visualizar-proyecto-autor', [$tp->proyecto]);
 
@@ -158,7 +159,7 @@ class TpController extends Controller
      * @param  \App\Models\Tp  $tp
      * @return \Illuminate\Http\Response
      */
-    public function update(TpRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Tp $tp)
+    public function update(TpRequest $request, Convocatoria $convocatoria, Tp $tp)
     {
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
@@ -196,12 +197,21 @@ class TpController extends Controller
      * @param  \App\Models\Tp  $tp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Tp $tp)
+    public function destroy(Request $request, Convocatoria $convocatoria, Tp $tp)
     {
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
+        if ($tp->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
         $tp->proyecto()->delete();
 
-        return redirect()->route('convocatorias.tp.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.tp.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }
