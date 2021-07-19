@@ -44,7 +44,7 @@ trait PresupuestoValidationTrait
      * @param  mixed $numeroItemsGuardado
      * @return void
      */
-    public static function viaticosValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
+    public static function viaticosValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal, $valorMaximo)
     {
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
         if ($codigoSegundoPresupuestal == '2042186' || $codigoSegundoPresupuestal == '2041101' || $codigoSegundoPresupuestal == '2041102' || $codigoSegundoPresupuestal == '2041104') {
@@ -59,7 +59,7 @@ trait PresupuestoValidationTrait
                 $total += $valorTotal;
             }
 
-            return ($total > 4460000) ? true : false;
+            return ($total > $valorMaximo) ? true : false;
         }
 
         return false;

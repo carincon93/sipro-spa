@@ -8,7 +8,7 @@ use App\Models\ReglaRolTp;
 
 trait ProyectoRolTpValidationTrait
 {
-    public static function rolTaValidation($proyecto, $nodoTecnoparqueId, $convocatoriaRolSennovaId, $proyectoRolSennovaId, $cantidadRoles)
+    public static function rolTpValidation($proyecto, $nodoTecnoparqueId, $convocatoriaRolSennovaId, $proyectoRolSennovaId, $cantidadRoles)
     {
         $tecnoparqueRoles = ReglaRolTp::where('nodo_tecnoparque_id', $nodoTecnoparqueId)->get();
 

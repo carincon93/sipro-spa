@@ -146,7 +146,7 @@ class InventarioEquipoController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, InventarioEquipo $inventarioEquipo)
     {
-        $this->authorize('delete', [InventarioEquipo::class, $inventarioEquipo]);
+        $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $inventarioEquipo->delete();
 
