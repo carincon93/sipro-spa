@@ -459,7 +459,11 @@
 </Dialog>
 
 <style>
-    :global(#nuevo-participante-dialog .mdc-dialog__surface, #participante-dialog .mdc-dialog__surface) {
+    :global(#nuevo-participante-dialog .mdc-dialog__surface) {
+        max-width: 1050px;
+    }
+
+    :global(#participante-dialog .mdc-dialog__surface) {
         max-width: 1050px;
     }
 </style>
