@@ -639,7 +639,11 @@
         background: #e5e5e5;
     }
 
-    :global(.tagify__tag:focus div::before, .tagify__tag:hover:not([readonly]) div::before) {
+    :global(.tagify__tag:focus div::before) {
+        background: #d3e2e2;
+    }
+
+    :global(.tagify__tag:hover:not([readonly]) div:before) {
         background: #d3e2e2;
     }
 </style>

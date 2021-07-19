@@ -210,7 +210,14 @@
 </AuthenticatedLayout>
 
 <style>
-    :global(#tipo_licencia, #tipo_software) {
+    :global(#tipo_licencia) {
+        border-radius: 4px;
+        border: 1px solid #dbdbdb;
+        height: 56px;
+        padding: 0 10px;
+    }
+
+    :global(#tipo_software) {
         border-radius: 4px;
         border: 1px solid #dbdbdb;
         height: 56px;

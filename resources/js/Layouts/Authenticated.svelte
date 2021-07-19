@@ -256,7 +256,11 @@
         margin-bottom: 0;
     }
 
-    :global(#main-menu-dialog .mdc-button--outlined, #main-menu-dialog .mdc-button--raised) {
+    :global(#main-menu-dialog .mdc-button--outlined) {
+        height: auto;
+    }
+
+    :global(#main-menu-dialog .mdc-button--raised) {
         height: auto;
     }
 </style>
