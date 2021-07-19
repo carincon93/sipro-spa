@@ -28,6 +28,7 @@ class LineaProgramaticaRequest extends FormRequest
             'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer'],
             'descripcion'           => ['required'],
             'categoria_proyecto'    => ['required', 'max:191'],
+            'activadores*'          => ['required', 'integer', 'exists:users,id'],
         ];
     }
 
@@ -48,19 +49,19 @@ class LineaProgramaticaRequest extends FormRequest
             'nombre' => mb_strtolower($this->nombre),
         ]);
 
-        if (is_array($this->lideres)) {
-            if (isset($this->lideres['value']) && is_numeric($this->lideres['value'])) {
+        if (is_array($this->activadores)) {
+            if (isset($this->activadores['value']) && is_numeric($this->activadores['value'])) {
                 $this->merge([
-                    'lideres' => $this->lideres['value'],
+                    'activadores' => $this->activadores['value'],
                 ]);
             } else {
-                $lideres = [];
-                foreach ($this->lideres as $lider) {
+                $activadores = [];
+                foreach ($this->activadores as $lider) {
                     if (is_array($lider)) {
-                        array_push($lideres, $lider['value']);
+                        array_push($activadores, $lider['value']);
                     }
                 }
-                $this->merge(['lideres' => $lideres]);
+                $this->merge(['activadores' => $activadores]);
             }
         }
     }
