@@ -98,6 +98,59 @@
                 </tfoot>
             </table>
         </div>
+    {:else if proyecto.codigo_linea_programatica == 23}
+        <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Concepto SENA</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regla</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Servicios especiales de construcción </td>
+                        <td class="border-t p-4">
+                            El valor no debe superar los 100 salarios mínimos (${new Intl.NumberFormat('de-DE').format(proyecto.salarios_minimos)}).
+                        </td>
+                        <td class="border-t p-4">
+                            Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_servicios_especiales_construccion) ? proyecto.total_servicios_especiales_construccion : 0)}
+                            {#if proyecto.total_servicios_especiales_construccion <= proyecto.salarios_minimos}
+                                <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                            {:else}
+                                <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                            {/if}
+                        </td>
+                    </tr>
+
+                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t p-4"> Mantenimiento de maquinaria, equipo, transporte y sofware </td>
+                        <td class="border-t p-4">
+                            El valor no debe superar el 5% (${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto * 0.05 : 0)}) del total del proyecto ( ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)}).
+                        </td>
+                        <td class="border-t p-4">
+                            Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_mantenimiento_maquinaria) ? proyecto.total_mantenimiento_maquinaria : 0)}
+                            {#if proyecto.total_mantenimiento_maquinaria <= proyecto.precio_proyecto * 0.05}
+                                <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
+                            {:else}
+                                <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
+                            {/if}
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="border-t p-4">
+                            <strong>Nota:</strong> Los valores en paréntesis son los valores calculados del proyecto.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     {:else if proyecto.codigo_linea_programatica == 70}
         <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
         <div class="bg-white rounded shadow">

@@ -38,6 +38,9 @@ class ProyectoPresupuestoController extends Controller
         $proyecto->viaticos_exterior                        = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041104');
         $proyecto->viaticos_interior                        = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041102');
 
+        $salarioMinimo = json_decode(Storage::get('json/salario-minimo.json'), true);
+        $proyecto->salarios_minimos = ($salarioMinimo['value'] * 100);
+
         if ($proyecto->codigo_linea_programatica == 70) {
             $proyecto->max_valor_materiales_formacion   = $proyecto->max_material_formacion;
             $proyecto->max_valor_bienestar_alumnos      = $proyecto->max_bienestar_aprendiz;
@@ -49,7 +52,7 @@ class ProyectoPresupuestoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Index', [
             'convocatoria'              => $convocatoria->only('id'),
-            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto'),
+            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto', 'salarios_minimos'),
             'filters'                   => request()->all('search'),
             'proyectoPresupuesto'       => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre,codigo', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate(),
             'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),
@@ -122,6 +125,11 @@ class ProyectoPresupuestoController extends Controller
         if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+            }
+
+            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+                $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -278,6 +286,11 @@ class ProyectoPresupuestoController extends Controller
         if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
                 return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+            }
+
+            if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+                $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
+                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
