@@ -91,9 +91,13 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        if ($proyecto->lineaProgramatica->codigo != 69 || $proyecto->lineaProgramatica->codigo != 70) {
-            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+        if ($proyecto->lineaProgramatica->codigo != 69 && $proyecto->lineaProgramatica->codigo != 70) {
+            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, 4460000)) {
                 return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+            }
+        } else if ($proyecto->lineaProgramatica->codigo == 69) {
+            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, 10000000)) {
+                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
             }
         }
 
@@ -254,8 +258,14 @@ class ProyectoPresupuestoController extends Controller
 
         $convocatoriaPresupuesto = ConvocatoriaPresupuesto::find($request->convocatoria_presupuesto_id);
 
-        if ($proyecto->lineaProgramatica->codigo != 70 && PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-            return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+        if ($proyecto->lineaProgramatica->codigo != 69 && $proyecto->lineaProgramatica->codigo != 70) {
+            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, 4460000)) {
+                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+            }
+        } else if ($proyecto->lineaProgramatica->codigo == 69) {
+            if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, 10000000)) {
+                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
+            }
         }
 
         if ($proyecto->lineaProgramatica->codigo == 70  && PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {

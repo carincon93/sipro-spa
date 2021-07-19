@@ -585,6 +585,12 @@ class ArbolProyectoController extends Controller
 
         $resultado->fill($request->all());
 
+        if ($proyecto->idi()->exists() || $proyecto->culturaInnovacion()->exists()) {
+            $request->validate([
+                'trl' => ['required', 'integer', 'between:1,9'],
+            ]);
+        }
+
         if ($resultado->save()) {
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
         }
