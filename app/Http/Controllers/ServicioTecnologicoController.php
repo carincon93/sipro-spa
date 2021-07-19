@@ -10,6 +10,7 @@ use App\Models\Proyecto;
 use App\Models\TipoProyectoSt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -189,9 +190,18 @@ class ServicioTecnologicoController extends Controller
      * @param  \App\Models\ServicioTecnologico  $servicioTecnologico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
+    public function destroy(Request $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
+
+        if ($servicioTecnologico->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
 
         $servicioTecnologico->proyecto()->delete();
 

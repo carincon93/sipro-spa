@@ -230,6 +230,10 @@ class IdiController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
+        if ($idi->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
         if (!Hash::check($request->password, Auth::user()->password)) {
             return redirect()->back()
                 ->withErrors(['password' => __('The password is incorrect.')]);

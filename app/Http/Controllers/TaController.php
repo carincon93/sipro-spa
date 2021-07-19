@@ -17,6 +17,7 @@ use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class TaController extends Controller
@@ -139,7 +140,7 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function show(Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
     }
@@ -150,7 +151,7 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function edit(Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
 
@@ -199,7 +200,7 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function update(TaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function update(TaRequest $request, Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
@@ -248,13 +249,22 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
+        if ($ta->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
         $ta->proyecto()->delete();
 
-        return redirect()->route('convocatorias.ta.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.ta.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**
