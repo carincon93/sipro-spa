@@ -23,23 +23,13 @@ class CentroFormacionRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('PUT')) {
-            return [
-                'regional_id'               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regionales,id'],
-                'subdirector_id'            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
-                'dinamizador_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
-                'nombre'                    => ['required', 'max:191'],
-                'codigo'                    => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:centros_formacion,codigo,' . $this->route('centro_formacion')->id . ',id'],
-            ];
-        } else {
-            return [
-                'regional_id'               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regionales,id'],
-                'subdirector_id'            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
-                'dinamizador_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
-                'nombre'                    => ['required', 'max:191'],
-                'codigo'                    => ['required', 'min:0', 'max:2147483647', 'integer', 'unique:centros_formacion,codigo'],
-            ];
-        }
+        return [
+            'regional_id'               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:regionales,id'],
+            'subdirector_id'            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
+            'dinamizador_sennova_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:users,id'],
+            'nombre'                    => ['required', 'max:191'],
+            'codigo'                    => ['required', 'min:0', 'max:2147483647', 'integer'],
+        ];
     }
 
     /**
