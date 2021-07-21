@@ -251,6 +251,10 @@ class TaController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
+        if ($ta->id == 1052) {
+            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+        }
+
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
         if ($ta->proyecto->finalizado) {
