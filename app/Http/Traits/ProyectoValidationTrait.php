@@ -335,7 +335,8 @@ trait ProyectoValidationTrait
      */
     public static function anexos(Proyecto $proyecto)
     {
-        $anexos = Anexo::join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get();
+        $anexos = Anexo::join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexos.obligatorio', true)->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get();
+
         $count = 0;
         foreach ($anexos as $anexo) {
             if ($proyecto->proyectoAnexo()->where('anexo_id', $anexo->id)->first() && $proyecto->proyectoAnexo()->where('anexo_id', $anexo->id)->first()->exists()) {
@@ -452,5 +453,24 @@ trait ProyectoValidationTrait
     public static function articulacionSennova(Proyecto $proyecto)
     {
         return $proyecto->lineasInvestigacion()->count() > 0 ? true : false;
+    }
+
+    /**
+     * 
+     * Valida que los estudios de mercado tengan al menos dos soportes
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function soportesEstudioMercado(Proyecto $proyecto)
+    {
+        $countSoportes = 0;
+        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->soportesEstudioMercado()->count() < 2) {
+                $countSoportes++;
+            }
+        }
+
+        return $countSoportes > 0 ? false : true;
     }
 }

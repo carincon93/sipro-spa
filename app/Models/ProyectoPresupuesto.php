@@ -17,13 +17,6 @@ class ProyectoPresupuesto extends Model
     protected $table = 'proyecto_presupuesto';
 
     /**
-     * appends
-     *
-     * @var array
-     */
-    protected $appends = ['promedio'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -33,8 +26,7 @@ class ProyectoPresupuesto extends Model
         'convocatoria_presupuesto_id',
         'descripcion',
         'justificacion',
-        'valor',
-        'numero_items',
+        'valor_total',
         'software',
         'codigo_uso_presupuestal'
     ];
@@ -78,16 +70,6 @@ class ProyectoPresupuesto extends Model
     }
 
     /**
-     * Relationship with ProyectoLoteEstudioMercado
-     *
-     * @return object
-     */
-    public function proyectoLoteEstudioMercado()
-    {
-        return $this->hasMany(ProyectoLoteEstudioMercado::class);
-    }
-
-    /**
      * Relationship with Actividad
      *
      * @return object
@@ -107,7 +89,6 @@ class ProyectoPresupuesto extends Model
         return $this->hasOne(SoftwareInfo::class);
     }
 
-
     /**
      * Relationship with ServicioEdicionInfo
      *
@@ -118,7 +99,25 @@ class ProyectoPresupuesto extends Model
         return $this->hasOne(ServicioEdicionInfo::class);
     }
 
+    /**
+     * Relationship with SoporteEstudioMercado
+     *
+     * @return object
+     */
+    public function soportesEstudioMercado()
+    {
+        return $this->hasMany(SoporteEstudioMercado::class);
+    }
 
+    /**
+     * Relationship with Edt
+     *
+     * @return object
+     */
+    public function edt()
+    {
+        return $this->hasMany(Edt::class);
+    }
 
     /**
      * Filtrar registros
@@ -129,53 +128,20 @@ class ProyectoPresupuesto extends Model
      */
     public function scopeFilterProyectoPresupuesto($query, array $filters)
     {
+        $query->join('convocatoria_presupuesto', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'convocatoria_presupuesto.id');
+        $query->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova_id', 'presupuesto_sennova.id');
+        $query->join('segundo_grupo_presupuestal', 'presupuesto_sennova.segundo_grupo_presupuestal_id', 'segundo_grupo_presupuestal.id');
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
-            $query->join('convocatoria_presupuesto', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'convocatoria_presupuesto.id');
-            $query->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova_id', 'presupuesto_sennova.id');
-            $query->join('segundo_grupo_presupuestal', 'presupuesto_sennova.segundo_grupo_presupuestal_id', 'segundo_grupo_presupuestal.id');
             $query->join('tercer_grupo_presupuestal', 'presupuesto_sennova.tercer_grupo_presupuestal_id', 'tercer_grupo_presupuestal.id');
             $query->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id');
             $query->whereRaw("unaccent(segundo_grupo_presupuestal.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(tercer_grupo_presupuestal.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(usos_presupuestales.descripcion) ilike unaccent('%" . $search . "%')");
+        })->when($filters['presupuestos'] ?? null, function ($query, $presupuesto) {
+            $query->whereRaw("unaccent(segundo_grupo_presupuestal.nombre) ilike unaccent('%" . $presupuesto . "%')");
         });
-    }
-
-    /**
-     * getDescripcionAttribute
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function getDescripcionAttribute($value)
-    {
-        return ucfirst($value);
-    }
-
-    /**
-     * getPromedioAttribute
-     *
-     * @return void
-     */
-    public function getPromedioAttribute()
-    {
-        $total = 0;
-
-        if ($this->proyectoLoteEstudioMercado()->exists()) {
-            if ($this->proyectoLoteEstudioMercado->count() > 0) {
-                foreach ($this->proyectoLoteEstudioMercado as $estudioMercado) {
-                    $total += $estudioMercado->getPromedioAttribute();
-                }
-            } else {
-                $total += $this->proyectoLoteEstudioMercado->getPromedioAttribute();
-            }
-        } elseif (!$this->proyectoLoteEstudioMercado()->exists() && !$this->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado) {
-            $this->valor > 0 ? $total = ($this->numero_items * $this->valor) : $total = 0;
-        }
-
-        return $total;
     }
 }

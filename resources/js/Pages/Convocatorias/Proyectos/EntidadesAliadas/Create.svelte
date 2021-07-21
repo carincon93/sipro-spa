@@ -88,7 +88,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 8]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
-                    <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
+                    <Select id="tipo" items={tiposEntidadAliada} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione el tipo de entidad" required />
                 </div>
 
                 <div class="mt-8">

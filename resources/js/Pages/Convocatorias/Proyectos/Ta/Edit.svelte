@@ -32,9 +32,14 @@
     export let proyectoProgramasFormacionArticulados
     export let proyectoDisCurriculares
     export let disCurriculares
+    export let tecnoAcademias
 
     $: $title = ta ? ta.titulo : null
 
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
     let sending = false
     let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
@@ -75,8 +80,22 @@
         nombre_instituciones_programas: ta.nombre_instituciones_programas,
         nuevas_instituciones: ta.nuevas_instituciones,
         articulacion_centro_formacion: ta.articulacion_centro_formacion,
+        proyectos_macro: ta.proyectos_macro,
+        lineas_medulares_centro: ta.lineas_medulares_centro,
+        lineas_tecnologicas_centro: ta.lineas_tecnologicas_centro,
+        proyeccion_nuevas_tecnoacademias: {
+            value: ta.proyeccion_nuevas_tecnoacademias,
+            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_tecnoacademias)?.label,
+        },
+        proyeccion_articulacion_media: {
+            value: ta.proyeccion_articulacion_media,
+            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_articulacion_media)?.label,
+        },
         bibliografia: ta.bibliografia,
-        tecnoacademia_id: tecnoacademiaRelacionada,
+        tecnoacademia_id: {
+            value: tecnoacademiaRelacionada,
+            label: tecnoAcademias.find((item) => item.value == tecnoacademiaRelacionada)?.label,
+        },
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
@@ -172,7 +191,7 @@
 
     let lineasTecnoaAcademia
     async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [$form.tecnoacademia_id]))
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
         }
@@ -245,18 +264,10 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="Tecnoacademia" />
+                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                     </div>
                     <div>
-                        <DynamicList
-                            id="tecnoacademia_id"
-                            bind:value={$form.tecnoacademia_id}
-                            noOptionsText="No hay tecnoacademias registradas para este centro de formación. Por favor seleccione un centro de formación diferente."
-                            routeWebApi={route('web-api.centros-formacion.tecnoacademias', [$form.centro_formacion_id])}
-                            placeholder="Busque por el nombre de la Tecnoacademia"
-                            message={errors.tecnoacademia_id}
-                            required
-                        />
+                        <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
                     </div>
                 </div>
             </fieldset>
@@ -407,25 +418,47 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="proyeccion_nuevas_tecnoacademias" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
                 </div>
                 <div>
-                    <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
-
-                    <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                    <Select items={opcionesSiNo} id="proyeccion_nuevas_tecnoacademias" bind:selectedValue={$form.proyeccion_nuevas_tecnoacademias} error={errors.proyeccion_nuevas_tecnoacademias} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
             </div>
+
+            {#if $form.proyeccion_nuevas_tecnoacademias?.value == 1}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                    </div>
+                    <div>
+                        <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                        <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                    </div>
+                </div>
+            {/if}
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                    <Label required class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Institucienes Educativas en articulación con la media?" />
                 </div>
                 <div>
-                    <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
-
-                    <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                    <Select items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={$form.proyeccion_articulacion_media} error={errors.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
             </div>
+
+            {#if $form.proyeccion_articulacion_media?.value == 1}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                    </div>
+                    <div>
+                        <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
+
+                        <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                    </div>
+                </div>
+            {/if}
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
@@ -463,7 +496,40 @@
                 <div>
                     <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
 
-                    <Button on:click={(event) => (disCurricularDialogOpen = true)} variant={null} type="button">Añadir programa</Button>
+                    <InfoMessage>
+                        Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
+                        <br />
+                        Por último busque nuevamente en la lista y selecciona el programa recién creado.
+                        <br />
+                        <Button on:click={(event) => (disCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-40 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
+                </div>
+                <div>
+                    <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$form.proyectos_macro} required />
+                </div>
+            </div>
+
+            <div class="mt-40 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
+                </div>
+                <div>
+                    <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$form.lineas_medulares_centro} required />
+                </div>
+            </div>
+
+            <div class="mt-40 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
+                </div>
+                <div>
+                    <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$form.lineas_tecnologicas_centro} required />
                 </div>
             </div>
 
@@ -502,7 +568,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (disCurricularDialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="dis-curricular-form">Confirmar</Button>
+                <Button variant="raised" form="dis-curricular-form">Crear programa</Button>
             </div>
         </div>
     </Dialog>
@@ -573,7 +639,11 @@
         background: #e5e5e5;
     }
 
-    :global(.tagify__tag:focus div::before, .tagify__tag:hover:not([readonly]) div::before) {
+    :global(.tagify__tag:focus div::before) {
+        background: #d3e2e2;
+    }
+
+    :global(.tagify__tag:hover:not([readonly]) div:before) {
         background: #d3e2e2;
     }
 </style>

@@ -16,6 +16,13 @@ class Tecnoacademia extends Model
      */
     protected $table = 'tecnoacademias';
 
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['suma_max_valores'];
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +35,12 @@ class Tecnoacademia extends Model
         'fecha_creacion',
         'foco',
         'linea_tecnoacademia_id',
-        'centro_formacion_id'
+        'centro_formacion_id',
+        'max_valor_viaticos_interior',
+        'max_valor_edt',
+        'max_valor_mantenimiento_equipos',
+        'max_valor_roles'
+
     ];
 
     /**
@@ -94,5 +106,10 @@ class Tecnoacademia extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getSumaMaxValoresAttribute()
+    {
+        return $this->max_valor_viaticos_interior + $this->max_valor_edt + $this->max_valor_mantenimiento_equipos + $this->max_valor_roles;
     }
 }

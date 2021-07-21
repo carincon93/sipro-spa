@@ -16,7 +16,7 @@
     export let errors
     export let convocatoria
     export let roles
-    export let authUserRegional
+    export let centrosFormacion
 
     $: $title = 'Crear proyecto de apropiación de la cultura de la innovación'
 
@@ -75,8 +75,8 @@
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8">
             <div class="mt-28">
-                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
-                <Textarea label="Título" maxlength="40000" id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
+                <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -104,23 +104,30 @@
                     </div>
                 {/if}
             </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                </div>
-                <div>
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion-ejecutor', authUserRegional)} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
-                </div>
-            </div>
 
-            {#if $form.centro_formacion_id}
+            {#if centrosFormacion.length > 0}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                    </div>
+                    <div>
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                    </div>
+                </div>
+            {:else}
+                <div class="mt-44">
+                    <InfoMessage message="No hay centros de formación disponibles para la formulación de proyectos de la línea 65." alertMsg={true} />
+                </div>
+            {/if}
+
+            {#if $form.centro_formacion_id?.value}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
                     </div>
                     <div>
-                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id?.value)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
                     </div>
                 </div>
             {/if}
@@ -182,7 +189,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034 - 04/03/2021 03:46:07 p.m" />
+                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034" />
                 </div>
                 <div>
                     <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />

@@ -61,7 +61,14 @@ class Ta extends Model
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
         'modificable',
-        'proyectos_ejecucion'
+        'proyectos_ejecucion',
+        'proyectos_macro',
+        'lineas_medulares_centro',
+        'lineas_tecnologicas_centro',
+        'proyeccion_nuevas_tecnoacademias',
+        'proyeccion_articulacion_media',
+        'articulacion_semillero',
+        'semilleros_en_formalizacion',
     ];
 
     /**
@@ -139,34 +146,53 @@ class Ta extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
-        $user = Auth::user();
-        if ($user->hasRole(1)) {
+        $authUser = Auth::user();
+        if ($authUser->hasRole(1)) {
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
-        } else if ($user->hasRole(4)) {
+        } else if ($authUser->hasRole(2)) { // Director regional
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->where('users.centro_formacion_id', Auth::user()->dinamizadorCentroFormacion->id)
+                ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
+                ->where('centros_formacion.regional_id', $authUser->directorRegional->id)
+                ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
-        } else if ($user->hasRole(5)) {
+        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
+            $centroFormacionId = null;
+            if ($authUser->hasRole(4)) {
+                $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
+            } else if ($authUser->hasRole(3)) {
+                $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
+            }
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->distinct('ta.id')
+                ->where('users.centro_formacion_id', $centroFormacionId)
+                ->distinct()
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
+        } else if ($authUser->getAllPermissions()->where('id', 15)->first()) {
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else {
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
-                ->where('proyecto_participantes.user_id', Auth::user()->id)
+                ->where('proyecto_participantes.user_id', $authUser->id)
+                ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         }

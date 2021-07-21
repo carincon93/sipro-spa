@@ -60,7 +60,7 @@
                 <div>
                     <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
                     <InfoMessage message="Se debe evidenciar que la metodología se presente de forma organizada y de manera secuencial, de acuerdo con el ciclo P-H-V-A “Planificar – Hacer – Verificar - Actuar” para alcanzar el objetivo general y cada uno de los objetivos específicos." />
-                    <Textarea maxlength="20000" id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
+                    <Textarea sinContador={true} id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
                 </div>
             </div>
             {#if proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70}

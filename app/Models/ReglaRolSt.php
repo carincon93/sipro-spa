@@ -75,7 +75,7 @@ class ReglaRolSt extends Model
     public function scopeFilterReglaRolSt($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('maximo', 'ilike', '%' . $search . '%');
+            $query->where('roles_sennova.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -56,9 +56,15 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
+        if ($proyecto->codigo_linea_programatica == 68) {
+            $proyecto->max_meses_ejecucion = $proyecto->servicioTecnologico->max_meses_ejecucion;
+        }
+
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
             'convocatoria'       => $convocatoria->only('id'),
-            'proyecto'           => $proyecto->only('id', 'diff_meses', 'modificable'),
+            'proyecto'           => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'lineaProgramatica'  => $proyecto->lineaProgramatica->only('id')
         ]);
     }
@@ -78,7 +84,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 65) {
             if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -87,7 +93,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 68) {
             if (ProyectoRolStValidationTrait::rolStValidation($proyecto, $proyecto->servicioTecnologico->tipoProyectoSt->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -96,7 +102,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (ProyectoRolTpValidationTrait::rolTpValidation($proyecto, $proyecto->tp->nodoTecnoparque->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -104,8 +110,8 @@ class ProyectoRolSennovaController extends Controller
          * Línea programática 70
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
-            if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->ta->tecnoacademiaLineaTecnoacademia->tecnoacademia->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
+            if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -116,11 +122,14 @@ class ProyectoRolSennovaController extends Controller
             return redirect()->back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
         }
 
-        /**
-         * Todas las líneas
-         */
-        if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
-            return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+        if ($proyecto->lineaProgramatica->codigo != 70) {
+            if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+            }
+        } else {
+            if (ProyectoRolTaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
+            }
         }
 
         $proyectoRolSennova = new ProyectoRolSennova();
@@ -156,9 +165,15 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
+        if ($proyecto->codigo_linea_programatica == 68) {
+            $proyecto->max_meses_ejecucion = $proyecto->servicioTecnologico->max_meses_ejecucion;
+        }
+
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
-            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable'),
+            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
             'lineaProgramatica'     => $proyecto->lineaProgramatica->only('id')
@@ -181,7 +196,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 65) {
             if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -190,7 +205,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 68) {
             if (ProyectoRolStValidationTrait::rolStValidation($proyecto, $proyecto->servicioTecnologico->tipoProyectoSt->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -198,8 +213,8 @@ class ProyectoRolSennovaController extends Controller
          * Línea programática 69
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
-            if (ProyectoRolTpValidationTrait::rolTaValidation($proyecto, $proyecto->tp->nodoTecnoparque->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
+            if (ProyectoRolTpValidationTrait::rolTpValidation($proyecto, $proyecto->tp->nodoTecnoparque->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -207,8 +222,8 @@ class ProyectoRolSennovaController extends Controller
          * Línea programática 70
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
-            if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->ta->tecnoacademiaLineaTecnoacademia->tecnoacademia->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podigo agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
+            if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -219,16 +234,19 @@ class ProyectoRolSennovaController extends Controller
             return redirect()->back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
         }
 
-        /**
-         * Todas las líneas
-         */
-        if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
-            return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+        if ($proyecto->lineaProgramatica->codigo != 70) {
+            if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+            }
+        } else {
+            if (ProyectoRolTaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
+                return redirect()->back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
+            }
         }
 
-        $proyectoRolSennova->numero_meses   = $request->numero_meses;
-        $proyectoRolSennova->numero_roles   = $request->numero_roles;
-        $proyectoRolSennova->descripcion    = $request->descripcion;
+        $proyectoRolSennova->numero_meses = $request->numero_meses;
+        $proyectoRolSennova->numero_roles = $request->numero_roles;
+        $proyectoRolSennova->descripcion  = $request->descripcion;
         $proyectoRolSennova->proyecto()->associate($proyecto->id);
         $proyectoRolSennova->convocatoriaRolSennova()->associate($request->convocatoria_rol_sennova_id);
 

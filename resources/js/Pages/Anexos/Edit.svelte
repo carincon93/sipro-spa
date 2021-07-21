@@ -12,6 +12,8 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
+    import Switch from '@/Shared/Switch'
+    import InputError from '@/Shared/InputError'
 
     export let errors
     export let anexo
@@ -31,8 +33,9 @@
     let form = useForm({
         nombre: anexo.nombre,
         descripcion: anexo.descripcion,
+        obligatorio: anexo.obligatorio,
         linea_programatica_id: anexoLineasProgramaticas,
-        archivo: anexo.archivo,
+        archivo: '',
     })
 
     function submit() {
@@ -93,6 +96,13 @@
                             </a>
                         </div>
                     {/if}
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="obligatorio" value="¿El anexo es obligatorio?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.obligatorio} />
+                    <InputError message={errors.obligatorio} />
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">

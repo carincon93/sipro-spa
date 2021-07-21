@@ -10,6 +10,7 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
+    import Switch from '@/Shared/Switch'
     import File from '@/Shared/File'
 
     export let errors
@@ -28,6 +29,7 @@
         nombre: '',
         descripcion: '',
         archivo: null,
+        obligatorio: '',
         linea_programatica_id: [],
     })
 
@@ -71,6 +73,13 @@
                     <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
 
                     <File type="file" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="obligatorio" value="¿El anexo es obligatorio?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.obligatorio} />
+                    <InputError message={errors.obligatorio} />
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">

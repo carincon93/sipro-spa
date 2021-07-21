@@ -36,6 +36,7 @@
     export let propuestaSostenibilidad
     export let productosActividades
     export let articulacionSennova
+    export let soportesEstudioMercado
 
     $: $title = 'Finalizar proyecto'
 
@@ -170,9 +171,9 @@
             {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && actividadesPresupuesto && resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
-            {:else}
+            {:else if proyecto.finalizado == false}
                 <InfoMessage class="mb-2" alertMsg={true}>
-                    <p>La información del proyecto está incompleta. Revise y complete los siguientes ítems:</p>
+                    <p><strong>La información del proyecto está incompleta. Para poder finalizar el proyecto debe completar los siguientes ítems:</strong></p>
                     <ul class="list-disc p-4">
                         {#if !generalidades}
                             <li>Generalidades</li>
@@ -230,6 +231,9 @@
                         {/if}
                         {#if !anexos}
                             <li>No se han cargado todos los anexos</li>
+                        {/if}
+                        {#if !soportesEstudioMercado}
+                            <li>Hay estudios de mercado con menos de dos soportes</li>
                         {/if}
                     </ul>
                 </InfoMessage>

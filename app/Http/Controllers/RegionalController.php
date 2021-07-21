@@ -55,7 +55,7 @@ class RegionalController extends Controller
 
         $regional->save();
 
-        return redirect()->route('regional.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('regionales.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -117,6 +117,6 @@ class RegionalController extends Controller
 
         $regional->delete();
 
-        return redirect()->route('regional.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('regionales.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

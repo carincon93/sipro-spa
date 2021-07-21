@@ -17,6 +17,7 @@ use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class TaController extends Controller
@@ -28,7 +29,7 @@ class TaController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Index', [
             'convocatoria'  => $convocatoria->only('id'),
@@ -44,12 +45,29 @@ class TaController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [null]);
+
+        if (auth()->user()->hasRole(12)) {
+            $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+        } else {
+            $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->get();
+        }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Create', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'tecnoacademias'            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'authUserCentroFormacion'   => Auth::user()->centroFormacion->id
+            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'tecnoAcademias' => $tecnoAcademias
         ]);
     }
 
@@ -61,10 +79,12 @@ class TaController extends Controller
      */
     public function store(TaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('formular-proyecto');
+        $this->authorize('formular-proyecto', [5]);
+
+        $tecnoAcademia = TecnoAcademia::find($request->tecnoacademia_id['value']);
 
         $proyecto = new Proyecto();
-        $proyecto->centroFormacion()->associate($request->centro_formacion_id);
+        $proyecto->centroFormacion()->associate($tecnoAcademia->centro_formacion_id);
         $proyecto->lineaProgramatica()->associate(5);
         $proyecto->convocatoria()->associate($convocatoria);
         $proyecto->save();
@@ -72,25 +92,28 @@ class TaController extends Controller
         $proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->tecnoacademia_linea_tecnoacademia_id);
 
         $ta = new Ta();
-        $ta->fecha_inicio                         = $request->fecha_inicio;
-        $ta->fecha_finalizacion                   = $request->fecha_finalizacion;
-        $ta->max_meses_ejecucion                  = $request->max_meses_ejecucion;
-        $ta->resumen                              = '';
-        $ta->antecedentes                         = '';
-        $ta->marco_conceptual                     = '';
-        $ta->metodologia                          = '';
-        $ta->bibliografia                         = '';
-        $ta->impacto_municipios                   = '';
-        $ta->articulacion_centro_formacion        = '';
-        $ta->identificacion_problema              = '';
-        $ta->resumen_regional                     = '';
-        $ta->antecedentes_tecnoacademia           = '';
-        $ta->retos_oportunidades                  = '';
-        $ta->pertinencia_territorio               = '';
-        $ta->metodologia_local                    = '';
-        $ta->numero_instituciones                 = 0;
-        $ta->nombre_instituciones                 = null;
-        $ta->nombre_instituciones_programas       = null;
+        $ta->fecha_inicio                       = $request->fecha_inicio;
+        $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
+        $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
+        $ta->resumen                            = '';
+        $ta->antecedentes                       = '';
+        $ta->marco_conceptual                   = '';
+        $ta->metodologia                        = '';
+        $ta->bibliografia                       = '';
+        $ta->impacto_municipios                 = '';
+        $ta->articulacion_centro_formacion      = '';
+        $ta->identificacion_problema            = '';
+        $ta->resumen_regional                   = '';
+        $ta->antecedentes_tecnoacademia         = '';
+        $ta->retos_oportunidades                = '';
+        $ta->pertinencia_territorio             = '';
+        $ta->metodologia_local                  = '';
+        $ta->numero_instituciones               = 0;
+        $ta->nombre_instituciones               = null;
+        $ta->nombre_instituciones_programas     = null;
+        $ta->proyeccion_nuevas_tecnoacademias   = 1;
+        $ta->proyeccion_articulacion_media      = 1;
+        $ta->articulacion_semillero             = 1;
 
         $proyecto->ta()->save($ta);
 
@@ -117,7 +140,7 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function show(Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
     }
@@ -128,13 +151,31 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function edit(Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
 
         $ta->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
         $ta->precio_proyecto           = $ta->proyecto->precioProyecto;
         $ta->proyecto->centroFormacion;
+
+        if (auth()->user()->hasRole(12)) {
+            $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+        } else {
+            $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
+                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
+            END as label, centros_formacion.id as centro_formacion_id")
+                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
+                ->get();
+        }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
             'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
@@ -147,7 +188,8 @@ class TaController extends Controller
             'proyectoMunicipiosImpactar'            => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
             'proyectoDisCurriculares'               => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get()
+            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'tecnoAcademias'                        => $tecnoAcademias
         ]);
     }
 
@@ -158,7 +200,7 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function update(TaRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function update(TaRequest $request, Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
@@ -184,6 +226,12 @@ class TaController extends Controller
         $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
         $ta->nuevas_instituciones               = $request->nuevas_instituciones;
 
+        $ta->proyectos_macro                    = $request->proyectos_macro;
+        $ta->lineas_medulares_centro            = $request->lineas_medulares_centro;
+        $ta->lineas_tecnologicas_centro         = $request->lineas_tecnologicas_centro;
+        $ta->proyeccion_nuevas_tecnoacademias   = $request->proyeccion_nuevas_tecnoacademias;
+        $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
+
         $ta->proyecto->municipios()->sync($request->municipios);
         $ta->proyecto->municipiosAImpactar()->sync($request->municipios_impactar);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
@@ -201,13 +249,22 @@ class TaController extends Controller
      * @param  \App\Models\Ta  $ta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, Ta $ta)
+    public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
+        if ($ta->proyecto->finalizado) {
+            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+        }
+
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
         $ta->proyecto()->delete();
 
-        return redirect()->route('convocatorias.ta.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.ta.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**
@@ -248,13 +305,15 @@ class TaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
-        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
-        $proyecto->precio_proyecto           = $proyecto->precioProyecto;
-        $proyecto->proyectos_ejecucion       = $proyecto->ta->proyectos_ejecucion;
+        $proyecto->codigo_linea_programatica            = $proyecto->lineaProgramatica->codigo;
+        $proyecto->precio_proyecto                      = $proyecto->precioProyecto;
+        $proyecto->proyectos_ejecucion                  = $proyecto->ta->proyectos_ejecucion;
+        $proyecto->articulacion_semillero               = $proyecto->ta->articulacion_semillero;
+        $proyecto->semilleros_en_formalizacion          = $proyecto->ta->semilleros_en_formalizacion;
 
         return Inertia::render('Convocatorias/Proyectos/ArticulacionSennova/Index', [
             'convocatoria'              => $convocatoria->only('id', 'year', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion', 'modificable', 'articulacion_semillero', 'semilleros_en_formalizacion'),
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
             'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
@@ -277,10 +336,16 @@ class TaController extends Controller
     {
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
-        $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+        if ($request->semilleros_en_formalizacion == 1) {
+            $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
+        } else {
+            $proyecto->semillerosInvestigacion()->sync([]);
+        }
 
         $proyecto->ta->update([
-            'proyectos_ejecucion' => $request->proyectos_ejecucion
+            'proyectos_ejecucion'           => $request->proyectos_ejecucion,
+            'articulacion_semillero'        => $request->articulacion_semillero,
+            'semilleros_en_formalizacion'   => $request->semilleros_en_formalizacion
         ]);
 
         return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');

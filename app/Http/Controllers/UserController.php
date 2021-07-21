@@ -24,8 +24,9 @@ class UserController extends Controller
         $this->authorize('viewAny', [User::class]);
 
         return Inertia::render('Users/Index', [
-            'filters'   => request()->all('search'),
-            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search]),
+            'filters'   => request()->all('search', 'roles'),
+            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search, 'roles' => request()->roles]),
+            'roles'     => Role::orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -109,7 +110,7 @@ class UserController extends Controller
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
             'roles'                 => Role::getRolesByRol(),
-            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'ta.tecnoacademiaLineaTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'tecnoacademiaLineasTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
 
         ]);
     }

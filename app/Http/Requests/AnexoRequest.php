@@ -28,6 +28,7 @@ class AnexoRequest extends FormRequest
             'nombre'                    => ['required', 'max:191', 'string'],
             'descripcion'               => ['required', 'string'],
             'archivo'                   => ['nullable', 'max:10000000', 'file'],
+            'obligatorio'               => ['required', 'boolean'],
         ];
     }
 }

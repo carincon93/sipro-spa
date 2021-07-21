@@ -92,6 +92,10 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {anexo.nombre}
+                            <br />
+                            {#if anexo.obligatorio}
+                                <span class="text-red-500">* El anexo es obligatorio</span>
+                            {/if}
                             {#if anexo.archivo}
                                 <a target="_blank" class="text-indigo-400 underline inline-block mt-4 mb-4 flex" download href={route('anexos.download', [anexo.id])}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,10 +117,6 @@
             {#if anexos.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
-                </tr>
-            {:else if !isSuperAdmin || (!checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == false)}
-                <tr>
-                    <td class="border-t px-6 py-4" colspan="4">No tiene permisos</td>
                 </tr>
             {/if}
         </tbody>

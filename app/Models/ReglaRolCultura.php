@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EstudioMercado extends Model
+class ReglaRolCultura extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class EstudioMercado extends Model
      *
      * @var string
      */
-    protected $table = 'estudios_mercado';
+    protected $table = 'reglas_roles_cultura';
 
     /**
      * The attributes that are mass assignable.
@@ -22,10 +22,11 @@ class EstudioMercado extends Model
      * @var array
      */
     protected $fillable = [
-        'proyecto_lote_estudio_mercado_id',
-        'valor',
-        'empresa',
-        'soporte'
+        'centro_formacion_id',
+        'auxiliar_editorial',
+        'gestor_editorial',
+        'experto_tematico',
+
     ];
 
     /**
@@ -47,13 +48,13 @@ class EstudioMercado extends Model
     ];
 
     /**
-     * Relationship with ProyectoLoteEstudioMercado
+     * Relationship with CentroFormacion
      *
      * @return object
      */
-    public function proyectoLoteEstudioMercado()
+    public function centroFormacion()
     {
-        return $this->belongsTo(ProyectoLoteEstudioMercado::class);
+        return $this->belongsTo(CentroFormacion::class);
     }
 
     /**
@@ -63,13 +64,10 @@ class EstudioMercado extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterEstudioMercado($query, array $filters)
+    public function scopeFilterReglaRolCultura($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $search = str_replace('"', "", $search);
-            $search = str_replace("'", "", $search);
-            $search = str_replace(' ', '%%', $search);
-            $query->whereRaw("unaccent(empresa) ilike unaccent('%" . $search . "%')");
+            $query->where('centros_formacion.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }

@@ -148,6 +148,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with ReglaRolCultura
+     *
+     * @return object
+     */
+    public function reglasRolesCultura()
+    {
+        return $this->hasMany(ReglaRolCultura::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

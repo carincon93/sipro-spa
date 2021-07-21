@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 trait PresupuestoValidationTrait
 {
     /**
-     * totalUsoPresupuestal
+     * totalSegundoGrupoPresupuestalProyecto
      *
      * Obtiene el total de un grupo presupuestal dado el código del segundo grupo presupuestal
      * 
@@ -15,7 +15,7 @@ trait PresupuestoValidationTrait
      * @param  mixed $codigo
      * @return int
      */
-    public static function totalUsoPresupuestal($proyecto, $codigo)
+    public static function totalSegundoGrupoPresupuestalProyecto($proyecto, $codigo)
     {
         $total = 0;
 
@@ -23,7 +23,7 @@ trait PresupuestoValidationTrait
             $codigoSegundoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
             if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
                 if ($codigoSegundoPresupuestal == $codigo) {
-                    $total += $proyectoPresupuesto->getPromedioAttribute();
+                    $total += $proyectoPresupuesto->valor_total;
                 }
             }
         }
@@ -37,24 +37,29 @@ trait PresupuestoValidationTrait
      * REQ-LINEA-66 Para el proyecto solo se podrá destinar hasta $4.460.000 de viáticos, lo cual comprende la sumatoria de todos los rubros que tengan esta finalidad. 
      * 
      * @param  mixed $proyecto
-     * @param  mixed $segundoGrupoPresupuestalCodigo
+     * @param  mixed $codigoSegundoPresupuestal
      * @param  mixed $valor
      * @param  mixed $numeroItems
      * @param  mixed $valorGuardado
      * @param  mixed $numeroItemsGuardado
      * @return void
      */
-    public static function viaticosValidation($proyecto, $segundoGrupoPresupuestalCodigo, $valor, $numeroItems)
+    public static function viaticosValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal, $valorMaximo)
     {
-        if ($segundoGrupoPresupuestalCodigo == '2042186' || $segundoGrupoPresupuestalCodigo == '2041101' || $segundoGrupoPresupuestalCodigo == '2041102' || $segundoGrupoPresupuestalCodigo == '2041104') {
-            if ($proyecto->lineaProgramatica->codigo == 66 && $segundoGrupoPresupuestalCodigo == '2041101') {
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+        if ($codigoSegundoPresupuestal == '2042186' || $codigoSegundoPresupuestal == '2041101' || $codigoSegundoPresupuestal == '2041102' || $codigoSegundoPresupuestal == '2041104') {
+            if ($proyecto->lineaProgramatica->codigo == 66 && $codigoSegundoPresupuestal == '2041101') {
                 return false;
             }
 
-            $total = 0;
-            $total += ($valor * $numeroItems) + self::totalUsoPresupuestal($proyecto, '2042186') + self::totalUsoPresupuestal($proyecto, '2041101') + self::totalUsoPresupuestal($proyecto, '2041102') + +self::totalUsoPresupuestal($proyecto, '2041104');
+            $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2042186') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041101') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041102') + +self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041104');
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
 
-            return ($total > 4460000) ? true : false;
+            return ($total > $valorMaximo) ? true : false;
         }
 
         return false;
@@ -74,27 +79,23 @@ trait PresupuestoValidationTrait
      * @param  mixed $tercerValor
      * @return boolean
      */
-    public static function serviciosEspecialesConstruccionValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    public static function serviciosEspecialesConstruccionValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        $porcentajeMaquinariaIndustrial         = self::totalUsoPresupuestal($proyecto, '2040115') * 0.05;
-        $totalServiciosEspecialesConstruccion   = self::totalUsoPresupuestal($proyecto, '2045110');
+        $porcentajeMaquinariaIndustrial             = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040115') * 0.05;
+        $totalAdecuacionesYConstruccionesProyecto   = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110');
 
         if ($porcentajeMaquinariaIndustrial == 0) {
             return false;
         }
 
-        $tercerValor = $tercerValor ?? 0;
+        if ($convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2045110') {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $totalAdecuacionesYConstruccionesProyecto = $totalAdecuacionesYConstruccionesProyecto - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $totalAdecuacionesYConstruccionesProyecto += $valorTotal;
+            }
 
-        $division = ($tercerValor > 0) ? 3 : 2;
-        $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
-
-        $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
-
-        // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "SERVICIOS ESPECIALES DE CONSTRUCCIÓN"
-        $promedioPresupuestoTotal = $promedio + ($totalServiciosEspecialesConstruccion - $promedioPresupuestoGuardado);
-
-        if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '2020200500405') {
-            return ($promedioPresupuestoTotal > $porcentajeMaquinariaIndustrial)  ? true : false;
+            return ($totalAdecuacionesYConstruccionesProyecto > $porcentajeMaquinariaIndustrial)  ? true : false;
         }
 
         return false;
@@ -113,25 +114,22 @@ trait PresupuestoValidationTrait
      * @param  mixed $tercerValor
      * @return boolean
      */
-    public static function serviciosMantenimientoValidation($proyecto, $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    public static function serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
         if ($proyecto->getPrecioProyectoAttribute() == 0) {
             return false;
         }
 
-        $tercerValor  = $tercerValor ?? 0;
+        $totalMantenimientoMaquinaria = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040516');
 
-        $division = ($tercerValor > 0) ? 3 : 2;
-        $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
+        if ($convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == '2040516') {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $totalMantenimientoMaquinaria = $totalMantenimientoMaquinaria - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $totalMantenimientoMaquinaria += $valorTotal;
+            }
 
-        $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
-        $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
-        $totalMantenimientoMaquinaria = self::totalUsoPresupuestal($proyecto, '2040516');
-
-        $promedioPresupuestoTotal = $promedio + ($totalMantenimientoMaquinaria - $promedioPresupuestoGuardado);
-
-        if ($codigoUsoPresupuestal == '2040516') {
-            return $promedioPresupuestoTotal > ($proyecto->getPrecioProyectoAttribute() * 0.05) ? true : false;
+            return $totalMantenimientoMaquinaria > ($proyecto->getPrecioProyectoAttribute() * 0.05) ? true : false;
         }
 
         return false;
@@ -150,21 +148,22 @@ trait PresupuestoValidationTrait
      * @param  mixed $tercerValor
      * @return void
      */
-    public static function adecuacionesYContruccionesValidation($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    public static function adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        $promedio = 0;
-
         $salarioMinimo = json_decode(Storage::get('json/salario-minimo.json'), true);
 
-        $codigoUsoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+        $codigoUsoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+
+        $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110');
 
         if ($codigoUsoPresupuestal == '2020200500406' || $codigoUsoPresupuestal == '2020200500407' || $codigoUsoPresupuestal == '2020200500405' || $codigoUsoPresupuestal == '20202005004023') {
-            $tercerValor = $tercerValor ?? 0;
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
 
-            $division = ($tercerValor > 0) ? 3 : 2;
-            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
-
-            if ($promedio > ($salarioMinimo['value'] * 100)) {
+            if ($total > ($salarioMinimo['value'] * 100)) {
                 return true;
             }
         }
@@ -172,29 +171,26 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    public static function primerReglaTp($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    public static function primerReglaTp($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
         if ($proyecto->getPrecioProyectoAttribute() == 0) {
             return false;
         }
 
-        $codigoSegundoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2045110' || $codigoSegundoPresupuestal == '2040106' || $codigoSegundoPresupuestal == '2040516' || $codigoSegundoPresupuestal == '2040115' || $codigoSegundoPresupuestal == '2040125' || $codigoSegundoPresupuestal == '2040108') {
 
-            $tercerValor  = $tercerValor ?? 0;
-
-            $division = ($tercerValor > 0) ? 3 : 2;
-            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
-
-            $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
-
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
-            $total = self::totalUsoPresupuestal($proyecto, '2045110') + self::totalUsoPresupuestal($proyecto, '2040106') + self::totalUsoPresupuestal($proyecto, '2040516') + self::totalUsoPresupuestal($proyecto, '2040115') + self::totalUsoPresupuestal($proyecto, '2040125') + self::totalUsoPresupuestal($proyecto, '2040108');
-            $promedioPresupuestoTotal = $promedio + ($total - $promedioPresupuestoGuardado);
+            $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040106') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040516') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040115') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040125') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040108');
 
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
 
-            if ($promedioPresupuestoTotal > 200000000) {
+            if ($total > 200000000) {
                 return true;
             }
         }
@@ -202,28 +198,124 @@ trait PresupuestoValidationTrait
         return false;
     }
 
-    public static function segundaReglaTp($proyecto,  $proyectoPresupuesto, $metodo, $primerValor, $segundoValor, $tercerValor)
+    public static function segundaReglaTp($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
         if ($proyecto->getPrecioProyectoAttribute() == 0) {
             return false;
         }
 
-        $codigoSegundoPresupuestal = $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2040424') {
-            $tercerValor  = $tercerValor ?? 0;
-
-            $division = ($tercerValor > 0) ? 3 : 2;
-            $promedio = ($primerValor + $segundoValor + $tercerValor) / $division;
-
-            $promedioPresupuestoGuardado = $metodo == 'store' ? 0 : $proyectoPresupuesto->getPromedioAttribute();
 
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "materiales para la formación"
-            $total = self::totalUsoPresupuestal($proyecto, '2040424');
-            $promedioPresupuestoTotal = $promedio + ($total - $promedioPresupuestoGuardado);
+            $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040424');
 
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
 
-            if ($promedioPresupuestoTotal > 120000000) {
+            if ($total > 120000000) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function materialesFormacion($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2040424') {
+            // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
+            $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040424');
+
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
+
+            if ($total > $proyecto->max_material_formacion) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2042186') {
+            $total = 0;
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2042186');
+            }
+
+            return ($total > $proyecto->max_bienestar_aprendiz) ? true : false;
+        }
+
+        return false;
+    }
+
+    public static function viaticosInterior($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2041102') {
+
+            $total = 0;
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041102');
+            }
+
+            return ($total > $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior) ? true : false;
+        }
+
+        return false;
+    }
+
+    public static function mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
+    {
+        if ($proyecto->getPrecioProyectoAttribute() == 0) {
+            return false;
+        }
+
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+
+        if ($codigoSegundoPresupuestal == '2040125' || $codigoSegundoPresupuestal == '2040115' || $codigoSegundoPresupuestal == '2040516' || $codigoSegundoPresupuestal == '2040106' || $codigoSegundoPresupuestal == '2045110') {
+
+            // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
+            $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040125') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040115') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040516') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040106') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110');
+
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
+
+            if ($total > $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos) {
                 return true;
             }
         }

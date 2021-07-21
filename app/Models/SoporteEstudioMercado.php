@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProyectoLoteEstudioMercado extends Model
+class SoporteEstudioMercado extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class ProyectoLoteEstudioMercado extends Model
      *
      * @var string
      */
-    protected $table = 'proyecto_lote_estudio_mercado';
+    protected $table = 'soportes_estudio_mercado';
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +23,8 @@ class ProyectoLoteEstudioMercado extends Model
      */
     protected $fillable = [
         'proyecto_presupuesto_id',
-        'numero_items',
-        'ficha_tecnica'
+        'empresa',
+        'soporte'
     ];
 
     /**
@@ -50,19 +50,9 @@ class ProyectoLoteEstudioMercado extends Model
      *
      * @return object
      */
-    public function proyectoPresupuesto()
+    public function ProyectoPresupuesto()
     {
         return $this->belongsTo(ProyectoPresupuesto::class);
-    }
-
-    /**
-     * Relationship with EstudioMercado
-     *
-     * @return object
-     */
-    public function estudiosMercado()
-    {
-        return $this->hasMany(EstudioMercado::class)->orderBy('id', 'ASC');
     }
 
     /**
@@ -72,29 +62,13 @@ class ProyectoLoteEstudioMercado extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterProyectoLoteEstudioMercado($query, array $filters)
+    public function scopeFilterSoporteEstudioMercado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
-            $query->where('numero_items', 'ilike', '%' . $search . '%');
+            $query->whereRaw("unaccent(empresa) ilike unaccent('%" . $search . "%')");
         });
-    }
-
-    /**
-     * getPromedioAttribute
-     *
-     * @return void
-     */
-    public function getPromedioAttribute()
-    {
-        $promedio    = 0;
-
-        foreach ($this->estudiosMercado as $estudioMercado) {
-            $promedio += (int) $estudioMercado->valor;
-        }
-
-        return $this->estudiosMercado->count() > 0 ? ($promedio / $this->estudiosMercado->count()) : 0;
     }
 }

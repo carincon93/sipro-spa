@@ -26,7 +26,8 @@ class Anexo extends Model
         'linea_programatica_id',
         'nombre',
         'descripcion',
-        'archivo'
+        'archivo',
+        'obligatorio'
     ];
 
     /**
