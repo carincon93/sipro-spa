@@ -17,6 +17,7 @@
     export let proyecto
     export let edt
     export let tiposEvento
+    export let proyectoPresupuesto
 
     $: $title = 'EDT'
 
@@ -38,6 +39,10 @@
         publico_objetivo: edt.publico_objetivo,
         numero_asistentes: edt.numero_asistentes,
         estrategia_comunicacion: edt.estrategia_comunicacion,
+        proyecto_presupuesto_id: {
+            value: edt.proyecto_presupuesto_id,
+            label: proyectoPresupuesto.find((item) => item.value == edt.proyecto_presupuesto_id)?.label,
+        },
     })
 
     function submit() {
@@ -75,6 +80,10 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && proyecto.modificable == true) ? undefined : true}>
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Presupuesto" />
+                    <Select id="proyecto_presupuesto_id" items={proyectoPresupuesto} bind:selectedValue={$form.proyecto_presupuesto_id} error={errors.proyecto_presupuesto_id} autocomplete="off" placeholder="Seleccione el presupuesto" required />
+                </div>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="tipo_evento" value="Tipo de evento" />
                     <Select id="tipo_evento" items={tiposEvento} bind:selectedValue={$form.tipo_evento} error={errors.tipo_evento} autocomplete="off" placeholder="Seleccione el tipo de evento" required />
