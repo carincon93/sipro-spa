@@ -33,7 +33,7 @@ class ProductoController extends Controller
                         $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
 
                         if ($productoAprendices) {
-                            $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices]);
+                            $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
                         }
                     }
                 }
