@@ -24,8 +24,9 @@ class UserController extends Controller
         $this->authorize('viewAny', [User::class]);
 
         return Inertia::render('Users/Index', [
-            'filters'   => request()->all('search'),
-            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search]),
+            'filters'   => request()->all('search', 'roles'),
+            'usuarios'  => User::getUsersByRol()->appends(['search' => request()->search, 'roles' => request()->roles]),
+            'roles'     => Role::orderBy('name', 'ASC')->get(),
         ]);
     }
 

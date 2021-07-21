@@ -210,7 +210,17 @@
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4 focus:text-indigo-500">
-                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp?.nodo_tecnoparque ? proyecto.tp?.nodo_tecnoparque.nombre : proyecto.tecnoacademia_lineas_tecnoacademia ? proyecto.tecnoacademia_lineas_tecnoacademia[0].tecnoacademia.nombre : null}
+                                {proyecto.idi
+                                    ? proyecto.idi.titulo
+                                    : proyecto.cultura_innovacion
+                                    ? proyecto.cultura_innovacion.titulo
+                                    : proyecto.servicio_tecnologico
+                                    ? proyecto.servicio_tecnologico.titulo
+                                    : proyecto.tp?.nodo_tecnoparque
+                                    ? proyecto.tp?.nodo_tecnoparque.nombre
+                                    : proyecto.tecnoacademia_lineas_tecnoacademia
+                                    ? proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre
+                                    : null}
                             </p>
                         </td>
                         <td class="border-t">

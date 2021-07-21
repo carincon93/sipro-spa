@@ -12,6 +12,7 @@
     import { Item, Text } from '@smui/list'
 
     export let usuarios
+    export let roles
 
     $title = 'Usuarios'
 
@@ -21,13 +22,24 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let filters = {}
+    let filters = {
+        roles: $page.props.filters.roles,
+    }
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20">
+    <DataTable class="mt-20" bind:filters showFilters={true}>
         <div slot="title">Usuarios</div>
 
+        <div slot="filters">
+            <label for="roles" class="block text-gray-700">Roles:</label>
+            <select id="roles" class="mt-1 w-full form-select" bind:value={filters.roles}>
+                <option value={null}>Seleccione un rol</option>
+                {#each roles as role}
+                    <option value={role.name}>{role.name}</option>
+                {/each}
+            </select>
+        </div>
         <div slot="actions">
             {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('users.create'))} variant="raised">Crear usuario</Button>
@@ -38,6 +50,8 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Rol</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -53,6 +67,18 @@
                         <p class="px-6 py-4">
                             {usuario.email}
                         </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4">
+                            {usuario.centro_formacion?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <ul class="px-6 py-4 list-disc">
+                            {#each usuario.roles as role}
+                                <li>{role.name}</li>
+                            {/each}
+                        </ul>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={usuarios.data.length < 4 ? 'z-50' : ''}>

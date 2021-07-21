@@ -1,6 +1,8 @@
 <script>
     import SearchFilter from '@/Shared/SearchFilter'
 
+    export let filters
+    export let showFilters
     export let routeParams
 
     $: props = {
@@ -18,7 +20,9 @@
     </div>
 
     <div class="mb-6 flex justify-between items-center">
-        <SearchFilter {routeParams} class="w-full max-w-md mr-4" />
+        <SearchFilter {routeParams} class="w-full max-w-md mr-4" {showFilters} bind:filters>
+            <slot name="filters" />
+        </SearchFilter>
         <slot name="actions" />
     </div>
     <div class="bg-white rounded shadow">
