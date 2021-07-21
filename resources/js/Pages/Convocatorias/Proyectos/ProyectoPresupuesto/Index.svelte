@@ -1,10 +1,9 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
-    import { fade } from 'svelte/transition'
 
     import Pagination from '@/Shared/Pagination'
     import Button from '@/Shared/Button'
@@ -26,7 +25,9 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let filtro = false
+    let filters = {
+        presupuestos: $page.props.filters.presupuestos,
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -210,26 +211,18 @@
         </div>
     {/if}
 
-    {#if filtro}
-        <div class="px-4 mt-4" transition:fade>
-            <ul class="flex flex-wrap">
+    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]} bind:filters showFilters={true}>
+        <div slot="filters">
+            <label for="presupuestos" class="block text-gray-700">Presupuestos:</label>
+            <select id="presupuestos" class="mt-1 w-full form-select" bind:value={filters.presupuestos}>
+                <option value={null}>Seleccione un presupuesto</option>
                 {#each segundoGrupoPresupuestal as { nombre }}
-                    <li class="mr-2 mb-2 inline-flex">
-                        <a class="bg-indigo-100 hover:bg-indigo-200 px-2 py-1 rounded-3xl text-center text-indigo-400" use:inertia={{ preserveScroll: true }} href="?search={nombre}">{nombre}</a>
-                    </li>
+                    <option value={nombre}>{nombre}</option>
                 {/each}
-                <li class="mr-2 mb-2 inline-flex">
-                    <a class="bg-green-100 hover:bg-green-200 px-2 py-1 rounded-3xl text-center text-green-400" use:inertia={{ preserveScroll: true }} href="?search=">Todos</a>
-                </li>
-            </ul>
+            </select>
         </div>
-    {/if}
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="actions">
-            <Button on:click={() => (filtro = !filtro)}>
-                {#if filtro}Ocultar{:else}Ver{/if} filtros
-            </Button>
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.create', [convocatoria.id, proyecto.id]))}>
                     <div>
