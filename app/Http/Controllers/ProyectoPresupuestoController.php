@@ -101,14 +101,6 @@ class ProyectoPresupuestoController extends Controller
             }
         }
 
-        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-            return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
-        }
-
-        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-            return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
-        }
-
         /**
          * Línea 66
          */
@@ -154,12 +146,21 @@ class ProyectoPresupuestoController extends Controller
          * Línea 70
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
+            if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+            }
+
+            if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
+            }
+
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
             }
 
-            if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
+            $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
+            if (PresupuestoValidationTrait::edt($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, $valorMaxEdt)) {
+                return redirect()->back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
             }
         }
 
@@ -268,14 +269,6 @@ class ProyectoPresupuestoController extends Controller
             }
         }
 
-        if ($proyecto->lineaProgramatica->codigo == 70  && PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-            return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
-        }
-
-        if ($proyecto->lineaProgramatica->codigo == 70 && PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-            return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
-        }
-
         /**
          * Línea 66
          */
@@ -321,6 +314,13 @@ class ProyectoPresupuestoController extends Controller
          * Línea 70
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
+            if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+            }
+
+            if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
+                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
+            }
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
                 return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
@@ -328,6 +328,11 @@ class ProyectoPresupuestoController extends Controller
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
                 return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
+            }
+
+            $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
+            if (PresupuestoValidationTrait::edt($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, $valorMaxEdt)) {
+                return redirect()->back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
             }
         }
 

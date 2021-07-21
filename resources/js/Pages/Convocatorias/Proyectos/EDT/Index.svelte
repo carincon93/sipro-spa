@@ -34,7 +34,7 @@
 
         <div slot="caption">
             {#if proyecto.servicios_organizacion == false}
-                <InfoMessage message="Para poder agregar un EDT debe generar primero el uso presupuestal 'Servicios de organización y asistencia de convenciones y ferias'." />
+                <InfoMessage message="Para poder agregar un EDT debe generar primero el uso presupuestal <strong>Servicios personales indirectos (persona jurídica)</strong> >  <strong>Servicios de organización y asistencia de convenciones y ferias</strong>." />
             {:else}
                 <p class="mb-20 text-center">A continuación, proyecte los EDTs que se realizarán durante la vigencia del proyecto:</p>
             {/if}
