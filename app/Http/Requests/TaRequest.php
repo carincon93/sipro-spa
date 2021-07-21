@@ -57,7 +57,7 @@ class TaRequest extends FormRequest
             ];
         } else {
             return [
-                'tecnoacademia_linea_tecnoacademia_id*'       => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
+                'tecnoacademia_linea_tecnoacademia_id*'     => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'ta', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'ta', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
@@ -155,6 +155,18 @@ class TaRequest extends FormRequest
         if (is_array($this->linea_programatica)) {
             $this->merge([
                 'linea_programatica' => $this->linea_programatica['codigo'],
+            ]);
+        }
+
+        if (is_array($this->proyeccion_nuevas_tecnoacademias)) {
+            $this->merge([
+                'proyeccion_nuevas_tecnoacademias' => $this->proyeccion_nuevas_tecnoacademias['value'],
+            ]);
+        }
+
+        if (is_array($this->proyeccion_articulacion_media)) {
+            $this->merge([
+                'proyeccion_articulacion_media' => $this->proyeccion_articulacion_media['value'],
             ]);
         }
     }
