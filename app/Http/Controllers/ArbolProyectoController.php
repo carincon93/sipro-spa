@@ -152,6 +152,13 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 388, 4, 32)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 389, 5, 38)');
 
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 508, 0, 0)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 507, 0, 1)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 509, 0, 2)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 510, 0, 3)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 511, 0, 4)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 512, 0, 5)');
+
             $proyecto->ta->update([
                 'modificable' => true
             ]);
