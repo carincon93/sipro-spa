@@ -26,6 +26,20 @@ class ProductoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        if ($proyecto->ta()->exists()) {
+            foreach ($proyecto->efectosDirectos as $efectoDirecto) {
+                foreach ($efectoDirecto->resultados as $resultado) {
+                    foreach ($resultado->productos as $producto) {
+                        $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
+
+                        if ($productoAprendices) {
+                            $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices]);
+                        }
+                    }
+                }
+            }
+        }
+
         $resultado = $proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
