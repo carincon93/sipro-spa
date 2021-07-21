@@ -27,7 +27,7 @@ class ArticulacionSennovaRequest extends FormRequest
             'lineas_investigacion*'         => ['required', 'integer', 'exists:lineas_investigacion,id'],
             'grupos_investigacion*'         => ['required', 'integer', 'exists:grupos_investigacion,id'],
             'semilleros_investigacion*'     => ['required', 'integer', 'exists:semilleros_investigacion,id'],
-            'articulacion_semillero'        => ['required', 'min:0', 'max:3', 'integer'],
+            'articulacion_semillero'        => ['required', 'min:0', 'max:2', 'integer'],
             'semilleros_en_formalizacion'   => ['nullable', 'json'],
         ];
     }
