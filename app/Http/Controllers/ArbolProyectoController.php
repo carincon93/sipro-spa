@@ -172,7 +172,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -211,7 +211,8 @@ class ArbolProyectoController extends Controller
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
             'efectosDirectos'   => $efectosDirectos,
-            'causasDirectas'    => $causasDirectas
+            'causasDirectas'    => $causasDirectas,
+            'to_pdf'            => ($request->to_pdf==1)?true:false
         ]);
     }
 
@@ -448,7 +449,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -499,7 +500,8 @@ class ArbolProyectoController extends Controller
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposImpacto'    => $tiposImpacto,
-            'tipoProyectoA'   => $tipoProyectoA
+            'tipoProyectoA'   => $tipoProyectoA,
+            'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
     }
 

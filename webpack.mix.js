@@ -26,7 +26,7 @@ mix.js('resources/js/app.js', 'public/js')
 })
 .webpackConfig({
 	// output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/sgpssipro/' }, Agregar al desplegar el sistema
-	output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/sgpssipro/'  },
+	output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/'  },
 	resolve: {
 		extensions: ['.js', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main'],
