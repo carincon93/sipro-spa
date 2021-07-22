@@ -114,12 +114,12 @@ class ArbolProyectoController extends Controller
             }
 
             if ($proyecto->ta()->exists() && $proyecto->ta->modificable == false) {
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 238, 237, 237, 0)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 239, 238, 238, 1)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 240, 239, 239, 2)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 241, 240, 240, 3)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 242, 241, 241, 4)');
-                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 243, 242, 242, 5)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 384, 377, 385, 0)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 385, 378, 386, 1)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 386, 379, 387, 2)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 387, 380, 388, 3)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 388, 381, 389, 4)');
+                DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 389, 382, 390, 5)');
             }
         }
 
@@ -145,12 +145,19 @@ class ArbolProyectoController extends Controller
 
         if ($proyecto->ta()->exists() && $proyecto->ta->modificable == false) {
             DB::select('SELECT public."objetivos_especificos_ta"(' . $proyecto->id . ')');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 238, 0, -1)');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 239, 1, 9)');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 240, 2, 19)');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 241, 3, 25)');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 242, 4, 32)');
-            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 243, 5, 38)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 384, 0, -1)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 385, 1, 9)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 386, 2, 19)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 387, 3, 25)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 388, 4, 32)');
+            DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 389, 5, 38)');
+
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 508, 0, 0)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 507, 0, 1)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 509, 0, 2)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 510, 0, 3)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 511, 0, 4)');
+            DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 512, 0, 5)');
 
             $proyecto->ta->update([
                 'modificable' => true

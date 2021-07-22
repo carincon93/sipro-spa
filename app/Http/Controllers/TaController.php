@@ -251,6 +251,10 @@ class TaController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
+        if ($ta->id == 1052) {
+            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+        }
+
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
         if ($ta->proyecto->finalizado) {
@@ -336,7 +340,8 @@ class TaController extends Controller
     {
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
-        if ($request->semilleros_en_formalizacion == 1) {
+
+        if ($request->articulacion_semillero == 1) {
             $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
         } else {
             $proyecto->semillerosInvestigacion()->sync([]);
