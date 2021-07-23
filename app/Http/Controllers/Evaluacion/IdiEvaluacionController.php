@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Http\Controllers\Evaluacion;
+
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\IdiEvaluacionRequest;
+use App\Models\CentroFormacion;
+use App\Models\Convocatoria;
+use App\Models\Idi;
+use App\Models\MesaSectorial;
+use App\Models\Tecnoacademia;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+
+class IdiEvaluacionController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Convocatoria $convocatoria)
+    {
+        return Inertia::render('Convocatorias/Evaluaciones/Idi/Index', [
+            'convocatoria'  => $convocatoria->only('id'),
+            'filters'       => request()->all('search'),
+            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Convocatoria $convocatoria)
+    {
+        return Inertia::render('Convocatorias/Evaluaciones/Idi/Create', [
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
+            'centrosFormacion'  => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(IdiEvaluacionRequest $request, Convocatoria $convocatoria)
+    {
+        //
+        return redirect()->route('convocatorias.idi-evaluaciones.edit', [$convocatoria])->with('success', 'El recurso se ha creado correctamente. Por favor continue diligenciando la información.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Idi  $idi
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
+    {
+        // 
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Idi  $idi
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
+    {
+        $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
+
+        $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
+        $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
+
+        $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
+        $idi->proyecto->centroFormacion;
+
+        return Inertia::render('Convocatorias/Evaluaciones/Idi/Edit', [
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'idi'                                       => $idi,
+            'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
+            'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
+            'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
+            'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
+            'tecnoacademias'                            => Tecnoacademia::select('id as value', 'nombre as label')->get(),
+            'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
+            'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Idi  $idi
+     * @return \Illuminate\Http\Response
+     */
+    public function update(IdiEvaluacionRequest $request, Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
+    {
+        // 
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Idi  $idi
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
+    {
+        return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+}

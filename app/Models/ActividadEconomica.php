@@ -64,6 +64,16 @@ class ActividadEconomica extends Model
     }
 
     /**
+     * Relationship with Ta
+     *
+     * @return object
+     */
+    public function ta()
+    {
+        return $this->belongsToMany(Ta::class, 'ta_actividad_economica', 'actividad_economica_id', 'ta_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -110,6 +110,46 @@ class Ta extends Model
     }
 
     /**
+     * Relationship with TematicaEstrategica
+     *
+     * @return object
+     */
+    public function tematicasEstrategicas()
+    {
+        return $this->belongsToMany(TematicaEstrategica::class, 'ta_tematica_estrategica', 'ta_id', 'tematica_estrategica_id');
+    }
+
+    /**
+     * Relationship with DisciplinaSubareaConocimiento
+     *
+     * @return object
+     */
+    public function disciplinasSubareaConocimiento()
+    {
+        return $this->belongsToMany(DisciplinaSubareaConocimiento::class, 'ta_disciplina_subarea_conocimiento', 'ta_id', 'disciplina_subarea_conocimiento_id');
+    }
+
+    /**
+     * Relationship with RedConocimiento
+     *
+     * @return object
+     */
+    public function redesConocimiento()
+    {
+        return $this->belongsToMany(RedConocimiento::class, 'ta_red_conocimiento', 'ta_id', 'red_conocimiento_id');
+    }
+
+    /**
+     * Relationship with ActividadEconomica
+     *
+     * @return object
+     */
+    public function actividadesEconomicas()
+    {
+        return $this->belongsToMany(ActividadEconomica::class, 'ta_actividad_economica', 'ta_id', 'actividad_economica_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -238,6 +238,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with Evaluacion
+     *
+     * @return object
+     */
+    public function evaluaciones()
+    {
+        return $this->hasMany(Evaluacion::class);
+    }
+
+    /**
      * Relationship with ProgramaFormacion
      *
      * @return object

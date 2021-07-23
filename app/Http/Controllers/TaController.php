@@ -9,11 +9,14 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaRequest;
+use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
+use App\Models\RedConocimiento;
 use App\Models\Regional;
 use App\Models\SemilleroInvestigacion;
+use App\Models\TematicaEstrategica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -321,10 +324,17 @@ class TaController extends Controller
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
             'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
+            'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get(),
+            'tematicasEstrategicas'     => TematicaEstrategica::select('id as value', 'nombre as label')->get(),
+            'actividadesEconomicas'     => ActividadEconomica::select('id as value', 'nombre as label')->get(),
 
-            'gruposInvestigacionRelacionados'       => $proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
-            'lineasInvestigacionRelacionadas'       => $proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
-            'semillerosInvestigacionRelacionados'   => $proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
+            'gruposInvestigacionRelacionados'               => $proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
+            'lineasInvestigacionRelacionadas'               => $proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
+            'semillerosInvestigacionRelacionados'           => $proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
+            'disciplinasSubareaConocimientoRelacionadas'    => $proyecto->ta->disciplinasSubareaConocimiento()->select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->get(),
+            'redesConocimientoRelacionadas'                 => $proyecto->ta->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
+            'tematicasEstrategicasRelacionadas'             => $proyecto->ta->tematicasEstrategicas()->select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->get(),
+            'actividadesEconomicasRelacionadas'             => $proyecto->ta->actividadesEconomicas()->select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->get(),
         ]);
     }
 
@@ -340,6 +350,10 @@ class TaController extends Controller
     {
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
+        $proyecto->ta->actividadesEconomicas()->sync($request->actividades_economicas);
+        $proyecto->ta->disciplinasSubareaConocimiento()->sync($request->disciplinas_subarea_conocimiento);
+        $proyecto->ta->redesConocimiento()->sync($request->redes_conocimiento);
+        $proyecto->ta->tematicasEstrategicas()->sync($request->tematicas_estrategicas);
 
         if ($request->articulacion_semillero == 1) {
             $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);

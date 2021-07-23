@@ -9,7 +9,6 @@ use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
 use App\Models\CentroFormacion;
-use App\Models\LineaProgramatica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
