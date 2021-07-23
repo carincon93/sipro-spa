@@ -64,6 +64,16 @@ class TematicaEstrategica extends Model
     }
 
     /**
+     * Relationship with Ta
+     *
+     * @return object
+     */
+    public function ta()
+    {
+        return $this->belongsToMany(Ta::class, 'ta_tematica_estrategica', 'tematica_estrategica_id', 'ta_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

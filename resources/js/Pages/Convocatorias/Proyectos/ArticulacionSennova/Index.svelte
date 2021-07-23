@@ -3,6 +3,7 @@
     import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
 
     import Stepper from '@/Shared/Stepper'
     import Label from '@/Shared/Label'
@@ -11,6 +12,7 @@
     import SelectMulti from '@/Shared/SelectMulti'
     import Textarea from '@/Shared/Textarea'
     import Tags from '@/Shared/Tags'
+    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let convocatoria
@@ -18,9 +20,16 @@
     export let lineasInvestigacion
     export let gruposInvestigacion
     export let semillerosInvestigacion
+    export let redesConocimiento
+    export let tematicasEstrategicas
+    export let actividadesEconomicas
     export let gruposInvestigacionRelacionados
     export let lineasInvestigacionRelacionadas
     export let semillerosInvestigacionRelacionados
+    export let disciplinasSubareaConocimientoRelacionadas
+    export let redesConocimientoRelacionadas
+    export let actividadesEconomicasRelacionadas
+    export let tematicasEstrategicasRelacionadas
 
     $title = 'Articulación SENNOVA'
 
@@ -36,9 +45,15 @@
     ]
     let sending = false
     let form = useForm({
+        area_conocimiento_id: null,
+        subarea_conocimiento_id: null,
         lineas_investigacion: lineasInvestigacionRelacionadas.length > 0 ? lineasInvestigacionRelacionadas : null,
         grupos_investigacion: gruposInvestigacionRelacionados.length > 0 ? gruposInvestigacionRelacionados : null,
         semilleros_investigacion: semillerosInvestigacionRelacionados.length > 0 ? semillerosInvestigacionRelacionados : null,
+        disciplinas_subarea_conocimiento: disciplinasSubareaConocimientoRelacionadas.length > 0 ? disciplinasSubareaConocimientoRelacionadas : null,
+        redes_conocimiento: redesConocimientoRelacionadas.length > 0 ? redesConocimientoRelacionadas : null,
+        actividades_economicas: actividadesEconomicasRelacionadas.length > 0 ? actividadesEconomicasRelacionadas : null,
+        tematicas_estrategicas: tematicasEstrategicasRelacionadas.length > 0 ? tematicasEstrategicasRelacionadas : null,
         proyectos_ejecucion: proyecto.proyectos_ejecucion,
         semilleros_en_formalizacion: proyecto.semilleros_en_formalizacion,
         articulacion_semillero: {
@@ -55,6 +70,21 @@
                 preserveScroll: true,
             })
         }
+    }
+
+    let disciplinasSubareaConocimiento
+    let oldDisciplinasSubareaConocimientoValue = null
+
+    $: if ($form.subarea_conocimiento_id) {
+        if (oldDisciplinasSubareaConocimientoValue != $form.subarea_conocimiento_id) {
+            getDisciplinasSubareaConocimiento($form.subarea_conocimiento_id)
+        }
+    }
+    async function getDisciplinasSubareaConocimiento(subareaConocimientoId) {
+        let res = await axios.get(route('web-api.disciplinas-subarea-conocimiento', subareaConocimientoId))
+        res.status == '200'
+        disciplinasSubareaConocimiento = res.data
+        oldDisciplinasSubareaConocimientoValue = $form.subarea_conocimiento_id
     }
 </script>
 
@@ -119,6 +149,62 @@
                 </div>
                 <div>
                     <Tags id="semilleros_en_formalizacion" class="mt-4" enforceWhitelist={false} bind:tags={$form.semilleros_en_formalizacion} placeholder="Nombre del semillero" error={errors.semilleros_en_formalizacion} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
+                </div>
+                <div>
+                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} />
+                </div>
+            </div>
+            {#if $form.area_conocimiento_id}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} />
+                    </div>
+                </div>
+            {/if}
+            {#if $form.subarea_conocimiento_id || disciplinasSubareaConocimientoRelacionadas.length > 0}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <SelectMulti id="disciplinas_subarea_conocimiento" bind:selectedValue={$form.disciplinas_subarea_conocimiento} items={disciplinasSubareaConocimiento} isMulti={true} error={errors.disciplinas_subarea_conocimiento} placeholder="Disciplinas subárea de concimiento" required />
+                    </div>
+                </div>
+            {/if}
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="redes_conocimiento" value="Red de conocimiento sectorial" />
+                </div>
+                <div>
+                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.redes_conocimiento} placeholder="Buscar por el nombre del grupo de investigación" required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="actividades_economicas" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto?" />
+                </div>
+                <div>
+                    <SelectMulti id="actividades_economicas" bind:selectedValue={$form.actividades_economicas} items={actividadesEconomicas} isMulti={true} error={errors.actividades_economicas} placeholder="Buscar por el nombre del grupo de investigación" required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="tematicas_estrategicas" value="Temática estratégica SENA" />
+                </div>
+                <div>
+                    <SelectMulti id="tematicas_estrategicas" bind:selectedValue={$form.tematicas_estrategicas} items={tematicasEstrategicas} isMulti={true} error={errors.tematicas_estrategicas} placeholder="Buscar por el nombre del grupo de investigación" required />
                 </div>
             </div>
         </fieldset>

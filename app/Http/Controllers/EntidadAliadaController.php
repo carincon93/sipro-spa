@@ -65,9 +65,11 @@ class EntidadAliadaController extends Controller
                     return $objetivoEspecifico->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
-            'tiposEntidadAliada'        => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
-            'naturalezaEntidadAliada'   => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
-            'tiposEmpresa'              => json_decode(Storage::get('json/tipos-empresa.json'), true)
+            'tiposEntidadAliada'            => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
+            'naturalezaEntidadAliada'       => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
+            'tiposEmpresa'                  => json_decode(Storage::get('json/tipos-empresa.json'), true),
+            'infraestructuraTecnoacademia'  => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
+
         ]);
     }
 
@@ -82,11 +84,11 @@ class EntidadAliadaController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $entidadAliada = new EntidadAliada();
-        $entidadAliada->tipo                                    = $request->tipo;
-        $entidadAliada->nombre                                  = $request->nombre;
-        $entidadAliada->naturaleza                              = $request->naturaleza;
-        $entidadAliada->tipo_empresa                            = $request->tipo_empresa;
-        $entidadAliada->nit                                     = $request->nit;
+        $entidadAliada->tipo         = $request->tipo;
+        $entidadAliada->nombre       = $request->nombre;
+        $entidadAliada->naturaleza   = $request->naturaleza;
+        $entidadAliada->tipo_empresa = $request->tipo_empresa;
+        $entidadAliada->nit          = $request->nit;
 
         $entidadAliada->proyecto()->associate($proyecto);
 
@@ -142,9 +144,10 @@ class EntidadAliadaController extends Controller
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
         } elseif ($proyecto->ta()->exists()) {
             $request->validate([
-                'soporte_convenio'      => 'required|max:10000000|file|mimetypes:application/pdf',
-                'fecha_inicio_convenio' => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
-                'fecha_fin_convenio'    => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+                'soporte_convenio'              => 'required|max:10000000|file|mimetypes:application/pdf',
+                'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
+                'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+                'infraestructura_tecnoacademia' => 'required|max:3',
             ]);
             $entidadAliadaTa = new EntidadAliadaTa();
             $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
@@ -153,9 +156,10 @@ class EntidadAliadaController extends Controller
                 'soportes-convenio',
                 $nombreSoporteConvenio
             );
-            $entidadAliadaTa->soporte_convenio = $rutaSoporteConvenio;
-            $entidadAliadaTa->fecha_inicio_convenio     = $request->fecha_inicio_convenio;
-            $entidadAliadaTa->fecha_fin_convenio        = $request->fecha_fin_convenio;
+            $entidadAliadaTa->soporte_convenio              = $rutaSoporteConvenio;
+            $entidadAliadaTa->fecha_inicio_convenio         = $request->fecha_inicio_convenio;
+            $entidadAliadaTa->fecha_fin_convenio            = $request->fecha_fin_convenio;
+            $entidadAliadaTa->infraestructura_tecnoacademia = $request->infraestructura_tecnoacademia['value'];
 
             $entidadAliada->entidadAliadaTa()->save($entidadAliadaTa);
 
@@ -206,7 +210,8 @@ class EntidadAliadaController extends Controller
             'objetivosEspecificosRelacionados'  => $entidadAliada->actividades()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico'),
             'tiposEntidadAliada'                => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
             'naturalezaEntidadAliada'           => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
-            'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true)
+            'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true),
+            'infraestructuraTecnoacademia'      => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
         ]);
     }
 
@@ -221,11 +226,11 @@ class EntidadAliadaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $entidadAliada->tipo                                        = $request->tipo;
-        $entidadAliada->nombre                                      = $request->nombre;
-        $entidadAliada->naturaleza                                  = $request->naturaleza;
-        $entidadAliada->tipo_empresa                                = $request->tipo_empresa;
-        $entidadAliada->nit                                         = $request->nit;
+        $entidadAliada->tipo         = $request->tipo;
+        $entidadAliada->nombre       = $request->nombre;
+        $entidadAliada->naturaleza   = $request->naturaleza;
+        $entidadAliada->tipo_empresa = $request->tipo_empresa;
+        $entidadAliada->nit          = $request->nit;
 
         if ($entidadAliada->entidadAliadaIdi()->exists()) {
             $request->validate([
@@ -270,7 +275,7 @@ class EntidadAliadaController extends Controller
                 Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
                 $nombreArchivoPropiedadIntelectual = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
 
-                $rutaPropiedadIntelectual        = $request->carta_propiedad_intelectual->storeAs(
+                $rutaPropiedadIntelectual = $request->carta_propiedad_intelectual->storeAs(
                     'cartas-propiedad-intelectual',
                     $nombreArchivoPropiedadIntelectual
                 );
@@ -281,14 +286,16 @@ class EntidadAliadaController extends Controller
             $entidadAliada->actividades()->sync($request->actividad_id);
         } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
-                'soporte_convenio'      => 'nullable|max:10000000|file|mimetypes:application/pdf',
-                'fecha_inicio_convenio' => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
-                'fecha_fin_convenio'    => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+                'soporte_convenio'              => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
+                'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
+                'infraestructura_tecnoacademia' => 'required|max:3',
             ]);
 
             $entidadAliada->entidadAliadaTa()->update([
-                'fecha_inicio_convenio'      => $request->fecha_inicio_convenio,
-                'fecha_fin_convenio'         => $request->fecha_fin_convenio,
+                'fecha_inicio_convenio'         => $request->fecha_inicio_convenio,
+                'fecha_fin_convenio'            => $request->fecha_fin_convenio,
+                'infraestructura_tecnoacademia' => $request->infraestructura_tecnoacademia['value']
             ]);
 
             if ($request->hasFile('soporte_convenio')) {

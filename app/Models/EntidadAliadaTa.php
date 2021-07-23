@@ -24,7 +24,8 @@ class EntidadAliadaTa extends Model
     protected $fillable = [
         'soporte_convenio',
         'fecha_inicio_convenio',
-        'fecha_fin_convenio'
+        'fecha_fin_convenio',
+        'infraestructura_tecnoacademia'
     ];
 
     /**
