@@ -7,7 +7,6 @@
 
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
-    import Button from '@/Shared/Button'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
 
@@ -27,12 +26,6 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id]}>
         <div slot="title">I+D+i</div>
 
-        <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [1])}
-                <Button on:click={() => Inertia.visit(route('convocatorias.idi.create', [convocatoria.id]))} variant="raised">Crear proyecto I+D+i</Button>
-            {/if}
-        </div>
-
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
@@ -43,7 +36,7 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each idi.data as { id, proyecto, titulo, fecha_ejecucion }}
+            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
@@ -63,7 +56,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 14])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

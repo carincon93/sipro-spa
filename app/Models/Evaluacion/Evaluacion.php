@@ -25,7 +25,7 @@ class Evaluacion extends Model
         'proyecto_id',
         'user_id',
         'finalizado',
-        'estado'
+        'habilitado'
     ];
 
     /**
@@ -49,21 +49,31 @@ class Evaluacion extends Model
     /**
      * Relationship with Proyecto
      *
-     * @return void
+     * @return object
      */
     public function proyecto()
     {
-        return $this->belongsTo(Proyecto::class);
+        return $this->belongsTo(\App\Models\Proyecto::class);
     }
 
     /**
      * Relationship with IdiEvaluacion
      *
-     * @return void
+     * @return object
      */
-    public function idiEvaluaciones()
+    public function idiEvaluacion()
     {
-        return $this->hasMany(IdiEvaluacion::class);
+        return $this->hasOne(IdiEvaluacion::class, 'id');
+    }
+
+    /**
+     * Relationship with User
+     *
+     * @return object
+     */
+    public function evaluador()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     /**
@@ -76,7 +86,7 @@ class Evaluacion extends Model
     public function scopeFilterEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%' . $search . '%');
+            $query->where('id', 'ilike', '%' . $search . '%');
         });
     }
 }

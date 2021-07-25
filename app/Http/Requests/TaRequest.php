@@ -27,7 +27,7 @@ class TaRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'tecnoacademia_linea_tecnoacademia_id*'       => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
+                'tecnoacademia_linea_tecnoacademia_id*'     => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'ta', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'ta', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],

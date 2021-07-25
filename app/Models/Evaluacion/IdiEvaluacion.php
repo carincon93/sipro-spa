@@ -2,8 +2,10 @@
 
 namespace App\Models\Evaluacion;
 
+use App\Models\Idi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class IdiEvaluacion extends Model
 {
@@ -73,11 +75,11 @@ class IdiEvaluacion extends Model
     /**
      * Relationship with Evaluacion
      *
-     * @return void
+     * @return object
      */
     public function evaluacion()
     {
-        return $this->belongsTo(Evaluacion::class);
+        return $this->belongsTo(Evaluacion::class, 'id');
     }
 
     /**
@@ -95,5 +97,36 @@ class IdiEvaluacion extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(titulo) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getProyectosPorEvaluador
+     *
+     * @param  mixed $convocatoria
+     * @return object
+     */
+    public static function getProyectosPorEvaluador($convocatoria)
+    {
+        $authUser = Auth::user();
+        if ($authUser->hasRole(1)) { // Admin
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->distinct()
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else if ($authUser->hasRole(11)) { // Evaluador
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('evaluaciones.user_id', $authUser->id)
+                ->distinct()
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        }
+        $idi->load('proyecto');
+        return $idi;
     }
 }

@@ -244,7 +244,7 @@ class Proyecto extends Model
      */
     public function evaluaciones()
     {
-        return $this->hasMany(Evaluacion::class);
+        return $this->hasMany(\App\Models\Evaluacion\Evaluacion::class);
     }
 
     /**

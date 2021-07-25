@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Evaluacion;
 
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\IdiEvaluacionRequest;
+use App\Http\Requests\Evaluacion\IdiEvaluacionRequest;
 use App\Models\CentroFormacion;
 use App\Models\Convocatoria;
-use App\Models\Idi;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
@@ -26,7 +25,7 @@ class IdiEvaluacionController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'filters'       => request()->all('search'),
-            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'idi'           => IdiEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
     }
 
@@ -75,10 +74,10 @@ class IdiEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
-        $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
-
-        $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
-        $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
+        $idiEvaluacion->evaluacion->proyecto;
+        $idi = $idiEvaluacion->evaluacion->proyecto->idi;
+        $idiEvaluacion->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
+        $idiEvaluacion->precio_proyecto           = $idi->proyecto->precioProyecto;
 
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;
@@ -86,11 +85,12 @@ class IdiEvaluacionController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
+            'idiEvaluacion'                             => $idiEvaluacion,
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                            => Tecnoacademia::select('id as value', 'nombre as label')->get(),
+            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
@@ -107,7 +107,23 @@ class IdiEvaluacionController extends Controller
      */
     public function update(IdiEvaluacionRequest $request, Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
-        // 
+        $idiEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
+        $idiEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == true ? $request->titulo_comentario : null;
+        $idiEvaluacion->video_puntaje               = $request->video_puntaje;
+        $idiEvaluacion->video_comentario            = $request->video_requiere_comentario == true ? $request->video_comentario : null;
+        $idiEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
+        $idiEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == true ? $request->resumen_comentario : null;
+        $idiEvaluacion->problema_central_puntaje    = $request->problema_central_puntaje;
+        $idiEvaluacion->problema_central_comentario = $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null;
+        $idiEvaluacion->ortografia_puntaje          = $request->ortografia_puntaje;
+        $idiEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == true ? $request->ortografia_comentario : null;
+        $idiEvaluacion->redaccion_puntaje           = $request->redaccion_puntaje;
+        $idiEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == true ? $request->redaccion_comentario : null;
+        $idiEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
+        $idiEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
+
+        $idiEvaluacion->save();
+
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 

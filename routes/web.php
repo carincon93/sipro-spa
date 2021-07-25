@@ -48,6 +48,8 @@ use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 use App\Http\Controllers\DisCurricularController;
 use App\Http\Controllers\EdtController;
+use App\Http\Controllers\Evaluacion\EvaluacionController;
+use App\Http\Controllers\Evaluacion\IdiEvaluacionController;
 use App\Http\Controllers\InventarioEquipoController;
 use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
@@ -508,6 +510,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/entidades-aliadas/{entidad_aliada}/{archivo}/download', [EntidadAliadaController::class, 'download'])->name('convocatorias.proyectos.entidades-aliadas.download');
+    Route::resource('convocatorias.idi-evaluaciones', IdiEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'idi-evaluaciones' => 'idi-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.idi', IdiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi'])->except(['show']);
 
     Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
@@ -694,6 +697,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('roles', RoleController::class)->except(['show']);
+
+    /**
+     * Evaluaciones
+     * 
+     */
+    Route::resource('evaluaciones', EvaluacionController::class)->parameters(['evaluaciones' => 'evaluacion'])->except(['show']);
 });
 
 require __DIR__ . '/auth.php';
