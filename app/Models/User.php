@@ -126,6 +126,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with Evaluacion
+     *
+     * @return object
+     */
+    public function evaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\Evaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

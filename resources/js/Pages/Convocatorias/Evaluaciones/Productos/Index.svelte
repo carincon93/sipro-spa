@@ -1,24 +1,30 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
     import Button from '@/Shared/Button'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import Gantt from '@/Shared/Gantt'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Label from '@/Shared/Label'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
+    import Textarea from '@/Shared/Textarea'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
+    export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let productos
     export let productosGantt
-    export let validacionResultados
 
     $title = 'Productos'
 
@@ -29,18 +35,29 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let showGantt = false
+    let sending = false
+    let form = useForm({
+        productos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_puntaje : null,
+        productos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.productos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.productos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <h1 class="text-3xl m-24 text-center">Productos</h1>
 
     <p class="text-center mb-10">Los productos se entienden como los bienes o servicios que se generan y entregan en un proceso productivo. Los productos materializan los objetivos específicos de los proyectos. De esta forma, los productos de un proyecto deben agotar los objetivos específicos del mismo y deben cumplir a cabalidad con el objetivo general del proyecto.</p>
-
-    {#if validacionResultados}
-        <InfoMessage message={validacionResultados} class="mt-10 mb-10" />
-    {/if}
 
     {#if proyecto.codigo_linea_programatica == 70}
         <InfoMessage message="Debe asociar las fechas a cada uno de los productos haciendo clic en los tres puntos, a continuación, clic en 'Ver detalles'. (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>)." />
@@ -54,7 +71,7 @@
     {#if showGantt}
         <Gantt
             items={productosGantt}
-            request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])
+            request={isSuperAdmin || checkRole(authUser, [11])
                 ? {
                       uri: 'convocatorias.proyectos.productos.edit',
                       params: [convocatoria.id, proyecto.id],
@@ -62,13 +79,7 @@
                 : null}
         />
     {:else}
-        <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
-            <div slot="actions">
-                {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11, 17]) && validacionResultados == null && proyecto.modificable == true)}
-                    <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear producto</Button>
-                {/if}
-            </div>
-
+        <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
             <thead slot="thead">
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
@@ -104,7 +115,7 @@
 
                         <td class="border-t td-actions">
                             <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
+                                {#if isSuperAdmin || checkRole(authUser, [11])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.productos.edit', [convocatoria.id, proyecto.id, producto.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
@@ -127,4 +138,43 @@
         </DataTable>
         <Pagination links={productos.links} />
     {/if}
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li>
+                        <strong>Puntaje: 0 a 4</strong> Los productos esperados no son pertinentes para atender la problemática identificada en un corto o mediano plazo (correlación con el cronograma de actividades) y la formulación de los indicadores dificulta su medición.
+                    </li>
+                    <li>
+                        <strong>Puntaje: 5 a 7</strong> La mayoría de productos esperados son pertinentes para atender la problemática identificada en un corto o mediano plazo (correlación con el cronograma de actividades) y son susceptibles de mejora en cuanto a su alcance, así como lo es la formulación de los indicadores para realizar mediciones precisas en el tiempo.
+                    </li>
+                    <li>
+                        <strong>Puntaje: 8 a 9</strong> Todos los productos esperados son pertinentes para atender la problemática identificada en un corto o mediano plazo (correlación con el cronograma de actividades) y la formulación de los indicadores permitirá realizar mediciones precisas en el tiempo.
+                    </li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="productos_puntaje" value="Puntaje (Máximo 9)" />
+                <Input label="Puntaje" id="productos_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.productos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.productos_puntaje} />
+
+                <div class="mt-4">
+                    <p>¿Los productos requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.productos_requiere_comentario} />
+                    {#if $form.productos_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
 </AuthenticatedLayout>

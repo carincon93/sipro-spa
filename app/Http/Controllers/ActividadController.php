@@ -6,6 +6,7 @@ use App\Http\Requests\ActividadRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Actividad;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -222,5 +223,93 @@ class ActividadController extends Controller
         }
 
         return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showMetodologiaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->idi->metodologia;
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->ta->metodologia;
+                $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->ta->metodologia_local;
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->tp->metodologia;
+                $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->tp->metodologia_local;
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->culturaInnovacion->metodologia;
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->servicioTecnologico->metodologia;
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
+            'year'              => date('Y') + 1,
+            'filters'           => request()->all('search'),
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->with('objetivoEspecifico')->orderBy('objetivo_especifico_id', 'ASC')
+                ->filterActividad(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'actividadesGantt'  => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+        ]);
+    }
+
+    /**
+     * updateMetodologiaEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateMetodologiaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

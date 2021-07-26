@@ -11,6 +11,7 @@
     export let placeholder
     export let error
     export let required
+    export let disabled = false
 
     const groupBy = (item) => item.group
 
@@ -26,7 +27,7 @@
     }
 </script>
 
-<SelectMulti inputAttributes={{ id: id }} bind:selectedValue {items} containerClasses="items" isMulti={true} {groupBy} {placeholder} />
+<SelectMulti isDisabled={disabled} inputAttributes={{ id: id }} bind:selectedValue {items} containerClasses="items" isMulti={true} {groupBy} placeholder={required ? placeholder + ' *' : placeholder} />
 <InputError message={error} />
 
 <style>

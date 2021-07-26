@@ -637,16 +637,6 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
-                </div>
-            </div>
-
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
@@ -731,6 +721,16 @@
                             </button>
                         </div>
                     {/if}
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                </div>
+                <div>
+                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>

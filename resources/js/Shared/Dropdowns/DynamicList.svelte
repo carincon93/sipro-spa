@@ -17,6 +17,7 @@
     export let recurso
     export let reset
     export let noOptionsText = ''
+    export let disabled = false
 
     let items = []
     let itemFiltered = null
@@ -62,7 +63,7 @@
     }
 </script>
 
-<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items w-full{items.length > 6 ? ' height-select' : ''} {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros o de clic en refrescar" />
+<Select bind:selectedValue={itemFiltered} inputAttributes={{ id: id }} {placeholder} containerClasses="items w-full{items.length > 6 ? ' height-select' : ''} {classes}" {items} on:select={handleSelect} on:clear={() => (value = null)} noOptionsMessage="No hay ítems, por favor revise los filtros o de clic en refrescar" isDisabled={disabled} />
 {#if items.length == 0}
     <InfoMessage class="mt-4">
         {#if noOptionsText != ''}

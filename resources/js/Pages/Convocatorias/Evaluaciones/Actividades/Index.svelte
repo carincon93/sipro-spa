@@ -1,27 +1,31 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page, useForm } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
     import Button from '@/Shared/Button'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import Gantt from '@/Shared/Gantt'
     import InfoMessage from '@/Shared/InfoMessage'
     import Label from '@/Shared/Label'
     import Textarea from '@/Shared/Textarea'
     import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
 
+    export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let actividades
     export let actividadesGantt
-    export let errors
+    export let year
 
     $title = 'Actividades'
 
@@ -31,16 +35,21 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let actividadInfo = {
+        metodologia: proyecto.metodologia,
+        metodologia_local: proyecto.metodologia_local,
+    }
+
     let showGantt = false
     let sending = false
     let form = useForm({
-        metodologia: proyecto.metodologia,
-        metodologia_local: proyecto.metodologia_local,
+        metodologia_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_puntaje : null,
+        metodologia_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
+        metodologia_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.metodologia_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
     })
-
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
-            $form.put(route('convocatorias.proyectos.metodologia', [convocatoria.id, proyecto.id]), {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.actividades.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -50,33 +59,26 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+        <div class="mt-4">
+            <div>
+                <Label class="mb-4" labelFor="metodologia" value="Metodología" />
+                <InfoMessage message="Se debe evidenciar que la metodología se presente de forma organizada y de manera secuencial, de acuerdo con el ciclo P-H-V-A “Planificar – Hacer – Verificar - Actuar” para alcanzar el objetivo general y cada uno de los objetivos específicos." />
+                <Textarea disabled sinContador={true} id="metodologia" value={actividadInfo.metodologia} />
+            </div>
+        </div>
+        {#if proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70}
             <div class="mt-4">
                 <div>
-                    <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
-                    <InfoMessage message="Se debe evidenciar que la metodología se presente de forma organizada y de manera secuencial, de acuerdo con el ciclo P-H-V-A “Planificar – Hacer – Verificar - Actuar” para alcanzar el objetivo general y cada uno de los objetivos específicos." />
-                    <Textarea sinContador={true} id="metodologia" error={errors.metodologia} bind:value={$form.metodologia} required />
+                    <Label class="mb-4" labelFor="metodologia_local" value="Descripcion de la metodología aplicada a nivel local" />
+                    <Textarea disabled maxlength="20000" id="metodologia_local" value={actividadInfo.metodologia_local} />
                 </div>
             </div>
-            {#if proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70}
-                <div class="mt-4">
-                    <div>
-                        <Label required class="mb-4" labelFor="metodologia_local" value="Descripcion de la metodología aplicada a nivel local" />
-                        <Textarea maxlength="20000" id="metodologia_local" error={errors.metodologia_local} bind:value={$form.metodologia_local} required />
-                    </div>
-                </div>
-            {/if}
-        </fieldset>
-        <div class="mt-4 bg-gray-100 border-t border-gray-200 flex items-center">
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-            {/if}
-        </div>
+        {/if}
     </form>
 
     <hr class="mb-20 mt-20" />
@@ -97,7 +99,7 @@
     {#if showGantt}
         <Gantt
             items={actividadesGantt}
-            request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])
+            request={isSuperAdmin || checkRole(authUser, [11])
                 ? {
                       uri: 'convocatorias.proyectos.actividadesGantt.edit',
                       params: [convocatoria.id, proyecto.id],
@@ -105,7 +107,7 @@
                 : null}
         />
     {:else}
-        <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+        <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
             <thead slot="thead">
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
@@ -141,7 +143,7 @@
 
                         <td class="border-t td-actions">
                             <DataTableMenu class={actividades.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
+                                {#if isSuperAdmin || checkRole(authUser, [11])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.actividades.edit', [convocatoria.id, proyecto.id, actividad.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
@@ -164,4 +166,46 @@
         </DataTable>
         <Pagination links={actividades.links} />
     {/if}
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li>
+                        <strong>Puntaje: 0 a 7</strong> La selección y descripción de la metodología o metodologías no son claras para el contexto y desarrollo del proyecto. Las actividades no estan descritas de forma secuencial, tampoco muestran como se lograrán los objetivos específicos, generarán los resultados y/o productos y no estan formuladas en el marco de la vigencia del proyecto. Algunas
+                        de las actividades no se desarrollarán durante la vigencia {year}.
+                    </li>
+                    <li>
+                        <strong>Puntaje: 8 a 13</strong> La selección y descripción de la metodología o metodologías son claras para el contexto y desarrollo del proyecto. Las actividades están descritas de forma secuencial; sin embargo, son susceptibles de mejora en cuanto a como se lograrán los objetivos específicos, generarán los resultados y/o productos y estan formuladas en el marco de la
+                        vigencia del proyecto. Todas las actividades se desarrollarán durante la vigencia {year} y el tiempo dispuesto para ello es suficiente para garantizar su ejecución.
+                    </li>
+                    <li>
+                        <strong>Puntaje: 14 a 15</strong> La selección y descripción de la metodología o metodologías son precisas para el contexto y desarrollo del proyecto. Las actividades están descritas de forma secuencial, evidencian de forma clara como se lograrán los objetivos específicos, generarán los resultados, productos y están formuladas en el marco de la vigencia del proyecto. Todas
+                        las actividades se desarrollarán durante la vigencia {year} y el tiempo dispuesto para ello es suficiente para garantizar su ejecución.
+                    </li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="metodologia_puntaje" value="Puntaje (Máximo 15)" />
+                <Input label="Puntaje" id="metodologia_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.metodologia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.metodologia_puntaje} />
+
+                <div class="mt-4">
+                    <p>¿La metodología o las actividades requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.metodologia_requiere_comentario} />
+                    {#if $form.metodologia_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
 </AuthenticatedLayout>

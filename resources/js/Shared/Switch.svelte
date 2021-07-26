@@ -3,12 +3,12 @@
     import FormField from '@smui/form-field'
 
     export let checked = false
-    checked
+    export let disabled
 </script>
 
 <FormField>
-    <Switch bind:checked />
-    <span slot="label"
-        >{#if checked} Si {:else} No {/if}</span
-    >
+    <Switch bind:checked {disabled} />
+    <span slot="label">
+        {#if checked} Si {:else} No {/if}
+    </span>
 </FormField>

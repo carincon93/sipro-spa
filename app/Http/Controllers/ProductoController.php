@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Actividad;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\Proyecto;
 use App\Models\Producto;
 use App\Models\ProductoCulturaInnovacion;
@@ -310,5 +311,88 @@ class ProductoController extends Controller
         $producto->delete();
 
         return redirect()->route('convocatorias.proyectos.productos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showProductosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $resultado = $evaluacion->proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/Productos/Index', [
+            'convocatoria'          => $convocatoria->only('id'),
+            'evaluacion'            => $evaluacion,
+            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'filters'               => request()->all('search'),
+            'productos'             => Producto::whereIn(
+                'resultado_id',
+                $resultado->map(function ($resultado) {
+                    return $resultado->id;
+                })
+            )->with('resultado.objetivoEspecifico')->orderBy('resultado_id', 'ASC')
+                ->filterProducto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'productosGantt'        => Producto::whereIn(
+                'resultado_id',
+                $resultado->map(function ($resultado) {
+                    return $resultado->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+        ]);
+    }
+
+    /**
+     * updateProductosEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateProductosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'productos_puntaje'      => $request->productos_puntaje,
+                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'productos_puntaje'      => $request->productos_puntaje,
+                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

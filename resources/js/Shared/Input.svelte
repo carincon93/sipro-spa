@@ -8,6 +8,7 @@
     export let label
     export let error
     export let type
+    export let disabled
 
     let input
 
@@ -27,7 +28,7 @@
 <div class={$$restProps.class}>
     <Label {label} {id} />
 
-    <Textfield variant="outlined" {...props} bind:this={input} {id} {type} {value} on:input={update} {label} />
+    <Textfield {disabled} variant="outlined" {...props} bind:this={input} {id} {type} {value} on:input={update} {label} />
     {#if error}
         <InputError message={error} />
     {/if}
