@@ -615,7 +615,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 69 && proyecto.codigo_linea_programatica != 70}
                                 {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
                                     <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
                                         <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
@@ -649,6 +649,14 @@
                                 {/each}
                             {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
                                 {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 69}
+                                {#each { length: 9 - causaDirecta.causas_indirectas.length } as _empty, j}
                                     <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
                                         <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                             <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
