@@ -342,6 +342,8 @@
         dialogOpen = false
     }
 
+    let containerArbol
+    let containerObjetivo
     onMount(() => {
         const impacto = document.querySelector('#impacto-tooltip-placement')
         const impactoTooltip = document.querySelector('#impacto-tooltip')
@@ -423,8 +425,14 @@
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    <div class="mt-16">
-        <div class="flex mb-14">
+    <div class="mt-16 relative" bind:this={containerArbol}>
+        <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
+            <div class="bg-red-100" style="width: {containerObjetivo?.offsetWidth}px;" />
+            <div class="bg-red-200" style="width: {containerObjetivo?.offsetWidth}px;" />
+            <div class="bg-red-100" style="width: {containerObjetivo?.offsetWidth}px;" />
+            <div class="bg-red-200" style="width: {containerObjetivo?.offsetWidth}px;" />
+        </div>
+        <div class="flex mb-14" style={proyecto.codigo_linea_programatica == 69 ? 'margin-left: -15px; margin-right: -15px;' : ''}>
             {#each efectosDirectos as efectoDirecto, i}
                 {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
                     <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
@@ -441,13 +449,17 @@
                                     <div class="flex-1 resultados relative">
                                         <div
                                             on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
-                                            class="{efectoIndirecto.descripcion != null && i % 2 == 0
-                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                            class="{proyecto.codigo_linea_programatica == 69
+                                                ? (efectoIndirecto.descripcion != null) & (i < 3) || (efectoIndirecto.descripcion != null && i > 5 && i < 9)
+                                                    ? 'bg-orangered-400 hover:bg-orangered-500 '
+                                                    : 'bg-orangered-500 hover:bg-orangered-600 '
+                                                : efectoIndirecto.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500 '
                                                 : efectoIndirecto.descripcion == null && i % 2 == 0
-                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                ? 'bg-gray-300 hover:bg-gray-400 '
                                                 : efectoIndirecto.descripcion != null && i % 2 != 0
-                                                ? 'bg-orangered-500 hover:bg-orangered-600'
-                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                                ? 'bg-orangered-500 hover:bg-orangered-600 '
+                                                : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
                                         >
                                             <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
                                                 {#if efectoIndirecto.impacto}
@@ -489,16 +501,20 @@
                             id={i == 0 ? 'resultado-tooltip-placement' : ''}
                             aria-describedby={i == 0 ? 'tooltip' : ''}
                         >
-                            {#each efectoDirecto.resultados as resultado, j}
+                            {#each efectoDirecto.resultados as resultado}
                                 <div
                                     on:click={showResultadoDialog(efectoDirecto, resultado)}
-                                    class="{efectoDirecto.descripcion != null && i % 2 == 0
-                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                    class="{proyecto.codigo_linea_programatica == 69
+                                        ? (efectoDirecto.descripcion != null) & (i < 3) || (efectoDirecto.descripcion != null && i > 5 && i < 9)
+                                            ? 'bg-orangered-400 hover:bg-orangered-500 '
+                                            : 'bg-orangered-500 hover:bg-orangered-600 '
+                                        : efectoDirecto.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500 '
                                         : efectoDirecto.descripcion == null && i % 2 == 0
-                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        ? 'bg-gray-300 hover:bg-gray-400 '
                                         : efectoDirecto.descripcion != null && i % 2 != 0
-                                        ? 'bg-orangered-500 hover:bg-orangered-600'
-                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 ? ' mb-4' : ''}"
+                                        ? 'bg-orangered-500 hover:bg-orangered-600 '
+                                        : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 ? ' mb-4' : ''}"
                                     style="flex: 1 0 33.333%"
                                 >
                                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
@@ -543,7 +559,7 @@
                                 <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
                             </div>
                         {/if}
-                        <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div bind:this={containerObjetivo} class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                             <div
                                 on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
                                 class="{causaDirecta.descripcion != null && i % 2 == 0
