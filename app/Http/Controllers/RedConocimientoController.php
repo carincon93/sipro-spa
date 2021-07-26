@@ -113,7 +113,7 @@ class RedConocimientoController extends Controller
         try {
             $redConocimiento->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('redes-conocimiento.index')->with('success', 'El recurso se ha eliminado correctamente.');

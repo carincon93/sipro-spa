@@ -23,7 +23,7 @@ class Tp extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion'];
+    protected $appends = ['titulo', 'fecha_ejecucion'];
 
     /**
      * The attributes that are mass assignable.
@@ -109,6 +109,16 @@ class Tp extends Model
             $search = str_replace(' ', '%%', $search);
             $query->where('resumen', 'ilike', '%' . $search . '%');
         });
+    }
+
+    /**
+     * getTituloAttribute
+     *
+     * @return void
+     */
+    public function getTituloAttribute()
+    {
+        return "Red Tecnoparque Nodo " . ucfirst($this->nodoTecnoparque->nombre) . " Vigencia " . date('Y', strtotime($this->fecha_inicio));
     }
 
     /**

@@ -125,8 +125,8 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('delete', [GrupoInvestigacion::class, $grupoInvestigacion]);
 
-        $grupoInvestigacion->delete();
+        // $grupoInvestigacion->delete();
 
-        return redirect()->route('grupos-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
     }
 }
