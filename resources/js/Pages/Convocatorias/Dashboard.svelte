@@ -76,16 +76,27 @@
             {/if}
         </div>
 
+        <hr class="mt-20 mb-20" />
+
         <h1 class="text-4xl text-center">
             A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} para realizar las respectivas evaluaciones.
         </h1>
         <div class="flex justify-around mt-24 gap-4">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [11])}
                 <a use:inertia href={route('convocatorias.idi-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                     <figure>
                         <img src={window.basePath + '/images/idi.png'} alt="Línea programática - I+D+i" class="bg-white h-44 w-44 object-contain rounded-full" />
                     </figure>
                     I+D+i
+                </a>
+            {/if}
+
+            {#if isSuperAdmin || checkRole(authUser, [11])}
+                <a use:inertia href={route('convocatorias.cultura-innovacion-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                    <figure>
+                        <img src={window.basePath + '/images/cultura-innovacion.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
+                    </figure>
+                    Apropiación de la cultura de la innovación
                 </a>
             {/if}
         </div>

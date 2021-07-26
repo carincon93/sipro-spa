@@ -3,19 +3,23 @@
     import { page, useForm } from '@inertiajs/inertia-svelte'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
-    import { checkRole, checkPermission } from '@/Utils'
+    import { checkRole } from '@/Utils'
 
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import InfoMessage from '@/Shared/InfoMessage'
     import Label from '@/Shared/Label'
     import Textarea from '@/Shared/Textarea'
     import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
 
     export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
-    export let objetivos
     export let productos
+    export let objetivos
+    export let impactos
 
     $title = 'Cadena de valor'
 
@@ -27,21 +31,11 @@
 
     let sending = false
 
-    let form = useForm({
+    let propuestaSostenibilidadInfo = {
         propuesta_sostenibilidad: proyecto.propuesta_sostenibilidad,
         propuesta_sostenibilidad_social: proyecto.propuesta_sostenibilidad_social,
         propuesta_sostenibilidad_ambiental: proyecto.propuesta_sostenibilidad_ambiental,
         propuesta_sostenibilidad_financiera: proyecto.propuesta_sostenibilidad_financiera,
-    })
-
-    function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
-            $form.put(route('convocatorias.proyectos.propuesta-sostenibilidad', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-                preserveScroll: true,
-            })
-        }
     }
 
     onMount(() => {
@@ -92,20 +86,52 @@
             chart.draw(data, options)
         }
     }
+
+    let form = useForm({
+        cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
+        cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.cadena_valor_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    <h1 class="text-3xl mt-24 mb-10 text-center">Propuesta de sostenibilidad</h1>
+    <h1 class="text-3xl mt-24 mb-10 text-center">Impactos</h1>
 
-    <p class="text-center mb-24">A continuación, plantee las acciones concretas que contribuirán a la sostenibilidad financiera de la TecnoAcademia y su aporte a la sostenibilidad ambiental y social del territorio.</p>
+    <form>
+        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.modificable == true) ? undefined : true}>
+            {#each impactos as impacto}
+                <div class="mt-4">
+                    {#if impacto.tipo == 1}
+                        <strong>Impacto social</strong>
+                    {:else if impacto.tipo == 2}
+                        <strong>Impacto tecnológico</strong>
+                    {:else if impacto.tipo == 3}
+                        <strong>Impacto económico</strong>
+                    {:else if impacto.tipo == 4}
+                        <strong>Impacto ambiental</strong>
+                    {:else if impacto.tipo == 5}
+                        <strong>Impacto en el centro de formación</strong>
+                    {:else if impacto.tipo == 6}
+                        <strong>Impacto en el sector productivo</strong>
+                    {/if}
+                    <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
+                </div>
+            {/each}
 
-    <form on:submit|preventDefault={submit}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             {#if proyecto.codigo_linea_programatica != 70}
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
+                    <h1 class="text-3xl mt-24 mb-10 text-center">Propuesta de sostenibilidad</h1>
                     {#if proyecto.codigo_linea_programatica == 68}
                         <InfoMessage class="mb-2">
                             Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
@@ -115,25 +141,20 @@
                     {:else}
                         <InfoMessage class="mb-2" message="Identificar los efectos que tiene el desarrollo del proyecto de investigación ya sea positivos o negativos. Se recomienda establecer las acciones pertinentes para mitigar los impactos negativos ambientales identificados y anexar el respectivo permiso ambiental cuando aplique. Tener en cuenta si aplica el decreto 1376 de 2013." />
                     {/if}
-                    <Textarea label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" error={errors.propuesta_sostenibilidad} bind:value={$form.propuesta_sostenibilidad} required />
+                    <Textarea disabled label="Propuesta de sostenibilidad" maxlength="40000" id="propuesta_sostenibilidad" value={propuestaSostenibilidadInfo.propuesta_sostenibilidad} />
                 </div>
             {:else if proyecto.codigo_linea_programatica == 70}
                 <div class="mt-4">
-                    <Textarea label="Propuesta de sostenibilidad social" maxlength="40000" id="propuesta_sostenibilidad_social" error={errors.propuesta_sostenibilidad_social} bind:value={$form.propuesta_sostenibilidad_social} required />
+                    <Textarea disabled label="Propuesta de sostenibilidad social" maxlength="40000" id="propuesta_sostenibilidad_social" value={propuestaSostenibilidadInfo.propuesta_sostenibilidad_social} />
                 </div>
                 <div class="mt-4">
-                    <Textarea label="Propuesta de sostenibilidad ambiental" maxlength="40000" id="propuesta_sostenibilidad_ambiental" error={errors.propuesta_sostenibilidad_ambiental} bind:value={$form.propuesta_sostenibilidad_ambiental} required />
+                    <Textarea disabled label="Propuesta de sostenibilidad ambiental" maxlength="40000" id="propuesta_sostenibilidad_ambiental" value={propuestaSostenibilidadInfo.propuesta_sostenibilidad_ambiental} />
                 </div>
                 <div class="mt-4">
-                    <Textarea label="Propuesta de sostenibilidad financiera" maxlength="40000" id="propuesta_sostenibilidad_financiera" error={errors.propuesta_sostenibilidad_financiera} bind:value={$form.propuesta_sostenibilidad_financiera} required />
+                    <Textarea disabled label="Propuesta de sostenibilidad financiera" maxlength="40000" id="propuesta_sostenibilidad_financiera" value={propuestaSostenibilidadInfo.propuesta_sostenibilidad_financiera} />
                 </div>
             {/if}
         </fieldset>
-        <div class="mt-4 flex items-center">
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-            {/if}
-        </div>
     </form>
 
     <hr class="mb-20 mt-20" />
@@ -146,6 +167,60 @@
 
     <div class="mt-10">
         <div id="orgchart_div" class="overflow-x-scroll" style="margin: 0 -100px;" />
+    </div>
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li>
+                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '24 a 25' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '19 a 20' : ''}</strong> El presupuesto está bien definido y se relaciona directamente con el desarrollo de las actividades y los entregables del proyecto. Los soportes que evidencian
+                        el costo del bien a adquirir son pertinentes y confiables.
+                    </li>
+                    <li>
+                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '13 a 23' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '10 a 18' : ''}</strong> El presupuesto es adecuado, pero es susceptible de ajustes frente a las las actividades a desarrollar que darán cumplimiento a los objetivos propuestos. Los
+                        soportes que evidencian el costo del bien a adquirir son pertinentes y confiables.
+                    </li>
+                    <li>
+                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '0 a 12' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '0 a 9' : ''}</strong> El presupuesto esta sobre o subdimensionado y / o no está directamente relacionado con el desarrollo de las actividades para el logro de los objetivos propuestos.
+                        Los soportes que evidencian el costo del bien a adquirir no son pertinentes y tampoco confiables
+                    </li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="cadena_valor_puntaje" value={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 'Puntaje (Máximo 25)' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 'Puntaje (Máximo 20)' : 'Puntaje (Máximo 0)'} />
+                <Input
+                    label="Puntaje"
+                    id="cadena_valor_puntaje"
+                    type="number"
+                    input$step="1"
+                    input$min="0"
+                    input$max={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 25 : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 20 : 0}
+                    class="mt-1"
+                    bind:value={$form.cadena_valor_puntaje}
+                    placeholder="Puntaje"
+                    autocomplete="off"
+                    error={errors.cadena_valor_puntaje}
+                />
+
+                <div class="mt-4">
+                    <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.cadena_valor_requiere_comentario} />
+                    {#if $form.cadena_valor_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
     </div>
 </AuthenticatedLayout>
 

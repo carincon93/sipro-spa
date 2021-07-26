@@ -36,11 +36,7 @@ class IdiEvaluacionController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        return Inertia::render('Convocatorias/Evaluaciones/Idi/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
-            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'centrosFormacion'  => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get()
-        ]);
+        //
     }
 
     /**
@@ -52,7 +48,6 @@ class IdiEvaluacionController extends Controller
     public function store(IdiEvaluacionRequest $request, Convocatoria $convocatoria)
     {
         //
-        return redirect()->route('convocatorias.idi-evaluaciones.edit', [$convocatoria])->with('success', 'El recurso se ha creado correctamente. Por favor continue diligenciando la información.');
     }
 
     /**
@@ -76,8 +71,8 @@ class IdiEvaluacionController extends Controller
     {
         $idiEvaluacion->evaluacion->proyecto;
         $idi = $idiEvaluacion->evaluacion->proyecto->idi;
-        $idiEvaluacion->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
-        $idiEvaluacion->precio_proyecto           = $idi->proyecto->precioProyecto;
+        $idi->proyecto->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
+        $idi->proyecto->precio_proyecto           = $idi->proyecto->precioProyecto;
 
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;

@@ -14,10 +14,12 @@
     import InfoMessage from '@/Shared/InfoMessage'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
-    import Stepper from '@/Shared/Stepper'
+    import Switch from '@/Shared/Switch'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
 
     export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let efectosDirectos
     export let causasDirectas
@@ -53,7 +55,6 @@
     let generalInfoType = 0
     let showGeneralInfo = false
     function showGeneralInfoDialog(tipo) {
-        reset()
         dialogTitle = 'Información general'
         dialogOpen = true
 
@@ -64,18 +65,17 @@
     /**
      * Impactos
      */
-    let formImpacto = useForm({
+    let impactoInfo = {
         id: 0,
         efecto_indirecto_id: 0,
         descripcion: '',
         tipo: '',
         resultado_id: '',
-    })
+    }
 
     let showImpactoForm = false
     let impactoEfectoIndirecto
     function showImpactDialog(efectoIndirecto, efectoIndirectoId, resultadoId) {
-        // reset()
         codigo = efectoIndirecto.impacto.id != null ? 'RES-' + resultadoId + '-IMP-' + efectoIndirecto.impacto.id : ''
         dialogTitle = 'Impacto'
         dialogOpen = true
@@ -84,58 +84,34 @@
         impactoEfectoIndirecto = efectoIndirecto.descripcion
 
         if (efectoIndirecto.impacto != null) {
-            $formImpacto.id = efectoIndirecto.impacto.id
-            $formImpacto.descripcion = efectoIndirecto.impacto.descripcion
-            $formImpacto.tipo = {
+            impactoInfo.id = efectoIndirecto.impacto.id
+            impactoInfo.descripcion = efectoIndirecto.impacto.descripcion
+            impactoInfo.tipo = {
                 value: efectoIndirecto.impacto.tipo,
                 label: tiposImpacto.find((item) => item.value == efectoIndirecto.impacto.tipo)?.label,
             }
-            $formImpacto.efecto_indirecto_id = efectoIndirecto.impacto.efectoIndirectoId
-            $formImpacto.resultado_id = resultadoId
+            impactoInfo.efecto_indirecto_id = efectoIndirecto.impacto.efectoIndirectoId
+            impactoInfo.resultado_id = resultadoId
         } else {
-            $formImpacto.id = null
-            $formImpacto.efecto_indirecto_id = efectoIndirectoId
-            $formImpacto.resultado_id = ''
-        }
-    }
-
-    function submitImpacto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formImpacto.post(
-                route('proyectos.impacto', {
-                    proyecto: proyecto.id,
-                    impacto: $formImpacto.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
+            impactoInfo.id = null
+            impactoInfo.efecto_indirecto_id = efectoIndirectoId
+            impactoInfo.resultado_id = ''
         }
     }
 
     /**
      * Resultados
      */
-    let formResultado = useForm({
+    let resultadoInfo = {
         descripcion: '',
         trl: '',
-    })
+    }
 
     let showResultadoForm = false
     let descripcionObjetivoEspecifico = []
     let resultadoEfectoDirecto
     $: causasDirectas
     function showResultadoDialog(efectoDirecto, resultado) {
-        reset()
         let objetivoEspecifico = causasDirectas.find((causaDirecta) => causaDirecta.objetivo_especifico.id == resultado.objetivo_especifico_id)
         descripcionObjetivoEspecifico = {
             descripcion: objetivoEspecifico.objetivo_especifico?.descripcion ? objetivoEspecifico.objetivo_especifico?.descripcion : 'Sin información registrada',
@@ -146,189 +122,99 @@
         dialogOpen = true
         showResultadoForm = true
         formId = 'resultado-form'
-        $formResultado.id = resultado.id
-        $formResultado.descripcion = resultado.descripcion
-        $formResultado.trl = resultado.trl
+        resultadoInfo.id = resultado.id
+        resultadoInfo.descripcion = resultado.descripcion
+        resultadoInfo.trl = resultado.trl
         resultadoEfectoDirecto = efectoDirecto.descripcion ?? 'Sin información registrada'
-    }
-
-    function submitResult() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formResultado.post(
-                route('proyectos.resultado', {
-                    proyecto: proyecto.id,
-                    resultado: $formResultado.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
     }
 
     /**
      * Objetivo general
      */
-    let formObjetivoGeneral = useForm({
+    let objetivoGeneralInfo = {
         objetivo_general: proyecto.objetivo_general,
-    })
+    }
 
     let showObjetivoGeneralForm = false
     let problemaCentral
     function showObjetivoGeneralDialog() {
-        reset()
         dialogTitle = 'Objetivo general'
         dialogOpen = true
         showObjetivoGeneralForm = true
         formId = 'objetivo-general-form'
         problemaCentral = proyecto.problema_central
-        $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general
-    }
-
-    function submitObjetivoGeneral() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
-                onStart: () => {
-                    sending = true
-                },
-                onSuccess: () => {
-                    closeDialog()
-                },
-                onFinish: () => {
-                    sending = false
-                },
-                preserveScroll: true,
-            })
-        }
+        objetivoGeneralInfo.objetivo_general = proyecto.objetivo_general
     }
 
     /**
      * Objetivos específicos
      */
-    let formObjetivoEspecifico = useForm({
+    let objetivoEspecificoInfo = {
         id: 0,
         descripcion: '',
         numero: 0,
-    })
+    }
 
     let showObjetivoEspecificoForm = false
     let causaDirectaObjetivoEspecifico
     function showObjetivoEspecificoDialog(causaDirecta, numero) {
-        reset()
         codigo = 'OBJ-ESP-' + causaDirecta.objetivo_especifico.id
         dialogTitle = causaDirecta.objetivo_especifico.numero
         dialogOpen = true
         showObjetivoEspecificoForm = true
         formId = 'objetivo-especifico-form'
-        $formObjetivoEspecifico.id = causaDirecta.objetivo_especifico.id
-        $formObjetivoEspecifico.descripcion = causaDirecta.objetivo_especifico.descripcion
-        $formObjetivoEspecifico.numero = numero
+        objetivoEspecificoInfo.id = causaDirecta.objetivo_especifico.id
+        objetivoEspecificoInfo.descripcion = causaDirecta.objetivo_especifico.descripcion
+        objetivoEspecificoInfo.numero = numero
         causaDirectaObjetivoEspecifico = causaDirecta.descripcion ?? 'Sin información registrada'
-    }
-
-    function submitObjetivoEspecifico() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formObjetivoEspecifico.post(
-                route('proyectos.objetivo-especifico', {
-                    proyecto: proyecto.id,
-                    objetivo_especifico: $formObjetivoEspecifico.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
     }
 
     /**
      * Actividades
      */
-    let formActividad = useForm({
+    let actividadInfo = {
         id: 0,
         causa_indirecta_id: 0,
         objetivo_especifico_id: 0,
         descripcion: '',
-    })
+    }
 
     let showActividadForm = false
     let actividadCausaIndirecta
     function showActivityDialog(causaIndirecta, objetivoEspecifico) {
-        reset()
         codigo = causaIndirecta.actividad.id != null ? 'OBJ-ESP-' + objetivoEspecifico + '-ACT-' + causaIndirecta.actividad.id : ''
         dialogTitle = 'Actividad'
         dialogOpen = true
         showActividadForm = true
         formId = 'actividad-form'
-        $formActividad.id = causaIndirecta.actividad.id
-        $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
-        $formActividad.objetivo_especifico_id = objetivoEspecifico
-        $formActividad.descripcion = causaIndirecta.actividad.descripcion
+        actividadInfo.id = causaIndirecta.actividad.id
+        actividadInfo.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
+        actividadInfo.objetivo_especifico_id = objetivoEspecifico
+        actividadInfo.descripcion = causaIndirecta.actividad.descripcion
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
     }
 
-    function submitActividad() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formActividad.post(
-                route('proyectos.actividad', {
-                    convocatoria: convocatoria.id,
-                    proyecto: proyecto.id,
-                    actividad: $formActividad.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
-    }
-
-    function reset() {
-        showObjetivoGeneralForm = false
-        showActividadForm = false
-        showResultadoForm = false
-        showImpactoForm = false
-        showGeneralInfo = false
-        showObjetivoEspecificoForm = false
-        dialogTitle = ''
-        codigo = ''
-        formId = ''
-
-        $formImpacto.reset()
-        $formResultado.reset()
-        $formObjetivoGeneral.reset()
-        $formObjetivoEspecifico.reset()
-        $formActividad.reset()
-    }
-
     function closeDialog() {
-        reset()
         dialogOpen = false
+    }
+
+    let form = useForm({
+        objetivos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_puntaje : null,
+        objetivos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
+        objetivos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.objetivos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
+
+        resultados_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.resultados_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_puntaje : null,
+        resultados_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.resultados_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
+        resultados_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.resultados_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
     }
 
     onMount(() => {
@@ -407,7 +293,7 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
@@ -636,6 +522,60 @@
         </div>
     </div>
 
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <h1 class="text-2xl text-center mb-10">Resultados</h1>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li><strong>Puntaje: 0 a 4</strong> No son claros los beneficios y ventajas de los resultados en el marco del proyecto, no se generan por el desarrollo de las actividades y tampoco evidencian la materialización de la solución propuesta para resolver el problema del proyecto.</li>
+                    <li><strong>Puntaje: 5 a 7</strong> Los resultados se generan por el desarrollo de las actividades y se identifican sus ventajas y beneficios para dar solución al problema identificado. Son susceptibles de mejora para evidenciar de forma clara la materialización de la solución propuesta.</li>
+                    <li><strong>Puntaje: 8 a 9</strong> Los resultados se generan por el desarrollo de las actividades, sus beneficios y ventajas sobresalen en pro de dar una solución contundente al problema identificado y evidencian de forma clara la materialización de la solución propuesta.	</li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
+                <Input label="Puntaje" id="resultados_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.resultados_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resultados_puntaje} />
+
+                <div class="mt-4">
+                    <p>¿Los resultados requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.resultados_requiere_comentario} />
+                    {#if $form.resultados_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} />
+                    {/if}
+                </div>
+
+                <hr class="mt-10 mb-10" />
+                <h1 class="text-2xl text-center mb-10">Árbol de objetivos / Objetivo general / Objetivos específicos</h1>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li><strong>Puntaje: 0 a 7</strong> El objetivo general y los objetivos específicos (solución identificada) no dan respuesta al problema, tampo estan relacionados entre ellos, y los objetivos específicos no presentan una secuencia lógica para alcanzar el objetivo general.</li>
+                    <li><strong>Puntaje: 8 a 13</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta parcial al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general, pero susceptibles de ajustes y mejoras.</li>
+                    <li><strong>Puntaje: 14 a 15</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta integral al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general.</li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
+                <Input label="Puntaje" id="objetivos_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.objetivos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.objetivos_puntaje} />
+
+                <div class="mt-4">
+                    <p>¿El árbol de objetivos, objetivo general o los objetivos específicos requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.objetivos_requiere_comentario} />
+                    {#if $form.objetivos_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
+
     <!-- Dialog -->
     <Dialog bind:open={dialogOpen} id="arbol-objetivos">
         <div slot="title">
@@ -662,10 +602,10 @@
                 <p class="mb-10 whitespace-pre-line">
                     {actividadCausaIndirecta}
                 </p>
-                <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="actividad-form">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div>
-                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="15000" id="descripcion-actividad" bind:value={actividadInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
@@ -680,15 +620,15 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <form id="objetivo-especifico-form">
+                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                             <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                             <p class="mb-20 whitespace-pre-line">
                                 {causaDirectaObjetivoEspecifico}
                             </p>
                             <div>
-                                <Textarea label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
+                                <Textarea disabled label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" bind:value={objetivoEspecificoInfo.descripcion} />
                             </div>
                         </fieldset>
                     </form>
@@ -696,8 +636,8 @@
                     <InfoMessage class="mb-4" message="Debe generar primero la causa directa en el árbol de problemas" />
                 {/if}
             {:else if showObjetivoGeneralForm}
-                <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="objetivo-general-form">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         {#if proyecto.codigo_linea_programatica == 68}
                             <InfoMessage class="mb-4">
                                 <p>
@@ -717,8 +657,8 @@
                             {problemaCentral ? problemaCentral : 'Sin información registrada'}
                         </p>
                         <div>
-                            <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <Textarea label="Descripción" maxlength="10000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Label class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
+                            <Textarea disabled label="Descripción" maxlength="10000" id="objetivo-general" bind:value={objetivoGeneralInfo.objetivo_general} />
                         </div>
                     </fieldset>
                 </form>
@@ -737,15 +677,15 @@
                         {descripcionObjetivoEspecifico.descripcion}
                     </p>
 
-                    <form on:submit|preventDefault={submitResult} id="resultado-form">
-                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <form id="resultado-form">
+                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                             {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                                 <div class="mb-10">
-                                    <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
+                                    <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" bind:value={resultadoInfo.trl} />
                                 </div>
                             {/if}
                             <div class="mb-20">
-                                <Textarea label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
+                                <Textarea disabled label="Descripción" maxlength="1000" id="descripcion-resultado" bind:value={resultadoInfo.descripcion} />
                             </div>
                         </fieldset>
                     </form>
@@ -761,27 +701,27 @@
                     {impactoEfectoIndirecto}
                 </p>
 
-                <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="impacto-form">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div class="mt-4">
                             <Label labelFor="tipo-impacto" value="Tipo" />
-                            <Select id="tipo-impacto" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
-                            {#if $formImpacto.tipo?.value == 4}
+                            <Select disabled={true} id="tipo-impacto" items={tiposImpacto} bind:selectedValue={impactoInfo.tipo} autocomplete="off" placeholder="Seleccione un tipo" />
+                            {#if impactoInfo.tipo?.value == 4}
                                 <InfoMessage
                                     message="Se busca minimizar y/o evitar los impactos negativos sobre el medio ambiente, tales como contaminación del aire, contaminación de corrientes de agua naturales, ruido, destrucción del paisaje, separación de comunidades que operan como unidades, etc. Por otro lado, se busca identificar diversas acciones de impacto ambiental positivo, tales como: producción limpia y sustentable, protección medioambiental, uso de residuos y reciclaje."
                                 />
-                            {:else if $formImpacto.tipo?.value == 2}
+                            {:else if impactoInfo.tipo?.value == 2}
                                 <InfoMessage
                                     message="Se busca medir la contribución potencial del proyecto en cualquiera de los siguientes ámbitos: generación y aplicación de nuevos conocimientos y tecnologías, desarrollo de infraestructura científico- tecnológica, articulación de diferentes proyectos para lograr un objetivo común, mejoramiento de la infraestructura, desarrollo de capacidades de gestión tecnológica."
                                 />
-                            {:else if $formImpacto.tipo?.value == 5}
+                            {:else if impactoInfo.tipo?.value == 5}
                                 <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)" />
-                            {:else if $formImpacto.tipo?.value == 6}
+                            {:else if impactoInfo.tipo?.value == 6}
                                 <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto." />
                             {/if}
                         </div>
                         <div class="mt-4">
-                            <Textarea label="Descripción" maxlength="10000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="10000" id="descripcion-impacto" bind:value={impactoInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
@@ -796,9 +736,6 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
-                <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
-            {/if}
         </div>
     </Dialog>
 </AuthenticatedLayout>

@@ -99,7 +99,9 @@
 
     <h1 class="text-3xl mt-24 mb-10 text-center">Propuesta de sostenibilidad</h1>
 
-    <p class="text-center mb-24">A continuación, plantee las acciones concretas que contribuirán a la sostenibilidad financiera de la TecnoAcademia y su aporte a la sostenibilidad ambiental y social del territorio.</p>
+    {#if proyecto.codigo_linea_programatica == 70}
+        <p class="text-center mb-24">A continuación, plantee las acciones concretas que contribuirán a la sostenibilidad financiera de la TecnoAcademia y su aporte a la sostenibilidad ambiental y social del territorio.</p>
+    {/if}
 
     <form on:submit|preventDefault={submit}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>

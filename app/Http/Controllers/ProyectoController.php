@@ -6,6 +6,8 @@ use App\Http\Requests\NuevoProponenteRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\Evaluacion;
+use App\Models\Impacto;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
@@ -82,6 +84,110 @@ class ProyectoController extends Controller
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);
+    }
+
+    /**
+     * showCadenaValorEvaluacion
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function showCadenaValorEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        $efectosIndirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos')->get()->pluck('efectosIndirectos')->flatten()->filter();
+
+        if ($evaluacion->proyecto->idi()->exists()) {
+            $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
+            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
+            $evaluacion->idiEvaluacion;
+        }
+
+        if ($evaluacion->proyecto->ta()->exists()) {
+            $objetivoGeneral = $evaluacion->proyecto->ta->objetivo_general;
+            $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
+            $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
+            $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
+        }
+
+        if ($evaluacion->proyecto->tp()->exists()) {
+            $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
+            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
+        }
+
+        if ($evaluacion->proyecto->servicioTecnologico()->exists()) {
+            $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
+            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
+        }
+
+        if ($evaluacion->proyecto->culturaInnovacion()->exists()) {
+            $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
+            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
+            $evaluacion->culturaInnovacionEvaluacion;
+        }
+
+        $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
+        $productos = collect([]);
+
+        foreach ($evaluacion->proyecto->causasDirectas as $causaDirecta) {
+            $objetivos->prepend($causaDirecta->objetivoEspecifico->descripcion, $causaDirecta->objetivoEspecifico->numero);
+        }
+
+        foreach ($evaluacion->proyecto->efectosDirectos as $efectoDirecto) {
+            foreach ($efectoDirecto->resultados as $resultado) {
+                foreach ($resultado->productos as $producto) {
+                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
+                }
+            }
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/CadenaValor/Index', [
+            'convocatoria'  => $convocatoria->only('id'),
+            'evaluacion'    => $evaluacion,
+            'proyecto'      => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable'),
+            'productos'     => $productos,
+            'objetivos'     => $objetivos,
+            'impactos'      => Impacto::whereIn(
+                'efecto_indirecto_id',
+                $efectosIndirectos->map(function ($efectosIndirecto) {
+                    return $efectosIndirecto->id;
+                })
+            )->orderBy('tipo', 'ASC')->get()
+        ]);
+    }
+
+    /**
+     * updateCadenaValorEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateCadenaValorEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     public function updatePropuestaSostenibilidad(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)

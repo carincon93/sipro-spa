@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Evaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\EvaluacionRequest;
+use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Evaluaciones/Index', [
             'filters'       => request()->all('search'),
-            'evaluaciones'  => Evaluacion::with('proyecto.ta:id', 'proyecto.idi:id,titulo', 'proyecto.tp:id', 'proyecto.culturaInnovacion:id', 'proyecto.servicioTecnologico:id', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
+            'evaluaciones'  => Evaluacion::with('proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
                 ->filterEvaluacion(request()->only('search'))->paginate(),
         ]);
     }
@@ -61,9 +62,33 @@ class EvaluacionController extends Controller
 
         $evaluacion->save();
 
-        $evaluacion->idiEvaluacion()->create([
-            'id' => $evaluacion->id
-        ]);
+        $proyecto = Proyecto::find($request->proyecto_id);
+
+        switch ($proyecto) {
+            case $proyecto->idi()->exists():
+                $evaluacion->idiEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
+                break;
+            case $proyecto->ta()->exists():
+                $proyecto->problema_central = $proyecto->ta->problema_central;
+                break;
+            case $proyecto->tp()->exists():
+                $proyecto->justificacion_problema   = $proyecto->tp->justificacion_problema;
+                $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
+                $proyecto->problema_central         = $proyecto->tp->problema_central;
+                break;
+            case $proyecto->servicioTecnologico()->exists():
+                $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
+                break;
+            case $proyecto->culturaInnovacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
+                break;
+            default:
+                break;
+        }
 
         return redirect()->route('evaluaciones.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -132,5 +157,35 @@ class EvaluacionController extends Controller
         $evaluacion->delete();
 
         return redirect()->route('evaluaciones.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * redireccionar
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function redireccionar(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->proyecto->idi()->exists():
+                return redirect()->route('convocatorias.idi-evaluaciones.edit', [$convocatoria, $evaluacion]);
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                return redirect()->route('convocatorias.ta.edit', [$convocatoria, $evaluacion]);
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                return redirect()->route('convocatorias.tp.edit', [$convocatoria, $evaluacion]);
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $evaluacion]);
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                return redirect()->route('convocatorias.cultura-innovacion-evaluaciones.edit', [$convocatoria, $evaluacion]);
+                break;
+            default:
+                break;
+        }
     }
 }

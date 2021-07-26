@@ -18,7 +18,7 @@
     })
 </script>
 
-<!-- Steper -->
+<!-- Stepper -->
 <div class="flex justify-around" id="stepper" bind:this={container}>
     <div class="w-10/12 step">
         <a use:inertia active={activeProyecto} href={route('convocatorias.proyectos.edit', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">

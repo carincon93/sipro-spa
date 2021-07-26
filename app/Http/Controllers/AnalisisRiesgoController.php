@@ -6,6 +6,7 @@ use App\Http\Requests\AnalisisRiesgoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\AnalisisRiesgo;
+use App\Models\Evaluacion\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -150,5 +151,73 @@ class AnalisisRiesgoController extends Controller
         $analisisRiesgo->delete();
 
         return redirect()->route('convocatorias.proyectos.analisis-riesgos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAnalisisRiesgosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
+            'convocatoria'    => $convocatoria->only('id'),
+            'evaluacion'      => $evaluacion,
+            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'filters'         => request()->all('search'),
+            'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
+                ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+        ]);
+    }
+
+    /**
+     * updateAnalisisRiesgosEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateAnalisisRiesgosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

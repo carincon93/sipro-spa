@@ -17,6 +17,13 @@ class Evaluacion extends Model
     protected $table = 'evaluaciones';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['total_evaluacion'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -67,6 +74,16 @@ class Evaluacion extends Model
     }
 
     /**
+     * Relationship with CulturaInnovacionEvaluacion
+     *
+     * @return object
+     */
+    public function culturaInnovacionEvaluacion()
+    {
+        return $this->hasOne(CulturaInnovacionEvaluacion::class, 'id');
+    }
+
+    /**
      * Relationship with User
      *
      * @return object
@@ -74,6 +91,44 @@ class Evaluacion extends Model
     public function evaluador()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+
+    public function getTotalEvaluacionAttribute()
+    {
+        $total = 0;
+        if ($this->proyecto->idi()->exists()) {
+            $total = $this->idiEvaluacion->titulo_puntaje +
+                $this->idiEvaluacion->video_puntaje +
+                $this->idiEvaluacion->resumen_puntaje +
+                $this->idiEvaluacion->problema_central_puntaje +
+                $this->idiEvaluacion->objetivos_puntaje +
+                $this->idiEvaluacion->metodologia_puntaje +
+                $this->idiEvaluacion->entidad_aliada_puntaje +
+                $this->idiEvaluacion->resultados_puntaje +
+                $this->idiEvaluacion->productos_puntaje +
+                $this->idiEvaluacion->cadena_valor_puntaje +
+                $this->idiEvaluacion->analisis_riesgos_puntaje +
+                $this->idiEvaluacion->ortografia_puntaje +
+                $this->idiEvaluacion->redaccion_puntaje +
+                $this->idiEvaluacion->normas_apa_puntaje;
+        } else if ($this->proyecto->culturaInnovacion()->exists()) {
+            $total = $this->culturaInnovacionEvaluacion->titulo_puntaje +
+                $this->culturaInnovacionEvaluacion->video_puntaje +
+                $this->culturaInnovacionEvaluacion->resumen_puntaje +
+                $this->culturaInnovacionEvaluacion->problema_central_puntaje +
+                $this->culturaInnovacionEvaluacion->objetivos_puntaje +
+                $this->culturaInnovacionEvaluacion->metodologia_puntaje +
+                $this->culturaInnovacionEvaluacion->entidad_aliada_puntaje +
+                $this->culturaInnovacionEvaluacion->resultados_puntaje +
+                $this->culturaInnovacionEvaluacion->productos_puntaje +
+                $this->culturaInnovacionEvaluacion->cadena_valor_puntaje +
+                $this->culturaInnovacionEvaluacion->analisis_riesgos_puntaje +
+                $this->culturaInnovacionEvaluacion->ortografia_puntaje +
+                $this->culturaInnovacionEvaluacion->redaccion_puntaje +
+                $this->culturaInnovacionEvaluacion->normas_apa_puntaje;
+        }
+
+        return $total;
     }
 
     /**

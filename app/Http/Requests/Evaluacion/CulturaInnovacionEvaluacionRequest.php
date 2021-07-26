@@ -4,7 +4,7 @@ namespace App\Http\Requests\Evaluacion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IdiEvaluacionRequest extends FormRequest
+class CulturaInnovacionEvaluacionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,7 +38,6 @@ class IdiEvaluacionRequest extends FormRequest
             'redaccion_comentario'          => ['nullable', 'string'],
             'normas_apa_puntaje'            => ['nullable', 'numeric'],
             'normas_apa_comentario'         => ['nullable', 'string'],
-
         ];
     }
 }

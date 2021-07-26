@@ -9,14 +9,17 @@
     import Button from '@/Shared/Button'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
+    import Input from '@/Shared/Input'
+    import Switch from '@/Shared/Switch'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
 
     import { createPopper } from '@popperjs/core'
 
     export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let efectosDirectos
     export let causasDirectas
@@ -47,15 +50,14 @@
     /**
      * Efectos indirectos
      */
-    let formEfectoIndirecto = useForm({
+    let efectoIndirectoInfo = {
         id: 0,
         efecto_directo_id: 0,
         descripcion: '',
-    })
+    }
 
     let showEfectoIndirectoForm = false
     function showEfectoIndirectoDialog(efectoIndirecto, efectoDirectoId) {
-        reset()
         codigo = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
         dialogTitle = 'Efecto indirecto'
         formId = 'efecto-indirecto'
@@ -63,236 +65,122 @@
         dialogOpen = true
 
         if (efectoIndirecto != null) {
-            $formEfectoIndirecto.id = efectoIndirecto.id
-            $formEfectoIndirecto.descripcion = efectoIndirecto.descripcion
-            $formEfectoIndirecto.efecto_directo_id = efectoIndirecto.efecto_directo_id
+            efectoIndirectoInfo.id = efectoIndirecto.id
+            efectoIndirectoInfo.descripcion = efectoIndirecto.descripcion
+            efectoIndirectoInfo.efecto_directo_id = efectoIndirecto.efecto_directo_id
         } else {
-            $formEfectoIndirecto.id = null
-            $formEfectoIndirecto.descripcion = null
-            $formEfectoIndirecto.efecto_directo_id = efectoDirectoId
-        }
-    }
-
-    function submitEfectoIndirecto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formEfectoIndirecto.post(
-                route('proyectos.efecto-indirecto', {
-                    proyecto: proyecto.id,
-                    efecto_directo: $formEfectoIndirecto.efecto_directo_id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
+            efectoIndirectoInfo.id = null
+            efectoIndirectoInfo.descripcion = null
+            efectoIndirectoInfo.efecto_directo_id = efectoDirectoId
         }
     }
 
     /**
      * Efectos directos
      */
-    let formEfectoDirecto = useForm({
+    let efectoDirectoInfo = {
         id: 0,
         descripcion: '',
-    })
+    }
 
     let showEfectoDirectoForm = false
     function showEfectoDirectoDialog(efectoDirecto) {
-        reset()
         codigo = 'EFE-' + efectoDirecto.id
         dialogTitle = 'Efecto directo'
         formId = 'efecto-directo'
         showEfectoDirectoForm = true
         dialogOpen = true
-        $formEfectoDirecto.descripcion = efectoDirecto.descripcion
-        $formEfectoDirecto.id = efectoDirecto.id
-    }
-
-    function submitEfectoDirecto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formEfectoDirecto.post(
-                route('proyectos.efecto-directo', {
-                    proyecto: proyecto.id,
-                    efecto_directo: $formEfectoDirecto.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
+        efectoDirectoInfo.descripcion = efectoDirecto.descripcion
+        efectoDirectoInfo.id = efectoDirecto.id
     }
 
     /**
      * Problema central
      */
-    let formProblemaCentral = useForm({
+    let problemaCentralInfo = {
+        antecedentes: proyecto.antecedentes,
+        marco_conceptual: proyecto.marco_conceptual,
         identificacion_problema: proyecto.identificacion_problema,
         problema_central: proyecto.problema_central,
         justificacion_problema: proyecto.justificacion_problema,
         pregunta_formulacion_problema: proyecto.pregunta_formulacion_problema,
-    })
+    }
 
     let showProblemaCentralForm = false
     function showProblemaCentralDialog() {
-        reset()
         dialogTitle = 'Problema central'
         formId = 'problema-central'
         showProblemaCentralForm = true
         dialogOpen = true
-        $formProblemaCentral.identificacion_problema = proyecto.identificacion_problema
-        $formProblemaCentral.problema_central = proyecto.problema_central
-        $formProblemaCentral.justificacion_problema = proyecto.justificacion_problema
-        $formProblemaCentral.pregunta_formulacion_problema = proyecto.pregunta_formulacion_problema
-    }
-
-    function submitProblemaCentral() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
-                onStart: () => {
-                    sending = true
-                },
-                onSuccess: () => {
-                    closeDialog()
-                },
-                onFinish: () => {
-                    sending = false
-                },
-                preserveScroll: true,
-            })
-        }
+        problemaCentralInfo.identificacion_problema = proyecto.identificacion_problema
+        problemaCentralInfo.problema_central = proyecto.problema_central
+        problemaCentralInfo.justificacion_problema = proyecto.justificacion_problema
+        problemaCentralInfo.pregunta_formulacion_problema = proyecto.pregunta_formulacion_problema
     }
 
     /**
      * Causas directas
      */
-    let formCausaDirecta = useForm({
+    let causaDirectaInfo = {
         id: 0,
         descripcion: '',
-    })
+    }
 
     let showCausaDirectaForm = false
     function showCausaDirectaDialog(causaDirecta) {
-        reset()
         codigo = 'CAU-' + causaDirecta.id
         dialogTitle = 'Causa directa'
         formId = 'causa-directa'
         showCausaDirectaForm = true
         dialogOpen = true
-        $formCausaDirecta.id = causaDirecta.id
-        $formCausaDirecta.descripcion = causaDirecta.descripcion
-    }
-
-    function submitCausaDirecta() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formCausaDirecta.post(
-                route('proyectos.causa-directa', {
-                    proyecto: proyecto.id,
-                    causa_directa: $formCausaDirecta.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
+        causaDirectaInfo.id = causaDirecta.id
+        causaDirectaInfo.descripcion = causaDirecta.descripcion
     }
 
     /**
      * Causas indirectas
      */
-    let formCausaIndirecta = useForm({
+    let causaIndirectaInfo = {
         id: 0,
         causa_directa_id: 0,
         descripcion: '',
-    })
+    }
 
     let showCausaIndirectaForm = false
     function showCausaIndirectaDialog(causaIndirecta, causaDirectaId) {
-        reset()
         codigo = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
         dialogTitle = 'Causa indirecta'
         formId = 'causa-indirecta'
         showCausaIndirectaForm = true
         dialogOpen = true
         if (causaIndirecta != null) {
-            $formCausaIndirecta.id = causaIndirecta.id
-            $formCausaIndirecta.descripcion = causaIndirecta.descripcion
-            $formCausaIndirecta.causa_directa_id = causaIndirecta.causa_directa_id
+            causaIndirectaInfo.id = causaIndirecta.id
+            causaIndirectaInfo.descripcion = causaIndirecta.descripcion
+            causaIndirectaInfo.causa_directa_id = causaIndirecta.causa_directa_id
         } else {
-            $formCausaIndirecta.id = null
-            $formCausaIndirecta.descripcion = null
-            $formCausaIndirecta.causa_directa_id = causaDirectaId
+            causaIndirectaInfo.id = null
+            causaIndirectaInfo.descripcion = null
+            causaIndirectaInfo.causa_directa_id = causaDirectaId
         }
-    }
-
-    function submitCausaIndirecta() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formCausaIndirecta.post(
-                route('proyectos.causa-indirecta', {
-                    proyecto: proyecto.id,
-                    causa_directa: $formCausaIndirecta.causa_directa_id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
-                    },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
-        }
-    }
-
-    function reset() {
-        showEfectoIndirectoForm = false
-        showEfectoDirectoForm = false
-        showProblemaCentralForm = false
-        showCausaDirectaForm = false
-        showCausaIndirectaForm = false
-        dialogTitle = ''
-        codigo = ''
-        formId = ''
-
-        $formCausaIndirecta.reset()
-        $formCausaDirecta.reset()
-        $formProblemaCentral.reset()
-        $formEfectoDirecto.reset()
-        $formEfectoIndirecto.reset()
     }
 
     function closeDialog() {
-        reset()
         dialogOpen = false
+    }
+
+    let form = useForm({
+        problema_central_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_puntaje : null,
+        problema_central_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
+        problema_central_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.problema_central_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
     }
 
     onMount(() => {
@@ -371,7 +259,7 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
@@ -555,6 +443,75 @@
         </div>
     </div>
 
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <div class="mt-44 ">
+            <div>
+                <p class="mb-4">Antecedentes</p>
+            </div>
+            <div>
+                <Textarea disabled label="Antecedentes" maxlength="40000" id="antecedentes" value={problemaCentralInfo.antecedentes} />
+            </div>
+        </div>
+
+        <div class="mt-44 ">
+            <div>
+                <p class="mb-4">Identificación y descripción del problema</p>
+            </div>
+            <div>
+                <Textarea disabled label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" value={problemaCentralInfo.identificacion_problema} />
+            </div>
+        </div>
+
+        <div class="mt-44 ">
+            <div>
+                <p class="mb-4">Justificación</p>
+            </div>
+            <div>
+                <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_problema" value={problemaCentralInfo.justificacion_problema} />
+            </div>
+        </div>
+
+        <div class="mt-44 ">
+            <div>
+                <p class="mb-4">Marco conceptual</p>
+            </div>
+            <div>
+                <Textarea disabled label="Marco conceptual" maxlength="20000" id="marco_conceptual" value={problemaCentralInfo.marco_conceptual} />
+            </div>
+        </div>
+
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li><strong>Puntaje: 0 a 7</strong> El problema no ha sido identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y no se encuentra coherencia con los antecedentes, la justificación y el marco conceptual.</li>
+                    <li><strong>Puntaje: 8 a 13</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y se encuentra coherencia entre los antecedentes, la justificación y el marco conceptual. Sin embargo, es susceptible de ajustes en términos de coherencia en la propuesta</li>
+                    <li><strong>Puntaje: 14 a 15</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y guarda una coherencia global entre los antecedentes, la justificación y el marco conceptual.</li>
+                </ul>
+
+                <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
+                <Input label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
+
+                <div class="mt-4">
+                    <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual requieren de alguna recomendación?</p>
+                    <Switch bind:checked={$form.problema_central_requiere_comentario} />
+                    {#if $form.problema_central_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
+
     <!-- Dialog -->
     <Dialog bind:open={dialogOpen} id="arbol-problemas">
         <div slot="title" class="mb-10 text-center">
@@ -569,68 +526,68 @@
         </div>
         <div slot="content">
             {#if showCausaIndirectaForm}
-                <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="causa-indirecta">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
-                            <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" value={causaIndirectaInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
             {:else if showCausaDirectaForm}
-                <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="causa-directa">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
-                            <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="40000" id="causa-directa-descripcion" value={causaDirectaInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
             {:else if showEfectoIndirectoForm}
-                <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="efecto-indirecto">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Corresponden a situaciones negativas generadas por los efectos directos." />
-                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="40000" id="efecto-directo-descripcion" value={efectoIndirectoInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
             {:else if showProblemaCentralForm}
-                <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="problema-central">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
                             <div class="mt-10">
-                                <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
+                                <Label class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
                                 <InfoMessage
                                     class="mb-2"
                                     message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                                 />
-                                <Textarea label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
+                                <Textarea disabled label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" value={problemaCentralInfo.identificacion_problema} />
                             </div>
                             <div class="mt-10">
-                                <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                                <Label class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                                 <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
 
-                                <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
+                                <Textarea disabled label="Justificación del problema" maxlength="5000" id="justificacion_problema" value={problemaCentralInfo.justificacion_problema} />
                             </div>
                         {/if}
 
                         <div class="mt-10">
-                            <Label required class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
+                            <Label class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
                             <InfoMessage
                                 class="mb-2"
                                 message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
                             />
-                            <Textarea label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
+                            <Textarea disabled label="Problema central" maxlength="5000" id="problema_central" value={problemaCentralInfo.problema_central} />
                         </div>
                     </fieldset>
                 </form>
             {:else if showEfectoDirectoForm}
-                <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <form id="efecto-directo">
+                    <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
-                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
+                            <Textarea disabled label="Descripción" maxlength="40000" id="efecto-directo-descripcion" value={efectoDirectoInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
@@ -638,9 +595,6 @@
         </div>
         <div slot="actions" class="block flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
-            {/if}
         </div>
     </Dialog>
 </AuthenticatedLayout>

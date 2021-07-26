@@ -1,13 +1,12 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
-    import Button from '@/Shared/Button'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
 
@@ -29,12 +28,6 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id]}>
         <div slot="title">Apropiación de la cultura de la innovación</div>
 
-        <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [11])}
-                <Button on:click={() => Inertia.visit(route('convocatorias.cultura-innovacion.create', [convocatoria.id]))} variant="raised">Crear proyecto Apropiación de la cultura de la innovación</Button>
-            {/if}
-        </div>
-
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
@@ -45,7 +38,7 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each culturaInnovacion.data as { id, proyecto, titulo, fecha_ejecucion }}
+            {#each culturaInnovacion.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
@@ -64,8 +57,8 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [12, 13, 21])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion.edit', [convocatoria.id, id]))}>
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

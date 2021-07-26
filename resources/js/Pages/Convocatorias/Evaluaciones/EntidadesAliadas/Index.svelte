@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -10,10 +10,11 @@
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let entidadesAliadas
 
@@ -27,22 +28,10 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">Entidades aliadas</div>
-
-        <div slot="caption">
-            {#if proyecto.codigo_linea_programatica == 70}
-                <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
-            {/if}
-        </div>
-
-        <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5]) && proyecto.modificable == true)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear entidad aliada</Button>
-            {/if}
-        </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
@@ -61,7 +50,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 21, 14, 15])}
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

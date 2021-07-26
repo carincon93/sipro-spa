@@ -9,6 +9,7 @@ use App\Models\EntidadAliada;
 use App\Models\Actividad;
 use App\Models\EntidadAliadaIdi;
 use App\Models\EntidadAliadaTa;
+use App\Models\Evaluacion\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -361,6 +362,68 @@ class EntidadAliadaController extends Controller
         }
 
         return response()->download(storage_path("app/$ruta"));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showEntidadesAliadasEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        /**
+         * Si el proyecto es de la línea programática 23 o 65 se prohibe el acceso. No requiere de entidades aliadas
+         */
+        if ($evaluacion->proyecto->codigo_linea_programatica == 23 || $evaluacion->proyecto->codigo_linea_programatica == 65 || $evaluacion->proyecto->codigo_linea_programatica == 68 || $evaluacion->proyecto->codigo_linea_programatica == 69) {
+            return redirect()->route('convocatorias.evaluaciones.analisis-riesgos', [$convocatoria, $evaluacion->proyecto])->with('error', 'Esta línea programática no requiere de entidades aliadas');
+        }
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 66) {
+            $puntaje = 0;
+            $detener = false;
+            foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
+                if ($entidadAliada->tipo == 2 || $entidadAliada->tipo == 4) {
+                    // Universidad / Centro de formación SENA
+                    $puntaje = 5;
+                    $detener = true;
+                } else if ($entidadAliada->tipo == 1 && $detener == false || $entidadAliada->tipo == 3 && $detener == false || $entidadAliada->tipo == 5 && $detener == false) {
+                    // Empresa / Entidades sin ánimo de lucro / Otra
+                    $puntaje = 2.5;
+                }
+            }
+
+            $evaluacion->idiEvaluacion()->update([
+                'entidad_aliada_puntaje' => $puntaje
+            ]);
+        } else if ($evaluacion->proyecto->codigo_linea_programatica == 82) {
+            $puntaje = 0;
+            $detener = false;
+            foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
+                if ($entidadAliada->tipo == 1 || $entidadAliada->tipo == 3 || $entidadAliada->tipo == 5 || $entidadAliada->tipo == 4) {
+                    // Empresa / Entidades sin ánimo de lucro / Otra / Centro de formación SENA
+                    $puntaje = 5;
+                    $detener = true;
+                } else if ($entidadAliada->tipo == 2 && $detener == false) {
+                    // Universidad 
+                    $puntaje = 2.5;
+                }
+            }
+
+            $evaluacion->idiEvaluacion()->update([
+                'entidad_aliada_puntaje' => $puntaje
+            ]);
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'filters'           => request()->all('search'),
+            'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
+                ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre')->paginate(),
+        ]);
     }
 
     /**

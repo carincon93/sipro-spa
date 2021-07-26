@@ -20,6 +20,7 @@
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -79,6 +80,8 @@
         justificacion_politica_discapacidad: idi.justificacion_politica_discapacidad,
         resumen: idi.resumen,
         antecedentes: idi.antecedentes,
+        identificacion_problema: idi.identificacion_problema,
+        justificacion_problema: idi.justificacion_problema,
         marco_conceptual: idi.marco_conceptual,
         bibliografia: idi.bibliografia,
         numero_aprendices: idi.numero_aprendices,
@@ -156,7 +159,7 @@
         normas_apa_requiere_comentario: idiEvaluacion.normas_apa_comentario == null ? false : true,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.radicado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true)) {
             $form.put(route('convocatorias.idi-evaluaciones.update', [convocatoria.id, idiEvaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -200,14 +203,19 @@
 </script>
 
 <AuthenticatedLayout>
-    <EvaluationStepper {convocatoria} proyectoEvaluacion={idiEvaluacion} />
+    <EvaluationStepper {convocatoria} evaluacion={idiEvaluacion.evaluacion} proyecto={idi.proyecto} />
 
     <form on:submit|preventDefault={submit}>
         <div class="mt-28">
             <p class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full">Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)</p>
             <Textarea disabled label="Título" id="titulo" sinContador={true} bind:value={idiInfo.titulo} classes="bg-transparent block border-0 mt-1 outline-none text-4xl text-center w-full" />
 
-            <div class="evaluacion">
+            <InfoMessage>
+                <h1>Criterios de evaluacion</h1>
+                <ul class="list-disc p-4">
+                    <li><strong>Puntaje: 0,0 a 0,5</strong> El título orienta el enfoque del proyecto</li>
+                    <li><strong>Puntaje: 0,6 a 1,0</strong> El título orienta el enfoque del proyecto e indica el cómo y el para qué</li>
+                </ul>
                 <Label class="mt-4 mb-4" labelFor="titulo_puntaje" value="Puntaje (Máximo 1)" />
                 <Input label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
 
@@ -218,7 +226,7 @@
                         <Textarea label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} />
                     {/if}
                 </div>
-            </div>
+            </InfoMessage>
         </div>
 
         <div class="mt-44">
@@ -326,7 +334,13 @@
                 {#if tieneVideo}
                     <Input disabled label="Link del video" id="video" type="url" class="mt-1" placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={idiInfo.video} />
 
-                    <div class="evaluacion">
+                    <InfoMessage>
+                        <h1>Criterios de evaluacion</h1>
+                        <ul class="list-disc p-4">
+                            <li><strong>Puntaje: 0,0 a 0,5</strong> El video no cumple los 3 minutos establecidos y no presenta de forma clara la justificación, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y/o su impacto de acuerdo con los lineamientos de la convocatoria</li>
+                            <li><strong>Puntaje: 0,6 a 1,0</strong> El video cumple los 3 minutos establecidos y presenta la justificación, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto de acuerdo con los lineamientos de la convocatoria</li>
+                        </ul>
+
                         <Label class="mt-4 mb-4" labelFor="video_puntaje" value="Puntaje (Máximo 1)" />
                         <Input label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
 
@@ -337,7 +351,7 @@
                                 <Textarea label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} />
                             {/if}
                         </div>
-                    </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -631,7 +645,13 @@
             <div>
                 <Textarea disabled label="Resumen" maxlength="40000" id="resumen" bind:value={idiInfo.resumen} />
 
-                <div class="evaluacion">
+                <InfoMessage>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li><strong>Puntaje: 0,0 a 1,0</strong> El resumen no presenta de forma clara la pertinencia y calidad del proyecto, en términos de cuál es el problema central, cómo se le dará solución y cuáles serán las herramientas que se utilizarán para ello, entre otros.</li>
+                        <li><strong>Puntaje: 1,1 a 2,0</strong> El resumen presenta de forma clara la pertinencia y calidad del proyecto e incluye todos los elementos en términos de cuál es el problema central, cómo se le dará solución y cuáles serán las herramientas que se utilizarán para ello, entre otros.</li>
+                    </ul>
+
                     <Label class="mt-4 mb-4" labelFor="resumen_puntaje" value="Puntaje (Máximo 2)" />
                     <Input label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
 
@@ -642,38 +662,7 @@
                             <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} />
                         {/if}
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-44 grid grid-cols-1">
-            <div>
-                <p class="mb-4">Antecedentes</p>
-            </div>
-            <div>
-                <Textarea disabled label="Antecedentes" maxlength="40000" id="antecedentes" bind:value={idiInfo.antecedentes} />
-            </div>
-        </div>
-
-        <div class="mt-44 grid grid-cols-1">
-            <div>
-                <p class="mb-4">Marco conceptual</p>
-            </div>
-            <div>
-                <Textarea disabled label="Marco conceptual" maxlength="20000" id="marco_conceptual" bind:value={idiInfo.marco_conceptual} />
-
-                <div class="evaluacion">
-                    <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 6)" />
-                    <Input label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="6" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
-
-                    <div class="mt-4">
-                        <p>¿Los antecedentes y el marco conceptual requieren de recomendaciones?</p>
-                        <Switch bind:checked={$form.problema_central_requiere_comentario} />
-                        {#if $form.problema_central_requiere_comentario}
-                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} />
-                        {/if}
-                    </div>
-                </div>
+                </InfoMessage>
             </div>
         </div>
 
@@ -775,7 +764,12 @@
 
         <hr class="mt-10 mb-10" />
         <h1>Ortografía</h1>
-        <div class="evaluacion">
+        <InfoMessage>
+            <h1>Criterios de evaluacion</h1>
+            <ul class="list-disc p-4">
+                <li><strong>Puntaje: 1</strong> Todo el documento respeta y aplica las reglas ortográficas</li>
+            </ul>
+
             <Label class="mt-4 mb-4" labelFor="ortografia_puntaje" value="Puntaje (Máximo 1)" />
             <Input label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
 
@@ -786,11 +780,16 @@
                     <Textarea label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} />
                 {/if}
             </div>
-        </div>
+        </InfoMessage>
 
         <hr class="mt-10 mb-10" />
         <h1>Redacción</h1>
-        <div class="evaluacion">
+        <InfoMessage>
+            <h1>Criterios de evaluacion</h1>
+            <ul class="list-disc p-4">
+                <li><strong>Puntaje: 1</strong> Todo el documento respeta y aplica las reglas gramaticales</li>
+            </ul>
+
             <Label class="mt-4 mb-4" labelFor="redaccion_puntaje" value="Puntaje (Máximo 1)" />
             <Input label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
 
@@ -801,11 +800,16 @@
                     <Textarea label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} />
                 {/if}
             </div>
-        </div>
+        </InfoMessage>
 
         <hr class="mt-10 mb-10" />
         <h1>Normas APA</h1>
-        <div class="evaluacion">
+        <InfoMessage>
+            <h1>Criterios de evaluacion</h1>
+            <ul class="list-disc p-4">
+                <li><strong>Puntaje: 1</strong> Las normas APA han sido aplicadas en todo el documento para referenciar y citar otros autores</li>
+            </ul>
+
             <Label class="mt-4 mb-4" labelFor="normas_apa_puntaje" value="Puntaje (Máximo 1)" />
             <Input label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
@@ -816,10 +820,10 @@
                     <Textarea label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} />
                 {/if}
             </div>
-        </div>
+        </InfoMessage>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.radicado == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -828,38 +832,34 @@
     <Dialog bind:open={proyectoDialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mt-4">
             <figure>
-                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+                <img src={window.basePath + '/images/feedback.png'} alt="Evaluación" class="h-32 mb-6" />
             </figure>
             Código del proyecto: {idi.proyecto.codigo}
         </div>
         <div slot="content">
             <div>
-                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
-                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                <h1 class="text-center mt-4 mb-4">Evaluación</h1>
+                <p class="text-center mb-4">Realice la evaluacion cuantitativa de los siguientes ítems:</p>
                 <ul class="list-disc">
+                    <li>Título</li>
                     <li>Video</li>
-                    <li>Industria 4.0</li>
-                    <li>Economía naranja</li>
-                    <li>Política Institucional para Atención de las Personas con discapacidad</li>
-                    <li>Origen de las muestras</li>
-                    <li>Plan tecnológico</li>
-                    <li>Agendas Departamentales de Competitividad e Innovación</li>
-                    <li>Mesas sectoriales</li>
-                    <li>Tecnoacademia</li>
                     <li>Resumen</li>
-                    <li>Antecedentes</li>
-                    <li>Marco conceptual</li>
-                    <li>Bibliografía</li>
-                    <li>Número de aprendices beneficiados</li>
-                    <li>Nombre de los municipios beneficiados</li>
-                    <li>Impacto en el centro de formación</li>
+                    <li>Antecedentes, árbol de problemas, identificación y descripción del problema, justificación y marco conceptual</li>
+                    <li>Árbol de objetivos, objetivo genral y objetivos específicos</li>
+                    <li>Metodología y actividades</li>
+                    <li>Resultados esperados</li>
+                    <li>Productos esperados</li>
+                    <li>Impactos, propuesta de sostenibilidad y la cadena de valor</li>
+                    <li>Análisis de riesgos</li>
+                    <li>Ortografía</li>
+                    <li>Redacción</li>
+                    <li>Normas APA</li>
                 </ul>
             </div>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>
