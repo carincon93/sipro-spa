@@ -35,7 +35,7 @@ class TaRequest extends FormRequest
                 'resumen_regional'                          => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
                 'antecedentes_tecnoacademia'                => ['required', 'max:40000', 'string'],
-                'justificacion'                             => ['required', 'max:40000', 'string'],
+                'justificacion_problema'                    => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],

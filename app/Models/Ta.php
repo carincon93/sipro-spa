@@ -33,7 +33,6 @@ class Ta extends Model
     protected $fillable = [
         'resumen',
         'resumen_regional',
-        'justificacion',
         'antecedentes',
         'antecedentes_tecnoacademia',
         'problema_central',

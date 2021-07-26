@@ -33,7 +33,6 @@ class TpRequest extends FormRequest
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
-                'justificacion'                             => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
