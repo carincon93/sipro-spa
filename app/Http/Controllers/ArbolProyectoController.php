@@ -22,6 +22,7 @@ use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
 use App\Http\Requests\ActividadRequest;
 use App\Models\Evaluacion\Evaluacion;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -39,33 +40,29 @@ class ArbolProyectoController extends Controller
     {
         $objetivosEspecificos = $proyecto->causasDirectas()->with('objetivoEspecifico')->count() > 0 ? $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten() : [];
 
-        $numeroCeldas = 4;
+        $numeroCeldasCausasDirectas = 4;
+        $numeroCeldasEfectosDirectos = 4;
         switch ($proyecto) {
-            case $proyecto->idi()->exists():
-                $numeroCeldas = 4;
-                break;
+
             case $proyecto->ta()->exists():
-                $numeroCeldas = 6;
+                $numeroCeldasEfectosDirectos = 6;
+                $numeroCeldasCausasDirectas = 6;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 4;
+                $numeroCeldasEfectosDirectos = 12;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 if ($proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1) {
-                    $numeroCeldas = 3;
-                } else {
-                    $numeroCeldas = 4;
+                    $numeroCeldasEfectosDirectos = 3;
+                    $numeroCeldasCausasDirectas = 3;
                 }
-                break;
-            case $proyecto->culturaInnovacion()->exists():
-                $numeroCeldas = 4;
                 break;
             default:
                 break;
         }
 
-        if ($proyecto->causasDirectas()->count() < $numeroCeldas) {
-            for ($i = 0; $i < $numeroCeldas; $i++) {
+        if ($proyecto->causasDirectas()->count() < $numeroCeldasCausasDirectas) {
+            for ($i = 0; $i < $numeroCeldasCausasDirectas; $i++) {
                 $causaDirecta = $proyecto->causasDirectas()->create([
                     ['descripcion' => null],
                 ]);
@@ -79,8 +76,8 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->efectosDirectos()->count() < $numeroCeldas) {
-            for ($i = 0; $i < $numeroCeldas; $i++) {
+        if ($proyecto->efectosDirectos()->count() < $numeroCeldasEfectosDirectos) {
+            for ($i = 0; $i < $numeroCeldasEfectosDirectos; $i++) {
                 $efectoDirecto = $proyecto->efectosDirectos()->create([
                     ['descripcion' => null],
                 ]);
@@ -106,6 +103,22 @@ class ArbolProyectoController extends Controller
                             'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
                         ]);
                     }
+                } else if ($proyecto->tp()->exists()) {
+                    $numObj = 0;
+                    if ($i < 3) {
+                        $numObj = 0;
+                    } else if ($i < 6) {
+                        $numObj = 1;
+                    } else if ($i < 9) {
+                        $numObj = 2;
+                    } else if ($i < 12) {
+                        $numObj = 3;
+                    }
+
+                    $efectoDirecto->resultados()->create([
+                        'descripcion'            => null,
+                        'objetivo_especifico_id' => $objetivosEspecificos[$numObj]->id
+                    ]);
                 } else {
                     $efectoDirecto->resultados()->create([
                         'descripcion'            => null,
@@ -331,7 +344,7 @@ class ArbolProyectoController extends Controller
                 $ta = $proyecto->ta;
 
                 $request->validate([
-                    'problema_central'          => 'required|string|max:40000',
+                    'problema_central' => 'required|string|max:40000',
                 ]);
                 $ta->problema_central = $request->problema_central;
 
@@ -341,8 +354,8 @@ class ArbolProyectoController extends Controller
                 $tp = $proyecto->tp;
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
+                    'problema_central'         => 'required|string|max:40000',
+                    'justificacion_problema'   => 'required|string|max:40000',
                 ]);
                 $tp->identificacion_problema  = $request->identificacion_problema;
                 $tp->justificacion_problema   = $request->justificacion_problema;
@@ -354,8 +367,8 @@ class ArbolProyectoController extends Controller
             case $proyecto->culturaInnovacion()->exists():
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
+                    'problema_central'         => 'required|string|max:40000',
+                    'justificacion_problema'   => 'required|string|max:40000',
                 ]);
 
                 $culturaInnovacion = $proyecto->culturaInnovacion;
@@ -421,7 +434,7 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 3;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 3;
+                $numeroCeldas = 1;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 3;
@@ -494,7 +507,7 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 10;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 4;
+                $numeroCeldas = 2;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 14;
@@ -540,8 +553,10 @@ class ArbolProyectoController extends Controller
 
         $this->generateTree($proyecto);
 
-        $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
-        $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $efectosDirectos    = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
+        $causasDirectas     = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $tipoProyectoA = false;
         switch ($proyecto) {
@@ -585,7 +600,13 @@ class ArbolProyectoController extends Controller
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposImpacto'    => $tiposImpacto,
-            'tipoProyectoA'   => $tipoProyectoA
+            'tipoProyectoA'   => $tipoProyectoA,
+            'resultados'      => Resultado::select('id as value', 'descripcion as label', 'objetivo_especifico_id')->whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->get()
         ]);
     }
 
@@ -823,11 +844,16 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        $request->resultado_id = $request->resultado_id['value'];
         $request->validate(
-            ['descripcion' => 'required|string']
+            ['descripcion'  => 'required|string'],
+            ['resultado_id' => 'required|integer|exists:resultados']
         );
 
-        $actividad->fill($request->all());
+        $resultado = Resultado::find($request->resultado_id);
+        $actividad->descripcion = $request->descripcion;
+        $actividad->resultado()->associate($request->resultado_id);
+        $actividad->objetivoEspecifico()->associate($resultado->objetivo_especifico_id);
 
         if ($actividad->save()) {
             return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');

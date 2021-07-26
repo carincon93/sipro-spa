@@ -115,7 +115,7 @@ class LineaInvestigacionController extends Controller
         try {
             $lineaInvestigacion->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');

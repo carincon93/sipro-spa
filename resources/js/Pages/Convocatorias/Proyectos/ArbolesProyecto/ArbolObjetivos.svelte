@@ -23,12 +23,16 @@
     export let causasDirectas
     export let tiposImpacto
     export let tipoProyectoA
+    export let resultados
 
     let cantidadCeldasActividades = 3
+    let cantidadCeldasImpactos = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
         cantidadCeldasActividades = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
         cantidadCeldasActividades = 14
+    } else if (proyecto.codigo_linea_programatica == 69) {
+        cantidadCeldasImpactos = 1
     } else if (proyecto.codigo_linea_programatica == 70) {
         cantidadCeldasActividades = 10
     }
@@ -265,11 +269,13 @@
         id: 0,
         causa_indirecta_id: 0,
         objetivo_especifico_id: 0,
+        resultado_id: 0,
         descripcion: '',
     })
 
     let showActividadForm = false
     let actividadCausaIndirecta
+    let resultadosFiltrados
     function showActivityDialog(causaIndirecta, objetivoEspecifico) {
         reset()
         codigo = causaIndirecta.actividad.id != null ? 'OBJ-ESP-' + objetivoEspecifico + '-ACT-' + causaIndirecta.actividad.id : ''
@@ -281,7 +287,12 @@
         $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         $formActividad.objetivo_especifico_id = objetivoEspecifico
         $formActividad.descripcion = causaIndirecta.actividad.descripcion
+        $formActividad.resultado_id = {
+            value: causaIndirecta.actividad.resultado_id,
+            label: resultados.find((item) => item.value == causaIndirecta.actividad.resultado_id)?.label,
+        }
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
+        resultadosFiltrados = resultados.filter((item) => item.objetivo_especifico_id == objetivoEspecifico)
     }
 
     function submitActividad() {
@@ -457,7 +468,7 @@
                                 {/if}
                             {/each}
                             {#if proyecto.codigo_linea_programatica != 70}
-                                {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                {#each { length: cantidadCeldasImpactos - efectoDirecto.efectos_indirectos.length } as _empty}
                                     <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
                                         <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
                                             <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
@@ -487,7 +498,7 @@
                                         ? 'bg-gray-300 hover:bg-gray-400'
                                         : efectoDirecto.descripcion != null && i % 2 != 0
                                         ? 'bg-orangered-500 hover:bg-orangered-600'
-                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 ? ' mb-4' : ''}"
+                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 ? ' mb-4' : ''}"
                                     style="flex: 1 0 33.333%"
                                 >
                                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
@@ -665,6 +676,10 @@
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div>
+                            <Label labelFor="resultado_id" value="Resultado" />
+                            <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                        </div>
+                        <div class="mt-8">
                             <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
                     </fieldset>

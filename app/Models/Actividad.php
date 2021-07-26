@@ -30,6 +30,7 @@ class Actividad extends Model
      */
     protected $fillable = [
         'objetivo_especifico_id',
+        'resultado_id',
         'causa_indirecta_id',
         'fecha_inicio',
         'fecha_finalizacion',
@@ -62,6 +63,16 @@ class Actividad extends Model
     public function objetivoEspecifico()
     {
         return $this->belongsTo(ObjetivoEspecifico::class);
+    }
+
+    /**
+     * Relationship with Resultado
+     *
+     * @return object
+     */
+    public function resultado()
+    {
+        return $this->belongsTo(Resultado::class);
     }
 
     /**

@@ -61,6 +61,16 @@ class Resultado extends Model
     }
 
     /**
+     * Relationship with Actividad
+     *
+     * @return object
+     */
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class);
+    }
+
+    /**
      * Relationship with Producto
      *
      * @return object
@@ -77,7 +87,7 @@ class Resultado extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function Resultado($query, array $filters)
+    public function scopeFilterResultado($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace('"', "", $search);

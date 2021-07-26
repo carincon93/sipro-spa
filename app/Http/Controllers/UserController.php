@@ -158,9 +158,12 @@ class UserController extends Controller
         $this->authorize('delete', [User::class, $user]);
 
         try {
+            if ($user->hasRole(1)) {
+                return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
+            }
             $user->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');

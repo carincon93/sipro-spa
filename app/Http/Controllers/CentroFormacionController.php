@@ -124,8 +124,8 @@ class CentroFormacionController extends Controller
     {
         $this->authorize('delete', [CentroFormacion::class, $centroFormacion]);
 
-        $centroFormacion->delete();
+        // $centroFormacion->delete();
 
-        return redirect()->route('centros-formacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
     }
 }

@@ -52,7 +52,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyecto_tp.nodo_tecnoparque.nombre}
+                            {proyecto_tp.titulo}
                         </p>
                     </td>
                     <td class="border-t">

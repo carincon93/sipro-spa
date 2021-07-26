@@ -69,7 +69,7 @@
                                 : evaluacion.proyecto.servicio_tecnologico
                                 ? evaluacion.proyecto.servicio_tecnologico.titulo
                                 : evaluacion.proyecto.tp?.nodo_tecnoparque
-                                ? evaluacion.proyecto.tp?.nodo_tecnoparque.nombre
+                                ? evaluacion.proyecto.tp?.titulo
                                 : evaluacion.proyecto.tecnoacademia_lineas_tecnoacademia
                                 ? evaluacion.proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre
                                 : null}
