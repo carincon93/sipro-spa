@@ -507,7 +507,7 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 10;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 2;
+                $numeroCeldas = 9;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 14;
