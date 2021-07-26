@@ -56,7 +56,6 @@
         resumen: tp.resumen,
         resumen_regional: tp.resumen_regional,
         antecedentes: tp.antecedentes,
-        justificacion: tp.justificacion,
         antecedentes_regional: tp.antecedentes_regional,
         retos_oportunidades: tp.retos_oportunidades,
         pertinencia_territorio: tp.pertinencia_territorio,
@@ -224,15 +223,6 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
             </div>
 

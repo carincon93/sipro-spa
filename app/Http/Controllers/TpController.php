@@ -168,7 +168,6 @@ class TpController extends Controller
         $tp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
         $tp->resumen                              = $request->resumen;
         $tp->antecedentes                         = $request->antecedentes;
-        $tp->justificacion                        = $request->justificacion;
         $tp->marco_conceptual                     = $request->marco_conceptual;
         $tp->bibliografia                         = $request->bibliografia;
         $tp->impacto_municipios                   = $request->impacto_municipios;

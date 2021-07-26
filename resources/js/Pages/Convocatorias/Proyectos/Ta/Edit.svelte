@@ -68,7 +68,7 @@
         resumen: ta.resumen,
         resumen_regional: ta.resumen_regional,
         antecedentes: ta.antecedentes,
-        justificacion: ta.justificacion,
+        justificacion_problema: ta.justificacion_problema,
         antecedentes_tecnoacademia: ta.antecedentes_tecnoacademia,
         retos_oportunidades: ta.retos_oportunidades,
         pertinencia_territorio: ta.pertinencia_territorio,
@@ -340,10 +340,10 @@
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-1">
                     <div>
-                        <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
+                        <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                        <Textarea maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
                     </div>
                 </div>
             </fieldset>

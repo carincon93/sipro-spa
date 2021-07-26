@@ -212,7 +212,7 @@ class TaController extends Controller
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
         $ta->resumen                            = $request->resumen;
         $ta->antecedentes                       = $request->antecedentes;
-        $ta->justificacion                      = $request->justificacion;
+        $ta->justificacion_problema             = $request->justificacion_problema;
         $ta->marco_conceptual                   = $request->marco_conceptual;
         $ta->bibliografia                       = $request->bibliografia;
         $ta->impacto_municipios                 = $request->impacto_municipios;
