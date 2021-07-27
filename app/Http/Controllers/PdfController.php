@@ -30,6 +30,12 @@ class PdfController extends Controller
                 $datos->relacionado_plan_tecnologico = $opcionesIDiDropdown->where('value', $datos->relacionado_plan_tecnologico)->first();
             }else if(!empty($proyecto->ta)){
                 $datos = $proyecto->ta;
+            }else if(!empty($proyecto->tp)){
+                $datos = $proyecto->tp;
+            }else if(!empty($proyecto->culturaInnovacion)){
+                $datos = $proyecto->culturaInnovacion;
+            }else if(!empty($proyecto->servicioTecnologico)){
+                $datos = $proyecto->servicioTecnologico;
             }
 
             $base64Arbolproblemas = $this->takeScreenshot(route('convocatorias.proyectos.arbol-problemas', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
@@ -66,7 +72,14 @@ class PdfController extends Controller
             config('session.cookie') => $_COOKIE[config('session.cookie')],
             ])
         ->windowSize(1550, 800)
-        ->deviceScaleFactor(2);
+        ->deviceScaleFactor(2)
+        ->addChromiumArguments([
+            'no-sandbox',
+            'disable-setuid-sandbox',
+            'disable-background-timer-throttling',
+            'disable-backgrounding-occluded-windows',
+            'disable-renderer-backgrounding'
+        ]);
         if(!empty($select)){
             $shot->select($select);
         }else{
