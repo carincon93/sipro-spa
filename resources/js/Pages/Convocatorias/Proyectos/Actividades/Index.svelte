@@ -86,7 +86,7 @@
     <InfoMessage
         message={actividadesGantt.length == 0
             ? "Debe generar las actividadesGantt en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor."
-            : '<strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor.'}
+            : '<strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor.'}
     />
     {#if showGantt}
         <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
