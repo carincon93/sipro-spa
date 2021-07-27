@@ -198,6 +198,10 @@ class TpController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Tp $tp)
     {
+        if ($tp->id == 1113) {
+            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+        }
+
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
         if ($tp->proyecto->finalizado) {
