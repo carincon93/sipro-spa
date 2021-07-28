@@ -59,7 +59,6 @@ class Ta extends Model
         'cantidad_instructores_planta',
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
-        'modificable',
         'proyectos_ejecucion',
         'proyectos_macro',
         'lineas_medulares_centro',
@@ -68,6 +67,7 @@ class Ta extends Model
         'proyeccion_articulacion_media',
         'articulacion_semillero',
         'semilleros_en_formalizacion',
+        'modificable',
     ];
 
     /**
