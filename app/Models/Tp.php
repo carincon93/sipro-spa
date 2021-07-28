@@ -52,7 +52,8 @@ class Tp extends Model
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
-        'max_meses_ejecucion'
+        'max_meses_ejecucion',
+        'modificable',
     ];
 
     /**
