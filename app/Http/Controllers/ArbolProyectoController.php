@@ -134,6 +134,28 @@ class ArbolProyectoController extends Controller
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 387, 380, 388, 3)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 388, 381, 389, 4)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 389, 382, 390, 5)');
+            } else if ($proyecto->tp()->exists() && $proyecto->tp->modificable == false) {
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 489, 0)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 490, 1)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 491, 2)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 492, 3)');
+
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 482, 0)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 483, 1)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 485, 3)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 486, 4)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 488, 6)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 489, 7)');
+
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 519, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 520, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 521, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 522, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 523, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 524, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 525, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 526, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 527, 0)');
             }
         }
 
@@ -174,6 +196,22 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 512, 0, 5)');
 
             $proyecto->ta->update([
+                'modificable' => true
+            ]);
+        } else if ($proyecto->tp()->exists() && $proyecto->tp->modificable == false) {
+            DB::select('SELECT public."objetivos_especificos_tp"(' . $proyecto->id . ')');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 489, 0, -1)');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 490, 1, 6)');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 491, 2, 15)');
+
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 590, 0, 0)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 591, 0, 1)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 592, 0, 2)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 593, 0, 3)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 594, 0, 4)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 595, 0, 5)');
+
+            $proyecto->tp->update([
                 'modificable' => true
             ]);
         }
