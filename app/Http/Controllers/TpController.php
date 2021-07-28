@@ -109,6 +109,10 @@ class TpController extends Controller
             ]
         );
 
+        if ($proyecto->lineaProgramatica->codigo == 69) {
+            DB::select('SELECT public."generalidades_tp"(' . $proyecto->id . ')');
+        }
+
         return redirect()->route('convocatorias.tp.edit', [$convocatoria, $tp])->with('success', 'El recurso se ha creado correctamente.');
     }
 
