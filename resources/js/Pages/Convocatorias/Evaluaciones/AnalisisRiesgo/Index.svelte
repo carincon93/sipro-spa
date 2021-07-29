@@ -93,7 +93,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={analisisRiesgos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.analisis-riesgos.edit', [convocatoria.id, evaluacion.id, analisisRiesgo.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -142,7 +142,7 @@
                     <p>¿Los análisis de riesgos requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.analisis_riesgos_requiere_comentario} />
                     {#if $form.analisis_riesgos_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>

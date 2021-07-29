@@ -57,7 +57,7 @@
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
-                                    <Text>Ver detalles</Text>
+                                    <Text>Evaluar</Text>
                                 </Item>
                             {:else}
                                 <Item>

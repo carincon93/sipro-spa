@@ -35,7 +35,6 @@
         cantidadCeldasActividades = 10
     }
 
-    let formId
     let sending = false
     let dialogOpen = false
     let dialogTitle
@@ -80,7 +79,6 @@
         dialogTitle = 'Impacto'
         dialogOpen = true
         showImpactoForm = true
-        formId = 'impacto-form'
         impactoEfectoIndirecto = efectoIndirecto.descripcion
 
         if (efectoIndirecto.impacto != null) {
@@ -121,7 +119,6 @@
         dialogTitle = 'Resultado'
         dialogOpen = true
         showResultadoForm = true
-        formId = 'resultado-form'
         resultadoInfo.id = resultado.id
         resultadoInfo.descripcion = resultado.descripcion
         resultadoInfo.trl = resultado.trl
@@ -141,7 +138,6 @@
         dialogTitle = 'Objetivo general'
         dialogOpen = true
         showObjetivoGeneralForm = true
-        formId = 'objetivo-general-form'
         problemaCentral = proyecto.problema_central
         objetivoGeneralInfo.objetivo_general = proyecto.objetivo_general
     }
@@ -162,7 +158,6 @@
         dialogTitle = causaDirecta.objetivo_especifico.numero
         dialogOpen = true
         showObjetivoEspecificoForm = true
-        formId = 'objetivo-especifico-form'
         objetivoEspecificoInfo.id = causaDirecta.objetivo_especifico.id
         objetivoEspecificoInfo.descripcion = causaDirecta.objetivo_especifico.descripcion
         objetivoEspecificoInfo.numero = numero
@@ -186,7 +181,6 @@
         dialogTitle = 'Actividad'
         dialogOpen = true
         showActividadForm = true
-        formId = 'actividad-form'
         actividadInfo.id = causaIndirecta.actividad.id
         actividadInfo.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         actividadInfo.objetivo_especifico_id = objetivoEspecifico
@@ -534,7 +528,7 @@
                 <ul class="list-disc p-4">
                     <li><strong>Puntaje: 0 a 4</strong> No son claros los beneficios y ventajas de los resultados en el marco del proyecto, no se generan por el desarrollo de las actividades y tampoco evidencian la materialización de la solución propuesta para resolver el problema del proyecto.</li>
                     <li><strong>Puntaje: 5 a 7</strong> Los resultados se generan por el desarrollo de las actividades y se identifican sus ventajas y beneficios para dar solución al problema identificado. Son susceptibles de mejora para evidenciar de forma clara la materialización de la solución propuesta.</li>
-                    <li><strong>Puntaje: 8 a 9</strong> Los resultados se generan por el desarrollo de las actividades, sus beneficios y ventajas sobresalen en pro de dar una solución contundente al problema identificado y evidencian de forma clara la materialización de la solución propuesta.	</li>
+                    <li><strong>Puntaje: 8 a 9</strong> Los resultados se generan por el desarrollo de las actividades, sus beneficios y ventajas sobresalen en pro de dar una solución contundente al problema identificado y evidencian de forma clara la materialización de la solución propuesta.</li>
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
@@ -544,7 +538,7 @@
                     <p>¿Los resultados requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.resultados_requiere_comentario} />
                     {#if $form.resultados_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
                     {/if}
                 </div>
 
@@ -564,7 +558,7 @@
                     <p>¿El árbol de objetivos, objetivo general o los objetivos específicos requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.objetivos_requiere_comentario} />
                     {#if $form.objetivos_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
@@ -605,7 +599,7 @@
                 <form id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                         <div>
-                            <Textarea disabled label="Descripción" maxlength="15000" id="descripcion-actividad" bind:value={actividadInfo.descripcion} />
+                            <Textarea disabled label="Descripción" maxlength="15000" id="descripcion-actividad" value={actividadInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>
@@ -628,7 +622,7 @@
                                 {causaDirectaObjetivoEspecifico}
                             </p>
                             <div>
-                                <Textarea disabled label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" bind:value={objetivoEspecificoInfo.descripcion} />
+                                <Textarea disabled label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" value={objetivoEspecificoInfo.descripcion} />
                             </div>
                         </fieldset>
                     </form>
@@ -658,7 +652,7 @@
                         </p>
                         <div>
                             <Label class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <Textarea disabled label="Descripción" maxlength="10000" id="objetivo-general" bind:value={objetivoGeneralInfo.objetivo_general} />
+                            <Textarea disabled label="Descripción" maxlength="10000" id="objetivo-general" value={objetivoGeneralInfo.objetivo_general} />
                         </div>
                     </fieldset>
                 </form>
@@ -681,11 +675,11 @@
                         <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                             {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                                 <div class="mb-10">
-                                    <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" bind:value={resultadoInfo.trl} />
+                                    <Input disabled label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" value={resultadoInfo.trl} />
                                 </div>
                             {/if}
                             <div class="mb-20">
-                                <Textarea disabled label="Descripción" maxlength="1000" id="descripcion-resultado" bind:value={resultadoInfo.descripcion} />
+                                <Textarea disabled label="Descripción" maxlength="1000" id="descripcion-resultado" value={resultadoInfo.descripcion} />
                             </div>
                         </fieldset>
                     </form>
@@ -721,7 +715,7 @@
                             {/if}
                         </div>
                         <div class="mt-4">
-                            <Textarea disabled label="Descripción" maxlength="10000" id="descripcion-impacto" bind:value={impactoInfo.descripcion} />
+                            <Textarea disabled label="Descripción" maxlength="10000" id="descripcion-impacto" value={impactoInfo.descripcion} />
                         </div>
                     </fieldset>
                 </form>

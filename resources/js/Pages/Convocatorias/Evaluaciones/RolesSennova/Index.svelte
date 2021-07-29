@@ -1,21 +1,19 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page, useForm } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Button from '@/Shared/Button'
     import DataTable from '@/Shared/DataTable'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import Input from '@/Shared/Input'
-    import LoadingButton from '@/Shared/LoadingButton'
 
-    export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let proyectoRolesSennova = []
 
@@ -27,19 +25,10 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
-    let form = useForm({
+    let cantidadesRolesInfo = {
         cantidad_instructores_planta: proyecto.cantidad_instructores_planta,
         cantidad_dinamizadores_planta: proyecto.cantidad_dinamizadores_planta,
         cantidad_psicopedagogos_planta: proyecto.cantidad_psicopedagogos_planta,
-    })
-    function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
-            $form.put(route('convocatorias.proyectos.rol-sennova-ta.update', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
-        }
     }
 
     function nivelAcademico(numeroNivel) {
@@ -81,46 +70,28 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Roles SENNOVA</div>
 
         <div slot="caption">
-            <h2 class="text-center mt-10 mb-24">
-                {#if proyecto.codigo_linea_programatica == 70}
-                    Ingrese el número de instructores de planta, dinamizadores de planta y psicopedagógos de planta que requiere el proyecto.
-                {:else}
-                    Ingrese cada uno de los roles SENNOVA que requiere el proyecto.
-                {/if}
-            </h2>
             {#if proyecto.codigo_linea_programatica == 70}
-                <form on:submit|preventDefault={submit}>
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
+                <form>
+                    <fieldset disabled={true}>
                         <div class="mt-4">
-                            <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_instructores_planta} bind:value={$form.cantidad_instructores_planta} required />
+                            <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="1" input$max="32767" class="mt-1" value={cantidadesRolesInfo.cantidad_instructores_planta} required />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Número de dinamizadores de planta" id="cantidad_dinamizadores_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_dinamizadores_planta} bind:value={$form.cantidad_dinamizadores_planta} required />
+                            <Input label="Número de dinamizadores de planta" id="cantidad_dinamizadores_planta" type="number" input$min="1" input$max="32767" class="mt-1" value={cantidadesRolesInfo.cantidad_dinamizadores_planta} required />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Número de psicopedagógos de planta" id="cantidad_psicopedagogos_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_psicopedagogos_planta} bind:value={$form.cantidad_psicopedagogos_planta} required />
+                            <Input label="Número de psicopedagógos de planta" id="cantidad_psicopedagogos_planta" type="number" input$min="1" input$max="32767" class="mt-1" value={cantidadesRolesInfo.cantidad_psicopedagogos_planta} required />
                         </div>
                     </fieldset>
-                    <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                        {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                        {/if}
-                    </div>
                 </form>
-            {/if}
-        </div>
-
-        <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
 
@@ -153,9 +124,9 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
-                                    <Text>Ver detalles</Text>
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.proyecto-rol-sennova.edit', [convocatoria.id, evaluacion.id, proyectoRolSennova.id]))}>
+                                    <Text>Evaluar</Text>
                                 </Item>
                             {:else}
                                 <Item>

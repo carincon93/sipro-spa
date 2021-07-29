@@ -496,9 +496,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('web-api.subtipologias-minciencias');
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
-    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finishProject'])->name('convocatorias.proyectos.finish');
-    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/radicar-proyecto', [ProyectoController::class, 'sendProject'])->name('convocatorias.proyectos.send');
-    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'returnProject'])->name('convocatorias.proyectos.return-project');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finalizarProyecto'])->name('convocatorias.proyectos.finish');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/radicar-proyecto', [ProyectoController::class, 'radicarProyecto'])->name('convocatorias.proyectos.send');
+    Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'devolverProyecto'])->name('convocatorias.proyectos.return-project');
 
     /**
      * Inventario equipos - Estrategia regional
@@ -703,6 +703,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/redireccionar', [EvaluacionController::class, 'redireccionar'])->name('convocatorias.evaluaciones.redireccionar');
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/participantes', [ProyectoController::class, 'participantesEvaluacion'])->name('convocatorias.evaluaciones.participantes');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/proyecto-rol-sennova', [ProyectoRolSennovaController::class, 'proyectoRolEvaluacion'])->name('convocatorias.evaluaciones.proyecto-rol-sennova.index');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/proyecto-rol-sennova/{proyecto_rol_sennova}/editar', [ProyectoRolSennovaController::class, 'evaluacionForm'])->name('convocatorias.evaluaciones.proyecto-rol-sennova.edit');
+    Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/proyecto-rol-sennova/{proyecto_rol_sennova}', [ProyectoRolSennovaController::class, 'updateEvaluacion'])->name('convocatorias.evaluaciones.proyecto-rol-sennova.update');
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto', [ProyectoPresupuestoController::class, 'proyectoPresupuestoEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.index');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}/editar', [ProyectoPresupuestoController::class, 'evaluacionForm'])->name('convocatorias.evaluaciones.presupuesto.edit');
+    Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}', [ProyectoPresupuestoController::class, 'updateEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.update');
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}/soportes', [SoporteEstudioMercadoController::class, 'soportesEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.soportes');
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/actividades/{actividad}', [ActividadController::class, 'actividadEvaluacion'])->name('convocatorias.evaluaciones.actividades.edit');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/productos/{producto}', [ProductoController::class, 'productoEvaluacion'])->name('convocatorias.evaluaciones.productos.edit');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/analisis-riesgos/{analisis_riesgo}', [AnalisisRiesgoController::class, 'analisisRiesgoEvaluacion'])->name('convocatorias.evaluaciones.analisis-riesgos.edit');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/entidades-aliadas/{entidad_aliada}', [EntidadAliadaController::class, 'entidadAliadaEvaluacion'])->name('convocatorias.evaluaciones.entidades-aliadas.edit');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/anexos', [ProyectoAnexoController::class, 'anexoEvaluacion'])->name('convocatorias.evaluaciones.anexos');
+    Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/anexos', [ProyectoAnexoController::class, 'updateAnexosEvaluacion'])->name('convocatorias.evaluaciones.anexos.guardar-evaluacion');
 
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/entidades-aliadas', [EntidadAliadaController::class, 'showEntidadesAliadasEvaluacion'])->name('convocatorias.evaluaciones.entidades-aliadas');
     // Falata el edit

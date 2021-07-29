@@ -1,11 +1,12 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import SemillerosInvestigacion from './SemillerosInvestigacion'
     import Participantes from './Participantes'
 
     export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let tiposDocumento
     export let tiposVinculacion
@@ -15,7 +16,7 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <div class="py-12">
         <div class="mt-16">

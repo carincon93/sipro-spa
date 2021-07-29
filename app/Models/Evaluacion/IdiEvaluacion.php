@@ -52,6 +52,33 @@ class IdiEvaluacion extends Model
         'redaccion_comentario',
         'normas_apa_puntaje',
         'normas_apa_comentario',
+
+        'justificacion_economia_naranja_requiere_comentario',
+        'justificacion_economia_naranja_comentario',
+
+        'justificacion_industria_4_requiere_comentario',
+        'justificacion_industria_4_comentario',
+
+        'bibliografia_requiere_comentario',
+        'bibliografia_comentario',
+
+        'fechas_requiere_comentario',
+        'fechas_comentario',
+
+        'justificacion_politica_discapacidad_requiere_comentario',
+        'justificacion_politica_discapacidad_comentario',
+
+        'actividad_economica_requiere_comentario',
+        'actividad_economica_comentario',
+
+        'disciplina_subarea_conocimiento_requiere_comentario',
+        'disciplina_subarea_conocimiento_comentario',
+
+        'red_conocimiento_requiere_comentario',
+        'red_conocimiento_comentario',
+
+        'tematica_estrategica_requiere_comentario',
+        'tematica_estrategica_comentario',
     ];
 
     /**

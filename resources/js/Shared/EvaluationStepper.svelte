@@ -29,7 +29,7 @@
     </div>
     {#if proyecto.codigo_linea_programatica != 70}
         <div class="w-10/12 step">
-            <a use:inertia active={route().current('convocatorias.proyectos.participantes')} href={route('convocatorias.proyectos.participantes', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+            <a use:inertia active={route().current('convocatorias.evaluaciones.participantes')} href={route('convocatorias.evaluaciones.participantes', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                 <p class="text-sm text-center">{proyecto.codigo_linea_programatica == 68 ? 'Formulador del proyecto' : 'Participantes'}</p>
             </a>
@@ -57,14 +57,14 @@
     <div class="flex justify-around relative w-10/12 px-1.5 presupuesto-container">
         {#if proyecto.codigo_linea_programatica != 23}
             <div class="w-10/12 step">
-                <a use:inertia active={route().current('convocatorias.proyectos.proyecto-rol-sennova.index')} href={route('convocatorias.proyectos.proyecto-rol-sennova.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+                <a use:inertia active={route().current('convocatorias.evaluaciones.proyecto-rol-sennova.index')} href={route('convocatorias.evaluaciones.proyecto-rol-sennova.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                     <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                     <p class="text-sm text-center">Roles</p>
                 </a>
             </div>
         {/if}
         <div class="w-10/12 step{proyecto.codigo_linea_programatica != 23 ? ' ml-5' : ''}">
-            <a use:inertia active={route().current('convocatorias.proyectos.presupuesto.index')} href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+            <a use:inertia active={route().current('convocatorias.evaluaciones.presupuesto.index')} href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                 <p class="text-sm text-center">Presupuesto</p>
             </a>
@@ -106,7 +106,7 @@
         </div>
     {/if}
     <div class="w-10/12 step">
-        <a use:inertia active={route().current('convocatorias.proyectos.proyecto-anexos.index')} href={route('convocatorias.proyectos.proyecto-anexos.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.evaluaciones.anexos')} href={route('convocatorias.evaluaciones.anexos', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
             <p class="text-sm text-center">Anexos</p>
         </a>

@@ -73,7 +73,7 @@
             items={productosGantt}
             request={isSuperAdmin || checkRole(authUser, [11])
                 ? {
-                      uri: 'convocatorias.proyectos.productos.edit',
+                      uri: 'convocatorias.evaluaciones.productos.edit',
                       params: [convocatoria.id, proyecto.id],
                   }
                 : null}
@@ -116,7 +116,7 @@
                         <td class="border-t td-actions">
                             <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkRole(authUser, [11])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.productos.edit', [convocatoria.id, proyecto.id, producto.id]))}>
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.productos.edit', [convocatoria.id, evaluacion.id, producto.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
                                 {:else}
@@ -166,7 +166,7 @@
                     <p>¿Los productos requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.productos_requiere_comentario} />
                     {#if $form.productos_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} error={errors.productos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>

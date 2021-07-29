@@ -84,6 +84,26 @@ class Evaluacion extends Model
     }
 
     /**
+     * Relationship with ProyectoRolEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoRolesEvaluaciones()
+    {
+        return $this->hasMany(ProyectoRolEvaluacion::class);
+    }
+
+    /**
+     * Relationship with ProyectoPresupuestoEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoPresupuestosEvaluaciones()
+    {
+        return $this->hasMany(ProyectoPresupuestoEvaluacion::class);
+    }
+
+    /**
      * Relationship with User
      *
      * @return object

@@ -786,7 +786,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Continuar</Button>
             </div>
         </div>
     </Dialog>

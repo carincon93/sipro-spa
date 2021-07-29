@@ -427,6 +427,42 @@ class EntidadAliadaController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\EntidadAliada  $entidadAliada
+     * @return \Illuminate\Http\Response
+     */
+    public function entidadAliadaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, EntidadAliada $entidadAliada)
+    {
+        $objetivoEspecificos = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
+        $entidadAliada->miembrosEntidadAliada->only('id', 'nombre', 'email', 'numero_celular');
+        $entidadAliada->entidadAliadaIdi;
+        $entidadAliada->entidadAliadaTa;
+
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Edit', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion->only('id'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica'),
+            'entidadAliada'     => $entidadAliada,
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecificos->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+            'actividadesRelacionadas'           => $entidadAliada->actividades()->pluck('id'),
+            'objetivosEspecificosRelacionados'  => $entidadAliada->actividades()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico'),
+            'tiposEntidadAliada'                => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
+            'naturalezaEntidadAliada'           => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
+            'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true),
+            'infraestructuraTecnoacademia'      => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
+        ]);
+    }
+
+    /**
      * cleanFileName
      *
      * @param  mixed $nombre

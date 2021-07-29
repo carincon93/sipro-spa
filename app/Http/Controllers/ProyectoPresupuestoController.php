@@ -12,6 +12,8 @@ use App\Models\SoftwareInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\PresupuestoValidationTrait;
+use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\ProyectoPresupuestoEvaluacion;
 use App\Models\ServicioEdicionInfo;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -440,6 +442,81 @@ class ProyectoPresupuestoController extends Controller
     public function downloadFormatoEstudioMercado(Convocatoria $convocatoria, Proyecto $proyecto)
     {
         return response()->download(storage_path("app/anexos/formatoGuia4EstudioMercado.xlsx"));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function proyectoPresupuestoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica                = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $evaluacion->proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040115');
+        $evaluacion->proyecto->total_viaticos                           = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2042186') + PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2041102');
+        $evaluacion->proyecto->total_mantenimiento_maquinaria           = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040516');
+        $evaluacion->proyecto->total_servicios_especiales_construccion  = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2045110');
+        $evaluacion->proyecto->total_equipo_sistemas                    = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040106');
+        $evaluacion->proyecto->otras_compras_equipos                    = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040125');
+        $evaluacion->proyecto->software                                 = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040108');
+        $evaluacion->proyecto->viaticos_exterior                        = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2041104');
+        $evaluacion->proyecto->viaticos_interior                        = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2041102');
+
+        $salarioMinimo = json_decode(Storage::get('json/salario-minimo.json'), true);
+        $evaluacion->proyecto->salarios_minimos = ($salarioMinimo['value'] * 100);
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
+            $evaluacion->proyecto->max_valor_materiales_formacion   = $evaluacion->proyecto->max_material_formacion;
+            $evaluacion->proyecto->max_valor_bienestar_alumnos      = $evaluacion->proyecto->max_bienestar_aprendiz;
+            $evaluacion->proyecto->max_valor_viaticos_interior      = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior;
+            $evaluacion->proyecto->max_valor_edt                    = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
+            $evaluacion->proyecto->max_valor_mantenimiento_equipos  = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
+            $evaluacion->proyecto->max_valor_proyecto               = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $evaluacion->proyecto->max_material_formacion + $evaluacion->proyecto->max_bienestar_aprendiz;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Index', [
+            'convocatoria'              => $convocatoria->only('id'),
+            'evaluacion'                => $evaluacion->only('id'),
+            'proyecto'                  => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto', 'salarios_minimos'),
+            'filters'                   => request()->all('search', 'presupuestos'),
+            'proyectoPresupuesto'       => ProyectoPresupuesto::select('proyecto_presupuesto.id', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'proyecto_presupuesto.proyecto_id', 'proyecto_presupuesto.valor_total')->where('proyecto_id', $evaluacion->proyecto->id)->filterProyectoPresupuesto(request()->only('search', 'presupuestos'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre,codigo', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate()->appends(['search' => request()->search, 'presupuestos' => request()->presupuestos]),
+            'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ProyectoPresupuesto  $proyectoRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function evaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
+    {
+        $presupuesto->softwareInfo;
+        $presupuesto->servicioEdicionInfo;
+        $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
+        $evaluacion->proyecto->lineaProgramatica;
+
+        return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Edit', [
+            'convocatoria'                  => $convocatoria->only('id'),
+            'evaluacion'                    => $evaluacion->only('id'),
+            'proyecto'                      => $evaluacion->proyecto,
+            'proyectoPresupuesto'           => $presupuesto,
+            'tiposLicencia'                 => json_decode(Storage::get('json/tipos-licencia-software.json'), true),
+            'opcionesServiciosEdicion'      => json_decode(Storage::get('json/opciones-servicios-edicion.json'), true),
+            'tiposSoftware'                 => json_decode(Storage::get('json/tipos-software.json'), true),
+            'proyectoPresupuestoEvaluacion' => ProyectoPresupuestoEvaluacion::where('evaluacion_id', $evaluacion->id)->where('proyecto_presupuesto_id', $presupuesto->id)->first()
+        ]);
+    }
+
+    public function updateEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
+    {
+        ProyectoPresupuestoEvaluacion::updateOrCreate(
+            ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
+        );
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

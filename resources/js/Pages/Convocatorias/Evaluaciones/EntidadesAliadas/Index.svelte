@@ -5,13 +5,11 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
     export let evaluacion
@@ -51,7 +49,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.entidades-aliadas.edit', [convocatoria.id, evaluacion.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

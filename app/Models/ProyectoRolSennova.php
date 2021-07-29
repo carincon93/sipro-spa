@@ -68,6 +68,16 @@ class ProyectoRolSennova extends Model
     }
 
     /**
+     * Relationship with ProyectoRolEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoRolesEvaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\ProyectoRolEvaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

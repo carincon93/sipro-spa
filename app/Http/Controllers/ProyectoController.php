@@ -146,7 +146,7 @@ class ProyectoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id'),
             'evaluacion'    => $evaluacion,
-            'proyecto'      => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable'),
+            'proyecto'      => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'finalizado'),
             'productos'     => $productos,
             'objetivos'     => $objetivos,
             'impactos'      => Impacto::whereIn(
@@ -323,12 +323,12 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Finsih project.
+     * Enviar el pryecto al dinamizador a cargo.
      *
      * @param  \App\Models\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function finishProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function finalizarProyecto(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
@@ -347,12 +347,12 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Finsih project.
+     * Radicar proyecto.
      *
      * @param  \App\Models\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function sendProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function radicarProyecto(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
@@ -373,12 +373,12 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Finsih project.
+     * El dinamizador devuelve el proyecto al proponente con algún comentario.
      *
      * @param  \App\Models\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function returnProject(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function devolverProyecto(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
@@ -429,6 +429,47 @@ class ProyectoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Participantes/Index', [
             'convocatoria'          => $convocatoria,
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion'),
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'roles'                 => $rolesSennova,
+        ]);
+    }
+
+    /**
+     * participantesEvaluacion
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function participantesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $evaluacion->proyecto->participantes;
+        $evaluacion->proyecto->programasFormacion;
+        $evaluacion->proyecto->semillerosInvestigacion;
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
+            return redirect()->back()->with('error', 'Esta línea programática no requiere de participantes');
+        }
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 23 || $evaluacion->proyecto->codigo_linea_programatica == 65 || $evaluacion->proyecto->codigo_linea_programatica == 66 || $evaluacion->proyecto->codigo_linea_programatica == 82) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
+        } elseif ($evaluacion->proyecto->codigo_linea_programatica == 70) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
+        } elseif ($evaluacion->proyecto->codigo_linea_programatica == 69) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true));
+        } elseif ($evaluacion->proyecto->codigo_linea_programatica == 68) {
+            $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-st.json'), true));
+        }
+
+        $evaluacion->proyecto->load('participantes.centroFormacion.regional');
+        $evaluacion->proyecto->load('semillerosInvestigacion.lineaInvestigacion.grupoInvestigacion');
+
+        return Inertia::render('Convocatorias/Evaluaciones/Participantes/Index', [
+            'convocatoria'          => $convocatoria,
+            'evaluacion'            => $evaluacion->only('id'),
+            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'diff_meses', 'participantes', 'semillerosInvestigacion'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => $rolesSennova,

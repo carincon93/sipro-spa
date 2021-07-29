@@ -63,7 +63,7 @@
 
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
-    <form on:submit|preventDefault={submit}>
+    <form>
         <div class="mt-4">
             <div>
                 <Label class="mb-4" labelFor="metodologia" value="Metodología" />
@@ -85,11 +85,6 @@
 
     <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
-    <InfoMessage
-        message={actividadesGantt.length == 0
-            ? "Debe generar las actividadesGantt en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor."
-            : '<strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor.'}
-    />
     {#if showGantt}
         <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
     {:else}
@@ -101,8 +96,8 @@
             items={actividadesGantt}
             request={isSuperAdmin || checkRole(authUser, [11])
                 ? {
-                      uri: 'convocatorias.proyectos.actividadesGantt.edit',
-                      params: [convocatoria.id, proyecto.id],
+                      uri: 'convocatorias.evaluaciones.actividades.edit',
+                      params: [convocatoria.id, evaluacion.id],
                   }
                 : null}
         />
@@ -144,7 +139,7 @@
                         <td class="border-t td-actions">
                             <DataTableMenu class={actividades.data.length < 4 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkRole(authUser, [11])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.actividades.edit', [convocatoria.id, proyecto.id, actividad.id]))}>
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.actividades.edit', [convocatoria.id, evaluacion.id, actividad.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
                                 {:else}
@@ -197,7 +192,7 @@
                     <p>¿La metodología o las actividades requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.metodologia_requiere_comentario} />
                     {#if $form.metodologia_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} error={errors.metodologia_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>

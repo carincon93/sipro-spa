@@ -223,7 +223,7 @@
                 <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
                 <ul>
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Soportes</a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Soportes / Cotizaciones</a>
                     </li>
                     <li class="mt-4">
                         <a class="flex bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" target="_blank" download href={route('convocatorias.proyectos.presupuesto.download-formato-estudio-mercado', [convocatoria.id, proyecto.id])}>

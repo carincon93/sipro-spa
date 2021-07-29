@@ -117,6 +117,17 @@ class IdiEvaluacionController extends Controller
         $idiEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
         $idiEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
 
+
+        $idiEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == true ? $request->justificacion_economia_naranja_comentario : null;
+        $idiEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == true ? $request->justificacion_industria_4_comentario : null;
+        $idiEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == true ? $request->bibliografia_comentario : null;
+        $idiEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == true ? $request->fechas_comentario : null;
+        $idiEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == true ? $request->justificacion_politica_discapacidad_comentario : null;
+        $idiEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == true ? $request->actividad_economica_comentario : null;
+        $idiEvaluacion->disciplina_subarea_conocimiento_comentario = $request->disciplina_subarea_conocimiento_requiere_comentario == true ? $request->disciplina_subarea_conocimiento_comentario : null;
+        $idiEvaluacion->red_conocimiento_comentario = $request->red_conocimiento_requiere_comentario == true ? $request->red_conocimiento_comentario : null;
+        $idiEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == true ? $request->tematica_estrategica_comentario : null;
+
         $idiEvaluacion->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');

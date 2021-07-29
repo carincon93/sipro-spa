@@ -262,7 +262,7 @@ class ActividadController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
-            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),
             'year'              => date('Y') + 1,
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
@@ -311,5 +311,33 @@ class ActividadController extends Controller
         $evaluacion->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Actividad  $actividad
+     * @return \Illuminate\Http\Response
+     */
+    public function actividadEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Actividad $actividad)
+    {
+        $resultados = $evaluacion->proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
+            $query->where('descripcion', '!=', null);
+        })->with('resultados')->get()->pluck('resultados')->flatten();
+
+        $productos = $resultados->map(function ($resultado) {
+            return $resultado->productos;
+        })->flatten();
+
+        return Inertia::render('Convocatorias/Evaluaciones/Actividades/Edit', [
+            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'                     => $evaluacion->only('id'),
+            'proyecto'                       => $evaluacion->proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
+            'productos'                      => $productos,
+            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $evaluacion->proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
+            'actividad'                      => $actividad,
+            'productosRelacionados'          => $actividad->productos()->pluck('id'),
+            'proyectoPresupuestoRelacionado' => $actividad->proyectoPresupuesto()->pluck('id')
+        ]);
     }
 }

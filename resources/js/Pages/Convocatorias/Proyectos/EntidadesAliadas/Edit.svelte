@@ -332,120 +332,120 @@
                 {/if}
             </tbody>
         </table>
+    </div>
 
-        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-            <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
-            <div class="mb-6 flex justify-end items-center">
-                <div>
-                    <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
-                </div>
+    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <h1 class="mt-24 mb-8 text-center text-3xl" id="miembros-entidad-aliada">Miembros de la entidad aliada</h1>
+        <div class="mb-6 flex justify-end items-center">
+            <div>
+                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.create', [convocatoria.id, proyecto.id, entidadAliada.id]))} variant="raised">Miembros de la entidad aliada</Button>
             </div>
-            <div class="bg-white rounded shadow">
-                <table class="w-full whitespace-no-wrap table-fixed data-table">
-                    <thead>
-                        <tr class="text-left font-bold">
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+        </div>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Correo electrónico </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Número de celular </th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.nombre}
+                                </p>
+                            </td>
+
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.email}
+                                </p>
+                            </td>
+
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {miembroEntidadAliada.numero_celular}
+                                </p>
+                            </td>
+
+                            <td class="border-t td-actions">
+                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
+                                </DataTableMenu>
+                            </td>
                         </tr>
-                    </thead>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
 
-                    <tbody>
-                        {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
-                            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                                <td class="border-t">
-                                    <p class="px-6 py-4 focus:text-indigo-500">
-                                        {miembroEntidadAliada.nombre}
-                                    </p>
-                                </td>
+        <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
+        <p class="mb-6">
+            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
+        </p>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
+                    </tr>
+                </thead>
 
-                                <td class="border-t">
-                                    <p class="px-6 py-4 focus:text-indigo-500">
-                                        {miembroEntidadAliada.email}
-                                    </p>
-                                </td>
+                <tbody>
+                    {#each objetivosEspecificosRelacionados as { id, descripcion }}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t">
+                                <p class="px-6 py-4 focus:text-indigo-500">
+                                    {descripcion}
+                                </p>
+                            </td>
+                        </tr>
+                    {/each}
 
-                                <td class="border-t">
-                                    <p class="px-6 py-4 focus:text-indigo-500">
-                                        {miembroEntidadAliada.numero_celular}
-                                    </p>
-                                </td>
+                    {#if objetivosEspecificosRelacionados.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+    {/if}
 
-                                <td class="border-t td-actions">
-                                    <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
-                                        {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
-                                            <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
-                                                <Text>Ver detalles</Text>
-                                            </Item>
-                                        {:else}
-                                            <Item>
-                                                <Text>No tiene permisos</Text>
-                                            </Item>
-                                        {/if}
-                                    </DataTableMenu>
-                                </td>
-                            </tr>
-                        {/each}
-                    </tbody>
-                </table>
-            </div>
-
-            <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
-            <p class="mb-6">
-                A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
+    <Dialog bind:open={dialogOpen}>
+        <div slot="title" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Eliminar recurso
+        </div>
+        <div slot="content">
+            <p>
+                ¿Está seguro(a) que desea eliminar este recurso?
+                <br />
+                Todos los datos se eliminarán de forma permanente.
+                <br />
+                Está acción no se puede deshacer.
             </p>
-            <div class="bg-white rounded shadow">
-                <table class="w-full whitespace-no-wrap table-fixed data-table">
-                    <thead>
-                        <tr class="text-left font-bold">
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Descripción </th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {#each objetivosEspecificosRelacionados as { id, descripcion }}
-                            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                                <td class="border-t">
-                                    <p class="px-6 py-4 focus:text-indigo-500">
-                                        {descripcion}
-                                    </p>
-                                </td>
-                            </tr>
-                        {/each}
-
-                        {#if objetivosEspecificosRelacionados.length === 0}
-                            <tr>
-                                <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
-                            </tr>
-                        {/if}
-                    </tbody>
-                </table>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
-        {/if}
-
-        <Dialog bind:open={dialogOpen}>
-            <div slot="title" class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                Eliminar recurso
-            </div>
-            <div slot="content">
-                <p>
-                    ¿Está seguro(a) que desea eliminar este recurso?
-                    <br />
-                    Todos los datos se eliminarán de forma permanente.
-                    <br />
-                    Está acción no se puede deshacer.
-                </p>
-            </div>
-            <div slot="actions">
-                <div class="p-4">
-                    <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                    <Button variant="raised" on:click={destroy}>Confirmar</Button>
-                </div>
-            </div>
-        </Dialog>
-    </div></AuthenticatedLayout
->
+        </div>
+    </Dialog>
+</AuthenticatedLayout>

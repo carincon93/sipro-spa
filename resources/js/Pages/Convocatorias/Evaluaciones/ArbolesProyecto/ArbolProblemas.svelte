@@ -24,7 +24,6 @@
     export let efectosDirectos
     export let causasDirectas
 
-    let formId
     let dialogTitle
     let codigo
     let sending = false
@@ -60,7 +59,6 @@
     function showEfectoIndirectoDialog(efectoIndirecto, efectoDirectoId) {
         codigo = efectoIndirecto?.id != null ? 'EFE-' + efectoIndirecto.efecto_directo_id + '-IND-' + efectoIndirecto.id : ''
         dialogTitle = 'Efecto indirecto'
-        formId = 'efecto-indirecto'
         showEfectoIndirectoForm = true
         dialogOpen = true
 
@@ -87,7 +85,6 @@
     function showEfectoDirectoDialog(efectoDirecto) {
         codigo = 'EFE-' + efectoDirecto.id
         dialogTitle = 'Efecto directo'
-        formId = 'efecto-directo'
         showEfectoDirectoForm = true
         dialogOpen = true
         efectoDirectoInfo.descripcion = efectoDirecto.descripcion
@@ -109,7 +106,6 @@
     let showProblemaCentralForm = false
     function showProblemaCentralDialog() {
         dialogTitle = 'Problema central'
-        formId = 'problema-central'
         showProblemaCentralForm = true
         dialogOpen = true
         problemaCentralInfo.identificacion_problema = proyecto.identificacion_problema
@@ -130,7 +126,6 @@
     function showCausaDirectaDialog(causaDirecta) {
         codigo = 'CAU-' + causaDirecta.id
         dialogTitle = 'Causa directa'
-        formId = 'causa-directa'
         showCausaDirectaForm = true
         dialogOpen = true
         causaDirectaInfo.id = causaDirecta.id
@@ -150,7 +145,6 @@
     function showCausaIndirectaDialog(causaIndirecta, causaDirectaId) {
         codigo = causaIndirecta?.id != null ? 'CAU-' + causaIndirecta.causa_directa_id + '-IND-' + causaIndirecta.id : ''
         dialogTitle = 'Causa indirecta'
-        formId = 'causa-indirecta'
         showCausaIndirectaForm = true
         dialogOpen = true
         if (causaIndirecta != null) {
@@ -500,7 +494,7 @@
                     <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.problema_central_requiere_comentario} />
                     {#if $form.problema_central_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>

@@ -157,6 +157,33 @@
         normas_apa_puntaje: idiEvaluacion.normas_apa_puntaje,
         normas_apa_comentario: idiEvaluacion.normas_apa_comentario,
         normas_apa_requiere_comentario: idiEvaluacion.normas_apa_comentario == null ? false : true,
+
+        justificacion_economia_naranja_requiere_comentario: idiEvaluacion.justificacion_economia_naranja_comentario == null ? false : true,
+        justificacion_economia_naranja_comentario: idiEvaluacion.justificacion_economia_naranja_comentario,
+
+        justificacion_industria_4_requiere_comentario: idiEvaluacion.justificacion_industria_4_comentario == null ? false : true,
+        justificacion_industria_4_comentario: idiEvaluacion.justificacion_industria_4_comentario,
+
+        bibliografia_requiere_comentario: idiEvaluacion.bibliografia_comentario == null ? false : true,
+        bibliografia_comentario: idiEvaluacion.bibliografia_comentario,
+
+        fechas_requiere_comentario: idiEvaluacion.fechas_comentario == null ? false : true,
+        fechas_comentario: idiEvaluacion.fechas_comentario,
+
+        justificacion_politica_discapacidad_requiere_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario == null ? false : true,
+        justificacion_politica_discapacidad_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario,
+
+        actividad_economica_requiere_comentario: idiEvaluacion.actividad_economica_comentario == null ? false : true,
+        actividad_economica_comentario: idiEvaluacion.actividad_economica_comentario,
+
+        disciplina_subarea_conocimiento_requiere_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario == null ? false : true,
+        disciplina_subarea_conocimiento_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario,
+
+        red_conocimiento_requiere_comentario: idiEvaluacion.red_conocimiento_comentario == null ? false : true,
+        red_conocimiento_comentario: idiEvaluacion.red_conocimiento_comentario,
+
+        tematica_estrategica_requiere_comentario: idiEvaluacion.tematica_estrategica_comentario == null ? false : true,
+        tematica_estrategica_comentario: idiEvaluacion.tematica_estrategica_comentario,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true)) {
@@ -223,7 +250,7 @@
                     <p>¿El título requiere de una recomendación?</p>
                     <Switch bind:checked={$form.titulo_requiere_comentario} />
                     {#if $form.titulo_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} error={errors.titulo_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
@@ -245,6 +272,16 @@
                     </div>
                 </div>
             </div>
+
+            <InfoMessage>
+                <div class="mt-4">
+                    <p>¿Las fechas requieren de una recomendación?</p>
+                    <Switch bind:checked={$form.fechas_requiere_comentario} />
+                    {#if $form.fechas_requiere_comentario}
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="fechas_comentario" bind:value={$form.fechas_comentario} error={errors.fechas_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
         </div>
         <div class="mt-44 grid grid-cols-2">
             <div>
@@ -279,6 +316,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="red_conocimiento_id" bind:value={idiInfo.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La red de conocimiento sectorial requiere de una recomendación?</p>
+                        <Switch bind:checked={$form.red_conocimiento_requiere_comentario} />
+                        {#if $form.red_conocimiento_requiere_comentario}
+                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="red_conocimiento_comentario" bind:value={$form.red_conocimiento_comentario} error={errors.red_conocimiento_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -306,6 +353,16 @@
                 </div>
                 <div>
                     <DynamicList disabled={true} id="disciplina_subarea_conocimiento_id" bind:value={idiInfo.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', idiInfo.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿La disciplina de la subárea de conocimiento requiere de una recomendación?</p>
+                            <Switch bind:checked={$form.disciplina_subarea_conocimiento_requiere_comentario} />
+                            {#if $form.disciplina_subarea_conocimiento_requiere_comentario}
+                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="disciplina_subarea_conocimiento_comentario" bind:value={$form.disciplina_subarea_conocimiento_comentario} error={errors.disciplina_subarea_conocimiento_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 </div>
             </div>
         {/if}
@@ -315,6 +372,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="actividad_economica_id" bind:value={idiInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La actividad económica requiere de una recomendación?</p>
+                        <Switch bind:checked={$form.actividad_economica_requiere_comentario} />
+                        {#if $form.actividad_economica_requiere_comentario}
+                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="actividad_economica_comentario" bind:value={$form.actividad_economica_comentario} error={errors.actividad_economica_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -323,6 +390,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="tematica_estrategica_id" bind:value={idiInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La temática estratégica requiere de una recomendación?</p>
+                        <Switch bind:checked={$form.tematica_estrategica_requiere_comentario} />
+                        {#if $form.tematica_estrategica_requiere_comentario}
+                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="tematica_estrategica_comentario" bind:value={$form.tematica_estrategica_comentario} error={errors.tematica_estrategica_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -348,7 +425,7 @@
                             <p>¿El video requiere de una recomendación?</p>
                             <Switch bind:checked={$form.video_requiere_comentario} />
                             {#if $form.video_requiere_comentario}
-                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} />
+                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} error={errors.video_comentario} required />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -367,6 +444,16 @@
 
                 {#if requiereJustificacionIndustria4}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_industria_4" bind:value={idiInfo.justificacion_industria_4} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requiere de una recomendación?</p>
+                            <Switch bind:checked={$form.justificacion_industria_4_requiere_comentario} />
+                            {#if $form.justificacion_industria_4_requiere_comentario}
+                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="justificacion_industria_4_comentario" bind:value={$form.justificacion_industria_4_comentario} error={errors.justificacion_industria_4_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -381,6 +468,16 @@
                 </div>
                 {#if requiereJustificacionEconomiaNaranja}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_economia_naranja" bind:value={idiInfo.justificacion_economia_naranja} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requiere de una recomendación?</p>
+                            <Switch bind:checked={$form.justificacion_economia_naranja_requiere_comentario} />
+                            {#if $form.justificacion_economia_naranja_requiere_comentario}
+                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="justificacion_economia_naranja_comentario" bind:value={$form.justificacion_economia_naranja_comentario} error={errors.justificacion_economia_naranja_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -395,6 +492,16 @@
                 </div>
                 {#if requiereJustificacionPoliticaDiscapacidad}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_politica_discapacidad" bind:value={idiInfo.justificacion_politica_discapacidad} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requieren de una recomendación?</p>
+                            <Switch bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
+                            {#if $form.justificacion_politica_discapacidad_requiere_comentario}
+                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="justificacion_politica_discapacidad_comentario" bind:value={$form.justificacion_politica_discapacidad_comentario} error={errors.justificacion_politica_discapacidad_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -659,7 +766,7 @@
                         <p>¿El resumen requiere de una recomendación?</p>
                         <Switch bind:checked={$form.resumen_requiere_comentario} />
                         {#if $form.resumen_requiere_comentario}
-                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} />
+                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} error={errors.resumen_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>
@@ -759,6 +866,16 @@
             </div>
             <div>
                 <Textarea disabled label="Bibliografía" maxlength="40000" id="bibliografia" bind:value={idiInfo.bibliografia} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La bibliografía requiere de una recomendación?</p>
+                        <Switch bind:checked={$form.bibliografia_requiere_comentario} />
+                        {#if $form.bibliografia_requiere_comentario}
+                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="bibliografia_comentario" bind:value={$form.bibliografia_comentario} error={errors.bibliografia_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
 
@@ -777,7 +894,7 @@
                 <p>¿La ortografía requiere de una recomendación?</p>
                 <Switch bind:checked={$form.ortografia_requiere_comentario} />
                 {#if $form.ortografia_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} />
+                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
@@ -797,7 +914,7 @@
                 <p>¿La redacción requiere de una recomendación?</p>
                 <Switch bind:checked={$form.redaccion_requiere_comentario} />
                 {#if $form.redaccion_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} />
+                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
                 {/if}
             </div>
         </InfoMessage>
@@ -817,7 +934,7 @@
                 <p>¿Las normas APA requieren de una recomendación?</p>
                 <Switch bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} />
+                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
@@ -859,7 +976,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Continuar</Button>
             </div>
         </div>
     </Dialog>

@@ -179,16 +179,16 @@
                 <h1>Criterios de evaluacion</h1>
                 <ul class="list-disc p-4">
                     <li>
-                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '24 a 25' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '19 a 20' : ''}</strong> El presupuesto está bien definido y se relaciona directamente con el desarrollo de las actividades y los entregables del proyecto. Los soportes que evidencian
-                        el costo del bien a adquirir son pertinentes y confiables.
+                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '0 a 12' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '0 a 9' : ''}</strong> El presupuesto esta sobre o subdimensionado y / o no está directamente relacionado con el desarrollo de las actividades para el logro de los objetivos propuestos.
+                        Los soportes que evidencian el costo del bien a adquirir no son pertinentes y tampoco confiables
                     </li>
                     <li>
                         <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '13 a 23' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '10 a 18' : ''}</strong> El presupuesto es adecuado, pero es susceptible de ajustes frente a las las actividades a desarrollar que darán cumplimiento a los objetivos propuestos. Los
                         soportes que evidencian el costo del bien a adquirir son pertinentes y confiables.
                     </li>
                     <li>
-                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '0 a 12' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '0 a 9' : ''}</strong> El presupuesto esta sobre o subdimensionado y / o no está directamente relacionado con el desarrollo de las actividades para el logro de los objetivos propuestos.
-                        Los soportes que evidencian el costo del bien a adquirir no son pertinentes y tampoco confiables
+                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '24 a 25' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '19 a 20' : ''}</strong> El presupuesto está bien definido y se relaciona directamente con el desarrollo de las actividades y los entregables del proyecto. Los soportes que evidencian
+                        el costo del bien a adquirir son pertinentes y confiables.
                     </li>
                 </ul>
 
@@ -211,7 +211,7 @@
                     <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>
                     <Switch bind:checked={$form.cadena_valor_requiere_comentario} />
                     {#if $form.cadena_valor_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} />
+                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
