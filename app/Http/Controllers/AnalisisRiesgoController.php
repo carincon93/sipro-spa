@@ -103,7 +103,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Edit', [
-            'convocatoria'         => $convocatoria,
+            'convocatoria'         => $convocatoria->only('id'),
             'proyecto'             => $proyecto,
             'analisisRiesgo'       => $analisisRiesgo,
             'nivelesRiesgo'        => json_decode(Storage::get('json/niveles-riesgo.json'), true),
@@ -182,7 +182,7 @@ class AnalisisRiesgoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
             'convocatoria'    => $convocatoria->only('id'),
             'evaluacion'      => $evaluacion,
-            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
                 ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
@@ -219,5 +219,25 @@ class AnalisisRiesgoController extends Controller
         $evaluacion->save();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\AnalisisRiesgo  $analisisRiesgo
+     * @return \Illuminate\Http\Response
+     */
+    public function analisisRiesgoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, AnalisisRiesgo $analisisRiesgo)
+    {
+        return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Edit', [
+            'convocatoria'          => $convocatoria->only('id'),
+            'evaluacion'            => $evaluacion->only('id'),
+            'proyecto'              => $evaluacion->proyecto,
+            'analisisRiesgo'        => $analisisRiesgo,
+            'nivelesRiesgo'         => json_decode(Storage::get('json/niveles-riesgo.json'), true),
+            'tiposRiesgo'           => json_decode(Storage::get('json/tipos-riesgo.json'), true),
+            'probabilidadesRiesgo'  => json_decode(Storage::get('json/probabilidades-riesgo.json'), true),
+            'impactosRiesgo'        => json_decode(Storage::get('json/impactos-riesgo.json'), true)
+        ]);
     }
 }

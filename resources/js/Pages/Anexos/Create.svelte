@@ -29,7 +29,7 @@
         nombre: '',
         descripcion: '',
         archivo: null,
-        obligatorio: '',
+        obligatorio: false,
         linea_programatica_id: [],
     })
 

@@ -40,7 +40,7 @@ class EntidadAliadaController extends Controller
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
-                ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre')->paginate(),
+                ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
         ]);
     }
 
@@ -382,15 +382,18 @@ class EntidadAliadaController extends Controller
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 66) {
             $puntaje = 0;
+            $tipo = '';
             $detener = false;
             foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
-                if ($entidadAliada->tipo == 2 || $entidadAliada->tipo == 4) {
+                if ($entidadAliada->tipo == 'Universidad' || $entidadAliada->tipo == 'Centro de formación SENA') {
                     // Universidad / Centro de formación SENA
                     $puntaje = 5;
                     $detener = true;
-                } else if ($entidadAliada->tipo == 1 && $detener == false || $entidadAliada->tipo == 3 && $detener == false || $entidadAliada->tipo == 5 && $detener == false) {
+                    $tipo = $entidadAliada->tipo;
+                } else if ($entidadAliada->tipo == 'Empresa' && $detener == false || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' && $detener == false || $entidadAliada->tipo == 'Otra' && $detener == false) {
                     // Empresa / Entidades sin ánimo de lucro / Otra
                     $puntaje = 2.5;
+                    $tipo = $entidadAliada->tipo;
                 }
             }
 
@@ -399,15 +402,18 @@ class EntidadAliadaController extends Controller
             ]);
         } else if ($evaluacion->proyecto->codigo_linea_programatica == 82) {
             $puntaje = 0;
+            $tipo = '';
             $detener = false;
             foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
-                if ($entidadAliada->tipo == 1 || $entidadAliada->tipo == 3 || $entidadAliada->tipo == 5 || $entidadAliada->tipo == 4) {
+                if ($entidadAliada->tipo == 'Empresa' || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' || $entidadAliada->tipo == 'Otra' || $entidadAliada->tipo == 'Centro de formación SEN') {
                     // Empresa / Entidades sin ánimo de lucro / Otra / Centro de formación SENA
                     $puntaje = 5;
                     $detener = true;
-                } else if ($entidadAliada->tipo == 2 && $detener == false) {
+                    $tipo = $entidadAliada->tipo;
+                } else if ($entidadAliada->tipo == 'Universidad' && $detener == false) {
                     // Universidad 
                     $puntaje = 2.5;
+                    $tipo = $entidadAliada->tipo;
                 }
             }
 
@@ -416,13 +422,52 @@ class EntidadAliadaController extends Controller
             ]);
         }
 
+        $evaluacion->entidad_aliada_puntaje = $puntaje;
+
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'tipoEntidad'       => $tipo,
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
-                ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre')->paginate(),
+                ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\EntidadAliada  $entidadAliada
+     * @return \Illuminate\Http\Response
+     */
+    public function entidadAliadaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, EntidadAliada $entidadAliada)
+    {
+        $objetivoEspecificos = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
+        $entidadAliada->miembrosEntidadAliada->only('id', 'nombre', 'email', 'numero_celular');
+        $entidadAliada->entidadAliadaIdi;
+        $entidadAliada->entidadAliadaTa;
+
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Edit', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion->only('id'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica'),
+            'entidadAliada'     => $entidadAliada,
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecificos->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+            'actividadesRelacionadas'           => $entidadAliada->actividades()->pluck('id'),
+            'objetivosEspecificosRelacionados'  => $entidadAliada->actividades()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico'),
+            'tiposEntidadAliada'                => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
+            'naturalezaEntidadAliada'           => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
+            'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true),
+            'infraestructuraTecnoacademia'      => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
         ]);
     }
 

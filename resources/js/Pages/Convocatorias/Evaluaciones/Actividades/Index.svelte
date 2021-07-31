@@ -63,7 +63,7 @@
 
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
-    <form on:submit|preventDefault={submit}>
+    <form>
         <div class="mt-4">
             <div>
                 <Label class="mb-4" labelFor="metodologia" value="Metodología" />
@@ -85,11 +85,6 @@
 
     <h1 class="text-3xl m-24 text-center">Actividades</h1>
 
-    <InfoMessage
-        message={actividadesGantt.length == 0
-            ? "Debe generar las actividadesGantt en el 'Árbol de objetivos'. <br /><strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor."
-            : '<strong>Importante</strong> Una vez creadas las actividadesGantt, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor.'}
-    />
     {#if showGantt}
         <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
     {:else}
@@ -101,8 +96,8 @@
             items={actividadesGantt}
             request={isSuperAdmin || checkRole(authUser, [11])
                 ? {
-                      uri: 'convocatorias.proyectos.actividadesGantt.edit',
-                      params: [convocatoria.id, proyecto.id],
+                      uri: 'convocatorias.evaluaciones.actividades.edit',
+                      params: [convocatoria.id, evaluacion.id],
                   }
                 : null}
         />
@@ -144,7 +139,7 @@
                         <td class="border-t td-actions">
                             <DataTableMenu class={actividades.data.length < 4 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkRole(authUser, [11])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.actividades.edit', [convocatoria.id, proyecto.id, actividad.id]))}>
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.actividades.edit', [convocatoria.id, evaluacion.id, actividad.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>
                                 {:else}
@@ -191,18 +186,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="metodologia_puntaje" value="Puntaje (Máximo 15)" />
-                <Input label="Puntaje" id="metodologia_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.metodologia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.metodologia_puntaje} />
+                <Input disabled={evaluacion.finalizado ? true : undefined} label="Puntaje" id="metodologia_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.metodologia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.metodologia_puntaje} />
 
                 <div class="mt-4">
                     <p>¿La metodología o las actividades requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.metodologia_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.metodologia_requiere_comentario} />
                     {#if $form.metodologia_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} error={errors.metodologia_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

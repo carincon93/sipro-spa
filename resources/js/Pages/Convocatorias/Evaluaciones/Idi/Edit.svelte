@@ -157,6 +157,33 @@
         normas_apa_puntaje: idiEvaluacion.normas_apa_puntaje,
         normas_apa_comentario: idiEvaluacion.normas_apa_comentario,
         normas_apa_requiere_comentario: idiEvaluacion.normas_apa_comentario == null ? false : true,
+
+        justificacion_economia_naranja_requiere_comentario: idiEvaluacion.justificacion_economia_naranja_comentario == null ? false : true,
+        justificacion_economia_naranja_comentario: idiEvaluacion.justificacion_economia_naranja_comentario,
+
+        justificacion_industria_4_requiere_comentario: idiEvaluacion.justificacion_industria_4_comentario == null ? false : true,
+        justificacion_industria_4_comentario: idiEvaluacion.justificacion_industria_4_comentario,
+
+        bibliografia_requiere_comentario: idiEvaluacion.bibliografia_comentario == null ? false : true,
+        bibliografia_comentario: idiEvaluacion.bibliografia_comentario,
+
+        fechas_requiere_comentario: idiEvaluacion.fechas_comentario == null ? false : true,
+        fechas_comentario: idiEvaluacion.fechas_comentario,
+
+        justificacion_politica_discapacidad_requiere_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario == null ? false : true,
+        justificacion_politica_discapacidad_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario,
+
+        actividad_economica_requiere_comentario: idiEvaluacion.actividad_economica_comentario == null ? false : true,
+        actividad_economica_comentario: idiEvaluacion.actividad_economica_comentario,
+
+        disciplina_subarea_conocimiento_requiere_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario == null ? false : true,
+        disciplina_subarea_conocimiento_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario,
+
+        red_conocimiento_requiere_comentario: idiEvaluacion.red_conocimiento_comentario == null ? false : true,
+        red_conocimiento_comentario: idiEvaluacion.red_conocimiento_comentario,
+
+        tematica_estrategica_requiere_comentario: idiEvaluacion.tematica_estrategica_comentario == null ? false : true,
+        tematica_estrategica_comentario: idiEvaluacion.tematica_estrategica_comentario,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true)) {
@@ -217,13 +244,13 @@
                     <li><strong>Puntaje: 0,6 a 1,0</strong> El título orienta el enfoque del proyecto e indica el cómo y el para qué</li>
                 </ul>
                 <Label class="mt-4 mb-4" labelFor="titulo_puntaje" value="Puntaje (Máximo 1)" />
-                <Input label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
+                <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
 
                 <div class="mt-4">
                     <p>¿El título requiere de una recomendación?</p>
-                    <Switch bind:checked={$form.titulo_requiere_comentario} />
+                    <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.titulo_requiere_comentario} />
                     {#if $form.titulo_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} />
+                        <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} error={errors.titulo_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
@@ -238,33 +265,25 @@
                         <input disabled id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_idi} max={convocatoria.max_fecha_finalizacion_proyectos_idi} bind:value={idiInfo.fecha_inicio} />
                     </div>
                 </div>
-                <div class="mt-4 flex">
+                <div class="mt-4 flex items-center">
                     <p>hasta</p>
                     <div class="ml-4">
                         <input disabled id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_idi} max={convocatoria.max_fecha_finalizacion_proyectos_idi} bind:value={idiInfo.fecha_finalizacion} />
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-44 grid grid-cols-2">
-            <div>
-                <p class="mb-4">Centro de formación</p>
-            </div>
-            <div>
-                {idi.proyecto.centro_formacion.nombre}
-            </div>
+
+            <InfoMessage>
+                <div class="mt-4">
+                    <p>¿Las fechas requieren de una recomendación?</p>
+                    <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
+                    {#if $form.fechas_requiere_comentario}
+                        <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fechas_comentario" bind:value={$form.fechas_comentario} error={errors.fechas_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
         </div>
 
-        {#if idiInfo.centro_formacion_id}
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <p class="mb-4">Línea de investigación</p>
-                </div>
-                <div>
-                    <DynamicList disabled={true} id="linea_investigacion_id" bind:value={idiInfo.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', idiInfo.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" />
-                </div>
-            </div>
-        {/if}
         <div class="mt-44 grid grid-cols-2">
             <div>
                 <p class="mb-4">Código dependencia presupuestal (SIIF)</p>
@@ -279,6 +298,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="red_conocimiento_id" bind:value={idiInfo.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La red de conocimiento sectorial requiere de una recomendación?</p>
+                        <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.red_conocimiento_requiere_comentario} />
+                        {#if $form.red_conocimiento_requiere_comentario}
+                            <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="red_conocimiento_comentario" bind:value={$form.red_conocimiento_comentario} error={errors.red_conocimiento_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -306,6 +335,16 @@
                 </div>
                 <div>
                     <DynamicList disabled={true} id="disciplina_subarea_conocimiento_id" bind:value={idiInfo.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', idiInfo.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿La disciplina de la subárea de conocimiento requiere de una recomendación?</p>
+                            <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.disciplina_subarea_conocimiento_requiere_comentario} />
+                            {#if $form.disciplina_subarea_conocimiento_requiere_comentario}
+                                <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="disciplina_subarea_conocimiento_comentario" bind:value={$form.disciplina_subarea_conocimiento_comentario} error={errors.disciplina_subarea_conocimiento_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 </div>
             </div>
         {/if}
@@ -315,6 +354,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="actividad_economica_id" bind:value={idiInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La actividad económica requiere de una recomendación?</p>
+                        <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.actividad_economica_requiere_comentario} />
+                        {#if $form.actividad_economica_requiere_comentario}
+                            <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="actividad_economica_comentario" bind:value={$form.actividad_economica_comentario} error={errors.actividad_economica_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -323,6 +372,16 @@
             </div>
             <div>
                 <DynamicList disabled={true} id="tematica_estrategica_id" bind:value={idiInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La temática estratégica requiere de una recomendación?</p>
+                        <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.tematica_estrategica_requiere_comentario} />
+                        {#if $form.tematica_estrategica_requiere_comentario}
+                            <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="tematica_estrategica_comentario" bind:value={$form.tematica_estrategica_comentario} error={errors.tematica_estrategica_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -342,13 +401,13 @@
                         </ul>
 
                         <Label class="mt-4 mb-4" labelFor="video_puntaje" value="Puntaje (Máximo 1)" />
-                        <Input label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
+                        <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
 
                         <div class="mt-4">
                             <p>¿El video requiere de una recomendación?</p>
-                            <Switch bind:checked={$form.video_requiere_comentario} />
+                            <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.video_requiere_comentario} />
                             {#if $form.video_requiere_comentario}
-                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} />
+                                <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} error={errors.video_comentario} required />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -367,6 +426,16 @@
 
                 {#if requiereJustificacionIndustria4}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_industria_4" bind:value={idiInfo.justificacion_industria_4} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requiere de una recomendación?</p>
+                            <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.justificacion_industria_4_requiere_comentario} />
+                            {#if $form.justificacion_industria_4_requiere_comentario}
+                                <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="justificacion_industria_4_comentario" bind:value={$form.justificacion_industria_4_comentario} error={errors.justificacion_industria_4_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -381,6 +450,16 @@
                 </div>
                 {#if requiereJustificacionEconomiaNaranja}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_economia_naranja" bind:value={idiInfo.justificacion_economia_naranja} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requiere de una recomendación?</p>
+                            <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.justificacion_economia_naranja_requiere_comentario} />
+                            {#if $form.justificacion_economia_naranja_requiere_comentario}
+                                <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="justificacion_economia_naranja_comentario" bind:value={$form.justificacion_economia_naranja_comentario} error={errors.justificacion_economia_naranja_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -395,6 +474,16 @@
                 </div>
                 {#if requiereJustificacionPoliticaDiscapacidad}
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_politica_discapacidad" bind:value={idiInfo.justificacion_politica_discapacidad} />
+
+                    <InfoMessage>
+                        <div class="mt-4">
+                            <p>¿El ítem requieren de una recomendación?</p>
+                            <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
+                            {#if $form.justificacion_politica_discapacidad_requiere_comentario}
+                                <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="justificacion_politica_discapacidad_comentario" bind:value={$form.justificacion_politica_discapacidad_comentario} error={errors.justificacion_politica_discapacidad_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 {/if}
             </div>
         </div>
@@ -653,13 +742,13 @@
                     </ul>
 
                     <Label class="mt-4 mb-4" labelFor="resumen_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
+                    <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
 
                     <div class="mt-4">
                         <p>¿El resumen requiere de una recomendación?</p>
-                        <Switch bind:checked={$form.resumen_requiere_comentario} />
+                        <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.resumen_requiere_comentario} />
                         {#if $form.resumen_requiere_comentario}
-                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} />
+                            <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} error={errors.resumen_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>
@@ -759,6 +848,16 @@
             </div>
             <div>
                 <Textarea disabled label="Bibliografía" maxlength="40000" id="bibliografia" bind:value={idiInfo.bibliografia} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La bibliografía requiere de una recomendación?</p>
+                        <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
+                        {#if $form.bibliografia_requiere_comentario}
+                            <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="bibliografia_comentario" bind:value={$form.bibliografia_comentario} error={errors.bibliografia_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
 
@@ -771,13 +870,13 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="ortografia_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
+            <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
 
             <div class="mt-4">
                 <p>¿La ortografía requiere de una recomendación?</p>
-                <Switch bind:checked={$form.ortografia_requiere_comentario} />
+                <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
                 {#if $form.ortografia_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} />
+                    <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
@@ -791,13 +890,13 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="redaccion_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
+            <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
 
             <div class="mt-4">
                 <p>¿La redacción requiere de una recomendación?</p>
-                <Switch bind:checked={$form.redaccion_requiere_comentario} />
+                <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
                 {#if $form.redaccion_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} />
+                    <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
                 {/if}
             </div>
         </InfoMessage>
@@ -811,19 +910,19 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="normas_apa_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
+            <Input disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
             <div class="mt-4">
                 <p>¿Las normas APA requieren de una recomendación?</p>
-                <Switch bind:checked={$form.normas_apa_requiere_comentario} />
+                <Switch disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} />
+                    <Textarea disabled={idiEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true && idiEvaluacion.evaluacion.finalizado == false)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -859,7 +958,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Continuar</Button>
             </div>
         </div>
     </Dialog>

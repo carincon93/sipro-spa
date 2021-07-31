@@ -31,12 +31,13 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
 
         <tbody slot="tbody">
-            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion }}
+            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, finalizado }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
@@ -53,11 +54,16 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4">
+                            {iniciado ? 'Evaluación iniciada' : finalizado ? 'Evaluación finalizada' : 'Sin evaluar'}
+                        </p>
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
-                                    <Text>Ver detalles</Text>
+                                    <Text>Evaluar</Text>
                                 </Item>
                             {:else}
                                 <Item>

@@ -5,7 +5,6 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
@@ -16,6 +15,7 @@
     export let convocatoria
     export let evaluacion
     export let proyecto
+    export let tipoEntidad
     export let entidadesAliadas
 
     $title = 'Entidades aliadas'
@@ -36,6 +36,7 @@
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Tipo de entidad aliada</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -48,10 +49,15 @@
                             {entidadAliada.nombre}
                         </p>
                     </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {entidadAliada.tipo}
+                        </p>
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.entidades-aliadas.edit', [convocatoria.id, evaluacion.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
@@ -72,4 +78,20 @@
         </tbody>
     </DataTable>
     <Pagination links={entidadesAliadas.links} />
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+    <InfoMessage>
+        El puntaje se asigna automáticamente.
+        <br />
+        <strong>Puntaje:</strong>
+        {evaluacion.entidad_aliada_puntaje}
+        <br />
+        <strong>Tipo de entidad aliada:</strong>
+        {tipoEntidad}
+        <br />
+        <strong>Código dependencia presupuestal (SIIF):</strong>
+        {proyecto.codigo_linea_programatica}
+    </InfoMessage>
 </AuthenticatedLayout>

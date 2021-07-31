@@ -52,6 +52,33 @@ class IdiEvaluacion extends Model
         'redaccion_comentario',
         'normas_apa_puntaje',
         'normas_apa_comentario',
+
+        'justificacion_economia_naranja_requiere_comentario',
+        'justificacion_economia_naranja_comentario',
+
+        'justificacion_industria_4_requiere_comentario',
+        'justificacion_industria_4_comentario',
+
+        'bibliografia_requiere_comentario',
+        'bibliografia_comentario',
+
+        'fechas_requiere_comentario',
+        'fechas_comentario',
+
+        'justificacion_politica_discapacidad_requiere_comentario',
+        'justificacion_politica_discapacidad_comentario',
+
+        'actividad_economica_requiere_comentario',
+        'actividad_economica_comentario',
+
+        'disciplina_subarea_conocimiento_requiere_comentario',
+        'disciplina_subarea_conocimiento_comentario',
+
+        'red_conocimiento_requiere_comentario',
+        'red_conocimiento_comentario',
+
+        'tematica_estrategica_requiere_comentario',
+        'tematica_estrategica_comentario',
     ];
 
     /**
@@ -109,7 +136,7 @@ class IdiEvaluacion extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1)) { // Admin
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
@@ -117,7 +144,7 @@ class IdiEvaluacion extends Model
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(11)) { // Evaluador
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)

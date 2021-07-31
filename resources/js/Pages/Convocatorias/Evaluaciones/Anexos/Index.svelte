@@ -1,23 +1,23 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page, useForm } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
-    import Button from '@/Shared/Button'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import Switch from '@/Shared/Switch'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Create from './Create'
+    import LoadingButton from '@/Shared/LoadingButton'
 
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
 
     export let errors
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let proyectoAnexo
     export let anexos
@@ -30,47 +30,49 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
-    let form = useForm({
+    let anexosSTInfo = {
         video: proyecto.video,
         infraestructura_adecuada: proyecto.infraestructura_adecuada,
         especificaciones_area: proyecto.especificaciones_area,
-    })
+    }
 
+    let sending = false
+    let form = useForm({
+        anexos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.anexos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
+        anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.anexos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
+    })
     function submit() {
-        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true && !sending)) {
-            $form.put(route('convocatorias.servicios-tecnologicos.infraestructura', [convocatoria.id, proyecto.id]), {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+            $form.put(route('convocatorias.evaluaciones.anexos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     {#if proyecto.codigo_linea_programatica == 68}
         <h1 class="mt-24 mb-8 text-center text-3xl">Especificaciones e infraestructura</h1>
 
-        <form on:submit|preventDefault={submit} class="mt-4 p-4">
-            <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true) ? undefined : true}>
+        <form class="mt-4 p-4">
+            <fieldset disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                 <div class="mt-4">
-                    <Label required labelFor="infraestructura_adecuada" value="¿Cuenta con infraestructura adecuada y propia para el funcionamiento de la línea servicios tecnológicos en el centro de formación?" class="inline-block mb-4" />
+                    <Label labelFor="infraestructura_adecuada" value="¿Cuenta con infraestructura adecuada y propia para el funcionamiento de la línea servicios tecnológicos en el centro de formación?" class="inline-block mb-4" />
                     <br />
-                    <Switch bind:checked={$form.infraestructura_adecuada} />
+                    <Switch disabled checked={anexosSTInfo.infraestructura_adecuada} />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="especificaciones_area" value="Relacione las especificaciones del área donde se desarrollan las actividades de servicios tecnológicos en el centro de formación" class="inline-block mb-4" />
-                    <Textarea label="Especificaciones del área" maxlength="40000" id="especificaciones_area" error={errors.especificaciones_area} bind:value={$form.especificaciones_area} required />
+                    <Label labelFor="especificaciones_area" value="Relacione las especificaciones del área donde se desarrollan las actividades de servicios tecnológicos en el centro de formación" class="inline-block mb-4" />
+                    <Textarea disabled label="Especificaciones del área" maxlength="40000" id="especificaciones_area" value={anexosSTInfo.especificaciones_area} />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="video" value="Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" class="inline-block mb-4" />
-                    <Input label="Enlace del video" type="url" class="mt-1" bind:value={$form.video} error={errors?.video} required />
+                    <Label labelFor="video" value="Enlace del video de las instalaciones donde se desarrollan las actividades de la línea servicios tecnológicos. (Youtube, Vídeo en Google Drive con visualización pública)" class="inline-block mb-4" />
+                    <Input disabled label="Enlace del video" type="url" class="mt-1" value={anexosSTInfo.video} />
                     <InfoMessage message="El vídeo debe incluir durante el recorrido en las instalaciones, una voz en off que justifique puntualmente el proyecto e incluya: el impacto a la formación, al sector productivo y a la política nacional de ciencia, tecnología e innovación." />
-                </div>
-                <div class="w-1/12">
-                    <Button loading={sending} class="w-full mt-4" type="submit">Guardar</Button>
                 </div>
             </fieldset>
         </form>
@@ -92,23 +94,20 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {anexo.nombre}
-                            <br />
-                            {#if anexo.obligatorio}
-                                <span class="text-red-500">* El anexo es obligatorio</span>
-                            {/if}
-                            {#if anexo.archivo}
-                                <a target="_blank" class="text-indigo-400 underline inline-block mt-4 mb-4 flex" download href={route('anexos.download', [anexo.id])}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                    </svg>
-                                    Descargar formato
-                                </a>
-                            {/if}
                         </p>
                     </td>
                     <td class="border-t">
-                        {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-                            <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
+                        {#if isSuperAdmin || checkRole(authUser, [11])}
+                            {#if proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id}
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.proyecto-anexos.download', [convocatoria.id, proyecto.id, proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id])}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    {anexo.nombre}
+                                </a>
+                            {:else}
+                                <p class="px-6 py-4 focus:text-indigo-500">No se cargaron anexos</p>
+                            {/if}
                         {/if}
                     </td>
                 </tr>
@@ -116,10 +115,33 @@
 
             {#if anexos.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="2">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
     <Pagination links={anexos.links} />
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submit}>
+            <InfoMessage>
+                <div class="mt-4">
+                    <p>¿Algún anexo requiere de recomendación?</p>
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
+                    {#if $form.anexos_requiere_comentario}
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$form.anexos_comentario} error={errors.anexos_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
 </AuthenticatedLayout>

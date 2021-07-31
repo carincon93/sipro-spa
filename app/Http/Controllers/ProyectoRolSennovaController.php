@@ -11,6 +11,8 @@ use App\Http\Traits\ProyectoRolSennovaValidationTrait;
 use App\Http\Traits\ProyectoRolStValidationTrait;
 use App\Http\Traits\ProyectoRolTaValidationTrait;
 use App\Http\Traits\ProyectoRolTpValidationTrait;
+use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\ProyectoRolEvaluacion;
 use Inertia\Inertia;
 
 class ProyectoRolSennovaController extends Controller
@@ -268,5 +270,71 @@ class ProyectoRolSennovaController extends Controller
         $proyectoRolSennova->delete();
 
         return redirect()->route('convocatorias.proyectos.proyecto-rol-sennova.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function proyectoRolEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
+            $evaluacion->proyecto->cantidad_instructores_planta = $evaluacion->proyecto->ta->cantidad_instructores_planta;
+            $evaluacion->proyecto->cantidad_dinamizadores_planta = $evaluacion->proyecto->ta->cantidad_dinamizadores_planta;
+            $evaluacion->proyecto->cantidad_psicopedagogos_planta = $evaluacion->proyecto->ta->cantidad_psicopedagogos_planta;
+        }
+
+        /**
+         * Si el proyecto es de la línea programática 23 se prohibe el acceso. No requiere de roles SENNOVA
+         */
+        if ($evaluacion->proyecto->codigo_linea_programatica == 23) {
+            return redirect()->route('convocatorias.proyectos.arbol-objetivos', [$convocatoria, $evaluacion->proyecto])->with('error', 'Esta línea programática no requiere de roles SENNOVA');
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Index', [
+            'convocatoria'           => $convocatoria->only('id'),
+            'evaluacion'             => $evaluacion->only('id'),
+            'proyecto'               => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta'),
+            'filters'                => request()->all('search'),
+            'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $evaluacion->proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova', 'proyectoRolesEvaluaciones')->paginate(),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ProyectoRolSennova  $proyectoRolSennova
+     * @return \Illuminate\Http\Response
+     */
+    public function evaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        if ($evaluacion->proyecto->codigo_linea_programatica == 68) {
+            $evaluacion->proyecto->max_meses_ejecucion = $evaluacion->proyecto->servicioTecnologico->max_meses_ejecucion;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Edit', [
+            'convocatoria'          => $convocatoria->only('id'),
+            'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado'),
+            'proyecto'              => $evaluacion->proyecto->only('id', 'diff_meses', 'finalizado', 'max_meses_ejecucion', 'codigo_linea_programatica'),
+            'proyectoRolSennova'    => $proyectoRolSennova,
+            'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
+            'lineaProgramatica'     => $evaluacion->proyecto->lineaProgramatica->only('id'),
+            'proyectoRolEvaluacion' => ProyectoRolEvaluacion::where('evaluacion_id', $evaluacion->id)->where('proyecto_rol_sennova_id', $proyectoRolSennova->id)->first()
+        ]);
+    }
+
+    public function updateEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
+    {
+        ProyectoRolEvaluacion::updateOrCreate(
+            ['evaluacion_id' => $evaluacion->id, 'proyecto_rol_sennova_id' => $proyectoRolSennova->id],
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
+        );
+
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

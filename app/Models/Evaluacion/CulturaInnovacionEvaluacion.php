@@ -109,7 +109,7 @@ class CulturaInnovacionEvaluacion extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1)) { // Admin
-            $culturaInnovacion = CulturaInnovacion::select('evaluaciones.id as evaluacion_id', 'cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
+            $culturaInnovacion = CulturaInnovacion::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
@@ -117,7 +117,7 @@ class CulturaInnovacionEvaluacion extends Model
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(11)) { // Evaluador
-            $culturaInnovacion = CulturaInnovacion::select('evaluaciones.id as evaluacion_id', 'cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
+            $culturaInnovacion = CulturaInnovacion::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)

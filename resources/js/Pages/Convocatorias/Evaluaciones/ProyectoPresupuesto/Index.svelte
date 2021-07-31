@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
@@ -10,9 +10,10 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
 
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let proyectoPresupuesto
     export let segundoGrupoPresupuestal
@@ -31,7 +32,7 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>
@@ -211,7 +212,7 @@
         </div>
     {/if}
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]} bind:filters showFilters={true}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]} bind:filters showFilters={true}>
         <div slot="filters">
             <label for="presupuestos" class="block text-gray-700">Presupuestos:</label>
             <select id="presupuestos" class="mt-1 w-full form-select" bind:value={filters.presupuestos}>
@@ -222,21 +223,11 @@
             </select>
         </div>
 
-        <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.create', [convocatoria.id, proyecto.id]))}>
-                    <div>
-                        <span>Crear</span>
-                        <span class="hidden md:inline">presupuesto</span>
-                    </div>
-                </Button>
-            {/if}
-        </div>
-
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Información</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Subtotal del costo de los productos o servicios requeridos</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -274,11 +265,16 @@
                             <span class="text-red-400 text-center text-xs px-6"> Este uso presupuestal NO suma al total del presupuesto </span>
                         {/if}
                     </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {presupuesto.proyecto_presupuestos_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
+                        </p>
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
-                                    <Text>Ver detalles</Text>
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.presupuesto.edit', [convocatoria.id, evaluacion.id, presupuesto.id]))}>
+                                    <Text>Evaluar</Text>
                                 </Item>
                             {:else}
                                 <Item>
@@ -299,7 +295,7 @@
 
         <tfoot slot="tfoot">
             <tr>
-                <td colspan="3" class="border-t p-4">
+                <td colspan="4" class="border-t p-4">
                     <strong>Actualmente el total del costo de los productos o servicios requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
                 </td>
             </tr>

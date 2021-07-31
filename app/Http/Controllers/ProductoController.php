@@ -395,4 +395,45 @@ class ProductoController extends Controller
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Producto  $producto
+     * @return \Illuminate\Http\Response
+     */
+    public function productoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Producto $producto)
+    {
+        $evaluacion->proyecto->idi;
+        $producto->productoIdi;
+        $evaluacion->proyecto->culturaInnovacion;
+        $producto->productoCulturaInnovacion;
+        $evaluacion->proyecto->ta;
+        $evaluacion->proyecto->tp;
+        $producto->productoTaTp;
+        $evaluacion->proyecto->servicioTecnologico;
+        $producto->productoServicioTecnologico;
+
+        $resultados = $evaluacion->proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
+            $query->where('descripcion', '!=', null);
+        })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten();
+
+        $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
+        return Inertia::render('Convocatorias/Evaluaciones/Productos/Edit', [
+            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'                => $evaluacion->only('id'),
+            'proyecto'                  => $evaluacion->proyecto,
+            'producto'                  => $producto,
+            'actividades'               => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+            'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
+            'resultados'                => $resultados->where('label', '!=', null)->flatten(),
+            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
+        ]);
+    }
 }

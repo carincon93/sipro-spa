@@ -120,6 +120,16 @@ class ProyectoPresupuesto extends Model
     }
 
     /**
+     * Relationship with ProyectoPresupuestoEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoPresupuestosEvaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\ProyectoPresupuestoEvaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -6,6 +6,7 @@ use App\Models\SoporteEstudioMercado;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SoporteEstudioMercadoRequest;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\Proyecto;
 use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class SoporteEstudioMercadoController extends Controller
          * Denega el acceso si el rubro no requiere de estudio de mercado.
          */
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo != '020202008005096') {
-            return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto]);
+            return redirect()->route('convocatorias.proyectos.presupuesto.index', [$convocatoria, $proyecto])->with('error', 'Este rubro presupuestal no requiere estudio de mercado.');
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
@@ -185,6 +186,31 @@ class SoporteEstudioMercadoController extends Controller
     public function download(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto, SoporteEstudioMercado $soporte)
     {
         return response()->download(storage_path("app/$soporte->soporte"));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function soportesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
+    {
+        /**
+         * Denega el acceso si el rubro no requiere de estudio de mercado.
+         */
+        if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo != '020202008005096') {
+            return redirect()->back()->with('error', 'Este rubro presupuestal no requiere estudio de mercado.');
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
+            'convocatoria'              => $convocatoria->only('id'),
+            'evaluacion'                => $evaluacion->only('id'),
+            'proyecto'                  => $evaluacion->proyecto->only('id', 'finalizado'),
+            'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
+            'filters'                   => request()->all('search'),
+            'soportesEstudioMercado'    => $presupuesto->soportesEstudioMercado()->orderBy('id', 'ASC')
+                ->filterSoporteEstudioMercado(request()->only('search'))->paginate(),
+        ]);
     }
 
     /**
