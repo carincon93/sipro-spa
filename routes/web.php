@@ -68,6 +68,7 @@ use App\Models\GrupoInvestigacion;
 use App\Models\SubtipologiaMinciencias;
 use App\Models\LineaProgramatica;
 use App\Models\ConvocatoriaRolSennova;
+use App\Models\EstadoSistemaGestion;
 use App\Models\SegundoGrupoPresupuestal;
 use App\Models\TercerGrupoPresupuestal;
 use App\Models\PresupuestoSennova;
@@ -78,6 +79,7 @@ use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
 use App\Models\ProgramaFormacionArticulado;
 use App\Models\SubareaConocimiento;
+use App\Models\TipoProyectoSt;
 use App\Models\User;
 
 /*
@@ -231,6 +233,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', function ($centroFormacion) {
         return response(ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $centroFormacion)->orderBy('nombre', 'ASC')->get());
     })->name('web-api.programas-formacion');
+
+    /**
+     * Estados de sistema de gestión
+     * 
+     */
+    Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', function ($tipoProyectoSt) {
+        $tipoProyectoStInfo = TipoProyectoSt::find($tipoProyectoSt);
+        return response(EstadoSistemaGestion::select('id as value', 'estado as label')->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('estado', 'ASC')->get());
+    })->name('web-api.estados-sistema-gestion');
 
     /**
      * Programas de formación

@@ -21,6 +21,7 @@
     export let convocatoria
     export let servicioTecnologico
     export let tiposProyectoSt
+    export let sectoresProductivos
 
     $: $title = servicioTecnologico ? servicioTecnologico.titulo : null
 
@@ -52,6 +53,12 @@
         identificacion_problema: servicioTecnologico.identificacion_problema,
         pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
         justificacion_problema: servicioTecnologico.justificacion_problema,
+
+        estado_sistema_gestion_id: servicioTecnologico.estado_sistema_gestion_id,
+        sector_productivo: {
+            value: servicioTecnologico.sector_productivo,
+            label: sectoresProductivos.find((item) => item.value == servicioTecnologico.sector_productivo)?.label,
+        },
     })
 
     function submit() {
@@ -124,10 +131,30 @@
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Tipo de proyecto" />
+                        <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
                     </div>
                     <div>
                         <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={$form.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+                    </div>
+                </div>
+
+                {#if $form.tipo_proyecto_st_id}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
+                        </div>
+                        <div>
+                            <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} required />
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
+                    </div>
+                    <div>
+                        <Select id="sector_productivo" items={sectoresProductivos} bind:selectedValue={$form.sector_productivo} error={errors.sector_productivo} autocomplete="off" placeholder="Seleccione una sector" required />
                     </div>
                 </div>
 

@@ -48,7 +48,8 @@ class ServicioTecnologico extends Model
         'max_meses_ejecucion',
         'video',
         'especificaciones_area',
-        'infraestructura_adecuada'
+        'infraestructura_adecuada',
+        'estado_sistema_gestion_id'
     ];
 
     /**
@@ -87,6 +88,16 @@ class ServicioTecnologico extends Model
     public function tipoProyectoSt()
     {
         return $this->belongsTo(TipoProyectoSt::class);
+    }
+
+    /**
+     * Relationship with EstadoSistemaGestion
+     *
+     * @return object
+     */
+    public function estadoSistemaGestion()
+    {
+        return $this->belongsTo(EstadoSistemaGestion::class);
     }
 
     /**
