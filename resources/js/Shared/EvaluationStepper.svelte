@@ -126,7 +126,7 @@
         </a>
     </div>
     <div class="w-10/12 step">
-        <a use:inertia active={route().current('convocatorias.proyectos.summary')} href={route('convocatorias.proyectos.summary', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+        <a use:inertia active={route().current('convocatorias.evaluaciones.summary')} href={route('convocatorias.evaluaciones.summary', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
             <p class="text-sm text-center">Finalizar evaluación</p>
         </a>

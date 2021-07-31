@@ -488,18 +488,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
-                <Input label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
+                <Input disabled={evaluacion.finalizado ? true : undefined} label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.problema_central_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.problema_central_requiere_comentario} />
                     {#if $form.problema_central_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

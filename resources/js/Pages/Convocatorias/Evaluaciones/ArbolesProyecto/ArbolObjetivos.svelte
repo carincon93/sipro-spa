@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole } from '@/Utils'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
     import { createPopper } from '@popperjs/core'
@@ -532,13 +532,13 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
-                <Input label="Puntaje" id="resultados_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.resultados_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resultados_puntaje} />
+                <Input disabled={evaluacion.finalizado ? true : undefined} label="Puntaje" id="resultados_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.resultados_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resultados_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los resultados requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.resultados_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.resultados_requiere_comentario} />
                     {#if $form.resultados_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
                     {/if}
                 </div>
 
@@ -552,18 +552,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
-                <Input label="Puntaje" id="objetivos_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.objetivos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.objetivos_puntaje} />
+                <Input disabled={evaluacion.finalizado ? true : undefined} label="Puntaje" id="objetivos_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.objetivos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.objetivos_puntaje} />
 
                 <div class="mt-4">
                     <p>¿El árbol de objetivos, objetivo general o los objetivos específicos requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.objetivos_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.objetivos_requiere_comentario} />
                     {#if $form.objetivos_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

@@ -62,12 +62,10 @@
         </FormField>
     </div>
 
-    <div class="flex items-center justify-end mt-4">
-        {#if canResetPassword}
-            <a use:inertia href={route('password.request')} class="mr-4 underline text-sm text-gray-600 hover:text-gray-900">
-                {$_('Forgot your password?')}
-            </a>
-        {/if}
+    <div class="flex items-center justify-between mt-4">
+        <a use:inertia href={route('password.request')} class="mr-4 underline text-sm text-gray-600 hover:text-gray-900">
+            {$_('Forgot your password?')}
+        </a>
 
         <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">{$_('Login')}</LoadingButton>
     </div>

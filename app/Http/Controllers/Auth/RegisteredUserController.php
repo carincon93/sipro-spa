@@ -121,12 +121,12 @@ class RegisteredUserController extends Controller
             })->get();
         }
 
-        if ($users) {
-            Notification::send($users, new NuevoUsuario($user));
-        }
+        // if ($users) {
+        //     Notification::send($users, new NuevoUsuario($user));
+        // }
 
-        $centroFormacion = CentroFormacion::find($request->centro_formacion_id);
-        $centroFormacion->dinamizadorSennova->notify(new NuevoUsuario($user));
+        // $centroFormacion = CentroFormacion::find($request->centro_formacion_id);
+        // $centroFormacion->dinamizadorSennova->notify(new NuevoUsuario($user));
 
         return redirect(RouteServiceProvider::HOME);
     }

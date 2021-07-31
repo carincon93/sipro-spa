@@ -13,6 +13,7 @@ use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
 use App\Models\SemilleroInvestigacion;
 use App\Notifications\ComentarioProyecto;
+use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\ProyectoFinalizado;
 use App\Notifications\ProyectoRadicado;
 use Illuminate\Http\Request;
@@ -323,6 +324,71 @@ class ProyectoController extends Controller
     }
 
     /**
+     * Show summaryEvaluacion.
+     *
+     * @param  \App\Models\Evaluacion  $evaluacion
+     * @return \Illuminate\Http\Response
+     */
+    public function summaryEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $evaluacion->proyecto->precio_proyecto           = $evaluacion->proyecto->precioProyecto;
+
+        $evaluacion->proyecto->logs = $evaluacion->proyecto::getLog($evaluacion->proyecto->id);
+
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->titulo_puntaje             = $evaluacion->idiEvaluacion->titulo_puntaje;
+                $evaluacion->video_puntaje              = $evaluacion->idiEvaluacion->video_puntaje;
+                $evaluacion->resumen_puntaje            = $evaluacion->idiEvaluacion->resumen_puntaje;
+                $evaluacion->problema_central_puntaje   = $evaluacion->idiEvaluacion->problema_central_puntaje;
+                $evaluacion->objetivos_puntaje          = $evaluacion->idiEvaluacion->objetivos_puntaje;
+                $evaluacion->metodologia_puntaje        = $evaluacion->idiEvaluacion->metodologia_puntaje;
+                $evaluacion->entidad_aliada_puntaje     = $evaluacion->idiEvaluacion->entidad_aliada_puntaje;
+                $evaluacion->resultados_puntaje         = $evaluacion->idiEvaluacion->resultados_puntaje;
+                $evaluacion->productos_puntaje          = $evaluacion->idiEvaluacion->productos_puntaje;
+                $evaluacion->cadena_valor_puntaje       = $evaluacion->idiEvaluacion->cadena_valor_puntaje;
+                $evaluacion->analisis_riesgos_puntaje   = $evaluacion->idiEvaluacion->analisis_riesgos_puntaje;
+                $evaluacion->ortografia_puntaje         = $evaluacion->idiEvaluacion->ortografia_puntaje;
+                $evaluacion->redaccion_puntaje          = $evaluacion->idiEvaluacion->redaccion_puntaje;
+                $evaluacion->normas_apa_puntaje         = $evaluacion->idiEvaluacion->normas_apa_puntaje;
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/Summary', [
+            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
+            'evaluacion'   => $evaluacion,
+            'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'radicado'),
+        ]);
+    }
+
+    /**
+     * Finalizar evaluación.
+     *
+     * @param  \App\Models\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function finalizarEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => __('The password is incorrect.')]);
+        }
+
+        $evaluacion->iniciado = false;
+        $evaluacion->finalizado = true;
+        $evaluacion->save();
+
+        Auth::user()->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));
+
+        return redirect()->back()->with('success', 'La evaluación ha sido finalizada correctamente.');
+    }
+
+    /**
      * Enviar el pryecto al dinamizador a cargo.
      *
      * @param  \App\Models\Proyecto  $proyecto
@@ -343,7 +409,7 @@ class ProyectoController extends Controller
 
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
-        return redirect()->back()->with('success', 'Se ha finalizado el proyecto exitosamente.');
+        return redirect()->back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
 
     /**
@@ -369,7 +435,7 @@ class ProyectoController extends Controller
         $user = $proyecto->participantes()->where('es_formulador', true)->first();
         $user->notify(new ProyectoRadicado($proyecto, Auth::user()));
 
-        return redirect()->back()->with('success', 'Se ha radicado el proyecto exitosamente.');
+        return redirect()->back()->with('success', 'Se ha radicado el proyecto correctamente.');
     }
 
     /**

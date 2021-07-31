@@ -194,6 +194,7 @@
 
                 <Label class="mt-4 mb-4" labelFor="cadena_valor_puntaje" value={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 'Puntaje (Máximo 25)' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 'Puntaje (Máximo 20)' : 'Puntaje (Máximo 0)'} />
                 <Input
+                    disabled={evaluacion.finalizado ? true : undefined}
                     label="Puntaje"
                     id="cadena_valor_puntaje"
                     type="number"
@@ -209,14 +210,14 @@
 
                 <div class="mt-4">
                     <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.cadena_valor_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.cadena_valor_requiere_comentario} />
                     {#if $form.cadena_valor_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

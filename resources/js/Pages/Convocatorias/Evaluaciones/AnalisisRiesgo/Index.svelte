@@ -136,18 +136,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="analisis_riesgos_puntaje" value="Puntaje (Máximo 5)" />
-                <Input label="Puntaje" id="analisis_riesgos_puntaje" type="number" input$step="0.1" input$min="0" input$max="5" class="mt-1" bind:value={$form.analisis_riesgos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.analisis_riesgos_puntaje} />
+                <Input disabled={evaluacion.finalizado ? true : undefined} label="Puntaje" id="analisis_riesgos_puntaje" type="number" input$step="0.1" input$min="0" input$max="5" class="mt-1" bind:value={$form.analisis_riesgos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.analisis_riesgos_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los análisis de riesgos requieren de alguna recomendación?</p>
-                    <Switch bind:checked={$form.analisis_riesgos_requiere_comentario} />
+                    <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.analisis_riesgos_requiere_comentario} />
                     {#if $form.analisis_riesgos_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
+                        <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

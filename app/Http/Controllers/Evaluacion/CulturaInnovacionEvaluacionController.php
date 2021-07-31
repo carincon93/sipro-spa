@@ -99,6 +99,10 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function update(CulturaInnovacionEvaluacionRequest $request, Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
+        $culturaInnovacionEvaluacion->evaluacion()->update([
+            'iniciado' => true
+        ]);
+
         $culturaInnovacionEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
         $culturaInnovacionEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == true ? $request->titulo_comentario : null;
         $culturaInnovacionEvaluacion->video_puntaje               = $request->video_puntaje;

@@ -100,6 +100,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nivel académico</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Asignación mensual</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -122,6 +123,11 @@
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {proyectoRolSennova.proyecto_roles_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
+                        </p>
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11])}
@@ -140,13 +146,13 @@
 
             {#if proyectoRolesSennova.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="5">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
         <tfoot slot="tfoot">
             <tr>
-                <td colspan="4" class="border-t p-4">
+                <td colspan="5" class="border-t p-4">
                     <strong>Actualmente el total del costo de los roles requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP
                 </td>
             </tr>

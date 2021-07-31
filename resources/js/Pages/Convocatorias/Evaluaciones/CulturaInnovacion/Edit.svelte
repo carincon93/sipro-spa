@@ -20,7 +20,6 @@
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
     import Dialog from '@/Shared/Dialog'
-    import { Inertia } from '@inertiajs/inertia'
 
     export let errors
     export let convocatoria
@@ -211,13 +210,13 @@
                     <li><strong>Puntaje: 0,6 a 1,0</strong> El título orienta el enfoque del proyecto e indica el cómo y el para qué</li>
                 </ul>
                 <Label class="mt-4 mb-4" labelFor="titulo_puntaje" value="Puntaje (Máximo 1)" />
-                <Input label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
+                <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
 
                 <div class="mt-4">
                     <p>¿El título requiere de una recomendación?</p>
-                    <Switch bind:checked={$form.titulo_requiere_comentario} />
+                    <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.titulo_requiere_comentario} />
                     {#if $form.titulo_requiere_comentario}
-                        <Textarea label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} />
+                        <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
@@ -226,13 +225,13 @@
         <div class="mt-44">
             <p class="text-center">Fecha de ejecución</p>
             <div class="mt-4 flex items-start justify-around">
-                <div class="mt-4 flex">
+                <div class="mt-4 flex items-end">
                     <p class="mb-4">Del</p>
                     <div class="ml-4">
                         <input disabled id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_cultura} max={convocatoria.max_fecha_finalizacion_proyectos_cultura} bind:value={culturaInnovacionInfo.fecha_inicio} />
                     </div>
                 </div>
-                <div class="mt-4 flex ">
+                <div class="mt-4 flex items-end">
                     <p class="mb-4">hasta</p>
                     <div class="ml-4">
                         <input disabled id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_cultura} max={convocatoria.max_fecha_finalizacion_proyectos_cultura} bind:value={culturaInnovacionInfo.fecha_finalizacion} />
@@ -240,25 +239,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-44 grid grid-cols-2">
-            <div>
-                <p class="mb-4">Centro de formación</p>
-            </div>
-            <div>
-                {culturaInnovacion.proyecto.centro_formacion.nombre}
-            </div>
-        </div>
 
-        {#if culturaInnovacionInfo.centro_formacion_id}
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <p class="mb-4">Línea de investigación</p>
-                </div>
-                <div>
-                    <DynamicList disabled={true} id="linea_investigacion_id" bind:value={culturaInnovacionInfo.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', culturaInnovacionInfo.centro_formacion_id)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" />
-                </div>
-            </div>
-        {/if}
         <div class="mt-44 grid grid-cols-2">
             <div>
                 <p class="mb-4">Código dependencia presupuestal (SIIF)</p>
@@ -308,13 +289,13 @@
                         </ul>
 
                         <Label class="mt-4 mb-4" labelFor="video_puntaje" value="Puntaje (Máximo 1)" />
-                        <Input label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
+                        <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
 
                         <div class="mt-4">
                             <p>¿El video requiere de una recomendación?</p>
-                            <Switch bind:checked={$form.video_requiere_comentario} />
+                            <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.video_requiere_comentario} />
                             {#if $form.video_requiere_comentario}
-                                <Textarea label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} />
+                                <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} required />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -580,13 +561,13 @@
                     </ul>
 
                     <Label class="mt-4 mb-4" labelFor="resumen_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
+                    <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
 
                     <div class="mt-4">
                         <p>¿El resumen requiere de una recomendación?</p>
-                        <Switch bind:checked={$form.resumen_requiere_comentario} />
+                        <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.resumen_requiere_comentario} />
                         {#if $form.resumen_requiere_comentario}
-                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} />
+                            <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>
@@ -698,13 +679,13 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="ortografia_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
+            <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
 
             <div class="mt-4">
                 <p>¿La ortografía requiere de una recomendación?</p>
-                <Switch bind:checked={$form.ortografia_requiere_comentario} />
+                <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
                 {#if $form.ortografia_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} />
+                    <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
@@ -718,13 +699,13 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="redaccion_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
+            <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
 
             <div class="mt-4">
                 <p>¿La redacción requiere de una recomendación?</p>
-                <Switch bind:checked={$form.redaccion_requiere_comentario} />
+                <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
                 {#if $form.redaccion_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} />
+                    <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
@@ -738,19 +719,19 @@
             </ul>
 
             <Label class="mt-4 mb-4" labelFor="normas_apa_puntaje" value="Puntaje (Máximo 1)" />
-            <Input label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
+            <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
             <div class="mt-4">
                 <p>¿Las normas APA requieren de una recomendación?</p>
-                <Switch bind:checked={$form.normas_apa_requiere_comentario} />
+                <Switch disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario}
-                    <Textarea label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} />
+                    <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} required />
                 {/if}
             </div>
         </InfoMessage>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

@@ -161,7 +161,7 @@ return [
 		'codigo_minciencias'    				=> 'código Minciencias',
 		'categoria_minciencias' 				=> 'categoría Minciencias',
 		'year' 									=> 'año',
-		'linea_programatica_id' 						=> 'tipo de proyecto',
+		'linea_programatica_id' 			    => 'tipo de proyecto',
 		'actividad_economica_id'				=> 'actividad económica',
 		'linea_tecnologica_id'  				=> 'línea tecnológica',
 		'titulo' 								=> 'título',

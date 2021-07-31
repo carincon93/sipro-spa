@@ -189,15 +189,15 @@
                 <InfoMessage>
                     <div class="mt-4">
                         <p>¿El rubro presupuestal requiere de una recomendación?</p>
-                        <Switch bind:checked={$form.correcto} />
+                        <Switch disabled={evaluacion.finalizado ? true : undefined} bind:checked={$form.correcto} />
                         {#if $form.correcto}
-                            <Textarea label="Comentario" class="mt-4" maxlength="40000" id="comentario" bind:value={$form.comentario} error={errors.comentario} required />
+                            <Textarea disabled={evaluacion.finalizado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="comentario" bind:value={$form.comentario} error={errors.comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
                         {#if presupuestoInfo.convocatoria_presupuesto_id != '' || presupuestoInfo.convocatoria_presupuesto_id != ''}
                             <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Evaluar</LoadingButton>
                         {/if}

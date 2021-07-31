@@ -56,6 +56,7 @@ class EvaluacionController extends Controller
 
         $evaluacion = new Evaluacion();
         $evaluacion->habilitado = $request->habilitado;
+        $evaluacion->iniciado   = false;
         $evaluacion->finalizado = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
         $evaluacion->proyecto()->associate($request->proyecto_id);
@@ -63,6 +64,9 @@ class EvaluacionController extends Controller
         $evaluacion->save();
 
         $proyecto = Proyecto::find($request->proyecto_id);
+        $proyecto->finalizado = true;
+        $proyecto->modificable = false;
+        $proyecto->save();
 
         switch ($proyecto) {
             case $proyecto->idi()->exists():
