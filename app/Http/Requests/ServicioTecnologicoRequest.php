@@ -42,11 +42,13 @@ class ServicioTecnologicoRequest extends FormRequest
         } else {
             return [
                 'tipo_proyecto_st_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto_st,id'],
+                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
                 'titulo'                                    => ['required', 'string', new MaxWords(40)],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'st', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'st', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'rol_sennova'                               => ['required', 'min:0', 'max:2147483647', 'integer'],
+                'sector_productivo'                         => ['required', 'min:0', 'max:2147483647', 'integer'],
             ];
         }
     }
@@ -67,6 +69,18 @@ class ServicioTecnologicoRequest extends FormRequest
         if (is_array($this->tipo_proyecto_st_id)) {
             $this->merge([
                 'tipo_proyecto_st_id' => $this->tipo_proyecto_st_id['value'],
+            ]);
+        }
+
+        if (is_array($this->estado_sistema_gestion_id)) {
+            $this->merge([
+                'estado_sistema_gestion_id' => $this->estado_sistema_gestion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->sector_productivo)) {
+            $this->merge([
+                'sector_productivo' => $this->sector_productivo['value'],
             ]);
         }
 
