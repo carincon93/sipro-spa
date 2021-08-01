@@ -91,7 +91,7 @@ class ReglaRolStController extends Controller
         $this->authorize('update', [ReglaRolSt::class, $reglaRolSt]);
 
         return Inertia::render('ReglasRolesSt/Edit', [
-            'rolesSt'           => RolSennova::select('id as value', 'nombre as label')->whereIn('id', [3, 18, 20, 21, 22, 23, 24])->get(),
+            'rolesSt'           => RolSennova::select('id as value', 'nombre as label')->whereIn('id', [3, 31, 30, 32, 29, 36, 37, 38, 39, 40, 41, 42, 43])->get(),
             'reglaRolSt'        => $reglaRolSt,
             'tiposProyectoSt'   => TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE tipos_proyecto_st.tipo_proyecto
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: A', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
