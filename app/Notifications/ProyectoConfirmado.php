@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProyectoRadicado extends Notification
+class ProyectoConfirmado extends Notification
 {
     use Queueable;
 
@@ -42,9 +42,7 @@ class ProyectoRadicado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->line("{$this->user->nombre} ha confirmado su proyecto. Debe esperar hasta la siguiente fase de la convocatoria. Este atento (a) de la plataforma y del correo electrónico.");
     }
 
     /**
@@ -57,8 +55,8 @@ class ProyectoRadicado extends Notification
     {
         return [
             "proyectoId"    => $this->proyecto->id,
-            "subject"       => "El proyecto ha sido radicado",
-            "message"       => "{$this->user->nombre} ha radicado su proyecto.",
+            "subject"       => "El proyecto ha sido confirmado",
+            "message"       => "{$this->user->nombre} ha confirmado su proyecto. Debe esperar hasta la siguiente fase de la convocatoria. Este atento (a) de la plataforma y del correo electrónico.",
         ];
     }
 }

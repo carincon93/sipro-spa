@@ -76,11 +76,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('modificar-proyecto-autor', function (User $user, Proyecto $proyecto) {
-            if ($proyecto->finalizado == true || $proyecto->radicado == true) {
+            if ($proyecto->finalizado == true || $proyecto->a_evaluar == true) {
                 return false;
             }
 
-            if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->radicado == false) {
+            if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->a_evaluar == false) {
                 $fechaActual = date('Y-m-d');
 
                 $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
