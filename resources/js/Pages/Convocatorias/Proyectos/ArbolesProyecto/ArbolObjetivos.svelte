@@ -297,25 +297,27 @@
 
     function submitActividad() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formActividad.post(
-                route('proyectos.actividad', {
-                    convocatoria: convocatoria.id,
-                    proyecto: proyecto.id,
-                    actividad: $formActividad.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
+            if ((typeof resultadosFiltrados.find((item) => item.label == null) == 'object') == false) {
+                $formActividad.post(
+                    route('proyectos.actividad', {
+                        convocatoria: convocatoria.id,
+                        proyecto: proyecto.id,
+                        actividad: $formActividad.id,
+                    }),
+                    {
+                        onStart: () => {
+                            sending = true
+                        },
+                        onSuccess: () => {
+                            closeDialog()
+                        },
+                        onFinish: () => {
+                            sending = false
+                        },
+                        preserveScroll: true,
                     },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
+                )
+            }
         }
     }
 
@@ -342,6 +344,7 @@
         dialogOpen = false
     }
 
+    let objetivosCount
     let containerArbol
     let containerObjetivo
     onMount(() => {
@@ -416,6 +419,7 @@
                 ],
             })
         })
+        objetivosCount = containerArbol.getElementsByClassName('objetivo-container').length
     })
 </script>
 
@@ -427,10 +431,9 @@
 
     <div class="mt-16 relative" bind:this={containerArbol}>
         <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
-            <div class="bg-red-100" style="width: {containerObjetivo?.offsetWidth}px;" />
-            <div class="bg-red-200" style="width: {containerObjetivo?.offsetWidth}px;" />
-            <div class="bg-red-100" style="width: {containerObjetivo?.offsetWidth}px;" />
-            <div class="bg-red-200" style="width: {containerObjetivo?.offsetWidth}px;" />
+            {#each { length: objetivosCount } as _empty, i}
+                <div class={i % 2 == 0 ? 'bg-red-100' : 'bg-red-200'} style="width: {containerObjetivo?.offsetWidth}px;" />
+            {/each}
         </div>
         <div class="flex mb-14" style={proyecto.codigo_linea_programatica == 69 ? 'margin-left: -15px; margin-right: -15px;' : ''}>
             {#each efectosDirectos as efectoDirecto, i}
@@ -559,7 +562,7 @@
                                 <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
                             </div>
                         {/if}
-                        <div bind:this={containerObjetivo} class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div bind:this={containerObjetivo} class="objetivo-especificos objetivo-container relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                             <div
                                 on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
                                 class="{causaDirecta.descripcion != null && i % 2 == 0
@@ -699,13 +702,17 @@
                 </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        <div>
-                            <Label labelFor="resultado_id" value="Resultado" />
-                            <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
-                        </div>
-                        <div class="mt-8">
-                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
-                        </div>
+                        {#if typeof resultadosFiltrados.find((item) => item.label == null) == 'object'}
+                            <InfoMessage message="Faltan resultados por definir" alertMsg={true} />
+                        {:else}
+                            <div>
+                                <Label labelFor="resultado_id" value="Resultado" />
+                                <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                            </div>
+                            <div class="mt-8">
+                                <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            </div>
+                        {/if}
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}

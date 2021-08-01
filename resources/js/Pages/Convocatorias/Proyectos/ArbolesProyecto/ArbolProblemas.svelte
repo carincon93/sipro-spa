@@ -371,8 +371,10 @@
                 ],
             })
         })
-    })
 
+        causasDirectasCount = containerArbol.getElementsByClassName('causa-directa-container').length
+    })
+    let causasDirectasCount
     let containerArbol
     let containerCausaDirecta
 </script>
@@ -385,10 +387,9 @@
 
     <div class="mt-16 relative" bind:this={containerArbol}>
         <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
-            <div class="bg-indigo-100" style="width: {containerCausaDirecta?.offsetWidth}px;" />
-            <div class="bg-indigo-200" style="width: {containerCausaDirecta?.offsetWidth}px;" />
-            <div class="bg-indigo-100" style="width: {containerCausaDirecta?.offsetWidth}px;" />
-            <div class="bg-indigo-200" style="width: {containerCausaDirecta?.offsetWidth}px;" />
+            {#each { length: causasDirectasCount } as _empty, i}
+                <div class={i % 2 == 0 ? 'bg-indigo-100' : 'bg-indigo-200'} style="width: {containerCausaDirecta?.offsetWidth}px;" />
+            {/each}
         </div>
         <!-- Efectos -->
         <div class="flex mb-14" style={proyecto.codigo_linea_programatica == 69 ? 'margin-left: -15px; margin-right: -15px;' : ''}>
@@ -501,7 +502,7 @@
                             <div id="arrow-causa-directa" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div bind:this={containerCausaDirecta} class="causas-directas-line relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div bind:this={containerCausaDirecta} class="causas-directas-line causa-directa-container relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         <div
                             on:click={showCausaDirectaDialog(causaDirecta)}
                             class="{causaDirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaDirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaDirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"

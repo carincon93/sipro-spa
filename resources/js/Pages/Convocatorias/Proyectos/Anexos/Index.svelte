@@ -33,7 +33,7 @@
     let sending = false
     let form = useForm({
         video: proyecto.video,
-        infraestructura_adecuada: proyecto.infraestructura_adecuada,
+        infraestructura_adecuada: proyecto.infraestructura_adecuada ? proyecto.infraestructura_adecuada : false,
         especificaciones_area: proyecto.especificaciones_area,
     })
 

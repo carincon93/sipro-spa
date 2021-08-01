@@ -43,9 +43,8 @@ class ComentarioProyecto extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->line('El proyecto no fue aceptado por el dinamizador SENNOVA. Por favor haga clic en \'Revisar comentario\' y revise en las notificaciones el comentario o recomendación que hizo el dinamizador.')
+            ->action('Revisar comentario', url('/notificaciones'));
     }
 
     /**

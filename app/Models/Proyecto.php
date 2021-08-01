@@ -36,7 +36,7 @@ class Proyecto extends Model
         'linea_programatica_id',
         'finalizado',
         'modificable',
-        'radicado'
+        'a_evaluar'
     ];
 
     /**

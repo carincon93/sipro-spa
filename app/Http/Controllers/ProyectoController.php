@@ -15,7 +15,7 @@ use App\Models\SemilleroInvestigacion;
 use App\Notifications\ComentarioProyecto;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\ProyectoFinalizado;
-use App\Notifications\ProyectoRadicado;
+use App\Notifications\ProyectoConfirmado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -299,7 +299,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'radicado'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
             'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
@@ -362,7 +362,7 @@ class ProyectoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Summary', [
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
-            'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'radicado'),
+            'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
         ]);
     }
 
@@ -389,7 +389,7 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Enviar el pryecto al dinamizador a cargo.
+     * Enviar el proyecto al dinamizador a cargo.
      *
      * @param  \App\Models\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
@@ -413,12 +413,12 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Radicar proyecto.
+     * Enviar proyecto a evaluación.
      *
      * @param  \App\Models\Proyecto  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function radicarProyecto(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function enviarAEvaluacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
@@ -427,15 +427,15 @@ class ProyectoController extends Controller
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
-        $proyecto->radicado = true;
+        $proyecto->a_evaluar = true;
         $proyecto->finalizado = true;
         $proyecto->modificable = false;
         $proyecto->save();
 
         $user = $proyecto->participantes()->where('es_formulador', true)->first();
-        $user->notify(new ProyectoRadicado($proyecto, Auth::user()));
+        $user->notify(new ProyectoConfirmado($proyecto, Auth::user()));
 
-        return redirect()->back()->with('success', 'Se ha radicado el proyecto correctamente.');
+        return redirect()->back()->with('success', 'Se ha confirmado el proyecto correctamente.');
     }
 
     /**
@@ -448,7 +448,7 @@ class ProyectoController extends Controller
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
-        $proyecto->radicado = false;
+        $proyecto->a_evaluar = false;
         $proyecto->finalizado = false;
         $proyecto->modificable = true;
         $proyecto->save();
@@ -553,12 +553,12 @@ class ProyectoController extends Controller
     public function filterParticipantes(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         if (!empty($request->search_participante)) {
-            $query = User::orderBy('nombre', 'ASC')
+            $query = User::orderBy('users.nombre', 'ASC')
                 ->filterUser(['search' => $request->search_participante])
                 ->with('centroFormacion.regional')->take(6);
 
             if ($proyecto->participantes->count() > 0) {
-                $query->whereNotIn('id', explode(',', $proyecto->participantes->implode('id', ',')));
+                $query->whereNotIn('users.id', explode(',', $proyecto->participantes->implode('id', ',')));
             }
 
             $users = $query->get()->take(5);
