@@ -97,19 +97,8 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
-
-                {#if infoRolSennova?.experiencia}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
-                            Experiencia (meses)
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {infoRolSennova.experiencia}
-                            </span>
-                        </p>
-                    </div>
-                {/if}
 
                 {#if proyecto.codigo_linea_programatica != 68}
                     <div class="mt-4">
