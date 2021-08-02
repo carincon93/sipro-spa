@@ -104,7 +104,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

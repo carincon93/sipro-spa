@@ -126,7 +126,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnoacademia_id);
         $tecnoacademia->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

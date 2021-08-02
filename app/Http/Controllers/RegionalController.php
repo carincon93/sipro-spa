@@ -102,7 +102,7 @@ class RegionalController extends Controller
 
         $regional->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -118,6 +118,6 @@ class RegionalController extends Controller
         // No se pueden eliminar regionales, solo el admin DB
         // $regional->delete();
 
-        return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
+        return back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
     }
 }

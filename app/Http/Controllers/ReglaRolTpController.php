@@ -138,7 +138,7 @@ class ReglaRolTpController extends Controller
 
         $reglaRolTp->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

@@ -95,11 +95,11 @@ class ProyectoPresupuestoController extends Controller
 
         if ($proyecto->lineaProgramatica->codigo != 69 && $proyecto->lineaProgramatica->codigo != 70) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, 4460000)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+                return back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
             }
         } else if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, 10000000)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
+                return back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
             }
         }
 
@@ -108,12 +108,12 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -122,12 +122,12 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+                return back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -136,11 +136,11 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::primerReglaTp($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria de rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+                return back()->with('error', "La sumatoria de rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
             }
 
             if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
             }
         }
 
@@ -149,20 +149,20 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
             }
 
             if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
+                return back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
             }
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
             }
 
             $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
             if (PresupuestoValidationTrait::edt($proyecto, $convocatoriaPresupuesto, null, $request->valor_total, $valorMaxEdt)) {
-                return redirect()->back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
+                return back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
             }
         }
 
@@ -263,11 +263,11 @@ class ProyectoPresupuestoController extends Controller
 
         if ($proyecto->lineaProgramatica->codigo != 69 && $proyecto->lineaProgramatica->codigo != 70) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, 4460000)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
+                return back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $4.460.000");
             }
         } else if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::viaticosValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, 10000000)) {
-                return redirect()->back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
+                return back()->with('error', "La sumatoria de todos los rubros de viáticos no debe superar el valor de $10.000.000");
             }
         }
 
@@ -276,12 +276,12 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 66) {
             if (PresupuestoValidationTrait::serviciosEspecialesConstruccionValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% del total del rubro 'Maquinaria industrial'. Vuelva a diligenciar.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% del ($ {$porcentajeProyecto}) COP total del proyecto. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% del ($ {$porcentajeProyecto}) COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -290,12 +290,12 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 23) {
             if (PresupuestoValidationTrait::adecuacionesYContruccionesValidation($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
+                return back()->with('error', "Antes de diligenciar información sobre este rubro de 'Adecuaciones y construcciones' tenga en cuenta que el total NO debe superar el valor de 100 salarios mínimos.");
             }
 
             if (PresupuestoValidationTrait::serviciosMantenimientoValidation($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 $porcentajeProyecto = $proyecto->getPrecioProyectoAttribute() * 0.05;
-                return redirect()->back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
+                return back()->with('error', "Este estudio de mercado supera el 5% ($ {$porcentajeProyecto}) del COP total del proyecto. Vuelva a diligenciar.");
             }
         }
 
@@ -304,11 +304,11 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::primerReglaTp($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria de los rubros: adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+                return back()->with('error', "La sumatoria de los rubros: adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
             }
 
             if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $120.000.000.");
             }
         }
 
@@ -317,24 +317,24 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
             }
 
             if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
+                return back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior);
             }
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return redirect()->back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
+                return back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
             }
 
             $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
             if (PresupuestoValidationTrait::edt($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total, $valorMaxEdt)) {
-                return redirect()->back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
+                return back()->with('error', "La sumatoria del EDT no debe superar los $" . $valorMaxEdt);
             }
         }
 
@@ -400,7 +400,7 @@ class ProyectoPresupuestoController extends Controller
             $presupuesto->servicioEdicionInfo()->delete();
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -516,7 +516,7 @@ class ProyectoPresupuestoController extends Controller
             ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
         );
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

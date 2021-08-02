@@ -192,7 +192,7 @@ class TpController extends Controller
 
         $tp->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -204,17 +204,17 @@ class TpController extends Controller
     public function destroy(Request $request, Convocatoria $convocatoria, Tp $tp)
     {
         if ($tp->id == 1113) {
-            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+            return back()->with('error', 'Este proyecto no se puede eliminar.');
         }
 
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
         if ($tp->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

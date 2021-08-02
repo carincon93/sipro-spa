@@ -66,6 +66,6 @@ class HelpDeskController extends Controller
             $message = 'El área de sistemas ha sido notificado del error. En breve recibirá una respuesta al correo.';
         }
 
-        return redirect()->back()->with('status', $message ?? 'Ha ocurrido un error. Intentelo de nuevo más tarde');
+        return back()->with('status', $message ?? 'Ha ocurrido un error. Intentelo de nuevo más tarde');
     }
 }

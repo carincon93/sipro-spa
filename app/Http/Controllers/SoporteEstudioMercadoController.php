@@ -76,7 +76,7 @@ class SoporteEstudioMercadoController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         if ($presupuesto->soportesEstudioMercado()->count() == 3) {
-            return redirect()->back()->with('error', 'No se ha podido crear el recurso. Ha superado el máximo de soportes/cotizaciones.');
+            return back()->with('error', 'No se ha podido crear el recurso. Ha superado el máximo de soportes/cotizaciones.');
         }
 
         $soporte = new SoporteEstudioMercado();
@@ -156,7 +156,7 @@ class SoporteEstudioMercadoController extends Controller
         $soporte->empresa = $request->empresa;
         $soporte->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -199,7 +199,7 @@ class SoporteEstudioMercadoController extends Controller
          * Denega el acceso si el rubro no requiere de estudio de mercado.
          */
         if (!$presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo != '020202008005096') {
-            return redirect()->back()->with('error', 'Este rubro presupuestal no requiere estudio de mercado.');
+            return back()->with('error', 'Este rubro presupuestal no requiere estudio de mercado.');
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/SoportesEstudioMercado/Index', [

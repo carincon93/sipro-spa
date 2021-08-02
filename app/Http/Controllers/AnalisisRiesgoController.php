@@ -135,7 +135,7 @@ class AnalisisRiesgoController extends Controller
 
         $analisisRiesgo->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -218,7 +218,7 @@ class AnalisisRiesgoController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

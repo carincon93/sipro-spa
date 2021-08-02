@@ -96,6 +96,6 @@ class DisCurricularController extends Controller
 
         $proyecto->disCurriculares()->attach($disCurricular);
 
-        return redirect()->back()->with('success', 'El recurso se ha creado correctamente.');
+        return back()->with('success', 'El recurso se ha creado correctamente.');
     }
 }

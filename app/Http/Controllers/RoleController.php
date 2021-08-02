@@ -112,7 +112,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->permission_id);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

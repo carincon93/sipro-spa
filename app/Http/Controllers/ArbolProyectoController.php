@@ -349,7 +349,7 @@ class ArbolProyectoController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -429,7 +429,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -448,7 +448,7 @@ class ArbolProyectoController extends Controller
 
         $efectoDirecto->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -493,7 +493,7 @@ class ArbolProyectoController extends Controller
             $efectoIndirecto->descripcion = $request->descripcion;
             $efectoIndirecto->save();
         } else {
-            return redirect()->back()->with('error', 'No se pueden añadir más efectos indirectos.');
+            return back()->with('error', 'No se pueden añadir más efectos indirectos.');
         }
 
         if (empty($efectoIndirecto->impacto)) {
@@ -502,7 +502,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -521,7 +521,7 @@ class ArbolProyectoController extends Controller
 
         $causaDirecta->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -566,7 +566,7 @@ class ArbolProyectoController extends Controller
             $causaIndirecta->descripcion = $request->descripcion;
             $causaIndirecta->save();
         } else {
-            return redirect()->back()->with('error', 'No se pueden añadir más causas indirectas.');
+            return back()->with('error', 'No se pueden añadir más causas indirectas.');
         }
 
         if (empty($causaIndirecta->actividad)) {
@@ -575,7 +575,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -742,7 +742,7 @@ class ArbolProyectoController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -795,7 +795,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -814,10 +814,10 @@ class ArbolProyectoController extends Controller
         $impacto->tipo           = $request->tipo;
 
         if ($impacto->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba el impacto. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actulizaba el impacto. Vuelva a intentar');
     }
 
     /**
@@ -841,10 +841,10 @@ class ArbolProyectoController extends Controller
         }
 
         if ($resultado->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el resultado. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actualizaba el resultado. Vuelva a intentar');
     }
 
     /**
@@ -863,10 +863,10 @@ class ArbolProyectoController extends Controller
         $objetivoEspecifico->numero      = $request->numero;
 
         if ($objetivoEspecifico->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
+        return back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
     }
 
     /**
@@ -894,9 +894,9 @@ class ArbolProyectoController extends Controller
         $actividad->objetivoEspecifico()->associate($resultado->objetivo_especifico_id);
 
         if ($actividad->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
     }
 }

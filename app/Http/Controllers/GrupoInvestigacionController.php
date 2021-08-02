@@ -112,7 +112,7 @@ class GrupoInvestigacionController extends Controller
 
         $grupoInvestigacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -127,6 +127,6 @@ class GrupoInvestigacionController extends Controller
 
         // $grupoInvestigacion->delete();
 
-        return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
+        return back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
     }
 }

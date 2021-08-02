@@ -205,7 +205,7 @@ class ServicioTecnologicoController extends Controller
 
         $servicioTecnologico->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -219,11 +219,11 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
         if ($servicioTecnologico->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -256,6 +256,6 @@ class ServicioTecnologicoController extends Controller
             'video'                     => $request->video
         ]);
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 }

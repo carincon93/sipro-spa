@@ -243,7 +243,7 @@ class TaController extends Controller
 
         $ta->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -255,17 +255,17 @@ class TaController extends Controller
     public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
         if ($ta->id == 1052) {
-            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+            return back()->with('error', 'Este proyecto no se puede eliminar.');
         }
 
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
         if ($ta->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -298,7 +298,7 @@ class TaController extends Controller
             'cantidad_psicopedagogos_planta' => $request->cantidad_psicopedagogos_planta
         ]);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -367,6 +367,6 @@ class TaController extends Controller
             'semilleros_en_formalizacion'   => $request->semilleros_en_formalizacion
         ]);
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 }

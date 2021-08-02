@@ -99,7 +99,7 @@ class LineaInvestigacionController extends Controller
 
         $lineaInvestigacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -115,7 +115,7 @@ class LineaInvestigacionController extends Controller
         try {
             $lineaInvestigacion->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
+            return back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
