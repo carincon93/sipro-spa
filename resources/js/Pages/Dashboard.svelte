@@ -119,7 +119,7 @@
             <figure>
                 <img src={window.basePath + '/images/megaphone.png'} alt="Megafono" />
             </figure>
-            Novedades
+            Anuncios
         </div>
         <div slot="content">
             <small>Agosto 2</small>
@@ -133,6 +133,11 @@
                     </svg>
                     Manual de usuario
                 </a>
+            </div>
+            <hr class="mt-10 mb-10" />
+            <div>
+                <h1 class="text-purple-200 mb-4">Usuarios del curso de estructuración de proyectos</h1>
+                <p>Si usted es una de las personas que realizó el curso de estructuración de proyectos y su usuario requiere un rol diferente al de Proponente I+D+i por favor escriba al correo ccvasquez@sena.edu.co solicitando cambio de rol.</p>
             </div>
             <hr class="mt-10 mb-10" />
             <div>
