@@ -128,7 +128,7 @@
                     </div>
                     {#if grupoInvestigacion}
                         <div class="mt-8">
-                            <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                            <Textarea label="Grupo de investigación" maxlength="191" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                         </div>
 
                         <div class="mt-8">
