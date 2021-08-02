@@ -24,7 +24,7 @@ class EfectoIndirectoRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => ['required', 'string', 'max:1200'],
+            'descripcion' => ['required', 'string'],
         ];
     }
 }
