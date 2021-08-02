@@ -30,6 +30,7 @@
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
