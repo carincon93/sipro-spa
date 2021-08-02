@@ -190,7 +190,7 @@ trait PresupuestoValidationTrait
                 $total += $valorTotal;
             }
 
-            if ($total > 200000000) {
+            if ($total > 250000000) {
                 return true;
             }
         }
