@@ -24,7 +24,7 @@ class ObjetivoEspecificoRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion'   => ['required', 'max:1200', 'string'],
+            'descripcion'   => ['required', 'string'],
             'numero'        => ['required', 'integer', 'between:1,6'],
         ];
     }
