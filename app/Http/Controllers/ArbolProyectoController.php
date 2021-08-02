@@ -757,7 +757,7 @@ class ArbolProyectoController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
-            'objetivo_general' => 'required|string|max:1200',
+            'objetivo_general' => 'required|string',
         ]);
 
         switch ($proyecto) {
