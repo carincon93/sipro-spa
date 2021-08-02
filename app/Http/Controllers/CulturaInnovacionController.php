@@ -67,7 +67,7 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto', [$request->linea_programatica_id]);
 
         if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->linea_programatica_id)) {
-            return redirect()->back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
+            return back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
         };
 
         $proyecto = new Proyecto();
@@ -217,7 +217,7 @@ class CulturaInnovacionController extends Controller
         $request->relacionado_tecnoacademia == 1 ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->detach();
 
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -231,11 +231,11 @@ class CulturaInnovacionController extends Controller
         $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         if ($culturaInnovacion->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

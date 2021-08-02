@@ -122,7 +122,7 @@ class ProyectoAnexoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -223,7 +223,7 @@ class ProyectoAnexoController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

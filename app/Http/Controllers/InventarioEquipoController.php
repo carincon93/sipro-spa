@@ -135,7 +135,7 @@ class InventarioEquipoController extends Controller
 
         $inventarioEquipo->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

@@ -152,7 +152,7 @@ class ActividadController extends Controller
         $actividad->productos()->sync($request->producto_id);
         $actividad->proyectoPresupuesto()->sync($request->proyecto_presupuesto_id);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -222,7 +222,7 @@ class ActividadController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -310,7 +310,7 @@ class ActividadController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

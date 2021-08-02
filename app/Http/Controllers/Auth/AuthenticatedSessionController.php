@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         Auth::guard('web')->logout();
-        return redirect()->back()->with('error', 'Su usuario está inhabilitado, solicite al dinamizador de su centro de formación que lo habilite en la plataforma.');
+        return back()->with('error', 'Su usuario está inhabilitado, solicite al dinamizador de su centro de formación que lo habilite en la plataforma.');
     }
 
     /**

@@ -86,7 +86,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 65) {
             if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -95,7 +95,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 68) {
             if (ProyectoRolStValidationTrait::rolStValidation($proyecto, $proyecto->servicioTecnologico->tipoProyectoSt->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -104,7 +104,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (ProyectoRolTpValidationTrait::rolTpValidation($proyecto, $proyecto->tp->nodoTecnoparque->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -113,7 +113,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id, $request->convocatoria_rol_sennova_id, null, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -121,16 +121,16 @@ class ProyectoRolSennovaController extends Controller
          * Todas las líneas
          */
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
-            return redirect()->back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
+            return back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
         }
 
         if ($proyecto->lineaProgramatica->codigo != 70) {
             if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+                return back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
             }
         } else {
             if (ProyectoRolTaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
+                return back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
             }
         }
 
@@ -198,7 +198,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 65) {
             if (ProyectoRolSennovaValidationTrait::culturaInnovacionRoles($proyecto, $request->convocatoria_rol_sennova_id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este centro de formación. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -207,7 +207,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 68) {
             if (ProyectoRolStValidationTrait::rolStValidation($proyecto, $proyecto->servicioTecnologico->tipoProyectoSt->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este tipo de proyecto. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -216,7 +216,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (ProyectoRolTpValidationTrait::rolTpValidation($proyecto, $proyecto->tp->nodoTecnoparque->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para este nodo. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -225,7 +225,7 @@ class ProyectoRolSennovaController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (ProyectoRolTaValidationTrait::rolTaValidation($proyecto, $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id, $request->convocatoria_rol_sennova_id, $proyectoRolSennova->id, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
+                return back()->with('error', 'No se ha podido agregar este rol SENNOVA. Razones: Ha superado el límite permitido o el rol no está disponible para esta tecnoacademia. Revise los lineamientos de la convocatoria.');
             }
         }
 
@@ -233,16 +233,16 @@ class ProyectoRolSennovaController extends Controller
          * Todas las líneas
          */
         if (ProyectoRolSennovaValidationTrait::monitoriaValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
-            return redirect()->back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
+            return back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
         }
 
         if ($proyecto->lineaProgramatica->codigo != 70) {
             if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
+                return back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
             }
         } else {
             if (ProyectoRolTaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
-                return redirect()->back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
+                return back()->with('error', 'Máximo 4 contratos de aprendizaje por 6 meses');
             }
         }
 
@@ -254,7 +254,7 @@ class ProyectoRolSennovaController extends Controller
 
         $proyectoRolSennova->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -335,6 +335,6 @@ class ProyectoRolSennovaController extends Controller
             ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
         );
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

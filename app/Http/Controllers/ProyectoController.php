@@ -188,7 +188,7 @@ class ProyectoController extends Controller
 
         $evaluacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     public function updatePropuestaSostenibilidad(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
@@ -249,7 +249,7 @@ class ProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -375,7 +375,7 @@ class ProyectoController extends Controller
     public function finalizarEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -385,7 +385,7 @@ class ProyectoController extends Controller
 
         Auth::user()->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));
 
-        return redirect()->back()->with('success', 'La evaluación ha sido finalizada correctamente.');
+        return back()->with('success', 'La evaluación ha sido finalizada correctamente.');
     }
 
     /**
@@ -399,7 +399,7 @@ class ProyectoController extends Controller
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -409,7 +409,7 @@ class ProyectoController extends Controller
 
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
-        return redirect()->back()->with('success', 'Se ha finalizado el proyecto correctamente.');
+        return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
 
     /**
@@ -423,7 +423,7 @@ class ProyectoController extends Controller
         $this->authorize('validar-dinamizador', [$proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -435,7 +435,7 @@ class ProyectoController extends Controller
         $user = $proyecto->participantes()->where('es_formulador', true)->first();
         $user->notify(new ProyectoConfirmado($proyecto, Auth::user()));
 
-        return redirect()->back()->with('success', 'Se ha confirmado el proyecto correctamente.');
+        return back()->with('success', 'Se ha confirmado el proyecto correctamente.');
     }
 
     /**
@@ -456,7 +456,7 @@ class ProyectoController extends Controller
         $user = $proyecto->participantes()->where('es_formulador', true)->first();
         $user->notify(new ComentarioProyecto($convocatoria, $proyecto, $request->comentario));
 
-        return redirect()->back()->with('success', 'Se ha notificado al proponente.');
+        return back()->with('success', 'Se ha notificado al proponente.');
     }
 
     /**
@@ -516,7 +516,7 @@ class ProyectoController extends Controller
         $evaluacion->proyecto->semillerosInvestigacion;
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
-            return redirect()->back()->with('error', 'Esta línea programática no requiere de participantes');
+            return back()->with('error', 'Esta línea programática no requiere de participantes');
         }
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 23 || $evaluacion->proyecto->codigo_linea_programatica == 65 || $evaluacion->proyecto->codigo_linea_programatica == 66 || $evaluacion->proyecto->codigo_linea_programatica == 82) {
@@ -587,16 +587,16 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
-                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
+                return back()->with('error', 'El recurso ya está vinculado.');
             }
 
             $proyecto->participantes()->attach($request->user_id, $data);
-            return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
+            return back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -614,13 +614,13 @@ class ProyectoController extends Controller
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
                 $proyecto->participantes()->detach($request->user_id);
-                return redirect()->back()->with('success', 'El recurso se ha desvinculado correctamente.');
+                return back()->with('success', 'El recurso se ha desvinculado correctamente.');
             }
-            return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
+            return back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -638,14 +638,14 @@ class ProyectoController extends Controller
         try {
             if ($proyecto->participantes()->where('id', $request->user_id)->exists()) {
                 $proyecto->participantes()->updateExistingPivot($request->user_id, $data);
-                return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
+                return back()->with('success', 'El recurso se ha vinculado correctamente.');
             }
-            return redirect()->back()->with('error', 'El recurso ya está desvinculado.');
+            return back()->with('error', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -724,15 +724,15 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->semillerosInvestigacion()->where('id', $request->semillero_investigacion_id)->exists()) {
-                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
+                return back()->with('error', 'El recurso ya está vinculado.');
             }
             $proyecto->semillerosInvestigacion()->attach($request->semillero_investigacion_id);
-            return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
+            return back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -750,13 +750,13 @@ class ProyectoController extends Controller
         try {
             if ($proyecto->semillerosInvestigacion()->where('id', $request->semillero_investigacion_id)->exists()) {
                 $proyecto->semillerosInvestigacion()->detach($request->semillero_investigacion_id);
-                return redirect()->back()->with('success', 'El recurso se ha desvinculado correctamente.');
+                return back()->with('success', 'El recurso se ha desvinculado correctamente.');
             }
-            return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
+            return back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -800,15 +800,15 @@ class ProyectoController extends Controller
 
         try {
             if ($proyecto->programasFormacion()->where('id', $request->programa_formacion_id)->exists()) {
-                return redirect()->back()->with('error', 'El recurso ya está vinculado.');
+                return back()->with('error', 'El recurso ya está vinculado.');
             }
             $proyecto->programasFormacion()->attach($request->programa_formacion_id);
-            return redirect()->back()->with('success', 'El recurso se ha vinculado correctamente.');
+            return back()->with('success', 'El recurso se ha vinculado correctamente.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
 
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**
@@ -826,13 +826,13 @@ class ProyectoController extends Controller
         try {
             if ($proyecto->programasFormacion()->where('id', $request->programa_formacion_id)->exists()) {
                 $proyecto->programasFormacion()->detach($request->programa_formacion_id);
-                return redirect()->back()->with('success', 'El recurso se ha desvinculado correctamente.');
+                return back()->with('success', 'El recurso se ha desvinculado correctamente.');
             }
-            return redirect()->back()->with('success', 'El recurso ya está desvinculado.');
+            return back()->with('success', 'El recurso ya está desvinculado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+            return back()->with('error', 'Oops! Algo salió mal.');
         }
-        return redirect()->back()->with('error', 'Oops! Algo salió mal.');
+        return back()->with('error', 'Oops! Algo salió mal.');
     }
 
     /**

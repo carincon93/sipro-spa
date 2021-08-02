@@ -216,7 +216,7 @@ class IdiController extends Controller
         $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
         $request->relacionado_tecnoacademia == 1 ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $idi->proyecto->tecnoacademiaLineasTecnoacademia()->detach();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -230,11 +230,11 @@ class IdiController extends Controller
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
         if ($idi->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

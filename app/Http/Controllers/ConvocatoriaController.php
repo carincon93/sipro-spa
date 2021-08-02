@@ -165,7 +165,7 @@ class ConvocatoriaController extends Controller
 
         $convocatoria->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -178,7 +178,7 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('delete', [Convocatoria::class, $convocatoria]);
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => 'Contraseña incorrecta']);
         }
 
