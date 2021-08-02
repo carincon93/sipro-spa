@@ -10,6 +10,7 @@
     import Select from '@/Shared/Select'
     import InputError from '@/Shared/InputError'
     import SelectMulti from '@/Shared/SelectMulti'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -112,14 +113,20 @@
                 {/if}
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
+            {#if tecnoAcademias.length > 0}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
+                    </div>
+                    <div>
+                        <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                    </div>
                 </div>
-                <div>
-                    <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+            {:else}
+                <div class="mt-44">
+                    <InfoMessage message="Su centro de formación no tiene TecnoAcademias asociadas." alertMsg={true} />
                 </div>
-            </div>
+            {/if}
 
             {#if $form.tecnoacademia_id?.value}
                 <div class="mt-44 grid grid-cols-2">
