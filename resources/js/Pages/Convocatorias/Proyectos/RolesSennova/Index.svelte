@@ -38,6 +38,7 @@
             $form.put(route('convocatorias.proyectos.rol-sennova-ta.update', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
@@ -95,7 +96,7 @@
                 {/if}
             </h2>
             {#if proyecto.codigo_linea_programatica == 70}
-                <form on:submit|preventDefault={submit}>
+                <form on:submit|preventDefault={submit} class="mb-40">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
                             <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_instructores_planta} bind:value={$form.cantidad_instructores_planta} required />
