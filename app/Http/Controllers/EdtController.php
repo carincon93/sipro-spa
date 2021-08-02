@@ -42,7 +42,7 @@ class EdtController extends Controller
             'convocatoria'     => $convocatoria->only('id'),
             'proyecto'         => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
             'filters'          => request()->all('search'),
-            'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')
+            'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $proyecto->id)
                 ->filterEdt(request()->only('search'))->select('edt.id', 'edt.descripcion_evento', 'edt.numero_asistentes', 'edt.proyecto_presupuesto_id')->paginate(),
         ]);
     }
