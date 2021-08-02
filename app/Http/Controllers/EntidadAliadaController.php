@@ -199,7 +199,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Edit', [
             'convocatoria'    => $convocatoria->only('id'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica'),
+            'proyecto'        => $proyecto->only('id', 'modificable', 'codigo_linea_programatica'),
             'entidadAliada'   => $entidadAliada,
             'actividades'     => Actividad::whereIn(
                 'objetivo_especifico_id',

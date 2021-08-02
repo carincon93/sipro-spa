@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="mt-8">
-                        <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                        <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="255" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                     </div>
 
                     <div class="mt-8">
