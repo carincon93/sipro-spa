@@ -205,17 +205,19 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage
-                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
-                    />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                        <InfoMessage
+                            message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                        />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
@@ -244,15 +246,17 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                        <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>

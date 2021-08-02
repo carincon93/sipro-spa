@@ -31,7 +31,7 @@
     let sending = false
     let sended = false
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             sending = true
             sended = false
             try {
@@ -52,7 +52,7 @@
     }
 
     function linkSemilleroInvestigacion(id) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.semilleros-investigacion.link', {
                     proyecto: proyecto.id,
@@ -65,7 +65,7 @@
     }
 
     function removeSemilleroInvestigacion(id) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.semilleros-investigacion.unlink', {
                     proyecto: proyecto.id,
@@ -82,7 +82,7 @@
     <h1 class="text-4xl text-center">Semilleros de investigación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de semilleros de investigación</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
+        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el nombre completo del semillero de investigación" id="search_semillero_investigacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_semillero_investigacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
@@ -123,7 +123,7 @@
                             </td>
                             <td class="border-t td-actions">
                                 <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)}
+                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
                                         <Item on:SMUI:action={() => linkSemilleroInvestigacion(resultado.id)}>
                                             <Text>Vincular</Text>
                                         </Item>
@@ -179,7 +179,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.semillerosInvestigacion.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13]) && proyecto.modificable == true)}
+                            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
                                 <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
                                     <Text>Quitar</Text>
                                 </Item>
