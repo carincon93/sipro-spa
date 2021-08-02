@@ -42,6 +42,7 @@
             $form.put(route('convocatorias.servicios-tecnologicos.infraestructura', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
