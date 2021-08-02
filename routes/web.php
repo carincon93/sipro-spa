@@ -114,6 +114,8 @@ Route::get('web-api/centros-formacion', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get('manual-usuario/download', [ProyectoController::class, 'downloadManualUsuario'])->name('manual-usuario.download');
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
