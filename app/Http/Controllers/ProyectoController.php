@@ -834,4 +834,17 @@ class ProyectoController extends Controller
         }
         return redirect()->back()->with('error', 'Oops! Algo salió mal.');
     }
+
+    /**
+     * downloadManualUsuario
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $proyectoAnexo
+     * @return void
+     */
+    public function downloadManualUsuario()
+    {
+        return response()->download(storage_path("app/manual-usuario/Manual_de_usuario.pdf"));
+    }
 }
