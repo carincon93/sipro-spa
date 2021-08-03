@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-    'failed' => 'Las credenciales introducidas son incorrectas.',
-    'throttle' => 'Demasiados intentos de acceso. Inténtelo de nuevo en :seconds segundos.',
+	'failed' => 'Las credenciales introducidas son incorrectas.  Es posible que haya olvidado la contraseña, por favor de clic en la opción \'¿Olvidó su contraseña?\'',
+	'throttle' => 'Demasiados intentos de acceso. Inténtelo de nuevo en :seconds segundos.',
 
 ];
