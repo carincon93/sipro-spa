@@ -24,8 +24,20 @@
                     ¡Bienvenido(a)
                     <span class="capitalize">{$page.props.auth.user.nombre}</span>!
                 </h1>
-                <p class="text-2xl mt-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
-                <p class="mt-4">Revise las convocatorias haciendo clic en el botón <strong>Revisar convocatorias</strong> y empiece la formulación de proyectos.</p>
+                {#if checkRole(authUser, [1])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Administrador</p>
+                {:else if checkRole(authUser, [2])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Director regional</p>
+                {:else if checkRole(authUser, [3])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Subdirector de centro de formación</p>
+                {:else if checkRole(authUser, [5, 17, 18, 19, 20])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Activador (a)</p>
+                {:else if checkRole(authUser, [4])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Dinamizador (a) SENNOVA</p>
+                {:else}
+                    <p class="text-2xl mt-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
+                {/if}
+                <p class="mt-4">Revise las convocatorias haciendo clic en el botón <strong>Revisar convocatorias</strong> y empiece la revisión o formulación de proyectos.</p>
 
                 {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
                     <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Revisar convocatorias</Button>
