@@ -136,7 +136,7 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::primerReglaTp($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return back()->with('error', "La sumatoria de rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+                return back()->with('error', "La sumatoria de rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $250.000.000.");
             }
 
             if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
@@ -158,6 +158,10 @@ class ProyectoPresupuestoController extends Controller
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
                 return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
+            }
+
+            if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
+                return back()->with('error', "La sumatoria de los rubros equipo de sistemas, maquinaria industrial, otras compras de equipos, adecuaciones y construccione, mantenimiento de maquinaria, equipo, transporte y sofware no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
             }
 
             $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
@@ -304,7 +308,7 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 69) {
             if (PresupuestoValidationTrait::primerReglaTp($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return back()->with('error', "La sumatoria de los rubros: adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $200.000.000.");
+                return back()->with('error', "La sumatoria de los rubros: adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software no debe superar los $250.000.000.");
             }
 
             if (PresupuestoValidationTrait::segundaReglaTp($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
@@ -329,7 +333,7 @@ class ProyectoPresupuestoController extends Controller
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return back()->with('error', "La sumatoria del rubro viaticos y gastos de viaje al interior formacion profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
+                return back()->with('error', "La sumatoria de los rubros equipo de sistemas, maquinaria industrial, otras compras de equipos, adecuaciones y construccione, mantenimiento de maquinaria, equipo, transporte y sofware no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos);
             }
 
             $valorMaxEdt = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
