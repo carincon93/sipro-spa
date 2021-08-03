@@ -21,8 +21,7 @@ class SemilleroInvestigacionController extends Controller
 
         return Inertia::render('SemillerosInvestigacion/Index', [
             'filters'   => request()->all('search'),
-            'semillerosInvestigacion' => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')
-                ->filterSemilleroInvestigacion(request()->only('search'))->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate()->appends(['search' => request()->search]),
+            'semillerosInvestigacion' => SemilleroInvestigacion::getSemillerosInvestigacionByRol()->appends(['search' => request()->search]),
         ]);
     }
 

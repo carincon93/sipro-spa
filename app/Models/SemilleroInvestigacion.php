@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SemilleroInvestigacion extends Model
 {
@@ -84,5 +85,31 @@ class SemilleroInvestigacion extends Model
             $query->orWhereRaw("unaccent(lineas_investigacion.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getUsersByRol
+     *
+     * @return object
+     */
+    public static function getSemillerosInvestigacionByRol()
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $semilerosInvestigacion = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')->filterSemilleroInvestigacion(request()->only('search'))->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate();
+        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
+            $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+
+            $semilerosInvestigacion = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion.centroFormacion')
+                ->whereHas(
+                    'lineaInvestigacion.grupoInvestigacion.centroFormacion',
+                    function ($query) use ($centroFormacionId) {
+                        $query->where('id', $centroFormacionId);
+                    }
+                )
+                ->filterSemilleroInvestigacion(request()->only('search'))->paginate();
+        }
+
+        return $semilerosInvestigacion;
     }
 }
