@@ -52,7 +52,7 @@ class TaRequest extends FormRequest
                 'proyectos_macro'                           => ['nullable', 'string'],
                 'lineas_medulares_centro'                   => ['nullable', 'string'],
                 'lineas_tecnologicas_centro'                => ['nullable', 'string'],
-                'proyeccion_nuevas_tecnoacademias'          => ['required', 'min:0', 'max:3', 'integer'],
+                'proyeccion_nuevas_instituciones'           => ['required', 'min:0', 'max:3', 'integer'],
                 'proyeccion_articulacion_media'             => ['required', 'min:0', 'max:3', 'integer'],
             ];
         } else {
@@ -158,9 +158,9 @@ class TaRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->proyeccion_nuevas_tecnoacademias)) {
+        if (is_array($this->proyeccion_nuevas_instituciones)) {
             $this->merge([
-                'proyeccion_nuevas_tecnoacademias' => $this->proyeccion_nuevas_tecnoacademias['value'],
+                'proyeccion_nuevas_instituciones' => $this->proyeccion_nuevas_instituciones['value'],
             ]);
         }
 

@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -12,10 +12,15 @@
     import DataTable from '@/Shared/DataTable'
     import Stepper from '@/Shared/Stepper'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Label from '@/Shared/Label'
+    import Select from '@/Shared/Select'
+    import LoadingButton from '@/Shared/LoadingButton'
 
+    export let errors
     export let convocatoria
     export let proyecto
     export let entidadesAliadas
+    export let infraestructuraTecnoacademia
 
     $title = 'Entidades aliadas'
 
@@ -24,6 +29,25 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let sending = false
+    let form = useForm({
+        _method: 'put',
+        infraestructura_tecnoacademia: {
+            value: proyecto.infraestructura_tecnoacademia,
+            label: infraestructuraTecnoacademia.find((item) => item.value == proyecto.infraestructura_tecnoacademia)?.label,
+        },
+    })
+
+    function submit() {
+        if (isSuperAdmin || (checkPermission(authUser, [8, 9]) && proyecto.modificable == true)) {
+            $form.post(route('convocatorias.ta.infraestrucutra.update', [convocatoria.id, proyecto.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -35,6 +59,19 @@
         <div slot="caption">
             {#if proyecto.codigo_linea_programatica == 70}
                 <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
+                <form on:submit|preventDefault={submit} class="mt-8 mb-40">
+                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [8, 9]) && proyecto.modificable == true) ? undefined : true}>
+                        <div>
+                            <Label required class="mb-4" labelFor="infraestructura_tecnoacademia" value="La infraestructura donde opera la TecnoAcademia es:" />
+                            <Select id="infraestructura_tecnoacademia" items={infraestructuraTecnoacademia} bind:selectedValue={$form.infraestructura_tecnoacademia} error={errors.infraestructura_tecnoacademia} autocomplete="off" placeholder="Seleccione el tipo de insfraestructura" required />
+                        </div>
+                        {#if isSuperAdmin || (checkPermission(authUser, [8, 9]) && proyecto.modificable == true)}
+                            <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                            </div>
+                        {/if}
+                    </fieldset>
+                </form>
             {/if}
         </div>
 

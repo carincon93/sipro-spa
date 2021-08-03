@@ -83,9 +83,9 @@
         proyectos_macro: ta.proyectos_macro,
         lineas_medulares_centro: ta.lineas_medulares_centro,
         lineas_tecnologicas_centro: ta.lineas_tecnologicas_centro,
-        proyeccion_nuevas_tecnoacademias: {
-            value: ta.proyeccion_nuevas_tecnoacademias,
-            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_tecnoacademias)?.label,
+        proyeccion_nuevas_instituciones: {
+            value: ta.proyeccion_nuevas_instituciones,
+            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_instituciones)?.label,
         },
         proyeccion_articulacion_media: {
             value: ta.proyeccion_articulacion_media,
@@ -418,14 +418,14 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="proyeccion_nuevas_tecnoacademias" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
+                    <Label required class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
                 </div>
                 <div>
-                    <Select items={opcionesSiNo} id="proyeccion_nuevas_tecnoacademias" bind:selectedValue={$form.proyeccion_nuevas_tecnoacademias} error={errors.proyeccion_nuevas_tecnoacademias} autocomplete="off" placeholder="Seleccione una opción" required />
+                    <Select items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={$form.proyeccion_nuevas_instituciones} error={errors.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
             </div>
 
-            {#if $form.proyeccion_nuevas_tecnoacademias?.value == 1}
+            {#if $form.proyeccion_nuevas_instituciones?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />

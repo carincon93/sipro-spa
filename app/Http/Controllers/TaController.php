@@ -114,7 +114,7 @@ class TaController extends Controller
         $ta->numero_instituciones               = 0;
         $ta->nombre_instituciones               = null;
         $ta->nombre_instituciones_programas     = null;
-        $ta->proyeccion_nuevas_tecnoacademias   = 1;
+        $ta->proyeccion_nuevas_instituciones    = 1;
         $ta->proyeccion_articulacion_media      = 1;
         $ta->articulacion_semillero             = 1;
 
@@ -232,7 +232,7 @@ class TaController extends Controller
         $ta->proyectos_macro                    = $request->proyectos_macro;
         $ta->lineas_medulares_centro            = $request->lineas_medulares_centro;
         $ta->lineas_tecnologicas_centro         = $request->lineas_tecnologicas_centro;
-        $ta->proyeccion_nuevas_tecnoacademias   = $request->proyeccion_nuevas_tecnoacademias;
+        $ta->proyeccion_nuevas_instituciones    = $request->proyeccion_nuevas_instituciones;
         $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
 
         $ta->proyecto->municipios()->sync($request->municipios);
@@ -245,6 +245,26 @@ class TaController extends Controller
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Ta  $ta
+     * @return \Illuminate\Http\Response
+     */
+    public function updateInfraestructura(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        // $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
+        $proyecto->ta()->update([
+            'infraestructura_tecnoacademia' => $request->infraestructura_tecnoacademia['value']
+        ]);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
