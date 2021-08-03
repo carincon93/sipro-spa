@@ -319,7 +319,8 @@ class ProyectoController extends Controller
             'propuestaSostenibilidad'   => ProyectoValidationTrait::propuestaSostenibilidad($proyecto),
             'productosActividades'      => ProyectoValidationTrait::productosActividades($proyecto),
             'articulacionSennova'       => ProyectoValidationTrait::articulacionSennova($proyecto),
-            'soportesEstudioMercado'    => ProyectoValidationTrait::soportesEstudioMercado($proyecto)
+            'soportesEstudioMercado'    => ProyectoValidationTrait::soportesEstudioMercado($proyecto),
+            'edt'                       => ProyectoValidationTrait::edt($proyecto)
         ]);
     }
 

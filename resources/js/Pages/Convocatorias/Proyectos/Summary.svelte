@@ -37,6 +37,7 @@
     export let productosActividades
     export let articulacionSennova
     export let soportesEstudioMercado
+    export let edt
 
     $: $title = 'Finalizar proyecto'
 
@@ -216,6 +217,9 @@
                         {/if}
                         {#if !propuestaSostenibilidad}
                             <li>Propuesta de sostenibilidad</li>
+                        {/if}
+                        {#if !edt && proyecto.codigo_linea_programatica == 70}
+                            <li>Tiene un rubro presupuestal 'Servicios de organización y asistencia de convenciones y ferias' y le debe asociar al menos un EDT</li>
                         {/if}
                         {#if !actividadesPresupuesto}
                             <li>Hay actividades sin presupuesto relacionado</li>
