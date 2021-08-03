@@ -142,10 +142,16 @@ class ArbolProyectoController extends Controller
 
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 482, 0)');
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 483, 1)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 484, 2)');
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 485, 3)');
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 486, 4)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 487, 5)');
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 488, 6)');
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 489, 7)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 490, 8)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 491, 9)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 492, 10)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 493, 11)');
 
                 DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 519, 0)');
                 DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 520, 0)');
