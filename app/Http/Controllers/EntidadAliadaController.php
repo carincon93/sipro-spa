@@ -28,6 +28,10 @@ class EntidadAliadaController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
+        if ($proyecto->codigo_linea_programatica == 70) {
+            $proyecto->infraestructura_tecnoacademia = $proyecto->ta->infraestructura_tecnoacademia;
+        }
+
         /**
          * Si el proyecto es de la línea programática 23 o 65 se prohibe el acceso. No requiere de entidades aliadas
          */
@@ -37,10 +41,12 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
+            'infraestructuraTecnoacademia'  => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
+
         ]);
     }
 
@@ -69,8 +75,6 @@ class EntidadAliadaController extends Controller
             'tiposEntidadAliada'            => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
             'naturalezaEntidadAliada'       => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
             'tiposEmpresa'                  => json_decode(Storage::get('json/tipos-empresa.json'), true),
-            'infraestructuraTecnoacademia'  => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
-
         ]);
     }
 
@@ -148,7 +152,6 @@ class EntidadAliadaController extends Controller
                 'soporte_convenio'              => 'required|max:10000000|file|mimetypes:application/pdf',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
-                'infraestructura_tecnoacademia' => 'required|max:3',
             ]);
             $entidadAliadaTa = new EntidadAliadaTa();
             $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
@@ -160,7 +163,6 @@ class EntidadAliadaController extends Controller
             $entidadAliadaTa->soporte_convenio              = $rutaSoporteConvenio;
             $entidadAliadaTa->fecha_inicio_convenio         = $request->fecha_inicio_convenio;
             $entidadAliadaTa->fecha_fin_convenio            = $request->fecha_fin_convenio;
-            $entidadAliadaTa->infraestructura_tecnoacademia = $request->infraestructura_tecnoacademia['value'];
 
             $entidadAliada->entidadAliadaTa()->save($entidadAliadaTa);
 
@@ -212,7 +214,6 @@ class EntidadAliadaController extends Controller
             'tiposEntidadAliada'                => json_decode(Storage::get('json/tipos-entidades-aliadas.json'), true),
             'naturalezaEntidadAliada'           => json_decode(Storage::get('json/naturaleza-empresa.json'), true),
             'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true),
-            'infraestructuraTecnoacademia'      => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
         ]);
     }
 
@@ -290,13 +291,11 @@ class EntidadAliadaController extends Controller
                 'soporte_convenio'              => 'nullable|max:10000000|file|mimetypes:application/pdf',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
-                'infraestructura_tecnoacademia' => 'required|max:3',
             ]);
 
             $entidadAliada->entidadAliadaTa()->update([
                 'fecha_inicio_convenio'         => $request->fecha_inicio_convenio,
                 'fecha_fin_convenio'            => $request->fecha_fin_convenio,
-                'infraestructura_tecnoacademia' => $request->infraestructura_tecnoacademia['value']
             ]);
 
             if ($request->hasFile('soporte_convenio')) {

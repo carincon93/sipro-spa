@@ -22,7 +22,6 @@
     export let tiposEntidadAliada
     export let naturalezaEntidadAliada
     export let tiposEmpresa
-    export let infraestructuraTecnoacademia
 
     let grupoInvestigacion = false
     let convenio = false
@@ -169,10 +168,6 @@
                         <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
                     </div>
                 {:else if proyecto.codigo_linea_programatica == 70}
-                    <div class="mt-8">
-                        <Label required class="mb-4" labelFor="infraestructura_tecnoacademia" value="La infraestructura donde opera la TecnoAcademia es:" />
-                        <Select id="infraestructura_tecnoacademia" items={infraestructuraTecnoacademia} bind:selectedValue={$form.infraestructura_tecnoacademia} error={errors.infraestructura_tecnoacademia} autocomplete="off" placeholder="Seleccione la naturaleza de la entidad" required />
-                    </div>
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
                         <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />

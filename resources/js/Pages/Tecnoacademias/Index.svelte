@@ -29,7 +29,7 @@
         <div slot="title">Tecnoacademias</div>
 
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [5])}
                 <Button on:click={() => Inertia.visit(route('tecnoacademias.create'))} variant="raised">Crear tecnoacademia</Button>
             {/if}
         </div>
@@ -56,7 +56,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={tecnoacademias.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin}
+                            {#if isSuperAdmin || checkRole(authUser, [5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tecnoacademias.edit', tecnoacademia.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

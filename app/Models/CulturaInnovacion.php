@@ -218,6 +218,14 @@ class CulturaInnovacion extends Model
                 ->distinct()
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
+        } else if ($authUser->getAllPermissions()->where('id', 21)->first()) {
+            $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->distinct()
+                ->orderBy('cultura_innovacion.id', 'ASC')
+                ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
@@ -230,14 +238,6 @@ class CulturaInnovacion extends Model
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
-                ->distinct()
-                ->orderBy('cultura_innovacion.id', 'ASC')
-                ->filterCulturaInnovacion(request()->only('search'))->paginate();
-        } else if ($authUser->getAllPermissions()->where('id', 21)->first()) {
-            $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
-                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
-                ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
