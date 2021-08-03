@@ -353,8 +353,6 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        $evaluacion->save();
-
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
