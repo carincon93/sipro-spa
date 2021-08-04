@@ -217,6 +217,16 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 490, 1, 6)');
             DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 491, 2, 15)');
 
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 519)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 520)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 521)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 522)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 523)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 524)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 525)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 526)');
+            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 527)');
+
             DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 590, 0, 0)');
             DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 591, 0, 1)');
             DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 592, 0, 2)');
