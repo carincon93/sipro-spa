@@ -10,6 +10,7 @@
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -83,6 +84,8 @@
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                <InfoMessage message={convocatoria.fecha_maxima_st} class="my-5" />
+
                 <div class="mt-4 flex items-start justify-around">
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
