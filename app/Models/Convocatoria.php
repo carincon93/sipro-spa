@@ -22,7 +22,7 @@ class Convocatoria extends Model
      *
      * @var array
      */
-    public $appends = ['year', 'fechas_idi', 'fechas_st', 'fechas_ta', 'fechas_tp', 'fechas_cultura'];
+    public $appends = ['year', 'fechas_idi', 'fechas_st', 'fechas_ta', 'fechas_tp', 'fechas_cultura', 'fecha_maxima_idi', 'fecha_maxima_cultura', 'fecha_maxima_ta', 'fecha_maxima_tp', 'fecha_maxima_st'];
 
     /**
      * The attributes that are mass assignable.
@@ -137,6 +137,56 @@ class Convocatoria extends Model
     public function getFechasIdiAttribute()
     {
         return "La convocatoria de proyectos I+D+i empezó el " . Carbon::parse($this->fecha_inicio_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y finaliza el " . Carbon::parse($this->fecha_finalizacion_convocatoria_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechaMaximaIdiAttribute
+     *
+     * @return void
+     */
+    public function getFechaMaximaIdiAttribute()
+    {
+        return "Las fechas de ejución deben estar dentro del rango: " . Carbon::parse($this->min_fecha_inicio_proyectos_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y " . Carbon::parse($this->max_fecha_finalizacion_proyectos_idi, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechaMaximaCulturaAttribute
+     *
+     * @return void
+     */
+    public function getFechaMaximaCulturaAttribute()
+    {
+        return "Las fechas de ejución deben estar dentro del rango: " . Carbon::parse($this->min_fecha_inicio_proyectos_cultura, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y " . Carbon::parse($this->max_fecha_finalizacion_proyectos_cultura, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechaMaximaTaAttribute
+     *
+     * @return void
+     */
+    public function getFechaMaximaTaAttribute()
+    {
+        return "Las fechas de ejución deben estar dentro del rango: " . Carbon::parse($this->min_fecha_inicio_proyectos_ta, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y " . Carbon::parse($this->max_fecha_finalizacion_proyectos_ta, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechaMaximaTpAttribute
+     *
+     * @return void
+     */
+    public function getFechaMaximaTpAttribute()
+    {
+        return "Las fechas de ejución deben estar dentro del rango: " . Carbon::parse($this->min_fecha_inicio_proyectos_tp, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y " . Carbon::parse($this->max_fecha_finalizacion_proyectos_tp, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
+    }
+
+    /**
+     * getFechaMaximaStAttribute
+     *
+     * @return void
+     */
+    public function getFechaMaximaStAttribute()
+    {
+        return "Las fechas de ejución deben estar dentro del rango: " . Carbon::parse($this->min_fecha_inicio_proyectos_st, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . " y " . Carbon::parse($this->max_fecha_finalizacion_proyectos_st, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ".";
     }
 
     /**
