@@ -58,7 +58,6 @@
 
         <div slot="caption">
             {#if proyecto.codigo_linea_programatica == 70}
-                <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
                 <form on:submit|preventDefault={submit} class="mt-8 mb-40">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [8, 9]) && proyecto.modificable == true) ? undefined : true}>
                         <div>
@@ -72,6 +71,8 @@
                         {/if}
                     </fieldset>
                 </form>
+
+                <InfoMessage message="En el caso de tener un acuerdo, convenio o contrato de arrendamiento para la operación de la TecnoAcademia en una infraestructura de un tercero, es indispensable, adjuntar el documento contractual una vez este creando la entidad aliada." />
             {/if}
         </div>
 
