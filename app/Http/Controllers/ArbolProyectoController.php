@@ -194,12 +194,12 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 388, 4, 32)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 389, 5, 38)');
 
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 385)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 386)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 387)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 388)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 389)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 390)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 385)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 386)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 387)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 388)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 389)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 390)');
 
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 508, 0, 0)');
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 507, 0, 1)');
@@ -217,15 +217,15 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 490, 1, 6)');
             DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 491, 2, 15)');
 
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 519)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 520)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 521)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 522)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 523)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 524)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 525)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 526)');
-            DB::select('SELECT public."actividad_producto_ta"(' . $proyecto->id . ', 527)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 519)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 520)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 521)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 522)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 523)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 524)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 525)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 526)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 527)');
 
             DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 590, 0, 0)');
             DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 591, 0, 1)');
