@@ -204,14 +204,6 @@ class Ta extends Model
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
-        } else if ($authUser->getAllPermissions()->where('id', 15)->first()) {
-            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
-                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
-                ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->distinct()
-                ->orderBy('ta.id', 'ASC')
-                ->filterTa(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
@@ -224,6 +216,14 @@ class Ta extends Model
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
+                ->distinct()
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
+        } else if ($authUser->getAllPermissions()->where('id', 15)->first()) {
+            $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();

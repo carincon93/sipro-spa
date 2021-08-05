@@ -155,14 +155,6 @@ class ServicioTecnologico extends Model
                 ->distinct()
                 ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
-        } else if ($authUser->getAllPermissions()->where('id', 16)->first()) {
-            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
-                ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
-                ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->distinct()
-                ->orderBy('servicios_tecnologicos.id', 'ASC')
-                ->filterServicioTecnologico(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
@@ -175,6 +167,14 @@ class ServicioTecnologico extends Model
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
+                ->distinct()
+                ->orderBy('servicios_tecnologicos.id', 'ASC')
+                ->filterServicioTecnologico(request()->only('search'))->paginate();
+        } else if ($authUser->getAllPermissions()->where('id', 16)->first()) {
+            $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
+                ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
                 ->orderBy('servicios_tecnologicos.id', 'ASC')
                 ->filterServicioTecnologico(request()->only('search'))->paginate();
