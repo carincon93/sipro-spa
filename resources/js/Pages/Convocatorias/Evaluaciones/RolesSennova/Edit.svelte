@@ -95,7 +95,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList disabled={true} id="convocatoria_rol_sennova_id" value={rolSennovaInfo.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} recurso={infoRolSennova} placeholder="Busque por el nombre del rol" />
+                    <DynamicList disabled={true} id="convocatoria_rol_sennova_id" value={rolSennovaInfo.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto, lineaProgramatica])} recurso={infoRolSennova} placeholder="Busque por el nombre del rol" />
                 </div>
 
                 {#if infoRolSennova?.experiencia}

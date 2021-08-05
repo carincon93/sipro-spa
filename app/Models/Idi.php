@@ -206,12 +206,15 @@ class Idi extends Model
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
@@ -227,7 +230,9 @@ class Idi extends Model
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
@@ -236,7 +241,9 @@ class Idi extends Model
                 ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->getAllPermissions()->where('id', 14)->first()) { // Permiso: Visualizador i+D+i
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
@@ -244,7 +251,9 @@ class Idi extends Model
                 ->filterIdi(request()->only('search'))->paginate();
         } else {
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'idi.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()

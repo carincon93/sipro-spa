@@ -36,7 +36,8 @@ class Proyecto extends Model
         'linea_programatica_id',
         'finalizado',
         'modificable',
-        'a_evaluar'
+        'a_evaluar',
+        'estructuracion_proyectos'
     ];
 
     /**

@@ -55,6 +55,13 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
+    <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 right-10 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        Ir a la evaluación
+    </a>
+
     {#if proyecto.codigo_linea_programatica == 68}
         <h1 class="mt-24 mb-8 text-center text-3xl">Especificaciones e infraestructura</h1>
 
@@ -124,7 +131,7 @@
 
     <hr class="mt-10 mb-10" />
 
-    <h1 class="text-3xl mt-24 mb-8 text-center">Evaluación</h1>
+    <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
 
     <div class="mt-16">
         <form on:submit|preventDefault={submit}>

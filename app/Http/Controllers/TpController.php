@@ -29,8 +29,8 @@ class TpController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'filters'       => request()->all('search'),
-            'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'filters'       => request()->all('search', 'estructuracion_proyectos'),
+            'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 
