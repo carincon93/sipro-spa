@@ -3,8 +3,8 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
 
-    import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -19,7 +19,6 @@
     export let convocatoria
     export let proyecto
     export let resultados
-    export let actividades
     export let tiposProducto
 
     $: $title = 'Crear producto'
@@ -54,6 +53,15 @@
                 onFinish: () => (sending = false),
             })
         }
+    }
+
+    let actividades = []
+    let resultado_id = null
+
+    $: if (resultado_id?.value) {
+        $form.actividad_id = []
+        $form.resultado_id = resultado_id.value
+        actividades = resultado_id.actividades
     }
 </script>
 
@@ -117,7 +125,7 @@
 
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
-                    <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                    <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
                 <div class="mt-8">
                     <Label required labelFor="indicador" value="Indicador" />
@@ -185,10 +193,11 @@
                     </div>
                     <div class="grid grid-cols-2">
                         {#each actividades as { id, descripcion }, i}
-                            <FormField class="border-b border-l py-4">
-                                <Checkbox bind:group={$form.actividad_id} value={id} />
-                                <span slot="label">{descripcion}</span>
-                            </FormField>
+                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
+
+                            <div class="border-b border-t flex items-center justify-center">
+                                <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
+                            </div>
                         {/each}
                         {#if actividades.length == 0}
                             <p class="p-4">Sin información registrada</p>

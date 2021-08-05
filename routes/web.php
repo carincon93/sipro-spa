@@ -55,6 +55,7 @@ use App\Http\Controllers\InventarioEquipoController;
 use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
+use App\Models\Actividad;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
 use App\Models\LineaInvestigacion;
@@ -180,6 +181,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->orderBy('centros_formacion.nombre', 'ASC')->get());
     })->name('web-api.cultura-innovacion.centros-formacion');
 
+    // Trae las actividades por resultado
+    Route::get('web-api/resultados/{resultado}/actividades', function ($resultado) {
+        return response(Actividad::select('actividades.id', 'actividades.descripcion', 'actividades.resultado_id')
+            ->where('actividades.resultado_id', $resultado)
+            ->distinct()
+            ->get());
+    })->name('web-api.resultados.actividades');
+
     // Trae los conceptos internos SENA
     Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', function ($lineaProgramatica) {
         return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
@@ -189,6 +198,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->orderBy('segundo_grupo_presupuestal.nombre', 'ASC')
             ->get());
     })->name('web-api.segundo-grupo-presupuestal');
+
+
 
     Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function ($segundoGrupoPresupuestal) {
         return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(tercer_grupo_presupuestal.id) as value, tercer_grupo_presupuestal.nombre as label')

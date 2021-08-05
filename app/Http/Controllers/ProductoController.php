@@ -93,20 +93,12 @@ class ProductoController extends Controller
         $proyecto->ta;
         $proyecto->tp;
 
-        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
-
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
-            'actividades'       => Actividad::whereIn(
-                'objetivo_especifico_id',
-                $objetivoEspecifico->map(function ($objetivoEspecifico) {
-                    return $objetivoEspecifico->id;
-                })
-            )->orderBy('fecha_inicio', 'ASC')->get(),
             'resultados'        => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
                 $query->where('descripcion', '!=', null);
-            })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten(),
+            })->with('resultados:id,id as value,descripcion as label,efecto_directo_id', 'resultados.actividades')->get()->pluck('resultados')->flatten(),
             'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
@@ -219,20 +211,12 @@ class ProductoController extends Controller
 
         $resultados = $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
             $query->where('descripcion', '!=', null);
-        })->with('resultados:id as value,descripcion as label,efecto_directo_id')->get()->pluck('resultados')->flatten();
-
-        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+        })->with('resultados:id,id as value,descripcion as label,efecto_directo_id', 'resultados.actividades')->get()->pluck('resultados')->flatten();
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto,
             'producto'                  => $producto,
-            'actividades'               => Actividad::whereIn(
-                'objetivo_especifico_id',
-                $objetivoEspecifico->map(function ($objetivoEspecifico) {
-                    return $objetivoEspecifico->id;
-                })
-            )->orderBy('fecha_inicio', 'ASC')->get(),
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
             'resultados'                => $resultados->where('label', '!=', null)->flatten(),
             'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
@@ -256,7 +240,11 @@ class ProductoController extends Controller
         $producto->indicador            = $request->indicador;
         $producto->resultado()->associate($request->resultado_id);
 
-        $producto->actividades()->sync($request->actividad_id);
+        if ($producto->resultado_id != $request->resultado_id) {
+            $producto->actividades()->sync([]);
+        } else {
+            $producto->actividades()->sync($request->actividad_id);
+        }
 
         if ($proyecto->idi()->exists()) {
             $request->validate([
