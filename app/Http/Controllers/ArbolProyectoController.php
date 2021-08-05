@@ -154,14 +154,14 @@ class ArbolProyectoController extends Controller
                 DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 493, 11)');
 
                 DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 519, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 520, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 521, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 522, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 523, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 524, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 525, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 526, 0)');
-                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 527, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 520, 1)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 521, 2)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 522, 3)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 523, 4)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 524, 5)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 525, 6)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 526, 7)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 527, 8)');
             }
         }
 
