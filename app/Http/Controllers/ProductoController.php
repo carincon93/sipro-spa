@@ -219,7 +219,7 @@ class ProductoController extends Controller
             'producto'                  => $producto,
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
             'resultados'                => $resultados->where('label', '!=', null)->flatten(),
-            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
+            'tiposProducto'             => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
 
