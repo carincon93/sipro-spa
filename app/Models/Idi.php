@@ -219,14 +219,6 @@ class Idi extends Model
                 ->distinct()
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
-        } else if ($authUser->getAllPermissions()->where('id', 14)->first()) { // Permiso: Visualizador i+D+i
-            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
-                ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->distinct()
-                ->orderBy('idi.id', 'ASC')
-                ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
@@ -239,6 +231,14 @@ class Idi extends Model
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
+                ->distinct()
+                ->orderBy('idi.id', 'ASC')
+                ->filterIdi(request()->only('search'))->paginate();
+        } else if ($authUser->getAllPermissions()->where('id', 14)->first()) { // Permiso: Visualizador i+D+i
+            $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+                ->join('proyectos', 'idi.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
