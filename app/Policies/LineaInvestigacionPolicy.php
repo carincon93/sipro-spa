@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Models\SemilleroInvestigacion;
+use App\Models\LineaInvestigacion;
 use App\Models\User;
 
-class SemilleroInvestigacionPolicy
+class LineaInvestigacionPolicy
 {
     use HandlesAuthorization;
 
@@ -60,12 +60,12 @@ class SemilleroInvestigacionPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
+     * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return mixed
      */
-    public function update(User $user, SemilleroInvestigacion $semilleroInvestigacion)
+    public function update(User $user, LineaInvestigacion $lineaInvestigacion)
     {
-        if ($user->hasRole(4) && $user->dinamizadorCentroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
+        if ($user->hasRole(4) && $user->dinamizadorCentroFormacion->id == $lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
             return true;
         }
 
@@ -76,10 +76,10 @@ class SemilleroInvestigacionPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
+     * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return mixed
      */
-    public function delete(User $user, SemilleroInvestigacion $semilleroInvestigacion)
+    public function delete(User $user, LineaInvestigacion $lineaInvestigacion)
     {
         return false;
     }
@@ -88,10 +88,10 @@ class SemilleroInvestigacionPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
+     * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return mixed
      */
-    public function restore(User $user, SemilleroInvestigacion $semilleroInvestigacion)
+    public function restore(User $user, LineaInvestigacion $lineaInvestigacion)
     {
         //
     }
@@ -100,10 +100,10 @@ class SemilleroInvestigacionPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
+     * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return mixed
      */
-    public function forceDelete(User $user, SemilleroInvestigacion $semilleroInvestigacion)
+    public function forceDelete(User $user, LineaInvestigacion $lineaInvestigacion)
     {
         //
     }

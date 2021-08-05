@@ -97,8 +97,13 @@ class SemilleroInvestigacion extends Model
         $user = Auth::user();
         if ($user->hasRole(1)) {
             $semilerosInvestigacion = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')->filterSemilleroInvestigacion(request()->only('search'))->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate();
-        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
-            $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+        } else if ($user->hasRole([4, 21])) {
+            $centroFormacionId = null;
+            if ($user->dinamizadorCentroFormacion()->exists()) {
+                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+            } else if ($user->hasRole(21)) {
+                $centroFormacionId = $user->centroFormacion->id;
+            }
 
             $semilerosInvestigacion = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion.centroFormacion')
                 ->whereHas(

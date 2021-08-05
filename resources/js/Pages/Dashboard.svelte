@@ -34,6 +34,8 @@
                     <p class="text-indigo-700 mt-4">Su rol principal es: Activador (a)</p>
                 {:else if checkRole(authUser, [4])}
                     <p class="text-indigo-700 mt-4">Su rol principal es: Dinamizador (a) SENNOVA</p>
+                {:else if checkRole(authUser, [21])}
+                    <p class="text-indigo-700 mt-4">Su rol principal es: Líder de grupo de investigación</p>
                 {:else if checkRole(authUser, [11])}
                     <p class="text-indigo-700 mt-4">Su rol principal es: Evaluador</p>
                 {:else}
@@ -74,7 +76,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('grupos-investigacion.index')}>Grupos de investigación</a>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('lineas-investigacion.index')}>Líneas de investigación</a>
             {/if}
 
@@ -110,7 +112,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('roles.index')}>Roles de sistema</a>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('semilleros-investigacion.index')}>Semilleros de investigación</a>
             {/if}
 
@@ -122,7 +124,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tematicas-estrategicas.index')}>Temáticas estratégicas SENA</a>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 18, 19, 5, 17])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 18, 19, 5, 17])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('users.index')}>Usuarios</a>
             {/if}
         </div>

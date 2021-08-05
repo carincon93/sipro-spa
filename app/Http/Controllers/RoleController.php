@@ -125,6 +125,10 @@ class RoleController extends Controller
     {
         $this->authorize('delete', [Role::class, $role]);
 
+        if (in_array($role->id, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21])) {
+            return back()->with('error', 'El recurso no se puede eliminar.');
+        }
+
         $role->delete();
 
         return redirect()->route('roles.index')->with('success', 'El recurso se ha eliminado correctamente.');

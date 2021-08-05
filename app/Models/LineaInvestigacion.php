@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class LineaInvestigacion extends Model
 {
@@ -114,5 +115,36 @@ class LineaInvestigacion extends Model
             $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getUsersByRol
+     *
+     * @return object
+     */
+    public static function getLineasInvestigacionByRol()
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion')->filterLineaInvestigacion(request()->only('search'))->orderBy('lineas_investigacion.nombre', 'ASC')->paginate();
+        } else if ($user->hasRole([4, 21])) {
+            $centroFormacionId = null;
+            if ($user->dinamizadorCentroFormacion()->exists()) {
+                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+            } else if ($user->hasRole(21)) {
+                $centroFormacionId = $user->centroFormacion->id;
+            }
+
+            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion.centroFormacion')
+                ->whereHas(
+                    'grupoInvestigacion.centroFormacion',
+                    function ($query) use ($centroFormacionId) {
+                        $query->where('id', $centroFormacionId);
+                    }
+                )
+                ->filterLineaInvestigacion(request()->only('search'))->paginate();
+        }
+
+        return $lineasInvestigacion;
     }
 }
