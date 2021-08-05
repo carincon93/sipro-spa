@@ -205,12 +205,15 @@ class CulturaInnovacion extends Model
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
-                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
@@ -226,7 +229,9 @@ class CulturaInnovacion extends Model
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
-                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
@@ -235,7 +240,9 @@ class CulturaInnovacion extends Model
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else if ($authUser->getAllPermissions()->where('id', 21)->first()) {
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
-                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
@@ -243,7 +250,10 @@ class CulturaInnovacion extends Model
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
         } else {
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
-                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
+
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()

@@ -146,12 +146,15 @@ class Tp extends Model
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
                 ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
@@ -167,7 +170,9 @@ class Tp extends Model
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->where('users.centro_formacion_id', $centroFormacionId)
@@ -176,7 +181,9 @@ class Tp extends Model
                 ->filterTp(request()->only('search'))->paginate();
         } else if ($authUser->getAllPermissions()->where('id', 20)->first()) {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->distinct()
@@ -184,7 +191,9 @@ class Tp extends Model
                 ->filterTp(request()->only('search'))->paginate();
         } else {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->where('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()

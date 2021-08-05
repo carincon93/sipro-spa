@@ -36,8 +36,8 @@ class TaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'filters'       => request()->all('search'),
-            'ta'            => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'filters'       => request()->all('search', 'estructuracion_proyectos'),
+            'ta'            => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 

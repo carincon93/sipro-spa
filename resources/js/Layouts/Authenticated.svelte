@@ -54,9 +54,7 @@
 
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
-                            <Button on:click={() => (dialogOpen = true)} variant={null}>
-                                {$_('Dashboard')}
-                            </Button>
+                            <Button on:click={() => (dialogOpen = true)} variant={null}>Menú de navegación</Button>
                         </div>
                     </div>
 
@@ -121,7 +119,7 @@
             <!-- Responsive Navigation Menu -->
             <div class="sm:hidden{(showingNavigationDropdown ? ' block' : '', !showingNavigationDropdown ? ' hidden' : '')}">
                 <div class="pt-2 pb-3 space-y-1">
-                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>Panel de control</ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>Menú de navegación</ResponsiveNavLink>
                 </div>
 
                 <!-- Responsive Settings Options -->
@@ -173,7 +171,7 @@
                 <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">Centros de formación</Button>
             {/if}
 
-            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
+            {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
                 <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">Convocatorias</Button>
             {/if}
 
