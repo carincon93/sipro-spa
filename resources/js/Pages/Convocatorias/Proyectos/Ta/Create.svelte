@@ -32,7 +32,7 @@
         max_meses_ejecucion: 0,
         tecnoacademia_id: null,
         centro_formacion_id: null,
-        tecnoacademia_linea_tecnoacademia_id: [],
+        tecnoacademia_linea_tecnoacademia_id: null,
         linea_programatica: null,
     })
 
@@ -61,8 +61,8 @@
             getLineasTecnoacademia($form.tecnoacademia_id?.value)
         }
     }
-    async function getLineasTecnoacademia(tes) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tes]))
+    async function getLineasTecnoacademia(tecnoacademiaId) {
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaId]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
             oldTecnoAcademiaValue = $form.tecnoacademia_id?.value
