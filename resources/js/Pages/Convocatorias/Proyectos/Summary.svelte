@@ -76,7 +76,7 @@
     }
 
     function sendProject() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -97,7 +97,7 @@
         comentario: '',
     })
     function submitComentario() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -145,7 +145,7 @@
             <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
         {/if}
 
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
@@ -154,14 +154,14 @@
                     <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar formulación</Button>
                 {:else if proyectoCompleto == false}
                     <form on:submit|preventDefault={submitComentario}>
-                        <fieldset disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
+                        <fieldset disabled={isSuperAdmin || checkRole(authUser, [4, 21]) ? undefined : true}>
                             <div class="mt-8">
                                 <p class="mb-2">Si considera que el proyecto está incompleto por favor haga un comentario al proponente detallando que información o ítems debe completar.</p>
                                 <Textarea label="Comentario" maxlength="40000" id="comentario" error={errors.comentario} bind:value={$comentarioForm.comentario} required />
                             </div>
                         </fieldset>
                         <div class="mt-10 flex items-center">
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
+                            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>

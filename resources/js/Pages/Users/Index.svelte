@@ -41,7 +41,7 @@
             </select>
         </div>
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                 <Button on:click={() => Inertia.visit(route('users.create'))} variant="raised">Crear usuario</Button>
             {/if}
         </div>
@@ -82,7 +82,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={usuarios.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
+                            {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('users.edit', usuario.id))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

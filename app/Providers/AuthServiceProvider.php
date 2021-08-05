@@ -70,9 +70,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ($user->hasRole(2) && $proyecto->centroFormacion->id == $user->directorRegional->id || $user->hasRole(3) && $proyecto->centroFormacion->id == $user->subdirectorCentroFormacion->id || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+            if ($user->hasRole(2) && $proyecto->centroFormacion->id == $user->directorRegional->id || $user->hasRole(3) && $proyecto->centroFormacion->id == $user->subdirectorCentroFormacion->id || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id || $user->hasRole(21) && $proyecto->centroFormacion->id == $user->centroFormacion->id) {
                 return true;
-            } else if (!$user->hasRole(2) && !$user->hasRole(3) && !$user->hasRole(4)) {
+            } else if (!$user->hasRole(2) && !$user->hasRole(3) && !$user->hasRole(4) & !$user->hasRole(21)) {
                 return $proyecto->lineaProgramatica->codigo == 69 && ($user->getAllPermissions()->where('id', 20)->first() ? $user->getAllPermissions()->where('id', 20)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 70 && ($user->getAllPermissions()->where('id', 15)->first() ? $user->getAllPermissions()->where('id', 15)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 68 && ($user->getAllPermissions()->where('id', 16)->first() ? $user->getAllPermissions()->where('id', 16)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 65 && ($user->getAllPermissions()->where('id', 21)->first() ? $user->getAllPermissions()->where('id', 21)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 66 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 82 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 23 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null) || $proyecto->participantes()->where('user_id', $user->id)->exists() ? true : false;
             }
 
@@ -84,7 +84,7 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
 
-            if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->a_evaluar == false) {
+            if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->a_evaluar == false || $user->hasRole(21) && $proyecto->centroFormacion->id == $user->centroFormacion->id && $proyecto->a_evaluar == false) {
                 $fechaActual = date('Y-m-d');
 
                 $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();

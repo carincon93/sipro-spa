@@ -18,7 +18,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
+        if ($user->hasRole([4, 21, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -34,7 +34,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
+        if ($user->hasRole([4, 21, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -49,7 +49,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasRole([4, 17, 18, 20, 19, 5])) {
+        if ($user->hasRole([4, 21, 17, 18, 20, 19, 5])) {
             return true;
         }
 
@@ -69,7 +69,7 @@ class UserPolicy
             return true;
         }
 
-        if ($user->dinamizadorCentroFormacion && $user->dinamizadorCentroFormacion->id == $proponente->centroFormacion->id) {
+        if ($user->dinamizadorCentroFormacion && $user->dinamizadorCentroFormacion->id == $proponente->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $proponente->centroFormacion->id) {
             return true;
         }
 

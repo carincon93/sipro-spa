@@ -37,13 +37,13 @@
         numero_celular: '',
         habilitado: '',
         tipo_vinculacion: '',
-        centro_formacion_id: null,
+        centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21]) ? authUser.centro_formacion_id : null,
         role_id: [],
         autorizacion_datos: false,
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])) {
             $form.post(route('users.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -57,7 +57,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
+                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                         <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -102,10 +102,12 @@
                     <Select id="tipo_vinculacion" items={tiposVinculacion} bind:selectedValue={$form.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
-                </div>
+                {#if isSuperAdmin}
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    </div>
+                {/if}
 
                 <div class="mt-4">
                     <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (Acuerdo No. 0009 del 2016)" />
@@ -130,7 +132,7 @@
             </div>
             <div class="grid grid-cols-2">
                 {#each roles as { id, name }, i}
-                    {#if (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && (name == 'proponente cultura de la innovación') | checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente i+d+i') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente servicios tecnológicos') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoacademia') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoparque')}
+                    {#if (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente cultura de la innovación') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente i+d+i') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente servicios tecnológicos') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente tecnoacademia') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente tecnoparque')}
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.role_id} value={id} />
@@ -150,7 +152,7 @@
         </div>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                 <LoadingButton bind:loading={sending} class="btn-indigo" type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
             {/if}
         </div>

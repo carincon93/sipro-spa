@@ -21,8 +21,7 @@ class LineaInvestigacionController extends Controller
 
         return Inertia::render('LineasInvestigacion/Index', [
             'filters'               => request()->all('search'),
-            'lineasInvestigacion'   => LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion', 'grupoInvestigacion.centroFormacion')
-                ->filterLineaInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'lineasInvestigacion'   => LineaInvestigacion::getLineasInvestigacionByRol()->appends(['search' => request()->search]),
         ]);
     }
 
