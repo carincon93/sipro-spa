@@ -35,6 +35,7 @@
             <label for="estructuracion_proyectos" class="block text-gray-700">Filtros:</label>
             <select id="estructuracion_proyectos" class="mt-1 w-full form-select" bind:value={filters.estructuracion_proyectos}>
                 <option value={null}>Seleccione una opción</option>
+                <option value={false}>Ver - Proyectos de la convocatoria</option>
                 <option value={true}>Ver - Curso de estructuración de proyectos</option>
             </select>
         </div>
