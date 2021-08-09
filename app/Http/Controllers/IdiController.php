@@ -27,7 +27,7 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'evaluaciones_finalizadas'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),
             'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
@@ -142,6 +142,8 @@ class IdiController extends Controller
     public function edit(Convocatoria $convocatoria, Idi $idi)
     {
         $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
+
+        $idi->load('proyecto.evaluaciones.idiEvaluacion');
 
         $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;

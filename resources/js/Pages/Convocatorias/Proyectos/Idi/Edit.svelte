@@ -205,8 +205,22 @@
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                {#if idi.proyecto.en_subsanacion}
+                    {#each idi.proyecto.evaluaciones as evaluacion, i}
+                        {#if evaluacion.finalizado && evaluacion.habilitado}
+                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                <div class="flex text-orangered-900 font-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                </div>
+                                <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.titulo_comentario ? evaluacion.idi_evaluacion.titulo_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
             </div>
-
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
@@ -232,6 +246,22 @@
                         <InputError classes="text-center" message={errors.fecha_finalizacion} />
                         <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
+                {/if}
+
+                {#if idi.proyecto.en_subsanacion}
+                    {#each idi.proyecto.evaluaciones as evaluacion, i}
+                        {#if evaluacion.finalizado && evaluacion.habilitado}
+                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                <div class="flex text-orangered-900 font-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                </div>
+                                <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.fechas_comentario ? evaluacion.idi_evaluacion.fechas_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
                 {/if}
             </div>
             <fieldset disabled>
@@ -270,6 +300,22 @@
                 </div>
                 <div>
                     <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
+
+                    {#if idi.proyecto.en_subsanacion}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.red_conocimiento_comentario ? evaluacion.idi_evaluacion.red_conocimiento_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -297,6 +343,22 @@
                     </div>
                     <div>
                         <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
+
+                        {#if idi.proyecto.en_subsanacion}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                        <div class="flex text-orangered-900 font-black">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        </div>
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario ? evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     </div>
                 </div>
             {/if}
@@ -306,6 +368,22 @@
                 </div>
                 <div>
                     <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
+
+                    {#if idi.proyecto.en_subsanacion}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.actividad_economica_comentario ? evaluacion.idi_evaluacion.actividad_economica_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -314,6 +392,22 @@
                 </div>
                 <div>
                     <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
+
+                    {#if idi.proyecto.en_subsanacion}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.tematica_estrategica_comentario ? evaluacion.idi_evaluacion.tematica_estrategica_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -325,6 +419,22 @@
                     {#if tieneVideo}
                         <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
                         <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
+
+                        {#if idi.proyecto.en_subsanacion}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                        <div class="flex text-orangered-900 font-black">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        </div>
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.video_comentario ? evaluacion.idi_evaluacion.video_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     {/if}
                 </div>
             </div>
@@ -341,6 +451,22 @@
                     {#if requiereJustificacionIndustria4}
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
                         <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+
+                        {#if idi.proyecto.en_subsanacion}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                        <div class="flex text-orangered-900 font-black">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        </div>
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.justificacion_industria_4_comentario ? evaluacion.idi_evaluacion.justificacion_industria_4_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     {/if}
                 </div>
             </div>
@@ -356,6 +482,22 @@
                     {#if requiereJustificacionEconomiaNaranja}
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
                         <Textarea label="Justificación" maxlength="40000" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
+
+                        {#if idi.proyecto.en_subsanacion}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                        <div class="flex text-orangered-900 font-black">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        </div>
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario ? evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     {/if}
                 </div>
             </div>
@@ -371,6 +513,21 @@
                     {#if requiereJustificacionPoliticaDiscapacidad}
                         <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
                         <Textarea label="Justificación" maxlength="40000" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
+                        {#if idi.proyecto.en_subsanacion}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                        <div class="flex text-orangered-900 font-black">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                            </svg>
+                                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        </div>
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario ? evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
+                        {/if}
                     {/if}
                 </div>
             </div>
@@ -648,6 +805,22 @@
                 </div>
                 <div>
                     <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+
+                    {#if idi.proyecto.en_subsanacion}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.resumen_comentario ? evaluacion.idi_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -765,8 +938,81 @@
                 </div>
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+
+                    {#if idi.proyecto.en_subsanacion}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.bibliografia_comentario ? evaluacion.idi_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
+
+            <hr class="mt-10 mb-10" />
+            <h1>Ortografía</h1>
+
+            {#if idi.proyecto.en_subsanacion}
+                {#each idi.proyecto.evaluaciones as evaluacion, i}
+                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.ortografia_comentario ? evaluacion.idi_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            <hr class="mt-10 mb-10" />
+            <h1>Redacción</h1>
+
+            {#if idi.proyecto.en_subsanacion}
+                {#each idi.proyecto.evaluaciones as evaluacion, i}
+                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.redaccion_comentario ? evaluacion.idi_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            <hr class="mt-10 mb-10" />
+            <h1>Normas APA</h1>
+
+            {#if idi.proyecto.en_subsanacion}
+                {#each idi.proyecto.evaluaciones as evaluacion, i}
+                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.normas_apa_comentario ? evaluacion.idi_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}

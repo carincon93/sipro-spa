@@ -28,16 +28,4 @@ class TercerGrupoPresupuestalRequest extends FormRequest
             'codigo'  => ['required', 'string', 'max:99'],
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-    }
 }

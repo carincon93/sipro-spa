@@ -136,7 +136,7 @@ class IdiEvaluacion extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1)) { // Admin
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
@@ -144,7 +144,7 @@ class IdiEvaluacion extends Model
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(11)) { // Evaluador
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
+            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)

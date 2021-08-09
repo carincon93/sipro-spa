@@ -50,9 +50,5 @@ class CentroFormacionRequest extends FormRequest
                 'subdirector_id' => $this->subdirector_id['value'],
             ]);
         }
-
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
     }
 }

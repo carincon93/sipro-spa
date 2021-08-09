@@ -31,11 +31,31 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Análisis de riesgos</div>
 
-        <p class="text-center mt-10 mb-24" slot="caption">
-            Los riesgos son eventos inciertos que pueden llegar a suceder en el futuro, dentro del horizonte de la ejecución del proyecto y representaran efectos de diferente magnitud en uno o más de sus objetivos.
-            <br />
-            Se debe establecer un riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos). Estos riesgos podrán ser clasificados conforme los siguientes tipos: mercados, operacionales, legales, administrativos.
-        </p>
+        <div slot="caption">
+            <p class="text-center mt-10 mb-24">
+                Los riesgos son eventos inciertos que pueden llegar a suceder en el futuro, dentro del horizonte de la ejecución del proyecto y representaran efectos de diferente magnitud en uno o más de sus objetivos.
+                <br />
+                Se debe establecer un riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos). Estos riesgos podrán ser clasificados conforme los siguientes tipos: mercados, operacionales, legales, administrativos.
+            </p>
+
+            {#if proyecto.en_subsanacion}
+                {#each proyecto.evaluaciones as evaluacion, i}
+                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            {#if evaluacion.idi_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.analisis_riesgos_comentario ? evaluacion.idi_evaluacion.analisis_riesgos_comentario : 'Sin recomendación'}</p>
+                            {/if}
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+        </div>
 
         <div slot="actions">
             {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}

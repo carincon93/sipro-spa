@@ -26,6 +26,8 @@ class EntidadAliadaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         if ($proyecto->codigo_linea_programatica == 70) {

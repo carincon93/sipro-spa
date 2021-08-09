@@ -27,6 +27,8 @@ class ProductoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         if ($proyecto->ta()->exists()) {
             foreach ($proyecto->efectosDirectos as $efectoDirecto) {
                 foreach ($efectoDirecto->resultados as $resultado) {
@@ -61,7 +63,7 @@ class ProductoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
             'convocatoria'          => $convocatoria->only('id'),
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'               => request()->all('search'),
             'validacionResultados'  => $validacionResultados,
             'productos'             => Producto::whereIn(
@@ -334,7 +336,7 @@ class ProductoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Productos/Index', [
             'convocatoria'          => $convocatoria->only('id'),
             'evaluacion'            => $evaluacion,
-            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'filters'               => request()->all('search'),
             'productos'             => Producto::whereIn(
                 'resultado_id',

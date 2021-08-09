@@ -54,7 +54,7 @@ class ProyectoPresupuestoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Index', [
             'convocatoria'              => $convocatoria->only('id'),
-            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto', 'salarios_minimos'),
+            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto', 'salarios_minimos', 'en_subsanacion'),
             'filters'                   => request()->all('search', 'presupuestos'),
             'proyectoPresupuesto'       => ProyectoPresupuesto::select('proyecto_presupuesto.id', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'proyecto_presupuesto.proyecto_id', 'proyecto_presupuesto.valor_total')->where('proyecto_id', $proyecto->id)->filterProyectoPresupuesto(request()->only('search', 'presupuestos'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre,codigo', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->paginate()->appends(['search' => request()->search, 'presupuestos' => request()->presupuestos]),
             'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::orderBy('nombre', 'ASC')->get('nombre'),
@@ -236,6 +236,8 @@ class ProyectoPresupuestoController extends Controller
     public function edit(Convocatoria $convocatoria, Proyecto $proyecto, ProyectoPresupuesto $presupuesto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        $presupuesto->load('proyectoPresupuestosEvaluaciones.evaluacion');
 
         $presupuesto->softwareInfo;
         $presupuesto->servicioEdicionInfo;
@@ -517,7 +519,7 @@ class ProyectoPresupuestoController extends Controller
     {
         ProyectoPresupuestoEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
-            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
+            ['incorrecto' => $request->incorrecto, 'comentario' => $request->incorrecto ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

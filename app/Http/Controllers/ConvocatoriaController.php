@@ -154,6 +154,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
+        $convocatoria->evaluaciones_finalizadas                 = $request->evaluaciones_finalizadas;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {

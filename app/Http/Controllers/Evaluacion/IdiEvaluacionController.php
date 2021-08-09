@@ -121,7 +121,6 @@ class IdiEvaluacionController extends Controller
         $idiEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
         $idiEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
 
-
         $idiEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == true ? $request->justificacion_economia_naranja_comentario : null;
         $idiEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == true ? $request->justificacion_industria_4_comentario : null;
         $idiEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == true ? $request->bibliografia_comentario : null;

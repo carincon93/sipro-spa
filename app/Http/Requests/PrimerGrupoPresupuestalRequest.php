@@ -29,16 +29,4 @@ class PrimerGrupoPresupuestalRequest extends FormRequest
             'bpin'      => ['required', 'string', 'max:20'],
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-    }
 }

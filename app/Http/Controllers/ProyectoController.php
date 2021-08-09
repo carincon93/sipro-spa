@@ -35,6 +35,8 @@ class ProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         if ($proyecto->idi()->exists()) {
@@ -81,7 +83,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'productos'     => $productos,
             'objetivos'     => $objetivos
         ]);

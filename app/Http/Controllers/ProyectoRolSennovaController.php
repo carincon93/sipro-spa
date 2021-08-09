@@ -43,7 +43,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
             'convocatoria'           => $convocatoria->only('id'),
-            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta'),
+            'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta', 'en_subsanacion'),
             'filters'                => request()->all('search'),
             'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova')->paginate(),
         ]);
@@ -167,6 +167,8 @@ class ProyectoRolSennovaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyectoRolSennova->load('proyectoRolesEvaluaciones.evaluacion');
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         if ($proyecto->codigo_linea_programatica == 68) {
@@ -175,7 +177,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
-            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica'),
+            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'en_subsanacion'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
             'lineaProgramatica'     => $proyecto->lineaProgramatica->only('id')
@@ -332,7 +334,7 @@ class ProyectoRolSennovaController extends Controller
     {
         ProyectoRolEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_rol_sennova_id' => $proyectoRolSennova->id],
-            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
+            ['incorrecto' => $request->incorrecto, 'comentario' => $request->incorrecto ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

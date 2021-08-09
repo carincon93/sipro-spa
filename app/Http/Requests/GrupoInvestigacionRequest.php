@@ -66,10 +66,6 @@ class GrupoInvestigacionRequest extends FormRequest
         }
 
         $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-
-        $this->merge([
             'email' => mb_strtolower($this->email),
         ]);
     }

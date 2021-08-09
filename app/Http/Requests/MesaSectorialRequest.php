@@ -27,16 +27,4 @@ class MesaSectorialRequest extends FormRequest
             'nombre' => ['required', 'max:255']
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-    }
 }

@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'max_material_formacion', 'max_bienestar_aprendiz'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'max_material_formacion', 'max_bienestar_aprendiz', 'estado_evaluacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +37,7 @@ class Proyecto extends Model
         'finalizado',
         'modificable',
         'a_evaluar',
+        'en_subsanacion',
         'estructuracion_proyectos'
     ];
 
@@ -521,5 +522,36 @@ class Proyecto extends Model
             $total = round($this->getMetaAprendicesAttribute() * 10200);
         }
         return $total;
+    }
+
+    public function getEstadoEvaluacionAttribute()
+    {
+        $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+
+        $puntajeTotal = 0;
+        $totalRecomendaciones = 0;
+        $estadoEvaluacion = '';
+        foreach ($evaluaciones as $evaluacion) {
+            $puntajeTotal += $evaluacion->total_evaluacion;
+            $totalRecomendaciones += $evaluacion->total_recomendaciones;
+        }
+
+        count($evaluaciones) > 0 ? $puntajeTotal = $puntajeTotal / count($evaluaciones) : $puntajeTotal = 0;
+
+        if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
+            $estadoEvaluacion = "a. No priorizado anexo 1C";
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
+            $estadoEvaluacion = "b. Pre-aprobado >= 91";
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = "c. Pre-aprobado con observaciones";
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = "d. Pre-aprobado con observaciones";
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = "e. Pre-aprobado con observaciones";
+        } elseif ($puntajeTotal < 70) { // Rechazado
+            $estadoEvaluacion = "f. Rechazado";
+        }
+
+        return $estadoEvaluacion;
     }
 }

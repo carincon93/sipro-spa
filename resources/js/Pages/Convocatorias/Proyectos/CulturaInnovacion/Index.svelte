@@ -51,6 +51,9 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                {#if convocatoria.evaluaciones_finalizadas}
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluación </th>
+                {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -73,6 +76,13 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
+                    {#if convocatoria.evaluaciones_finalizadas}
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {proyecto.estado_evaluacion}
+                            </p>
+                        </td>
+                    {/if}
                     <td class="border-t td-actions">
                         <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [12, 13, 21])}

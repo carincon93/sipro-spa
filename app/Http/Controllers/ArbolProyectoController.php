@@ -251,6 +251,8 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $this->generateTree($proyecto);
         $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
         $causasDirectas  = $proyecto->causasDirectas()->with('causasIndirectas')->get();
@@ -284,7 +286,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
         ]);
@@ -610,6 +612,8 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $this->generateTree($proyecto);
 
         $efectosDirectos    = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
@@ -655,7 +659,7 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposImpacto'    => $tiposImpacto,
