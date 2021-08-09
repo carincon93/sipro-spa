@@ -303,7 +303,7 @@ trait PresupuestoValidationTrait
     {
         $total = 0;
 
-        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '20202008005096') {
 
