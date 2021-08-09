@@ -303,23 +303,28 @@ trait PresupuestoValidationTrait
     {
         $total = 0;
 
-        if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
-            $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
-        } else {
-            $total += $valorTotal;
-        }
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
-        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
-            $codigoSegundoPresupuestal = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
-            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
-                if ($codigoSegundoPresupuestal == '20202008005096') {
-                    $total += $presupuesto->valor_total;
+        if ($codigoSegundoPresupuestal == '20202008005096') {
+
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
+
+            foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+                $codigoSegundoPresupuestal = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+                if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
+                    if ($codigoSegundoPresupuestal == '20202008005096') {
+                        $total += $presupuesto->valor_total;
+                    }
                 }
             }
-        }
 
-        if ($total > $valorMaxEdt) {
-            return true;
+            if ($total > $valorMaxEdt) {
+                return true;
+            }
         }
 
         return false;
