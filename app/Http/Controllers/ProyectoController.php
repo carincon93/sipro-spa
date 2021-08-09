@@ -301,11 +301,12 @@ class ProyectoController extends Controller
 
         if ($proyecto->ta()->exists()) {
             $proyecto->max_valor_roles = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_roles;
+            $proyecto->max_valor_presupuesto = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_presupuesto;
         }
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar', 'max_valor_roles'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar', 'max_valor_roles', 'max_valor_presupuesto'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
             'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
@@ -328,6 +329,7 @@ class ProyectoController extends Controller
             'soportesEstudioMercado'    => ProyectoValidationTrait::soportesEstudioMercado($proyecto),
             'edt'                       => ProyectoValidationTrait::edt($proyecto),
             'maxValorRoles'             => ProyectoValidationTrait::maxValorRoles($proyecto),
+            'maxValorTAPresupuesto'     => ProyectoValidationTrait::maxValorTAPresupuesto($proyecto),
         ]);
     }
 
