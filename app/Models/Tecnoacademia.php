@@ -106,7 +106,7 @@ class Tecnoacademia extends Model
             $search = str_replace(' ', '%%', $search);
             $query->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id');
             $query->whereRaw("unaccent(tecnoacademias.nombre) ilike unaccent('%" . $search . "%')");
-            $query->whereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
+            $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
     }
 
