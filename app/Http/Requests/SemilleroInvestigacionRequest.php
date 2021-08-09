@@ -41,9 +41,5 @@ class SemilleroInvestigacionRequest extends FormRequest
                 'linea_investigacion_id' => $this->linea_investigacion_id['value'],
             ]);
         }
-
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
     }
 }

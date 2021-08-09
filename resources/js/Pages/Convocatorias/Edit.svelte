@@ -51,6 +51,7 @@
         fecha_inicio_convocatoria_tp: convocatoria.fecha_inicio_convocatoria_tp,
         fecha_finalizacion_convocatoria_ta: convocatoria.fecha_finalizacion_convocatoria_ta,
         fecha_finalizacion_convocatoria_tp: convocatoria.fecha_finalizacion_convocatoria_tp,
+        evaluaciones_finalizadas: convocatoria.evaluaciones_finalizadas,
     })
 
     function submit() {
@@ -58,6 +59,7 @@
             $form.put(route('convocatorias.update', convocatoria.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
@@ -223,6 +225,13 @@
                     <br />
                     <Switch bind:checked={$form.esta_activa} />
                     <InputError message={errors.esta_activa} />
+                </div>
+
+                <div class="mt-4 mb-20">
+                    <Label required labelFor="evaluaciones_finalizadas" value="¿Desea finalizar la fase de evaluación?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.evaluaciones_finalizadas} />
+                    <InputError message={errors.evaluaciones_finalizadas} />
                 </div>
 
                 <hr />

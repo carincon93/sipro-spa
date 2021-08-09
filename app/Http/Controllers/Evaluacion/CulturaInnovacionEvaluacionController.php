@@ -118,6 +118,15 @@ class CulturaInnovacionEvaluacionController extends Controller
         $culturaInnovacionEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
         $culturaInnovacionEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
 
+        $culturaInnovacionEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == true ? $request->justificacion_economia_naranja_comentario : null;
+        $culturaInnovacionEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == true ? $request->justificacion_industria_4_comentario : null;
+        $culturaInnovacionEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == true ? $request->bibliografia_comentario : null;
+        $culturaInnovacionEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == true ? $request->fechas_comentario : null;
+        $culturaInnovacionEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == true ? $request->justificacion_politica_discapacidad_comentario : null;
+        $culturaInnovacionEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == true ? $request->actividad_economica_comentario : null;
+        $culturaInnovacionEvaluacion->area_conocimiento_comentario = $request->area_conocimiento_requiere_comentario == true ? $request->area_conocimiento_comentario : null;
+        $culturaInnovacionEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == true ? $request->tematica_estrategica_comentario : null;
+
         $culturaInnovacionEvaluacion->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

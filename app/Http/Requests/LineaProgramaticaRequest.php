@@ -45,10 +45,6 @@ class LineaProgramaticaRequest extends FormRequest
             ]);
         }
 
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-
         if (is_array($this->activadores)) {
             if (isset($this->activadores['value']) && is_numeric($this->activadores['value'])) {
                 $this->merge([

@@ -21,7 +21,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones'];
 
     /**
      * The attributes that are mass assignable.
@@ -146,6 +146,80 @@ class Evaluacion extends Model
                 $this->culturaInnovacionEvaluacion->ortografia_puntaje +
                 $this->culturaInnovacionEvaluacion->redaccion_puntaje +
                 $this->culturaInnovacionEvaluacion->normas_apa_puntaje;
+        }
+
+        return $total;
+    }
+
+    public function getTotalRecomendacionesAttribute()
+    {
+        $total = 0;
+        if ($this->proyecto->idi()->exists()) {
+            $this->idiEvaluacion->titulo_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->video_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->resumen_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->problema_central_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->objetivos_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->metodologia_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->entidad_aliada_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->resultados_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->productos_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->cadena_valor_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_economia_naranja_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_economia_naranja_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_industria_4_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_industria_4_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->bibliografia_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->bibliografia_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->fechas_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->fechas_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_politica_discapacidad_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->justificacion_politica_discapacidad_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->actividad_economica_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->actividad_economica_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->disciplina_subarea_conocimiento_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->disciplina_subarea_conocimiento_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->red_conocimiento_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->red_conocimiento_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->tematica_estrategica_requiere_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->tematica_estrategica_comentario != null ? $total++ : null;
+        } else if ($this->proyecto->culturaInnovacion()->exists()) {
+            $this->culturaInnovacionEvaluacion->titulo_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->video_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->resumen_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->problema_central_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->objetivos_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->metodologia_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->entidad_aliada_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->resultados_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->productos_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->cadena_valor_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_economia_naranja_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_economia_naranja_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_industria_4_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_industria_4_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->bibliografia_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->bibliografia_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->fechas_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->fechas_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_politica_discapacidad_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->justificacion_politica_discapacidad_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->actividad_economica_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->actividad_economica_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->disciplina_subarea_conocimiento_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->disciplina_subarea_conocimiento_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->red_conocimiento_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->red_conocimiento_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->tematica_estrategica_requiere_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->tematica_estrategica_comentario != null ? $total++ : null;
         }
 
         return $total;

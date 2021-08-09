@@ -55,9 +55,5 @@ class TecnoacademiaRequest extends FormRequest
                 'modalidad' => $this->modalidad['value'],
             ]);
         }
-
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
     }
 }

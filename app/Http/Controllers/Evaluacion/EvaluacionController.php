@@ -54,6 +54,10 @@ class EvaluacionController extends Controller
     {
         $this->authorize('create', [Evaluacion::class]);
 
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        }
+
         $evaluacion = new Evaluacion();
         $evaluacion->habilitado = $request->habilitado;
         $evaluacion->iniciado   = false;
@@ -137,6 +141,10 @@ class EvaluacionController extends Controller
     public function update(EvaluacionRequest $request, Evaluacion $evaluacion)
     {
         $this->authorize('update', [Evaluacion::class, $evaluacion]);
+
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        }
 
         $evaluacion->habilitado = $request->habilitado;
         $evaluacion->finalizado = $request->finalizado;

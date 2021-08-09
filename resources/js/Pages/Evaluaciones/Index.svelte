@@ -49,6 +49,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Título</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluador</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -85,6 +86,11 @@
                             {evaluacion.evaluador.nombre}
                         </p>
                     </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4">
+                            {evaluacion.habilitado ? 'Habilitado' : 'Deshabilitado'}
+                        </p>
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={evaluaciones.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
@@ -103,7 +109,7 @@
 
             {#if evaluaciones.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="5">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="6">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

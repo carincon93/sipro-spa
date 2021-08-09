@@ -91,12 +91,6 @@ class IdiRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if (is_string($this->titulo)) {
-            $this->merge([
-                'titulo' => ucfirst(mb_strtolower($this->titulo)),
-            ]);
-        }
-
         if (is_array($this->centro_formacion_id)) {
             $this->merge([
                 'centro_formacion_id' => $this->centro_formacion_id['value'],

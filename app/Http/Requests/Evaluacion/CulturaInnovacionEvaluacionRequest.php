@@ -38,6 +38,15 @@ class CulturaInnovacionEvaluacionRequest extends FormRequest
             'redaccion_comentario'          => ['nullable', 'string'],
             'normas_apa_puntaje'            => ['nullable', 'numeric'],
             'normas_apa_comentario'         => ['nullable', 'string'],
+
+            'justificacion_economia_naranja_comentario'         => ['nullable', 'string'],
+            'justificacion_industria_4_comentario'              => ['nullable', 'string'],
+            'bibliografia_comentario'                           => ['nullable', 'string'],
+            'fechas_comentario'                                 => ['nullable', 'string'],
+            'justificacion_politica_discapacidad_comentario'    => ['nullable', 'string'],
+            'actividad_economica_comentario'                    => ['nullable', 'string'],
+            'area_conocimiento_comentario'                      => ['nullable', 'string'],
+            'tematica_estrategica_comentario'                   => ['nullable', 'string'],
         ];
     }
 }

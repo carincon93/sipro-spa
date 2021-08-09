@@ -37,11 +37,15 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, finalizado }}
+            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, habilitado, finalizado }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
+
+                            {#if !habilitado}
+                                <span class="block text-danger">Evaluación deshabilitada. No puede realizar la evaluación.</span>
+                            {/if}
                         </p>
                     </td>
                     <td class="border-t">
