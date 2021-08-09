@@ -65,6 +65,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
         $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;
         $tecnoacademia->max_valor_roles                 = $request->max_valor_roles;
+        $tecnoacademia->max_valor_presupuesto           = $request->max_valor_presupuesto;
 
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->save();
@@ -122,6 +123,7 @@ class TecnoacademiaController extends Controller
         $tecnoacademia->max_valor_edt                   = $request->max_valor_edt;
         $tecnoacademia->max_valor_mantenimiento_equipos = $request->max_valor_mantenimiento_equipos;
         $tecnoacademia->max_valor_roles                 = $request->max_valor_roles;
+        $tecnoacademia->max_valor_presupuesto           = $request->max_valor_presupuesto;
         $tecnoacademia->centroFormacion()->associate($request->centro_formacion_id);
         $tecnoacademia->lineasTecnoacademia()->sync($request->linea_tecnoacademia_id);
         $tecnoacademia->save();

@@ -38,6 +38,7 @@
     export let articulacionSennova
     export let soportesEstudioMercado
     export let edt
+    export let maxValorRoles
 
     $: $title = 'Finalizar proyecto'
 
@@ -220,6 +221,9 @@
                         {/if}
                         {#if !edt && proyecto.codigo_linea_programatica == 70}
                             <li>Tiene un rubro presupuestal 'Servicios de organización y asistencia de convenciones y ferias' y le debe asociar al menos un EDT</li>
+                        {/if}
+                        {#if !maxValorRoles && proyecto.codigo_linea_programatica == 70}
+                            <li>El valor máximo de los roles es: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_roles)}</li>
                         {/if}
                         {#if !actividadesPresupuesto}
                             <li>Hay actividades sin presupuesto relacionado</li>
