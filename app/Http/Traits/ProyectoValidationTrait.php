@@ -494,4 +494,14 @@ trait ProyectoValidationTrait
 
         return $countEdt > 0 ? false : true;
     }
+
+    public static function maxValorRoles($proyecto)
+    {
+        $bool = false;
+        if ($proyecto->ta()->exists()) {
+            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_roles > $proyecto->total_roles_sennova ? true : false;
+        }
+
+        return $bool;
+    }
 }
