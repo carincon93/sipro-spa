@@ -144,6 +144,6 @@ class IdiEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
-        return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }
