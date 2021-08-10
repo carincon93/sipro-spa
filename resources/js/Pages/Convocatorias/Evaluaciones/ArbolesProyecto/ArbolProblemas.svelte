@@ -23,6 +23,7 @@
     export let proyecto
     export let efectosDirectos
     export let causasDirectas
+    export let segundaEvaluacion
 
     let dialogTitle
     let codigo
@@ -497,6 +498,9 @@
                 <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
 
+                {#if segundaEvaluacion.problema_central_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.problema_central_comentario}</p>
+                {/if}
                 <div class="mt-4">
                     <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual requieren de alguna recomendación?</p>
                     <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.problema_central_requiere_comentario} />

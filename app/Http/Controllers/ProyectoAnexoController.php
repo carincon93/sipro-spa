@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Anexo;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\ProyectoAnexo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -172,6 +173,11 @@ class ProyectoAnexoController extends Controller
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 break;
@@ -190,6 +196,7 @@ class ProyectoAnexoController extends Controller
             'filters'           => request()->all('search'),
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'video', 'infraestructura_adecuada', 'especificaciones_area'),
             'proyectoAnexo'     => $evaluacion->proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),

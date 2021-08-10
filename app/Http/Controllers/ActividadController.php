@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Actividad;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -241,6 +242,11 @@ class ActividadController extends Controller
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->idi->metodologia;
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->ta->metodologia;
@@ -264,6 +270,7 @@ class ActividadController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),
             'year'              => date('Y') + 1,
             'filters'           => request()->all('search'),

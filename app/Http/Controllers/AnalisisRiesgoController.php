@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\AnalisisRiesgo;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -167,6 +168,11 @@ class AnalisisRiesgoController extends Controller
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 break;
@@ -182,11 +188,12 @@ class AnalisisRiesgoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id'),
-            'evaluacion'      => $evaluacion,
-            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
-            'filters'         => request()->all('search'),
-            'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
+            'filters'           => request()->all('search'),
+            'analisisRiesgos'   => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
                 ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }

@@ -22,6 +22,7 @@ use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
 use App\Http\Requests\ActividadRequest;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
 use GrahamCampbell\ResultType\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -313,6 +314,11 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->idi->justificacion_problema;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->idi->identificacion_problema;
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->problema_central = $evaluacion->proyecto->ta->problema_central;
@@ -338,6 +344,7 @@ class ArbolProyectoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas
@@ -693,6 +700,11 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->idi->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->ta->problema_central;
@@ -724,13 +736,14 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos', [
-            'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'evaluacion'      => $evaluacion,
-            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
-            'efectosDirectos' => $efectosDirectos,
-            'causasDirectas'  => $causasDirectas,
-            'tiposImpacto'    => $tiposImpacto,
-            'tipoProyectoA'   => $tipoProyectoA
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
+            'efectosDirectos'   => $efectosDirectos,
+            'causasDirectas'    => $causasDirectas,
+            'tiposImpacto'      => $tiposImpacto,
+            'tipoProyectoA'     => $tipoProyectoA
         ]);
     }
 

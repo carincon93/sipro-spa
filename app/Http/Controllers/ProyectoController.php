@@ -7,6 +7,7 @@ use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Impacto;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
@@ -106,6 +107,12 @@ class ProyectoController extends Controller
             $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
             $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
             $evaluacion->idiEvaluacion;
+
+            $idi = $evaluacion->proyecto->idi;
+
+            $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+            })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
         }
 
         if ($evaluacion->proyecto->ta()->exists()) {
@@ -147,12 +154,13 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/CadenaValor/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
-            'evaluacion'    => $evaluacion,
-            'proyecto'      => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'finalizado'),
-            'productos'     => $productos,
-            'objetivos'     => $objetivos,
-            'impactos'      => Impacto::whereIn(
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'finalizado'),
+            'productos'         => $productos,
+            'objetivos'         => $objetivos,
+            'impactos'          => Impacto::whereIn(
                 'efecto_indirecto_id',
                 $efectosIndirectos->map(function ($efectosIndirecto) {
                     return $efectosIndirecto->id;

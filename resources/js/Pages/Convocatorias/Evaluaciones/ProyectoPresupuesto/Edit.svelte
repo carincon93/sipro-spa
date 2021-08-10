@@ -16,6 +16,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyectoPresupuestoEvaluacion
     export let proyecto
     export let proyectoPresupuesto
@@ -187,6 +188,9 @@
                 </fieldset>
 
                 <InfoMessage>
+                    {#if segundaEvaluacion?.comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.comentario}</p>
+                    {/if}
                     <div class="mt-4">
                         <p>¿El rubro presupuestal requiere de una recomendación?</p>
                         <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.incorrecto} />

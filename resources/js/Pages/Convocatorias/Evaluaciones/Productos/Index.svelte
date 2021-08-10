@@ -22,6 +22,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyecto
     export let productos
     export let productosGantt
@@ -169,6 +170,9 @@
                 <Label class="mt-4 mb-4" labelFor="productos_puntaje" value="Puntaje (Máximo 9)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="productos_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.productos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.productos_puntaje} />
 
+                {#if segundaEvaluacion.productos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.productos_comentario}</p>
+                {/if}
                 <div class="mt-4">
                     <p>¿Los productos requieren de alguna recomendación?</p>
                     <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.productos_requiere_comentario} />

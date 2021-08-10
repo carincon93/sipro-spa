@@ -8,6 +8,7 @@ use App\Http\Requests\Evaluacion\IdiEvaluacionRequest;
 use App\Models\CentroFormacion;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
+use App\Models\Proyecto;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -81,6 +82,9 @@ class IdiEvaluacionController extends Controller
             'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
             'idiEvaluacion'                             => $idiEvaluacion,
+            'idiSegundaEvaluacion'                      => IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+            })->where('idi_evaluaciones.id', '!=', $idiEvaluacion->id)->first(),
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,

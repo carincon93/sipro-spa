@@ -16,6 +16,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyecto
     export let productos
     export let objetivos
@@ -214,6 +215,10 @@
                     autocomplete="off"
                     error={errors.cadena_valor_puntaje}
                 />
+
+                {#if segundaEvaluacion.cadena_valor_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.cadena_valor_comentario}</p>
+                {/if}
 
                 <div class="mt-4">
                     <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>

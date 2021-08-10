@@ -22,6 +22,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyecto
     export let actividades
     export let actividadesGantt
@@ -195,6 +196,9 @@
                 <Label class="mt-4 mb-4" labelFor="metodologia_puntaje" value="Puntaje (Máximo 15)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="metodologia_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.metodologia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.metodologia_puntaje} />
 
+                {#if segundaEvaluacion.metodologia_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.metodologia_comentario}</p>
+                {/if}
                 <div class="mt-4">
                     <p>¿La metodología o las actividades requieren de alguna recomendación?</p>
                     <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.metodologia_requiere_comentario} />

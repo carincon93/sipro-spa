@@ -25,6 +25,7 @@
     export let causasDirectas
     export let tiposImpacto
     export let tipoProyectoA
+    export let segundaEvaluacion
 
     let cantidadCeldasActividades = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
@@ -561,6 +562,9 @@
                 <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="objetivos_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.objetivos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.objetivos_puntaje} />
 
+                {#if segundaEvaluacion.objetivos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.objetivos_comentario}</p>
+                {/if}
                 <div class="mt-4">
                     <p>¿El árbol de objetivos, objetivo general o los objetivos específicos requieren de alguna recomendación?</p>
                     <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.objetivos_requiere_comentario} />

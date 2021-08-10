@@ -18,6 +18,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyecto
     export let proyectoAnexo
     export let anexos
@@ -136,6 +137,9 @@
     <div class="mt-16">
         <form on:submit|preventDefault={submit}>
             <InfoMessage>
+                {#if segundaEvaluacion.anexos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.anexos_comentario}</p>
+                {/if}
                 <div class="mt-4">
                     <p>¿Algún anexo requiere de recomendación?</p>
                     <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
