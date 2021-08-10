@@ -76,8 +76,10 @@
         }
     }
 
-    $: if (infoRolSennova?.perfil) {
+    $: if (infoRolSennova?.perfil != null) {
         $form.descripcion = infoRolSennova.perfil
+    } else {
+        $form.descripcion = proyectoRolSennova.descripcion
     }
 </script>
 
