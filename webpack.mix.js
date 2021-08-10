@@ -16,36 +16,32 @@ const tailwindcss = require('tailwindcss')
 */
 
 mix.js('resources/js/app.js', 'public/js')
-.postCss('resources/css/app.css', 'public/css/app.css')
-.options({
-	postCss: [
-		cssImport(),
-		cssNesting(),
-		tailwindcss('tailwind.config.js'),
-	],
-})
-.webpackConfig({
-	// output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/sgpssipro/' }, Agregar al desplegar el sistema
-	output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/sgpssipro/'  },
-	resolve: {
-		extensions: ['.js', '.svelte'],
-		mainFields: ['svelte', 'browser', 'module', 'main'],
-		alias: {
-			'@': path.resolve('resources/js'),
-		},
-	},
-	module: {
-		rules: [
-			{
-				test: /\.(svelte)$/,
-				use: {
-					loader: 'svelte-loader',
-					options: {
-						emitCss: true,
-						hotReload: true,
-					},
-				},
-			},
-		],
-	},
-})
+    .postCss('resources/css/app.css', 'public/css/app.css')
+    .options({
+        postCss: [cssImport(), cssNesting(), tailwindcss('tailwind.config.js')],
+    })
+    .webpackConfig({
+        // output: { chunkFilename: 'js/[name].js?id=[chunkhash]', publicPath: '/sgpssipro/' }, Agregar al desplegar el sistema
+        output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+        resolve: {
+            extensions: ['.js', '.svelte'],
+            mainFields: ['svelte', 'browser', 'module', 'main'],
+            alias: {
+                '@': path.resolve('resources/js'),
+            },
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.(svelte)$/,
+                    use: {
+                        loader: 'svelte-loader',
+                        options: {
+                            emitCss: true,
+                            hotReload: true,
+                        },
+                    },
+                },
+            ],
+        },
+    })

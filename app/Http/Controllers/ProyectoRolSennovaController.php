@@ -321,7 +321,7 @@ class ProyectoRolSennovaController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id'),
-            'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado'),
+            'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado'),
             'proyecto'              => $evaluacion->proyecto->only('id', 'diff_meses', 'finalizado', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),

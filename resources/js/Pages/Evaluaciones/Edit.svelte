@@ -82,18 +82,18 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="proyecto_id" value="Proyecto" />
-                    <Select id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Seleccione un proyecto" required />
+                    <Select disabled={true} id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Seleccione un proyecto" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="habilitado" value="¿Está evaluación está habilitada?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿La evaluación está habilitada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="finalizado" value="¿Está evaluación está finalizada?" class="inline-block mb-4" />
+                    <Label required labelFor="finalizado" value="¿La evaluación está finalizada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.finalizado} />
                     <InputError message={errors.finalizado} />

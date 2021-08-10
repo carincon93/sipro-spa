@@ -505,7 +505,7 @@ class ProyectoPresupuestoController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Edit', [
             'convocatoria'                  => $convocatoria->only('id'),
-            'evaluacion'                    => $evaluacion->only('id', 'iniciado', 'finalizado'),
+            'evaluacion'                    => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado'),
             'proyecto'                      => $evaluacion->proyecto,
             'proyectoPresupuesto'           => $presupuesto,
             'tiposLicencia'                 => json_decode(Storage::get('json/tipos-licencia-software.json'), true),

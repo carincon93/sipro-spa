@@ -32,7 +32,7 @@
     })
 
     function finishEvaluacion() {
-        if (isSuperAdmin || checkRole(authUser, [11])) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
             $form.put(route('convocatorias.evaluaciones.finish', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -53,32 +53,40 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
+    {#if evaluacion.finalizado == true}
+        <InfoMessage class="mt-20 mb-2" message="La evaluación ha sido finalizada con éxito." />
+    {/if}
     <div class="mt-20">
         <InfoMessage class="mb-2">
-            <ul class="list'disc">
-                <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
-                {#if proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                    <li><strong>Video:</strong> {evaluacion.video_puntaje ? evaluacion.video_puntaje : 0}</li>
-                {/if}
-                <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
-                <li><strong>Problema central:</strong> {evaluacion.problema_central_puntaje ? evaluacion.problema_central_puntaje : 0}</li>
-                <li><strong>Objetivos:</strong> {evaluacion.objetivos_puntaje ? evaluacion.objetivos_puntaje : 0}</li>
-                <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
-                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                    <li><strong>Entidad aliada:</strong> {evaluacion.entidad_aliada_puntaje ? evaluacion.entidad_aliada_puntaje : 0}</li>
-                {/if}
-                <li><strong>Resultados:</strong> {evaluacion.resultados_puntaje ? evaluacion.resultados_puntaje : 0}</li>
-                <li><strong>Productos:</strong> {evaluacion.productos_puntaje ? evaluacion.productos_puntaje : 0}</li>
-                <li><strong>Cadena de valor:</strong> {evaluacion.cadena_valor_puntaje ? evaluacion.cadena_valor_puntaje : 0}</li>
-                <li><strong>Ánalisis de riesgos:</strong> {evaluacion.analisis_riesgos_puntaje ? evaluacion.analisis_riesgos_puntaje : 0}</li>
-                <li><strong>Ortografía:</strong> {evaluacion.ortografia_puntaje ? evaluacion.ortografia_puntaje : 0}</li>
-                <li><strong>Redacción:</strong> {evaluacion.redaccion_puntaje ? evaluacion.redaccion_puntaje : 0}</li>
-                <li><strong>Normas APA:</strong> {evaluacion.normas_apa_puntaje ? evaluacion.normas_apa_puntaje : 0}</li>
-                <li>
-                    <strong>Puntaje total:</strong>
-                    {evaluacion.total_evaluacion}
-                </li>
-            </ul>
+            <h1 class="text-2xl font-black text-center">Evaluación</h1>
+            <div class="flex">
+                <ul class="list-disc flex-1 pl-4">
+                    <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
+                    {#if proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                        <li><strong>Video:</strong> {evaluacion.video_puntaje ? evaluacion.video_puntaje : 0}</li>
+                    {/if}
+                    <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
+                    <li><strong>Problema central:</strong> {evaluacion.problema_central_puntaje ? evaluacion.problema_central_puntaje : 0}</li>
+                    <li><strong>Objetivos:</strong> {evaluacion.objetivos_puntaje ? evaluacion.objetivos_puntaje : 0}</li>
+                    <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
+                    {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                        <li><strong>Entidad aliada:</strong> {evaluacion.entidad_aliada_puntaje ? evaluacion.entidad_aliada_puntaje : 0}</li>
+                    {/if}
+                    <li><strong>Resultados:</strong> {evaluacion.resultados_puntaje ? evaluacion.resultados_puntaje : 0}</li>
+                    <li><strong>Productos:</strong> {evaluacion.productos_puntaje ? evaluacion.productos_puntaje : 0}</li>
+                    <li><strong>Cadena de valor:</strong> {evaluacion.cadena_valor_puntaje ? evaluacion.cadena_valor_puntaje : 0}</li>
+                    <li><strong>Análisis de riesgos:</strong> {evaluacion.analisis_riesgos_puntaje ? evaluacion.analisis_riesgos_puntaje : 0}</li>
+                    <li><strong>Ortografía:</strong> {evaluacion.ortografia_puntaje ? evaluacion.ortografia_puntaje : 0}</li>
+                    <li><strong>Redacción:</strong> {evaluacion.redaccion_puntaje ? evaluacion.redaccion_puntaje : 0}</li>
+                    <li><strong>Normas APA:</strong> {evaluacion.normas_apa_puntaje ? evaluacion.normas_apa_puntaje : 0}</li>
+                </ul>
+                <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                    <h1 class="text-2xl">
+                        <strong>Puntaje total:</strong>
+                        {evaluacion.total_evaluacion}
+                    </h1>
+                </div>
+            </div>
         </InfoMessage>
 
         {#if evaluacion.validar_evaluacion.length > 0}
@@ -93,10 +101,6 @@
         {:else if evaluacion.finalizado == false && evaluacion.validar_evaluacion.length == 0}
             <InfoMessage class="mb-2" message="Si desea finalizar la evaluación de clic en <strong>Finalizar evaluación</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
             <Button on:click={(event) => (finishEvaluacionDialogOpen = true)} variant="raised">Finalizar evaluación</Button>
-        {/if}
-
-        {#if evaluacion.finalizado}
-            <InfoMessage class="mb-2" message="La evaluación ha sido finalizada con éxito." />
         {/if}
     </div>
     <hr class="mt-10 mb-10" />

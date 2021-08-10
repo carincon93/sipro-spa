@@ -168,7 +168,7 @@
         problema_central_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.problema_central_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
             $form.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -495,18 +495,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
-                <Input disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
+                <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="problema_central_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.problema_central_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.problema_central_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual requieren de alguna recomendación?</p>
-                    <Switch disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} bind:checked={$form.problema_central_requiere_comentario} />
+                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.problema_central_requiere_comentario} />
                     {#if $form.problema_central_requiere_comentario}
-                        <Textarea disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

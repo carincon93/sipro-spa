@@ -38,7 +38,7 @@
         analisis_riesgos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.analisis_riesgos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
             $form.put(route('convocatorias.evaluaciones.analisis-riesgos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -143,18 +143,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="analisis_riesgos_puntaje" value="Puntaje (Máximo 5)" />
-                <Input disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Puntaje" id="analisis_riesgos_puntaje" type="number" input$step="0.1" input$min="0" input$max="5" class="mt-1" bind:value={$form.analisis_riesgos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.analisis_riesgos_puntaje} />
+                <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="analisis_riesgos_puntaje" type="number" input$step="0.1" input$min="0" input$max="5" class="mt-1" bind:value={$form.analisis_riesgos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.analisis_riesgos_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los análisis de riesgos requieren de alguna recomendación?</p>
-                    <Switch disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} bind:checked={$form.analisis_riesgos_requiere_comentario} />
+                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.analisis_riesgos_requiere_comentario} />
                     {#if $form.analisis_riesgos_requiere_comentario}
-                        <Textarea disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

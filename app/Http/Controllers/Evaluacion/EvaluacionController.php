@@ -149,7 +149,7 @@ class EvaluacionController extends Controller
         $evaluacion->habilitado = $request->habilitado;
         $evaluacion->finalizado = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
-        $evaluacion->proyecto()->associate($request->proyecto_id);
+        $evaluacion->proyecto()->associate($evaluacion->proyecto_id);
 
         $evaluacion->save();
 

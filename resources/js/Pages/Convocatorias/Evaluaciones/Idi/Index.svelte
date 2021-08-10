@@ -60,7 +60,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {iniciado ? 'Evaluación iniciada' : finalizado ? 'Evaluación finalizada' : 'Sin evaluar'}
+                            {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
                         </p>
                     </td>
                     <td class="border-t td-actions">

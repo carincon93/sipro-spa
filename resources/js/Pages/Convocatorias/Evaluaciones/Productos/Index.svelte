@@ -42,7 +42,7 @@
         productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.productos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
             $form.put(route('convocatorias.evaluaciones.productos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -167,18 +167,18 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="productos_puntaje" value="Puntaje (Máximo 9)" />
-                <Input disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Puntaje" id="productos_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.productos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.productos_puntaje} />
+                <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="productos_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.productos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.productos_puntaje} />
 
                 <div class="mt-4">
                     <p>¿Los productos requieren de alguna recomendación?</p>
-                    <Switch disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} bind:checked={$form.productos_requiere_comentario} />
+                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.productos_requiere_comentario} />
                     {#if $form.productos_requiere_comentario}
-                        <Textarea disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} error={errors.productos_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} error={errors.productos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

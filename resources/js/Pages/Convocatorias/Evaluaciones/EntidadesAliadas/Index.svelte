@@ -96,7 +96,7 @@
         {evaluacion.entidad_aliada_puntaje}
         <br />
         <strong>Tipo de entidad aliada:</strong>
-        {tipoEntidad}
+        {tipoEntidad ? tipoEntidad : 'No hay una entidad aliada registrada'}
         <br />
         <strong>Código dependencia presupuestal (SIIF):</strong>
         {proyecto.codigo_linea_programatica}
