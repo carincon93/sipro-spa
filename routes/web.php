@@ -210,7 +210,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Trae los usos presupuestales
     Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', function ($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal) {
-        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje')
+        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje', 'convocatoria_presupuesto.perfil')
             ->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')
             ->join('convocatoria_presupuesto', 'presupuesto_sennova.id', 'convocatoria_presupuesto.presupuesto_sennova_id')
             ->where('convocatoria_presupuesto.convocatoria_id', $convocatoria)

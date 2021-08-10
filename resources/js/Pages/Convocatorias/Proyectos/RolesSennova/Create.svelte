@@ -63,6 +63,10 @@
             }
         }
     }
+
+    $: if (infoRolSennova?.perfil) {
+        $form.descripcion = infoRolSennova.perfil
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -88,11 +92,14 @@
                     <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
 
-                {#if proyecto.codigo_linea_programatica != 68}
-                    <div class="mt-4">
+                <div class="mt-4">
+                    {#if infoRolSennova?.perfil}
+                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} value={infoRolSennova.perfil} required />
+                    {:else}
                         <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
-                    </div>
-
+                    {/if}
+                </div>
+                {#if proyecto.codigo_linea_programatica != 68}
                     <div class="mt-4">
                         <Input label="Número de meses que requiere el apoyo. (Máximo {diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
                         <InfoMessage>Este proyecto será ejecutado en {diff_meses} meses.</InfoMessage>
