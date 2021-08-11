@@ -539,7 +539,7 @@ class Proyecto extends Model
         count($evaluaciones) > 0 ? $puntajeTotal = $puntajeTotal / count($evaluaciones) : $puntajeTotal = 0;
 
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
-            $estadoEvaluacion = "a. No priorizado anexo 1C";
+            $estadoEvaluacion = "a. No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.";
         } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
             $estadoEvaluacion = "b. Pre-aprobado >= 91";
         } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
