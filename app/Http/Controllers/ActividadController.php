@@ -11,8 +11,6 @@ use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use function PHPSTORM_META\map;
-
 class ActividadController extends Controller
 {
     /**
