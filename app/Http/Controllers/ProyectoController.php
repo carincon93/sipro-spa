@@ -59,6 +59,7 @@ class ProyectoController extends Controller
         if ($proyecto->servicioTecnologico()->exists()) {
             $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
             $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
+            $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
         }
 
         if ($proyecto->culturaInnovacion()->exists()) {
