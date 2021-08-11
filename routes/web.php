@@ -210,7 +210,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Trae los usos presupuestales
     Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', function ($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal) {
-        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje', 'convocatoria_presupuesto.perfil')
+        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje')
             ->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')
             ->join('convocatoria_presupuesto', 'presupuesto_sennova.id', 'convocatoria_presupuesto.presupuesto_sennova_id')
             ->where('convocatoria_presupuesto.convocatoria_id', $convocatoria)
@@ -289,7 +289,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', function ($tipoProyectoSt) {
         $tipoProyectoStInfo = TipoProyectoSt::find($tipoProyectoSt);
-        return response(EstadoSistemaGestion::select('id as value', 'estado as label')->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('estado', 'ASC')->get());
+        return response(EstadoSistemaGestion::selectRaw("id as value, CASE tipo_proyecto
+            WHEN '1' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo A')
+            WHEN '2' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo B')
+        END as label")->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('id', 'ASC')->get());
     })->name('web-api.estados-sistema-gestion');
 
     /**

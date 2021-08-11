@@ -317,7 +317,7 @@ class ProyectoController extends Controller
             'objetivosEspecificos'      => ProyectoValidationTrait::objetivosEspecificos($proyecto),
             'actividades'               => ProyectoValidationTrait::actividades($proyecto),
             'impactos'                  => ProyectoValidationTrait::impactos($proyecto),
-            'actividadesPresupuesto'    => ProyectoValidationTrait::actividadesPresupuesto($proyecto),
+            // 'actividadesPresupuesto'    => ProyectoValidationTrait::actividadesPresupuesto($proyecto),
             'resultadoProducto'         => ProyectoValidationTrait::resultadoProducto($proyecto),
             'analisisRiesgo'            => ProyectoValidationTrait::analisisRiesgo($proyecto),
             'anexos'                    => ProyectoValidationTrait::anexos($proyecto),

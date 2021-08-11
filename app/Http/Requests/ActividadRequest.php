@@ -25,14 +25,27 @@ class ActividadRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'objetivo_especifico_id'            => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:objetivos_especificos,id'],
             // 'producto_id*'                      => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:productos,id'],
-            'proyecto_presupuesto_id*'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_rubro_presupuestal,id'],
+            'proyecto_presupuesto_id*'          => ['required_if:requiere_rubros,1', 'min:0', 'max:2147483647', 'exists:proyecto_presupuesto,id'],
             'descripcion'                       => ['required', 'string'],
             'fecha_inicio'                      => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), null, $this->route('proyecto'))],
             'fecha_finalizacion'                => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), null, $this->route('proyecto'))],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->requiere_rubros)) {
+            $this->merge([
+                'requiere_rubros' => $this->requiere_rubros['value'],
+            ]);
+        }
     }
 }
