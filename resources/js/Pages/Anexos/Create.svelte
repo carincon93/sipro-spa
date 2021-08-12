@@ -30,6 +30,7 @@
         descripcion: '',
         archivo: null,
         obligatorio: false,
+        habilitado: true,
         linea_programatica_id: [],
     })
 
@@ -80,6 +81,13 @@
                     <br />
                     <Switch bind:checked={$form.obligatorio} />
                     <InputError message={errors.obligatorio} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="habilitado" value="¿El anexo esta habilitado?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.habilitado} />
+                    <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="bg-white rounded shadow overflow-hidden mt-20">
