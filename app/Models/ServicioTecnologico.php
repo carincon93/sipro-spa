@@ -44,6 +44,7 @@ class ServicioTecnologico extends Model
         'fecha_inicio',
         'fecha_finalizacion',
         'propuesta_sostenibilidad',
+        'zona_influencia',
         'bibliografia',
         'max_meses_ejecucion',
         'video',

@@ -202,6 +202,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->identificacion_problema       = $request->identificacion_problema;
         $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
         $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
+        $servicioTecnologico->zona_influencia               = $request->zona_influencia;
         $servicioTecnologico->bibliografia                  = $request->bibliografia;
 
         $servicioTecnologico->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);

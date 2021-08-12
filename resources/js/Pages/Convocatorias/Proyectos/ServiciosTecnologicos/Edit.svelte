@@ -19,6 +19,7 @@
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
     import SelectMulti from '@/Shared/SelectMulti'
+    import Input from '@/Shared/Input'
 
     export let errors
     export let convocatoria
@@ -54,6 +55,7 @@
         resumen: servicioTecnologico.resumen,
         antecedentes: servicioTecnologico.antecedentes,
         bibliografia: servicioTecnologico.bibliografia,
+        zona_influencia: servicioTecnologico.zona_influencia,
 
         identificacion_problema: servicioTecnologico.identificacion_problema,
         pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
@@ -299,6 +301,15 @@
                             </button>
                         </div>
                     {/if}
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
+                </div>
+                <div>
+                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.zona_influencia} required />
                 </div>
             </div>
 

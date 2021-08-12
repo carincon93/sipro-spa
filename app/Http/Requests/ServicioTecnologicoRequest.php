@@ -38,6 +38,7 @@ class ServicioTecnologicoRequest extends FormRequest
                 'pregunta_formulacion_problema'             => ['required', 'string', new MaxWords(50)],
                 'justificacion_problema'                    => ['required', 'max:5000', 'string'],
                 'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
+                'zona_influencia'                           => ['required', 'string', 'max:255'],
                 'bibliografia'                              => ['required', 'string'],
             ];
         } else {
