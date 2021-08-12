@@ -173,10 +173,11 @@ class ServicioTecnologicoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
-            'servicioTecnologico'   => $servicioTecnologico,
-            'sectoresProductivos'   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
-            'tiposProyectoSt'       => $tipoProyectoSt,
+            'convocatoria'                  => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
+            'servicioTecnologico'           => $servicioTecnologico,
+            'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
+            'tiposProyectoSt'               => $tipoProyectoSt,
+            'proyectoProgramasFormacion'    => $servicioTecnologico->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
         ]);
     }
 
@@ -202,6 +203,8 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
         $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
         $servicioTecnologico->bibliografia                  = $request->bibliografia;
+
+        $servicioTecnologico->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
 
         $servicioTecnologico->save();
 
