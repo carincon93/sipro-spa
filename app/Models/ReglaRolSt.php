@@ -76,6 +76,7 @@ class ReglaRolSt extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('roles_sennova.nombre', 'ilike', '%' . $search . '%');
+            $query->orWhere('centros_formacion.nombre', 'ilike', '%' . $search . '%');
         });
     }
 }
