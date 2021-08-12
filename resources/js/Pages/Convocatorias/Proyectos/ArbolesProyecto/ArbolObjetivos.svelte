@@ -873,7 +873,7 @@
                     <p class="mb-5">Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
 
                     {#if proyecto.codigo_linea_programatica == 68}
-                        <InfoMessage>Si el proyecto es de ST por favor genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
+                        <InfoMessage>Si el proyecto es de ST y hay actividades que no requieren de una causa indirecta por favor diríjase al Árbol de problemas y genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
                     {/if}
                 {/if}
             {/if}

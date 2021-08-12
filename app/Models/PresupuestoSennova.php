@@ -29,7 +29,8 @@ class PresupuestoSennova extends Model
         'linea_programatica_id',
         'requiere_estudio_mercado',
         'sumar_al_presupuesto',
-        'mensaje'
+        'mensaje',
+        'habilitado'
     ];
 
     /**

@@ -119,6 +119,10 @@ fieldset[disabled] .selectedItem {
     height: auto !important;
 }
 
+.listContainer .listItem .item {
+    font-size: 14px;
+}
+
 .mdc-dialog {
     z-index: 9999;
 }
