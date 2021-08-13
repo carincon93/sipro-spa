@@ -117,7 +117,7 @@ class ReglaRolTpController extends Controller
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
             END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [6, 8, 15, 5, 7])->where('convocatoria_rol_sennova.linea_programatica_id', 4)->get(),
-            'nodos_tecnoparque' => NodoTecnoparque::select('id as value', 'nombre as label')->get()
+            'nodosTecnoparque' => NodoTecnoparque::select('id as value', 'nombre as label')->get()
         ]);
     }
 
