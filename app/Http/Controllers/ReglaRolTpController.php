@@ -23,7 +23,7 @@ class ReglaRolTpController extends Controller
 
         return Inertia::render('ReglasRolesTp/Index', [
             'filters'       => request()->all('search'),
-            'reglasRolesTp' => ReglaRolTp::selectRaw("reglas_roles_tp.id, CASE convocatoria_rol_sennova.nivel_academico
+            'reglasRolesTp' => ReglaRolTp::selectRaw("reglas_roles_tp.id, reglas_roles_tp.maximo, CASE convocatoria_rol_sennova.nivel_academico
                 WHEN '7' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Ninguno')
                 WHEN '1' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico')
                 WHEN '2' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo')
