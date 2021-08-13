@@ -61,7 +61,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TA </a>
+                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TP</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Editar
