@@ -40,7 +40,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.put(route('reglas-roles-ta.update', reglaRolTp.id), {
+            $form.put(route('reglas-roles-tp.update', reglaRolTp.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -50,7 +50,7 @@
 
     function destroy() {
         if (isSuperAdmin) {
-            $form.delete(route('reglas-roles-ta.destroy', reglaRolTp.id))
+            $form.delete(route('reglas-roles-tp.destroy', reglaRolTp.id))
         }
     }
 </script>
@@ -61,7 +61,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('reglas-roles-ta.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TA </a>
+                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Editar
