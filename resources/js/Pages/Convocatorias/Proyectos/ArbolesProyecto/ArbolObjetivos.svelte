@@ -17,7 +17,7 @@
     import Stepper from '@/Shared/Stepper'
 
     export let errors
-    export let to_pdf = false;
+    export let to_pdf;
     export let convocatoria
     export let proyecto
     export let efectosDirectos

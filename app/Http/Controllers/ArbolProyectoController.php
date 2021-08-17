@@ -286,7 +286,8 @@ class ArbolProyectoController extends Controller
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
-            'causasDirectas'    => $causasDirectas
+            'causasDirectas'    => $causasDirectas,
+            'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
     }
 
@@ -668,7 +669,8 @@ class ArbolProyectoController extends Controller
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
                 })
-            )->get()
+            )->get(),
+            'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
     }
 

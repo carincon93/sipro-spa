@@ -21,7 +21,7 @@ class PdfController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function generateProjectSumary(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
+    static function generateProjectSumary(Convocatoria $convocatoria, Proyecto $proyecto, $save = false)
     {
         if($_COOKIE[config('session.cookie')]){
             $datos = null;
@@ -51,11 +51,11 @@ class PdfController extends Controller
                 }
             }
 
-            $base64Arbolproblemas = $this->takeScreenshot(route('convocatorias.proyectos.arbol-problemas', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
-            $base64Arbolobjetivos = $this->takeScreenshot(route('convocatorias.proyectos.arbol-objetivos', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
-            $base64GantProductos = $this->takeScreenshot(route('convocatorias.proyectos.productos.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
-            $base64GantActividades = $this->takeScreenshot(route('convocatorias.proyectos.actividades.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
-            $base64CadenaValor = $this->takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '#orgchart_div');
+            $base64Arbolproblemas = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-problemas', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
+            $base64Arbolobjetivos = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-objetivos', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
+            $base64GantProductos = PdfController::takeScreenshot(route('convocatorias.proyectos.productos.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
+            $base64GantActividades = PdfController::takeScreenshot(route('convocatorias.proyectos.actividades.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
+            $base64CadenaValor = PdfController::takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '#orgchart_div');
 
             
             $pdf = PDF::loadView('Convocatorias.Proyectos.ResumenPdf', [
@@ -73,13 +73,17 @@ class PdfController extends Controller
                 'tiposImpacto'    => collect(json_decode(Storage::get('json/tipos-impacto.json'), true)),
                 'estadosInventarioEquipos'  => collect(json_decode(Storage::get('json/estados-inventario-equipos.json'), true)),
                 ]);
-            return $pdf->stream('Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');
+            if ($save==false) {
+                return $pdf->stream('Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');
+            }else{
+                $pdf->setWarnings(false)->save($convocatoria->id.'/'.$proyecto->id.'/Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');
+            }
 
         }
         return redirect()->route('login');
     }
 
-    private function takeScreenshot($route, $select = null)
+    static function takeScreenshot($route, $select = null)
     {
         $shot = Browsershot::url($route.'?to_pdf=1')
         ->useCookies([

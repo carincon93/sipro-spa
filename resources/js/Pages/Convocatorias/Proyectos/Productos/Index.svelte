@@ -19,7 +19,7 @@
     export let productos
     export let productosGantt
     export let validacionResultados
-    export let to_pdf = false;
+    export let to_pdf;
 
     $title = 'Productos'
 
@@ -65,7 +65,7 @@
         {/each}
     {/if}
 
-    {#if showGantt}
+    {#if showGantt || to_pdf}
         <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
     {:else}
         <Button on:click={() => (showGantt = true)}>Visualizar diagrama de Gantt</Button>
