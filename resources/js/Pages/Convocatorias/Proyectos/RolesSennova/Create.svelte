@@ -103,8 +103,7 @@
                 </div>
                 {#if proyecto.codigo_linea_programatica != 68}
                     <div class="mt-4">
-                        <Input label="Número de meses que requiere el apoyo. (Máximo {diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
-                        <InfoMessage>Este proyecto será ejecutado en {diff_meses} meses.</InfoMessage>
+                        <Input label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
                     </div>
 
                     <div class="mt-4">
