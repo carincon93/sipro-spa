@@ -64,11 +64,11 @@
             <tr>
                <td rowspan="2"  valign="middle" align="center" width="20%">
                   <div>
-                     <img src="{{asset('/images/Sena_Colombia_logo.png')}}" alt="Logo SENA">
+                     <img src="{{asset('images/Sena_Colombia_logo.png')}}" alt="Logo SENA">
                   </div>
                </td>
                <td valign="middle" align="center">
-                  <p>Resumen Proyecto - SGPS-SIPRO <br> <small>Código Proyecto: SGPS-8{{$proyecto->id}}-2021</small></p>
+                  <p>Resumen Proyecto - SGPS-SIPRO <br> <small>Código Proyecto: {{$proyecto->codigo}}</small></p>
                </td>
             </tr>
             <tr>

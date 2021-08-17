@@ -351,6 +351,17 @@ class Proyecto extends Model
         return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->orderBy('created_at', 'DESC')->get();
     }
 
+
+    /**
+     * Relationship with ProyectoPdfVersion
+     *
+     * @return object
+     */
+    public function PdfVersiones()
+    {
+        return $this->hasMany(ProyectoPdfVersion::class);
+    }
+
     /**
      * Get codigo e.g. SGPS-8000-2021
      *

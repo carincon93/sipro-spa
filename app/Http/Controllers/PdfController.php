@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Proyecto;
 use App\Models\Convocatoria;
 use App\Models\TipoProyectoSt;
+use App\Models\ProyectoPdfVersion;
 use Spatie\Browsershot\Browsershot;
 use PDF;
 
@@ -23,8 +24,7 @@ class PdfController extends Controller
      */
     static function generateProjectSumary(Convocatoria $convocatoria, Proyecto $proyecto, $save = false)
     {
-        if($_COOKIE[config('session.cookie')]){
-            $datos = null;
+        $datos = null;
             $tipoProyectoSt = null;
             if(!empty($proyecto->idi)){
                 $datos = $proyecto->idi;
@@ -76,20 +76,18 @@ class PdfController extends Controller
             if ($save==false) {
                 return $pdf->stream('Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');
             }else{
-                $pdf->setWarnings(false)->save($convocatoria->id.'/'.$proyecto->id.'/Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');
+                $output = $pdf->setWarnings(false)->output();
+                $path = Storage::put('convocatorias/'.$convocatoria->id.'/'.$proyecto->id.'/'.$save.'.pdf', $output);
+                if (!empty($path)) {
+                    $version = ProyectoPdfVersion::where('version', $save)->update(['estado' => 1]);
+                }
             }
-
-        }
-        return redirect()->route('login');
     }
 
     static function takeScreenshot($route, $select = null)
     {
-        $shot = Browsershot::url($route.'?to_pdf=1')
-        ->useCookies([
-            'XSRF-TOKEN' => csrf_token(),
-            config('session.cookie') => $_COOKIE[config('session.cookie')],
-            ])
+        $cookie = (isset($_COOKIE[config('session.cookie')]))?$_COOKIE[config('session.cookie')]:'';
+        $shot = Browsershot::url($route.'?to_pdf=1&key_to_pdf=ktvIOFQuNXqXinQIM1Uc')
         ->windowSize(1550, 800)
         ->deviceScaleFactor(2)
         ->addChromiumArguments([
@@ -99,6 +97,12 @@ class PdfController extends Controller
             'disable-backgrounding-occluded-windows',
             'disable-renderer-backgrounding'
         ]);
+        if (!empty($cookie)) {
+            $shot->useCookies([
+            'XSRF-TOKEN' => csrf_token(),
+            config('session.cookie') => $cookie,
+            ]);
+        }
         if(!empty($select)){
             $shot->select($select);
         }else{
