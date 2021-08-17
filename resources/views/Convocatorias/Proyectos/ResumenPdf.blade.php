@@ -4,7 +4,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>Resumen Proyecto {{(!empty($proyecto->idi))?'I+D+I':'TA'}} SGPS-8{{$proyecto->id}}-2021 - SGPS-SIPRO</title>
+      
+      <title>Resumen Proyecto SGPS-8{{$proyecto->id}}-2021 - SGPS-SIPRO</title>
       <!-- Fonts -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap">
       <!-- Styles -->
@@ -67,7 +68,7 @@
                   </div>
                </td>
                <td valign="middle" align="center">
-                  <p>Resumen Proyecto {{(!empty($proyecto->idi))?'I+D+I':'TA'}} - SGPS-SIPRO <br> <small>Código Proyecto: SGPS-8{{$proyecto->id}}-2021</small></p>
+                  <p>Resumen Proyecto - SGPS-SIPRO <br> <small>Código Proyecto: SGPS-8{{$proyecto->id}}-2021</small></p>
                </td>
             </tr>
             <tr>
@@ -111,6 +112,42 @@
                   <p>Linea programatica: {{$proyecto->lineaProgramatica->codigo}} - {{$proyecto->lineaProgramatica->nombre}}</p>
                </td>
             </tr>
+            @if($proyecto->servicioTecnologico)
+            <tr>
+               <td align="left">
+                  <p class="title">Tipo de proyecto</p>
+               </td>
+               <td align="left">
+                  <p>{{($tipoProyectoSt->where('value',$datos->tipo_proyecto_st_id)->first())?$tipoProyectoSt->where('value',$datos->tipo_proyecto_st_id)->first()['label']:''}}</p>
+               </td>
+            </tr>
+            <tr>
+               <td align="left">
+                  <p class="title">Identificación y descripción del problema</p>
+               </td>
+               <td align="left">
+                  <p>{{$datos->identificacion_problema}}</p>
+               </td>
+            </tr>
+            <tr>
+               <td align="left">
+                  <p class="title">Pregunta de formulación del problema</p>
+               </td>
+               <td align="left">
+                  <p>{{$datos->pregunta_formulacion_problema}}</p>
+               </td>
+            </tr>
+            @endif
+            @if($datos->nodoTecnoparque)
+            <tr>
+               <td align="left">
+                  <p class="title">Nodo Tecnoparque</p>
+               </td>
+               <td align="left">
+                  <p>{{$datos->nodoTecnoparque->nombre}}</p>
+               </td>
+            </tr>
+            @endif
             @if($datos->redConocimiento)
             <tr>
                <td align="left">
@@ -315,6 +352,7 @@
             @endif
          </table>
          @endif
+
          <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
             @if($proyecto->tecnoacademiaLineasTecnoacademia()->count()>0)
             <tr>
@@ -323,10 +361,18 @@
                </td>
                <td>
                   <p>{{$proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->nombre}}
+                  <br>Modalidad: 
+                  @if($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad==1)
+                  itinerante
+                  @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad==2)
+                  itinerante - vehículo
+                  @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad==3)
+                  fija con extensión
+                  @endif
                   <br>Lineas Tecnologicas:</p>
                   <ol>
                   @foreach($proyecto->tecnoacademiaLineasTecnoacademia as $linea)
-                     <li>{{$linea->lineaTecnologica->nombre}}</li>
+                     <li>{{$linea->lineaTecnoacademia->nombre}}</li>
                   @endforeach
                   </ol>
                </td>
@@ -337,27 +383,154 @@
             <p class="title">Resumen del proyecto</p>
             <p>{{$datos->resumen}}</p>
          </div>
+         @if($datos->resumen_regional)
+         <div class="border">
+            <p class="title">Complemento - Resumen ejecutivo regional</p>
+            <p>{{$datos->resumen_regional}}</p>
+         </div>
+         @endif
          <div class="border">
             <p class="title">Antecedentes</p>
             <p>{{$datos->antecedentes}}</p>
          </div>
+         @if($datos->antecedentes_regional)
+         <div class="border">
+            <p class="title">Complemento - Antecedentes regional</p>
+            <p>{{$datos->antecedentes_regional}}</p>
+         </div>
+         @endif
+         @if($datos->antecedentes_tecnoacademia)
+         <div class="border">
+            <p class="title">Antecedentes de la Tecnoacademia y su impacto en la región</p>
+            <p>{{$datos->antecedentes_tecnoacademia}}</p>
+         </div>
+         @endif
+         @if($datos->retos_oportunidades)
+         <div class="border">
+            <p class="title">Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto</p>
+            <p>{{$datos->retos_oportunidades}}</p>
+         </div>
+         @endif
+         @if($datos->pertinencia_territorio)
+         <div class="border">
+            <p class="title">Justificación y pertinencia en el territorio</p>
+            <p>{{$datos->pertinencia_territorio}}</p>
+         </div>
+         @endif
+         @if(!empty($datos->marco_conceptual))
          <div class="border">
             <p class="title">Marco conceptual</p>
             <p>{{$datos->marco_conceptual}}</p>
          </div>
+         @endif
          <div class="border">
             <p class="title">Metodología</p>
             <p>{{$datos->metodologia}}</p>
          </div>
+         @if($proyecto->tp)
+         <div class="border">
+            <p class="title">Metodología Local</p>
+            <p>{{$datos->metodologia_local}}</p>
+         </div>
+         @endif
+
+         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+            @if($datos->nombre_instituciones_programas && !empty($datos->nombre_instituciones_programas))
+            <tr>
+               <td width="35%">
+                  <p class="title">Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach(json_decode($datos->nombre_instituciones_programas) as $instProg)
+                     <li>{{$instProg->value}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if($datos->proyeccion_nuevas_tecnoacademias==1 && !empty($datos->nuevas_instituciones))
+            <tr>
+               <td width="35%">
+                  <p class="title">Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach(json_decode($datos->nuevas_instituciones) as $instNuevaProg)
+                     <li>{{$instNuevaProg->value}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if($datos->proyeccion_articulacion_media==1 && !empty($datos->nombre_instituciones))
+            <tr>
+               <td width="35%">
+                  <p class="title">Instituciones donde se implementará el programa que tienen <b>articulación con la Media</b></p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach(json_decode($datos->nombre_instituciones) as $inst)
+                     <li>{{$inst->value}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+         </table>
+         @if(!empty($datos->articulacion_centro_formacion))
+         <div class="border">
+            <p class="title">Articulación con el centro de formación</p>
+            <p>{{$datos->articulacion_centro_formacion}}</p>
+         </div>
+         @endif
+
+         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+            @if(!empty($proyecto->disCurriculares))
+            <tr>
+               <td width="35%">
+                  <p class="title">Programas a ejecutar en la vigencia del proyecto</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->disCurriculares as $disCurricular)
+                     <li>{{$disCurricular->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+         </table>
+         @if(!empty($datos->proyectos_macro))
+         <div class="border">
+            <p class="title">Proyectos Macro de investigación formativa y aplicada de la TecnoAcademia para la vigencia {{$convocatoria->year}}</p>
+            <p>{{$datos->proyectos_macro}}</p>
+         </div>
+         @endif
+         @if(!empty($datos->lineas_medulares_centro))
+         <div class="border">
+            <p class="title">Líneas medulares del Centro con las que se articula la TecnoAcademia</p>
+            <p>{{$datos->lineas_medulares_centro}}</p>
+         </div>
+         @endif
+         @if(!empty($datos->lineas_tecnologicas_centro))
+         <div class="border">
+            <p class="title">Líneas tecnológicas del Centro con las que se articula la TecnoAcademia</p>
+            <p>{{$datos->lineas_tecnologicas_centro}}</p>
+         </div>
+         @endif
+
+         @if(!empty($datos->propuesta_sostenibilidad))
          <div class="border">
             <p class="title">Propuesta de sostenibilidad</p>
             <p>{{$datos->propuesta_sostenibilidad}}</p>
          </div>
+         @endif
          <div class="border">
             <p class="title">Bibliografía</p>
             <p>{{$datos->bibliografia}}</p>
          </div>
-         @if($proyecto->idi)
+         @if(!empty($datos->numero_aprendices))
          <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
             <tr>
                <td class="title">Número de los aprendices que se beneficiarán en la ejecución del proyecto</td>
@@ -365,9 +538,10 @@
             </tr>
          </table>
          @endif
+         @if($proyecto->municipios->count()>0)
          <table class="page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
             <tr>
-               <td width="35%" class="title">Nombre de los municipios beneficiados</td>
+               <td width="35%" class="title">Municipios beneficiados</td>
                <td>
                   <ol>
                      @foreach($proyecto->municipios as $mun)
@@ -382,28 +556,130 @@
                   <p>{{$datos->impacto_municipios}}</p>
                </td>
             </tr>
+            @if(!empty($datos->impacto_centro_formacion))
             <tr>
                <td width="35%" class="title">Impacto en el centro de formación</td>
                <td>
                   <p>{{$datos->impacto_centro_formacion}}</p>
                </td>
             </tr>
+            @endif
          </table>
+         @endif
+         @if($proyecto->municipiosAImpactar->count()>0)
+         <table class="" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+            <tr>
+               <td width="35%" class="title">Municipios a impactar en la vigencia el proyecto:</td>
+               <td>
+                  <ol>
+                     @foreach($proyecto->municipiosAImpactar as $munImp)
+                     <li>{{$munImp->nombre}}</li>
+                     @endforeach
+                  </ol>
+               </td>
+            </tr>
+            <tr>
+               <td width="35%" class="title">Descripción del beneficio o impacto en los municipios</td>
+               <td>
+                  <p>{{$datos->impacto_municipios}}</p>
+               </td>
+            </tr>
+            @if(!empty($datos->impacto_centro_formacion))
+            <tr>
+               <td width="35%" class="title">Impacto en el centro de formación</td>
+               <td>
+                  <p>{{$datos->impacto_centro_formacion}}</p>
+               </td>
+            </tr>
+            @endif
+         </table>
+         @endif
+
+         @if(!empty($proyecto->ta))
+         <div style="text-align: center;">
+            <h3>Articulación SENNOVA</h3>
+            <p>A continuación, registre la información relacionada con la articulación de la línea de TecnoAcademia con las otras líneas de SENNOVA en el centro y la regional:</p>
+         </div>
+         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+            @if(!empty($proyecto->lineasInvestigacion))
+            <tr>
+               <td width="35%" class="title">Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia</td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->lineasInvestigacion as $lineaInvest)
+                     <li>{{$lineaInvest->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($proyecto->gruposInvestigacion))
+            <tr>
+               <td width="35%" class="title">Grupos de investigación en los cuales está vinculada la TecnoAcademia</td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->gruposInvestigacion as $grupoInvest)
+                     <li>{{$grupoInvest->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if($datos->articulacion_semillero==1 && !empty($proyecto->semillerosInvestigacion))
+            <tr>
+               <td width="35%" class="title">Semillero(s) de investigación de la TecnoAcademia</td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->semillerosInvestigacion as $semilleroInvest)
+                     <li>{{$semilleroInvest->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($datos->proyectos_ejecucion))
+            <tr>
+               <td width="35%" class="title">Proyectos o iniciativas en ejecución en el año 2021</td>
+               <td>
+                  <p>{{$datos->proyectos_ejecucion}}</p>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($datos->semilleros_en_formalizacion))
+            <tr>
+               <td width="35%">
+                  <p class="title">Semilleros en proceso de formalización</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach(json_decode($datos->semilleros_en_formalizacion) as $semForm)
+                     <li>{{$semForm->value}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+         </table>
+         @endif
+         
          <div class="rotate90 page_break">
             <img class="" src="data:image/png;base64,{{$base64Arbolproblemas}}" alt="Árbol de problemas" width="100%">
          </div>
          <div class="rotate90">
             <img class="" src="data:image/png;base64,{{$base64Arbolobjetivos}}" alt="Árbol de objetivos" width="100%">
          </div>
-         
+         @if(!empty($datos->planteamiento_problema))
          <div class="border page_break">
             <p class="title">Planteamiento del problema</p>
             <p>{{$datos->planteamiento_problema}}</p>
          </div>
+         @endif
+         @if(!empty($datos->justificacion_problema))
          <div class="border">
             <p class="title">Justificación</p>
             <p>{{$datos->justificacion_problema}}</p>
          </div>
+         @endif
          <div class="border">
             <p class="title">Objetivo general</p>
             <p>{{$datos->objetivo_general}}</p>
@@ -471,7 +747,7 @@
                   @foreach($cauDir->causasindirectas as $cauind)
                   <td width="{{100/$cauDir->causasindirectas()->count()}}%" valign="top">
                      <span class="mb-3">
-                        <span class="title">Actividad: OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}-ACT-{{$cauind->actividad->id}}</span>
+                        <span class="title">Actividad: OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}-ACT-{{$cauind->actividad->id}}</span><br>
                         <small>Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</small><br>
                         <span class="title">Fecha de ejecución</span><br>
                         Del: {{$cauind->actividad->year_inicio}}-{{$cauind->actividad->mes_inicio}}-{{$cauind->actividad->dia_inicio}} hasta {{$cauind->actividad->year_finalizacion}}-{{$cauind->actividad->mes_finalizacion}}-{{$cauind->actividad->dia_finalizacion}}
@@ -567,7 +843,7 @@
                </tbody>
             </table>
          </div>
-         
+         @if($proyecto->semillerosInvestigacion->count()>0)
          <div class="border">
             <p class="title" style="text-align:center">Semilleros de investigación</p>
             <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
@@ -595,7 +871,7 @@
                </tbody>
             </table>
          </div>
-         
+         @endif
          <div class="border page_break">
             <p class="title" style="text-align:center">Productos</p>
             <img class="" src="data:image/png;base64,{{$base64GantProductos}}" alt="Gant Productos" width="100%">
@@ -619,15 +895,53 @@
                               <th align="left" width="15%">Indicador</th>
                               <td colspan="3">{{$prod->indicador}}</td>
                         </tr>
-                        @if($prod->productoIdi)
+                        @if(!empty($prod->productoIdi))
                         <tr>
                               <th align="left" width="15%">Subtipologia Minciencias</th>
                               <td colspan="3">{{$prod->productoIdi->subtipologiaMinciencias->nombre}}</td>
                         </tr>
-                        @elseif($prod->productoTaTp)
+                        @endif
+                        @if(!empty($prod->productoTaTp))
                         <tr>
                               <th align="left" width="15%">Valor proyectado</th>
                               <td colspan="3">{{$prod->productoTaTp->valor_proyectado}}</td>
+                        </tr>
+                        @endif
+                        @if(!empty($prod->productoCulturaInnovacion))
+                        <tr>
+                              <th align="left" width="15%">Subtipología Minciencias</th>
+                              <td colspan="3">
+                                 {{$prod->productoCulturaInnovacion->subtipologiaMinciencias->tipologiaMinciencias->nombre}}<br>
+                                 {{$prod->productoCulturaInnovacion->subtipologiaMinciencias->nombre}}<br>
+                                 {{$prod->productoCulturaInnovacion->medio_verificacion}}
+                              </td>
+                        </tr>
+                        @endif
+                        @if(!empty($prod->productoServicioTecnologico))
+                        <tr>
+                              <th align="left" width="15%">Medio de verificación</th>
+                              <td colspan="3">{{$prod->productoServicioTecnologico->medio_verificacion}}</td>
+                        </tr>
+                        <tr>
+                              <th align="left" width="15%">Nombre del Indicador del producto</th>
+                              <td colspan="3">{{$prod->productoServicioTecnologico->nombre_indicador}}</td>
+                        </tr>
+                        <tr>
+                              <th align="left" width="15%">Fórmula del Indicador del producto</th>
+                              <td colspan="3">{{$prod->productoServicioTecnologico->formula_indicador}}</td>
+                        </tr>
+                        @endif
+
+                        @if($prod->actividades->count()>0)
+                        <tr>
+                              <th align="left" width="15%">Actividades</th>
+                              <td colspan="3">
+                                 <ul>
+                                    @foreach($prod->actividades as $pact)
+                                    <li>OBJ-ESP-{{$pact->objetivo_especifico_id}}-ACT-{{$pact->id}}</li>
+                                    @endforeach
+                                 </ul>
+                              </td>
                         </tr>
                         @endif
                      </tbody>
@@ -671,7 +985,58 @@
                </table>
             @endforeach
          </div>
-         
+         @if($proyecto->inventarioEquipos->count()>0)
+         <div class="border page_break">
+            <p class="title" style="text-align:center">Inventario de equipos</p>
+            
+            @foreach($proyecto->inventarioEquipos as $equipo)
+               <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-top:20px;">
+                  <tbody slot="thead">
+                     <tr>
+                           <th align="left" width="15%">Nombre</th>
+                           <td>{{$equipo->nombre}}</td>
+                           <th align="left" width="15%">Marca</th>
+                           <td>{{$equipo->marca}}</td>
+                     </tr>
+                     <tr>
+                           <th align="left" width="15%">Serial</th>
+                           <td>{{$equipo->serial}}</td>
+                           <th align="left" width="15%">Código interno</th>
+                           <td>{{$equipo->codigo_interno}}</td>
+                     </tr>
+                     <tr>
+                           <th align="left" width="15%">Fecha de adquisición</th>
+                           <td>{{$equipo->fecha_adquisicion}}</td>
+                           <th align="left" width="15%">Estado</th>
+                           <td>{{($estadosInventarioEquipos->where('value',$equipo->estado)->first())?$estadosInventarioEquipos->where('value',$equipo->estado)->first()['label']:''}}</td>
+                     </tr>
+                     <tr>
+                           <th align="left" width="15%">¿Uso exclusivo de Servicios tecnológicos?</th>
+                           <td>{{($equipo->uso_st==1)?'SI':'NO'}}</td>
+                           <th align="left" width="15%">¿Otra dependencia que usa el equipo?</th>
+                           <td>
+                              {{($equipo->uso_otra_dependencia==1)?'SI':'NO'}}
+                              @if($equipo->uso_otra_dependencia==1)
+                              <br>Dependencia: $equipo->dependencia
+                              @endif
+                           </td>
+                     </tr>
+                     <tr>
+                           <th align="left" width="15%">Descripción</th>
+                           <td colspan="3">{{$equipo->descripcion}}</td>
+                     </tr>
+
+                     <tr>
+                           <th align="left" width="15%">¿Para el próximo año el equipo necesita mantenimiento?</th>
+                           <td>{{($equipo->mantenimiento_prox_year==1)?'SI':'NO'}}</td>
+                           <th align="left" width="15%">¿Para el próximo año el equipo necesita calibración?</th>
+                           <td>{{($equipo->calibracion_prox_year==1)?'SI':'NO'}}</td>
+                     </tr>
+                  </tbody>
+               </table>
+            @endforeach
+         </div>
+         @endif
          <div class="border">
             <p class="title" style="text-align:center">Anexos</p>
                <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-top:20px;">
@@ -694,7 +1059,7 @@
                </table>
          </div>
          
-         <div class="rotate90 page_break" style="margin-top: 2in !important">
+         <div class="rotate90 page_break" style="margin-top: 1.8in !important">
             <p class="title" style="text-align:center">Cadena de valor</p>
             <img src="data:image/png;base64,{{$base64CadenaValor}}" alt="Cadena de valor" width="100%">
          </div>
