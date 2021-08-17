@@ -58,9 +58,5 @@ class RegionalRequest extends FormRequest
                 'director_regional_id' => $this->director_regional_id['value'],
             ]);
         }
-
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
     }
 }

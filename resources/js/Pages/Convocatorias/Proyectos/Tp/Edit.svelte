@@ -56,7 +56,6 @@
         resumen: tp.resumen,
         resumen_regional: tp.resumen_regional,
         antecedentes: tp.antecedentes,
-        justificacion: tp.justificacion,
         antecedentes_regional: tp.antecedentes_regional,
         retos_oportunidades: tp.retos_oportunidades,
         pertinencia_territorio: tp.pertinencia_territorio,
@@ -135,6 +134,8 @@
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                <InfoMessage message={convocatoria.fecha_maxima_tp} class="my-5" />
+
                 <div class="mt-4 flex items-start justify-around">
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
@@ -206,17 +207,19 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage
-                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
-                    />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                        <InfoMessage
+                            message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                        />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
@@ -224,15 +227,6 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
                 </div>
             </div>
 
@@ -254,15 +248,17 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+            <fieldset disabled>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                        <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
-                </div>
-            </div>
+            </fieldset>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>

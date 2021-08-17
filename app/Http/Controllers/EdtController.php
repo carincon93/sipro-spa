@@ -42,7 +42,7 @@ class EdtController extends Controller
             'convocatoria'     => $convocatoria->only('id'),
             'proyecto'         => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
             'filters'          => request()->all('search'),
-            'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')
+            'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $proyecto->id)
                 ->filterEdt(request()->only('search'))->select('edt.id', 'edt.descripcion_evento', 'edt.numero_asistentes', 'edt.proyecto_presupuesto_id')->paginate(),
         ]);
     }
@@ -69,7 +69,7 @@ class EdtController extends Controller
         if ($proyecto->lineaProgramatica->codigo != 70) {
             return redirect()->route('convocatorias.proyectos.edit', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de edt');
         } else if ($proyecto->servicios_organizacion == false) {
-            return redirect()->back()->with('error', 'Debe generar primero el uso presupuestal "Servicios de organización y asistencia de convenciones y ferias".');
+            return back()->with('error', 'Debe generar primero el uso presupuestal "Servicios de organización y asistencia de convenciones y ferias".');
         }
 
         return Inertia::render('Convocatorias/Proyectos/EDT/Create', [
@@ -140,7 +140,7 @@ class EdtController extends Controller
         if ($proyecto->lineaProgramatica->codigo != 70) {
             return redirect()->route('convocatorias.proyectos.edit', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de edt');
         } else if ($proyecto->servicios_organizacion == false) {
-            return redirect()->back()->with('error', 'Debe generar primero el uso presupuestal "Servicios de organización y asistencia de convenciones y ferias".');
+            return back()->with('error', 'Debe generar primero el uso presupuestal "Servicios de organización y asistencia de convenciones y ferias".');
         }
 
         return Inertia::render('Convocatorias/Proyectos/EDT/Edit', [
@@ -173,7 +173,7 @@ class EdtController extends Controller
 
         $edt->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

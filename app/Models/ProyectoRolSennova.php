@@ -17,6 +17,13 @@ class ProyectoRolSennova extends Model
     protected $table = 'proyecto_rol_sennova';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['rol_aprobado'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -68,6 +75,16 @@ class ProyectoRolSennova extends Model
     }
 
     /**
+     * Relationship with ProyectoRolEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoRolesEvaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\ProyectoRolEvaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -95,5 +112,10 @@ class ProyectoRolSennova extends Model
     public function getTotalRolSennova()
     {
         return ($this->numero_meses * $this->convocatoriaRolSennova->asignacion_mensual) * $this->numero_roles;
+    }
+
+    public function getRolAprobadoAttribute()
+    {
+        return $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('incorrecto', false)->count();
     }
 }

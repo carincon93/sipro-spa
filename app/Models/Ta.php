@@ -33,7 +33,6 @@ class Ta extends Model
     protected $fillable = [
         'resumen',
         'resumen_regional',
-        'justificacion',
         'antecedentes',
         'antecedentes_tecnoacademia',
         'problema_central',
@@ -60,15 +59,16 @@ class Ta extends Model
         'cantidad_instructores_planta',
         'cantidad_dinamizadores_planta',
         'cantidad_psicopedagogos_planta',
-        'modificable',
         'proyectos_ejecucion',
         'proyectos_macro',
         'lineas_medulares_centro',
         'lineas_tecnologicas_centro',
-        'proyeccion_nuevas_tecnoacademias',
+        'proyeccion_nuevas_instituciones',
         'proyeccion_articulacion_media',
         'articulacion_semillero',
         'semilleros_en_formalizacion',
+        'infraestructura_tecnoacademia',
+        'modificable',
     ];
 
     /**
@@ -107,6 +107,46 @@ class Ta extends Model
     public function edt()
     {
         return $this->hasMany(Edt::class);
+    }
+
+    /**
+     * Relationship with TematicaEstrategica
+     *
+     * @return object
+     */
+    public function tematicasEstrategicas()
+    {
+        return $this->belongsToMany(TematicaEstrategica::class, 'ta_tematica_estrategica', 'ta_id', 'tematica_estrategica_id');
+    }
+
+    /**
+     * Relationship with DisciplinaSubareaConocimiento
+     *
+     * @return object
+     */
+    public function disciplinasSubareaConocimiento()
+    {
+        return $this->belongsToMany(DisciplinaSubareaConocimiento::class, 'ta_disciplina_subarea_conocimiento', 'ta_id', 'disciplina_subarea_conocimiento_id');
+    }
+
+    /**
+     * Relationship with RedConocimiento
+     *
+     * @return object
+     */
+    public function redesConocimiento()
+    {
+        return $this->belongsToMany(RedConocimiento::class, 'ta_red_conocimiento', 'ta_id', 'red_conocimiento_id');
+    }
+
+    /**
+     * Relationship with ActividadEconomica
+     *
+     * @return object
+     */
+    public function actividadesEconomicas()
+    {
+        return $this->belongsToMany(ActividadEconomica::class, 'ta_actividad_economica', 'ta_id', 'actividad_economica_id');
     }
 
     /**
@@ -151,46 +191,57 @@ class Ta extends Model
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
-                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->where('centros_formacion.regional_id', $authUser->directorRegional->id)
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
-        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
+        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion || $authUser->hasRole(21)) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
                 $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
+            } else if ($authUser->hasRole(21)) {
+                $centroFormacionId = $authUser->centroFormacion->id;
             } else if ($authUser->hasRole(3)) {
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
-                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->where('users.centro_formacion_id', $centroFormacionId)
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
+                ->where('proyectos.centro_formacion_id', $centroFormacionId)
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else if ($authUser->getAllPermissions()->where('id', 15)->first()) {
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
-                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
         } else {
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
-                ->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->where('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')

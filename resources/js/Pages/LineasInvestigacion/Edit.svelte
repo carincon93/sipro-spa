@@ -30,7 +30,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
             $form.put(route('lineas-investigacion.update', lineaInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -51,7 +51,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                         <a use:inertia href={route('lineas-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -63,7 +63,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21]) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
@@ -77,7 +77,7 @@
                 {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar línea de investigación </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar línea de investigación</LoadingButton>
                 {/if}
             </div>

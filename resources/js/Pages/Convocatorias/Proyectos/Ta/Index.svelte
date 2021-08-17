@@ -21,11 +21,24 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let filters = {
+        estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
+    }
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20" routeParams={[convocatoria.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id]} bind:filters showFilters={true}>
         <div slot="title">Tecnoacademia</div>
+
+        <div slot="filters">
+            <label for="estructuracion_proyectos" class="block text-gray-700">Filtros:</label>
+            <select id="estructuracion_proyectos" class="mt-1 w-full form-select" bind:value={filters.estructuracion_proyectos}>
+                <option value={null}>Seleccione una opción</option>
+                <option value={false}>Ver - Proyectos de la convocatoria</option>
+                <option value={true}>Ver - Curso de estructuración de proyectos</option>
+            </select>
+        </div>
 
         <div slot="actions">
             {#if isSuperAdmin || checkPermission(authUser, [8])}

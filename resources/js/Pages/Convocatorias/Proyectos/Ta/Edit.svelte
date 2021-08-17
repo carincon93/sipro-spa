@@ -68,7 +68,7 @@
         resumen: ta.resumen,
         resumen_regional: ta.resumen_regional,
         antecedentes: ta.antecedentes,
-        justificacion: ta.justificacion,
+        justificacion_problema: ta.justificacion_problema,
         antecedentes_tecnoacademia: ta.antecedentes_tecnoacademia,
         retos_oportunidades: ta.retos_oportunidades,
         pertinencia_territorio: ta.pertinencia_territorio,
@@ -83,9 +83,9 @@
         proyectos_macro: ta.proyectos_macro,
         lineas_medulares_centro: ta.lineas_medulares_centro,
         lineas_tecnologicas_centro: ta.lineas_tecnologicas_centro,
-        proyeccion_nuevas_tecnoacademias: {
-            value: ta.proyeccion_nuevas_tecnoacademias,
-            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_tecnoacademias)?.label,
+        proyeccion_nuevas_instituciones: {
+            value: ta.proyeccion_nuevas_instituciones,
+            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_instituciones)?.label,
         },
         proyeccion_articulacion_media: {
             value: ta.proyeccion_articulacion_media,
@@ -220,6 +220,8 @@
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                <InfoMessage message={convocatoria.fecha_maxima_ta} class="my-5" />
+
                 <div class="mt-4 flex items-start justify-around">
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
@@ -340,10 +342,10 @@
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-1">
                     <div>
-                        <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
+                        <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
+                        <Textarea maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
                     </div>
                 </div>
             </fieldset>
@@ -418,14 +420,14 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="proyeccion_nuevas_tecnoacademias" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
+                    <Label required class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas Instituciones Educativas en la nueva vigencia??" />
                 </div>
                 <div>
-                    <Select items={opcionesSiNo} id="proyeccion_nuevas_tecnoacademias" bind:selectedValue={$form.proyeccion_nuevas_tecnoacademias} error={errors.proyeccion_nuevas_tecnoacademias} autocomplete="off" placeholder="Seleccione una opción" required />
+                    <Select items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={$form.proyeccion_nuevas_instituciones} error={errors.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
             </div>
 
-            {#if $form.proyeccion_nuevas_tecnoacademias?.value == 1}
+            {#if $form.proyeccion_nuevas_instituciones?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
@@ -440,7 +442,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Institucienes Educativas en articulación con la media?" />
+                    <Label required class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Instituciones Educativas en articulación con la media??" />
                 </div>
                 <div>
                     <Select items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={$form.proyeccion_articulacion_media} error={errors.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" required />
@@ -508,7 +510,7 @@
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
+                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$form.proyectos_macro} required />

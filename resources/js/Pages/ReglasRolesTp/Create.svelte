@@ -60,7 +60,7 @@
                     <Input label="Máximo de roles" id="maximo" type="number" input$min="0" class="mt-1" bind:value={$form.maximo} error={errors.maximo} required />
                 </div>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol TA" />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol TP" />
                     <Select id="convocatoria_rol_sennova_id" items={rolesTp} bind:selectedValue={$form.convocatoria_rol_sennova_id} error={errors.convocatoria_rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol" required />
                 </div>
 

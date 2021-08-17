@@ -126,6 +126,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with Evaluacion
+     *
+     * @return object
+     */
+    public function evaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\Evaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -138,6 +148,7 @@ class User extends Authenticatable
             $search = str_replace(' ', '%%', $search);
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
+            $query->select('users.id', 'users.nombre', 'users.email', 'users.centro_formacion_id');
             $query->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id');
             $query->whereRaw("unaccent(users.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhere('users.email', 'ilike', '%' . $search . '%');
@@ -184,8 +195,13 @@ class User extends Authenticatable
         if ($user->hasRole(1)) {
             $users = User::select('users.id', 'users.nombre', 'users.email', 'centro_formacion_id')->with('roles', 'centroFormacion')->orderBy('nombre', 'ASC')
                 ->filterUser(request()->only('search', 'roles'))->paginate();
-        } else if ($user->hasRole(4) && $user->dinamizadorCentroFormacion()->exists()) {
-            $users = User::select('users.id', 'users.nombre', 'users.email', 'centro_formacion_id')->with('roles', 'centroFormacion')->where('centro_formacion_id', $user->dinamizadorCentroFormacion->id)->orderBy('nombre', 'ASC')
+        } else if ($user->hasRole([4, 21])) {
+            if ($user->dinamizadorCentroFormacion()->exists()) {
+                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+            } else {
+                $centroFormacionId = $user->centroFormacion->id;
+            }
+            $users = User::select('users.id', 'users.nombre', 'users.email', 'centro_formacion_id')->with('roles', 'centroFormacion')->where('centro_formacion_id', $centroFormacionId)->orderBy('nombre', 'ASC')
                 ->filterUser(request()->only('search', 'roles'))->paginate();
         }
 

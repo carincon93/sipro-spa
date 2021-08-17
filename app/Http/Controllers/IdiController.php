@@ -9,7 +9,6 @@ use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
 use App\Models\CentroFormacion;
-use App\Models\LineaProgramatica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -28,9 +27,9 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
-            'filters'       => request()->all('search'),
-            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'convocatoria'  => $convocatoria->only('id', 'evaluaciones_finalizadas'),
+            'filters'       => request()->all('search', 'estructuracion_proyectos'),
+            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 
@@ -50,7 +49,7 @@ class IdiController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'centrosFormacion'  => $centrosFormacion
         ]);
@@ -144,6 +143,8 @@ class IdiController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$idi->proyecto]);
 
+        $idi->load('proyecto.evaluaciones.idiEvaluacion');
+
         $idi->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
         $idi->precio_proyecto           = $idi->proyecto->precioProyecto;
 
@@ -151,7 +152,7 @@ class IdiController extends Controller
         $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
             'idi'                                       => $idi,
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
@@ -217,7 +218,7 @@ class IdiController extends Controller
         $request->relacionado_mesas_sectoriales == 1 ? $idi->mesasSectoriales()->sync($request->mesa_sectorial_id) : $idi->mesasSectoriales()->detach();
         $request->relacionado_tecnoacademia == 1 ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $idi->proyecto->tecnoacademiaLineasTecnoacademia()->detach();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -231,11 +232,11 @@ class IdiController extends Controller
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
         if ($idi->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

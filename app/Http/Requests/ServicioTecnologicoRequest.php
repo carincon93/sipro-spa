@@ -37,16 +37,20 @@ class ServicioTecnologicoRequest extends FormRequest
                 'identificacion_problema'                   => ['required', 'max:5000', 'string'],
                 'pregunta_formulacion_problema'             => ['required', 'string', new MaxWords(50)],
                 'justificacion_problema'                    => ['required', 'max:5000', 'string'],
+                'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
+                'zona_influencia'                           => ['required', 'string', 'max:255'],
                 'bibliografia'                              => ['required', 'string'],
             ];
         } else {
             return [
                 'tipo_proyecto_st_id'                       => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tipos_proyecto_st,id'],
+                'estado_sistema_gestion_id'                 => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:estados_sistema_gestion,id'],
                 'titulo'                                    => ['required', 'string', new MaxWords(40)],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'st', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'st', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'rol_sennova'                               => ['required', 'min:0', 'max:2147483647', 'integer'],
+                'sector_productivo'                         => ['required', 'min:0', 'max:2147483647', 'integer'],
             ];
         }
     }
@@ -70,10 +74,38 @@ class ServicioTecnologicoRequest extends FormRequest
             ]);
         }
 
+        if (is_array($this->estado_sistema_gestion_id)) {
+            $this->merge([
+                'estado_sistema_gestion_id' => $this->estado_sistema_gestion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->sector_productivo)) {
+            $this->merge([
+                'sector_productivo' => $this->sector_productivo['value'],
+            ]);
+        }
+
         if (is_array($this->rol_sennova)) {
             $this->merge([
                 'rol_sennova' => $this->rol_sennova['value'],
             ]);
+        }
+
+        if (is_array($this->programas_formacion)) {
+            if (isset($this->programas_formacion['value']) && is_numeric($this->programas_formacion['value'])) {
+                $this->merge([
+                    'programas_formacion' => $this->programas_formacion['value'],
+                ]);
+            } else {
+                $programasFormacion = [];
+                foreach ($this->programas_formacion as $programaFormacion) {
+                    if (is_array($programaFormacion)) {
+                        array_push($programasFormacion, $programaFormacion['value']);
+                    }
+                }
+                $this->merge(['programas_formacion' => $programasFormacion]);
+            }
         }
     }
 }

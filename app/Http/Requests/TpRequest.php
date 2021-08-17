@@ -33,7 +33,6 @@ class TpRequest extends FormRequest
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'resumen'                                   => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
-                'justificacion'                             => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
@@ -48,7 +47,7 @@ class TpRequest extends FormRequest
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
                 'rol_sennova'                               => ['required', 'min:0', 'max:2147483647', 'integer'],
                 'cantidad_horas'                            => ['required', 'numeric', 'min:1', 'max:168'],
-                'cantidad_meses'                            => ['required', 'numeric', 'min:1', 'max:11.5'],
+                'cantidad_meses'                            => ['required', 'numeric', 'min:1', 'max:11.9'],
             ];
         }
     }

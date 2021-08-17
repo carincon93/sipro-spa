@@ -17,6 +17,13 @@ class ProyectoPresupuesto extends Model
     protected $table = 'proyecto_presupuesto';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['presupuesto_aprobado'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -120,6 +127,16 @@ class ProyectoPresupuesto extends Model
     }
 
     /**
+     * Relationship with ProyectoPresupuestoEvaluacion
+     *
+     * @return object
+     */
+    public function proyectoPresupuestosEvaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\ProyectoPresupuestoEvaluacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
@@ -143,5 +160,10 @@ class ProyectoPresupuesto extends Model
         })->when($filters['presupuestos'] ?? null, function ($query, $presupuesto) {
             $query->whereRaw("unaccent(segundo_grupo_presupuestal.nombre) ilike unaccent('%" . $presupuesto . "%')");
         });
+    }
+
+    public function getPresupuestoAprobadoAttribute()
+    {
+        return $this->proyectoPresupuestosEvaluaciones()->count() == $this->proyectoPresupuestosEvaluaciones()->where('incorrecto', false)->count();
     }
 }

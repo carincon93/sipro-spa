@@ -53,6 +53,7 @@
         carta_intencion: null,
         carta_propiedad_intelectual: null,
         soporte_convenio: null,
+        infraestructura_tecnoacademia: '',
         fecha_inicio_convenio: '',
         fecha_fin_convenio: '',
         actividad_id: [],
@@ -92,7 +93,7 @@
                 </div>
 
                 <div class="mt-8">
-                    <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="255" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 <div class="mt-8">
@@ -126,7 +127,7 @@
                     </div>
                     {#if grupoInvestigacion}
                         <div class="mt-8">
-                            <Textarea label="Grupo de investigación" maxlength="400" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
+                            <Textarea label="Grupo de investigación" maxlength="191" id="grupo_investigacion" error={errors.grupo_investigacion} bind:value={$form.grupo_investigacion} required />
                         </div>
 
                         <div class="mt-8">

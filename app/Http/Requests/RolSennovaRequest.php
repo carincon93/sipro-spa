@@ -28,16 +28,4 @@ class RolSennovaRequest extends FormRequest
             'sumar_al_presupuesto'  => ['required', 'boolean'],
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'nombre' => mb_strtolower($this->nombre),
-        ]);
-    }
 }

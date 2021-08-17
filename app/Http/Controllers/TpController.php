@@ -11,6 +11,7 @@ use App\Models\NodoTecnoparque;
 use App\Models\Regional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -28,8 +29,8 @@ class TpController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'filters'       => request()->all('search'),
-            'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'filters'       => request()->all('search', 'estructuracion_proyectos'),
+            'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 
@@ -49,7 +50,7 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
             'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
             'nodosTecnoParque'  => $nodosTecnoParque
         ]);
@@ -109,6 +110,10 @@ class TpController extends Controller
             ]
         );
 
+        if ($proyecto->lineaProgramatica->codigo == 69) {
+            DB::select('SELECT public."generalidades_tp"(' . $proyecto->id . ')');
+        }
+
         return redirect()->route('convocatorias.tp.edit', [$convocatoria, $tp])->with('success', 'El recurso se ha creado correctamente.');
     }
 
@@ -144,7 +149,7 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
-            'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp'),
+            'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
@@ -168,7 +173,6 @@ class TpController extends Controller
         $tp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
         $tp->resumen                              = $request->resumen;
         $tp->antecedentes                         = $request->antecedentes;
-        $tp->justificacion                        = $request->justificacion;
         $tp->marco_conceptual                     = $request->marco_conceptual;
         $tp->bibliografia                         = $request->bibliografia;
         $tp->impacto_municipios                   = $request->impacto_municipios;
@@ -188,7 +192,7 @@ class TpController extends Controller
 
         $tp->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -199,14 +203,18 @@ class TpController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Tp $tp)
     {
+        if ($tp->id == 1113) {
+            return back()->with('error', 'Este proyecto no se puede eliminar.');
+        }
+
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
         if ($tp->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

@@ -65,7 +65,7 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_vinculacion   = $request->tipo_vinculacion;
+        $user->tipo_vinculacion     = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
@@ -144,7 +144,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->role_id);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -158,9 +158,12 @@ class UserController extends Controller
         $this->authorize('delete', [User::class, $user]);
 
         try {
+            if ($user->hasRole(1)) {
+                return back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
+            }
             $user->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha eliminado correctamente.');
@@ -199,7 +202,7 @@ class UserController extends Controller
             $status = 'error';
         }
 
-        return redirect()->back()->with($status, $message);
+        return back()->with($status, $message);
     }
 
     /**
@@ -225,6 +228,6 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->back();
+        return back();
     }
 }

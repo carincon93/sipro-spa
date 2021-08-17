@@ -28,7 +28,7 @@ class InventarioEquipoController extends Controller
             'convocatoria'      => $convocatoria->only('id'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'filters'           => request()->all('search'),
-            'inventarioEquipos' => InventarioEquipo::orderBy('nombre', 'ASC')
+            'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterInventarioEquipo(request()->only('search'))->paginate(),
         ]);
     }
@@ -135,7 +135,7 @@ class InventarioEquipoController extends Controller
 
         $inventarioEquipo->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

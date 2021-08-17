@@ -27,7 +27,7 @@
     export let objetivosEspecificos
     export let actividades
     export let impactos
-    export let actividadesPresupuesto
+    // export let actividadesPresupuesto
     export let resultadoProducto
     export let analisisRiesgo
     export let anexos
@@ -37,6 +37,9 @@
     export let productosActividades
     export let articulacionSennova
     export let soportesEstudioMercado
+    export let edt
+    export let maxValorRoles
+    export let maxValorTAPresupuesto
 
     $: $title = 'Finalizar proyecto'
 
@@ -75,7 +78,7 @@
     }
 
     function sendProject() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -96,7 +99,7 @@
         comentario: '',
     })
     function submitComentario() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -140,27 +143,27 @@
 
         {#if proyecto.finalizado == true && !checkRole(authUser, [1, 4])}
             <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
-        {:else if proyecto.radicado == true}
-            <InfoMessage class="mb-2" message="El proyecto se ha radicado con éxito." />
+        {:else if proyecto.a_evaluar == true}
+            <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
         {/if}
 
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.radicado == false) || (checkRole(authUser, [4]) && proyecto.finalizado == true && proyecto.radicado == false)}
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
                 {#if proyectoCompleto}
-                    <p class="mb-2 mt-8">Si desea radicar el proyecto de clic en <strong>Radicar proyecto</strong> y a continuación, escriba la contraseña de su usuario.</p>
-                    <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Radicar proyecto</Button>
+                    <p class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar formulación</strong> y a continuación, escriba la contraseña de su usuario.</p>
+                    <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar formulación</Button>
                 {:else if proyectoCompleto == false}
                     <form on:submit|preventDefault={submitComentario}>
-                        <fieldset disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
+                        <fieldset disabled={isSuperAdmin || checkRole(authUser, [4, 21]) ? undefined : true}>
                             <div class="mt-8">
                                 <p class="mb-2">Si considera que el proyecto está incompleto por favor haga un comentario al proponente detallando que información o ítems debe completar.</p>
                                 <Textarea label="Comentario" maxlength="40000" id="comentario" error={errors.comentario} bind:value={$comentarioForm.comentario} required />
                             </div>
                         </fieldset>
                         <div class="mt-10 flex items-center">
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
+                            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>
@@ -168,7 +171,7 @@
                 {/if}
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && actividadesPresupuesto && resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
+            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && /** actividadesPresupuesto && */ resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
             {:else if proyecto.finalizado == false}
@@ -217,9 +220,21 @@
                         {#if !propuestaSostenibilidad}
                             <li>Propuesta de sostenibilidad</li>
                         {/if}
-                        {#if !actividadesPresupuesto}
-                            <li>Hay actividades sin presupuesto relacionado</li>
+                        {#if proyecto.codigo_linea_programatica == 70}
+                            {#if !edt}
+                                <li>Tiene un rubro presupuestal 'Servicios de organización y asistencia de convenciones y ferias' y le debe asociar al menos un EDT</li>
+                            {/if}
+                            {#if !maxValorRoles}
+                                <li>El valor máximo de los roles es: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_roles)}</li>
+                            {/if}
+                            {#if !maxValorTAPresupuesto}
+                                <li>El valor máximo del presupuesto total es: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_presupuesto)}</li>
+                            {/if}
                         {/if}
+
+                        <!-- {#if !actividadesPresupuesto}
+                            <li>Hay actividades sin presupuesto relacionado</li>
+                        {/if} -->
                         {#if !productosActividades}
                             <li>Hay productos sin actividades relacionadas</li>
                         {/if}
@@ -284,20 +299,20 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
-            Radicar proyecto
+            Confirmar formulación
         </div>
         <div slot="content">
-            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea radicar el proyecto?<br />Una vez radicado el proyecto no se podrá modificar." />
+            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea confirmar la formulación del proyecto?<br />Una vez confirmado el proyecto no se podrá modificar." />
 
-            <form on:submit|preventDefault={sendProject} id="radicar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea radicar este proyecto" class="mb-4" />
+            <form on:submit|preventDefault={sendProject} id="confirmar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar la formulación de este proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
             </form>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (sendProjectDialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="radicar-proyecto">Radicar proyecto</Button>
+                <Button variant="raised" form="confirmar-proyecto">Confirmar formulación</Button>
             </div>
         </div>
     </Dialog>

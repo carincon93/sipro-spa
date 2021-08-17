@@ -40,7 +40,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.put(route('reglas-roles-ta.update', reglaRolTp.id), {
+            $form.put(route('reglas-roles-tp.update', reglaRolTp.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -50,7 +50,7 @@
 
     function destroy() {
         if (isSuperAdmin) {
-            $form.delete(route('reglas-roles-ta.destroy', reglaRolTp.id))
+            $form.delete(route('reglas-roles-tp.destroy', reglaRolTp.id))
         }
     }
 </script>
@@ -61,7 +61,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('reglas-roles-ta.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TA </a>
+                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles TP</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Editar
@@ -77,7 +77,7 @@
                     <Input label="Máximo de roles" id="maximo" type="number" input$min="0" class="mt-1" bind:value={$form.maximo} error={errors.maximo} required />
                 </div>
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol TA" />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol TP" />
                     <Select id="convocatoria_rol_sennova_id" items={rolesTp} bind:selectedValue={$form.convocatoria_rol_sennova_id} error={errors.convocatoria_rol_sennova_id} autocomplete="off" placeholder="Seleccione un rol" required />
                 </div>
 

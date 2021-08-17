@@ -1,8 +1,9 @@
 <script>
     import { afterUpdate, onMount } from 'svelte'
-    import Select from 'svelte-select'
     import InputError from '@/Shared/InputError'
     import { _ } from 'svelte-i18n'
+
+    import Select from 'svelte-select'
 
     export let classes = ''
     export let id = ''
@@ -15,6 +16,7 @@
     export let isMulti = false
     export let groupBy
     export let isSearchable = true
+    export let disabled = false
 
     let select = null
 
@@ -33,7 +35,22 @@
     }
 </script>
 
-<Select selectedValue={selectedValue?.value ? selectedValue : null} inputAttributes={{ id: id }} {placeholder} containerClasses="items {classes}" {items} {autocomplete} {isMulti} {isSearchable} {groupBy} on:select={(e) => handleSelect(e)} on:clear={() => (selectedValue = null)} noOptionsMessage="No hay ítems, por favor revise los filtros" />
+<Select
+    isDisabled={disabled}
+    selectedValue={selectedValue?.value ? selectedValue : null}
+    inputAttributes={{ id: id }}
+    placeholder={required ? placeholder + ' *' : placeholder}
+    containerClasses="items {classes}"
+    listPlacement="bottom"
+    {items}
+    {autocomplete}
+    {isMulti}
+    {isSearchable}
+    {groupBy}
+    on:select={(e) => handleSelect(e)}
+    on:clear={() => (selectedValue = null)}
+    noOptionsMessage="No hay ítems, por favor revise los filtros"
+/>
 <InputError message={error} />
 
 <style>

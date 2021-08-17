@@ -21,11 +21,24 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let filters = {
+        estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
+    }
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20" routeParams={[convocatoria.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id]} bind:filters showFilters={true}>
         <div slot="title">I+D+i</div>
+
+        <div slot="filters">
+            <label for="estructuracion_proyectos" class="block text-gray-700">Filtros:</label>
+            <select id="estructuracion_proyectos" class="mt-1 w-full form-select" bind:value={filters.estructuracion_proyectos}>
+                <option value={null}>Seleccione una opción</option>
+                <option value={false}>Ver - Proyectos de la convocatoria</option>
+                <option value={true}>Ver - Curso de estructuración de proyectos</option>
+            </select>
+        </div>
 
         <div slot="actions">
             {#if isSuperAdmin || checkPermission(authUser, [1])}
@@ -38,6 +51,9 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                {#if convocatoria.evaluaciones_finalizadas}
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluación </th>
+                {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -60,6 +76,13 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
+                    {#if convocatoria.evaluaciones_finalizadas}
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {proyecto.estado_evaluacion}
+                            </p>
+                        </td>
+                    {/if}
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 14])}

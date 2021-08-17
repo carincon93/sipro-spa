@@ -27,7 +27,7 @@ class TaRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
-                'tecnoacademia_linea_tecnoacademia_id*'       => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
+                'tecnoacademia_linea_tecnoacademia_id*'     => ['required', 'min:0', 'max:2147483647', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'ta', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'ta', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
@@ -35,7 +35,7 @@ class TaRequest extends FormRequest
                 'resumen_regional'                          => ['required', 'max:40000', 'string'],
                 'antecedentes'                              => ['required', 'max:40000', 'string'],
                 'antecedentes_tecnoacademia'                => ['required', 'max:40000', 'string'],
-                'justificacion'                             => ['required', 'max:40000', 'string'],
+                'justificacion_problema'                    => ['required', 'max:40000', 'string'],
                 'marco_conceptual'                          => ['required', 'string'],
                 'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
@@ -52,7 +52,7 @@ class TaRequest extends FormRequest
                 'proyectos_macro'                           => ['nullable', 'string'],
                 'lineas_medulares_centro'                   => ['nullable', 'string'],
                 'lineas_tecnologicas_centro'                => ['nullable', 'string'],
-                'proyeccion_nuevas_tecnoacademias'          => ['required', 'min:0', 'max:3', 'integer'],
+                'proyeccion_nuevas_instituciones'           => ['required', 'min:0', 'max:3', 'integer'],
                 'proyeccion_articulacion_media'             => ['required', 'min:0', 'max:3', 'integer'],
             ];
         } else {
@@ -158,9 +158,9 @@ class TaRequest extends FormRequest
             ]);
         }
 
-        if (is_array($this->proyeccion_nuevas_tecnoacademias)) {
+        if (is_array($this->proyeccion_nuevas_instituciones)) {
             $this->merge([
-                'proyeccion_nuevas_tecnoacademias' => $this->proyeccion_nuevas_tecnoacademias['value'],
+                'proyeccion_nuevas_instituciones' => $this->proyeccion_nuevas_instituciones['value'],
             ]);
         }
 

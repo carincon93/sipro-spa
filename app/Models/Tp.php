@@ -23,7 +23,7 @@ class Tp extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion'];
+    protected $appends = ['titulo', 'fecha_ejecucion'];
 
     /**
      * The attributes that are mass assignable.
@@ -34,7 +34,6 @@ class Tp extends Model
         'nodo_tecnoparque_id',
         'resumen',
         'resumen_regional',
-        'justificacion',
         'antecedentes',
         'antecedentes_regional',
         'problema_central',
@@ -53,7 +52,8 @@ class Tp extends Model
         'bibliografia',
         'numero_instituciones',
         'nombre_instituciones',
-        'max_meses_ejecucion'
+        'max_meses_ejecucion',
+        'modificable',
     ];
 
     /**
@@ -112,6 +112,16 @@ class Tp extends Model
     }
 
     /**
+     * getTituloAttribute
+     *
+     * @return void
+     */
+    public function getTituloAttribute()
+    {
+        return "Red Tecnoparque Nodo " . ucfirst($this->nodoTecnoparque->nombre) . " Vigencia " . date('Y', strtotime($this->fecha_inicio));
+    }
+
+    /**
      * getFechaEjecucionAttribute
      *
      * @return void
@@ -136,46 +146,57 @@ class Tp extends Model
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
                 ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
                 ->join('centros_formacion', 'users.centro_formacion_id', 'centros_formacion.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->where('centros_formacion.regional_id', $authUser->directorRegional->id)
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
-        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion) { // Dinamizador SENNOVA o Subdirector de centro
+        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion || $authUser->hasRole(21)) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
                 $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
+            } else if ($authUser->hasRole(21)) {
+                $centroFormacionId = $authUser->centroFormacion->id;
             } else if ($authUser->hasRole(3)) {
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
-                ->where('users.centro_formacion_id', $centroFormacionId)
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
+                ->where('proyectos.centro_formacion_id', $centroFormacionId)
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
         } else if ($authUser->getAllPermissions()->where('id', 20)->first()) {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
                 ->join('users', 'proyecto_participantes.user_id', 'users.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
         } else {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
-                ->join('proyectos', 'tp.id', 'proyectos.id')->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->join('proyectos', 'tp.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->where('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')

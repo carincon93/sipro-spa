@@ -121,7 +121,7 @@ class LineaProgramaticaController extends Controller
 
         $lineaProgramatica->activadores()->sync($request->activadores);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -137,7 +137,7 @@ class LineaProgramaticaController extends Controller
         try {
             $lineaProgramatica->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('lineas-programaticas.index')->with('success', 'El recurso se ha eliminado correctamente.');

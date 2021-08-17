@@ -173,10 +173,6 @@ trait PresupuestoValidationTrait
 
     public static function primerReglaTp($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2045110' || $codigoSegundoPresupuestal == '2040106' || $codigoSegundoPresupuestal == '2040516' || $codigoSegundoPresupuestal == '2040115' || $codigoSegundoPresupuestal == '2040125' || $codigoSegundoPresupuestal == '2040108') {
@@ -190,7 +186,7 @@ trait PresupuestoValidationTrait
                 $total += $valorTotal;
             }
 
-            if ($total > 200000000) {
+            if ($total > 250000000) {
                 return true;
             }
         }
@@ -200,10 +196,6 @@ trait PresupuestoValidationTrait
 
     public static function segundaReglaTp($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2040424') {
@@ -227,10 +219,6 @@ trait PresupuestoValidationTrait
 
     public static function materialesFormacion($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2040424') {
@@ -253,10 +241,6 @@ trait PresupuestoValidationTrait
 
     public static function bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2042186') {
@@ -275,10 +259,6 @@ trait PresupuestoValidationTrait
 
     public static function viaticosInterior($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2041102') {
@@ -298,10 +278,6 @@ trait PresupuestoValidationTrait
 
     public static function mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $proyectoPresupuesto, $valorTotal)
     {
-        if ($proyecto->getPrecioProyectoAttribute() == 0) {
-            return false;
-        }
-
         $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo;
 
         if ($codigoSegundoPresupuestal == '2040125' || $codigoSegundoPresupuestal == '2040115' || $codigoSegundoPresupuestal == '2040516' || $codigoSegundoPresupuestal == '2040106' || $codigoSegundoPresupuestal == '2045110') {
@@ -327,23 +303,28 @@ trait PresupuestoValidationTrait
     {
         $total = 0;
 
-        if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
-            $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
-        } else {
-            $total += $valorTotal;
-        }
+        $codigoSegundoPresupuestal = $convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
 
-        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
-            $codigoSegundoPresupuestal = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
-            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
-                if ($codigoSegundoPresupuestal == '20202008005096') {
-                    $total += $presupuesto->valor_total;
+        if ($codigoSegundoPresupuestal == '20202008005096') {
+
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+                $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
+            } else {
+                $total += $valorTotal;
+            }
+
+            foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+                $codigoSegundoPresupuestal = $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo;
+                if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto) {
+                    if ($codigoSegundoPresupuestal == '20202008005096') {
+                        $total += $presupuesto->valor_total;
+                    }
                 }
             }
-        }
 
-        if ($total > $valorMaxEdt) {
-            return true;
+            if ($total > $valorMaxEdt) {
+                return true;
+            }
         }
 
         return false;

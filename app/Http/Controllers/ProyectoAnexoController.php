@@ -6,6 +6,7 @@ use App\Http\Requests\ProyectoAnexoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Anexo;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\ProyectoAnexo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -23,6 +24,8 @@ class ProyectoAnexoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->codigo_linea_programatica == 68 ? $proyecto->infraestructura_adecuada = $proyecto->servicioTecnologico->infraestructura_adecuada : $proyecto->infraestructura_adecuada = null;
         $proyecto->codigo_linea_programatica == 68 ? $proyecto->especificaciones_area = $proyecto->servicioTecnologico->especificaciones_area : $proyecto->especificaciones_area = null;
@@ -31,10 +34,10 @@ class ProyectoAnexoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Anexos/Index', [
             'filters'           => request()->all('search'),
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area', 'en_subsanacion', 'evaluaciones'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
-            'anexos'            => Anexo::select('id', 'nombre', 'archivo', 'obligatorio')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
+            'anexos'            => Anexo::select('id', 'nombre', 'archivo', 'obligatorio', 'habilitado')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
                 ->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search])
         ]);
     }
@@ -121,7 +124,7 @@ class ProyectoAnexoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -152,6 +155,77 @@ class ProyectoAnexoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return response()->download(storage_path("app/$proyectoAnexo->archivo"));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function anexoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->infraestructura_adecuada = $evaluacion->proyecto->servicioTecnologico->infraestructura_adecuada : $evaluacion->proyecto->infraestructura_adecuada = null;
+        $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->especificaciones_area = $evaluacion->proyecto->servicioTecnologico->especificaciones_area : $evaluacion->proyecto->especificaciones_area = null;
+        $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->video = $evaluacion->proyecto->servicioTecnologico->video : $evaluacion->proyecto->video = null;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/Anexos/Index', [
+            'filters'           => request()->all('search'),
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'video', 'infraestructura_adecuada', 'especificaciones_area'),
+            'proyectoAnexo'     => $evaluacion->proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
+                ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
+            'anexos'            => Anexo::select('id', 'nombre', 'archivo', 'obligatorio')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')
+                ->where('anexo_lineas_programaticas.linea_programatica_id', $evaluacion->proyecto->lineaProgramatica->id)->filterAnexo(request()->only('search'))->paginate()->appends(['search' => request()->search])
+        ]);
+    }
+
+    /**
+     * updateAnexosEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateAnexosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == true ? $request->anexos_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == true ? $request->anexos_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

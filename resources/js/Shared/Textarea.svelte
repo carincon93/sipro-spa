@@ -9,6 +9,7 @@
     export let id
     export let value
     export let label
+    export let disabled
     export let sinContador = false
     export let maxlength = 2000
 
@@ -16,7 +17,7 @@
 
     $: props = {
         ...$$restProps,
-        class: 'w-full block bg-white',
+        class: `w-full block bg-white ${$$restProps.class || ''}`,
     }
 
     function update(event) {
@@ -30,9 +31,9 @@
 
 <div bind:this={container}>
     {#if sinContador == true}
-        <Textarea textarea bind:value {label} {...props} {id} on:input={update} />
+        <Textarea {disabled} textarea bind:value {label} {...props} {id} on:input={update} />
     {:else}
-        <Textarea textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update}>
+        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update}>
             <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
         </Textarea>
     {/if}

@@ -206,6 +206,9 @@
 
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
+                <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                <InfoMessage message={convocatoria.fecha_maxima_cultura} class="my-5" />
+
                 <div class="mt-4 flex items-start justify-around">
                     <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
                         <Label required labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
@@ -637,16 +640,6 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
-                </div>
-            </div>
-
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
@@ -731,6 +724,16 @@
                             </button>
                         </div>
                     {/if}
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                </div>
+                <div>
+                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>

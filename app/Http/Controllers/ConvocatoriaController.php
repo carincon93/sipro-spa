@@ -154,6 +154,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
+        $convocatoria->evaluaciones_finalizadas                 = $request->evaluaciones_finalizadas;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {
@@ -165,7 +166,7 @@ class ConvocatoriaController extends Controller
 
         $convocatoria->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -178,7 +179,7 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('delete', [Convocatoria::class, $convocatoria]);
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => 'Contraseña incorrecta']);
         }
 

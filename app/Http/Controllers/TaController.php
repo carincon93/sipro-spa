@@ -9,11 +9,14 @@ use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaRequest;
+use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
+use App\Models\RedConocimiento;
 use App\Models\Regional;
 use App\Models\SemilleroInvestigacion;
+use App\Models\TematicaEstrategica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,8 +36,8 @@ class TaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Index', [
             'convocatoria'  => $convocatoria->only('id'),
-            'filters'       => request()->all('search'),
-            'ta'            => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'filters'       => request()->all('search', 'estructuracion_proyectos'),
+            'ta'            => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 
@@ -66,7 +69,7 @@ class TaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Create', [
-            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'convocatoria'   => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
             'tecnoAcademias' => $tecnoAcademias
         ]);
     }
@@ -111,7 +114,7 @@ class TaController extends Controller
         $ta->numero_instituciones               = 0;
         $ta->nombre_instituciones               = null;
         $ta->nombre_instituciones_programas     = null;
-        $ta->proyeccion_nuevas_tecnoacademias   = 1;
+        $ta->proyeccion_nuevas_instituciones    = 1;
         $ta->proyeccion_articulacion_media      = 1;
         $ta->articulacion_semillero             = 1;
 
@@ -178,7 +181,7 @@ class TaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
-            'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta'),
+            'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
             'ta'                                    => $ta,
             'tecnoacademiaRelacionada'              => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,
             'lineasTecnoacademiaRelacionadas'       => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
@@ -209,7 +212,7 @@ class TaController extends Controller
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
         $ta->resumen                            = $request->resumen;
         $ta->antecedentes                       = $request->antecedentes;
-        $ta->justificacion                      = $request->justificacion;
+        $ta->justificacion_problema             = $request->justificacion_problema;
         $ta->marco_conceptual                   = $request->marco_conceptual;
         $ta->bibliografia                       = $request->bibliografia;
         $ta->impacto_municipios                 = $request->impacto_municipios;
@@ -229,7 +232,7 @@ class TaController extends Controller
         $ta->proyectos_macro                    = $request->proyectos_macro;
         $ta->lineas_medulares_centro            = $request->lineas_medulares_centro;
         $ta->lineas_tecnologicas_centro         = $request->lineas_tecnologicas_centro;
-        $ta->proyeccion_nuevas_tecnoacademias   = $request->proyeccion_nuevas_tecnoacademias;
+        $ta->proyeccion_nuevas_instituciones    = $request->proyeccion_nuevas_instituciones;
         $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
 
         $ta->proyecto->municipios()->sync($request->municipios);
@@ -240,8 +243,28 @@ class TaController extends Controller
 
         $ta->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Ta  $ta
+     * @return \Illuminate\Http\Response
+     */
+    public function updateInfraestructura(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        // $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
+        $proyecto->ta()->update([
+            'infraestructura_tecnoacademia' => $request->infraestructura_tecnoacademia['value']
+        ]);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -252,17 +275,17 @@ class TaController extends Controller
     public function destroy(Request $request, Convocatoria $convocatoria, Ta $ta)
     {
         if ($ta->id == 1052) {
-            return redirect()->back()->with('error', 'Este proyecto no se puede eliminar.');
+            return back()->with('error', 'Este proyecto no se puede eliminar.');
         }
 
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
         if ($ta->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 
@@ -295,7 +318,7 @@ class TaController extends Controller
             'cantidad_psicopedagogos_planta' => $request->cantidad_psicopedagogos_planta
         ]);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -321,10 +344,17 @@ class TaController extends Controller
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $proyecto->centroFormacion->regional->id)->get(),
             'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $proyecto->centroFormacion->id)->get(),
+            'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get(),
+            'tematicasEstrategicas'     => TematicaEstrategica::select('id as value', 'nombre as label')->get(),
+            'actividadesEconomicas'     => ActividadEconomica::select('id as value', 'nombre as label')->get(),
 
-            'gruposInvestigacionRelacionados'       => $proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
-            'lineasInvestigacionRelacionadas'       => $proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
-            'semillerosInvestigacionRelacionados'   => $proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
+            'gruposInvestigacionRelacionados'               => $proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
+            'lineasInvestigacionRelacionadas'               => $proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
+            'semillerosInvestigacionRelacionados'           => $proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
+            'disciplinasSubareaConocimientoRelacionadas'    => $proyecto->ta->disciplinasSubareaConocimiento()->select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->get(),
+            'redesConocimientoRelacionadas'                 => $proyecto->ta->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
+            'tematicasEstrategicasRelacionadas'             => $proyecto->ta->tematicasEstrategicas()->select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->get(),
+            'actividadesEconomicasRelacionadas'             => $proyecto->ta->actividadesEconomicas()->select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->get(),
         ]);
     }
 
@@ -340,6 +370,10 @@ class TaController extends Controller
     {
         $proyecto->gruposInvestigacion()->sync($request->grupos_investigacion);
         $proyecto->lineasInvestigacion()->sync($request->lineas_investigacion);
+        $proyecto->ta->actividadesEconomicas()->sync($request->actividades_economicas);
+        $proyecto->ta->disciplinasSubareaConocimiento()->sync($request->disciplinas_subarea_conocimiento);
+        $proyecto->ta->redesConocimiento()->sync($request->redes_conocimiento);
+        $proyecto->ta->tematicasEstrategicas()->sync($request->tematicas_estrategicas);
 
         if ($request->articulacion_semillero == 1) {
             $proyecto->semillerosInvestigacion()->sync($request->semilleros_investigacion);
@@ -353,6 +387,6 @@ class TaController extends Controller
             'semilleros_en_formalizacion'   => $request->semilleros_en_formalizacion
         ]);
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 }

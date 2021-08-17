@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Shared/Input'
@@ -36,6 +36,25 @@
 </script>
 
 <AuthenticatedLayout>
+    <InfoMessage class="mb-10">
+        <strong>Importante</strong>
+        <p>
+            Si tiene dudas sobre la formulación de proyectos por favor escriba al correo de la conovocatoria.
+            <br />
+            Si evidencia fallas y requiere de apoyo técnico por favor escriba a los correos de soporte o diligencie el formulario.
+        </p>
+        <ul class="list-disc p-4">
+            <li>
+                <a href="mailto:convocatoriasennova@sena.edu.co">Conovocatoria: <span class="underline">convocatoriasennova@sena.edu.co</span></a>
+            </li>
+            <li>
+                <a href="mailto:ccvasquez@sena.edu.co">Soporte: <span class="underline">ccvasquez@sena.edu.co</span></a>
+            </li>
+            <li>
+                <a href="mailto:jicarrillo@sena.edu.co">Soporte: <span class="underline">jicarrillo@sena.edu.co</span></a>
+            </li>
+        </ul>
+    </InfoMessage>
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8">

@@ -24,11 +24,15 @@ class ArticulacionSennovaRequest extends FormRequest
     public function rules()
     {
         return [
-            'lineas_investigacion*'         => ['required', 'integer', 'exists:lineas_investigacion,id'],
-            'grupos_investigacion*'         => ['required', 'integer', 'exists:grupos_investigacion,id'],
-            'semilleros_investigacion*'     => ['required', 'integer', 'exists:semilleros_investigacion,id'],
-            'articulacion_semillero'        => ['required', 'min:0', 'max:2', 'integer'],
-            'semilleros_en_formalizacion'   => ['nullable', 'json'],
+            'lineas_investigacion*'             => ['required', 'integer', 'exists:lineas_investigacion,id'],
+            'grupos_investigacion*'             => ['required', 'integer', 'exists:grupos_investigacion,id'],
+            'semilleros_investigacion*'         => ['required', 'integer', 'exists:semilleros_investigacion,id'],
+            'disciplinas_subarea_conocimiento*' => ['required', 'integer', 'exists:disciplinas_subarea_conocimiento,id'],
+            'redes_conocimiento*'               => ['required', 'integer', 'exists:redes_conocimiento,id'],
+            'tematicas_estrategicas*'           => ['required', 'integer', 'exists:tematicas_estrategicas,id'],
+            'actividades_economicas*'           => ['required', 'integer', 'exists:actividades_economicas,id'],
+            'articulacion_semillero'            => ['required', 'min:0', 'max:2', 'integer'],
+            'semilleros_en_formalizacion'       => ['nullable', 'json'],
         ];
     }
 
@@ -84,6 +88,70 @@ class ArticulacionSennovaRequest extends FormRequest
                     }
                 }
                 $this->merge(['semilleros_investigacion' => $semillerosInvestigacion]);
+            }
+        }
+
+        if (is_array($this->disciplinas_subarea_conocimiento)) {
+            if (isset($this->disciplinas_subarea_conocimiento['value']) && is_numeric($this->disciplinas_subarea_conocimiento['value'])) {
+                $this->merge([
+                    'disciplinas_subarea_conocimiento' => $this->disciplinas_subarea_conocimiento['value'],
+                ]);
+            } else {
+                $disciplinasSubareaConocimiento = [];
+                foreach ($this->disciplinas_subarea_conocimiento as $lineaInvestigacion) {
+                    if (is_array($lineaInvestigacion)) {
+                        array_push($disciplinasSubareaConocimiento, $lineaInvestigacion['value']);
+                    }
+                }
+                $this->merge(['disciplinas_subarea_conocimiento' => $disciplinasSubareaConocimiento]);
+            }
+        }
+
+        if (is_array($this->tematicas_estrategicas)) {
+            if (isset($this->tematicas_estrategicas['value']) && is_numeric($this->tematicas_estrategicas['value'])) {
+                $this->merge([
+                    'tematicas_estrategicas' => $this->tematicas_estrategicas['value'],
+                ]);
+            } else {
+                $tematicasEstrategicas = [];
+                foreach ($this->tematicas_estrategicas as $lineaInvestigacion) {
+                    if (is_array($lineaInvestigacion)) {
+                        array_push($tematicasEstrategicas, $lineaInvestigacion['value']);
+                    }
+                }
+                $this->merge(['tematicas_estrategicas' => $tematicasEstrategicas]);
+            }
+        }
+
+        if (is_array($this->actividades_economicas)) {
+            if (isset($this->actividades_economicas['value']) && is_numeric($this->actividades_economicas['value'])) {
+                $this->merge([
+                    'actividades_economicas' => $this->actividades_economicas['value'],
+                ]);
+            } else {
+                $actividadesEconomicas = [];
+                foreach ($this->actividades_economicas as $lineaInvestigacion) {
+                    if (is_array($lineaInvestigacion)) {
+                        array_push($actividadesEconomicas, $lineaInvestigacion['value']);
+                    }
+                }
+                $this->merge(['actividades_economicas' => $actividadesEconomicas]);
+            }
+        }
+
+        if (is_array($this->redes_conocimiento)) {
+            if (isset($this->redes_conocimiento['value']) && is_numeric($this->redes_conocimiento['value'])) {
+                $this->merge([
+                    'redes_conocimiento' => $this->redes_conocimiento['value'],
+                ]);
+            } else {
+                $redesConocimiento = [];
+                foreach ($this->redes_conocimiento as $lineaInvestigacion) {
+                    if (is_array($lineaInvestigacion)) {
+                        array_push($redesConocimiento, $lineaInvestigacion['value']);
+                    }
+                }
+                $this->merge(['redes_conocimiento' => $redesConocimiento]);
             }
         }
 

@@ -75,6 +75,12 @@
             }
         }
     }
+
+    $: if (infoRolSennova?.perfil != null) {
+        $form.descripcion = infoRolSennova.perfil
+    } else {
+        $form.descripcion = proyectoRolSennova.descripcion
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -92,49 +98,62 @@
         </div>
     </header>
 
-    <div class="bg-white rounded shadow max-w-3xl">
-        <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+    <div class="flex">
+        <div class="bg-white rounded shadow max-w-3xl">
+            <form on:submit|preventDefault={submit}>
+                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
+                        <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    </div>
+
+                    <div class="mt-4">
+                        {#if infoRolSennova?.perfil}
+                            <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} value={infoRolSennova.perfil} required />
+                        {:else}
+                            <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                        {/if}
+                    </div>
+
+                    {#if proyecto.codigo_linea_programatica != 68}
+                        <div class="mt-4">
+                            <Input label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
+                        </div>
+
+                        <div class="mt-4">
+                            <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
+                        </div>
+                    {/if}
+                </fieldset>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
+                    {/if}
+                    {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
+                    {/if}
                 </div>
-
-                {#if infoRolSennova?.experiencia}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
-                            Experiencia (meses)
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {infoRolSennova.experiencia}
-                            </span>
-                        </p>
+            </form>
+        </div>
+        <div class="ml-1.5">
+            {#if proyecto.en_subsanacion}
+                {#each proyectoRolSennova.proyecto_roles_evaluaciones as evaluacionRol, i}
+                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                        <div class="flex text-orangered-900 font-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                        </div>
+                        {#if evaluacionRol.incorrecto && evaluacionRol.evaluacion.habilitado}
+                            <p class="whitespace-pre-line">{evaluacionRol.comentario ? evaluacionRol.comentario : 'Sin recomendación'}</p>
+                        {:else}
+                            Aprobado
+                        {/if}
                     </div>
-                {/if}
-
-                {#if proyecto.codigo_linea_programatica != 68}
-                    <div class="mt-4">
-                        <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
-                    </div>
-
-                    <div class="mt-4">
-                        <Input label="Número de meses que requiere el apoyo. (Máximo {proyecto.diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
-                        <InfoMessage>Este proyecto será ejecutado en {proyecto.diff_meses} meses.</InfoMessage>
-                    </div>
-
-                    <div class="mt-4">
-                        <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
-                    </div>
-                {/if}
-            </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
-                {/if}
-                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
-                {/if}
-            </div>
-        </form>
+                {/each}
+            {/if}
+        </div>
     </div>
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">

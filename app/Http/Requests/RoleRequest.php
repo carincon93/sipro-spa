@@ -29,16 +29,4 @@ class RoleRequest extends FormRequest
             'permission_id*' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:permissions,id']
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'name' => mb_strtolower($this->name),
-        ]);
-    }
 }

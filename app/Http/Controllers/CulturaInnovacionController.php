@@ -28,9 +28,9 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
-            'filters'           => request()->all('search'),
-            'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search]),
+            'convocatoria'      => $convocatoria->only('id', 'evaluaciones_finalizadas'),
+            'filters'           => request()->all('search', 'estructuracion_proyectos'),
+            'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
     }
 
@@ -50,7 +50,7 @@ class CulturaInnovacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
+            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'centrosFormacion'  => $centrosFormacion
         ]);
@@ -67,7 +67,7 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto', [$request->linea_programatica_id]);
 
         if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->linea_programatica_id)) {
-            return redirect()->back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
+            return back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
         };
 
         $proyecto = new Proyecto();
@@ -151,7 +151,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
             'culturaInnovacion'                         => $culturaInnovacion,
             'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->pluck('id'),
@@ -217,7 +217,7 @@ class CulturaInnovacionController extends Controller
         $request->relacionado_tecnoacademia == 1 ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->detach();
 
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -231,11 +231,11 @@ class CulturaInnovacionController extends Controller
         $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         if ($culturaInnovacion->proyecto->finalizado) {
-            return redirect()->back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
+            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
         if (!Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->back()
+            return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
 

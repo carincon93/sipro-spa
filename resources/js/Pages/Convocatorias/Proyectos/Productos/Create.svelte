@@ -3,8 +3,8 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import axios from 'axios'
 
-    import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -19,7 +19,6 @@
     export let convocatoria
     export let proyecto
     export let resultados
-    export let actividades
     export let tiposProducto
 
     $: $title = 'Crear producto'
@@ -55,6 +54,17 @@
             })
         }
     }
+
+    let actividades = []
+    let resultado_id = null
+
+    $: if (resultado_id?.value) {
+        $form.actividad_id = []
+        $form.resultado_id = resultado_id.value
+        actividades = resultado_id.actividades
+    }
+
+    console.log(proyecto.servicio_tecnologico)
 </script>
 
 <AuthenticatedLayout>
@@ -99,7 +109,7 @@
                 <hr />
 
                 <div class="mt-8">
-                    {#if $form.tatp_servicio_tecnologico == true}
+                    {#if $form.tatp_servicio_tecnologico}
                         <InfoMessage>
                             <p>
                                 Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
@@ -117,18 +127,20 @@
 
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
-                    <Select id="resultado_id" items={resultados} bind:selectedValue={$form.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                    <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                <div class="mt-8">
-                    <Label required labelFor="indicador" value="Indicador" />
+                {#if typeof proyecto.servicio_tecnologico != 'object'}
+                    <div class="mt-8">
+                        <Label required labelFor="indicador" value="Indicador" />
 
-                    {#if $form.tatp_servicio_tecnologico == true}
-                        <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
-                    {:else}
-                        <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
-                    {/if}
-                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
-                </div>
+                        {#if $form.tatp_servicio_tecnologico == true}
+                            <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                        {:else}
+                            <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                        {/if}
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    </div>
+                {/if}
 
                 {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
@@ -168,12 +180,12 @@
                     </div>
 
                     <div class="mt-8">
-                        <Label required labelFor="formula_indicador" value="Fórmula del Indicador del producto" />
+                        <Label required labelFor="indicador" value="Fórmula del Indicador del producto" />
 
                         <InfoMessage
                             message="El método de cálculo debe ser una expresión matemática definida de manera adecuada y de fácil comprensión, es decir, deben quedar claras cuáles son las variables utilizadas. Los métodos de cálculo más comunes son el porcentaje, la tasa de variación, la razón y el número índice. Aunque éstos no son las únicas expresiones para los indicadores, sí son las más frecuentes."
                         />
-                        <Textarea maxlength="40000" id="formula_indicador" error={errors.formula_indicador} bind:value={$form.formula_indicador} required />
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 
@@ -185,10 +197,11 @@
                     </div>
                     <div class="grid grid-cols-2">
                         {#each actividades as { id, descripcion }, i}
-                            <FormField class="border-b border-l py-4">
-                                <Checkbox bind:group={$form.actividad_id} value={id} />
-                                <span slot="label">{descripcion}</span>
-                            </FormField>
+                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
+
+                            <div class="border-b border-t flex items-center justify-center">
+                                <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
+                            </div>
                         {/each}
                         {#if actividades.length == 0}
                             <p class="p-4">Sin información registrada</p>

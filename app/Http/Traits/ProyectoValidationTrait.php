@@ -473,4 +473,45 @@ trait ProyectoValidationTrait
 
         return $countSoportes > 0 ? false : true;
     }
+
+    /**
+     * 
+     * Valida que haya un edt por uso presupuestal 'servicios de organización y asistencia de convenciones y ferias'
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function edt(Proyecto $proyecto)
+    {
+        $countEdt = 0;
+        if ($proyecto->ta()->exists()) {
+            foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+                if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == 20202008005096 && !$presupuesto->edt()->exists()) {
+                    $countEdt++;
+                }
+            }
+        }
+
+        return $countEdt > 0 ? false : true;
+    }
+
+    public static function maxValorRoles($proyecto)
+    {
+        $bool = true;
+        if ($proyecto->ta()->exists()) {
+            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_roles > $proyecto->total_roles_sennova ? true : false;
+        }
+
+        return $bool;
+    }
+
+    public static function maxValorTAPresupuesto($proyecto)
+    {
+        $bool = true;
+        if ($proyecto->ta()->exists()) {
+            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_presupuesto > $proyecto->precio_proyecto ? true : false;
+        }
+
+        return $bool;
+    }
 }

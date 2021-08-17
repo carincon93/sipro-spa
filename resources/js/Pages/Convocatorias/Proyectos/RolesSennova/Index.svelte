@@ -38,6 +38,7 @@
             $form.put(route('convocatorias.proyectos.rol-sennova-ta.update', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
+                preserveScroll: true,
             })
         }
     }
@@ -95,18 +96,18 @@
                 {/if}
             </h2>
             {#if proyecto.codigo_linea_programatica == 70}
-                <form on:submit|preventDefault={submit}>
+                <form on:submit|preventDefault={submit} class="mb-40">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
-                            <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_instructores_planta} bind:value={$form.cantidad_instructores_planta} required />
+                            <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="0" input$max="32767" class="mt-1" error={errors.cantidad_instructores_planta} bind:value={$form.cantidad_instructores_planta} required />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Número de dinamizadores de planta" id="cantidad_dinamizadores_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_dinamizadores_planta} bind:value={$form.cantidad_dinamizadores_planta} required />
+                            <Input label="Número de dinamizadores de planta" id="cantidad_dinamizadores_planta" type="number" input$min="0" input$max="32767" class="mt-1" error={errors.cantidad_dinamizadores_planta} bind:value={$form.cantidad_dinamizadores_planta} required />
                         </div>
 
                         <div class="mt-4">
-                            <Input label="Número de psicopedagógos de planta" id="cantidad_psicopedagogos_planta" type="number" input$min="1" input$max="32767" class="mt-1" error={errors.cantidad_psicopedagogos_planta} bind:value={$form.cantidad_psicopedagogos_planta} required />
+                            <Input label="Número de psicopedagógos de planta" id="cantidad_psicopedagogos_planta" type="number" input$min="0" input$max="32767" class="mt-1" error={errors.cantidad_psicopedagogos_planta} bind:value={$form.cantidad_psicopedagogos_planta} required />
                         </div>
                     </fieldset>
                     <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
@@ -119,7 +120,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
+            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
@@ -129,6 +130,9 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nivel académico</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Asignación mensual</th>
+                {#if proyecto.en_subsanacion}
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluación</th>
+                {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -151,6 +155,17 @@
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>
+                    {#if proyecto.en_subsanacion}
+                        <td class="border-t">
+                            <div class="px-6 py-4">
+                                {#if proyectoRolSennova.rol_aprobado}
+                                    Aprobado
+                                {:else}
+                                    Reprobado
+                                {/if}
+                            </div>
+                        </td>
+                    {/if}
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
@@ -169,13 +184,13 @@
 
             {#if proyectoRolesSennova.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="5">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
         <tfoot slot="tfoot">
             <tr>
-                <td colspan="4" class="border-t p-4">
+                <td colspan="5" class="border-t p-4">
                     <strong>Actualmente el total del costo de los roles requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP
                 </td>
             </tr>

@@ -60,7 +60,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])) {
             $form.put(route('users.update', usuario.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -81,7 +81,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
+                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                         <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -93,7 +93,7 @@
 
     <form on:submit|preventDefault={submit}>
         <div class="bg-white rounded shadow max-w-3xl">
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre completo" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
@@ -127,10 +127,12 @@
                     <Select id="tipo_vinculacion" items={tiposVinculacion} bind:selectedValue={$form.tipo_vinculacion} error={errors.tipo_vinculacion} autocomplete="off" placeholder="Seleccione el tipo de vinculación" required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
-                </div>
+                {#if isSuperAdmin}
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    </div>
+                {/if}
 
                 <div class="mt-4">
                     <Label required labelFor="default_password" value="¿Usar contraseña por defecto?" class="inline-block mb-4" />
@@ -151,14 +153,14 @@
         </div>
 
         <div class="bg-white rounded shadow overflow-hidden mt-20">
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="p-4">
                     <Label required class="mb-4" labelFor="role_id" value="Seleccione algún rol" />
                     <InputError message={errors.role_id} />
                 </div>
                 <div class="grid grid-cols-2">
                     {#each roles as { id, name }, i}
-                        {#if (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && (name == 'proponente cultura de la innovación') | checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente i+d+i') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente servicios tecnológicos') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoacademia') || (checkRole(authUser, [4, 17, 18, 20, 19, 5]) && name == 'proponente tecnoparque')}
+                        {#if (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente cultura de la innovación') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente i+d+i') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente servicios tecnológicos') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente tecnoacademia') || (checkRole(authUser, [4, 21, 17, 18, 20, 19, 5]) && name == 'proponente tecnoparque')}
                             <div class="pt-8 pb-8 border-t">
                                 <FormField>
                                     <Checkbox bind:group={$form.role_id} value={id} />
@@ -182,7 +184,7 @@
             {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
             {/if}
-            {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar usuario</LoadingButton>
             {/if}
         </div>
@@ -210,17 +212,7 @@
                         </td>
                         <td class="border-t">
                             <p class="px-6 py-4 focus:text-indigo-500">
-                                {proyecto.idi
-                                    ? proyecto.idi.titulo
-                                    : proyecto.cultura_innovacion
-                                    ? proyecto.cultura_innovacion.titulo
-                                    : proyecto.servicio_tecnologico
-                                    ? proyecto.servicio_tecnologico.titulo
-                                    : proyecto.tp?.nodo_tecnoparque
-                                    ? proyecto.tp?.nodo_tecnoparque.nombre
-                                    : proyecto.tecnoacademia_lineas_tecnoacademia
-                                    ? proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre
-                                    : null}
+                                {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp?.nodo_tecnoparque ? proyecto.tp?.titulo : proyecto.tecnoacademia_lineas_tecnoacademia ? proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre : null}
                             </p>
                         </td>
                         <td class="border-t">
@@ -230,7 +222,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={proyecto.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4])}
+                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 21])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>

@@ -24,12 +24,16 @@
     export let causasDirectas
     export let tiposImpacto
     export let tipoProyectoA
+    export let resultados
 
     let cantidadCeldasActividades = 3
+    let cantidadCeldasImpactos = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
         cantidadCeldasActividades = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
         cantidadCeldasActividades = 14
+    } else if (proyecto.codigo_linea_programatica == 69) {
+        cantidadCeldasImpactos = 1
     } else if (proyecto.codigo_linea_programatica == 70) {
         cantidadCeldasActividades = 10
     }
@@ -266,11 +270,13 @@
         id: 0,
         causa_indirecta_id: 0,
         objetivo_especifico_id: 0,
+        resultado_id: 0,
         descripcion: '',
     })
 
     let showActividadForm = false
     let actividadCausaIndirecta
+    let resultadosFiltrados
     function showActivityDialog(causaIndirecta, objetivoEspecifico) {
         reset()
         codigo = causaIndirecta.actividad.id != null ? 'OBJ-ESP-' + objetivoEspecifico + '-ACT-' + causaIndirecta.actividad.id : ''
@@ -282,30 +288,37 @@
         $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         $formActividad.objetivo_especifico_id = objetivoEspecifico
         $formActividad.descripcion = causaIndirecta.actividad.descripcion
+        $formActividad.resultado_id = {
+            value: causaIndirecta.actividad.resultado_id,
+            label: resultados.find((item) => item.value == causaIndirecta.actividad.resultado_id)?.label,
+        }
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
+        resultadosFiltrados = resultados.filter((item) => item.objetivo_especifico_id == objetivoEspecifico)
     }
 
     function submitActividad() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            $formActividad.post(
-                route('proyectos.actividad', {
-                    convocatoria: convocatoria.id,
-                    proyecto: proyecto.id,
-                    actividad: $formActividad.id,
-                }),
-                {
-                    onStart: () => {
-                        sending = true
+            if ((typeof resultadosFiltrados.find((item) => item.label == null) == 'object') == false) {
+                $formActividad.post(
+                    route('proyectos.actividad', {
+                        convocatoria: convocatoria.id,
+                        proyecto: proyecto.id,
+                        actividad: $formActividad.id,
+                    }),
+                    {
+                        onStart: () => {
+                            sending = true
+                        },
+                        onSuccess: () => {
+                            closeDialog()
+                        },
+                        onFinish: () => {
+                            sending = false
+                        },
+                        preserveScroll: true,
                     },
-                    onSuccess: () => {
-                        closeDialog()
-                    },
-                    onFinish: () => {
-                        sending = false
-                    },
-                    preserveScroll: true,
-                },
-            )
+                )
+            }
         }
     }
 
@@ -332,6 +345,9 @@
         dialogOpen = false
     }
 
+    let objetivosCount
+    let containerArbol
+    let containerObjetivo
     onMount(() => {
         const impacto = document.querySelector('#impacto-tooltip-placement')
         const impactoTooltip = document.querySelector('#impacto-tooltip')
@@ -404,6 +420,7 @@
                 ],
             })
         })
+        objetivosCount = containerArbol.getElementsByClassName('objetivo-container').length
     })
 </script>
 
@@ -415,8 +432,47 @@
     <h1 class="text-3xl {(to_pdf)?'':'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    <div class="mt-16">
-        <div class="flex mb-14">
+    {#if proyecto.en_subsanacion}
+        {#each proyecto.evaluaciones as evaluacion, i}
+            {#if evaluacion.finalizado && evaluacion.habilitado}
+                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                    <div class="flex text-orangered-900 font-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                    </div>
+                    {#if evaluacion.idi_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.objetivos_comentario ? evaluacion.idi_evaluacion.objetivos_comentario : 'Sin recomendación'}</p>
+                    {/if}
+                </div>
+            {/if}
+        {/each}
+
+        {#each proyecto.evaluaciones as evaluacion, i}
+            {#if evaluacion.finalizado && evaluacion.habilitado}
+                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                    <div class="flex text-orangered-900 font-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                    </div>
+                    {#if evaluacion.idi_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.resultados_comentario ? evaluacion.idi_evaluacion.resultados_comentario : 'Sin recomendación'}</p>
+                    {/if}
+                </div>
+            {/if}
+        {/each}
+    {/if}
+
+    <div class="mt-16 relative" bind:this={containerArbol}>
+        <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
+            {#each { length: objetivosCount } as _empty, i}
+                <div class={i % 2 == 0 ? 'bg-red-100' : 'bg-red-200'} style="width: {containerObjetivo?.offsetWidth}px;" />
+            {/each}
+        </div>
+        <div class="flex mb-14" style={proyecto.codigo_linea_programatica == 69 ? 'margin-left: -15px; margin-right: -15px;' : ''}>
             {#each efectosDirectos as efectoDirecto, i}
                 {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
                     <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
@@ -433,13 +489,17 @@
                                     <div class="flex-1 resultados relative">
                                         <div
                                             on:click={showImpactDialog(efectoIndirecto, efectoIndirecto.id, efectoDirecto.resultados[0].id)}
-                                            class="{efectoIndirecto.descripcion != null && i % 2 == 0
-                                                ? 'bg-orangered-400 hover:bg-orangered-500'
+                                            class="{proyecto.codigo_linea_programatica == 69
+                                                ? (efectoIndirecto.descripcion != null) & (i < 3) || (efectoIndirecto.descripcion != null && i > 5 && i < 9)
+                                                    ? 'bg-orangered-400 hover:bg-orangered-500 '
+                                                    : 'bg-orangered-500 hover:bg-orangered-600 '
+                                                : efectoIndirecto.descripcion != null && i % 2 == 0
+                                                ? 'bg-orangered-400 hover:bg-orangered-500 '
                                                 : efectoIndirecto.descripcion == null && i % 2 == 0
-                                                ? 'bg-gray-300 hover:bg-gray-400'
+                                                ? 'bg-gray-300 hover:bg-gray-400 '
                                                 : efectoIndirecto.descripcion != null && i % 2 != 0
-                                                ? 'bg-orangered-500 hover:bg-orangered-600'
-                                                : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                                ? 'bg-orangered-500 hover:bg-orangered-600 '
+                                                : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
                                         >
                                             <p class="paragraph-ellipsis text-xs node text-white line-height-1-24">
                                                 {#if efectoIndirecto.impacto}
@@ -460,7 +520,7 @@
                                 {/if}
                             {/each}
                             {#if proyecto.codigo_linea_programatica != 70}
-                                {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                                {#each { length: cantidadCeldasImpactos - efectoDirecto.efectos_indirectos.length } as _empty}
                                     <div on:click={() => showGeneralInfoDialog(1)} class="flex-1 resultados relative">
                                         <div class="h-36 bg-gray-300 rounded shadow-lg hover:bg-gray-400 cursor-pointer mr-1.5 p-2.5">
                                             <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
@@ -481,16 +541,20 @@
                             id={i == 0 ? 'resultado-tooltip-placement' : ''}
                             aria-describedby={i == 0 ? 'tooltip' : ''}
                         >
-                            {#each efectoDirecto.resultados as resultado, j}
+                            {#each efectoDirecto.resultados as resultado}
                                 <div
                                     on:click={showResultadoDialog(efectoDirecto, resultado)}
-                                    class="{efectoDirecto.descripcion != null && i % 2 == 0
-                                        ? 'bg-orangered-400 hover:bg-orangered-500'
+                                    class="{proyecto.codigo_linea_programatica == 69
+                                        ? (efectoDirecto.descripcion != null) & (i < 3) || (efectoDirecto.descripcion != null && i > 5 && i < 9)
+                                            ? 'bg-orangered-400 hover:bg-orangered-500 '
+                                            : 'bg-orangered-500 hover:bg-orangered-600 '
+                                        : efectoDirecto.descripcion != null && i % 2 == 0
+                                        ? 'bg-orangered-400 hover:bg-orangered-500 '
                                         : efectoDirecto.descripcion == null && i % 2 == 0
-                                        ? 'bg-gray-300 hover:bg-gray-400'
+                                        ? 'bg-gray-300 hover:bg-gray-400 '
                                         : efectoDirecto.descripcion != null && i % 2 != 0
-                                        ? 'bg-orangered-500 hover:bg-orangered-600'
-                                        : 'bg-gray-400 hover:bg-gray-500'} tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 ? ' mb-4' : ''}"
+                                        ? 'bg-orangered-500 hover:bg-orangered-600 '
+                                        : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 ? ' mb-4' : ''}"
                                     style="flex: 1 0 33.333%"
                                 >
                                     <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
@@ -535,7 +599,7 @@
                                 <div id="arrow-objetivo-especifico" class="arrow" data-popper-arrow />
                             </div>
                         {/if}
-                        <div class="objetivo-especificos relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                        <div bind:this={containerObjetivo} class="objetivo-especificos objetivo-container relative flex-1" id={i == 0 ? 'objetivo-especifico-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                             <div
                                 on:click={showObjetivoEspecificoDialog(causaDirecta, i + 1)}
                                 class="{causaDirecta.descripcion != null && i % 2 == 0
@@ -591,7 +655,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
+                            {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 69 && proyecto.codigo_linea_programatica != 70}
                                 {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
                                     <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
                                         <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
@@ -625,6 +689,14 @@
                                 {/each}
                             {:else if proyecto.codigo_linea_programatica == 68 && i == 3}
                                 {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
+                                    <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
+                                        <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                            <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
+                                        </div>
+                                    </div>
+                                {/each}
+                            {:else if proyecto.codigo_linea_programatica == 69}
+                                {#each { length: 9 - causaDirecta.causas_indirectas.length } as _empty, j}
                                     <div id="{j}_empty_actividad" on:click={() => showGeneralInfoDialog(2)} class="mb-4" style="flex: 1 0 33.333%">
                                         <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                             <p class="paragraph-ellipsis text-sm text-white line-height-1-24" />
@@ -667,9 +739,17 @@
                 </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        <div>
-                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
-                        </div>
+                        {#if typeof resultadosFiltrados.find((item) => item.label == null) == 'object'}
+                            <InfoMessage message="Faltan resultados por definir" alertMsg={true} />
+                        {:else}
+                            <div>
+                                <Label labelFor="resultado_id" value="Resultado" />
+                                <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                            </div>
+                            <div class="mt-8">
+                                <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            </div>
+                        {/if}
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}
@@ -793,7 +873,11 @@
                     <p>Para poder editar este impacto, primero debe generar el efecto indirecto en el árbol de problemas.</p>
                 {/if}
                 {#if generalInfoType == 2}
-                    <p>Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
+                    <p class="mb-5">Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
+
+                    {#if proyecto.codigo_linea_programatica == 68}
+                        <InfoMessage>Si el proyecto es de ST y hay actividades que no requieren de una causa indirecta por favor diríjase al Árbol de problemas y genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
+                    {/if}
                 {/if}
             {/if}
         </div>

@@ -24,7 +24,7 @@ class CausaIndirectaRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => ['required', 'max:1200', 'string'],
+            'descripcion' => ['required', 'string'],
         ];
     }
 }

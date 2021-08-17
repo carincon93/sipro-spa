@@ -6,11 +6,10 @@ use App\Http\Requests\ActividadRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Actividad;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
-use function PHPSTORM_META\map;
 
 class ActividadController extends Controller
 {
@@ -22,6 +21,8 @@ class ActividadController extends Controller
     public function index(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        $proyecto->load('evaluaciones.idiEvaluacion');
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
@@ -50,7 +51,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -152,7 +153,7 @@ class ActividadController extends Controller
         $actividad->productos()->sync($request->producto_id);
         $actividad->proyectoPresupuesto()->sync($request->proyecto_presupuesto_id);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -222,6 +223,122 @@ class ActividadController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showMetodologiaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->idi->metodologia;
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->ta->metodologia;
+                $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->ta->metodologia_local;
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->tp->metodologia;
+                $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->tp->metodologia_local;
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->culturaInnovacion->metodologia;
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $evaluacion->proyecto->metodologia = $evaluacion->proyecto->servicioTecnologico->metodologia;
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),
+            'year'              => date('Y') + 1,
+            'filters'           => request()->all('search'),
+            'actividades'       => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->with('objetivoEspecifico')->orderBy('objetivo_especifico_id', 'ASC')
+                ->filterActividad(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'actividadesGantt'  => Actividad::whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->orderBy('fecha_inicio', 'ASC')->get(),
+        ]);
+    }
+
+    /**
+     * updateMetodologiaEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateMetodologiaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Actividad  $actividad
+     * @return \Illuminate\Http\Response
+     */
+    public function actividadEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Actividad $actividad)
+    {
+        $resultados = $evaluacion->proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
+            $query->where('descripcion', '!=', null);
+        })->with('resultados')->get()->pluck('resultados')->flatten();
+
+        $productos = $resultados->map(function ($resultado) {
+            return $resultado->productos;
+        })->flatten();
+
+        return Inertia::render('Convocatorias/Evaluaciones/Actividades/Edit', [
+            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'                     => $evaluacion->only('id'),
+            'proyecto'                       => $evaluacion->proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
+            'productos'                      => $productos,
+            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $evaluacion->proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
+            'actividad'                      => $actividad,
+            'productosRelacionados'          => $actividad->productos()->pluck('id'),
+            'proyectoPresupuestoRelacionado' => $actividad->proyectoPresupuesto()->pluck('id')
+        ]);
     }
 }

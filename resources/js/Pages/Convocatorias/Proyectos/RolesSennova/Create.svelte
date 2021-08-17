@@ -63,6 +63,12 @@
             }
         }
     }
+
+    $: if (infoRolSennova?.perfil != null) {
+        $form.descripcion = infoRolSennova.perfil
+    } else {
+        $form.descripcion = ''
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -85,28 +91,19 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
                 </div>
 
-                {#if infoRolSennova?.experiencia}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 whitespace-pre-wrap">
-                            Experiencia (meses)
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {infoRolSennova.experiencia}
-                            </span>
-                        </p>
-                    </div>
-                {/if}
-
+                <div class="mt-4">
+                    {#if infoRolSennova?.perfil}
+                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} value={infoRolSennova.perfil} required />
+                    {:else}
+                        <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    {/if}
+                </div>
                 {#if proyecto.codigo_linea_programatica != 68}
                     <div class="mt-4">
-                        <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
-                    </div>
-
-                    <div class="mt-4">
-                        <Input label="Número de meses que requiere el apoyo. (Máximo {diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
-                        <InfoMessage>Este proyecto será ejecutado en {diff_meses} meses.</InfoMessage>
+                        <Input label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={diff_meses < 6 ? 6 : diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
                     </div>
 
                     <div class="mt-4">

@@ -12,13 +12,13 @@
     import Textarea from '@/Shared/Textarea'
     import InputError from '@/Shared/InputError'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Select from '@/Shared/Select'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let actividad
-    // export let productos
-    // export let productosRelacionados
     export let proyectoPresupuesto
     export let proyectoPresupuestoRelacionado
 
@@ -30,14 +30,19 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
+
     let dialogOpen = false
     let sending = false
     let form = useForm({
         descripcion: actividad.descripcion,
         fecha_inicio: actividad.fecha_inicio,
         fecha_finalizacion: actividad.fecha_finalizacion,
-        // producto_id: productosRelacionados,
         proyecto_presupuesto_id: proyectoPresupuestoRelacionado,
+        requiere_rubros: proyectoPresupuestoRelacionado.length > 0 ? { value: 1, label: 'Si' } : { value: 2, label: 'No' },
     })
 
     function submit() {
@@ -99,105 +104,82 @@
                 <div class="mt-20">
                     <Textarea label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
-                <!-- <h6 class="mt-20 mb-12 text-2xl">Productos</h6>
-                <div class="bg-white rounded shadow overflow-hidden">
-                    <div class="p-4">
-                        <Label required class="mb-4" labelFor="producto_id" value="Relacione algún producto" />
-                        <InputError message={errors.producto_id} />
-                    </div>
-                    {#if isSuperAdmin || proyecto.modificable == true}
-                        <div class="grid grid-cols-2">
-                            {#each productos as { id, nombre }}
-                                <FormField class="border-b border-l py-4">
-                                    <Checkbox bind:group={$form.producto_id} value={id} />
-                                    <span slot="label">{nombre}</span>
-                                </FormField>
-                            {/each}
-                            {#if productos.length == 0}
-                                <p class="p-4">Sin información registrada</p>
-                            {/if}
-                        </div>
-                    {:else}
-                        <div class="p-2">
-                            <ul class="list-disc p-4">
-                                {#each productos as { id, nombre }}
-                                    {#each $form.producto_id as producto}
-                                        {#if id == producto}
-                                            <li class="first-letter-uppercase mb-4">{nombre}</li>
-                                        {/if}
-                                    {/each}
-                                {/each}
-                            </ul>
-                        </div>
-                    {/if}
-                </div> -->
 
                 <h6 class="mt-20 mb-12 text-2xl">Rubros presupuestales</h6>
-                <div class="bg-white rounded shadow overflow-hidden">
-                    <div class="p-4">
-                        <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Relacione algún rubro" />
-                        <InputError message={errors.proyecto_presupuesto_id} />
-                    </div>
-                    {#if isSuperAdmin || proyecto.modificable == true}
-                        <div class="grid grid-cols-2">
-                            {#each proyectoPresupuesto as presupuesto}
-                                <FormField class="border-b border-l">
-                                    <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
-                                    <span slot="label">
-                                        <div class="mb-8 mt-4">
-                                            <small class="block">Concepto interno SENA</small>
-                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
-                                        </div>
-                                        <div class="mb-8">
-                                            <small class="block">Rubro</small>
-                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
-                                        </div>
-                                        <div class="mb-8">
-                                            <small class="block">Uso presupuestal</small>
-                                            {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
-                                        </div>
-                                        <div class="mb-8">
-                                            <small class="block">Descripción</small>
-                                            {presupuesto.descripcion}
-                                        </div>
-                                    </span>
-                                </FormField>
-                            {/each}
-                            {#if proyectoPresupuesto.length == 0}
-                                <p class="p-4">Sin información registrada</p>
-                            {/if}
+
+                <InfoMessage>
+                    Si la actividad no requiere asociar un rubro presupuestal. (Ej: Actividad de PQRS) <br /> Por favor, cambie la siguiente opción a <strong>No</strong>
+                    <Select items={opcionesSiNo} id="requiere_rubros" bind:selectedValue={$form.requiere_rubros} error={errors.requiere_rubros} autocomplete="off" placeholder="Seleccione una opción" required />
+                    <hr class="mb-10" />
+                    IMPORTANTE: Solo para actividades que no requieran asociar algún rubro presupuestal. Para el resto de actividades SI debe asociar un rubro para poder completar la<strong class="ml-1.5"> Cadena de valor</strong>.
+                </InfoMessage>
+                {#if $form.requiere_rubros?.value == 1}
+                    <div class="bg-white rounded shadow overflow-hidden">
+                        <div class="p-4">
+                            <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Relacione algún rubro" />
+                            <InputError message={errors.proyecto_presupuesto_id} />
                         </div>
-                    {:else}
-                        <div class="p-2">
-                            <ul class="list-disc p-4">
+                        {#if isSuperAdmin || proyecto.modificable == true}
+                            <div class="grid grid-cols-2">
                                 {#each proyectoPresupuesto as presupuesto}
-                                    {#each $form.proyecto_presupuesto_id as proyectoPresupuesto}
-                                        {#if presupuesto.id == proyectoPresupuesto}
-                                            <li class="mb-4">
-                                                <div class="mb-8 mt-4">
-                                                    <small class="block">Concepto interno SENA</small>
-                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
-                                                </div>
-                                                <div class="mb-8">
-                                                    <small class="block">Rubro</small>
-                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
-                                                </div>
-                                                <div class="mb-8">
-                                                    <small class="block">Uso presupuestal</small>
-                                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
-                                                </div>
-                                                <div class="mb-8">
-                                                    <small class="block">Descripción</small>
-                                                    {presupuesto.descripcion}
-                                                </div>
-                                            </li>
-                                        {/if}
-                                    {/each}
+                                    <FormField class="border-b border-l">
+                                        <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
+                                        <span slot="label">
+                                            <div class="mb-8 mt-4">
+                                                <small class="block">Concepto interno SENA</small>
+                                                {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                            </div>
+                                            <div class="mb-8">
+                                                <small class="block">Rubro</small>
+                                                {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
+                                            </div>
+                                            <div class="mb-8">
+                                                <small class="block">Uso presupuestal</small>
+                                                {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
+                                            </div>
+                                            <div class="mb-8">
+                                                <small class="block">Descripción</small>
+                                                {presupuesto.descripcion}
+                                            </div>
+                                        </span>
+                                    </FormField>
                                 {/each}
-                            </ul>
-                        </div>
-                    {/if}
-                </div>
+                                {#if proyectoPresupuesto.length == 0}
+                                    <p class="p-4">Sin información registrada</p>
+                                {/if}
+                            </div>
+                        {:else}
+                            <div class="p-2">
+                                <ul class="list-disc p-4">
+                                    {#each proyectoPresupuesto as presupuesto}
+                                        {#each $form.proyecto_presupuesto_id as proyectoPresupuesto}
+                                            {#if presupuesto.id == proyectoPresupuesto}
+                                                <li class="mb-4">
+                                                    <div class="mb-8 mt-4">
+                                                        <small class="block">Concepto interno SENA</small>
+                                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                                    </div>
+                                                    <div class="mb-8">
+                                                        <small class="block">Rubro</small>
+                                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
+                                                    </div>
+                                                    <div class="mb-8">
+                                                        <small class="block">Uso presupuestal</small>
+                                                        {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
+                                                    </div>
+                                                    <div class="mb-8">
+                                                        <small class="block">Descripción</small>
+                                                        {presupuesto.descripcion}
+                                                    </div>
+                                                </li>
+                                            {/if}
+                                        {/each}
+                                    {/each}
+                                </ul>
+                            </div>
+                        {/if}
+                    </div>
+                {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}

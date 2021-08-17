@@ -20,7 +20,7 @@ use App\Http\Requests\CausaIndirectaRequest;
 use App\Http\Requests\ImpactoRequest;
 use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
-use App\Http\Requests\ActividadRequest;
+use App\Models\Evaluacion\Evaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -38,33 +38,29 @@ class ArbolProyectoController extends Controller
     {
         $objetivosEspecificos = $proyecto->causasDirectas()->with('objetivoEspecifico')->count() > 0 ? $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten() : [];
 
-        $numeroCeldas = 4;
+        $numeroCeldasCausasDirectas = 4;
+        $numeroCeldasEfectosDirectos = 4;
         switch ($proyecto) {
-            case $proyecto->idi()->exists():
-                $numeroCeldas = 4;
-                break;
+
             case $proyecto->ta()->exists():
-                $numeroCeldas = 6;
+                $numeroCeldasEfectosDirectos = 6;
+                $numeroCeldasCausasDirectas = 6;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 4;
+                $numeroCeldasEfectosDirectos = 12;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 if ($proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1) {
-                    $numeroCeldas = 3;
-                } else {
-                    $numeroCeldas = 4;
+                    $numeroCeldasEfectosDirectos = 3;
+                    $numeroCeldasCausasDirectas = 3;
                 }
-                break;
-            case $proyecto->culturaInnovacion()->exists():
-                $numeroCeldas = 4;
                 break;
             default:
                 break;
         }
 
-        if ($proyecto->causasDirectas()->count() < $numeroCeldas) {
-            for ($i = 0; $i < $numeroCeldas; $i++) {
+        if ($proyecto->causasDirectas()->count() < $numeroCeldasCausasDirectas) {
+            for ($i = 0; $i < $numeroCeldasCausasDirectas; $i++) {
                 $causaDirecta = $proyecto->causasDirectas()->create([
                     ['descripcion' => null],
                 ]);
@@ -78,8 +74,8 @@ class ArbolProyectoController extends Controller
             }
         }
 
-        if ($proyecto->efectosDirectos()->count() < $numeroCeldas) {
-            for ($i = 0; $i < $numeroCeldas; $i++) {
+        if ($proyecto->efectosDirectos()->count() < $numeroCeldasEfectosDirectos) {
+            for ($i = 0; $i < $numeroCeldasEfectosDirectos; $i++) {
                 $efectoDirecto = $proyecto->efectosDirectos()->create([
                     ['descripcion' => null],
                 ]);
@@ -105,6 +101,22 @@ class ArbolProyectoController extends Controller
                             'objetivo_especifico_id' => $objetivosEspecificos[$i]->id
                         ]);
                     }
+                } else if ($proyecto->tp()->exists()) {
+                    $numObj = 0;
+                    if ($i < 3) {
+                        $numObj = 0;
+                    } else if ($i < 6) {
+                        $numObj = 1;
+                    } else if ($i < 9) {
+                        $numObj = 2;
+                    } else if ($i < 12) {
+                        $numObj = 3;
+                    }
+
+                    $efectoDirecto->resultados()->create([
+                        'descripcion'            => null,
+                        'objetivo_especifico_id' => $objetivosEspecificos[$numObj]->id
+                    ]);
                 } else {
                     $efectoDirecto->resultados()->create([
                         'descripcion'            => null,
@@ -120,6 +132,34 @@ class ArbolProyectoController extends Controller
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 387, 380, 388, 3)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 388, 381, 389, 4)');
                 DB::select('SELECT public."crear_causas_indirectas"(' . $proyecto->id . ', 389, 382, 390, 5)');
+            } else if ($proyecto->tp()->exists() && $proyecto->tp->modificable == false) {
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 489, 0)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 490, 1)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 491, 2)');
+                DB::select('SELECT public."crear_causas_indirectas_tp"(' . $proyecto->id . ', 492, 3)');
+
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 482, 0)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 483, 1)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 484, 2)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 485, 3)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 486, 4)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 487, 5)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 488, 6)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 489, 7)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 490, 8)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 491, 9)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 492, 10)');
+                DB::select('SELECT public."crear_efectos_indirectos_tp"(' . $proyecto->id . ', 493, 11)');
+
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 519, 0)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 520, 1)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 521, 2)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 522, 3)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 523, 4)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 524, 5)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 525, 6)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 526, 7)');
+                DB::select('SELECT public."crear_productos_tp"(' . $proyecto->id . ', 527, 8)');
             }
         }
 
@@ -152,6 +192,13 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 388, 4, 32)');
             DB::select('SELECT public."actualizar_actividades_ta"(' . $proyecto->id . ', 389, 5, 38)');
 
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 385)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 386)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 387)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 388)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 389)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 390)');
+
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 508, 0, 0)');
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 507, 0, 1)');
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 509, 0, 2)');
@@ -160,6 +207,32 @@ class ArbolProyectoController extends Controller
             DB::select('SELECT public."actualizar_impactos_ta"(' . $proyecto->id . ', 512, 0, 5)');
 
             $proyecto->ta->update([
+                'modificable' => true
+            ]);
+        } else if ($proyecto->tp()->exists() && $proyecto->tp->modificable == false) {
+            DB::select('SELECT public."objetivos_especificos_tp"(' . $proyecto->id . ')');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 489, 0, -1)');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 490, 1, 6)');
+            DB::select('SELECT public."actualizar_actividades_tp"(' . $proyecto->id . ', 491, 2, 15)');
+
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 519)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 520)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 521)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 522)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 523)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 524)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 525)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 526)');
+            DB::select('SELECT public."actividad_producto_tatp"(' . $proyecto->id . ', 527)');
+
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 590, 0, 0)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 591, 0, 1)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 592, 0, 2)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 593, 0, 3)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 594, 0, 4)');
+            DB::select('SELECT public."actualizar_impactos_tp"(' . $proyecto->id . ', 595, 0, 5)');
+
+            $proyecto->tp->update([
                 'modificable' => true
             ]);
         }
@@ -175,6 +248,8 @@ class ArbolProyectoController extends Controller
     public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        $proyecto->load('evaluaciones.idiEvaluacion');
 
         $this->generateTree($proyecto);
         $efectosDirectos = $proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
@@ -209,11 +284,94 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
             'convocatoria'      => $convocatoria->only('id'),
-            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
+            'efectosDirectos'   => $efectosDirectos,
+            'causasDirectas'    => $causasDirectas
+        ]);
+    }
+
+    /**
+     * showArbolProblemasEvaluacion
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function showArbolProblemasEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $efectosDirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
+        $causasDirectas  = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas')->get();
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->proyecto->antecedentes             = $evaluacion->proyecto->idi->antecedentes;
+                $evaluacion->proyecto->marco_conceptual         = $evaluacion->proyecto->idi->marco_conceptual;
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->idi->problema_central;
+                $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->idi->justificacion_problema;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->idi->identificacion_problema;
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->proyecto->problema_central = $evaluacion->proyecto->ta->problema_central;
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->tp->justificacion_problema;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->tp->identificacion_problema;
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->tp->problema_central;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $evaluacion->proyecto->problema_central = $evaluacion->proyecto->servicioTecnologico->problema_central;
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->culturaInnovacion->problema_central;
+                $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->culturaInnovacion->justificacion_problema;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolProblemas', [
+            'convocatoria'      => $convocatoria->only('id'),
+            'evaluacion'        => $evaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
             'to_pdf'            => ($request->to_pdf==1)?true:false
         ]);
+    }
+
+
+    /**
+     * updateArbolProblemasEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateArbolProblemasEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'problema_central_puntaje'      => $request->problema_central_puntaje,
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'problema_central_puntaje'      => $request->problema_central_puntaje,
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -246,7 +404,7 @@ class ArbolProyectoController extends Controller
                 $ta = $proyecto->ta;
 
                 $request->validate([
-                    'problema_central'          => 'required|string|max:40000',
+                    'problema_central' => 'required|string|max:40000',
                 ]);
                 $ta->problema_central = $request->problema_central;
 
@@ -256,8 +414,8 @@ class ArbolProyectoController extends Controller
                 $tp = $proyecto->tp;
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
+                    'problema_central'         => 'required|string|max:40000',
+                    'justificacion_problema'   => 'required|string|max:40000',
                 ]);
                 $tp->identificacion_problema  = $request->identificacion_problema;
                 $tp->justificacion_problema   = $request->justificacion_problema;
@@ -269,8 +427,8 @@ class ArbolProyectoController extends Controller
             case $proyecto->culturaInnovacion()->exists():
                 $request->validate([
                     'identificacion_problema'  => 'required|string|max:40000',
-                    'problema_central'          => 'required|string|max:40000',
-                    'justificacion_problema'    => 'required|string|max:40000',
+                    'problema_central'         => 'required|string|max:40000',
+                    'justificacion_problema'   => 'required|string|max:40000',
                 ]);
 
                 $culturaInnovacion = $proyecto->culturaInnovacion;
@@ -293,7 +451,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -312,7 +470,7 @@ class ArbolProyectoController extends Controller
 
         $efectoDirecto->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -336,7 +494,7 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 3;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 3;
+                $numeroCeldas = 1;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 3;
@@ -357,7 +515,7 @@ class ArbolProyectoController extends Controller
             $efectoIndirecto->descripcion = $request->descripcion;
             $efectoIndirecto->save();
         } else {
-            return redirect()->back()->with('error', 'No se pueden añadir más efectos indirectos.');
+            return back()->with('error', 'No se pueden añadir más efectos indirectos.');
         }
 
         if (empty($efectoIndirecto->impacto)) {
@@ -366,7 +524,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -385,7 +543,7 @@ class ArbolProyectoController extends Controller
 
         $causaDirecta->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -409,7 +567,7 @@ class ArbolProyectoController extends Controller
                 $numeroCeldas = 10;
                 break;
             case $proyecto->tp()->exists():
-                $numeroCeldas = 4;
+                $numeroCeldas = 9;
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $numeroCeldas = 14;
@@ -430,7 +588,7 @@ class ArbolProyectoController extends Controller
             $causaIndirecta->descripcion = $request->descripcion;
             $causaIndirecta->save();
         } else {
-            return redirect()->back()->with('error', 'No se pueden añadir más causas indirectas.');
+            return back()->with('error', 'No se pueden añadir más causas indirectas.');
         }
 
         if (empty($causaIndirecta->actividad)) {
@@ -439,7 +597,7 @@ class ArbolProyectoController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -453,10 +611,14 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.idiEvaluacion');
+
         $this->generateTree($proyecto);
 
-        $efectosDirectos  = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
-        $causasDirectas   = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $efectosDirectos    = $proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
+        $causasDirectas     = $proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $tipoProyectoA = false;
         switch ($proyecto) {
@@ -496,13 +658,116 @@ class ArbolProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
             'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
+            'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'en_subsanacion', 'evaluaciones'),
+            'efectosDirectos' => $efectosDirectos,
+            'causasDirectas'  => $causasDirectas,
+            'tiposImpacto'    => $tiposImpacto,
+            'tipoProyectoA'   => $tipoProyectoA,
+            'resultados'      => Resultado::select('id as value', 'descripcion as label', 'objetivo_especifico_id')->whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->get()
+        ]);
+    }
+
+    /**
+     * showArbolObjetivosEvaluacion
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function showArbolObjetivosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $efectosDirectos  = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
+        $causasDirectas   = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $tipoProyectoA = false;
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->idi->problema_central;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->idi->identificacion_problema;
+                $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->idi->objetivo_general;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+                $evaluacion->idiEvaluacion;
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->ta->problema_central;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->ta->identificacion_problema;
+                $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->ta->objetivo_general;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->tp->problema_central;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->tp->identificacion_problema;
+                $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->tp->objetivo_general;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+                break;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->culturaInnovacion->problema_central;
+                $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
+                $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $evaluacion->proyecto->objetivo_general   = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
+                $evaluacion->proyecto->problema_central   = $evaluacion->proyecto->servicioTecnologico->problema_central;
+                $tiposImpacto = json_decode(Storage::get('json/tipos-impacto-st.json'), true);
+                $tipoProyectoA = $evaluacion->proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1;
+                break;
+            default:
+                break;
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos', [
+            'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'      => $evaluacion,
+            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
             'tiposImpacto'    => $tiposImpacto,
             'tipoProyectoA'   => $tipoProyectoA,
             'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
+    }
+
+    /**
+     * updateArbolObjetivosEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateArbolObjetivosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        switch ($evaluacion) {
+            case $evaluacion->idiEvaluacion()->exists():
+                $evaluacion->idiEvaluacion()->update([
+                    'objetivos_puntaje'      => $request->objetivos_puntaje,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'resultados_puntaje'     => $request->resultados_puntaje,
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                ]);
+                break;
+            case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'objetivos_puntaje'      => $request->objetivos_puntaje,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'resultados_puntaje'     => $request->resultados_puntaje,
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        $evaluacion->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -517,7 +782,7 @@ class ArbolProyectoController extends Controller
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
         $request->validate([
-            'objetivo_general' => 'required|string|max:1200',
+            'objetivo_general' => 'required|string',
         ]);
 
         switch ($proyecto) {
@@ -555,7 +820,7 @@ class ArbolProyectoController extends Controller
                 break;
         }
 
-        return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+        return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
 
     /**
@@ -574,10 +839,10 @@ class ArbolProyectoController extends Controller
         $impacto->tipo           = $request->tipo;
 
         if ($impacto->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba el impacto. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actulizaba el impacto. Vuelva a intentar');
     }
 
     /**
@@ -601,10 +866,10 @@ class ArbolProyectoController extends Controller
         }
 
         if ($resultado->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el resultado. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actualizaba el resultado. Vuelva a intentar');
     }
 
     /**
@@ -623,10 +888,10 @@ class ArbolProyectoController extends Controller
         $objetivoEspecifico->numero      = $request->numero;
 
         if ($objetivoEspecifico->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
+        return back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
     }
 
     /**
@@ -642,16 +907,21 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        $request->resultado_id = $request->resultado_id['value'];
         $request->validate(
-            ['descripcion' => 'required|string']
+            ['descripcion'  => 'required|string'],
+            ['resultado_id' => 'required|integer|exists:resultados']
         );
 
-        $actividad->fill($request->all());
+        $resultado = Resultado::find($request->resultado_id);
+        $actividad->descripcion = $request->descripcion;
+        $actividad->resultado()->associate($request->resultado_id);
+        $actividad->objetivoEspecifico()->associate($resultado->objetivo_especifico_id);
 
         if ($actividad->save()) {
-            return redirect()->back()->with('success', 'El recurso se ha guardado correctamente.');
+            return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
+        return back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
     }
 }

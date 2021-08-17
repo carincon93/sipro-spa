@@ -21,8 +21,7 @@ class LineaInvestigacionController extends Controller
 
         return Inertia::render('LineasInvestigacion/Index', [
             'filters'               => request()->all('search'),
-            'lineasInvestigacion'   => LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion', 'grupoInvestigacion.centroFormacion')
-                ->filterLineaInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'lineasInvestigacion'   => LineaInvestigacion::getLineasInvestigacionByRol()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -99,7 +98,7 @@ class LineaInvestigacionController extends Controller
 
         $lineaInvestigacion->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -115,7 +114,7 @@ class LineaInvestigacionController extends Controller
         try {
             $lineaInvestigacion->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'No se puede elimiar el recurso debido a que está asociado a uno o varios proyectos.');
+            return back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
         return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');

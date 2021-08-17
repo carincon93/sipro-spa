@@ -27,12 +27,16 @@
     let codigo
     let sending = false
     let dialogOpen = false
-    let cantidadCeldasCausasIndirectas = 3
 
+    let cantidadCeldasCausasIndirectas = 3
+    let cantidadCeldasEfectosIndirectos = 3
     if (proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82) {
         cantidadCeldasCausasIndirectas = 3
     } else if (proyecto.codigo_linea_programatica == 68) {
         cantidadCeldasCausasIndirectas = 14
+    } else if (proyecto.codigo_linea_programatica == 69) {
+        cantidadCeldasCausasIndirectas = 9
+        cantidadCeldasEfectosIndirectos = 1
     } else if (proyecto.codigo_linea_programatica == 70) {
         cantidadCeldasCausasIndirectas = 10
     }
@@ -368,7 +372,12 @@
                 ],
             })
         })
+
+        causasDirectasCount = containerArbol.getElementsByClassName('causa-directa-container').length
     })
+    let causasDirectasCount
+    let containerArbol
+    let containerCausaDirecta
 </script>
 
 <AuthenticatedLayout>
@@ -379,15 +388,38 @@
     <h1 class="text-3xl {(to_pdf)?'':'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
-    <div class="mt-16">
+    {#if proyecto.en_subsanacion}
+        {#each proyecto.evaluaciones as evaluacion, i}
+            {#if evaluacion.finalizado && evaluacion.habilitado}
+                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                    <div class="flex text-orangered-900 font-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                    </div>
+                    {#if evaluacion.idi_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.problema_central_comentario ? evaluacion.idi_evaluacion.problema_central_comentario : 'Sin recomendación'}</p>
+                    {/if}
+                </div>
+            {/if}
+        {/each}
+    {/if}
+
+    <div class="mt-16 relative" bind:this={containerArbol}>
+        <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
+            {#each { length: causasDirectasCount } as _empty, i}
+                <div class={i % 2 == 0 ? 'bg-indigo-100' : 'bg-indigo-200'} style="width: {containerCausaDirecta?.offsetWidth}px;" />
+            {/each}
+        </div>
         <!-- Efectos -->
-        <div class="flex mb-14">
+        <div class="flex mb-14" style={proyecto.codigo_linea_programatica == 69 ? 'margin-left: -15px; margin-right: -15px;' : ''}>
             {#each efectosDirectos as efectoDirecto, i}
                 <div class="flex-1{proyecto.codigo_linea_programatica == 70 && efectoDirecto.efectos_indirectos.length == 0 ? ' flex items-end' : ''}">
                     {#if i == 0}
                         <!-- Efectos indirectos -->
                         <div id="efecto-indirecto-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Efectos indirectos</small>
+                            <small>Efectos <br /> indirectos</small>
                             <div id="arrow-efecto-indirecto" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
@@ -397,7 +429,17 @@
                                 <div class="flex-1 efectos-directos relative">
                                     <div
                                         on:click={showEfectoIndirectoDialog(efectoIndirecto, efectoDirecto.id)}
-                                        class="{efectoIndirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoIndirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoIndirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        class="{proyecto.codigo_linea_programatica == 69
+                                            ? (efectoIndirecto.descripcion != null) & (i < 3) || (efectoIndirecto.descripcion != null && i > 5 && i < 9)
+                                                ? 'bg-indigo-300 hover:bg-indigo-400 '
+                                                : 'bg-indigo-500 hover:bg-indigo-600 '
+                                            : efectoIndirecto.descripcion != null && i % 2 == 0
+                                            ? 'bg-indigo-300 hover:bg-indigo-400 '
+                                            : efectoIndirecto.descripcion == null && i % 2 == 0
+                                            ? 'bg-gray-300 hover:bg-gray-400 '
+                                            : efectoIndirecto.descripcion != null && i % 2 != 0
+                                            ? 'bg-indigo-500 hover:bg-indigo-600 '
+                                            : 'bg-gray-400 hover:bg-gray-500 '}h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
                                     >
                                         <p class="paragraph-ellipsis text-xs text-white line-height-1-24">
                                             <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}-IND-{efectoIndirecto.id}</small>
@@ -410,9 +452,9 @@
                             {/if}
                         {/each}
                         {#if proyecto.codigo_linea_programatica != 70}
-                            {#each { length: 3 - efectoDirecto.efectos_indirectos.length } as _empty}
+                            {#each { length: cantidadCeldasEfectosIndirectos - efectoDirecto.efectos_indirectos.length } as _empty}
                                 <div class="flex-1 efectos-directos relative" on:click={showEfectoIndirectoDialog(null, efectoDirecto.id)}>
-                                    <div class="{i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
+                                    <div class="{proyecto.codigo_linea_programatica == 69 ? 'bg-gray-300 hover:bg-gray-400 ' : i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400 ' : 'bg-gray-400 hover:bg-gray-500 '}h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5">
                                         <p class="text-sm text-white line-height-1-24" />
                                     </div>
                                 </div>
@@ -423,7 +465,7 @@
                     {#if i == 0}
                         <!-- Efecto directo -->
                         <div id="efecto-directo-tooltip" class="tooltip bg-black" role="tooltip" data-popper-placement="left">
-                            <small>Efectos directos</small>
+                            <small>Efectos <br /> directos</small>
                             <div id="arrow-efecto-directo" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
@@ -431,7 +473,17 @@
                     <div class="efectos-directos relative flex-1" id={i == 0 ? 'efecto-directo-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         <div
                             on:click={showEfectoDirectoDialog(efectoDirecto)}
-                            class="{efectoDirecto.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : efectoDirecto.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : efectoDirecto.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                            class="{proyecto.codigo_linea_programatica == 69
+                                ? (efectoDirecto.descripcion != null) & (i < 3) || (efectoDirecto.descripcion != null && i > 5 && i < 9)
+                                    ? 'bg-indigo-300 hover:bg-indigo-400 '
+                                    : 'bg-indigo-500 hover:bg-indigo-600 '
+                                : efectoDirecto.descripcion != null && i % 2 == 0
+                                ? 'bg-indigo-300 hover:bg-indigo-400 '
+                                : efectoDirecto.descripcion == null && i % 2 == 0
+                                ? 'bg-gray-300 hover:bg-gray-400 '
+                                : efectoDirecto.descripcion != null && i % 2 != 0
+                                ? 'bg-indigo-500 hover:bg-indigo-600 '
+                                : 'bg-gray-400 hover:bg-gray-500 '}h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
                         >
                             <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
                                 <small class="title block font-bold mb-2">EFE-{efectoDirecto.id}</small>
@@ -471,7 +523,7 @@
                             <div id="arrow-causa-directa" class="arrow" data-popper-arrow />
                         </div>
                     {/if}
-                    <div class="causas-directas-line relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
+                    <div bind:this={containerCausaDirecta} class="causas-directas-line causa-directa-container relative flex-1" id={i == 0 ? 'causa-directa-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                         <div
                             on:click={showCausaDirectaDialog(causaDirecta)}
                             class="{causaDirecta.descripcion != null && i % 2 == 0 ? 'bg-indigo-300 hover:bg-indigo-400' : causaDirecta.descripcion == null && i % 2 == 0 ? 'bg-gray-300 hover:bg-gray-400' : causaDirecta.descripcion != null && i % 2 != 0 ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 hover:bg-gray-500'} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
