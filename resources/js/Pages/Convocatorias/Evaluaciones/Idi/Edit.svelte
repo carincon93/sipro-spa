@@ -247,7 +247,7 @@
                 <Label class="mt-4 mb-4" labelFor="titulo_puntaje" value="Puntaje (Máximo 1)" />
                 <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
 
-                {#if idiSegundaEvaluacion.titulo_comentario}
+                {#if idiSegundaEvaluacion?.titulo_comentario}
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.titulo_comentario}</p>
                 {/if}
 
@@ -279,7 +279,7 @@
             </div>
 
             <InfoMessage>
-                {#if idiSegundaEvaluacion.fechas_comentario}
+                {#if idiSegundaEvaluacion?.fechas_comentario}
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.fechas_comentario}</p>
                 {/if}
                 <div class="mt-4">
@@ -308,7 +308,7 @@
                 <DynamicList disabled={true} id="red_conocimiento_id" bind:value={idiInfo.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" />
 
                 <InfoMessage>
-                    {#if idiSegundaEvaluacion.red_conocimiento_comentario}
+                    {#if idiSegundaEvaluacion?.red_conocimiento_comentario}
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.red_conocimiento_comentario}</p>
                     {/if}
                     <div class="mt-4">
@@ -348,7 +348,7 @@
                     <DynamicList disabled={true} id="disciplina_subarea_conocimiento_id" bind:value={idiInfo.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', idiInfo.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" />
 
                     <InfoMessage>
-                        {#if idiSegundaEvaluacion.disciplina_subarea_conocimiento_comentario}
+                        {#if idiSegundaEvaluacion?.disciplina_subarea_conocimiento_comentario}
                             <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.disciplina_subarea_conocimiento_comentario}</p>
                         {/if}
                         <div class="mt-4">
@@ -379,7 +379,7 @@
                 <DynamicList disabled={true} id="actividad_economica_id" bind:value={idiInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" />
 
                 <InfoMessage>
-                    {#if idiSegundaEvaluacion.actividad_economica_comentario}
+                    {#if idiSegundaEvaluacion?.actividad_economica_comentario}
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.actividad_economica_comentario}</p>
                     {/if}
                     <div class="mt-4">
@@ -400,7 +400,7 @@
                 <DynamicList disabled={true} id="tematica_estrategica_id" bind:value={idiInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
 
                 <InfoMessage>
-                    {#if idiSegundaEvaluacion.tematica_estrategica_comentario}
+                    {#if idiSegundaEvaluacion?.tematica_estrategica_comentario}
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.tematica_estrategica_comentario}</p>
                     {/if}
                     <div class="mt-4">
@@ -432,7 +432,7 @@
                         <Label class="mt-4 mb-4" labelFor="video_puntaje" value="Puntaje (Máximo 1)" />
                         <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
 
-                        {#if idiSegundaEvaluacion.video_comentario}
+                        {#if idiSegundaEvaluacion?.video_comentario}
                             <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.video_comentario}</p>
                         {/if}
                         <div class="mt-4">
@@ -460,7 +460,7 @@
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_industria_4" bind:value={idiInfo.justificacion_industria_4} />
 
                     <InfoMessage>
-                        {#if idiSegundaEvaluacion.justificacion_industria_4_comentario}
+                        {#if idiSegundaEvaluacion?.justificacion_industria_4_comentario}
                             <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.justificacion_industria_4_comentario}</p>
                         {/if}
                         <div class="mt-4">
@@ -496,7 +496,7 @@
                     <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_economia_naranja" bind:value={idiInfo.justificacion_economia_naranja} />
 
                     <InfoMessage>
-                        {#if idiSegundaEvaluacion.justificacion_economia_naranja_comentario}
+                        {#if idiSegundaEvaluacion?.justificacion_economia_naranja_comentario}
                             <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.justificacion_economia_naranja_comentario}</p>
                         {/if}
                         <div class="mt-4">
@@ -809,7 +809,7 @@
                     <Label class="mt-4 mb-4" labelFor="resumen_puntaje" value="Puntaje (Máximo 2)" />
                     <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
 
-                    {#if idiSegundaEvaluacion.resumen_comentario}
+                    {#if idiSegundaEvaluacion?.resumen_comentario}
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.resumen_comentario}</p>
                     {/if}
                     <div class="mt-4">
@@ -918,7 +918,7 @@
                 <Textarea disabled label="Bibliografía" maxlength="40000" id="bibliografia" bind:value={idiInfo.bibliografia} />
 
                 <InfoMessage>
-                    {#if idiSegundaEvaluacion.bibliografia_comentario}
+                    {#if idiSegundaEvaluacion?.bibliografia_comentario}
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.bibliografia_comentario}</p>
                     {/if}
                     <div class="mt-4">
@@ -943,7 +943,7 @@
             <Label class="mt-4 mb-4" labelFor="ortografia_puntaje" value="Puntaje (Máximo 1)" />
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
 
-            {#if idiSegundaEvaluacion.ortografia_comentario}
+            {#if idiSegundaEvaluacion?.ortografia_comentario}
                 <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.ortografia_comentario}</p>
             {/if}
             <div class="mt-4">
@@ -966,7 +966,7 @@
             <Label class="mt-4 mb-4" labelFor="redaccion_puntaje" value="Puntaje (Máximo 1)" />
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
 
-            {#if idiSegundaEvaluacion.redaccion_comentario}
+            {#if idiSegundaEvaluacion?.redaccion_comentario}
                 <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.redaccion_comentario}</p>
             {/if}
             <div class="mt-4">
@@ -989,7 +989,7 @@
             <Label class="mt-4 mb-4" labelFor="normas_apa_puntaje" value="Puntaje (Máximo 1)" />
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
-            {#if idiSegundaEvaluacion.normas_apa_comentario}
+            {#if idiSegundaEvaluacion?.normas_apa_comentario}
                 <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.normas_apa_comentario}</p>
             {/if}
             <div class="mt-4">
