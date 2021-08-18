@@ -512,7 +512,16 @@ class Proyecto extends Model
                 $valorAprendiz = 63000;
             }
         }
-        return round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+
+        $total = round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+
+        if ($this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 18) {
+            $total = 32098065;
+        } else if ($this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 16) {
+            $total = 23174417;
+        }
+
+        return $total;
     }
 
     public function getMaxBienestarAprendizAttribute()
