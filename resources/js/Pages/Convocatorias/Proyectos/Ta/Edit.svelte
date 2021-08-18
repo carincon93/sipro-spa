@@ -7,6 +7,7 @@
     import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
+    import Input from '@/Shared/Input'
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -32,7 +33,10 @@
     export let proyectoProgramasFormacionArticulados
     export let proyectoDisCurriculares
     export let disCurriculares
+    export let programasFormacion
     export let tecnoAcademias
+    export let modalidades
+    export let nivelesFormacion
 
     $: $title = ta ? ta.titulo : null
 
@@ -144,7 +148,6 @@
 
     onMount(() => {
         getMunicipios()
-        getProgramasFormacionArticular()
         getLineasTecnoacademia()
     })
 
@@ -181,19 +184,30 @@
         $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
 
-    let programasFormacionArticular
-    async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion', ta.proyecto.centro_formacion_id))
-        if (res.status == '200') {
-            programasFormacionArticular = res.data
-        }
-    }
-
     let lineasTecnoaAcademia
     async function getLineasTecnoacademia() {
         let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
+        }
+    }
+
+    let programasFormacionDialogOpen = false
+    let formProgramasFormacion = useForm({
+        nombre: '',
+        codigo: '',
+        modalidad: '',
+        nivel_formacion: '',
+        registro_calificado: true,
+        centro_formacion_id: ta.proyecto.centro_formacion_id,
+    })
+    function submitProgramasFormacion() {
+        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+            $formProgramasFormacion.post(route('convocatorias.proyectos.programas-formacion.store', [convocatoria.id, ta.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => ((sending = false), ((programasFormacionDialogOpen = false), $formProgramasFormacion.reset())),
+                preserveScroll: true,
+            })
         }
     }
 
@@ -205,7 +219,7 @@
         if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $formDisCurricular.post(route('convocatorias.proyectos.dis-curriculares.store', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), (disCurricularDialogOpen = false)),
                 preserveScroll: true,
             })
         }
@@ -467,18 +481,14 @@
                     <Label required class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
-                    {#if programasFormacionArticular?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
+                    <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
+                    <InfoMessage>
+                        Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
+                        <br />
+                        Por último busque nuevamente en la lista y selecciona el programa recién creado.
+                        <br />
+                        <Button on:click={(event) => (programasFormacionDialogOpen = true)} variant="raised" type="button">Añadir programa de formación</Button>
+                    </InfoMessage>
                 </div>
             </div>
 
@@ -554,6 +564,39 @@
             {/if}
         </div>
     </form>
+
+    <Dialog bind:open={programasFormacionDialogOpen} id="programas-formacion">
+        <div slot="content">
+            <form on:submit|preventDefault={submitProgramasFormacion} id="programas-formacion-form">
+                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
+                    <div class="mt-4">
+                        <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$formProgramasFormacion.nombre} error={errors.nombre} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Input label="Código" id="codigo" type="number" input$min="0" input$max="2147483647" class="mt-1" bind:value={$formProgramasFormacion.codigo} error={errors.codigo} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="modalidad" value="Modalidad de estudio" />
+                        <Select id="modalidad" items={modalidades} bind:selectedValue={$formProgramasFormacion.modalidad} error={errors.modalidad} autocomplete="off" placeholder="Seleccione una modalidad de estudio" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="nivel_formacion" value="Nivel de formación" />
+                        <Select id="nivel_formacion" items={nivelesFormacion} bind:selectedValue={$formProgramasFormacion.nivel_formacion} error={errors.nivel_formacion} autocomplete="off" placeholder="Seleccione un nivel de formación" required />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (programasFormacionDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" form="programas-formacion-form">Crear programa</Button>
+            </div>
+        </div>
+    </Dialog>
 
     <Dialog bind:open={disCurricularDialogOpen} id="dis-curricular">
         <div slot="content">

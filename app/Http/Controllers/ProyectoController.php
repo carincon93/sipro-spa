@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NuevoProponenteRequest;
+use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
@@ -857,5 +858,31 @@ class ProyectoController extends Controller
     public function downloadManualUsuario()
     {
         return response()->download(storage_path("app/manual-usuario/Manual_de_usuario.pdf"));
+    }
+
+    /**
+     * storeProgramaFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function storeProgramaFormacion(ProgramaFormacionRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $programaFormacion = new ProgramaFormacion();
+        $programaFormacion->nombre              = $request->nombre;
+        $programaFormacion->codigo              = $request->codigo;
+        $programaFormacion->modalidad           = $request->modalidad;
+        $programaFormacion->nivel_formacion     = $request->nivel_formacion;
+        $programaFormacion->centroFormacion()->associate($request->centro_formacion_id);
+
+        $programaFormacion->save();
+
+        if ($proyecto->ta()->exists()) {
+            $proyecto->taProgramasFormacion()->attach($programaFormacion);
+        }
+
+        return back()->with('success', 'El recurso se ha creado correctamente.');
     }
 }

@@ -42,8 +42,10 @@
         fecha_inicio: actividad.fecha_inicio,
         fecha_finalizacion: actividad.fecha_finalizacion,
         proyecto_presupuesto_id: proyectoPresupuestoRelacionado,
-        requiere_rubros: proyectoPresupuestoRelacionado.length > 0 ? { value: 1, label: 'Si' } : { value: 2, label: 'No' },
+        requiere_rubros: proyectoPresupuestoRelacionado.length == 0 ? { value: 2, label: 'No' } : { value: 1, label: 'Si' },
     })
+
+    console.log(proyectoPresupuestoRelacionado.length)
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
