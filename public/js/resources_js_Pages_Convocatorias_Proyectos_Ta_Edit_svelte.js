@@ -7817,9 +7817,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "#main-menu-dialog .mdc-dialog__surface
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -30585,9 +30585,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
+/***/ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
+  !*** ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30598,7 +30598,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_69_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./Edit.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_72_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./Edit.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
 
             
 
@@ -30607,11 +30607,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_69_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_72_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_69_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_72_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -48157,7 +48157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_69_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_69_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.69.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_72_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_72_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.72.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Pages\Convocatorias\Proyectos\Ta\Edit.svelte generated by Svelte v3.38.3 */
 
@@ -48722,13 +48722,13 @@ function create_default_slot_12(ctx) {
 		c() {
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Si no encuentra un programa por favor de clic en ");
 			strong0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong0.textContent = "Añadir programa";
+			strong0.textContent = "Añadir programa de formación";
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(". A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en ");
 			strong1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong1.textContent = "Crear programa";
+			strong1.textContent = "Crear programa de formación";
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(".\r\n                        ");
 			br0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
-			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                        Por último busque nuevamente en la lista y selecciona el programa recién creado.\r\n                        ");
+			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                        Por último busque nuevamente en la lista y seleccione el programa recién creado.\r\n                        ");
 			br1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
 			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(button.$$.fragment);
@@ -48831,7 +48831,7 @@ function create_default_slot_10(ctx) {
 			strong1.textContent = "Crear programa";
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(".\r\n                        ");
 			br0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
-			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                        Por último busque nuevamente en la lista y selecciona el programa recién creado.\r\n                        ");
+			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("\r\n                        Por último busque nuevamente en la lista y seleccione el programa recién creado.\r\n                        ");
 			br1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
 			t6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(button.$$.fragment);
@@ -49272,7 +49272,7 @@ function create_default_slot_7(ctx) {
 
 	return {
 		c() {
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Crear programa");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Crear de formación");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);

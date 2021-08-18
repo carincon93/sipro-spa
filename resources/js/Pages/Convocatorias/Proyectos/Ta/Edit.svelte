@@ -483,9 +483,9 @@
                 <div>
                     <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
                     <InfoMessage>
-                        Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
+                        Si no encuentra un programa por favor de clic en <strong>Añadir programa de formación</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa de formación</strong>.
                         <br />
-                        Por último busque nuevamente en la lista y selecciona el programa recién creado.
+                        Por último busque nuevamente en la lista y seleccione el programa recién creado.
                         <br />
                         <Button on:click={(event) => (programasFormacionDialogOpen = true)} variant="raised" type="button">Añadir programa de formación</Button>
                     </InfoMessage>
@@ -511,7 +511,7 @@
                     <InfoMessage>
                         Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
                         <br />
-                        Por último busque nuevamente en la lista y selecciona el programa recién creado.
+                        Por último busque nuevamente en la lista y seleccione el programa recién creado.
                         <br />
                         <Button on:click={(event) => (disCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
                     </InfoMessage>
@@ -593,7 +593,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (programasFormacionDialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="programas-formacion-form">Crear programa</Button>
+                <Button variant="raised" form="programas-formacion-form">Crear de formación</Button>
             </div>
         </div>
     </Dialog>
