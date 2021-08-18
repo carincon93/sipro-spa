@@ -63,6 +63,7 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let nombreFormulario = ta.proyecto.codigo + 'ta-form'
     let form = useForm({
         centro_formacion_id: ta.proyecto.centro_formacion_id,
         linea_programatica_id: ta.proyecto.linea_programatica_id,
@@ -70,23 +71,23 @@
         fecha_finalizacion: ta.fecha_finalizacion,
         max_meses_ejecucion: ta.max_meses_ejecucion,
         resumen: ta.resumen,
-        resumen_regional: ta.resumen_regional,
+        resumen_regional: localStorage.getItem(nombreFormulario + '.resumen_regional') ? localStorage.getItem(nombreFormulario + '.resumen_regional') : ta.resumen_regional,
         antecedentes: ta.antecedentes,
         justificacion_problema: ta.justificacion_problema,
-        antecedentes_tecnoacademia: ta.antecedentes_tecnoacademia,
-        retos_oportunidades: ta.retos_oportunidades,
-        pertinencia_territorio: ta.pertinencia_territorio,
+        antecedentes_tecnoacademia: localStorage.getItem(nombreFormulario + '.antecedentes_tecnoacademia') ? localStorage.getItem(nombreFormulario + '.antecedentes_tecnoacademia') : ta.antecedentes_tecnoacademia,
+        retos_oportunidades: localStorage.getItem(nombreFormulario + '.retos_oportunidades') ? localStorage.getItem(nombreFormulario + '.retos_oportunidades') : ta.retos_oportunidades,
+        pertinencia_territorio: localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ? localStorage.getItem(nombreFormulario + '.pertinencia_territorio') : ta.pertinencia_territorio,
         marco_conceptual: ta.marco_conceptual,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
         municipios_impactar: proyectoMunicipiosImpactar.length > 0 ? proyectoMunicipiosImpactar : null,
-        impacto_municipios: ta.impacto_municipios,
+        impacto_municipios: localStorage.getItem(nombreFormulario + '.impacto_municipios') ? localStorage.getItem(nombreFormulario + '.impacto_municipios') : ta.impacto_municipios,
         nombre_instituciones: ta.nombre_instituciones,
         nombre_instituciones_programas: ta.nombre_instituciones_programas,
         nuevas_instituciones: ta.nuevas_instituciones,
-        articulacion_centro_formacion: ta.articulacion_centro_formacion,
-        proyectos_macro: ta.proyectos_macro,
-        lineas_medulares_centro: ta.lineas_medulares_centro,
-        lineas_tecnologicas_centro: ta.lineas_tecnologicas_centro,
+        articulacion_centro_formacion: localStorage.getItem(nombreFormulario + '.articulacion_centro_formacion') ? localStorage.getItem(nombreFormulario + '.articulacion_centro_formacion') : ta.articulacion_centro_formacion,
+        proyectos_macro: localStorage.getItem(nombreFormulario + '.proyectos_macro') ? localStorage.getItem(nombreFormulario + '.proyectos_macro') : ta.proyectos_macro,
+        lineas_medulares_centro: localStorage.getItem(nombreFormulario + '.lineas_medulares_centro') ? localStorage.getItem(nombreFormulario + '.lineas_medulares_centro') : ta.lineas_medulares_centro,
+        lineas_tecnologicas_centro: localStorage.getItem(nombreFormulario + '.lineas_tecnologicas_centro') ? localStorage.getItem(nombreFormulario + '.lineas_tecnologicas_centro') : ta.lineas_tecnologicas_centro,
         proyeccion_nuevas_instituciones: {
             value: ta.proyeccion_nuevas_instituciones,
             label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_instituciones)?.label,
@@ -95,7 +96,7 @@
             value: ta.proyeccion_articulacion_media,
             label: opcionesSiNo.find((item) => item.value == ta.proyeccion_articulacion_media)?.label,
         },
-        bibliografia: ta.bibliografia,
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : ta.bibliografia,
         tecnoacademia_id: {
             value: tecnoacademiaRelacionada,
             label: tecnoAcademias.find((item) => item.value == tecnoacademiaRelacionada)?.label,
@@ -151,11 +152,37 @@
         getLineasTecnoacademia()
     })
 
+    let count =
+        localStorage.getItem(nombreFormulario + '.resumen_regional') ||
+        localStorage.getItem(nombreFormulario + '.antecedentes_tecnoacademia') ||
+        localStorage.getItem(nombreFormulario + '.retos_oportunidades') ||
+        localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ||
+        localStorage.getItem(nombreFormulario + '.impacto_municipios') ||
+        localStorage.getItem(nombreFormulario + '.articulacion_centro_formacion') ||
+        localStorage.getItem(nombreFormulario + '.proyectos_macro') ||
+        localStorage.getItem(nombreFormulario + '.lineas_medulares_centro') ||
+        localStorage.getItem(nombreFormulario + '.lineas_tecnologicas_centro') ||
+        localStorage.getItem(nombreFormulario + '.bibliografia')
+            ? 1
+            : 0
+
+    function clearLocalStorage() {
+        localStorage.removeItem(nombreFormulario + '.resumen_regional')
+        localStorage.removeItem(nombreFormulario + '.antecedentes_tecnoacademia')
+        localStorage.removeItem(nombreFormulario + '.retos_oportunidades')
+        localStorage.removeItem(nombreFormulario + '.pertinencia_territorio')
+        localStorage.removeItem(nombreFormulario + '.impacto_municipios')
+        localStorage.removeItem(nombreFormulario + '.articulacion_centro_formacion')
+        localStorage.removeItem(nombreFormulario + '.proyectos_macro')
+        localStorage.removeItem(nombreFormulario + '.lineas_medulares_centro')
+        localStorage.removeItem(nombreFormulario + '.lineas_tecnologicas_centro')
+        localStorage.removeItem(nombreFormulario + '.bibliografia')
+    }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $form.put(route('convocatorias.ta.update', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
                 preserveScroll: true,
             })
         }
@@ -326,7 +353,7 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
                 </div>
             </div>
 
@@ -349,7 +376,7 @@
                     <Label required class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$form.antecedentes_tecnoacademia} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$form.antecedentes_tecnoacademia} required />
                 </div>
             </div>
 
@@ -369,7 +396,7 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
                 </div>
             </div>
 
@@ -378,7 +405,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
                 </div>
             </div>
 
@@ -417,7 +444,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -497,7 +524,7 @@
                     <Label required class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$form.articulacion_centro_formacion} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$form.articulacion_centro_formacion} required />
                 </div>
             </div>
 
@@ -523,7 +550,7 @@
                     <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$form.proyectos_macro} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="proyectos_macro" error={errors.proyectos_macro} bind:value={$form.proyectos_macro} required />
                 </div>
             </div>
 
@@ -532,7 +559,7 @@
                     <Label required class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$form.lineas_medulares_centro} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$form.lineas_medulares_centro} required />
                 </div>
             </div>
 
@@ -541,7 +568,7 @@
                     <Label required class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$form.lineas_tecnologicas_centro} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$form.lineas_tecnologicas_centro} required />
                 </div>
             </div>
 
@@ -551,16 +578,18 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <small>{ta.updated_at}</small>
+                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

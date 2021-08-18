@@ -57,11 +57,12 @@
         { value: 2, label: 'No' },
     ]
 
+    let nombreFormulario = culturaInnovacion.proyecto.codigo + 'cultura-innovacion-form'
     let lineasTecnologicas = []
     let tieneVideo = culturaInnovacion.video != null
-    let requiereJustificacionIndustria4 = culturaInnovacion.justificacion_industria_4 != null
-    let requiereJustificacionEconomiaNaranja = culturaInnovacion.justificacion_economia_naranja != null
-    let requiereJustificacionPoliticaDiscapacidad = culturaInnovacion.justificacion_politica_discapacidad != null
+    let requiereJustificacionIndustria4 = localStorage.getItem(nombreFormulario + '.justificacion_industria_4') ? localStorage.getItem(nombreFormulario + '.justificacion_industria_4') : culturaInnovacion.justificacion_industria_4 != null
+    let requiereJustificacionEconomiaNaranja = localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') ? localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') : culturaInnovacion.justificacion_economia_naranja != null
+    let requiereJustificacionPoliticaDiscapacidad = localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') ? localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') : culturaInnovacion.justificacion_politica_discapacidad != null
 
     let form = useForm({
         centro_formacion_id: culturaInnovacion.proyecto?.centro_formacion_id,
@@ -70,24 +71,24 @@
         tematica_estrategica_id: culturaInnovacion.tematica_estrategica_id,
         linea_programatica_id: culturaInnovacion.proyecto?.linea_programatica_id,
         actividad_economica_id: culturaInnovacion.actividad_economica_id,
-        titulo: culturaInnovacion.titulo,
+        titulo: localStorage.getItem(nombreFormulario + '.titulo') ? localStorage.getItem(nombreFormulario + '.titulo') : culturaInnovacion.titulo,
         fecha_inicio: culturaInnovacion.fecha_inicio,
         fecha_finalizacion: culturaInnovacion.fecha_finalizacion,
         max_meses_ejecucion: culturaInnovacion.max_meses_ejecucion,
         video: culturaInnovacion.video,
-        justificacion_industria_4: culturaInnovacion.justificacion_industria_4,
-        justificacion_economia_naranja: culturaInnovacion.justificacion_economia_naranja,
-        justificacion_politica_discapacidad: culturaInnovacion.justificacion_politica_discapacidad,
-        resumen: culturaInnovacion.resumen,
-        antecedentes: culturaInnovacion.antecedentes,
-        marco_conceptual: culturaInnovacion.marco_conceptual,
-        bibliografia: culturaInnovacion.bibliografia,
+        justificacion_industria_4: localStorage.getItem(nombreFormulario + '.justificacion_industria_4') ? localStorage.getItem(nombreFormulario + '.justificacion_industria_4') : culturaInnovacion.justificacion_industria_4,
+        justificacion_economia_naranja: localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') ? localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') : culturaInnovacion.justificacion_economia_naranja,
+        justificacion_politica_discapacidad: localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') ? localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') : culturaInnovacion.justificacion_politica_discapacidad,
+        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : culturaInnovacion.resumen,
+        antecedentes: localStorage.getItem(nombreFormulario + '.antecedentes') ? localStorage.getItem(nombreFormulario + '.antecedentes') : culturaInnovacion.antecedentes,
+        marco_conceptual: localStorage.getItem(nombreFormulario + '.marco_conceptual') ? localStorage.getItem(nombreFormulario + '.marco_conceptual') : culturaInnovacion.marco_conceptual,
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : culturaInnovacion.bibliografia,
         numero_aprendices: culturaInnovacion.numero_aprendices,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
         programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
-        impacto_municipios: culturaInnovacion.impacto_municipios,
-        impacto_centro_formacion: culturaInnovacion.impacto_centro_formacion,
+        impacto_municipios: localStorage.getItem(nombreFormulario + '.impacto_municipios') ? localStorage.getItem(nombreFormulario + '.impacto_municipios') : culturaInnovacion.impacto_municipios,
+        impacto_centro_formacion: localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') ? localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') : culturaInnovacion.impacto_centro_formacion,
         muestreo: culturaInnovacion.muestreo,
         actividades_muestreo: culturaInnovacion.actividades_muestreo,
         objetivo_muestreo: culturaInnovacion.objetivo_muestreo,
@@ -133,6 +134,38 @@
         $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
 
+    let count =
+        localStorage.getItem(nombreFormulario + '.justificacion_industria_4') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') ||
+        localStorage.getItem(nombreFormulario + '.titulo') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_industria_4') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_economia_naranja') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_politica_discapacidad') ||
+        localStorage.getItem(nombreFormulario + '.resumen') ||
+        localStorage.getItem(nombreFormulario + '.antecedentes') ||
+        localStorage.getItem(nombreFormulario + '.marco_conceptual') ||
+        localStorage.getItem(nombreFormulario + '.bibliografia') ||
+        localStorage.getItem(nombreFormulario + '.impacto_municipios') ||
+        localStorage.getItem(nombreFormulario + '.impacto_centro_formacion')
+            ? 1
+            : 0
+
+    function clearLocalStorage() {
+        localStorage.removeItem(nombreFormulario + '.justificacion_industria_4')
+        localStorage.removeItem(nombreFormulario + '.justificacion_economia_naranja')
+        localStorage.removeItem(nombreFormulario + '.justificacion_politica_discapacidad')
+        localStorage.removeItem(nombreFormulario + '.titulo')
+        localStorage.removeItem(nombreFormulario + '.justificacion_industria_4')
+        localStorage.removeItem(nombreFormulario + '.justificacion_economia_naranja')
+        localStorage.removeItem(nombreFormulario + '.justificacion_politica_discapacidad')
+        localStorage.removeItem(nombreFormulario + '.resumen')
+        localStorage.removeItem(nombreFormulario + '.antecedentes')
+        localStorage.removeItem(nombreFormulario + '.marco_conceptual')
+        localStorage.removeItem(nombreFormulario + '.bibliografia')
+        localStorage.removeItem(nombreFormulario + '.impacto_municipios')
+        localStorage.removeItem(nombreFormulario + '.impacto_centro_formacion')
+    }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
@@ -142,7 +175,7 @@
 
             $form.put(route('convocatorias.cultura-innovacion.update', [convocatoria.id, culturaInnovacion.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
                 preserveScroll: true,
             })
         }
@@ -201,7 +234,7 @@
         <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
-                <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea label="Título" localStorageForm={nombreFormulario} bind:count id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -309,7 +342,7 @@
 
                     {#if requiereJustificacionIndustria4}
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+                        <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -324,7 +357,7 @@
                     </div>
                     {#if requiereJustificacionEconomiaNaranja}
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
+                        <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -339,7 +372,7 @@
                     </div>
                     {#if requiereJustificacionPoliticaDiscapacidad}
                         <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
+                        <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
                     {/if}
                 </div>
             </div>
@@ -616,7 +649,7 @@
                     <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea label="Resumen" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -626,7 +659,7 @@
                     <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
                 </div>
                 <div>
-                    <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea label="Antecedentes" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
@@ -636,7 +669,7 @@
                     <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                 </div>
                 <div>
-                    <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    <Textarea label="Marco conceptual" maxlength="20000" localStorageForm={nombreFormulario} bind:count id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                 </div>
             </div>
 
@@ -674,7 +707,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea label="Descripción" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -683,7 +716,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea label="Descripción" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
                 </div>
             </div>
 
@@ -733,16 +766,18 @@
                     <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea label="Bibliografía" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <small>{culturaInnovacion.updated_at}</small>
+                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
