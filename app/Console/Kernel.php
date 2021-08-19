@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CrudGenerator::class,
-        Commands\generatePdfProject::class,
+        Commands\GeneratePdfProject::class,
     ];
 
     /**
@@ -27,7 +27,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('versioning:project')
                  ->everyMinute()
-                 ->timezone('America/Bogota')
                  ->withoutOverlapping();
     }
 

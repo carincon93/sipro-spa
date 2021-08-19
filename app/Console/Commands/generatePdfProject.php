@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PdfController;
 use App\Models\ProyectoPdfVersion;
 
-class generatePdfProject extends Command
+class GeneratePdfProject extends Command
 {
     /**
      * The name and signature of the console command.
