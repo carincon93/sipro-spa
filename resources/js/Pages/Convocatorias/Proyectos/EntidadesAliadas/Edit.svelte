@@ -30,7 +30,6 @@
     export let tiposEntidadAliada
     export let naturalezaEntidadAliada
     export let tiposEmpresa
-    export let infraestructuraTecnoacademia
 
     $: $title = entidadAliada ? entidadAliada.nombre : null
 
@@ -65,10 +64,6 @@
         carta_propiedad_intelectual: null,
         actividad_id: actividadesRelacionadas,
         soporte_convenio: null,
-        infraestructura_tecnoacademia: {
-            value: entidadAliada.entidad_aliada_ta?.infraestructura_tecnoacademia,
-            label: infraestructuraTecnoacademia.find((item) => item.value == entidadAliada.entidad_aliada_ta?.infraestructura_tecnoacademia)?.label,
-        },
         fecha_inicio_convenio: entidadAliada.entidad_aliada_ta?.fecha_inicio_convenio,
         fecha_fin_convenio: entidadAliada.entidad_aliada_ta?.fecha_fin_convenio,
     })
