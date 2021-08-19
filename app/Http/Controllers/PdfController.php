@@ -56,7 +56,6 @@ class PdfController extends Controller
             $base64GantProductos = PdfController::takeScreenshot(route('convocatorias.proyectos.productos.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
             $base64GantActividades = PdfController::takeScreenshot(route('convocatorias.proyectos.actividades.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
             $base64CadenaValor = PdfController::takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '#orgchart_div');
-
             
             $pdf = PDF::loadView('Convocatorias.Proyectos.ResumenPdf', [
                 'convocatoria' => $convocatoria, 
@@ -72,6 +71,9 @@ class PdfController extends Controller
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
                 'tiposImpacto'    => collect(json_decode(Storage::get('json/tipos-impacto.json'), true)),
                 'estadosInventarioEquipos'  => collect(json_decode(Storage::get('json/estados-inventario-equipos.json'), true)),
+                'tiposLicencia'             => collect(json_decode(Storage::get('json/tipos-licencia-software.json'), true)),
+                'opcionesServiciosEdicion'  => collect(json_decode(Storage::get('json/opciones-servicios-edicion.json'), true)),
+                'tiposSoftware'             => collect(json_decode(Storage::get('json/tipos-software.json'), true))
                 ]);
             if ($save==false) {
                 return $pdf->stream('Proyecto '.$proyecto->id.' - SIPRO-SPA.pdf');

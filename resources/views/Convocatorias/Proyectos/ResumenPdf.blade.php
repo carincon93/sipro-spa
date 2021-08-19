@@ -668,8 +668,125 @@
          <div class="rotate90">
             <img class="" src="data:image/png;base64,{{$base64Arbolobjetivos}}" alt="Árbol de objetivos" width="100%">
          </div>
+         <div class="page_break">
+            <p class="title" style="text-align: center;">Presupuesto ${{number_format($proyecto->total_proyecto_presupuesto, 0, ",", ".")}} COP</p>
+            @foreach($proyecto->proyectoPresupuesto as $presupuesto)
+            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+               <tbody slot="tbody">
+                  <tr>
+                      <th colspan="3" class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Información</th>
+                  </tr>
+                  <tr>
+                     <td>
+                        <div class="mt-3">
+                          <small>Concepto interno SENA</small>
+                          <p>
+                              {{$presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre}}
+                          </p>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="mt-3">
+                          <small>Rubro</small>
+                          <p>
+                              {{$presupuesto->convocatoriaPresupuesto->presupuestoSennova->tercerGrupoPresupuestal->nombre}}
+                          </p>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="mt-3">
+                          <small>Uso presupuestal</small>
+                          <p>
+                              {{$presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->descripcion}}
+                          </p>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th colspan="2" class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Subtotal del costo de los productos o servicios requeridos</th>
+                     <td class="border-t">
+                        ${{number_format($presupuesto->valor_total, 0, ",", ".")}} COP
+                     </td>
+                  </tr>
+                  @if($proyecto->en_subsanacion)
+                  <tr>
+                     <th colspan="3" class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluación</th>
+                  </tr>
+                  <tr>
+                     <td colspan="3" class="border-t">
+                         <div class="px-6 py-4">
+                             @if($presupuesto->presupuesto_aprobado)
+                                 Aprobado
+                             @else
+                                 Reprobado
+                             @endif
+                         </div>
+                     </td>
+                  </tr>
+                  @endif
+                  <tr>
+                     <td colspan="3">
+                        <p class="title">Descripción</p>
+                        <p>{{$presupuesto->descripcion}}</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="3">
+                        <p class="title">Justificación</p>
+                        <p>{{$presupuesto->justificacion}}</p>
+                     </td>
+                  </tr>
+                  @if($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado || $presupuesto->codigo_uso_presupuestal == '020202008005096')
+                  <tr>
+                     <td colspan="3">Archivos</td>
+                  </tr>
+                  <tr>
+                     <td colspan="3">
+                        <ul>
+                           @foreach($presupuesto->soportesEstudioMercado as $soporte)
+                           <li>
+                              @if($presupuesto->formato_estudio_mercado)
+                              {{$soporte->empresa}}
+                              @endif
+                              <a href="">{{route('convocatorias.proyectos.presupuesto.download', [$convocatoria->id, $proyecto->id, $presupuesto->id])}}</a>
+                           </li>
+                           @endforeach
+                        </ul>
+                     </td>
+                  </tr>
+                  @endif
+                  @if($presupuesto->codigo_uso_presupuestal == '2010100600203101' || !empty($presupuesto->softwareInfo))
+                  <tr>
+                     <td colspan="3">Información del Software</td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p class="title">Tipo de licencia</p>
+                        <p>{{($tiposLicencia->where('value',$presupuesto->softwareInfo->tipo_licencia)->first())?$tiposLicencia->where('value',$presupuesto->softwareInfo->tipo_licencia)->first()['label']:''}}</p>
+                     </td>
+                     <td>
+                        <p class="title">Tipo de software</p>
+                        <p>{{($tiposSoftware->where('value',$presupuesto->softwareInfo->tipo_software)->first())?$tiposSoftware->where('value',$presupuesto->softwareInfo->tipo_software)->first()['label']:''}}</p>
+                     </td>
+                     <td>
+                        <p class="title">Fecha de inicio y fin</p>
+                        <p>desde: {{$presupuesto->softwareInfo->fecha_inicio}}{{(!empty($presupuesto->softwareInfo->fecha_finalizacion))?' al '.$presupuesto->softwareInfo->fecha_finalizacion:''}}</p>
+                     </td>
+                  </tr>
+                  @endif
+                  @if($presupuesto->codigo_uso_presupuestal == '2020200800901' || !empty($presupuesto->servicioEdicionInfo))
+                  <tr>
+                     <td><b>Nodo editorial</b></td>
+                     <td colspan="2">{{$presupuesto->servicioEdicionInfo->info}}</td>
+                  </tr>
+                  @endif
+               </tbody>
+            </table>
+            @endforeach
+         </div>
+         <div class="page_break"></div>
          @if(!empty($datos->planteamiento_problema))
-         <div class="border page_break">
+         <div class="border">
             <p class="title">Planteamiento del problema</p>
             <p>{{$datos->planteamiento_problema}}</p>
          </div>
@@ -691,18 +808,21 @@
             </tr>
          </table>
          @foreach($proyecto->efectosDirectos as $efeDir)
-         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table width="100%" cellspacing="0" cellpadding="3" style="border-top: none;">
             <tr>
-               <td class="title" width="15%">EFE-{{$efeDir->id}}</td>
-               <td colspan="{{($efeDir->efectosindirectos()->count()>=2)?$efeDir->efectosindirectos()->count()-1:''}}">{{$efeDir->descripcion}}</td>
+               <td style="border: 1px solid black !important;" class="title" width="15%">EFE-{{$efeDir->id}}</td>
+               <td style="border: 1px solid black !important;" colspan="2">{{$efeDir->descripcion}}</td>
             </tr>
                <tr>
                   @foreach($efeDir->efectosindirectos as $efeind)
-                  <td width="{{100/$efeDir->efectosindirectos()->count()}}%" valign="top">
+                  <td width="33%" valign="top" style="border: 1px solid black !important;">
                      <span class="title">Efecto indirecto EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</span>
                      <br>{{$efeind->descripcion}}
                   </td>
                   @endforeach
+                  @for($i=0; $i<=(2-$efeDir->efectosindirectos()->count()); $i++)
+                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
+                  @endfor
                </tr>
          </table>
          @endforeach
@@ -716,15 +836,18 @@
          <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
             <tr>
                <td class="title" width="15%">CAU-{{$cauDir->id}}</td>
-               <td colspan="{{($cauDir->causasindirectas()->count()>=2)?$cauDir->causasindirectas()->count()-1:''}}">{{$cauDir->descripcion}}</td>
+               <td colspan="2">{{$cauDir->descripcion}}</td>
             </tr>
                <tr>
                   @foreach($cauDir->causasindirectas as $cauind)
-                  <td width="{{100/$cauDir->causasindirectas()->count()}}%" valign="top">
+                  <td width="33%" valign="top">
                      <span class="title">Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</span>
                      <br>{{$cauind->descripcion}}
                   </td>
                   @endforeach
+                  @for($i=0; $i<=(2-$cauDir->causasindirectas()->count()); $i++)
+                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
+                  @endfor
                </tr>
          </table>
          @endforeach
@@ -741,11 +864,11 @@
                   <span class="title">OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}</span><br>
                   <small>Causa Directa: CAU-{{$cauDir->id}}</small>
                </td>
-               <td colspan="{{($cauDir->causasindirectas()->count()>=2)?$cauDir->causasindirectas()->count()-1:''}}">{{$cauDir->objetivoEspecifico->descripcion}}</td>
+               <td colspan="2">{{$cauDir->objetivoEspecifico->descripcion}}</td>
             </tr>
                <tr>
                   @foreach($cauDir->causasindirectas as $cauind)
-                  <td width="{{100/$cauDir->causasindirectas()->count()}}%" valign="top">
+                  <td width="33%" valign="top">
                      <span class="mb-3">
                         <span class="title">Actividad: OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}-ACT-{{$cauind->actividad->id}}</span><br>
                         <small>Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</small><br>
@@ -755,6 +878,9 @@
                      <br>{{$cauind->actividad->descripcion}}
                   </td>
                   @endforeach
+                  @for($i=0; $i<=(2-$cauDir->causasindirectas()->count()); $i++)
+                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
+                  @endfor
                </tr>
          </table>
          @endforeach
@@ -772,13 +898,13 @@
                   <span class="title">RES-{{$resultado->id}}</span><br>
                   <small>Efecto directo: EFE-{{$efeDir->id}}</small>
                   </td>
-                  <td colspan="{{($efeDir->efectosindirectos()->count()>=2)?$efeDir->efectosindirectos()->count()-1:''}}">
+                  <td colspan="2">
                   {{$resultado->descripcion}}
                   </td>
                </tr>
                   <tr>
                      @foreach($efeDir->efectosindirectos as $efeind)
-                     <td width="{{100/$efeDir->efectosindirectos()->count()}}%" valign="top">
+                     <td width="33%" valign="top">
                         <span class="mb-3">
                            <span class="title">RES-{{$resultado->id}}-IMP-{{$efeind->impacto->id}}</span><br>
                            <small>Efecto indirecto: EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</small>
@@ -788,6 +914,9 @@
                         {{$efeind->impacto->descripcion}}
                      </td>
                      @endforeach
+                     @for($i=0; $i<=(2-$efeDir->efectosindirectos()->count()); $i++)
+                     <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
+                     @endfor
                   </tr>
             </table>
             @endforeach
