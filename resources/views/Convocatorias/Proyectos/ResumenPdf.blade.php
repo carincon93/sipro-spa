@@ -526,6 +526,13 @@
             <p>{{$datos->propuesta_sostenibilidad}}</p>
          </div>
          @endif
+
+         @if(!empty($datos->zona_influencia))
+         <div class="border">
+            <p class="title">Zona de influencia</p>
+            <p>{{$datos->zona_influencia}}</p>
+         </div>
+         @endif
          <div class="border">
             <p class="title">Bibliografía</p>
             <p>{{$datos->bibliografia}}</p>
