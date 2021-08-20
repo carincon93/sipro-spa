@@ -35,7 +35,7 @@
         tipo_documento: '',
         numero_documento: '',
         numero_celular: '',
-        habilitado: '',
+        habilitado: true,
         tipo_vinculacion: '',
         centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21]) ? authUser.centro_formacion_id : null,
         role_id: [],
