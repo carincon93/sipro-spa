@@ -516,9 +516,9 @@ class Proyecto extends Model
         $total = round($this->getMetaAprendicesAttribute() * $valorAprendiz);
 
         if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 18) {
-            $total = 32098065;
+            $total = 32098065 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
         } else if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 16) {
-            $total = 23174417;
+            $total = 23174417 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
         }
 
         return $total;
