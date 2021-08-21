@@ -65,14 +65,6 @@
                 $form.numero_meses = proyecto.max_meses_ejecucion
             }
         }
-
-        if (proyecto.codigo_linea_programatica == 70) {
-            if (($form.convocatoria_rol_sennova_id == 51 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 52 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 53 && proyecto.diff_meses >= 11)) {
-                diff_meses = 11
-            } else {
-                diff_meses = proyecto.diff_meses
-            }
-        }
     }
 
     $: if (infoRolSennova?.perfil != null) {
