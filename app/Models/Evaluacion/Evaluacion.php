@@ -32,7 +32,9 @@ class Evaluacion extends Model
         'proyecto_id',
         'user_id',
         'finalizado',
-        'habilitado'
+        'habilitado',
+        'iniciado',
+        'clausula_confidencialidad',
     ];
 
     /**

@@ -381,54 +381,59 @@ class EntidadAliadaController extends Controller
             return redirect()->route('convocatorias.evaluaciones.analisis-riesgos', [$convocatoria, $evaluacion->proyecto])->with('error', 'Esta línea programática no requiere de entidades aliadas');
         }
 
-        if ($evaluacion->proyecto->codigo_linea_programatica == 66) {
-            $puntaje = 0;
-            $tipo = '';
-            $detener = false;
-            foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
-                if ($entidadAliada->tipo == 'Universidad' || $entidadAliada->tipo == 'Centro de formación SENA') {
-                    // Universidad / Centro de formación SENA
-                    $puntaje = 5;
-                    $detener = true;
-                    $tipo = $entidadAliada->tipo;
-                } else if ($entidadAliada->tipo == 'Empresa' && $detener == false || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' && $detener == false || $entidadAliada->tipo == 'Otra' && $detener == false) {
-                    // Empresa / Entidades sin ánimo de lucro / Otra
-                    $puntaje = 2.5;
-                    $tipo = $entidadAliada->tipo;
+        $tipo = 'Sin información';
+        if ($evaluacion->idiEvaluacion()->exists() && $evaluacion->idiEvaluacion->entidad_aliada_verificada) {
+            if ($evaluacion->proyecto->codigo_linea_programatica == 66) {
+                $puntaje = 0;
+                $tipo = '';
+                $detener = false;
+                foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
+                    if ($entidadAliada->tipo == 'Universidad' || $entidadAliada->tipo == 'Centro de formación SENA') {
+                        // Universidad / Centro de formación SENA
+                        $puntaje = 5;
+                        $detener = true;
+                        $tipo = $entidadAliada->tipo;
+                    } else if ($entidadAliada->tipo == 'Empresa' && $detener == false || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' && $detener == false || $entidadAliada->tipo == 'Otra' && $detener == false) {
+                        // Empresa / Entidades sin ánimo de lucro / Otra
+                        $puntaje = 2.5;
+                        $tipo = $entidadAliada->tipo;
+                    }
                 }
+
+                $evaluacion->idiEvaluacion()->update([
+                    'entidad_aliada_puntaje' => $puntaje
+                ]);
+            } else if ($evaluacion->proyecto->codigo_linea_programatica == 82) {
+                $puntaje = 0;
+                $tipo = '';
+                $detener = false;
+                foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
+                    if ($entidadAliada->tipo == 'Empresa' || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' || $entidadAliada->tipo == 'Otra' || $entidadAliada->tipo == 'Centro de formación SEN') {
+                        // Empresa / Entidades sin ánimo de lucro / Otra / Centro de formación SENA
+                        $puntaje = 5;
+                        $detener = true;
+                        $tipo = $entidadAliada->tipo;
+                    } else if ($entidadAliada->tipo == 'Universidad' && $detener == false) {
+                        // Universidad 
+                        $puntaje = 2.5;
+                        $tipo = $entidadAliada->tipo;
+                    }
+                }
+
+                $evaluacion->idiEvaluacion()->update([
+                    'entidad_aliada_puntaje' => $puntaje
+                ]);
             }
 
-            $evaluacion->idiEvaluacion()->update([
-                'entidad_aliada_puntaje' => $puntaje
-            ]);
-        } else if ($evaluacion->proyecto->codigo_linea_programatica == 82) {
-            $puntaje = 0;
-            $tipo = '';
-            $detener = false;
-            foreach ($evaluacion->proyecto->entidadesAliadas as $entidadAliada) {
-                if ($entidadAliada->tipo == 'Empresa' || $entidadAliada->tipo == 'Entidades sin ánimo de lucro' || $entidadAliada->tipo == 'Otra' || $entidadAliada->tipo == 'Centro de formación SEN') {
-                    // Empresa / Entidades sin ánimo de lucro / Otra / Centro de formación SENA
-                    $puntaje = 5;
-                    $detener = true;
-                    $tipo = $entidadAliada->tipo;
-                } else if ($entidadAliada->tipo == 'Universidad' && $detener == false) {
-                    // Universidad 
-                    $puntaje = 2.5;
-                    $tipo = $entidadAliada->tipo;
-                }
-            }
-
-            $evaluacion->idiEvaluacion()->update([
-                'entidad_aliada_puntaje' => $puntaje
-            ]);
+            $evaluacion->entidad_aliada_puntaje = $puntaje;
+        } else {
+            $evaluacion->entidad_aliada_puntaje = 0;
         }
-
-        $evaluacion->entidad_aliada_puntaje = $puntaje;
 
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id'),
             'evaluacion'        => $evaluacion,
-            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'tipoEntidad'       => $tipo,
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
@@ -470,6 +475,18 @@ class EntidadAliadaController extends Controller
             'tiposEmpresa'                      => json_decode(Storage::get('json/tipos-empresa.json'), true),
             'infraestructuraTecnoacademia'      => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
         ]);
+    }
+
+
+    public function validarEntidadAliada(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, EntidadAliada $entidadAliada)
+    {
+        if ($evaluacion->idiEvaluacion()->exists()) {
+            $evaluacion->idiEvaluacion()->update([
+                'entidad_aliada_verificada' => $request->entidad_aliada_verificada
+            ]);
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

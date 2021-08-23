@@ -1,7 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
@@ -19,6 +18,7 @@
     import Switch from '@/Shared/Switch'
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
+    import Checkbox from '@smui/checkbox'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
 
@@ -48,7 +48,7 @@
     let municipios
     let programasFormacion
     let programasFormacionArticular
-    let proyectoDialogOpen = true
+    let proyectoDialogOpen = idiEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
     let sending = false
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
@@ -137,6 +137,7 @@
     })
 
     let form = useForm({
+        clausula_confidencialidad: idiEvaluacion.evaluacion.clausula_confidencialidad,
         titulo_puntaje: idiEvaluacion.titulo_puntaje,
         titulo_comentario: idiEvaluacion.titulo_comentario,
         titulo_requiere_comentario: idiEvaluacion.titulo_comentario == null ? false : true,
@@ -1001,8 +1002,20 @@
             </div>
         </InfoMessage>
 
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true && idiEvaluacion.evaluacion.finalizado == false && idiEvaluacion.evaluacion.habilitado == true)}
+                {#if $form.clausula_confidencialidad}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
+                {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
+                {/if}
+
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -1017,28 +1030,16 @@
         </div>
         <div slot="content">
             <div>
-                <h1 class="text-center mt-4 mb-4">Evaluación</h1>
-                <p class="text-center mb-4">Realice la evaluacion cuantitativa de los siguientes ítems:</p>
-                <ul class="list-disc">
-                    <li>Título</li>
-                    <li>Video</li>
-                    <li>Resumen</li>
-                    <li>Antecedentes, árbol de problemas, identificación y descripción del problema, justificación y marco conceptual</li>
-                    <li>Árbol de objetivos, objetivo genral y objetivos específicos</li>
-                    <li>Metodología y actividades</li>
-                    <li>Resultados esperados</li>
-                    <li>Productos esperados</li>
-                    <li>Impactos, propuesta de sostenibilidad y la cadena de valor</li>
-                    <li>Análisis de riesgos</li>
-                    <li>Ortografía</li>
-                    <li>Redacción</li>
-                    <li>Normas APA</li>
-                </ul>
+                <h1 class="text-center mt-4 mb-4">Cláusula de confidencialidad</h1>
+                <p class="mb-4">
+                    Al hacer clic en el botón Aceptar, dejo constancia del tratamiento confidencial que daré a la información relacionada con el proceso de evaluación que incluye, sin limitarse a esta, la información sobre proyectos, centros de formación, formuladores, autores y coautores de proyectos, resultados del proceso de evaluación en sus dos etapas. Por tanto, declaro que me abstendré de
+                    usar o divulgar para cualquier fin y por cualquier medio la información enunciada.
+                </p>
             </div>
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Continuar</Button>
+                <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

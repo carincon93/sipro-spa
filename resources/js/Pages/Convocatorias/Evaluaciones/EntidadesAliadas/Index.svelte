@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -11,6 +11,8 @@
     import DataTable from '@/Shared/DataTable'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Switch from '@/Shared/Switch'
+    import LoadingButton from '@/Shared/LoadingButton'
 
     export let convocatoria
     export let evaluacion
@@ -25,6 +27,20 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let sending = false
+    let form = useForm({
+        entidad_aliada_verificada: evaluacion.idi_evaluacion.entidad_aliada_verificada,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
+            $form.put(route('convocatorias.evaluaciones.entidades-aliadas.verificar', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -90,15 +106,28 @@
 
     <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
     <InfoMessage>
-        El puntaje se asigna automáticamente.
-        <br />
-        <strong>Puntaje:</strong>
-        {evaluacion.entidad_aliada_puntaje}
-        <br />
-        <strong>Tipo de entidad aliada:</strong>
-        {tipoEntidad ? tipoEntidad : 'No hay una entidad aliada registrada'}
-        <br />
-        <strong>Código dependencia presupuestal (SIIF):</strong>
-        {proyecto.codigo_linea_programatica}
+        <form on:submit|preventDefault={submit}>
+            <div class="mt-4">
+                <p>¿Las entidades aliadas son válidas?</p>
+                <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.entidad_aliada_verificada} />
+            </div>
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
+                <div class="px-8 py-4 border-t border-gray-200 flex items-center sticky bottom-0">
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                </div>
+            {/if}
+        </form>
+        {#if evaluacion.idi_evaluacion?.entidad_aliada_verificada}
+            El puntaje se asigna automáticamente.
+            <br />
+            <strong>Puntaje:</strong>
+            {evaluacion.entidad_aliada_puntaje}
+            <br />
+            <strong>Tipo de entidad aliada:</strong>
+            {tipoEntidad ? tipoEntidad : 'No hay una entidad aliada registrada'}
+            <br />
+            <strong>Código dependencia presupuestal (SIIF):</strong>
+            {proyecto.codigo_linea_programatica}
+        {/if}
     </InfoMessage>
 </AuthenticatedLayout>

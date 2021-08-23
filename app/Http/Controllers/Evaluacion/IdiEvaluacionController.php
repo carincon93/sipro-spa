@@ -107,7 +107,8 @@ class IdiEvaluacionController extends Controller
     public function update(IdiEvaluacionRequest $request, Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
         $idiEvaluacion->evaluacion()->update([
-            'iniciado' => true
+            'iniciado' => true,
+            'clausula_confidencialidad' => $request->clausula_confidencialidad
         ]);
 
         $idiEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
