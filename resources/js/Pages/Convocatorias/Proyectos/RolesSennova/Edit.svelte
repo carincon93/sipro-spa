@@ -8,7 +8,6 @@
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
-    import InfoMessage from '@/Shared/InfoMessage'
     import Textarea from '@/Shared/Textarea'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Dialog from '@/Shared/Dialog'
