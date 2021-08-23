@@ -1,5 +1,6 @@
 *
 !json/
+!fonts/
 !public/
 !manual-usuario/
 !.gitignore
