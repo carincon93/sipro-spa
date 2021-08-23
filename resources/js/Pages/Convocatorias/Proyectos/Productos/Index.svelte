@@ -19,6 +19,7 @@
     export let productos
     export let productosGantt
     export let validacionResultados
+    export let to_pdf;
 
     $title = 'Productos'
 
@@ -64,13 +65,13 @@
         {/each}
     {/if}
 
-    {#if showGantt}
+    {#if showGantt || to_pdf}
         <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
     {:else}
         <Button on:click={() => (showGantt = true)}>Visualizar diagrama de Gantt</Button>
     {/if}
 
-    {#if showGantt}
+    {#if showGantt || to_pdf}
         <Gantt
             items={productosGantt}
             request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])

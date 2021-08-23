@@ -484,7 +484,7 @@
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
+                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
                 </div>
                 <div>
                     <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />

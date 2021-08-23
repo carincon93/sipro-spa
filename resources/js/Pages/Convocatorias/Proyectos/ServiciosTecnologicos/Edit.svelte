@@ -3,6 +3,9 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import { Inertia } from '@inertiajs/inertia'
+    import { onMount } from 'svelte'
+    import axios from 'axios'
 
     import Button from '@/Shared/Button'
     import InputError from '@/Shared/InputError'
@@ -15,13 +18,17 @@
     import Password from '@/Shared/Password'
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
-    import { Inertia } from '@inertiajs/inertia'
+    import SelectMulti from '@/Shared/SelectMulti'
+    import Input from '@/Shared/Input'
 
     export let errors
     export let convocatoria
     export let servicioTecnologico
     export let tiposProyectoSt
     export let sectoresProductivos
+    export let proyectoProgramasFormacion
+
+    let programasFormacion
 
     $: $title = servicioTecnologico ? servicioTecnologico.titulo : null
 
@@ -35,24 +42,27 @@
     let proyectoDialogOpen = true
     let sending = false
 
-    console.log(tiposProyectoSt)
+    let nombreFormulario = servicioTecnologico.proyecto.codigo + 'servicio-tecnologico-form'
     let form = useForm({
         tipo_proyecto_st_id: {
             value: servicioTecnologico.tipo_proyecto_st_id,
             label: tiposProyectoSt.find((item) => item.value == servicioTecnologico.tipo_proyecto_st_id)?.label,
         },
         linea_programatica_id: servicioTecnologico.proyecto?.linea_programatica_id,
-        titulo: servicioTecnologico.titulo,
+        titulo: localStorage.getItem(nombreFormulario + '.titulo') ? localStorage.getItem(nombreFormulario + '.titulo') : servicioTecnologico.titulo,
         fecha_inicio: servicioTecnologico.fecha_inicio,
         fecha_finalizacion: servicioTecnologico.fecha_finalizacion,
         max_meses_ejecucion: servicioTecnologico.max_meses_ejecucion,
-        resumen: servicioTecnologico.resumen,
-        antecedentes: servicioTecnologico.antecedentes,
-        bibliografia: servicioTecnologico.bibliografia,
+        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : servicioTecnologico.resumen,
+        antecedentes: localStorage.getItem(nombreFormulario + '.antecedentes') ? localStorage.getItem(nombreFormulario + '.antecedentes') : servicioTecnologico.antecedentes,
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : servicioTecnologico.bibliografia,
+        zona_influencia: servicioTecnologico.zona_influencia,
 
-        identificacion_problema: servicioTecnologico.identificacion_problema,
-        pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
-        justificacion_problema: servicioTecnologico.justificacion_problema,
+        identificacion_problema: localStorage.getItem(nombreFormulario + '.identificacion_problema') ? localStorage.getItem(nombreFormulario + '.identificacion_problema') : servicioTecnologico.identificacion_problema,
+        pregunta_formulacion_problema: localStorage.getItem(nombreFormulario + '.pregunta_formulacion_problema') ? localStorage.getItem(nombreFormulario + '.pregunta_formulacion_problema') : servicioTecnologico.pregunta_formulacion_problema,
+        justificacion_problema: localStorage.getItem(nombreFormulario + '.justificacion_problema') ? localStorage.getItem(nombreFormulario + '.justificacion_problema') : servicioTecnologico.justificacion_problema,
+
+        programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
 
         estado_sistema_gestion_id: servicioTecnologico.estado_sistema_gestion_id,
         sector_productivo: {
@@ -61,11 +71,31 @@
         },
     })
 
+    let count =
+        localStorage.getItem(nombreFormulario + '.titulo') ||
+        localStorage.getItem(nombreFormulario + '.resumen') ||
+        localStorage.getItem(nombreFormulario + '.antecedentes') ||
+        localStorage.getItem(nombreFormulario + '.identificacion_problema') ||
+        localStorage.getItem(nombreFormulario + '.pregunta_formulacion_problema') ||
+        localStorage.getItem(nombreFormulario + '.justificacion_problema') ||
+        localStorage.getItem(nombreFormulario + '.bibliografia')
+            ? 1
+            : 0
+
+    function clearLocalStorage() {
+        localStorage.removeItem(nombreFormulario + '.titulo')
+        localStorage.removeItem(nombreFormulario + '.resumen')
+        localStorage.removeItem(nombreFormulario + '.antecedentes')
+        localStorage.removeItem(nombreFormulario + '.identificacion_problema')
+        localStorage.removeItem(nombreFormulario + '.pregunta_formulacion_problema')
+        localStorage.removeItem(nombreFormulario + '.justificacion_problema')
+        localStorage.removeItem(nombreFormulario + '.bibliografia')
+    }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
                 preserveScroll: true,
             })
         }
@@ -86,6 +116,17 @@
     $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
         $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
     }
+
+    onMount(() => {
+        getProgramasFormacion()
+    })
+
+    async function getProgramasFormacion() {
+        let res = await axios.get(route('web-api.programas-formacion', servicioTecnologico.proyecto.centro_formacion_id))
+        if (res.status == '200') {
+            programasFormacion = res.data
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -100,7 +141,7 @@
                     class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full"
                     value="Debe corresponder al contenido del proyecto y responder a los siguientes interrogantes: ¿Qué se va a hacer?, ¿Sobre qué o quiénes se hará?, ¿Cómo?, ¿Dónde se llevará a cabo? Tiene que estar escrito de manera breve y concisa. Un buen título describe con exactitud y usando el menor número posible de palabras el tema central del proyecto. Nota: las respuestas a las preguntas anteriormente formuladas no necesariamente deben responderse en mismo orden en el que aparecen. (Máximo 40 palabras)"
                 />
-                <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea label="Título" sinContador={true} localStorageForm={nombreFormulario} bind:count id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
             <div class="mt-44">
@@ -187,7 +228,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="1000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -205,7 +246,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea maxlength="10000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
@@ -219,7 +260,7 @@
                 </div>
 
                 <div>
-                    <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$form.identificacion_problema} required />
+                    <Textarea label="Identificación y descripción del problema" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="identificacion_problema" error={errors.identificacion_problema} bind:value={$form.identificacion_problema} required />
                 </div>
             </div>
 
@@ -241,7 +282,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea label="Pregunta formulación del problema" sinContador={true} id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
+                    <Textarea label="Pregunta formulación del problema" sinContador={true} localStorageForm={nombreFormulario} bind:count id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-1">
@@ -260,7 +301,36 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
+                    <Textarea label="Justificación" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
+                </div>
+                <div>
+                    <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
+                    {#if programasFormacion?.length == 0}
+                        <div>
+                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Refrescar
+                            </button>
+                        </div>
+                    {/if}
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
+                </div>
+                <div>
+                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.zona_influencia} required />
                 </div>
             </div>
 
@@ -270,16 +340,18 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea sinContador={true} localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <small>{servicioTecnologico.updated_at}</small>
+                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

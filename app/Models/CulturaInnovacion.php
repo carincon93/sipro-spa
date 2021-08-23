@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DateTimeInterface;
 
 class CulturaInnovacion extends Model
 {
@@ -82,6 +83,17 @@ class CulturaInnovacion extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Prepare a date for array / JSON serialization.
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     /**
      * Relationship with Proyecto
@@ -264,5 +276,15 @@ class CulturaInnovacion extends Model
 
         $culturaInnovacion->load('proyecto');
         return $culturaInnovacion;
+    }
+
+    /**
+     * getUpdatedAtAttribute
+     *
+     * @return void
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
     }
 }

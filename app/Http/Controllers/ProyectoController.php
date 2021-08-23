@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NuevoProponenteRequest;
+use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
@@ -13,6 +14,7 @@ use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
 use App\Models\SemilleroInvestigacion;
+use App\Models\ProyectoPdfVersion;
 use App\Notifications\ComentarioProyecto;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\ProyectoFinalizado;
@@ -59,6 +61,7 @@ class ProyectoController extends Controller
 
         if ($proyecto->servicioTecnologico()->exists()) {
             $objetivoGeneral = $proyecto->servicioTecnologico->objetivo_general;
+            $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
             $proyecto->propuesta_sostenibilidad = $proyecto->servicioTecnologico->propuesta_sostenibilidad;
         }
 
@@ -325,7 +328,7 @@ class ProyectoController extends Controller
             'objetivosEspecificos'      => ProyectoValidationTrait::objetivosEspecificos($proyecto),
             'actividades'               => ProyectoValidationTrait::actividades($proyecto),
             'impactos'                  => ProyectoValidationTrait::impactos($proyecto),
-            'actividadesPresupuesto'    => ProyectoValidationTrait::actividadesPresupuesto($proyecto),
+            // 'actividadesPresupuesto'    => ProyectoValidationTrait::actividadesPresupuesto($proyecto),
             'resultadoProducto'         => ProyectoValidationTrait::resultadoProducto($proyecto),
             'analisisRiesgo'            => ProyectoValidationTrait::analisisRiesgo($proyecto),
             'anexos'                    => ProyectoValidationTrait::anexos($proyecto),
@@ -338,6 +341,7 @@ class ProyectoController extends Controller
             'edt'                       => ProyectoValidationTrait::edt($proyecto),
             'maxValorRoles'             => ProyectoValidationTrait::maxValorRoles($proyecto),
             'maxValorTAPresupuesto'     => ProyectoValidationTrait::maxValorTAPresupuesto($proyecto),
+            'versiones'                 => $proyecto->PdfVersiones,
         ]);
     }
 
@@ -381,6 +385,7 @@ class ProyectoController extends Controller
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
             'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
+            'versiones'     => $evaluacion->proyecto->PdfVersiones,
         ]);
     }
 
@@ -426,6 +431,9 @@ class ProyectoController extends Controller
         $proyecto->save();
 
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
+
+        $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
+        $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
@@ -864,5 +872,44 @@ class ProyectoController extends Controller
     public function downloadManualUsuario()
     {
         return response()->download(storage_path("app/manual-usuario/Manual_de_usuario.pdf"));
+    }
+
+    /**
+     * storeProgramaFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function storeProgramaFormacion(ProgramaFormacionRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $programaFormacion = new ProgramaFormacion();
+        $programaFormacion->nombre              = $request->nombre;
+        $programaFormacion->codigo              = $request->codigo;
+        $programaFormacion->modalidad           = $request->modalidad;
+        $programaFormacion->nivel_formacion     = $request->nivel_formacion;
+        $programaFormacion->centroFormacion()->associate($request->centro_formacion_id);
+
+        $programaFormacion->save();
+
+        if ($proyecto->ta()->exists()) {
+            $proyecto->taProgramasFormacion()->attach($programaFormacion);
+        }
+
+        return back()->with('success', 'El recurso se ha creado correctamente.');
+    }
+
+    /**  
+     * descargarPdf
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $version
+     * @return void
+     */
+    public function descargarPdf(Convocatoria $convocatoria, Proyecto $proyecto, $version)
+    {
+        return response()->download(storage_path("app/convocatorias/" . $convocatoria->id . "/" . $proyecto->id . "/" . $version . ".pdf"));
     }
 }

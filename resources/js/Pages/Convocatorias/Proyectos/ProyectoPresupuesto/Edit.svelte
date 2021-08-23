@@ -68,7 +68,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.presupuesto.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))
         }
     }
@@ -155,9 +155,9 @@
                         <Input label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" bind:value={$form.valor_total} error={errors.valor_total} required />
                     </div>
                     {#if presupuestoSennova?.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
-                        <InfoMessage message="Por favor indique el valor total que arrojó el Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
+                        <InfoMessage message="Por favor indique el valor total que arrojó el Estudio de mercado - Convocatoria Sennova 2021" />
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021" />
+                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Estudio de mercado - Convocatoria Sennova 2021" />
                             <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
                         </div>
                     {/if}
@@ -206,7 +206,7 @@
                 </fieldset>
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
+                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar presupuesto </button>
                     {/if}
 

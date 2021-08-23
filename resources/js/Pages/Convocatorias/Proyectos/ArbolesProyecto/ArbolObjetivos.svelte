@@ -17,6 +17,7 @@
     import Stepper from '@/Shared/Stepper'
 
     export let errors
+    export let to_pdf;
     export let convocatoria
     export let proyecto
     export let efectosDirectos
@@ -424,9 +425,11 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    {#if !to_pdf}
+        <Stepper {convocatoria} {proyecto} />
+    {/if}
 
-    <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
+    <h1 class="text-3xl {(to_pdf)?'':'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
     {#if proyecto.en_subsanacion}
@@ -870,7 +873,11 @@
                     <p>Para poder editar este impacto, primero debe generar el efecto indirecto en el árbol de problemas.</p>
                 {/if}
                 {#if generalInfoType == 2}
-                    <p>Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
+                    <p class="mb-5">Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
+
+                    {#if proyecto.codigo_linea_programatica == 68}
+                        <InfoMessage>Si el proyecto es de ST y hay actividades que no requieren de una causa indirecta por favor diríjase al Árbol de problemas y genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
+                    {/if}
                 {/if}
             {/if}
         </div>
@@ -883,6 +890,11 @@
     </Dialog>
 </AuthenticatedLayout>
 
+{#if to_pdf}
+<style>
+    nav{display: none !important;}
+</style>
+{/if}
 <style>
     .resultados.relative.flex-1:before {
         content: '';

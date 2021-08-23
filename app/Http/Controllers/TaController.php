@@ -13,6 +13,7 @@ use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
+use App\Models\ProgramaFormacion;
 use App\Models\RedConocimiento;
 use App\Models\Regional;
 use App\Models\SemilleroInvestigacion;
@@ -21,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TaController extends Controller
@@ -192,7 +194,10 @@ class TaController extends Controller
             'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
             'proyectoDisCurriculares'               => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
             'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'tecnoAcademias'                        => $tecnoAcademias
+            'programasFormacion'                    => ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $ta->proyecto->centroFormacion->id)->orderBy('nombre', 'ASC')->get(),
+            'tecnoAcademias'                        => $tecnoAcademias,
+            'modalidades'                           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
+            'nivelesFormacion'                      => json_decode(Storage::get('json/nivel-formacion.json'), true)
         ]);
     }
 

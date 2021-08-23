@@ -68,7 +68,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.productos.destroy', [convocatoria.id, proyecto.id, producto.id]))
         }
     }
@@ -105,7 +105,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8 mb-8">
-                    <Label class="text-center" required value="Fecha de ejecución" />
+                    <Label class="text-center" required value="Fecha de entrega del producto" />
                     <div class="mt-4 flex items-start justify-around">
                         <div class="mt-4 flex">
                             <Label labelFor="fecha_inicio" value="Del" />

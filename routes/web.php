@@ -56,6 +56,7 @@ use App\Http\Controllers\InventarioEquipoController;
 use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
+use App\Http\Controllers\PdfController;
 use App\Models\Actividad;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
@@ -128,6 +129,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Redirecciona según el tipo de proyecto
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/editar', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+    
+    //Exporta resumen proyecto PDF
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/pdf', [PdfController::class, 'generateProjectSumary'])->name('convocatorias.proyectos.pdf');
 
     // Reportar problemas
     Route::get('reportar-problemas/crear', [HelpDeskController::class, 'create'])->name('reportar-problemas.create');
@@ -195,6 +199,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
             ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
             ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
+            ->where('presupuesto_sennova.habilitado', true)
             ->groupBy('segundo_grupo_presupuestal.id')
             ->orderBy('segundo_grupo_presupuestal.nombre', 'ASC')
             ->get());
@@ -290,7 +295,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', function ($tipoProyectoSt) {
         $tipoProyectoStInfo = TipoProyectoSt::find($tipoProyectoSt);
-        return response(EstadoSistemaGestion::select('id as value', 'estado as label')->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('estado', 'ASC')->get());
+        return response(EstadoSistemaGestion::selectRaw("id as value, CASE tipo_proyecto
+            WHEN '1' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo A')
+            WHEN '2' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo B')
+        END as label")->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('id', 'ASC')->get());
     })->name('web-api.estados-sistema-gestion');
 
     /**
@@ -560,7 +568,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finalizarProyecto'])->name('convocatorias.proyectos.finish');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/enviar-proyecto-evaluar', [ProyectoController::class, 'enviarAEvaluacion'])->name('convocatorias.proyectos.send');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'devolverProyecto'])->name('convocatorias.proyectos.return-project');
-
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/descargar-version/{version}', [ProyectoController::class, 'descargarPdf'])->name('convocatorias.proyectos.version');
     /**
      * Inventario equipos - Estrategia regional
      * 
@@ -598,6 +606,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'showArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/articulacion', [TaController::class, 'storeArticulacionSennova'])->name('convocatorias.proyectos.articulacion-sennova.store');
+    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/programas-formacion', [ProyectoController::class, 'storeProgramaFormacion'])->name('convocatorias.proyectos.programas-formacion.store');
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/discurriculares', [DisCurricularController::class, 'storeDisCurricular'])->name('convocatorias.proyectos.dis-curriculares.store');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/rol/sennova/ta', [TaController::class, 'updateCantidadRolesTa'])->name('convocatorias.proyectos.rol-sennova-ta.update');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/infraestructura', [TaController::class, 'updateInfraestructura'])->name('convocatorias.ta.infraestrucutra.update');

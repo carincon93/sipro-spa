@@ -63,6 +63,8 @@
         $form.resultado_id = resultado_id.value
         actividades = resultado_id.actividades
     }
+
+    console.log(proyecto.servicio_tecnologico)
 </script>
 
 <AuthenticatedLayout>
@@ -107,7 +109,7 @@
                 <hr />
 
                 <div class="mt-8">
-                    {#if $form.tatp_servicio_tecnologico == true}
+                    {#if $form.tatp_servicio_tecnologico}
                         <InfoMessage>
                             <p>
                                 Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
@@ -127,16 +129,18 @@
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                <div class="mt-8">
-                    <Label required labelFor="indicador" value="Indicador" />
+                {#if typeof proyecto.servicio_tecnologico != 'object'}
+                    <div class="mt-8">
+                        <Label required labelFor="indicador" value="Indicador" />
 
-                    {#if $form.tatp_servicio_tecnologico == true}
-                        <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
-                    {:else}
-                        <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
-                    {/if}
-                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
-                </div>
+                        {#if $form.tatp_servicio_tecnologico == true}
+                            <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                        {:else}
+                            <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                        {/if}
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    </div>
+                {/if}
 
                 {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
@@ -176,12 +180,12 @@
                     </div>
 
                     <div class="mt-8">
-                        <Label required labelFor="formula_indicador" value="Fórmula del Indicador del producto" />
+                        <Label required labelFor="indicador" value="Fórmula del Indicador del producto" />
 
                         <InfoMessage
                             message="El método de cálculo debe ser una expresión matemática definida de manera adecuada y de fácil comprensión, es decir, deben quedar claras cuáles son las variables utilizadas. Los métodos de cálculo más comunes son el porcentaje, la tasa de variación, la razón y el número índice. Aunque éstos no son las únicas expresiones para los indicadores, sí son las más frecuentes."
                         />
-                        <Textarea maxlength="40000" id="formula_indicador" error={errors.formula_indicador} bind:value={$form.formula_indicador} required />
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 

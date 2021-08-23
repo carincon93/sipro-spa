@@ -27,7 +27,8 @@ class Anexo extends Model
         'nombre',
         'descripcion',
         'archivo',
-        'obligatorio'
+        'obligatorio',
+        'habilitado'
     ];
 
     /**

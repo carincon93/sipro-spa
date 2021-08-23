@@ -12,8 +12,6 @@ use App\Models\ProyectoPresupuesto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use function PHPSTORM_META\map;
-
 class ActividadController extends Controller
 {
     /**
@@ -21,7 +19,7 @@ class ActividadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -69,6 +67,7 @@ class ActividadController extends Controller
                     return $objetivoEspecifico->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
+            'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
     }
 

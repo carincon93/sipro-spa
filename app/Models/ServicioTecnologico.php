@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,7 @@ class ServicioTecnologico extends Model
         'fecha_inicio',
         'fecha_finalizacion',
         'propuesta_sostenibilidad',
+        'zona_influencia',
         'bibliografia',
         'max_meses_ejecucion',
         'video',
@@ -69,6 +71,17 @@ class ServicioTecnologico extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Prepare a date for array / JSON serialization.
+     *
+     * @param  \DateTimeInterface  $date
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     /**
      * Relationship with Proyecto
@@ -201,5 +214,15 @@ class ServicioTecnologico extends Model
         $servicioTecnologico->load('proyecto');
 
         return $servicioTecnologico;
+    }
+
+    /**
+     * getUpdatedAtAttribute
+     *
+     * @return void
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
     }
 }

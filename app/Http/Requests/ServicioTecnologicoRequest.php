@@ -37,6 +37,8 @@ class ServicioTecnologicoRequest extends FormRequest
                 'identificacion_problema'                   => ['required', 'max:5000', 'string'],
                 'pregunta_formulacion_problema'             => ['required', 'string', new MaxWords(50)],
                 'justificacion_problema'                    => ['required', 'max:5000', 'string'],
+                'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
+                'zona_influencia'                           => ['required', 'string', 'max:255'],
                 'bibliografia'                              => ['required', 'string'],
             ];
         } else {
@@ -88,6 +90,22 @@ class ServicioTecnologicoRequest extends FormRequest
             $this->merge([
                 'rol_sennova' => $this->rol_sennova['value'],
             ]);
+        }
+
+        if (is_array($this->programas_formacion)) {
+            if (isset($this->programas_formacion['value']) && is_numeric($this->programas_formacion['value'])) {
+                $this->merge([
+                    'programas_formacion' => $this->programas_formacion['value'],
+                ]);
+            } else {
+                $programasFormacion = [];
+                foreach ($this->programas_formacion as $programaFormacion) {
+                    if (is_array($programaFormacion)) {
+                        array_push($programasFormacion, $programaFormacion['value']);
+                    }
+                }
+                $this->merge(['programas_formacion' => $programasFormacion]);
+            }
         }
     }
 }

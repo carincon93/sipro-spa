@@ -351,6 +351,17 @@ class Proyecto extends Model
         return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->orderBy('created_at', 'DESC')->get();
     }
 
+
+    /**
+     * Relationship with ProyectoPdfVersion
+     *
+     * @return object
+     */
+    public function PdfVersiones()
+    {
+        return $this->hasMany(ProyectoPdfVersion::class);
+    }
+
     /**
      * Get codigo e.g. SGPS-8000-2021
      *
@@ -512,7 +523,16 @@ class Proyecto extends Model
                 $valorAprendiz = 63000;
             }
         }
-        return round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+
+        $total = round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+
+        if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 18) {
+            $total = 32098065 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
+        } else if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 16) {
+            $total = 23174417 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
+        }
+
+        return $total;
     }
 
     public function getMaxBienestarAprendizAttribute()

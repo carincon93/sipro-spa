@@ -17,6 +17,7 @@
     export let errors
     export let convocatoria
     export let proyecto
+    export let versiones
     export let problemaCentral
     export let efectosDirectos
     export let causasIndirectas
@@ -27,7 +28,7 @@
     export let objetivosEspecificos
     export let actividades
     export let impactos
-    export let actividadesPresupuesto
+    // export let actividadesPresupuesto
     export let resultadoProducto
     export let analisisRiesgo
     export let anexos
@@ -171,7 +172,7 @@
                 {/if}
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && actividadesPresupuesto && resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
+            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && /** actividadesPresupuesto && */ resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
             {:else if proyecto.finalizado == false}
@@ -232,9 +233,9 @@
                             {/if}
                         {/if}
 
-                        {#if !actividadesPresupuesto}
+                        <!-- {#if !actividadesPresupuesto}
                             <li>Hay actividades sin presupuesto relacionado</li>
-                        {/if}
+                        {/if} -->
                         {#if !productosActividades}
                             <li>Hay productos sin actividades relacionadas</li>
                         {/if}
@@ -263,6 +264,27 @@
                 <ul>
                     {#each proyecto.logs as log}
                         <li>{log.created_at} - {JSON.parse(log.data).subject}</li>
+                    {/each}
+                </ul>
+            {:else}
+                <p>No se ha generado un historial aún</p>
+            {/if}
+        </InfoMessage>
+    </div>
+    <hr class="mt-10 mb-10" />
+    <div>
+        <InfoMessage>
+            <h1><strong>Versiones del proyecto</strong></h1>
+            {#if versiones}
+                <ul>
+                    {#each versiones as version}
+                        <li>{version.version}.pdf - 
+                            {#if version.estado==1}
+                            <a href="{route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}">Descargar</a>
+                            {:else}
+                            Generando, regrese pronto.
+                            {/if}
+                        </li>
                     {/each}
                 </ul>
             {:else}

@@ -13,6 +13,7 @@ use App\Models\ProductoCulturaInnovacion;
 use App\Models\ProductoIdi;
 use App\Models\ProductoServicioTecnologico;
 use App\Models\ProductoTaTp;
+use App\Models\Resultado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -24,7 +25,7 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -80,6 +81,7 @@ class ProductoController extends Controller
                     return $resultado->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -96,12 +98,14 @@ class ProductoController extends Controller
         $proyecto->ta;
         $proyecto->tp;
 
+        $proyectoId = $proyecto->id;
+
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
             'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
-            'resultados'        => $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
-                $query->where('descripcion', '!=', null);
-            })->with('resultados:id,id as value,descripcion as label,efecto_directo_id', 'resultados.actividades')->get()->pluck('resultados')->flatten(),
+            'resultados'        => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
+                $query->where('efectos_directos.proyecto_id', $proyectoId);
+            })->where('resultados.descripcion', '!=', null)->with('actividades')->get(),
             'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
@@ -212,16 +216,16 @@ class ProductoController extends Controller
         $proyecto->servicioTecnologico;
         $producto->productoServicioTecnologico;
 
-        $resultados = $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
-            $query->where('descripcion', '!=', null);
-        })->with('resultados:id,id as value,descripcion as label,efecto_directo_id', 'resultados.actividades')->get()->pluck('resultados')->flatten();
+        $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
             'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto,
             'producto'                  => $producto,
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
-            'resultados'                => $resultados->where('label', '!=', null)->flatten(),
+            'resultados'                => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
+                $query->where('efectos_directos.proyecto_id', $proyectoId);
+            })->where('resultados.descripcion', '!=', null)->with('actividades')->get(),
             'tiposProducto'             => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }

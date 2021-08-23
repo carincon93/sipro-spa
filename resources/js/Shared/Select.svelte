@@ -1,8 +1,9 @@
 <script>
     import { afterUpdate, onMount } from 'svelte'
-    import Select from 'svelte-select'
     import InputError from '@/Shared/InputError'
     import { _ } from 'svelte-i18n'
+
+    import Select from 'svelte-select'
 
     export let classes = ''
     export let id = ''
@@ -40,6 +41,7 @@
     inputAttributes={{ id: id }}
     placeholder={required ? placeholder + ' *' : placeholder}
     containerClasses="items {classes}"
+    listPlacement="bottom"
     {items}
     {autocomplete}
     {isMulti}
