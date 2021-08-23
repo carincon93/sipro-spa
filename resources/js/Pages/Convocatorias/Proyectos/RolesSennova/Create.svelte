@@ -8,7 +8,6 @@
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
-    import InfoMessage from '@/Shared/InfoMessage'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let convocatoria

@@ -17,6 +17,7 @@
     export let errors
     export let convocatoria
     export let proyecto
+    export let versiones
     export let problemaCentral
     export let efectosDirectos
     export let causasIndirectas
@@ -263,6 +264,27 @@
                 <ul>
                     {#each proyecto.logs as log}
                         <li>{log.created_at} - {JSON.parse(log.data).subject}</li>
+                    {/each}
+                </ul>
+            {:else}
+                <p>No se ha generado un historial aún</p>
+            {/if}
+        </InfoMessage>
+    </div>
+    <hr class="mt-10 mb-10" />
+    <div>
+        <InfoMessage>
+            <h1><strong>Versiones del proyecto</strong></h1>
+            {#if versiones}
+                <ul>
+                    {#each versiones as version}
+                        <li>{version.version}.pdf - 
+                            {#if version.estado==1}
+                            <a href="{route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}">Descargar</a>
+                            {:else}
+                            Generando, regrese pronto.
+                            {/if}
+                        </li>
                     {/each}
                 </ul>
             {:else}

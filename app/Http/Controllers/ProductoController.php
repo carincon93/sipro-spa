@@ -24,7 +24,7 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function index(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -80,6 +80,7 @@ class ProductoController extends Controller
                     return $resultado->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
+            'to_pdf'          => ($request->to_pdf==1)?true:false
         ]);
     }
 

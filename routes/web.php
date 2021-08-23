@@ -55,6 +55,7 @@ use App\Http\Controllers\InventarioEquipoController;
 use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
+use App\Http\Controllers\PdfController;
 use App\Models\Actividad;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
@@ -127,6 +128,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Redirecciona según el tipo de proyecto
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/editar', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
+    
+    //Exporta resumen proyecto PDF
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/pdf', [PdfController::class, 'generateProjectSumary'])->name('convocatorias.proyectos.pdf');
 
     // Reportar problemas
     Route::get('reportar-problemas/crear', [HelpDeskController::class, 'create'])->name('reportar-problemas.create');
@@ -563,7 +567,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finalizarProyecto'])->name('convocatorias.proyectos.finish');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/enviar-proyecto-evaluar', [ProyectoController::class, 'enviarAEvaluacion'])->name('convocatorias.proyectos.send');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/comentario-proyecto', [ProyectoController::class, 'devolverProyecto'])->name('convocatorias.proyectos.return-project');
-
+    Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/descargar-version/{version}', [ProyectoController::class, 'descargarPdf'])->name('convocatorias.proyectos.version');
     /**
      * Inventario equipos - Estrategia regional
      * 

@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\ProgramaFormacion;
 use App\Models\Proyecto;
 use App\Models\SemilleroInvestigacion;
+use App\Models\ProyectoPdfVersion;
 use App\Notifications\ComentarioProyecto;
 use App\Notifications\EvaluacionFinalizada;
 use App\Notifications\ProyectoFinalizado;
@@ -332,6 +333,7 @@ class ProyectoController extends Controller
             'edt'                       => ProyectoValidationTrait::edt($proyecto),
             'maxValorRoles'             => ProyectoValidationTrait::maxValorRoles($proyecto),
             'maxValorTAPresupuesto'     => ProyectoValidationTrait::maxValorTAPresupuesto($proyecto),
+            'versiones'                 => $proyecto->PdfVersiones,
         ]);
     }
 
@@ -375,6 +377,7 @@ class ProyectoController extends Controller
             'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
             'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
+            'versiones'     => $evaluacion->proyecto->PdfVersiones,
         ]);
     }
 
@@ -420,6 +423,9 @@ class ProyectoController extends Controller
         $proyecto->save();
 
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
+
+        $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
+        $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
@@ -884,5 +890,18 @@ class ProyectoController extends Controller
         }
 
         return back()->with('success', 'El recurso se ha creado correctamente.');
+    }
+
+    /**  
+     * descargarPdf
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @param  mixed $version
+     * @return void
+     */
+    public function descargarPdf(Convocatoria $convocatoria, Proyecto $proyecto, $version)
+    {
+        return response()->download(storage_path("app/convocatorias/" . $convocatoria->id . "/" . $proyecto->id . "/" . $version . ".pdf"));
     }
 }
