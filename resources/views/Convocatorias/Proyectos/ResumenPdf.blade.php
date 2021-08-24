@@ -676,7 +676,7 @@
             <img class="" src="data:image/png;base64,{{$base64Arbolobjetivos}}" alt="Árbol de objetivos" width="100%">
          </div>
          <div class="page_break">
-            <p class="title" style="text-align: center;">Presupuesto ${{number_format($proyecto->total_proyecto_presupuesto, 0, ",", ".")}} COP</p>
+            <p class="title" style="text-align: center;">Presupuesto ${{number_format($proyecto->precio_proyecto, 0, ",", ".")}} COP</p>
             @foreach($proyecto->proyectoPresupuesto as $presupuesto)
             <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
                <tbody slot="tbody">
@@ -791,6 +791,71 @@
             </table>
             @endforeach
          </div>
+
+         @if(!empty($proyecto->proyectoRolesSennova))
+         <div class="">
+            <p class="title" style="text-align: center;">Roles SENNOVA</p>
+            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+               <thead>
+                  <tr>
+                     <th width="30%">Rol</th>
+                     <th width="auto">Nivel académico</th>
+                     <th width="auto">Meses</th>
+                     <th width="auto">Número de personas</th>
+                     <th width="15%">Asignación mensual</th>
+                  </tr>
+               </thead>
+               <tbody slot="tbody">
+               @foreach($proyecto->proyectoRolesSennova as $rolSENNOVA)
+                  <tr>
+                     <td width="30%">{{ $rolSENNOVA->convocatoriaRolSennova->rolSennova->nombre }}</td>
+                     <td width="auto">
+                        @switch ($rolSENNOVA->convocatoriaRolSennova->nivel_academico)
+                           @case(1)
+                              técnico
+                               @break
+                           @case(2)
+                              tecnólogo
+                               @break
+                           @case(3)
+                              pregrado
+                               @break
+                           @case(4)
+                              especalización
+                               @break
+                           @case(5)
+                              maestría
+                               @break
+                           @case(6)
+                              doctorado
+                               @break
+                           @case(7)
+                              ninguno
+                               @break
+                           @case(8)
+                              técnico con especialización
+                               @break
+                           @case(9)
+                              tecnólogo con especialización
+                               @break
+                           @default
+                              ''
+                        @endswitch
+                     </td>
+                     <th width="auto">{{$rolSENNOVA->numero_meses}}</th>
+                     <th width="auto">{{$rolSENNOVA->numero_roles}}</th>
+                     <td width="15%">${{number_format($rolSENNOVA->convocatoriaRolSennova->asignacion_mensual, 0, ",", ".")}} COP</td>
+                  </tr>
+               @endforeach
+               <tr>
+                  <td colspan="4"><b>Actualmente el total del costo de los roles requeridos es de:</b></td>
+                  <td width="30%">${{number_format($proyecto->total_roles_sennova, 0, ",", ".")}} COP</td>
+               </tr>
+               </tbody>
+            </table>
+         </div>
+         @endif
+
          <div class="page_break"></div>
          @if(!empty($datos->planteamiento_problema))
          <div class="border">
