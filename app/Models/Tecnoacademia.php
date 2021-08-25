@@ -39,8 +39,9 @@ class Tecnoacademia extends Model
         'max_valor_viaticos_interior',
         'max_valor_edt',
         'max_valor_mantenimiento_equipos',
-        'max_valor_roles'
-
+        'max_valor_roles',
+        'max_valor_materiales_formacion',
+        'max_valor_bienestar_alumnos'
     ];
 
     /**

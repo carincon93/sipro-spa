@@ -246,7 +246,7 @@
                             </svg>
                             Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
                         </div>
-                        {#if evaluacionPresupuesto.incorrecto && evaluacionPresupuesto.evaluacion.habilitado}
+                        {#if evaluacionPresupuesto.correcto && evaluacionPresupuesto.evaluacion.habilitado}
                             <p class="whitespace-pre-line">{evaluacionPresupuesto.comentario ? evaluacionPresupuesto.comentario : 'Sin recomendación'}</p>
                         {:else}
                             Aprobado

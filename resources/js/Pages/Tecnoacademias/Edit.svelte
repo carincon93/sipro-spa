@@ -47,6 +47,8 @@
         max_valor_mantenimiento_equipos: tecnoacademia.max_valor_mantenimiento_equipos,
         max_valor_roles: tecnoacademia.max_valor_roles,
         max_valor_presupuesto: tecnoacademia.max_valor_presupuesto,
+        max_valor_materiales_formacion: tecnoacademia.max_valor_materiales_formacion,
+        max_valor_bienestar_alumnos: tecnoacademia.max_valor_bienestar_alumnos,
     })
 
     function submit() {
@@ -105,6 +107,14 @@
 
                 <div class="mt-4">
                     <Textarea label="Foco de la TecnoAcademia" maxlength="40000" id="foco" bind:value={$form.foco} error={errors.foco} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Material de enseñanza" id="max_valor_materiales_formacion" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_materiales_formacion} error={errors.max_valor_materiales_formacion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Bienestar alumnos" id="max_valor_bienestar_alumnos" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_bienestar_alumnos} error={errors.max_valor_bienestar_alumnos} required />
                 </div>
 
                 <div class="mt-4">
