@@ -42,7 +42,7 @@
     let sending = false
     let form = useForm({
         comentario: proyectoRolEvaluacion ? proyectoRolEvaluacion.comentario : '',
-        incorrecto: proyectoRolEvaluacion?.incorrecto,
+        correcto: proyectoRolEvaluacion?.correcto == undefined || proyectoRolEvaluacion?.correcto == true ? true : false,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -128,12 +128,12 @@
 
             <InfoMessage>
                 {#if segundaEvaluacion?.comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.comentario}</p>
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿El rol requiere de una recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.incorrecto} />
-                    {#if $form.incorrecto}
+                    <p>¿El rol es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.correcto} />
+                    {#if $form.correcto == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="comentario" bind:value={$form.comentario} error={errors.comentario} required />
                     {/if}
                 </div>

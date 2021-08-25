@@ -40,7 +40,7 @@
     let sending = false
     let form = useForm({
         anexos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.anexos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
-        anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.anexos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
+        anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.anexos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -137,13 +137,13 @@
     <div class="mt-16">
         <form on:submit|preventDefault={submit}>
             <InfoMessage>
-                {#if segundaEvaluacion.anexos_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.anexos_comentario}</p>
+                {#if segundaEvaluacion?.anexos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
                 {/if}
                 <div class="mt-4">
                     <p>¿Algún anexo requiere de recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
-                    {#if $form.anexos_requiere_comentario}
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
+                    {#if $form.anexos_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$form.anexos_comentario} error={errors.anexos_comentario} required />
                     {/if}
                 </div>

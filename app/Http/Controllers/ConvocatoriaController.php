@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\Convocatoria;
+use App\Models\Proyecto;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ConvocatoriaController extends Controller
@@ -84,6 +86,8 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
+
+        $convocatoria->fase                                     = 1;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             $convocatoriaPrevActiva->esta_activa = false;
@@ -118,7 +122,8 @@ class ConvocatoriaController extends Controller
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
         return Inertia::render('Convocatorias/Edit', [
-            'convocatoria' => $convocatoria
+            'convocatoria' => $convocatoria,
+            'fases'        => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
         ]);
     }
 
@@ -154,7 +159,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
-        $convocatoria->evaluaciones_finalizadas                 = $request->evaluaciones_finalizadas;
+
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {
@@ -163,6 +168,38 @@ class ConvocatoriaController extends Controller
             }
         }
         $convocatoria->esta_activa = $request->esta_activa;
+        $convocatoria->fase        = $request->fase;
+
+        switch ($request->fase) {
+            case 1: // Formulación
+                $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+            case 2: // Primera evaluación
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                break;
+            case 3: // Subsanación
+                // $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+                foreach ($convocatoria->proyectos()->get() as $proyecto) {
+                    if ($proyecto->estado_evaluacion != null && json_decode($proyecto->estado_evaluacion)->requiereSubsanar) {
+                        $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+                    } else {
+                        $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
+                    }
+                }
+                break;
+            case 4: // Segunda evaluación
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                break;
+            case 5: // Convocatoria finalizada
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
+                $convocatoria->evaluaciones()->update(['finalizado' => true, 'iniciado' => false]);
+                foreach ($convocatoria->proyectos()->get() as $proyecto) {
+                    $proyecto->update(['estado' => $proyecto->estado_evaluacion]);
+                }
+                break;
+
+            default:
+                break;
+        }
 
         $convocatoria->save();
 

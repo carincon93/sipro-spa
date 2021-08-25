@@ -28,7 +28,7 @@ class CulturaInnovacionController extends Controller
         $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'evaluaciones_finalizadas'),
+            'convocatoria'      => $convocatoria->only('id', 'fase'),
             'filters'           => request()->all('search', 'estructuracion_proyectos'),
             'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);

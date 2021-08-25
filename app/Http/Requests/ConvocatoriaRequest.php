@@ -48,4 +48,18 @@ class ConvocatoriaRequest extends FormRequest
             'max_fecha_finalizacion_proyectos_tp'       => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_tp'],
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->fase)) {
+            $this->merge([
+                'fase' => $this->fase['value'],
+            ]);
+        }
+    }
 }

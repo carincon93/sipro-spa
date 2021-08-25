@@ -129,7 +129,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Redirecciona según el tipo de proyecto
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/editar', [ProyectoController::class, 'edit'])->name('convocatorias.proyectos.edit');
-    
+
     //Exporta resumen proyecto PDF
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/pdf', [PdfController::class, 'generateProjectSumary'])->name('convocatorias.proyectos.pdf');
 
@@ -815,6 +815,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/arbol-objetivos', [ArbolProyectoController::class, 'showArbolObjetivosEvaluacion'])->name('convocatorias.evaluaciones.arbol-objetivos');
     Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/arbol-objetivos', [ArbolProyectoController::class, 'updateArbolObjetivosEvaluacion'])->name('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion');
 
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/causales-rechazo', [EvaluacionController::class, 'editCausalRechazo'])->name('convocatorias.evaluaciones.causales-rechazo');
+    Route::post('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/causales-rechazo', [EvaluacionController::class, 'updateCausalRechazo'])->name('convocatorias.evaluaciones.update-causal-rechazo');
     Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/finalizar-evaluacion', [ProyectoController::class, 'finalizarEvaluacion'])->name('convocatorias.evaluaciones.finish');
 
     Route::resource('convocatorias.cultura-innovacion-evaluaciones', CulturaInnovacionEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion-evaluaciones' => 'cultura-innovacion-evaluacion'])->except(['create', 'store', 'show']);

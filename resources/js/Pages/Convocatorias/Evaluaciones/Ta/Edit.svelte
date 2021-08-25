@@ -288,9 +288,9 @@
 
                     <InfoMessage>
                         <div class="mt-4">
-                            <p>¿El ítem requiere de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={taInfo.justificacion_economia_naranja_requiere_comentario} />
-                            {#if taInfo.justificacion_economia_naranja_requiere_comentario}
+                            <p>¿El ítem es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={taInfo.justificacion_economia_naranja_requiere_comentario} />
+                            {#if taInfo.justificacion_economia_naranja_requiere_comentario == false}
                                 <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="justificacion_economia_naranja_comentario" bind:value={taInfo.justificacion_economia_naranja_comentario} />
                             {/if}
                         </div>

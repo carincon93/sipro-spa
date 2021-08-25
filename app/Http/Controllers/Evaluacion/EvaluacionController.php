@@ -200,4 +200,27 @@ class EvaluacionController extends Controller
                 break;
         }
     }
+
+    public function editCausalRechazo(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
+            'convocatoria'                  => $convocatoria->only('id'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo'),
+            'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
+            'proyecto'                      => $evaluacion->proyecto,
+        ]);
+    }
+
+    public function updateCausalRechazo(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->evaluacionCausalesRechazo()->delete();
+        $evaluacion->update(['justificacion_causal_rechazo' => $request->justificacion_causal_rechazo]);
+        foreach ($request->causal_rechazo as $causalRechazo) {
+            $evaluacion->evaluacionCausalesRechazo()->updateOrCreate(
+                ['evaluacion_id' => $evaluacion->id, 'causal_rechazo' => $causalRechazo],
+            );
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
 }

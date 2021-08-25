@@ -109,7 +109,7 @@
         <form on:submit|preventDefault={submit}>
             <div class="mt-4">
                 <p>¿Las entidades aliadas son válidas?</p>
-                <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.entidad_aliada_verificada} />
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.entidad_aliada_verificada} />
             </div>
             {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
                 <div class="px-8 py-4 border-t border-gray-200 flex items-center sticky bottom-0">

@@ -52,7 +52,7 @@ class Convocatoria extends Model
         'fecha_inicio_convocatoria_tp',
         'fecha_finalizacion_convocatoria_ta',
         'fecha_finalizacion_convocatoria_tp',
-        'evaluaciones_finalizadas'
+        'fase'
     ];
 
     /**
@@ -81,6 +81,16 @@ class Convocatoria extends Model
     public function proyectos()
     {
         return $this->hasMany(Proyecto::class);
+    }
+
+    /**
+     * Relationship with Evaluacion
+     *
+     * @return object
+     */
+    public function evaluaciones()
+    {
+        return $this->hasMany(\App\Models\Evaluacion\Evaluacion::class);
     }
 
     /**

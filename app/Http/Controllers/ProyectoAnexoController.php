@@ -218,12 +218,12 @@ class ProyectoAnexoController extends Controller
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
-                    'anexos_comentario'   => $request->anexos_requiere_comentario == true ? $request->anexos_comentario : null
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
-                    'anexos_comentario'   => $request->anexos_requiere_comentario == true ? $request->anexos_comentario : null
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
                 ]);
                 break;
             default:

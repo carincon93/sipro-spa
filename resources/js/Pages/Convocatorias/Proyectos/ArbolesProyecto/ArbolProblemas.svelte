@@ -16,7 +16,7 @@
     import { createPopper } from '@popperjs/core'
 
     export let errors
-    export let to_pdf;
+    export let to_pdf
     export let convocatoria
     export let proyecto
     export let efectosDirectos
@@ -385,10 +385,10 @@
         <Stepper {convocatoria} {proyecto} />
     {/if}
 
-    <h1 class="text-3xl {(to_pdf)?'':'mt-24'} mb-8 text-center">Árbol de problemas</h1>
+    <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
-    {#if proyecto.en_subsanacion}
+    {#if convocatoria.fase == 3}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -701,10 +701,13 @@
 </AuthenticatedLayout>
 
 {#if to_pdf}
-<style>
-    nav{display: none !important;}
-</style>
+    <style>
+        nav {
+            display: none !important;
+        }
+    </style>
 {/if}
+
 <style>
     .efectos-directos.relative.flex-1:before {
         content: '';

@@ -91,7 +91,7 @@
     let form = useForm({
         cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
         cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
-        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.cadena_valor_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.cadena_valor_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -216,14 +216,14 @@
                     error={errors.cadena_valor_puntaje}
                 />
 
-                {#if segundaEvaluacion.cadena_valor_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.cadena_valor_comentario}</p>
+                {#if segundaEvaluacion?.cadena_valor_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
                 {/if}
 
                 <div class="mt-4">
-                    <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.cadena_valor_requiere_comentario} />
-                    {#if $form.cadena_valor_requiere_comentario}
+                    <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.cadena_valor_requiere_comentario} />
+                    {#if $form.cadena_valor_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
                     {/if}
                 </div>

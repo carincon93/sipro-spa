@@ -246,7 +246,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
+    public function showArbolProblemas(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -288,7 +288,7 @@ class ArbolProyectoController extends Controller
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'          => ($request->to_pdf == 1) ? true : false
+            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -347,7 +347,6 @@ class ArbolProyectoController extends Controller
             'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -366,13 +365,13 @@ class ArbolProyectoController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'problema_central_puntaje'      => $request->problema_central_puntaje,
-                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'problema_central_puntaje'      => $request->problema_central_puntaje,
-                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
                 ]);
                 break;
             default:
@@ -615,7 +614,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
+    public function showArbolObjetivos(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -762,17 +761,17 @@ class ArbolProyectoController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'objetivos_puntaje'      => $request->objetivos_puntaje,
-                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
-                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'objetivos_puntaje'      => $request->objetivos_puntaje,
-                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
-                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
                 ]);
                 break;
             default:

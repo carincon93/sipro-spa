@@ -186,13 +186,13 @@ class ProyectoController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
-                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
-                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
                 ]);
                 break;
             default:

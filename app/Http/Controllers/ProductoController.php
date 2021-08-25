@@ -379,13 +379,13 @@ class ProductoController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'productos_puntaje'      => $request->productos_puntaje,
-                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                    'productos_comentario'   => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'productos_puntaje'      => $request->productos_puntaje,
-                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                    'productos_comentario'   => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
                 ]);
                 break;
             default:

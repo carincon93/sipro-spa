@@ -339,7 +339,7 @@ class ProyectoRolSennovaController extends Controller
     {
         ProyectoRolEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_rol_sennova_id' => $proyectoRolSennova->id],
-            ['incorrecto' => $request->incorrecto, 'comentario' => $request->incorrecto ? $request->comentario : null]
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

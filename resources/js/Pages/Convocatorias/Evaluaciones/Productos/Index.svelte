@@ -40,7 +40,7 @@
     let form = useForm({
         productos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_puntaje : null,
         productos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
-        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.productos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.productos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -170,13 +170,13 @@
                 <Label class="mt-4 mb-4" labelFor="productos_puntaje" value="Puntaje (Máximo 9)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="productos_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.productos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.productos_puntaje} />
 
-                {#if segundaEvaluacion.productos_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.productos_comentario}</p>
+                {#if segundaEvaluacion?.productos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.productos_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿Los productos requieren de alguna recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.productos_requiere_comentario} />
-                    {#if $form.productos_requiere_comentario}
+                    <p>¿Los productos son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.productos_requiere_comentario} />
+                    {#if $form.productos_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$form.productos_comentario} error={errors.productos_comentario} required />
                     {/if}
                 </div>

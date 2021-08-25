@@ -19,7 +19,7 @@
     export let productos
     export let productosGantt
     export let validacionResultados
-    export let to_pdf;
+    export let to_pdf
 
     $title = 'Productos'
 
@@ -47,7 +47,7 @@
         <InfoMessage message="Debe asociar las fechas a cada uno de los productos haciendo clic en los tres puntos, a continuación, clic en 'Ver detalles'. (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>)." />
     {/if}
 
-    {#if proyecto.en_subsanacion}
+    {#if convocatoria.fase == 3}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

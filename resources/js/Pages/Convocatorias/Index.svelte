@@ -23,13 +23,13 @@
             <div>
                 {#if convocatoriaActiva}
                     <h1 class="font-bold text-5xl">
-                        Convocatoria activa: {convocatoriaActiva.year}
+                        Convocatoria activa: {convocatoriaActiva?.year}
                     </h1>
 
                     {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
-                        <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva.id))} variant="raised" class="mt-4 inline-block">
+                        <Button on:click={() => Inertia.visit(route('convocatorias.dashboard', convocatoriaActiva?.id))} variant="raised" class="mt-4 inline-block">
                             Revisar convocatoria
-                            {convocatoriaActiva.year}
+                            {convocatoriaActiva?.year}
                         </Button>
                     {/if}
                 {:else}
@@ -59,18 +59,18 @@
                 </div>
             </div>
         {/if}
-        <div>
+        <!-- <div>
             <h1 class="text-3xl mb-10 text-center">Fechas de convocatoria de las diferentes líneas programáticas:</h1>
             <InfoMessage>
                 <ul class="list-disc p-4">
-                    <li>{convocatoriaActiva.fechas_idi}</li>
-                    <li>{convocatoriaActiva.fechas_cultura}</li>
-                    <li>{convocatoriaActiva.fechas_st}</li>
-                    <li>{convocatoriaActiva.fechas_ta}</li>
-                    <li>{convocatoriaActiva.fechas_tp}</li>
+                    <li>{convocatoriaActiva?.fechas_idi}</li>
+                    <li>{convocatoriaActiva?.fechas_cultura}</li>
+                    <li>{convocatoriaActiva?.fechas_st}</li>
+                    <li>{convocatoriaActiva?.fechas_ta}</li>
+                    <li>{convocatoriaActiva?.fechas_tp}</li>
                 </ul>
             </InfoMessage>
-        </div>
+        </div> -->
 
         <h1 class="text-3xl m-10 text-center">Lista de convocatorias</h1>
 

@@ -67,7 +67,7 @@ class ActividadController extends Controller
                     return $objetivoEspecifico->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -303,13 +303,13 @@ class ActividadController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'metodologia_puntaje'      => $request->metodologia_puntaje,
-                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'metodologia_puntaje'      => $request->metodologia_puntaje,
-                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
                 ]);
                 break;
             default:

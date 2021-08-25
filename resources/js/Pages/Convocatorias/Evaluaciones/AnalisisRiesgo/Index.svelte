@@ -36,7 +36,7 @@
     let form = useForm({
         analisis_riesgos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.analisis_riesgos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_puntaje : null,
         analisis_riesgos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.analisis_riesgos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
-        analisis_riesgos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.analisis_riesgos_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
+        analisis_riesgos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.analisis_riesgos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -146,13 +146,13 @@
                 <Label class="mt-4 mb-4" labelFor="analisis_riesgos_puntaje" value="Puntaje (Máximo 5)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="analisis_riesgos_puntaje" type="number" input$step="0.1" input$min="0" input$max="5" class="mt-1" bind:value={$form.analisis_riesgos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.analisis_riesgos_puntaje} />
 
-                {#if segundaEvaluacion.analisis_riesgos_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.analisis_riesgos_comentario}</p>
+                {#if segundaEvaluacion?.analisis_riesgos_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.analisis_riesgos_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿Los análisis de riesgos requieren de alguna recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.analisis_riesgos_requiere_comentario} />
-                    {#if $form.analisis_riesgos_requiere_comentario}
+                    <p>¿Los análisis de riesgos son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.analisis_riesgos_requiere_comentario} />
+                    {#if $form.analisis_riesgos_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$form.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
                     {/if}
                 </div>

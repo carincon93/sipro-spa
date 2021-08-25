@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Proyecto extends Model
@@ -38,7 +37,8 @@ class Proyecto extends Model
         'modificable',
         'a_evaluar',
         'en_subsanacion',
-        'estructuracion_proyectos'
+        'estructuracion_proyectos',
+        'estado'
     ];
 
     /**
@@ -547,31 +547,76 @@ class Proyecto extends Model
     public function getEstadoEvaluacionAttribute()
     {
         $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+        $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
 
         $puntajeTotal = 0;
         $totalRecomendaciones = 0;
         $estadoEvaluacion = '';
+        $causalRechazo  = null;
+        $requiereSubsanar = false;
+
         foreach ($evaluaciones as $evaluacion) {
             $puntajeTotal += $evaluacion->total_evaluacion;
             $totalRecomendaciones += $evaluacion->total_recomendaciones;
+
+            switch ($evaluacion) {
+                case $evaluacion->idiEvaluacion()->exists():
+                    if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                        $causalRechazo = 'En revisión por Cord. SENNOVA';
+                    } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                        $causalRechazo = 'Rechazado';
+                    }
+
+                    if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
+                        $requiereSubsanar = true;
+                    }
+                    break;
+                case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                    if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                        $causalRechazo = 'En revisión por Cord. SENNOVA';
+                    } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                        $causalRechazo = 'Rechazado';
+                    }
+
+                    if ($evaluacion->culturaInnovacionEvaluacion->anexos_comentario != null) {
+                        $requiereSubsanar = true;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
-        count($evaluaciones) > 0 ? $puntajeTotal = $puntajeTotal / count($evaluaciones) : $puntajeTotal = 0;
+        $cantidadEvaluaciones = count($evaluaciones);
 
-        if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
-            $estadoEvaluacion = "a. No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.";
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
-            $estadoEvaluacion = "b. Pre-aprobado >= 91";
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = "c. Pre-aprobado con observaciones";
-        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = "d. Pre-aprobado con observaciones";
-        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = "e. Pre-aprobado con observaciones";
-        } elseif ($puntajeTotal < 70) { // Rechazado
-            $estadoEvaluacion = "f. Rechazado";
+        $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
+
+        if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
+            if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
+                $estadoEvaluacion = "a. No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.";
+            } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado - No requiere ser subsanado
+                $estadoEvaluacion = "b. Pre-aprobado >= 91";
+            } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+                $estadoEvaluacion = "c. Pre-aprobado con observaciones";
+                $requiereSubsanar = true;
+            } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
+                $estadoEvaluacion = "d. Pre-aprobado con observaciones";
+                $requiereSubsanar = true;
+            } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+                $estadoEvaluacion = "e. Pre-aprobado con observaciones";
+                $requiereSubsanar = true;
+            } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
+                $estadoEvaluacion = "f. Rechazado";
+            }
+        } else {
+            $estadoEvaluacion = $causalRechazo;
         }
 
-        return $estadoEvaluacion;
+        if ($cantidadEvaluaciones == 0) {
+            $estadoEvaluacion = 'Sin evaluar';
+        }
+
+        return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar]);
     }
 }

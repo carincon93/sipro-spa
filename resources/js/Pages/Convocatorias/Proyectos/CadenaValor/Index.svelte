@@ -146,7 +146,7 @@
 
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
-    {#if proyecto.en_subsanacion}
+    {#if convocatoria.fase == 3}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

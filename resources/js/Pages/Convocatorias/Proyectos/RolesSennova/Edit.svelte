@@ -124,7 +124,7 @@
             </form>
         </div>
         <div class="ml-1.5">
-            {#if proyecto.en_subsanacion}
+            {#if convocatoria.fase == 3}
                 {#each proyectoRolSennova.proyecto_roles_evaluaciones as evaluacionRol, i}
                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                         <div class="flex text-orangered-900 font-black">

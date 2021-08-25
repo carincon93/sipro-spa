@@ -17,7 +17,7 @@
     import Stepper from '@/Shared/Stepper'
 
     export let errors
-    export let to_pdf;
+    export let to_pdf
     export let convocatoria
     export let proyecto
     export let efectosDirectos
@@ -429,10 +429,10 @@
         <Stepper {convocatoria} {proyecto} />
     {/if}
 
-    <h1 class="text-3xl {(to_pdf)?'':'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
+    <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    {#if proyecto.en_subsanacion}
+    {#if convocatoria.fase == 3}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -891,10 +891,13 @@
 </AuthenticatedLayout>
 
 {#if to_pdf}
-<style>
-    nav{display: none !important;}
-</style>
+    <style>
+        nav {
+            display: none !important;
+        }
+    </style>
 {/if}
+
 <style>
     .resultados.relative.flex-1:before {
         content: '';

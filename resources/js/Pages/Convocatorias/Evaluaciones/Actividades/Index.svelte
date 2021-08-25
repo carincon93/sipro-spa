@@ -46,7 +46,7 @@
     let form = useForm({
         metodologia_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_puntaje : null,
         metodologia_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
-        metodologia_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.metodologia_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
+        metodologia_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.metodologia_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
@@ -196,13 +196,13 @@
                 <Label class="mt-4 mb-4" labelFor="metodologia_puntaje" value="Puntaje (Máximo 15)" />
                 <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="metodologia_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.metodologia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.metodologia_puntaje} />
 
-                {#if segundaEvaluacion.metodologia_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion.metodologia_comentario}</p>
+                {#if segundaEvaluacion?.metodologia_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.metodologia_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿La metodología o las actividades requieren de alguna recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.metodologia_requiere_comentario} />
-                    {#if $form.metodologia_requiere_comentario}
+                    <p>¿La metodología o las actividades son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.metodologia_requiere_comentario} />
+                    {#if $form.metodologia_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$form.metodologia_comentario} error={errors.metodologia_comentario} required />
                     {/if}
                 </div>

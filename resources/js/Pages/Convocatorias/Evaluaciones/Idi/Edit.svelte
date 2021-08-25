@@ -18,7 +18,6 @@
     import Switch from '@/Shared/Switch'
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
-    import Checkbox from '@smui/checkbox'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
 
@@ -140,51 +139,51 @@
         clausula_confidencialidad: idiEvaluacion.evaluacion.clausula_confidencialidad,
         titulo_puntaje: idiEvaluacion.titulo_puntaje,
         titulo_comentario: idiEvaluacion.titulo_comentario,
-        titulo_requiere_comentario: idiEvaluacion.titulo_comentario == null ? false : true,
+        titulo_requiere_comentario: idiEvaluacion.titulo_comentario == null ? true : false,
         video_puntaje: idiEvaluacion.video_puntaje,
         video_comentario: idiEvaluacion.video_comentario,
-        video_requiere_comentario: idiEvaluacion.video_comentario == null ? false : true,
+        video_requiere_comentario: idiEvaluacion.video_comentario == null ? true : false,
         resumen_puntaje: idiEvaluacion.resumen_puntaje,
         resumen_comentario: idiEvaluacion.resumen_comentario,
-        resumen_requiere_comentario: idiEvaluacion.resumen_comentario == null ? false : true,
+        resumen_requiere_comentario: idiEvaluacion.resumen_comentario == null ? true : false,
         problema_central_puntaje: idiEvaluacion.problema_central_puntaje,
         problema_central_comentario: idiEvaluacion.problema_central_comentario,
-        problema_central_requiere_comentario: idiEvaluacion.problema_central_comentario == null ? false : true,
+        problema_central_requiere_comentario: idiEvaluacion.problema_central_comentario == null ? true : false,
         ortografia_puntaje: idiEvaluacion.ortografia_puntaje,
         ortografia_comentario: idiEvaluacion.ortografia_comentario,
-        ortografia_requiere_comentario: idiEvaluacion.ortografia_comentario == null ? false : true,
+        ortografia_requiere_comentario: idiEvaluacion.ortografia_comentario == null ? true : false,
         redaccion_puntaje: idiEvaluacion.redaccion_puntaje,
         redaccion_comentario: idiEvaluacion.redaccion_comentario,
-        redaccion_requiere_comentario: idiEvaluacion.redaccion_comentario == null ? false : true,
+        redaccion_requiere_comentario: idiEvaluacion.redaccion_comentario == null ? true : false,
         normas_apa_puntaje: idiEvaluacion.normas_apa_puntaje,
         normas_apa_comentario: idiEvaluacion.normas_apa_comentario,
-        normas_apa_requiere_comentario: idiEvaluacion.normas_apa_comentario == null ? false : true,
+        normas_apa_requiere_comentario: idiEvaluacion.normas_apa_comentario == null ? true : false,
 
-        justificacion_economia_naranja_requiere_comentario: idiEvaluacion.justificacion_economia_naranja_comentario == null ? false : true,
+        justificacion_economia_naranja_requiere_comentario: idiEvaluacion.justificacion_economia_naranja_comentario == null ? true : false,
         justificacion_economia_naranja_comentario: idiEvaluacion.justificacion_economia_naranja_comentario,
 
-        justificacion_industria_4_requiere_comentario: idiEvaluacion.justificacion_industria_4_comentario == null ? false : true,
+        justificacion_industria_4_requiere_comentario: idiEvaluacion.justificacion_industria_4_comentario == null ? true : false,
         justificacion_industria_4_comentario: idiEvaluacion.justificacion_industria_4_comentario,
 
-        bibliografia_requiere_comentario: idiEvaluacion.bibliografia_comentario == null ? false : true,
+        bibliografia_requiere_comentario: idiEvaluacion.bibliografia_comentario == null ? true : false,
         bibliografia_comentario: idiEvaluacion.bibliografia_comentario,
 
-        fechas_requiere_comentario: idiEvaluacion.fechas_comentario == null ? false : true,
+        fechas_requiere_comentario: idiEvaluacion.fechas_comentario == null ? true : false,
         fechas_comentario: idiEvaluacion.fechas_comentario,
 
-        justificacion_politica_discapacidad_requiere_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario == null ? false : true,
+        justificacion_politica_discapacidad_requiere_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario == null ? true : false,
         justificacion_politica_discapacidad_comentario: idiEvaluacion.justificacion_politica_discapacidad_comentario,
 
-        actividad_economica_requiere_comentario: idiEvaluacion.actividad_economica_comentario == null ? false : true,
+        actividad_economica_requiere_comentario: idiEvaluacion.actividad_economica_comentario == null ? true : false,
         actividad_economica_comentario: idiEvaluacion.actividad_economica_comentario,
 
-        disciplina_subarea_conocimiento_requiere_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario == null ? false : true,
+        disciplina_subarea_conocimiento_requiere_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario == null ? true : false,
         disciplina_subarea_conocimiento_comentario: idiEvaluacion.disciplina_subarea_conocimiento_comentario,
 
-        red_conocimiento_requiere_comentario: idiEvaluacion.red_conocimiento_comentario == null ? false : true,
+        red_conocimiento_requiere_comentario: idiEvaluacion.red_conocimiento_comentario == null ? true : false,
         red_conocimiento_comentario: idiEvaluacion.red_conocimiento_comentario,
 
-        tematica_estrategica_requiere_comentario: idiEvaluacion.tematica_estrategica_comentario == null ? false : true,
+        tematica_estrategica_requiere_comentario: idiEvaluacion.tematica_estrategica_comentario == null ? true : false,
         tematica_estrategica_comentario: idiEvaluacion.tematica_estrategica_comentario,
     })
     function submit() {
@@ -249,13 +248,13 @@
                 <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="titulo_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.titulo_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.titulo_puntaje} />
 
                 {#if idiSegundaEvaluacion?.titulo_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.titulo_comentario}</p>
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.titulo_comentario}</p>
                 {/if}
 
                 <div class="mt-4">
-                    <p>¿El título requiere de una recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.titulo_requiere_comentario} />
-                    {#if $form.titulo_requiere_comentario}
+                    <p>¿El título es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.titulo_requiere_comentario} />
+                    {#if $form.titulo_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="titulo_comentario" bind:value={$form.titulo_comentario} error={errors.titulo_comentario} required />
                     {/if}
                 </div>
@@ -281,12 +280,12 @@
 
             <InfoMessage>
                 {#if idiSegundaEvaluacion?.fechas_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.fechas_comentario}</p>
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.fechas_comentario}</p>
                 {/if}
                 <div class="mt-4">
                     <p>¿Las fechas requieren de una recomendación?</p>
-                    <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
-                    {#if $form.fechas_requiere_comentario}
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
+                    {#if $form.fechas_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fechas_comentario" bind:value={$form.fechas_comentario} error={errors.fechas_comentario} required />
                     {/if}
                 </div>
@@ -310,12 +309,12 @@
 
                 <InfoMessage>
                     {#if idiSegundaEvaluacion?.red_conocimiento_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.red_conocimiento_comentario}</p>
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.red_conocimiento_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿La red de conocimiento sectorial requiere de una recomendación?</p>
-                        <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.red_conocimiento_requiere_comentario} />
-                        {#if $form.red_conocimiento_requiere_comentario}
+                        <p>¿La red de conocimiento sectorial es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.red_conocimiento_requiere_comentario} />
+                        {#if $form.red_conocimiento_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="red_conocimiento_comentario" bind:value={$form.red_conocimiento_comentario} error={errors.red_conocimiento_comentario} required />
                         {/if}
                     </div>
@@ -350,12 +349,12 @@
 
                     <InfoMessage>
                         {#if idiSegundaEvaluacion?.disciplina_subarea_conocimiento_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.disciplina_subarea_conocimiento_comentario}</p>
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.disciplina_subarea_conocimiento_comentario}</p>
                         {/if}
                         <div class="mt-4">
-                            <p>¿La disciplina de la subárea de conocimiento requiere de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.disciplina_subarea_conocimiento_requiere_comentario} />
-                            {#if $form.disciplina_subarea_conocimiento_requiere_comentario}
+                            <p>¿La disciplina de la subárea de conocimiento es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.disciplina_subarea_conocimiento_requiere_comentario} />
+                            {#if $form.disciplina_subarea_conocimiento_requiere_comentario == false}
                                 <Textarea
                                     disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined}
                                     label="Comentario"
@@ -381,12 +380,12 @@
 
                 <InfoMessage>
                     {#if idiSegundaEvaluacion?.actividad_economica_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.actividad_economica_comentario}</p>
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.actividad_economica_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿La actividad económica requiere de una recomendación?</p>
-                        <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.actividad_economica_requiere_comentario} />
-                        {#if $form.actividad_economica_requiere_comentario}
+                        <p>¿La actividad económica es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.actividad_economica_requiere_comentario} />
+                        {#if $form.actividad_economica_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="actividad_economica_comentario" bind:value={$form.actividad_economica_comentario} error={errors.actividad_economica_comentario} required />
                         {/if}
                     </div>
@@ -402,12 +401,12 @@
 
                 <InfoMessage>
                     {#if idiSegundaEvaluacion?.tematica_estrategica_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.tematica_estrategica_comentario}</p>
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.tematica_estrategica_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿La temática estratégica requiere de una recomendación?</p>
-                        <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.tematica_estrategica_requiere_comentario} />
-                        {#if $form.tematica_estrategica_requiere_comentario}
+                        <p>¿La temática estratégica es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.tematica_estrategica_requiere_comentario} />
+                        {#if $form.tematica_estrategica_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="tematica_estrategica_comentario" bind:value={$form.tematica_estrategica_comentario} error={errors.tematica_estrategica_comentario} required />
                         {/if}
                     </div>
@@ -434,12 +433,12 @@
                         <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="video_puntaje" type="number" input$step="0.1" input$min="0" input$max="1" class="mt-1" bind:value={$form.video_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.video_puntaje} />
 
                         {#if idiSegundaEvaluacion?.video_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.video_comentario}</p>
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.video_comentario}</p>
                         {/if}
                         <div class="mt-4">
-                            <p>¿El video requiere de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.video_requiere_comentario} />
-                            {#if $form.video_requiere_comentario}
+                            <p>¿El video es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.video_requiere_comentario} />
+                            {#if $form.video_requiere_comentario == false}
                                 <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$form.video_comentario} error={errors.video_comentario} required />
                             {/if}
                         </div>
@@ -462,12 +461,12 @@
 
                     <InfoMessage>
                         {#if idiSegundaEvaluacion?.justificacion_industria_4_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.justificacion_industria_4_comentario}</p>
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.justificacion_industria_4_comentario}</p>
                         {/if}
                         <div class="mt-4">
-                            <p>¿El ítem requiere de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_industria_4_requiere_comentario} />
-                            {#if $form.justificacion_industria_4_requiere_comentario}
+                            <p>¿El ítem es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_industria_4_requiere_comentario} />
+                            {#if $form.justificacion_industria_4_requiere_comentario == false}
                                 <Textarea
                                     disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined}
                                     label="Comentario"
@@ -498,12 +497,12 @@
 
                     <InfoMessage>
                         {#if idiSegundaEvaluacion?.justificacion_economia_naranja_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.justificacion_economia_naranja_comentario}</p>
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.justificacion_economia_naranja_comentario}</p>
                         {/if}
                         <div class="mt-4">
-                            <p>¿El ítem requiere de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_economia_naranja_requiere_comentario} />
-                            {#if $form.justificacion_economia_naranja_requiere_comentario}
+                            <p>¿El ítem es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_economia_naranja_requiere_comentario} />
+                            {#if $form.justificacion_economia_naranja_requiere_comentario == false}
                                 <Textarea
                                     disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined}
                                     label="Comentario"
@@ -535,8 +534,8 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿El ítem requieren de una recomendación?</p>
-                            <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
-                            {#if $form.justificacion_politica_discapacidad_requiere_comentario}
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
+                            {#if $form.justificacion_politica_discapacidad_requiere_comentario == false}
                                 <Textarea
                                     disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined}
                                     label="Comentario"
@@ -811,12 +810,12 @@
                     <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="resumen_puntaje" type="number" input$step="0.1" input$min="0" input$max="2" class="mt-1" bind:value={$form.resumen_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resumen_puntaje} />
 
                     {#if idiSegundaEvaluacion?.resumen_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.resumen_comentario}</p>
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.resumen_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿El resumen requiere de una recomendación?</p>
-                        <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.resumen_requiere_comentario} />
-                        {#if $form.resumen_requiere_comentario}
+                        <p>¿El resumen es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.resumen_requiere_comentario} />
+                        {#if $form.resumen_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resumen_comentario" bind:value={$form.resumen_comentario} error={errors.resumen_comentario} required />
                         {/if}
                     </div>
@@ -920,12 +919,12 @@
 
                 <InfoMessage>
                     {#if idiSegundaEvaluacion?.bibliografia_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.bibliografia_comentario}</p>
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.bibliografia_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿La bibliografía requiere de una recomendación?</p>
-                        <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
-                        {#if $form.bibliografia_requiere_comentario}
+                        <p>¿La bibliografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
+                        {#if $form.bibliografia_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="bibliografia_comentario" bind:value={$form.bibliografia_comentario} error={errors.bibliografia_comentario} required />
                         {/if}
                     </div>
@@ -945,12 +944,12 @@
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="ortografia_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.ortografia_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.ortografia_puntaje} />
 
             {#if idiSegundaEvaluacion?.ortografia_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.ortografia_comentario}</p>
+                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.ortografia_comentario}</p>
             {/if}
             <div class="mt-4">
-                <p>¿La ortografía requiere de una recomendación?</p>
-                <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
-                {#if $form.ortografia_requiere_comentario}
+                <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
+                {#if $form.ortografia_requiere_comentario == false}
                     <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
                 {/if}
             </div>
@@ -968,12 +967,12 @@
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="redaccion_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.redaccion_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.redaccion_puntaje} />
 
             {#if idiSegundaEvaluacion?.redaccion_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.redaccion_comentario}</p>
+                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.redaccion_comentario}</p>
             {/if}
             <div class="mt-4">
-                <p>¿La redacción requiere de una recomendación?</p>
-                <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
-                {#if $form.redaccion_requiere_comentario}
+                <p>¿La redacción es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
+                {#if $form.redaccion_requiere_comentario == false}
                     <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
                 {/if}
             </div>
@@ -991,12 +990,12 @@
             <Input disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
             {#if idiSegundaEvaluacion?.normas_apa_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion.normas_apa_comentario}</p>
+                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.normas_apa_comentario}</p>
             {/if}
             <div class="mt-4">
                 <p>¿Las normas APA requieren de una recomendación?</p>
-                <Switch disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
-                {#if $form.normas_apa_requiere_comentario}
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
+                {#if $form.normas_apa_requiere_comentario == false}
                     <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
                 {/if}
             </div>
@@ -1005,12 +1004,12 @@
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11]) && idi.proyecto.finalizado == true && idiEvaluacion.evaluacion.finalizado == false && idiEvaluacion.evaluacion.habilitado == true)}
                 {#if $form.clausula_confidencialidad}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
                 {:else}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>

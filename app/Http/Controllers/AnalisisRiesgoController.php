@@ -212,13 +212,13 @@ class AnalisisRiesgoController extends Controller
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
-                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
-                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
                 ]);
                 break;
             default:

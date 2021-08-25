@@ -27,7 +27,7 @@ class IdiController extends Controller
         $this->authorize('formular-proyecto', [null]);
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'evaluaciones_finalizadas'),
+            'convocatoria'  => $convocatoria->only('id', 'fase'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),
             'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);

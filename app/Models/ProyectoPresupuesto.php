@@ -164,6 +164,6 @@ class ProyectoPresupuesto extends Model
 
     public function getPresupuestoAprobadoAttribute()
     {
-        return $this->proyectoPresupuestosEvaluaciones()->count() == $this->proyectoPresupuestosEvaluaciones()->where('incorrecto', false)->count();
+        return $this->proyectoPresupuestosEvaluaciones()->count() == $this->proyectoPresupuestosEvaluaciones()->where('correcto', true)->count();
     }
 }

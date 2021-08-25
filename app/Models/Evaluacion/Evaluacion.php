@@ -29,12 +29,14 @@ class Evaluacion extends Model
      * @var array
      */
     protected $fillable = [
+        'convocatoria_id',
         'proyecto_id',
         'user_id',
         'finalizado',
         'habilitado',
         'iniciado',
         'clausula_confidencialidad',
+        'justificacion_causal_rechazo'
     ];
 
     /**
@@ -63,6 +65,16 @@ class Evaluacion extends Model
     public function proyecto()
     {
         return $this->belongsTo(\App\Models\Proyecto::class);
+    }
+
+    /**
+     * Relationship with Convocatoria
+     *
+     * @return object
+     */
+    public function convocatoria()
+    {
+        return $this->belongsTo(\App\Models\Convocatoria::class);
     }
 
     /**
@@ -113,6 +125,16 @@ class Evaluacion extends Model
     public function evaluador()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+
+    /**
+     * Relationship with EvaluacionCausalRechazo
+     *
+     * @return object
+     */
+    public function evaluacionCausalesRechazo()
+    {
+        return $this->hasMany(EvaluacionCausalRechazo::class);
     }
 
     public function getTotalEvaluacionAttribute()
