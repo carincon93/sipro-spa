@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Proyecto extends Model
@@ -23,7 +22,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'max_material_formacion', 'max_bienestar_aprendiz', 'estado_evaluacion'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -486,62 +485,6 @@ class Proyecto extends Model
     public function getPrecioProyectoAttribute()
     {
         return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
-    }
-
-    public function getMetaAprendicesAttribute()
-    {
-        $valorEstandarizado = 0;
-        if ($this->ta()->exists()) {
-            $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
-            if ($modalidad == 1) {
-                $valorEstandarizado = 460000;
-            } else if ($modalidad == 2) {
-                $valorEstandarizado = 490000;
-            } else if ($modalidad == 3) {
-                $valorEstandarizado = 520000;
-            }
-        }
-
-        $total = 0;
-        if ($valorEstandarizado > 0) {
-            $total = $this->getPrecioProyectoAttribute() / $valorEstandarizado;
-        }
-
-        return round($total);
-    }
-
-    public function getMaxMaterialFormacionAttribute()
-    {
-        $valorAprendiz = 0;
-        if ($this->ta()->exists()) {
-            $modalidad = $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad;
-            if ($modalidad == 1) {
-                $valorAprendiz = 20000;
-            } else if ($modalidad == 2) {
-                $valorAprendiz = 35000;
-            } else if ($modalidad == 3) {
-                $valorAprendiz = 63000;
-            }
-        }
-
-        $total = round($this->getMetaAprendicesAttribute() * $valorAprendiz);
-
-        if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 18) {
-            $total = 32098065 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
-        } else if ($this->tecnoacademiaLineasTecnoacademia()->first() && $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id == 16) {
-            $total = 23174417 + $this->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
-        }
-
-        return $total;
-    }
-
-    public function getMaxBienestarAprendizAttribute()
-    {
-        $total = 0;
-        if ($this->ta()->exists()) {
-            $total = round($this->getMetaAprendicesAttribute() * 10200);
-        }
-        return $total;
     }
 
     public function getEstadoEvaluacionAttribute()
