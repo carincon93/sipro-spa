@@ -133,7 +133,7 @@
                             </svg>
                             Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
                         </div>
-                        {#if evaluacionRol.incorrecto && evaluacionRol.evaluacion.habilitado}
+                        {#if evaluacionRol.correcto && evaluacionRol.evaluacion.habilitado}
                             <p class="whitespace-pre-line">{evaluacionRol.comentario ? evaluacionRol.comentario : 'Sin recomendación'}</p>
                         {:else}
                             Aprobado
