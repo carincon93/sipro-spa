@@ -52,7 +52,8 @@ class Convocatoria extends Model
         'fecha_inicio_convocatoria_tp',
         'fecha_finalizacion_convocatoria_ta',
         'fecha_finalizacion_convocatoria_tp',
-        'fase'
+        'fase',
+        'mostrar_recomendaciones'
     ];
 
     /**

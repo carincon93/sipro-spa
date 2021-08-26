@@ -72,7 +72,7 @@
                     </div>
                 </div>
             {/if}
-            {#if convocatoria.fase == 3}
+            {#if convocatoria.mostrar_recomendaciones}
                 {#each proyecto.evaluaciones as evaluacion, i}
                     {#if evaluacion.finalizado && evaluacion.habilitado}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -107,7 +107,7 @@
             : '<strong>Importante</strong> Una vez creadas las actividades, edite cada una haciendo clic en los tres puntos, a continuación, registre las fechas (<strong>Se deben registrar todas las fechas para visualizar el diagrama de Gantt</strong>), enlace los productos y rubros correspondientes, de esta manera se completa la cadena de valor.'}
     />
 
-    {#if convocatoria.fase == 3}
+    {#if convocatoria.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

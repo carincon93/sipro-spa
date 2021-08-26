@@ -167,14 +167,16 @@ class ConvocatoriaController extends Controller
                 $convocatoriaPrevActiva->save();
             }
         }
-        $convocatoria->esta_activa = $request->esta_activa;
-        $convocatoria->fase        = $request->fase;
+        $convocatoria->esta_activa              = $request->esta_activa;
+        $convocatoria->fase                     = $request->fase;
+        $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
 
         switch ($request->fase) {
             case 1: // Formulación
                 $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
             case 2: // Primera evaluación
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                $convocatoria->evaluaciones()->update(['finalizado' => false, 'iniciado' => false]);
                 break;
             case 3: // Subsanación
                 // $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
@@ -188,6 +190,7 @@ class ConvocatoriaController extends Controller
                 break;
             case 4: // Segunda evaluación
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                $convocatoria->evaluaciones()->update(['finalizado' => false, 'iniciado' => false]);
                 break;
             case 5: // Convocatoria finalizada
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);

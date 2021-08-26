@@ -51,7 +51,7 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
@@ -267,7 +267,7 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),

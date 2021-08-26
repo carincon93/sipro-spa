@@ -173,7 +173,7 @@ class ServicioTecnologicoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'                  => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
+            'convocatoria'                  => $convocatoria->only('id', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
             'servicioTecnologico'           => $servicioTecnologico,
             'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
             'tiposProyectoSt'               => $tipoProyectoSt,

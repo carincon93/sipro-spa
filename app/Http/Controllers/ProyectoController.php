@@ -86,7 +86,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'mostrar_recomendaciones'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'productos'     => $productos,
             'objetivos'     => $objetivos

@@ -86,7 +86,14 @@
                                         Puntaje: {proyecto.estado_evaluacion.puntaje}
                                         <br />
                                         Número de recomendaciones: {proyecto.estado_evaluacion.numeroRecomendaciones}
+                                        <br />
                                         Evaluaciones: {proyecto.estado_evaluacion.evaluacionesHabilitadas} habilitada(s) / {proyecto.estado_evaluacion.evaluacionesFinalizadas} finalizada(s)
+                                        <br />
+                                        {#if proyecto.estado_evaluacion.alerta}
+                                            <strong class="text-red-500">
+                                                Importante: {proyecto.estado_evaluacion.alerta}
+                                            </strong>
+                                        {/if}
                                     </small>
                                 {/if}
                             </p>

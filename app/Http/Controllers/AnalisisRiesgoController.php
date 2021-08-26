@@ -28,7 +28,7 @@ class AnalisisRiesgoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id'),
+            'convocatoria'    => $convocatoria->only('id', 'mostrar_recomendaciones'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')

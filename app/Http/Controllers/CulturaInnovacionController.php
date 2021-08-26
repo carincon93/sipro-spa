@@ -151,7 +151,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
+            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura', 'mostrar_recomendaciones'),
             'culturaInnovacion'                         => $culturaInnovacion,
             'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->pluck('id'),

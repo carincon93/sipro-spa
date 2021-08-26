@@ -57,7 +57,7 @@
         <div slot="title">Entidades aliadas</div>
 
         <div slot="caption">
-            {#if convocatoria.fase == 3}
+            {#if convocatoria.mostrar_recomendaciones}
                 {#each proyecto.evaluaciones as evaluacion, i}
                     {#if evaluacion.finalizado && evaluacion.habilitado}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

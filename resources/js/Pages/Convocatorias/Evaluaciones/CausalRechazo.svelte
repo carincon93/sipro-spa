@@ -78,7 +78,7 @@
             </div>
 
             <div class="grid grid-cols-2">
-                <Label class="p-3 border-t border-b flex items-center text-sm" labelFor="4" value="Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA.Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA" />
+                <Label class="p-3 border-t border-b flex items-center text-sm" labelFor="4" value="Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA." />
 
                 <div class="border-b border-t flex items-center justify-center">
                     <input type="checkbox" bind:group={$form.causal_rechazo} id="4" value={4} class="rounded text-indigo-500" />

@@ -33,7 +33,10 @@
     let form = useForm({
         descripcion: convocatoria.descripcion,
         esta_activa: convocatoria.esta_activa,
-        fase: convocatoria.fase,
+        fase: {
+            value: convocatoria.fase,
+            label: fases.find((item) => item.value == convocatoria.fase)?.label,
+        },
         min_fecha_inicio_proyectos_idi: convocatoria.min_fecha_inicio_proyectos_idi,
         max_fecha_finalizacion_proyectos_idi: convocatoria.max_fecha_finalizacion_proyectos_idi,
         fecha_inicio_convocatoria_idi: convocatoria.fecha_inicio_convocatoria_idi,
@@ -54,6 +57,7 @@
         fecha_inicio_convocatoria_tp: convocatoria.fecha_inicio_convocatoria_tp,
         fecha_finalizacion_convocatoria_ta: convocatoria.fecha_finalizacion_convocatoria_ta,
         fecha_finalizacion_convocatoria_tp: convocatoria.fecha_finalizacion_convocatoria_tp,
+        mostrar_recomendaciones: convocatoria.mostrar_recomendaciones,
     })
 
     function submit() {
@@ -225,6 +229,13 @@
                         <br />
                         <Switch bind:checked={$form.esta_activa} />
                         <InputError message={errors.esta_activa} />
+                    </div>
+
+                    <div class="mt-4 mb-20">
+                        <Label required labelFor="mostrar_recomendaciones" value="¿Desea que el formulador observe las recomendaciones?" class="inline-block mb-4" />
+                        <br />
+                        <Switch bind:checked={$form.mostrar_recomendaciones} />
+                        <InputError message={errors.mostrar_recomendaciones} />
                     </div>
                     <hr />
 

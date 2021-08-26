@@ -149,7 +149,7 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
-            'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
+            'convocatoria'       => $convocatoria->only('id', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),

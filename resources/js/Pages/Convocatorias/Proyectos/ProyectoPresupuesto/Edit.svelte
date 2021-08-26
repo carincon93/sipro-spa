@@ -237,7 +237,7 @@
             </div>
         {/if}
         <div class="ml-1.5">
-            {#if convocatoria.fase == 3}
+            {#if convocatoria.mostrar_recomendaciones}
                 {#each proyectoPresupuesto.proyecto_presupuestos_evaluaciones as evaluacionPresupuesto, i}
                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                         <div class="flex text-orangered-900 font-black">

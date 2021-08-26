@@ -245,7 +245,7 @@ class ProyectoPresupuestoController extends Controller
         $proyecto->lineaProgramatica;
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Edit', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'mostrar_recomendaciones'),
             'proyecto'                  => $proyecto,
             'proyectoPresupuesto'       => $presupuesto,
             'tiposLicencia'             => json_decode(Storage::get('json/tipos-licencia-software.json'), true),

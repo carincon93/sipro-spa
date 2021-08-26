@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Proyecto extends Model
 {
@@ -555,9 +556,12 @@ class Proyecto extends Model
         $causalRechazo  = null;
         $requiereSubsanar = false;
 
+        $estados = array();
         foreach ($evaluaciones as $evaluacion) {
             $puntajeTotal += $evaluacion->total_evaluacion;
             $totalRecomendaciones += $evaluacion->total_recomendaciones;
+
+            array_push($estados, $this->estadoEvaluacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
             switch ($evaluacion) {
                 case $evaluacion->idiEvaluacion()->exists():
@@ -590,33 +594,94 @@ class Proyecto extends Model
 
         $cantidadEvaluaciones = count($evaluaciones);
 
+        $sq = 0;
+        $sq = $this->getDesviacionEstandarAttribute();
+        $alerta = null;
+        if (in_array(2, $estados) && $sq >= 25  || in_array(3, $estados) && $sq >= 25) {
+            if (in_array(2, $estados)) {
+                $estadoArr = 'Pre-aprobado';
+            } else if (in_array(3, $estados)) {
+                $estadoArr = 'Pre-aprobado con observaciones';
+            }
+            $alerta = "Hay una evaluación en estado '{$estadoArr}' y la desviación estándar de las {$cantidadEvaluaciones} evaluaciones es {$sq}.";
+        }
+
         $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
 
         if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
-            if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
-                $estadoEvaluacion = "a. No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.";
-            } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado - No requiere ser subsanado
-                $estadoEvaluacion = "b. Pre-aprobado >= 91";
-            } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-                $estadoEvaluacion = "c. Pre-aprobado con observaciones";
-                $requiereSubsanar = true;
-            } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
-                $estadoEvaluacion = "d. Pre-aprobado con observaciones";
-                $requiereSubsanar = true;
-            } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-                $estadoEvaluacion = "e. Pre-aprobado con observaciones";
-                $requiereSubsanar = true;
-            } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
-                $estadoEvaluacion = "f. Rechazado";
-            }
+            $estadoEvaluacion = $this->estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
+            $requiereSubsanar = $this->estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
         } else {
             $estadoEvaluacion = $causalRechazo;
         }
 
         if ($cantidadEvaluaciones == 0) {
-            $estadoEvaluacion = 'Sin evaluar';
+            $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
         }
 
-        return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar]);
+        return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
+    }
+
+    public function estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
+    {
+        $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
+
+        $id = null;
+        if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 1)->first()['value'];
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado - No requiere ser subsanado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 2)->first()['value'];
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 4)->first()['value'];
+        }
+
+        return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
+    }
+
+    public function getDesviacionEstandarAttribute()
+    {
+        $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+        $nums = array();
+
+        foreach ($evaluaciones as $evaluacion) {
+            array_push($nums, $evaluacion->total_evaluacion);
+        }
+
+        /**
+         * Calcular desviacion Estandar
+         * @author evilnapsis
+         **/
+        $sq = 0;
+        if (count($nums) > 0) {
+            $sum = 0;
+            for ($i = 0; $i < count($nums); $i++) {
+                $sum += $nums[$i];
+            }
+            $media = $sum / count($nums);
+            $sum2 = 0;
+            for ($i = 0; $i < count($nums); $i++) {
+                $sum2 += ($nums[$i] - $media) * ($nums[$i] - $media);
+            }
+            $vari = $sum2 / count($nums);
+            $sq = sqrt($vari);
+        }
+
+        return $sq;
     }
 }

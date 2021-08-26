@@ -432,7 +432,7 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    {#if convocatoria.fase == 3}
+    {#if convocatoria.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if evaluacion.finalizado && evaluacion.habilitado}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
