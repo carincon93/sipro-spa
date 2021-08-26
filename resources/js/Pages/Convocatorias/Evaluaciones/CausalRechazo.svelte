@@ -40,6 +40,8 @@
             })
         }
     }
+
+    $: console.log()
 </script>
 
 <AuthenticatedLayout>
@@ -85,9 +87,9 @@
                 </div>
             </div>
             <div class="mt-8 mb-8">
-                <Label required labelFor="justificacion_causal_rechazo" value="Justificación" />
+                <Label required={$form.causal_rechazo?.length > 0} labelFor="justificacion_causal_rechazo" value="Justificación" />
 
-                <Textarea maxlength="40000" id="justificacion_causal_rechazo" error={errors.justificacion_causal_rechazo} bind:value={$form.justificacion_causal_rechazo} required />
+                <Textarea required={$form.causal_rechazo?.length > 0} maxlength="40000" id="justificacion_causal_rechazo" error={errors.justificacion_causal_rechazo} bind:value={$form.justificacion_causal_rechazo} />
             </div>
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

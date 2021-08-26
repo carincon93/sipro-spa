@@ -108,8 +108,8 @@
     <InfoMessage>
         <form on:submit|preventDefault={submit}>
             <div class="mt-4">
-                <p>¿Las entidades aliadas son válidas?</p>
-                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.entidad_aliada_verificada} />
+                <p>Verifique que la información de la entidad o entidades aliadas registradas sea correcta. Luego seleccione una de las siguientes opciones: <strong>Entidad validada</strong> o <strong>Entidad no validada</strong> y finalmente de clic en <strong>Guardar</strong></p>
+                <Switch onMessage="Entidad validada" offMessage="Entidad no validada" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.entidad_aliada_verificada} />
             </div>
             {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
                 <div class="px-8 py-4 border-t border-gray-200 flex items-center sticky bottom-0">

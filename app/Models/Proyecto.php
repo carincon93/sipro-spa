@@ -555,40 +555,55 @@ class Proyecto extends Model
         $estadoEvaluacion = '';
         $causalRechazo  = null;
         $requiereSubsanar = false;
+        $totalPresupuestosEvaluados = 0;
+        $countPresupuestoNoAprobado = 0;
 
-        $estados = array();
-        foreach ($evaluaciones as $evaluacion) {
+        $estados = array(1, 2);
+
+        foreach ($evaluaciones as $key => $evaluacion) {
             $puntajeTotal += $evaluacion->total_evaluacion;
             $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
-            array_push($estados, $this->estadoEvaluacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+            // Sumar los presupuesto no aprobados
+            $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
+            foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
+                $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
+            }
 
-            switch ($evaluacion) {
-                case $evaluacion->idiEvaluacion()->exists():
-                    if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                        $causalRechazo = 'En revisión por Cord. SENNOVA';
-                    } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                        $causalRechazo = 'Rechazado';
-                    }
+            if ($key === count($evaluaciones) - 1) {
+                $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado causal f' : $causalRechazo = null;
 
-                    if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
-                        $requiereSubsanar = true;
-                    }
-                    break;
-                case $evaluacion->culturaInnovacionEvaluacion()->exists():
-                    if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                        $causalRechazo = 'En revisión por Cord. SENNOVA';
-                    } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                        $causalRechazo = 'Rechazado';
-                    }
+                array_push($estados, $this->estadoEvaluacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
-                    if ($evaluacion->culturaInnovacionEvaluacion->anexos_comentario != null) {
-                        $requiereSubsanar = true;
-                    }
-                    break;
+                if ($causalRechazo == null) {
+                    switch ($evaluacion) {
+                        case $evaluacion->idiEvaluacion()->exists():
+                            if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                $causalRechazo = 'En revisión por Cord. SENNOVA';
+                            } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                $causalRechazo = 'Rechazado';
+                            }
 
-                default:
-                    break;
+                            if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
+                                $requiereSubsanar = true;
+                            }
+                            break;
+                        case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                            if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                $causalRechazo = 'En revisión por Cord. SENNOVA';
+                            } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                $causalRechazo = 'Rechazado';
+                            }
+
+                            if ($evaluacion->culturaInnovacionEvaluacion->anexos_comentario != null) {
+                                $requiereSubsanar = true;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
             }
         }
 

@@ -203,6 +203,8 @@ class EvaluacionController extends Controller
 
     public function editCausalRechazo(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
             'convocatoria'                  => $convocatoria->only('id'),
             'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo'),
