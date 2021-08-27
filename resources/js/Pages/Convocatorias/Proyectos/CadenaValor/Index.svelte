@@ -83,11 +83,22 @@
         productos.map((producto) => {
             data.addRows([[{ v: producto.v, f: '<strong>Producto</strong><div>' + producto.f + '</div>' }, producto.fkey, producto.tooltip]])
             producto.actividades.map((actividad) => {
-                data.addRows([[{ v: 'act' + producto.v + actividad.id, f: '<strong>Actividad</strong><div>' + actividad.descripcion + '</div>' }, producto.v, actividad.descripcion]])
+                data.addRows([
+                    [
+                        {
+                            v: 'act' + producto.v + actividad.id,
+                            f: '<strong>Actividad</strong><div>' + actividad.descripcion + '</div><div><strong>Roles:</strong><ul class="list-inside">' + actividad.proyecto_roles_sennova.map((proyectoRol) => '<li>' + proyectoRol.convocatoria_rol_sennova.rol_sennova.nombre + '</li>') + '</ul></div>',
+                        },
+                        producto.v,
+                        actividad.descripcion,
+                    ],
+                ])
 
                 data.addRows([[{ v: 'cost' + producto.v + actividad.id, f: '<strong>Costo</strong><div>$ ' + new Intl.NumberFormat('de-DE').format(!isNaN(actividad.costo_actividad) ? actividad.costo_actividad : 0) + ' COP</div>' }, 'act' + producto.v + actividad.id, new Intl.NumberFormat('de-DE').format(!isNaN(actividad.costo_actividad) ? actividad.costo_actividad : 0)]])
             })
         })
+
+        console.log(productos)
 
         // Create the chart.
         var chart = new google.visualization.OrgChart(document.getElementById('orgchart_div'))
