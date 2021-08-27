@@ -153,7 +153,6 @@ class ActividadController extends Controller
 
         $actividad->save();
 
-        $actividad->productos()->sync($request->producto_id);
         $actividad->proyectoPresupuesto()->sync($request->proyecto_presupuesto_id);
         $actividad->proyectoRolesSennova()->sync($request->proyecto_rol_sennova_id);
 

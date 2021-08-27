@@ -181,6 +181,10 @@ class Actividad extends Model
             $total += $proyectoPresupuesto->valor_total;
         }
 
+        foreach ($this->proyectoRolesSennova as $proyectoRol) {
+            $total += $proyectoRol->getTotalRolSennova();
+        }
+
         return $total;
     }
 }
