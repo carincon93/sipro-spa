@@ -96,15 +96,17 @@
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit}>
                 <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
-                    <div class="mt-4 mb-20">
-                        <p class="text-center">Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}</p>
-                        <div class="mt-4 ">
-                            <Label required labelFor="fecha_finalizacion_fase" value="Fecha límite" />
-                            <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
+                    {#if $form.fase?.label}
+                        <div class="mt-4 mb-20">
+                            <p class="text-center">Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}</p>
+                            <div class="mt-4 ">
+                                <Label required labelFor="fecha_finalizacion_fase" value="Fecha límite" />
+                                <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
+                            </div>
                         </div>
-                    </div>
-                    {#if errors.fecha_finalizacion_fase}
-                        <InputError message={errors.fecha_finalizacion_fase} />
+                        {#if errors.fecha_finalizacion_fase}
+                            <InputError message={errors.fecha_finalizacion_fase} />
+                        {/if}
                     {/if}
 
                     <div class="mt-4">
