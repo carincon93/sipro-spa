@@ -71,7 +71,7 @@
             $form.descripcion = infoRolSennova.perfil
         }
     } else {
-        $form.descripcion = ''
+        $form.descripcion = proyectoRolSennova.descripcion
     }
 </script>
 
