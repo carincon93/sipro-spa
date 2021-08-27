@@ -10,8 +10,10 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
     import Switch from '@/Shared/Switch'
+    import Select from '@/Shared/Select'
 
     export let errors
+    export let fases
 
     $: $title = 'Crear convocatoria'
 
@@ -25,10 +27,10 @@
     let form = useForm({
         descripcion: '',
         esta_activa: false,
+        fase: null,
+        fecha_finalizacion_fase: '',
         min_fecha_inicio_proyectos_idi: '',
         max_fecha_finalizacion_proyectos_idi: '',
-        fecha_inicio_convocatoria_idi: '',
-        fecha_finalizacion_convocatoria_idi: '',
         min_fecha_inicio_proyectos_cultura: '',
         max_fecha_finalizacion_proyectos_cultura: '',
         min_fecha_inicio_proyectos_st: '',
@@ -37,14 +39,6 @@
         min_fecha_inicio_proyectos_tp: '',
         max_fecha_finalizacion_proyectos_ta: '',
         max_fecha_finalizacion_proyectos_tp: '',
-        fecha_inicio_convocatoria_cultura: '',
-        fecha_finalizacion_convocatoria_cultura: '',
-        fecha_inicio_convocatoria_st: '',
-        fecha_finalizacion_convocatoria_st: '',
-        fecha_inicio_convocatoria_ta: '',
-        fecha_inicio_convocatoria_tp: '',
-        fecha_finalizacion_convocatoria_ta: '',
-        fecha_finalizacion_convocatoria_tp: '',
     })
 
     function submit() {
@@ -76,119 +70,15 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovocatoria I+D+i</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.fecha_inicio_convocatoria_idi ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_inicio_convocatoria_idi" class={errors.fecha_inicio_convocatoria_idi ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="fecha_inicio_convocatoria_idi" type="date" class="mt-1" bind:value={$form.fecha_inicio_convocatoria_idi} required />
-                            </div>
-                        </div>
-                        <div class="mt-4 flex {errors.fecha_finalizacion_convocatoria_idi ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_finalizacion_convocatoria_idi" class={errors.fecha_finalizacion_convocatoria_idi ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="fecha_finalizacion_convocatoria_idi" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_convocatoria_idi} required />
-                            </div>
-                        </div>
+                    <p class="text-center">Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}</p>
+                    <div class="mt-4 ">
+                        <Label required labelFor="fecha_finalizacion_fase" value="Fecha límite" />
+                        <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
                     </div>
                 </div>
-                {#if errors.fecha_inicio_convocatoria_idi || errors.fecha_finalizacion_convocatoria_idi}
-                    <InputError message={errors.fecha_inicio_convocatoria_idi || errors.fecha_finalizacion_convocatoria_idi} />
+                {#if errors.fecha_finalizacion_fase}
+                    <InputError message={errors.fecha_finalizacion_fase} />
                 {/if}
-
-                <hr />
-
-                <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovocatoria Cultura de la innovación</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.fecha_inicio_convocatoria_cultura ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_inicio_convocatoria_cultura" class={errors.fecha_inicio_convocatoria_cultura ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="fecha_inicio_convocatoria_cultura" type="date" class="mt-1" bind:value={$form.fecha_inicio_convocatoria_cultura} required />
-                            </div>
-                        </div>
-                        <div class="mt-4 flex {errors.fecha_finalizacion_convocatoria_cultura ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_finalizacion_convocatoria_cultura" class={errors.fecha_finalizacion_convocatoria_cultura ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="fecha_finalizacion_convocatoria_cultura" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_convocatoria_cultura} required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {#if errors.fecha_inicio_convocatoria_cultura || errors.fecha_finalizacion_convocatoria_cultura}
-                    <InputError message={errors.fecha_inicio_convocatoria_cultura || errors.fecha_finalizacion_convocatoria_cultura} />
-                {/if}
-
-                <hr />
-
-                <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovocatoria Tecnoacademia</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.fecha_inicio_convocatoria_ta ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_inicio_convocatoria_ta" class={errors.fecha_inicio_convocatoria_ta ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="fecha_inicio_convocatoria_ta" type="date" class="mt-1" bind:value={$form.fecha_inicio_convocatoria_ta} required />
-                            </div>
-                        </div>
-                        <div class="mt-4 flex {errors.fecha_finalizacion_convocatoria_ta ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_finalizacion_convocatoria_ta" class={errors.fecha_finalizacion_convocatoria_ta ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="fecha_finalizacion_convocatoria_ta" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_convocatoria_ta} required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {#if errors.fecha_inicio_convocatoria_ta || errors.fecha_finalizacion_convocatoria_ta}
-                    <InputError message={errors.fecha_inicio_convocatoria_ta || errors.fecha_finalizacion_convocatoria_ta} />
-                {/if}
-
-                <hr />
-
-                <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovocatoria Tecnoparque</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.fecha_inicio_convocatoria_tp ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_inicio_convocatoria_tp" class={errors.fecha_inicio_convocatoria_tp ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="fecha_inicio_convocatoria_tp" type="date" class="mt-1" bind:value={$form.fecha_inicio_convocatoria_tp} required />
-                            </div>
-                        </div>
-                        <div class="mt-4 flex {errors.fecha_finalizacion_convocatoria_tp ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_finalizacion_convocatoria_tp" class={errors.fecha_finalizacion_convocatoria_tp ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="fecha_finalizacion_convocatoria_tp" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_convocatoria_tp} required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {#if errors.fecha_inicio_convocatoria_tp || errors.fecha_finalizacion_convocatoria_tp}
-                    <InputError message={errors.fecha_inicio_convocatoria_tp || errors.fecha_finalizacion_convocatoria_tp} />
-                {/if}
-
-                <hr />
-
-                <div class="mt-4 mb-20">
-                    <p class="text-center">Fecha de la conovocatoria Servicios tecnológicos</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.fecha_inicio_convocatoria_st ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_inicio_convocatoria_st" class={errors.fecha_inicio_convocatoria_st ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="fecha_inicio_convocatoria_st" type="date" class="mt-1" bind:value={$form.fecha_inicio_convocatoria_st} required />
-                            </div>
-                        </div>
-                        <div class="mt-4 flex {errors.fecha_finalizacion_convocatoria_st ? '' : 'items-center'}">
-                            <Label required labelFor="fecha_finalizacion_convocatoria_st" class={errors.fecha_finalizacion_convocatoria_st ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="fecha_finalizacion_convocatoria_st" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_convocatoria_st} required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {#if errors.fecha_inicio_convocatoria_st || errors.fecha_finalizacion_convocatoria_st}
-                    <InputError message={errors.fecha_inicio_convocatoria_st || errors.fecha_finalizacion_convocatoria_st} />
-                {/if}
-
-                <hr />
 
                 <div class="mt-4">
                     <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
@@ -199,6 +89,22 @@
                     <br />
                     <Switch bind:checked={$form.esta_activa} />
                     <InputError message={errors.esta_activa} />
+                </div>
+
+                <div class="mt-4 mb-20">
+                    <Label required labelFor="mostrar_recomendaciones" value="¿Desea que el formulador visualice las recomendaciones?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.mostrar_recomendaciones} />
+                    <InputError message={errors.mostrar_recomendaciones} />
+                </div>
+
+                <div class="mt-44 mb-20 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="fase" value="Fase" />
+                    </div>
+                    <div>
+                        <Select id="fase" items={fases} bind:selectedValue={$form.fase} error={errors.fase} autocomplete="off" placeholder="Seleccione una fase" required />
+                    </div>
                 </div>
 
                 <hr />

@@ -571,8 +571,6 @@ class Proyecto extends Model
             }
 
             if ($key === count($evaluaciones) - 1) {
-                $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado causal f' : $causalRechazo = null;
-
                 array_push($estados, $this->estadoEvaluacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
                 if ($causalRechazo == null) {
@@ -603,6 +601,10 @@ class Proyecto extends Model
                         default:
                             break;
                     }
+                }
+
+                if ($causalRechazo == null) {
+                    $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
                 }
             }
         }

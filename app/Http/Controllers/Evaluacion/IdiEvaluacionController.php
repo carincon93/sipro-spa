@@ -24,7 +24,7 @@ class IdiEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'filters'       => request()->all('search'),
             'idi'           => IdiEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -79,7 +79,7 @@ class IdiEvaluacionController extends Controller
         $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
             'idiEvaluacion'                             => $idiEvaluacion,
             'idiSegundaEvaluacion'                      => IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {

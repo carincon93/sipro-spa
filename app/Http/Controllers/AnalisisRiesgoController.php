@@ -28,7 +28,7 @@ class AnalisisRiesgoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id', 'mostrar_recomendaciones'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')
@@ -106,7 +106,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Edit', [
-            'convocatoria'         => $convocatoria->only('id'),
+            'convocatoria'         => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'             => $proyecto,
             'analisisRiesgo'       => $analisisRiesgo,
             'nivelesRiesgo'        => json_decode(Storage::get('json/niveles-riesgo.json'), true),
@@ -188,7 +188,7 @@ class AnalisisRiesgoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
@@ -239,7 +239,7 @@ class AnalisisRiesgoController extends Controller
     public function analisisRiesgoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, AnalisisRiesgo $analisisRiesgo)
     {
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Edit', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion->only('id'),
             'proyecto'              => $evaluacion->proyecto,
             'analisisRiesgo'        => $analisisRiesgo,

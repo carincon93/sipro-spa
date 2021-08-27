@@ -25,7 +25,7 @@ class InventarioEquipoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
@@ -43,7 +43,7 @@ class InventarioEquipoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Create', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
         ]);
@@ -101,7 +101,7 @@ class InventarioEquipoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Edit', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'inventarioEquipo'          => $inventarioEquipo,
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),

@@ -76,11 +76,11 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || convocatoria.fase == 5}
                         <td class="border-t">
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion.estado}
-                                {#if isSuperAdmin || convocatoria.fase == 5}
+                                {#if isSuperAdmin}
                                     <br />
                                     <small>
                                         Puntaje: {proyecto.estado_evaluacion.puntaje}
@@ -99,6 +99,7 @@
                             </p>
                         </td>
                     {/if}
+
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 14])}
@@ -117,7 +118,7 @@
 
             {#if idi.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

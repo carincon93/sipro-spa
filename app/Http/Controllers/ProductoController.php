@@ -64,7 +64,7 @@ class ProductoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
-            'convocatoria'          => $convocatoria->only('id', 'mostrar_recomendaciones'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'               => request()->all('search'),
             'validacionResultados'  => $validacionResultados,
@@ -101,7 +101,7 @@ class ProductoController extends Controller
         $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
             'resultados'        => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
                 $query->where('efectos_directos.proyecto_id', $proyectoId);
@@ -219,7 +219,7 @@ class ProductoController extends Controller
         $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto,
             'producto'                  => $producto,
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
@@ -344,7 +344,7 @@ class ProductoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Productos/Index', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion,
             'segundaEvaluacion'     => $segundaEvaluacion,
             'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
@@ -422,7 +422,7 @@ class ProductoController extends Controller
         $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
         return Inertia::render('Convocatorias/Evaluaciones/Productos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'evaluacion'                => $evaluacion->only('id'),
             'proyecto'                  => $evaluacion->proyecto,
             'producto'                  => $producto,

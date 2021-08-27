@@ -51,7 +51,7 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
@@ -124,7 +124,7 @@ class ActividadController extends Controller
         })->flatten();
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
-            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
             'productos'                      => $productos,
             'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
@@ -267,7 +267,7 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),
@@ -338,7 +338,7 @@ class ActividadController extends Controller
         })->flatten();
 
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Edit', [
-            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'evaluacion'                     => $evaluacion->only('id'),
             'proyecto'                       => $evaluacion->proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
             'productos'                      => $productos,

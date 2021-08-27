@@ -34,7 +34,7 @@ class ProyectoAnexoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Index', [
             'filters'           => request()->all('search'),
-            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area', 'en_subsanacion', 'evaluaciones'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
@@ -53,7 +53,7 @@ class ProyectoAnexoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/Anexos/Create', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'      => $proyecto->only('id', 'modificable'),
             'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get()
         ]);
@@ -194,7 +194,7 @@ class ProyectoAnexoController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/Anexos/Index', [
             'filters'           => request()->all('search'),
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'video', 'infraestructura_adecuada', 'especificaciones_area'),

@@ -22,7 +22,7 @@ class TaEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/Ta/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'filters'       => request()->all('search'),
             'ta'            => TaEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -93,7 +93,7 @@ class TaEvaluacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
-            'convocatoria'                          => $convocatoria->only('id', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
+            'convocatoria'                          => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
             'ta'                                    => $ta,
             'taEvaluacion'                          => $taEvaluacion,
             'tecnoacademiaRelacionada'              => $taEvaluacion->ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $taEvaluacion->ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,

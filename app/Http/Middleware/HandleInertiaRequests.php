@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Convocatoria;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Illuminate\Support\Facades\Session;
@@ -35,6 +36,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
+            'convocatoria' => Convocatoria::where('esta_activa', true)->first(),
             'auth' => [
                 'user'                  => $request->user() ? $request->user()->only('id', 'nombre', 'nombre_usuario', 'email', 'roles', 'can', 'centro_formacion_id') : null,
                 'numeroNotificaciones'  => $request->user() ? $request->user()->unreadNotifications()->count() : 0

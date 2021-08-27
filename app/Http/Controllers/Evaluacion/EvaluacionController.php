@@ -206,7 +206,7 @@ class EvaluacionController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
-            'convocatoria'                  => $convocatoria->only('id'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo'),
             'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
             'proyecto'                      => $evaluacion->proyecto,

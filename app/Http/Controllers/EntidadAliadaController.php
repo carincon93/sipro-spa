@@ -42,8 +42,8 @@ class EntidadAliadaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
@@ -66,7 +66,7 @@ class EntidadAliadaController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Create', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'modificable'),
             'actividades'   => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -202,7 +202,7 @@ class EntidadAliadaController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Edit', [
-            'convocatoria'    => $convocatoria->only('id'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'        => $proyecto->only('id', 'modificable', 'codigo_linea_programatica'),
             'entidadAliada'   => $entidadAliada,
             'actividades'     => Actividad::whereIn(
@@ -431,7 +431,7 @@ class EntidadAliadaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'tipoEntidad'       => $tipo,
@@ -458,7 +458,7 @@ class EntidadAliadaController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Edit', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion->only('id'),
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica'),
             'entidadAliada'     => $entidadAliada,
