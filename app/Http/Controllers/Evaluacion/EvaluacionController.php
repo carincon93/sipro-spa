@@ -59,9 +59,10 @@ class EvaluacionController extends Controller
         }
 
         $evaluacion = new Evaluacion();
-        $evaluacion->habilitado = $request->habilitado;
-        $evaluacion->iniciado   = false;
-        $evaluacion->finalizado = $request->finalizado;
+        $evaluacion->habilitado  = $request->habilitado;
+        $evaluacion->modificable = $request->modificable;
+        $evaluacion->iniciado    = false;
+        $evaluacion->finalizado  = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
         $evaluacion->proyecto()->associate($request->proyecto_id);
 
@@ -146,8 +147,9 @@ class EvaluacionController extends Controller
             return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
         }
 
-        $evaluacion->habilitado = $request->habilitado;
-        $evaluacion->finalizado = $request->finalizado;
+        $evaluacion->habilitado  = $request->habilitado;
+        $evaluacion->modificable = $request->modificable;
+        $evaluacion->finalizado  = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
         $evaluacion->proyecto()->associate($evaluacion->proyecto_id);
 

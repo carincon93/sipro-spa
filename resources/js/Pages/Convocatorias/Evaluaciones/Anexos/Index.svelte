@@ -43,7 +43,7 @@
         anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.anexos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.anexos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -142,14 +142,14 @@
                 {/if}
                 <div class="mt-4">
                     <p>¿Algún anexo requiere de recomendación?</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.anexos_requiere_comentario} />
                     {#if $form.anexos_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$form.anexos_comentario} error={errors.anexos_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$form.anexos_comentario} error={errors.anexos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

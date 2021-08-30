@@ -33,7 +33,7 @@
     })
 
     function finishEvaluacion() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.finish', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -126,11 +126,12 @@
             {#if versiones}
                 <ul>
                     {#each versiones as version}
-                        <li>{version.version}.pdf - 
-                            {#if version.estado==1}
-                            <a href="{route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}">Descargar</a>
+                        <li>
+                            {version.version}.pdf -
+                            {#if version.estado == 1}
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}>Descargar</a>
                             {:else}
-                            Generando, regrese pronto.
+                                Generando, regrese pronto.
                             {/if}
                         </li>
                     {/each}

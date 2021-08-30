@@ -24,8 +24,9 @@
 
     let sending = false
     let form = useForm({
-        finalizado: false,
         habilitado: false,
+        modificable: false,
+        finalizado: false,
         proyecto_id: null,
         user_id: null,
     })
@@ -73,6 +74,13 @@
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="modificable" value="¿La evaluación es modificable?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.modificable} />
+                    <InputError message={errors.modificable} />
                 </div>
 
                 <div class="mt-4">

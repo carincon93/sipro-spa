@@ -35,6 +35,7 @@ class Evaluacion extends Model
         'finalizado',
         'habilitado',
         'iniciado',
+        'modificable',
         'clausula_confidencialidad',
         'justificacion_causal_rechazo'
     ];

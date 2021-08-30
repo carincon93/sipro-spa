@@ -203,7 +203,7 @@
         resultados_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.resultados_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -540,13 +540,26 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
-                <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="resultados_puntaje" type="number" input$step="1" input$min="0" input$max="9" class="mt-1" bind:value={$form.resultados_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.resultados_puntaje} />
+                <Input
+                    disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                    label="Puntaje"
+                    id="resultados_puntaje"
+                    type="number"
+                    input$step="1"
+                    input$min="0"
+                    input$max="9"
+                    class="mt-1"
+                    bind:value={$form.resultados_puntaje}
+                    placeholder="Puntaje"
+                    autocomplete="off"
+                    error={errors.resultados_puntaje}
+                />
 
                 <div class="mt-4">
                     <p>¿Los resultados son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.resultados_requiere_comentario} />
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.resultados_requiere_comentario} />
                     {#if $form.resultados_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
                     {/if}
                 </div>
 
@@ -560,21 +573,34 @@
                 </ul>
 
                 <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
-                <Input disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="objetivos_puntaje" type="number" input$step="1" input$min="0" input$max="15" class="mt-1" bind:value={$form.objetivos_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.objetivos_puntaje} />
+                <Input
+                    disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                    label="Puntaje"
+                    id="objetivos_puntaje"
+                    type="number"
+                    input$step="1"
+                    input$min="0"
+                    input$max="15"
+                    class="mt-1"
+                    bind:value={$form.objetivos_puntaje}
+                    placeholder="Puntaje"
+                    autocomplete="off"
+                    error={errors.objetivos_puntaje}
+                />
 
                 {#if segundaEvaluacion?.objetivos_comentario}
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.objetivos_comentario}</p>
                 {/if}
                 <div class="mt-4">
                     <p>¿El árbol de objetivos, objetivo general o los objetivos específicos son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} bind:checked={$form.objetivos_requiere_comentario} />
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.objetivos_requiere_comentario} />
                     {#if $form.objetivos_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
                     {/if}
                 </div>
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true)}
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

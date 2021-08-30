@@ -158,9 +158,10 @@ class ConvocatoriaController extends Controller
         switch ($request->fase) {
             case 1: // Formulación
                 $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
             case 2: // Primera evaluación
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
-                $convocatoria->evaluaciones()->update(['finalizado' => false, 'iniciado' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
                 break;
             case 3: // Subsanación
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
@@ -173,15 +174,15 @@ class ConvocatoriaController extends Controller
                     }
                 }
 
-                $convocatoria->evaluaciones()->update(['finalizado' => true, 'iniciado' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => true, 'iniciado' => false]);
                 break;
             case 4: // Segunda evaluación
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
-                $convocatoria->evaluaciones()->update(['finalizado' => false, 'iniciado' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
                 break;
             case 5: // Convocatoria finalizada
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
-                $convocatoria->evaluaciones()->update(['finalizado' => true, 'iniciado' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
                     $proyecto->update(['estado' => $proyecto->estado_evaluacion]);
                 }

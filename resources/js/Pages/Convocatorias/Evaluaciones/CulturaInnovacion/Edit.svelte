@@ -176,7 +176,7 @@
         tematica_estrategica_comentario: culturaInnovacionEvaluacion.tematica_estrategica_comentario,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.cultura-innovacion-evaluaciones.update', [convocatoria.id, culturaInnovacionEvaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -862,7 +862,7 @@
         </InfoMessage>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

@@ -28,8 +28,9 @@
     let dialogOpen = false
     let sending = false
     let form = useForm({
-        finalizado: evaluacion.finalizado,
         habilitado: evaluacion.habilitado,
+        modificable: evaluacion.modificable,
+        finalizado: evaluacion.finalizado,
         proyecto_id: {
             value: evaluacion.proyecto_id,
             label: proyectos.find((item) => item.value == evaluacion.proyecto_id)?.label,
@@ -90,6 +91,13 @@
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="modificable" value="¿La evaluación es modificable?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.modificable} />
+                    <InputError message={errors.modificable} />
                 </div>
 
                 <div class="mt-4">
