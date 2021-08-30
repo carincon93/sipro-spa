@@ -74,6 +74,17 @@ class ProyectoRolSennova extends Model
         return $this->belongsTo(ConvocatoriaRolSennova::class);
     }
 
+
+    /**
+     * Relationship with Actividad
+     *
+     * @return object
+     */
+    public function actividades()
+    {
+        return $this->belongsToMany(Actividad::class, 'actividad_proyecto_rol', 'proyecto_rol_sennova_id', 'actividad_id');
+    }
+
     /**
      * Relationship with ProyectoRolEvaluacion
      *
@@ -116,6 +127,6 @@ class ProyectoRolSennova extends Model
 
     public function getRolAprobadoAttribute()
     {
-        return $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('incorrecto', false)->count();
+        return $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('correcto', false)->count();
     }
 }

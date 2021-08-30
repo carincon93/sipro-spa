@@ -47,23 +47,24 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let nombreFormulario = tp.proyecto.codigo + 'tp-form'
     let form = useForm({
         centro_formacion_id: tp.proyecto.centro_formacion_id,
         linea_programatica_id: tp.proyecto.linea_programatica_id,
         fecha_inicio: tp.fecha_inicio,
         fecha_finalizacion: tp.fecha_finalizacion,
         max_meses_ejecucion: tp.max_meses_ejecucion,
-        resumen: tp.resumen,
-        resumen_regional: tp.resumen_regional,
+        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : tp.resumen,
+        resumen_regional: localStorage.getItem(nombreFormulario + '.resumen_regional') ? localStorage.getItem(nombreFormulario + '.resumen_regional') : tp.resumen_regional,
         antecedentes: tp.antecedentes,
-        antecedentes_regional: tp.antecedentes_regional,
-        retos_oportunidades: tp.retos_oportunidades,
-        pertinencia_territorio: tp.pertinencia_territorio,
+        antecedentes_regional: localStorage.getItem(nombreFormulario + '.antecedentes_regional') ? localStorage.getItem(nombreFormulario + '.antecedentes_regional') : tp.antecedentes_regional,
+        retos_oportunidades: localStorage.getItem(nombreFormulario + '.retos_oportunidades') ? localStorage.getItem(nombreFormulario + '.retos_oportunidades') : tp.retos_oportunidades,
+        pertinencia_territorio: localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ? localStorage.getItem(nombreFormulario + '.pertinencia_territorio') : tp.pertinencia_territorio,
         marco_conceptual: tp.marco_conceptual,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
-        impacto_municipios: tp.impacto_municipios,
-        impacto_centro_formacion: tp.impacto_centro_formacion,
-        bibliografia: tp.bibliografia,
+        impacto_municipios: localStorage.getItem(nombreFormulario + '.impacto_municipios') ? localStorage.getItem(nombreFormulario + '.impacto_municipios') : tp.impacto_municipios,
+        impacto_centro_formacion: localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') ? localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') : tp.impacto_centro_formacion,
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : tp.bibliografia,
         codigo_linea_programatica: null,
         nodo_tecnoparque_id: tp.nodo_tecnoparque_id,
     })
@@ -92,11 +93,33 @@
         getMunicipios()
     })
 
+    let count =
+        localStorage.getItem(nombreFormulario + '.resumen') ||
+        localStorage.getItem(nombreFormulario + '.resumen_regional') ||
+        localStorage.getItem(nombreFormulario + '.antecedentes_regional') ||
+        localStorage.getItem(nombreFormulario + '.retos_oportunidades') ||
+        localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ||
+        localStorage.getItem(nombreFormulario + '.impacto_municipios') ||
+        localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') ||
+        localStorage.getItem(nombreFormulario + '.bibliografia')
+            ? 1
+            : 0
+
+    function clearLocalStorage() {
+        localStorage.removeItem(nombreFormulario + '.resumen')
+        localStorage.removeItem(nombreFormulario + '.resumen_regional')
+        localStorage.removeItem(nombreFormulario + '.antecedentes_regional')
+        localStorage.removeItem(nombreFormulario + '.retos_oportunidades')
+        localStorage.removeItem(nombreFormulario + '.pertinencia_territorio')
+        localStorage.removeItem(nombreFormulario + '.impacto_municipios')
+        localStorage.removeItem(nombreFormulario + '.impacto_centro_formacion')
+        localStorage.removeItem(nombreFormulario + '.bibliografia')
+    }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
             $form.put(route('convocatorias.tp.update', [convocatoria.id, tp.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
                 preserveScroll: true,
             })
         }
@@ -194,7 +217,7 @@
                     <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -203,7 +226,7 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
                 </div>
             </div>
 
@@ -226,7 +249,7 @@
                     <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
                 </div>
             </div>
 
@@ -235,7 +258,7 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
                 </div>
             </div>
 
@@ -244,7 +267,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
                 </div>
             </div>
 
@@ -274,7 +297,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -283,7 +306,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
                 </div>
             </div>
 
@@ -293,16 +316,18 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <small>{tp.updated_at}</small>
+                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

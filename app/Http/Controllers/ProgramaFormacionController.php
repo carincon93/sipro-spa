@@ -20,11 +20,8 @@ class ProgramaFormacionController extends Controller
         $this->authorize('viewAny', [ProgramaFormacion::class]);
 
         return Inertia::render('ProgramasFormacion/Index', [
-            'filters'   => request()->all('search'),
-            'programasFormacion' => ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with(['centroFormacion' => function ($query) {
-                $query->orderBy('nombre', 'ASC');
-            }])
-                ->filterProgramaFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'filters'               => request()->all('search'),
+            'programasFormacion'    => ProgramaFormacion::getProgramasFormacionByRol()->appends(['search' => request()->search]),
         ]);
     }
 

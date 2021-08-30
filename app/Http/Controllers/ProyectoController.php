@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NuevoProponenteRequest;
+use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
@@ -78,7 +79,7 @@ class ProyectoController extends Controller
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 foreach ($resultado->productos as $producto) {
-                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
+                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades->load('proyectoRolesSennova.convocatoriaRolSennova.rolSennova')]);
                 }
             }
         }
@@ -423,7 +424,7 @@ class ProyectoController extends Controller
 
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
-        $version = $proyecto->codigo.'-PDF-'.\Carbon\Carbon::now()->format('YmdHis');
+        $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
         $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
@@ -866,6 +867,32 @@ class ProyectoController extends Controller
     }
 
     /**
+     * storeProgramaFormacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function storeProgramaFormacion(ProgramaFormacionRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $programaFormacion = new ProgramaFormacion();
+        $programaFormacion->nombre              = $request->nombre;
+        $programaFormacion->codigo              = $request->codigo;
+        $programaFormacion->modalidad           = $request->modalidad;
+        $programaFormacion->nivel_formacion     = $request->nivel_formacion;
+        $programaFormacion->centroFormacion()->associate($request->centro_formacion_id);
+
+        $programaFormacion->save();
+
+        if ($proyecto->ta()->exists()) {
+            $proyecto->taProgramasFormacion()->attach($programaFormacion);
+        }
+
+        return back()->with('success', 'El recurso se ha creado correctamente.');
+    }
+
+    /**  
      * descargarPdf
      *
      * @param  mixed $convocatoria
@@ -875,6 +902,6 @@ class ProyectoController extends Controller
      */
     public function descargarPdf(Convocatoria $convocatoria, Proyecto $proyecto, $version)
     {
-        return response()->download(storage_path("app/convocatorias/".$convocatoria->id."/".$proyecto->id."/".$version.".pdf"));
+        return response()->download(storage_path("app/convocatorias/" . $convocatoria->id . "/" . $proyecto->id . "/" . $version . ".pdf"));
     }
 }

@@ -25,7 +25,7 @@ class ProyectoRolEvaluacion extends Model
         'proyecto_rol_sennova_id',
         'evaluacion_id',
         'comentario',
-        'incorrecto'
+        'correcto'
     ];
 
     /**

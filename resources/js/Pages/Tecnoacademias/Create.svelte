@@ -39,6 +39,8 @@
         max_valor_mantenimiento_equipos: 0,
         max_valor_roles: 0,
         max_valor_presupuesto: 0,
+        max_valor_materiales_formacion: 0,
+        max_valor_bienestar_alumnos: 0,
     })
 
     function submit() {
@@ -92,23 +94,31 @@
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Valor máximo: Viáticos interior formación profesional" id="max_valor_viaticos_interior" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_viaticos_interior} error={errors.max_valor_viaticos_interior} required />
+                    <Input label="Valor máximo: Material de enseñanza" id="max_valor_materiales_formacion" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_materiales_formacion} error={errors.max_valor_materiales_formacion} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Valor máximo: EDT" id="max_valor_edt" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_edt} error={errors.max_valor_edt} required />
+                    <Input label="Valor máximo: Bienestar alumnos" id="max_valor_bienestar_alumnos" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_bienestar_alumnos} error={errors.max_valor_bienestar_alumnos} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Valor máximo: Mantenimiento de equipos" id="max_valor_mantenimiento_equipos" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_mantenimiento_equipos} error={errors.max_valor_mantenimiento_equipos} required />
+                    <Input label="Valor máximo: Viáticos interior formación profesional" id="max_valor_viaticos_interior" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_viaticos_interior} error={errors.max_valor_viaticos_interior} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Valor máximo: Roles" id="max_valor_roles" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_roles} error={errors.max_valor_roles} required />
+                    <Input label="Valor máximo: EDT" id="max_valor_edt" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_edt} error={errors.max_valor_edt} required />
                 </div>
 
                 <div class="mt-4">
-                    <Input label="Valor máximo: Presupuesto total" id="max_valor_presupuesto" type="number" input$step="0.1" input$min="1" class="mt-1" bind:value={$form.max_valor_presupuesto} error={errors.max_valor_presupuesto} required />
+                    <Input label="Valor máximo: Mantenimiento de equipos" id="max_valor_mantenimiento_equipos" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_mantenimiento_equipos} error={errors.max_valor_mantenimiento_equipos} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Roles" id="max_valor_roles" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_roles} error={errors.max_valor_roles} required />
+                </div>
+
+                <div class="mt-4">
+                    <Input label="Valor máximo: Presupuesto total" id="max_valor_presupuesto" type="number" input$step="0.1" input$min="0" class="mt-1" bind:value={$form.max_valor_presupuesto} error={errors.max_valor_presupuesto} required />
                 </div>
 
                 <div class="mt-10">

@@ -8,7 +8,6 @@
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
-    import InfoMessage from '@/Shared/InfoMessage'
     import Textarea from '@/Shared/Textarea'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Dialog from '@/Shared/Dialog'
@@ -50,34 +49,27 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.proyecto-rol-sennova.destroy', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))
         }
     }
 
-    let diff_meses = proyecto.diff_meses
     $: if ($form.convocatoria_rol_sennova_id) {
         if (proyecto.codigo_linea_programatica == 68) {
-            $form.descripcion = infoRolSennova?.perfil == null ? 'Sin descripción' : infoRolSennova?.perfil
-            $form.numero_roles = 1
             if ($form.convocatoria_rol_sennova_id == 108) {
                 $form.numero_meses = 6
             } else {
                 $form.numero_meses = proyecto.max_meses_ejecucion
             }
         }
-
-        if (proyecto.codigo_linea_programatica == 70) {
-            if (($form.convocatoria_rol_sennova_id == 51 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 52 && proyecto.diff_meses >= 11) || ($form.convocatoria_rol_sennova_id == 53 && proyecto.diff_meses >= 11)) {
-                diff_meses = 11
-            } else {
-                diff_meses = proyecto.diff_meses
-            }
-        }
     }
 
     $: if (infoRolSennova?.perfil != null) {
-        $form.descripcion = infoRolSennova.perfil
+        if (infoRolSennova?.value == proyectoRolSennova.convocatoria_rol_sennova_id) {
+            $form.descripcion = proyectoRolSennova.descripcion
+        } else {
+            $form.descripcion = infoRolSennova.perfil
+        }
     } else {
         $form.descripcion = proyectoRolSennova.descripcion
     }
@@ -109,7 +101,7 @@
 
                     <div class="mt-4">
                         {#if infoRolSennova?.perfil}
-                            <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} value={infoRolSennova.perfil} required />
+                            <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                         {:else}
                             <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                         {/if}
@@ -119,14 +111,14 @@
                         <div class="mt-4">
                             <Input label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" error={errors.numero_meses} bind:value={$form.numero_meses} required />
                         </div>
-
-                        <div class="mt-4">
-                            <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
-                        </div>
                     {/if}
+
+                    <div class="mt-4">
+                        <Input label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" error={errors.numero_roles} bind:value={$form.numero_roles} required />
+                    </div>
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
+                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
                     {/if}
                     {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
@@ -145,7 +137,7 @@
                             </svg>
                             Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
                         </div>
-                        {#if evaluacionRol.incorrecto && evaluacionRol.evaluacion.habilitado}
+                        {#if evaluacionRol.correcto && evaluacionRol.evaluacion.habilitado}
                             <p class="whitespace-pre-line">{evaluacionRol.comentario ? evaluacionRol.comentario : 'Sin recomendación'}</p>
                         {:else}
                             Aprobado

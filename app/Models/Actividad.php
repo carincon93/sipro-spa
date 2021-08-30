@@ -115,6 +115,17 @@ class Actividad extends Model
         return $this->belongsToMany(EntidadAliada::class, 'actividad_entidad_aliada', 'actividad_id', 'entidad_aliada_id');
     }
 
+
+    /**
+     * Relationship with ProyectoRolSennova
+     *
+     * @return object
+     */
+    public function proyectoRolesSennova()
+    {
+        return $this->belongsToMany(ProyectoRolSennova::class, 'actividad_proyecto_rol', 'actividad_id', 'proyecto_rol_sennova_id');
+    }
+
     /**
      * Filtrar registros
      *
@@ -168,6 +179,10 @@ class Actividad extends Model
 
         foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
             $total += $proyectoPresupuesto->valor_total;
+        }
+
+        foreach ($this->proyectoRolesSennova as $proyectoRol) {
+            $total += $proyectoRol->getTotalRolSennova();
         }
 
         return $total;

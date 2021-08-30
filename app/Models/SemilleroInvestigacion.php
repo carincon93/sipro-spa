@@ -88,7 +88,7 @@ class SemilleroInvestigacion extends Model
     }
 
     /**
-     * getUsersByRol
+     * getSemillerosInvestigacionByRol
      *
      * @return object
      */

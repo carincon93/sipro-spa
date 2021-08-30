@@ -19,6 +19,8 @@
     export let convocatoria
     export let proyecto
     export let actividad
+    export let proyectoRoles
+    export let proyectoRolRelacionado
     export let proyectoPresupuesto
     export let proyectoPresupuestoRelacionado
 
@@ -42,7 +44,8 @@
         fecha_inicio: actividad.fecha_inicio,
         fecha_finalizacion: actividad.fecha_finalizacion,
         proyecto_presupuesto_id: proyectoPresupuestoRelacionado,
-        requiere_rubros: proyectoPresupuestoRelacionado.length > 0 ? { value: 1, label: 'Si' } : { value: 2, label: 'No' },
+        proyecto_rol_sennova_id: proyectoRolRelacionado,
+        requiere_rubros: proyectoPresupuestoRelacionado.length == 0 ? { value: 2, label: 'No' } : { value: 1, label: 'Si' },
     })
 
     function submit() {
@@ -56,7 +59,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
             $form.delete(route('convocatorias.proyectos.actividades.destroy', [convocatoria.id, proyecto.id, actividad.id]))
         }
     }
@@ -120,7 +123,7 @@
                             <InputError message={errors.proyecto_presupuesto_id} />
                         </div>
                         {#if isSuperAdmin || proyecto.modificable == true}
-                            <div class="grid grid-cols-2">
+                            <div>
                                 {#each proyectoPresupuesto as presupuesto}
                                     <FormField class="border-b border-l">
                                         <Checkbox bind:group={$form.proyecto_presupuesto_id} value={presupuesto.id} />
@@ -180,9 +183,54 @@
                         {/if}
                     </div>
                 {/if}
+
+                <h6 class="mt-20 mb-12 text-2xl">Roles</h6>
+                <InfoMessage>Si la actividad tiene un responsable por favor seleccione el rol de la siguiente lista</InfoMessage>
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4">
+                        <Label class="mb-4" labelFor="proyecto_rol_sennova_id" value="Relacione algún rol" />
+                        <InputError message={errors.proyecto_rol_sennova_id} />
+                    </div>
+                    {#if isSuperAdmin || proyecto.modificable == true}
+                        <div class="flex flex-col">
+                            {#each proyectoRoles as rol}
+                                <FormField class="border-b border-l">
+                                    <Checkbox bind:group={$form.proyecto_rol_sennova_id} value={rol.id} />
+                                    <span slot="label">
+                                        <div class="mb-8">
+                                            <small class="block">Nombre</small>
+                                            {rol.convocatoria_rol_sennova.rol_sennova.nombre}
+                                            <br />
+                                            Nivel académico:
+                                            {rol.convocatoria_rol_sennova.nivel_academico_formateado}
+                                        </div>
+                                    </span>
+                                </FormField>
+                            {/each}
+                            {#if proyectoRoles.length == 0}
+                                <p class="p-4">Sin información registrada</p>
+                            {/if}
+                        </div>
+                    {:else}
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each proyectoRoles as rol}
+                                    {#if rol.id == rol}
+                                        <li class="mb-4">
+                                            <div class="mb-8">
+                                                <small class="block">Nombre</small>
+                                                {rol.convocatoria_rol_sennova.rol_sennova.nombre}
+                                            </div>
+                                        </li>
+                                    {/if}
+                                {/each}
+                            </ul>
+                        </div>
+                    {/if}
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13]) && proyecto.modificable == true)}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar actividad </button>
                 {/if}
                 {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}

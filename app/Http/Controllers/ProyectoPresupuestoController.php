@@ -44,12 +44,12 @@ class ProyectoPresupuestoController extends Controller
         $proyecto->salarios_minimos = ($salarioMinimo['value'] * 100);
 
         if ($proyecto->codigo_linea_programatica == 70) {
-            $proyecto->max_valor_materiales_formacion   = $proyecto->max_material_formacion;
-            $proyecto->max_valor_bienestar_alumnos      = $proyecto->max_bienestar_aprendiz;
+            $proyecto->max_valor_materiales_formacion   = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion;
+            $proyecto->max_valor_bienestar_alumnos      = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos;
             $proyecto->max_valor_viaticos_interior      = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior;
             $proyecto->max_valor_edt                    = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
             $proyecto->max_valor_mantenimiento_equipos  = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
-            $proyecto->max_valor_proyecto               = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $proyecto->max_material_formacion + $proyecto->max_bienestar_aprendiz;
+            $proyecto->max_valor_proyecto               = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion + $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos;
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/Index', [
@@ -149,7 +149,7 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos);
             }
 
             if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
@@ -157,7 +157,7 @@ class ProyectoPresupuestoController extends Controller
             }
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
-                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion);
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, null, $request->valor_total)) {
@@ -323,7 +323,7 @@ class ProyectoPresupuestoController extends Controller
          */
         if ($proyecto->lineaProgramatica->codigo == 70) {
             if (PresupuestoValidationTrait::bienestarAlumnos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->ta->max_bienestar_aprendiz);
+                return back()->with('error', "La sumatoria del rubro bienestar alumnos no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos);
             }
 
             if (PresupuestoValidationTrait::viaticosInterior($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
@@ -331,7 +331,7 @@ class ProyectoPresupuestoController extends Controller
             }
 
             if (PresupuestoValidationTrait::materialesFormacion($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
-                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->max_material_formacion);
+                return back()->with('error', "La sumatoria del rubro materiales para la formación profesional no debe superar los $" . $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion);
             }
 
             if (PresupuestoValidationTrait::mantenimientoEquipos($proyecto, $convocatoriaPresupuesto, $presupuesto, $request->valor_total)) {
@@ -472,12 +472,12 @@ class ProyectoPresupuestoController extends Controller
         $evaluacion->proyecto->salarios_minimos = ($salarioMinimo['value'] * 100);
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
-            $evaluacion->proyecto->max_valor_materiales_formacion   = $evaluacion->proyecto->max_material_formacion;
-            $evaluacion->proyecto->max_valor_bienestar_alumnos      = $evaluacion->proyecto->max_bienestar_aprendiz;
+            $evaluacion->proyecto->max_valor_materiales_formacion   = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion;
+            $evaluacion->proyecto->max_valor_bienestar_alumnos      = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos;
             $evaluacion->proyecto->max_valor_viaticos_interior      = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior;
             $evaluacion->proyecto->max_valor_edt                    = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_edt;
             $evaluacion->proyecto->max_valor_mantenimiento_equipos  = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_mantenimiento_equipos;
-            $evaluacion->proyecto->max_valor_proyecto               = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $evaluacion->proyecto->max_material_formacion + $evaluacion->proyecto->max_bienestar_aprendiz;
+            $evaluacion->proyecto->max_valor_proyecto               = $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->suma_max_valores + $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_materiales_formacion + $evaluacion->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Index', [
@@ -519,7 +519,7 @@ class ProyectoPresupuestoController extends Controller
     {
         ProyectoPresupuestoEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
-            ['incorrecto' => $request->incorrecto, 'comentario' => $request->incorrecto ? $request->comentario : null]
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
