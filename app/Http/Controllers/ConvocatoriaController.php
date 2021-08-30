@@ -166,8 +166,6 @@ class ConvocatoriaController extends Controller
             case 3: // Subsanación
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
                     if ($proyecto->estado_evaluacion != null && json_decode($proyecto->estado_evaluacion)->requiereSubsanar && $proyecto->id == 989) {
-
-                        dd($proyecto->estado_evaluacion);
                         $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion]);
                     } else {
                         $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion]);

@@ -506,7 +506,7 @@ class ProyectoPresupuestoController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Edit', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                    => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado'),
+            'evaluacion'                    => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado', 'modificable'),
             'segundaEvaluacion'             => ProyectoPresupuestoEvaluacion::whereHas('evaluacion', function ($query) use ($proyecto) {
                 $query->where('evaluaciones.proyecto_id', $proyecto->id)->where('evaluaciones.habilitado', true);
             })->where('proyecto_presupuesto_evaluacion.evaluacion_id', '!=', $evaluacion->id)->first(),

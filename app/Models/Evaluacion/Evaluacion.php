@@ -247,6 +247,9 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->tematica_estrategica_comentario != null ? $total++ : null;
         }
 
+        $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();
+        $total += $this->proyectoRolesEvaluaciones()->where('correcto', false)->count();
+
         return $total;
     }
 
