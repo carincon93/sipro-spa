@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramaFormacion extends Model
 {
@@ -95,5 +96,36 @@ class ProgramaFormacion extends Model
             $query->orWhere('programas_formacion.codigo', 'ilike', '%' . $search . '%');
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getProgramasFormacionByRol
+     *
+     * @return object
+     */
+    public static function getProgramasFormacionByRol()
+    {
+        $user = Auth::user();
+        if ($user->hasRole(1)) {
+            $lineasInvestigacion = ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with('centroFormacion')->filterProgramaFormacion(request()->only('search'))->orderBy('programas_formacion.nombre', 'ASC')->paginate();
+        } else if ($user->hasRole([4, 21])) {
+            $centroFormacionId = null;
+            if ($user->dinamizadorCentroFormacion()->exists()) {
+                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+            } else if ($user->hasRole(21)) {
+                $centroFormacionId = $user->centroFormacion->id;
+            }
+
+            $lineasInvestigacion = ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with('centroFormacion')
+                ->whereHas(
+                    'centroFormacion',
+                    function ($query) use ($centroFormacionId) {
+                        $query->where('id', $centroFormacionId);
+                    }
+                )
+                ->filterProgramaFormacion(request()->only('search'))->paginate();
+        }
+
+        return $lineasInvestigacion;
     }
 }
