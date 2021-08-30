@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PdfController;
 use App\Models\ProyectoPdfVersion;
+use App\Notifications\ProjectoVersion;
 
 class GeneratePdfProject extends Command
 {
@@ -44,6 +45,13 @@ class GeneratePdfProject extends Command
 
         if (!empty($pdfVersion)) {
             PdfController::generateProjectSumary($pdfVersion->proyecto->convocatoria, $pdfVersion->proyecto, $pdfVersion->version);
+            $same = ProyectoPdfVersion::find($pdfVersion->id);
+            if (!empty($same) && $same->estado==1) {
+                $user = $pdfVersion->proyecto->participantes()->where('es_formulador', true)->first();
+                if (!empty($user)) {
+                    $user->notify(new ProjectoVersion($same));
+                }
+            }
         }
     }
 }
