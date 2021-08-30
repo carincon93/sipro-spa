@@ -39,8 +39,9 @@ class Tecnoacademia extends Model
         'max_valor_viaticos_interior',
         'max_valor_edt',
         'max_valor_mantenimiento_equipos',
-        'max_valor_roles'
-
+        'max_valor_roles',
+        'max_valor_materiales_formacion',
+        'max_valor_bienestar_alumnos'
     ];
 
     /**
@@ -113,5 +114,62 @@ class Tecnoacademia extends Model
     public function getSumaMaxValoresAttribute()
     {
         return $this->max_valor_viaticos_interior + $this->max_valor_edt + $this->max_valor_mantenimiento_equipos + $this->max_valor_roles;
+    }
+
+
+    public function getMetaAprendicesAttribute()
+    {
+        $valorEstandarizado = 0;
+        $modalidad = $this->modalidad;
+        if ($modalidad == 1) {
+            $valorEstandarizado = 460000;
+        } else if ($modalidad == 2) {
+            $valorEstandarizado = 490000;
+        } else if ($modalidad == 3) {
+            $valorEstandarizado = 520000;
+        }
+
+        $total = 0;
+        if ($valorEstandarizado > 0) {
+            if (request()->route('proyecto') != null) {
+                $total = request()->route('proyecto')->getPrecioProyectoAttribute() / $valorEstandarizado;
+            }
+        }
+
+        return round($total);
+    }
+
+    public function getMaxValorMaterialesFormacionAttribute($value)
+    {
+        $total = 0;
+        if ($value > 0) {
+            $total = $value;
+        } else {
+            $valorAprendiz = 0;
+            $modalidad = $this->modalidad;
+            if ($modalidad == 1) {
+                $valorAprendiz = 20000;
+            } else if ($modalidad == 2) {
+                $valorAprendiz = 35000;
+            } else if ($modalidad == 3) {
+                $valorAprendiz = 63000;
+            }
+
+            $total = round($this->getMetaAprendicesAttribute() * $valorAprendiz);
+        }
+
+        return $total;
+    }
+
+    public function getMaxValorBienestarAlumnosAttribute($value)
+    {
+        $total = 0;
+
+        if ($value > 0) {
+            $total = $value;
+        } else {
+            $total = round($this->getMetaAprendicesAttribute() * 10200);
+        }
+        return $total;
     }
 }

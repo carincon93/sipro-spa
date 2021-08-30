@@ -118,7 +118,7 @@ class LineaInvestigacion extends Model
     }
 
     /**
-     * getUsersByRol
+     * getLineasInvestigacionByRol
      *
      * @return object
      */

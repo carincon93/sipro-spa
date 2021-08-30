@@ -201,7 +201,7 @@
                 <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">Mesas técnicas</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
                 <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">Programas de formación</Button>
             {/if}
 

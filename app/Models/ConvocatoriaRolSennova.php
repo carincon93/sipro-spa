@@ -16,6 +16,14 @@ class ConvocatoriaRolSennova extends Model
      */
     protected $table = 'convocatoria_rol_sennova';
 
+
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['nivel_academico_formateado'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -125,5 +133,44 @@ class ConvocatoriaRolSennova extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(roles_sennova.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getNivelAcademicoFormateadoAttribute()
+    {
+        $nivelAcademico = "";
+
+        switch ($this->nivel_academico) {
+            case 1:
+                $nivelAcademico =  "técnico";
+                break;
+            case 2:
+                $nivelAcademico =  "tecnólogo";
+                break;
+            case 3:
+                $nivelAcademico =  "pregrado";
+                break;
+            case 4:
+                $nivelAcademico =  "especalización";
+                break;
+            case 5:
+                $nivelAcademico =  "maestría";
+                break;
+            case 6:
+                $nivelAcademico =  "doctorado";
+                break;
+            case 7:
+                $nivelAcademico =  "ninguno";
+                break;
+            case 8:
+                $nivelAcademico =  "especialización";
+                break;
+            case 9:
+                $nivelAcademico =  "con especialización";
+                break;
+            default:
+                break;
+        }
+
+        return $nivelAcademico;
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Actividad;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\ProyectoPresupuesto;
+use App\Models\ProyectoRolSennova;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -126,11 +127,13 @@ class ActividadController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
-            'productos'                      => $productos,
-            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
             'actividad'                      => $actividad,
+            'productos'                      => $productos,
             'productosRelacionados'          => $actividad->productos()->pluck('id'),
-            'proyectoPresupuestoRelacionado' => $actividad->proyectoPresupuesto()->pluck('id')
+            'proyectoPresupuesto'            => ProyectoPresupuesto::where('proyecto_id', $proyecto->id)->with('convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion')->get(),
+            'proyectoPresupuestoRelacionado' => $actividad->proyectoPresupuesto()->pluck('id'),
+            'proyectoRoles'                  => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->with('convocatoriaRolSennova.rolSennova:id,nombre')->get(),
+            'proyectoRolRelacionado'         => $actividad->proyectoRolesSennova()->pluck('id'),
         ]);
     }
 
@@ -151,8 +154,8 @@ class ActividadController extends Controller
 
         $actividad->save();
 
-        $actividad->productos()->sync($request->producto_id);
         $actividad->proyectoPresupuesto()->sync($request->proyecto_presupuesto_id);
+        $actividad->proyectoRolesSennova()->sync($request->proyecto_rol_sennova_id);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

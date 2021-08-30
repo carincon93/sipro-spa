@@ -45,7 +45,6 @@
     let diff_meses = proyecto.diff_meses
     $: if ($form.convocatoria_rol_sennova_id) {
         if (proyecto.codigo_linea_programatica == 68) {
-            $form.descripcion = infoRolSennova?.perfil == null ? $form.descripcion : infoRolSennova?.perfil
             if ($form.convocatoria_rol_sennova_id == 108) {
                 $form.numero_meses = 6
             } else {
@@ -84,7 +83,7 @@
 
                 <div class="mt-4">
                     {#if infoRolSennova?.perfil}
-                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} value={infoRolSennova.perfil} required />
+                        <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                     {:else}
                         <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                     {/if}

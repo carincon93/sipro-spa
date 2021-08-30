@@ -80,7 +80,7 @@ class ProyectoController extends Controller
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 foreach ($resultado->productos as $producto) {
-                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
+                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades->load('proyectoRolesSennova.convocatoriaRolSennova.rolSennova')]);
                 }
             }
         }
