@@ -188,10 +188,11 @@ class Actividad extends Model
         }
 
         foreach ($this->proyectoRolesSennova as $proyectoRol) {
-            $total += $proyectoRol->getTotalRolActividadesSennova();
+            if ($proyectoRol->convocatoriaRolSennova->rolSennova->id != 3)
+                $total += $proyectoRol->getTotalRolActividadesSennova();
         }
 
-        $diffDays = $this->getDiffDaysAttribute();
+        // $diffDays = $this->getDiffDaysAttribute();
         // if ($diffDays > 0) {
         //     $total = $total / $diffDays;
         // }
