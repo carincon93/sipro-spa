@@ -13,6 +13,7 @@
     import Stepper from '@/Shared/Stepper'
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let convocatoria
@@ -117,6 +118,8 @@
                     </div>
                 </form>
             {/if}
+
+            <InfoMessage>Tenga en cuenta que el rol <strong>Aprendiz sennova (contrato aprendizaje)</strong> no suma al total del presupuesto del proyecto.</InfoMessage>
         </div>
 
         <div slot="actions">
