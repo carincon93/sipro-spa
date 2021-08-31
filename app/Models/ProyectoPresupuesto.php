@@ -162,6 +162,22 @@ class ProyectoPresupuesto extends Model
         });
     }
 
+    /**
+     * getTotalPresupuestoActividadesSennova
+     *
+     * @return int
+     */
+    public function getTotalPresupuestoActividadesSennova()
+    {
+        $countActividades = $this->actividades()->count();
+        $total = 0;
+        if ($countActividades > 0) {
+            $total = $this->valor_total / $countActividades;
+        }
+
+        return $total;
+    }
+
     public function getPresupuestoAprobadoAttribute()
     {
         return $this->proyectoPresupuestosEvaluaciones()->count() == $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();
