@@ -99,6 +99,16 @@ class Evaluacion extends Model
     }
 
     /**
+     * Relationship with TaEvaluacion
+     *
+     * @return object
+     */
+    public function taEvaluacion()
+    {
+        return $this->hasOne(TaEvaluacion::class, 'id');
+    }
+
+    /**
      * Relationship with ProyectoRolEvaluacion
      *
      * @return object
@@ -191,9 +201,6 @@ class Evaluacion extends Model
             $this->idiEvaluacion->productos_comentario != null ? $total++ : null;
             $this->idiEvaluacion->cadena_valor_comentario != null ? $total++ : null;
             $this->idiEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
-            $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
-            $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
-            $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
             $this->idiEvaluacion->justificacion_economia_naranja_requiere_comentario != null ? $total++ : null;
             $this->idiEvaluacion->justificacion_economia_naranja_comentario != null ? $total++ : null;
             $this->idiEvaluacion->justificacion_industria_4_requiere_comentario != null ? $total++ : null;
@@ -212,6 +219,10 @@ class Evaluacion extends Model
             $this->idiEvaluacion->red_conocimiento_comentario != null ? $total++ : null;
             $this->idiEvaluacion->tematica_estrategica_requiere_comentario != null ? $total++ : null;
             $this->idiEvaluacion->tematica_estrategica_comentario != null ? $total++ : null;
+
+            $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
         } else if ($this->proyecto->culturaInnovacion()->exists()) {
             $this->culturaInnovacionEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->video_comentario != null ? $total++ : null;
@@ -224,9 +235,6 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->productos_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->cadena_valor_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
-            $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
-            $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
-            $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->justificacion_economia_naranja_requiere_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->justificacion_economia_naranja_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->justificacion_industria_4_requiere_comentario != null ? $total++ : null;
@@ -245,6 +253,31 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->red_conocimiento_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->tematica_estrategica_requiere_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->tematica_estrategica_comentario != null ? $total++ : null;
+
+            $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
+        } else if ($this->proyecto->ta()->exists()) {
+            $this->taEvaluacion->resumen_regional_comentario != null ? $total++ : null;
+            $this->taEvaluacion->antecedentes_tecnoacademia_comentario != null ? $total++ : null;
+            $this->taEvaluacion->retos_oportunidades_comentario != null ? $total++ : null;
+            $this->taEvaluacion->metodologia_comentario != null ? $total++ : null;
+            $this->taEvaluacion->lineas_medulares_centro_comentario != null ? $total++ : null;
+            $this->taEvaluacion->lineas_tecnologicas_centro_comentario != null ? $total++ : null;
+            $this->taEvaluacion->articulacion_sennova_comentario != null ? $total++ : null;
+            $this->taEvaluacion->productos_comentario != null ? $total++ : null;
+            $this->taEvaluacion->municipios_comentario != null ? $total++ : null;
+            $this->taEvaluacion->instituciones_comentario != null ? $total++ : null;
+            $this->taEvaluacion->fecha_ejecucion_comentario != null ? $total++ : null;
+            $this->taEvaluacion->cadena_valor_comentario != null ? $total++ : null;
+            $this->taEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
+            $this->taEvaluacion->anexos_comentario != null ? $total++ : null;
+            $this->taEvaluacion->proyectos_macro_comentario != null ? $total++ : null;
+            $this->taEvaluacion->bibliografia_comentario != null ? $total++ : null;
+
+            $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->taEvaluacion->normas_apa_comentario != null ? $total++ : null;
         }
 
         $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();
@@ -266,6 +299,7 @@ class Evaluacion extends Model
             $this->idiEvaluacion->productos_puntaje == null ? array_push($itemsPorEvaluar, 'Productos') : null;
             $this->idiEvaluacion->cadena_valor_puntaje == null ? array_push($itemsPorEvaluar, 'Cadena de valor') : null;
             $this->idiEvaluacion->analisis_riesgos_puntaje == null ? array_push($itemsPorEvaluar, 'Análisis de riesgos') : null;
+
             $this->idiEvaluacion->ortografia_puntaje == null ? array_push($itemsPorEvaluar, 'Ortografía') : null;
             $this->idiEvaluacion->redaccion_puntaje == null ? array_push($itemsPorEvaluar, 'Redacción') : null;
             $this->idiEvaluacion->normas_apa_puntaje == null ? array_push($itemsPorEvaluar, 'Normas APA') : null;
@@ -279,6 +313,7 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->productos_puntaje == null ? array_push($itemsPorEvaluar, 'Productos') : null;
             $this->culturaInnovacionEvaluacion->cadena_valor_puntaje == null ? array_push($itemsPorEvaluar, 'Cadena de valor') : null;
             $this->culturaInnovacionEvaluacion->analisis_riesgos_puntaje == null ? array_push($itemsPorEvaluar, 'Análisis de riesgos') : null;
+
             $this->culturaInnovacionEvaluacion->ortografia_puntaje == null ? array_push($itemsPorEvaluar, 'Ortografía') : null;
             $this->culturaInnovacionEvaluacion->redaccion_puntaje == null ? array_push($itemsPorEvaluar, 'Redacción') : null;
             $this->culturaInnovacionEvaluacion->normas_apa_puntaje == null ? array_push($itemsPorEvaluar, 'Normas APA') : null;

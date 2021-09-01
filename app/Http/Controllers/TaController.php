@@ -11,6 +11,7 @@ use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaRequest;
 use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
 use App\Models\ProgramaFormacion;
@@ -159,6 +160,8 @@ class TaController extends Controller
     public function edit(Convocatoria $convocatoria, Ta $ta)
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
+
+        $ta->load('proyecto.evaluaciones.taEvaluacion');
 
         $ta->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
         $ta->precio_proyecto           = $ta->proyecto->precioProyecto;
@@ -364,6 +367,42 @@ class TaController extends Controller
     }
 
     /**
+     * showArticulacionSennovaEvaluacion
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function showArticulacionSennovaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica            = $evaluacion->proyecto->lineaProgramatica->codigo;
+        $evaluacion->proyecto->precio_proyecto                      = $evaluacion->proyecto->precioProyecto;
+        $evaluacion->proyecto->proyectos_ejecucion                  = $evaluacion->proyecto->ta->proyectos_ejecucion;
+        $evaluacion->proyecto->articulacion_semillero               = $evaluacion->proyecto->ta->articulacion_semillero;
+        $evaluacion->proyecto->semilleros_en_formalizacion          = $evaluacion->proyecto->ta->semilleros_en_formalizacion;
+
+        return Inertia::render('Convocatorias/Evaluaciones/ArticulacionSennova/Index', [
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'year', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'mostrar_recomendaciones'),
+            'evaluacion'                => $evaluacion,
+            'proyecto'                  => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion', 'modificable', 'articulacion_semillero', 'semilleros_en_formalizacion'),
+            'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $evaluacion->proyecto->centroFormacion->id)->get(),
+            'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $evaluacion->proyecto->centroFormacion->regional->id)->get(),
+            'semillerosInvestigacion'   => SemilleroInvestigacion::selectRaw('semilleros_investigacion.id as value, concat(semilleros_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $evaluacion->proyecto->centroFormacion->id)->get(),
+            'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get(),
+            'tematicasEstrategicas'     => TematicaEstrategica::select('id as value', 'nombre as label')->get(),
+            'actividadesEconomicas'     => ActividadEconomica::select('id as value', 'nombre as label')->get(),
+
+            'gruposInvestigacionRelacionados'               => $evaluacion->proyecto->gruposInvestigacion()->select('grupos_investigacion.id as value', 'grupos_investigacion.nombre as label')->get(),
+            'lineasInvestigacionRelacionadas'               => $evaluacion->proyecto->lineasInvestigacion()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
+            'semillerosInvestigacionRelacionados'           => $evaluacion->proyecto->semillerosInvestigacion()->select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->get(),
+            'disciplinasSubareaConocimientoRelacionadas'    => $evaluacion->proyecto->ta->disciplinasSubareaConocimiento()->select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->get(),
+            'redesConocimientoRelacionadas'                 => $evaluacion->proyecto->ta->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
+            'tematicasEstrategicasRelacionadas'             => $evaluacion->proyecto->ta->tematicasEstrategicas()->select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->get(),
+            'actividadesEconomicasRelacionadas'             => $evaluacion->proyecto->ta->actividadesEconomicas()->select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->get(),
+        ]);
+    }
+
+    /**
      * storeArticulacionSennova
      *
      * @param  mixed $request
@@ -393,5 +432,22 @@ class TaController extends Controller
         ]);
 
         return back()->with('success', 'El recurso se ha guardado correctamente.');
+    }
+
+    /**
+     * updatedArticulacionSennovaEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updatedArticulacionSennovaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->taEvaluacion()->update([
+            'articulacion_sennova_comentario'   => $request->articulacion_sennova_requiere_comentario == false ? $request->articulacion_sennova_comentario : null
+        ]);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

@@ -10,10 +10,11 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
+    export let evaluacion
     export let proyecto
     export let eventos
 
@@ -27,7 +28,7 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">EDT</div>

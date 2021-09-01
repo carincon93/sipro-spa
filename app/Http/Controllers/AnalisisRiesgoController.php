@@ -8,6 +8,7 @@ use App\Models\Proyecto;
 use App\Models\AnalisisRiesgo;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -24,6 +25,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
@@ -175,6 +177,12 @@ class AnalisisRiesgoController extends Controller
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 break;
@@ -218,6 +226,12 @@ class AnalisisRiesgoController extends Controller
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
                     'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
                 ]);
                 break;

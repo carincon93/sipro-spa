@@ -296,7 +296,7 @@
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.fechas_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿Las fechas requieren de una recomendación?</p>
+                    <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
                     {#if $form.fechas_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fechas_comentario" bind:value={$form.fechas_comentario} error={errors.fechas_comentario} required />
@@ -325,7 +325,7 @@
                         <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.red_conocimiento_comentario}</p>
                     {/if}
                     <div class="mt-4">
-                        <p>¿La red de conocimiento sectorial es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <p>¿La red de conocimiento sectorial es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.red_conocimiento_requiere_comentario} />
                         {#if $form.red_conocimiento_requiere_comentario == false}
                             <Textarea
@@ -374,7 +374,7 @@
                             <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.disciplina_subarea_conocimiento_comentario}</p>
                         {/if}
                         <div class="mt-4">
-                            <p>¿La disciplina de la subárea de conocimiento es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                            <p>¿La disciplina de la subárea de conocimiento es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.disciplina_subarea_conocimiento_requiere_comentario} />
                             {#if $form.disciplina_subarea_conocimiento_requiere_comentario == false}
                                 <Textarea
@@ -1071,7 +1071,7 @@
                 <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.redaccion_comentario}</p>
             {/if}
             <div class="mt-4">
-                <p>¿La redacción es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
                 {#if $form.redaccion_requiere_comentario == false}
                     <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />

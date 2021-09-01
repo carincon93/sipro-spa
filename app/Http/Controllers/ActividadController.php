@@ -8,6 +8,7 @@ use App\Models\Proyecto;
 use App\Models\Actividad;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\ProyectoPresupuesto;
 use App\Models\ProyectoRolSennova;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class ActividadController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
@@ -253,6 +255,12 @@ class ActividadController extends Controller
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->ta->metodologia;
                 $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->ta->metodologia_local;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->tp->metodologia;
@@ -312,6 +320,11 @@ class ActividadController extends Controller
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
                     'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
                 ]);
                 break;

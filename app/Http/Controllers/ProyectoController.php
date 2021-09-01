@@ -9,6 +9,7 @@ use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Impacto;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
@@ -39,6 +40,7 @@ class ProyectoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
@@ -106,39 +108,48 @@ class ProyectoController extends Controller
 
         $efectosIndirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos')->get()->pluck('efectosIndirectos')->flatten()->filter();
 
-        if ($evaluacion->proyecto->idi()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
-            $evaluacion->idiEvaluacion;
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
+                $evaluacion->idiEvaluacion;
 
-            $idi = $evaluacion->proyecto->idi;
+                $idi = $evaluacion->proyecto->idi;
 
-            $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
-                $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
-            })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
-        }
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->ta->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
+                $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
+                $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
+                $evaluacion->taEvaluacion;
 
-        if ($evaluacion->proyecto->ta()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->ta->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
-            $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
-            $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
-        }
+                $ta = $evaluacion->proyecto->ta;
 
-        if ($evaluacion->proyecto->tp()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
-        }
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
+                break;
 
-        if ($evaluacion->proyecto->servicioTecnologico()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
-        }
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
+                break;
 
-        if ($evaluacion->proyecto->culturaInnovacion()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
-            $evaluacion->culturaInnovacionEvaluacion;
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
+                $evaluacion->culturaInnovacionEvaluacion;
+                break;
+            default:
+                break;
         }
 
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
@@ -160,7 +171,7 @@ class ProyectoController extends Controller
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
-            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'finalizado'),
+            'proyecto'          => $evaluacion->proyecto,
             'productos'         => $productos,
             'objetivos'         => $objetivos,
             'impactos'          => Impacto::whereIn(
@@ -192,6 +203,11 @@ class ProyectoController extends Controller
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
                     'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
                 ]);
                 break;

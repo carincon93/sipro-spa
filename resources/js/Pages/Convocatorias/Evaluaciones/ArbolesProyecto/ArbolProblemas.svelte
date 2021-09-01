@@ -163,14 +163,14 @@
         dialogOpen = false
     }
 
-    let form = useForm({
+    let formEstrategiaRegionalEvaluacion = useForm({
         problema_central_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_puntaje : null,
         problema_central_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
         problema_central_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.problema_central_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
     })
-    function submit() {
+    function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
-            $form.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+            $formEstrategiaRegionalEvaluacion.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -256,12 +256,15 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-        </svg>
-        Ir a la evaluación
-    </a>
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <hr class="mt-10 mb-10" />
+        <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            Ir a la evaluación
+        </a>
+    {/if}
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
@@ -445,90 +448,100 @@
         </div>
     </div>
 
-    <hr class="mt-10 mb-10" />
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <hr class="mt-10 mb-10" />
 
-    <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <div class="mt-16">
+            <div class="mt-44 ">
+                <div>
+                    <p class="mb-4">Antecedentes</p>
+                </div>
+                <div>
+                    <Textarea disabled label="Antecedentes" maxlength="40000" id="antecedentes" value={problemaCentralInfo.antecedentes} />
+                </div>
+            </div>
 
-    <div class="mt-16">
-        <div class="mt-44 ">
-            <div>
-                <p class="mb-4">Antecedentes</p>
+            <div class="mt-44 ">
+                <div>
+                    <p class="mb-4">Identificación y descripción del problema</p>
+                </div>
+                <div>
+                    <Textarea disabled label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" value={problemaCentralInfo.identificacion_problema} />
+                </div>
             </div>
-            <div>
-                <Textarea disabled label="Antecedentes" maxlength="40000" id="antecedentes" value={problemaCentralInfo.antecedentes} />
-            </div>
-        </div>
 
-        <div class="mt-44 ">
-            <div>
-                <p class="mb-4">Identificación y descripción del problema</p>
+            <div class="mt-44 ">
+                <div>
+                    <p class="mb-4">Justificación</p>
+                </div>
+                <div>
+                    <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_problema" value={problemaCentralInfo.justificacion_problema} />
+                </div>
             </div>
-            <div>
-                <Textarea disabled label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" value={problemaCentralInfo.identificacion_problema} />
-            </div>
-        </div>
 
-        <div class="mt-44 ">
-            <div>
-                <p class="mb-4">Justificación</p>
+            <div class="mt-44 ">
+                <div>
+                    <p class="mb-4">Marco conceptual</p>
+                </div>
+                <div>
+                    <Textarea disabled label="Marco conceptual" maxlength="20000" id="marco_conceptual" value={problemaCentralInfo.marco_conceptual} />
+                </div>
             </div>
-            <div>
-                <Textarea disabled label="Justificación" maxlength="40000" id="justificacion_problema" value={problemaCentralInfo.justificacion_problema} />
-            </div>
-        </div>
 
-        <div class="mt-44 ">
-            <div>
-                <p class="mb-4">Marco conceptual</p>
-            </div>
-            <div>
-                <Textarea disabled label="Marco conceptual" maxlength="20000" id="marco_conceptual" value={problemaCentralInfo.marco_conceptual} />
-            </div>
-        </div>
+            <form on:submit|preventDefault={submitEstrategiaRegionalEvaluacion}>
+                <InfoMessage>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li><strong>Puntaje: 0 a 7</strong> El problema no ha sido identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y no se encuentra coherencia con los antecedentes, la justificación y el marco conceptual.</li>
+                        <li><strong>Puntaje: 8 a 13</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y se encuentra coherencia entre los antecedentes, la justificación y el marco conceptual. Sin embargo, es susceptible de ajustes en términos de coherencia en la propuesta</li>
+                        <li><strong>Puntaje: 14 a 15</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y guarda una coherencia global entre los antecedentes, la justificación y el marco conceptual.</li>
+                    </ul>
 
-        <form on:submit|preventDefault={submit}>
-            <InfoMessage>
-                <h1>Criterios de evaluacion</h1>
-                <ul class="list-disc p-4">
-                    <li><strong>Puntaje: 0 a 7</strong> El problema no ha sido identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y no se encuentra coherencia con los antecedentes, la justificación y el marco conceptual.</li>
-                    <li><strong>Puntaje: 8 a 13</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y se encuentra coherencia entre los antecedentes, la justificación y el marco conceptual. Sin embargo, es susceptible de ajustes en términos de coherencia en la propuesta</li>
-                    <li><strong>Puntaje: 14 a 15</strong> El problema se ha identificado a partir de los instrumentos de planeación regional como las agendas departamentales y/o planes tecnológicos y guarda una coherencia global entre los antecedentes, la justificación y el marco conceptual.</li>
-                </ul>
+                    <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="problema_central_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="15"
+                        class="mt-1"
+                        bind:value={$formEstrategiaRegionalEvaluacion.problema_central_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.problema_central_puntaje}
+                    />
 
-                <Label class="mt-4 mb-4" labelFor="problema_central_puntaje" value="Puntaje (Máximo 15)" />
-                <Input
-                    disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                    label="Puntaje"
-                    id="problema_central_puntaje"
-                    type="number"
-                    input$step="1"
-                    input$min="0"
-                    input$max="15"
-                    class="mt-1"
-                    bind:value={$form.problema_central_puntaje}
-                    placeholder="Puntaje"
-                    autocomplete="off"
-                    error={errors.problema_central_puntaje}
-                />
-
-                {#if segundaEvaluacion?.problema_central_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.problema_central_comentario}</p>
-                {/if}
-                <div class="mt-4">
-                    <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.problema_central_requiere_comentario} />
-                    {#if $form.problema_central_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="problema_central_comentario" bind:value={$form.problema_central_comentario} error={errors.problema_central_comentario} required />
+                    {#if segundaEvaluacion?.problema_central_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.problema_central_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.problema_central_requiere_comentario} />
+                        {#if $formEstrategiaRegionalEvaluacion.problema_central_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="problema_central_comentario"
+                                bind:value={$formEstrategiaRegionalEvaluacion.problema_central_comentario}
+                                error={errors.problema_central_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
-            </InfoMessage>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                {/if}
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    {/if}
 
     <!-- Dialog -->
     <Dialog bind:open={dialogOpen} id="arbol-problemas">

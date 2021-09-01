@@ -79,19 +79,19 @@
                     {#if isSuperAdmin || convocatoria.fase == 5}
                         <td class="border-t">
                             <p class="px-6 py-4">
-                                {proyecto.estado_evaluacion.estado}
+                                {proyecto.estado_evaluacion_idi.estado}
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>
-                                        Puntaje: {proyecto.estado_evaluacion.puntaje}
+                                        Puntaje: {proyecto.estado_evaluacion_idi.puntaje}
                                         <br />
-                                        Número de recomendaciones: {proyecto.estado_evaluacion.numeroRecomendaciones}
+                                        Número de recomendaciones: {proyecto.estado_evaluacion_idi.numeroRecomendaciones}
                                         <br />
-                                        Evaluaciones: {proyecto.estado_evaluacion.evaluacionesHabilitadas} habilitada(s) / {proyecto.estado_evaluacion.evaluacionesFinalizadas} finalizada(s)
+                                        Evaluaciones: {proyecto.estado_evaluacion_idi.evaluacionesHabilitadas} habilitada(s) / {proyecto.estado_evaluacion_idi.evaluacionesFinalizadas} finalizada(s)
                                         <br />
-                                        {#if proyecto.estado_evaluacion.alerta}
+                                        {#if proyecto.estado_evaluacion_idi.alerta}
                                             <strong class="text-red-500">
-                                                Importante: {proyecto.estado_evaluacion.alerta}
+                                                Importante: {proyecto.estado_evaluacion_idi.alerta}
                                             </strong>
                                         {/if}
                                     </small>

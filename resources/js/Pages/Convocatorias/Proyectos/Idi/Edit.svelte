@@ -231,8 +231,6 @@
             programasFormacionArticular = res.data
         }
     }
-
-    console.log(idi.proyecto)
 </script>
 
 <AuthenticatedLayout>
@@ -243,9 +241,9 @@
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" localStorageForm={nombreFormulario} bind:count id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
-                {#if convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
-                        {#if evaluacion.finalizado && evaluacion.habilitado}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                 <div class="flex text-orangered-900 font-black">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -286,9 +284,9 @@
                     </div>
                 {/if}
 
-                {#if convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
-                        {#if evaluacion.finalizado && evaluacion.habilitado}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                 <div class="flex text-orangered-900 font-black">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -339,9 +337,9 @@
                 <div>
                     <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
 
-                    {#if convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
-                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                     <div class="flex text-orangered-900 font-black">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -382,9 +380,9 @@
                     <div>
                         <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
 
-                        {#if convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                         <div class="flex text-orangered-900 font-black">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -407,9 +405,9 @@
                 <div>
                     <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
 
-                    {#if convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
-                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                     <div class="flex text-orangered-900 font-black">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -431,9 +429,9 @@
                 <div>
                     <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
 
-                    {#if convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
-                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                     <div class="flex text-orangered-900 font-black">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -458,9 +456,9 @@
                         <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
                         <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
 
-                        {#if convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                         <div class="flex text-orangered-900 font-black">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -490,9 +488,9 @@
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
                         <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$form.justificacion_industria_4} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
 
-                        {#if convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                         <div class="flex text-orangered-900 font-black">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -521,9 +519,9 @@
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
                         <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_economia_naranja" error={errors.justificacion_economia_naranja} bind:value={$form.justificacion_economia_naranja} required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'} />
 
-                        {#if convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                         <div class="flex text-orangered-900 font-black">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -551,9 +549,9 @@
                     {#if requiereJustificacionPoliticaDiscapacidad}
                         <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
                         <Textarea label="Justificación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="justificacion_politica_discapacidad" error={errors.justificacion_politica_discapacidad} bind:value={$form.justificacion_politica_discapacidad} required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'} />
-                        {#if convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if evaluacion.finalizado && evaluacion.habilitado}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                         <div class="flex text-orangered-900 font-black">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -844,9 +842,9 @@
                 <div>
                     <Textarea label="Resumen" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
 
-                    {#if convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
-                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                     <div class="flex text-orangered-900 font-black">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -977,9 +975,9 @@
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
 
-                    {#if convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
-                            {#if evaluacion.finalizado && evaluacion.habilitado}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                                     <div class="flex text-orangered-900 font-black">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -995,11 +993,11 @@
                 </div>
             </div>
 
-            {#if convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
-                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                             <div class="flex text-orangered-900 font-black">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1013,11 +1011,11 @@
                 {/each}
             {/if}
 
-            {#if convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
-                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                             <div class="flex text-orangered-900 font-black">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1031,11 +1029,11 @@
                 {/each}
             {/if}
 
-            {#if convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
-                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                             <div class="flex text-orangered-900 font-black">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

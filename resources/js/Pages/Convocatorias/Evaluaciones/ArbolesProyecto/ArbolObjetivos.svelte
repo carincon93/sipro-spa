@@ -193,7 +193,7 @@
         dialogOpen = false
     }
 
-    let form = useForm({
+    let formEstrategiaRegionalEvaluacion = useForm({
         objetivos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_puntaje : null,
         objetivos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
         objetivos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.objetivos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
@@ -202,9 +202,9 @@
         resultados_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.resultados_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
         resultados_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.resultados_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
     })
-    function submit() {
+    function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
-            $form.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+            $formEstrategiaRegionalEvaluacion.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -290,12 +290,14 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-        </svg>
-        Ir a la evaluación
-    </a>
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            Ir a la evaluación
+        </a>
+    {/if}
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
@@ -524,88 +526,90 @@
         </div>
     </div>
 
-    <hr class="mt-10 mb-10" />
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <hr class="mt-10 mb-10" />
 
-    <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
 
-    <div class="mt-16">
-        <form on:submit|preventDefault={submit}>
-            <InfoMessage>
-                <h1 class="text-2xl text-center mb-10">Resultados</h1>
-                <h1>Criterios de evaluacion</h1>
-                <ul class="list-disc p-4">
-                    <li><strong>Puntaje: 0 a 4</strong> No son claros los beneficios y ventajas de los resultados en el marco del proyecto, no se generan por el desarrollo de las actividades y tampoco evidencian la materialización de la solución propuesta para resolver el problema del proyecto.</li>
-                    <li><strong>Puntaje: 5 a 7</strong> Los resultados se generan por el desarrollo de las actividades y se identifican sus ventajas y beneficios para dar solución al problema identificado. Son susceptibles de mejora para evidenciar de forma clara la materialización de la solución propuesta.</li>
-                    <li><strong>Puntaje: 8 a 9</strong> Los resultados se generan por el desarrollo de las actividades, sus beneficios y ventajas sobresalen en pro de dar una solución contundente al problema identificado y evidencian de forma clara la materialización de la solución propuesta.</li>
-                </ul>
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitEstrategiaRegionalEvaluacion}>
+                <InfoMessage>
+                    <h1 class="text-2xl text-center mb-10">Resultados</h1>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li><strong>Puntaje: 0 a 4</strong> No son claros los beneficios y ventajas de los resultados en el marco del proyecto, no se generan por el desarrollo de las actividades y tampoco evidencian la materialización de la solución propuesta para resolver el problema del proyecto.</li>
+                        <li><strong>Puntaje: 5 a 7</strong> Los resultados se generan por el desarrollo de las actividades y se identifican sus ventajas y beneficios para dar solución al problema identificado. Son susceptibles de mejora para evidenciar de forma clara la materialización de la solución propuesta.</li>
+                        <li><strong>Puntaje: 8 a 9</strong> Los resultados se generan por el desarrollo de las actividades, sus beneficios y ventajas sobresalen en pro de dar una solución contundente al problema identificado y evidencian de forma clara la materialización de la solución propuesta.</li>
+                    </ul>
 
-                <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
-                <Input
-                    disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                    label="Puntaje"
-                    id="resultados_puntaje"
-                    type="number"
-                    input$step="1"
-                    input$min="0"
-                    input$max="9"
-                    class="mt-1"
-                    bind:value={$form.resultados_puntaje}
-                    placeholder="Puntaje"
-                    autocomplete="off"
-                    error={errors.resultados_puntaje}
-                />
+                    <Label class="mt-4 mb-4" labelFor="resultados_puntaje" value="Puntaje (Máximo 9)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="resultados_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="9"
+                        class="mt-1"
+                        bind:value={$formEstrategiaRegionalEvaluacion.resultados_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.resultados_puntaje}
+                    />
 
-                <div class="mt-4">
-                    <p>¿Los resultados son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.resultados_requiere_comentario} />
-                    {#if $form.resultados_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$form.resultados_comentario} error={errors.resultados_comentario} required />
+                    <div class="mt-4">
+                        <p>¿Los resultados son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.resultados_requiere_comentario} />
+                        {#if $formEstrategiaRegionalEvaluacion.resultados_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resultados_comentario" bind:value={$formEstrategiaRegionalEvaluacion.resultados_comentario} error={errors.resultados_comentario} required />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10" />
+                    <h1 class="text-2xl text-center mb-10">Árbol de objetivos / Objetivo general / Objetivos específicos</h1>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li><strong>Puntaje: 0 a 7</strong> El objetivo general y los objetivos específicos (solución identificada) no dan respuesta al problema, tampo estan relacionados entre ellos, y los objetivos específicos no presentan una secuencia lógica para alcanzar el objetivo general.</li>
+                        <li><strong>Puntaje: 8 a 13</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta parcial al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general, pero susceptibles de ajustes y mejoras.</li>
+                        <li><strong>Puntaje: 14 a 15</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta integral al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general.</li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="objetivos_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="15"
+                        class="mt-1"
+                        bind:value={$formEstrategiaRegionalEvaluacion.objetivos_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.objetivos_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.objetivos_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.objetivos_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿El árbol de objetivos, objetivo general o los objetivos específicos son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.objetivos_requiere_comentario} />
+                        {#if $formEstrategiaRegionalEvaluacion.objetivos_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$formEstrategiaRegionalEvaluacion.objetivos_comentario} error={errors.objetivos_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
-
-                <hr class="mt-10 mb-10" />
-                <h1 class="text-2xl text-center mb-10">Árbol de objetivos / Objetivo general / Objetivos específicos</h1>
-                <h1>Criterios de evaluacion</h1>
-                <ul class="list-disc p-4">
-                    <li><strong>Puntaje: 0 a 7</strong> El objetivo general y los objetivos específicos (solución identificada) no dan respuesta al problema, tampo estan relacionados entre ellos, y los objetivos específicos no presentan una secuencia lógica para alcanzar el objetivo general.</li>
-                    <li><strong>Puntaje: 8 a 13</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta parcial al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general, pero susceptibles de ajustes y mejoras.</li>
-                    <li><strong>Puntaje: 14 a 15</strong> El objetivo general y los objetivos específicos (solución identificada) dan respuesta integral al problema; hay relación entre ellos y los objetivos específicos están formulados como una secuencia lógica para alcanzar el objetivo general.</li>
-                </ul>
-
-                <Label class="mt-4 mb-4" labelFor="objetivos_puntaje" value="Puntaje (Máximo 15)" />
-                <Input
-                    disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                    label="Puntaje"
-                    id="objetivos_puntaje"
-                    type="number"
-                    input$step="1"
-                    input$min="0"
-                    input$max="15"
-                    class="mt-1"
-                    bind:value={$form.objetivos_puntaje}
-                    placeholder="Puntaje"
-                    autocomplete="off"
-                    error={errors.objetivos_puntaje}
-                />
-
-                {#if segundaEvaluacion?.objetivos_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.objetivos_comentario}</p>
-                {/if}
-                <div class="mt-4">
-                    <p>¿El árbol de objetivos, objetivo general o los objetivos específicos son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.objetivos_requiere_comentario} />
-                    {#if $form.objetivos_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="objetivos_comentario" bind:value={$form.objetivos_comentario} error={errors.objetivos_comentario} required />
-                    {/if}
-                </div>
-            </InfoMessage>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                {/if}
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    {/if}
 
     <!-- Dialog -->
     <Dialog bind:open={dialogOpen} id="arbol-objetivos">

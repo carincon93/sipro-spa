@@ -22,6 +22,7 @@ use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -320,7 +321,14 @@ class ArbolProyectoController extends Controller
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
                 $evaluacion->proyecto->problema_central = $evaluacion->proyecto->ta->problema_central;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->tp->justificacion_problema;
@@ -707,9 +715,17 @@ class ArbolProyectoController extends Controller
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->ta->problema_central;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->ta->identificacion_problema;
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->ta->objetivo_general;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
+
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 break;
             case $evaluacion->proyecto->tp()->exists():

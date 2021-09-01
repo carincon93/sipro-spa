@@ -284,6 +284,22 @@
                         <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
+
+                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#each ta.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                <div class="flex text-orangered-900 font-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                </div>
+                                <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.fecha_ejecucion_comentario ? evaluacion.ta_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
             </div>
 
             <fieldset disabled>
@@ -354,6 +370,22 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.resumen_regional_comentario ? evaluacion.ta_evaluacion.resumen_regional_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -377,6 +409,21 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$form.antecedentes_tecnoacademia} required />
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario ? evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -397,6 +444,22 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.retos_oportunidades_comentario ? evaluacion.ta_evaluacion.retos_oportunidades_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -445,6 +508,27 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div />
+                <div>
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.municipios_comentario ? evaluacion.ta_evaluacion.municipios_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -503,6 +587,27 @@
                 </div>
             {/if}
 
+            <div class="mt-44 grid grid-cols-1">
+                <div />
+                <div>
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.instituciones_comentario ? evaluacion.ta_evaluacion.instituciones_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
+                </div>
+            </div>
+
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
@@ -551,6 +656,22 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="proyectos_macro" error={errors.proyectos_macro} bind:value={$form.proyectos_macro} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.proyectos_macro_comentario ? evaluacion.ta_evaluacion.proyectos_macro_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -560,6 +681,22 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$form.lineas_medulares_centro} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_medulares_centro_comentario ? evaluacion.ta_evaluacion.lineas_medulares_centro_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -569,6 +706,22 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$form.lineas_tecnologicas_centro} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario ? evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -579,8 +732,78 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.bibliografia ? evaluacion.ta_evaluacion.bibliografia : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Ortografía</h1>
+                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.ortografia_comentario ? evaluacion.ta_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Redacción</h1>
+                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.redaccion_comentario ? evaluacion.ta_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Normas APA</h1>
+                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.normas_apa_comentario ? evaluacion.ta_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true)}

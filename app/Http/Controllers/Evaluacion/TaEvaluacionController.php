@@ -70,9 +70,9 @@ class TaEvaluacionController extends Controller
     {
         $taEvaluacion->evaluacion->proyecto;
         $ta = $taEvaluacion->evaluacion->proyecto->ta;
-        $ta->codigo_linea_programatica = $taEvaluacion->ta->proyecto->lineaProgramatica->codigo;
-        $ta->precio_proyecto           = $taEvaluacion->ta->proyecto->precioProyecto;
-        $taEvaluacion->ta->proyecto->centroFormacion;
+        $ta->proyecto->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
+        $ta->proyecto->precio_proyecto           = $ta->proyecto->precioProyecto;
+        $ta->proyecto->centroFormacion;
 
         if (auth()->user()->hasRole(12)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
@@ -92,20 +92,23 @@ class TaEvaluacionController extends Controller
                 ->get();
         }
 
-        return Inertia::render('Convocatorias/Proyectos/Ta/Edit', [
-            'convocatoria'                          => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
-            'ta'                                    => $ta,
-            'taEvaluacion'                          => $taEvaluacion,
-            'tecnoacademiaRelacionada'              => $taEvaluacion->ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $taEvaluacion->ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,
-            'lineasTecnoacademiaRelacionadas'       => $taEvaluacion->ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
-            'regionales'                            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
-            'tecnoacademias'                        => TecnoAcademia::select('id as value', 'nombre as label')->get(),
-            'proyectoMunicipios'                    => $taEvaluacion->ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoMunicipiosImpactar'            => $taEvaluacion->ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacionArticulados' => $taEvaluacion->ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoDisCurriculares'               => $taEvaluacion->ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'tecnoAcademias'                        => $tecnoAcademias
+        return Inertia::render('Convocatorias/Evaluaciones/Ta/Edit', [
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
+            'ta'                                        => $ta,
+            'taEvaluacion'                              => $taEvaluacion,
+            'idiSegundaEvaluacion'                      => TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+            })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->first(),
+            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,
+            'lineasTecnoacademiaRelacionadas'           => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
+            'regionales'                                => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'proyectoMunicipios'                        => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoMunicipiosImpactar'                => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoProgramasFormacionArticulados'     => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoDisCurriculares'                   => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'disCurriculares'                           => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'tecnoAcademias'                            => $tecnoAcademias
         ]);
     }
 
@@ -118,9 +121,30 @@ class TaEvaluacionController extends Controller
      */
     public function update(TaEvaluacionRequest $request, Convocatoria $convocatoria, TaEvaluacion $taEvaluacion)
     {
-        $taEvaluacion->fieldName = $request->fieldName;
-        $taEvaluacion->fieldName = $request->fieldName;
-        $taEvaluacion->fieldName = $request->fieldName;
+        $taEvaluacion->evaluacion()->update([
+            'iniciado' => true,
+            'clausula_confidencialidad' => $request->clausula_confidencialidad
+        ]);
+
+        $taEvaluacion->resumen_regional_comentario              = $request->resumen_regional_requiere_comentario == false ? $request->resumen_regional_comentario : null;
+        $taEvaluacion->antecedentes_tecnoacademia_comentario    = $request->antecedentes_tecnoacademia_requiere_comentario == false ? $request->antecedentes_tecnoacademia_comentario : null;
+        $taEvaluacion->retos_oportunidades_comentario           = $request->retos_oportunidades_requiere_comentario == false ? $request->retos_oportunidades_comentario : null;
+        $taEvaluacion->metodologia_comentario             = $request->metodologia_local_requiere_comentario == false ? $request->metodologia_comentario : null;
+        $taEvaluacion->lineas_medulares_centro_comentario       = $request->lineas_medulares_centro_requiere_comentario == false ? $request->lineas_medulares_centro_comentario : null;
+        $taEvaluacion->lineas_tecnologicas_centro_comentario    = $request->lineas_tecnologicas_centro_requiere_comentario == false ? $request->lineas_tecnologicas_centro_comentario : null;
+        $taEvaluacion->articulacion_sennova_comentario                    = $request->semilleros_requiere_comentario == false ? $request->articulacion_sennova_comentario : null;
+        $taEvaluacion->municipios_comentario                    = $request->municipios_requiere_comentario == false ? $request->municipios_comentario : null;
+        $taEvaluacion->instituciones_comentario                 = $request->instituciones_requiere_comentario == false ? $request->instituciones_comentario : null;
+        $taEvaluacion->fecha_ejecucion_comentario               = $request->fecha_ejecucion_requiere_comentario == false ? $request->fecha_ejecucion_comentario : null;
+        $taEvaluacion->cadena_valor_comentario                  = $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null;
+        $taEvaluacion->analisis_riesgos_comentario              = $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null;
+        $taEvaluacion->anexos_comentario                        = $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null;
+        $taEvaluacion->proyectos_macro_comentario               = $request->proyectos_macro_requiere_comentario == false ? $request->proyectos_macro_comentario : null;
+        $taEvaluacion->bibliografia_comentario                  = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
+
+        $taEvaluacion->ortografia_comentario                    = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
+        $taEvaluacion->redaccion_comentario                     = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;
+        $taEvaluacion->normas_apa_comentario                    = $request->normas_apa_requiere_comentario == false ? $request->normas_apa_comentario : null;
 
         $taEvaluacion->save();
 
@@ -135,8 +159,6 @@ class TaEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, TaEvaluacion $taEvaluacion)
     {
-        $taEvaluacion->delete();
-
-        return redirect()->route('convocatorias.ta-evaluaciones.index')->with('error', 'El recurso se no se ha podido eliminar.');
+        return redirect()->route('convocatorias.ta-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

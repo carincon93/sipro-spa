@@ -24,7 +24,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Evaluaciones/Index', [
             'filters'       => request()->all('search'),
-            'evaluaciones'  => Evaluacion::with('proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
+            'evaluaciones'  => Evaluacion::with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
                 ->filterEvaluacion(request()->only('search'))->paginate(),
         ]);
     }
@@ -80,15 +80,19 @@ class EvaluacionController extends Controller
                 ]);
                 break;
             case $proyecto->ta()->exists():
-                $proyecto->problema_central = $proyecto->ta->problema_central;
+                $evaluacion->taEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->tp()->exists():
-                $proyecto->justificacion_problema   = $proyecto->tp->justificacion_problema;
-                $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
-                $proyecto->problema_central         = $proyecto->tp->problema_central;
+                $evaluacion->tpEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
+                $evaluacion->servicioTecnologicoEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->create([
@@ -187,10 +191,10 @@ class EvaluacionController extends Controller
                 return redirect()->route('convocatorias.idi-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->ta()->exists():
-                return redirect()->route('convocatorias.ta.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.ta-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->tp()->exists():
-                return redirect()->route('convocatorias.tp.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.tp-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $evaluacion]);

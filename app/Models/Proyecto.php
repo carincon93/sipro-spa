@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_ta'];
 
     /**
      * The attributes that are mass assignable.
@@ -489,7 +489,12 @@ class Proyecto extends Model
         return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
     }
 
-    public function getEstadoEvaluacionAttribute()
+    /**
+     * getEstadoEvaluacionIdiAttribute - Estrategia regional
+     *
+     * @return void
+     */
+    public function getEstadoEvaluacionIdiAttribute()
     {
         $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
         $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
@@ -515,7 +520,7 @@ class Proyecto extends Model
             }
 
             if ($key === count($evaluaciones) - 1) {
-                array_push($estados, $this->estadoEvaluacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
                 if ($causalRechazo == null) {
                     switch ($evaluacion) {
@@ -570,8 +575,8 @@ class Proyecto extends Model
         $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
 
         if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
-            $estadoEvaluacion = $this->estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
-            $requiereSubsanar = $this->estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
+            $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
+            $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
         } else {
             $estadoEvaluacion = $causalRechazo;
         }
@@ -584,7 +589,39 @@ class Proyecto extends Model
         return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
     }
 
-    public function estadoEvaluacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
+    /**
+     * getEstadoEvaluacionTaAttribute - Tecnoacademia
+     *
+     * @return void
+     */
+    public function getEstadoEvaluacionTaAttribute()
+    {
+        $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+        $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
+        $cantidadEvaluaciones = count($evaluaciones);
+
+        $totalRecomendaciones = 0;
+        $estadoEvaluacion = '';
+        $causalRechazo  = null;
+        $requiereSubsanar = false;
+        $totalPresupuestosEvaluados = 0;
+        $countPresupuestoNoAprobado = 0;
+
+        $estados = array(1, 2);
+
+        foreach ($evaluaciones as $key => $evaluacion) {
+            $totalRecomendaciones += $evaluacion->total_recomendaciones;
+
+            // Sumar los presupuesto no aprobados
+            $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
+            foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
+                $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
+            }
+        }
+        return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => null, 'alerta' => null]);
+    }
+
+    public function estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
     {
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 

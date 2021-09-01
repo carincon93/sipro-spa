@@ -9,7 +9,7 @@
     export let proyecto
 
     let container
-    let activeProyecto = route().current('convocatorias.ta.edit') || route().current('convocatorias.tp.edit') || route().current('convocatorias.idi-evaluaciones.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion-evaluaciones.edit')
+    let activeProyecto = route().current('convocatorias.ta-evaluaciones.edit') || route().current('convocatorias.tp.edit') || route().current('convocatorias.idi-evaluaciones.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion-evaluaciones.edit')
 
     onMount(() => {
         let steps = container.getElementsByClassName('step-number')
@@ -36,7 +36,7 @@
         </div>
     {:else}
         <div class="w-10/12 step">
-            <a use:inertia active={route().current('convocatorias.proyectos.articulacion-sennova')} href={route('convocatorias.proyectos.articulacion-sennova', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+            <a use:inertia active={route().current('convocatorias.evaluaciones.articulacion-sennova')} href={route('convocatorias.evaluaciones.articulacion-sennova', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                 <p class="text-sm text-center">Articulación SENNOVA</p>
             </a>
@@ -71,7 +71,7 @@
         </div>
         {#if proyecto.codigo_linea_programatica == 70}
             <div class="w-10/12 step ml-5">
-                <a use:inertia active={route().current('convocatorias.proyectos.edt.index')} href={route('convocatorias.proyectos.edt.index', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+                <a use:inertia active={route().current('convocatorias.evaluaciones.edt')} href={route('convocatorias.evaluaciones.edt', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                     <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                     <p class="text-sm text-center">EDT</p>
                 </a>
@@ -125,12 +125,15 @@
             <p class="text-sm text-center">Cadena de valor</p>
         </a>
     </div>
-    <div class="w-10/12 step">
-        <a use:inertia active={route().current('convocatorias.evaluaciones.causales-rechazo')} href={route('convocatorias.evaluaciones.causales-rechazo', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
-            <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
-            <p class="text-sm text-center">Causales de rechazo</p>
-        </a>
-    </div>
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <div class="w-10/12 step">
+            <a use:inertia active={route().current('convocatorias.evaluaciones.causales-rechazo')} href={route('convocatorias.evaluaciones.causales-rechazo', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+                <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
+                <p class="text-sm text-center">Causales de rechazo</p>
+            </a>
+        </div>
+    {/if}
+
     <div class="w-10/12 step">
         <a use:inertia active={route().current('convocatorias.evaluaciones.summary')} href={route('convocatorias.evaluaciones.summary', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />

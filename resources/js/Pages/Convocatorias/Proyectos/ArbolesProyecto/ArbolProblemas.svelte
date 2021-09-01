@@ -388,9 +388,9 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
-    {#if convocatoria.mostrar_recomendaciones}
+    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
-            {#if evaluacion.finalizado && evaluacion.habilitado}
+            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                     <div class="flex text-orangered-900 font-black">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

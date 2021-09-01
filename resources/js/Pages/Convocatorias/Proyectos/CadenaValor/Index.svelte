@@ -98,8 +98,6 @@
             })
         })
 
-        console.log(productos)
-
         // Create the chart.
         var chart = new google.visualization.OrgChart(document.getElementById('orgchart_div'))
         if (typeof chart.draw === 'function') {
@@ -157,9 +155,9 @@
 
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
-    {#if convocatoria.mostrar_recomendaciones}
+    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
-            {#if evaluacion.finalizado && evaluacion.habilitado}
+            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                     <div class="flex text-orangered-900 font-black">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,6 +167,8 @@
                     </div>
                     {#if evaluacion.idi_evaluacion}
                         <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.cadena_valor_comentario ? evaluacion.idi_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.ta_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.cadena_valor_comentario ? evaluacion.ta_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
                     {/if}
                 </div>
             {/if}

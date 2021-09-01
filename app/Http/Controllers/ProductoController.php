@@ -7,6 +7,7 @@ use App\Models\Actividad;
 use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Proyecto;
 use App\Models\Producto;
 use App\Models\ProductoCulturaInnovacion;
@@ -328,7 +329,12 @@ class ProductoController extends Controller
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
 
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
 
@@ -386,6 +392,12 @@ class ProductoController extends Controller
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'productos_puntaje'      => $request->productos_puntaje,
                     'productos_comentario'   => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
+                    'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
                 ]);
                 break;
             default:

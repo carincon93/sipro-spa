@@ -79,7 +79,7 @@
                     {#if isSuperAdmin || convocatoria.fase == 5}
                         <td class="border-t">
                             <p class="px-6 py-4">
-                                {proyecto.estado_evaluacion}
+                                {proyecto.estado_evaluacion_idi}
                             </p>
                         </td>
                     {/if}

@@ -2,12 +2,21 @@
 
 namespace App\Models\Evaluacion;
 
+use App\Models\Ta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TaEvaluacion extends Model
 {
     use HasFactory;
+
+    /**
+     * table
+     *
+     * @var string
+     */
+    protected $table = 'ta_evaluaciones';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +24,25 @@ class TaEvaluacion extends Model
      * @var array
      */
     protected $fillable = [
-        //
+        'resumen_regional_comentario',
+        'antecedentes_tecnoacademia_comentario',
+        'retos_oportunidades_comentario',
+        'metodologia_comentario',
+        'lineas_medulares_centro_comentario',
+        'lineas_tecnologicas_centro_comentario',
+        'articulacion_sennova_comentario',
+        'municipios_comentario',
+        'instituciones_comentario',
+        'fecha_ejecucion_comentario',
+        'cadena_valor_comentario',
+        'analisis_riesgos_comentario',
+        'anexos_comentario',
+        'proyectos_macro_comentario',
+        'bibliografia_comentario',
+        'productos_comentario',
+        'ortografia_comentario',
+        'redaccion_comentario',
+        'normas_apa_comentario',
     ];
 
     /**
@@ -37,23 +64,13 @@ class TaEvaluacion extends Model
     ];
 
     /**
-     * Relationship with FirstRelatedModel
+     * Relationship with Evaluacion
      *
-     * @return void
+     * @return object
      */
-    public function firstRelatedModel()
+    public function evaluacion()
     {
-        return $this->belongsTo(FirstRelatedModel::class);
-    }
-
-    /**
-     * Relationship with SecondRelatedModel
-     *
-     * @return void
-     */
-    public function secondRelatedModel()
-    {
-        return $this->hasOne(SecondRelatedModel::class);
+        return $this->belongsTo(Evaluacion::class, 'id');
     }
 
     /**
@@ -66,7 +83,43 @@ class TaEvaluacion extends Model
     public function scopeFilterTaEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%'.$search.'%');
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(resumen) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getProyectosPorEvaluador
+     *
+     * @param  mixed $convocatoria
+     * @return object
+     */
+    public static function getProyectosPorEvaluador($convocatoria)
+    {
+        $authUser = Auth::user();
+        if ($authUser->hasRole(1)) { // Admin
+            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')
+                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->distinct()
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
+        } else if ($authUser->hasRole(11)) { // Evaluador
+            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+                ->join('proyectos', 'ta.id', 'proyectos.id')
+                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
+                ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->where('evaluaciones.user_id', $authUser->id)
+                ->distinct()
+                ->orderBy('ta.id', 'ASC')
+                ->filterTa(request()->only('search'))->paginate();
+        }
+        $ta->load('proyecto');
+        $ta->load('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia');
+
+        return $ta;
     }
 }

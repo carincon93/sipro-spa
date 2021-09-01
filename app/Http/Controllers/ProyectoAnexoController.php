@@ -8,6 +8,7 @@ use App\Models\Proyecto;
 use App\Models\Anexo;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\ProyectoAnexo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,6 +27,7 @@ class ProyectoAnexoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
         $proyecto->codigo_linea_programatica == 68 ? $proyecto->infraestructura_adecuada = $proyecto->servicioTecnologico->infraestructura_adecuada : $proyecto->infraestructura_adecuada = null;
@@ -180,6 +182,11 @@ class ProyectoAnexoController extends Controller
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 break;
@@ -223,6 +230,11 @@ class ProyectoAnexoController extends Controller
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
+                ]);
+                break;
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
                     'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
                 ]);
                 break;

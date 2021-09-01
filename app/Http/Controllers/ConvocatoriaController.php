@@ -165,10 +165,10 @@ class ConvocatoriaController extends Controller
                 break;
             case 3: // Subsanación
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
-                    if ($proyecto->estado_evaluacion != null && json_decode($proyecto->estado_evaluacion)->requiereSubsanar && $proyecto->id == 989) {
-                        $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion]);
+                    if ($proyecto->estado_evaluacion_idi != null && json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar && $proyecto->id == 989) {
+                        $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
                     } else {
-                        $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion]);
+                        $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
                     }
                 }
 
@@ -182,7 +182,7 @@ class ConvocatoriaController extends Controller
                 $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
                 $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
-                    $proyecto->update(['estado' => $proyecto->estado_evaluacion]);
+                    $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
                 }
                 break;
 
