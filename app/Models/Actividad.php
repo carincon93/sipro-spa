@@ -174,9 +174,9 @@ class Actividad extends Model
         return date('d', strtotime($this->fecha_finalizacion));
     }
 
-    public function getDiffDaysAttribute() 
+    public function getDiffDaysAttribute()
     {
-        return Carbon::parse( $this->fecha_inicio )->diffInMonths( $this->fecha_finalizacion );
+        return Carbon::parse($this->fecha_inicio)->diffInMonths($this->fecha_finalizacion);
     }
 
     public function getCostoActividadAttribute()
