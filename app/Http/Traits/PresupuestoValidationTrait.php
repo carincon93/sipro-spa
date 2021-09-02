@@ -248,7 +248,7 @@ trait PresupuestoValidationTrait
             if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
-                $total += $valorTotal + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2042186');
+                $total += $valorTotal;
             }
 
             return ($total > $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_bienestar_alumnos) ? true : false;
@@ -267,7 +267,7 @@ trait PresupuestoValidationTrait
             if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
-                $total += $valorTotal + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2041102');
+                $total += $valorTotal;
             }
 
             return ($total > $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_viaticos_interior) ? true : false;
