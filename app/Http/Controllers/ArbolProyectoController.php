@@ -287,7 +287,7 @@ class ArbolProyectoController extends Controller
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -340,7 +340,7 @@ class ArbolProyectoController extends Controller
             'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'            => ($request->to_pdf==1)?true:false
+            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -670,7 +670,7 @@ class ArbolProyectoController extends Controller
                     return $objetivoEspecifico->id;
                 })
             )->get(),
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -732,7 +732,7 @@ class ArbolProyectoController extends Controller
             'causasDirectas'  => $causasDirectas,
             'tiposImpacto'    => $tiposImpacto,
             'tipoProyectoA'   => $tipoProyectoA,
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
