@@ -9,7 +9,7 @@
     export let proyecto
 
     let container
-    let activeProyecto = route().current('convocatorias.ta-evaluaciones.edit') || route().current('convocatorias.tp.edit') || route().current('convocatorias.idi-evaluaciones.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion-evaluaciones.edit')
+    let activeProyecto = route().current('convocatorias.ta-evaluaciones.edit') || route().current('convocatorias.tp-evaluaciones.edit') || route().current('convocatorias.idi-evaluaciones.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion-evaluaciones.edit')
 
     onMount(() => {
         let steps = container.getElementsByClassName('step-number')

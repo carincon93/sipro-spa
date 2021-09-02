@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_ta'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_ta', 'estado_evaluacion_tp'];
 
     /**
      * The attributes that are mass assignable.
@@ -595,6 +595,38 @@ class Proyecto extends Model
      * @return void
      */
     public function getEstadoEvaluacionTaAttribute()
+    {
+        $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+        $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
+        $cantidadEvaluaciones = count($evaluaciones);
+
+        $totalRecomendaciones = 0;
+        $estadoEvaluacion = '';
+        $causalRechazo  = null;
+        $requiereSubsanar = false;
+        $totalPresupuestosEvaluados = 0;
+        $countPresupuestoNoAprobado = 0;
+
+        $estados = array(1, 2);
+
+        foreach ($evaluaciones as $key => $evaluacion) {
+            $totalRecomendaciones += $evaluacion->total_recomendaciones;
+
+            // Sumar los presupuesto no aprobados
+            $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
+            foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
+                $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
+            }
+        }
+        return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => null, 'alerta' => null]);
+    }
+
+    /**
+     * getEstadoEvaluacionTpAttribute - Tecnoacademia
+     *
+     * @return void
+     */
+    public function getEstadoEvaluacionTpAttribute()
     {
         $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
         $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();

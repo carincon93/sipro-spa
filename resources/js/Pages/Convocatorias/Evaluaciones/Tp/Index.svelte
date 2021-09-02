@@ -27,44 +27,44 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id]}>
         <div slot="title">Tecnoparque</div>
 
-        <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [17])}
-                <Button on:click={() => Inertia.visit(route('convocatorias.tp.create', [convocatoria.id]))} variant="raised">Crear proyecto Tecnoparque</Button>
-            {/if}
-        </div>
-
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nodo Tecnoparque </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
 
         <tbody slot="tbody">
-            {#each tp.data as proyecto_tp}
+            {#each tp.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, habilitado, finalizado }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyecto_tp.proyecto.codigo}
+                            {proyecto.codigo}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyecto_tp.titulo}
+                            {titulo}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {proyecto_tp.fecha_ejecucion}
+                            {fecha_ejecucion}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4">
+                            {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [18, 19, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, proyecto_tp.id]))}>
-                                    <Text>Ver detalles</Text>
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
+                                    <Text>Evaluar</Text>
                                 </Item>
                             {:else}
                                 <Item>

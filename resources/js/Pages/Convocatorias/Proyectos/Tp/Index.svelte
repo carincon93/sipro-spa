@@ -51,6 +51,9 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nodo Tecnoparque </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
+                {#if isSuperAdmin || convocatoria.fase == 5}
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluación </th>
+                {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -73,6 +76,29 @@
                             {proyecto_tp.fecha_ejecucion}
                         </p>
                     </td>
+                    {#if isSuperAdmin || convocatoria.fase == 5}
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {proyecto_tp.proyecto.estado_evaluacion_ta.estado}
+
+                                {#if isSuperAdmin}
+                                    <br />
+                                    <small>
+                                        <br />
+                                        Número de recomendaciones: {proyecto_tp.proyecto.estado_evaluacion_ta.numeroRecomendaciones}
+                                        <br />
+                                        Evaluaciones: {proyecto_tp.proyecto.estado_evaluacion_ta.evaluacionesHabilitadas} habilitada(s) / {proyecto_tp.proyecto.estado_evaluacion_ta.evaluacionesFinalizadas} finalizada(s)
+                                        <br />
+                                        {#if proyecto_tp.proyecto.estado_evaluacion_ta.alerta}
+                                            <strong class="text-red-500">
+                                                Importante: {proyecto_tp.proyecto.estado_evaluacion_ta.alerta}
+                                            </strong>
+                                        {/if}
+                                    </small>
+                                {/if}
+                            </p>
+                        </td>
+                    {/if}
                     <td class="border-t td-actions">
                         <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [18, 19, 20])}

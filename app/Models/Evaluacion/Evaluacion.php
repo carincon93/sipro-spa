@@ -109,6 +109,16 @@ class Evaluacion extends Model
     }
 
     /**
+     * Relationship with TaEvaluacion
+     *
+     * @return object
+     */
+    public function tpEvaluacion()
+    {
+        return $this->hasOne(TpEvaluacion::class, 'id');
+    }
+
+    /**
      * Relationship with ProyectoRolEvaluacion
      *
      * @return object
@@ -278,6 +288,24 @@ class Evaluacion extends Model
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->taEvaluacion->normas_apa_comentario != null ? $total++ : null;
+        } else if ($this->proyecto->tp()->exists()) {
+            $this->tpEvaluacion->resumen_regional_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->antecedentes_regional_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->municipios_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->fecha_ejecucion_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->cadena_valor_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->impacto_centro_formacion_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->bibliografia_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->retos_oportunidades_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->pertinencia_territorio_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->metodologia_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->instituciones_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->anexos_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->productos_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
         }
 
         $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();
