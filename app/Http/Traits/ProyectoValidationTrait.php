@@ -476,6 +476,25 @@ trait ProyectoValidationTrait
 
     /**
      * 
+     * Valida que los estudios de mercado tengan al menos dos soportes
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function estudiosMercadoArchivo(Proyecto $proyecto)
+    {
+        $countSoportes = 0;
+        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->formato_estudio_mercado == null) {
+                $countSoportes++;
+            }
+        }
+
+        return $countSoportes > 0 ? false : true;
+    }
+
+    /**
+     * 
      * Valida que haya un edt por uso presupuestal 'servicios de organización y asistencia de convenciones y ferias'
      * 
      * @param  mixed $proyecto

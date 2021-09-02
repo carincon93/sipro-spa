@@ -125,6 +125,26 @@ class ProyectoRolSennova extends Model
         return ($this->numero_meses * $this->convocatoriaRolSennova->asignacion_mensual) * $this->numero_roles;
     }
 
+    /**
+     * getTotalRolActividadesSennova
+     *
+     * @return int
+     */
+    public function getTotalRolActividadesSennova()
+    {
+        $total = 0;
+        $countProductos = 0;
+        foreach ($this->actividades()->get() as $actividad) {
+            $countProductos += $actividad->productos()->count();
+        }
+
+        if ($countProductos > 0) {
+            $total = $this->getTotalRolSennova() / $countProductos;
+        }
+
+        return $total;
+    }
+
     public function getRolAprobadoAttribute()
     {
         return $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('correcto', false)->count();

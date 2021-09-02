@@ -144,6 +144,10 @@
                                                 <small class="block">Descripción</small>
                                                 {presupuesto.descripcion}
                                             </div>
+                                            <div class="mb-8">
+                                                <small class="block">Valor total</small>
+                                                ${new Intl.NumberFormat('de-DE').format(presupuesto.valor_total)} COP
+                                            </div>
                                         </span>
                                     </FormField>
                                 {/each}

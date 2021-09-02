@@ -38,6 +38,7 @@
     export let productosActividades
     export let articulacionSennova
     export let soportesEstudioMercado
+    export let estudiosMercadoArchivo
     export let edt
     export let maxValorRoles
     export let maxValorTAPresupuesto
@@ -172,7 +173,7 @@
                 {/if}
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-            {#if proyecto.finalizado == false && problemaCentral && efectosDirectos && causasIndirectas && causasDirectas && efectosIndirectos && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && /** actividadesPresupuesto && */ resultadoProducto && analisisRiesgo && anexos && metodologia && propuestaSostenibilidad && generalidades}
+            {#if proyecto.finalizado == false && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
             {:else if proyecto.finalizado == false}
@@ -251,6 +252,9 @@
                         {#if !soportesEstudioMercado}
                             <li>Hay estudios de mercado con menos de dos soportes</li>
                         {/if}
+                        {#if !estudiosMercadoArchivo}
+                            <li>Hay rubros presupuestales que no tienen el estudio de mercado cargado</li>
+                        {/if}
                     </ul>
                 </InfoMessage>
             {/if}
@@ -278,11 +282,12 @@
             {#if versiones}
                 <ul>
                     {#each versiones as version}
-                        <li>{version.version}.pdf - 
-                            {#if version.estado==1}
-                            <a href="{route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}">Descargar</a>
+                        <li>
+                            {version.version}.pdf -
+                            {#if version.estado == 1}
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}>Descargar</a>
                             {:else}
-                            Generando, regrese pronto.
+                                Generando, regrese pronto.
                             {/if}
                         </li>
                     {/each}
