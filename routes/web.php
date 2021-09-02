@@ -76,7 +76,6 @@ use App\Http\Controllers\PdfController;
 //     ]);
 // });
 
-Route::get('/', [WebController::class, 'redirectLogin'])->name('web-api.redirectLogin');
 
 /**
  * Trae los centros de formación
@@ -84,6 +83,7 @@ Route::get('/', [WebController::class, 'redirectLogin'])->name('web-api.redirect
 Route::get('web-api/centros-formacion', [WebController::class, 'centrosFormacion'])->name('web-api.centros-formacion');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [WebController::class, 'redirectLogin'])->name('web-api.redirectLogin');
 
     Route::get('manual-usuario/download', [ProyectoController::class, 'downloadManualUsuario'])->name('manual-usuario.download');
 
