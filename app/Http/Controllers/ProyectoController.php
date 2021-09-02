@@ -330,6 +330,7 @@ class ProyectoController extends Controller
             'productosActividades'      => ProyectoValidationTrait::productosActividades($proyecto),
             'articulacionSennova'       => ProyectoValidationTrait::articulacionSennova($proyecto),
             'soportesEstudioMercado'    => ProyectoValidationTrait::soportesEstudioMercado($proyecto),
+            'estudiosMercadoArchivo'    => ProyectoValidationTrait::estudiosMercadoArchivo($proyecto),
             'edt'                       => ProyectoValidationTrait::edt($proyecto),
             'maxValorRoles'             => ProyectoValidationTrait::maxValorRoles($proyecto),
             'maxValorTAPresupuesto'     => ProyectoValidationTrait::maxValorTAPresupuesto($proyecto),
