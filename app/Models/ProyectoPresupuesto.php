@@ -169,10 +169,14 @@ class ProyectoPresupuesto extends Model
      */
     public function getTotalPresupuestoActividadesSennova()
     {
-        $countActividades = $this->actividades()->count();
         $total = 0;
-        if ($countActividades > 0) {
-            $total = $this->valor_total / $countActividades;
+        $countProductos = 0;
+        foreach ($this->actividades()->get() as $actividad) {
+            $countProductos += $actividad->productos()->count();
+        }
+
+        if ($countProductos > 0) {
+            $total = $this->valor_total / $countProductos;
         }
 
         return $total;

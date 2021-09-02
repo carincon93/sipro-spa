@@ -132,10 +132,14 @@ class ProyectoRolSennova extends Model
      */
     public function getTotalRolActividadesSennova()
     {
-        $countActividades = $this->actividades()->count();
         $total = 0;
-        if ($countActividades > 0) {
-            $total = $this->getTotalRolSennova() / $countActividades;
+        $countProductos = 0;
+        foreach ($this->actividades()->get() as $actividad) {
+            $countProductos += $actividad->productos()->count();
+        }
+
+        if ($countProductos > 0) {
+            $total = $this->getTotalRolSennova() / $countProductos;
         }
 
         return $total;
