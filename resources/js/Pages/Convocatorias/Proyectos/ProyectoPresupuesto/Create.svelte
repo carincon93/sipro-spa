@@ -135,8 +135,8 @@
                         <InfoMessage message="Por favor indique el valor total que arrojó el Estudio de mercado - Convocatoria Sennova 2021" />
 
                         <div class="mt-4">
-                            <Label required class="mb-4" labelFor="formato_estudio_mercado" value="Estudio de mercado - Convocatoria Sennova 2021" />
-                            <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} required />
+                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Estudio de mercado - Convocatoria Sennova 2021" />
+                            <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
                         </div>
                     {/if}
 
