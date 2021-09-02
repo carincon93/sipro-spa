@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\API\WebController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\CentroFormacionController;
@@ -56,34 +57,6 @@ use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
 use App\Http\Controllers\PdfController;
-use App\Models\Actividad;
-use App\Models\ActividadEconomica;
-use App\Models\AreaConocimiento;
-use App\Models\LineaInvestigacion;
-use App\Models\RedConocimiento;
-use App\Models\DisciplinaSubareaConocimiento;
-use App\Models\TematicaEstrategica;
-use App\Models\CentroFormacion;
-use App\Models\Region;
-use App\Models\Regional;
-use App\Models\GrupoInvestigacion;
-use App\Models\SubtipologiaMinciencias;
-use App\Models\LineaProgramatica;
-use App\Models\ConvocatoriaRolSennova;
-use App\Models\EstadoSistemaGestion;
-use App\Models\SegundoGrupoPresupuestal;
-use App\Models\TercerGrupoPresupuestal;
-use App\Models\PresupuestoSennova;
-use App\Models\Tecnoacademia;
-use App\Models\LineaTecnoacademia;
-use App\Models\Municipio;
-use App\Models\NodoTecnoparque;
-use App\Models\ProgramaFormacion;
-use App\Models\ProgramaFormacionArticulado;
-use App\Models\Proyecto;
-use App\Models\SubareaConocimiento;
-use App\Models\TipoProyectoSt;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,24 +76,18 @@ use App\Models\User;
 //     ]);
 // });
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', [WebController::class, 'redirectLogin'])->name('web-api.redirectLogin');
 
 /**
  * Trae los centros de formación
  */
-Route::get('web-api/centros-formacion', function () {
-    return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
-})->name('web-api.centros-formacion');
+Route::get('web-api/centros-formacion', [WebController::class, 'centrosFormacion'])->name('web-api.centros-formacion');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('manual-usuario/download', [ProyectoController::class, 'downloadManualUsuario'])->name('manual-usuario.download');
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [WebController::class, 'dashboard'])->name('dashboard');
 
     // Notificaciones
     Route::get('notificaciones', [UserController::class, 'showAllNotifications'])->name('notificaciones.index');
@@ -163,189 +130,66 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('anexos/{anexo}/download', [AnexoController::class, 'download'])->name('anexos.download');
 
     // Trae los centros de formación - Cultura innovación
-    Route::get('web-api/cultura-innovacion/centros-formacion', function () {
-        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')
-            ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
-            ->whereIn('centros_formacion.codigo', [
-                9309,
-                9503,
-                9230,
-                9124,
-                9120,
-                9222,
-                9116,
-                9548,
-                9401,
-                9403,
-                9303,
-                9310,
-                9529,
-                9121
-            ])
-            ->orderBy('centros_formacion.nombre', 'ASC')->get());
-    })->name('web-api.cultura-innovacion.centros-formacion');
+    Route::get('web-api/cultura-innovacion/centros-formacion', [WebController::class, 'culturaInnovacionCentrosFormacion'])->name('web-api.cultura-innovacion.centros-formacion');
 
     // Trae las actividades por resultado
-    Route::get('web-api/resultados/{resultado}/actividades', function ($resultado) {
-        return response(Actividad::select('actividades.id', 'actividades.descripcion', 'actividades.resultado_id')
-            ->where('actividades.resultado_id', $resultado)
-            ->distinct()
-            ->get());
-    })->name('web-api.resultados.actividades');
+    Route::get('web-api/resultados/{resultado}/actividades', [WebController::class, 'resultadosActividades'] )->name('web-api.resultados.actividades');
 
     // Trae los conceptos internos SENA
-    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', function ($lineaProgramatica) {
-        return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
-            ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
-            ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
-            ->where('presupuesto_sennova.habilitado', true)
-            ->groupBy('segundo_grupo_presupuestal.id')
-            ->orderBy('segundo_grupo_presupuestal.nombre', 'ASC')
-            ->get());
-    })->name('web-api.segundo-grupo-presupuestal');
+    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', [WebController::class, 'segundoGrupoPresupuestal'] )->name('web-api.segundo-grupo-presupuestal');
 
 
 
-    Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', function ($segundoGrupoPresupuestal) {
-        return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(tercer_grupo_presupuestal.id) as value, tercer_grupo_presupuestal.nombre as label')
-            ->join('presupuesto_sennova', 'tercer_grupo_presupuestal.id', 'presupuesto_sennova.tercer_grupo_presupuestal_id')
-            ->where('presupuesto_sennova.segundo_grupo_presupuestal_id', $segundoGrupoPresupuestal)
-            ->get());
-    })->name('web-api.tercer-grupo-presupuestal');
+    Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', [WebController::class, 'tercerGrupoPresupuestal'] )->name('web-api.tercer-grupo-presupuestal');
 
     // Trae los usos presupuestales
-    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', function ($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal) {
-        return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje')
-            ->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')
-            ->join('convocatoria_presupuesto', 'presupuesto_sennova.id', 'convocatoria_presupuesto.presupuesto_sennova_id')
-            ->where('convocatoria_presupuesto.convocatoria_id', $convocatoria)
-            ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
-            ->where('presupuesto_sennova.segundo_grupo_presupuestal_id', $segundoGrupoPresupuestal)
-            ->where('presupuesto_sennova.tercer_grupo_presupuestal_id', $tercerGrupoPresupuestal)
-            ->orderBy('usos_presupuestales.descripcion', 'ASC')->get());
-    })->name('web-api.usos-presupuestales');
+    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', [WebController::class, 'usosPresupuestales'] )->name('web-api.usos-presupuestales');
 
-    Route::get('web-api/convocatorias/{convocatoria}/proyectos/{proyecto}/{linea_programatica}/roles-sennova', function ($convocatoria, $proyectoId, $lineaProgramatica) {
-        $proyecto = Proyecto::find($proyectoId);
-        if ($proyecto->servicioTecnologico()->exists()) {
-            $rol = '';
-            $tipologiaSt = '';
-            if ($proyecto->servicioTecnologico->estadoSistemaGestion->id == 1) {
-                $rol = 'responsable de servicios tecnológicos (laboratorio)';
-            }
-
-            if ($proyecto->servicioTecnologico->tipoProyectoSt->tipologia == 1) {
-                $tipologiaSt = '%especiales%';
-            } else if ($proyecto->servicioTecnologico->tipoProyectoSt->tipologia == 2) {
-                $tipologiaSt = '%laboratorio%';
-            } else if ($proyecto->servicioTecnologico->tipoProyectoSt->tipologia == 3) {
-                $tipologiaSt = '%técnicos%';
-            }
-            return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.perfil, convocatoria_rol_sennova.mensaje,
-                CASE nivel_academico
-                    WHEN '7' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Ninguno', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '1' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Técnico', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '2' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Tecnólogo', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '3' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Pregrado', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '4' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Especalización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '5' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Maestría', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '6' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Doctorado', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '8' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Técnico con especialización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                    WHEN '9' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Tecnólogo con especialización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                END as label")
-                ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-                ->where('roles_sennova.nombre', 'like', $tipologiaSt)
-                ->where('roles_sennova.nombre', '!=', $rol)
-                ->orWhere('roles_sennova.nombre', 'like', '%aprendiz sennova (contrato aprendizaje)%')
-                ->where('convocatoria_rol_sennova.linea_programatica_id', $lineaProgramatica)
-                ->where('convocatoria_rol_sennova.convocatoria_id', $convocatoria)
-                ->orderBy('roles_sennova.nombre')->get());
-        }
-
-        return response(ConvocatoriaRolSennova::selectRaw("convocatoria_rol_sennova.id as value, convocatoria_rol_sennova.perfil, convocatoria_rol_sennova.mensaje,
-            CASE nivel_academico
-				WHEN '7' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Ninguno', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '1' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Técnico', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '2' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Tecnólogo', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '3' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Pregrado', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '4' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Especalización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '5' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Maestría', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '6' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Doctorado', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '8' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Técnico con especialización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-                WHEN '9' THEN	concat(roles_sennova.nombre, chr(10), '∙ ', 'Nivel académico: Tecnólogo con especialización', chr(10), '∙ ', convocatoria_rol_sennova.experiencia, chr(10), '∙ Asignación mensual: ', convocatoria_rol_sennova.asignacion_mensual)
-            END as label")
-            ->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')
-            ->where('convocatoria_rol_sennova.linea_programatica_id', $lineaProgramatica)
-            ->where('convocatoria_rol_sennova.convocatoria_id', $convocatoria)
-            ->orderBy('roles_sennova.nombre')->get());
-    })->name('web-api.convocatorias.roles-sennova');
+    Route::get('web-api/convocatorias/{convocatoria}/proyectos/{proyecto}/{linea_programatica}/roles-sennova', [WebController::class, 'rolesSennova'] )->name('web-api.convocatorias.roles-sennova');
 
     /**
      * Programas de formación
      * 
      */
-    Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', function ($centroFormacion) {
-        return response(ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $centroFormacion)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.programas-formacion');
+    Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', [WebController::class, 'programasFormacion'] )->name('web-api.programas-formacion');
 
     /**
      * Estados de sistema de gestión
      * 
      */
-    Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', function ($tipoProyectoSt) {
-        $tipoProyectoStInfo = TipoProyectoSt::find($tipoProyectoSt);
-        return response(EstadoSistemaGestion::selectRaw("id as value, CASE tipo_proyecto
-            WHEN '1' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo A')
-            WHEN '2' THEN	concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo B')
-        END as label")->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('id', 'ASC')->get());
-    })->name('web-api.estados-sistema-gestion');
+    Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', [WebController::class, 'estadosSistemaGestion'] )->name('web-api.estados-sistema-gestion');
 
     /**
-     * Programas de formación
+     * Programas de formación articulados
      * 
      */
-    Route::get('web-api/programas-formacion-articulados', function () {
-        return response(ProgramaFormacionArticulado::selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')
-            ->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.programas-formacion-articulados');
+    Route::get('web-api/programas-formacion-articulados', [WebController::class, 'programasFormacionArticulados'] )->name('web-api.programas-formacion-articulados');
 
     /**
      * Regionales
      * 
      * Trae las regiones
      */
-    Route::get('web-api/regiones', function () {
-        return response(Region::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.regiones');
+    Route::get('web-api/regiones', [WebController::class, 'regiones'] )->name('web-api.regiones');
 
     /**
      * Trae las regionales
      */
-    Route::get('web-api/regionales', function () {
-        return response(Regional::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.regionales');
+    Route::get('web-api/regionales', [WebController::class, 'regionales'] )->name('web-api.regionales');
 
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
 
     /**
      * Trae los centros de formación por regional
      */
-    Route::get('web-api/regional/{regional}/centros-formacion', function ($regional) {
-        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $regional)->orderBy('centros_formacion.nombre', 'ASC')->get());
-    })->name('web-api.centros-formacion-ejecutor');
+    Route::get('web-api/regional/{regional}/centros-formacion', [WebController::class, 'centrosFormacionRegional'] )->name('web-api.centros-formacion-ejecutor');
 
     /**
      * Centros de formación
      * 
      * Trae los subdirectores
      */
-    Route::get('web-api/users/{rol}', function ($rol) {
-        return response(User::select('users.id as value', 'users.nombre as label')
-            ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', 'roles.id')
-            ->where('roles.name', 'ilike', '%' . $rol . '%')
-            ->orderBy('users.nombre', 'ASC')->get());
-    })->name('web-api.users');
+    Route::get('web-api/users/{rol}', [WebController::class, 'subdirectores'] )->name('web-api.users');
 
     Route::resource('centros-formacion', CentroFormacionController::class)->except(['show'])->parameters(['centros-formacion' => 'centro-formacion']);
 
@@ -409,9 +253,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae los grupos de investigación
      * 
      */
-    Route::get('web-api/grupos-investigacion', function () {
-        return response(GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ Acrónimo: \', grupos_investigacion.acronimo, chr(10), \'∙ Centro de formación: \', centros_formacion.nombre, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get());
-    })->name('web-api.grupos-investigacion');
+    Route::get('web-api/grupos-investigacion', [WebController::class, 'gruposInvestigacion'] )->name('web-api.grupos-investigacion');
 
     Route::resource('lineas-investigacion', LineaInvestigacionController::class)->parameters(['lineas-investigacion' => 'linea-investigacion'])->except(['show']);
 
@@ -420,9 +262,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      * Trae las líneas de investigación
      */
-    Route::get('web-api/lineas-investigacion/{centro_formacion}', function ($centroFormacion) {
-        return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
-    })->name('web-api.lineas-investigacion');
+    Route::get('web-api/lineas-investigacion/{centro_formacion}', [WebController::class, 'lineasInvestigacion'] )->name('web-api.lineas-investigacion');
 
     Route::resource('semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
@@ -436,132 +276,91 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Web api
      * 
      */
-    Route::get('web-api/municipios', function () {
-        return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')
-            ->join('regionales', 'regionales.id', 'municipios.regional_id')
-            ->get());
-    })->name('web-api.municipios');
+    Route::get('web-api/municipios', [WebController::class, 'municipios'] )->name('web-api.municipios');
 
     /**
      * Web api
      * 
      * Trae las Tecnoacademias
      */
-    Route::get('web-api/tecnoacademias', function () {
-        return response(Tecnoacademia::select('tecnoacademias.id as value', 'tecnoacademias.nombre as label')->get());
-    })->name('web-api.tecnoacademias');
+    Route::get('web-api/tecnoacademias', [WebController::class, 'tecnoacademias'] )->name('web-api.tecnoacademias');
 
     /**
      * Web api
      * 
-     * Trae las tecnoacademias
+     * Trae las tecnoacademias centro_formacion
      */
-    Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', function ($centroFormacion) {
-        return response(Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
-                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-            END as label, centros_formacion.id as centro_formacion_id")
-            ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-            ->where('tecnoacademias.centro_formacion_id', $centroFormacion)->get());
-    })->name('web-api.centros-formacion.tecnoacademias');
+    Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', [WebController::class, 'tecnoacademiasCentroFormacion'] )->name('web-api.centros-formacion.tecnoacademias');
 
     /**
      * Web api
      * 
      * Trae las líneas tecnoacademia
      */
-    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', function ($tecnoacademia) {
-        return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());
-    })->name('web-api.tecnoacademias.lineas-tecnoacademia');
+    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', [WebController::class, 'líneasTecnoacademia'] )->name('web-api.tecnoacademias.lineas-tecnoacademia');
 
     /**
      * Web api
      * 
      * Trae los nodos tecnoparque
      */
-    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', function ($centroFormacion) {
-        return response(NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->where('nodos_tecnoparque.centro_formacion_id', $centroFormacion)->get());
-    })->name('web-api.nodos-tecnoparque');
+    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', [WebController::class, 'nodosTecnoparque'] )->name('web-api.nodos-tecnoparque');
 
     /**
      * Web api
      * 
      * Trae las líneas programáticas
      */
-    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', function ($categoriaProyecto) {
-        if ($categoriaProyecto) {
-            return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
-                ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
-                ->get());
-        } else {
-            return response(LineaProgramatica::select('id as value', 'nombre as label')
-                ->get());
-        }
-    })->name('web-api.lineas-programaticas');
+    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', [WebController::class, 'líneasProgramaticas'] )->name('web-api.lineas-programaticas');
 
     /**
      * Web api
      * 
      * Trae las redes de conocimiento 
      */
-    Route::get('web-api/redes-conocimiento', function () {
-        return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.redes-conocimiento');
+    Route::get('web-api/redes-conocimiento', [WebController::class, 'redesConocimiento'] )->name('web-api.redes-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las áreas de conocimiento
      */
-    Route::get('web-api/areas-conocimiento', function () {
-        return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.areas-conocimiento');
+    Route::get('web-api/areas-conocimiento', [WebController::class, 'areasConocimiento'] )->name('web-api.areas-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las subáreas de conocimiento
      */
-    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', function ($areaConocimiento) {
-        return response(SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label')->where('subareas_conocimiento.area_conocimiento_id', $areaConocimiento)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.subareas-conocimiento');
+    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', [WebController::class, 'subareasConocimiento'] )->name('web-api.subareas-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las disciplinas de subáreas de conocimiento
      */
-    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', function ($subareaConocimiento) {
-        return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->where('disciplinas_subarea_conocimiento.subarea_conocimiento_id', $subareaConocimiento)->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.disciplinas-subarea-conocimiento');
+    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', [WebController::class, 'disciplinasSubareaConocimiento'] )->name('web-api.disciplinas-subarea-conocimiento');
 
     /**
      * Web api
      * 
      * Trae los actividades económicas
      */
-    Route::get('web-api/actividades-economicas', function () {
-        return response(ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.actividades-economicas');
+    Route::get('web-api/actividades-economicas', [WebController::class, 'actividadesEconomicas'] )->name('web-api.actividades-economicas');
 
     /**
      * Web api
      * 
      * Trae las temáticas estrategicas SENA
      */
-    Route::get('web-api/tematicas-estrategicas', function () {
-        return response(TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('nombre', 'ASC')->get());
-    })->name('web-api.tematicas-estrategicas');
+    Route::get('web-api/tematicas-estrategicas', [WebController::class, 'tematicasEstrategicas'] )->name('web-api.tematicas-estrategicas');
 
     /**
      * Web api
      * 
      * Trae las subtipologías Minciencias
      */
-    Route::get('web-api/subtipologias-minciencias', function () {
-        return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
-    })->name('web-api.subtipologias-minciencias');
+    Route::get('web-api/subtipologias-minciencias', [WebController::class, 'subtipologiasMinciencias'] )->name('web-api.subtipologias-minciencias');
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finalizarProyecto'])->name('convocatorias.proyectos.finish');
