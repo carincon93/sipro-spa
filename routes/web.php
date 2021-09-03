@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 use App\Http\Controllers\API\WebController;
 use App\Http\Controllers\UserController;
@@ -69,13 +68,6 @@ use App\Http\Controllers\PdfController;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin'    => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//     ]);
-// });
-
 
 /**
  * Trae los centros de formación
@@ -83,11 +75,10 @@ use App\Http\Controllers\PdfController;
 Route::get('web-api/centros-formacion', [WebController::class, 'centrosFormacion'])->name('web-api.centros-formacion');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', [WebController::class, 'redirectLogin'])->name('web-api.redirectLogin');
 
     Route::get('manual-usuario/download', [ProyectoController::class, 'downloadManualUsuario'])->name('manual-usuario.download');
 
-    Route::get('/dashboard', [WebController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [WebController::class, 'dashboard'])->name('dashboard');
 
     // Notificaciones
     Route::get('notificaciones', [UserController::class, 'showAllNotifications'])->name('notificaciones.index');
