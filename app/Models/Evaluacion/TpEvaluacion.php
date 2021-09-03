@@ -34,7 +34,6 @@ class TpEvaluacion extends Model
         'retos_oportunidades_comentario',
         'pertinencia_territorio_comentario',
         'metodologia_comentario',
-        'instituciones_comentario',
         'analisis_riesgos_comentario',
         'anexos_comentario',
         'productos_comentario',

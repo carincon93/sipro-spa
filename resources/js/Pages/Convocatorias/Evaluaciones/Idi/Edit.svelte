@@ -586,7 +586,7 @@
 
                     <InfoMessage>
                         <div class="mt-4">
-                            <p>¿El ítem requieren de una recomendación?</p>
+                            <p>¿El ítem es correcto? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
                             {#if $form.justificacion_politica_discapacidad_requiere_comentario == false}
                                 <Textarea
@@ -1107,7 +1107,7 @@
                 <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{idiSegundaEvaluacion?.normas_apa_comentario}</p>
             {/if}
             <div class="mt-4">
-                <p>¿Las normas APA requieren de una recomendación?</p>
+                <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario == false}
                     <Textarea disabled={isSuperAdmin ? undefined : idiEvaluacion.evaluacion.finalizado == true || idiEvaluacion.evaluacion.habilitado == false || idiEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />

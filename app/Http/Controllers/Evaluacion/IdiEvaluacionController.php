@@ -117,8 +117,6 @@ class IdiEvaluacionController extends Controller
         $idiEvaluacion->video_comentario            = $request->video_requiere_comentario == false ? $request->video_comentario : null;
         $idiEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
         $idiEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == false ? $request->resumen_comentario : null;
-        $idiEvaluacion->problema_central_puntaje    = $request->problema_central_puntaje;
-        $idiEvaluacion->problema_central_comentario = $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null;
         $idiEvaluacion->ortografia_puntaje          = $request->ortografia_puntaje;
         $idiEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $idiEvaluacion->redaccion_puntaje           = $request->redaccion_puntaje;

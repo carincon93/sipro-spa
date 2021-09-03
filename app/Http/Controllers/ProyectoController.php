@@ -7,6 +7,7 @@ use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -154,7 +155,14 @@ class ProyectoController extends Controller
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
                 $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
+
                 break;
             default:
                 break;
@@ -216,6 +224,11 @@ class ProyectoController extends Controller
                 break;
             case $evaluacion->taEvaluacion()->exists():
                 $evaluacion->taEvaluacion()->update([
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
                     'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
                 ]);
                 break;
@@ -400,6 +413,20 @@ class ProyectoController extends Controller
                 $evaluacion->normas_apa_puntaje         = $evaluacion->idiEvaluacion->normas_apa_puntaje;
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->titulo_puntaje             = $evaluacion->culturaInnovacionEvaluacion->titulo_puntaje;
+                $evaluacion->video_puntaje              = $evaluacion->culturaInnovacionEvaluacion->video_puntaje;
+                $evaluacion->resumen_puntaje            = $evaluacion->culturaInnovacionEvaluacion->resumen_puntaje;
+                $evaluacion->problema_central_puntaje   = $evaluacion->culturaInnovacionEvaluacion->problema_central_puntaje;
+                $evaluacion->objetivos_puntaje          = $evaluacion->culturaInnovacionEvaluacion->objetivos_puntaje;
+                $evaluacion->metodologia_puntaje        = $evaluacion->culturaInnovacionEvaluacion->metodologia_puntaje;
+                $evaluacion->entidad_aliada_puntaje     = $evaluacion->culturaInnovacionEvaluacion->entidad_aliada_puntaje;
+                $evaluacion->resultados_puntaje         = $evaluacion->culturaInnovacionEvaluacion->resultados_puntaje;
+                $evaluacion->productos_puntaje          = $evaluacion->culturaInnovacionEvaluacion->productos_puntaje;
+                $evaluacion->cadena_valor_puntaje       = $evaluacion->culturaInnovacionEvaluacion->cadena_valor_puntaje;
+                $evaluacion->analisis_riesgos_puntaje   = $evaluacion->culturaInnovacionEvaluacion->analisis_riesgos_puntaje;
+                $evaluacion->ortografia_puntaje         = $evaluacion->culturaInnovacionEvaluacion->ortografia_puntaje;
+                $evaluacion->redaccion_puntaje          = $evaluacion->culturaInnovacionEvaluacion->redaccion_puntaje;
+                $evaluacion->normas_apa_puntaje         = $evaluacion->culturaInnovacionEvaluacion->normas_apa_puntaje;
                 break;
             default:
                 break;
@@ -409,7 +436,7 @@ class ProyectoController extends Controller
             'convocatoria' => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
             'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
-            'versiones'     => $evaluacion->proyecto->PdfVersiones,
+            'versiones'    => $evaluacion->proyecto->PdfVersiones,
         ]);
     }
 

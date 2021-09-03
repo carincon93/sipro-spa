@@ -111,15 +111,9 @@ class TpEvaluacionController extends Controller
         $tpEvaluacion->municipios_comentario = $request->municipios_requiere_comentario == false ? $request->municipios_comentario : null;
         $tpEvaluacion->fecha_ejecucion_comentario = $request->fecha_ejecucion_requiere_comentario == false ? $request->fecha_ejecucion_comentario : null;
         $tpEvaluacion->cadena_valor_comentario = $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null;
-        $tpEvaluacion->impacto_centro_formacion_comentario = $request->impacto_centro_formacion_requiere_comentario == false ? $request->impacto_centro_formacion_comentario : null;
         $tpEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
         $tpEvaluacion->retos_oportunidades_comentario = $request->retos_oportunidades_requiere_comentario == false ? $request->retos_oportunidades_comentario : null;
         $tpEvaluacion->pertinencia_territorio_comentario = $request->pertinencia_territorio_requiere_comentario == false ? $request->pertinencia_territorio_comentario : null;
-        $tpEvaluacion->metodologia_comentario = $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null;
-        $tpEvaluacion->instituciones_comentario = $request->instituciones_requiere_comentario == false ? $request->instituciones_comentario : null;
-        $tpEvaluacion->analisis_riesgos_comentario = $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null;
-        $tpEvaluacion->anexos_comentario = $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null;
-        $tpEvaluacion->productos_comentario = $request->productos_requiere_comentario == false ? $request->productos_comentario : null;
         $tpEvaluacion->ortografia_comentario = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $tpEvaluacion->redaccion_comentario = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;
         $tpEvaluacion->normas_apa_comentario = $request->normas_apa_requiere_comentario == false ? $request->normas_apa_comentario : null;

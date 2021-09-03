@@ -109,8 +109,6 @@ class CulturaInnovacionEvaluacionController extends Controller
         $culturaInnovacionEvaluacion->video_comentario            = $request->video_requiere_comentario == false ? $request->video_comentario : null;
         $culturaInnovacionEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
         $culturaInnovacionEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == false ? $request->resumen_comentario : null;
-        $culturaInnovacionEvaluacion->problema_central_puntaje    = $request->problema_central_puntaje;
-        $culturaInnovacionEvaluacion->problema_central_comentario = $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null;
         $culturaInnovacionEvaluacion->ortografia_puntaje          = $request->ortografia_puntaje;
         $culturaInnovacionEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $culturaInnovacionEvaluacion->redaccion_puntaje           = $request->redaccion_puntaje;

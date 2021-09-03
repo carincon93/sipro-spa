@@ -6,6 +6,7 @@ use App\Http\Requests\ProyectoAnexoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Anexo;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -199,6 +200,11 @@ class ProyectoAnexoController extends Controller
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 break;
@@ -242,6 +248,11 @@ class ProyectoAnexoController extends Controller
                 break;
             case $evaluacion->taEvaluacion()->exists():
                 $evaluacion->taEvaluacion()->update([
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
                     'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
                 ]);
                 break;

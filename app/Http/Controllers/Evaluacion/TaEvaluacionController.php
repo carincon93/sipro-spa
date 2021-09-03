@@ -129,16 +129,11 @@ class TaEvaluacionController extends Controller
         $taEvaluacion->resumen_regional_comentario              = $request->resumen_regional_requiere_comentario == false ? $request->resumen_regional_comentario : null;
         $taEvaluacion->antecedentes_tecnoacademia_comentario    = $request->antecedentes_tecnoacademia_requiere_comentario == false ? $request->antecedentes_tecnoacademia_comentario : null;
         $taEvaluacion->retos_oportunidades_comentario           = $request->retos_oportunidades_requiere_comentario == false ? $request->retos_oportunidades_comentario : null;
-        $taEvaluacion->metodologia_comentario                   = $request->metodologia_local_requiere_comentario == false ? $request->metodologia_comentario : null;
         $taEvaluacion->lineas_medulares_centro_comentario       = $request->lineas_medulares_centro_requiere_comentario == false ? $request->lineas_medulares_centro_comentario : null;
         $taEvaluacion->lineas_tecnologicas_centro_comentario    = $request->lineas_tecnologicas_centro_requiere_comentario == false ? $request->lineas_tecnologicas_centro_comentario : null;
-        $taEvaluacion->articulacion_sennova_comentario          = $request->semilleros_requiere_comentario == false ? $request->articulacion_sennova_comentario : null;
         $taEvaluacion->municipios_comentario                    = $request->municipios_requiere_comentario == false ? $request->municipios_comentario : null;
         $taEvaluacion->instituciones_comentario                 = $request->instituciones_requiere_comentario == false ? $request->instituciones_comentario : null;
         $taEvaluacion->fecha_ejecucion_comentario               = $request->fecha_ejecucion_requiere_comentario == false ? $request->fecha_ejecucion_comentario : null;
-        $taEvaluacion->cadena_valor_comentario                  = $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null;
-        $taEvaluacion->analisis_riesgos_comentario              = $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null;
-        $taEvaluacion->anexos_comentario                        = $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null;
         $taEvaluacion->proyectos_macro_comentario               = $request->proyectos_macro_requiere_comentario == false ? $request->proyectos_macro_comentario : null;
         $taEvaluacion->bibliografia_comentario                  = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
 

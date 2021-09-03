@@ -795,7 +795,7 @@
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.normas_apa_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿Las normas APA requieren de una recomendación?</p>
+                    <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                     {#if $form.normas_apa_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />

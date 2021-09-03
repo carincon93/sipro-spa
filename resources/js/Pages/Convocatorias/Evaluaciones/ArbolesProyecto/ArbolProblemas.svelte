@@ -308,7 +308,7 @@
     let formEstrategiaRegionalEvaluacion = useForm({
         problema_central_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_puntaje : null,
         problema_central_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.problema_central_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
-        problema_central_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.problema_central_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.problema_central_comentario : null,
+        problema_central_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.problema_central_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? (evaluacion.cultura_innovacion_evaluacion.problema_central_comentario == null ? true : false) : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

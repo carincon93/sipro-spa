@@ -299,7 +299,6 @@ class Evaluacion extends Model
             $this->tpEvaluacion->retos_oportunidades_comentario != null ? $total++ : null;
             $this->tpEvaluacion->pertinencia_territorio_comentario != null ? $total++ : null;
             $this->tpEvaluacion->metodologia_comentario != null ? $total++ : null;
-            $this->tpEvaluacion->instituciones_comentario != null ? $total++ : null;
             $this->tpEvaluacion->analisis_riesgos_comentario != null ? $total++ : null;
             $this->tpEvaluacion->anexos_comentario != null ? $total++ : null;
             $this->tpEvaluacion->productos_comentario != null ? $total++ : null;

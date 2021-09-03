@@ -6,6 +6,7 @@ use App\Http\Requests\ActividadRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Actividad;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -276,7 +277,13 @@ class ActividadController extends Controller
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->culturaInnovacion->metodologia;
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->servicioTecnologico->metodologia;
@@ -333,6 +340,11 @@ class ActividadController extends Controller
                 break;
             case $evaluacion->taEvaluacion()->exists():
                 $evaluacion->taEvaluacion()->update([
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
                     'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
                 ]);
                 break;

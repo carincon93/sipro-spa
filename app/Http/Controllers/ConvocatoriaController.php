@@ -165,10 +165,41 @@ class ConvocatoriaController extends Controller
                 break;
             case 3: // Subsanación
                 foreach ($convocatoria->proyectos()->get() as $proyecto) {
-                    if ($proyecto->estado_evaluacion_idi != null && json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar && $proyecto->id == 989) {
-                        $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
-                    } else {
-                        $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                    switch ($proyecto) {
+                        case $proyecto->estado_evaluacion_idi != null:
+                            if (json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                            if (json_decode($proyecto->estado_evaluacion_cultura_innovacion)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_ta != null:
+                            if (json_decode($proyecto->estado_evaluacion_ta)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_tp != null:
+                            if (json_decode($proyecto->estado_evaluacion_tp)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            }
+                            break;
+
+                        default:
+                            break;
                     }
                 }
 

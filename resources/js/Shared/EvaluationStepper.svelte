@@ -125,7 +125,7 @@
             <p class="text-sm text-center">Cadena de valor</p>
         </a>
     </div>
-    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <div class="w-10/12 step">
             <a use:inertia active={route().current('convocatorias.evaluaciones.causales-rechazo')} href={route('convocatorias.evaluaciones.causales-rechazo', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />

@@ -6,6 +6,7 @@ use App\Http\Requests\AnalisisRiesgoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\AnalisisRiesgo;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -195,6 +196,11 @@ class AnalisisRiesgoController extends Controller
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 break;
@@ -239,6 +245,11 @@ class AnalisisRiesgoController extends Controller
 
             case $evaluacion->taEvaluacion()->exists():
                 $evaluacion->taEvaluacion()->update([
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
                     'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
                 ]);
                 break;

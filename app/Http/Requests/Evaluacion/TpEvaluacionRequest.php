@@ -34,7 +34,6 @@ class TpEvaluacionRequest extends FormRequest
             'retos_oportunidades_comentario'        => ['nullable', 'string'],
             'pertinencia_territorio_comentario'     => ['nullable', 'string'],
             'metodologia_comentario'                => ['nullable', 'string'],
-            'instituciones_comentario'              => ['nullable', 'string'],
             'analisis_riesgos_comentario'           => ['nullable', 'string'],
             'anexos_comentario'                     => ['nullable', 'string'],
             'productos_comentario'                  => ['nullable', 'string'],

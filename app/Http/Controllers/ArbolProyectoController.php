@@ -20,6 +20,7 @@ use App\Http\Requests\CausaIndirectaRequest;
 use App\Http\Requests\ImpactoRequest;
 use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -348,7 +349,13 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->culturaInnovacion->problema_central;
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->culturaInnovacion->justificacion_problema;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             default:
                 break;
@@ -756,7 +763,13 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->objetivo_general   = $evaluacion->proyecto->servicioTecnologico->objetivo_general;

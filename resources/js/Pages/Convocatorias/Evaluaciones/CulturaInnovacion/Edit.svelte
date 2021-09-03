@@ -265,7 +265,7 @@
 
             <InfoMessage>
                 <div class="mt-4">
-                    <p>¿Las fechas requieren de una recomendación?</p>
+                    <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
                     {#if $form.fechas_requiere_comentario == false}
                         <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fechas_comentario" bind:value={$form.fechas_comentario} error={errors.fechas_comentario} required />
@@ -447,7 +447,7 @@
 
                     <InfoMessage>
                         <div class="mt-4">
-                            <p>¿El ítem requieren de una recomendación?</p>
+                            <p>¿El ítem es correcto? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.justificacion_politica_discapacidad_requiere_comentario} />
                             {#if $form.justificacion_politica_discapacidad_requiere_comentario == false}
                                 <Textarea
@@ -853,7 +853,7 @@
             <Input disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Puntaje" id="normas_apa_puntaje" type="number" input$step="1" input$min="0" input$max="1" class="mt-1" bind:value={$form.normas_apa_puntaje} placeholder="Puntaje" autocomplete="off" error={errors.normas_apa_puntaje} />
 
             <div class="mt-4">
-                <p>¿Las normas APA requieren de una recomendación?</p>
+                <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario == false}
                     <Textarea disabled={culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} required />

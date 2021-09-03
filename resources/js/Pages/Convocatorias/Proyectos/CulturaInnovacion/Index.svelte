@@ -64,6 +64,10 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
+                            <br />
+                            {#if JSON.parse(proyecto.estado).requiereSubsanar && convocatoria.fase == 3}
+                                <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere modificaciones </span>
+                            {/if}
                         </p>
                     </td>
                     <td class="border-t">
@@ -79,7 +83,23 @@
                     {#if isSuperAdmin || convocatoria.fase == 5}
                         <td class="border-t">
                             <p class="px-6 py-4">
-                                {proyecto.estado_evaluacion_idi}
+                                {proyecto.estado_evaluacion_cultura_innovacion.estado}
+                                {#if isSuperAdmin}
+                                    <br />
+                                    <small>
+                                        Puntaje: {proyecto.estado_evaluacion_cultura_innovacion.puntaje}
+                                        <br />
+                                        Número de recomendaciones: {proyecto.estado_evaluacion_cultura_innovacion.numeroRecomendaciones}
+                                        <br />
+                                        Evaluaciones: {proyecto.estado_evaluacion_cultura_innovacion.evaluacionesHabilitadas} habilitada(s) / {proyecto.estado_evaluacion_cultura_innovacion.evaluacionesFinalizadas} finalizada(s)
+                                        <br />
+                                        {#if proyecto.estado_evaluacion_cultura_innovacion.alerta}
+                                            <strong class="text-red-500">
+                                                Importante: {proyecto.estado_evaluacion_cultura_innovacion.alerta}
+                                            </strong>
+                                        {/if}
+                                    </small>
+                                {/if}
                             </p>
                         </td>
                     {/if}

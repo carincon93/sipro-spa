@@ -396,6 +396,28 @@
                 </div>
                 <div>
                     <Textarea disabled maxlength="40000" id="impacto_centro_formacion" bind:value={tpInfo.impacto_centro_formacion} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.impacto_centro_formacion_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.impacto_centro_formacion_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿El impacto en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.impacto_centro_formacion_requiere_comentario} />
+                            {#if $form.impacto_centro_formacion_requiere_comentario == false}
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="impacto_centro_formacion_comentario"
+                                    bind:value={$form.impacto_centro_formacion_comentario}
+                                    error={errors.impacto_centro_formacion_comentario}
+                                    required
+                                />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 </div>
             </div>
 
@@ -460,7 +482,7 @@
                     <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.normas_apa_comentario}</p>
                 {/if}
                 <div class="mt-4">
-                    <p>¿Las normas APA requieren de una recomendación?</p>
+                    <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                     {#if $form.normas_apa_requiere_comentario == false}
                         <Textarea disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />

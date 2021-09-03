@@ -350,11 +350,11 @@
     let formEstrategiaRegionalEvaluacion = useForm({
         objetivos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_puntaje : null,
         objetivos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.objetivos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
-        objetivos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.objetivos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : null,
+        objetivos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.objetivos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? (evaluacion.cultura_innovacion_evaluacion.objetivos_comentario == null ? true : false) : null,
 
         resultados_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.resultados_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_puntaje : null,
         resultados_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.resultados_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
-        resultados_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.resultados_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : null,
+        resultados_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.resultados_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? (evaluacion.cultura_innovacion_evaluacion.resultados_comentario == null ? true : false) : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

@@ -40,7 +40,7 @@
     let formEstrategiaRegionalEvaluacion = useForm({
         productos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.productos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_puntaje : null,
         productos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.productos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
-        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.productos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.productos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? (evaluacion.cultura_innovacion_evaluacion.productos_comentario == null ? true : false) : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -65,12 +65,26 @@
             })
         }
     }
+
+    let formTpEvaluacion = useForm({
+        productos_comentario: evaluacion.tp_evaluacion?.productos_comentario,
+        productos_requiere_comentario: evaluacion.tp_evaluacion?.productos_comentario == null ? true : false,
+    })
+    function submitTpEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTpEvaluacion.put(route('convocatorias.evaluaciones.productos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 70 || proyecto.codigo_linea_programatica == 82}
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70 || proyecto.codigo_linea_programatica == 82}
         <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -233,6 +247,32 @@
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.productos_requiere_comentario} />
                         {#if $formTaEvaluacion.productos_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$formTaEvaluacion.productos_comentario} error={errors.productos_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 69}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitTpEvaluacion}>
+                <InfoMessage>
+                    {#if segundaEvaluacion?.productos_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.productos_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los productos y las metas están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.productos_requiere_comentario} />
+                        {#if $formTpEvaluacion.productos_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="productos_comentario" bind:value={$formTpEvaluacion.productos_comentario} error={errors.productos_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>

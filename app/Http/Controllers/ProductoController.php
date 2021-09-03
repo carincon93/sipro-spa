@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Actividad;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
@@ -347,6 +348,11 @@ class ProductoController extends Controller
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
 
@@ -403,6 +409,11 @@ class ProductoController extends Controller
 
             case $evaluacion->taEvaluacion()->exists():
                 $evaluacion->taEvaluacion()->update([
+                    'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
                     'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
                 ]);
                 break;
