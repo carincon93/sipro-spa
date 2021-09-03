@@ -89,9 +89,9 @@
     }
 
     let formEstrategiaRegionalEvaluacion = useForm({
-        cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
-        cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
-        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.cadena_valor_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+        cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
+        cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.cadena_valor_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -104,8 +104,8 @@
     }
 
     let formTaEvaluacion = useForm({
-        cadena_valor_comentario: evaluacion.ta_evaluacion.cadena_valor_comentario,
-        cadena_valor_requiere_comentario: evaluacion.ta_evaluacion.cadena_valor_comentario == null ? true : false,
+        cadena_valor_comentario: evaluacion.ta_evaluacion?.cadena_valor_comentario,
+        cadena_valor_requiere_comentario: evaluacion.ta_evaluacion?.cadena_valor_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

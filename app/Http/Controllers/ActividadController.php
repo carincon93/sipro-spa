@@ -9,6 +9,7 @@ use App\Models\Actividad;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\ProyectoPresupuesto;
 use App\Models\ProyectoRolSennova;
 use Illuminate\Http\Request;
@@ -265,6 +266,13 @@ class ActividadController extends Controller
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->tp->metodologia;
                 $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->tp->metodologia_local;
+
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->culturaInnovacion->metodologia;

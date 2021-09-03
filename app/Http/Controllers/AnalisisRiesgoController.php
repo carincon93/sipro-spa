@@ -9,6 +9,7 @@ use App\Models\AnalisisRiesgo;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -185,6 +186,12 @@ class AnalisisRiesgoController extends Controller
                 })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;

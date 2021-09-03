@@ -705,6 +705,9 @@ class ArbolProyectoController extends Controller
     {
         $efectosDirectos  = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
         $causasDirectas   = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+
+        $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $tipoProyectoA = false;
         switch ($evaluacion->proyecto) {
@@ -773,7 +776,13 @@ class ArbolProyectoController extends Controller
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
             'tiposImpacto'      => $tiposImpacto,
-            'tipoProyectoA'     => $tipoProyectoA
+            'tipoProyectoA'     => $tipoProyectoA,
+            'resultados'        => Resultado::select('id as value', 'descripcion as label', 'objetivo_especifico_id')->whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->get(),
         ]);
     }
 

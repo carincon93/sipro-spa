@@ -38,9 +38,9 @@
     let showGantt = false
     let sending = false
     let formEstrategiaRegionalEvaluacion = useForm({
-        productos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_puntaje : null,
-        productos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.productos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
-        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.productos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+        productos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.productos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_puntaje : null,
+        productos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.productos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
+        productos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.productos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -53,8 +53,8 @@
     }
 
     let formTaEvaluacion = useForm({
-        productos_comentario: evaluacion.ta_evaluacion.productos_comentario,
-        productos_requiere_comentario: evaluacion.ta_evaluacion.productos_comentario == null ? true : false,
+        productos_comentario: evaluacion.ta_evaluacion?.productos_comentario,
+        productos_requiere_comentario: evaluacion.ta_evaluacion?.productos_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

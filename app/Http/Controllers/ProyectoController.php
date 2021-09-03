@@ -10,6 +10,7 @@ use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\Impacto;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
@@ -136,6 +137,13 @@ class ProyectoController extends Controller
             case $evaluacion->proyecto->tp()->exists():
                 $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
                 $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
+
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
 
             case $evaluacion->proyecto->servicioTecnologico()->exists():

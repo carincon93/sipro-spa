@@ -39,8 +39,8 @@
 
     let sending = false
     let formEstrategiaRegionalEvaluacion = useForm({
-        anexos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.anexos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
-        anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.anexos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
+        anexos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.anexos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
+        anexos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.anexos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -53,8 +53,8 @@
     }
 
     let formTaEvaluacion = useForm({
-        anexos_comentario: evaluacion.ta_evaluacion.anexos_comentario,
-        anexos_requiere_comentario: evaluacion.ta_evaluacion.anexos_comentario == null ? true : false,
+        anexos_comentario: evaluacion.ta_evaluacion?.anexos_comentario,
+        anexos_requiere_comentario: evaluacion.ta_evaluacion?.anexos_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

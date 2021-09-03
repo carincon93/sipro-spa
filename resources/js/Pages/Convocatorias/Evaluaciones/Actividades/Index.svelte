@@ -44,9 +44,9 @@
     let showGantt = false
     let sending = false
     let formEstrategiaRegionalEvaluacion = useForm({
-        metodologia_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_puntaje : null,
-        metodologia_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.metodologia_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
-        metodologia_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.metodologia_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
+        metodologia_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.metodologia_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_puntaje : null,
+        metodologia_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.metodologia_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
+        metodologia_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.metodologia_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -59,8 +59,8 @@
     }
 
     let formTaEvaluacion = useForm({
-        metodologia_comentario: evaluacion.ta_evaluacion.metodologia_comentario,
-        metodologia_requiere_comentario: evaluacion.ta_evaluacion.metodologia_comentario == null ? true : false,
+        metodologia_comentario: evaluacion.ta_evaluacion?.metodologia_comentario,
+        metodologia_requiere_comentario: evaluacion.ta_evaluacion?.metodologia_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

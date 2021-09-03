@@ -34,9 +34,9 @@
 
     let sending = false
     let formEstrategiaRegionalEvaluacion = useForm({
-        analisis_riesgos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.analisis_riesgos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_puntaje : null,
-        analisis_riesgos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.analisis_riesgos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
-        analisis_riesgos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.analisis_riesgos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
+        analisis_riesgos_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.analisis_riesgos_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_puntaje : null,
+        analisis_riesgos_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.analisis_riesgos_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
+        analisis_riesgos_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.analisis_riesgos_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.analisis_riesgos_comentario : null,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -49,8 +49,8 @@
     }
 
     let formTaEvaluacion = useForm({
-        analisis_riesgos_comentario: evaluacion.ta_evaluacion.analisis_riesgos_comentario,
-        analisis_riesgos_requiere_comentario: evaluacion.ta_evaluacion.analisis_riesgos_comentario == null ? true : false,
+        analisis_riesgos_comentario: evaluacion.ta_evaluacion?.analisis_riesgos_comentario,
+        analisis_riesgos_requiere_comentario: evaluacion.ta_evaluacion?.analisis_riesgos_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
