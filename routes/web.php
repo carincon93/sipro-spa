@@ -370,6 +370,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/entidades-aliadas/{entidad_aliada}/{archivo}/download', [EntidadAliadaController::class, 'download'])->name('convocatorias.proyectos.entidades-aliadas.download');
     Route::resource('convocatorias.idi', IdiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi'])->except(['show']);
+    
+    Route::put('convocatorias/{convocatoria}/idi/{idi}/column/{column}', [IdiController::class, 'updateLongColumn'])->name('convocatorias.idi.updateLongColumn');
 
     Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
 
