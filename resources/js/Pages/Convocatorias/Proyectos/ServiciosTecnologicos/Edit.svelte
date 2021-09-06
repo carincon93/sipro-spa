@@ -228,7 +228,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="1000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea label="Resumen ejecutivo" maxlength="1000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -246,7 +246,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="10000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea label="Antecedentes" maxlength="10000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                 </div>
             </div>
 
@@ -340,7 +340,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea sinContador={true} localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea label="Bibliografía" sinContador={true} localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
                 </div>
             </div>
         </fieldset>
