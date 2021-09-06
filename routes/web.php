@@ -51,6 +51,7 @@ use App\Http\Controllers\EdtController;
 use App\Http\Controllers\Evaluacion\EvaluacionController;
 use App\Http\Controllers\Evaluacion\IdiEvaluacionController;
 use App\Http\Controllers\Evaluacion\CulturaInnovacionEvaluacionController;
+use App\Http\Controllers\Evaluacion\ServicioTecnologicoEvaluacionController;
 use App\Http\Controllers\Evaluacion\TaEvaluacionController;
 use App\Http\Controllers\Evaluacion\TpEvaluacionController;
 use App\Http\Controllers\InventarioEquipoController;
@@ -829,6 +830,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.idi-evaluaciones', IdiEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'idi-evaluaciones' => 'idi-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.ta-evaluaciones', TaEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'ta-evaluaciones' => 'ta-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.tp-evaluaciones', TpEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'tp-evaluaciones' => 'tp-evaluacion'])->except(['create', 'store', 'show']);
+    Route::resource('convocatorias.servicios-tecnologicos-evaluaciones', ServicioTecnologicoEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos-evaluaciones' => 'servicio-tecnologico-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('evaluaciones', EvaluacionController::class)->parameters(['evaluaciones' => 'evaluacion'])->except(['show']);
 });
 

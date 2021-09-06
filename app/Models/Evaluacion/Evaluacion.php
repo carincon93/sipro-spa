@@ -109,13 +109,23 @@ class Evaluacion extends Model
     }
 
     /**
-     * Relationship with TaEvaluacion
+     * Relationship with TpEvaluacion
      *
      * @return object
      */
     public function tpEvaluacion()
     {
         return $this->hasOne(TpEvaluacion::class, 'id');
+    }
+
+    /**
+     * Relationship with ServicioTecnologicoEvaluacion
+     *
+     * @return object
+     */
+    public function servicioTecnologicoEvaluacion()
+    {
+        return $this->hasOne(ServicioTecnologicoEvaluacion::class, 'id');
     }
 
     /**

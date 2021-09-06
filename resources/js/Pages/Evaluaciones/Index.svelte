@@ -24,8 +24,6 @@
     let filters = {
         year: $page.props.filters.year,
     }
-
-    console.log(evaluaciones.data)
 </script>
 
 <AuthenticatedLayout>
