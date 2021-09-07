@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos'];
 
     /**
      * The attributes that are mass assignable.
@@ -582,7 +582,7 @@ class Proyecto extends Model
     }
 
     /**
-     * getEstadoEvaluacionCulturaInnovacionAttribute - Estrategia regional
+     * getEstadoEvaluacionCulturaInnovacionAttribute
      *
      * @return void
      */
@@ -655,6 +655,98 @@ class Proyecto extends Model
             if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
                 $estadoEvaluacion = $this->estadoEvaluacionCulturaInnovacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
                 $requiereSubsanar = $this->estadoEvaluacionCulturaInnovacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
+            } else {
+                $estadoEvaluacion = $causalRechazo;
+            }
+
+            if ($cantidadEvaluaciones == 0) {
+                $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+            }
+
+            return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
+        }
+    }
+
+    /**
+     * getEstadoEvaluacionServiciosTecnologicosAttribute - Estrategia regional
+     *
+     * @return void
+     */
+    public function getEstadoEvaluacionServiciosTecnologicosAttribute()
+    {
+        if ($this->servicioTecnologico()->exists()) {
+
+            $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
+            $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
+
+            $puntajeTotal = 0;
+            $totalRecomendaciones = 0;
+            $estadoEvaluacion = '';
+            $causalRechazo  = null;
+            $requiereSubsanar = false;
+            $totalPresupuestosEvaluados = 0;
+            $countPresupuestoNoAprobado = 0;
+
+            $estados = array(1, 2);
+
+            foreach ($evaluaciones as $key => $evaluacion) {
+                $puntajeTotal += $evaluacion->total_evaluacion;
+                $totalRecomendaciones += $evaluacion->total_recomendaciones;
+
+                // Sumar los presupuesto no aprobados
+                $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
+                foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
+                    $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
+                }
+
+                if ($key === count($evaluaciones) - 1) {
+                    array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+
+                    if ($causalRechazo == null) {
+                        switch ($evaluacion) {
+                            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                                if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                    $causalRechazo = 'En revisión por Cord. SENNOVA';
+                                } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                    $causalRechazo = 'Rechazado';
+                                }
+
+                                if ($evaluacion->servicioTecnologicoEvaluacion->anexos_comentario != null) {
+                                    $requiereSubsanar = true;
+                                }
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
+                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                        $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                    }
+                }
+            }
+
+            $cantidadEvaluaciones = count($evaluaciones);
+
+            $sq = 0;
+            $sq = $this->getDesviacionEstandarAttribute();
+            $alerta = null;
+            if (in_array(2, $estados) && $sq >= 25  || in_array(3, $estados) && $sq >= 25) {
+                if (in_array(2, $estados)) {
+                    $estadoArr = 'Pre-aprobado';
+                } else if (in_array(3, $estados)) {
+                    $estadoArr = 'Pre-aprobado con observaciones';
+                }
+                $alerta = "Hay una evaluación en estado '{$estadoArr}' y la desviación estándar de las {$cantidadEvaluaciones} evaluaciones es {$sq}.";
+            }
+
+            $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
+
+            if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
+                $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
+                $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
             } else {
                 $estadoEvaluacion = $causalRechazo;
             }

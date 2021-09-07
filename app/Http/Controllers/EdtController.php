@@ -224,4 +224,38 @@ class EdtController extends Controller
                 ->filterEdt(request()->only('search'))->select('edt.id', 'edt.descripcion_evento', 'edt.numero_asistentes', 'edt.proyecto_presupuesto_id')->paginate(),
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showEdtEvaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, Edt $edt)
+    {
+        foreach ($evaluacion->proyecto->proyectoPresupuesto as $presupuesto) {
+            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '020202008005096') {
+                $evaluacion->proyecto->servicios_organizacion = true;
+            }
+        }
+
+        /**
+         * Si el proyecto es diferente de la línea programática 70 se prohibe el acceso. No requiere de edt
+         */
+        if ($evaluacion->proyecto->lineaProgramatica->codigo != 70) {
+            return redirect()->route('convocatorias.evaluaciones.edit', [$convocatoria, $evaluacion->proyecto])->with('error', 'Esta línea programática no requiere de edt');
+        } else if ($evaluacion->proyecto->servicios_organizacion == false) {
+            return back()->with('error', 'Debe generar primero el uso presupuestal "Servicios de organización y asistencia de convenciones y ferias".');
+        }
+
+        return Inertia::render('Convocatorias/Evaluaciones/EDT/Edit', [
+            'convocatoria'          => $convocatoria,
+            'proyecto'              => $evaluacion->proyecto,
+            'edt'                   => $edt,
+            'tiposEvento'           => json_decode(Storage::get('json/tipos-edt.json'), true),
+            'proyectoPresupuesto'   => $evaluacion->proyecto->proyectoPresupuesto()->selectRaw('id as value, concat(\'Servicios de organización y asistencia de convenciones y ferias\', chr(10), \'∙ Presupuesto: $\', valor_total) as label')->whereHas('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal', function ($query) {
+                $query->where('codigo', '=', '020202008005096');
+            })->get()
+        ]);
+    }
 }

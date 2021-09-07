@@ -75,6 +75,29 @@
             })
         }
     }
+
+    let formServicioTecnologicoEvaluacion = useForm({
+        riesgos_objetivo_general_puntaje: evaluacion.servicio_tecnologico_evaluacion?.riesgos_objetivo_general_puntaje,
+        riesgos_objetivo_general_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_objetivo_general_comentario,
+        riesgos_objetivo_general_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_objetivo_general_comentario == null ? true : false,
+
+        riesgos_productos_puntaje: evaluacion.servicio_tecnologico_evaluacion?.riesgos_productos_puntaje,
+        riesgos_productos_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_productos_comentario,
+        riesgos_productos_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_productos_comentario == null ? true : false,
+
+        riesgos_actividades_puntaje: evaluacion.servicio_tecnologico_evaluacion?.riesgos_actividades_puntaje,
+        riesgos_actividades_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_actividades_comentario,
+        riesgos_actividades_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.riesgos_actividades_comentario == null ? true : false,
+    })
+    function submitServicioTecnologicoEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.analisis-riesgos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -203,6 +226,158 @@
                                 id="analisis_riesgos_comentario"
                                 bind:value={$formEstrategiaRegionalEvaluacion.analisis_riesgos_comentario}
                                 error={errors.analisis_riesgos_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 68}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitServicioTecnologicoEvaluacion}>
+                <InfoMessage>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica claramente el tipo de riesgo (mercados, operacionales, legales, administrativos)</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Describe adecuamente el riesgo identificado para el Objetivo general</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica la probabilidad de ocurrencia del riesgo</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica el impacto generado por el riesgo</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica los posibles efectos que puede causar el riegos</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Se debe evidenciar las medidas de mitigación del riesgo</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica claramente el tipo de riesgo (mercados, operacionales, legales, administrativos)</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Describe adecuamente el riesgo identificado para el Objetivo general</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica la probabilidad de ocurrencia del riesgo</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica el impacto generado por el riesgo</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Identifica los posibles efectos que puede causar el riegos</li>
+                        <li><strong>Puntaje: 0,0 a 0,2</strong> Se debe evidenciar las medidas de mitigación del riesgo</li>
+                        <li><strong>Puntaje máximo por nivel de análisis de riesgos</strong> 2,4</li>
+                    </ul>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="font-black">Análisis de riesgos a nivel de objetivo general</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="riesgos_objetivo_general_puntaje" value="Puntaje (Máximo 2,4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="riesgos_objetivo_general_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="2.4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.riesgos_objetivo_general_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.riesgos_objetivo_general_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.riesgos_objetivo_general_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_objetivo_general_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los análisis de riesgos a nivel de objetivo general son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_objetivo_general_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.riesgos_objetivo_general_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="riesgos_objetivo_general_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.riesgos_objetivo_general_comentario}
+                                error={errors.riesgos_objetivo_general_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="font-black">Análisis de riesgos a nivel de productos</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="riesgos_productos_puntaje" value="Puntaje (Máximo 2,4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="riesgos_productos_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="2.4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.riesgos_productos_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.riesgos_productos_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.riesgos_productos_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_productos_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los análisis de riesgos a nivel de productos son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_productos_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.riesgos_productos_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="riesgos_productos_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.riesgos_productos_comentario}
+                                error={errors.riesgos_productos_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="font-black">Análisis de riesgos a nivel de actividades</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="riesgos_actividades_puntaje" value="Puntaje (Máximo 2,4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="riesgos_actividades_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="2.4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.riesgos_actividades_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.riesgos_actividades_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.riesgos_actividades_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_actividades_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los análisis de riesgos a nivel de actividades son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_actividades_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.riesgos_actividades_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="riesgos_actividades_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.riesgos_actividades_comentario}
+                                error={errors.riesgos_actividades_comentario}
                                 required
                             />
                         {/if}

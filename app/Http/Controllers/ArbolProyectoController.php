@@ -23,6 +23,7 @@ use App\Http\Requests\ResultadoRequest;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use Illuminate\Http\Request;
@@ -344,6 +345,13 @@ class ArbolProyectoController extends Controller
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->problema_central = $evaluacion->proyecto->servicioTecnologico->problema_central;
+
+                $evaluacion->servicioTecnologicoEvaluacion;
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->culturaInnovacion->problema_central;
@@ -393,6 +401,12 @@ class ArbolProyectoController extends Controller
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'problema_central_puntaje'      => $request->problema_central_puntaje,
                     'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
+                ]);
+                break;
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'arbol_problemas_puntaje'      => $request->arbol_problemas_puntaje,
+                    'arbol_problemas_comentario'   => $request->arbol_problemas_requiere_comentario == false ? $request->arbol_problemas_comentario : null
                 ]);
                 break;
             default:
@@ -776,6 +790,12 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->problema_central   = $evaluacion->proyecto->servicioTecnologico->problema_central;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto-st.json'), true);
                 $tipoProyectoA = $evaluacion->proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
@@ -824,6 +844,37 @@ class ArbolProyectoController extends Controller
                     'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
                     'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'objetivo_general_puntaje'      => $request->objetivo_general_puntaje,
+                    'objetivo_general_comentario'   => $request->objetivo_general_requiere_comentario == false ? $request->objetivo_general_comentario : null,
+
+                    'primer_objetivo_puntaje'       => $request->primer_objetivo_puntaje,
+                    'primer_objetivo_comentario'    => $request->primer_objetivo_requiere_comentario == false ? $request->primer_objetivo_comentario : null,
+
+                    'segundo_objetivo_puntaje'      => $request->segundo_objetivo_puntaje,
+                    'segundo_objetivo_comentario'   => $request->segundo_objetivo_requiere_comentario == false ? $request->segundo_objetivo_comentario : null,
+
+                    'tercer_objetivo_puntaje'       => $request->tercer_objetivo_puntaje,
+                    'tercer_objetivo_comentario'    => $request->tercer_objetivo_requiere_comentario == false ? $request->tercer_objetivo_comentario : null,
+
+                    'cuarto_objetivo_puntaje'       => $request->cuarto_objetivo_puntaje,
+                    'cuarto_objetivo_comentario'    => $request->cuarto_objetivo_requiere_comentario == false ? $request->cuarto_objetivo_comentario : null,
+
+                    'resultados_primer_obj_puntaje'     => $request->resultados_primer_obj_puntaje,
+                    'resultados_primer_obj_comentario'  => $request->resultados_primer_obj_requiere_comentario == false ? $request->resultados_primer_obj_comentario : null,
+
+                    'resultados_segundo_obj_puntaje'    => $request->resultados_segundo_obj_puntaje,
+                    'resultados_segundo_obj_comentario' => $request->resultados_segundo_obj_requiere_comentario == false ? $request->resultados_segundo_obj_comentario : null,
+
+                    'resultados_tercer_obj_puntaje'     => $request->resultados_tercer_obj_puntaje,
+                    'resultados_tercer_obj_comentario'  => $request->resultados_tercer_obj_requiere_comentario == false ? $request->resultados_tercer_obj_comentario : null,
+
+                    'resultados_cuarto_obj_puntaje'     => $request->resultados_cuarto_obj_puntaje,
+                    'resultados_cuarto_obj_comentario'  => $request->resultados_cuarto_obj_requiere_comentario == false ? $request->resultados_cuarto_obj_comentario : null
                 ]);
                 break;
             default:

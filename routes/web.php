@@ -792,6 +792,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}', [ProyectoPresupuestoController::class, 'updateEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.update');
 
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/edt', [EdtController::class, 'showEdtEvaluacion'])->name('convocatorias.evaluaciones.edt');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/edt/{edt}/editar', [EdtController::class, 'showEdtEvaluacionForm'])->name('convocatorias.evaluaciones.edt.edit');
+
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/inventario-equipos', [InventarioEquipoController::class, 'showInventarioEquiposEvaluacion'])->name('convocatorias.evaluaciones.inventario-equipos');
+    Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/inventario-equipos/{inventario_equipo}/editar', [InventarioEquipoController::class, 'showInventarioEquiposEvaluacionForm'])->name('convocatorias.evaluaciones.inventario-equipos.edit');
 
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}/soportes', [SoporteEstudioMercadoController::class, 'soportesEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.soportes');
 

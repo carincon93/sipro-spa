@@ -85,6 +85,37 @@
             })
         }
     }
+
+    let formServicioTecnologicoEvaluacion = useForm({
+        metodologia_puntaje: evaluacion.servicio_tecnologico_evaluacion.metodologia_puntaje,
+        metodologia_comentario: evaluacion.servicio_tecnologico_evaluacion.metodologia_comentario,
+        metodologia_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.metodologia_comentario == null ? true : false,
+
+        actividades_primer_obj_puntaje: evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_puntaje,
+        actividades_primer_obj_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_comentario,
+        actividades_primer_obj_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_comentario == null ? true : false,
+
+        actividades_segundo_obj_puntaje: evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_puntaje,
+        actividades_segundo_obj_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_comentario,
+        actividades_segundo_obj_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_comentario == null ? true : false,
+
+        actividades_tercer_obj_puntaje: evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_puntaje,
+        actividades_tercer_obj_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_comentario,
+        actividades_tercer_obj_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_comentario == null ? true : false,
+
+        actividades_cuarto_obj_puntaje: evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_puntaje,
+        actividades_cuarto_obj_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_comentario,
+        actividades_cuarto_obj_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_comentario == null ? true : false,
+    })
+    function submitServicioTecnologicoEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.actividades.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -246,6 +277,210 @@
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.metodologia_requiere_comentario} />
                         {#if $formEstrategiaRegionalEvaluacion.metodologia_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$formEstrategiaRegionalEvaluacion.metodologia_comentario} error={errors.metodologia_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 68}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitServicioTecnologicoEvaluacion}>
+                <InfoMessage>
+                    <h1 class="text-2xl text-center mb-10">Metodología</h1>
+
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li>
+                            <strong>Puntaje: 0 a 4</strong> Se debe evidenciar que la metodología se presente de forma organizada y de manera secuencial, de acuerdo con el ciclo P-H-V-A “Planificar – Hacer – Verificar - Actuar” para alcanzar el objetivo general y cada uno de los objetivos específicos.
+                        </li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="metodologia_puntaje" value="Puntaje (Máximo 4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="metodologia_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.metodologia_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.metodologia_puntaje}
+                    />
+
+                    <div class="mt-4">
+                        <p>¿La metodología es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.metodologia_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.metodologia_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="metodologia_comentario" bind:value={$formServicioTecnologicoEvaluacion.metodologia_comentario} error={errors.metodologia_comentario} required />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <h1 class="text-2xl text-center mb-10">Actividades</h1>
+
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li>
+                            <strong>Puntaje: 0 a 4</strong> "Se debe evidenciar la descripción de las actividades de manera secuencial para alcanzar el logro de cada uno de los objetivos específicos y deben ser coherentes con los productos a las cuales están asociadas; una misma actividad podrá ser necesaria para generar diferentes productos de un mismo proyecto.
+                        </li>
+                    </ul>
+
+                    <h1 class="text-black">Actividades del primer objetivo específico</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="actividades_primer_obj_puntaje" value="Puntaje (Máximo 4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="actividades_primer_obj_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.actividades_primer_obj_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.actividades_primer_obj_puntaje}
+                    />
+
+                    <div class="mt-4">
+                        <p>¿Las actividades del primer objetivo específico son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.actividades_primer_obj_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.actividades_primer_obj_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="actividades_primer_obj_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.actividades_primer_obj_comentario}
+                                error={errors.actividades_primer_obj_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="text-black">Actividades del segundo objetivo específico</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="actividades_segundo_obj_puntaje" value="Puntaje (Máximo 4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="actividades_segundo_obj_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.actividades_segundo_obj_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.actividades_segundo_obj_puntaje}
+                    />
+
+                    <div class="mt-4">
+                        <p>¿Las actividades del segundo objetivo específico son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.actividades_segundo_obj_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.actividades_segundo_obj_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="actividades_segundo_obj_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.actividades_segundo_obj_comentario}
+                                error={errors.actividades_segundo_obj_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="text-black">Actividades del tercer objetivo específico</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="actividades_tercer_obj_puntaje" value="Puntaje (Máximo 4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="actividades_tercer_obj_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.actividades_tercer_obj_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.actividades_tercer_obj_puntaje}
+                    />
+
+                    <div class="mt-4">
+                        <p>¿Las actividades del tercer objetivo específico son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.actividades_tercer_obj_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.actividades_tercer_obj_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="actividades_tercer_obj_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.actividades_tercer_obj_comentario}
+                                error={errors.actividades_tercer_obj_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+
+                    <h1 class="text-black">Actividades del cuarto objetivo específico</h1>
+
+                    <Label class="mt-4 mb-4" labelFor="actividades_cuarto_obj_puntaje" value="Puntaje (Máximo 4)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="actividades_cuarto_obj_puntaje"
+                        type="number"
+                        input$step="0.1"
+                        input$min="0"
+                        input$max="4"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.actividades_cuarto_obj_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.actividades_cuarto_obj_puntaje}
+                    />
+
+                    <div class="mt-4">
+                        <p>¿Las actividades del cuarto objetivo específico son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.actividades_cuarto_obj_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.actividades_cuarto_obj_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="actividades_cuarto_obj_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.actividades_cuarto_obj_comentario}
+                                error={errors.actividades_cuarto_obj_comentario}
+                                required
+                            />
                         {/if}
                     </div>
                 </InfoMessage>

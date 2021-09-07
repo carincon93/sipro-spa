@@ -10,6 +10,7 @@ use App\Models\Convocatoria;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\Impacto;
@@ -114,8 +115,8 @@ class ProyectoController extends Controller
             case $evaluacion->proyecto->idi()->exists():
                 $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
                 $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
-                $evaluacion->idiEvaluacion;
 
+                $evaluacion->idiEvaluacion;
                 $idi = $evaluacion->proyecto->idi;
 
                 $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
@@ -127,8 +128,8 @@ class ProyectoController extends Controller
                 $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
                 $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
                 $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
-                $evaluacion->taEvaluacion;
 
+                $evaluacion->taEvaluacion;
                 $ta = $evaluacion->proyecto->ta;
 
                 $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
@@ -150,6 +151,12 @@ class ProyectoController extends Controller
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
                 $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
 
             case $evaluacion->proyecto->culturaInnovacion()->exists():
@@ -230,6 +237,25 @@ class ProyectoController extends Controller
             case $evaluacion->tpEvaluacion()->exists():
                 $evaluacion->tpEvaluacion()->update([
                     'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'propuesta_sostenibilidad_puntaje'      => $request->propuesta_sostenibilidad_puntaje,
+                    'propuesta_sostenibilidad_comentario'   => $request->propuesta_sostenibilidad_requiere_comentario == false ? $request->propuesta_sostenibilidad_comentario : null,
+
+                    'impacto_ambiental_puntaje'      => $request->impacto_ambiental_puntaje,
+                    'impacto_ambiental_comentario'   => $request->impacto_ambiental_requiere_comentario == false ? $request->impacto_ambiental_comentario : null,
+
+                    'impacto_social_centro_puntaje'      => $request->impacto_social_centro_puntaje,
+                    'impacto_social_centro_comentario'   => $request->impacto_social_centro_requiere_comentario == false ? $request->impacto_social_centro_comentario : null,
+
+                    'impacto_social_productivo_puntaje'      => $request->impacto_social_productivo_puntaje,
+                    'impacto_social_productivo_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_social_productivo_comentario : null,
+
+                    'impacto_tecnologico_puntaje'      => $request->impacto_tecnologico_puntaje,
+                    'impacto_tecnologico_requiere_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_tecnologico_requiere_comentario : null,
                 ]);
                 break;
             default:

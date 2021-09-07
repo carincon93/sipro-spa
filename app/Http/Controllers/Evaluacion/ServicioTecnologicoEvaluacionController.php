@@ -68,9 +68,9 @@ class ServicioTecnologicoEvaluacionController extends Controller
     public function edit(Convocatoria $convocatoria, ServicioTecnologicoEvaluacion $servicioTecnologicoEvaluacion)
     {
         $servicioTecnologicoEvaluacion->evaluacion->proyecto;
-        $servicioTecnologico = $servicioTecnologicoEvaluacion->evaluacion->proyecto->serviciosTecnologicosEvaluacion;
-        $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
-        $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
+        $servicioTecnologico = $servicioTecnologicoEvaluacion->evaluacion->proyecto->servicioTecnologico;
+        $servicioTecnologico->proyecto->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
+        $servicioTecnologico->proyecto->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
 
         $servicioTecnologico->proyecto->centroFormacion;
 
@@ -97,11 +97,15 @@ class ServicioTecnologicoEvaluacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ServiciosTecnologicos/Edit', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
-            'servicioTecnologico'           => $servicioTecnologico,
-            'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
-            'tiposProyectoSt'               => $tipoProyectoSt,
-            'proyectoProgramasFormacion'    => $servicioTecnologico->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'convocatoria'                          => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
+            'servicioTecnologico'                   => $servicioTecnologico,
+            'servicioTecnologicoEvaluacion'         => $servicioTecnologicoEvaluacion,
+            'servicioTecnologicoSegundaEvaluacion'  => ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+            })->where('servicios_tecnologicos_evaluaciones.id', '!=', $servicioTecnologicoEvaluacion->id)->first(),
+            'sectoresProductivos'                   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
+            'tiposProyectoSt'                       => $tipoProyectoSt,
+            'proyectoProgramasFormacion'            => $servicioTecnologico->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
         ]);
     }
 
@@ -119,10 +123,26 @@ class ServicioTecnologicoEvaluacionController extends Controller
             'clausula_confidencialidad' => $request->clausula_confidencialidad
         ]);
 
+        $servicioTecnologicoEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == false ? $request->fechas_comentario : null;
+
         $servicioTecnologicoEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
         $servicioTecnologicoEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == false ? $request->titulo_comentario : null;
         $servicioTecnologicoEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
         $servicioTecnologicoEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == false ? $request->resumen_comentario : null;
+        $servicioTecnologicoEvaluacion->antecedentes_puntaje        = $request->antecedentes_puntaje;
+        $servicioTecnologicoEvaluacion->antecedentes_comentario     = $request->antecedentes_requiere_comentario == false ? $request->antecedentes_comentario : null;
+
+        $servicioTecnologicoEvaluacion->identificacion_problema_puntaje            = $request->identificacion_problema_puntaje;
+        $servicioTecnologicoEvaluacion->identificacion_problema_comentario         = $request->identificacion_problema_requiere_comentario == false ? $request->identificacion_problema_comentario : null;
+
+        $servicioTecnologicoEvaluacion->pregunta_formulacion_problema_puntaje      = $request->pregunta_formulacion_problema_puntaje;
+        $servicioTecnologicoEvaluacion->pregunta_formulacion_problema_comentario   = $request->pregunta_formulacion_problema_requiere_comentario == false ? $request->pregunta_formulacion_problema_comentario : null;
+
+        $servicioTecnologicoEvaluacion->justificacion_problema_puntaje             = $request->justificacion_problema_puntaje;
+        $servicioTecnologicoEvaluacion->justificacion_problema_comentario          = $request->justificacion_problema_requiere_comentario == false ? $request->justificacion_problema_comentario : null;
+
+        $servicioTecnologicoEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
+
         $servicioTecnologicoEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $servicioTecnologicoEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;
         $servicioTecnologicoEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == false ? $request->normas_apa_comentario : null;

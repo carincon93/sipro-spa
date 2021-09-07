@@ -9,6 +9,7 @@ use App\Models\Actividad;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\ProyectoPresupuesto;
@@ -287,6 +288,12 @@ class ActividadController extends Controller
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->servicioTecnologico->metodologia;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
@@ -346,6 +353,25 @@ class ActividadController extends Controller
             case $evaluacion->tpEvaluacion()->exists():
                 $evaluacion->tpEvaluacion()->update([
                     'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null,
+
+                    'actividades_primer_obj_puntaje'      => $request->actividades_primer_obj_puntaje,
+                    'actividades_primer_obj_comentario'   => $request->actividades_primer_obj_requiere_comentario == false ? $request->actividades_primer_obj_comentario : null,
+
+                    'actividades_segundo_obj_puntaje'      => $request->actividades_segundo_obj_puntaje,
+                    'actividades_segundo_obj_comentario'   => $request->actividades_segundo_obj_requiere_comentario == false ? $request->actividades_segundo_obj_comentario : null,
+
+                    'actividades_tercer_obj_puntaje'      => $request->actividades_tercer_obj_puntaje,
+                    'actividades_tercer_obj_comentario'   => $request->actividades_tercer_obj_requiere_comentario == false ? $request->actividades_tercer_obj_comentario : null,
+
+                    'actividades_cuarto_obj_puntaje'      => $request->actividades_cuarto_obj_puntaje,
+                    'actividades_cuarto_obj_comentario'   => $request->actividades_cuarto_obj_requiere_comentario == false ? $request->actividades_cuarto_obj_comentario : null,
                 ]);
                 break;
             default:

@@ -41,12 +41,6 @@
             {/if}
         </div>
 
-        <div slot="actions">
-            {#if (isSuperAdmin && proyecto.servicios_organizacion) || (checkPermission(authUser, [8]) && proyecto.modificable == true && proyecto.servicios_organizacion)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.edt.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear EDT</Button>
-            {/if}
-        </div>
-
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción del evento</th>
@@ -80,7 +74,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={eventos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 15])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.edt.edit', [convocatoria.id, proyecto.id, evento.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.edt.edit', [convocatoria.id, proyecto.id, evento.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

@@ -6,6 +6,7 @@ use App\Models\InventarioEquipo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioEquipoRequest;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -151,5 +152,41 @@ class InventarioEquipoController extends Controller
         $inventarioEquipo->delete();
 
         return redirect()->route('convocatorias.proyectos.inventario-equipos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showInventarioEquiposEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Index', [
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'evaluacion'        => $evaluacion,
+            'filters'           => request()->all('search'),
+            'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
+                ->filterInventarioEquipo(request()->only('search'))->paginate(),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\InventarioEquipo  $inventarioEquipo
+     * @return \Illuminate\Http\Response
+     */
+    public function showInventarioEquiposEvaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, InventarioEquipo $inventarioEquipo)
+    {
+        return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Edit', [
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
+            'proyecto'                  => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'evaluacion'                => $evaluacion,
+            'inventarioEquipo'          => $inventarioEquipo,
+            'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
+        ]);
     }
 }

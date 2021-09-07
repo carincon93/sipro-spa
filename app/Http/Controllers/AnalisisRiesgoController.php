@@ -9,6 +9,7 @@ use App\Models\AnalisisRiesgo;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use Illuminate\Http\Request;
@@ -203,6 +204,11 @@ class AnalisisRiesgoController extends Controller
                 })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
@@ -251,6 +257,19 @@ class AnalisisRiesgoController extends Controller
             case $evaluacion->tpEvaluacion()->exists():
                 $evaluacion->tpEvaluacion()->update([
                     'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'riesgos_objetivo_general_puntaje'      => $request->riesgos_objetivo_general_puntaje,
+                    'riesgos_objetivo_general_comentario'   => $request->riesgos_objetivo_general_requiere_comentario == false ? $request->riesgos_objetivo_general_comentario : null,
+
+                    'riesgos_productos_puntaje'             => $request->riesgos_productos_puntaje,
+                    'riesgos_productos_comentario'          => $request->riesgos_productos_requiere_comentario == false ? $request->riesgos_productos_comentario : null,
+
+                    'riesgos_actividades_puntaje'           => $request->riesgos_actividades_puntaje,
+                    'riesgos_actividades_comentario'        => $request->riesgos_actividades_requiere_comentario == false ? $request->riesgos_actividades_comentario : null,
                 ]);
                 break;
             default:

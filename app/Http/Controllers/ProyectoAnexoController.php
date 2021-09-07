@@ -9,6 +9,7 @@ use App\Models\Anexo;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\ProyectoAnexo;
@@ -207,6 +208,11 @@ class ProyectoAnexoController extends Controller
                 })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;

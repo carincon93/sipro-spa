@@ -197,7 +197,7 @@ class EvaluacionController extends Controller
                 return redirect()->route('convocatorias.tp-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
-                return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.servicios-tecnologicos-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 return redirect()->route('convocatorias.cultura-innovacion-evaluaciones.edit', [$convocatoria, $evaluacion]);

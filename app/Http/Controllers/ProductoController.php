@@ -8,6 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\Proyecto;
@@ -355,7 +356,11 @@ class ProductoController extends Controller
                 })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
 
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
@@ -415,6 +420,22 @@ class ProductoController extends Controller
             case $evaluacion->tpEvaluacion()->exists():
                 $evaluacion->tpEvaluacion()->update([
                     'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'productos_primer_obj_puntaje'      => $request->productos_primer_obj_puntaje,
+                    'productos_primer_obj_comentario'   => $request->productos_primer_obj_requiere_comentario == false ? $request->productos_primer_obj_comentario : null,
+
+                    'productos_segundo_obj_puntaje'      => $request->productos_segundo_obj_puntaje,
+                    'productos_segundo_obj_comentario'   => $request->productos_segundo_obj_requiere_comentario == false ? $request->productos_segundo_obj_comentario : null,
+
+                    'productos_tercer_obj_puntaje'      => $request->productos_tercer_obj_puntaje,
+                    'productos_tercer_obj_comentario'   => $request->productos_tercer_obj_requiere_comentario == false ? $request->productos_tercer_obj_comentario : null,
+
+                    'productos_cuarto_obj_puntaje'      => $request->productos_cuarto_obj_puntaje,
+                    'productos_cuarto_obj_comentario'   => $request->productos_cuarto_obj_requiere_comentario == false ? $request->productos_cuarto_obj_comentario : null,
                 ]);
                 break;
             default:

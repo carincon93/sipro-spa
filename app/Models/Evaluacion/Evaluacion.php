@@ -201,9 +201,52 @@ class Evaluacion extends Model
                 $this->culturaInnovacionEvaluacion->ortografia_puntaje +
                 $this->culturaInnovacionEvaluacion->redaccion_puntaje +
                 $this->culturaInnovacionEvaluacion->normas_apa_puntaje;
+        } else if ($this->proyecto->servicioTecnologico()->exists()) {
+            $total = $this->servicioTecnologicoEvaluacion->titulo_puntaje +
+                $this->servicioTecnologicoEvaluacion->resumen_puntaje +
+                $this->servicioTecnologicoEvaluacion->antecedentes_puntaje +
+                $this->servicioTecnologicoEvaluacion->problema_central_puntaje +
+                $this->servicioTecnologicoEvaluacion->justificacion_problema_puntaje +
+                $this->servicioTecnologicoEvaluacion->pregunta_formulacion_problema_puntaje +
+                $this->servicioTecnologicoEvaluacion->identificacion_problema_puntaje +
+                $this->servicioTecnologicoEvaluacion->arbol_problemas_puntaje +
+                $this->servicioTecnologicoEvaluacion->propuesta_sostenibilidad_puntaje +
+                $this->servicioTecnologicoEvaluacion->impacto_ambiental_puntaje +
+                $this->servicioTecnologicoEvaluacion->impacto_social_centro_puntaje +
+                $this->servicioTecnologicoEvaluacion->impacto_social_productivo_puntaje +
+                $this->servicioTecnologicoEvaluacion->impacto_tecnologico_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->riesgos_objetivo_general_puntaje +
+                $this->servicioTecnologicoEvaluacion->riesgos_productos_puntaje +
+                $this->servicioTecnologicoEvaluacion->riesgos_actividades_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->objetivo_general_puntaje +
+                $this->servicioTecnologicoEvaluacion->objetivo_general_comentario +
+
+                $this->servicioTecnologicoEvaluacion->primer_objetivo_puntaje +
+                $this->servicioTecnologicoEvaluacion->segundo_objetivo_puntaje +
+                $this->servicioTecnologicoEvaluacion->tercer_objetivo_puntaje +
+                $this->servicioTecnologicoEvaluacion->cuarto_objetivo_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->resultados_primer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->resultados_segundo_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->resultados_tercer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->resultados_cuarto_obj_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->metodologia_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->actividades_primer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->actividades_segundo_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->actividades_tercer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->actividades_cuarto_obj_puntaje +
+
+                $this->servicioTecnologicoEvaluacion->productos_primer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->productos_segundo_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->productos_tercer_obj_puntaje +
+                $this->servicioTecnologicoEvaluacion->productos_cuarto_obj_puntaje;
         }
 
-        return $total;
+        return round($total, 2);
     }
 
     public function getTotalRecomendacionesAttribute()
