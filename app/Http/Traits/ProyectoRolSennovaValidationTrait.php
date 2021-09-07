@@ -34,7 +34,7 @@ trait ProyectoRolSennovaValidationTrait
                 return true;
             }
 
-            if ($numeroMeses == 3 && $numeroRoles <= 2 || $numeroMeses == 6 && $numeroRoles <= 2) {
+            if ($numeroMeses == 3 && $numeroRoles <= 2 || $numeroMeses == 4 && $numeroRoles <= 2 || $numeroMeses == 5 && $numeroRoles <= 2 || $numeroMeses == 6 && $numeroRoles <= 2) {
                 return false;
             } else {
                 return true;
