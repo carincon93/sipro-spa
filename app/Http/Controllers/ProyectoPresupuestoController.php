@@ -457,6 +457,8 @@ class ProyectoPresupuestoController extends Controller
      */
     public function proyectoPresupuestoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica                = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040115');
         $evaluacion->proyecto->total_viaticos                           = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2042186') + PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2041102');
@@ -498,6 +500,8 @@ class ProyectoPresupuestoController extends Controller
      */
     public function evaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $presupuesto->softwareInfo;
         $presupuesto->servicioEdicionInfo;
         $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;
@@ -521,6 +525,8 @@ class ProyectoPresupuestoController extends Controller
 
     public function updateEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         ProyectoPresupuestoEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
             ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null]

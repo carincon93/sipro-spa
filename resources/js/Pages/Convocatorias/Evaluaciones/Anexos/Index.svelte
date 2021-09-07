@@ -79,6 +79,20 @@
             })
         }
     }
+
+    let formServicioTecnologicoEvaluacion = useForm({
+        anexos_comentario: evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario,
+        anexos_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario == null ? true : false,
+    })
+    function submitServicioTecnologicoEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.anexos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -126,27 +140,29 @@
 
         <tbody slot="tbody">
             {#each anexos.data as anexo (anexo.id)}
-                <tr>
-                    <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
-                            {anexo.nombre}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        {#if isSuperAdmin || checkRole(authUser, [11])}
-                            {#if proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id}
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.proyecto-anexos.download', [convocatoria.id, proyecto.id, proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id])}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                    </svg>
-                                    {anexo.nombre}
-                                </a>
-                            {:else}
-                                <p class="px-6 py-4 focus:text-indigo-500">No se cargaron anexos</p>
+                {#if anexo.id != 11 && anexo.id != 12}
+                    <tr>
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {anexo.nombre}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                                {#if proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id}
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.proyecto-anexos.download', [convocatoria.id, proyecto.id, proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id])}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        {anexo.nombre}
+                                    </a>
+                                {:else}
+                                    <p class="px-6 py-4 focus:text-indigo-500">No se cargaron anexos</p>
+                                {/if}
                             {/if}
-                        {/if}
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                {/if}
             {/each}
 
             {#if anexos.data.length === 0}
@@ -174,6 +190,32 @@
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.anexos_requiere_comentario} />
                         {#if $formEstrategiaRegionalEvaluacion.anexos_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$formEstrategiaRegionalEvaluacion.anexos_comentario} error={errors.anexos_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 68}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitServicioTecnologicoEvaluacion}>
+                <InfoMessage>
+                    {#if segundaEvaluacion?.anexos_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Los anexos son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.anexos_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.anexos_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$formServicioTecnologicoEvaluacion.anexos_comentario} error={errors.anexos_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>

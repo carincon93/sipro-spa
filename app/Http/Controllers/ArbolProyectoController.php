@@ -305,6 +305,8 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolProblemasEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $efectosDirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
         $causasDirectas  = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas')->get();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
@@ -390,6 +392,8 @@ class ArbolProyectoController extends Controller
      */
     public function updateArbolProblemasEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -724,6 +728,8 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolObjetivosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $efectosDirectos  = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
         $causasDirectas   = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
 
@@ -829,6 +835,8 @@ class ArbolProyectoController extends Controller
      */
     public function updateArbolObjetivosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([

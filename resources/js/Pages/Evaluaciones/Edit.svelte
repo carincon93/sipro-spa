@@ -110,7 +110,7 @@
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar evaluación </button>
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar evaluación</LoadingButton>

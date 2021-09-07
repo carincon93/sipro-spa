@@ -161,6 +161,8 @@ class InventarioEquipoController extends Controller
      */
     public function showInventarioEquiposEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Index', [
@@ -181,6 +183,8 @@ class InventarioEquipoController extends Controller
      */
     public function showInventarioEquiposEvaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, InventarioEquipo $inventarioEquipo)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Edit', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'                  => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),

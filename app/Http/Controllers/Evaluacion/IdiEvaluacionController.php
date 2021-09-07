@@ -70,6 +70,8 @@ class IdiEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
         $idiEvaluacion->evaluacion->proyecto;
         $idi = $idiEvaluacion->evaluacion->proyecto->idi;
         $idi->proyecto->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
@@ -106,6 +108,8 @@ class IdiEvaluacionController extends Controller
      */
     public function update(IdiEvaluacionRequest $request, Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
         $idiEvaluacion->evaluacion()->update([
             'iniciado' => true,
             'clausula_confidencialidad' => $request->clausula_confidencialidad
@@ -147,6 +151,8 @@ class IdiEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
         return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

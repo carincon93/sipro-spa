@@ -242,6 +242,8 @@ class ActividadController extends Controller
      */
     public function showMetodologiaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
@@ -332,6 +334,8 @@ class ActividadController extends Controller
      */
     public function updateMetodologiaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -391,6 +395,8 @@ class ActividadController extends Controller
      */
     public function actividadEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Actividad $actividad)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $resultados = $evaluacion->proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
             $query->where('descripcion', '!=', null);
         })->with('resultados')->get()->pluck('resultados')->flatten();

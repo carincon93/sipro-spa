@@ -221,7 +221,6 @@ class Evaluacion extends Model
                 $this->servicioTecnologicoEvaluacion->riesgos_actividades_puntaje +
 
                 $this->servicioTecnologicoEvaluacion->objetivo_general_puntaje +
-                $this->servicioTecnologicoEvaluacion->objetivo_general_comentario +
 
                 $this->servicioTecnologicoEvaluacion->primer_objetivo_puntaje +
                 $this->servicioTecnologicoEvaluacion->segundo_objetivo_puntaje +
@@ -358,6 +357,52 @@ class Evaluacion extends Model
             $this->tpEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->tpEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
+        } else if ($this->proyecto->servicioTecnologico()->exists()) {
+            $this->servicioTecnologicoEvaluacion->titulo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->resumen_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->antecedentes_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->problema_central_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->justificacion_problema_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->pregunta_formulacion_problema_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->fecha_ejecucion_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->propuesta_sostenibilidad_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->identificacion_problema_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->video_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->especificaciones_area_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->infraestructura_adecuada_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->ortografia_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->redaccion_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->normas_apa_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->arbol_objetivos_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->impacto_ambiental_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->impacto_social_centro_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->impacto_social_productivo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->impacto_tecnologico_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->objetivo_general_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->primer_objetivo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->segundo_objetivo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->tercer_objetivo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->cuarto_objetivo_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->resultados_primer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->resultados_segundo_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->resultados_tercer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->resultados_cuarto_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->metodologia_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->actividades_primer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->actividades_segundo_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->actividades_tercer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->actividades_cuarto_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->productos_primer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->productos_segundo_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->productos_tercer_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->productos_cuarto_obj_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->cadena_valor_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->bibliografia_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->anexos_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->riesgos_objetivo_general_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->riesgos_productos_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->riesgos_actividades_comentario != null ? $total++ : null;
         }
 
         $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();

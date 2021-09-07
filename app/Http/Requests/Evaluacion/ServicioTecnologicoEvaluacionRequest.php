@@ -24,7 +24,7 @@ class ServicioTecnologicoEvaluacionRequest extends FormRequest
     public function rules()
     {
         return [
-            'fechas_comentario'             => ['nullable', 'string'],
+            'fecha_ejecucion_comentario'    => ['nullable', 'string'],
 
             'titulo_puntaje'                => ['nullable', 'numeric', 'max:4'],
             'titulo_comentario'             => ['nullable', 'string'],
@@ -45,7 +45,6 @@ class ServicioTecnologicoEvaluacionRequest extends FormRequest
             'justificacion_problema_comentario'   => ['nullable', 'string'],
 
             'bibliografia_comentario'       => ['nullable', 'string'],
-            'fechas_comentario'             => ['nullable', 'string'],
 
             'ortografia_comentario'         => ['nullable', 'string'],
             'redaccion_comentario'          => ['nullable', 'string'],

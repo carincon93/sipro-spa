@@ -293,7 +293,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                     </svg>
-                                    Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                    Recomendación del evaluador COD-{evaluacion.id}:
                                 </div>
                                 <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.fecha_ejecucion_comentario ? evaluacion.ta_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
                             </div>
@@ -379,7 +379,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.resumen_regional_comentario ? evaluacion.ta_evaluacion.resumen_regional_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -417,7 +417,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario ? evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -453,7 +453,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.retos_oportunidades_comentario ? evaluacion.ta_evaluacion.retos_oportunidades_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -522,7 +522,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.municipios_comentario ? evaluacion.ta_evaluacion.municipios_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -598,7 +598,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.instituciones_comentario ? evaluacion.ta_evaluacion.instituciones_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -665,7 +665,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.proyectos_macro_comentario ? evaluacion.ta_evaluacion.proyectos_macro_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -690,7 +690,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_medulares_centro_comentario ? evaluacion.ta_evaluacion.lineas_medulares_centro_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -715,7 +715,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario ? evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario : 'Sin recomendación'}</p>
                                 </div>
@@ -741,7 +741,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
-                                        Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                        Recomendación del evaluador COD-{evaluacion.id}:
                                     </div>
                                     <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.bibliografia ? evaluacion.ta_evaluacion.bibliografia : 'Sin recomendación'}</p>
                                 </div>
@@ -761,7 +761,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                Recomendación del evaluador COD-{evaluacion.id}:
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.ortografia_comentario ? evaluacion.ta_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
                         </div>
@@ -779,7 +779,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                Recomendación del evaluador COD-{evaluacion.id}:
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.redaccion_comentario ? evaluacion.ta_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
                         </div>
@@ -797,7 +797,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                Recomendación del evaluador COD-{evaluacion.id}:
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.normas_apa_comentario ? evaluacion.ta_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
                         </div>

@@ -80,12 +80,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                Recomendación del evaluador COD-{evaluacion.id}:
                             </div>
                             {#if evaluacion.idi_evaluacion}
                                 <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.metodologia_comentario ? evaluacion.idi_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
                             {:else if evaluacion.ta_evaluacion}
                                 <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.metodologia_comentario ? evaluacion.ta_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                <h1 class="font-black mt-10">Metodología</h1>
+
+                                <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion?.metodologia_comentario ? evaluacion.servicio_tecnologico_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Actividades</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_primer_obj_comentario ? 'Recomendación actividades del primer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_segundo_obj_comentario ? 'Recomendación actividades del segundo objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_tercer_obj_comentario ? 'Recomendación actividades del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_cuarto_obj_comentario ? 'Recomendación actividades del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_comentario : 'Sin recomendación'}</li>
+                                </ul>
                             {/if}
                         </div>
                     {/if}
@@ -118,7 +132,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                             </svg>
-                            Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                            Recomendación del evaluador COD-{evaluacion.id}:
                         </div>
                         {#if evaluacion.idi_evaluacion}
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.actividades_comentario ? evaluacion.idi_evaluacion.actividades_comentario : 'Sin recomendación'}</p>

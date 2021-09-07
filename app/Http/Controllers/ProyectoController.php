@@ -107,6 +107,8 @@ class ProyectoController extends Controller
      */
     public function showCadenaValorEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         $efectosIndirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos')->get()->pluck('efectosIndirectos')->flatten()->filter();
@@ -216,6 +218,8 @@ class ProyectoController extends Controller
      */
     public function updateCadenaValorEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -255,7 +259,7 @@ class ProyectoController extends Controller
                     'impacto_social_productivo_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_social_productivo_comentario : null,
 
                     'impacto_tecnologico_puntaje'      => $request->impacto_tecnologico_puntaje,
-                    'impacto_tecnologico_requiere_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_tecnologico_requiere_comentario : null,
+                    'impacto_tecnologico_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_tecnologico_comentario : null,
                 ]);
                 break;
             default:
@@ -416,6 +420,8 @@ class ProyectoController extends Controller
      */
     public function summaryEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->precio_proyecto           = $evaluacion->proyecto->precioProyecto;
 
@@ -613,6 +619,8 @@ class ProyectoController extends Controller
      */
     public function participantesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->participantes;
         $evaluacion->proyecto->programasFormacion;

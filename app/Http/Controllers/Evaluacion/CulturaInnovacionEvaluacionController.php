@@ -68,6 +68,8 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
+
         $culturaInnovacionEvaluacion->evaluacion->proyecto;
         $culturaInnovacion = $culturaInnovacionEvaluacion->evaluacion->proyecto->culturaInnovacion;
         $culturaInnovacion->proyecto->codigo_linea_programatica = $culturaInnovacion->proyecto->lineaProgramatica->codigo;
@@ -99,6 +101,8 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function update(CulturaInnovacionEvaluacionRequest $request, Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
+
         $culturaInnovacionEvaluacion->evaluacion()->update([
             'iniciado' => true
         ]);
@@ -138,8 +142,8 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
-        $culturaInnovacionEvaluacion->delete();
+        $this->authorize('modificar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('resourceRoute.index')->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

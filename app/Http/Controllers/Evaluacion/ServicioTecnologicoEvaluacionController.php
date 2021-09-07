@@ -67,6 +67,8 @@ class ServicioTecnologicoEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, ServicioTecnologicoEvaluacion $servicioTecnologicoEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $servicioTecnologicoEvaluacion->evaluacion);
+
         $servicioTecnologicoEvaluacion->evaluacion->proyecto;
         $servicioTecnologico = $servicioTecnologicoEvaluacion->evaluacion->proyecto->servicioTecnologico;
         $servicioTecnologico->proyecto->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
@@ -118,12 +120,14 @@ class ServicioTecnologicoEvaluacionController extends Controller
      */
     public function update(ServicioTecnologicoEvaluacionRequest $request, Convocatoria $convocatoria, ServicioTecnologicoEvaluacion $servicioTecnologicoEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $servicioTecnologicoEvaluacion->evaluacion);
+
         $servicioTecnologicoEvaluacion->evaluacion()->update([
             'iniciado' => true,
             'clausula_confidencialidad' => $request->clausula_confidencialidad
         ]);
 
-        $servicioTecnologicoEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == false ? $request->fechas_comentario : null;
+        $servicioTecnologicoEvaluacion->fecha_ejecucion_comentario = $request->fechas_requiere_comentario == false ? $request->fecha_ejecucion_comentario : null;
 
         $servicioTecnologicoEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
         $servicioTecnologicoEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == false ? $request->titulo_comentario : null;
@@ -160,6 +164,8 @@ class ServicioTecnologicoEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, ServicioTecnologicoEvaluacion $servicioTecnologicoEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $servicioTecnologicoEvaluacion->evaluacion);
+
         return redirect()->route('convocatorias.servicios-tecnologicos-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

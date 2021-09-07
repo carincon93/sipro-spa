@@ -54,8 +54,12 @@ class EvaluacionController extends Controller
     {
         $this->authorize('create', [Evaluacion::class]);
 
-        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado) {
+        $proyecto = Proyecto::find($request->proyecto_id);
+
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado && $proyecto->lineaProgramatica->codigo != 68) {
             return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        } else if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 3 && $request->habilitado && $proyecto->lineaProgramatica->codigo == 68) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene tres evaluaciones habilitadas. Debe modificar alguna evaluación.');
         }
 
         $evaluacion = new Evaluacion();
@@ -68,7 +72,6 @@ class EvaluacionController extends Controller
 
         $evaluacion->save();
 
-        $proyecto = Proyecto::find($request->proyecto_id);
         $proyecto->finalizado = true;
         $proyecto->modificable = false;
         $proyecto->save();
@@ -147,8 +150,10 @@ class EvaluacionController extends Controller
     {
         $this->authorize('update', [Evaluacion::class, $evaluacion]);
 
-        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->where('evaluaciones.id', '!=', $evaluacion->id)->count() == 2 && $request->habilitado) {
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->where('evaluaciones.id', '!=', $evaluacion->id)->count() == 2 && $request->habilitado && $evaluacion->proyecto->lineaProgramatica->codigo != 68) {
             return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        } else if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->where('evaluaciones.id', '!=', $evaluacion->id)->count() == 3 && $request->habilitado && $evaluacion->proyecto->lineaProgramatica->codigo == 68) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene tres evaluaciones habilitadas. Debe modificar alguna evaluación.');
         }
 
         $evaluacion->habilitado  = $request->habilitado;
@@ -209,6 +214,8 @@ class EvaluacionController extends Controller
 
     public function editCausalRechazo(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [

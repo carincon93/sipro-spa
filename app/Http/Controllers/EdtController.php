@@ -199,6 +199,8 @@ class EdtController extends Controller
      */
     public function showEdtEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         /**
@@ -233,6 +235,8 @@ class EdtController extends Controller
      */
     public function showEdtEvaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, Edt $edt)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         foreach ($evaluacion->proyecto->proyectoPresupuesto as $presupuesto) {
             if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->codigo == '020202008005096') {
                 $evaluacion->proyecto->servicios_organizacion = true;

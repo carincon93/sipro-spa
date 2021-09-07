@@ -195,6 +195,8 @@ class SoporteEstudioMercadoController extends Controller
      */
     public function soportesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         /**
          * Denega el acceso si el rubro no requiere de estudio de mercado.
          */

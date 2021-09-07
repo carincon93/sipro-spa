@@ -375,6 +375,8 @@ class TaController extends Controller
      */
     public function showArticulacionSennovaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica            = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->precio_proyecto                      = $evaluacion->proyecto->precioProyecto;
         $evaluacion->proyecto->proyectos_ejecucion                  = $evaluacion->proyecto->ta->proyectos_ejecucion;
@@ -444,6 +446,8 @@ class TaController extends Controller
      */
     public function updatedArticulacionSennovaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         $evaluacion->taEvaluacion()->update([
             'articulacion_sennova_comentario'   => $request->articulacion_sennova_requiere_comentario == false ? $request->articulacion_sennova_comentario : null
         ]);

@@ -281,6 +281,8 @@ class ProyectoRolSennovaController extends Controller
      */
     public function proyectoRolEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
@@ -313,6 +315,8 @@ class ProyectoRolSennovaController extends Controller
      */
     public function evaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 68) {
@@ -337,6 +341,8 @@ class ProyectoRolSennovaController extends Controller
 
     public function updateEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         ProyectoRolEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_rol_sennova_id' => $proyectoRolSennova->id],
             ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null]

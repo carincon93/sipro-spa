@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\Evaluacion;
 use App\Models\LineaProgramatica;
 use App\Models\Proyecto;
 use App\Models\User;
@@ -81,6 +82,22 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('validar-dinamizador', function (User $user, Proyecto $proyecto) {
             return $user->hasRole(4) && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id;
+        });
+
+        Gate::define('visualizar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
+            if ($evaluacion->user_id == $user->id) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Gate::define('modificar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
+            if ($evaluacion->modificable == true && $evaluacion->user_id == $user->id) {
+                return true;
+            }
+
+            return false;
         });
     }
 

@@ -372,6 +372,8 @@ class EntidadAliadaController extends Controller
      */
     public function showEntidadesAliadasEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         /**
@@ -449,6 +451,8 @@ class EntidadAliadaController extends Controller
      */
     public function entidadAliadaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, EntidadAliada $entidadAliada)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $objetivoEspecificos = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
         $entidadAliada->miembrosEntidadAliada->only('id', 'nombre', 'email', 'numero_celular');

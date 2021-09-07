@@ -133,7 +133,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function show(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('visualizar-proyecto-autor', [$servicioTecnologico->proyecto]);
+        // 
     }
 
     /**
@@ -145,6 +145,8 @@ class ServicioTecnologicoController extends Controller
     public function edit(Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
         $this->authorize('visualizar-proyecto-autor', [$servicioTecnologico->proyecto]);
+
+        $servicioTecnologico->load('proyecto.evaluaciones.servicioTecnologicoEvaluacion');
 
         $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;

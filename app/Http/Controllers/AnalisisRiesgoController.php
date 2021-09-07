@@ -168,6 +168,8 @@ class AnalisisRiesgoController extends Controller
      */
     public function showAnalisisRiesgosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         switch ($evaluacion->proyecto) {
@@ -235,6 +237,8 @@ class AnalisisRiesgoController extends Controller
      */
     public function updateAnalisisRiesgosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -289,6 +293,8 @@ class AnalisisRiesgoController extends Controller
      */
     public function analisisRiesgoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, AnalisisRiesgo $analisisRiesgo)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion->only('id'),

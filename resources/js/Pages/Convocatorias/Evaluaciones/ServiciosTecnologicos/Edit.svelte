@@ -72,8 +72,8 @@
     let form = useForm({
         clausula_confidencialidad: servicioTecnologicoEvaluacion.evaluacion.clausula_confidencialidad,
 
-        fechas_requiere_comentario: servicioTecnologicoEvaluacion.fechas_comentario == null ? true : false,
-        fechas_comentario: servicioTecnologicoEvaluacion.fechas_comentario,
+        fechas_requiere_comentario: servicioTecnologicoEvaluacion.fecha_ejecucion_comentario == null ? true : false,
+        fecha_ejecucion_comentario: servicioTecnologicoEvaluacion.fecha_ejecucion_comentario,
 
         titulo_puntaje: servicioTecnologicoEvaluacion.titulo_puntaje,
         titulo_comentario: servicioTecnologicoEvaluacion.titulo_comentario,
@@ -210,8 +210,8 @@
             </div>
 
             <InfoMessage>
-                {#if servicioTecnologicoSegundaEvaluacion?.fechas_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.fechas_comentario}</p>
+                {#if servicioTecnologicoSegundaEvaluacion?.fecha_ejecucion_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.fecha_ejecucion_comentario}</p>
                 {/if}
                 <div class="mt-4">
                     <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
@@ -222,9 +222,9 @@
                             label="Comentario"
                             class="mt-4"
                             maxlength="40000"
-                            id="fechas_comentario"
-                            bind:value={$form.fechas_comentario}
-                            error={errors.fechas_comentario}
+                            id="fecha_ejecucion_comentario"
+                            bind:value={$form.fecha_ejecucion_comentario}
+                            error={errors.fecha_ejecucion_comentario}
                             required
                         />
                     {/if}
@@ -286,10 +286,8 @@
                     <h1>Criterios de evaluacion</h1>
                     <ul class="list-disc p-4">
                         <li>
-                            <strong>Puntaje: 0 a 3</strong> "Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto. Nota: El resumen por lo general se construye
-                            al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres)."
-                            <br />
-                            <strong>Nota:</strong> El resumen por lo general se construye al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres).
+                            <strong>Puntaje: 0 a 3</strong> Información necesaria para darle al lector una idea precisa de la pertinencia y calidad proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto. Nota: El resumen por lo general se construye al
+                            final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres).
                         </li>
                     </ul>
                     <Label class="mt-4 mb-4" labelFor="resumen_puntaje" value="Puntaje (Máximo 3)" />
@@ -342,11 +340,9 @@
                     <h1>Criterios de evaluacion</h1>
                     <ul class="list-disc p-4">
                         <li>
-                            <strong>Puntaje: 0 a 3</strong> Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de
-                            formación de tal forma que el proyecto no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado,
-                            las tendencias de los precios y las gestiones comerciales a realizadas Nota: La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
-                            <br />
-                            <strong>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
+                            <strong>Puntaje: 0 a 3</strong> Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de formación
+                            de tal forma que el proyecto no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias
+                            de los precios y las gestiones comerciales a realizadas Nota: La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
                         </li>
                     </ul>
                     <Label class="mt-4 mb-4" labelFor="antecedentes_puntaje" value="Puntaje (Máximo 3)" />

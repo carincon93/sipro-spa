@@ -319,6 +319,8 @@ class ProductoController extends Controller
      */
     public function showProductosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $resultado = $evaluacion->proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
@@ -398,6 +400,8 @@ class ProductoController extends Controller
      */
     public function updateProductosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -455,6 +459,8 @@ class ProductoController extends Controller
      */
     public function productoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Producto $producto)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->idi;
         $producto->productoIdi;
         $evaluacion->proyecto->culturaInnovacion;

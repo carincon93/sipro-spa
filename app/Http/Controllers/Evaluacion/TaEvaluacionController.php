@@ -68,6 +68,8 @@ class TaEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, TaEvaluacion $taEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $taEvaluacion->evaluacion);
+
         $taEvaluacion->evaluacion->proyecto;
         $ta = $taEvaluacion->evaluacion->proyecto->ta;
         $ta->proyecto->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
@@ -121,6 +123,8 @@ class TaEvaluacionController extends Controller
      */
     public function update(TaEvaluacionRequest $request, Convocatoria $convocatoria, TaEvaluacion $taEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $taEvaluacion->evaluacion);
+
         $taEvaluacion->evaluacion()->update([
             'iniciado' => true,
             'clausula_confidencialidad' => $request->clausula_confidencialidad
@@ -154,6 +158,8 @@ class TaEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, TaEvaluacion $taEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $taEvaluacion->evaluacion);
+
         return redirect()->route('convocatorias.ta-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

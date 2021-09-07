@@ -170,6 +170,8 @@ class ProyectoAnexoController extends Controller
      */
     public function anexoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->infraestructura_adecuada = $evaluacion->proyecto->servicioTecnologico->infraestructura_adecuada : $evaluacion->proyecto->infraestructura_adecuada = null;
         $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->especificaciones_area = $evaluacion->proyecto->servicioTecnologico->especificaciones_area : $evaluacion->proyecto->especificaciones_area = null;
@@ -241,6 +243,8 @@ class ProyectoAnexoController extends Controller
      */
     public function updateAnexosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
@@ -259,6 +263,11 @@ class ProyectoAnexoController extends Controller
                 break;
             case $evaluacion->tpEvaluacion()->exists():
                 $evaluacion->tpEvaluacion()->update([
+                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
+                ]);
+                break;
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
                     'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
                 ]);
                 break;

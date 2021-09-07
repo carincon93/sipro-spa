@@ -30,8 +30,7 @@ class ServicioTecnologicoEvaluacion extends Model
         'resumen_puntaje',
         'antecedentes_comentario',
         'antecedentes_puntaje',
-        'problema_central_comentario',
-        'problema_central_puntaje',
+
         'justificacion_problema_comentario',
         'justificacion_problema_puntaje',
         'pregunta_formulacion_problema_comentario',
@@ -58,7 +57,11 @@ class ServicioTecnologicoEvaluacion extends Model
         'impacto_social_productivo_puntaje',
         'impacto_social_productivo_comentario',
         'impacto_tecnologico_puntaje',
-        'impacto_tecnologico_requiere_comentario',
+        'impacto_tecnologico_comentario',
+
+        'riesgos_objetivo_general_comentario',
+        'riesgos_productos_comentario',
+        'riesgos_actividades_comentario',
 
         'objetivo_general_puntaje',
         'objetivo_general_comentario',
@@ -104,8 +107,8 @@ class ServicioTecnologicoEvaluacion extends Model
 
         'cadena_valor_comentario',
         'bibliografia_comentario',
-        'fechas_comentario',
 
+        'anexos_comentario'
     ];
 
     /**

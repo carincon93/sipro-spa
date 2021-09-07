@@ -67,6 +67,8 @@ class TpEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, TpEvaluacion $tpEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $tpEvaluacion->evaluacion);
+
         $tpEvaluacion->evaluacion->proyecto;
         $tp = $tpEvaluacion->evaluacion->proyecto->tp;
         $tp->codigo_linea_programatica = $tp->proyecto->lineaProgramatica->codigo;
@@ -101,6 +103,8 @@ class TpEvaluacionController extends Controller
      */
     public function update(TpEvaluacionRequest $request, Convocatoria $convocatoria, TpEvaluacion $tpEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $tpEvaluacion->evaluacion);
+
         $tpEvaluacion->evaluacion()->update([
             'iniciado' => true,
             'clausula_confidencialidad' => $request->clausula_confidencialidad
@@ -131,10 +135,8 @@ class TpEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, TpEvaluacion $tpEvaluacion)
     {
-        $this->authorize('delete', [TpEvaluacion::class, $tpEvaluacion]);
+        $this->authorize('modificar-evaluacion-autor', $tpEvaluacion->evaluacion);
 
-        $tpEvaluacion->delete();
-
-        return redirect()->route('convocatorias.tp-evaluaciones.index', [$convocatoria])->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route('convocatorias.tp-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }
