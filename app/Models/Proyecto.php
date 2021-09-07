@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos'];
 
     /**
      * The attributes that are mass assignable.
@@ -487,6 +487,16 @@ class Proyecto extends Model
     public function getPrecioProyectoAttribute()
     {
         return $this->getTotalProyectoPresupuestoAttribute() + $this->getTotalRolesSennovaAttribute();
+    }
+
+    public function getCantidadObjetivosAttribute()
+    {
+        $numeroObjetivos = 0;
+
+        foreach ($this->causasDirectas as $causaDirecta) {
+            strlen($causaDirecta->objetivoEspecifico->descripcion) > 10 ? $numeroObjetivos++ : null;
+        }
+        return $numeroObjetivos;
     }
 
     /**

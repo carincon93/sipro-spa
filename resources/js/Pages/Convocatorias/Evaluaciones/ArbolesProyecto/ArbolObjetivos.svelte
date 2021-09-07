@@ -895,157 +895,162 @@
                     <h1>Criterios de evaluacion</h1>
                     <ul class="list-disc p-4">
                         <li>
-                            <strong>Puntaje: 0 a 2</strong> Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas. La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir, con una palabra terminada en ""ar"", ""er""
-                            o ""ir"". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos. Nota: A continuación, se describen algunos errores comunes al momento de estructurar los objetivos específicos: - Describir los objetivos específicos del proyecto
-                            de forma demasiado amplia, es decir, los objetivos específicos parecen objetivos generales. - Confundir los objetivos específicos con las actividades del proyecto. Es decir, utilizar verbos que hacen referencia a aspectos demasiado operativos para describir los objetivos específicos de la iniciativa, por ejemplo: contratar, instalar, entre otros.
+                            <strong>Puntaje: 0 a {(8 / proyecto.cantidad_objetivos).toFixed(2)}</strong> Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas. La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir,
+                            con una palabra terminada en ""ar"", ""er"" o ""ir"". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos. Nota: A continuación, se describen algunos errores comunes al momento de estructurar los objetivos específicos: -
+                            Describir los objetivos específicos del proyecto de forma demasiado amplia, es decir, los objetivos específicos parecen objetivos generales. - Confundir los objetivos específicos con las actividades del proyecto. Es decir, utilizar verbos que hacen referencia a aspectos demasiado operativos para describir los objetivos específicos de la iniciativa, por ejemplo: contratar,
+                            instalar, entre otros.
                         </li>
                     </ul>
+                    {#each { length: proyecto.cantidad_objetivos } as _empty, j}
+                        {#if j == 0}
+                            <h1 class="text-black">Primer objetivo específico</h1>
 
-                    <h1 class="text-black">Primer objetivo específico</h1>
-
-                    <Label class="mt-4 mb-4" labelFor="primer_objetivo_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="primer_objetivo_puntaje"
-                        type="number"
-                        input$step="1"
-                        input$min="0"
-                        input$max="2"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.primer_objetivo_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.primer_objetivo_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿El primer objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario == false}
-                            <Textarea
+                            <Label class="mt-4 mb-4" labelFor="primer_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="primer_objetivo_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.primer_objetivo_comentario}
-                                error={errors.primer_objetivo_comentario}
-                                required
+                                label="Puntaje"
+                                id="primer_objetivo_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(8 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.primer_objetivo_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.primer_objetivo_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿El primer objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="primer_objetivo_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.primer_objetivo_comentario}
+                                        error={errors.primer_objetivo_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 1}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Segundo objetivo específico</h1>
+                            <h1 class="text-black">Segundo objetivo específico</h1>
 
-                    <Label class="mt-4 mb-4" labelFor="segundo_objetivo_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="segundo_objetivo_puntaje"
-                        type="number"
-                        input$step="1"
-                        input$min="0"
-                        input$max="2"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.segundo_objetivo_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.segundo_objetivo_puntaje}
-                    />
+                            <Label class="mt-4 mb-4" labelFor="segundo_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
 
-                    <div class="mt-4">
-                        <p>¿El segundo objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario == false}
-                            <Textarea
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="segundo_objetivo_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.segundo_objetivo_comentario}
-                                error={errors.segundo_objetivo_comentario}
-                                required
+                                label="Puntaje"
+                                id="segundo_objetivo_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(8 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.segundo_objetivo_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.segundo_objetivo_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿El segundo objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="segundo_objetivo_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.segundo_objetivo_comentario}
+                                        error={errors.segundo_objetivo_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 2}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Tercer objetivo específico</h1>
+                            <h1 class="text-black">Tercer objetivo específico</h1>
+                            <Label class="mt-4 mb-4" labelFor="tercer_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
 
-                    <Label class="mt-4 mb-4" labelFor="tercer_objetivo_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="tercer_objetivo_puntaje"
-                        type="number"
-                        input$step="1"
-                        input$min="0"
-                        input$max="2"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.tercer_objetivo_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.tercer_objetivo_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿El tercer objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario == false}
-                            <Textarea
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="tercer_objetivo_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.tercer_objetivo_comentario}
-                                error={errors.tercer_objetivo_comentario}
-                                required
+                                label="Puntaje"
+                                id="tercer_objetivo_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(8 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.tercer_objetivo_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.tercer_objetivo_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿El tercer objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="tercer_objetivo_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.tercer_objetivo_comentario}
+                                        error={errors.tercer_objetivo_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 3}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Cuarto objetivo específico</h1>
+                            <h1 class="text-black">Cuardo objetivo específico</h1>
+                            <Label class="mt-4 mb-4" labelFor="cuarto_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
 
-                    <Label class="mt-4 mb-4" labelFor="cuarto_objetivo_puntaje" value="Puntaje (Máximo 2)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="cuarto_objetivo_puntaje"
-                        type="number"
-                        input$step="1"
-                        input$min="0"
-                        input$max="2"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.cuarto_objetivo_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.cuarto_objetivo_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿El cuarto objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario == false}
-                            <Textarea
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="cuarto_objetivo_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.cuarto_objetivo_comentario}
-                                error={errors.cuarto_objetivo_comentario}
-                                required
+                                label="Puntaje"
+                                id="cuarto_objetivo_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(8 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.cuarto_objetivo_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.cuarto_objetivo_puntaje}
                             />
+
+                            <div class="mt-4">
+                                <p>¿El cuarto objetivo específico es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="cuarto_objetivo_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.cuarto_objetivo_comentario}
+                                        error={errors.cuarto_objetivo_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
                         {/if}
-                    </div>
+                    {/each}
 
                     <hr class="mt-10 mb-10 border-indigo-300" />
                     <h1 class="text-2xl text-center mb-10">Resultados</h1>
@@ -1058,152 +1063,155 @@
                             Nota: Los resultados son, en contraste, intangibles, tales como conocimientos y habilidades nuevas, compromisos adquiridos, etc.
                         </li>
                     </ul>
+                    {#each { length: proyecto.cantidad_objetivos } as _empty, j}
+                        {#if j == 0}
+                            <h1 class="text-black">Resultados del primer objetivo específico</h1>
 
-                    <h1 class="text-black">Resultados del primer objetivo específico</h1>
-
-                    <Label class="mt-4 mb-4" labelFor="resultados_primer_obj_puntaje" value="Puntaje (Máximo 2,5)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="resultados_primer_obj_puntaje"
-                        type="number"
-                        input$step="0.1"
-                        input$min="0"
-                        input$max="2.5"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.resultados_primer_obj_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.resultados_primer_obj_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿Los resultados del primer objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario == false}
-                            <Textarea
+                            <Label class="mt-4 mb-4" labelFor="resultados_primer_obj_puntaje" value="Puntaje (Máximo {(10 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="resultados_primer_obj_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.resultados_primer_obj_comentario}
-                                error={errors.resultados_primer_obj_comentario}
-                                required
+                                label="Puntaje"
+                                id="resultados_primer_obj_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(10 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.resultados_primer_obj_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.resultados_primer_obj_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿Los resultados del primer objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="resultados_primer_obj_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.resultados_primer_obj_comentario}
+                                        error={errors.resultados_primer_obj_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 1}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Resultados del segundo objetivo específico</h1>
+                            <h1 class="text-black">Resultados del segundo objetivo específico</h1>
 
-                    <Label class="mt-4 mb-4" labelFor="resultados_segundo_obj_puntaje" value="Puntaje (Máximo 2,5)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="resultados_segundo_obj_puntaje"
-                        type="number"
-                        input$step="0.1"
-                        input$min="0"
-                        input$max="2.5"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.resultados_segundo_obj_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿Los resultados del segundo objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario == false}
-                            <Textarea
+                            <Label class="mt-4 mb-4" labelFor="resultados_segundo_obj_puntaje" value="Puntaje (Máximo {(10 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="resultados_segundo_obj_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_comentario}
-                                error={errors.resultados_segundo_obj_comentario}
-                                required
+                                label="Puntaje"
+                                id="resultados_segundo_obj_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(10 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.resultados_segundo_obj_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿Los resultados del segundo objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="resultados_segundo_obj_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.resultados_segundo_obj_comentario}
+                                        error={errors.resultados_segundo_obj_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 2}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Resultados del tercer objetivo específico</h1>
+                            <h1 class="text-black">Resultados del tercer objetivo específico</h1>
 
-                    <Label class="mt-4 mb-4" labelFor="resultados_tercer_obj_puntaje" value="Puntaje (Máximo 2,5)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="resultados_tercer_obj_puntaje"
-                        type="number"
-                        input$step="0.1"
-                        input$min="0"
-                        input$max="2.5"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.resultados_tercer_obj_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿Los resultados del tercer objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario == false}
-                            <Textarea
+                            <Label class="mt-4 mb-4" labelFor="resultados_tercer_obj_puntaje" value="Puntaje (Máximo {(10 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="resultados_tercer_obj_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_comentario}
-                                error={errors.resultados_tercer_obj_comentario}
-                                required
+                                label="Puntaje"
+                                id="resultados_tercer_obj_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(10 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.resultados_tercer_obj_puntaje}
                             />
-                        {/if}
-                    </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                            <div class="mt-4">
+                                <p>¿Los resultados del tercer objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="resultados_tercer_obj_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.resultados_tercer_obj_comentario}
+                                        error={errors.resultados_tercer_obj_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
+                        {:else if j == 3}
+                            <hr class="mt-10 mb-10 border-indigo-300" />
 
-                    <h1 class="text-black">Resultados del cuarto objetivo específico</h1>
+                            <h1 class="text-black">Resultados del cuarto objetivo específico</h1>
 
-                    <Label class="mt-4 mb-4" labelFor="resultados_cuarto_obj_puntaje" value="Puntaje (Máximo 2,5)" />
-                    <Input
-                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                        label="Puntaje"
-                        id="resultados_cuarto_obj_puntaje"
-                        type="number"
-                        input$step="0.1"
-                        input$min="0"
-                        input$max="2.5"
-                        class="mt-1"
-                        bind:value={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_puntaje}
-                        placeholder="Puntaje"
-                        autocomplete="off"
-                        error={errors.resultados_cuarto_obj_puntaje}
-                    />
-
-                    <div class="mt-4">
-                        <p>¿Los resultados del cuarto objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario} />
-                        {#if $formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario == false}
-                            <Textarea
+                            <Label class="mt-4 mb-4" labelFor="resultados_cuarto_obj_puntaje" value="Puntaje (Máximo {(19 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="resultados_cuarto_obj_comentario"
-                                bind:value={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_comentario}
-                                error={errors.resultados_cuarto_obj_comentario}
-                                required
+                                label="Puntaje"
+                                id="resultados_cuarto_obj_puntaje"
+                                type="number"
+                                input$step="0.1"
+                                input$min="0"
+                                input$max={(10 / proyecto.cantidad_objetivos).toFixed(2)}
+                                class="mt-1"
+                                bind:value={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_puntaje}
+                                placeholder="Puntaje"
+                                autocomplete="off"
+                                error={errors.resultados_cuarto_obj_puntaje}
                             />
+
+                            <div class="mt-4">
+                                <p>¿Los resultados del cuarto objetivo específico son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario} />
+                                {#if $formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario == false}
+                                    <Textarea
+                                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                        label="Comentario"
+                                        class="mt-4"
+                                        maxlength="40000"
+                                        id="resultados_cuarto_obj_comentario"
+                                        bind:value={$formServicioTecnologicoEvaluacion.resultados_cuarto_obj_comentario}
+                                        error={errors.resultados_cuarto_obj_comentario}
+                                        required
+                                    />
+                                {/if}
+                            </div>
                         {/if}
-                    </div>
+                    {/each}
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}

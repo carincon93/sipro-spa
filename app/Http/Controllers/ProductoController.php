@@ -370,7 +370,7 @@ class ProductoController extends Controller
             'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion,
             'segundaEvaluacion'     => $segundaEvaluacion,
-            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
+            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'cantidad_objetivos'),
             'filters'               => request()->all('search'),
             'productos'             => Producto::whereIn(
                 'resultado_id',
