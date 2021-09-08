@@ -40,12 +40,12 @@ class IdiLongColumnRequest extends FormRequest
     {
         if ($this->columnsRules[$this->route('column')]) {
             return [
-                $this->route('column') => $this->columnsRules[$this->route('column')];
+                $this->route('column') => $this->columnsRules[$this->route('column')]
             ];
         }else{
             return [
                 'column' => 'required'
-            ]
+            ];
         }
     }
 

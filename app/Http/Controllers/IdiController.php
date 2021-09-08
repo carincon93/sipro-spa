@@ -8,6 +8,7 @@ use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
 use App\Http\Requests\IdiRequest;
+use App\Http\Requests\IdiLongColumnRequest;
 use App\Models\CentroFormacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
