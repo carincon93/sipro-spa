@@ -44,7 +44,7 @@ class ServicioTecnologicoEvaluacion extends Model
         'arbol_problemas_comentario',
         'video_comentario',
         'especificaciones_area_comentario',
-        'infraestructura_adecuada_comentario',
+
         'ortografia_comentario',
         'redaccion_comentario',
         'normas_apa_comentario',

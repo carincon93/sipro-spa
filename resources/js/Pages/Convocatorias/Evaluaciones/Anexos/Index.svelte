@@ -83,6 +83,12 @@
     let formServicioTecnologicoEvaluacion = useForm({
         anexos_comentario: evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario,
         anexos_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario == null ? true : false,
+
+        video_comentario: evaluacion.servicio_tecnologico_evaluacion?.video_comentario,
+        video_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.video_comentario == null ? true : false,
+
+        especificaciones_area_comentario: evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario,
+        especificaciones_area_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario == null ? true : false,
     })
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
@@ -93,6 +99,8 @@
             })
         }
     }
+
+    console.log(evaluacion.servicio_tecnologico_evaluacion)
 </script>
 
 <AuthenticatedLayout>
@@ -216,6 +224,37 @@
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.anexos_requiere_comentario} />
                         {#if $formServicioTecnologicoEvaluacion.anexos_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="anexos_comentario" bind:value={$formServicioTecnologicoEvaluacion.anexos_comentario} error={errors.anexos_comentario} required />
+                        {/if}
+                    </div>
+
+                    {#if segundaEvaluacion?.video_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.video_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿El video es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.video_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.video_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="video_comentario" bind:value={$formServicioTecnologicoEvaluacion.video_comentario} error={errors.video_comentario} required />
+                        {/if}
+                    </div>
+
+                    {#if segundaEvaluacion?.especificaciones_area_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.especificaciones_area_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Las especificaciones del área son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.especificaciones_area_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.especificaciones_area_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="especificaciones_area_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.especificaciones_area_comentario}
+                                error={errors.especificaciones_area_comentario}
+                                required
+                            />
                         {/if}
                     </div>
                 </InfoMessage>

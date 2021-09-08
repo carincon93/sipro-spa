@@ -37,7 +37,9 @@ class Evaluacion extends Model
         'iniciado',
         'modificable',
         'clausula_confidencialidad',
-        'justificacion_causal_rechazo'
+        'justificacion_causal_rechazo',
+        'comentarios_generales',
+        'replicas'
     ];
 
     /**
@@ -370,7 +372,6 @@ class Evaluacion extends Model
             $this->servicioTecnologicoEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->video_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->especificaciones_area_comentario != null ? $total++ : null;
-            $this->servicioTecnologicoEvaluacion->infraestructura_adecuada_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->normas_apa_comentario != null ? $total++ : null;

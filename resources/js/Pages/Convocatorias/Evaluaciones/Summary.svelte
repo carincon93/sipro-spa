@@ -89,6 +89,51 @@
                         </h1>
                     </div>
                 </div>
+            {:else if proyecto.codigo_linea_programatica == 68}
+                <div class="flex">
+                    <ul class="list-disc flex-1 pl-4">
+                        <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
+                        <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
+                        <li><strong>Antecedentes:</strong> {evaluacion.antecedentes_puntaje ? evaluacion.antecedentes_puntaje : 0}</li>
+                        <li><strong>Justificación del problema:</strong> {evaluacion.justificacion_problema_puntaje ? evaluacion.justificacion_problema_puntaje : 0}</li>
+                        <li><strong>Pregunta de formulación del problema:</strong> {evaluacion.pregunta_formulacion_problema_puntaje ? evaluacion.pregunta_formulacion_problema_puntaje : 0}</li>
+                        <li><strong>Propuesta de sostenibilidad:</strong> {evaluacion.propuesta_sostenibilidad_puntaje ? evaluacion.propuesta_sostenibilidad_puntaje : 0}</li>
+                        <li><strong>Identificación del problema:</strong> {evaluacion.identificacion_problema_puntaje ? evaluacion.identificacion_problema_puntaje : 0}</li>
+                        <li><strong>Árbol de problemas:</strong> {evaluacion.arbol_problemas_puntaje ? evaluacion.arbol_problemas_puntaje : 0}</li>
+                        <li><strong>Impacto ambiental:</strong> {evaluacion.impacto_ambiental_puntaje ? evaluacion.impacto_ambiental_puntaje : 0}</li>
+                        <li><strong>Impacto social en el centro de formación:</strong> {evaluacion.impacto_social_centro_puntaje ? evaluacion.impacto_social_centro_puntaje : 0}</li>
+                        <li><strong>Impacto social en el sector productivo:</strong> {evaluacion.impacto_social_productivo_puntaje ? evaluacion.impacto_social_productivo_puntaje : 0}</li>
+                        <li><strong>Impacto tecnológico:</strong> {evaluacion.impacto_tecnologico_puntaje ? evaluacion.impacto_tecnologico_puntaje : 0}</li>
+                        <li><strong>Objetivo general:</strong> {evaluacion.objetivo_general_puntaje ? evaluacion.objetivo_general_puntaje : 0}</li>
+                        <li><strong>Primer objetivo específico:</strong> {evaluacion.primer_objetivo_puntaje ? evaluacion.primer_objetivo_puntaje : 0}</li>
+                        <li><strong>Segundo objetivo específico:</strong> {evaluacion.segundo_objetivo_puntaje ? evaluacion.segundo_objetivo_puntaje : 0}</li>
+                        <li><strong>Tercer objetivo específico:</strong> {evaluacion.tercer_objetivo_puntaje ? evaluacion.tercer_objetivo_puntaje : 0}</li>
+                        <li><strong>Cuarto objetivo específico:</strong> {evaluacion.cuarto_objetivo_puntaje ? evaluacion.cuarto_objetivo_puntaje : 0}</li>
+                        <li><strong>Resultados del primer objetivo específico:</strong> {evaluacion.resultados_primer_obj_puntaje ? evaluacion.resultados_primer_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo objetivo específico:</strong> {evaluacion.resultados_segundo_obj_puntaje ? evaluacion.resultados_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo tercer específico:</strong> {evaluacion.resultados_tercer_obj_puntaje ? evaluacion.resultados_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo cuarto específico:</strong> {evaluacion.resultados_cuarto_obj_puntaje ? evaluacion.resultados_cuarto_obj_puntaje : 0}</li>
+                        <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
+                        <li><strong>Actividades del primer objetivo específico:</strong> {evaluacion.actividades_primer_obj_puntaje ? evaluacion.actividades_primer_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del segundo objetivo específico:</strong> {evaluacion.actividades_segundo_obj_puntaje ? evaluacion.actividades_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del tercer objetivo específico:</strong> {evaluacion.actividades_tercer_obj_puntaje ? evaluacion.actividades_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del cuarto objetivo específico:</strong> {evaluacion.actividades_cuarto_obj_puntaje ? evaluacion.actividades_cuarto_obj_puntaje : 0}</li>
+                        <li><strong>Productos del primer objetivo específico:</strong> {evaluacion.productos_primer_obj_puntaje ? evaluacion.productos_primer_obj_puntaje : 0}</li>
+                        <li><strong>Productos del segundo objetivo específico:</strong> {evaluacion.productos_segundo_obj_puntaje ? evaluacion.productos_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Productos del tercer objetivo específico:</strong> {evaluacion.productos_tercer_obj_puntaje ? evaluacion.productos_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Productos del cuarto objetivo específico:</strong> {evaluacion.productos_cuarto_obj_puntaje ? evaluacion.productos_cuarto_obj_puntaje : 0}</li>
+
+                        <li><strong>Análisis de riesgos a nivel de objetivo general:</strong> {evaluacion.riesgos_objetivo_general_puntaje ? evaluacion.riesgos_objetivo_general_puntaje : 0}</li>
+                        <li><strong>Análisis de riesgos a nivel de productos:</strong> {evaluacion.riesgos_productos_puntaje ? evaluacion.riesgos_productos_puntaje : 0}</li>
+                        <li><strong>Análisis de riesgos a nivel de actividades:</strong> {evaluacion.riesgos_actividades_puntaje ? evaluacion.riesgos_actividades_puntaje : 0}</li>
+                    </ul>
+                    <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                        <h1 class="text-2xl">
+                            <strong>Puntaje total:</strong>
+                            {evaluacion.total_evaluacion}
+                        </h1>
+                    </div>
+                </div>
             {/if}
         </InfoMessage>
 

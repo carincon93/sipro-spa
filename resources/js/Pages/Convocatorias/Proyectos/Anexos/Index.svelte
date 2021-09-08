@@ -102,6 +102,20 @@
                                 <ul class="list-disc pl-4">
                                     <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
                                 </ul>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Video</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
+                                </ul>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Especificaciones del área</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
+                                </ul>
                             {/if}
                         </div>
                     {/if}

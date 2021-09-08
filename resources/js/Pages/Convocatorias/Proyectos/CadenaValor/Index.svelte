@@ -169,6 +169,21 @@
                         <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.cadena_valor_comentario ? evaluacion.idi_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
                     {:else if evaluacion.ta_evaluacion}
                         <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.cadena_valor_comentario ? evaluacion.ta_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.servicio_tecnologico_evaluacion}
+                        <hr class="mt-10 mb-10 border-black-200" />
+                        <h1 class="font-black">Propuesta de sostenibilidad</h1>
+
+                        <p class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario ? 'Recomendación: ' + evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_comentario : 'Sin recomendación'}</p>
+
+                        <hr class="mt-10 mb-10 border-black-200" />
+                        <h1 class="font-black">Impactos</h1>
+
+                        <ul class="list-disc pl-4">
+                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario ? 'Recomendación impacto ambiental: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_comentario : 'Sin recomendación'}</li>
+                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario ? 'Recomendación impacto social en el centro de formación: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_comentario : 'Sin recomendación'}</li>
+                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario ? 'Recomendación impacto social en el sector productivo: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_comentario : 'Sin recomendación'}</li>
+                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario ? 'Recomendación impacto tecnológico: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_comentario : 'Sin recomendación'}</li>
+                        </ul>
                     {/if}
                 </div>
             {/if}

@@ -895,12 +895,15 @@
                     <h1>Criterios de evaluacion</h1>
                     <ul class="list-disc p-4">
                         <li>
-                            <strong>Puntaje: 0 a {(8 / proyecto.cantidad_objetivos).toFixed(2)}</strong> Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas. La redacción de los objetivos específicos deberá iniciar con un verbo en modo infinitivo, es decir,
-                            con una palabra terminada en ""ar"", ""er"" o ""ir"". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos. Nota: A continuación, se describen algunos errores comunes al momento de estructurar los objetivos específicos: -
-                            Describir los objetivos específicos del proyecto de forma demasiado amplia, es decir, los objetivos específicos parecen objetivos generales. - Confundir los objetivos específicos con las actividades del proyecto. Es decir, utilizar verbos que hacen referencia a aspectos demasiado operativos para describir los objetivos específicos de la iniciativa, por ejemplo: contratar,
-                            instalar, entre otros.
+                            <strong>Puntaje: 0 a {proyecto.cantidad_objetivos > 0 ? (8 / proyecto.cantidad_objetivos).toFixed(2) : 0}</strong> Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas. La redacción de los objetivos específicos deberá iniciar con
+                            un verbo en modo infinitivo, es decir, con una palabra terminada en ""ar"", ""er"" o ""ir"". La estructura del objetivo debe contener al menos tres componentes: (1) la acción que se espera realizar, (2) el objeto sobre el cual recae la acción y (3) elementos adicionales de contexto o descriptivos. Nota: A continuación, se describen algunos errores comunes al momento de estructurar
+                            los objetivos específicos: - Describir los objetivos específicos del proyecto de forma demasiado amplia, es decir, los objetivos específicos parecen objetivos generales. - Confundir los objetivos específicos con las actividades del proyecto. Es decir, utilizar verbos que hacen referencia a aspectos demasiado operativos para describir los objetivos específicos de la iniciativa,
+                            por ejemplo: contratar, instalar, entre otros.
                         </li>
                     </ul>
+                    {#if proyecto.cantidad_objetivos == 0}
+                        <InfoMessage class="mt-10" alertMsg={true}>Este proyecto no tiene objetivos específicos generados. No se puede evaluar</InfoMessage>
+                    {/if}
                     {#each { length: proyecto.cantidad_objetivos } as _empty, j}
                         {#if j == 0}
                             <h1 class="text-black">Primer objetivo específico</h1>
@@ -1058,11 +1061,14 @@
                     <h1>Criterios de evaluacion</h1>
                     <ul class="list-disc p-4">
                         <li>
-                            <strong>Puntaje: 0 a 2,5</strong> Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.
+                            <strong>Puntaje: 0 a {proyecto.cantidad_objetivos > 0 ? (10 / proyecto.cantidad_objetivos).toFixed(2) : 0}</strong> Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.
                             <br />
                             Nota: Los resultados son, en contraste, intangibles, tales como conocimientos y habilidades nuevas, compromisos adquiridos, etc.
                         </li>
                     </ul>
+                    {#if proyecto.cantidad_objetivos == 0}
+                        <InfoMessage class="mt-10" alertMsg={true}>Este proyecto no tiene objetivos específicos generados. No se puede evaluar</InfoMessage>
+                    {/if}
                     {#each { length: proyecto.cantidad_objetivos } as _empty, j}
                         {#if j == 0}
                             <h1 class="text-black">Resultados del primer objetivo específico</h1>
@@ -1178,7 +1184,7 @@
 
                             <h1 class="text-black">Resultados del cuarto objetivo específico</h1>
 
-                            <Label class="mt-4 mb-4" labelFor="resultados_cuarto_obj_puntaje" value="Puntaje (Máximo {(19 / proyecto.cantidad_objetivos).toFixed(2)})" />
+                            <Label class="mt-4 mb-4" labelFor="resultados_cuarto_obj_puntaje" value="Puntaje (Máximo {(10 / proyecto.cantidad_objetivos).toFixed(2)})" />
                             <Input
                                 disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
                                 label="Puntaje"

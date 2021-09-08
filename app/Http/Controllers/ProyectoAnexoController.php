@@ -268,7 +268,9 @@ class ProyectoAnexoController extends Controller
                 break;
             case $evaluacion->servicioTecnologicoEvaluacion()->exists():
                 $evaluacion->servicioTecnologicoEvaluacion()->update([
-                    'anexos_comentario'   => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null
+                    'anexos_comentario'                     => $request->anexos_requiere_comentario == false ? $request->anexos_comentario : null,
+                    'video_comentario'                      => $request->video_requiere_comentario == false ? $request->video_comentario : null,
+                    'especificaciones_area_comentario'      => $request->especificaciones_area_requiere_comentario == false ? $request->especificaciones_area_comentario : null,
                 ]);
                 break;
             default:

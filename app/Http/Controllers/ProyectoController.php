@@ -460,6 +460,43 @@ class ProyectoController extends Controller
                 $evaluacion->redaccion_puntaje          = $evaluacion->culturaInnovacionEvaluacion->redaccion_puntaje;
                 $evaluacion->normas_apa_puntaje         = $evaluacion->culturaInnovacionEvaluacion->normas_apa_puntaje;
                 break;
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->titulo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->titulo_puntaje;
+                $evaluacion->resumen_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resumen_puntaje;
+                $evaluacion->antecedentes_puntaje = $evaluacion->servicioTecnologicoEvaluacion->antecedentes_puntaje;
+                $evaluacion->justificacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->justificacion_problema_puntaje;
+                $evaluacion->pregunta_formulacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->pregunta_formulacion_problema_puntaje;
+                $evaluacion->propuesta_sostenibilidad_puntaje = $evaluacion->servicioTecnologicoEvaluacion->propuesta_sostenibilidad_puntaje;
+                $evaluacion->identificacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->identificacion_problema_puntaje;
+                $evaluacion->arbol_problemas_puntaje = $evaluacion->servicioTecnologicoEvaluacion->arbol_problemas_puntaje;
+                $evaluacion->impacto_ambiental_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_ambiental_puntaje;
+                $evaluacion->impacto_social_centro_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_social_centro_puntaje;
+                $evaluacion->impacto_social_productivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_social_productivo_puntaje;
+                $evaluacion->impacto_tecnologico_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_tecnologico_puntaje;
+                $evaluacion->objetivo_general_puntaje = $evaluacion->servicioTecnologicoEvaluacion->objetivo_general_puntaje;
+                $evaluacion->primer_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->primer_objetivo_puntaje;
+                $evaluacion->segundo_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->segundo_objetivo_puntaje;
+                $evaluacion->tercer_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->tercer_objetivo_puntaje;
+                $evaluacion->cuarto_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->cuarto_objetivo_puntaje;
+                $evaluacion->resultados_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_primer_obj_puntaje;
+                $evaluacion->resultados_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_segundo_obj_puntaje;
+                $evaluacion->resultados_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_tercer_obj_puntaje;
+                $evaluacion->resultados_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_cuarto_obj_puntaje;
+                $evaluacion->metodologia_puntaje = $evaluacion->servicioTecnologicoEvaluacion->metodologia_puntaje;
+                $evaluacion->actividades_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_primer_obj_puntaje;
+                $evaluacion->actividades_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_segundo_obj_puntaje;
+                $evaluacion->actividades_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_tercer_obj_puntaje;
+                $evaluacion->actividades_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_cuarto_obj_puntaje;
+                $evaluacion->productos_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_primer_obj_puntaje;
+                $evaluacion->productos_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_segundo_obj_puntaje;
+                $evaluacion->productos_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_tercer_obj_puntaje;
+                $evaluacion->productos_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_cuarto_obj_puntaje;
+
+                $evaluacion->riesgos_objetivo_general_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_objetivo_general_puntaje;
+                $evaluacion->riesgos_productos_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_productos_puntaje;
+                $evaluacion->riesgos_actividades_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_actividades_puntaje;
+
+                break;
             default:
                 break;
         }
@@ -996,5 +1033,43 @@ class ProyectoController extends Controller
     public function descargarPdf(Convocatoria $convocatoria, Proyecto $proyecto, $version)
     {
         return response()->download(storage_path("app/convocatorias/" . $convocatoria->id . "/" . $proyecto->id . "/" . $version . ".pdf"));
+    }
+
+    /**
+     * showComentariosGeneralesForm
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function showComentariosGeneralesForm(Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'evaluaciones'                  => $proyecto->evaluaciones,
+            'proyecto'                      => $proyecto,
+        ]);
+    }
+
+    /**
+     * udpdateComentariosGenerales
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-proyecto-autor', $evaluacion->proyecto);
+
+        $evaluacion->update(
+            ['evaluacion_id' => $evaluacion->id, 'replicas' => $request->replicas],
+        );
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

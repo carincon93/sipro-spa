@@ -212,6 +212,13 @@ class EvaluacionController extends Controller
         }
     }
 
+    /**
+     * editCausalRechazo
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
     public function editCausalRechazo(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
@@ -226,8 +233,18 @@ class EvaluacionController extends Controller
         ]);
     }
 
+    /**
+     * updateCausalRechazo
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
     public function updateCausalRechazo(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         $evaluacion->evaluacionCausalesRechazo()->delete();
         $evaluacion->update(['justificacion_causal_rechazo' => $request->justificacion_causal_rechazo]);
         foreach ($request->causal_rechazo as $causalRechazo) {
@@ -235,6 +252,44 @@ class EvaluacionController extends Controller
                 ['evaluacion_id' => $evaluacion->id, 'causal_rechazo' => $causalRechazo],
             );
         }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * showComentariosGeneralesForm
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function showComentariosGeneralesForm(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', 'comentarios_generales', 'replicas'),
+            'proyecto'                      => $evaluacion->proyecto,
+        ]);
+    }
+
+    /**
+     * udpdateComentariosGenerales
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->update(
+            ['evaluacion_id' => $evaluacion->id, 'comentarios_generales' => $request->comentarios_generales],
+        );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

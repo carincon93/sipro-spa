@@ -496,6 +496,7 @@ class Proyecto extends Model
         foreach ($this->causasDirectas as $causaDirecta) {
             strlen($causaDirecta->objetivoEspecifico->descripcion) > 10 ? $numeroObjetivos++ : null;
         }
+
         return $numeroObjetivos;
     }
 

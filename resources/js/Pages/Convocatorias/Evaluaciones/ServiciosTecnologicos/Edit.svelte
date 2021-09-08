@@ -235,39 +235,39 @@
         <fieldset disabled>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
+                    <Label class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
                 </div>
                 <div>
-                    <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={servicioTecnologicoInfo.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+                    <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={servicioTecnologicoInfo.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" />
                 </div>
             </div>
 
             {#if servicioTecnologicoInfo.tipo_proyecto_st_id}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
+                        <Label class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
                     </div>
                     <div>
-                        <DynamicList id="estado_sistema_gestion_id" bind:value={servicioTecnologicoInfo.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', servicioTecnologicoInfo.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} required />
+                        <DynamicList id="estado_sistema_gestion_id" bind:value={servicioTecnologicoInfo.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', servicioTecnologicoInfo.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} />
                     </div>
                 </div>
             {/if}
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
+                    <Label class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
                 </div>
                 <div>
-                    <Select id="sector_productivo" items={sectoresProductivos} bind:selectedValue={servicioTecnologicoInfo.sector_productivo} error={errors.sector_productivo} autocomplete="off" placeholder="Seleccione una sector" required />
+                    <Select id="sector_productivo" items={sectoresProductivos} bind:selectedValue={servicioTecnologicoInfo.sector_productivo} error={errors.sector_productivo} autocomplete="off" placeholder="Seleccione una sector" />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
+                    <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="linea_programatica_id" bind:value={servicioTecnologicoInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                    <DynamicList id="linea_programatica_id" bind:value={servicioTecnologicoInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
                 </div>
             </div>
         </fieldset>
@@ -562,10 +562,10 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
+                <Label class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
             </div>
             <div>
-                <SelectMulti id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" required />
+                <SelectMulti id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacion?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -582,10 +582,10 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
+                <Label class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
             </div>
             <div>
-                <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={servicioTecnologicoInfo.zona_influencia} required />
+                <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={servicioTecnologicoInfo.zona_influencia} />
             </div>
         </div>
 

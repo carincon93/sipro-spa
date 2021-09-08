@@ -135,6 +135,12 @@
     {/if}
 
     <div class="w-10/12 step">
+        <a use:inertia active={route().current('convocatorias.evaluaciones.comentarios-generales-form')} href={route('convocatorias.evaluaciones.comentarios-generales-form', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+            <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
+            <p class="text-sm text-center">Comentarios generales</p>
+        </a>
+    </div>
+    <div class="w-10/12 step">
         <a use:inertia active={route().current('convocatorias.evaluaciones.summary')} href={route('convocatorias.evaluaciones.summary', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
             <p class="text-sm text-center">Finalizar evaluación</p>
