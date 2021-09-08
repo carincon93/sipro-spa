@@ -48,25 +48,24 @@
 
     <form on:submit|preventDefault={submit}>
         <div class="mt-28">
-            <InfoMessage>Este es un espacio para que realice comentarios generales del proyecto. También podrá responder a las replicas del formulador una vez finalice la fase de subsanación.</InfoMessage>
-            <div class="mt-8 mb-8">
+            <!-- <div class="mt-8 mb-8">
                 <Label labelFor="comentarios_generales" value="Comentarios" />
 
                 <Textarea maxlength="40000" id="comentarios_generales" error={errors.comentarios_generales} bind:value={$form.comentarios_generales} />
             </div>
 
-            <hr class="mt-10 mb-10 border-black-200" />
+            <hr class="mt-10 mb-10 border-black-200" /> -->
 
-            <h1>Replicas del formulador</h1>
+            <h1 class="font-black mb-10">Comentarios del formulador</h1>
 
             <p class="whitespace-pre-line">
                 {evaluacion.replicas ? evaluacion.replicas : 'Sin información registrada'}
             </p>
         </div>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <!-- <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
-        </div>
+        </div> -->
     </form>
 </AuthenticatedLayout>

@@ -638,7 +638,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/comentarios-generales', [ProyectoController::class, 'showComentariosGeneralesForm'])->name('convocatorias.proyectos.comentarios-generales-form');
-    Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/comentarios-generales', [ProyectoController::class, 'udpdateComentariosGenerales'])->name('convocatorias.proyectos.update-comentarios-generales');
+    Route::post('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/comentarios-generales', [ProyectoController::class, 'udpdateComentariosGenerales'])->name('convocatorias.proyectos.update-comentarios-generales');
 
     /**
      * Muestra el árbol de objetivos

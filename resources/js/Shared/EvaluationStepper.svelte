@@ -1,6 +1,6 @@
 <script>
-    import { inertia } from '@inertiajs/inertia-svelte'
-    import { route } from '@/Utils'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { onMount } from 'svelte'
 
@@ -17,6 +17,12 @@
             steps[i].textContent = i + 1
         }
     })
+
+    /**
+     * Permisos
+     */
+    let authUser = $page.props.auth.user
+    let isSuperAdmin = checkRole(authUser, [1])
 </script>
 
 <!-- Stepper -->
@@ -134,12 +140,15 @@
         </div>
     {/if}
 
-    <div class="w-10/12 step">
-        <a use:inertia active={route().current('convocatorias.evaluaciones.comentarios-generales-form')} href={route('convocatorias.evaluaciones.comentarios-generales-form', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
-            <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
-            <p class="text-sm text-center">Comentarios generales</p>
-        </a>
-    </div>
+    {#if isSuperAdmin || convocatoria.fase == 4}
+        <div class="w-10/12 step">
+            <a use:inertia active={route().current('convocatorias.evaluaciones.comentarios-generales-form')} href={route('convocatorias.evaluaciones.comentarios-generales-form', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
+                <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
+                <p class="text-sm text-center">Comentarios generales</p>
+            </a>
+        </div>
+    {/if}
+
     <div class="w-10/12 step">
         <a use:inertia active={route().current('convocatorias.evaluaciones.summary')} href={route('convocatorias.evaluaciones.summary', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />

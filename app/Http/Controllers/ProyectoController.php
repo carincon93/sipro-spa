@@ -1062,8 +1062,10 @@ class ProyectoController extends Controller
      * @param  mixed $evaluacion
      * @return void
      */
-    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, $evaluacion)
     {
+        $evaluacion = Evaluacion::find($evaluacion);
+
         $this->authorize('modificar-proyecto-autor', $evaluacion->proyecto);
 
         $evaluacion->update(
