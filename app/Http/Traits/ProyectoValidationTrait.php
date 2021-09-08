@@ -158,6 +158,10 @@ trait ProyectoValidationTrait
     public static function resultados(Proyecto $proyecto)
     {
         $countResultado = 0;
+
+        if ($proyecto->lineaProgramatica->codigo == 68) {
+            return true;
+        }
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 if ($efectoDirecto->descripcion != '' && $resultado->descripcion == '') {
