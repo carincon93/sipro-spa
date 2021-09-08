@@ -105,7 +105,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-8 mb-8">
-                    <Label class="text-center" required value="Fecha de entrega del producto" />
+                    <Label class="text-center" required value="Fecha de ejecución" />
                     <div class="mt-4 flex items-start justify-around">
                         <div class="mt-4 flex">
                             <Label labelFor="fecha_inicio" value="Del" />
@@ -128,7 +128,7 @@
                 <hr />
 
                 <div class="mt-8">
-                    {#if $form.tatp_servicio_tecnologico == true}
+                    {#if $form.tatp_servicio_tecnologico}
                         <InfoMessage>
                             <p>
                                 Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
@@ -143,20 +143,23 @@
                     {/if}
                     <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
+
                 <div class="mt-8">
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                <div class="mt-8">
-                    <Label required labelFor="indicador" value="Indicador" />
+                {#if typeof proyecto.servicio_tecnologico != 'object'}
+                    <div class="mt-8">
+                        <Label required labelFor="indicador" value="Indicador" />
 
-                    {#if $form.tatp_servicio_tecnologico == true}
-                        <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
-                    {:else}
-                        <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
-                    {/if}
-                    <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
-                </div>
+                        {#if $form.tatp_servicio_tecnologico == true}
+                            <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                        {:else}
+                            <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                        {/if}
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                    </div>
+                {/if}
 
                 {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
@@ -186,6 +189,7 @@
                         <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
+
                 {#if proyecto.servicio_tecnologico}
                     <div class="mt-8">
                         <Label required labelFor="nombre_indicador" value="Nombre del Indicador del producto" />
@@ -195,12 +199,12 @@
                     </div>
 
                     <div class="mt-8">
-                        <Label required labelFor="formula_indicador" value="Fórmula del Indicador del producto" />
+                        <Label required labelFor="indicador" value="Fórmula del Indicador del producto" />
 
                         <InfoMessage
                             message="El método de cálculo debe ser una expresión matemática definida de manera adecuada y de fácil comprensión, es decir, deben quedar claras cuáles son las variables utilizadas. Los métodos de cálculo más comunes son el porcentaje, la tasa de variación, la razón y el número índice. Aunque éstos no son las únicas expresiones para los indicadores, sí son las más frecuentes."
                         />
-                        <Textarea maxlength="40000" id="formula_indicador" error={errors.formula_indicador} bind:value={$form.formula_indicador} required />
+                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 
@@ -210,33 +214,18 @@
                         <Label required class="mb-4" labelFor="actividad_id" value="Relacione alguna actividad" />
                         <InputError message={errors.actividad_id} />
                     </div>
-                    {#if isSuperAdmin || proyecto.modificable == true}
-                        <div class="grid grid-cols-2">
-                            {#each actividades as { id, descripcion }, i}
-                                <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
+                    <div class="grid grid-cols-2">
+                        {#each actividades as { id, descripcion }, i}
+                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
 
-                                <div class="border-b border-t flex items-center justify-center">
-                                    <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
-                                </div>
-                            {/each}
-
-                            {#if actividades.length == 0}
-                                <p class="p-4">Sin información registrada</p>
-                            {/if}
-                        </div>
-                    {:else}
-                        <div class="p-2">
-                            <ul class="list-disc p-4">
-                                {#each actividades as { id, descripcion }, i}
-                                    {#each $form.actividad_id as actividad}
-                                        {#if id == actividad}
-                                            <li class="first-letter-uppercase mb-4">{descripcion}</li>
-                                        {/if}
-                                    {/each}
-                                {/each}
-                            </ul>
-                        </div>
-                    {/if}
+                            <div class="border-b border-t flex items-center justify-center">
+                                <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
+                            </div>
+                        {/each}
+                        {#if actividades.length == 0}
+                            <p class="p-4">Sin información registrada</p>
+                        {/if}
+                    </div>
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
