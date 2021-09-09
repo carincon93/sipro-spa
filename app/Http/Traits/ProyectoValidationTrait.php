@@ -158,6 +158,10 @@ trait ProyectoValidationTrait
     public static function resultados(Proyecto $proyecto)
     {
         $countResultado = 0;
+
+        if ($proyecto->lineaProgramatica->codigo == 68) {
+            return true;
+        }
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 if ($efectoDirecto->descripcion != '' && $resultado->descripcion == '') {
@@ -467,6 +471,25 @@ trait ProyectoValidationTrait
         $countSoportes = 0;
         foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
             if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->soportesEstudioMercado()->count() < 2) {
+                $countSoportes++;
+            }
+        }
+
+        return $countSoportes > 0 ? false : true;
+    }
+
+    /**
+     * 
+     * Valida que los estudios de mercado tengan al menos dos soportes
+     * 
+     * @param  mixed $proyecto
+     * @return bool
+     */
+    public static function estudiosMercadoArchivo(Proyecto $proyecto)
+    {
+        $countSoportes = 0;
+        foreach ($proyecto->proyectoPresupuesto as $presupuesto) {
+            if ($presupuesto->convocatoriaPresupuesto->presupuestoSennova->requiere_estudio_mercado && $presupuesto->formato_estudio_mercado == null) {
                 $countSoportes++;
             }
         }

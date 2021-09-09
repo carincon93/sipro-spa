@@ -294,7 +294,10 @@
         }
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
         resultadosFiltrados = resultados.filter((item) => item.objetivo_especifico_id == objetivoEspecifico)
+        resultadosFiltrados = resultadosFiltrados.filter((item) => item.label != null)
     }
+
+    // typeof resultadosFiltrados.find((item) => item.label == null) == 'object'
 
     function submitActividad() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
@@ -764,17 +767,13 @@
                 </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
-                        {#if typeof resultadosFiltrados.find((item) => item.label == null) == 'object'}
-                            <InfoMessage message="Faltan resultados por definir" alertMsg={true} />
-                        {:else}
-                            <div>
-                                <Label labelFor="resultado_id" value="Resultado" />
-                                <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
-                            </div>
-                            <div class="mt-8">
-                                <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
-                            </div>
-                        {/if}
+                        <div>
+                            <Label labelFor="resultado_id" value="Resultado" />
+                            <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                        </div>
+                        <div class="mt-8">
+                            <Textarea label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                        </div>
                     </fieldset>
                 </form>
             {:else if showObjetivoEspecificoForm}

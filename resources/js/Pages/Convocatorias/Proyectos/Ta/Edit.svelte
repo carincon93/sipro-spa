@@ -105,6 +105,10 @@
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
         dis_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+
+        otras_nuevas_instituciones: ta.otras_nuevas_instituciones,
+        otras_nombre_instituciones_programas: ta.otras_nombre_instituciones_programas,
+        otras_nombre_instituciones: ta.otras_nombre_instituciones,
     })
 
     let regionalIEArticulacion
@@ -359,7 +363,7 @@
                         <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                        <Textarea label="Resumen del proyecto" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                     </div>
                 </div>
             </fieldset>
@@ -398,7 +402,7 @@
                         />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                     </div>
                 </div>
             </fieldset>
@@ -433,7 +437,7 @@
                         <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
                     </div>
                 </div>
             </fieldset>
@@ -468,7 +472,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
                 </div>
             </div>
 
@@ -479,7 +483,7 @@
                         <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                        <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                     </div>
                 </div>
             </fieldset>
@@ -507,7 +511,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea label="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
@@ -540,6 +544,10 @@
                     <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
                     <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required />
+                    <div class="mt-10">
+                        <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                        <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nombre_instituciones_programas" error={errors.otras_nombre_instituciones_programas} bind:value={$form.otras_nombre_instituciones_programas} />
+                    </div>
                 </div>
             </div>
 
@@ -561,6 +569,10 @@
                         <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
                         <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                        <div class="mt-10">
+                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                            <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nuevas_instituciones" error={errors.otras_nuevas_instituciones} bind:value={$form.otras_nuevas_instituciones} />
+                        </div>
                     </div>
                 </div>
             {/if}
@@ -583,6 +595,10 @@
                         <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
 
                         <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                        <div class="mt-10">
+                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                            <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nombre_instituciones" error={errors.otras_nombre_instituciones} bind:value={$form.otras_nombre_instituciones} />
+                        </div>
                     </div>
                 </div>
             {/if}
@@ -629,7 +645,7 @@
                     <Label required class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$form.articulacion_centro_formacion} required />
+                    <Textarea label="Articulación con el centro de formación" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$form.articulacion_centro_formacion} required />
                 </div>
             </div>
 
@@ -856,7 +872,7 @@
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
                     <div>
                         <Label required class="mb-4" labelFor="nombre" value="Nombre del programa" />
-                        <Textarea maxlength="40000" id="nombre" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
+                        <Textarea label="" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
                     </div>
                 </fieldset>
             </form>

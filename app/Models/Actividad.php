@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -173,18 +174,29 @@ class Actividad extends Model
         return date('d', strtotime($this->fecha_finalizacion));
     }
 
+    public function getDiffDaysAttribute()
+    {
+        return Carbon::parse($this->fecha_inicio)->diffInMonths($this->fecha_finalizacion);
+    }
+
     public function getCostoActividadAttribute()
     {
         $total = 0;
 
         foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
-            $total += $proyectoPresupuesto->valor_total;
+            $total += $proyectoPresupuesto->getTotalPresupuestoActividadesSennova();
         }
 
         foreach ($this->proyectoRolesSennova as $proyectoRol) {
-            $total += $proyectoRol->getTotalRolSennova();
+            if ($proyectoRol->convocatoriaRolSennova->rolSennova->id != 3)
+                $total += $proyectoRol->getTotalRolActividadesSennova();
         }
 
-        return $total;
+        // $diffDays = $this->getDiffDaysAttribute();
+        // if ($diffDays > 0) {
+        //     $total = $total / $diffDays;
+        // }
+
+        return round($total);
     }
 }

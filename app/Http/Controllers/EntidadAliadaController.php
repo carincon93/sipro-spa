@@ -288,6 +288,51 @@ class EntidadAliadaController extends Controller
             }
 
             $entidadAliada->actividades()->sync($request->actividad_id);
+        } elseif ($proyecto->idi()->exists()) {
+            $request->validate([
+                'descripcion_convenio'                      => 'nullable|string',
+                'grupo_investigacion'                       => 'nullable|max:191',
+                'codigo_gruplac'                            => 'nullable|max:191',
+                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'actividades_transferencia_conocimiento'    => 'required|max:10000',
+                'carta_intencion'                           => 'required|max:10000000|file|mimetypes:application/pdf',
+                'carta_propiedad_intelectual'               => 'required|max:10000000|file|mimetypes:application/pdf',
+                'recursos_especie'                          => 'required|numeric',
+                'descripcion_recursos_especie'              => 'required|string',
+                'recursos_dinero'                           => 'required|numeric',
+                'descripcion_recursos_dinero'               => 'required|string',
+                'actividad_id*'                             => 'required|min:0|max:2147483647|integer|exists:actividades,id',
+            ]);
+
+            $entidadAliadaIdi = new EntidadAliadaIdi();
+            $entidadAliadaIdi->descripcion_convenio                     = $request->descripcion_convenio;
+            $entidadAliadaIdi->grupo_investigacion                      = $request->grupo_investigacion;
+            $entidadAliadaIdi->codigo_gruplac                           = $request->codigo_gruplac;
+            $entidadAliadaIdi->enlace_gruplac                           = $request->enlace_gruplac;
+            $entidadAliadaIdi->actividades_transferencia_conocimiento   = $request->actividades_transferencia_conocimiento;
+            $entidadAliadaIdi->recursos_especie                         = $request->recursos_especie;
+            $entidadAliadaIdi->descripcion_recursos_especie             = $request->descripcion_recursos_especie;
+            $entidadAliadaIdi->recursos_dinero                          = $request->recursos_dinero;
+            $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
+
+            $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
+            $rutaCartaIntencion          = $request->carta_intencion->storeAs(
+                'cartas-intencion',
+                $nombreArchivoCartaIntencion
+            );
+            $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
+
+            $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
+            $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
+                'cartas-propiedad-intelectual',
+                $nombreArchivoPropiedadIntelectual
+            );
+
+            $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
+
+            $entidadAliada->actividades()->attach($request->actividad_id);
+
+            $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
         } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
                 'soporte_convenio'              => 'nullable|max:10000000|file|mimetypes:application/pdf',

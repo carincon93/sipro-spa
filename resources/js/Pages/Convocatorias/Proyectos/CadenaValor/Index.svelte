@@ -80,6 +80,7 @@
         if (objetivos['Sexto objetivo específico']) {
             data.addRows([[{ v: 'Sexto objetivo específico', f: '<strong>Sexto objetivo específico</strong><div>' + objetivos['Sexto objetivo específico'] + '</div>' }, 'Objetivo general', 'Sexto objetivo específico']])
         }
+        let totalProyecto = 0
         productos.map((producto) => {
             data.addRows([[{ v: producto.v, f: '<strong>Producto</strong><div>' + producto.f + '</div>' }, producto.fkey, producto.tooltip]])
             producto.actividades.map((actividad) => {
@@ -93,7 +94,7 @@
                         actividad.descripcion,
                     ],
                 ])
-
+                totalProyecto += actividad.costo_actividad
                 data.addRows([[{ v: 'cost' + producto.v + actividad.id, f: '<strong>Costo</strong><div>$ ' + new Intl.NumberFormat('de-DE').format(!isNaN(actividad.costo_actividad) ? actividad.costo_actividad : 0) + ' COP</div>' }, 'act' + producto.v + actividad.id, new Intl.NumberFormat('de-DE').format(!isNaN(actividad.costo_actividad) ? actividad.costo_actividad : 0)]])
             })
         })
@@ -104,6 +105,8 @@
             // Draw the chart, setting the allowHtml option to true for the tooltips.
             chart.draw(data, options)
         }
+
+        console.log(totalProyecto)
     }
 </script>
 

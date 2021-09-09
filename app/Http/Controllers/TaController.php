@@ -243,6 +243,10 @@ class TaController extends Controller
         $ta->proyeccion_nuevas_instituciones    = $request->proyeccion_nuevas_instituciones;
         $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
 
+        $ta->otras_nuevas_instituciones = $request->otras_nuevas_instituciones;
+        $ta->otras_nombre_instituciones_programas = $request->otras_nombre_instituciones_programas;
+        $ta->otras_nombre_instituciones = $request->otras_nombre_instituciones;
+
         $ta->proyecto->municipios()->sync($request->municipios);
         $ta->proyecto->municipiosAImpactar()->sync($request->municipios_impactar);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);

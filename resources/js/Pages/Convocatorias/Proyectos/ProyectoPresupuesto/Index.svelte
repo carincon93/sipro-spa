@@ -28,8 +28,6 @@
     let filters = {
         presupuestos: $page.props.filters.presupuestos,
     }
-
-    console.log(proyectoPresupuesto)
 </script>
 
 <AuthenticatedLayout>

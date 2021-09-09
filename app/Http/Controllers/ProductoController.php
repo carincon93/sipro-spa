@@ -99,8 +99,10 @@ class ProductoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->idi;
+        $proyecto->culturaInnovacion;
         $proyecto->ta;
         $proyecto->tp;
+        $proyecto->servicioTecnologico;
 
         $proyectoId = $proyecto->id;
 

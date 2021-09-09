@@ -30,4 +30,18 @@ class ReglaRolCulturaRequest extends FormRequest
             'experto_tematico'     => ['required', 'min:0', 'max:32767', 'integer'],
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->centro_formacion_id)) {
+            $this->merge([
+                'centro_formacion_id' => $this->centro_formacion_id['value'],
+            ]);
+        }
+    }
 }

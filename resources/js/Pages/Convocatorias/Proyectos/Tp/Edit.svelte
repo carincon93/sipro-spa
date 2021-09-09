@@ -233,7 +233,7 @@
                     <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea label="Resumen del proyecto" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
 
@@ -271,7 +271,7 @@
                         />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
                     </div>
                 </div>
             </fieldset>
@@ -358,7 +358,7 @@
                         <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                     </div>
                     <div>
-                        <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                        <Textarea label="" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
                     </div>
                 </div>
             </fieldset>
@@ -377,7 +377,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea label="Descripción del beneficio en los municipios" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
                 </div>
             </div>
 
