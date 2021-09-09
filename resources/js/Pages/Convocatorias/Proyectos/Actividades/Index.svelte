@@ -84,8 +84,12 @@
                             </div>
                             {#if evaluacion.idi_evaluacion}
                                 <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.metodologia_comentario ? evaluacion.idi_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.cultura_innovacion_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.metodologia_comentario ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
                             {:else if evaluacion.ta_evaluacion}
                                 <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.metodologia_comentario ? evaluacion.ta_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.tp_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.metodologia_comentario ? evaluacion.tp_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
                             {:else if evaluacion.servicio_tecnologico_evaluacion}
                                 <h1 class="font-black mt-10">Metodología</h1>
 
@@ -136,6 +140,8 @@
                         </div>
                         {#if evaluacion.idi_evaluacion}
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.actividades_comentario ? evaluacion.idi_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.cultura_innovacion_evaluacion}
+                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.actividades_comentario ? evaluacion.cultura_innovacion_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
                         {/if}
                     </div>
                 {/if}

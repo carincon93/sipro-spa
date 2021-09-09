@@ -450,6 +450,14 @@
                         <h1 class="font-black">Resultados</h1>
 
                         <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.resultados_comentario ? evaluacion.idi_evaluacion.resultados_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.cultura_innovacion_evaluacion}
+                        <h1 class="font-black mt-10">Objetivos</h1>
+                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.objetivos_comentario ? evaluacion.cultura_innovacion_evaluacion.objetivos_comentario : 'Sin recomendación'}</p>
+
+                        <hr class="mt-10 mb-10 border-black-200" />
+                        <h1 class="font-black">Resultados</h1>
+
+                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.resultados_comentario ? evaluacion.cultura_innovacion_evaluacion.resultados_comentario : 'Sin recomendación'}</p>
                     {:else if evaluacion.servicio_tecnologico_evaluacion}
                         <h1 class="font-black mt-10">Objetivo general</h1>
 
@@ -473,6 +481,10 @@
                             <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.resultados_tercer_obj_comentario ? 'Recomendación resultados del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.resultados_tercer_obj_comentario : 'Sin recomendación'}</li>
                             <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.resultados_cuarto_obj_comentario ? 'Recomendación resultados del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.resultados_cuarto_obj_comentario : 'Sin recomendación'}</li>
                         </ul>
+                    {:else if evaluacion.ta_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.arbol_objetivos_comentario ? evaluacion.ta_evaluacion.arbol_objetivos_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.tp_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.arbol_objetivos_comentario ? evaluacion.tp_evaluacion.arbol_objetivos_comentario : 'Sin recomendación'}</p>
                     {/if}
                 </div>
             {/if}

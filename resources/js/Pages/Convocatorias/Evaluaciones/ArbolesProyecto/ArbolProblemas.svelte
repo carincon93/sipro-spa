@@ -321,9 +321,9 @@
     }
 
     let formServicioTecnologicoEvaluacion = useForm({
-        arbol_problemas_puntaje: evaluacion.servicio_tecnologico_evaluacion.arbol_problemas_puntaje,
-        arbol_problemas_comentario: evaluacion.servicio_tecnologico_evaluacion.arbol_problemas_comentario,
-        arbol_problemas_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.arbol_problemas_comentario == null ? true : false,
+        arbol_problemas_puntaje: evaluacion.servicio_tecnologico_evaluacion?.arbol_problemas_puntaje,
+        arbol_problemas_comentario: evaluacion.servicio_tecnologico_evaluacion?.arbol_problemas_comentario,
+        arbol_problemas_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.arbol_problemas_comentario == null ? true : false,
     })
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

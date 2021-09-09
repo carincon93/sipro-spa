@@ -695,6 +695,26 @@
             </div>
         </div>
 
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
+            </div>
+            <div>
+                <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={culturaInnovacionInfo.antecedentes} required />
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+            </div>
+            <div>
+                <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={culturaInnovacionInfo.marco_conceptual} required />
+            </div>
+        </div>
+
         <div class="mt-44 grid grid-cols-2">
             <div>
                 <p class="mb-4">Número de los aprendices que se beneficiarán en la ejecución del proyecto</p>

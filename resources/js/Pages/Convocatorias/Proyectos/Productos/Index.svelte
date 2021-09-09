@@ -60,6 +60,8 @@
                         </div>
                         {#if evaluacion.idi_evaluacion}
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.productos_comentario ? evaluacion.idi_evaluacion.productos_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.cultura_innovacion_evaluacion}
+                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.productos_comentario ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : 'Sin recomendación'}</p>
                         {:else if evaluacion.servicio_tecnologico_evaluacion}
                             <hr class="mt-10 mb-10 border-black-200" />
                             <h1 class="font-black">Productos</h1>

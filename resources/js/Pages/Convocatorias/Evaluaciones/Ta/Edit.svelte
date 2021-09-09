@@ -250,8 +250,8 @@
                     {/if}
                     <div class="mt-4">
                         <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
-                        {#if $form.fechas_requiere_comentario == false}
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
+                        {#if $form.fecha_ejecucion_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fecha_ejecucion_comentario" bind:value={$form.fecha_ejecucion_comentario} error={errors.fecha_ejecucion_comentario} required />
                         {/if}
                     </div>

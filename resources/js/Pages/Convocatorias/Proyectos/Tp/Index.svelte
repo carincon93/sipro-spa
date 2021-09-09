@@ -64,7 +64,7 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto_tp.proyecto.codigo}
-                            {#if JSON.parse(proyecto_tp.proyecto.estado).requiereSubsanar && convocatoria.fase == 3}
+                            {#if JSON.parse(proyecto_tp.proyecto.estado)?.requiereSubsanar && convocatoria.fase == 3}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere modificaciones </span>
                             {/if}
                         </p>

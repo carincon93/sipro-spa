@@ -132,25 +132,25 @@
     }
 
     let formServicioTecnologicoEvaluacion = useForm({
-        propuesta_sostenibilidad_puntaje: evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_puntaje,
-        propuesta_sostenibilidad_comentario: evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_comentario,
-        propuesta_sostenibilidad_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_comentario == null ? true : false,
+        propuesta_sostenibilidad_puntaje: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_puntaje,
+        propuesta_sostenibilidad_comentario: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario,
+        propuesta_sostenibilidad_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario == null ? true : false,
 
-        impacto_ambiental_puntaje: evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_puntaje,
-        impacto_ambiental_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_comentario,
-        impacto_ambiental_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_comentario == null ? true : false,
+        impacto_ambiental_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_puntaje,
+        impacto_ambiental_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario,
+        impacto_ambiental_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario == null ? true : false,
 
-        impacto_social_centro_puntaje: evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_puntaje,
-        impacto_social_centro_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_comentario,
-        impacto_social_centro_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_comentario == null ? true : false,
+        impacto_social_centro_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_puntaje,
+        impacto_social_centro_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario,
+        impacto_social_centro_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario == null ? true : false,
 
-        impacto_social_productivo_puntaje: evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_puntaje,
-        impacto_social_productivo_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_comentario,
-        impacto_social_productivo_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_comentario == null ? true : false,
+        impacto_social_productivo_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_puntaje,
+        impacto_social_productivo_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario,
+        impacto_social_productivo_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario == null ? true : false,
 
-        impacto_tecnologico_puntaje: evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_puntaje,
-        impacto_tecnologico_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_comentario,
-        impacto_tecnologico_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_comentario == null ? true : false,
+        impacto_tecnologico_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_puntaje,
+        impacto_tecnologico_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario,
+        impacto_tecnologico_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario == null ? true : false,
     })
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {

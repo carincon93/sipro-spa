@@ -167,8 +167,12 @@
                     </div>
                     {#if evaluacion.idi_evaluacion}
                         <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.cadena_valor_comentario ? evaluacion.idi_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.cultura_innovacion_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.cadena_valor_comentario ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
                     {:else if evaluacion.ta_evaluacion}
                         <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.cadena_valor_comentario ? evaluacion.ta_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                    {:else if evaluacion.tp_evaluacion}
+                        <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.cadena_valor_comentario ? evaluacion.tp_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
                     {:else if evaluacion.servicio_tecnologico_evaluacion}
                         <hr class="mt-10 mb-10 border-black-200" />
                         <h1 class="font-black">Propuesta de sostenibilidad</h1>

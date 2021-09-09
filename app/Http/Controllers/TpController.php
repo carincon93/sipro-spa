@@ -138,6 +138,8 @@ class TpController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$tp->proyecto]);
 
+        $tp->load('proyecto.evaluaciones.tpEvaluacion');
+
         $tp->codigo_linea_programatica = $tp->proyecto->lineaProgramatica->codigo;
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;

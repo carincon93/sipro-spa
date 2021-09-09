@@ -146,6 +146,8 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
+        $culturaInnovacion->load('proyecto.evaluaciones.culturaInnovacionEvaluacion');
+
         $culturaInnovacion->codigo_linea_programatica = $culturaInnovacion->proyecto->lineaProgramatica->codigo;
         $culturaInnovacion->precio_proyecto           = $culturaInnovacion->proyecto->precioProyecto;
         $culturaInnovacion->proyecto->centroFormacion;

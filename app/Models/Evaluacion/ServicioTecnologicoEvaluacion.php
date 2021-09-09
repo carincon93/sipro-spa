@@ -48,7 +48,6 @@ class ServicioTecnologicoEvaluacion extends Model
         'ortografia_comentario',
         'redaccion_comentario',
         'normas_apa_comentario',
-        'arbol_problemas_comentario',
         'arbol_objetivos_comentario',
         'impacto_ambiental_puntaje',
         'impacto_ambiental_comentario',
