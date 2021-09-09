@@ -84,6 +84,8 @@
         $form.resultado_id = resultado_id.value
         actividades = resultado_id.actividades
     }
+
+    console.log(proyecto.servicio_tecnologico)
 </script>
 
 <AuthenticatedLayout>
@@ -148,7 +150,7 @@
                     <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                     <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                 </div>
-                {#if typeof proyecto.servicio_tecnologico != 'object'}
+                {#if proyecto.servicio_tecnologico == null}
                     <div class="mt-8">
                         <Label required labelFor="indicador" value="Indicador" />
 

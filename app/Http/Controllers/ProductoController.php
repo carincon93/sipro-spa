@@ -80,7 +80,7 @@ class ProductoController extends Controller
                     return $resultado->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -94,8 +94,10 @@ class ProductoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->idi;
+        $proyecto->culturaInnovacion;
         $proyecto->ta;
         $proyecto->tp;
+        $proyecto->servicioTecnologico;
 
         $proyectoId = $proyecto->id;
 
