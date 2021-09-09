@@ -42,7 +42,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
-            'convocatoria'           => $convocatoria->only('id'),
+            'convocatoria'           => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta', 'en_subsanacion'),
             'filters'                => request()->all('search'),
             'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova')->paginate(),
@@ -65,7 +65,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
-            'convocatoria'       => $convocatoria->only('id'),
+            'convocatoria'       => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'           => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'lineaProgramatica'  => $proyecto->lineaProgramatica->only('id')
         ]);
@@ -124,7 +124,7 @@ class ProyectoRolSennovaController extends Controller
             return back()->with('error', 'Máximo 2 monitorías de 3 a 6 meses cada una');
         }
 
-        if ($proyecto->lineaProgramatica->codigo != 70) {
+        if ($proyecto->lineaProgramatica->codigo != 70 && $proyecto->lineaProgramatica->codigo != 69) {
             if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, null, $request->numero_meses, $request->numero_roles)) {
                 return back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
             }
@@ -176,7 +176,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'en_subsanacion'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
@@ -238,7 +238,7 @@ class ProyectoRolSennovaController extends Controller
             return back()->with('error', 'Máximo 2 monitorias de 3 a 6 meses cada una');
         }
 
-        if ($proyecto->lineaProgramatica->codigo != 70) {
+        if ($proyecto->lineaProgramatica->codigo != 70 && $proyecto->lineaProgramatica->codigo != 69) {
             if (ProyectoRolSennovaValidationTrait::contratoAprendizajeValidation($request->convocatoria_rol_sennova_id, $proyecto, $proyectoRolSennova, $request->numero_meses, $request->numero_roles)) {
                 return back()->with('error', 'Máximo 1 contrato de aprendizaje por 6 meses');
             }
@@ -281,6 +281,8 @@ class ProyectoRolSennovaController extends Controller
      */
     public function proyectoRolEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 70) {
@@ -297,7 +299,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Index', [
-            'convocatoria'           => $convocatoria->only('id'),
+            'convocatoria'           => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'             => $evaluacion->only('id'),
             'proyecto'               => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta'),
             'filters'                => request()->all('search'),
@@ -313,15 +315,22 @@ class ProyectoRolSennovaController extends Controller
      */
     public function evaluacionForm(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         if ($evaluacion->proyecto->codigo_linea_programatica == 68) {
             $evaluacion->proyecto->max_meses_ejecucion = $evaluacion->proyecto->servicioTecnologico->max_meses_ejecucion;
         }
 
+        $proyecto = $evaluacion->proyecto;
+
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Edit', [
-            'convocatoria'          => $convocatoria->only('id'),
-            'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado', 'modificable'),
+            'segundaEvaluacion'     => ProyectoRolEvaluacion::whereHas('evaluacion', function ($query) use ($proyecto) {
+                $query->where('evaluaciones.proyecto_id', $proyecto->id)->where('evaluaciones.habilitado', true);
+            })->where('proyecto_rol_evaluacion.evaluacion_id', '!=', $evaluacion->id)->first(),
             'proyecto'              => $evaluacion->proyecto->only('id', 'diff_meses', 'finalizado', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
@@ -332,9 +341,11 @@ class ProyectoRolSennovaController extends Controller
 
     public function updateEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoRolSennova $proyectoRolSennova)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         ProyectoRolEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_rol_sennova_id' => $proyectoRolSennova->id],
-            ['correcto' => $request->correcto, 'comentario' => $request->correcto ? $request->comentario : null]
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

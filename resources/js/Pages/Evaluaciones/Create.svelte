@@ -24,8 +24,9 @@
 
     let sending = false
     let form = useForm({
-        finalizado: false,
         habilitado: false,
+        modificable: false,
+        finalizado: false,
         proyecto_id: null,
         user_id: null,
     })
@@ -69,14 +70,21 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="habilitado" value="¿Está evaluación está habilitada?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿La evaluación está habilitada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="finalizado" value="¿Está evaluación está finalizada?" class="inline-block mb-4" />
+                    <Label required labelFor="modificable" value="¿La evaluación es modificable?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.modificable} />
+                    <InputError message={errors.modificable} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="finalizado" value="¿La evaluación está finalizada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.finalizado} />
                     <InputError message={errors.finalizado} />

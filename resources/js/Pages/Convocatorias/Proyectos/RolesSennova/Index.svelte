@@ -133,7 +133,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nivel académico</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Asignación mensual</th>
-                {#if proyecto.en_subsanacion}
+                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluación</th>
                 {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
@@ -158,7 +158,7 @@
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>
-                    {#if proyecto.en_subsanacion}
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         <td class="border-t">
                             <div class="px-6 py-4">
                                 {#if proyectoRolSennova.rol_aprobado}

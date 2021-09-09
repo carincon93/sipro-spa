@@ -59,7 +59,7 @@
                 </div>
             </div>
         {/if}
-        <div>
+        <!-- <div>
             <h1 class="text-3xl mb-10 text-center">Fechas de convocatoria de las diferentes líneas programáticas:</h1>
             <InfoMessage>
                 <ul class="list-disc p-4">
@@ -70,7 +70,7 @@
                     <li>{convocatoriaActiva?.fechas_tp}</li>
                 </ul>
             </InfoMessage>
-        </div>
+        </div> -->
 
         <h1 class="text-3xl m-10 text-center">Lista de convocatorias</h1>
 

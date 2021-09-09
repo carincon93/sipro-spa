@@ -24,7 +24,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Evaluaciones/Index', [
             'filters'       => request()->all('search'),
-            'evaluaciones'  => Evaluacion::with('proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
+            'evaluaciones'  => Evaluacion::with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,nodo_tecnoparque_id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('id', 'ASC')
                 ->filterEvaluacion(request()->only('search'))->paginate(),
         ]);
     }
@@ -54,20 +54,24 @@ class EvaluacionController extends Controller
     {
         $this->authorize('create', [Evaluacion::class]);
 
-        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado) {
+        $proyecto = Proyecto::find($request->proyecto_id);
+
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado && $proyecto->lineaProgramatica->codigo != 68) {
             return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        } else if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 3 && $request->habilitado && $proyecto->lineaProgramatica->codigo == 68) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene tres evaluaciones habilitadas. Debe modificar alguna evaluación.');
         }
 
         $evaluacion = new Evaluacion();
-        $evaluacion->habilitado = $request->habilitado;
-        $evaluacion->iniciado   = false;
-        $evaluacion->finalizado = $request->finalizado;
+        $evaluacion->habilitado  = $request->habilitado;
+        $evaluacion->modificable = $request->modificable;
+        $evaluacion->iniciado    = false;
+        $evaluacion->finalizado  = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
         $evaluacion->proyecto()->associate($request->proyecto_id);
 
         $evaluacion->save();
 
-        $proyecto = Proyecto::find($request->proyecto_id);
         $proyecto->finalizado = true;
         $proyecto->modificable = false;
         $proyecto->save();
@@ -79,15 +83,19 @@ class EvaluacionController extends Controller
                 ]);
                 break;
             case $proyecto->ta()->exists():
-                $proyecto->problema_central = $proyecto->ta->problema_central;
+                $evaluacion->taEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->tp()->exists():
-                $proyecto->justificacion_problema   = $proyecto->tp->justificacion_problema;
-                $proyecto->identificacion_problema  = $proyecto->tp->identificacion_problema;
-                $proyecto->problema_central         = $proyecto->tp->problema_central;
+                $evaluacion->tpEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->servicioTecnologico()->exists():
-                $proyecto->problema_central = $proyecto->servicioTecnologico->problema_central;
+                $evaluacion->servicioTecnologicoEvaluacion()->create([
+                    'id' => $evaluacion->id
+                ]);
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->create([
@@ -142,14 +150,17 @@ class EvaluacionController extends Controller
     {
         $this->authorize('update', [Evaluacion::class, $evaluacion]);
 
-        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->count() == 2 && $request->habilitado) {
+        if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->where('evaluaciones.id', '!=', $evaluacion->id)->count() == 2 && $request->habilitado && $evaluacion->proyecto->lineaProgramatica->codigo != 68) {
             return redirect()->back()->with('error', 'Este proyecto ya tiene dos evaluaciones habilitadas. Debe modificar alguna evaluación.');
+        } else if (Evaluacion::where('proyecto_id', $request->proyecto_id)->where('habilitado', true)->where('evaluaciones.id', '!=', $evaluacion->id)->count() == 3 && $request->habilitado && $evaluacion->proyecto->lineaProgramatica->codigo == 68) {
+            return redirect()->back()->with('error', 'Este proyecto ya tiene tres evaluaciones habilitadas. Debe modificar alguna evaluación.');
         }
 
-        $evaluacion->habilitado = $request->habilitado;
-        $evaluacion->finalizado = $request->finalizado;
+        $evaluacion->habilitado  = $request->habilitado;
+        $evaluacion->modificable = $request->modificable;
+        $evaluacion->finalizado  = $request->finalizado;
         $evaluacion->evaluador()->associate($request->user_id);
-        $evaluacion->proyecto()->associate($request->proyecto_id);
+        $evaluacion->proyecto()->associate($evaluacion->proyecto_id);
 
         $evaluacion->save();
 
@@ -185,13 +196,13 @@ class EvaluacionController extends Controller
                 return redirect()->route('convocatorias.idi-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->ta()->exists():
-                return redirect()->route('convocatorias.ta.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.ta-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->tp()->exists():
-                return redirect()->route('convocatorias.tp.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.tp-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
-                return redirect()->route('convocatorias.servicios-tecnologicos.edit', [$convocatoria, $evaluacion]);
+                return redirect()->route('convocatorias.servicios-tecnologicos-evaluaciones.edit', [$convocatoria, $evaluacion]);
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 return redirect()->route('convocatorias.cultura-innovacion-evaluaciones.edit', [$convocatoria, $evaluacion]);
@@ -199,5 +210,87 @@ class EvaluacionController extends Controller
             default:
                 break;
         }
+    }
+
+    /**
+     * editCausalRechazo
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function editCausalRechazo(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo'),
+            'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
+            'proyecto'                      => $evaluacion->proyecto,
+        ]);
+    }
+
+    /**
+     * updateCausalRechazo
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateCausalRechazo(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->evaluacionCausalesRechazo()->delete();
+        $evaluacion->update(['justificacion_causal_rechazo' => $request->justificacion_causal_rechazo]);
+        foreach ($request->causal_rechazo as $causalRechazo) {
+            $evaluacion->evaluacionCausalesRechazo()->updateOrCreate(
+                ['evaluacion_id' => $evaluacion->id, 'causal_rechazo' => $causalRechazo],
+            );
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * showComentariosGeneralesForm
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function showComentariosGeneralesForm(Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', 'comentarios_generales', 'replicas'),
+            'proyecto'                      => $evaluacion->proyecto,
+        ]);
+    }
+
+    /**
+     * udpdateComentariosGenerales
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->update(
+            ['evaluacion_id' => $evaluacion->id, 'comentarios_generales' => $request->comentarios_generales],
+        );
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

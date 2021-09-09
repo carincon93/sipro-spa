@@ -33,7 +33,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'                  => $proyecto->only('id', 'modificable'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'filters'                   => request()->all('search'),
@@ -59,7 +59,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Create', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'                  => $proyecto->only('id', 'modificable'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
         ]);
@@ -125,7 +125,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Edit', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'              => $proyecto->only('id', 'modificable'),
             'proyectoPresupuesto'   => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'soporteEstudioMercado' => $soporte
@@ -195,6 +195,8 @@ class SoporteEstudioMercadoController extends Controller
      */
     public function soportesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, ProyectoPresupuesto $presupuesto)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         /**
          * Denega el acceso si el rubro no requiere de estudio de mercado.
          */
@@ -203,7 +205,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
-            'convocatoria'              => $convocatoria->only('id'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'                => $evaluacion->only('id'),
             'proyecto'                  => $evaluacion->proyecto->only('id', 'finalizado'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),

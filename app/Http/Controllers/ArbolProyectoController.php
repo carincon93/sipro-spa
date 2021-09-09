@@ -20,7 +20,12 @@ use App\Http\Requests\CausaIndirectaRequest;
 use App\Http\Requests\ImpactoRequest;
 use App\Http\Requests\ObjetivoEspecificoRequest;
 use App\Http\Requests\ResultadoRequest;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -245,7 +250,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolProblemas(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
+    public function showArbolProblemas(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -283,11 +288,11 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'          => ($request->to_pdf == 1) ? true : false
+            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -300,6 +305,8 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolProblemasEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $efectosDirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos:id,efecto_directo_id,descripcion')->get();
         $causasDirectas  = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas')->get();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
@@ -312,35 +319,65 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->idi->justificacion_problema;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->idi->identificacion_problema;
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->problema_central = $evaluacion->proyecto->ta->problema_central;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->tp->justificacion_problema;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->tp->identificacion_problema;
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->tp->problema_central;
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->problema_central = $evaluacion->proyecto->servicioTecnologico->problema_central;
+
+                $evaluacion->servicioTecnologicoEvaluacion;
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->culturaInnovacion->problema_central;
                 $evaluacion->proyecto->justificacion_problema   = $evaluacion->proyecto->culturaInnovacion->justificacion_problema;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolProblemas', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
-            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -355,17 +392,25 @@ class ArbolProyectoController extends Controller
      */
     public function updateArbolProblemasEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'problema_central_puntaje'      => $request->problema_central_puntaje,
-                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'problema_central_puntaje'      => $request->problema_central_puntaje,
-                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null
+                    'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
+                ]);
+                break;
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'arbol_problemas_puntaje'      => $request->arbol_problemas_puntaje,
+                    'arbol_problemas_comentario'   => $request->arbol_problemas_requiere_comentario == false ? $request->arbol_problemas_comentario : null
                 ]);
                 break;
             default:
@@ -608,7 +653,7 @@ class ArbolProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showArbolObjetivos(Convocatoria $convocatoria, Proyecto $proyecto, Request $request)
+    public function showArbolObjetivos(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -658,7 +703,7 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
-            'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
@@ -683,8 +728,13 @@ class ArbolProyectoController extends Controller
      */
     public function showArbolObjetivosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $efectosDirectos  = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos.impacto', 'resultados')->get();
         $causasDirectas   = $evaluacion->proyecto->causasDirectas()->with('causasIndirectas.actividad', 'objetivoEspecifico')->get();
+
+        $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $tipoProyectoA = false;
         switch ($evaluacion->proyecto) {
@@ -694,17 +744,38 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->idi->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->ta->problema_central;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->ta->identificacion_problema;
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->ta->objetivo_general;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
+
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->problema_central         = $evaluacion->proyecto->tp->problema_central;
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->tp->identificacion_problema;
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->tp->objetivo_general;
+
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
+
+
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
@@ -712,27 +783,45 @@ class ArbolProyectoController extends Controller
                 $evaluacion->proyecto->identificacion_problema  = $evaluacion->proyecto->culturaInnovacion->identificacion_problema;
                 $evaluacion->proyecto->objetivo_general         = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto.json'), true);
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->objetivo_general   = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
                 $evaluacion->proyecto->problema_central   = $evaluacion->proyecto->servicioTecnologico->problema_central;
                 $tiposImpacto = json_decode(Storage::get('json/tipos-impacto-st.json'), true);
                 $tipoProyectoA = $evaluacion->proyecto->servicioTecnologico->tipoProyectoSt->tipo_proyecto == 1;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos', [
-            'convocatoria'    => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'evaluacion'      => $evaluacion,
-            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
-            'efectosDirectos' => $efectosDirectos,
-            'causasDirectas'  => $causasDirectas,
-            'tiposImpacto'    => $tiposImpacto,
-            'tipoProyectoA'   => $tipoProyectoA,
-            'to_pdf'          => ($request->to_pdf == 1) ? true : false
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado', 'cantidad_objetivos'),
+            'efectosDirectos'   => $efectosDirectos,
+            'causasDirectas'    => $causasDirectas,
+            'tiposImpacto'      => $tiposImpacto,
+            'tipoProyectoA'     => $tipoProyectoA,
+            'resultados'        => Resultado::select('id as value', 'descripcion as label', 'objetivo_especifico_id')->whereIn(
+                'objetivo_especifico_id',
+                $objetivoEspecifico->map(function ($objetivoEspecifico) {
+                    return $objetivoEspecifico->id;
+                })
+            )->get(),
         ]);
     }
 
@@ -746,21 +835,54 @@ class ArbolProyectoController extends Controller
      */
     public function updateArbolObjetivosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'objetivos_puntaje'      => $request->objetivos_puntaje,
-                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
-                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'objetivos_puntaje'      => $request->objetivos_puntaje,
-                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == true ? $request->objetivos_comentario : null,
+                    'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
-                    'resultados_comentario'  => $request->resultados_requiere_comentario == true ? $request->resultados_comentario : null
+                    'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'objetivo_general_puntaje'      => $request->objetivo_general_puntaje,
+                    'objetivo_general_comentario'   => $request->objetivo_general_requiere_comentario == false ? $request->objetivo_general_comentario : null,
+
+                    'primer_objetivo_puntaje'       => $request->primer_objetivo_puntaje,
+                    'primer_objetivo_comentario'    => $request->primer_objetivo_requiere_comentario == false ? $request->primer_objetivo_comentario : null,
+
+                    'segundo_objetivo_puntaje'      => $request->segundo_objetivo_puntaje,
+                    'segundo_objetivo_comentario'   => $request->segundo_objetivo_requiere_comentario == false ? $request->segundo_objetivo_comentario : null,
+
+                    'tercer_objetivo_puntaje'       => $request->tercer_objetivo_puntaje,
+                    'tercer_objetivo_comentario'    => $request->tercer_objetivo_requiere_comentario == false ? $request->tercer_objetivo_comentario : null,
+
+                    'cuarto_objetivo_puntaje'       => $request->cuarto_objetivo_puntaje,
+                    'cuarto_objetivo_comentario'    => $request->cuarto_objetivo_requiere_comentario == false ? $request->cuarto_objetivo_comentario : null,
+
+                    'resultados_primer_obj_puntaje'     => $request->resultados_primer_obj_puntaje,
+                    'resultados_primer_obj_comentario'  => $request->resultados_primer_obj_requiere_comentario == false ? $request->resultados_primer_obj_comentario : null,
+
+                    'resultados_segundo_obj_puntaje'    => $request->resultados_segundo_obj_puntaje,
+                    'resultados_segundo_obj_comentario' => $request->resultados_segundo_obj_requiere_comentario == false ? $request->resultados_segundo_obj_comentario : null,
+
+                    'resultados_tercer_obj_puntaje'     => $request->resultados_tercer_obj_puntaje,
+                    'resultados_tercer_obj_comentario'  => $request->resultados_tercer_obj_requiere_comentario == false ? $request->resultados_tercer_obj_comentario : null,
+
+                    'resultados_cuarto_obj_puntaje'     => $request->resultados_cuarto_obj_puntaje,
+                    'resultados_cuarto_obj_comentario'  => $request->resultados_cuarto_obj_requiere_comentario == false ? $request->resultados_cuarto_obj_comentario : null
                 ]);
                 break;
             default:

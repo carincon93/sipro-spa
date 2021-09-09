@@ -81,18 +81,45 @@
         <div slot="title">Anexos</div>
 
         <div slot="caption">
-            {#if proyecto.en_subsanacion}
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                 {#each proyecto.evaluaciones as evaluacion, i}
-                    {#if evaluacion.finalizado && evaluacion.habilitado}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                             <div class="flex text-orangered-900 font-black">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                 </svg>
-                                Recomendación del {i == 0 ? 'primer' : i == 1 ? 'segundo' : ''} evaluador:
+                                Recomendación del evaluador COD-{evaluacion.id}:
                             </div>
                             {#if evaluacion.idi_evaluacion}
                                 <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.anexos_comentario ? evaluacion.idi_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.cultura_innovacion_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.anexos_comentario ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.ta_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.anexos_comentario ? evaluacion.ta_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.tp_evaluacion}
+                                <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.anexos_comentario ? evaluacion.tp_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Anexos</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
+                                </ul>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Video</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
+                                </ul>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Especificaciones del área</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
+                                </ul>
                             {/if}
                         </div>
                     {/if}

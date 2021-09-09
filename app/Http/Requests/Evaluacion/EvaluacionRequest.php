@@ -23,12 +23,20 @@ class EvaluacionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'proyecto_id'    => ['required', 'integer', 'exists:proyectos,id'],
-            'user_id'       => ['required', 'integer', 'exists:users,id'],
-            'habilitado'    => ['required', 'boolean'],
-            'finalizado'    => ['required', 'boolean'],
-        ];
+        if ($this->isMethod('PUT')) {
+            return [
+                'user_id'       => ['required', 'integer', 'exists:users,id'],
+                'habilitado'    => ['required', 'boolean'],
+                'finalizado'    => ['required', 'boolean'],
+            ];
+        } else {
+            return [
+                'proyecto_id'    => ['required', 'integer', 'exists:proyectos,id'],
+                'user_id'       => ['required', 'integer', 'exists:users,id'],
+                'habilitado'    => ['required', 'boolean'],
+                'finalizado'    => ['required', 'boolean'],
+            ];
+        }
     }
 
     /**

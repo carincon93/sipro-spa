@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Actividad;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\Proyecto;
 use App\Models\Producto;
 use App\Models\ProductoCulturaInnovacion;
@@ -63,7 +68,7 @@ class ProductoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'               => request()->all('search'),
             'validacionResultados'  => $validacionResultados,
@@ -80,7 +85,7 @@ class ProductoController extends Controller
                     return $resultado->id;
                 })
             )->orderBy('fecha_inicio', 'ASC')->get(),
-            'to_pdf'          => ($request->to_pdf==1)?true:false
+            'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -94,13 +99,15 @@ class ProductoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->idi;
+        $proyecto->culturaInnovacion;
         $proyecto->ta;
         $proyecto->tp;
+        $proyecto->servicioTecnologico;
 
         $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'          => $proyecto,
             'resultados'        => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
                 $query->where('efectos_directos.proyecto_id', $proyectoId);
@@ -218,7 +225,7 @@ class ProductoController extends Controller
         $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto,
             'producto'                  => $producto,
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
@@ -314,33 +321,60 @@ class ProductoController extends Controller
      */
     public function showProductosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $resultado = $evaluacion->proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
 
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
 
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
 
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Productos/Index', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion,
-            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
+            'segundaEvaluacion'     => $segundaEvaluacion,
+            'proyecto'              => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'cantidad_objetivos'),
             'filters'               => request()->all('search'),
             'productos'             => Producto::whereIn(
                 'resultado_id',
@@ -368,17 +402,46 @@ class ProductoController extends Controller
      */
     public function updateProductosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'productos_puntaje'      => $request->productos_puntaje,
-                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                    'productos_comentario'   => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'productos_puntaje'      => $request->productos_puntaje,
-                    'productos_comentario'   => $request->productos_requiere_comentario == true ? $request->productos_comentario : null
+                    'productos_comentario'   => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
+                    'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'productos_comentario'  => $request->productos_requiere_comentario == false ? $request->productos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'productos_primer_obj_puntaje'      => $request->productos_primer_obj_puntaje,
+                    'productos_primer_obj_comentario'   => $request->productos_primer_obj_requiere_comentario == false ? $request->productos_primer_obj_comentario : null,
+
+                    'productos_segundo_obj_puntaje'      => $request->productos_segundo_obj_puntaje,
+                    'productos_segundo_obj_comentario'   => $request->productos_segundo_obj_requiere_comentario == false ? $request->productos_segundo_obj_comentario : null,
+
+                    'productos_tercer_obj_puntaje'      => $request->productos_tercer_obj_puntaje,
+                    'productos_tercer_obj_comentario'   => $request->productos_tercer_obj_requiere_comentario == false ? $request->productos_tercer_obj_comentario : null,
+
+                    'productos_cuarto_obj_puntaje'      => $request->productos_cuarto_obj_puntaje,
+                    'productos_cuarto_obj_comentario'   => $request->productos_cuarto_obj_requiere_comentario == false ? $request->productos_cuarto_obj_comentario : null,
                 ]);
                 break;
             default:
@@ -398,6 +461,8 @@ class ProductoController extends Controller
      */
     public function productoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Producto $producto)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->idi;
         $producto->productoIdi;
         $evaluacion->proyecto->culturaInnovacion;
@@ -415,7 +480,7 @@ class ProductoController extends Controller
         $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
 
         return Inertia::render('Convocatorias/Evaluaciones/Productos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'evaluacion'                => $evaluacion->only('id'),
             'proyecto'                  => $evaluacion->proyecto,
             'producto'                  => $producto,

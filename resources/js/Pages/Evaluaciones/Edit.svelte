@@ -28,8 +28,9 @@
     let dialogOpen = false
     let sending = false
     let form = useForm({
-        finalizado: evaluacion.finalizado,
         habilitado: evaluacion.habilitado,
+        modificable: evaluacion.modificable,
+        finalizado: evaluacion.finalizado,
         proyecto_id: {
             value: evaluacion.proyecto_id,
             label: proyectos.find((item) => item.value == evaluacion.proyecto_id)?.label,
@@ -82,18 +83,25 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="proyecto_id" value="Proyecto" />
-                    <Select id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Seleccione un proyecto" required />
+                    <Select disabled={true} id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Seleccione un proyecto" required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="habilitado" value="¿Está evaluación está habilitada?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿La evaluación está habilitada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="finalizado" value="¿Está evaluación está finalizada?" class="inline-block mb-4" />
+                    <Label required labelFor="modificable" value="¿La evaluación es modificable?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.modificable} />
+                    <InputError message={errors.modificable} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="finalizado" value="¿La evaluación está finalizada?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.finalizado} />
                     <InputError message={errors.finalizado} />
@@ -102,7 +110,7 @@
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar evaluación </button>
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar evaluación</LoadingButton>

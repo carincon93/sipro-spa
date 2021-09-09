@@ -22,7 +22,7 @@ class CulturaInnovacionEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/CulturaInnovacion/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'filters'           => request()->all('search'),
             'culturaInnovacion' => CulturaInnovacionEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -68,6 +68,8 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
+
         $culturaInnovacionEvaluacion->evaluacion->proyecto;
         $culturaInnovacion = $culturaInnovacionEvaluacion->evaluacion->proyecto->culturaInnovacion;
         $culturaInnovacion->proyecto->codigo_linea_programatica = $culturaInnovacion->proyecto->lineaProgramatica->codigo;
@@ -75,7 +77,7 @@ class CulturaInnovacionEvaluacionController extends Controller
         $culturaInnovacion->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Evaluaciones/CulturaInnovacion/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura'),
             'culturaInnovacion'                         => $culturaInnovacion,
             'culturaInnovacionEvaluacion'               => $culturaInnovacionEvaluacion,
             'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
@@ -99,33 +101,33 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function update(CulturaInnovacionEvaluacionRequest $request, Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
+
         $culturaInnovacionEvaluacion->evaluacion()->update([
             'iniciado' => true
         ]);
 
         $culturaInnovacionEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
-        $culturaInnovacionEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == true ? $request->titulo_comentario : null;
+        $culturaInnovacionEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == false ? $request->titulo_comentario : null;
         $culturaInnovacionEvaluacion->video_puntaje               = $request->video_puntaje;
-        $culturaInnovacionEvaluacion->video_comentario            = $request->video_requiere_comentario == true ? $request->video_comentario : null;
+        $culturaInnovacionEvaluacion->video_comentario            = $request->video_requiere_comentario == false ? $request->video_comentario : null;
         $culturaInnovacionEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
-        $culturaInnovacionEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == true ? $request->resumen_comentario : null;
-        $culturaInnovacionEvaluacion->problema_central_puntaje    = $request->problema_central_puntaje;
-        $culturaInnovacionEvaluacion->problema_central_comentario = $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null;
+        $culturaInnovacionEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == false ? $request->resumen_comentario : null;
         $culturaInnovacionEvaluacion->ortografia_puntaje          = $request->ortografia_puntaje;
-        $culturaInnovacionEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == true ? $request->ortografia_comentario : null;
+        $culturaInnovacionEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $culturaInnovacionEvaluacion->redaccion_puntaje           = $request->redaccion_puntaje;
-        $culturaInnovacionEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == true ? $request->redaccion_comentario : null;
+        $culturaInnovacionEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;
         $culturaInnovacionEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
-        $culturaInnovacionEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
+        $culturaInnovacionEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == false ? $request->normas_apa_comentario : null;
 
-        $culturaInnovacionEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == true ? $request->justificacion_economia_naranja_comentario : null;
-        $culturaInnovacionEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == true ? $request->justificacion_industria_4_comentario : null;
-        $culturaInnovacionEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == true ? $request->bibliografia_comentario : null;
-        $culturaInnovacionEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == true ? $request->fechas_comentario : null;
-        $culturaInnovacionEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == true ? $request->justificacion_politica_discapacidad_comentario : null;
-        $culturaInnovacionEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == true ? $request->actividad_economica_comentario : null;
-        $culturaInnovacionEvaluacion->area_conocimiento_comentario = $request->area_conocimiento_requiere_comentario == true ? $request->area_conocimiento_comentario : null;
-        $culturaInnovacionEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == true ? $request->tematica_estrategica_comentario : null;
+        $culturaInnovacionEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == false ? $request->justificacion_economia_naranja_comentario : null;
+        $culturaInnovacionEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == false ? $request->justificacion_industria_4_comentario : null;
+        $culturaInnovacionEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
+        $culturaInnovacionEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == false ? $request->fechas_comentario : null;
+        $culturaInnovacionEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == false ? $request->justificacion_politica_discapacidad_comentario : null;
+        $culturaInnovacionEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == false ? $request->actividad_economica_comentario : null;
+        $culturaInnovacionEvaluacion->area_conocimiento_comentario = $request->area_conocimiento_requiere_comentario == false ? $request->area_conocimiento_comentario : null;
+        $culturaInnovacionEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == false ? $request->tematica_estrategica_comentario : null;
 
         $culturaInnovacionEvaluacion->save();
 
@@ -140,8 +142,8 @@ class CulturaInnovacionEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, CulturaInnovacionEvaluacion $culturaInnovacionEvaluacion)
     {
-        $culturaInnovacionEvaluacion->delete();
+        $this->authorize('modificar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('resourceRoute.index')->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

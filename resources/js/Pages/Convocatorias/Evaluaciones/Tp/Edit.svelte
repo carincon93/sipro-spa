@@ -7,36 +7,35 @@
     import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
-    import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Password from '@/Shared/Password'
     import SelectMulti from '@/Shared/SelectMulti'
     import Dialog from '@/Shared/Dialog'
-    import { Inertia } from '@inertiajs/inertia'
+    import Switch from '@/Shared/Switch'
 
     export let errors
     export let convocatoria
     export let tp
+    export let tpEvaluacion
+    export let tpSegundaEvaluacion
     export let proyectoMunicipios
 
     $: $title = tp ? tp.titulo : null
 
     let sending = false
-    let dialogOpen = errors.password != undefined ? true : false
-    let proyectoDialogOpen = true
+    let proyectoDialogOpen = tpEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
 
     let municipios = []
     let codigoLineaProgramatica
 
     $: if (codigoLineaProgramatica) {
-        $form.codigo_linea_programatica = codigoLineaProgramatica.codigo
+        tpInfo.codigo_linea_programatica = codigoLineaProgramatica.codigo
     } else {
-        $form.codigo_linea_programatica = tp.codigo_linea_programatica
+        tpInfo.codigo_linea_programatica = tp.codigo_linea_programatica
     }
 
     const groupBy = (item) => item.group
@@ -47,7 +46,7 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let form = useForm({
+    let tpInfo = {
         centro_formacion_id: tp.proyecto.centro_formacion_id,
         linea_programatica_id: tp.proyecto.linea_programatica_id,
         fecha_inicio: tp.fecha_inicio,
@@ -56,7 +55,7 @@
         resumen: tp.resumen,
         resumen_regional: tp.resumen_regional,
         antecedentes: tp.antecedentes,
-        justificacion: tp.justificacion,
+        justificacion_problema: tp.justificacion_problema,
         antecedentes_regional: tp.antecedentes_regional,
         retos_oportunidades: tp.retos_oportunidades,
         pertinencia_territorio: tp.pertinencia_territorio,
@@ -67,7 +66,7 @@
         bibliografia: tp.bibliografia,
         codigo_linea_programatica: null,
         nodo_tecnoparque_id: tp.nodo_tecnoparque_id,
-    })
+    }
 
     let regional
     $: whitelistInstitucionesEducativas = []
@@ -76,7 +75,7 @@
             .get('https://www.datos.gov.co/resource/cfw5-qzt5.json?cod_dane_departamento=' + regional?.codigo)
             .then(function (response) {
                 // handle success
-                response.data.map((item) => {
+                response.datp.map((item) => {
                     whitelistInstitucionesEducativas.push(item.nombre_establecimiento)
                 })
             })
@@ -93,23 +92,40 @@
         getMunicipios()
     })
 
+    let form = useForm({
+        clausula_confidencialidad: tpEvaluacion.evaluacion.clausula_confidencialidad,
+        fecha_ejecucion_comentario: tpEvaluacion.fecha_ejecucion_comentario,
+        fecha_ejecucion_requiere_comentario: tpEvaluacion.fecha_ejecucion_comentario == null ? true : false,
+        resumen_regional_comentario: tpEvaluacion.resumen_regional_comentario,
+        resumen_regional_requiere_comentario: tpEvaluacion.resumen_regional_comentario == null ? true : false,
+        antecedentes_regional_comentario: tpEvaluacion.antecedentes_regional_comentario,
+        antecedentes_regional_requiere_comentario: tpEvaluacion.antecedentes_regional_comentario == null ? true : false,
+        municipios_comentario: tpEvaluacion.municipios_comentario,
+        municipios_requiere_comentario: tpEvaluacion.municipios_comentario == null ? true : false,
+        impacto_centro_formacion_comentario: tpEvaluacion.impacto_centro_formacion_comentario,
+        impacto_centro_formacion_requiere_comentario: tpEvaluacion.impacto_centro_formacion_comentario == null ? true : false,
+        retos_oportunidades_comentario: tpEvaluacion.retos_oportunidades_comentario,
+        retos_oportunidades_requiere_comentario: tpEvaluacion.retos_oportunidades_comentario == null ? true : false,
+        pertinencia_territorio_comentario: tpEvaluacion.pertinencia_territorio_comentario,
+        pertinencia_territorio_requiere_comentario: tpEvaluacion.pertinencia_territorio_comentario == null ? true : false,
+        instituciones_comentario: tpEvaluacion.instituciones_comentario,
+        instituciones_requiere_comentario: tpEvaluacion.instituciones_comentario == null ? true : false,
+
+        bibliografia_comentario: tpEvaluacion.bibliografia_comentario,
+        bibliografia_requiere_comentario: tpEvaluacion.bibliografia_comentario == null ? true : false,
+
+        ortografia_comentario: tpEvaluacion.ortografia_comentario,
+        ortografia_requiere_comentario: tpEvaluacion.ortografia_comentario == null ? true : false,
+        redaccion_comentario: tpEvaluacion.redaccion_comentario,
+        redaccion_requiere_comentario: tpEvaluacion.redaccion_comentario == null ? true : false,
+        normas_apa_comentario: tpEvaluacion.normas_apa_comentario,
+        normas_apa_requiere_comentario: tpEvaluacion.normas_apa_comentario == null ? true : false,
+    })
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
-            $form.put(route('convocatorias.tp.update', [convocatoria.id, tp.id]), {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && tp.proyecto.finalizado == true && tpEvaluacion.evaluacion.finalizado == false && tpEvaluacion.evaluacion.habilitado == true && tpEvaluacion.evaluacion.modificable == true)) {
+            $form.put(route('convocatorias.tp-evaluaciones.update', [convocatoria.id, tpEvaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
-                preserveScroll: true,
-            })
-        }
-    }
-
-    let deleteForm = useForm({
-        password: '',
-    })
-
-    function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)) {
-            $deleteForm.delete(route('convocatorias.tp.destroy', [convocatoria.id, tp.id]), {
                 preserveScroll: true,
             })
         }
@@ -122,250 +138,397 @@
         }
     }
 
-    $: if ($form.fecha_inicio && $form.fecha_finalizacion) {
-        $form.max_meses_ejecucion = monthDiff($form.fecha_inicio, $form.fecha_finalizacion)
+    $: if (tpInfo.fecha_inicio && tpInfo.fecha_finalizacion) {
+        tpInfo.max_meses_ejecucion = monthDiff(tpInfo.fecha_inicio, tpInfo.fecha_finalizacion)
     }
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} proyecto={tp} />
+    <EvaluationStepper {convocatoria} evaluacion={tpEvaluacion.evaluacion} proyecto={tp.proyecto} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [11]) && tp.proyecto.finalizado == true) ? undefined : true}>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <div class="mt-4 flex items-start justify-around">
-                    <div class="mt-4 flex {errors.fecha_inicio ? '' : 'items-center'}">
-                        <Label labelFor="fecha_inicio" class={errors.fecha_inicio ? 'top-3.5 relative' : ''} value="Del" />
+                    <div class="mt-4 flex">
+                        <Label labelFor="fecha_inicio" value="Del" />
                         <div class="ml-4">
-                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} error={errors.fecha_inicio} bind:value={$form.fecha_inicio} required />
+                            <input disabled id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} bind:value={tpInfo.fecha_inicio} />
                         </div>
                     </div>
-                    <div class="mt-4 flex {errors.fecha_finalizacion ? '' : 'items-center'}">
-                        <Label labelFor="fecha_finalizacion" class={errors.fecha_finalizacion ? 'top-3.5 relative' : ''} value="hasta" />
+                    <div class="mt-4 flex">
+                        <Label labelFor="fecha_finalizacion" value="hasta" />
                         <div class="ml-4">
-                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} error={errors.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
+                            <input disabled id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={convocatoria.min_fecha_inicio_proyectos_tp} max={convocatoria.max_fecha_finalizacion_proyectos_tp} bind:value={tpInfo.fecha_finalizacion} />
                         </div>
                     </div>
                 </div>
-                {#if errors.fecha_inicio || errors.fecha_finalizacion || errors.max_meses_ejecucion}
-                    <div class="mb-20 flex justify-center mt-4">
-                        <InputError classes="text-center" message={errors.fecha_inicio} />
-                        <InputError classes="text-center" message={errors.fecha_finalizacion} />
-                        <InputError classes="text-center" message={errors.max_meses_ejecucion} />
+
+                <InfoMessage>
+                    {#if tpSegundaEvaluacion?.fecha_ejecucion_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.fecha_ejecucion_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
+                        {#if $form.fecha_ejecucion_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fecha_ejecucion_comentario" bind:value={$form.fecha_ejecucion_comentario} error={errors.fecha_ejecucion_comentario} required />
+                        {/if}
                     </div>
-                {/if}
+                </InfoMessage>
             </div>
 
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
-                    </div>
-                    <div>
-                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
-                    </div>
-                </div>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                    </div>
-                    <div>
-                        {tp.proyecto.centro_formacion.nombre}
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
-                    </div>
-                    <div>
-                        <DynamicList id="nodo_tecnoparque_id" bind:value={$form.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', $form.centro_formacion_id)} message={errors.nodo_tecnoparque_id} required />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-40 grid grid-cols-1">
+            <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <DynamicList disabled={true} id="linea_programatica_id" bind:value={tpInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
                 </div>
             </div>
-
-            <div class="mt-40 grid grid-cols-1">
+            <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
+                    <Label class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage
-                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
-                    />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="justificacion" value="Justificación" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="justificacion" error={errors.justificacion} bind:value={$form.justificacion} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                    {tp.proyecto.centro_formacion.nombre}
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                    <Label class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
                 </div>
                 <div>
-                    <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <DynamicList disabled={true} id="nodo_tecnoparque_id" bind:value={tpInfo.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', tpInfo.centro_formacion_id)} message={errors.nodo_tecnoparque_id} />
                 </div>
             </div>
 
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
+                    <Label class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
+                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea disabled maxlength="40000" id="resumen" bind:value={tpInfo.resumen} />
+                </div>
+            </div>
+
+            <div class="mt-40 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="resumen_regional" bind:value={tpInfo.resumen_regional} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.resumen_regional_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.resumen_regional_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
+                            {#if $form.resumen_regional_requiere_comentario == false}
+                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resumen_regional_comentario" bind:value={$form.resumen_regional_comentario} error={errors.resumen_regional_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                    <Label class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                    <InfoMessage
+                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                    />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="antecedentes" bind:value={tpInfo.antecedentes} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="antecedentes_regional" bind:value={tpInfo.antecedentes_regional} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.antecedentes_regional_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.antecedentes_regional_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿Los antecedentes regionales son correctos? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_regional_requiere_comentario} />
+                            {#if $form.antecedentes_regional_requiere_comentario == false}
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="antecedentes_regional_comentario"
+                                    bind:value={$form.antecedentes_regional_comentario}
+                                    error={errors.antecedentes_regional_comentario}
+                                    required
+                                />
+                            {/if}
+                        </div>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="justificacion_problema" bind:value={tpInfo.justificacion_problema} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="retos_oportunidades" bind:value={tpInfo.retos_oportunidades} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.retos_oportunidades_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.retos_oportunidades_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿Los retos y prioridades locales son correctos? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
+                            {#if $form.retos_oportunidades_requiere_comentario == false}
+                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="retos_oportunidades_comentario" bind:value={$form.retos_oportunidades_comentario} error={errors.retos_oportunidades_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="pertinencia_territorio" bind:value={tpInfo.pertinencia_territorio} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.pertinencia_territorio_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.pertinencia_territorio_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿La justificación y pertinencia en el territorio es correcta? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.pertinencia_territorio_requiere_comentario} />
+                            {#if $form.pertinencia_territorio_requiere_comentario == false}
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="pertinencia_territorio_comentario"
+                                    bind:value={$form.pertinencia_territorio_comentario}
+                                    error={errors.pertinencia_territorio_comentario}
+                                    required
+                                />
+                            {/if}
+                        </div>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="marco_conceptual" bind:value={tpInfo.marco_conceptual} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                </div>
+                <div>
+                    <SelectMulti disabled={true} id="municipios" bind:selectedValue={tpInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="impacto_municipios" bind:value={tpInfo.impacto_municipios} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div />
+                <div>
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.municipios_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.municipios_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿Los municipios y la descripción del beneficio son correctos? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
+                            {#if $form.municipios_requiere_comentario == false}
+                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="municipios_comentario" bind:value={$form.municipios_comentario} error={errors.municipios_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-40 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="impacto_centro_formacion" bind:value={tpInfo.impacto_centro_formacion} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.impacto_centro_formacion_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.impacto_centro_formacion_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿El impacto en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.impacto_centro_formacion_requiere_comentario} />
+                            {#if $form.impacto_centro_formacion_requiere_comentario == false}
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="impacto_centro_formacion_comentario"
+                                    bind:value={$form.impacto_centro_formacion_comentario}
+                                    error={errors.impacto_centro_formacion_comentario}
+                                    required
+                                />
+                            {/if}
+                        </div>
+                    </InfoMessage>
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="bibliografia" value="Bibliografía" />
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea disabled maxlength="40000" id="bibliografia" bind:value={tpInfo.bibliografia} />
+
+                    <InfoMessage>
+                        {#if tpSegundaEvaluacion?.bibliografia_comentario}
+                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.bibliografia_comentario}</p>
+                        {/if}
+                        <div class="mt-4">
+                            <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple</p>
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
+                            {#if $form.bibliografia_requiere_comentario == false}
+                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="bibliografia_comentario" bind:value={$form.bibliografia_comentario} error={errors.bibliografia_comentario} required />
+                            {/if}
+                        </div>
+                    </InfoMessage>
                 </div>
             </div>
+
+            <hr class="mt-10 mb-10" />
+
+            <h1>Ortografía</h1>
+            <InfoMessage>
+                {#if tpSegundaEvaluacion?.ortografia_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.ortografia_comentario}</p>
+                {/if}
+                <div class="mt-4">
+                    <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
+                    {#if $form.ortografia_requiere_comentario == false}
+                        <Textarea disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
+
+            <hr class="mt-10 mb-10" />
+            <h1>Redacción</h1>
+            <InfoMessage>
+                {#if tpSegundaEvaluacion?.redaccion_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.redaccion_comentario}</p>
+                {/if}
+                <div class="mt-4">
+                    <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
+                    {#if $form.redaccion_requiere_comentario == false}
+                        <Textarea disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
+                    {/if}
+                </div>
+            </InfoMessage>
+
+            <hr class="mt-10 mb-10" />
+            <h1>Normas APA</h1>
+            <InfoMessage>
+                {#if tpSegundaEvaluacion?.normas_apa_comentario}
+                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.normas_apa_comentario}</p>
+                {/if}
+                <div class="mt-4">
+                    <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
+                    {#if $form.normas_apa_requiere_comentario == false}
+                        <Textarea disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
+
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && tp.proyecto.finalizado == true && tpEvaluacion.evaluacion.finalizado == false && tpEvaluacion.evaluacion.habilitado == true && tpEvaluacion.evaluacion.modificable == true)}
+                    {#if $form.clausula_confidencialidad}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
+                    {:else}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
+                    {/if}
+
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
-            {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-            {/if}
-        </div>
     </form>
 
     <Dialog bind:open={proyectoDialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mt-4">
             <figure>
-                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+                <img src={window.basePath + '/images/feedback.png'} alt="Evaluación" class="h-32 mb-6" />
             </figure>
             Código del proyecto: {tp.proyecto.codigo}
         </div>
         <div slot="content">
             <div>
-                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
-                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
-                <ul class="list-disc">
-                    <li>Resumen</li>
-                    <li>Complemento - Resumen</li>
-                    <li>Antecedentes</li>
-                    <li>Complemento - Antecedentes regional</li>
-                    <li>Justificación</li>
-                    <li>Retos y prioridades locales</li>
-                    <li>Justificación y pertinencia en el territorio</li>
-                    <li>Marco conceptual</li>
-                    <li>Bibliografía</li>
-                    <li>Número de aprendices beneficiados</li>
-                    <li>Nombre de los municipios beneficiados</li>
-                    <li>Articulación con la media</li>
-                    <li>Impacto en el centro de formación</li>
-                </ul>
+                <h1 class="text-center mt-4 mb-4">Cláusula de confidencialidad</h1>
+                <p class="mb-4">
+                    Al hacer clic en el botón Aceptar, dejo constancia del tratamiento confidencial que daré a la información relacionada con el proceso de evaluación que incluye, sin limitarse a esta, la información sobre proyectos, centros de formación, formuladores, autores y coautores de proyectos, resultados del proceso de evaluación en sus dos etapas. Por tanto, declaro que me abstendré de
+                    usar o divulgar para cualquier fin y por cualquier medio la información enunciada.
+                </p>
             </div>
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#nodo_tecnoparque_id')}>Continuar diligenciando</Button>
-            </div>
-        </div>
-    </Dialog>
-
-    <Dialog bind:open={dialogOpen}>
-        <div slot="titulo" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
-
-            <form on:submit|preventDefault={destroy} id="delete-tp" class="mt-10 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
-                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
-            </form>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-tp">Confirmar</Button>
+                <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

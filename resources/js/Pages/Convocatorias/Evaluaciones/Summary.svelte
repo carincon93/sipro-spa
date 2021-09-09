@@ -33,7 +33,7 @@
     })
 
     function finishEvaluacion() {
-        if (isSuperAdmin || checkRole(authUser, [11])) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.finish', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -54,32 +54,87 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
+    {#if evaluacion.finalizado == true}
+        <InfoMessage class="mt-20 mb-2" message="La evaluación ha sido finalizada con éxito." />
+    {/if}
     <div class="mt-20">
         <InfoMessage class="mb-2">
-            <ul class="list'disc">
-                <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
-                {#if proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                    <li><strong>Video:</strong> {evaluacion.video_puntaje ? evaluacion.video_puntaje : 0}</li>
-                {/if}
-                <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
-                <li><strong>Problema central:</strong> {evaluacion.problema_central_puntaje ? evaluacion.problema_central_puntaje : 0}</li>
-                <li><strong>Objetivos:</strong> {evaluacion.objetivos_puntaje ? evaluacion.objetivos_puntaje : 0}</li>
-                <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
-                {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-                    <li><strong>Entidad aliada:</strong> {evaluacion.entidad_aliada_puntaje ? evaluacion.entidad_aliada_puntaje : 0}</li>
-                {/if}
-                <li><strong>Resultados:</strong> {evaluacion.resultados_puntaje ? evaluacion.resultados_puntaje : 0}</li>
-                <li><strong>Productos:</strong> {evaluacion.productos_puntaje ? evaluacion.productos_puntaje : 0}</li>
-                <li><strong>Cadena de valor:</strong> {evaluacion.cadena_valor_puntaje ? evaluacion.cadena_valor_puntaje : 0}</li>
-                <li><strong>Ánalisis de riesgos:</strong> {evaluacion.analisis_riesgos_puntaje ? evaluacion.analisis_riesgos_puntaje : 0}</li>
-                <li><strong>Ortografía:</strong> {evaluacion.ortografia_puntaje ? evaluacion.ortografia_puntaje : 0}</li>
-                <li><strong>Redacción:</strong> {evaluacion.redaccion_puntaje ? evaluacion.redaccion_puntaje : 0}</li>
-                <li><strong>Normas APA:</strong> {evaluacion.normas_apa_puntaje ? evaluacion.normas_apa_puntaje : 0}</li>
-                <li>
-                    <strong>Puntaje total:</strong>
-                    {evaluacion.total_evaluacion}
-                </li>
-            </ul>
+            <h1 class="text-2xl font-black text-center">Evaluación</h1>
+            {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                <div class="flex">
+                    <ul class="list-disc flex-1 pl-4">
+                        <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
+                        {#if proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                            <li><strong>Video:</strong> {evaluacion.video_puntaje ? evaluacion.video_puntaje : 0}</li>
+                        {/if}
+                        <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
+                        <li><strong>Problema central:</strong> {evaluacion.problema_central_puntaje ? evaluacion.problema_central_puntaje : 0}</li>
+                        <li><strong>Objetivos:</strong> {evaluacion.objetivos_puntaje ? evaluacion.objetivos_puntaje : 0}</li>
+                        <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
+                        {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+                            <li><strong>Entidad aliada:</strong> {evaluacion.entidad_aliada_puntaje ? evaluacion.entidad_aliada_puntaje : 0}</li>
+                        {/if}
+                        <li><strong>Resultados:</strong> {evaluacion.resultados_puntaje ? evaluacion.resultados_puntaje : 0}</li>
+                        <li><strong>Productos:</strong> {evaluacion.productos_puntaje ? evaluacion.productos_puntaje : 0}</li>
+                        <li><strong>Cadena de valor:</strong> {evaluacion.cadena_valor_puntaje ? evaluacion.cadena_valor_puntaje : 0}</li>
+                        <li><strong>Análisis de riesgos:</strong> {evaluacion.analisis_riesgos_puntaje ? evaluacion.analisis_riesgos_puntaje : 0}</li>
+                        <li><strong>Ortografía:</strong> {evaluacion.ortografia_puntaje ? evaluacion.ortografia_puntaje : 0}</li>
+                        <li><strong>Redacción:</strong> {evaluacion.redaccion_puntaje ? evaluacion.redaccion_puntaje : 0}</li>
+                        <li><strong>Normas APA:</strong> {evaluacion.normas_apa_puntaje ? evaluacion.normas_apa_puntaje : 0}</li>
+                    </ul>
+                    <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                        <h1 class="text-2xl">
+                            <strong>Puntaje total:</strong>
+                            {evaluacion.total_evaluacion}
+                        </h1>
+                    </div>
+                </div>
+            {:else if proyecto.codigo_linea_programatica == 68}
+                <div class="flex">
+                    <ul class="list-disc flex-1 pl-4">
+                        <li><strong>Título:</strong> {evaluacion.titulo_puntaje ? evaluacion.titulo_puntaje : 0}</li>
+                        <li><strong>Resumen:</strong> {evaluacion.resumen_puntaje ? evaluacion.resumen_puntaje : 0}</li>
+                        <li><strong>Antecedentes:</strong> {evaluacion.antecedentes_puntaje ? evaluacion.antecedentes_puntaje : 0}</li>
+                        <li><strong>Justificación del problema:</strong> {evaluacion.justificacion_problema_puntaje ? evaluacion.justificacion_problema_puntaje : 0}</li>
+                        <li><strong>Pregunta de formulación del problema:</strong> {evaluacion.pregunta_formulacion_problema_puntaje ? evaluacion.pregunta_formulacion_problema_puntaje : 0}</li>
+                        <li><strong>Propuesta de sostenibilidad:</strong> {evaluacion.propuesta_sostenibilidad_puntaje ? evaluacion.propuesta_sostenibilidad_puntaje : 0}</li>
+                        <li><strong>Identificación del problema:</strong> {evaluacion.identificacion_problema_puntaje ? evaluacion.identificacion_problema_puntaje : 0}</li>
+                        <li><strong>Árbol de problemas:</strong> {evaluacion.arbol_problemas_puntaje ? evaluacion.arbol_problemas_puntaje : 0}</li>
+                        <li><strong>Impacto ambiental:</strong> {evaluacion.impacto_ambiental_puntaje ? evaluacion.impacto_ambiental_puntaje : 0}</li>
+                        <li><strong>Impacto social en el centro de formación:</strong> {evaluacion.impacto_social_centro_puntaje ? evaluacion.impacto_social_centro_puntaje : 0}</li>
+                        <li><strong>Impacto social en el sector productivo:</strong> {evaluacion.impacto_social_productivo_puntaje ? evaluacion.impacto_social_productivo_puntaje : 0}</li>
+                        <li><strong>Impacto tecnológico:</strong> {evaluacion.impacto_tecnologico_puntaje ? evaluacion.impacto_tecnologico_puntaje : 0}</li>
+                        <li><strong>Objetivo general:</strong> {evaluacion.objetivo_general_puntaje ? evaluacion.objetivo_general_puntaje : 0}</li>
+                        <li><strong>Primer objetivo específico:</strong> {evaluacion.primer_objetivo_puntaje ? evaluacion.primer_objetivo_puntaje : 0}</li>
+                        <li><strong>Segundo objetivo específico:</strong> {evaluacion.segundo_objetivo_puntaje ? evaluacion.segundo_objetivo_puntaje : 0}</li>
+                        <li><strong>Tercer objetivo específico:</strong> {evaluacion.tercer_objetivo_puntaje ? evaluacion.tercer_objetivo_puntaje : 0}</li>
+                        <li><strong>Cuarto objetivo específico:</strong> {evaluacion.cuarto_objetivo_puntaje ? evaluacion.cuarto_objetivo_puntaje : 0}</li>
+                        <li><strong>Resultados del primer objetivo específico:</strong> {evaluacion.resultados_primer_obj_puntaje ? evaluacion.resultados_primer_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo objetivo específico:</strong> {evaluacion.resultados_segundo_obj_puntaje ? evaluacion.resultados_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo tercer específico:</strong> {evaluacion.resultados_tercer_obj_puntaje ? evaluacion.resultados_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Resultados del segundo cuarto específico:</strong> {evaluacion.resultados_cuarto_obj_puntaje ? evaluacion.resultados_cuarto_obj_puntaje : 0}</li>
+                        <li><strong>Metodología:</strong> {evaluacion.metodologia_puntaje ? evaluacion.metodologia_puntaje : 0}</li>
+                        <li><strong>Actividades del primer objetivo específico:</strong> {evaluacion.actividades_primer_obj_puntaje ? evaluacion.actividades_primer_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del segundo objetivo específico:</strong> {evaluacion.actividades_segundo_obj_puntaje ? evaluacion.actividades_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del tercer objetivo específico:</strong> {evaluacion.actividades_tercer_obj_puntaje ? evaluacion.actividades_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Actividades del cuarto objetivo específico:</strong> {evaluacion.actividades_cuarto_obj_puntaje ? evaluacion.actividades_cuarto_obj_puntaje : 0}</li>
+                        <li><strong>Productos del primer objetivo específico:</strong> {evaluacion.productos_primer_obj_puntaje ? evaluacion.productos_primer_obj_puntaje : 0}</li>
+                        <li><strong>Productos del segundo objetivo específico:</strong> {evaluacion.productos_segundo_obj_puntaje ? evaluacion.productos_segundo_obj_puntaje : 0}</li>
+                        <li><strong>Productos del tercer objetivo específico:</strong> {evaluacion.productos_tercer_obj_puntaje ? evaluacion.productos_tercer_obj_puntaje : 0}</li>
+                        <li><strong>Productos del cuarto objetivo específico:</strong> {evaluacion.productos_cuarto_obj_puntaje ? evaluacion.productos_cuarto_obj_puntaje : 0}</li>
+
+                        <li><strong>Análisis de riesgos a nivel de objetivo general:</strong> {evaluacion.riesgos_objetivo_general_puntaje ? evaluacion.riesgos_objetivo_general_puntaje : 0}</li>
+                        <li><strong>Análisis de riesgos a nivel de productos:</strong> {evaluacion.riesgos_productos_puntaje ? evaluacion.riesgos_productos_puntaje : 0}</li>
+                        <li><strong>Análisis de riesgos a nivel de actividades:</strong> {evaluacion.riesgos_actividades_puntaje ? evaluacion.riesgos_actividades_puntaje : 0}</li>
+                    </ul>
+                    <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                        <h1 class="text-2xl">
+                            <strong>Puntaje total:</strong>
+                            {evaluacion.total_evaluacion}
+                        </h1>
+                    </div>
+                </div>
+            {/if}
         </InfoMessage>
 
         {#if evaluacion.validar_evaluacion.length > 0}
@@ -94,10 +149,6 @@
         {:else if evaluacion.finalizado == false && evaluacion.validar_evaluacion.length == 0}
             <InfoMessage class="mb-2" message="Si desea finalizar la evaluación de clic en <strong>Finalizar evaluación</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
             <Button on:click={(event) => (finishEvaluacionDialogOpen = true)} variant="raised">Finalizar evaluación</Button>
-        {/if}
-
-        {#if evaluacion.finalizado}
-            <InfoMessage class="mb-2" message="La evaluación ha sido finalizada con éxito." />
         {/if}
     </div>
     <hr class="mt-10 mb-10" />
@@ -122,11 +173,12 @@
             {#if versiones}
                 <ul>
                     {#each versiones as version}
-                        <li>{version.version}.pdf - 
-                            {#if version.estado==1}
-                            <a href="{route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}">Descargar</a>
+                        <li>
+                            {version.version}.pdf -
+                            {#if version.estado == 1}
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}>Descargar</a>
                             {:else}
-                            Generando, regrese pronto.
+                                Generando, regrese pronto.
                             {/if}
                         </li>
                     {/each}

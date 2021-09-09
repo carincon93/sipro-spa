@@ -60,7 +60,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {iniciado ? 'Evaluación iniciada' : finalizado ? 'Evaluación finalizada' : 'Sin evaluar'}
+                            {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
                         </p>
                     </td>
                     <td class="border-t td-actions">
@@ -81,7 +81,7 @@
 
             {#if idi.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

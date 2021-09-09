@@ -6,7 +6,12 @@ use App\Http\Requests\ActividadRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\Actividad;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\ProyectoPresupuesto;
 use App\Models\ProyectoRolSennova;
 use Illuminate\Http\Request;
@@ -24,6 +29,7 @@ class ActividadController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $objetivoEspecifico = $proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
@@ -51,7 +57,7 @@ class ActividadController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
@@ -124,7 +130,7 @@ class ActividadController extends Controller
         })->flatten();
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
-            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable'),
             'actividad'                      => $actividad,
             'productos'                      => $productos,
@@ -236,6 +242,8 @@ class ActividadController extends Controller
      */
     public function showMetodologiaEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $objetivoEspecifico = $evaluacion->proyecto->causasDirectas()->with('objetivoEspecifico')->get()->pluck('objetivoEspecifico')->flatten()->filter();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
@@ -243,30 +251,61 @@ class ActividadController extends Controller
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->idi->metodologia;
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->ta->metodologia;
                 $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->ta->metodologia_local;
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->tp->metodologia;
                 $evaluacion->proyecto->metodologia_local = $evaluacion->proyecto->tp->metodologia_local;
+
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->culturaInnovacion->metodologia;
+
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $evaluacion->proyecto->metodologia = $evaluacion->proyecto->servicioTecnologico->metodologia;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Index', [
-            'convocatoria'      => $convocatoria->only('id'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'evaluacion'        => $evaluacion,
-            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local'),
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'metodologia', 'metodologia_local', 'cantidad_objetivos'),
             'year'              => date('Y') + 1,
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
@@ -295,17 +334,48 @@ class ActividadController extends Controller
      */
     public function updateMetodologiaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'metodologia_puntaje'      => $request->metodologia_puntaje,
-                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'metodologia_puntaje'      => $request->metodologia_puntaje,
-                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == true ? $request->metodologia_comentario : null
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'metodologia_puntaje'      => $request->metodologia_puntaje,
+                    'metodologia_comentario'   => $request->metodologia_requiere_comentario == false ? $request->metodologia_comentario : null,
+
+                    'actividades_primer_obj_puntaje'      => $request->actividades_primer_obj_puntaje,
+                    'actividades_primer_obj_comentario'   => $request->actividades_primer_obj_requiere_comentario == false ? $request->actividades_primer_obj_comentario : null,
+
+                    'actividades_segundo_obj_puntaje'      => $request->actividades_segundo_obj_puntaje,
+                    'actividades_segundo_obj_comentario'   => $request->actividades_segundo_obj_requiere_comentario == false ? $request->actividades_segundo_obj_comentario : null,
+
+                    'actividades_tercer_obj_puntaje'      => $request->actividades_tercer_obj_puntaje,
+                    'actividades_tercer_obj_comentario'   => $request->actividades_tercer_obj_requiere_comentario == false ? $request->actividades_tercer_obj_comentario : null,
+
+                    'actividades_cuarto_obj_puntaje'      => $request->actividades_cuarto_obj_puntaje,
+                    'actividades_cuarto_obj_comentario'   => $request->actividades_cuarto_obj_requiere_comentario == false ? $request->actividades_cuarto_obj_comentario : null,
                 ]);
                 break;
             default:
@@ -325,6 +395,8 @@ class ActividadController extends Controller
      */
     public function actividadEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, Actividad $actividad)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $resultados = $evaluacion->proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
             $query->where('descripcion', '!=', null);
         })->with('resultados')->get()->pluck('resultados')->flatten();
@@ -334,7 +406,7 @@ class ActividadController extends Controller
         })->flatten();
 
         return Inertia::render('Convocatorias/Evaluaciones/Actividades/Edit', [
-            'convocatoria'                   => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'evaluacion'                     => $evaluacion->only('id'),
             'proyecto'                       => $evaluacion->proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'finalizado'),
             'productos'                      => $productos,

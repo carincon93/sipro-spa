@@ -180,6 +180,22 @@
                         <InputError classes="text-center" message={errors.max_meses_ejecucion} />
                     </div>
                 {/if}
+
+                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#each tp.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                <div class="flex text-orangered-900 font-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Recomendación del evaluador COD-{evaluacion.id}:
+                                </div>
+                                <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.fecha_ejecucion_comentario ? evaluacion.tp_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
             </div>
 
             <fieldset disabled>
@@ -226,7 +242,23 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea label="Complemento - Resumen ejecutivo regional" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.resumen_regional_comentario ? evaluacion.tp_evaluacion.resumen_regional_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -249,7 +281,23 @@
                     <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
                 </div>
                 <div>
-                    <Textarea label="Complemento - Antecedentes regional" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.antecedentes_regional_comentario ? evaluacion.tp_evaluacion.antecedentes_regional_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -258,7 +306,23 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
                 </div>
                 <div>
-                    <Textarea label="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.retos_oportunidades_comentario ? evaluacion.tp_evaluacion.retos_oportunidades_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -267,7 +331,23 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.pertinencia_territorio_comentario ? evaluacion.tp_evaluacion.pertinencia_territorio_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
 
@@ -301,14 +381,105 @@
                 </div>
             </div>
 
+            <div class="mt-44 grid grid-cols-1">
+                <div />
+                <div>
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.municipios_comentario ? evaluacion.tp_evaluacion.municipios_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
+                </div>
+            </div>
+
             <div class="mt-40 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea label="" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.impacto_centro_formacion_comentario ? evaluacion.tp_evaluacion.impacto_centro_formacion_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Ortografía</h1>
+                {#each tp.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del evaluador COD-{evaluacion.id}:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.ortografia_comentario ? evaluacion.tp_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Redacción</h1>
+                {#each tp.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del evaluador COD-{evaluacion.id}:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.redaccion_comentario ? evaluacion.tp_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                <hr class="mt-10 mb-10" />
+                <h1>Normas APA</h1>
+                {#each tp.proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                            <div class="flex text-orangered-900 font-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                                Recomendación del evaluador COD-{evaluacion.id}:
+                            </div>
+                            <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.normas_apa_comentario ? evaluacion.tp_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
@@ -316,7 +487,23 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea label="Bibliografía" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+
+                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#each tp.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                    <div class="flex text-orangered-900 font-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                        Recomendación del evaluador COD-{evaluacion.id}:
+                                    </div>
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion.bibliografia_comentario ? evaluacion.tp_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
                 </div>
             </div>
         </fieldset>

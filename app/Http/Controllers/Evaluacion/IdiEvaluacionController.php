@@ -8,6 +8,7 @@ use App\Http\Requests\Evaluacion\IdiEvaluacionRequest;
 use App\Models\CentroFormacion;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
+use App\Models\Proyecto;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +24,7 @@ class IdiEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'filters'       => request()->all('search'),
             'idi'           => IdiEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -69,6 +70,8 @@ class IdiEvaluacionController extends Controller
      */
     public function edit(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
         $idiEvaluacion->evaluacion->proyecto;
         $idi = $idiEvaluacion->evaluacion->proyecto->idi;
         $idi->proyecto->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
@@ -78,9 +81,12 @@ class IdiEvaluacionController extends Controller
         $idi->proyecto->centroFormacion;
 
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi'),
             'idi'                                       => $idi,
             'idiEvaluacion'                             => $idiEvaluacion,
+            'idiSegundaEvaluacion'                      => IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+            })->where('idi_evaluaciones.id', '!=', $idiEvaluacion->id)->first(),
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
@@ -102,34 +108,35 @@ class IdiEvaluacionController extends Controller
      */
     public function update(IdiEvaluacionRequest $request, Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
         $idiEvaluacion->evaluacion()->update([
-            'iniciado' => true
+            'iniciado' => true,
+            'clausula_confidencialidad' => $request->clausula_confidencialidad
         ]);
 
         $idiEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
-        $idiEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == true ? $request->titulo_comentario : null;
+        $idiEvaluacion->titulo_comentario           = $request->titulo_requiere_comentario == false ? $request->titulo_comentario : null;
         $idiEvaluacion->video_puntaje               = $request->video_puntaje;
-        $idiEvaluacion->video_comentario            = $request->video_requiere_comentario == true ? $request->video_comentario : null;
+        $idiEvaluacion->video_comentario            = $request->video_requiere_comentario == false ? $request->video_comentario : null;
         $idiEvaluacion->resumen_puntaje             = $request->resumen_puntaje;
-        $idiEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == true ? $request->resumen_comentario : null;
-        $idiEvaluacion->problema_central_puntaje    = $request->problema_central_puntaje;
-        $idiEvaluacion->problema_central_comentario = $request->problema_central_requiere_comentario == true ? $request->problema_central_comentario : null;
+        $idiEvaluacion->resumen_comentario          = $request->resumen_requiere_comentario == false ? $request->resumen_comentario : null;
         $idiEvaluacion->ortografia_puntaje          = $request->ortografia_puntaje;
-        $idiEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == true ? $request->ortografia_comentario : null;
+        $idiEvaluacion->ortografia_comentario       = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $idiEvaluacion->redaccion_puntaje           = $request->redaccion_puntaje;
-        $idiEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == true ? $request->redaccion_comentario : null;
+        $idiEvaluacion->redaccion_comentario        = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;
         $idiEvaluacion->normas_apa_puntaje          = $request->normas_apa_puntaje;
-        $idiEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == true ? $request->normas_apa_comentario : null;
+        $idiEvaluacion->normas_apa_comentario       = $request->normas_apa_requiere_comentario == false ? $request->normas_apa_comentario : null;
 
-        $idiEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == true ? $request->justificacion_economia_naranja_comentario : null;
-        $idiEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == true ? $request->justificacion_industria_4_comentario : null;
-        $idiEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == true ? $request->bibliografia_comentario : null;
-        $idiEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == true ? $request->fechas_comentario : null;
-        $idiEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == true ? $request->justificacion_politica_discapacidad_comentario : null;
-        $idiEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == true ? $request->actividad_economica_comentario : null;
-        $idiEvaluacion->disciplina_subarea_conocimiento_comentario = $request->disciplina_subarea_conocimiento_requiere_comentario == true ? $request->disciplina_subarea_conocimiento_comentario : null;
-        $idiEvaluacion->red_conocimiento_comentario = $request->red_conocimiento_requiere_comentario == true ? $request->red_conocimiento_comentario : null;
-        $idiEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == true ? $request->tematica_estrategica_comentario : null;
+        $idiEvaluacion->justificacion_economia_naranja_comentario = $request->justificacion_economia_naranja_requiere_comentario == false ? $request->justificacion_economia_naranja_comentario : null;
+        $idiEvaluacion->justificacion_industria_4_comentario = $request->justificacion_industria_4_requiere_comentario == false ? $request->justificacion_industria_4_comentario : null;
+        $idiEvaluacion->bibliografia_comentario = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
+        $idiEvaluacion->fechas_comentario = $request->fechas_requiere_comentario == false ? $request->fechas_comentario : null;
+        $idiEvaluacion->justificacion_politica_discapacidad_comentario = $request->justificacion_politica_discapacidad_requiere_comentario == false ? $request->justificacion_politica_discapacidad_comentario : null;
+        $idiEvaluacion->actividad_economica_comentario = $request->actividad_economica_requiere_comentario == false ? $request->actividad_economica_comentario : null;
+        $idiEvaluacion->disciplina_subarea_conocimiento_comentario = $request->disciplina_subarea_conocimiento_requiere_comentario == false ? $request->disciplina_subarea_conocimiento_comentario : null;
+        $idiEvaluacion->red_conocimiento_comentario = $request->red_conocimiento_requiere_comentario == false ? $request->red_conocimiento_comentario : null;
+        $idiEvaluacion->tematica_estrategica_comentario = $request->tematica_estrategica_requiere_comentario == false ? $request->tematica_estrategica_comentario : null;
 
         $idiEvaluacion->save();
 
@@ -144,6 +151,8 @@ class IdiEvaluacionController extends Controller
      */
     public function destroy(Convocatoria $convocatoria, IdiEvaluacion $idiEvaluacion)
     {
-        return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
+        $this->authorize('modificar-evaluacion-autor', $idiEvaluacion->evaluacion);
+
+        return redirect()->route('convocatorias.idi-evaluaciones.index', [$convocatoria])->with('error', 'El recurso se no se ha podido eliminar.');
     }
 }

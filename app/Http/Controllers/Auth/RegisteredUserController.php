@@ -47,21 +47,6 @@ class RegisteredUserController extends Controller
     public function store(UserRegisterRequest $request)
     {
         $habilitado = false;
-        $convocatoriaActiva = Convocatoria::where('esta_activa', 1)->first();
-
-        $fechaActual = date('Y-m-d');
-
-        if (in_array(6, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_idi && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_idi) {
-            $habilitado = true;
-        } else if (in_array(15, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_cultura && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_cultura) {
-            $habilitado = true;
-        } else if (in_array(13, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_st && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_st) {
-            $habilitado = true;
-        } else if (in_array(12, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_ta && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_ta) {
-            $habilitado = true;
-        } else if (in_array(16, $request->role_id) && $fechaActual >= $convocatoriaActiva->fecha_inicio_convocatoria_tp && $fechaActual <= $convocatoriaActiva->fecha_finalizacion_convocatoria_tp) {
-            $habilitado = true;
-        }
 
         Auth::login($user = User::create([
             'nombre'                => $request->nombre,

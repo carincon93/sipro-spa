@@ -7,7 +7,12 @@ use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
 use App\Http\Traits\ProyectoValidationTrait;
 use App\Models\Convocatoria;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use App\Models\Impacto;
 use App\Models\User;
 use App\Models\ProgramaFormacion;
@@ -38,6 +43,7 @@ class ProyectoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
@@ -85,7 +91,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'productos'     => $productos,
             'objetivos'     => $objetivos
@@ -101,37 +107,74 @@ class ProyectoController extends Controller
      */
     public function showCadenaValorEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         $efectosIndirectos = $evaluacion->proyecto->efectosDirectos()->with('efectosIndirectos')->get()->pluck('efectosIndirectos')->flatten()->filter();
 
-        if ($evaluacion->proyecto->idi()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
-            $evaluacion->idiEvaluacion;
-        }
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->idi()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->idi->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->idi->propuesta_sostenibilidad;
 
-        if ($evaluacion->proyecto->ta()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->ta->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
-            $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
-            $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
-        }
+                $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
 
-        if ($evaluacion->proyecto->tp()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
-        }
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
+                break;
+            case $evaluacion->proyecto->ta()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->ta->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad_social      = $evaluacion->proyecto->ta->propuesta_sostenibilidad_social;
+                $evaluacion->proyecto->propuesta_sostenibilidad_ambiental   = $evaluacion->proyecto->ta->propuesta_sostenibilidad_ambiental;
+                $evaluacion->proyecto->propuesta_sostenibilidad_financiera  = $evaluacion->proyecto->ta->propuesta_sostenibilidad_financiera;
 
-        if ($evaluacion->proyecto->servicioTecnologico()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
-        }
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
 
-        if ($evaluacion->proyecto->culturaInnovacion()->exists()) {
-            $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
-            $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
-            $evaluacion->culturaInnovacionEvaluacion;
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
+                break;
+            case $evaluacion->proyecto->tp()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->tp->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->tp->propuesta_sostenibilidad;
+
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
+                break;
+
+            case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->servicioTecnologico->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->servicioTecnologico->propuesta_sostenibilidad;
+
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
+                break;
+
+            case $evaluacion->proyecto->culturaInnovacion()->exists():
+                $objetivoGeneral = $evaluacion->proyecto->culturaInnovacion->objetivo_general;
+                $evaluacion->proyecto->propuesta_sostenibilidad = $evaluacion->proyecto->culturaInnovacion->propuesta_sostenibilidad;
+
+                $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
+
+                break;
+            default:
+                break;
         }
 
         $objetivos = collect(['Objetivo general' => $objetivoGeneral]);
@@ -150,12 +193,13 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/CadenaValor/Index', [
-            'convocatoria'  => $convocatoria->only('id'),
-            'evaluacion'    => $evaluacion,
-            'proyecto'      => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'finalizado'),
-            'productos'     => $productos,
-            'objetivos'     => $objetivos,
-            'impactos'      => Impacto::whereIn(
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto,
+            'productos'         => $productos,
+            'objetivos'         => $objetivos,
+            'impactos'          => Impacto::whereIn(
                 'efecto_indirecto_id',
                 $efectosIndirectos->map(function ($efectosIndirecto) {
                     return $efectosIndirecto->id;
@@ -174,17 +218,48 @@ class ProyectoController extends Controller
      */
     public function updateCadenaValorEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
-                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'cadena_valor_puntaje'      => $request->cadena_valor_puntaje,
-                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == true ? $request->cadena_valor_comentario : null
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'cadena_valor_comentario'   => $request->cadena_valor_requiere_comentario == false ? $request->cadena_valor_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'propuesta_sostenibilidad_puntaje'      => $request->propuesta_sostenibilidad_puntaje,
+                    'propuesta_sostenibilidad_comentario'   => $request->propuesta_sostenibilidad_requiere_comentario == false ? $request->propuesta_sostenibilidad_comentario : null,
+
+                    'impacto_ambiental_puntaje'      => $request->impacto_ambiental_puntaje,
+                    'impacto_ambiental_comentario'   => $request->impacto_ambiental_requiere_comentario == false ? $request->impacto_ambiental_comentario : null,
+
+                    'impacto_social_centro_puntaje'      => $request->impacto_social_centro_puntaje,
+                    'impacto_social_centro_comentario'   => $request->impacto_social_centro_requiere_comentario == false ? $request->impacto_social_centro_comentario : null,
+
+                    'impacto_social_productivo_puntaje'      => $request->impacto_social_productivo_puntaje,
+                    'impacto_social_productivo_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_social_productivo_comentario : null,
+
+                    'impacto_tecnologico_puntaje'      => $request->impacto_tecnologico_puntaje,
+                    'impacto_tecnologico_comentario'   => $request->impacto_social_productivo_requiere_comentario == false ? $request->impacto_tecnologico_comentario : null,
                 ]);
                 break;
             default:
@@ -308,7 +383,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
-            'convocatoria'              => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar', 'max_valor_roles', 'max_valor_presupuesto'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
@@ -346,6 +421,8 @@ class ProyectoController extends Controller
      */
     public function summaryEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->precio_proyecto           = $evaluacion->proyecto->precioProyecto;
 
@@ -369,16 +446,67 @@ class ProyectoController extends Controller
                 $evaluacion->normas_apa_puntaje         = $evaluacion->idiEvaluacion->normas_apa_puntaje;
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                $evaluacion->titulo_puntaje             = $evaluacion->culturaInnovacionEvaluacion->titulo_puntaje;
+                $evaluacion->video_puntaje              = $evaluacion->culturaInnovacionEvaluacion->video_puntaje;
+                $evaluacion->resumen_puntaje            = $evaluacion->culturaInnovacionEvaluacion->resumen_puntaje;
+                $evaluacion->problema_central_puntaje   = $evaluacion->culturaInnovacionEvaluacion->problema_central_puntaje;
+                $evaluacion->objetivos_puntaje          = $evaluacion->culturaInnovacionEvaluacion->objetivos_puntaje;
+                $evaluacion->metodologia_puntaje        = $evaluacion->culturaInnovacionEvaluacion->metodologia_puntaje;
+                $evaluacion->entidad_aliada_puntaje     = $evaluacion->culturaInnovacionEvaluacion->entidad_aliada_puntaje;
+                $evaluacion->resultados_puntaje         = $evaluacion->culturaInnovacionEvaluacion->resultados_puntaje;
+                $evaluacion->productos_puntaje          = $evaluacion->culturaInnovacionEvaluacion->productos_puntaje;
+                $evaluacion->cadena_valor_puntaje       = $evaluacion->culturaInnovacionEvaluacion->cadena_valor_puntaje;
+                $evaluacion->analisis_riesgos_puntaje   = $evaluacion->culturaInnovacionEvaluacion->analisis_riesgos_puntaje;
+                $evaluacion->ortografia_puntaje         = $evaluacion->culturaInnovacionEvaluacion->ortografia_puntaje;
+                $evaluacion->redaccion_puntaje          = $evaluacion->culturaInnovacionEvaluacion->redaccion_puntaje;
+                $evaluacion->normas_apa_puntaje         = $evaluacion->culturaInnovacionEvaluacion->normas_apa_puntaje;
+                break;
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->titulo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->titulo_puntaje;
+                $evaluacion->resumen_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resumen_puntaje;
+                $evaluacion->antecedentes_puntaje = $evaluacion->servicioTecnologicoEvaluacion->antecedentes_puntaje;
+                $evaluacion->justificacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->justificacion_problema_puntaje;
+                $evaluacion->pregunta_formulacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->pregunta_formulacion_problema_puntaje;
+                $evaluacion->propuesta_sostenibilidad_puntaje = $evaluacion->servicioTecnologicoEvaluacion->propuesta_sostenibilidad_puntaje;
+                $evaluacion->identificacion_problema_puntaje = $evaluacion->servicioTecnologicoEvaluacion->identificacion_problema_puntaje;
+                $evaluacion->arbol_problemas_puntaje = $evaluacion->servicioTecnologicoEvaluacion->arbol_problemas_puntaje;
+                $evaluacion->impacto_ambiental_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_ambiental_puntaje;
+                $evaluacion->impacto_social_centro_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_social_centro_puntaje;
+                $evaluacion->impacto_social_productivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_social_productivo_puntaje;
+                $evaluacion->impacto_tecnologico_puntaje = $evaluacion->servicioTecnologicoEvaluacion->impacto_tecnologico_puntaje;
+                $evaluacion->objetivo_general_puntaje = $evaluacion->servicioTecnologicoEvaluacion->objetivo_general_puntaje;
+                $evaluacion->primer_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->primer_objetivo_puntaje;
+                $evaluacion->segundo_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->segundo_objetivo_puntaje;
+                $evaluacion->tercer_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->tercer_objetivo_puntaje;
+                $evaluacion->cuarto_objetivo_puntaje = $evaluacion->servicioTecnologicoEvaluacion->cuarto_objetivo_puntaje;
+                $evaluacion->resultados_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_primer_obj_puntaje;
+                $evaluacion->resultados_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_segundo_obj_puntaje;
+                $evaluacion->resultados_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_tercer_obj_puntaje;
+                $evaluacion->resultados_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->resultados_cuarto_obj_puntaje;
+                $evaluacion->metodologia_puntaje = $evaluacion->servicioTecnologicoEvaluacion->metodologia_puntaje;
+                $evaluacion->actividades_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_primer_obj_puntaje;
+                $evaluacion->actividades_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_segundo_obj_puntaje;
+                $evaluacion->actividades_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_tercer_obj_puntaje;
+                $evaluacion->actividades_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->actividades_cuarto_obj_puntaje;
+                $evaluacion->productos_primer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_primer_obj_puntaje;
+                $evaluacion->productos_segundo_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_segundo_obj_puntaje;
+                $evaluacion->productos_tercer_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_tercer_obj_puntaje;
+                $evaluacion->productos_cuarto_obj_puntaje = $evaluacion->servicioTecnologicoEvaluacion->productos_cuarto_obj_puntaje;
+
+                $evaluacion->riesgos_objetivo_general_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_objetivo_general_puntaje;
+                $evaluacion->riesgos_productos_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_productos_puntaje;
+                $evaluacion->riesgos_actividades_puntaje = $evaluacion->servicioTecnologicoEvaluacion->riesgos_actividades_puntaje;
+
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Summary', [
-            'convocatoria' => $convocatoria->only('id', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
+            'convocatoria' => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
             'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
-            'versiones'     => $evaluacion->proyecto->PdfVersiones,
+            'versiones'    => $evaluacion->proyecto->PdfVersiones,
         ]);
     }
 
@@ -529,6 +657,8 @@ class ProyectoController extends Controller
      */
     public function participantesEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->participantes;
         $evaluacion->proyecto->programasFormacion;
@@ -904,5 +1034,45 @@ class ProyectoController extends Controller
     public function descargarPdf(Convocatoria $convocatoria, Proyecto $proyecto, $version)
     {
         return response()->download(storage_path("app/convocatorias/" . $convocatoria->id . "/" . $proyecto->id . "/" . $version . ".pdf"));
+    }
+
+    /**
+     * showComentariosGeneralesForm
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function showComentariosGeneralesForm(Convocatoria $convocatoria, Proyecto $proyecto)
+    {
+        $this->authorize('visualizar-proyecto-autor', $proyecto);
+
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
+        return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'evaluaciones'                  => $proyecto->evaluaciones,
+            'proyecto'                      => $proyecto,
+        ]);
+    }
+
+    /**
+     * udpdateComentariosGenerales
+     *
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function udpdateComentariosGenerales(Request $request, Convocatoria $convocatoria, $evaluacion)
+    {
+        $evaluacion = Evaluacion::find($evaluacion);
+
+        $this->authorize('modificar-proyecto-autor', $evaluacion->proyecto);
+
+        $evaluacion->update(
+            ['evaluacion_id' => $evaluacion->id, 'replicas' => $request->replicas],
+        );
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

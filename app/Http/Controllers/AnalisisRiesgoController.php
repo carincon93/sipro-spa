@@ -6,7 +6,12 @@ use App\Http\Requests\AnalisisRiesgoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 use App\Models\AnalisisRiesgo;
+use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\IdiEvaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
+use App\Models\Evaluacion\TpEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -23,11 +28,12 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')
@@ -105,7 +111,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Edit', [
-            'convocatoria'         => $convocatoria->only('id'),
+            'convocatoria'         => $convocatoria->only('id', 'fase_formateada'),
             'proyecto'             => $proyecto,
             'analisisRiesgo'       => $analisisRiesgo,
             'nivelesRiesgo'        => json_decode(Storage::get('json/niveles-riesgo.json'), true),
@@ -162,31 +168,61 @@ class AnalisisRiesgoController extends Controller
      */
     public function showAnalisisRiesgosEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;
+                $idi = $evaluacion->proyecto->idi;
+
+                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                    $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
+                })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->ta()->exists():
+                $evaluacion->taEvaluacion;
+                $ta = $evaluacion->proyecto->ta;
+
+                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->tp()->exists():
+                $evaluacion->tpEvaluacion;
+                $tp = $evaluacion->proyecto->tp;
+
+                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                    $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
+                })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->culturaInnovacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion;
+                $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
+
+                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                    $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
+                })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
+                $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
+
+                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                    $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
+                })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
             default:
                 break;
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id'),
-            'evaluacion'      => $evaluacion,
-            'proyecto'        => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
-            'filters'         => request()->all('search'),
-            'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
+            'evaluacion'        => $evaluacion,
+            'segundaEvaluacion' => $segundaEvaluacion,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
+            'filters'           => request()->all('search'),
+            'analisisRiesgos'   => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
                 ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
@@ -201,17 +237,43 @@ class AnalisisRiesgoController extends Controller
      */
     public function updateAnalisisRiesgosEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
         switch ($evaluacion) {
             case $evaluacion->idiEvaluacion()->exists():
                 $evaluacion->idiEvaluacion()->update([
                     'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
-                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
                 ]);
                 break;
             case $evaluacion->culturaInnovacionEvaluacion()->exists():
                 $evaluacion->culturaInnovacionEvaluacion()->update([
                     'analisis_riesgos_puntaje'      => $request->analisis_riesgos_puntaje,
-                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == true ? $request->analisis_riesgos_comentario : null
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->taEvaluacion()->exists():
+                $evaluacion->taEvaluacion()->update([
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'analisis_riesgos_comentario'   => $request->analisis_riesgos_requiere_comentario == false ? $request->analisis_riesgos_comentario : null
+                ]);
+                break;
+
+            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                $evaluacion->servicioTecnologicoEvaluacion()->update([
+                    'riesgos_objetivo_general_puntaje'      => $request->riesgos_objetivo_general_puntaje,
+                    'riesgos_objetivo_general_comentario'   => $request->riesgos_objetivo_general_requiere_comentario == false ? $request->riesgos_objetivo_general_comentario : null,
+
+                    'riesgos_productos_puntaje'             => $request->riesgos_productos_puntaje,
+                    'riesgos_productos_comentario'          => $request->riesgos_productos_requiere_comentario == false ? $request->riesgos_productos_comentario : null,
+
+                    'riesgos_actividades_puntaje'           => $request->riesgos_actividades_puntaje,
+                    'riesgos_actividades_comentario'        => $request->riesgos_actividades_requiere_comentario == false ? $request->riesgos_actividades_comentario : null,
                 ]);
                 break;
             default:
@@ -231,8 +293,10 @@ class AnalisisRiesgoController extends Controller
      */
     public function analisisRiesgoEvaluacion(Convocatoria $convocatoria, Evaluacion $evaluacion, AnalisisRiesgo $analisisRiesgo)
     {
+        $this->authorize('visualizar-evaluacion-autor', $evaluacion);
+
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Edit', [
-            'convocatoria'          => $convocatoria->only('id'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion->only('id'),
             'proyecto'              => $evaluacion->proyecto,
             'analisisRiesgo'        => $analisisRiesgo,

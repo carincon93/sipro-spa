@@ -16,6 +16,7 @@
     export let errors
     export let convocatoria
     export let evaluacion
+    export let segundaEvaluacion
     export let proyecto
     export let productos
     export let objetivos
@@ -87,14 +88,73 @@
         }
     }
 
-    let form = useForm({
-        cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
-        cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
-        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion.cadena_valor_comentario == null ? false : true) : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+    let formEstrategiaRegionalEvaluacion = useForm({
+        cadena_valor_puntaje: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.cadena_valor_puntaje : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_puntaje : null,
+        cadena_valor_comentario: evaluacion.idi_evaluacion ? evaluacion.idi_evaluacion?.cadena_valor_comentario : evaluacion.cultura_innovacion_evaluacion ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : null,
+        cadena_valor_requiere_comentario: evaluacion.idi_evaluacion ? (evaluacion.idi_evaluacion?.cadena_valor_comentario == null ? true : false) : evaluacion.cultura_innovacion_evaluacion ? (evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario == null ? true : false) : null,
     })
-    function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)) {
-            $form.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+    function submitEstrategiaRegionalEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formEstrategiaRegionalEvaluacion.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
+    let formTaEvaluacion = useForm({
+        cadena_valor_comentario: evaluacion.ta_evaluacion?.cadena_valor_comentario,
+        cadena_valor_requiere_comentario: evaluacion.ta_evaluacion?.cadena_valor_comentario == null ? true : false,
+    })
+    function submitTaEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTaEvaluacion.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
+    let formTpEvaluacion = useForm({
+        cadena_valor_comentario: evaluacion.tp_evaluacion?.cadena_valor_comentario,
+        cadena_valor_requiere_comentario: evaluacion.tp_evaluacion?.cadena_valor_comentario == null ? true : false,
+    })
+    function submitTpEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTpEvaluacion.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
+    let formServicioTecnologicoEvaluacion = useForm({
+        propuesta_sostenibilidad_puntaje: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_puntaje,
+        propuesta_sostenibilidad_comentario: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario,
+        propuesta_sostenibilidad_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario == null ? true : false,
+
+        impacto_ambiental_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_puntaje,
+        impacto_ambiental_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario,
+        impacto_ambiental_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario == null ? true : false,
+
+        impacto_social_centro_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_puntaje,
+        impacto_social_centro_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario,
+        impacto_social_centro_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario == null ? true : false,
+
+        impacto_social_productivo_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_puntaje,
+        impacto_social_productivo_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario,
+        impacto_social_productivo_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario == null ? true : false,
+
+        impacto_tecnologico_puntaje: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_puntaje,
+        impacto_tecnologico_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario,
+        impacto_tecnologico_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario == null ? true : false,
+    })
+    function submitServicioTecnologicoEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.cadena-valor.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -176,60 +236,364 @@
         <div id="orgchart_div" class="overflow-x-scroll" style="margin: 0 -100px;" />
     </div>
 
-    <hr class="mt-10 mb-10" />
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+        <hr class="mt-10 mb-10" />
 
-    <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
 
-    <div class="mt-16">
-        <form on:submit|preventDefault={submit}>
-            <InfoMessage>
-                <h1>Criterios de evaluacion</h1>
-                <ul class="list-disc p-4">
-                    <li>
-                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '0 a 12' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '0 a 9' : ''}</strong> El presupuesto esta sobre o subdimensionado y / o no está directamente relacionado con el desarrollo de las actividades para el logro de los objetivos propuestos.
-                        Los soportes que evidencian el costo del bien a adquirir no son pertinentes y tampoco confiables
-                    </li>
-                    <li>
-                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '13 a 23' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '10 a 18' : ''}</strong> El presupuesto es adecuado, pero es susceptible de ajustes frente a las las actividades a desarrollar que darán cumplimiento a los objetivos propuestos. Los
-                        soportes que evidencian el costo del bien a adquirir son pertinentes y confiables.
-                    </li>
-                    <li>
-                        <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '24 a 25' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '19 a 20' : ''}</strong> El presupuesto está bien definido y se relaciona directamente con el desarrollo de las actividades y los entregables del proyecto. Los soportes que evidencian
-                        el costo del bien a adquirir son pertinentes y confiables.
-                    </li>
-                </ul>
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitEstrategiaRegionalEvaluacion}>
+                <InfoMessage>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li>
+                            <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '0 a 12' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '0 a 9' : ''}</strong> El presupuesto esta sobre o subdimensionado y / o no está directamente relacionado con el desarrollo de las actividades para el logro de los objetivos propuestos.
+                            Los soportes que evidencian el costo del bien a adquirir no son pertinentes y tampoco confiables
+                        </li>
+                        <li>
+                            <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '13 a 23' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '10 a 18' : ''}</strong> El presupuesto es adecuado, pero es susceptible de ajustes frente a las las actividades a desarrollar que darán cumplimiento a los objetivos propuestos.
+                            Los soportes que evidencian el costo del bien a adquirir son pertinentes y confiables.
+                        </li>
+                        <li>
+                            <strong>{proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? '24 a 25' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? '19 a 20' : ''}</strong> El presupuesto está bien definido y se relaciona directamente con el desarrollo de las actividades y los entregables del proyecto. Los soportes que evidencian
+                            el costo del bien a adquirir son pertinentes y confiables.
+                        </li>
+                    </ul>
 
-                <Label class="mt-4 mb-4" labelFor="cadena_valor_puntaje" value={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 'Puntaje (Máximo 25)' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 'Puntaje (Máximo 20)' : 'Puntaje (Máximo 0)'} />
-                <Input
-                    disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined}
-                    label="Puntaje"
-                    id="cadena_valor_puntaje"
-                    type="number"
-                    input$step="1"
-                    input$min="0"
-                    input$max={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 25 : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 20 : 0}
-                    class="mt-1"
-                    bind:value={$form.cadena_valor_puntaje}
-                    placeholder="Puntaje"
-                    autocomplete="off"
-                    error={errors.cadena_valor_puntaje}
-                />
+                    <Label class="mt-4 mb-4" labelFor="cadena_valor_puntaje" value={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 'Puntaje (Máximo 25)' : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 'Puntaje (Máximo 20)' : 'Puntaje (Máximo 0)'} />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="cadena_valor_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max={proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 ? 25 : proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82 ? 20 : 0}
+                        class="mt-1"
+                        bind:value={$formEstrategiaRegionalEvaluacion.cadena_valor_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.cadena_valor_puntaje}
+                    />
 
-                <div class="mt-4">
-                    <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación requieren de alguna recomendación?</p>
-                    <Switch disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} bind:checked={$form.cadena_valor_requiere_comentario} />
-                    {#if $form.cadena_valor_requiere_comentario}
-                        <Textarea disabled={evaluacion.finalizado && evaluacion.habilitado ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$form.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
+                    {#if segundaEvaluacion?.cadena_valor_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.cadena_valor_requiere_comentario} />
+                        {#if $formEstrategiaRegionalEvaluacion.cadena_valor_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$formEstrategiaRegionalEvaluacion.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
-            </InfoMessage>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                {/if}
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 68}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitServicioTecnologicoEvaluacion}>
+                <InfoMessage>
+                    <h1 class="font-black">Propuesta de sostenibilidad</h1>
+                    <h1>Criterios de evaluacion</h1>
+                    <ul class="list-disc p-4">
+                        <li>
+                            Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
+                            <br />
+                            Para definir la propuesta de sostenibilidad se deben tener en cuenta los impactos definidos en el árbol de objetivos (ambiental, social - en el centro de formación, social - en el sector productivo, tecnológico)
+                        </li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="propuesta_sostenibilidad_puntaje" value="Puntaje (Máximo 3)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="propuesta_sostenibilidad_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="3"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.propuesta_sostenibilidad_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.propuesta_sostenibilidad_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.propuesta_sostenibilidad_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.propuesta_sostenibilidad_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿La propuesta de sostenibilidad es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.propuesta_sostenibilidad_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.propuesta_sostenibilidad_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="propuesta_sostenibilidad_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.propuesta_sostenibilidad_comentario}
+                                error={errors.propuesta_sostenibilidad_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <h1 class="font-black">Impacto ambiental</h1>
+                    <h1>Criterios de evaluacion</h1>
+
+                    <ul class="list-disc p-4">
+                        <li>
+                            Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
+                            <br />
+                            Para definir la propuesta de sostenibilidad se deben tener en cuenta los impactos definidos en el árbol de objetivos (ambiental, social - en el centro de formación, social - en el sector productivo, tecnológico)
+                        </li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="impacto_ambiental_puntaje" value="Puntaje (Máximo 1)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="impacto_ambiental_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="1"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.impacto_ambiental_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.impacto_ambiental_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.impacto_ambiental_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_ambiental_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿El impacto ambiental es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_ambiental_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.impacto_ambiental_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="impacto_ambiental_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.impacto_ambiental_comentario}
+                                error={errors.impacto_ambiental_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <h1 class="font-black">Impacto social en el centro de formación</h1>
+                    <h1>Criterios de evaluacion</h1>
+
+                    <ul class="list-disc p-4">
+                        <li>Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)</li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="impacto_social_centro_puntaje" value="Puntaje (Máximo 1)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="impacto_social_centro_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="1"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.impacto_social_centro_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.impacto_social_centro_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.impacto_social_centro_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_social_centro_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿El impacto social en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_social_centro_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.impacto_social_centro_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="impacto_social_centro_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.impacto_social_centro_comentario}
+                                error={errors.impacto_social_centro_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <h1 class="font-black">Impacto social en el sector productivo</h1>
+                    <h1>Criterios de evaluacion</h1>
+
+                    <ul class="list-disc p-4">
+                        <li>Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto.</li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="impacto_social_productivo_puntaje" value="Puntaje (Máximo 1)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="impacto_social_productivo_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="1"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.impacto_social_productivo_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.impacto_social_productivo_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.impacto_social_productivo_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_social_productivo_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿El impacto social en el sector productivo es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_social_productivo_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.impacto_social_productivo_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="impacto_social_productivo_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.impacto_social_productivo_comentario}
+                                error={errors.impacto_social_productivo_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+
+                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <h1 class="font-black">Impacto tecnológico</h1>
+                    <h1>Criterios de evaluacion</h1>
+
+                    <ul class="list-disc p-4">
+                        <li>Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)</li>
+                    </ul>
+
+                    <Label class="mt-4 mb-4" labelFor="impacto_tecnologico_puntaje" value="Puntaje (Máximo 1)" />
+                    <Input
+                        disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                        label="Puntaje"
+                        id="impacto_tecnologico_puntaje"
+                        type="number"
+                        input$step="1"
+                        input$min="0"
+                        input$max="1"
+                        class="mt-1"
+                        bind:value={$formServicioTecnologicoEvaluacion.impacto_tecnologico_puntaje}
+                        placeholder="Puntaje"
+                        autocomplete="off"
+                        error={errors.impacto_tecnologico_puntaje}
+                    />
+
+                    {#if segundaEvaluacion?.impacto_tecnologico_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_tecnologico_comentario}</p>
+                    {/if}
+
+                    <div class="mt-4">
+                        <p>¿El impacto tecnológico es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_tecnologico_requiere_comentario} />
+                        {#if $formServicioTecnologicoEvaluacion.impacto_tecnologico_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="impacto_tecnologico_comentario"
+                                bind:value={$formServicioTecnologicoEvaluacion.impacto_tecnologico_comentario}
+                                error={errors.impacto_tecnologico_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 70}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitTaEvaluacion}>
+                <InfoMessage>
+                    {#if segundaEvaluacion?.cadena_valor_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.cadena_valor_requiere_comentario} />
+                        {#if $formTaEvaluacion.cadena_valor_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$formTaEvaluacion.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 69}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitTpEvaluacion}>
+                <InfoMessage>
+                    {#if segundaEvaluacion?.cadena_valor_comentario}
+                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
+                    {/if}
+                    <div class="mt-4">
+                        <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.cadena_valor_requiere_comentario} />
+                        {#if $formTpEvaluacion.cadena_valor_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="cadena_valor_comentario" bind:value={$formTpEvaluacion.cadena_valor_comentario} error={errors.cadena_valor_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {/if}
 </AuthenticatedLayout>
 
 <style>

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\Convocatoria;
+use App\Models\Proyecto;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ConvocatoriaController extends Controller
@@ -49,7 +51,9 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('create', [Convocatoria::class]);
 
-        return Inertia::render('Convocatorias/Create');
+        return Inertia::render('Convocatorias/Create', [
+            'fases' => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
+        ]);
     }
 
     /**
@@ -64,16 +68,7 @@ class ConvocatoriaController extends Controller
 
         $convocatoria = new Convocatoria();
         $convocatoria->descripcion                              = $request->descripcion;
-        $convocatoria->fecha_inicio_convocatoria_idi            = $request->fecha_inicio_convocatoria_idi;
-        $convocatoria->fecha_finalizacion_convocatoria_idi      = $request->fecha_finalizacion_convocatoria_idi;
-        $convocatoria->fecha_inicio_convocatoria_cultura        = $request->fecha_inicio_convocatoria_cultura;
-        $convocatoria->fecha_finalizacion_convocatoria_cultura  = $request->fecha_finalizacion_convocatoria_cultura;
-        $convocatoria->fecha_inicio_convocatoria_st             = $request->fecha_inicio_convocatoria_st;
-        $convocatoria->fecha_finalizacion_convocatoria_st       = $request->fecha_finalizacion_convocatoria_st;
-        $convocatoria->fecha_inicio_convocatoria_ta             = $request->fecha_inicio_convocatoria_ta;
-        $convocatoria->fecha_inicio_convocatoria_tp             = $request->fecha_inicio_convocatoria_tp;
-        $convocatoria->fecha_finalizacion_convocatoria_ta       = $request->fecha_finalizacion_convocatoria_ta;
-        $convocatoria->fecha_finalizacion_convocatoria_tp       = $request->fecha_finalizacion_convocatoria_tp;
+        $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
         $convocatoria->min_fecha_inicio_proyectos_cultura       = $request->min_fecha_inicio_proyectos_cultura;
@@ -83,7 +78,9 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_ta            = $request->min_fecha_inicio_proyectos_ta;
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
-        $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
+        $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
+
+        $convocatoria->fase                                     = 1;
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             $convocatoriaPrevActiva->esta_activa = false;
@@ -118,7 +115,8 @@ class ConvocatoriaController extends Controller
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
         return Inertia::render('Convocatorias/Edit', [
-            'convocatoria' => $convocatoria
+            'convocatoria' => $convocatoria,
+            'fases'        => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
         ]);
     }
 
@@ -134,16 +132,6 @@ class ConvocatoriaController extends Controller
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
         $convocatoria->descripcion                              = $request->descripcion;
-        $convocatoria->fecha_inicio_convocatoria_idi            = $request->fecha_inicio_convocatoria_idi;
-        $convocatoria->fecha_finalizacion_convocatoria_idi      = $request->fecha_finalizacion_convocatoria_idi;
-        $convocatoria->fecha_inicio_convocatoria_cultura        = $request->fecha_inicio_convocatoria_cultura;
-        $convocatoria->fecha_finalizacion_convocatoria_cultura  = $request->fecha_finalizacion_convocatoria_cultura;
-        $convocatoria->fecha_inicio_convocatoria_st             = $request->fecha_inicio_convocatoria_st;
-        $convocatoria->fecha_finalizacion_convocatoria_st       = $request->fecha_finalizacion_convocatoria_st;
-        $convocatoria->fecha_inicio_convocatoria_ta             = $request->fecha_inicio_convocatoria_ta;
-        $convocatoria->fecha_inicio_convocatoria_tp             = $request->fecha_inicio_convocatoria_tp;
-        $convocatoria->fecha_finalizacion_convocatoria_ta       = $request->fecha_finalizacion_convocatoria_ta;
-        $convocatoria->fecha_finalizacion_convocatoria_tp       = $request->fecha_finalizacion_convocatoria_tp;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
         $convocatoria->min_fecha_inicio_proyectos_cultura       = $request->min_fecha_inicio_proyectos_cultura;
@@ -151,10 +139,11 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_st            = $request->min_fecha_inicio_proyectos_st;
         $convocatoria->max_fecha_finalizacion_proyectos_st      = $request->max_fecha_finalizacion_proyectos_st;
         $convocatoria->min_fecha_inicio_proyectos_ta            = $request->min_fecha_inicio_proyectos_ta;
-        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
+        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
-        $convocatoria->evaluaciones_finalizadas                 = $request->evaluaciones_finalizadas;
+        $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
+
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
             if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {
@@ -162,7 +151,75 @@ class ConvocatoriaController extends Controller
                 $convocatoriaPrevActiva->save();
             }
         }
-        $convocatoria->esta_activa = $request->esta_activa;
+        $convocatoria->esta_activa              = $request->esta_activa;
+        $convocatoria->fase                     = $request->fase;
+        $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
+
+        switch ($request->fase) {
+            case 1: // Formulación
+                $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
+            case 2: // Primera evaluación
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
+                break;
+            case 3: // Subsanación
+                foreach ($convocatoria->proyectos()->get() as $proyecto) {
+                    switch ($proyecto) {
+                        case $proyecto->estado_evaluacion_idi != null:
+                            if (json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                            if (json_decode($proyecto->estado_evaluacion_cultura_innovacion)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_ta != null:
+                            if (json_decode($proyecto->estado_evaluacion_ta)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            }
+                            break;
+
+                        case $proyecto->estado_evaluacion_tp != null:
+                            if (json_decode($proyecto->estado_evaluacion_tp)->requiereSubsanar) {
+                                $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            } else {
+                                $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => true, 'iniciado' => false]);
+                break;
+            case 4: // Segunda evaluación
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
+                $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
+                break;
+            case 5: // Convocatoria finalizada
+                $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
+                $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
+                foreach ($convocatoria->proyectos()->get() as $proyecto) {
+                    $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
+                }
+                break;
+
+            default:
+                break;
+        }
 
         $convocatoria->save();
 

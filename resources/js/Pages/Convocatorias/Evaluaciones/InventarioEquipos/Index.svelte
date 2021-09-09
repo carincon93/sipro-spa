@@ -10,10 +10,11 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
-    import Stepper from '@/Shared/Stepper'
+    import EvaluationStepper from '@/Shared/EvaluationStepper'
 
     export let convocatoria
     export let proyecto
+    export let evaluacion
     export let inventarioEquipos
 
     $title = 'Inventario de equipos'
@@ -26,16 +27,10 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Inventario de equipos</div>
-
-        <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.inventario-equipos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear inventario de equipos</Button>
-            {/if}
-        </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
@@ -63,7 +58,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={inventarioEquipos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 16])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.inventario-equipos.edit', [convocatoria.id, proyecto.id, inventarioEquipo.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.inventario-equipos.edit', [convocatoria.id, evaluacion.id, inventarioEquipo.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}
