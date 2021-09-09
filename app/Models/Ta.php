@@ -70,6 +70,9 @@ class Ta extends Model
         'semilleros_en_formalizacion',
         'infraestructura_tecnoacademia',
         'modificable',
+        'otras_nuevas_instituciones',
+        'otras_nombre_instituciones_programas',
+        'otras_nombre_instituciones'
     ];
 
     /**

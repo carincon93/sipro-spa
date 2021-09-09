@@ -105,6 +105,10 @@
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
         dis_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+
+        otras_nuevas_instituciones: ta.otras_nuevas_instituciones,
+        otras_nombre_instituciones_programas: ta.otras_nombre_instituciones_programas,
+        otras_nombre_instituciones: ta.otras_nombre_instituciones,
     })
 
     let regionalIEArticulacion
@@ -456,6 +460,10 @@
                     <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
                     <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required />
+                    <div class="mt-10">
+                        <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                        <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nombre_instituciones_programas" error={errors.otras_nombre_instituciones_programas} bind:value={$form.otras_nombre_instituciones_programas} />
+                    </div>
                 </div>
             </div>
 
@@ -477,6 +485,10 @@
                         <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
                         <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                        <div class="mt-10">
+                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                            <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nuevas_instituciones" error={errors.otras_nuevas_instituciones} bind:value={$form.otras_nuevas_instituciones} />
+                        </div>
                     </div>
                 </div>
             {/if}
@@ -499,6 +511,10 @@
                         <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
 
                         <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                        <div class="mt-10">
+                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                            <Textarea label="Instituciones" maxlength="40000" bind:count id="otras_nombre_instituciones" error={errors.otras_nombre_instituciones} bind:value={$form.otras_nombre_instituciones} />
+                        </div>
                     </div>
                 </div>
             {/if}
