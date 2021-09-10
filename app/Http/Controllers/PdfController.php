@@ -38,17 +38,10 @@ class PdfController extends Controller
                 $datos = $proyecto->culturaInnovacion;
             }else if(!empty($proyecto->servicioTecnologico)){
                 $datos = $proyecto->servicioTecnologico;
-                if (auth()->user()->hasRole(13)) {
                 $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE tipos_proyecto_st.tipo_proyecto
-                    WHEN '1' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: A', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                    WHEN '2' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: B', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
-                } else {
-                    $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE tipos_proyecto_st.tipo_proyecto
                         WHEN '1' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: A', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                         WHEN '2' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: B', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                     END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->get();
-                }
             }
 
             $base64Arbolproblemas = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-problemas', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
