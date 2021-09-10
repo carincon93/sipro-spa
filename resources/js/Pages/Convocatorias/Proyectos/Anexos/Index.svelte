@@ -77,6 +77,15 @@
         </form>
     {/if}
 
+    <InfoMessage class="mt-20">
+        <h1 class="mb-10 font-black">Importante:</h1>
+        <ul>
+            <li><strong>ANEXO 1A. Acta_Reunión Regional</strong> NO se adjunta en plataforma. Se envía junto al Anexo 1B a la Coordinación Sennova (Obligatorio)</li>
+
+            <li><strong>ANEXO 1C. Carta C.I Director Regional</strong> NO se adjunta en plataforma. Se envía a la Coordinación Sennova, uno por regional, junto con el Anexo 1A (Obligatorio)</li>
+        </ul>
+    </InfoMessage>
+
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Anexos</div>
 
