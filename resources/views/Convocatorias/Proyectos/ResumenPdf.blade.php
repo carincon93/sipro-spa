@@ -486,7 +486,7 @@
          @endif
 
          <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
-            @if(!empty($proyecto->disCurriculares))
+            @if(!empty($proyecto->disCurriculares) && $proyecto->disCurriculares()->count()>0)
             <tr>
                <td width="35%">
                   <p class="title">Programas a ejecutar en la vigencia del proyecto</p>
@@ -495,6 +495,48 @@
                   <ul>
                      @foreach($proyecto->disCurriculares as $disCurricular)
                      <li>{{$disCurricular->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($proyecto->programasFormacionArticulados) && $proyecto->programasFormacionArticulados()->count()>0)
+            <tr>
+               <td width="35%">
+                  <p class="title">Programas de formación con registro calificado a impactar</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->programasFormacionArticulados as $formCurricular)
+                     <li>{{$formCurricular->codigo}}: {{$formCurricular->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($proyecto->programasFormacionImpactados) && $proyecto->programasFormacionImpactados()->count()>0)
+            <tr>
+               <td width="35%">
+                  <p class="title">Programas de formación articulados</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->programasFormacionImpactados as $formImp)
+                     <li>{{$formImp->codigo}}: {{$formImp->nombre}}</li>
+                     @endforeach
+                  </ul>
+               </td>
+            </tr>
+            @endif
+            @if(!empty($proyecto->taProgramasFormacion) && $proyecto->taProgramasFormacion()->count()>0)
+            <tr>
+               <td width="35%">
+                  <p class="title">Programas de formación articulados</p>
+               </td>
+               <td>
+                  <ul>
+                     @foreach($proyecto->taProgramasFormacion as $taformImp)
+                     <li>{{$taformImp->codigo}}: {{$taformImp->nombre}}</li>
                      @endforeach
                   </ul>
                </td>
@@ -1174,25 +1216,115 @@
          </div>
          @endif
          <div class="border">
+            @if(!empty($proyecto->entidadesAliadas) && $proyecto->entidadesAliadas()->count()>0)
+            <p class="title" style="text-align:center">Entidades Aliadas</p>
+            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-top:20px;">
+               <tbody slot="thead">
+                  @foreach($proyecto->entidadesAliadas as $entidad)
+                  <tr>
+                     <td align="left" width="30%">Tipo de entidad aliada: {{$entidad->tipo}} ({{$entidad->naturaleza}})</td>
+                     <td>
+                        {{$entidad->nombre}} ({{$entidad->tipo_empresa}}) - NIT: {{$entidad->nit}}
+                     </td>
+                  </tr>
+                  @if(!empty($entidad->entidadAliadaIdi))
+                  <tr>
+                     <td>Descripcion convenio</td>
+                     <td>{{$entidad->entidadAliadaIdi->descripcion_convenio}}</td>
+                  </tr>
+                  <tr>
+                     <td>Grupo de Investigación</td>
+                     <td>{{$entidad->entidadAliadaIdi->codigo_gruplac}} - {{$entidad->entidadAliadaIdi->grupo_investigacion}} <br> {{$entidad->entidadAliadaIdi->enlace_gruplac}}</td>
+                  </tr>
+                  <tr>
+                     <td>Recursos en especie</td>
+                     <td>{{number_format($entidad->entidadAliadaIdi->recursos_especie)}}</td>
+                  </tr>
+                  <tr>
+                     <td>Descripción en especie aportados</td>
+                     <td>{{$entidad->entidadAliadaIdi->descripcion_recursos_especie}}</td>
+                  </tr>
+                  <tr>
+                     <td>Recursos en dinero</td>
+                     <td>{{number_format($entidad->entidadAliadaIdi->recursos_dinero)}}</td>
+                  </tr>
+                  <tr>
+                     <td>Descripción destinación del dinero aportado</td>
+                     <td>{{$entidad->entidadAliadaIdi->descripcion_recursos_dinero}}</td>
+                  </tr>
+                  <tr>
+                     <td>Metodología o actividades de tranferencia al centro de formación</td>
+                     <td>{{$entidad->entidadAliadaIdi->actividades_transferencia_conocimiento}}</td>
+                  </tr>
+                  <tr>
+                     <td>Anexos</td>
+                     <td>
+                        <ul>
+                           <li>ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA) <a href="{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'carta_intencion'])}}">{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'carta_intencion'])}}</a></li>
+                           <li>ANEXO 8. Propiedad intelectual <a href="{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'carta_propiedad_intelectual'])}}">{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'carta_propiedad_intelectual'])}}</a></li>
+                        </ul>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Actividades</td>
+                     <td>
+                        <ul>
+                           @foreach($entidad->actividades as $actividadEntidad)
+                           <li>OBJ-ESP-{{$actividadEntidad->objetivo_especifico_id}}-ACT-{{$actividadEntidad->id}}</li>
+                           @endforeach
+                        </ul>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Miembros de la entidad aliada</td>
+                     <td>
+                        <ul>
+                           @foreach($entidad->miembrosEntidadAliada as $miembroEntidad)
+                           <li>{{$miembroEntidad->nombre}} - {{$miembroEntidad->email}} - {{$miembroEntidad->numero_celular}}</li>
+                           @endforeach
+                        </ul>
+                     </td>
+                  </tr>
+                  @endif
+
+                  @if(!empty($entidad->entidadAliadaTa))
+                  <tr>
+                     <td>Fechas de vigencia Convenio/Acuerdos</td>
+                     <td>Inicio: {{$entidad->entidadAliadaTa->fecha_inicio_convenio}} Fin: {{$entidad->entidadAliadaTa->fecha_fin_convenio}}</td>
+                  </tr>
+                  <tr>
+                     <td>Anexos</td>
+                     <td>
+                        <ul>
+                           <li>Convenio <a href="{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'soporte_convenio'])}}">{{route('convocatorias.proyectos.entidades-aliadas.download', [$convocatoria->id, $proyecto->id, $entidad->id, 'soporte_convenio'])}}</a></li>
+                        </ul>
+                     </td>
+                  </tr>
+                  @endif
+
+                  @endforeach
+               </tbody>
+            </table>
+            @endif
             <p class="title" style="text-align:center">Anexos</p>
-               <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-top:20px;">
-                  <tbody slot="thead">
-                     @foreach($proyectoAnexo as $anexo)
-                     <tr>
-                        <th align="left" width="30%">{{$anexo->nombre}}</th>
-                        <td>
-                        {{(empty($anexo->archivo)?'N/A':'')}}
-                        @if(!empty($anexo->archivo))
-                        <a href="{{route('convocatorias.proyectos.proyecto-anexos.download', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id, 'proyecto_anexo'=>$anexo])}}" target="blank" download>
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                           {{route('convocatorias.proyectos.proyecto-anexos.download', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id, 'proyecto_anexo'=>$anexo])}}
-                        </a>
-                        @endif
-                        </td>
-                     </tr>
-                      @endforeach
-                  </tbody>
-               </table>
+            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-top:20px;">
+               <tbody slot="thead">
+                  @foreach($proyectoAnexo as $anexo)
+                  <tr>
+                     <th align="left" width="30%">{{$anexo->nombre}}</th>
+                     <td>
+                     {{(empty($anexo->archivo)?'N/A':'')}}
+                     @if(!empty($anexo->archivo))
+                     <a href="{{route('convocatorias.proyectos.proyecto-anexos.download', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id, 'proyecto_anexo'=>$anexo])}}" target="blank" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        {{route('convocatorias.proyectos.proyecto-anexos.download', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id, 'proyecto_anexo'=>$anexo])}}
+                     </a>
+                     @endif
+                     </td>
+                  </tr>
+                   @endforeach
+               </tbody>
+            </table>
          </div>
          
          <div class="rotate90 page_break" style="margin-top: 1.8in !important">
