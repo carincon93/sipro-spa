@@ -326,7 +326,10 @@
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}
                 <small>{tp.updated_at}</small>
-                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                {#if count > 0}
+                    <small class="text-red-600 bg-red-200 px-4 py-1">Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice</small>
+                {/if}
+
                 <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
