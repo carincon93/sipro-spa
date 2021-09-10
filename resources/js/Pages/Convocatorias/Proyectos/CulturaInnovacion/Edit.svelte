@@ -175,7 +175,7 @@
 
             $form.put(route('convocatorias.cultura-innovacion.update', [convocatoria.id, culturaInnovacion.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
+                onFinish: () => ((sending = false), $page.props.flash.success ? clearLocalStorage() : null, (count = 0)),
                 preserveScroll: true,
             })
         }
@@ -776,7 +776,9 @@
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
                 <small>{culturaInnovacion.updated_at}</small>
-                <small class="text-red-600">{count > 0 ? "Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice" : ''}</small>
+                {#if count > 0}
+                    <small class="text-red-600 bg-red-200 px-4 py-1">Tiene campos sin guardar. No olvide dar clic en 'Guardar' cuando finalice</small>
+                {/if}
                 <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
