@@ -181,7 +181,7 @@
 
             $form.put(route('convocatorias.idi.update', [convocatoria.id, idi.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
+                onFinish: () => ((sending = false), $page.props.flash.success ? clearLocalStorage() : null, (count = 0)),
                 preserveScroll: true,
             })
         }

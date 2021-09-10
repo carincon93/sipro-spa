@@ -95,7 +95,7 @@
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
+                onFinish: () => ((sending = false), $page.props.flash.success ? clearLocalStorage() : null, (count = 0)),
                 preserveScroll: true,
             })
         }

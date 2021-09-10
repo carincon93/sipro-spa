@@ -186,7 +186,7 @@
         if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $form.put(route('convocatorias.ta.update', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
-                onFinish: () => ((sending = false), clearLocalStorage(), (count = 0)),
+                onFinish: () => ((sending = false), $page.props.flash.success ? clearLocalStorage() : null, (count = 0)),
                 preserveScroll: true,
             })
         }
