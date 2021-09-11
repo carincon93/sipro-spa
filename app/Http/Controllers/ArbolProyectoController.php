@@ -475,6 +475,28 @@ class ArbolProyectoController extends Controller
     }
 
     /**
+     * destroyEfectoDirecto
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $efectoDirecto
+     * @return void
+     */
+    public function destroyEfectoDirecto(Proyecto $proyecto, EfectoDirecto $efectoDirecto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $efectoDirecto->update([
+            'descripcion' => null
+        ]);
+
+        $efectoDirecto->resultados()->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
      * createOrUpdateEfectoIndirecto
      *
      * @param  mixed $request
@@ -529,6 +551,22 @@ class ArbolProyectoController extends Controller
     }
 
     /**
+     * destroyEfectoIndirecto
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $efectoDirecto
+     * @return void
+     */
+    public function destroyEfectoIndirecto(Proyecto $proyecto, EfectoIndirecto $efectoIndirecto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $efectoIndirecto->delete();
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
      * updateCausaDirecta
      *
      * @param  mixed $request
@@ -546,6 +584,30 @@ class ArbolProyectoController extends Controller
 
         return back()->with('success', 'El recurso se ha guardado correctamente.');
     }
+
+
+    /**
+     * destroyCausaDirecta
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $efectoDirecto
+     * @return void
+     */
+    public function destroyCausaDirecta(Proyecto $proyecto, CausaDirecta $causaDirecta)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $causaDirecta->update([
+            'descripcion' => null
+        ]);
+
+        $causaDirecta->objetivoEspecifico()->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
 
     /**
      * createOrUpdateCausaIndirecta
@@ -599,6 +661,22 @@ class ArbolProyectoController extends Controller
         }
 
         return back()->with('success', 'El recurso se ha guardado correctamente.');
+    }
+
+    /**
+     * destroyCausaIndirecta
+     *
+     * @param  mixed $proyecto
+     * @param  mixed $causaIndirecta
+     * @return void
+     */
+    public function destroyCausaIndirecta(Proyecto $proyecto, CausaIndirecta $causaIndirecta)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $causaIndirecta->delete();
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**
@@ -848,6 +926,25 @@ class ArbolProyectoController extends Controller
     }
 
     /**
+     * destroyImpacto
+     *
+     * @param  mixed $request
+     * @param  mixed $proyecto
+     * @param  mixed $impacto
+     * @return void
+     */
+    public function destroyImpacto(Proyecto $proyecto, Impacto $impacto)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $impacto->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
      * updateResultado
      *
      * @param  mixed $request
@@ -875,6 +972,25 @@ class ArbolProyectoController extends Controller
     }
 
     /**
+     * destroyResultado
+     *
+     * @param  mixed $request
+     * @param  mixed $proyecto
+     * @param  mixed $resultado
+     * @return void
+     */
+    public function destroyResultado(Proyecto $proyecto, Resultado $resultado)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $resultado->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
      * updateObjetivoEspecifico
      *
      * @param  mixed $request
@@ -894,6 +1010,25 @@ class ArbolProyectoController extends Controller
         }
 
         return back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
+    }
+
+    /**
+     * destroyObjetivoEspecifico
+     *
+     * @param  mixed $request
+     * @param  mixed $proyecto
+     * @param  mixed $objetivoEspecifico
+     * @return void
+     */
+    public function destroyObjetivoEspecifico(Proyecto $proyecto, ObjetivoEspecifico $objetivoEspecifico)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $objetivoEspecifico->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**
@@ -925,5 +1060,24 @@ class ArbolProyectoController extends Controller
         }
 
         return back()->with('error', 'Hubo un error mientras se actulizaba la actividad. Vuelva a intentar');
+    }
+
+    /**
+     * destroyActividad
+     *
+     * @param  mixed $request
+     * @param  mixed $proyecto
+     * @param  mixed $actividad
+     * @return void
+     */
+    public function destroyActividad(Proyecto $proyecto, Actividad $actividad)
+    {
+        $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        $actividad->update([
+            'descripcion' => null
+        ]);
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }
