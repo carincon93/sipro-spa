@@ -485,6 +485,10 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede eliminar este recurso.');
+        }
+
         $efectoDirecto->update([
             'descripcion' => null
         ]);
@@ -561,6 +565,10 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede elimminar este recurso.');
+        }
+
         $efectoIndirecto->delete();
 
         return back()->with('success', 'El recurso se ha eliminado correctamente.');
@@ -596,6 +604,10 @@ class ArbolProyectoController extends Controller
     public function destroyCausaDirecta(Proyecto $proyecto, CausaDirecta $causaDirecta)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede elimminar este recurso.');
+        }
 
         $causaDirecta->update([
             'descripcion' => null
@@ -673,6 +685,10 @@ class ArbolProyectoController extends Controller
     public function destroyCausaIndirecta(Proyecto $proyecto, CausaIndirecta $causaIndirecta)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede elimminar este recurso.');
+        }
 
         $causaIndirecta->delete();
 
@@ -937,6 +953,10 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede elimminar este recurso.');
+        }
+
         $impacto->update([
             'descripcion' => null
         ]);
@@ -983,6 +1003,10 @@ class ArbolProyectoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede eliminar este recurso.');
+        }
+
         $resultado->update([
             'descripcion' => null
         ]);
@@ -1009,7 +1033,7 @@ class ArbolProyectoController extends Controller
             return back()->with('success', 'El recurso se ha guardado correctamente.');
         }
 
-        return back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. Vuelva a intentar.');
+        return back()->with('error', 'Hubo un error mientras se actualizaba el objetivo específico. <<<<Vuelva a intentar.');
     }
 
     /**
@@ -1023,6 +1047,10 @@ class ArbolProyectoController extends Controller
     public function destroyObjetivoEspecifico(Proyecto $proyecto, ObjetivoEspecifico $objetivoEspecifico)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede eliminar este recurso.');
+        }
 
         $objetivoEspecifico->update([
             'descripcion' => null
@@ -1073,6 +1101,10 @@ class ArbolProyectoController extends Controller
     public function destroyActividad(Proyecto $proyecto, Actividad $actividad)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
+
+        if ($proyecto->lineaProgramatica->codigo == 69 || $proyecto->lineaProgramatica->codigo == 70) {
+            return back()->with('error', 'No se puede eliminar este recurso.');
+        }
 
         $actividad->update([
             'descripcion' => null
