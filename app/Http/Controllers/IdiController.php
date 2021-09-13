@@ -183,16 +183,7 @@ class IdiController extends Controller
         $idi->fecha_finalizacion                    = $request->fecha_finalizacion;
         $idi->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $idi->video                                 = $request->video;
-        // $idi->justificacion_industria_4             = $request->justificacion_industria_4;
-        // $idi->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
-        // $idi->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
-        // $idi->resumen                               = $request->resumen;
-        // $idi->antecedentes                          = $request->antecedentes;
-        // $idi->marco_conceptual                      = $request->marco_conceptual;
-        // $idi->bibliografia                          = $request->bibliografia;
         $idi->numero_aprendices                     = $request->numero_aprendices;
-        // $idi->impacto_municipios                    = $request->impacto_municipios;
-        // $idi->impacto_centro_formacion              = $request->impacto_centro_formacion;
 
         $idi->muestreo                              = $request->muestreo;
         $idi->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;

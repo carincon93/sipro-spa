@@ -408,6 +408,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('reglas-roles-ta', ReglaRolTaController::class)->parameters(['reglas-roles-ta' => 'regla-rol-ta'])->except(['show']);
     Route::resource('convocatorias.proyectos.edt', EdtController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'edt' => 'edt'])->except(['show']);
     Route::resource('convocatorias.ta', TaController::class)->parameters(['convocatorias' => 'convocatoria', 'ta' => 'ta'])->except(['show']);
+    Route::put('convocatorias/{convocatoria}/ta/{idi}/column/{column}', [TaController::class, 'updateLongColumn'])->name('convocatorias.ta.updateLongColumn');
 
     /**
      * Servicios tecnológicos - Estrategia  nacional

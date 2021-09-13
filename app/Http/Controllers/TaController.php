@@ -8,6 +8,7 @@ use App\Models\Ta;
 use App\Models\TecnoAcademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticulacionSennovaRequest;
+use App\Http\Requests\TaLongColumnRequest;
 use App\Http\Requests\TaRequest;
 use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
@@ -218,18 +219,6 @@ class TaController extends Controller
         $ta->fecha_inicio                       = $request->fecha_inicio;
         $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
-        $ta->resumen                            = $request->resumen;
-        $ta->antecedentes                       = $request->antecedentes;
-        $ta->justificacion_problema             = $request->justificacion_problema;
-        $ta->marco_conceptual                   = $request->marco_conceptual;
-        $ta->bibliografia                       = $request->bibliografia;
-        $ta->impacto_municipios                 = $request->impacto_municipios;
-        $ta->articulacion_centro_formacion      = $request->articulacion_centro_formacion;
-
-        $ta->resumen_regional                   = $request->resumen_regional;
-        $ta->antecedentes_tecnoacademia         = $request->antecedentes_tecnoacademia;
-        $ta->retos_oportunidades                = $request->retos_oportunidades;
-        $ta->pertinencia_territorio             = $request->pertinencia_territorio;
         $ta->metodologia_local                  = $request->metodologia_local;
 
         $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
@@ -237,9 +226,6 @@ class TaController extends Controller
         $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
         $ta->nuevas_instituciones               = $request->nuevas_instituciones;
 
-        $ta->proyectos_macro                    = $request->proyectos_macro;
-        $ta->lineas_medulares_centro            = $request->lineas_medulares_centro;
-        $ta->lineas_tecnologicas_centro         = $request->lineas_tecnologicas_centro;
         $ta->proyeccion_nuevas_instituciones    = $request->proyeccion_nuevas_instituciones;
         $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
 
@@ -254,6 +240,15 @@ class TaController extends Controller
         $ta->proyecto->disCurriculares()->sync($request->dis_curricular_id);
 
         $ta->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    public function updateLongColumn(TaLongColumnRequest $request, Convocatoria $convocatoria, Ta $idi, $column)
+    {
+        $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
+
+        $idi->update([$column => $request->only($column)]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
