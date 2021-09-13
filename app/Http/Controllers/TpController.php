@@ -182,7 +182,6 @@ class TpController extends Controller
         $tp->antecedentes_regional                = $request->antecedentes_regional;
         $tp->retos_oportunidades                  = $request->retos_oportunidades;
         $tp->pertinencia_territorio               = $request->pertinencia_territorio;
-        $tp->metodologia_local                    = $request->metodologia_local;
 
         $tp->numero_instituciones                 = null;
         $tp->nombre_instituciones                 = null;

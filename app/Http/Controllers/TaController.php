@@ -227,7 +227,6 @@ class TaController extends Controller
         $ta->antecedentes_tecnoacademia         = $request->antecedentes_tecnoacademia;
         $ta->retos_oportunidades                = $request->retos_oportunidades;
         $ta->pertinencia_territorio             = $request->pertinencia_territorio;
-        $ta->metodologia_local                  = $request->metodologia_local;
 
         $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
         $ta->nombre_instituciones               = $request->nombre_instituciones;
