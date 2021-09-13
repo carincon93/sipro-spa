@@ -417,6 +417,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('reglas-roles-st', ReglaRolStController::class)->parameters(['reglas-roles-st' => 'regla-rol-st'])->except(['show']);
     Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/infraestructura', [ServicioTecnologicoController::class, 'updateEspecificacionesInfraestructura'])->name('convocatorias.servicios-tecnologicos.infraestructura');
     Route::resource('convocatorias.servicios-tecnologicos', ServicioTecnologicoController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos' => 'servicio-tecnologico'])->except(['show']);
+    Route::put('convocatorias/{convocatoria}/servicios-tecnologicos/{servicio_tecnologico}/column/{column}', [ServicioTecnologicoController::class, 'updateLongColumn'])->name('convocatorias.servicios-tecnologicos.updateLongColumn');
 
     /**
      * Convocatorias

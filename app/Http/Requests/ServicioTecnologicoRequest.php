@@ -32,14 +32,8 @@ class ServicioTecnologicoRequest extends FormRequest
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'st', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'st', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
-                'resumen'                                   => ['required', 'max:1000', 'string'],
-                'antecedentes'                              => ['required', 'max:10000', 'string'],
-                'identificacion_problema'                   => ['required', 'max:5000', 'string'],
                 'pregunta_formulacion_problema'             => ['required', 'string', new MaxWords(50)],
-                'justificacion_problema'                    => ['required', 'max:5000', 'string'],
                 'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
-                'zona_influencia'                           => ['required', 'string', 'max:255'],
-                'bibliografia'                              => ['required', 'string'],
             ];
         } else {
             return [

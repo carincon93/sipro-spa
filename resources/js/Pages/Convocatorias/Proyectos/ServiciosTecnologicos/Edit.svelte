@@ -43,6 +43,26 @@
     let sending = false
 
     let nombreFormulario = servicioTecnologico.proyecto.codigo + 'servicio-tecnologico-form'
+
+    let resumenForm = useForm({
+        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : servicioTecnologico.resumen,
+    });
+    let formAntecedentes = useForm({
+        antecedentes: localStorage.getItem(nombreFormulario + '.antecedentes') ? localStorage.getItem(nombreFormulario + '.antecedentes') : servicioTecnologico.antecedentes,
+    });
+    let formIdentificacionProblema = useForm({
+        identificacion_problema: localStorage.getItem(nombreFormulario + '.identificacion_problema') ? localStorage.getItem(nombreFormulario + '.identificacion_problema') : servicioTecnologico.identificacion_problema,
+    });
+    let formJustificacionProblema = useForm({
+        justificacion_problema: localStorage.getItem(nombreFormulario + '.justificacion_problema') ? localStorage.getItem(nombreFormulario + '.justificacion_problema') : servicioTecnologico.justificacion_problema,
+    });
+    let formZonaInfluencia = useForm({
+        zona_influencia: servicioTecnologico.zona_influencia,
+    });
+    let formBibliografia = useForm({
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : servicioTecnologico.bibliografia,
+    });
+
     let form = useForm({
         tipo_proyecto_st_id: {
             value: servicioTecnologico.tipo_proyecto_st_id,
@@ -53,14 +73,7 @@
         fecha_inicio: servicioTecnologico.fecha_inicio,
         fecha_finalizacion: servicioTecnologico.fecha_finalizacion,
         max_meses_ejecucion: servicioTecnologico.max_meses_ejecucion,
-        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : servicioTecnologico.resumen,
-        antecedentes: localStorage.getItem(nombreFormulario + '.antecedentes') ? localStorage.getItem(nombreFormulario + '.antecedentes') : servicioTecnologico.antecedentes,
-        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : servicioTecnologico.bibliografia,
-        zona_influencia: servicioTecnologico.zona_influencia,
-
-        identificacion_problema: localStorage.getItem(nombreFormulario + '.identificacion_problema') ? localStorage.getItem(nombreFormulario + '.identificacion_problema') : servicioTecnologico.identificacion_problema,
         pregunta_formulacion_problema: localStorage.getItem(nombreFormulario + '.pregunta_formulacion_problema') ? localStorage.getItem(nombreFormulario + '.pregunta_formulacion_problema') : servicioTecnologico.pregunta_formulacion_problema,
-        justificacion_problema: localStorage.getItem(nombreFormulario + '.justificacion_problema') ? localStorage.getItem(nombreFormulario + '.justificacion_problema') : servicioTecnologico.justificacion_problema,
 
         programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
 
@@ -90,6 +103,23 @@
         localStorage.removeItem(nombreFormulario + '.pregunta_formulacion_problema')
         localStorage.removeItem(nombreFormulario + '.justificacion_problema')
         localStorage.removeItem(nombreFormulario + '.bibliografia')
+    }
+
+    async function syncColumnLong(column, form) {
+        return new Promise(resolve => {
+            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && servicioTecnologico.proyecto.modificable == true))) {
+
+                //guardar
+                Inertia.put(route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]), {[column]:form[column]}, {
+                    onStart: () => (sending = true),
+                    onError: resp => ((sending = false), (resolve(resp))),
+                    onFinish: () => ((sending = false), (resolve({})), (localStorage.removeItem(nombreFormulario + '.'+column))),
+                    preserveScroll: true,
+                })
+            }else{
+                resolve({});
+            }
+        });
     }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
@@ -260,7 +290,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="1000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea maxlength="1000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} change={syncColumnLong('resumen', $resumenForm)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -294,7 +324,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="10000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                    <Textarea maxlength="10000" localStorageForm={nombreFormulario} bind:count id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} change={syncColumnLong('antecedentes', $formAntecedentes)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -324,7 +354,7 @@
                 </div>
 
                 <div>
-                    <Textarea label="Identificación y descripción del problema" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="identificacion_problema" error={errors.identificacion_problema} bind:value={$form.identificacion_problema} required />
+                    <Textarea label="Identificación y descripción del problema" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} change={syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -397,7 +427,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea label="Justificación" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="justificacion_problema" error={errors.justificacion_problema} bind:value={$form.justificacion_problema} required />
+                    <Textarea label="Justificación" maxlength="5000" localStorageForm={nombreFormulario} bind:count id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} change={syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -441,7 +471,7 @@
                     <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
                 </div>
                 <div>
-                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.zona_influencia} required />
+                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$formZonaInfluencia.zona_influencia} change={syncColumnLong('zona_influencia', $formZonaInfluencia)} required />
                 </div>
             </div>
 
@@ -451,7 +481,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea sinContador={true} localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea sinContador={true} localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} change={syncColumnLong('bibliografia', $formBibliografia)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}

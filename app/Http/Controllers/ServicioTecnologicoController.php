@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ServicioTecnologico;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServicioTecnologicoLongColumnRequest;
 use App\Http\Requests\ServicioTecnologicoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
@@ -195,21 +196,24 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
         $servicioTecnologico->titulo                        = $request->titulo;
-        $servicioTecnologico->resumen                       = $request->resumen;
-        $servicioTecnologico->antecedentes                  = $request->antecedentes;
         $servicioTecnologico->metodologia                   = $request->metodologia;
         $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
         $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
-        $servicioTecnologico->identificacion_problema       = $request->identificacion_problema;
         $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
-        $servicioTecnologico->justificacion_problema        = $request->justificacion_problema;
-        $servicioTecnologico->zona_influencia               = $request->zona_influencia;
-        $servicioTecnologico->bibliografia                  = $request->bibliografia;
 
         $servicioTecnologico->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
 
         $servicioTecnologico->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    public function updateLongColumn(ServicioTecnologicoLongColumnRequest $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico, $column)
+    {
+        $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
+
+        $servicioTecnologico->update([$column => $request->only($column)]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
