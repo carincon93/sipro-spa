@@ -408,7 +408,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('reglas-roles-ta', ReglaRolTaController::class)->parameters(['reglas-roles-ta' => 'regla-rol-ta'])->except(['show']);
     Route::resource('convocatorias.proyectos.edt', EdtController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'edt' => 'edt'])->except(['show']);
     Route::resource('convocatorias.ta', TaController::class)->parameters(['convocatorias' => 'convocatoria', 'ta' => 'ta'])->except(['show']);
-    Route::put('convocatorias/{convocatoria}/ta/{idi}/column/{column}', [TaController::class, 'updateLongColumn'])->name('convocatorias.ta.updateLongColumn');
+    Route::put('convocatorias/{convocatoria}/ta/{ta}/column/{column}', [TaController::class, 'updateLongColumn'])->name('convocatorias.ta.updateLongColumn');
 
     /**
      * Servicios tecnológicos - Estrategia  nacional
@@ -647,6 +647,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.idi-evaluaciones', IdiEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'idi-evaluaciones' => 'idi-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.ta-evaluaciones', TaEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'ta-evaluaciones' => 'ta-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.tp-evaluaciones', TpEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'tp-evaluaciones' => 'tp-evaluacion'])->except(['create', 'store', 'show']);
+    Route::put('convocatorias/{convocatoria}/tp/{tp}/column/{column}', [TpController::class, 'updateLongColumn'])->name('convocatorias.tp.updateLongColumn');
     Route::resource('convocatorias.servicios-tecnologicos-evaluaciones', ServicioTecnologicoEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos-evaluaciones' => 'servicio-tecnologico-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('evaluaciones', EvaluacionController::class)->parameters(['evaluaciones' => 'evaluacion'])->except(['show']);
 });

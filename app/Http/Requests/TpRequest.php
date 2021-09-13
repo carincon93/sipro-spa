@@ -31,14 +31,7 @@ class TpRequest extends FormRequest
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'tp', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'tp', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
-                'resumen'                                   => ['required', 'max:40000', 'string'],
-                'resumen_regional'                          => ['required', 'max:40000', 'string'],
-                'antecedentes'                              => ['required', 'max:40000', 'string'],
-                'marco_conceptual'                          => ['required', 'string'],
-                'bibliografia'                              => ['required', 'string'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
-                'impacto_municipios'                        => ['required', 'string'],
-                'impacto_centro_formacion'                  => ['required', 'string'],
             ];
         } else {
             return [

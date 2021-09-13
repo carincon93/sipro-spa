@@ -48,23 +48,45 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let nombreFormulario = tp.proyecto.codigo + 'tp-form'
+
+    let resumenForm = useForm({
+        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : tp.resumen,
+    });
+    let formResumenRegional = useForm({
+        resumen_regional: localStorage.getItem(nombreFormulario + '.resumen_regional') ? localStorage.getItem(nombreFormulario + '.resumen_regional') : tp.resumen_regional,
+    });
+    let formAntecedentes = useForm({
+        antecedentes: tp.antecedentes,
+    });
+    let formAntecedentesRegional = useForm({
+        antecedentes_regional: localStorage.getItem(nombreFormulario + '.antecedentes_regional') ? localStorage.getItem(nombreFormulario + '.antecedentes_regional') : tp.antecedentes_regional,
+    });
+    let formMarcoConceptual = useForm({
+        marco_conceptual: tp.marco_conceptual,
+    });
+    let formBibliografia = useForm({
+        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : tp.bibliografia,
+    });
+    let formImpactoMunicipios = useForm({
+        impacto_municipios: localStorage.getItem(nombreFormulario + '.impacto_municipios') ? localStorage.getItem(nombreFormulario + '.impacto_municipios') : tp.impacto_municipios,
+    });
+    let formImpactoCentroFormacion = useForm({
+        impacto_centro_formacion: localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') ? localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') : tp.impacto_centro_formacion,
+    });
+    let formRetosOportunidades = useForm({
+        retos_oportunidades: localStorage.getItem(nombreFormulario + '.retos_oportunidades') ? localStorage.getItem(nombreFormulario + '.retos_oportunidades') : tp.retos_oportunidades,
+    });
+    let formPertinenciaTerritorio = useForm({
+        pertinencia_territorio: localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ? localStorage.getItem(nombreFormulario + '.pertinencia_territorio') : tp.pertinencia_territorio,
+    });
+
     let form = useForm({
         centro_formacion_id: tp.proyecto.centro_formacion_id,
         linea_programatica_id: tp.proyecto.linea_programatica_id,
         fecha_inicio: tp.fecha_inicio,
         fecha_finalizacion: tp.fecha_finalizacion,
         max_meses_ejecucion: tp.max_meses_ejecucion,
-        resumen: localStorage.getItem(nombreFormulario + '.resumen') ? localStorage.getItem(nombreFormulario + '.resumen') : tp.resumen,
-        resumen_regional: localStorage.getItem(nombreFormulario + '.resumen_regional') ? localStorage.getItem(nombreFormulario + '.resumen_regional') : tp.resumen_regional,
-        antecedentes: tp.antecedentes,
-        antecedentes_regional: localStorage.getItem(nombreFormulario + '.antecedentes_regional') ? localStorage.getItem(nombreFormulario + '.antecedentes_regional') : tp.antecedentes_regional,
-        retos_oportunidades: localStorage.getItem(nombreFormulario + '.retos_oportunidades') ? localStorage.getItem(nombreFormulario + '.retos_oportunidades') : tp.retos_oportunidades,
-        pertinencia_territorio: localStorage.getItem(nombreFormulario + '.pertinencia_territorio') ? localStorage.getItem(nombreFormulario + '.pertinencia_territorio') : tp.pertinencia_territorio,
-        marco_conceptual: tp.marco_conceptual,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
-        impacto_municipios: localStorage.getItem(nombreFormulario + '.impacto_municipios') ? localStorage.getItem(nombreFormulario + '.impacto_municipios') : tp.impacto_municipios,
-        impacto_centro_formacion: localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') ? localStorage.getItem(nombreFormulario + '.impacto_centro_formacion') : tp.impacto_centro_formacion,
-        bibliografia: localStorage.getItem(nombreFormulario + '.bibliografia') ? localStorage.getItem(nombreFormulario + '.bibliografia') : tp.bibliografia,
         codigo_linea_programatica: null,
         nodo_tecnoparque_id: tp.nodo_tecnoparque_id,
     })
@@ -114,6 +136,23 @@
         localStorage.removeItem(nombreFormulario + '.impacto_municipios')
         localStorage.removeItem(nombreFormulario + '.impacto_centro_formacion')
         localStorage.removeItem(nombreFormulario + '.bibliografia')
+    }
+
+    async function syncColumnLong(column, form) {
+        return new Promise(resolve => {
+            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && tp.proyecto.modificable == true))) {
+
+                //guardar
+                Inertia.put(route('convocatorias.tp.updateLongColumn', [convocatoria.id, tp.id, column]), {[column]:form[column]}, {
+                    onStart: () => (sending = true),
+                    onError: resp => ((sending = false), (resolve(resp))),
+                    onFinish: () => ((sending = false), (resolve({})), (localStorage.removeItem(nombreFormulario + '.'+column))),
+                    preserveScroll: true,
+                })
+            }else{
+                resolve({});
+            }
+        });
     }
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
@@ -233,7 +272,7 @@
                     <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Resumen del proyecto" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
+                    <Textarea label="Resumen del proyecto" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} change={syncColumnLong('resumen', $resumenForm)} required />
                 </div>
             </div>
 
@@ -242,7 +281,7 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$form.resumen_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} change={syncColumnLong('resumen_regional', $formResumenRegional)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -271,7 +310,7 @@
                         />
                     </div>
                     <div>
-                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$form.antecedentes} required />
+                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} change={syncColumnLong('antecedentes', $formAntecedentes)} required />
                     </div>
                 </div>
             </fieldset>
@@ -281,7 +320,7 @@
                     <Label required class="mb-4" labelFor="antecedentes_regional" value="Complemento - Antecedentes regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$form.antecedentes_regional} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$formAntecedentesRegional.antecedentes_regional} change={syncColumnLong('antecedentes_regional', $formAntecedentesRegional)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -306,7 +345,7 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$form.retos_oportunidades} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} change={syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -331,7 +370,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$form.pertinencia_territorio} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} change={syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -358,7 +397,7 @@
                         <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                     </div>
                     <div>
-                        <Textarea label="" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$form.marco_conceptual} required />
+                        <Textarea label="" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} change={syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
                     </div>
                 </div>
             </fieldset>
@@ -377,7 +416,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción del beneficio en los municipios" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$form.impacto_municipios} required />
+                    <Textarea label="Descripción del beneficio en los municipios" maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} change={syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
                 </div>
             </div>
 
@@ -407,7 +446,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$form.impacto_centro_formacion} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} change={syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -487,7 +526,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$form.bibliografia} required />
+                    <Textarea maxlength="40000" localStorageForm={nombreFormulario} bind:count id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} change={syncColumnLong('bibliografia', $formBibliografia)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}

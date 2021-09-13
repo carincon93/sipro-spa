@@ -244,11 +244,11 @@ class TaController extends Controller
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
-    public function updateLongColumn(TaLongColumnRequest $request, Convocatoria $convocatoria, Ta $idi, $column)
+    public function updateLongColumn(TaLongColumnRequest $request, Convocatoria $convocatoria, Ta $ta, $column)
     {
-        $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
+        $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
-        $idi->update([$column => $request->only($column)]);
+        $ta->update([$column => $request->only($column)]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
