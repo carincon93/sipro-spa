@@ -53,7 +53,7 @@
                         </td>
                         <td class="border-t p-4">
                             Valor actual: ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_servicios_especiales_construccion) ? proyecto.total_servicios_especiales_construccion : 0)}
-                            {#if proyecto.total_servicios_especiales_construccion <= proyecto.total_maquinaria_industrial * 0.05}
+                            {#if proyecto.total_maquinaria_industrial == 0 || proyecto.total_servicios_especiales_construccion <= proyecto.total_maquinaria_industrial * 0.05}
                                 <span class="bg-green-100 text-green-400 hover:bg-green-200 px-2 py-1 rounded-3xl text-center block"> Cumple </span>
                             {:else}
                                 <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center block"> No cumple </span>
@@ -294,6 +294,11 @@
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, presupuesto.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
+                                {#if presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.requiere_estudio_mercado}
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, presupuesto.id]))}>
+                                        <Text>Soportes</Text>
+                                    </Item>
+                                {/if}
                             {:else}
                                 <Item>
                                     <Text>No tiene permisos</Text>

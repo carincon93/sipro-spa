@@ -1,6 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
@@ -15,6 +16,7 @@
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import Stepper from '@/Shared/Stepper'
+    import Dropdown from '@/Shared/Dropdown'
 
     export let errors
     export let to_pdf
@@ -127,6 +129,12 @@
         }
     }
 
+    function destroyImpacto(impacto) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            Inertia.post(route('proyectos.impacto.destroy', [proyecto.id, impacto.id]), [], { preserveScroll: true })
+        }
+    }
+
     /**
      * Resultados
      */
@@ -177,6 +185,12 @@
                     preserveScroll: true,
                 },
             )
+        }
+    }
+
+    function destroyResultado(resultado) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            Inertia.post(route('proyectos.resultado.destroy', [proyecto.id, resultado.id]), [], { preserveScroll: true })
         }
     }
 
@@ -263,6 +277,12 @@
         }
     }
 
+    function destroyObjetivoEspecifico(objetivoEspecifico) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            Inertia.post(route('proyectos.objetivo-especifico.destroy', [proyecto.id, objetivoEspecifico.id]), [], { preserveScroll: true })
+        }
+    }
+
     /**
      * Actividades
      */
@@ -322,6 +342,12 @@
                     },
                 )
             }
+        }
+    }
+
+    function destroyActividad(actividad) {
+        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+            Inertia.post(route('proyectos.actividad.destroy', [proyecto.id, actividad.id]), [], { preserveScroll: true })
         }
     }
 
@@ -544,6 +570,18 @@
                                                 {/if}
                                             </p>
                                         </div>
+                                        {#if efectoIndirecto.impacto.descripcion != null}
+                                            <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                                <div class="flex items-center cursor-pointer select-none group">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </div>
+                                                <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                                    <Button variant={null} on:click={destroyImpacto(efectoIndirecto.impacto)}>Eliminar</Button>
+                                                </div>
+                                            </Dropdown>
+                                        {/if}
                                     </div>
                                 {/if}
                             {/each}
@@ -570,27 +608,42 @@
                             aria-describedby={i == 0 ? 'tooltip' : ''}
                         >
                             {#each efectoDirecto.resultados as resultado}
-                                <div
-                                    on:click={showResultadoDialog(efectoDirecto, resultado)}
-                                    class="{proyecto.codigo_linea_programatica == 69
-                                        ? (efectoDirecto.descripcion != null) & (i < 3) || (efectoDirecto.descripcion != null && i > 5 && i < 9)
+                                <div class="relative mb-4" style="flex: 1 0 33.333%">
+                                    <div
+                                        class="{proyecto.codigo_linea_programatica == 69
+                                            ? (efectoDirecto.descripcion != null) & (i < 3) || (efectoDirecto.descripcion != null && i > 5 && i < 9)
+                                                ? 'bg-orangered-400 hover:bg-orangered-500 '
+                                                : 'bg-orangered-500 hover:bg-orangered-600 '
+                                            : efectoDirecto.descripcion != null && i % 2 == 0
                                             ? 'bg-orangered-400 hover:bg-orangered-500 '
-                                            : 'bg-orangered-500 hover:bg-orangered-600 '
-                                        : efectoDirecto.descripcion != null && i % 2 == 0
-                                        ? 'bg-orangered-400 hover:bg-orangered-500 '
-                                        : efectoDirecto.descripcion == null && i % 2 == 0
-                                        ? 'bg-gray-300 hover:bg-gray-400 '
-                                        : efectoDirecto.descripcion != null && i % 2 != 0
-                                        ? 'bg-orangered-500 hover:bg-orangered-600 '
-                                        : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5{proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 ? ' mb-4' : ''}"
-                                    style="flex: 1 0 33.333%"
-                                >
-                                    <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
-                                        <small class="title block font-bold mb-2">RES-{resultado.id}</small>
-                                        {#if resultado.descripcion != null && resultado.descripcion.length > 0}
-                                            {resultado.descripcion}
-                                        {/if}
-                                    </p>
+                                            : efectoDirecto.descripcion == null && i % 2 == 0
+                                            ? 'bg-gray-300 hover:bg-gray-400 '
+                                            : efectoDirecto.descripcion != null && i % 2 != 0
+                                            ? 'bg-orangered-500 hover:bg-orangered-600 '
+                                            : 'bg-gray-400 hover:bg-gray-500 '}tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"
+                                        on:click={showResultadoDialog(efectoDirecto, resultado)}
+                                    >
+                                        <div class="h-full">
+                                            <p class="paragraph-ellipsis text-white text-sm line-height-1-24">
+                                                <small class="title block font-bold mb-2">RES-{resultado.id}</small>
+                                                {#if resultado.descripcion != null && resultado.descripcion.length > 0}
+                                                    {resultado.descripcion}
+                                                {/if}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {#if resultado.descripcion != null}
+                                        <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                            <div class="flex items-center cursor-pointer select-none group">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </div>
+                                            <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                                <Button variant={null} on:click={destroyResultado(resultado)}>Eliminar</Button>
+                                            </div>
+                                        </Dropdown>
+                                    {/if}
                                 </div>
                             {/each}
                         </div>
@@ -647,6 +700,18 @@
                                     {/if}
                                 </p>
                             </div>
+                            {#if causaDirecta.objetivo_especifico.descripcion != null}
+                                <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                    <div class="flex items-center cursor-pointer select-none group">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </div>
+                                    <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                        <Button variant={null} on:click={destroyObjetivoEspecifico(causaDirecta.objetivo_especifico)}>Eliminar</Button>
+                                    </div>
+                                </Dropdown>
+                            {/if}
                         </div>
                         <!-- Actividades -->
                         {#if i == 0}
@@ -658,7 +723,7 @@
                         <div class="flex flex-wrap objetivo-especificos relative mt-14" id={i == 0 ? 'actividad-tooltip-placement' : ''} aria-describedby={i == 0 ? 'tooltip' : ''}>
                             {#each causaDirecta.causas_indirectas as causaIndirecta}
                                 {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-                                    <div class="mb-4" style="flex: 1 0 33.333%">
+                                    <div class="mb-4 relative" style="flex: 1 0 33.333%">
                                         <div
                                             on:click={showActivityDialog(causaIndirecta, causaDirecta.objetivo_especifico.id)}
                                             class="{causaIndirecta.descripcion != null && i % 2 == 0
@@ -680,6 +745,18 @@
                                                 {/if}
                                             </p>
                                         </div>
+                                        {#if causaIndirecta.actividad.descripcion != null}
+                                            <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                                <div class="flex items-center cursor-pointer select-none group">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </div>
+                                                <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                                    <Button variant={null} on:click={destroyActividad(causaIndirecta.actividad)}>Eliminar</Button>
+                                                </div>
+                                            </Dropdown>
+                                        {/if}
                                     </div>
                                 {/if}
                             {/each}

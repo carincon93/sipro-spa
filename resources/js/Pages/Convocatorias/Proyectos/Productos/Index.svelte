@@ -106,8 +106,8 @@
             <thead slot="thead">
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Fechas</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Objetivo específico</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Resultado</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
                 </tr>
             </thead>
@@ -123,16 +123,13 @@
 
                         <td class="border-t">
                             <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
-                                {#if producto.fecha_inicio}
-                                    Del {producto.fecha_inicio} al {producto.fecha_finalizacion}
-                                {:else}
-                                    <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center inline-block mt-2 mb-2">Sin fechas definidas</span>
-                                {/if}
+                                {producto.resultado.objetivo_especifico.descripcion}
                             </p>
                         </td>
+
                         <td class="border-t">
                             <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
-                                {producto.resultado.objetivo_especifico.descripcion}
+                                {producto.resultado.descripcion}
                             </p>
                         </td>
 

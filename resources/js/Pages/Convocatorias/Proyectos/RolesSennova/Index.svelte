@@ -119,7 +119,7 @@
                 </form>
             {/if}
 
-            <InfoMessage>Tenga en cuenta que el rol <strong>Aprendiz sennova (contrato aprendizaje)</strong> no suma al total del presupuesto del proyecto.</InfoMessage>
+            <InfoMessage>Tenga en cuenta que el rol <strong>Aprendiz SENNOVA (contrato aprendizaje)</strong> no suma al total del presupuesto del proyecto.</InfoMessage>
         </div>
 
         <div slot="actions">
@@ -194,7 +194,7 @@
         <tfoot slot="tfoot">
             <tr>
                 <td colspan="5" class="border-t p-4">
-                    <strong>Actualmente el total del costo de los roles requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP
+                    <strong>Actualmente el total del costo de los roles requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_roles_sennova) ? proyecto.total_roles_sennova : 0)} COP (No se suma el Aprendiz SENNOVA Contrato aprendizaje)
                 </td>
             </tr>
         </tfoot>
