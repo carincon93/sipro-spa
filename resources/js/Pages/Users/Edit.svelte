@@ -39,6 +39,7 @@
     let dialogOpen = false
     let sending = false
     let form = useForm({
+        _token: $page.props.csrf_token,
         nombre: usuario.nombre,
         email: usuario.email,
         password: usuario.password,

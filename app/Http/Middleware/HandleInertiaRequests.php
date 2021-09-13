@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
+            'csrf_token' => csrf_token(),
             'convocatoria' => Convocatoria::where('esta_activa', true)->first(),
             'auth' => [
                 'user'                  => $request->user() ? $request->user()->only('id', 'nombre', 'nombre_usuario', 'email', 'roles', 'can', 'centro_formacion_id') : null,
