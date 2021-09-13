@@ -7,6 +7,7 @@ use App\Models\CulturaInnovacion;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
+use App\Http\Requests\CulturaInnovacionLongColumnRequest;
 use App\Http\Requests\CulturaInnovacionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -218,6 +219,15 @@ class CulturaInnovacionController extends Controller
         $request->relacionado_mesas_sectoriales == 1 ? $culturaInnovacion->mesasSectoriales()->sync($request->mesa_sectorial_id) : $culturaInnovacion->mesasSectoriales()->detach();
         $request->relacionado_tecnoacademia == 1 ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->sync($request->linea_tecnologica_id) : $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->detach();
 
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    public function updateLongColumn(CulturaInnovacionLongColumnRequest $request, Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion, $column)
+    {
+        $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
+
+        $culturaInnovacion->update([$column => $request->only($column)]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

@@ -384,6 +384,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Cultura innovacion - Estrategia Nacional
      * 
      */
+    Route::post('convocatorias/{convocatoria}/cultura-innovacion/{cultura_innovacion}/column/{column}', [CulturaInnovacionController::class, 'updateLongColumn'])->name('convocatorias.cultura-innovacion.updateLongColumn');
     Route::resource('reglas-roles-cultura', ReglaRolCulturaController::class)->parameters(['reglas-roles-cultura' => 'regla-rol-cultura'])->except(['show']);
     Route::resource('convocatorias.cultura-innovacion', CulturaInnovacionController::class)->parameters(['convocatorias' => 'convocatoria', 'cultura-innovacion' => 'cultura-innovacion'])->except(['show']);
 
@@ -393,6 +394,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::resource('reglas-roles-tp', ReglaRolTpController::class)->parameters(['reglas-roles-tp' => 'regla-rol-tp'])->except(['show']);
     Route::resource('convocatorias.tp', TpController::class)->parameters(['convocatorias' => 'convocatoria', 'tp' => 'tp'])->except(['show']);
+    Route::put('convocatorias/{convocatoria}/tp/{tp}/column/{column}', [TpController::class, 'updateLongColumn'])->name('convocatorias.tp.updateLongColumn');
 
     /**
      * Ta - Estrategia nacional
@@ -648,7 +650,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.idi-evaluaciones', IdiEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'idi-evaluaciones' => 'idi-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.ta-evaluaciones', TaEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'ta-evaluaciones' => 'ta-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.tp-evaluaciones', TpEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'tp-evaluaciones' => 'tp-evaluacion'])->except(['create', 'store', 'show']);
-    Route::put('convocatorias/{convocatoria}/tp/{tp}/column/{column}', [TpController::class, 'updateLongColumn'])->name('convocatorias.tp.updateLongColumn');
     Route::resource('convocatorias.servicios-tecnologicos-evaluaciones', ServicioTecnologicoEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos-evaluaciones' => 'servicio-tecnologico-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('evaluaciones', EvaluacionController::class)->parameters(['evaluaciones' => 'evaluacion'])->except(['show']);
 });
