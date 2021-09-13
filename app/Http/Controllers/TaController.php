@@ -219,7 +219,6 @@ class TaController extends Controller
         $ta->fecha_inicio                       = $request->fecha_inicio;
         $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
-        $ta->metodologia_local                  = $request->metodologia_local;
 
         $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
         $ta->nombre_instituciones               = $request->nombre_instituciones;

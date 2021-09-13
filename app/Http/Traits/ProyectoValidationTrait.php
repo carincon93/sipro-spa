@@ -522,7 +522,7 @@ trait ProyectoValidationTrait
     {
         $bool = true;
         if ($proyecto->ta()->exists()) {
-            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_roles > $proyecto->total_roles_sennova ? true : false;
+            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_roles >= $proyecto->total_roles_sennova ? true : false;
         }
 
         return $bool;
@@ -532,7 +532,7 @@ trait ProyectoValidationTrait
     {
         $bool = true;
         if ($proyecto->ta()->exists()) {
-            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_presupuesto > $proyecto->precio_proyecto ? true : false;
+            $bool = $proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->max_valor_presupuesto >= $proyecto->precio_proyecto ? true : false;
         }
 
         return $bool;

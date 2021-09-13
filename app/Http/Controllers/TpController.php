@@ -175,8 +175,6 @@ class TpController extends Controller
         $tp->fecha_finalizacion                   = $request->fecha_finalizacion;
         $tp->max_meses_ejecucion                  = $request->max_meses_ejecucion;
 
-        $tp->metodologia_local                    = $request->metodologia_local;
-
         $tp->numero_instituciones                 = null;
         $tp->nombre_instituciones                 = null;
         $tp->nodoTecnoparque()->associate($request->nodo_tecnoparque_id);
