@@ -190,7 +190,7 @@ class TpController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
 
-        $tp->update([$column => $request->only($column)]);
+        $tp->update($request->only($column));
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
