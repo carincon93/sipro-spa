@@ -213,7 +213,7 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
-        $servicioTecnologico->update([$column => $request->only($column)]);
+        $servicioTecnologico->update($request->only($column));
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

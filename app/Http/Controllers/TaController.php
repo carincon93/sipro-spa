@@ -247,7 +247,7 @@ class TaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
-        $ta->update([$column => $request->only($column)]);
+        $ta->update($request->only($column));
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

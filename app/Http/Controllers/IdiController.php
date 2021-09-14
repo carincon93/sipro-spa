@@ -217,7 +217,7 @@ class IdiController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
-        $idi->update([$column => $request->only($column)]);
+        $idi->update($request->only($column));
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
