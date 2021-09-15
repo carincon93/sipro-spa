@@ -179,6 +179,30 @@
                         <div class="mt-8">
                             <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
                             <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
+                            {#if proyecto.codigo_linea_programatica}
+                                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                    <td class="border-t px-6 pt-6 pb-4">
+                                        <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
+                                            Descargar carta de intención
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                    <td class="border-t px-6 pt-6 pb-4">
+                                        <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
+                                            Descargar carta de propiedad intelectual
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/if}
+                            <span class="bg-green-200 px-2 py-1 text-green-700 inline-block mb-4">Archivo cargado. Descarguelo desde el siguiente enlace:</span>
                         </div>
 
                         <div class="mt-8">
