@@ -216,8 +216,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise(resolve => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && ta.proyecto.modificable == true))) {
-
+            if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
                 //guardar
                 Inertia.put(route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]), {[column]:form[column]}, {
                     onStart: () => (sending = true),
@@ -226,7 +225,8 @@
                     preserveScroll: true,
                 })
             }else{
-                resolve({});
+                console.log('not permited')
+                reject({});
             }
         });
     }

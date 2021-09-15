@@ -188,7 +188,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise(resolve => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && culturaInnovacion.proyecto.modificable == true))) {
+        if (isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
 
                 //guardar
                 Inertia.post(route('convocatorias.cultura-innovacion.updateLongColumn', [convocatoria.id, culturaInnovacion.id, column]), {[column]:form[column]}, {

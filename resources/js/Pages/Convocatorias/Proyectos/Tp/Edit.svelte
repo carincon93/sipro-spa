@@ -140,7 +140,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise(resolve => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && tp.proyecto.modificable == true))) {
+        if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
 
                 //guardar
                 Inertia.put(route('convocatorias.tp.updateLongColumn', [convocatoria.id, tp.id, column]), {[column]:form[column]}, {

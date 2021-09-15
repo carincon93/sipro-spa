@@ -107,7 +107,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise(resolve => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && servicioTecnologico.proyecto.modificable == true))) {
+        if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
 
                 //guardar
                 Inertia.put(route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]), {[column]:form[column]}, {
