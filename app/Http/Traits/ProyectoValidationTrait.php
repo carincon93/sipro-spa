@@ -184,7 +184,7 @@ trait ProyectoValidationTrait
     {
         $countObjetivoEspecifico = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
-            if ($causaDirecta->descripcion != '' && $causaDirecta->objetivoEspecifico->descripcion == '') {
+            if ($causaDirecta->descripcion != '' && $causaDirecta->objetivoEspecifico && $causaDirecta->objetivoEspecifico->descripcion == '') {
                 $countObjetivoEspecifico++;
             }
         }
@@ -204,7 +204,7 @@ trait ProyectoValidationTrait
         $countActividad = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
             foreach ($causaDirecta->causasIndirectas as $causaIndirecta) {
-                if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad->descripcion == null) {
+                if ($causaIndirecta && $causaIndirecta->descripcion != '' && $causaIndirecta->actividad && $causaIndirecta->actividad->descripcion == null) {
                     $countActividad++;
                 }
             }
@@ -225,7 +225,7 @@ trait ProyectoValidationTrait
         $countImpacto = 0;
         foreach ($proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->efectosIndirectos as $efectoIndirecto) {
-                if ($efectoIndirecto->descripcion != '' && $efectoIndirecto->impacto->descripcion == null) {
+                if ($efectoIndirecto->descripcion != '' && $efectoIndirecto->impacto && $efectoIndirecto->impacto->descripcion == null) {
                     $countImpacto++;
                 }
             }
@@ -246,7 +246,7 @@ trait ProyectoValidationTrait
         $countActividadPresupuesto = 0;
         foreach ($proyecto->causasDirectas as $causaDirecta) {
             foreach ($causaDirecta->causasIndirectas as $causaIndirecta) {
-                if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad->proyectoPresupuesto()->count() == 0) {
+                if ($causaIndirecta->descripcion != '' && $causaIndirecta->actividad && $causaIndirecta->actividad->proyectoPresupuesto()->count() == 0) {
                     $countActividadPresupuesto++;
                 }
             }
