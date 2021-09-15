@@ -238,6 +238,7 @@ class Ta extends Model
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->where('proyectos.estructuracion_proyectos', request()->only('estructuracion_proyectos'))
                 ->where('proyectos.centro_formacion_id', $centroFormacionId)
+                ->orWhere('proyecto_participantes.user_id', $authUser->id)
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
