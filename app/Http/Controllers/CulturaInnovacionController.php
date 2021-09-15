@@ -184,16 +184,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->fecha_finalizacion                    = $request->fecha_finalizacion;
         $culturaInnovacion->max_meses_ejecucion                   = $request->max_meses_ejecucion;
         $culturaInnovacion->video                                 = $request->video;
-        $culturaInnovacion->justificacion_industria_4             = $request->justificacion_industria_4;
-        $culturaInnovacion->justificacion_economia_naranja        = $request->justificacion_economia_naranja;
-        $culturaInnovacion->justificacion_politica_discapacidad   = $request->justificacion_politica_discapacidad;
-        $culturaInnovacion->resumen                               = $request->resumen;
-        $culturaInnovacion->antecedentes                          = $request->antecedentes;
-        $culturaInnovacion->marco_conceptual                      = $request->marco_conceptual;
-        $culturaInnovacion->bibliografia                          = $request->bibliografia;
+
         $culturaInnovacion->numero_aprendices                     = $request->numero_aprendices;
-        $culturaInnovacion->impacto_municipios                    = $request->impacto_municipios;
-        $culturaInnovacion->impacto_centro_formacion              = $request->impacto_centro_formacion;
 
         $culturaInnovacion->muestreo                              = $request->muestreo;
         $culturaInnovacion->actividades_muestreo                  = $request->muestreo == 1 ? $request->actividades_muestreo : null;
