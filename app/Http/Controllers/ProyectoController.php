@@ -32,6 +32,51 @@ use Inertia\Inertia;
 class ProyectoController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return Inertia::render('Proyectos/Index', [
+            'filters'       => request()->all('search'),
+            'proyectos'     => Proyecto::orderBy('id', 'ASC')->paginate()->appends(['search' => request()->search]),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Evaluacion\Proyecto $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function editProyecto(Proyecto $proyecto)
+    {
+        return Inertia::render('Proyectos/Edit', [
+            'proyecto'    => $proyecto,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Evaluacion\Proyecto  $proyecto
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Proyecto $proyecto)
+    {
+        $proyecto->a_evaluar  = $request->a_evaluar;
+        $proyecto->modificable = $request->modificable;
+        $proyecto->finalizado  = $request->finalizado;
+        $proyecto->radicado  = $request->radicado;
+
+        $proyecto->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
      * showCadenaValor
      *
      * @param  mixed $convocatoria
@@ -333,7 +378,7 @@ class ProyectoController extends Controller
     }
 
     /**
-     * edit
+     * Proyecto
      *
      * @param  mixed $convocatoria
      * @param  mixed $proyecto

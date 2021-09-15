@@ -127,63 +127,63 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/cultura-innovacion/centros-formacion', [WebController::class, 'culturaInnovacionCentrosFormacion'])->name('web-api.cultura-innovacion.centros-formacion');
 
     // Trae las actividades por resultado
-    Route::get('web-api/resultados/{resultado}/actividades', [WebController::class, 'resultadosActividades'] )->name('web-api.resultados.actividades');
+    Route::get('web-api/resultados/{resultado}/actividades', [WebController::class, 'resultadosActividades'])->name('web-api.resultados.actividades');
 
     // Trae los conceptos internos SENA
-    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', [WebController::class, 'segundoGrupoPresupuestal'] )->name('web-api.segundo-grupo-presupuestal');
+    Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', [WebController::class, 'segundoGrupoPresupuestal'])->name('web-api.segundo-grupo-presupuestal');
 
 
 
-    Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', [WebController::class, 'tercerGrupoPresupuestal'] )->name('web-api.tercer-grupo-presupuestal');
+    Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', [WebController::class, 'tercerGrupoPresupuestal'])->name('web-api.tercer-grupo-presupuestal');
 
     // Trae los usos presupuestales
-    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', [WebController::class, 'usosPresupuestales'] )->name('web-api.usos-presupuestales');
+    Route::get('web-api/convocatorias/{convocatoria}/lineas-programaticas/{linea_programatica}/presupuesto-sennova/segundo-grupo-presupuestal/{segundo_grupo_presupuestal}/tercer-grupo-presupuestal/{tercer_grupo_presupuestal}', [WebController::class, 'usosPresupuestales'])->name('web-api.usos-presupuestales');
 
-    Route::get('web-api/convocatorias/{convocatoria}/proyectos/{proyecto}/{linea_programatica}/roles-sennova', [WebController::class, 'rolesSennova'] )->name('web-api.convocatorias.roles-sennova');
+    Route::get('web-api/convocatorias/{convocatoria}/proyectos/{proyecto}/{linea_programatica}/roles-sennova', [WebController::class, 'rolesSennova'])->name('web-api.convocatorias.roles-sennova');
 
     /**
      * Programas de formación
      * 
      */
-    Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', [WebController::class, 'programasFormacion'] )->name('web-api.programas-formacion');
+    Route::get('web-api/centros-formacion/{centro_formacion}/programas-formacion', [WebController::class, 'programasFormacion'])->name('web-api.programas-formacion');
 
     /**
      * Estados de sistema de gestión
      * 
      */
-    Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', [WebController::class, 'estadosSistemaGestion'] )->name('web-api.estados-sistema-gestion');
+    Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', [WebController::class, 'estadosSistemaGestion'])->name('web-api.estados-sistema-gestion');
 
     /**
      * Programas de formación articulados
      * 
      */
-    Route::get('web-api/programas-formacion-articulados', [WebController::class, 'programasFormacionArticulados'] )->name('web-api.programas-formacion-articulados');
+    Route::get('web-api/programas-formacion-articulados', [WebController::class, 'programasFormacionArticulados'])->name('web-api.programas-formacion-articulados');
 
     /**
      * Regionales
      * 
      * Trae las regiones
      */
-    Route::get('web-api/regiones', [WebController::class, 'regiones'] )->name('web-api.regiones');
+    Route::get('web-api/regiones', [WebController::class, 'regiones'])->name('web-api.regiones');
 
     /**
      * Trae las regionales
      */
-    Route::get('web-api/regionales', [WebController::class, 'regionales'] )->name('web-api.regionales');
+    Route::get('web-api/regionales', [WebController::class, 'regionales'])->name('web-api.regionales');
 
     Route::resource('regionales', RegionalController::class)->parameters(['regionales' => 'regional'])->except(['show']);
 
     /**
      * Trae los centros de formación por regional
      */
-    Route::get('web-api/regional/{regional}/centros-formacion', [WebController::class, 'centrosFormacionRegional'] )->name('web-api.centros-formacion-ejecutor');
+    Route::get('web-api/regional/{regional}/centros-formacion', [WebController::class, 'centrosFormacionRegional'])->name('web-api.centros-formacion-ejecutor');
 
     /**
      * Centros de formación
      * 
      * Trae los subdirectores
      */
-    Route::get('web-api/users/{rol}', [WebController::class, 'subdirectores'] )->name('web-api.users');
+    Route::get('web-api/users/{rol}', [WebController::class, 'subdirectores'])->name('web-api.users');
 
     Route::resource('centros-formacion', CentroFormacionController::class)->except(['show'])->parameters(['centros-formacion' => 'centro-formacion']);
 
@@ -247,7 +247,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae los grupos de investigación
      * 
      */
-    Route::get('web-api/grupos-investigacion', [WebController::class, 'gruposInvestigacion'] )->name('web-api.grupos-investigacion');
+    Route::get('web-api/grupos-investigacion', [WebController::class, 'gruposInvestigacion'])->name('web-api.grupos-investigacion');
 
     Route::resource('lineas-investigacion', LineaInvestigacionController::class)->parameters(['lineas-investigacion' => 'linea-investigacion'])->except(['show']);
 
@@ -256,7 +256,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      * Trae las líneas de investigación
      */
-    Route::get('web-api/lineas-investigacion/{centro_formacion}', [WebController::class, 'lineasInvestigacion'] )->name('web-api.lineas-investigacion');
+    Route::get('web-api/lineas-investigacion/{centro_formacion}', [WebController::class, 'lineasInvestigacion'])->name('web-api.lineas-investigacion');
 
     Route::resource('semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
@@ -270,91 +270,91 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Web api
      * 
      */
-    Route::get('web-api/municipios', [WebController::class, 'municipios'] )->name('web-api.municipios');
+    Route::get('web-api/municipios', [WebController::class, 'municipios'])->name('web-api.municipios');
 
     /**
      * Web api
      * 
      * Trae las Tecnoacademias
      */
-    Route::get('web-api/tecnoacademias', [WebController::class, 'tecnoacademias'] )->name('web-api.tecnoacademias');
+    Route::get('web-api/tecnoacademias', [WebController::class, 'tecnoacademias'])->name('web-api.tecnoacademias');
 
     /**
      * Web api
      * 
      * Trae las tecnoacademias centro_formacion
      */
-    Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', [WebController::class, 'tecnoacademiasCentroFormacion'] )->name('web-api.centros-formacion.tecnoacademias');
+    Route::get('web-api/centros-formacion/{centro_formacion}/tecnoacademias', [WebController::class, 'tecnoacademiasCentroFormacion'])->name('web-api.centros-formacion.tecnoacademias');
 
     /**
      * Web api
      * 
      * Trae las líneas tecnoacademia
      */
-    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', [WebController::class, 'líneasTecnoacademia'] )->name('web-api.tecnoacademias.lineas-tecnoacademia');
+    Route::get('web-api/tecnoacademias/{tecnoacademia}/lineas-tecnoacademia', [WebController::class, 'líneasTecnoacademia'])->name('web-api.tecnoacademias.lineas-tecnoacademia');
 
     /**
      * Web api
      * 
      * Trae los nodos tecnoparque
      */
-    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', [WebController::class, 'nodosTecnoparque'] )->name('web-api.nodos-tecnoparque');
+    Route::get('web-api/nodos-tecnoparque/{centro_formacion}', [WebController::class, 'nodosTecnoparque'])->name('web-api.nodos-tecnoparque');
 
     /**
      * Web api
      * 
      * Trae las líneas programáticas
      */
-    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', [WebController::class, 'líneasProgramaticas'] )->name('web-api.lineas-programaticas');
+    Route::get('web-api/lineas-programaticas/{categoria_proyecto}', [WebController::class, 'líneasProgramaticas'])->name('web-api.lineas-programaticas');
 
     /**
      * Web api
      * 
      * Trae las redes de conocimiento 
      */
-    Route::get('web-api/redes-conocimiento', [WebController::class, 'redesConocimiento'] )->name('web-api.redes-conocimiento');
+    Route::get('web-api/redes-conocimiento', [WebController::class, 'redesConocimiento'])->name('web-api.redes-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las áreas de conocimiento
      */
-    Route::get('web-api/areas-conocimiento', [WebController::class, 'areasConocimiento'] )->name('web-api.areas-conocimiento');
+    Route::get('web-api/areas-conocimiento', [WebController::class, 'areasConocimiento'])->name('web-api.areas-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las subáreas de conocimiento
      */
-    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', [WebController::class, 'subareasConocimiento'] )->name('web-api.subareas-conocimiento');
+    Route::get('web-api/subareas-conocimiento/{area_conocimiento}', [WebController::class, 'subareasConocimiento'])->name('web-api.subareas-conocimiento');
 
     /**
      * Web api
      * 
      * Trae las disciplinas de subáreas de conocimiento
      */
-    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', [WebController::class, 'disciplinasSubareaConocimiento'] )->name('web-api.disciplinas-subarea-conocimiento');
+    Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', [WebController::class, 'disciplinasSubareaConocimiento'])->name('web-api.disciplinas-subarea-conocimiento');
 
     /**
      * Web api
      * 
      * Trae los actividades económicas
      */
-    Route::get('web-api/actividades-economicas', [WebController::class, 'actividadesEconomicas'] )->name('web-api.actividades-economicas');
+    Route::get('web-api/actividades-economicas', [WebController::class, 'actividadesEconomicas'])->name('web-api.actividades-economicas');
 
     /**
      * Web api
      * 
      * Trae las temáticas estrategicas SENA
      */
-    Route::get('web-api/tematicas-estrategicas', [WebController::class, 'tematicasEstrategicas'] )->name('web-api.tematicas-estrategicas');
+    Route::get('web-api/tematicas-estrategicas', [WebController::class, 'tematicasEstrategicas'])->name('web-api.tematicas-estrategicas');
 
     /**
      * Web api
      * 
      * Trae las subtipologías Minciencias
      */
-    Route::get('web-api/subtipologias-minciencias', [WebController::class, 'subtipologiasMinciencias'] )->name('web-api.subtipologias-minciencias');
+    Route::get('web-api/subtipologias-minciencias', [WebController::class, 'subtipologiasMinciencias'])->name('web-api.subtipologias-minciencias');
 
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'summary'])->name('convocatorias.proyectos.summary');
     Route::put('convocatorias/{convocatoria}/proyectos/{proyecto}/finalizar-proyecto', [ProyectoController::class, 'finalizarProyecto'])->name('convocatorias.proyectos.finish');
@@ -373,7 +373,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/entidades-aliadas/{entidad_aliada}/{archivo}/download', [EntidadAliadaController::class, 'download'])->name('convocatorias.proyectos.entidades-aliadas.download');
     Route::resource('convocatorias.idi', IdiController::class)->parameters(['convocatorias' => 'convocatoria', 'idi' => 'idi'])->except(['show']);
-    
+
     Route::put('convocatorias/{convocatoria}/idi/{idi}/column/{column}', [IdiController::class, 'updateLongColumn'])->name('convocatorias.idi.updateLongColumn');
 
     Route::resource('convocatorias.proyectos.entidades-aliadas', EntidadAliadaController::class)->parameters(['convocatorias' => 'convocatoria', 'proyectos' => 'proyecto', 'entidades-aliadas' => 'entidad-aliada'])->except(['show']);
@@ -584,6 +584,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('roles', RoleController::class)->except(['show']);
+
+    /**
+     * Proyectos
+     * 
+     */
+    Route::get('proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
+    Route::get('proyectos/{proyecto}/editar', [ProyectoController::class, 'editProyecto'])->name('proyectos.edit');
+    Route::put('proyectos/{proyecto}/editar', [ProyectoController::class, 'update'])->name('proyectos.update');
 
     /**
      * Evaluaciones
