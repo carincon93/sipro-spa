@@ -29,7 +29,7 @@ class ProjectoVersion extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
@@ -41,11 +41,11 @@ class ProjectoVersion extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Se ha generado una versión en PDF del proyecto')
-                    ->line("Se ha generado una versión en PDF del proyecto {$this->version->proyecto->codigo} tras ser finalizado.")
-                    ->action('Ver proyecto', url("/convocatorias/{$this->version->proyecto->convocatoria->id}/proyectos/{$this->version->proyecto->id}/editar?notificacion={$this->id}"))
-                    ->line('Recuerde revisar el archivo anexo en PDF!')
-                    ->attach(storage_path("app/convocatorias/".$this->version->proyecto->convocatoria->id."/".$this->version->proyecto->id."/".$this->version->version.".pdf"));
+            ->subject('Se ha generado una versión en PDF del proyecto')
+            ->line("Se ha generado una versión en PDF del proyecto {$this->version->proyecto->codigo} tras ser finalizado.")
+            ->action('Ver proyecto', url("/convocatorias/{$this->version->proyecto->convocatoria->id}/proyectos/{$this->version->proyecto->id}/editar?notificacion={$this->id}"))
+            ->line('Recuerde revisar el archivo anexo en PDF!')
+            ->attach(storage_path("app/convocatorias/" . $this->version->proyecto->convocatoria->id . "/" . $this->version->proyecto->id . "/" . $this->version->version . ".pdf"));
     }
 
     /**

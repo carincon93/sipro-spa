@@ -143,7 +143,7 @@
             </InfoMessage>
         {/if}
 
-        {#if proyecto.finalizado == true && !checkRole(authUser, [1, 4])}
+        {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
             <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
         {:else if proyecto.a_evaluar == true}
             <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
@@ -205,22 +205,22 @@
                             <li>Objetivo general</li>
                         {/if}
                         {#if !resultados}
-                            <li>Resultados</li>
+                            <li>Resultados (árbol de objetivos)</li>
                         {/if}
                         {#if !objetivosEspecificos}
-                            <li>Objetivos específicos</li>
+                            <li>Objetivos específicos (árbol de objetivos)</li>
                         {/if}
                         {#if !actividades}
-                            <li>Actividades</li>
+                            <li>Actividades (árbol de objetivos)</li>
                         {/if}
                         {#if !impactos}
                             <li>Impactos</li>
                         {/if}
                         {#if !metodologia}
-                            <li>Metodología</li>
+                            <li>Metodología (Metodología y actividades)</li>
                         {/if}
                         {#if !propuestaSostenibilidad}
-                            <li>Propuesta de sostenibilidad</li>
+                            <li>Propuesta de sostenibilidad (Cadena de valor)</li>
                         {/if}
                         {#if proyecto.codigo_linea_programatica == 70}
                             {#if !edt}
@@ -279,6 +279,7 @@
     <div>
         <InfoMessage>
             <h1><strong>Versiones del proyecto</strong></h1>
+            El PDF se generará una vez finalice la fase de formulación.
             {#if versiones}
                 <ul>
                     {#each versiones as version}

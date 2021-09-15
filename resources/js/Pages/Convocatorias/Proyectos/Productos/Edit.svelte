@@ -84,8 +84,6 @@
         $form.resultado_id = resultado_id.value
         actividades = resultado_id.actividades
     }
-
-    console.log(proyecto.servicio_tecnologico)
 </script>
 
 <AuthenticatedLayout>
@@ -217,14 +215,15 @@
                         <InputError message={errors.actividad_id} />
                     </div>
                     <div class="grid grid-cols-2">
-                        {#each actividades as { id, descripcion }, i}
-                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
+                        {#if actividades}
+                            {#each actividades as { id, descripcion }, i}
+                                <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
 
-                            <div class="border-b border-t flex items-center justify-center">
-                                <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
-                            </div>
-                        {/each}
-                        {#if actividades.length == 0}
+                                <div class="border-b border-t flex items-center justify-center">
+                                    <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
+                                </div>
+                            {/each}
+                        {:else}
                             <p class="p-4">Sin información registrada</p>
                         {/if}
                     </div>

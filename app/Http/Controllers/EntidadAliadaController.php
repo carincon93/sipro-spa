@@ -316,6 +316,7 @@ class EntidadAliadaController extends Controller
             $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
 
             $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
+
             $rutaCartaIntencion          = $request->carta_intencion->storeAs(
                 'cartas-intencion',
                 $nombreArchivoCartaIntencion
@@ -554,6 +555,6 @@ class EntidadAliadaController extends Controller
 
         $random    = Str::random(5);
 
-        return "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension();
+        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension()));
     }
 }

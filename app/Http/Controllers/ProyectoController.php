@@ -554,7 +554,7 @@ class ProyectoController extends Controller
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
         $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
-        $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
+        // $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
@@ -573,6 +573,7 @@ class ProyectoController extends Controller
             return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
+
 
         $proyecto->a_evaluar = true;
         $proyecto->finalizado = true;

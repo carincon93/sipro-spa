@@ -1,20 +1,15 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Shared/Label'
-    import Button from '@/Shared/Button'
-    import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
-    import Dialog from '@/Shared/Dialog'
     import Input from '@/Shared/Input'
 
-    export let errors
     export let convocatoria
-    export let proyecto
     export let evaluacion
     export let edt
     export let tiposEvento

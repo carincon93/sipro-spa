@@ -298,6 +298,6 @@ class ProyectoAnexoController extends Controller
 
         $random    = Str::random(5);
 
-        return "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension();
+        return str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension());
     }
 }
