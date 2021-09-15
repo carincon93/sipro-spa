@@ -196,7 +196,6 @@ class ServicioTecnologicoController extends Controller
         $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
         $servicioTecnologico->titulo                        = $request->titulo;
-        $servicioTecnologico->metodologia                   = $request->metodologia;
         $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
         $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
         $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
