@@ -279,6 +279,7 @@
     <div>
         <InfoMessage>
             <h1><strong>Versiones del proyecto</strong></h1>
+            El PDF se generará una vez finalice la fase de formulación.
             {#if versiones}
                 <ul>
                     {#each versiones as version}
