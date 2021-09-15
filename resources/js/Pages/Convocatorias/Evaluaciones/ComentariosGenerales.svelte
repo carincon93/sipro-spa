@@ -5,12 +5,7 @@
     import { _ } from 'svelte-i18n'
 
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import Label from '@/Shared/Label'
-    import LoadingButton from '@/Shared/LoadingButton'
-    import Textarea from '@/Shared/Textarea'
-    import InfoMessage from '@/Shared/InfoMessage'
 
-    export let errors
     export let convocatoria
     export let evaluacion
     export let proyecto

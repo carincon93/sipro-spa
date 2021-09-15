@@ -1,19 +1,14 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Shared/Label'
-    import Button from '@/Shared/Button'
-    import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
-    import Dialog from '@/Shared/Dialog'
 
-    export let errors
     export let convocatoria
-    export let proyecto
     export let evaluacion
     export let inventarioEquipo
     export let estadosInventarioEquipos
@@ -31,8 +26,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let dialogOpen = false
-    let sending = false
     let inventarioEquiposInfo = {
         nombre: inventarioEquipo.nombre,
         marca: inventarioEquipo.marca,
