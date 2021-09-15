@@ -205,22 +205,22 @@
                             <li>Objetivo general</li>
                         {/if}
                         {#if !resultados}
-                            <li>Resultados</li>
+                            <li>Resultados (árbol de objetivos)</li>
                         {/if}
                         {#if !objetivosEspecificos}
-                            <li>Objetivos específicos</li>
+                            <li>Objetivos específicos (árbol de objetivos)</li>
                         {/if}
                         {#if !actividades}
-                            <li>Actividades</li>
+                            <li>Actividades (árbol de objetivos)</li>
                         {/if}
                         {#if !impactos}
                             <li>Impactos</li>
                         {/if}
                         {#if !metodologia}
-                            <li>Metodología</li>
+                            <li>Metodología (Metodología y actividades)</li>
                         {/if}
                         {#if !propuestaSostenibilidad}
-                            <li>Propuesta de sostenibilidad</li>
+                            <li>Propuesta de sostenibilidad (Cadena de valor)</li>
                         {/if}
                         {#if proyecto.codigo_linea_programatica == 70}
                             {#if !edt}
