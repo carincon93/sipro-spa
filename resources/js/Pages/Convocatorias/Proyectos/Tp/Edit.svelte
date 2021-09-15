@@ -215,7 +215,7 @@
                 {/if}
             </div>
 
-            <fieldset disabled>
+            <fieldset disabled={authUser.id == 122 ? undefined : true}>
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
@@ -279,7 +279,7 @@
                 </div>
             </div>
 
-            <fieldset disabled>
+            <fieldset disabled={authUser.id == 122 ? undefined : true}>
                 <div class="mt-44 grid grid-cols-1">
                     <div>
                         <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
@@ -368,7 +368,7 @@
                 </div>
             </div>
 
-            <fieldset disabled>
+            <fieldset disabled={authUser.id == 122 ? undefined : true}>
                 <div class="mt-44 grid grid-cols-1">
                     <div>
                         <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
