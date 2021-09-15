@@ -206,6 +206,10 @@
             {/if}
 
             {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('proyectos.index'))} variant={route().current('proyectos.*') ? 'raised' : 'outlined'} class="p-2">Proyectos</Button>
+            {/if}
+
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('redes-conocimiento.index'))} variant={route().current('redes-conocimiento.*') ? 'raised' : 'outlined'} class="p-2">Redes de conocimiento</Button>
             {/if}
 
