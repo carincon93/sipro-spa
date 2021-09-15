@@ -227,7 +227,7 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
-        $culturaInnovacion->update([$column => $request->only($column)]);
+        $culturaInnovacion->update($request->only($column));
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
