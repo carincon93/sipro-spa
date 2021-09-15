@@ -143,7 +143,7 @@
             </InfoMessage>
         {/if}
 
-        {#if proyecto.finalizado == true && !checkRole(authUser, [1, 4])}
+        {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
             <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
         {:else if proyecto.a_evaluar == true}
             <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
