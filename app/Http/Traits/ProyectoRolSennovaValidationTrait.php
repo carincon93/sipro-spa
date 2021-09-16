@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use App\Models\CentroFormacion;
 use App\Models\ConvocatoriaRolSennova;
 use App\Models\LineaProgramatica;
+use App\Models\ProyectoRolSennova;
 use App\Models\ReglaRolCultura;
 
 trait ProyectoRolSennovaValidationTrait
@@ -103,25 +104,48 @@ trait ProyectoRolSennovaValidationTrait
         return false;
     }
 
-    public static function culturaInnovacionRoles($proyecto, $rolSennovaId, $numeroRoles)
+    public static function culturaInnovacionRoles($proyecto, $convocatoriaRolSennovaId, $proyectoRolSennovaId, $cantidadRoles)
     {
+        $convocatoriaRolSennova = ConvocatoriaRolSennova::find($convocatoriaRolSennovaId);
         $centroFormacion = ReglaRolCultura::where('centro_formacion_id', $proyecto->centroFormacion->id)->first();
-        $convocatoriaRolSennova = ConvocatoriaRolSennova::find($rolSennovaId);
 
         if ($centroFormacion && $convocatoriaRolSennova) {
-            // 27 auxiliar editorial
-            if ($convocatoriaRolSennova->rolSennova->id == 27 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->auxiliar_editorial) {
-                return true;
+
+            $proyectoRolSennovaBd = ProyectoRolSennova::find($proyectoRolSennovaId);
+
+            $proyectoRolesSennova = ProyectoRolSennova::select('proyecto_rol_sennova.id', 'proyecto_rol_sennova.numero_roles')->join('convocatoria_rol_sennova', 'proyecto_rol_sennova.convocatoria_rol_sennova_id', 'convocatoria_rol_sennova.id')->where('convocatoria_rol_sennova.rol_sennova_id', $convocatoriaRolSennova->rolSennova->id)->where('proyecto_id', $proyecto->id)->get();
+            if (count($proyectoRolesSennova) > 0) {
+                foreach ($proyectoRolesSennova as $proyectoRolSennova) {
+                    if ($proyectoRolSennovaBd && $proyectoRolSennovaBd->id == $proyectoRolSennova->id) {
+                        $proyectoRolSennova->numero_roles = 0;
+                    }
+                    $cantidadRoles += $proyectoRolSennova->numero_roles;
+                }
             }
 
-            // 26 gestor editorial
-            if ($convocatoriaRolSennova->rolSennova->id == 26 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->gestor_editorial) {
-                return true;
-            }
+            $count = 0;
+            // Valida si el rol ta está en el array
+            foreach ($proyectoRolesSennova as $rol) {
+                if ($convocatoriaRolSennova->rolSennova->id == $rol->rol_sennova_id) {
+                    $count--;
+                } else {
+                    $count++;
+                }
 
-            // 25 experto temático en producción científica
-            if ($convocatoriaRolSennova->rolSennova->id == 25 && (self::totalRolesSennova($proyecto, $convocatoriaRolSennova->rolSennova->id) + $numeroRoles) > $centroFormacion->experto_tematico) {
-                return true;
+                // 27 auxiliar editorial
+                if ($convocatoriaRolSennova->rolSennova->id == 27 && ($cantidadRoles) > $centroFormacion->auxiliar_editorial) {
+                    return true;
+                }
+
+                // 26 gestor editorial
+                if ($convocatoriaRolSennova->rolSennova->id == 26 && ($cantidadRoles) > $centroFormacion->gestor_editorial) {
+                    return true;
+                }
+
+                // 25 experto temático en producción científica
+                if ($convocatoriaRolSennova->rolSennova->id == 25 && ($cantidadRoles) > $centroFormacion->experto_tematico) {
+                    return true;
+                }
             }
         }
 

@@ -191,7 +191,7 @@
                 Inertia.put(route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]), {[column]:form[column]}, {
                     onStart: () => (sending = true),
                     onError: resp => ((sending = false), (resolve(resp))),
-                    onFinish: () => ((sending = false), (resolve({})), (localStorage.removeItem(nombreFormulario + '.'+column))),
+                    onFinish: () => ((sending = false), resolve({})),
                     preserveScroll: true,
                 })
             }else{
