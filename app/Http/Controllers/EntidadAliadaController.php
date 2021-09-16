@@ -317,10 +317,13 @@ class EntidadAliadaController extends Controller
 
             $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
 
+
             $rutaCartaIntencion          = $request->carta_intencion->storeAs(
                 'cartas-intencion',
                 $nombreArchivoCartaIntencion
             );
+
+
             $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
 
             $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
@@ -331,7 +334,7 @@ class EntidadAliadaController extends Controller
 
             $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
 
-            $entidadAliada->actividades()->attach($request->actividad_id);
+            $entidadAliada->actividades()->sync($request->actividad_id);
 
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
         } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
@@ -553,8 +556,8 @@ class EntidadAliadaController extends Controller
         $cleanProyectoCodigo = str_replace(' ', '', substr($codigoProyecto, 0, 30));
         $cleanProyectoCodigo = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanProyectoCodigo);
 
-        $random    = Str::random(5);
+        $random    = Str::random(10);
 
-        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension()));
+        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}cod{$random}." . $archivo->extension()));
     }
 }
