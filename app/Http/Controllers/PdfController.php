@@ -44,6 +44,16 @@ class PdfController extends Controller
                     END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->get();
             }
 
+            if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82) {
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
+            } elseif ($proyecto->codigo_linea_programatica == 70) {
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
+            } elseif ($proyecto->codigo_linea_programatica == 69) {
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true));
+            } elseif ($proyecto->codigo_linea_programatica == 68) {
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-st.json'), true));
+            }
+
             $base64Arbolproblemas = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-problemas', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
             $base64Arbolobjetivos = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-objetivos', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
             $base64GantProductos = PdfController::takeScreenshot(route('convocatorias.proyectos.productos.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
@@ -62,6 +72,7 @@ class PdfController extends Controller
                 'base64CadenaValor' => $base64CadenaValor,
                 'proyectoAnexo' => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
+                'rolesSennova' => $rolesSennova,
                 'tiposImpacto'    => collect(json_decode(Storage::get('json/tipos-impacto.json'), true)),
                 'estadosInventarioEquipos'  => collect(json_decode(Storage::get('json/estados-inventario-equipos.json'), true)),
                 'tiposLicencia'             => collect(json_decode(Storage::get('json/tipos-licencia-software.json'), true)),
@@ -83,6 +94,7 @@ class PdfController extends Controller
     {
         $cookie = (isset($_COOKIE[config('session.cookie')]))?$_COOKIE[config('session.cookie')]:'';
         $shot = Browsershot::url($route.'?to_pdf=1&key_to_pdf=ktvIOFQuNXqXinQIM1Uc')
+        ->setNodeBinary(base_path().'/node_modules/node/bin/node.exe')
         ->windowSize(1550, 800)
         ->deviceScaleFactor(2)
         ->addChromiumArguments([
