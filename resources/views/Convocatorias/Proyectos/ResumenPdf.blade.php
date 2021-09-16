@@ -1061,7 +1061,7 @@
                @foreach($proyecto->participantes as $part)
                   <tr>
                         <td>
-                           <p>{{$part->nombre_usuario}}</p>
+                           <p>{{$part->nombre}}</p>
                         </td>
                         <td>
                            <p>{{$part->email}}</p>
@@ -1073,7 +1073,7 @@
                            <p>{{$part->centroFormacion->regional->nombre}}</p>
                         </td>
                         <td>
-                           <p>{{($part->pivot->rol_id)?\App\Models\Role::find($part->pivot->rol_id)->nombre:'Sin información registrada'}}</p>
+                           <p>{{($rolesSennova->where('value',$part->rol_sennova)->first())?$rolesSennova->where('value',$part->rol_sennova)->first()['label']:'Sin información registrada'}}</p>
                         </td>
                         <td>
                            <p>{{$part->pivot->cantidad_meses}}</p>

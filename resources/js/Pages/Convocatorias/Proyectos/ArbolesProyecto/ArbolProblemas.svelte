@@ -813,7 +813,7 @@
 
 {#if to_pdf}
     <style>
-        nav {
+        nav, button.absolute.bottom-1\.5 {
             display: none !important;
         }
     </style>

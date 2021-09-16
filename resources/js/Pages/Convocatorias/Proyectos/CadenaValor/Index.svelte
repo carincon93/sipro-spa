@@ -16,6 +16,7 @@
     export let proyecto
     export let objetivos
     export let productos
+    export let to_pdf
 
     $title = 'Cadena de valor'
 
@@ -206,6 +207,16 @@
     </div>
 </AuthenticatedLayout>
 
+{#if to_pdf}
+    <style>
+        .min-h-screen.bg-gray-100 {
+            background: white !important;
+        }
+        div#orgchart_div {
+            overflow: unset;
+        }
+    </style>
+{/if}
 <style>
     :global(#orgchart_div table) {
         border-collapse: unset;
