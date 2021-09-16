@@ -229,8 +229,8 @@ class SoporteEstudioMercadoController extends Controller
         $cleanProyectoCodigo = str_replace(' ', '', substr($codigoProyecto, 0, 30));
         $cleanProyectoCodigo = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanProyectoCodigo);
 
-        $random    = Str::random(5);
+        $random    = Str::random(10);
 
-        return str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}{$cleanName}cod{$random}." . $archivo->extension());
+        return str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}cod{$random}." . $archivo->extension());
     }
 }

@@ -175,8 +175,8 @@ class AnexoController extends Controller
     {
         $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
         $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
-        $random    = Str::random(5);
+        $random    = Str::random(10);
 
-        return str_replace(array("\r", "\n"), '', "formato{$cleanName}cod{$random}." . $archivo->extension());
+        return str_replace(array("\r", "\n"), '', "formatocod{$random}." . $archivo->extension());
     }
 }
