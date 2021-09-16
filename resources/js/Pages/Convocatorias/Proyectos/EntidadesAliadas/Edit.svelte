@@ -180,13 +180,13 @@
                             <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
                             <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
 
-                            {#if $form.carta_intencion != null}
+                            {#if entidadAliada.entidad_aliada_idi?.carta_intencion}
                                 <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
                                     <span class="px-2 py-1 text-green-700 inline-block mb-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
-                                        Archivo cargado correctamente. Descargar carta de intención haciendo clic aqui.
+                                        Archivo cargado correctamente. Descargar carta de intención haciendo clic aquí.
                                     </span>
                                 </a>
                             {/if}
@@ -196,13 +196,13 @@
                             <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
                             <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
 
-                            {#if $form.carta_propiedad_intelectual != null}
+                            {#if entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}
                                 <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
                                     <span class="px-2 py-1 text-green-700 inline-block mb-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
-                                        Archivo cargado correctamente. Descargar carta de propiedad intelectual haciendo clic aqui.
+                                        Archivo cargado correctamente. Descargar carta de propiedad intelectual haciendo clic aquí.
                                     </span>
                                 </a>
                             {/if}
