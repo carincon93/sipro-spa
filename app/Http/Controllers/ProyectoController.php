@@ -600,7 +600,7 @@ class ProyectoController extends Controller
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
         $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
-        // $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
+        $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }
