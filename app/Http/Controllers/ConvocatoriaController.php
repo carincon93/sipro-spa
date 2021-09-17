@@ -155,13 +155,12 @@ class ConvocatoriaController extends Controller
         $convocatoria->fase                     = $request->fase;
         $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
 
-        if ($request->fase == 1) {
+        if ($request->fase == 1) { // Formulación
             $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
-        } else if ($request->fase == 2) {
-            $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
-            $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
-        } else if ($request->fase == 3) {
+        } else if ($request->fase == 2) { // Primera evaluación
+            $convocatoria->proyectos()->update(['modificable' => false]);
+        } else if ($request->fase == 3) { // Subsanación
 
             foreach ($convocatoria->proyectos()->get() as $proyecto) {
                 switch ($proyecto) {
@@ -202,20 +201,13 @@ class ConvocatoriaController extends Controller
                 }
             }
 
-            $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => true, 'iniciado' => false]);
-        } else if ($request->fase == 4) {
-
-
-            $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => true]);
-            $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
-        } else if ($request->fase == 5) {
-
-
-            $convocatoria->proyectos()->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
-            foreach ($convocatoria->proyectos()->get() as $proyecto) {
-                $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
-            }
+        } else if ($request->fase == 4) { // Segunda evaluación
+            $convocatoria->proyectos()->update(['modificable' => false]);
+            $convocatoria->evaluaciones()->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
+        } else if ($request->fase == 5) { // Finalizar convocatoria
+            $convocatoria->proyectos()->update(['modificable' => false]);
+            $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         }
 
         $convocatoria->save();
