@@ -27,6 +27,7 @@ class EntidadAliadaController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->load('evaluaciones.idiEvaluacion');
+        $proyecto->load('evaluaciones.taEvaluacion');
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
@@ -48,7 +49,6 @@ class EntidadAliadaController extends Controller
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
             'infraestructuraTecnoacademia'  => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
-
         ]);
     }
 
@@ -489,6 +489,8 @@ class EntidadAliadaController extends Controller
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
+            'infraestructuraTecnoacademia'  => json_decode(Storage::get('json/infraestructura-tecnoacademia.json'), true)
+
         ]);
     }
 
@@ -530,6 +532,24 @@ class EntidadAliadaController extends Controller
         ]);
     }
 
+    /**
+     * updateEntidadAliadaEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateEntidadAliadaEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->taEvaluacion()->update([
+            'entidad_aliada_comentario'   => $request->entidad_aliada_requiere_comentario == false ? $request->entidad_aliada_comentario : null
+        ]);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
 
     public function validarEntidadAliada(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion, EntidadAliada $entidadAliada)
     {

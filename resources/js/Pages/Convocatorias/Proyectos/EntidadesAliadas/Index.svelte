@@ -48,6 +48,8 @@
             })
         }
     }
+
+    console.log(proyecto.evaluaciones)
 </script>
 
 <AuthenticatedLayout>
@@ -57,7 +59,7 @@
         <div slot="title">Entidades aliadas</div>
 
         <div slot="caption">
-            {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+            {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 70 || proyecto.codigo_linea_programatica == 82}
                 {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                     {#each proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -70,6 +72,9 @@
                                 </div>
                                 {#if evaluacion.idi_evaluacion}
                                     <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.entidad_aliada_comentario ? evaluacion.idi_evaluacion.entidad_aliada_comentario : 'Sin recomendación'}</p>
+                                {/if}
+                                {#if evaluacion.ta_evaluacion}
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.entidad_aliada_comentario ? evaluacion.ta_evaluacion.entidad_aliada_comentario : 'Sin recomendación'}</p>
                                 {/if}
                             </div>
                         {/if}

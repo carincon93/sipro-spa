@@ -291,6 +291,11 @@
                                     <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
+                            {#if presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.requiere_estudio_mercado}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.presupuesto.soportes', [convocatoria.id, evaluacion.id, presupuesto.id]))}>
+                                    <Text>Soportes</Text>
+                                </Item>
+                            {/if}
                         </DataTableMenu>
                     </td>
                 </tr>

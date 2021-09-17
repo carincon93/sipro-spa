@@ -18,7 +18,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let proyectoAnexo
     export let anexos
@@ -99,8 +98,6 @@
             })
         }
     }
-
-    console.log(evaluacion.servicio_tecnologico_evaluacion)
 </script>
 
 <AuthenticatedLayout>
@@ -190,9 +187,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitEstrategiaRegionalEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.anexos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los anexos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.anexos_requiere_comentario} />
@@ -216,9 +210,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitServicioTecnologicoEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.anexos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los anexos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.anexos_requiere_comentario} />
@@ -227,9 +218,6 @@
                         {/if}
                     </div>
 
-                    {#if segundaEvaluacion?.video_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.video_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿El video es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.video_requiere_comentario} />
@@ -238,9 +226,6 @@
                         {/if}
                     </div>
 
-                    {#if segundaEvaluacion?.especificaciones_area_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.especificaciones_area_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Las especificaciones del área son correctas? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.especificaciones_area_requiere_comentario} />
@@ -273,9 +258,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.anexos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los anexos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.anexos_requiere_comentario} />
@@ -299,9 +281,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTpEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.anexos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.anexos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los anexos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.anexos_requiere_comentario} />

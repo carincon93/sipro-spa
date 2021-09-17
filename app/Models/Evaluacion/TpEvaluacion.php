@@ -37,6 +37,8 @@ class TpEvaluacion extends Model
         'analisis_riesgos_comentario',
         'anexos_comentario',
         'productos_comentario',
+        'arbol_problemas_comentario',
+        'arbol_objetivos_comentario',
         'ortografia_comentario',
         'redaccion_comentario',
         'normas_apa_comentario'

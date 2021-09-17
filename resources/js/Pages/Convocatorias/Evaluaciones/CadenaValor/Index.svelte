@@ -16,7 +16,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let productos
     export let objetivos
@@ -181,18 +180,23 @@
                 <div class="mt-4">
                     {#if impacto.tipo == 1}
                         <strong>Impacto social</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {:else if impacto.tipo == 2}
                         <strong>Impacto tecnológico</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {:else if impacto.tipo == 3}
                         <strong>Impacto económico</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {:else if impacto.tipo == 4}
                         <strong>Impacto ambiental</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {:else if impacto.tipo == 5}
-                        <strong>Impacto en el centro de formación</strong>
+                        <strong>Impacto social en el centro de formación</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {:else if impacto.tipo == 6}
-                        <strong>Impacto en el sector productivo</strong>
+                        <strong>Impacto social en el sector productivo</strong>
+                        <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                     {/if}
-                    <Textarea disabled label="" maxlength="40000" value={impacto.descripcion} />
                 </div>
             {/each}
 
@@ -276,10 +280,6 @@
                         error={errors.cadena_valor_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.cadena_valor_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.cadena_valor_requiere_comentario} />
@@ -329,10 +329,6 @@
                         error={errors.propuesta_sostenibilidad_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.propuesta_sostenibilidad_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.propuesta_sostenibilidad_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿La propuesta de sostenibilidad es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.propuesta_sostenibilidad_requiere_comentario} />
@@ -378,10 +374,6 @@
                         error={errors.impacto_ambiental_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.impacto_ambiental_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_ambiental_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿El impacto ambiental es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_ambiental_requiere_comentario} />
@@ -422,10 +414,6 @@
                         autocomplete="off"
                         error={errors.impacto_social_centro_puntaje}
                     />
-
-                    {#if segundaEvaluacion?.impacto_social_centro_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_social_centro_comentario}</p>
-                    {/if}
 
                     <div class="mt-4">
                         <p>¿El impacto social en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple.</p>
@@ -468,10 +456,6 @@
                         error={errors.impacto_social_productivo_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.impacto_social_productivo_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_social_productivo_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿El impacto social en el sector productivo es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_social_productivo_requiere_comentario} />
@@ -513,10 +497,6 @@
                         error={errors.impacto_tecnologico_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.impacto_tecnologico_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.impacto_tecnologico_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿El impacto tecnológico es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.impacto_tecnologico_requiere_comentario} />
@@ -549,9 +529,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.cadena_valor_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.cadena_valor_requiere_comentario} />
@@ -575,9 +552,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTpEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.cadena_valor_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.cadena_valor_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La cadena de valor, propuesta de sostenibilidad, impacto social, impacto tecnológico o impacto en el centro de formación son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.cadena_valor_requiere_comentario} />

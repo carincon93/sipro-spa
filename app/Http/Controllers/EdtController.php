@@ -23,6 +23,8 @@ class EdtController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones.taEvaluacion');
+
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         /**
@@ -41,7 +43,7 @@ class EdtController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EDT/Index', [
             'convocatoria'     => $convocatoria->only('id', 'fase_formateada'),
-            'proyecto'         => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
+            'proyecto'         => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion', 'evaluaciones'),
             'filters'          => request()->all('search'),
             'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $proyecto->id)
                 ->filterEdt(request()->only('search'))->select('edt.id', 'edt.descripcion_evento', 'edt.numero_asistentes', 'edt.proyecto_presupuesto_id')->paginate(),
@@ -261,5 +263,24 @@ class EdtController extends Controller
                 $query->where('codigo', '=', '020202008005096');
             })->get()
         ]);
+    }
+
+    /**
+     * updateEdtEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateEdtEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->taEvaluacion()->update([
+            'edt_comentario'   => $request->edt_requiere_comentario == false ? $request->edt_comentario : null
+        ]);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

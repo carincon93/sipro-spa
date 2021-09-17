@@ -1,18 +1,21 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
-    import Button from '@/Shared/Button'
+    import Switch from '@/Shared/Switch'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
     import InfoMessage from '@/Shared/InfoMessage'
+    import Textarea from '@/Shared/Textarea'
+    import LoadingButton from '@/Shared/LoadingButton'
 
+    export let errors
     export let convocatoria
     export let evaluacion
     export let proyecto
@@ -25,10 +28,32 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let sending = false
+    let formTaEvaluacion = useForm({
+        edt_comentario: evaluacion.ta_evaluacion.edt_comentario,
+        edt_requiere_comentario: evaluacion.ta_evaluacion.edt_comentario == null ? true : false,
+    })
+    function submitTaEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTaEvaluacion.put(route('convocatorias.evaluaciones.edt.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
+
+    <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        Ir a la evaluación
+    </a>
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">EDT</div>
@@ -95,4 +120,27 @@
         </tbody>
     </DataTable>
     <Pagination links={eventos.links} />
+
+    <hr class="mt-10 mb-10" />
+
+    <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+    <div class="mt-16">
+        <form on:submit|preventDefault={submitTaEvaluacion}>
+            <InfoMessage>
+                <div class="mt-4">
+                    <p>¿Las EDT son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.edt_requiere_comentario} />
+                    {#if $formTaEvaluacion.edt_requiere_comentario == false}
+                        <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="edt_comentario" bind:value={$formTaEvaluacion.edt_comentario} error={errors.edt_comentario} required />
+                    {/if}
+                </div>
+            </InfoMessage>
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                {/if}
+            </div>
+        </form>
+    </div>
 </AuthenticatedLayout>
