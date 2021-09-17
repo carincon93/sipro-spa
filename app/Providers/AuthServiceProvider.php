@@ -68,6 +68,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('modificar-proyecto-autor', function (User $user, Proyecto $proyecto) {
+            if ($proyecto->modificable == false) {
+                return false;
+            }
+
             if ($user->hasRole([5, 17, 18, 19, 20]) || $proyecto->participantes()->where('user_id', $user->id)->exists()) {
                 return true;
             }
