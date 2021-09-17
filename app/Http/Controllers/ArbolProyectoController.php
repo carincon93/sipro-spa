@@ -407,6 +407,11 @@ class ArbolProyectoController extends Controller
                     'problema_central_comentario'   => $request->problema_central_requiere_comentario == false ? $request->problema_central_comentario : null
                 ]);
                 break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'arbol_problemas_comentario'   => $request->arbol_problemas_requiere_comentario == false ? $request->arbol_problemas_comentario : null
+                ]);
+                break;
             case $evaluacion->servicioTecnologicoEvaluacion()->exists():
                 $evaluacion->servicioTecnologicoEvaluacion()->update([
                     'arbol_problemas_puntaje'      => $request->arbol_problemas_puntaje,
@@ -946,6 +951,11 @@ class ArbolProyectoController extends Controller
                     'objetivos_comentario'   => $request->objetivos_requiere_comentario == false ? $request->objetivos_comentario : null,
                     'resultados_puntaje'     => $request->resultados_puntaje,
                     'resultados_comentario'  => $request->resultados_requiere_comentario == false ? $request->resultados_comentario : null
+                ]);
+                break;
+            case $evaluacion->tpEvaluacion()->exists():
+                $evaluacion->tpEvaluacion()->update([
+                    'arbol_objetivos_comentario'   => $request->arbol_objetivos_requiere_comentario == false ? $request->arbol_objetivos_comentario : null,
                 ]);
                 break;
 

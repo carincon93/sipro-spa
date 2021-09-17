@@ -7383,9 +7383,9 @@ function monthDiff(d1, d2) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7407,9 +7407,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-vhcw6{\n  height:calc(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7431,9 +7431,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1unnvn6{\n  height:var
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7455,9 +7455,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".circle.svelte-14upwad{\n  height:var(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7479,9 +7479,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".circle.svelte-1vclic6{\n  width:var(-
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7503,9 +7503,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1vf8im1{\n  width:var(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7527,9 +7527,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "div.svelte-1cgj772{\n  position:relati
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7551,9 +7551,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "span.svelte-evhfle{\n  width:var(--siz
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7575,9 +7575,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-h1a2xs{\n  position:re
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7599,9 +7599,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1x2s7pr{\n  width:calc
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7623,9 +7623,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".svelte-1exboqr{\n  overflow:hidden;\n
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7647,9 +7647,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1v1mfqa{\n  position:r
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7671,9 +7671,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1cy66mt{\n  width:var(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7695,9 +7695,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-nlgli4{\n  height:var(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7719,9 +7719,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1sqavxm.svelte-1sqavxm
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7743,9 +7743,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-446r86{\n  position:re
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7791,9 +7791,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-17ey38u{\n  position:r
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7839,9 +7839,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-tycttu{\n  position:re
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7863,9 +7863,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1wp57lu{\n  width:var(
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7887,9 +7887,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".square.svelte-btmyrn{\n  height:var(-
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7911,9 +7911,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1uxpkwt{\n  height:var
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7935,9 +7935,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-14w6xk7{\n  height:var
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -7959,9 +7959,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-8cmcz4{\n  position:re
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -8007,9 +8007,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".listContainer.svelte-ux0sbr{\n  box-s
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -8055,9 +8055,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".selectContainer.svelte-17qb5ew.svelte
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -8103,9 +8103,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "svelte-virtual-list-viewport.svelte-p6
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -8127,10 +8127,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "#main-menu-dialog .mdc-dialog__surface
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -8223,9 +8223,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".z-index-full.svelte-193iq1{\n  z-inde
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -8247,9 +8247,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{\n  height:auto;\n  min-he
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -29863,9 +29863,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -29876,7 +29876,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./BarLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./BarLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
 
             
 
@@ -29885,17 +29885,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -29906,7 +29906,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_48_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./Chasing.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_45_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./Chasing.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte");
 
             
 
@@ -29915,17 +29915,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_48_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_45_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_48_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_45_css_Chasing_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -29936,7 +29936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_29_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./Circle.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_30_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./Circle.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte");
 
             
 
@@ -29945,17 +29945,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_29_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_30_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_29_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_30_css_Circle_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -29966,7 +29966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_34_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./Circle2.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./Circle2.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
 
             
 
@@ -29975,17 +29975,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_34_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_34_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -29996,7 +29996,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_30_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./Circle3.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_29_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./Circle3.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
 
             
 
@@ -30005,17 +30005,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_30_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_29_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_30_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_29_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30026,7 +30026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_50_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./Clock.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./Clock.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
 
             
 
@@ -30035,17 +30035,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_50_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_50_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30056,7 +30056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_51_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./Diamonds.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_50_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./Diamonds.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
 
             
 
@@ -30065,17 +30065,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_51_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_50_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_51_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_50_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30086,7 +30086,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_32_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./DoubleBounce.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_31_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./DoubleBounce.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
 
             
 
@@ -30095,17 +30095,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_32_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_31_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_32_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_31_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30116,7 +30116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_45_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./Firework.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_42_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./Firework.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
 
             
 
@@ -30125,17 +30125,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_45_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_42_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_45_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_42_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30146,7 +30146,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_35_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./GoogleSpin.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./GoogleSpin.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
 
             
 
@@ -30155,17 +30155,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_35_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_35_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30176,7 +30176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_43_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./Jellyfish.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./Jellyfish.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
 
             
 
@@ -30185,17 +30185,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_43_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_43_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30206,7 +30206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_33_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./Jumper.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_35_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./Jumper.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
 
             
 
@@ -30215,17 +30215,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_33_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_35_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_33_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_35_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30236,7 +30236,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_47_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./Moon.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_49_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./Moon.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
 
             
 
@@ -30245,17 +30245,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_47_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_49_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_47_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_49_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30266,7 +30266,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_52_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./Plane.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./Plane.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
 
             
 
@@ -30275,17 +30275,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_52_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_52_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30296,7 +30296,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./Pulse.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_41_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./Pulse.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
 
             
 
@@ -30305,17 +30305,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_41_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_41_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30326,7 +30326,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_42_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./Rainbow.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_43_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./Rainbow.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
 
             
 
@@ -30335,11 +30335,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_42_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_43_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_42_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_43_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30373,9 +30373,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30386,7 +30386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_36_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./ScaleOut.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./ScaleOut.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
 
             
 
@@ -30395,11 +30395,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_36_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_36_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30433,9 +30433,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30446,7 +30446,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_37_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./SpinLine.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_32_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./SpinLine.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte");
 
             
 
@@ -30455,17 +30455,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_37_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_32_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_37_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_32_css_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30476,7 +30476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./Square.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_48_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./Square.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
 
             
 
@@ -30485,17 +30485,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_48_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_48_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30506,7 +30506,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_31_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./Stretch.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./Stretch.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
 
             
 
@@ -30515,17 +30515,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_31_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_31_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30536,7 +30536,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_41_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./SyncLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_40_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./SyncLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
 
             
 
@@ -30545,17 +30545,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_41_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_40_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_41_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_40_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30566,7 +30566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_39_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./Wave.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_44_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./Wave.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
 
             
 
@@ -30575,17 +30575,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_39_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_44_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_39_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_44_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Item.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/svelte-select/src/Item.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Item.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/svelte-select/src/Item.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30596,7 +30596,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_25_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_26_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte");
 
             
 
@@ -30605,11 +30605,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_25_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_26_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_25_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_26_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30643,9 +30643,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/MultiSelection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte":
+/***/ "./node_modules/svelte-select/src/MultiSelection.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/MultiSelection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
+  !*** ./node_modules/svelte-select/src/MultiSelection.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30656,7 +30656,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_27_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./MultiSelection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_25_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./MultiSelection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte");
 
             
 
@@ -30665,11 +30665,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_27_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_25_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_27_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_25_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30703,9 +30703,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/svelte-select/src/Selection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!**************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/svelte-select/src/Selection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \**************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30716,7 +30716,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_27_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte");
 
             
 
@@ -30725,11 +30725,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_27_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_27_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30763,9 +30763,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./resources/js/Layouts/Authenticated.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte":
+/***/ "./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte":
 /*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Layouts/Authenticated.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte ***!
+  !*** ./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte ***!
   \********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30776,7 +30776,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_12_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./Authenticated.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./Authenticated.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte");
 
             
 
@@ -30785,18 +30785,18 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_12_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_12_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -30806,7 +30806,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_8_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./ArbolObjetivos.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_61_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./ArbolObjetivos.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte");
 
             
 
@@ -30815,11 +30815,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_8_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_61_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_8_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_61_css_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -30913,9 +30913,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30926,7 +30926,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte");
 
             
 
@@ -30935,17 +30935,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte":
+/***/ "./resources/js/Shared/Select.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte":
 /*!********************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./resources/js/Shared/Select.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte ***!
   \********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30956,7 +30956,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_11_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte");
 
             
 
@@ -30965,11 +30965,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_11_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_11_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -40014,7 +40014,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\BarLoader.svelte generated by Svelte v3.38.3 */
 
@@ -40180,7 +40180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_48_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_48_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte */ "./node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_45_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte_45_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Chasing_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte */ "./node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Chasing.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Chasing.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Chasing.svelte generated by Svelte v3.38.3 */
 
@@ -40345,7 +40345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_29_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_29_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_30_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte_30_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Circle.svelte generated by Svelte v3.38.3 */
 
@@ -40431,7 +40431,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_34_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_34_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.34.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Circle2.svelte generated by Svelte v3.38.3 */
 
@@ -40567,7 +40567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_30_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_30_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.30.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_29_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_29_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.29.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Circle3.svelte generated by Svelte v3.38.3 */
 
@@ -40705,7 +40705,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_50_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_50_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte */ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte */ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Clock.svelte generated by Svelte v3.38.3 */
 
@@ -40791,7 +40791,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_51_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_51_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte */ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_50_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_50_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte */ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.50.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Diamonds.svelte generated by Svelte v3.38.3 */
 
@@ -40896,7 +40896,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_32_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_32_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte */ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.32.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_31_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_31_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte */ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.31.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\DoubleBounce.svelte generated by Svelte v3.38.3 */
 
@@ -41055,7 +41055,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_45_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_45_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte */ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_42_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_42_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte */ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Firework.svelte generated by Svelte v3.38.3 */
 
@@ -41145,7 +41145,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_35_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_35_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte */ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.35.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte */ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\GoogleSpin.svelte generated by Svelte v3.38.3 */
 
@@ -41225,7 +41225,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_43_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_43_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte */ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte */ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Jellyfish.svelte generated by Svelte v3.38.3 */
 
@@ -41406,7 +41406,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_33_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_33_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte */ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_35_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_35_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte */ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.35.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Jumper.svelte generated by Svelte v3.38.3 */
 
@@ -41561,7 +41561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_47_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_47_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte */ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_49_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_49_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte */ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Moon.svelte generated by Svelte v3.38.3 */
 
@@ -41666,7 +41666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_52_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_52_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte */ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte */ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Plane.svelte generated by Svelte v3.38.3 */
 
@@ -41776,7 +41776,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte */ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_41_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_41_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte */ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.41.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Pulse.svelte generated by Svelte v3.38.3 */
 
@@ -41936,7 +41936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_42_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_42_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte */ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_43_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_43_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte */ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Rainbow.svelte generated by Svelte v3.38.3 */
 
@@ -42180,7 +42180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_36_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_36_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte */ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.36.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte */ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\ScaleOut.svelte generated by Svelte v3.38.3 */
 
@@ -42365,7 +42365,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_37_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_37_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte */ "./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.37.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_32_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte_32_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SpinLine_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte */ "./node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SpinLine.svelte.32.css!./node_modules/svelte-loading-spinners/dist/SpinLine.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\SpinLine.svelte generated by Svelte v3.38.3 */
 
@@ -42474,7 +42474,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte */ "./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_48_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_48_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte */ "./node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.48.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Square.svelte generated by Svelte v3.38.3 */
 
@@ -42561,7 +42561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_31_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_31_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte */ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte */ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Stretch.svelte generated by Svelte v3.38.3 */
 
@@ -42717,7 +42717,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_41_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_41_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_40_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_40_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\SyncLoader.svelte generated by Svelte v3.38.3 */
 
@@ -42878,7 +42878,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_39_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_39_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte */ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_44_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_44_css_C_laragon_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte */ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Wave.svelte generated by Svelte v3.38.3 */
 
@@ -43099,7 +43099,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_25_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_25_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.25.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.25.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_26_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_26_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.26.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.26.css!./node_modules/svelte-select/src/Item.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Item.svelte generated by Svelte v3.38.3 */
 
@@ -44217,7 +44217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_27_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_27_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/MultiSelection.svelte.27.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte */ "./node_modules/svelte-select/src/MultiSelection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.27.css!./node_modules/svelte-select/src/MultiSelection.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_25_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_25_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/MultiSelection.svelte.25.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte */ "./node_modules/svelte-select/src/MultiSelection.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.25.css!./node_modules/svelte-select/src/MultiSelection.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\MultiSelection.svelte generated by Svelte v3.38.3 */
 
@@ -46197,7 +46197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.26.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_27_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_27_css_C_laragon_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.27.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.27.css!./node_modules/svelte-select/src/Selection.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Selection.svelte generated by Svelte v3.38.3 */
 
@@ -46697,7 +46697,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Loading__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Shared/Loading */ "./resources/js/Shared/Loading.svelte");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_12_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_12_css_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./resources/js/Layouts/Authenticated.svelte.12.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte */ "./resources/js/Layouts/Authenticated.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.12.css!./resources/js/Layouts/Authenticated.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_C_laragon_www_sipro_spa_resources_js_Layouts_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./resources/js/Layouts/Authenticated.svelte.13.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte */ "./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Layouts\Authenticated.svelte generated by Svelte v3.38.3 */
 
@@ -49187,7 +49187,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Shared/Switch */ "./resources/js/Shared/Switch.svelte");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_8_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_8_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte */ "./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.8.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_61_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte_61_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Evaluaciones_ArbolesProyecto_ArbolObjetivos_svelte__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte */ "./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte.61.css!./resources/js/Pages/Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Pages\Convocatorias\Evaluaciones\ArbolesProyecto\ArbolObjetivos.svelte generated by Svelte v3.38.3 */
 
@@ -49211,113 +49211,113 @@ __webpack_require__.r(__webpack_exports__);
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
-	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
-	return child_ctx;
-}
-
-function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
 	child_ctx[122] = list[i];
 	child_ctx[124] = i;
 	return child_ctx;
 }
 
+function get_each_context_2(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[126] = list[i];
+	child_ctx[128] = i;
+	return child_ctx;
+}
+
 function get_each_context_8(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_7(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_6(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_5(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_4(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[120] = i;
+	child_ctx[122] = list[i];
+	child_ctx[124] = i;
 	return child_ctx;
 }
 
 function get_each_context_9(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[131] = list[i];
+	child_ctx[135] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_10(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[134] = list[i];
-	child_ctx[124] = i;
+	child_ctx[138] = list[i];
+	child_ctx[128] = i;
 	return child_ctx;
 }
 
 function get_each_context_11(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[136] = list[i];
+	child_ctx[140] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_12(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
+	child_ctx[122] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_13(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[141] = list[i];
+	child_ctx[145] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_14(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[144] = list[i].id;
+	child_ctx[148] = list[i].id;
 	return child_ctx;
 }
 
 function get_each_context_15(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[118] = list[i];
-	child_ctx[124] = i;
+	child_ctx[122] = list[i];
+	child_ctx[128] = i;
 	return child_ctx;
 }
 
-// (498:4) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-function create_if_block_68(ctx) {
+// (511:4) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+function create_if_block_70(ctx) {
 	let hr;
 	let t0;
 	let a;
@@ -49348,7 +49348,7 @@ function create_if_block_68(ctx) {
 	};
 }
 
-// (513:12) {#each { length: objetivosCount } as _empty, i}
+// (526:12) {#each { length: objetivosCount } as _empty, i}
 function create_each_block_15(ctx) {
 	let div;
 	let div_class_value;
@@ -49356,15 +49356,15 @@ function create_each_block_15(ctx) {
 	return {
 		c() {
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = /*i*/ ctx[124] % 2 == 0 ? "bg-red-100" : "bg-red-200");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div, "width", /*containerObjetivo*/ ctx[31]?.offsetWidth + "px");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = /*i*/ ctx[128] % 2 == 0 ? "bg-red-100" : "bg-red-200");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div, "width", /*containerObjetivo*/ ctx[30]?.offsetWidth + "px");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*containerObjetivo*/ 1) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div, "width", /*containerObjetivo*/ ctx[31]?.offsetWidth + "px");
+			if (dirty[0] & /*containerObjetivo*/ 1073741824) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div, "width", /*containerObjetivo*/ ctx[30]?.offsetWidth + "px");
 			}
 		},
 		d(detaching) {
@@ -49373,8 +49373,8 @@ function create_each_block_15(ctx) {
 	};
 }
 
-// (519:16) {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
-function create_if_block_60(ctx) {
+// (532:16) {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+function create_if_block_62(ctx) {
 	let div2;
 	let t0;
 	let div0;
@@ -49389,17 +49389,17 @@ function create_if_block_60(ctx) {
 	let div1_aria_describedby_value;
 	let t4;
 	let div2_class_value;
-	let if_block0 = /*i*/ ctx[124] == 0 && create_if_block_67(ctx);
-	let each_value_13 = /*efectoDirecto*/ ctx[134].efectos_indirectos;
+	let if_block0 = /*i*/ ctx[128] == 0 && create_if_block_69(ctx);
+	let each_value_13 = /*efectoDirecto*/ ctx[138].efectos_indirectos;
 	let each_blocks_1 = [];
 
 	for (let i = 0; i < each_value_13.length; i += 1) {
 		each_blocks_1[i] = create_each_block_13(get_each_context_13(ctx, each_value_13, i));
 	}
 
-	let if_block1 = /*proyecto*/ ctx[4].codigo_linea_programatica != 70 && create_if_block_63(ctx);
-	let if_block2 = /*i*/ ctx[124] == 0 && create_if_block_62(ctx);
-	let each_value_11 = /*efectoDirecto*/ ctx[134].resultados;
+	let if_block1 = /*proyecto*/ ctx[3].codigo_linea_programatica != 70 && create_if_block_65(ctx);
+	let if_block2 = /*i*/ ctx[128] == 0 && create_if_block_64(ctx);
+	let each_value_11 = /*efectoDirecto*/ ctx[138].resultados;
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_11.length; i += 1) {
@@ -49430,21 +49430,21 @@ function create_if_block_60(ctx) {
 
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "flex mb-14");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "id", div0_id_value = /*i*/ ctx[124] == 0 ? "impacto-tooltip-placement" : "");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "aria-describedby", div0_aria_describedby_value = /*i*/ ctx[124] == 0 ? "tooltip" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "id", div0_id_value = /*i*/ ctx[128] == 0 ? "impacto-tooltip-placement" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "aria-describedby", div0_aria_describedby_value = /*i*/ ctx[128] == 0 ? "tooltip" : "");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value = "" + ((/*i*/ ctx[124] == 0
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value = "" + ((/*i*/ ctx[128] == 0
 			? "resultados"
-			: /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 1 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 2
+			: /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 1 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 2
 				? "resultados-line"
-				: /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 3
+				: /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 3
 					? "resultados-line-4"
 					: "resultados") + " relative flex-1 flex flex-wrap" + " svelte-12jqh28"));
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = /*i*/ ctx[124] == 0 ? "resultado-tooltip-placement" : "");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "aria-describedby", div1_aria_describedby_value = /*i*/ ctx[124] == 0 ? "tooltip" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = /*i*/ ctx[128] == 0 ? "resultado-tooltip-placement" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "aria-describedby", div1_aria_describedby_value = /*i*/ ctx[128] == 0 ? "tooltip" : "");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = "flex-1" + (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*efectoDirecto*/ ctx[134].efectos_indirectos.length == 0
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = "flex-1" + (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*efectoDirecto*/ ctx[138].efectos_indirectos.length == 0
 			? " flex items-end"
 			: ""));
 		},
@@ -49472,8 +49472,8 @@ function create_if_block_60(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t4);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*proyecto, efectosDirectos*/ 48 | dirty[1] & /*showImpactDialog*/ 4096) {
-				each_value_13 = /*efectoDirecto*/ ctx[134].efectos_indirectos;
+			if (dirty[0] & /*proyecto, efectosDirectos*/ 24 | dirty[1] & /*showImpactDialog*/ 4096) {
+				each_value_13 = /*efectoDirecto*/ ctx[138].efectos_indirectos;
 				let i;
 
 				for (i = 0; i < each_value_13.length; i += 1) {
@@ -49495,11 +49495,11 @@ function create_if_block_60(ctx) {
 				each_blocks_1.length = each_value_13.length;
 			}
 
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica != 70) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica != 70) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block_63(ctx);
+					if_block1 = create_if_block_65(ctx);
 					if_block1.c();
 					if_block1.m(div0, null);
 				}
@@ -49508,8 +49508,8 @@ function create_if_block_60(ctx) {
 				if_block1 = null;
 			}
 
-			if (dirty[0] & /*proyecto, efectosDirectos*/ 48 | dirty[1] & /*showResultadoDialog*/ 32768) {
-				each_value_11 = /*efectoDirecto*/ ctx[134].resultados;
+			if (dirty[0] & /*proyecto, efectosDirectos*/ 24 | dirty[1] & /*showResultadoDialog*/ 32768) {
+				each_value_11 = /*efectoDirecto*/ ctx[138].resultados;
 				let i;
 
 				for (i = 0; i < each_value_11.length; i += 1) {
@@ -49531,17 +49531,17 @@ function create_if_block_60(ctx) {
 				each_blocks.length = each_value_11.length;
 			}
 
-			if (dirty[0] & /*proyecto*/ 16 && div1_class_value !== (div1_class_value = "" + ((/*i*/ ctx[124] == 0
+			if (dirty[0] & /*proyecto*/ 8 && div1_class_value !== (div1_class_value = "" + ((/*i*/ ctx[128] == 0
 			? "resultados"
-			: /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 1 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 2
+			: /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 1 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 2
 				? "resultados-line"
-				: /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 3
+				: /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 3
 					? "resultados-line-4"
 					: "resultados") + " relative flex-1 flex flex-wrap" + " svelte-12jqh28"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value);
 			}
 
-			if (dirty[0] & /*proyecto, efectosDirectos*/ 48 && div2_class_value !== (div2_class_value = "flex-1" + (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*efectoDirecto*/ ctx[134].efectos_indirectos.length == 0
+			if (dirty[0] & /*proyecto, efectosDirectos*/ 24 && div2_class_value !== (div2_class_value = "flex-1" + (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*efectoDirecto*/ ctx[138].efectos_indirectos.length == 0
 			? " flex items-end"
 			: ""))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value);
@@ -49558,8 +49558,8 @@ function create_if_block_60(ctx) {
 	};
 }
 
-// (522:24) {#if i == 0}
-function create_if_block_67(ctx) {
+// (535:24) {#if i == 0}
+function create_if_block_69(ctx) {
 	let div1;
 
 	return {
@@ -49583,15 +49583,15 @@ function create_if_block_67(ctx) {
 	};
 }
 
-// (530:32) {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-function create_if_block_64(ctx) {
+// (543:32) {#if (proyecto.codigo_linea_programatica == 70 && efectoIndirecto.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+function create_if_block_66(ctx) {
 	let div1;
 	let div0;
 	let p;
 	let div0_class_value;
 	let mounted;
 	let dispose;
-	let if_block = /*efectoIndirecto*/ ctx[141].impacto && create_if_block_65(ctx);
+	let if_block = /*efectoIndirecto*/ ctx[145].impacto && create_if_block_67(ctx);
 
 	return {
 		c() {
@@ -49601,15 +49601,15 @@ function create_if_block_64(ctx) {
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "paragraph-ellipsis text-xs node text-white line-height-1-24 svelte-12jqh28");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*proyecto*/ ctx[4].codigo_linea_programatica == 69
-			? /*efectoIndirecto*/ ctx[141].descripcion != null & /*i*/ ctx[124] < 3 || /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] > 5 && /*i*/ ctx[124] < 9
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*proyecto*/ ctx[3].codigo_linea_programatica == 69
+			? /*efectoIndirecto*/ ctx[145].descripcion != null & /*i*/ ctx[128] < 3 || /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] > 5 && /*i*/ ctx[128] < 9
 				? "bg-orangered-400 hover:bg-orangered-500 "
 				: "bg-orangered-500 hover:bg-orangered-600 "
-			: /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			: /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] % 2 == 0
 				? "bg-orangered-400 hover:bg-orangered-500 "
-				: /*efectoIndirecto*/ ctx[141].descripcion == null && /*i*/ ctx[124] % 2 == 0
+				: /*efectoIndirecto*/ ctx[145].descripcion == null && /*i*/ ctx[128] % 2 == 0
 					? "bg-gray-300 hover:bg-gray-400 "
-					: /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] % 2 != 0
+					: /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] % 2 != 0
 						? "bg-orangered-500 hover:bg-orangered-600 "
 						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"));
 
@@ -49623,7 +49623,7 @@ function create_if_block_64(ctx) {
 
 			if (!mounted) {
 				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div0, "click", function () {
-					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showImpactDialog*/ ctx[43](/*efectoIndirecto*/ ctx[141], /*efectoIndirecto*/ ctx[141].id, /*efectoDirecto*/ ctx[134].resultados[0].id))) /*showImpactDialog*/ ctx[43](/*efectoIndirecto*/ ctx[141], /*efectoIndirecto*/ ctx[141].id, /*efectoDirecto*/ ctx[134].resultados[0].id).apply(this, arguments);
+					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showImpactDialog*/ ctx[43](/*efectoIndirecto*/ ctx[145], /*efectoIndirecto*/ ctx[145].id, /*efectoDirecto*/ ctx[138].resultados[0].id))) /*showImpactDialog*/ ctx[43](/*efectoIndirecto*/ ctx[145], /*efectoIndirecto*/ ctx[145].id, /*efectoDirecto*/ ctx[138].resultados[0].id).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -49632,11 +49632,11 @@ function create_if_block_64(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (/*efectoIndirecto*/ ctx[141].impacto) {
+			if (/*efectoIndirecto*/ ctx[145].impacto) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_65(ctx);
+					if_block = create_if_block_67(ctx);
 					if_block.c();
 					if_block.m(p, null);
 				}
@@ -49645,15 +49645,15 @@ function create_if_block_64(ctx) {
 				if_block = null;
 			}
 
-			if (dirty[0] & /*proyecto, efectosDirectos*/ 48 && div0_class_value !== (div0_class_value = "" + ((/*proyecto*/ ctx[4].codigo_linea_programatica == 69
-			? /*efectoIndirecto*/ ctx[141].descripcion != null & /*i*/ ctx[124] < 3 || /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] > 5 && /*i*/ ctx[124] < 9
+			if (dirty[0] & /*proyecto, efectosDirectos*/ 24 && div0_class_value !== (div0_class_value = "" + ((/*proyecto*/ ctx[3].codigo_linea_programatica == 69
+			? /*efectoIndirecto*/ ctx[145].descripcion != null & /*i*/ ctx[128] < 3 || /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] > 5 && /*i*/ ctx[128] < 9
 				? "bg-orangered-400 hover:bg-orangered-500 "
 				: "bg-orangered-500 hover:bg-orangered-600 "
-			: /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			: /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] % 2 == 0
 				? "bg-orangered-400 hover:bg-orangered-500 "
-				: /*efectoIndirecto*/ ctx[141].descripcion == null && /*i*/ ctx[124] % 2 == 0
+				: /*efectoIndirecto*/ ctx[145].descripcion == null && /*i*/ ctx[128] % 2 == 0
 					? "bg-gray-300 hover:bg-gray-400 "
-					: /*efectoIndirecto*/ ctx[141].descripcion != null && /*i*/ ctx[124] % 2 != 0
+					: /*efectoIndirecto*/ ctx[145].descripcion != null && /*i*/ ctx[128] % 2 != 0
 						? "bg-orangered-500 hover:bg-orangered-600 "
 						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value);
@@ -49668,23 +49668,23 @@ function create_if_block_64(ctx) {
 	};
 }
 
-// (547:48) {#if efectoIndirecto.impacto}
-function create_if_block_65(ctx) {
+// (560:48) {#if efectoIndirecto.impacto}
+function create_if_block_67(ctx) {
 	let small;
 	let t0;
 	let t1;
-	let t2_value = /*efectoIndirecto*/ ctx[141].impacto.id + "";
+	let t2_value = /*efectoIndirecto*/ ctx[145].impacto.id + "";
 	let t2;
 	let t3;
 	let if_block_anchor;
-	let each_value_14 = /*efectoDirecto*/ ctx[134].resultados;
+	let each_value_14 = /*efectoDirecto*/ ctx[138].resultados;
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_14.length; i += 1) {
 		each_blocks[i] = create_each_block_14(get_each_context_14(ctx, each_value_14, i));
 	}
 
-	let if_block = /*efectoIndirecto*/ ctx[141].impacto.descripcion != null && /*efectoIndirecto*/ ctx[141].impacto.descripcion.length > 0 && create_if_block_66(ctx);
+	let if_block = /*efectoIndirecto*/ ctx[145].impacto.descripcion != null && /*efectoIndirecto*/ ctx[145].impacto.descripcion.length > 0 && create_if_block_68(ctx);
 
 	return {
 		c() {
@@ -49717,8 +49717,8 @@ function create_if_block_65(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*efectosDirectos*/ 32) {
-				each_value_14 = /*efectoDirecto*/ ctx[134].resultados;
+			if (dirty[0] & /*efectosDirectos*/ 16) {
+				each_value_14 = /*efectoDirecto*/ ctx[138].resultados;
 				let i;
 
 				for (i = 0; i < each_value_14.length; i += 1) {
@@ -49740,13 +49740,13 @@ function create_if_block_65(ctx) {
 				each_blocks.length = each_value_14.length;
 			}
 
-			if (dirty[0] & /*efectosDirectos*/ 32 && t2_value !== (t2_value = /*efectoIndirecto*/ ctx[141].impacto.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t2, t2_value);
+			if (dirty[0] & /*efectosDirectos*/ 16 && t2_value !== (t2_value = /*efectoIndirecto*/ ctx[145].impacto.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t2, t2_value);
 
-			if (/*efectoIndirecto*/ ctx[141].impacto.descripcion != null && /*efectoIndirecto*/ ctx[141].impacto.descripcion.length > 0) {
+			if (/*efectoIndirecto*/ ctx[145].impacto.descripcion != null && /*efectoIndirecto*/ ctx[145].impacto.descripcion.length > 0) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_66(ctx);
+					if_block = create_if_block_68(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -49765,10 +49765,10 @@ function create_if_block_65(ctx) {
 	};
 }
 
-// (549:59) {#each efectoDirecto.resultados as { id }}
+// (562:59) {#each efectoDirecto.resultados as { id }}
 function create_each_block_14(ctx) {
 	let t0;
-	let t1_value = /*id*/ ctx[144] + "";
+	let t1_value = /*id*/ ctx[148] + "";
 	let t1;
 
 	return {
@@ -49781,7 +49781,7 @@ function create_each_block_14(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t1, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*efectosDirectos*/ 32 && t1_value !== (t1_value = /*id*/ ctx[144] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+			if (dirty[0] & /*efectosDirectos*/ 16 && t1_value !== (t1_value = /*id*/ ctx[148] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
@@ -49790,9 +49790,9 @@ function create_each_block_14(ctx) {
 	};
 }
 
-// (555:52) {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
-function create_if_block_66(ctx) {
-	let t_value = /*efectoIndirecto*/ ctx[141].impacto.descripcion + "";
+// (568:52) {#if efectoIndirecto.impacto.descripcion != null && efectoIndirecto.impacto.descripcion.length > 0}
+function create_if_block_68(ctx) {
+	let t_value = /*efectoIndirecto*/ ctx[145].impacto.descripcion + "";
 	let t;
 
 	return {
@@ -49803,7 +49803,7 @@ function create_if_block_66(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*efectosDirectos*/ 32 && t_value !== (t_value = /*efectoIndirecto*/ ctx[141].impacto.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*efectosDirectos*/ 16 && t_value !== (t_value = /*efectoIndirecto*/ ctx[145].impacto.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
@@ -49811,10 +49811,10 @@ function create_if_block_66(ctx) {
 	};
 }
 
-// (529:28) {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
+// (542:28) {#each efectoDirecto.efectos_indirectos as efectoIndirecto}
 function create_each_block_13(ctx) {
 	let if_block_anchor;
-	let if_block = (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*efectoIndirecto*/ ctx[141].descripcion != " " || /*proyecto*/ ctx[4].codigo_linea_programatica != 70) && create_if_block_64(ctx);
+	let if_block = (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*efectoIndirecto*/ ctx[145].descripcion != " " || /*proyecto*/ ctx[3].codigo_linea_programatica != 70) && create_if_block_66(ctx);
 
 	return {
 		c() {
@@ -49826,11 +49826,11 @@ function create_each_block_13(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*efectoIndirecto*/ ctx[141].descripcion != " " || /*proyecto*/ ctx[4].codigo_linea_programatica != 70) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*efectoIndirecto*/ ctx[145].descripcion != " " || /*proyecto*/ ctx[3].codigo_linea_programatica != 70) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_64(ctx);
+					if_block = create_if_block_66(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -49846,12 +49846,12 @@ function create_each_block_13(ctx) {
 	};
 }
 
-// (564:28) {#if proyecto.codigo_linea_programatica != 70}
-function create_if_block_63(ctx) {
+// (577:28) {#if proyecto.codigo_linea_programatica != 70}
+function create_if_block_65(ctx) {
 	let each_1_anchor;
 
 	let each_value_12 = {
-		length: /*cantidadCeldasImpactos*/ ctx[10] - /*efectoDirecto*/ ctx[134].efectos_indirectos.length
+		length: /*cantidadCeldasImpactos*/ ctx[9] - /*efectoDirecto*/ ctx[138].efectos_indirectos.length
 	};
 
 	let each_blocks = [];
@@ -49876,9 +49876,9 @@ function create_if_block_63(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*cantidadCeldasImpactos, efectosDirectos*/ 1056 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*cantidadCeldasImpactos, efectosDirectos*/ 528 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_12 = {
-					length: /*cantidadCeldasImpactos*/ ctx[10] - /*efectoDirecto*/ ctx[134].efectos_indirectos.length
+					length: /*cantidadCeldasImpactos*/ ctx[9] - /*efectoDirecto*/ ctx[138].efectos_indirectos.length
 				};
 
 				let i;
@@ -49909,7 +49909,7 @@ function create_if_block_63(ctx) {
 	};
 }
 
-// (565:32) {#each { length: cantidadCeldasImpactos - efectoDirecto.efectos_indirectos.length } as _empty}
+// (578:32) {#each { length: cantidadCeldasImpactos - efectoDirecto.efectos_indirectos.length } as _empty}
 function create_each_block_12(ctx) {
 	let div1;
 	let mounted;
@@ -49928,7 +49928,7 @@ function create_each_block_12(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler*/ ctx[63]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler*/ ctx[65]);
 				mounted = true;
 			}
 		},
@@ -49941,8 +49941,8 @@ function create_each_block_12(ctx) {
 	};
 }
 
-// (575:24) {#if i == 0}
-function create_if_block_62(ctx) {
+// (588:24) {#if i == 0}
+function create_if_block_64(ctx) {
 	let div1;
 
 	return {
@@ -49966,9 +49966,9 @@ function create_if_block_62(ctx) {
 	};
 }
 
-// (604:40) {#if resultado.descripcion != null && resultado.descripcion.length > 0}
-function create_if_block_61(ctx) {
-	let t_value = /*resultado*/ ctx[136].descripcion + "";
+// (617:40) {#if resultado.descripcion != null && resultado.descripcion.length > 0}
+function create_if_block_63(ctx) {
+	let t_value = /*resultado*/ ctx[140].descripcion + "";
 	let t;
 
 	return {
@@ -49979,7 +49979,7 @@ function create_if_block_61(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*efectosDirectos*/ 32 && t_value !== (t_value = /*resultado*/ ctx[136].descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*efectosDirectos*/ 16 && t_value !== (t_value = /*resultado*/ ctx[140].descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
@@ -49987,20 +49987,20 @@ function create_if_block_61(ctx) {
 	};
 }
 
-// (586:28) {#each efectoDirecto.resultados as resultado}
+// (599:28) {#each efectoDirecto.resultados as resultado}
 function create_each_block_11(ctx) {
 	let div;
 	let p;
 	let small;
 	let t0;
-	let t1_value = /*resultado*/ ctx[136].id + "";
+	let t1_value = /*resultado*/ ctx[140].id + "";
 	let t1;
 	let t2;
 	let t3;
 	let div_class_value;
 	let mounted;
 	let dispose;
-	let if_block = /*resultado*/ ctx[136].descripcion != null && /*resultado*/ ctx[136].descripcion.length > 0 && create_if_block_61(ctx);
+	let if_block = /*resultado*/ ctx[140].descripcion != null && /*resultado*/ ctx[140].descripcion.length > 0 && create_if_block_63(ctx);
 
 	return {
 		c() {
@@ -50015,17 +50015,17 @@ function create_each_block_11(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(small, "class", "title block font-bold mb-2");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "paragraph-ellipsis text-white text-sm line-height-1-24 svelte-12jqh28");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = "" + ((/*proyecto*/ ctx[4].codigo_linea_programatica == 69
-			? /*efectoDirecto*/ ctx[134].descripcion != null & /*i*/ ctx[124] < 3 || /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] > 5 && /*i*/ ctx[124] < 9
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = "" + ((/*proyecto*/ ctx[3].codigo_linea_programatica == 69
+			? /*efectoDirecto*/ ctx[138].descripcion != null & /*i*/ ctx[128] < 3 || /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] > 5 && /*i*/ ctx[128] < 9
 				? "bg-orangered-400 hover:bg-orangered-500 "
 				: "bg-orangered-500 hover:bg-orangered-600 "
-			: /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			: /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] % 2 == 0
 				? "bg-orangered-400 hover:bg-orangered-500 "
-				: /*efectoDirecto*/ ctx[134].descripcion == null && /*i*/ ctx[124] % 2 == 0
+				: /*efectoDirecto*/ ctx[138].descripcion == null && /*i*/ ctx[128] % 2 == 0
 					? "bg-gray-300 hover:bg-gray-400 "
-					: /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] % 2 != 0
+					: /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] % 2 != 0
 						? "bg-orangered-500 hover:bg-orangered-600 "
-						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5" + (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 || /*proyecto*/ ctx[4].codigo_linea_programatica == 69
+						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5" + (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 || /*proyecto*/ ctx[3].codigo_linea_programatica == 69
 			? " mb-4"
 			: "")));
 
@@ -50043,7 +50043,7 @@ function create_each_block_11(ctx) {
 
 			if (!mounted) {
 				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div, "click", function () {
-					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showResultadoDialog*/ ctx[46](/*efectoDirecto*/ ctx[134], /*resultado*/ ctx[136]))) /*showResultadoDialog*/ ctx[46](/*efectoDirecto*/ ctx[134], /*resultado*/ ctx[136]).apply(this, arguments);
+					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showResultadoDialog*/ ctx[46](/*efectoDirecto*/ ctx[138], /*resultado*/ ctx[140]))) /*showResultadoDialog*/ ctx[46](/*efectoDirecto*/ ctx[138], /*resultado*/ ctx[140]).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -50051,13 +50051,13 @@ function create_each_block_11(ctx) {
 		},
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
-			if (dirty[0] & /*efectosDirectos*/ 32 && t1_value !== (t1_value = /*resultado*/ ctx[136].id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+			if (dirty[0] & /*efectosDirectos*/ 16 && t1_value !== (t1_value = /*resultado*/ ctx[140].id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
 
-			if (/*resultado*/ ctx[136].descripcion != null && /*resultado*/ ctx[136].descripcion.length > 0) {
+			if (/*resultado*/ ctx[140].descripcion != null && /*resultado*/ ctx[140].descripcion.length > 0) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_61(ctx);
+					if_block = create_if_block_63(ctx);
 					if_block.c();
 					if_block.m(p, null);
 				}
@@ -50066,17 +50066,17 @@ function create_each_block_11(ctx) {
 				if_block = null;
 			}
 
-			if (dirty[0] & /*proyecto, efectosDirectos*/ 48 && div_class_value !== (div_class_value = "" + ((/*proyecto*/ ctx[4].codigo_linea_programatica == 69
-			? /*efectoDirecto*/ ctx[134].descripcion != null & /*i*/ ctx[124] < 3 || /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] > 5 && /*i*/ ctx[124] < 9
+			if (dirty[0] & /*proyecto, efectosDirectos*/ 24 && div_class_value !== (div_class_value = "" + ((/*proyecto*/ ctx[3].codigo_linea_programatica == 69
+			? /*efectoDirecto*/ ctx[138].descripcion != null & /*i*/ ctx[128] < 3 || /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] > 5 && /*i*/ ctx[128] < 9
 				? "bg-orangered-400 hover:bg-orangered-500 "
 				: "bg-orangered-500 hover:bg-orangered-600 "
-			: /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			: /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] % 2 == 0
 				? "bg-orangered-400 hover:bg-orangered-500 "
-				: /*efectoDirecto*/ ctx[134].descripcion == null && /*i*/ ctx[124] % 2 == 0
+				: /*efectoDirecto*/ ctx[138].descripcion == null && /*i*/ ctx[128] % 2 == 0
 					? "bg-gray-300 hover:bg-gray-400 "
-					: /*efectoDirecto*/ ctx[134].descripcion != null && /*i*/ ctx[124] % 2 != 0
+					: /*efectoDirecto*/ ctx[138].descripcion != null && /*i*/ ctx[128] % 2 != 0
 						? "bg-orangered-500 hover:bg-orangered-600 "
-						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5" + (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 || /*proyecto*/ ctx[4].codigo_linea_programatica == 69
+						: "bg-gray-400 hover:bg-gray-500 ") + "tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5" + (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 || /*proyecto*/ ctx[3].codigo_linea_programatica == 69
 			? " mb-4"
 			: "")))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value);
@@ -50091,10 +50091,10 @@ function create_each_block_11(ctx) {
 	};
 }
 
-// (518:12) {#each efectosDirectos as efectoDirecto, i}
+// (531:12) {#each efectosDirectos as efectoDirecto, i}
 function create_each_block_10(ctx) {
 	let if_block_anchor;
-	let if_block = (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[8] && /*i*/ ctx[124] < 3 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[8] || /*proyecto*/ ctx[4].codigo_linea_programatica != 68) && create_if_block_60(ctx);
+	let if_block = (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[7] && /*i*/ ctx[128] < 3 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[7] || /*proyecto*/ ctx[3].codigo_linea_programatica != 68) && create_if_block_62(ctx);
 
 	return {
 		c() {
@@ -50106,11 +50106,11 @@ function create_each_block_10(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[8] && /*i*/ ctx[124] < 3 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[8] || /*proyecto*/ ctx[4].codigo_linea_programatica != 68) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[7] && /*i*/ ctx[128] < 3 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[7] || /*proyecto*/ ctx[3].codigo_linea_programatica != 68) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_60(ctx);
+					if_block = create_if_block_62(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -50126,10 +50126,10 @@ function create_each_block_10(ctx) {
 	};
 }
 
-// (623:16) {#if proyecto.objetivo_general != null && proyecto.objetivo_general.length > 0}
-function create_if_block_59(ctx) {
+// (636:16) {#if proyecto.objetivo_general != null && proyecto.objetivo_general.length > 0}
+function create_if_block_61(ctx) {
 	let p;
-	let t_value = /*proyecto*/ ctx[4].objetivo_general + "";
+	let t_value = /*proyecto*/ ctx[3].objetivo_general + "";
 	let t;
 
 	return {
@@ -50143,7 +50143,7 @@ function create_if_block_59(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*proyecto*/ 16 && t_value !== (t_value = /*proyecto*/ ctx[4].objetivo_general + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*proyecto*/ 8 && t_value !== (t_value = /*proyecto*/ ctx[3].objetivo_general + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
@@ -50151,8 +50151,8 @@ function create_if_block_59(ctx) {
 	};
 }
 
-// (633:16) {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
-function create_if_block_46(ctx) {
+// (646:16) {#if (proyecto.codigo_linea_programatica == 68 && tipoProyectoA && i < 3) || (proyecto.codigo_linea_programatica == 68 && !tipoProyectoA) || proyecto.codigo_linea_programatica != 68}
+function create_if_block_48(ctx) {
 	let div3;
 	let t0;
 	let div1;
@@ -50160,7 +50160,7 @@ function create_if_block_46(ctx) {
 	let p;
 	let small;
 	let t1;
-	let t2_value = /*causaDirecta*/ ctx[122].objetivo_especifico.id + "";
+	let t2_value = /*causaDirecta*/ ctx[126].objetivo_especifico.id + "";
 	let t2;
 	let t3;
 	let div0_class_value;
@@ -50175,10 +50175,10 @@ function create_if_block_46(ctx) {
 	let t7;
 	let mounted;
 	let dispose;
-	let if_block0 = /*i*/ ctx[124] == 0 && create_if_block_58(ctx);
-	let if_block1 = /*causaDirecta*/ ctx[122].objetivo_especifico.descripcion != null && /*causaDirecta*/ ctx[122].objetivo_especifico.descripcion.length > 0 && create_if_block_57(ctx);
-	let if_block2 = /*i*/ ctx[124] == 0 && create_if_block_56(ctx);
-	let each_value_9 = /*causaDirecta*/ ctx[122].causas_indirectas;
+	let if_block0 = /*i*/ ctx[128] == 0 && create_if_block_60(ctx);
+	let if_block1 = /*causaDirecta*/ ctx[126].objetivo_especifico.descripcion != null && /*causaDirecta*/ ctx[126].objetivo_especifico.descripcion.length > 0 && create_if_block_59(ctx);
+	let if_block2 = /*i*/ ctx[128] == 0 && create_if_block_58(ctx);
+	let each_value_9 = /*causaDirecta*/ ctx[126].causas_indirectas;
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_9.length; i += 1) {
@@ -50186,12 +50186,12 @@ function create_if_block_46(ctx) {
 	}
 
 	function select_block_type(ctx, dirty) {
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica != 68 && /*proyecto*/ ctx[4].codigo_linea_programatica != 69 && /*proyecto*/ ctx[4].codigo_linea_programatica != 70) return create_if_block_47;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 0) return create_if_block_48;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 1) return create_if_block_49;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 2) return create_if_block_50;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*i*/ ctx[124] == 3) return create_if_block_51;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 69) return create_if_block_52;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica != 68 && /*proyecto*/ ctx[3].codigo_linea_programatica != 69 && /*proyecto*/ ctx[3].codigo_linea_programatica != 70) return create_if_block_49;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 0) return create_if_block_50;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 1) return create_if_block_51;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 2) return create_if_block_52;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*i*/ ctx[128] == 3) return create_if_block_53;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 69) return create_if_block_54;
 	}
 
 	let current_block_type = select_block_type(ctx, [-1, -1, -1, -1, -1]);
@@ -50225,24 +50225,24 @@ function create_if_block_46(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(small, "class", "title block font-bold mb-2");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "paragraph-ellipsis text-white text-sm line-height-1-24 svelte-12jqh28");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*causaDirecta*/ ctx[122].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*causaDirecta*/ ctx[126].descripcion != null && /*i*/ ctx[128] % 2 == 0
 			? "bg-orangered-400 hover:bg-orangered-500"
-			: /*causaDirecta*/ ctx[122].descripcion == null && /*i*/ ctx[124] % 2 == 0
+			: /*causaDirecta*/ ctx[126].descripcion == null && /*i*/ ctx[128] % 2 == 0
 				? "bg-gray-300 hover:bg-gray-400"
-				: /*causaDirecta*/ ctx[122].descripcion != null && /*i*/ ctx[124] % 2 != 0
+				: /*causaDirecta*/ ctx[126].descripcion != null && /*i*/ ctx[128] % 2 != 0
 					? "bg-orangered-500 hover:bg-orangered-600"
 					: "bg-gray-400 hover:bg-gray-500") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"));
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "objetivo-especificos objetivo-container relative flex-1 svelte-12jqh28");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = /*i*/ ctx[124] == 0
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = /*i*/ ctx[128] == 0
 			? "objetivo-especifico-tooltip-placement"
 			: "");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "aria-describedby", div1_aria_describedby_value = /*i*/ ctx[124] == 0 ? "tooltip" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "aria-describedby", div1_aria_describedby_value = /*i*/ ctx[128] == 0 ? "tooltip" : "");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "flex flex-wrap objetivo-especificos relative mt-14 svelte-12jqh28");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "id", div2_id_value = /*i*/ ctx[124] == 0 ? "actividad-tooltip-placement" : "");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "aria-describedby", div2_aria_describedby_value = /*i*/ ctx[124] == 0 ? "tooltip" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "id", div2_id_value = /*i*/ ctx[128] == 0 ? "actividad-tooltip-placement" : "");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "aria-describedby", div2_aria_describedby_value = /*i*/ ctx[128] == 0 ? "tooltip" : "");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "flex-1");
 		},
 		m(target, anchor) {
@@ -50257,7 +50257,7 @@ function create_if_block_46(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(small, t2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t3);
 			if (if_block1) if_block1.m(p, null);
-			/*div1_binding*/ ctx[64](div1);
+			/*div1_binding*/ ctx[66](div1);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, t4);
 			if (if_block2) if_block2.m(div3, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, t5);
@@ -50273,7 +50273,7 @@ function create_if_block_46(ctx) {
 
 			if (!mounted) {
 				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div0, "click", function () {
-					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showObjetivoEspecificoDialog*/ ctx[52](/*causaDirecta*/ ctx[122], /*i*/ ctx[124] + 1))) /*showObjetivoEspecificoDialog*/ ctx[52](/*causaDirecta*/ ctx[122], /*i*/ ctx[124] + 1).apply(this, arguments);
+					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showObjetivoEspecificoDialog*/ ctx[52](/*causaDirecta*/ ctx[126], /*i*/ ctx[128] + 1))) /*showObjetivoEspecificoDialog*/ ctx[52](/*causaDirecta*/ ctx[126], /*i*/ ctx[128] + 1).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -50281,13 +50281,13 @@ function create_if_block_46(ctx) {
 		},
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
-			if (dirty[0] & /*causasDirectas*/ 64 && t2_value !== (t2_value = /*causaDirecta*/ ctx[122].objetivo_especifico.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t2, t2_value);
+			if (dirty[0] & /*causasDirectas*/ 32 && t2_value !== (t2_value = /*causaDirecta*/ ctx[126].objetivo_especifico.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t2, t2_value);
 
-			if (/*causaDirecta*/ ctx[122].objetivo_especifico.descripcion != null && /*causaDirecta*/ ctx[122].objetivo_especifico.descripcion.length > 0) {
+			if (/*causaDirecta*/ ctx[126].objetivo_especifico.descripcion != null && /*causaDirecta*/ ctx[126].objetivo_especifico.descripcion.length > 0) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block_57(ctx);
+					if_block1 = create_if_block_59(ctx);
 					if_block1.c();
 					if_block1.m(p, null);
 				}
@@ -50296,18 +50296,18 @@ function create_if_block_46(ctx) {
 				if_block1 = null;
 			}
 
-			if (dirty[0] & /*causasDirectas*/ 64 && div0_class_value !== (div0_class_value = "" + ((/*causaDirecta*/ ctx[122].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			if (dirty[0] & /*causasDirectas*/ 32 && div0_class_value !== (div0_class_value = "" + ((/*causaDirecta*/ ctx[126].descripcion != null && /*i*/ ctx[128] % 2 == 0
 			? "bg-orangered-400 hover:bg-orangered-500"
-			: /*causaDirecta*/ ctx[122].descripcion == null && /*i*/ ctx[124] % 2 == 0
+			: /*causaDirecta*/ ctx[126].descripcion == null && /*i*/ ctx[128] % 2 == 0
 				? "bg-gray-300 hover:bg-gray-400"
-				: /*causaDirecta*/ ctx[122].descripcion != null && /*i*/ ctx[124] % 2 != 0
+				: /*causaDirecta*/ ctx[126].descripcion != null && /*i*/ ctx[128] % 2 != 0
 					? "bg-orangered-500 hover:bg-orangered-600"
 					: "bg-gray-400 hover:bg-gray-500") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value);
 			}
 
-			if (dirty[0] & /*causasDirectas, proyecto*/ 80 | dirty[1] & /*showActivityDialog*/ 16777216) {
-				each_value_9 = /*causaDirecta*/ ctx[122].causas_indirectas;
+			if (dirty[0] & /*causasDirectas, proyecto*/ 40 | dirty[1] & /*showActivityDialog*/ 16777216) {
+				each_value_9 = /*causaDirecta*/ ctx[126].causas_indirectas;
 				let i;
 
 				for (i = 0; i < each_value_9.length; i += 1) {
@@ -50345,7 +50345,7 @@ function create_if_block_46(ctx) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div3);
 			if (if_block0) if_block0.d();
 			if (if_block1) if_block1.d();
-			/*div1_binding*/ ctx[64](null);
+			/*div1_binding*/ ctx[66](null);
 			if (if_block2) if_block2.d();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
 
@@ -50359,8 +50359,8 @@ function create_if_block_46(ctx) {
 	};
 }
 
-// (636:24) {#if i == 0}
-function create_if_block_58(ctx) {
+// (649:24) {#if i == 0}
+function create_if_block_60(ctx) {
 	let div1;
 
 	return {
@@ -50384,9 +50384,9 @@ function create_if_block_58(ctx) {
 	};
 }
 
-// (659:36) {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
-function create_if_block_57(ctx) {
-	let t_value = /*causaDirecta*/ ctx[122].objetivo_especifico.descripcion + "";
+// (672:36) {#if causaDirecta.objetivo_especifico.descripcion != null && causaDirecta.objetivo_especifico.descripcion.length > 0}
+function create_if_block_59(ctx) {
+	let t_value = /*causaDirecta*/ ctx[126].objetivo_especifico.descripcion + "";
 	let t;
 
 	return {
@@ -50397,7 +50397,7 @@ function create_if_block_57(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 && t_value !== (t_value = /*causaDirecta*/ ctx[122].objetivo_especifico.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*causasDirectas*/ 32 && t_value !== (t_value = /*causaDirecta*/ ctx[126].objetivo_especifico.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
@@ -50405,8 +50405,8 @@ function create_if_block_57(ctx) {
 	};
 }
 
-// (666:24) {#if i == 0}
-function create_if_block_56(ctx) {
+// (679:24) {#if i == 0}
+function create_if_block_58(ctx) {
 	let div1;
 
 	return {
@@ -50430,15 +50430,15 @@ function create_if_block_56(ctx) {
 	};
 }
 
-// (674:32) {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
-function create_if_block_53(ctx) {
+// (687:32) {#if (proyecto.codigo_linea_programatica == 70 && causaIndirecta.actividad.descripcion != ' ') || proyecto.codigo_linea_programatica != 70}
+function create_if_block_55(ctx) {
 	let div1;
 	let div0;
 	let p;
 	let div0_class_value;
 	let mounted;
 	let dispose;
-	let if_block = /*causaIndirecta*/ ctx[131].actividad && create_if_block_54(ctx);
+	let if_block = /*causaIndirecta*/ ctx[135].actividad && create_if_block_56(ctx);
 
 	return {
 		c() {
@@ -50448,11 +50448,11 @@ function create_if_block_53(ctx) {
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "paragraph-ellipsis text-xs node text-white line-height-1-24 svelte-12jqh28");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*causaIndirecta*/ ctx[131].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value = "" + ((/*causaIndirecta*/ ctx[135].descripcion != null && /*i*/ ctx[128] % 2 == 0
 			? "bg-orangered-400 hover:bg-orangered-500"
-			: /*causaIndirecta*/ ctx[131].descripcion == null && /*i*/ ctx[124] % 2 == 0
+			: /*causaIndirecta*/ ctx[135].descripcion == null && /*i*/ ctx[128] % 2 == 0
 				? "bg-gray-300 hover:bg-gray-400"
-				: /*causaIndirecta*/ ctx[131].descripcion != null && /*i*/ ctx[124] % 2 != 0
+				: /*causaIndirecta*/ ctx[135].descripcion != null && /*i*/ ctx[128] % 2 != 0
 					? "bg-orangered-500 hover:bg-orangered-600"
 					: "bg-gray-400 hover:bg-gray-500") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"));
 
@@ -50467,7 +50467,7 @@ function create_if_block_53(ctx) {
 
 			if (!mounted) {
 				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div0, "click", function () {
-					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showActivityDialog*/ ctx[55](/*causaIndirecta*/ ctx[131], /*causaDirecta*/ ctx[122].objetivo_especifico.id))) /*showActivityDialog*/ ctx[55](/*causaIndirecta*/ ctx[131], /*causaDirecta*/ ctx[122].objetivo_especifico.id).apply(this, arguments);
+					if ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.is_function)(/*showActivityDialog*/ ctx[55](/*causaIndirecta*/ ctx[135], /*causaDirecta*/ ctx[126].objetivo_especifico.id))) /*showActivityDialog*/ ctx[55](/*causaIndirecta*/ ctx[135], /*causaDirecta*/ ctx[126].objetivo_especifico.id).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -50476,11 +50476,11 @@ function create_if_block_53(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (/*causaIndirecta*/ ctx[131].actividad) {
+			if (/*causaIndirecta*/ ctx[135].actividad) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_54(ctx);
+					if_block = create_if_block_56(ctx);
 					if_block.c();
 					if_block.m(p, null);
 				}
@@ -50489,11 +50489,11 @@ function create_if_block_53(ctx) {
 				if_block = null;
 			}
 
-			if (dirty[0] & /*causasDirectas*/ 64 && div0_class_value !== (div0_class_value = "" + ((/*causaIndirecta*/ ctx[131].descripcion != null && /*i*/ ctx[124] % 2 == 0
+			if (dirty[0] & /*causasDirectas*/ 32 && div0_class_value !== (div0_class_value = "" + ((/*causaIndirecta*/ ctx[135].descripcion != null && /*i*/ ctx[128] % 2 == 0
 			? "bg-orangered-400 hover:bg-orangered-500"
-			: /*causaIndirecta*/ ctx[131].descripcion == null && /*i*/ ctx[124] % 2 == 0
+			: /*causaIndirecta*/ ctx[135].descripcion == null && /*i*/ ctx[128] % 2 == 0
 				? "bg-gray-300 hover:bg-gray-400"
-				: /*causaIndirecta*/ ctx[131].descripcion != null && /*i*/ ctx[124] % 2 != 0
+				: /*causaIndirecta*/ ctx[135].descripcion != null && /*i*/ ctx[128] % 2 != 0
 					? "bg-orangered-500 hover:bg-orangered-600"
 					: "bg-gray-400 hover:bg-gray-500") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", div0_class_value);
@@ -50508,18 +50508,18 @@ function create_if_block_53(ctx) {
 	};
 }
 
-// (687:48) {#if causaIndirecta.actividad}
-function create_if_block_54(ctx) {
+// (700:48) {#if causaIndirecta.actividad}
+function create_if_block_56(ctx) {
 	let small;
 	let t0;
-	let t1_value = /*causaDirecta*/ ctx[122].objetivo_especifico.id + "";
+	let t1_value = /*causaDirecta*/ ctx[126].objetivo_especifico.id + "";
 	let t1;
 	let t2;
-	let t3_value = /*causaIndirecta*/ ctx[131].actividad.id + "";
+	let t3_value = /*causaIndirecta*/ ctx[135].actividad.id + "";
 	let t3;
 	let t4;
 	let if_block_anchor;
-	let if_block = /*causaIndirecta*/ ctx[131].actividad.descripcion != null && /*causaIndirecta*/ ctx[131].actividad.descripcion.length > 0 && create_if_block_55(ctx);
+	let if_block = /*causaIndirecta*/ ctx[135].actividad.descripcion != null && /*causaIndirecta*/ ctx[135].actividad.descripcion.length > 0 && create_if_block_57(ctx);
 
 	return {
 		c() {
@@ -50544,14 +50544,14 @@ function create_if_block_54(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 && t1_value !== (t1_value = /*causaDirecta*/ ctx[122].objetivo_especifico.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
-			if (dirty[0] & /*causasDirectas*/ 64 && t3_value !== (t3_value = /*causaIndirecta*/ ctx[131].actividad.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
+			if (dirty[0] & /*causasDirectas*/ 32 && t1_value !== (t1_value = /*causaDirecta*/ ctx[126].objetivo_especifico.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+			if (dirty[0] & /*causasDirectas*/ 32 && t3_value !== (t3_value = /*causaIndirecta*/ ctx[135].actividad.id + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
 
-			if (/*causaIndirecta*/ ctx[131].actividad.descripcion != null && /*causaIndirecta*/ ctx[131].actividad.descripcion.length > 0) {
+			if (/*causaIndirecta*/ ctx[135].actividad.descripcion != null && /*causaIndirecta*/ ctx[135].actividad.descripcion.length > 0) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_55(ctx);
+					if_block = create_if_block_57(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -50569,9 +50569,9 @@ function create_if_block_54(ctx) {
 	};
 }
 
-// (691:52) {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
-function create_if_block_55(ctx) {
-	let t_value = /*causaIndirecta*/ ctx[131].actividad.descripcion + "";
+// (704:52) {#if causaIndirecta.actividad.descripcion != null && causaIndirecta.actividad.descripcion.length > 0}
+function create_if_block_57(ctx) {
+	let t_value = /*causaIndirecta*/ ctx[135].actividad.descripcion + "";
 	let t;
 
 	return {
@@ -50582,7 +50582,7 @@ function create_if_block_55(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 && t_value !== (t_value = /*causaIndirecta*/ ctx[131].actividad.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*causasDirectas*/ 32 && t_value !== (t_value = /*causaIndirecta*/ ctx[135].actividad.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
@@ -50590,10 +50590,10 @@ function create_if_block_55(ctx) {
 	};
 }
 
-// (673:28) {#each causaDirecta.causas_indirectas as causaIndirecta}
+// (686:28) {#each causaDirecta.causas_indirectas as causaIndirecta}
 function create_each_block_9(ctx) {
 	let if_block_anchor;
-	let if_block = (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*causaIndirecta*/ ctx[131].actividad.descripcion != " " || /*proyecto*/ ctx[4].codigo_linea_programatica != 70) && create_if_block_53(ctx);
+	let if_block = (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*causaIndirecta*/ ctx[135].actividad.descripcion != " " || /*proyecto*/ ctx[3].codigo_linea_programatica != 70) && create_if_block_55(ctx);
 
 	return {
 		c() {
@@ -50605,11 +50605,11 @@ function create_each_block_9(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 70 && /*causaIndirecta*/ ctx[131].actividad.descripcion != " " || /*proyecto*/ ctx[4].codigo_linea_programatica != 70) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 70 && /*causaIndirecta*/ ctx[135].actividad.descripcion != " " || /*proyecto*/ ctx[3].codigo_linea_programatica != 70) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_53(ctx);
+					if_block = create_if_block_55(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -50625,12 +50625,12 @@ function create_each_block_9(ctx) {
 	};
 }
 
-// (740:79) 
-function create_if_block_52(ctx) {
+// (753:79) 
+function create_if_block_54(ctx) {
 	let each_1_anchor;
 
 	let each_value_8 = {
-		length: 9 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: 9 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50655,9 +50655,9 @@ function create_if_block_52(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*causasDirectas*/ 32 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_8 = {
-					length: 9 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: 9 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -50688,12 +50688,12 @@ function create_if_block_52(ctx) {
 	};
 }
 
-// (732:89) 
-function create_if_block_51(ctx) {
+// (745:89) 
+function create_if_block_53(ctx) {
 	let each_1_anchor;
 
 	let each_value_7 = {
-		length: 2 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: 2 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50718,9 +50718,9 @@ function create_if_block_51(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*causasDirectas*/ 32 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_7 = {
-					length: 2 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: 2 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -50751,12 +50751,12 @@ function create_if_block_51(ctx) {
 	};
 }
 
-// (724:89) 
-function create_if_block_50(ctx) {
+// (737:89) 
+function create_if_block_52(ctx) {
 	let each_1_anchor;
 
 	let each_value_6 = {
-		length: 3 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: 3 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50781,9 +50781,9 @@ function create_if_block_50(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*causasDirectas*/ 32 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_6 = {
-					length: 3 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: 3 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -50814,12 +50814,12 @@ function create_if_block_50(ctx) {
 	};
 }
 
-// (716:89) 
-function create_if_block_49(ctx) {
+// (729:89) 
+function create_if_block_51(ctx) {
 	let each_1_anchor;
 
 	let each_value_5 = {
-		length: 3 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: 3 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50844,9 +50844,9 @@ function create_if_block_49(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*causasDirectas*/ 32 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_5 = {
-					length: 3 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: 3 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -50877,12 +50877,12 @@ function create_if_block_49(ctx) {
 	};
 }
 
-// (708:89) 
-function create_if_block_48(ctx) {
+// (721:89) 
+function create_if_block_50(ctx) {
 	let each_1_anchor;
 
 	let each_value_4 = {
-		length: 14 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: 14 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50907,9 +50907,9 @@ function create_if_block_48(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*causasDirectas*/ 64 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*causasDirectas*/ 32 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_4 = {
-					length: 14 - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: 14 - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -50940,12 +50940,12 @@ function create_if_block_48(ctx) {
 	};
 }
 
-// (700:28) {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 69 && proyecto.codigo_linea_programatica != 70}
-function create_if_block_47(ctx) {
+// (713:28) {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 69 && proyecto.codigo_linea_programatica != 70}
+function create_if_block_49(ctx) {
 	let each_1_anchor;
 
 	let each_value_3 = {
-		length: /*cantidadCeldasActividades*/ ctx[9] - /*causaDirecta*/ ctx[122].causas_indirectas.length
+		length: /*cantidadCeldasActividades*/ ctx[8] - /*causaDirecta*/ ctx[126].causas_indirectas.length
 	};
 
 	let each_blocks = [];
@@ -50970,9 +50970,9 @@ function create_if_block_47(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*cantidadCeldasActividades, causasDirectas*/ 576 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
+			if (dirty[0] & /*cantidadCeldasActividades, causasDirectas*/ 288 | dirty[1] & /*showGeneralInfoDialog*/ 1024) {
 				each_value_3 = {
-					length: /*cantidadCeldasActividades*/ ctx[9] - /*causaDirecta*/ ctx[122].causas_indirectas.length
+					length: /*cantidadCeldasActividades*/ ctx[8] - /*causaDirecta*/ ctx[126].causas_indirectas.length
 				};
 
 				let i;
@@ -51003,7 +51003,7 @@ function create_if_block_47(ctx) {
 	};
 }
 
-// (741:32) {#each { length: 9 - causaDirecta.causas_indirectas.length } as _empty, j}
+// (754:32) {#each { length: 9 - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_8(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51014,12 +51014,12 @@ function create_each_block_8(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51027,7 +51027,7 @@ function create_each_block_8(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_6*/ ctx[70]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_6*/ ctx[72]);
 				mounted = true;
 			}
 		},
@@ -51040,7 +51040,7 @@ function create_each_block_8(ctx) {
 	};
 }
 
-// (733:32) {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
+// (746:32) {#each { length: 2 - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_7(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51051,12 +51051,12 @@ function create_each_block_7(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51064,7 +51064,7 @@ function create_each_block_7(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_5*/ ctx[69]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_5*/ ctx[71]);
 				mounted = true;
 			}
 		},
@@ -51077,7 +51077,7 @@ function create_each_block_7(ctx) {
 	};
 }
 
-// (725:32) {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+// (738:32) {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_6(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51088,12 +51088,12 @@ function create_each_block_6(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51101,7 +51101,7 @@ function create_each_block_6(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_4*/ ctx[68]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_4*/ ctx[70]);
 				mounted = true;
 			}
 		},
@@ -51114,7 +51114,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (717:32) {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
+// (730:32) {#each { length: 3 - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_5(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51125,12 +51125,12 @@ function create_each_block_5(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51138,7 +51138,7 @@ function create_each_block_5(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_3*/ ctx[67]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_3*/ ctx[69]);
 				mounted = true;
 			}
 		},
@@ -51151,7 +51151,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (709:32) {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty, j}
+// (722:32) {#each { length: 14 - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_4(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51162,12 +51162,12 @@ function create_each_block_4(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51175,7 +51175,7 @@ function create_each_block_4(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_2*/ ctx[66]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_2*/ ctx[68]);
 				mounted = true;
 			}
 		},
@@ -51188,7 +51188,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (701:32) {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
+// (714:32) {#each { length: cantidadCeldasActividades - causaDirecta.causas_indirectas.length } as _empty, j}
 function create_each_block_3(ctx) {
 	let div1;
 	let div1_id_value;
@@ -51199,12 +51199,12 @@ function create_each_block_3(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div class="${/*i*/ ctx[124] % 2 == 0
+			div1.innerHTML = `<div class="${/*i*/ ctx[128] % 2 == 0
 			? "bg-gray-300 hover:bg-gray-400"
 			: "bg-gray-400 hover:bg-gray-500"} h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"><p class="paragraph-ellipsis text-sm text-white line-height-1-24 svelte-12jqh28"></p></div> 
                                     `;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[120] + "_empty_actividad"));
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "id", div1_id_value = "" + (/*j*/ ctx[124] + "_empty_actividad"));
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div1, "flex", "1 0 33.333%");
 		},
@@ -51212,7 +51212,7 @@ function create_each_block_3(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_1*/ ctx[65]);
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(div1, "click", /*click_handler_1*/ ctx[67]);
 				mounted = true;
 			}
 		},
@@ -51225,10 +51225,10 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (632:12) {#each causasDirectas as causaDirecta, i}
+// (645:12) {#each causasDirectas as causaDirecta, i}
 function create_each_block_2(ctx) {
 	let if_block_anchor;
-	let if_block = (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[8] && /*i*/ ctx[124] < 3 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[8] || /*proyecto*/ ctx[4].codigo_linea_programatica != 68) && create_if_block_46(ctx);
+	let if_block = (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[7] && /*i*/ ctx[128] < 3 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[7] || /*proyecto*/ ctx[3].codigo_linea_programatica != 68) && create_if_block_48(ctx);
 
 	return {
 		c() {
@@ -51240,11 +51240,11 @@ function create_each_block_2(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[8] && /*i*/ ctx[124] < 3 || /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[8] || /*proyecto*/ ctx[4].codigo_linea_programatica != 68) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68 && /*tipoProyectoA*/ ctx[7] && /*i*/ ctx[128] < 3 || /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && !/*tipoProyectoA*/ ctx[7] || /*proyecto*/ ctx[3].codigo_linea_programatica != 68) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_46(ctx);
+					if_block = create_if_block_48(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -51260,8 +51260,8 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (839:55) 
-function create_if_block_25(ctx) {
+// (1239:55) 
+function create_if_block_45(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -51271,7 +51271,127 @@ function create_if_block_25(ctx) {
 	let infomessage;
 	let t3;
 	let div0;
-	let show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[4].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+	let show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+	let current;
+	let mounted;
+	let dispose;
+
+	infomessage = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_11__.default({
+			props: {
+				$$slots: { default: [create_default_slot_15] },
+				$$scope: { ctx }
+			}
+		});
+
+	let if_block = show_if && create_if_block_46(ctx);
+
+	return {
+		c() {
+			hr = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("hr");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			h1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
+			h1.textContent = "Evaluación";
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			form = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			if (if_block) if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(hr, "class", "mt-10 mb-10");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "text-3xl mt-24 mb-8 text-center");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "id", "evaluacion");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-16");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, hr, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, h1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, form);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, form, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form, t3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form, div0);
+			if (if_block) if_block.m(div0, null);
+			current = true;
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*submitTpEvaluacion*/ ctx[63]));
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			const infomessage_changes = {};
+
+			if (dirty[0] & /*evaluacion, errors*/ 5 | dirty[1] & /*$formTpEvaluacion*/ 128 | dirty[4] & /*$$scope*/ 268435456) {
+				infomessage_changes.$$scope = { dirty, ctx };
+			}
+
+			infomessage.$set(infomessage_changes);
+			if (dirty[0] & /*proyecto, evaluacion*/ 12) show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+
+			if (show_if) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+
+					if (dirty[0] & /*proyecto, evaluacion*/ 12) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
+					}
+				} else {
+					if_block = create_if_block_46(ctx);
+					if_block.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
+					if_block.m(div0, null);
+				}
+			} else if (if_block) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block, 1, 1, () => {
+					if_block = null;
+				});
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(infomessage.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(hr);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t2);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage);
+			if (if_block) if_block.d();
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (849:55) 
+function create_if_block_24(ctx) {
+	let hr;
+	let t0;
+	let h1;
+	let t2;
+	let div1;
+	let form;
+	let infomessage;
+	let t3;
+	let div0;
+	let show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
 	let current;
 	let mounted;
 	let dispose;
@@ -51283,7 +51403,7 @@ function create_if_block_25(ctx) {
 			}
 		});
 
-	let if_block = show_if && create_if_block_26(ctx);
+	let if_block = show_if && create_if_block_25(ctx);
 
 	return {
 		c() {
@@ -51325,22 +51445,22 @@ function create_if_block_25(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[0] & /*proyecto, evaluacion, errors*/ 21 | dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128 | dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[0] & /*proyecto, evaluacion, errors*/ 13 | dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64 | dirty[4] & /*$$scope*/ 268435456) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (dirty[0] & /*proyecto, evaluacion*/ 20) show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[4].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+			if (dirty[0] & /*proyecto, evaluacion*/ 12) show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
 
 			if (show_if) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[0] & /*proyecto, evaluacion*/ 20) {
+					if (dirty[0] & /*proyecto, evaluacion*/ 12) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_26(ctx);
+					if_block = create_if_block_25(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div0, null);
@@ -51380,7 +51500,7 @@ function create_if_block_25(ctx) {
 	};
 }
 
-// (756:4) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+// (769:4) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
 function create_if_block_20(ctx) {
 	let hr;
 	let t0;
@@ -51391,7 +51511,7 @@ function create_if_block_20(ctx) {
 	let infomessage;
 	let t3;
 	let div0;
-	let show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[4].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+	let show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
 	let current;
 	let mounted;
 	let dispose;
@@ -51445,18 +51565,18 @@ function create_if_block_20(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[0] & /*evaluacion, errors, segundaEvaluacion*/ 13 | dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64 | dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[0] & /*evaluacion, errors*/ 5 | dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32 | dirty[4] & /*$$scope*/ 268435456) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (dirty[0] & /*proyecto, evaluacion*/ 20) show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[4].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+			if (dirty[0] & /*proyecto, evaluacion*/ 12) show_if = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[39], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
 
 			if (show_if) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[0] & /*proyecto, evaluacion*/ 20) {
+					if (dirty[0] & /*proyecto, evaluacion*/ 12) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -51500,14 +51620,263 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (878:24) {#if $formServicioTecnologicoEvaluacion.objetivo_general_requiere_comentario == false}
-function create_if_block_45(ctx) {
+// (1249:24) {#if $formTpEvaluacion.arbol_objetivos_requiere_comentario == false}
+function create_if_block_47(ctx) {
+	let textarea;
+	let updating_value;
+	let current;
+
+	function textarea_value_binding_11(value) {
+		/*textarea_value_binding_11*/ ctx[108](value);
+	}
+
+	let textarea_props = {
+		disabled: /*isSuperAdmin*/ ctx[40]
+		? undefined
+		: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
+			? true
+			: undefined,
+		label: "Comentario",
+		class: "mt-4",
+		maxlength: "40000",
+		id: "arbol_objetivos_comentario",
+		error: /*errors*/ ctx[0].arbol_objetivos_comentario,
+		required: true
+	};
+
+	if (/*$formTpEvaluacion*/ ctx[38].arbol_objetivos_comentario !== void 0) {
+		textarea_props.value = /*$formTpEvaluacion*/ ctx[38].arbol_objetivos_comentario;
+	}
+
+	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_11));
+
+	return {
+		c() {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(textarea.$$.fragment);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(textarea, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const textarea_changes = {};
+
+			if (dirty[0] & /*evaluacion*/ 4) textarea_changes.disabled = /*isSuperAdmin*/ ctx[40]
+			? undefined
+			: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
+				? true
+				: undefined;
+
+			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].arbol_objetivos_comentario;
+
+			if (!updating_value && dirty[1] & /*$formTpEvaluacion*/ 128) {
+				updating_value = true;
+				textarea_changes.value = /*$formTpEvaluacion*/ ctx[38].arbol_objetivos_comentario;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
+			}
+
+			textarea.$set(textarea_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(textarea.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(textarea.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(textarea, detaching);
+		}
+	};
+}
+
+// (1245:16) <InfoMessage>
+function create_default_slot_15(ctx) {
+	let div;
+	let p;
+	let t1;
+	let switch_1;
+	let updating_checked;
+	let t2;
+	let current;
+
+	function switch_1_checked_binding_9(value) {
+		/*switch_1_checked_binding_9*/ ctx[107](value);
+	}
+
+	let switch_1_props = {
+		onMessage: "Cumple",
+		offMessage: "No cumple",
+		disabled: /*isSuperAdmin*/ ctx[40]
+		? undefined
+		: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
+			? true
+			: undefined
+	};
+
+	if (/*$formTpEvaluacion*/ ctx[38].arbol_objetivos_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formTpEvaluacion*/ ctx[38].arbol_objetivos_requiere_comentario;
+	}
+
+	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_9));
+	let if_block = /*$formTpEvaluacion*/ ctx[38].arbol_objetivos_requiere_comentario == false && create_if_block_47(ctx);
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "¿El árbol de objetivos es correcto? Por favor seleccione si Cumple o No cumple.";
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch_1.$$.fragment);
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block) if_block.c();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-4");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, p);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch_1, div, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
+			if (if_block) if_block.m(div, null);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const switch_1_changes = {};
+
+			if (dirty[0] & /*evaluacion*/ 4) switch_1_changes.disabled = /*isSuperAdmin*/ ctx[40]
+			? undefined
+			: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
+				? true
+				: undefined;
+
+			if (!updating_checked && dirty[1] & /*$formTpEvaluacion*/ 128) {
+				updating_checked = true;
+				switch_1_changes.checked = /*$formTpEvaluacion*/ ctx[38].arbol_objetivos_requiere_comentario;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
+			}
+
+			switch_1.$set(switch_1_changes);
+
+			if (/*$formTpEvaluacion*/ ctx[38].arbol_objetivos_requiere_comentario == false) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+
+					if (dirty[1] & /*$formTpEvaluacion*/ 128) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
+					}
+				} else {
+					if_block = create_if_block_47(ctx);
+					if_block.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
+					if_block.m(div, null);
+				}
+			} else if (if_block) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block, 1, 1, () => {
+					if_block = null;
+				});
+
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch_1.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch_1);
+			if (if_block) if_block.d();
+		}
+	};
+}
+
+// (1255:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+function create_if_block_46(ctx) {
+	let loadingbutton;
+	let current;
+
+	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_8__.default({
+			props: {
+				loading: /*sending*/ ctx[10],
+				class: "btn-indigo ml-auto",
+				type: "submit",
+				$$slots: { default: [create_default_slot_14] },
+				$$scope: { ctx }
+			}
+		});
+
+	return {
+		c() {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(loadingbutton.$$.fragment);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(loadingbutton, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const loadingbutton_changes = {};
+			if (dirty[0] & /*sending*/ 1024) loadingbutton_changes.loading = /*sending*/ ctx[10];
+
+			if (dirty[4] & /*$$scope*/ 268435456) {
+				loadingbutton_changes.$$scope = { dirty, ctx };
+			}
+
+			loadingbutton.$set(loadingbutton_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(loadingbutton.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(loadingbutton.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(loadingbutton, detaching);
+		}
+	};
+}
+
+// (1256:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+function create_default_slot_14(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Guardar");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+		}
+	};
+}
+
+// (888:24) {#if $formServicioTecnologicoEvaluacion.objetivo_general_requiere_comentario == false}
+function create_if_block_44(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_2(value) {
-		/*textarea_value_binding_2*/ ctx[80](value);
+		/*textarea_value_binding_2*/ ctx[82](value);
 	}
 
 	let textarea_props = {
@@ -51524,8 +51893,8 @@ function create_if_block_45(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -51550,9 +51919,9 @@ function create_if_block_45(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].objetivo_general_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -51573,8 +51942,8 @@ function create_if_block_45(ctx) {
 	};
 }
 
-// (904:20) {#if proyecto.cantidad_objetivos == 0}
-function create_if_block_44(ctx) {
+// (914:20) {#if proyecto.cantidad_objetivos == 0}
+function create_if_block_43(ctx) {
 	let infomessage;
 	let current;
 
@@ -51610,7 +51979,7 @@ function create_if_block_44(ctx) {
 	};
 }
 
-// (905:24) <InfoMessage class="mt-10" alertMsg={true}>
+// (915:24) <InfoMessage class="mt-10" alertMsg={true}>
 function create_default_slot_13(ctx) {
 	let t;
 
@@ -51627,8 +51996,8 @@ function create_default_slot_13(ctx) {
 	};
 }
 
-// (1018:41) 
-function create_if_block_42(ctx) {
+// (1028:41) 
+function create_if_block_41(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -51650,12 +52019,12 @@ function create_if_block_42(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "cuarto_objetivo_puntaje",
-				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_4(value) {
-		/*input_value_binding_4*/ ctx[90](value);
+		/*input_value_binding_4*/ ctx[92](value);
 	}
 
 	let input_props = {
@@ -51669,22 +52038,22 @@ function create_if_block_42(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].cuarto_objetivo_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_4));
 
 	function switch_1_checked_binding_4(value) {
-		/*switch_1_checked_binding_4*/ ctx[91](value);
+		/*switch_1_checked_binding_4*/ ctx[93](value);
 	}
 
 	let switch_1_props = {
@@ -51697,13 +52066,13 @@ function create_if_block_42(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_4));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_requiere_comentario == false && create_if_block_43(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_requiere_comentario == false && create_if_block_42(ctx);
 
 	return {
 		c() {
@@ -51746,7 +52115,7 @@ function create_if_block_42(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -51756,12 +52125,12 @@ function create_if_block_42(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].cuarto_objetivo_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -51774,23 +52143,23 @@ function create_if_block_42(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_43(ctx);
+					if_block = create_if_block_42(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -51836,8 +52205,8 @@ function create_if_block_42(ctx) {
 	};
 }
 
-// (981:41) 
-function create_if_block_40(ctx) {
+// (991:41) 
+function create_if_block_39(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -51859,12 +52228,12 @@ function create_if_block_40(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "tercer_objetivo_puntaje",
-				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_3(value) {
-		/*input_value_binding_3*/ ctx[87](value);
+		/*input_value_binding_3*/ ctx[89](value);
 	}
 
 	let input_props = {
@@ -51878,22 +52247,22 @@ function create_if_block_40(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].tercer_objetivo_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_3));
 
 	function switch_1_checked_binding_3(value) {
-		/*switch_1_checked_binding_3*/ ctx[88](value);
+		/*switch_1_checked_binding_3*/ ctx[90](value);
 	}
 
 	let switch_1_props = {
@@ -51906,13 +52275,13 @@ function create_if_block_40(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_3));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_requiere_comentario == false && create_if_block_41(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_requiere_comentario == false && create_if_block_40(ctx);
 
 	return {
 		c() {
@@ -51955,7 +52324,7 @@ function create_if_block_40(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -51965,12 +52334,12 @@ function create_if_block_40(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].tercer_objetivo_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -51983,23 +52352,23 @@ function create_if_block_40(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_41(ctx);
+					if_block = create_if_block_40(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -52045,8 +52414,8 @@ function create_if_block_40(ctx) {
 	};
 }
 
-// (943:41) 
-function create_if_block_38(ctx) {
+// (953:41) 
+function create_if_block_37(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -52068,12 +52437,12 @@ function create_if_block_38(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "segundo_objetivo_puntaje",
-				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_2(value) {
-		/*input_value_binding_2*/ ctx[84](value);
+		/*input_value_binding_2*/ ctx[86](value);
 	}
 
 	let input_props = {
@@ -52087,22 +52456,22 @@ function create_if_block_38(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].segundo_objetivo_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_2));
 
 	function switch_1_checked_binding_2(value) {
-		/*switch_1_checked_binding_2*/ ctx[85](value);
+		/*switch_1_checked_binding_2*/ ctx[87](value);
 	}
 
 	let switch_1_props = {
@@ -52115,13 +52484,13 @@ function create_if_block_38(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_2));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_requiere_comentario == false && create_if_block_39(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_requiere_comentario == false && create_if_block_38(ctx);
 
 	return {
 		c() {
@@ -52164,7 +52533,7 @@ function create_if_block_38(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -52174,12 +52543,12 @@ function create_if_block_38(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].segundo_objetivo_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52192,23 +52561,23 @@ function create_if_block_38(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_39(ctx);
+					if_block = create_if_block_38(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -52254,8 +52623,8 @@ function create_if_block_38(ctx) {
 	};
 }
 
-// (908:24) {#if j == 0}
-function create_if_block_36(ctx) {
+// (918:24) {#if j == 0}
+function create_if_block_35(ctx) {
 	let h1;
 	let t1;
 	let label;
@@ -52275,12 +52644,12 @@ function create_if_block_36(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "primer_objetivo_puntaje",
-				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_1(value) {
-		/*input_value_binding_1*/ ctx[81](value);
+		/*input_value_binding_1*/ ctx[83](value);
 	}
 
 	let input_props = {
@@ -52294,22 +52663,22 @@ function create_if_block_36(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].primer_objetivo_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_1));
 
 	function switch_1_checked_binding_1(value) {
-		/*switch_1_checked_binding_1*/ ctx[82](value);
+		/*switch_1_checked_binding_1*/ ctx[84](value);
 	}
 
 	let switch_1_props = {
@@ -52322,13 +52691,13 @@ function create_if_block_36(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_1));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_requiere_comentario == false && create_if_block_37(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_requiere_comentario == false && create_if_block_36(ctx);
 
 	return {
 		c() {
@@ -52366,7 +52735,7 @@ function create_if_block_36(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -52376,12 +52745,12 @@ function create_if_block_36(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].primer_objetivo_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52394,23 +52763,23 @@ function create_if_block_36(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_37(ctx);
+					if_block = create_if_block_36(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -52454,14 +52823,14 @@ function create_if_block_36(ctx) {
 	};
 }
 
-// (1042:32) {#if $formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario == false}
-function create_if_block_43(ctx) {
+// (1052:32) {#if $formServicioTecnologicoEvaluacion.cuarto_objetivo_requiere_comentario == false}
+function create_if_block_42(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_6(value) {
-		/*textarea_value_binding_6*/ ctx[92](value);
+		/*textarea_value_binding_6*/ ctx[94](value);
 	}
 
 	let textarea_props = {
@@ -52478,8 +52847,8 @@ function create_if_block_43(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -52504,9 +52873,9 @@ function create_if_block_43(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].cuarto_objetivo_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].cuarto_objetivo_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].cuarto_objetivo_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52527,14 +52896,14 @@ function create_if_block_43(ctx) {
 	};
 }
 
-// (1005:32) {#if $formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario == false}
-function create_if_block_41(ctx) {
+// (1015:32) {#if $formServicioTecnologicoEvaluacion.tercer_objetivo_requiere_comentario == false}
+function create_if_block_40(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_5(value) {
-		/*textarea_value_binding_5*/ ctx[89](value);
+		/*textarea_value_binding_5*/ ctx[91](value);
 	}
 
 	let textarea_props = {
@@ -52551,8 +52920,8 @@ function create_if_block_41(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -52577,9 +52946,9 @@ function create_if_block_41(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].tercer_objetivo_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].tercer_objetivo_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].tercer_objetivo_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52600,14 +52969,14 @@ function create_if_block_41(ctx) {
 	};
 }
 
-// (968:32) {#if $formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario == false}
-function create_if_block_39(ctx) {
+// (978:32) {#if $formServicioTecnologicoEvaluacion.segundo_objetivo_requiere_comentario == false}
+function create_if_block_38(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_4(value) {
-		/*textarea_value_binding_4*/ ctx[86](value);
+		/*textarea_value_binding_4*/ ctx[88](value);
 	}
 
 	let textarea_props = {
@@ -52624,8 +52993,8 @@ function create_if_block_39(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -52650,9 +53019,9 @@ function create_if_block_39(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].segundo_objetivo_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].segundo_objetivo_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].segundo_objetivo_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52673,14 +53042,14 @@ function create_if_block_39(ctx) {
 	};
 }
 
-// (930:32) {#if $formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario == false}
-function create_if_block_37(ctx) {
+// (940:32) {#if $formServicioTecnologicoEvaluacion.primer_objetivo_requiere_comentario == false}
+function create_if_block_36(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_3(value) {
-		/*textarea_value_binding_3*/ ctx[83](value);
+		/*textarea_value_binding_3*/ ctx[85](value);
 	}
 
 	let textarea_props = {
@@ -52697,8 +53066,8 @@ function create_if_block_37(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -52723,9 +53092,9 @@ function create_if_block_37(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].primer_objetivo_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].primer_objetivo_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].primer_objetivo_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -52746,20 +53115,20 @@ function create_if_block_37(ctx) {
 	};
 }
 
-// (907:20) {#each { length: proyecto.cantidad_objetivos } as _empty, j}
+// (917:20) {#each { length: proyecto.cantidad_objetivos } as _empty, j}
 function create_each_block_1(ctx) {
 	let current_block_type_index;
 	let if_block;
 	let if_block_anchor;
 	let current;
-	const if_block_creators = [create_if_block_36, create_if_block_38, create_if_block_40, create_if_block_42];
+	const if_block_creators = [create_if_block_35, create_if_block_37, create_if_block_39, create_if_block_41];
 	const if_blocks = [];
 
 	function select_block_type_2(ctx, dirty) {
-		if (/*j*/ ctx[120] == 0) return 0;
-		if (/*j*/ ctx[120] == 1) return 1;
-		if (/*j*/ ctx[120] == 2) return 2;
-		if (/*j*/ ctx[120] == 3) return 3;
+		if (/*j*/ ctx[124] == 0) return 0;
+		if (/*j*/ ctx[124] == 1) return 1;
+		if (/*j*/ ctx[124] == 2) return 2;
+		if (/*j*/ ctx[124] == 3) return 3;
 		return -1;
 	}
 
@@ -52802,8 +53171,8 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (1069:20) {#if proyecto.cantidad_objetivos == 0}
-function create_if_block_35(ctx) {
+// (1079:20) {#if proyecto.cantidad_objetivos == 0}
+function create_if_block_34(ctx) {
 	let infomessage;
 	let current;
 
@@ -52839,7 +53208,7 @@ function create_if_block_35(ctx) {
 	};
 }
 
-// (1070:24) <InfoMessage class="mt-10" alertMsg={true}>
+// (1080:24) <InfoMessage class="mt-10" alertMsg={true}>
 function create_default_slot_12(ctx) {
 	let t;
 
@@ -52856,8 +53225,8 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (1182:41) 
-function create_if_block_33(ctx) {
+// (1192:41) 
+function create_if_block_32(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -52880,12 +53249,12 @@ function create_if_block_33(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "resultados_cuarto_obj_puntaje",
-				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_8(value) {
-		/*input_value_binding_8*/ ctx[102](value);
+		/*input_value_binding_8*/ ctx[104](value);
 	}
 
 	let input_props = {
@@ -52899,22 +53268,22 @@ function create_if_block_33(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].resultados_cuarto_obj_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_8));
 
 	function switch_1_checked_binding_8(value) {
-		/*switch_1_checked_binding_8*/ ctx[103](value);
+		/*switch_1_checked_binding_8*/ ctx[105](value);
 	}
 
 	let switch_1_props = {
@@ -52927,13 +53296,13 @@ function create_if_block_33(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_8));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_requiere_comentario == false && create_if_block_34(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_requiere_comentario == false && create_if_block_33(ctx);
 
 	return {
 		c() {
@@ -52978,7 +53347,7 @@ function create_if_block_33(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -52988,12 +53357,12 @@ function create_if_block_33(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].resultados_cuarto_obj_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53006,23 +53375,23 @@ function create_if_block_33(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_34(ctx);
+					if_block = create_if_block_33(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, t8);
@@ -53068,8 +53437,8 @@ function create_if_block_33(ctx) {
 	};
 }
 
-// (1145:41) 
-function create_if_block_31(ctx) {
+// (1155:41) 
+function create_if_block_30(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -53092,12 +53461,12 @@ function create_if_block_31(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "resultados_tercer_obj_puntaje",
-				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_7(value) {
-		/*input_value_binding_7*/ ctx[99](value);
+		/*input_value_binding_7*/ ctx[101](value);
 	}
 
 	let input_props = {
@@ -53111,22 +53480,22 @@ function create_if_block_31(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].resultados_tercer_obj_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_7));
 
 	function switch_1_checked_binding_7(value) {
-		/*switch_1_checked_binding_7*/ ctx[100](value);
+		/*switch_1_checked_binding_7*/ ctx[102](value);
 	}
 
 	let switch_1_props = {
@@ -53139,13 +53508,13 @@ function create_if_block_31(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_7));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_requiere_comentario == false && create_if_block_32(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_requiere_comentario == false && create_if_block_31(ctx);
 
 	return {
 		c() {
@@ -53190,7 +53559,7 @@ function create_if_block_31(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -53200,12 +53569,12 @@ function create_if_block_31(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].resultados_tercer_obj_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53218,23 +53587,23 @@ function create_if_block_31(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_32(ctx);
+					if_block = create_if_block_31(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, t8);
@@ -53280,8 +53649,8 @@ function create_if_block_31(ctx) {
 	};
 }
 
-// (1108:41) 
-function create_if_block_29(ctx) {
+// (1118:41) 
+function create_if_block_28(ctx) {
 	let hr;
 	let t0;
 	let h1;
@@ -53304,12 +53673,12 @@ function create_if_block_29(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "resultados_segundo_obj_puntaje",
-				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_6(value) {
-		/*input_value_binding_6*/ ctx[96](value);
+		/*input_value_binding_6*/ ctx[98](value);
 	}
 
 	let input_props = {
@@ -53323,22 +53692,22 @@ function create_if_block_29(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].resultados_segundo_obj_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_6));
 
 	function switch_1_checked_binding_6(value) {
-		/*switch_1_checked_binding_6*/ ctx[97](value);
+		/*switch_1_checked_binding_6*/ ctx[99](value);
 	}
 
 	let switch_1_props = {
@@ -53351,13 +53720,13 @@ function create_if_block_29(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_6));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_requiere_comentario == false && create_if_block_30(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_requiere_comentario == false && create_if_block_29(ctx);
 
 	return {
 		c() {
@@ -53402,7 +53771,7 @@ function create_if_block_29(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -53412,12 +53781,12 @@ function create_if_block_29(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].resultados_segundo_obj_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53430,23 +53799,23 @@ function create_if_block_29(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_30(ctx);
+					if_block = create_if_block_29(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, t8);
@@ -53492,8 +53861,8 @@ function create_if_block_29(ctx) {
 	};
 }
 
-// (1073:24) {#if j == 0}
-function create_if_block_27(ctx) {
+// (1083:24) {#if j == 0}
+function create_if_block_26(ctx) {
 	let h1;
 	let t1;
 	let label;
@@ -53514,12 +53883,12 @@ function create_if_block_27(ctx) {
 			props: {
 				class: "mt-4 mb-4",
 				labelFor: "resultados_primer_obj_puntaje",
-				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")"
+				value: "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")"
 			}
 		});
 
 	function input_value_binding_5(value) {
-		/*input_value_binding_5*/ ctx[93](value);
+		/*input_value_binding_5*/ ctx[95](value);
 	}
 
 	let input_props = {
@@ -53533,22 +53902,22 @@ function create_if_block_27(ctx) {
 		type: "number",
 		input$step: "0.1",
 		input$min: "0",
-		input$max: (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2),
+		input$max: (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2),
 		class: "mt-1",
 		placeholder: "Puntaje",
 		autocomplete: "off",
 		error: /*errors*/ ctx[0].resultados_primer_obj_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_5));
 
 	function switch_1_checked_binding_5(value) {
-		/*switch_1_checked_binding_5*/ ctx[94](value);
+		/*switch_1_checked_binding_5*/ ctx[96](value);
 	}
 
 	let switch_1_props = {
@@ -53561,13 +53930,13 @@ function create_if_block_27(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_5));
-	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_requiere_comentario == false && create_if_block_28(ctx);
+	let if_block = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_requiere_comentario == false && create_if_block_27(ctx);
 
 	return {
 		c() {
@@ -53607,7 +53976,7 @@ function create_if_block_27(ctx) {
 		},
 		p(ctx, dirty) {
 			const label_changes = {};
-			if (dirty[0] & /*proyecto*/ 16) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2) + ")";
+			if (dirty[0] & /*proyecto*/ 8) label_changes.value = "Puntaje (Máximo " + (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2) + ")";
 			label.$set(label_changes);
 			const input_changes = {};
 
@@ -53617,12 +53986,12 @@ function create_if_block_27(ctx) {
 				? true
 				: undefined;
 
-			if (dirty[0] & /*proyecto*/ 16) input_changes.input$max = (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2);
+			if (dirty[0] & /*proyecto*/ 8) input_changes.input$max = (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2);
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].resultados_primer_obj_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53635,23 +54004,23 @@ function create_if_block_27(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_requiere_comentario == false) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_28(ctx);
+					if_block = create_if_block_27(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, t7);
@@ -53695,14 +54064,14 @@ function create_if_block_27(ctx) {
 	};
 }
 
-// (1206:32) {#if $formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario == false}
-function create_if_block_34(ctx) {
+// (1216:32) {#if $formServicioTecnologicoEvaluacion.resultados_cuarto_obj_requiere_comentario == false}
+function create_if_block_33(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_10(value) {
-		/*textarea_value_binding_10*/ ctx[104](value);
+		/*textarea_value_binding_10*/ ctx[106](value);
 	}
 
 	let textarea_props = {
@@ -53719,8 +54088,8 @@ function create_if_block_34(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -53745,9 +54114,9 @@ function create_if_block_34(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].resultados_cuarto_obj_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_cuarto_obj_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_cuarto_obj_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53768,14 +54137,14 @@ function create_if_block_34(ctx) {
 	};
 }
 
-// (1169:32) {#if $formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario == false}
-function create_if_block_32(ctx) {
+// (1179:32) {#if $formServicioTecnologicoEvaluacion.resultados_tercer_obj_requiere_comentario == false}
+function create_if_block_31(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_9(value) {
-		/*textarea_value_binding_9*/ ctx[101](value);
+		/*textarea_value_binding_9*/ ctx[103](value);
 	}
 
 	let textarea_props = {
@@ -53792,8 +54161,8 @@ function create_if_block_32(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -53818,9 +54187,9 @@ function create_if_block_32(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].resultados_tercer_obj_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_tercer_obj_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_tercer_obj_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53841,14 +54210,14 @@ function create_if_block_32(ctx) {
 	};
 }
 
-// (1132:32) {#if $formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario == false}
-function create_if_block_30(ctx) {
+// (1142:32) {#if $formServicioTecnologicoEvaluacion.resultados_segundo_obj_requiere_comentario == false}
+function create_if_block_29(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_8(value) {
-		/*textarea_value_binding_8*/ ctx[98](value);
+		/*textarea_value_binding_8*/ ctx[100](value);
 	}
 
 	let textarea_props = {
@@ -53865,8 +54234,8 @@ function create_if_block_30(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -53891,9 +54260,9 @@ function create_if_block_30(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].resultados_segundo_obj_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_segundo_obj_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_segundo_obj_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53914,14 +54283,14 @@ function create_if_block_30(ctx) {
 	};
 }
 
-// (1095:32) {#if $formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario == false}
-function create_if_block_28(ctx) {
+// (1105:32) {#if $formServicioTecnologicoEvaluacion.resultados_primer_obj_requiere_comentario == false}
+function create_if_block_27(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_7(value) {
-		/*textarea_value_binding_7*/ ctx[95](value);
+		/*textarea_value_binding_7*/ ctx[97](value);
 	}
 
 	let textarea_props = {
@@ -53938,8 +54307,8 @@ function create_if_block_28(ctx) {
 		required: true
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_comentario !== void 0) {
-		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_comentario !== void 0) {
+		textarea_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -53964,9 +54333,9 @@ function create_if_block_28(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].resultados_primer_obj_comentario;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].resultados_primer_obj_comentario;
+				textarea_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].resultados_primer_obj_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -53987,20 +54356,20 @@ function create_if_block_28(ctx) {
 	};
 }
 
-// (1072:20) {#each { length: proyecto.cantidad_objetivos } as _empty, j}
+// (1082:20) {#each { length: proyecto.cantidad_objetivos } as _empty, j}
 function create_each_block(ctx) {
 	let current_block_type_index;
 	let if_block;
 	let if_block_anchor;
 	let current;
-	const if_block_creators = [create_if_block_27, create_if_block_29, create_if_block_31, create_if_block_33];
+	const if_block_creators = [create_if_block_26, create_if_block_28, create_if_block_30, create_if_block_32];
 	const if_blocks = [];
 
 	function select_block_type_3(ctx, dirty) {
-		if (/*j*/ ctx[120] == 0) return 0;
-		if (/*j*/ ctx[120] == 1) return 1;
-		if (/*j*/ ctx[120] == 2) return 2;
-		if (/*j*/ ctx[120] == 3) return 3;
+		if (/*j*/ ctx[124] == 0) return 0;
+		if (/*j*/ ctx[124] == 1) return 1;
+		if (/*j*/ ctx[124] == 2) return 2;
+		if (/*j*/ ctx[124] == 3) return 3;
 		return -1;
 	}
 
@@ -54043,7 +54412,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (846:16) <InfoMessage>
+// (856:16) <InfoMessage>
 function create_default_slot_11(ctx) {
 	let h10;
 	let t1;
@@ -54074,8 +54443,8 @@ function create_default_slot_11(ctx) {
 	let strong1;
 	let t18;
 
-	let t19_value = (/*proyecto*/ ctx[4].cantidad_objetivos > 0
-	? (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2)
+	let t19_value = (/*proyecto*/ ctx[3].cantidad_objetivos > 0
+	? (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2)
 	: 0) + "";
 
 	let t19;
@@ -54094,8 +54463,8 @@ function create_default_slot_11(ctx) {
 	let strong2;
 	let t29;
 
-	let t30_value = (/*proyecto*/ ctx[4].cantidad_objetivos > 0
-	? (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2)
+	let t30_value = (/*proyecto*/ ctx[3].cantidad_objetivos > 0
+	? (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2)
 	: 0) + "";
 
 	let t30;
@@ -54116,7 +54485,7 @@ function create_default_slot_11(ctx) {
 		});
 
 	function input_value_binding(value) {
-		/*input_value_binding*/ ctx[78](value);
+		/*input_value_binding*/ ctx[80](value);
 	}
 
 	let input_props = {
@@ -54137,15 +54506,15 @@ function create_default_slot_11(ctx) {
 		error: /*errors*/ ctx[0].objetivo_general_puntaje
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_puntaje !== void 0) {
-		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_puntaje;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_puntaje !== void 0) {
+		input_props.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_puntaje;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding));
 
 	function switch_1_checked_binding(value) {
-		/*switch_1_checked_binding*/ ctx[79](value);
+		/*switch_1_checked_binding*/ ctx[81](value);
 	}
 
 	let switch_1_props = {
@@ -54158,17 +54527,17 @@ function create_default_slot_11(ctx) {
 			: undefined
 	};
 
-	if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_requiere_comentario !== void 0) {
-		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_requiere_comentario;
+	if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_requiere_comentario !== void 0) {
+		switch_1_props.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_requiere_comentario;
 	}
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding));
-	let if_block0 = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_requiere_comentario == false && create_if_block_45(ctx);
-	let if_block1 = /*proyecto*/ ctx[4].cantidad_objetivos == 0 && create_if_block_44(ctx);
+	let if_block0 = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_requiere_comentario == false && create_if_block_44(ctx);
+	let if_block1 = /*proyecto*/ ctx[3].cantidad_objetivos == 0 && create_if_block_43(ctx);
 
 	let each_value_1 = {
-		length: /*proyecto*/ ctx[4].cantidad_objetivos
+		length: /*proyecto*/ ctx[3].cantidad_objetivos
 	};
 
 	let each_blocks_1 = [];
@@ -54181,10 +54550,10 @@ function create_default_slot_11(ctx) {
 		each_blocks_1[i] = null;
 	});
 
-	let if_block2 = /*proyecto*/ ctx[4].cantidad_objetivos == 0 && create_if_block_35(ctx);
+	let if_block2 = /*proyecto*/ ctx[3].cantidad_objetivos == 0 && create_if_block_34(ctx);
 
 	let each_value = {
-		length: /*proyecto*/ ctx[4].cantidad_objetivos
+		length: /*proyecto*/ ctx[3].cantidad_objetivos
 	};
 
 	let each_blocks = [];
@@ -54358,9 +54727,9 @@ function create_default_slot_11(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].objetivo_general_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_value && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_value = true;
-				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_puntaje;
+				input_changes.value = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -54373,23 +54742,23 @@ function create_default_slot_11(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+			if (!updating_checked && dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 				updating_checked = true;
-				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_requiere_comentario;
+				switch_1_changes.checked = /*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch_1.$set(switch_1_changes);
 
-			if (/*$formServicioTecnologicoEvaluacion*/ ctx[38].objetivo_general_requiere_comentario == false) {
+			if (/*$formServicioTecnologicoEvaluacion*/ ctx[37].objetivo_general_requiere_comentario == false) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
-					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 128) {
+					if (dirty[1] & /*$formServicioTecnologicoEvaluacion*/ 64) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_45(ctx);
+					if_block0 = create_if_block_44(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(div, null);
@@ -54404,17 +54773,17 @@ function create_default_slot_11(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if ((!current || dirty[0] & /*proyecto*/ 16) && t19_value !== (t19_value = (/*proyecto*/ ctx[4].cantidad_objetivos > 0
-			? (8 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2)
+			if ((!current || dirty[0] & /*proyecto*/ 8) && t19_value !== (t19_value = (/*proyecto*/ ctx[3].cantidad_objetivos > 0
+			? (8 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2)
 			: 0) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t19, t19_value);
 
-			if (/*proyecto*/ ctx[4].cantidad_objetivos == 0) {
+			if (/*proyecto*/ ctx[3].cantidad_objetivos == 0) {
 				if (if_block1) {
-					if (dirty[0] & /*proyecto*/ 16) {
+					if (dirty[0] & /*proyecto*/ 8) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_44(ctx);
+					if_block1 = create_if_block_43(ctx);
 					if_block1.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					if_block1.m(t22.parentNode, t22);
@@ -54429,9 +54798,9 @@ function create_default_slot_11(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (dirty[0] & /*evaluacion, errors, proyecto*/ 21 | dirty[1] & /*isSuperAdmin, $formServicioTecnologicoEvaluacion*/ 640) {
+			if (dirty[0] & /*evaluacion, errors, proyecto*/ 13 | dirty[1] & /*isSuperAdmin, $formServicioTecnologicoEvaluacion*/ 576) {
 				each_value_1 = {
-					length: /*proyecto*/ ctx[4].cantidad_objetivos
+					length: /*proyecto*/ ctx[3].cantidad_objetivos
 				};
 
 				let i;
@@ -54459,17 +54828,17 @@ function create_default_slot_11(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if ((!current || dirty[0] & /*proyecto*/ 16) && t30_value !== (t30_value = (/*proyecto*/ ctx[4].cantidad_objetivos > 0
-			? (10 / /*proyecto*/ ctx[4].cantidad_objetivos).toFixed(2)
+			if ((!current || dirty[0] & /*proyecto*/ 8) && t30_value !== (t30_value = (/*proyecto*/ ctx[3].cantidad_objetivos > 0
+			? (10 / /*proyecto*/ ctx[3].cantidad_objetivos).toFixed(2)
 			: 0) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t30, t30_value);
 
-			if (/*proyecto*/ ctx[4].cantidad_objetivos == 0) {
+			if (/*proyecto*/ ctx[3].cantidad_objetivos == 0) {
 				if (if_block2) {
-					if (dirty[0] & /*proyecto*/ 16) {
+					if (dirty[0] & /*proyecto*/ 8) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					}
 				} else {
-					if_block2 = create_if_block_35(ctx);
+					if_block2 = create_if_block_34(ctx);
 					if_block2.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					if_block2.m(t34.parentNode, t34);
@@ -54484,9 +54853,9 @@ function create_default_slot_11(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (dirty[0] & /*evaluacion, errors, proyecto*/ 21 | dirty[1] & /*isSuperAdmin, $formServicioTecnologicoEvaluacion*/ 640) {
+			if (dirty[0] & /*evaluacion, errors, proyecto*/ 13 | dirty[1] & /*isSuperAdmin, $formServicioTecnologicoEvaluacion*/ 576) {
 				each_value = {
-					length: /*proyecto*/ ctx[4].cantidad_objetivos
+					length: /*proyecto*/ ctx[3].cantidad_objetivos
 				};
 
 				let i;
@@ -54598,14 +54967,14 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (1223:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-function create_if_block_26(ctx) {
+// (1233:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+function create_if_block_25(ctx) {
 	let loadingbutton;
 	let current;
 
 	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_8__.default({
 			props: {
-				loading: /*sending*/ ctx[11],
+				loading: /*sending*/ ctx[10],
 				class: "btn-indigo ml-auto",
 				type: "submit",
 				$$slots: { default: [create_default_slot_10] },
@@ -54623,9 +54992,9 @@ function create_if_block_26(ctx) {
 		},
 		p(ctx, dirty) {
 			const loadingbutton_changes = {};
-			if (dirty[0] & /*sending*/ 2048) loadingbutton_changes.loading = /*sending*/ ctx[11];
+			if (dirty[0] & /*sending*/ 1024) loadingbutton_changes.loading = /*sending*/ ctx[10];
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -54646,7 +55015,7 @@ function create_if_block_26(ctx) {
 	};
 }
 
-// (1224:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (1234:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_10(ctx) {
 	let t;
 
@@ -54663,14 +55032,14 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (791:24) {#if $formEstrategiaRegionalEvaluacion.resultados_requiere_comentario == false}
-function create_if_block_24(ctx) {
+// (804:24) {#if $formEstrategiaRegionalEvaluacion.resultados_requiere_comentario == false}
+function create_if_block_23(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding(value) {
-		/*textarea_value_binding*/ ctx[74](value);
+		/*textarea_value_binding*/ ctx[76](value);
 	}
 
 	let textarea_props = {
@@ -54687,8 +55056,8 @@ function create_if_block_24(ctx) {
 		required: true
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_comentario !== void 0) {
-		textarea_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_comentario;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_comentario !== void 0) {
+		textarea_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -54713,9 +55082,9 @@ function create_if_block_24(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].resultados_comentario;
 
-			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_value = true;
-				textarea_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_comentario;
+				textarea_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -54736,43 +55105,14 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (821:20) {#if segundaEvaluacion?.objetivos_comentario}
-function create_if_block_23(ctx) {
-	let p;
-	let strong;
-	let t1_value = /*segundaEvaluacion*/ ctx[3]?.objetivos_comentario + "";
-	let t1;
-
-	return {
-		c() {
-			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			strong = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong.textContent = "Comentario del segundo evaluador: ";
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t1_value);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "whitespace-pre-line bg-indigo-400 shadow text-white p-4");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, strong);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p, t1);
-		},
-		p(ctx, dirty) {
-			if (dirty[0] & /*segundaEvaluacion*/ 8 && t1_value !== (t1_value = /*segundaEvaluacion*/ ctx[3]?.objetivos_comentario + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
-		},
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
-		}
-	};
-}
-
-// (827:24) {#if $formEstrategiaRegionalEvaluacion.objetivos_requiere_comentario == false}
+// (837:24) {#if $formEstrategiaRegionalEvaluacion.objetivos_requiere_comentario == false}
 function create_if_block_22(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
 
 	function textarea_value_binding_1(value) {
-		/*textarea_value_binding_1*/ ctx[77](value);
+		/*textarea_value_binding_1*/ ctx[79](value);
 	}
 
 	let textarea_props = {
@@ -54789,8 +55129,8 @@ function create_if_block_22(ctx) {
 		required: true
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_comentario !== void 0) {
-		textarea_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_comentario;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_comentario !== void 0) {
+		textarea_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_comentario;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
@@ -54815,9 +55155,9 @@ function create_if_block_22(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].objetivos_comentario;
 
-			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_value = true;
-				textarea_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_comentario;
+				textarea_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -54838,7 +55178,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (763:16) <InfoMessage>
+// (776:16) <InfoMessage>
 function create_default_slot_9(ctx) {
 	let h10;
 	let t1;
@@ -54871,13 +55211,12 @@ function create_default_slot_9(ctx) {
 	let input1;
 	let updating_value_1;
 	let t34;
-	let t35;
 	let div1;
 	let p1;
-	let t37;
+	let t36;
 	let switch1;
 	let updating_checked_1;
-	let t38;
+	let t37;
 	let current;
 
 	label0 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
@@ -54889,7 +55228,7 @@ function create_default_slot_9(ctx) {
 		});
 
 	function input0_value_binding(value) {
-		/*input0_value_binding*/ ctx[72](value);
+		/*input0_value_binding*/ ctx[74](value);
 	}
 
 	let input0_props = {
@@ -54910,15 +55249,15 @@ function create_default_slot_9(ctx) {
 		error: /*errors*/ ctx[0].resultados_puntaje
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_puntaje !== void 0) {
-		input0_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_puntaje;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_puntaje !== void 0) {
+		input0_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_puntaje;
 	}
 
 	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, "value", input0_value_binding));
 
 	function switch0_checked_binding(value) {
-		/*switch0_checked_binding*/ ctx[73](value);
+		/*switch0_checked_binding*/ ctx[75](value);
 	}
 
 	let switch0_props = {
@@ -54931,13 +55270,13 @@ function create_default_slot_9(ctx) {
 			: undefined
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_requiere_comentario !== void 0) {
-		switch0_props.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_requiere_comentario;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_requiere_comentario !== void 0) {
+		switch0_props.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_requiere_comentario;
 	}
 
 	switch0 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch0, "checked", switch0_checked_binding));
-	let if_block0 = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_requiere_comentario == false && create_if_block_24(ctx);
+	let if_block0 = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_requiere_comentario == false && create_if_block_23(ctx);
 
 	label1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
 			props: {
@@ -54948,7 +55287,7 @@ function create_default_slot_9(ctx) {
 		});
 
 	function input1_value_binding(value) {
-		/*input1_value_binding*/ ctx[75](value);
+		/*input1_value_binding*/ ctx[77](value);
 	}
 
 	let input1_props = {
@@ -54969,16 +55308,15 @@ function create_default_slot_9(ctx) {
 		error: /*errors*/ ctx[0].objetivos_puntaje
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_puntaje !== void 0) {
-		input1_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_puntaje;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_puntaje !== void 0) {
+		input1_props.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_puntaje;
 	}
 
 	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input1, "value", input1_value_binding));
-	let if_block1 = /*segundaEvaluacion*/ ctx[3]?.objetivos_comentario && create_if_block_23(ctx);
 
 	function switch1_checked_binding(value) {
-		/*switch1_checked_binding*/ ctx[76](value);
+		/*switch1_checked_binding*/ ctx[78](value);
 	}
 
 	let switch1_props = {
@@ -54991,13 +55329,13 @@ function create_default_slot_9(ctx) {
 			: undefined
 	};
 
-	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_requiere_comentario !== void 0) {
-		switch1_props.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_requiere_comentario;
+	if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_requiere_comentario !== void 0) {
+		switch1_props.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_requiere_comentario;
 	}
 
 	switch1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_15__.default({ props: switch1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch1, "checked", switch1_checked_binding));
-	let if_block2 = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_requiere_comentario == false && create_if_block_22(ctx);
+	let if_block1 = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_requiere_comentario == false && create_if_block_22(ctx);
 
 	return {
 		c() {
@@ -55045,15 +55383,13 @@ function create_default_slot_9(ctx) {
 			t33 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(input1.$$.fragment);
 			t34 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if (if_block1) if_block1.c();
-			t35 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p1.textContent = "¿El árbol de objetivos, objetivo general o los objetivos específicos son correctos? Por favor seleccione si Cumple o No cumple.";
-			t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t36 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch1.$$.fragment);
-			t38 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if (if_block2) if_block2.c();
+			t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block1) if_block1.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h10, "class", "text-2xl text-center mb-10");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(ul0, "class", "list-disc p-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
@@ -55092,14 +55428,12 @@ function create_default_slot_9(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t33, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(input1, target, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t34, anchor);
-			if (if_block1) if_block1.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t35, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, p1);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t37);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t36);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch1, div1, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t38);
-			if (if_block2) if_block2.m(div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t37);
+			if (if_block1) if_block1.m(div1, null);
 			current = true;
 		},
 		p(ctx, dirty) {
@@ -55113,9 +55447,9 @@ function create_default_slot_9(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].resultados_puntaje;
 
-			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_value && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_value = true;
-				input0_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_puntaje;
+				input0_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -55128,23 +55462,23 @@ function create_default_slot_9(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_checked && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_checked = true;
-				switch0_changes.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_requiere_comentario;
+				switch0_changes.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
 			}
 
 			switch0.$set(switch0_changes);
 
-			if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].resultados_requiere_comentario == false) {
+			if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].resultados_requiere_comentario == false) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
-					if (dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+					if (dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_24(ctx);
+					if_block0 = create_if_block_23(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(div0, null);
@@ -55169,27 +55503,13 @@ function create_default_slot_9(ctx) {
 
 			if (dirty[0] & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].objetivos_puntaje;
 
-			if (!updating_value_1 && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_value_1 && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_value_1 = true;
-				input1_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_puntaje;
+				input1_changes.value = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_puntaje;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
 			}
 
 			input1.$set(input1_changes);
-
-			if (/*segundaEvaluacion*/ ctx[3]?.objetivos_comentario) {
-				if (if_block1) {
-					if_block1.p(ctx, dirty);
-				} else {
-					if_block1 = create_if_block_23(ctx);
-					if_block1.c();
-					if_block1.m(t35.parentNode, t35);
-				}
-			} else if (if_block1) {
-				if_block1.d(1);
-				if_block1 = null;
-			}
-
 			const switch1_changes = {};
 
 			if (dirty[0] & /*evaluacion*/ 4) switch1_changes.disabled = /*isSuperAdmin*/ ctx[40]
@@ -55198,32 +55518,32 @@ function create_default_slot_9(ctx) {
 				? true
 				: undefined;
 
-			if (!updating_checked_1 && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
+			if (!updating_checked_1 && dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
 				updating_checked_1 = true;
-				switch1_changes.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_requiere_comentario;
+				switch1_changes.checked = /*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_requiere_comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked_1 = false);
 			}
 
 			switch1.$set(switch1_changes);
 
-			if (/*$formEstrategiaRegionalEvaluacion*/ ctx[37].objetivos_requiere_comentario == false) {
-				if (if_block2) {
-					if_block2.p(ctx, dirty);
+			if (/*$formEstrategiaRegionalEvaluacion*/ ctx[36].objetivos_requiere_comentario == false) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
 
-					if (dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 64) {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
+					if (dirty[1] & /*$formEstrategiaRegionalEvaluacion*/ 32) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block2 = create_if_block_22(ctx);
-					if_block2.c();
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
-					if_block2.m(div1, null);
+					if_block1 = create_if_block_22(ctx);
+					if_block1.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
+					if_block1.m(div1, null);
 				}
-			} else if (if_block2) {
+			} else if (if_block1) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
 
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block2, 1, 1, () => {
-					if_block2 = null;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1, 1, 1, () => {
+					if_block1 = null;
 				});
 
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
@@ -55238,7 +55558,7 @@ function create_default_slot_9(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label1.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input1.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch1.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1);
 			current = true;
 		},
 		o(local) {
@@ -55249,7 +55569,7 @@ function create_default_slot_9(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label1.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input1.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch1.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block1);
 			current = false;
 		},
 		d(detaching) {
@@ -55279,23 +55599,21 @@ function create_default_slot_9(ctx) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t33);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(input1, detaching);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t34);
-			if (if_block1) if_block1.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t35);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch1);
-			if (if_block2) if_block2.d();
+			if (if_block1) if_block1.d();
 		}
 	};
 }
 
-// (833:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+// (843:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
 function create_if_block_21(ctx) {
 	let loadingbutton;
 	let current;
 
 	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_8__.default({
 			props: {
-				loading: /*sending*/ ctx[11],
+				loading: /*sending*/ ctx[10],
 				class: "btn-indigo ml-auto",
 				type: "submit",
 				$$slots: { default: [create_default_slot_8] },
@@ -55313,9 +55631,9 @@ function create_if_block_21(ctx) {
 		},
 		p(ctx, dirty) {
 			const loadingbutton_changes = {};
-			if (dirty[0] & /*sending*/ 2048) loadingbutton_changes.loading = /*sending*/ ctx[11];
+			if (dirty[0] & /*sending*/ 1024) loadingbutton_changes.loading = /*sending*/ ctx[10];
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -55336,7 +55654,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (834:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (844:24) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_8(ctx) {
 	let t;
 
@@ -55353,7 +55671,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (1238:16) {#if codigo}
+// (1270:16) {#if codigo}
 function create_if_block_19(ctx) {
 	let small;
 	let t0;
@@ -55363,7 +55681,7 @@ function create_if_block_19(ctx) {
 		c() {
 			small = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("small");
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Código: ");
-			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*codigo*/ ctx[14]);
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*codigo*/ ctx[13]);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(small, "class", "block text-primary-light");
 		},
 		m(target, anchor) {
@@ -55372,7 +55690,7 @@ function create_if_block_19(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(small, t1);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*codigo*/ 16384) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, /*codigo*/ ctx[14]);
+			if (dirty[0] & /*codigo*/ 8192) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, /*codigo*/ ctx[13]);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(small);
@@ -55380,21 +55698,21 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (1233:8) 
+// (1265:8) 
 function create_title_slot(ctx) {
 	let div2;
 	let div1;
 	let div0;
 	let t0;
 	let t1;
-	let if_block = /*codigo*/ ctx[14] && create_if_block_19(ctx);
+	let if_block = /*codigo*/ ctx[13] && create_if_block_19(ctx);
 
 	return {
 		c() {
 			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*dialogTitle*/ ctx[13]);
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*dialogTitle*/ ctx[12]);
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "text-primary");
@@ -55410,9 +55728,9 @@ function create_title_slot(ctx) {
 			if (if_block) if_block.m(div1, null);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*dialogTitle*/ 8192) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, /*dialogTitle*/ ctx[13]);
+			if (dirty[0] & /*dialogTitle*/ 4096) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t0, /*dialogTitle*/ ctx[12]);
 
-			if (/*codigo*/ ctx[14]) {
+			if (/*codigo*/ ctx[13]) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
@@ -55432,13 +55750,13 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (1388:38) 
+// (1420:38) 
 function create_if_block_15(ctx) {
 	let t;
 	let if_block1_anchor;
 	let current;
-	let if_block0 = /*generalInfoType*/ ctx[15] == 1 && create_if_block_18(ctx);
-	let if_block1 = /*generalInfoType*/ ctx[15] == 2 && create_if_block_16(ctx);
+	let if_block0 = /*generalInfoType*/ ctx[14] == 1 && create_if_block_18(ctx);
+	let if_block1 = /*generalInfoType*/ ctx[14] == 2 && create_if_block_16(ctx);
 
 	return {
 		c() {
@@ -55455,7 +55773,7 @@ function create_if_block_15(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (/*generalInfoType*/ ctx[15] == 1) {
+			if (/*generalInfoType*/ ctx[14] == 1) {
 				if (if_block0) {
 					
 				} else {
@@ -55468,11 +55786,11 @@ function create_if_block_15(ctx) {
 				if_block0 = null;
 			}
 
-			if (/*generalInfoType*/ ctx[15] == 2) {
+			if (/*generalInfoType*/ ctx[14] == 2) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 
-					if (dirty[0] & /*generalInfoType*/ 32768) {
+					if (dirty[0] & /*generalInfoType*/ 16384) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
@@ -55509,7 +55827,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (1355:38) 
+// (1387:38) 
 function create_if_block_10(ctx) {
 	let infomessage;
 	let t0;
@@ -55550,21 +55868,21 @@ function create_if_block_10(ctx) {
 		});
 
 	function select_selectedValue_binding_1(value) {
-		/*select_selectedValue_binding_1*/ ctx[111](value);
+		/*select_selectedValue_binding_1*/ ctx[115](value);
 	}
 
 	let select_props = {
 		disabled: true,
 		id: "tipo-impacto",
-		items: /*tiposImpacto*/ ctx[7],
+		items: /*tiposImpacto*/ ctx[6],
 		error: /*errors*/ ctx[0].tipo,
 		autocomplete: "off",
 		placeholder: "Seleccione un tipo",
 		required: true
 	};
 
-	if (/*$formImpacto*/ ctx[32].tipo !== void 0) {
-		select_props.selectedValue = /*$formImpacto*/ ctx[32].tipo;
+	if (/*$formImpacto*/ ctx[31].tipo !== void 0) {
+		select_props.selectedValue = /*$formImpacto*/ ctx[31].tipo;
 	}
 
 	select = new _Shared_Select__WEBPACK_IMPORTED_MODULE_10__.default({ props: select_props });
@@ -55573,10 +55891,10 @@ function create_if_block_10(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_9(ctx, dirty) {
-		if (/*$formImpacto*/ ctx[32].tipo?.value == 4) return 0;
-		if (/*$formImpacto*/ ctx[32].tipo?.value == 2) return 1;
-		if (/*$formImpacto*/ ctx[32].tipo?.value == 5) return 2;
-		if (/*$formImpacto*/ ctx[32].tipo?.value == 6) return 3;
+		if (/*$formImpacto*/ ctx[31].tipo?.value == 4) return 0;
+		if (/*$formImpacto*/ ctx[31].tipo?.value == 2) return 1;
+		if (/*$formImpacto*/ ctx[31].tipo?.value == 5) return 2;
+		if (/*$formImpacto*/ ctx[31].tipo?.value == 6) return 3;
 		return -1;
 	}
 
@@ -55584,8 +55902,8 @@ function create_if_block_10(ctx) {
 		if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 	}
 
-	function textarea_value_binding_15(value) {
-		/*textarea_value_binding_15*/ ctx[112](value);
+	function textarea_value_binding_16(value) {
+		/*textarea_value_binding_16*/ ctx[116](value);
 	}
 
 	let textarea_props = {
@@ -55597,12 +55915,12 @@ function create_if_block_10(ctx) {
 		required: true
 	};
 
-	if (/*$formImpacto*/ ctx[32].descripcion !== void 0) {
-		textarea_props.value = /*$formImpacto*/ ctx[32].descripcion;
+	if (/*$formImpacto*/ ctx[31].descripcion !== void 0) {
+		textarea_props.value = /*$formImpacto*/ ctx[31].descripcion;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_15));
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_16));
 
 	return {
 		c() {
@@ -55612,7 +55930,7 @@ function create_if_block_10(ctx) {
 			p0.textContent = "Efecto indirecto";
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*impactoEfectoIndirecto*/ ctx[18]);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*impactoEfectoIndirecto*/ ctx[17]);
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			form = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
 			fieldset = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("fieldset");
@@ -55630,7 +55948,7 @@ function create_if_block_10(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
 
-			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true;
 
@@ -55669,19 +55987,19 @@ function create_if_block_10(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (!current || dirty[0] & /*impactoEfectoIndirecto*/ 262144) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*impactoEfectoIndirecto*/ ctx[18]);
+			if (!current || dirty[0] & /*impactoEfectoIndirecto*/ 131072) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*impactoEfectoIndirecto*/ ctx[17]);
 			const select_changes = {};
-			if (dirty[0] & /*tiposImpacto*/ 128) select_changes.items = /*tiposImpacto*/ ctx[7];
+			if (dirty[0] & /*tiposImpacto*/ 64) select_changes.items = /*tiposImpacto*/ ctx[6];
 			if (dirty[0] & /*errors*/ 1) select_changes.error = /*errors*/ ctx[0].tipo;
 
-			if (!updating_selectedValue && dirty[1] & /*$formImpacto*/ 2) {
+			if (!updating_selectedValue && dirty[1] & /*$formImpacto*/ 1) {
 				updating_selectedValue = true;
-				select_changes.selectedValue = /*$formImpacto*/ ctx[32].tipo;
+				select_changes.selectedValue = /*$formImpacto*/ ctx[31].tipo;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_selectedValue = false);
 			}
 
@@ -55720,15 +56038,15 @@ function create_if_block_10(ctx) {
 			const textarea_changes = {};
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].descripcion;
 
-			if (!updating_value && dirty[1] & /*$formImpacto*/ 2) {
+			if (!updating_value && dirty[1] & /*$formImpacto*/ 1) {
 				updating_value = true;
-				textarea_changes.value = /*$formImpacto*/ ctx[32].descripcion;
+				textarea_changes.value = /*$formImpacto*/ ctx[31].descripcion;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
 			textarea.$set(textarea_changes);
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -55773,7 +56091,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (1325:40) 
+// (1357:40) 
 function create_if_block_7(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -55783,7 +56101,7 @@ function create_if_block_7(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_8(ctx, dirty) {
-		if (/*resultadoEfectoDirecto*/ ctx[21] != "Sin información registrada") return 0;
+		if (/*resultadoEfectoDirecto*/ ctx[20] != "Sin información registrada") return 0;
 		return 1;
 	}
 
@@ -55843,7 +56161,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (1298:46) 
+// (1330:46) 
 function create_if_block_5(ctx) {
 	let form;
 	let fieldset;
@@ -55854,8 +56172,8 @@ function create_if_block_5(ctx) {
 	let t2;
 	let p1;
 
-	let t3_value = (/*problemaCentral*/ ctx[23]
-	? /*problemaCentral*/ ctx[23]
+	let t3_value = (/*problemaCentral*/ ctx[22]
+	? /*problemaCentral*/ ctx[22]
 	: "Sin información registrada") + "";
 
 	let t3;
@@ -55873,7 +56191,7 @@ function create_if_block_5(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_7(ctx, dirty) {
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68) return 0;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68) return 0;
 		return 1;
 	}
 
@@ -55889,8 +56207,8 @@ function create_if_block_5(ctx) {
 			}
 		});
 
-	function textarea_value_binding_13(value) {
-		/*textarea_value_binding_13*/ ctx[108](value);
+	function textarea_value_binding_14(value) {
+		/*textarea_value_binding_14*/ ctx[112](value);
 	}
 
 	let textarea_props = {
@@ -55902,12 +56220,12 @@ function create_if_block_5(ctx) {
 		required: true
 	};
 
-	if (/*$formObjetivoGeneral*/ ctx[34].objetivo_general !== void 0) {
-		textarea_props.value = /*$formObjetivoGeneral*/ ctx[34].objetivo_general;
+	if (/*$formObjetivoGeneral*/ ctx[33].objetivo_general !== void 0) {
+		textarea_props.value = /*$formObjetivoGeneral*/ ctx[33].objetivo_general;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_13));
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_14));
 
 	return {
 		c() {
@@ -55928,7 +56246,7 @@ function create_if_block_5(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "block font-medium mb-2 text-gray-700 text-sm");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p1, "class", "mb-20 whitespace-pre-line");
 
-			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true;
 
@@ -55980,22 +56298,22 @@ function create_if_block_5(ctx) {
 				if_block.m(fieldset, t0);
 			}
 
-			if ((!current || dirty[0] & /*problemaCentral*/ 8388608) && t3_value !== (t3_value = (/*problemaCentral*/ ctx[23]
-			? /*problemaCentral*/ ctx[23]
+			if ((!current || dirty[0] & /*problemaCentral*/ 4194304) && t3_value !== (t3_value = (/*problemaCentral*/ ctx[22]
+			? /*problemaCentral*/ ctx[22]
 			: "Sin información registrada") + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
 
 			const textarea_changes = {};
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].objetivo_general;
 
-			if (!updating_value && dirty[1] & /*$formObjetivoGeneral*/ 8) {
+			if (!updating_value && dirty[1] & /*$formObjetivoGeneral*/ 4) {
 				updating_value = true;
-				textarea_changes.value = /*$formObjetivoGeneral*/ ctx[34].objetivo_general;
+				textarea_changes.value = /*$formObjetivoGeneral*/ ctx[33].objetivo_general;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
 			textarea.$set(textarea_changes);
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -56025,7 +56343,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (1272:49) 
+// (1304:49) 
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -56035,7 +56353,7 @@ function create_if_block_2(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_6(ctx, dirty) {
-		if (/*causaDirectaObjetivoEspecifico*/ ctx[25] != "Sin información registrada") return 0;
+		if (/*causaDirectaObjetivoEspecifico*/ ctx[24] != "Sin información registrada") return 0;
 		return 1;
 	}
 
@@ -56095,7 +56413,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (1246:12) {#if showActividadForm}
+// (1278:12) {#if showActividadForm}
 function create_if_block(ctx) {
 	let infomessage;
 	let t0;
@@ -56126,7 +56444,7 @@ function create_if_block(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_5(ctx, dirty) {
-		if (dirty[0] & /*resultadosFiltrados*/ 268435456) show_if = !!(typeof /*resultadosFiltrados*/ ctx[28].find(func) == "object");
+		if (dirty[0] & /*resultadosFiltrados*/ 134217728) show_if = !!(typeof /*resultadosFiltrados*/ ctx[27].find(func) == "object");
 		if (show_if) return 0;
 		return 1;
 	}
@@ -56142,7 +56460,7 @@ function create_if_block(ctx) {
 			p0.textContent = "Causa indirecta";
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*actividadCausaIndirecta*/ ctx[27]);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*actividadCausaIndirecta*/ ctx[26]);
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			form = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
 			fieldset = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("fieldset");
@@ -56150,7 +56468,7 @@ function create_if_block(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "block font-medium mb-2 text-gray-700 text-sm");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p1, "class", "mb-10 whitespace-pre-line");
 
-			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true;
 
@@ -56177,12 +56495,12 @@ function create_if_block(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (!current || dirty[0] & /*actividadCausaIndirecta*/ 134217728) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*actividadCausaIndirecta*/ ctx[27]);
+			if (!current || dirty[0] & /*actividadCausaIndirecta*/ 67108864) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*actividadCausaIndirecta*/ ctx[26]);
 			let previous_block_index = current_block_type_index;
 			current_block_type_index = select_block_type_5(ctx, dirty);
 
@@ -56209,7 +56527,7 @@ function create_if_block(ctx) {
 				if_block.m(fieldset, null);
 			}
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -56241,7 +56559,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (1389:16) {#if generalInfoType == 1}
+// (1421:16) {#if generalInfoType == 1}
 function create_if_block_18(ctx) {
 	let p;
 
@@ -56259,13 +56577,13 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (1392:16) {#if generalInfoType == 2}
+// (1424:16) {#if generalInfoType == 2}
 function create_if_block_16(ctx) {
 	let p;
 	let t1;
 	let if_block_anchor;
 	let current;
-	let if_block = /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && create_if_block_17(ctx);
+	let if_block = /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && create_if_block_17(ctx);
 
 	return {
 		c() {
@@ -56284,9 +56602,9 @@ function create_if_block_16(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68) {
 				if (if_block) {
-					if (dirty[0] & /*proyecto*/ 16) {
+					if (dirty[0] & /*proyecto*/ 8) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -56323,7 +56641,7 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (1395:20) {#if proyecto.codigo_linea_programatica == 68}
+// (1427:20) {#if proyecto.codigo_linea_programatica == 68}
 function create_if_block_17(ctx) {
 	let infomessage;
 	let current;
@@ -56358,7 +56676,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (1396:24) <InfoMessage>
+// (1428:24) <InfoMessage>
 function create_default_slot_7(ctx) {
 	let t0;
 	let strong;
@@ -56380,7 +56698,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (1356:16) <InfoMessage class="mb-4">
+// (1388:16) <InfoMessage class="mb-4">
 function create_default_slot_6(ctx) {
 	let t;
 
@@ -56397,7 +56715,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (1379:68) 
+// (1411:68) 
 function create_if_block_14(ctx) {
 	let infomessage;
 	let current;
@@ -56431,7 +56749,7 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (1377:68) 
+// (1409:68) 
 function create_if_block_13(ctx) {
 	let infomessage;
 	let current;
@@ -56465,7 +56783,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (1373:68) 
+// (1405:68) 
 function create_if_block_12(ctx) {
 	let infomessage;
 	let current;
@@ -56499,7 +56817,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (1369:28) {#if $formImpacto.tipo?.value == 4}
+// (1401:28) {#if $formImpacto.tipo?.value == 4}
 function create_if_block_11(ctx) {
 	let infomessage;
 	let current;
@@ -56533,7 +56851,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (1352:16) {:else}
+// (1384:16) {:else}
 function create_else_block_3(ctx) {
 	let infomessage;
 	let current;
@@ -56569,7 +56887,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (1326:16) {#if resultadoEfectoDirecto != 'Sin información registrada'}
+// (1358:16) {#if resultadoEfectoDirecto != 'Sin información registrada'}
 function create_if_block_8(ctx) {
 	let infomessage;
 	let t0;
@@ -56579,11 +56897,11 @@ function create_if_block_8(ctx) {
 	let t3;
 	let t4;
 	let p2;
-	let t5_value = /*descripcionObjetivoEspecifico*/ ctx[20].numero + "";
+	let t5_value = /*descripcionObjetivoEspecifico*/ ctx[19].numero + "";
 	let t5;
 	let t6;
 	let p3;
-	let t7_value = /*descripcionObjetivoEspecifico*/ ctx[20].descripcion + "";
+	let t7_value = /*descripcionObjetivoEspecifico*/ ctx[19].descripcion + "";
 	let t7;
 	let t8;
 	let form;
@@ -56605,10 +56923,10 @@ function create_if_block_8(ctx) {
 			}
 		});
 
-	let if_block = (/*proyecto*/ ctx[4].codigo_linea_programatica == 23 || /*proyecto*/ ctx[4].codigo_linea_programatica == 65 || /*proyecto*/ ctx[4].codigo_linea_programatica == 66 || /*proyecto*/ ctx[4].codigo_linea_programatica == 82) && create_if_block_9(ctx);
+	let if_block = (/*proyecto*/ ctx[3].codigo_linea_programatica == 23 || /*proyecto*/ ctx[3].codigo_linea_programatica == 65 || /*proyecto*/ ctx[3].codigo_linea_programatica == 66 || /*proyecto*/ ctx[3].codigo_linea_programatica == 82) && create_if_block_9(ctx);
 
-	function textarea_value_binding_14(value) {
-		/*textarea_value_binding_14*/ ctx[110](value);
+	function textarea_value_binding_15(value) {
+		/*textarea_value_binding_15*/ ctx[114](value);
 	}
 
 	let textarea_props = {
@@ -56620,12 +56938,12 @@ function create_if_block_8(ctx) {
 		required: true
 	};
 
-	if (/*$formResultado*/ ctx[33].descripcion !== void 0) {
-		textarea_props.value = /*$formResultado*/ ctx[33].descripcion;
+	if (/*$formResultado*/ ctx[32].descripcion !== void 0) {
+		textarea_props.value = /*$formResultado*/ ctx[32].descripcion;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_14));
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_15));
 
 	return {
 		c() {
@@ -56635,7 +56953,7 @@ function create_if_block_8(ctx) {
 			p0.textContent = "Efecto directo";
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*resultadoEfectoDirecto*/ ctx[21]);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*resultadoEfectoDirecto*/ ctx[20]);
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			t5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t5_value);
@@ -56655,7 +56973,7 @@ function create_if_block_8(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p3, "class", "mb-20 whitespace-pre-line");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mb-20");
 
-			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true;
 
@@ -56691,20 +57009,20 @@ function create_if_block_8(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (!current || dirty[0] & /*resultadoEfectoDirecto*/ 2097152) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*resultadoEfectoDirecto*/ ctx[21]);
-			if ((!current || dirty[0] & /*descripcionObjetivoEspecifico*/ 1048576) && t5_value !== (t5_value = /*descripcionObjetivoEspecifico*/ ctx[20].numero + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t5, t5_value);
-			if ((!current || dirty[0] & /*descripcionObjetivoEspecifico*/ 1048576) && t7_value !== (t7_value = /*descripcionObjetivoEspecifico*/ ctx[20].descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t7, t7_value);
+			if (!current || dirty[0] & /*resultadoEfectoDirecto*/ 1048576) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*resultadoEfectoDirecto*/ ctx[20]);
+			if ((!current || dirty[0] & /*descripcionObjetivoEspecifico*/ 524288) && t5_value !== (t5_value = /*descripcionObjetivoEspecifico*/ ctx[19].numero + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t5, t5_value);
+			if ((!current || dirty[0] & /*descripcionObjetivoEspecifico*/ 524288) && t7_value !== (t7_value = /*descripcionObjetivoEspecifico*/ ctx[19].descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t7, t7_value);
 
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 23 || /*proyecto*/ ctx[4].codigo_linea_programatica == 65 || /*proyecto*/ ctx[4].codigo_linea_programatica == 66 || /*proyecto*/ ctx[4].codigo_linea_programatica == 82) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 23 || /*proyecto*/ ctx[3].codigo_linea_programatica == 65 || /*proyecto*/ ctx[3].codigo_linea_programatica == 66 || /*proyecto*/ ctx[3].codigo_linea_programatica == 82) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty[0] & /*proyecto*/ 16) {
+					if (dirty[0] & /*proyecto*/ 8) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -56726,15 +57044,15 @@ function create_if_block_8(ctx) {
 			const textarea_changes = {};
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].descripcion;
 
-			if (!updating_value && dirty[1] & /*$formResultado*/ 4) {
+			if (!updating_value && dirty[1] & /*$formResultado*/ 2) {
 				updating_value = true;
-				textarea_changes.value = /*$formResultado*/ ctx[33].descripcion;
+				textarea_changes.value = /*$formResultado*/ ctx[32].descripcion;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
 			textarea.$set(textarea_changes);
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -56773,7 +57091,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (1327:20) <InfoMessage class="mb-4">
+// (1359:20) <InfoMessage class="mb-4">
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -56790,7 +57108,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (1342:28) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
+// (1374:28) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
 function create_if_block_9(ctx) {
 	let div;
 	let input;
@@ -56798,7 +57116,7 @@ function create_if_block_9(ctx) {
 	let current;
 
 	function input_value_binding_9(value) {
-		/*input_value_binding_9*/ ctx[109](value);
+		/*input_value_binding_9*/ ctx[113](value);
 	}
 
 	let input_props = {
@@ -56812,8 +57130,8 @@ function create_if_block_9(ctx) {
 		required: true
 	};
 
-	if (/*$formResultado*/ ctx[33].trl !== void 0) {
-		input_props.value = /*$formResultado*/ ctx[33].trl;
+	if (/*$formResultado*/ ctx[32].trl !== void 0) {
+		input_props.value = /*$formResultado*/ ctx[32].trl;
 	}
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_7__.default({ props: input_props });
@@ -56834,9 +57152,9 @@ function create_if_block_9(ctx) {
 			const input_changes = {};
 			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].trl;
 
-			if (!updating_value && dirty[1] & /*$formResultado*/ 4) {
+			if (!updating_value && dirty[1] & /*$formResultado*/ 2) {
 				updating_value = true;
-				input_changes.value = /*$formResultado*/ ctx[33].trl;
+				input_changes.value = /*$formResultado*/ ctx[32].trl;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -56858,7 +57176,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (1311:24) {:else}
+// (1343:24) {:else}
 function create_else_block_2(ctx) {
 	let infomessage;
 	let current;
@@ -56893,7 +57211,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (1301:24) {#if proyecto.codigo_linea_programatica == 68}
+// (1333:24) {#if proyecto.codigo_linea_programatica == 68}
 function create_if_block_6(ctx) {
 	let infomessage;
 	let current;
@@ -56929,7 +57247,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (1302:28) <InfoMessage class="mb-4">
+// (1334:28) <InfoMessage class="mb-4">
 function create_default_slot_4(ctx) {
 	let p;
 
@@ -56952,7 +57270,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (1295:16) {:else}
+// (1327:16) {:else}
 function create_else_block_1(ctx) {
 	let infomessage;
 	let current;
@@ -56988,7 +57306,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (1273:16) {#if causaDirectaObjetivoEspecifico != 'Sin información registrada'}
+// (1305:16) {#if causaDirectaObjetivoEspecifico != 'Sin información registrada'}
 function create_if_block_3(ctx) {
 	let t0;
 	let form;
@@ -57005,10 +57323,10 @@ function create_if_block_3(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	let if_block = /*proyecto*/ ctx[4].codigo_linea_programatica == 68 && create_if_block_4(ctx);
+	let if_block = /*proyecto*/ ctx[3].codigo_linea_programatica == 68 && create_if_block_4(ctx);
 
-	function textarea_value_binding_12(value) {
-		/*textarea_value_binding_12*/ ctx[107](value);
+	function textarea_value_binding_13(value) {
+		/*textarea_value_binding_13*/ ctx[111](value);
 	}
 
 	let textarea_props = {
@@ -57020,12 +57338,12 @@ function create_if_block_3(ctx) {
 		required: true
 	};
 
-	if (/*$formObjetivoEspecifico*/ ctx[35].descripcion !== void 0) {
-		textarea_props.value = /*$formObjetivoEspecifico*/ ctx[35].descripcion;
+	if (/*$formObjetivoEspecifico*/ ctx[34].descripcion !== void 0) {
+		textarea_props.value = /*$formObjetivoEspecifico*/ ctx[34].descripcion;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_12));
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_13));
 
 	return {
 		c() {
@@ -57037,14 +57355,14 @@ function create_if_block_3(ctx) {
 			p0.textContent = "Causa directa";
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*causaDirectaObjetivoEspecifico*/ ctx[25]);
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*causaDirectaObjetivoEspecifico*/ ctx[24]);
 			t4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(textarea.$$.fragment);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "block font-medium mb-2 text-gray-700 text-sm");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p1, "class", "mb-20 whitespace-pre-line");
 
-			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			fieldset.disabled = fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true;
 
@@ -57070,9 +57388,9 @@ function create_if_block_3(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68) {
 				if (if_block) {
-					if (dirty[0] & /*proyecto*/ 16) {
+					if (dirty[0] & /*proyecto*/ 8) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -57091,19 +57409,19 @@ function create_if_block_3(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (!current || dirty[0] & /*causaDirectaObjetivoEspecifico*/ 33554432) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*causaDirectaObjetivoEspecifico*/ ctx[25]);
+			if (!current || dirty[0] & /*causaDirectaObjetivoEspecifico*/ 16777216) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, /*causaDirectaObjetivoEspecifico*/ ctx[24]);
 			const textarea_changes = {};
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].descripcion;
 
-			if (!updating_value && dirty[1] & /*$formObjetivoEspecifico*/ 16) {
+			if (!updating_value && dirty[1] & /*$formObjetivoEspecifico*/ 8) {
 				updating_value = true;
-				textarea_changes.value = /*$formObjetivoEspecifico*/ ctx[35].descripcion;
+				textarea_changes.value = /*$formObjetivoEspecifico*/ ctx[34].descripcion;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
 			textarea.$set(textarea_changes);
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[4].modificable == true
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[40] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(/*authUser*/ ctx[39], [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && /*proyecto*/ ctx[3].modificable == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -57131,7 +57449,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (1274:20) {#if proyecto.codigo_linea_programatica == 68}
+// (1306:20) {#if proyecto.codigo_linea_programatica == 68}
 function create_if_block_4(ctx) {
 	let infomessage;
 	let current;
@@ -57167,7 +57485,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (1275:24) <InfoMessage class="mb-4">
+// (1307:24) <InfoMessage class="mb-4">
 function create_default_slot_3(ctx) {
 	let p;
 
@@ -57188,7 +57506,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (1247:16) <InfoMessage class="mb-4">
+// (1279:16) <InfoMessage class="mb-4">
 function create_default_slot_2(ctx) {
 	let t0;
 	let br;
@@ -57213,7 +57531,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (1261:24) {:else}
+// (1293:24) {:else}
 function create_else_block(ctx) {
 	let div0;
 	let label;
@@ -57234,28 +57552,28 @@ function create_else_block(ctx) {
 		});
 
 	function select_selectedValue_binding(value) {
-		/*select_selectedValue_binding*/ ctx[105](value);
+		/*select_selectedValue_binding*/ ctx[109](value);
 	}
 
 	let select_props = {
 		disabled: true,
 		id: "resultado_id",
-		items: /*resultadosFiltrados*/ ctx[28],
+		items: /*resultadosFiltrados*/ ctx[27],
 		error: /*errors*/ ctx[0].resultado_id,
 		autocomplete: "off",
 		placeholder: "Seleccione un resultado",
 		required: true
 	};
 
-	if (/*$formActividad*/ ctx[36].resultado_id !== void 0) {
-		select_props.selectedValue = /*$formActividad*/ ctx[36].resultado_id;
+	if (/*$formActividad*/ ctx[35].resultado_id !== void 0) {
+		select_props.selectedValue = /*$formActividad*/ ctx[35].resultado_id;
 	}
 
 	select = new _Shared_Select__WEBPACK_IMPORTED_MODULE_10__.default({ props: select_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select, "selectedValue", select_selectedValue_binding));
 
-	function textarea_value_binding_11(value) {
-		/*textarea_value_binding_11*/ ctx[106](value);
+	function textarea_value_binding_12(value) {
+		/*textarea_value_binding_12*/ ctx[110](value);
 	}
 
 	let textarea_props = {
@@ -57267,12 +57585,12 @@ function create_else_block(ctx) {
 		required: true
 	};
 
-	if (/*$formActividad*/ ctx[36].descripcion !== void 0) {
-		textarea_props.value = /*$formActividad*/ ctx[36].descripcion;
+	if (/*$formActividad*/ ctx[35].descripcion !== void 0) {
+		textarea_props.value = /*$formActividad*/ ctx[35].descripcion;
 	}
 
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({ props: textarea_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_11));
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_12));
 
 	return {
 		c() {
@@ -57297,12 +57615,12 @@ function create_else_block(ctx) {
 		},
 		p(ctx, dirty) {
 			const select_changes = {};
-			if (dirty[0] & /*resultadosFiltrados*/ 268435456) select_changes.items = /*resultadosFiltrados*/ ctx[28];
+			if (dirty[0] & /*resultadosFiltrados*/ 134217728) select_changes.items = /*resultadosFiltrados*/ ctx[27];
 			if (dirty[0] & /*errors*/ 1) select_changes.error = /*errors*/ ctx[0].resultado_id;
 
-			if (!updating_selectedValue && dirty[1] & /*$formActividad*/ 32) {
+			if (!updating_selectedValue && dirty[1] & /*$formActividad*/ 16) {
 				updating_selectedValue = true;
-				select_changes.selectedValue = /*$formActividad*/ ctx[36].resultado_id;
+				select_changes.selectedValue = /*$formActividad*/ ctx[35].resultado_id;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_selectedValue = false);
 			}
 
@@ -57310,9 +57628,9 @@ function create_else_block(ctx) {
 			const textarea_changes = {};
 			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].descripcion;
 
-			if (!updating_value && dirty[1] & /*$formActividad*/ 32) {
+			if (!updating_value && dirty[1] & /*$formActividad*/ 16) {
 				updating_value = true;
-				textarea_changes.value = /*$formActividad*/ ctx[36].descripcion;
+				textarea_changes.value = /*$formActividad*/ ctx[35].descripcion;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
@@ -57342,7 +57660,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (1259:24) {#if typeof resultadosFiltrados.find((item) => item.label == null) == 'object'}
+// (1291:24) {#if typeof resultadosFiltrados.find((item) => item.label == null) == 'object'}
 function create_if_block_1(ctx) {
 	let infomessage;
 	let current;
@@ -57378,7 +57696,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (1245:8) 
+// (1277:8) 
 function create_content_slot(ctx) {
 	let div;
 	let current_block_type_index;
@@ -57397,12 +57715,12 @@ function create_content_slot(ctx) {
 	const if_blocks = [];
 
 	function select_block_type_4(ctx, dirty) {
-		if (/*showActividadForm*/ ctx[26]) return 0;
-		if (/*showObjetivoEspecificoForm*/ ctx[24]) return 1;
-		if (/*showObjetivoGeneralForm*/ ctx[22]) return 2;
-		if (/*showResultadoForm*/ ctx[19]) return 3;
-		if (/*showImpactoForm*/ ctx[17]) return 4;
-		if (/*showGeneralInfo*/ ctx[16]) return 5;
+		if (/*showActividadForm*/ ctx[25]) return 0;
+		if (/*showObjetivoEspecificoForm*/ ctx[23]) return 1;
+		if (/*showObjetivoGeneralForm*/ ctx[21]) return 2;
+		if (/*showResultadoForm*/ ctx[18]) return 3;
+		if (/*showImpactoForm*/ ctx[16]) return 4;
+		if (/*showGeneralInfo*/ ctx[15]) return 5;
 		return -1;
 	}
 
@@ -57480,7 +57798,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (1402:12) <Button on:click={closeDialog} type="button" variant={null}>
+// (1434:12) <Button on:click={closeDialog} type="button" variant={null}>
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -57497,7 +57815,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (1401:8) 
+// (1433:8) 
 function create_actions_slot(ctx) {
 	let div;
 	let button;
@@ -57529,7 +57847,7 @@ function create_actions_slot(ctx) {
 		p(ctx, dirty) {
 			const button_changes = {};
 
-			if (dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[4] & /*$$scope*/ 268435456) {
 				button_changes.$$scope = { dirty, ctx };
 			}
 
@@ -57551,7 +57869,7 @@ function create_actions_slot(ctx) {
 	};
 }
 
-// (495:0) <AuthenticatedLayout>
+// (508:0) <AuthenticatedLayout>
 function create_default_slot(ctx) {
 	let evaluationstepper;
 	let t0;
@@ -57587,39 +57905,40 @@ function create_default_slot(ctx) {
 			props: {
 				convocatoria: /*convocatoria*/ ctx[1],
 				evaluacion: /*evaluacion*/ ctx[2],
-				proyecto: /*proyecto*/ ctx[4]
+				proyecto: /*proyecto*/ ctx[3]
 			}
 		});
 
-	let if_block0 = (/*proyecto*/ ctx[4].codigo_linea_programatica == 23 || /*proyecto*/ ctx[4].codigo_linea_programatica == 65 || /*proyecto*/ ctx[4].codigo_linea_programatica == 66 || /*proyecto*/ ctx[4].codigo_linea_programatica == 82) && create_if_block_68(ctx);
-	let each_value_15 = { length: /*objetivosCount*/ ctx[29] };
+	let if_block0 = (/*proyecto*/ ctx[3].codigo_linea_programatica == 23 || /*proyecto*/ ctx[3].codigo_linea_programatica == 65 || /*proyecto*/ ctx[3].codigo_linea_programatica == 66 || /*proyecto*/ ctx[3].codigo_linea_programatica == 82) && create_if_block_70(ctx);
+	let each_value_15 = { length: /*objetivosCount*/ ctx[28] };
 	let each_blocks_2 = [];
 
 	for (let i = 0; i < each_value_15.length; i += 1) {
 		each_blocks_2[i] = create_each_block_15(get_each_context_15(ctx, each_value_15, i));
 	}
 
-	let each_value_10 = /*efectosDirectos*/ ctx[5];
+	let each_value_10 = /*efectosDirectos*/ ctx[4];
 	let each_blocks_1 = [];
 
 	for (let i = 0; i < each_value_10.length; i += 1) {
 		each_blocks_1[i] = create_each_block_10(get_each_context_10(ctx, each_value_10, i));
 	}
 
-	let if_block1 = /*proyecto*/ ctx[4].objetivo_general != null && /*proyecto*/ ctx[4].objetivo_general.length > 0 && create_if_block_59(ctx);
-	let each_value_2 = /*causasDirectas*/ ctx[6];
+	let if_block1 = /*proyecto*/ ctx[3].objetivo_general != null && /*proyecto*/ ctx[3].objetivo_general.length > 0 && create_if_block_61(ctx);
+	let each_value_2 = /*causasDirectas*/ ctx[5];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_2.length; i += 1) {
 		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
 	}
 
-	const if_block_creators = [create_if_block_20, create_if_block_25];
+	const if_block_creators = [create_if_block_20, create_if_block_24, create_if_block_45];
 	const if_blocks = [];
 
 	function select_block_type_1(ctx, dirty) {
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 23 || /*proyecto*/ ctx[4].codigo_linea_programatica == 65 || /*proyecto*/ ctx[4].codigo_linea_programatica == 66 || /*proyecto*/ ctx[4].codigo_linea_programatica == 82) return 0;
-		if (/*proyecto*/ ctx[4].codigo_linea_programatica == 68) return 1;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 23 || /*proyecto*/ ctx[3].codigo_linea_programatica == 65 || /*proyecto*/ ctx[3].codigo_linea_programatica == 66 || /*proyecto*/ ctx[3].codigo_linea_programatica == 82) return 0;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 68) return 1;
+		if (/*proyecto*/ ctx[3].codigo_linea_programatica == 69) return 2;
 		return -1;
 	}
 
@@ -57628,7 +57947,7 @@ function create_default_slot(ctx) {
 	}
 
 	function dialog_open_binding(value) {
-		/*dialog_open_binding*/ ctx[113](value);
+		/*dialog_open_binding*/ ctx[117](value);
 	}
 
 	let dialog_props = {
@@ -57641,8 +57960,8 @@ function create_default_slot(ctx) {
 		$$scope: { ctx }
 	};
 
-	if (/*dialogOpen*/ ctx[12] !== void 0) {
-		dialog_props.open = /*dialogOpen*/ ctx[12];
+	if (/*dialogOpen*/ ctx[11] !== void 0) {
+		dialog_props.open = /*dialogOpen*/ ctx[11];
 	}
 
 	dialog = new _Shared_Dialog__WEBPACK_IMPORTED_MODULE_12__.default({ props: dialog_props });
@@ -57698,11 +58017,11 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "text-3xl mt-24 mb-8 text-center");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p, "class", "text-center");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "flex opacity-50 absolute");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div0, "height", /*containerArbol*/ ctx[30]?.offsetHeight + "px");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div0, "height", /*containerArbol*/ ctx[29]?.offsetHeight + "px");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div0, "top", "0");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "flex mb-14");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "style", div1_style_value = /*proyecto*/ ctx[4].codigo_linea_programatica == 69
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "style", div1_style_value = /*proyecto*/ ctx[3].codigo_linea_programatica == 69
 			? "margin-left: -15px; margin-right: -15px;"
 			: "");
 
@@ -57711,7 +58030,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "role", "tooltip");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "data-popper-placement", "left");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", div4_class_value = "" + ((/*proyecto*/ ctx[4].objetivo_general != null
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", div4_class_value = "" + ((/*proyecto*/ ctx[3].objetivo_general != null
 			? "bg-orangered-400 hover:bg-orangered-500"
 			: "bg-gray-300 hover:bg-gray-400") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"));
 
@@ -57757,7 +58076,7 @@ function create_default_slot(ctx) {
 				each_blocks[i].m(div6, null);
 			}
 
-			/*div7_binding*/ ctx[71](div7);
+			/*div7_binding*/ ctx[73](div7);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t12, anchor);
 
 			if (~current_block_type_index) {
@@ -57777,14 +58096,14 @@ function create_default_slot(ctx) {
 			const evaluationstepper_changes = {};
 			if (dirty[0] & /*convocatoria*/ 2) evaluationstepper_changes.convocatoria = /*convocatoria*/ ctx[1];
 			if (dirty[0] & /*evaluacion*/ 4) evaluationstepper_changes.evaluacion = /*evaluacion*/ ctx[2];
-			if (dirty[0] & /*proyecto*/ 16) evaluationstepper_changes.proyecto = /*proyecto*/ ctx[4];
+			if (dirty[0] & /*proyecto*/ 8) evaluationstepper_changes.proyecto = /*proyecto*/ ctx[3];
 			evaluationstepper.$set(evaluationstepper_changes);
 
-			if (/*proyecto*/ ctx[4].codigo_linea_programatica == 23 || /*proyecto*/ ctx[4].codigo_linea_programatica == 65 || /*proyecto*/ ctx[4].codigo_linea_programatica == 66 || /*proyecto*/ ctx[4].codigo_linea_programatica == 82) {
+			if (/*proyecto*/ ctx[3].codigo_linea_programatica == 23 || /*proyecto*/ ctx[3].codigo_linea_programatica == 65 || /*proyecto*/ ctx[3].codigo_linea_programatica == 66 || /*proyecto*/ ctx[3].codigo_linea_programatica == 82) {
 				if (if_block0) {
 					
 				} else {
-					if_block0 = create_if_block_68(ctx);
+					if_block0 = create_if_block_70(ctx);
 					if_block0.c();
 					if_block0.m(t1.parentNode, t1);
 				}
@@ -57793,8 +58112,8 @@ function create_default_slot(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*objetivosCount*/ 536870912 | dirty[1] & /*containerObjetivo*/ 1) {
-				each_value_15 = { length: /*objetivosCount*/ ctx[29] };
+			if (dirty[0] & /*containerObjetivo, objetivosCount*/ 1342177280) {
+				each_value_15 = { length: /*objetivosCount*/ ctx[28] };
 				let i;
 
 				for (i = 0; i < each_value_15.length; i += 1) {
@@ -57816,12 +58135,12 @@ function create_default_slot(ctx) {
 				each_blocks_2.length = each_value_15.length;
 			}
 
-			if (!current || dirty[0] & /*containerArbol*/ 1073741824) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div0, "height", /*containerArbol*/ ctx[30]?.offsetHeight + "px");
+			if (!current || dirty[0] & /*containerArbol*/ 536870912) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(div0, "height", /*containerArbol*/ ctx[29]?.offsetHeight + "px");
 			}
 
-			if (dirty[0] & /*proyecto, efectosDirectos, cantidadCeldasImpactos, tipoProyectoA*/ 1328 | dirty[1] & /*showResultadoDialog, showGeneralInfoDialog, showImpactDialog*/ 37888) {
-				each_value_10 = /*efectosDirectos*/ ctx[5];
+			if (dirty[0] & /*proyecto, efectosDirectos, cantidadCeldasImpactos, tipoProyectoA*/ 664 | dirty[1] & /*showResultadoDialog, showGeneralInfoDialog, showImpactDialog*/ 37888) {
+				each_value_10 = /*efectosDirectos*/ ctx[4];
 				let i;
 
 				for (i = 0; i < each_value_10.length; i += 1) {
@@ -57843,17 +58162,17 @@ function create_default_slot(ctx) {
 				each_blocks_1.length = each_value_10.length;
 			}
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && div1_style_value !== (div1_style_value = /*proyecto*/ ctx[4].codigo_linea_programatica == 69
+			if (!current || dirty[0] & /*proyecto*/ 8 && div1_style_value !== (div1_style_value = /*proyecto*/ ctx[3].codigo_linea_programatica == 69
 			? "margin-left: -15px; margin-right: -15px;"
 			: "")) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "style", div1_style_value);
 			}
 
-			if (/*proyecto*/ ctx[4].objetivo_general != null && /*proyecto*/ ctx[4].objetivo_general.length > 0) {
+			if (/*proyecto*/ ctx[3].objetivo_general != null && /*proyecto*/ ctx[3].objetivo_general.length > 0) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block_59(ctx);
+					if_block1 = create_if_block_61(ctx);
 					if_block1.c();
 					if_block1.m(div4, null);
 				}
@@ -57862,14 +58181,14 @@ function create_default_slot(ctx) {
 				if_block1 = null;
 			}
 
-			if (!current || dirty[0] & /*proyecto*/ 16 && div4_class_value !== (div4_class_value = "" + ((/*proyecto*/ ctx[4].objetivo_general != null
+			if (!current || dirty[0] & /*proyecto*/ 8 && div4_class_value !== (div4_class_value = "" + ((/*proyecto*/ ctx[3].objetivo_general != null
 			? "bg-orangered-400 hover:bg-orangered-500"
 			: "bg-gray-300 hover:bg-gray-400") + " tree-label h-36 rounded shadow-lg cursor-pointer mr-1.5 p-2.5"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", div4_class_value);
 			}
 
-			if (dirty[0] & /*cantidadCeldasActividades, causasDirectas, proyecto, tipoProyectoA*/ 848 | dirty[1] & /*showGeneralInfoDialog, showActivityDialog, containerObjetivo, showObjetivoEspecificoDialog*/ 18875393) {
-				each_value_2 = /*causasDirectas*/ ctx[6];
+			if (dirty[0] & /*cantidadCeldasActividades, causasDirectas, proyecto, containerObjetivo, tipoProyectoA*/ 1073742248 | dirty[1] & /*showGeneralInfoDialog, showActivityDialog, showObjetivoEspecificoDialog*/ 18875392) {
+				each_value_2 = /*causasDirectas*/ ctx[5];
 				let i;
 
 				for (i = 0; i < each_value_2.length; i += 1) {
@@ -57928,13 +58247,13 @@ function create_default_slot(ctx) {
 
 			const dialog_changes = {};
 
-			if (dirty[0] & /*proyecto, resultadosFiltrados, errors, actividadCausaIndirecta, showActividadForm, causaDirectaObjetivoEspecifico, showObjetivoEspecificoForm, problemaCentral, showObjetivoGeneralForm, descripcionObjetivoEspecifico, resultadoEfectoDirecto, showResultadoForm, tiposImpacto, impactoEfectoIndirecto, showImpactoForm, generalInfoType, showGeneralInfo, codigo, dialogTitle*/ 536862865 | dirty[1] & /*$formActividad, $formObjetivoEspecifico, $formObjetivoGeneral, $formResultado, $formImpacto*/ 62 | dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[0] & /*proyecto, resultadosFiltrados, errors, actividadCausaIndirecta, showActividadForm, causaDirectaObjetivoEspecifico, showObjetivoEspecificoForm, problemaCentral, showObjetivoGeneralForm, descripcionObjetivoEspecifico, resultadoEfectoDirecto, showResultadoForm, tiposImpacto, impactoEfectoIndirecto, showImpactoForm, generalInfoType, showGeneralInfo, codigo, dialogTitle*/ 268431433 | dirty[1] & /*$formActividad, $formObjetivoEspecifico, $formObjetivoGeneral, $formResultado, $formImpacto*/ 31 | dirty[4] & /*$$scope*/ 268435456) {
 				dialog_changes.$$scope = { dirty, ctx };
 			}
 
-			if (!updating_open && dirty[0] & /*dialogOpen*/ 4096) {
+			if (!updating_open && dirty[0] & /*dialogOpen*/ 2048) {
 				updating_open = true;
-				dialog_changes.open = /*dialogOpen*/ ctx[12];
+				dialog_changes.open = /*dialogOpen*/ ctx[11];
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_open = false);
 			}
 
@@ -57967,7 +58286,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks_1, detaching);
 			if (if_block1) if_block1.d();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
-			/*div7_binding*/ ctx[71](null);
+			/*div7_binding*/ ctx[73](null);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t12);
 
 			if (~current_block_type_index) {
@@ -58004,7 +58323,7 @@ function create_fragment(ctx) {
 		p(ctx, dirty) {
 			const authenticatedlayout_changes = {};
 
-			if (dirty[0] & /*dialogOpen, proyecto, resultadosFiltrados, errors, actividadCausaIndirecta, showActividadForm, causaDirectaObjetivoEspecifico, showObjetivoEspecificoForm, problemaCentral, showObjetivoGeneralForm, descripcionObjetivoEspecifico, resultadoEfectoDirecto, showResultadoForm, tiposImpacto, impactoEfectoIndirecto, showImpactoForm, generalInfoType, showGeneralInfo, codigo, dialogTitle, sending, evaluacion, segundaEvaluacion, containerArbol, causasDirectas, cantidadCeldasActividades, tipoProyectoA, efectosDirectos, cantidadCeldasImpactos, objetivosCount, convocatoria*/ 2147483647 | dirty[1] & /*$formActividad, $formObjetivoEspecifico, $formObjetivoGeneral, $formResultado, $formImpacto, $formEstrategiaRegionalEvaluacion, $formServicioTecnologicoEvaluacion, containerObjetivo*/ 255 | dirty[4] & /*$$scope*/ 16777216) {
+			if (dirty[0] & /*dialogOpen, proyecto, resultadosFiltrados, errors, actividadCausaIndirecta, showActividadForm, causaDirectaObjetivoEspecifico, showObjetivoEspecificoForm, problemaCentral, showObjetivoGeneralForm, descripcionObjetivoEspecifico, resultadoEfectoDirecto, showResultadoForm, tiposImpacto, impactoEfectoIndirecto, showImpactoForm, generalInfoType, showGeneralInfo, codigo, dialogTitle, sending, evaluacion, containerArbol, causasDirectas, cantidadCeldasActividades, containerObjetivo, tipoProyectoA, efectosDirectos, cantidadCeldasImpactos, objetivosCount, convocatoria*/ 2147483647 | dirty[1] & /*$formActividad, $formObjetivoEspecifico, $formObjetivoGeneral, $formResultado, $formImpacto, $formEstrategiaRegionalEvaluacion, $formServicioTecnologicoEvaluacion, $formTpEvaluacion*/ 255 | dirty[4] & /*$$scope*/ 268435456) {
 				authenticatedlayout_changes.$$scope = { dirty, ctx };
 			}
 
@@ -58037,12 +58356,12 @@ function instance($$self, $$props, $$invalidate) {
 	let $formActividad;
 	let $formEstrategiaRegionalEvaluacion;
 	let $formServicioTecnologicoEvaluacion;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.title, $$value => $$invalidate(115, $title = $$value));
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.page, $$value => $$invalidate(116, $page = $$value));
+	let $formTpEvaluacion;
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.title, $$value => $$invalidate(119, $title = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.page, $$value => $$invalidate(120, $page = $$value));
 	let { errors } = $$props;
 	let { convocatoria } = $$props;
 	let { evaluacion } = $$props;
-	let { segundaEvaluacion } = $$props;
 	let { proyecto } = $$props;
 	let { efectosDirectos } = $$props;
 	let { causasDirectas } = $$props;
@@ -58084,10 +58403,10 @@ function instance($$self, $$props, $$invalidate) {
 
 	function showGeneralInfoDialog(tipo) {
 		reset();
-		$$invalidate(13, dialogTitle = "Información general");
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(15, generalInfoType = tipo);
-		$$invalidate(16, showGeneralInfo = true);
+		$$invalidate(12, dialogTitle = "Información general");
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(14, generalInfoType = tipo);
+		$$invalidate(15, showGeneralInfo = true);
 	}
 
 	/**
@@ -58101,21 +58420,21 @@ function instance($$self, $$props, $$invalidate) {
 		resultado_id: ""
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formImpacto, value => $$invalidate(32, $formImpacto = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formImpacto, value => $$invalidate(31, $formImpacto = value));
 	let showImpactoForm = false;
 	let impactoEfectoIndirecto;
 
 	function showImpactDialog(efectoIndirecto, efectoIndirectoId, resultadoId) {
 		// reset()
-		$$invalidate(14, codigo = efectoIndirecto.impacto.id != null
+		$$invalidate(13, codigo = efectoIndirecto.impacto.id != null
 		? "RES-" + resultadoId + "-IMP-" + efectoIndirecto.impacto.id
 		: "");
 
-		$$invalidate(13, dialogTitle = "Impacto");
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(17, showImpactoForm = true);
+		$$invalidate(12, dialogTitle = "Impacto");
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(16, showImpactoForm = true);
 		formId = "impacto-form";
-		$$invalidate(18, impactoEfectoIndirecto = efectoIndirecto.descripcion);
+		$$invalidate(17, impactoEfectoIndirecto = efectoIndirecto.descripcion);
 
 		if (efectoIndirecto.impacto != null) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formImpacto, $formImpacto.id = efectoIndirecto.impacto.id, $formImpacto);
@@ -58148,13 +58467,13 @@ function instance($$self, $$props, $$invalidate) {
 				}),
 				{
 					onStart: () => {
-						$$invalidate(11, sending = true);
+						$$invalidate(10, sending = true);
 					},
 					onSuccess: () => {
 						closeDialog();
 					},
 					onFinish: () => {
-						$$invalidate(11, sending = false);
+						$$invalidate(10, sending = false);
 					},
 					preserveScroll: true
 				}
@@ -58167,7 +58486,7 @@ function instance($$self, $$props, $$invalidate) {
  */
 	let formResultado = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({ descripcion: "", trl: "" });
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formResultado, value => $$invalidate(33, $formResultado = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formResultado, value => $$invalidate(32, $formResultado = value));
 	let showResultadoForm = false;
 	let descripcionObjetivoEspecifico = [];
 	let resultadoEfectoDirecto;
@@ -58176,22 +58495,22 @@ function instance($$self, $$props, $$invalidate) {
 		reset();
 		let objetivoEspecifico = causasDirectas.find(causaDirecta => causaDirecta.objetivo_especifico.id == resultado.objetivo_especifico_id);
 
-		$$invalidate(20, descripcionObjetivoEspecifico = {
+		$$invalidate(19, descripcionObjetivoEspecifico = {
 			descripcion: (objetivoEspecifico.objetivo_especifico?.descripcion)
 			? objetivoEspecifico.objetivo_especifico?.descripcion
 			: "Sin información registrada",
 			numero: objetivoEspecifico.objetivo_especifico?.numero
 		});
 
-		$$invalidate(14, codigo = "RES-" + resultado.id);
-		$$invalidate(13, dialogTitle = "Resultado");
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(19, showResultadoForm = true);
+		$$invalidate(13, codigo = "RES-" + resultado.id);
+		$$invalidate(12, dialogTitle = "Resultado");
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(18, showResultadoForm = true);
 		formId = "resultado-form";
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formResultado, $formResultado.id = resultado.id, $formResultado);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formResultado, $formResultado.descripcion = resultado.descripcion, $formResultado);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formResultado, $formResultado.trl = resultado.trl, $formResultado);
-		$$invalidate(21, resultadoEfectoDirecto = efectoDirecto.descripcion ?? "Sin información registrada");
+		$$invalidate(20, resultadoEfectoDirecto = efectoDirecto.descripcion ?? "Sin información registrada");
 	}
 
 	function submitResult() {
@@ -58203,13 +58522,13 @@ function instance($$self, $$props, $$invalidate) {
 				}),
 				{
 					onStart: () => {
-						$$invalidate(11, sending = true);
+						$$invalidate(10, sending = true);
 					},
 					onSuccess: () => {
 						closeDialog();
 					},
 					onFinish: () => {
-						$$invalidate(11, sending = false);
+						$$invalidate(10, sending = false);
 					},
 					preserveScroll: true
 				}
@@ -58224,17 +58543,17 @@ function instance($$self, $$props, $$invalidate) {
 		objetivo_general: proyecto.objetivo_general
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formObjetivoGeneral, value => $$invalidate(34, $formObjetivoGeneral = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formObjetivoGeneral, value => $$invalidate(33, $formObjetivoGeneral = value));
 	let showObjetivoGeneralForm = false;
 	let problemaCentral;
 
 	function showObjetivoGeneralDialog() {
 		reset();
-		$$invalidate(13, dialogTitle = "Objetivo general");
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(22, showObjetivoGeneralForm = true);
+		$$invalidate(12, dialogTitle = "Objetivo general");
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(21, showObjetivoGeneralForm = true);
 		formId = "objetivo-general-form";
-		$$invalidate(23, problemaCentral = proyecto.problema_central);
+		$$invalidate(22, problemaCentral = proyecto.problema_central);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formObjetivoGeneral, $formObjetivoGeneral.objetivo_general = proyecto.objetivo_general, $formObjetivoGeneral);
 	}
 
@@ -58242,13 +58561,13 @@ function instance($$self, $$props, $$invalidate) {
 		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkPermission)(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) {
 			$formObjetivoGeneral.post((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("proyectos.objetivo-general", proyecto.id), {
 				onStart: () => {
-					$$invalidate(11, sending = true);
+					$$invalidate(10, sending = true);
 				},
 				onSuccess: () => {
 					closeDialog();
 				},
 				onFinish: () => {
-					$$invalidate(11, sending = false);
+					$$invalidate(10, sending = false);
 				},
 				preserveScroll: true
 			});
@@ -58260,21 +58579,21 @@ function instance($$self, $$props, $$invalidate) {
  */
 	let formObjetivoEspecifico = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({ id: 0, descripcion: "", numero: 0 });
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formObjetivoEspecifico, value => $$invalidate(35, $formObjetivoEspecifico = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formObjetivoEspecifico, value => $$invalidate(34, $formObjetivoEspecifico = value));
 	let showObjetivoEspecificoForm = false;
 	let causaDirectaObjetivoEspecifico;
 
 	function showObjetivoEspecificoDialog(causaDirecta, numero) {
 		reset();
-		$$invalidate(14, codigo = "OBJ-ESP-" + causaDirecta.objetivo_especifico.id);
-		$$invalidate(13, dialogTitle = causaDirecta.objetivo_especifico.numero);
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(24, showObjetivoEspecificoForm = true);
+		$$invalidate(13, codigo = "OBJ-ESP-" + causaDirecta.objetivo_especifico.id);
+		$$invalidate(12, dialogTitle = causaDirecta.objetivo_especifico.numero);
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(23, showObjetivoEspecificoForm = true);
 		formId = "objetivo-especifico-form";
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formObjetivoEspecifico, $formObjetivoEspecifico.id = causaDirecta.objetivo_especifico.id, $formObjetivoEspecifico);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formObjetivoEspecifico, $formObjetivoEspecifico.descripcion = causaDirecta.objetivo_especifico.descripcion, $formObjetivoEspecifico);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formObjetivoEspecifico, $formObjetivoEspecifico.numero = numero, $formObjetivoEspecifico);
-		$$invalidate(25, causaDirectaObjetivoEspecifico = causaDirecta.descripcion ?? "Sin información registrada");
+		$$invalidate(24, causaDirectaObjetivoEspecifico = causaDirecta.descripcion ?? "Sin información registrada");
 	}
 
 	function submitObjetivoEspecifico() {
@@ -58286,13 +58605,13 @@ function instance($$self, $$props, $$invalidate) {
 				}),
 				{
 					onStart: () => {
-						$$invalidate(11, sending = true);
+						$$invalidate(10, sending = true);
 					},
 					onSuccess: () => {
 						closeDialog();
 					},
 					onFinish: () => {
-						$$invalidate(11, sending = false);
+						$$invalidate(10, sending = false);
 					},
 					preserveScroll: true
 				}
@@ -58311,7 +58630,7 @@ function instance($$self, $$props, $$invalidate) {
 		descripcion: ""
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formActividad, value => $$invalidate(36, $formActividad = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formActividad, value => $$invalidate(35, $formActividad = value));
 	let showActividadForm = false;
 	let actividadCausaIndirecta;
 	let resultadosFiltrados;
@@ -58319,13 +58638,13 @@ function instance($$self, $$props, $$invalidate) {
 	function showActivityDialog(causaIndirecta, objetivoEspecifico) {
 		reset();
 
-		$$invalidate(14, codigo = causaIndirecta.actividad.id != null
+		$$invalidate(13, codigo = causaIndirecta.actividad.id != null
 		? "OBJ-ESP-" + objetivoEspecifico + "-ACT-" + causaIndirecta.actividad.id
 		: "");
 
-		$$invalidate(13, dialogTitle = "Actividad");
-		$$invalidate(12, dialogOpen = true);
-		$$invalidate(26, showActividadForm = true);
+		$$invalidate(12, dialogTitle = "Actividad");
+		$$invalidate(11, dialogOpen = true);
+		$$invalidate(25, showActividadForm = true);
 		formId = "actividad-form";
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formActividad, $formActividad.id = causaIndirecta.actividad.id, $formActividad);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formActividad, $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id, $formActividad);
@@ -58341,8 +58660,8 @@ function instance($$self, $$props, $$invalidate) {
 			$formActividad
 		);
 
-		$$invalidate(27, actividadCausaIndirecta = causaIndirecta.descripcion ?? "Sin información registrada");
-		$$invalidate(28, resultadosFiltrados = resultados.filter(item => item.objetivo_especifico_id == objetivoEspecifico));
+		$$invalidate(26, actividadCausaIndirecta = causaIndirecta.descripcion ?? "Sin información registrada");
+		$$invalidate(27, resultadosFiltrados = resultados.filter(item => item.objetivo_especifico_id == objetivoEspecifico));
 	}
 
 	function submitActividad() {
@@ -58356,13 +58675,13 @@ function instance($$self, $$props, $$invalidate) {
 					}),
 					{
 						onStart: () => {
-							$$invalidate(11, sending = true);
+							$$invalidate(10, sending = true);
 						},
 						onSuccess: () => {
 							closeDialog();
 						},
 						onFinish: () => {
-							$$invalidate(11, sending = false);
+							$$invalidate(10, sending = false);
 						},
 						preserveScroll: true
 					}
@@ -58372,14 +58691,14 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	function reset() {
-		$$invalidate(22, showObjetivoGeneralForm = false);
-		$$invalidate(26, showActividadForm = false);
-		$$invalidate(19, showResultadoForm = false);
-		$$invalidate(17, showImpactoForm = false);
-		$$invalidate(16, showGeneralInfo = false);
-		$$invalidate(24, showObjetivoEspecificoForm = false);
-		$$invalidate(13, dialogTitle = "");
-		$$invalidate(14, codigo = "");
+		$$invalidate(21, showObjetivoGeneralForm = false);
+		$$invalidate(25, showActividadForm = false);
+		$$invalidate(18, showResultadoForm = false);
+		$$invalidate(16, showImpactoForm = false);
+		$$invalidate(15, showGeneralInfo = false);
+		$$invalidate(23, showObjetivoEspecificoForm = false);
+		$$invalidate(12, dialogTitle = "");
+		$$invalidate(13, codigo = "");
 		formId = "";
 		$formImpacto.reset();
 		$formResultado.reset();
@@ -58390,7 +58709,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	function closeDialog() {
 		reset();
-		$$invalidate(12, dialogOpen = false);
+		$$invalidate(11, dialogOpen = false);
 	}
 
 	let formEstrategiaRegionalEvaluacion = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({
@@ -58434,13 +58753,13 @@ function instance($$self, $$props, $$invalidate) {
 			: null
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formEstrategiaRegionalEvaluacion, value => $$invalidate(37, $formEstrategiaRegionalEvaluacion = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formEstrategiaRegionalEvaluacion, value => $$invalidate(36, $formEstrategiaRegionalEvaluacion = value));
 
 	function submitEstrategiaRegionalEvaluacion() {
 		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true) {
 			$formEstrategiaRegionalEvaluacion.put((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion", [convocatoria.id, evaluacion.id]), {
-				onStart: () => $$invalidate(11, sending = true),
-				onFinish: () => $$invalidate(11, sending = false),
+				onStart: () => $$invalidate(10, sending = true),
+				onFinish: () => $$invalidate(10, sending = false),
 				preserveScroll: true
 			});
 		}
@@ -58494,13 +58813,32 @@ function instance($$self, $$props, $$invalidate) {
 		: false
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formServicioTecnologicoEvaluacion, value => $$invalidate(38, $formServicioTecnologicoEvaluacion = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formServicioTecnologicoEvaluacion, value => $$invalidate(37, $formServicioTecnologicoEvaluacion = value));
 
 	function submitServicioTecnologicoEvaluacion() {
 		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true) {
 			$formServicioTecnologicoEvaluacion.put((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion", [convocatoria.id, evaluacion.id]), {
-				onStart: () => $$invalidate(11, sending = true),
-				onFinish: () => $$invalidate(11, sending = false),
+				onStart: () => $$invalidate(10, sending = true),
+				onFinish: () => $$invalidate(10, sending = false),
+				preserveScroll: true
+			});
+		}
+	}
+
+	let formTpEvaluacion = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({
+		arbol_objetivos_comentario: evaluacion.tp_evaluacion?.arbol_objetivos_comentario,
+		arbol_objetivos_requiere_comentario: evaluacion.tp_evaluacion?.arbol_objetivos_comentario == null
+		? true
+		: false
+	});
+
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, formTpEvaluacion, value => $$invalidate(38, $formTpEvaluacion = value));
+
+	function submitTpEvaluacion() {
+		if (isSuperAdmin || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true) {
+			$formTpEvaluacion.put((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion", [convocatoria.id, evaluacion.id]), {
+				onStart: () => $$invalidate(10, sending = true),
+				onFinish: () => $$invalidate(10, sending = false),
 				preserveScroll: true
 			});
 		}
@@ -58577,7 +58915,7 @@ function instance($$self, $$props, $$invalidate) {
 			});
 		});
 
-		$$invalidate(29, objetivosCount = containerArbol.getElementsByClassName("objetivo-container").length);
+		$$invalidate(28, objetivosCount = containerArbol.getElementsByClassName("objetivo-container").length);
 	});
 
 	const click_handler = () => showGeneralInfoDialog(1);
@@ -58585,7 +58923,7 @@ function instance($$self, $$props, $$invalidate) {
 	function div1_binding($$value) {
 		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
 			containerObjetivo = $$value;
-			$$invalidate(31, containerObjetivo);
+			$$invalidate(30, containerObjetivo);
 		});
 	}
 
@@ -58599,7 +58937,7 @@ function instance($$self, $$props, $$invalidate) {
 	function div7_binding($$value) {
 		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
 			containerArbol = $$value;
-			$$invalidate(30, containerArbol);
+			$$invalidate(29, containerArbol);
 		});
 	}
 
@@ -58834,6 +59172,20 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
+	function switch_1_checked_binding_9(value) {
+		if ($$self.$$.not_equal($formTpEvaluacion.arbol_objetivos_requiere_comentario, value)) {
+			$formTpEvaluacion.arbol_objetivos_requiere_comentario = value;
+			formTpEvaluacion.set($formTpEvaluacion);
+		}
+	}
+
+	function textarea_value_binding_11(value) {
+		if ($$self.$$.not_equal($formTpEvaluacion.arbol_objetivos_comentario, value)) {
+			$formTpEvaluacion.arbol_objetivos_comentario = value;
+			formTpEvaluacion.set($formTpEvaluacion);
+		}
+	}
+
 	function select_selectedValue_binding(value) {
 		if ($$self.$$.not_equal($formActividad.resultado_id, value)) {
 			$formActividad.resultado_id = value;
@@ -58841,21 +59193,21 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	function textarea_value_binding_11(value) {
+	function textarea_value_binding_12(value) {
 		if ($$self.$$.not_equal($formActividad.descripcion, value)) {
 			$formActividad.descripcion = value;
 			formActividad.set($formActividad);
 		}
 	}
 
-	function textarea_value_binding_12(value) {
+	function textarea_value_binding_13(value) {
 		if ($$self.$$.not_equal($formObjetivoEspecifico.descripcion, value)) {
 			$formObjetivoEspecifico.descripcion = value;
 			formObjetivoEspecifico.set($formObjetivoEspecifico);
 		}
 	}
 
-	function textarea_value_binding_13(value) {
+	function textarea_value_binding_14(value) {
 		if ($$self.$$.not_equal($formObjetivoGeneral.objetivo_general, value)) {
 			$formObjetivoGeneral.objetivo_general = value;
 			formObjetivoGeneral.set($formObjetivoGeneral);
@@ -58869,7 +59221,7 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	function textarea_value_binding_14(value) {
+	function textarea_value_binding_15(value) {
 		if ($$self.$$.not_equal($formResultado.descripcion, value)) {
 			$formResultado.descripcion = value;
 			formResultado.set($formResultado);
@@ -58883,7 +59235,7 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	function textarea_value_binding_15(value) {
+	function textarea_value_binding_16(value) {
 		if ($$self.$$.not_equal($formImpacto.descripcion, value)) {
 			$formImpacto.descripcion = value;
 			formImpacto.set($formImpacto);
@@ -58892,24 +59244,23 @@ function instance($$self, $$props, $$invalidate) {
 
 	function dialog_open_binding(value) {
 		dialogOpen = value;
-		$$invalidate(12, dialogOpen);
+		$$invalidate(11, dialogOpen);
 	}
 
 	$$self.$$set = $$props => {
 		if ("errors" in $$props) $$invalidate(0, errors = $$props.errors);
 		if ("convocatoria" in $$props) $$invalidate(1, convocatoria = $$props.convocatoria);
 		if ("evaluacion" in $$props) $$invalidate(2, evaluacion = $$props.evaluacion);
-		if ("segundaEvaluacion" in $$props) $$invalidate(3, segundaEvaluacion = $$props.segundaEvaluacion);
-		if ("proyecto" in $$props) $$invalidate(4, proyecto = $$props.proyecto);
-		if ("efectosDirectos" in $$props) $$invalidate(5, efectosDirectos = $$props.efectosDirectos);
-		if ("causasDirectas" in $$props) $$invalidate(6, causasDirectas = $$props.causasDirectas);
-		if ("tiposImpacto" in $$props) $$invalidate(7, tiposImpacto = $$props.tiposImpacto);
-		if ("tipoProyectoA" in $$props) $$invalidate(8, tipoProyectoA = $$props.tipoProyectoA);
-		if ("resultados" in $$props) $$invalidate(62, resultados = $$props.resultados);
+		if ("proyecto" in $$props) $$invalidate(3, proyecto = $$props.proyecto);
+		if ("efectosDirectos" in $$props) $$invalidate(4, efectosDirectos = $$props.efectosDirectos);
+		if ("causasDirectas" in $$props) $$invalidate(5, causasDirectas = $$props.causasDirectas);
+		if ("tiposImpacto" in $$props) $$invalidate(6, tiposImpacto = $$props.tiposImpacto);
+		if ("tipoProyectoA" in $$props) $$invalidate(7, tipoProyectoA = $$props.tipoProyectoA);
+		if ("resultados" in $$props) $$invalidate(64, resultados = $$props.resultados);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty[0] & /*causasDirectas*/ 64) {
+		if ($$self.$$.dirty[0] & /*causasDirectas*/ 32) {
 			$: causasDirectas;
 		}
 	};
@@ -58920,7 +59271,6 @@ function instance($$self, $$props, $$invalidate) {
 		errors,
 		convocatoria,
 		evaluacion,
-		segundaEvaluacion,
 		proyecto,
 		efectosDirectos,
 		causasDirectas,
@@ -58956,6 +59306,7 @@ function instance($$self, $$props, $$invalidate) {
 		$formActividad,
 		$formEstrategiaRegionalEvaluacion,
 		$formServicioTecnologicoEvaluacion,
+		$formTpEvaluacion,
 		authUser,
 		isSuperAdmin,
 		showGeneralInfoDialog,
@@ -58979,6 +59330,8 @@ function instance($$self, $$props, $$invalidate) {
 		submitEstrategiaRegionalEvaluacion,
 		formServicioTecnologicoEvaluacion,
 		submitServicioTecnologicoEvaluacion,
+		formTpEvaluacion,
+		submitTpEvaluacion,
 		resultados,
 		click_handler,
 		div1_binding,
@@ -59022,14 +59375,16 @@ function instance($$self, $$props, $$invalidate) {
 		input_value_binding_8,
 		switch_1_checked_binding_8,
 		textarea_value_binding_10,
-		select_selectedValue_binding,
+		switch_1_checked_binding_9,
 		textarea_value_binding_11,
+		select_selectedValue_binding,
 		textarea_value_binding_12,
 		textarea_value_binding_13,
-		input_value_binding_9,
 		textarea_value_binding_14,
-		select_selectedValue_binding_1,
+		input_value_binding_9,
 		textarea_value_binding_15,
+		select_selectedValue_binding_1,
+		textarea_value_binding_16,
 		dialog_open_binding
 	];
 }
@@ -59048,13 +59403,12 @@ class ArbolObjetivos extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.Svelte
 				errors: 0,
 				convocatoria: 1,
 				evaluacion: 2,
-				segundaEvaluacion: 3,
-				proyecto: 4,
-				efectosDirectos: 5,
-				causasDirectas: 6,
-				tiposImpacto: 7,
-				tipoProyectoA: 8,
-				resultados: 62
+				proyecto: 3,
+				efectosDirectos: 4,
+				causasDirectas: 5,
+				tiposImpacto: 6,
+				tipoProyectoA: 7,
+				resultados: 64
 			},
 			[-1, -1, -1, -1, -1]
 		);
@@ -60842,7 +61196,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (143:4) {#if isSuperAdmin || convocatoria.fase == 4}
+// (150:4) {#if isSuperAdmin || convocatoria.fase == 4}
 function create_if_block(ctx) {
 	let div1;
 	let a;
@@ -60995,15 +61349,15 @@ function create_fragment(ctx) {
 	let inertia_action_8;
 	let t35;
 	let t36;
-	let t37;
 	let div20;
 	let a9;
 	let div19;
-	let t38;
+	let t37;
 	let p9;
 	let a9_active_value;
 	let a9_href_value;
 	let inertia_action_9;
+	let t39;
 	let mounted;
 	let dispose;
 
@@ -61105,14 +61459,14 @@ function create_fragment(ctx) {
 			t35 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block5) if_block5.c();
 			t36 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if (if_block6) if_block6.c();
-			t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div20 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			a9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
 			div19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			t38 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p9.textContent = "Finalizar evaluación";
+			t39 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block6) if_block6.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number svelte-lbeht8");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "text-sm text-center");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a0, "active", /*activeProyecto*/ ctx[4]);
@@ -61256,13 +61610,13 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t35);
 			if (if_block5) if_block5.m(div21, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t36);
-			if (if_block6) if_block6.m(div21, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t37);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, div20);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div20, a9);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a9, div19);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a9, t38);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a9, t37);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a9, p9);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div21, t39);
+			if (if_block6) if_block6.m(div21, null);
 			/*div21_binding*/ ctx[6](div21);
 
 			if (!mounted) {
@@ -61406,21 +61760,21 @@ function create_fragment(ctx) {
 				if_block5 = null;
 			}
 
+			if (dirty & /*convocatoria, evaluacion*/ 3 && a9_href_value !== (a9_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.evaluaciones.summary", [/*convocatoria*/ ctx[0].id, /*evaluacion*/ ctx[1].id]))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a9, "href", a9_href_value);
+			}
+
 			if (/*isSuperAdmin*/ ctx[5] || /*convocatoria*/ ctx[0].fase == 4) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
 					if_block6 = create_if_block(ctx);
 					if_block6.c();
-					if_block6.m(div21, t37);
+					if_block6.m(div21, null);
 				}
 			} else if (if_block6) {
 				if_block6.d(1);
 				if_block6 = null;
-			}
-
-			if (dirty & /*convocatoria, evaluacion*/ 3 && a9_href_value !== (a9_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.route)("convocatorias.evaluaciones.summary", [/*convocatoria*/ ctx[0].id, /*evaluacion*/ ctx[1].id]))) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a9, "href", a9_href_value);
 			}
 		},
 		i: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
@@ -63377,7 +63731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.11.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_C_laragon_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.12.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\LoadingButton.svelte generated by Svelte v3.38.3 */
 
@@ -63748,7 +64102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte-select */ "./node_modules/svelte-select/src/Select.svelte");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.14.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_11_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte_11_css_C_laragon_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.11.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/Select.svelte.11.css!./resources/js/Shared/Select.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Select.svelte generated by Svelte v3.38.3 */
 

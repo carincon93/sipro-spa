@@ -23,7 +23,6 @@
     export let convocatoria
     export let ta
     export let taEvaluacion
-    export let taSegundaEvaluacion
     export let regionales
     export let lineasTecnoacademiaRelacionadas
     export let tecnoacademiaRelacionada
@@ -245,9 +244,6 @@
                     </div>
                 </div>
                 <InfoMessage>
-                    {#if taSegundaEvaluacion?.fecha_ejecucion_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.fecha_ejecucion_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
@@ -328,9 +324,6 @@
                     <Textarea disabled maxlength="40000" id="resumen_regional" bind:value={taInfo.resumen_regional} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.resumen_regional_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.resumen_regional_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
@@ -373,9 +366,6 @@
                     <Textarea disabled maxlength="40000" id="antecedentes_tecnoacademia" bind:value={taInfo.antecedentes_tecnoacademia} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.antecedentes_tecnoacademia_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.antecedentes_tecnoacademia_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿Los antecedentes de la Tecnoacademia y su impacto en la región son correctos? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_tecnoacademia_requiere_comentario} />
@@ -415,9 +405,6 @@
                     <Textarea disabled maxlength="40000" id="retos_oportunidades" bind:value={taInfo.retos_oportunidades} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.retos_oportunidades_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.retos_oportunidades_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La descripción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
@@ -490,9 +477,6 @@
                 <div />
                 <div>
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.municipios_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.municipios_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La información relacionada con los municipios es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
@@ -572,9 +556,6 @@
                 <div />
                 <div>
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.instituciones_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.instituciones_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La información relacionada con las instituciones es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.instituciones_requiere_comentario} />
@@ -640,9 +621,6 @@
                 <div>
                     <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.proyectos_macro_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.proyectos_macro_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La información es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyectos_macro_requiere_comentario} />
@@ -671,9 +649,6 @@
                     <Textarea disabled maxlength="40000" id="lineas_medulares_centro" bind:value={taInfo.lineas_medulares_centro} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.lineas_medulares_centro_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.lineas_medulares_centro_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La información sobre las líneas medulares es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_medulares_centro_requiere_comentario} />
@@ -702,9 +677,6 @@
                     <Textarea disabled maxlength="40000" id="lineas_tecnologicas_centro" bind:value={taInfo.lineas_tecnologicas_centro} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.lineas_tecnologicas_centro_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.lineas_tecnologicas_centro_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La información sobre las líneas tecnológicas es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_tecnologicas_centro_requiere_comentario} />
@@ -734,9 +706,6 @@
                     <Textarea disabled maxlength="40000" id="bibliografia" bind:value={taInfo.bibliografia} />
 
                     <InfoMessage>
-                        {#if taSegundaEvaluacion?.bibliografia_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.bibliografia_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
@@ -761,9 +730,6 @@
 
             <h1>Ortografía</h1>
             <InfoMessage>
-                {#if taSegundaEvaluacion?.ortografia_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.ortografia_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
@@ -776,9 +742,6 @@
             <hr class="mt-10 mb-10" />
             <h1>Redacción</h1>
             <InfoMessage>
-                {#if taSegundaEvaluacion?.redaccion_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.redaccion_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
@@ -791,9 +754,6 @@
             <hr class="mt-10 mb-10" />
             <h1>Normas APA</h1>
             <InfoMessage>
-                {#if taSegundaEvaluacion?.normas_apa_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{taSegundaEvaluacion?.normas_apa_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />

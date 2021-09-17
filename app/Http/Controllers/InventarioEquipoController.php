@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioEquipoRequest;
 use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\ServicioTecnologicoEvaluacion;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -192,5 +193,27 @@ class InventarioEquipoController extends Controller
             'inventarioEquipo'          => $inventarioEquipo,
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
         ]);
+    }
+
+    /**
+     * updateInventarioEquiposEvaluacion
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @param  mixed $evaluacion
+     * @return void
+     */
+    public function updateInventarioEquiposEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->servicioTecnologicoEvaluacion()->update([
+            'inventario_equipos_comentario' => $request->inventario_equipos_requiere_comentario == false ? $request->inventario_equipos_comentario : null,
+        ]);
+
+
+        $evaluacion->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 }

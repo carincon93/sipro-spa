@@ -15,7 +15,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyectoRolEvaluacion
     export let proyecto
     export let lineaProgramatica
@@ -95,41 +94,30 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList disabled={true} id="convocatoria_rol_sennova_id" value={rolSennovaInfo.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto, lineaProgramatica])} recurso={infoRolSennova} placeholder="Busque por el nombre del rol" />
+                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
+                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={rolSennovaInfo.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} placeholder="Busque por el nombre del rol" />
                 </div>
 
-                {#if infoRolSennova?.experiencia}
-                    <div class="mt-4">
-                        <p class="block font-medium text-sm text-gray-700 ">
-                            Experiencia (meses)
-                            <span class="block border-gray-300 p-4 rounded-md shadow-sm">
-                                {infoRolSennova.experiencia}
-                            </span>
-                        </p>
-                    </div>
-                {/if}
+                <div class="mt-4">
+                    {#if infoRolSennova?.perfil}
+                        <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
+                    {:else}
+                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
+                    {/if}
+                </div>
 
                 {#if proyecto.codigo_linea_programatica != 68}
                     <div class="mt-4">
-                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" value={rolSennovaInfo.descripcion} />
-                    </div>
-
-                    <div class="mt-4">
-                        <Input disabled label="Número de meses que requiere el apoyo. (Máximo {proyecto.diff_meses})" id="numero_meses" type="number" input$min="1" input$step="0.1" input$max={proyecto.diff_meses < 6 ? 6 : proyecto.diff_meses} class="mt-1" value={rolSennovaInfo.numero_meses} />
-                        <InfoMessage>Este proyecto será ejecutado en {proyecto.diff_meses} meses.</InfoMessage>
-                    </div>
-
-                    <div class="mt-4">
-                        <Input disabled label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" value={rolSennovaInfo.numero_roles} />
+                        <Input disabled label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" class="mt-1" bind:value={rolSennovaInfo.numero_meses} />
                     </div>
                 {/if}
+
+                <div class="mt-4">
+                    <Input disabled label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" bind:value={rolSennovaInfo.numero_roles} />
+                </div>
             </fieldset>
 
             <InfoMessage>
-                {#if segundaEvaluacion?.comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿El rol es correcto? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.correcto} />
