@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // Run every Minute...
+        $schedule->command('versioning:project')
+                  ->everyMinute()
+                  ->timezone('America/Bogota')
+                  ->withoutOverlapping();
     }
 
     /**
