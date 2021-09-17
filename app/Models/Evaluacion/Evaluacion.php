@@ -338,6 +338,8 @@ class Evaluacion extends Model
             $this->taEvaluacion->anexos_comentario != null ? $total++ : null;
             $this->taEvaluacion->proyectos_macro_comentario != null ? $total++ : null;
             $this->taEvaluacion->bibliografia_comentario != null ? $total++ : null;
+            $this->taEvaluacion->entidad_aliada_comentario != null ? $total++ : null;
+            $this->taEvaluacion->edt_comentario != null ? $total++ : null;
 
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
@@ -359,6 +361,8 @@ class Evaluacion extends Model
             $this->tpEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->tpEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
+            $this->tpEvaluacion->arbol_objetivos_comentario != null ? $total++ : null;
         } else if ($this->proyecto->servicioTecnologico()->exists()) {
             $this->servicioTecnologicoEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -404,6 +408,7 @@ class Evaluacion extends Model
             $this->servicioTecnologicoEvaluacion->riesgos_objetivo_general_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->riesgos_productos_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->riesgos_actividades_comentario != null ? $total++ : null;
+            $this->servicioTecnologicoEvaluacion->inventario_equipos_comentario != null ? $total++ : null;
         }
 
         $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();

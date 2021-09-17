@@ -17,7 +17,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let lineasInvestigacion
     export let gruposInvestigacion
@@ -137,9 +136,7 @@
 
                 <div class="mt-16">
                     <InfoMessage>
-                        {#if segundaEvaluacion?.articulacion_sennova_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.articulacion_sennova_comentario}</p>
-                        {/if}
+               
                         <div class="mt-4">
                             <p>¿La articulación SENNOVA está definida correctamente? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.articulacion_sennova_requiere_comentario} />

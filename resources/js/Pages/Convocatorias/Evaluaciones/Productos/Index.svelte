@@ -22,7 +22,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let productos
     export let productosGantt
@@ -148,8 +147,8 @@
             <thead slot="thead">
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Fechas</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Objetivo específico</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Resultado</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
                 </tr>
             </thead>
@@ -165,16 +164,12 @@
 
                         <td class="border-t">
                             <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
-                                {#if producto.fecha_inicio}
-                                    Del {producto.fecha_inicio} al {producto.fecha_finalizacion}
-                                {:else}
-                                    <span class="bg-red-100 text-red-400 hover:bg-red-200 px-2 py-1 rounded-3xl text-center inline-block mt-2 mb-2">Sin fechas definidas</span>
-                                {/if}
+                                {producto.resultado.objetivo_especifico.descripcion}
                             </p>
                         </td>
                         <td class="border-t">
                             <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
-                                {producto.resultado.objetivo_especifico.descripcion}
+                                {producto.resultado.descripcion}
                             </p>
                         </td>
 
@@ -240,9 +235,6 @@
                         error={errors.productos_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.productos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.productos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los productos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.productos_requiere_comentario} />
@@ -431,9 +423,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.productos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.productos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los productos y las metas están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.productos_requiere_comentario} />
@@ -457,9 +446,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTpEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.productos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.productos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los productos y las metas están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.productos_requiere_comentario} />

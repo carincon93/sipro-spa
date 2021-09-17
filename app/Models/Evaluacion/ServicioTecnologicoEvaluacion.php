@@ -107,7 +107,9 @@ class ServicioTecnologicoEvaluacion extends Model
         'cadena_valor_comentario',
         'bibliografia_comentario',
 
-        'anexos_comentario'
+        'anexos_comentario',
+
+        'inventario_equipos_comentario'
     ];
 
     /**

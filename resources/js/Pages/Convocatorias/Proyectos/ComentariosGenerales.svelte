@@ -30,7 +30,7 @@
 
     function submitReplicaPrimeraEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
-            $formPrimeraEvaluacion.post(route('convocatorias.proyectos.update-comentarios-generales', [convocatoria.id, evaluaciones[0].id]), {
+            $formPrimeraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[0].id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
                     sending = false
@@ -46,7 +46,7 @@
 
     function submitReplicaSegundaEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
-            $formSegundaEvaluacion.post(route('convocatorias.proyectos.update-comentarios-generales', [convocatoria.id, evaluaciones[1].id]), {
+            $formSegundaEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[1].id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
                     sending = false
@@ -62,7 +62,7 @@
 
     function submitReplicaTerceraEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
-            $formTerceraEvaluacion.post(route('convocatorias.proyectos.update-comentarios-generales', [convocatoria.id, evaluaciones[2].id]), {
+            $formTerceraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[2].id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
                     sending = false

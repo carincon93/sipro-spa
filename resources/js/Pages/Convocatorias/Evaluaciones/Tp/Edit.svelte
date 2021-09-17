@@ -21,7 +21,6 @@
     export let convocatoria
     export let tp
     export let tpEvaluacion
-    export let tpSegundaEvaluacion
     export let proyectoMunicipios
 
     $: $title = tp ? tp.titulo : null
@@ -167,9 +166,6 @@
                 </div>
 
                 <InfoMessage>
-                    {#if tpSegundaEvaluacion?.fecha_ejecucion_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.fecha_ejecucion_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
@@ -225,9 +221,6 @@
                     <Textarea disabled maxlength="40000" id="resumen_regional" bind:value={tpInfo.resumen_regional} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.resumen_regional_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.resumen_regional_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
@@ -259,9 +252,6 @@
                     <Textarea disabled maxlength="40000" id="antecedentes_regional" bind:value={tpInfo.antecedentes_regional} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.antecedentes_regional_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.antecedentes_regional_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿Los antecedentes regionales son correctos? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_regional_requiere_comentario} />
@@ -299,9 +289,6 @@
                     <Textarea disabled maxlength="40000" id="retos_oportunidades" bind:value={tpInfo.retos_oportunidades} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.retos_oportunidades_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.retos_oportunidades_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿Los retos y prioridades locales son correctos? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
@@ -321,9 +308,6 @@
                     <Textarea disabled maxlength="40000" id="pertinencia_territorio" bind:value={tpInfo.pertinencia_territorio} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.pertinencia_territorio_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.pertinencia_territorio_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La justificación y pertinencia en el territorio es correcta? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.pertinencia_territorio_requiere_comentario} />
@@ -376,9 +360,6 @@
                 <div />
                 <div>
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.municipios_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.municipios_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿Los municipios y la descripción del beneficio son correctos? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
@@ -398,9 +379,6 @@
                     <Textarea disabled maxlength="40000" id="impacto_centro_formacion" bind:value={tpInfo.impacto_centro_formacion} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.impacto_centro_formacion_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.impacto_centro_formacion_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿El impacto en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.impacto_centro_formacion_requiere_comentario} />
@@ -430,9 +408,6 @@
                     <Textarea disabled maxlength="40000" id="bibliografia" bind:value={tpInfo.bibliografia} />
 
                     <InfoMessage>
-                        {#if tpSegundaEvaluacion?.bibliografia_comentario}
-                            <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.bibliografia_comentario}</p>
-                        {/if}
                         <div class="mt-4">
                             <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
@@ -448,9 +423,6 @@
 
             <h1>Ortografía</h1>
             <InfoMessage>
-                {#if tpSegundaEvaluacion?.ortografia_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.ortografia_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
@@ -463,9 +435,6 @@
             <hr class="mt-10 mb-10" />
             <h1>Redacción</h1>
             <InfoMessage>
-                {#if tpSegundaEvaluacion?.redaccion_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.redaccion_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
@@ -478,9 +447,6 @@
             <hr class="mt-10 mb-10" />
             <h1>Normas APA</h1>
             <InfoMessage>
-                {#if tpSegundaEvaluacion?.normas_apa_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{tpSegundaEvaluacion?.normas_apa_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
