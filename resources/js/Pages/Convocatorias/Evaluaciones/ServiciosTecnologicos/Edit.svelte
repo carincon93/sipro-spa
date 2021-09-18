@@ -24,7 +24,6 @@
     export let servicioTecnologico
     export let servicioTecnologicoEvaluacion
     export let tiposProyectoSt
-    export let servicioTecnologicoSegundaEvaluacion
     export let sectoresProductivos
     export let proyectoProgramasFormacion
 
@@ -169,10 +168,6 @@
                     error={errors.titulo_puntaje}
                 />
 
-                {#if servicioTecnologicoSegundaEvaluacion?.titulo_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.titulo_comentario}</p>
-                {/if}
-
                 <div class="mt-4">
                     <p>¿El título es correcto? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.titulo_requiere_comentario} />
@@ -210,9 +205,6 @@
             </div>
 
             <InfoMessage>
-                {#if servicioTecnologicoSegundaEvaluacion?.fecha_ejecucion_comentario}
-                    <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.fecha_ejecucion_comentario}</p>
-                {/if}
                 <div class="mt-4">
                     <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fechas_requiere_comentario} />
@@ -305,10 +297,6 @@
                         error={errors.resumen_puntaje}
                     />
 
-                    {#if servicioTecnologicoSegundaEvaluacion?.resumen_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.resumen_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿El resumen es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_requiere_comentario} />
@@ -359,10 +347,6 @@
                         autocomplete="off"
                         error={errors.antecedentes_puntaje}
                     />
-
-                    {#if servicioTecnologicoSegundaEvaluacion?.antecedentes_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.antecedentes_comentario}</p>
-                    {/if}
 
                     <div class="mt-4">
                         <p>¿Los antecedentes son correctos? Por favor seleccione si Cumple o No cumple.</p>
@@ -415,10 +399,6 @@
                         autocomplete="off"
                         error={errors.identificacion_problema_puntaje}
                     />
-
-                    {#if servicioTecnologicoSegundaEvaluacion?.identificacion_problema_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.identificacion_problema_comentario}</p>
-                    {/if}
 
                     <div class="mt-4">
                         <p>¿La identificación del problema es correcta? Por favor seleccione si Cumple o No cumple.</p>
@@ -477,10 +457,6 @@
                         error={errors.pregunta_formulacion_problema_puntaje}
                     />
 
-                    {#if servicioTecnologicoSegundaEvaluacion?.pregunta_formulacion_problema_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.pregunta_formulacion_problema_comentario}</p>
-                    {/if}
-
                     <div class="mt-4">
                         <p>¿La pregunta de formulación del problema es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.pregunta_formulacion_problema_requiere_comentario} />
@@ -535,10 +511,6 @@
                         autocomplete="off"
                         error={errors.justificacion_problema_puntaje}
                     />
-
-                    {#if servicioTecnologicoSegundaEvaluacion?.justificacion_problema_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.justificacion_problema_comentario}</p>
-                    {/if}
 
                     <div class="mt-4">
                         <p>¿La justificación del problema es correcta? Por favor seleccione si Cumple o No cumple.</p>
@@ -598,9 +570,6 @@
                 <Textarea sinContador={true} id="bibliografia" bind:value={servicioTecnologicoInfo.bibliografia} />
 
                 <InfoMessage>
-                    {#if servicioTecnologicoSegundaEvaluacion?.bibliografia_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.bibliografia_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La bibliografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
@@ -624,9 +593,6 @@
         <hr class="mt-10 mb-10" />
         <h1>Ortografía</h1>
         <InfoMessage>
-            {#if servicioTecnologicoSegundaEvaluacion?.ortografia_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.ortografia_comentario}</p>
-            {/if}
             <div class="mt-4">
                 <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
@@ -648,9 +614,6 @@
         <hr class="mt-10 mb-10" />
         <h1>Redacción</h1>
         <InfoMessage>
-            {#if servicioTecnologicoSegundaEvaluacion?.redaccion_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.redaccion_comentario}</p>
-            {/if}
             <div class="mt-4">
                 <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
@@ -671,9 +634,6 @@
         <hr class="mt-10 mb-10" />
         <h1>Normas APA</h1>
         <InfoMessage>
-            {#if servicioTecnologicoSegundaEvaluacion?.normas_apa_comentario}
-                <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{servicioTecnologicoSegundaEvaluacion?.normas_apa_comentario}</p>
-            {/if}
             <div class="mt-4">
                 <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : servicioTecnologicoEvaluacion.evaluacion.finalizado == true || servicioTecnologicoEvaluacion.evaluacion.habilitado == false || servicioTecnologicoEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />

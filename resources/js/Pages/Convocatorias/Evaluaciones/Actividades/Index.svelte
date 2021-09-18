@@ -22,7 +22,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let actividades
     export let actividadesGantt
@@ -269,9 +268,6 @@
                         error={errors.metodologia_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.metodologia_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.metodologia_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La metodología o las actividades son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.metodologia_requiere_comentario} />
@@ -504,9 +500,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.metodologia_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.metodologia_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La metodología y las actividades están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.metodologia_requiere_comentario} />
@@ -530,9 +523,6 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTpEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.metodologia_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.metodologia_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿La metodología y las actividades están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.metodologia_requiere_comentario} />

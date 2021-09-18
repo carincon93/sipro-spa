@@ -40,6 +40,8 @@ class TaEvaluacion extends Model
         'proyectos_macro_comentario',
         'bibliografia_comentario',
         'productos_comentario',
+        'entidad_aliada_comentario',
+        'edt_comentario',
         'ortografia_comentario',
         'redaccion_comentario',
         'normas_apa_comentario',

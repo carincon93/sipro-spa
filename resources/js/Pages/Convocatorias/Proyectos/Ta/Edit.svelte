@@ -185,17 +185,21 @@
     })
 
     async function syncColumnLong(column, form) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
                 //guardar
-                Inertia.put(route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]), {[column]:form[column]}, {
-                    onStart: () => (sending = true),
-                    onError: resp => ((sending = false), (resolve(resp))),
-                    onFinish: () => ((sending = false), resolve({})),
-                    preserveScroll: true,
-                })
-            }else{
-                resolve({});
+                Inertia.put(
+                    route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]),
+                    { [column]: form[column] },
+                    {
+                        onStart: () => (sending = true),
+                        onError: (resp) => ((sending = false), resolve(resp)),
+                        onFinish: () => ((sending = false), resolve({})),
+                        preserveScroll: true,
+                    },
+                )
+            } else {
+                resolve({})
             }
         })
     }

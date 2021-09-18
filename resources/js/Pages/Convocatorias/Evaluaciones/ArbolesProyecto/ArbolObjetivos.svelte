@@ -20,7 +20,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let efectosDirectos
     export let causasDirectas
@@ -406,6 +405,20 @@
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
+    let formTpEvaluacion = useForm({
+        arbol_objetivos_comentario: evaluacion.tp_evaluacion?.arbol_objetivos_comentario,
+        arbol_objetivos_requiere_comentario: evaluacion.tp_evaluacion?.arbol_objetivos_comentario == null ? true : false,
+    })
+    function submitTpEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTpEvaluacion.put(route('convocatorias.evaluaciones.arbol-objetivos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -818,9 +831,6 @@
                         error={errors.objetivos_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.objetivos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.objetivos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿El árbol de objetivos, objetivo general o los objetivos específicos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.objetivos_requiere_comentario} />
@@ -1218,6 +1228,28 @@
                             </div>
                         {/if}
                     {/each}
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 69}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitTpEvaluacion}>
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿El árbol de objetivos es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.arbol_objetivos_requiere_comentario} />
+                        {#if $formTpEvaluacion.arbol_objetivos_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="arbol_objetivos_comentario" bind:value={$formTpEvaluacion.arbol_objetivos_comentario} error={errors.arbol_objetivos_comentario} required />
+                        {/if}
+                    </div>
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}

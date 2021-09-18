@@ -20,7 +20,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let analisisRiesgos
 
@@ -211,9 +210,6 @@
                         error={errors.analisis_riesgos_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.analisis_riesgos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.analisis_riesgos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los análisis de riesgos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.analisis_riesgos_requiere_comentario} />
@@ -283,9 +279,6 @@
                         error={errors.riesgos_objetivo_general_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.riesgos_objetivo_general_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_objetivo_general_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los análisis de riesgos a nivel de objetivo general son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_objetivo_general_requiere_comentario} />
@@ -323,9 +316,6 @@
                         error={errors.riesgos_productos_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.riesgos_productos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_productos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los análisis de riesgos a nivel de productos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_productos_requiere_comentario} />
@@ -363,9 +353,6 @@
                         error={errors.riesgos_actividades_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.riesgos_actividades_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.riesgos_actividades_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los análisis de riesgos a nivel de actividades son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.riesgos_actividades_requiere_comentario} />
@@ -398,11 +385,8 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.analisis_riesgos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.analisis_riesgos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
-                        <p>¿La metodología y las actividades están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
+                        <p>¿Los análisis de riesgos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.analisis_riesgos_requiere_comentario} />
                         {#if $formTaEvaluacion.analisis_riesgos_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$formTaEvaluacion.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />
@@ -424,11 +408,8 @@
         <div class="mt-16">
             <form on:submit|preventDefault={submitTpEvaluacion}>
                 <InfoMessage>
-                    {#if segundaEvaluacion?.analisis_riesgos_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.analisis_riesgos_comentario}</p>
-                    {/if}
                     <div class="mt-4">
-                        <p>¿La metodología y las actividades están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
+                        <p>¿Los análisis de riesgos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.analisis_riesgos_requiere_comentario} />
                         {#if $formTpEvaluacion.analisis_riesgos_requiere_comentario == false}
                             <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="analisis_riesgos_comentario" bind:value={$formTpEvaluacion.analisis_riesgos_comentario} error={errors.analisis_riesgos_comentario} required />

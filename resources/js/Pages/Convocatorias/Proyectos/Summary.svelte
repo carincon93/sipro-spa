@@ -80,7 +80,7 @@
     }
 
     function sendProject() {
-        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -101,7 +101,7 @@
         comentario: '',
     })
     function submitComentario() {
-        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -149,7 +149,7 @@
             <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
         {/if}
 
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.modificable == true && proyecto.finalizado == true && proyecto.a_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
@@ -158,14 +158,14 @@
                     <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar formulación</Button>
                 {:else if proyectoCompleto == false}
                     <form on:submit|preventDefault={submitComentario}>
-                        <fieldset disabled={isSuperAdmin || checkRole(authUser, [4, 21]) ? undefined : true}>
+                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true) ? undefined : true}>
                             <div class="mt-8">
                                 <p class="mb-2">Si considera que el proyecto está incompleto por favor haga un comentario al proponente detallando que información o ítems debe completar.</p>
                                 <Textarea label="Comentario" maxlength="40000" id="comentario" error={errors.comentario} bind:value={$comentarioForm.comentario} required />
                             </div>
                         </fieldset>
                         <div class="mt-10 flex items-center">
-                            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+                            {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)}
                                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>
@@ -173,7 +173,7 @@
                 {/if}
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
-            {#if proyecto.finalizado == false && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
+            {#if proyecto.finalizado == false && proyecto.modificable == true && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
                 <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
                 <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
             {:else if proyecto.finalizado == false}

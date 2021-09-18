@@ -20,7 +20,6 @@
     export let errors
     export let convocatoria
     export let evaluacion
-    export let segundaEvaluacion
     export let proyecto
     export let efectosDirectos
     export let causasDirectas
@@ -335,6 +334,20 @@
         }
     }
 
+    let formTpEvaluacion = useForm({
+        arbol_problemas_comentario: evaluacion.tp_evaluacion?.arbol_problemas_comentario,
+        arbol_problemas_requiere_comentario: evaluacion.tp_evaluacion?.arbol_problemas_comentario == null ? true : false,
+    })
+    function submitTpEvaluacion() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $formTpEvaluacion.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+
     onMount(() => {
         const efectoIndirecto = document.querySelector('#efecto-indirecto-tooltip-placement')
         const efectoIndirectoTooltip = document.querySelector('#efecto-indirecto-tooltip')
@@ -418,7 +431,7 @@
 <AuthenticatedLayout>
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
-    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 82}
+    {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 82}
         <hr class="mt-10 mb-10" />
         <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -701,9 +714,6 @@
                         error={errors.problema_central_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.problema_central_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.problema_central_comentario}</p>
-                    {/if}
                     <div class="mt-4">
                         <p>¿Los antecedentes, árbol de problemas, identificación y descripción del problema, justificación y el marco conceptual son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formEstrategiaRegionalEvaluacion.problema_central_requiere_comentario} />
@@ -760,11 +770,8 @@
                         error={errors.arbol_problemas_puntaje}
                     />
 
-                    {#if segundaEvaluacion?.arbol_problemas_comentario}
-                        <p class="whitespace-pre-line bg-indigo-400 shadow text-white p-4"><strong>Comentario del segundo evaluador: </strong>{segundaEvaluacion?.arbol_problemas_comentario}</p>
-                    {/if}
                     <div class="mt-4">
-                        <p>¿El árbol de problemas correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <p>¿El árbol de problemas es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formServicioTecnologicoEvaluacion.arbol_problemas_requiere_comentario} />
                         {#if $formServicioTecnologicoEvaluacion.arbol_problemas_requiere_comentario == false}
                             <Textarea
@@ -777,6 +784,28 @@
                                 error={errors.arbol_problemas_comentario}
                                 required
                             />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {:else if proyecto.codigo_linea_programatica == 69}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <div class="mt-16">
+            <form on:submit|preventDefault={submitTpEvaluacion}>
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿El árbol de problemas es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTpEvaluacion.arbol_problemas_requiere_comentario} />
+                        {#if $formTpEvaluacion.arbol_problemas_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="arbol_problemas_comentario" bind:value={$formTpEvaluacion.arbol_problemas_comentario} error={errors.arbol_problemas_comentario} required />
                         {/if}
                     </div>
                 </InfoMessage>

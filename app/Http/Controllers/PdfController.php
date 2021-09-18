@@ -30,27 +30,22 @@ class PdfController extends Controller
                 $datos = $proyecto->idi;
                 $opcionesIDiDropdown = collect(json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true));
                 $datos->relacionado_plan_tecnologico = $opcionesIDiDropdown->where('value', $datos->relacionado_plan_tecnologico)->first();
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
             }else if(!empty($proyecto->ta)){
                 $datos = $proyecto->ta;
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
             }else if(!empty($proyecto->tp)){
                 $datos = $proyecto->tp;
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true));
             }else if(!empty($proyecto->culturaInnovacion)){
                 $datos = $proyecto->culturaInnovacion;
+                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
             }else if(!empty($proyecto->servicioTecnologico)){
                 $datos = $proyecto->servicioTecnologico;
                 $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE tipos_proyecto_st.tipo_proyecto
                         WHEN '1' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: A', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                         WHEN '2' THEN   concat(centros_formacion.nombre, chr(10), '∙ Tipo de proyecto: B', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                     END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->get();
-            }
-
-            if ($proyecto->codigo_linea_programatica == 23 || $proyecto->codigo_linea_programatica == 65 || $proyecto->codigo_linea_programatica == 66 || $proyecto->codigo_linea_programatica == 82) {
-                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true));
-            } elseif ($proyecto->codigo_linea_programatica == 70) {
-                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-ta.json'), true));
-            } elseif ($proyecto->codigo_linea_programatica == 69) {
-                $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true));
-            } elseif ($proyecto->codigo_linea_programatica == 68) {
                 $rolesSennova = collect(json_decode(Storage::get('json/roles-sennova-st.json'), true));
             }
 
