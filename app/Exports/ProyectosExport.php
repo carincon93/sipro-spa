@@ -1,0 +1,149 @@
+<?php
+
+namespace App\Exports;
+
+use App\Models\Proyecto;
+use App\Models\Convocatoria;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithProperties;
+use Illuminate\Support\Facades\Storage;
+
+class ProyectosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting
+{
+    protected $datos;
+    protected $convocatoria;
+
+    public function __construct(Convocatoria $convocatoria)
+    {
+        $this->convocatoria = $convocatoria;
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function collection()
+    {
+        return $this->convocatoria->proyectos;
+    }
+    /**
+    * @var Invoice $proyecto
+    */
+    public function map($proyecto): array
+    {
+        $tipo = '';
+        if(!empty($proyecto->idi)){
+            $this->datos =  $proyecto->idi;
+            $tipo = 'I+D+I';
+        }else if(!empty($proyecto->ta)){
+            $this->datos =  $proyecto->ta;
+            $tipo = 'Tecnoacademia';
+        }else if(!empty($proyecto->tp)){
+            $this->datos =  $proyecto->tp;
+            $tipo = 'Tecnoparque';
+        }else if(!empty($proyecto->culturaInnovacion)){
+            $this->datos =  $proyecto->culturaInnovacion;
+            $tipo = 'Apropiación de la cultura de la innovación';
+        }else if(!empty($proyecto->servicioTecnologico)){
+            $this->datos =  $proyecto->servicioTecnologico;
+            $tipo = 'Servicios tecnológicos';
+        }
+
+        return [
+            $this->convocatoria->descripcion,
+            $proyecto->codigo,
+            $tipo,
+            $proyecto->centroFormacion->regional->nombre,
+            $proyecto->centroFormacion->codigo,
+            $proyecto->centroFormacion->nombre,
+            $proyecto->lineaProgramatica->codigo,
+            $proyecto->lineaProgramatica->nombre,
+            $this->datos->titulo,
+            ($this->datos->redConocimiento)?$this->datos->redConocimiento->nombre:'N/A',
+            ($this->datos->areaConocimiento)?$this->datos->areaConocimiento->nombre:'N/A',
+            ($this->datos->areaConocimiento)?$this->datos->areaConocimiento->subareasConocimiento->implode('nombre',', '):'N/A',
+            '',
+            $this->datos->objetivo_general,
+            $proyecto->total_proyecto_presupuesto,
+            $proyecto->total_roles_sennova,
+            $proyecto->precio_proyecto,
+            ($proyecto->finalizado)?'SI':'NO',
+            ($proyecto->a_evaluar)?'SI':'NO',
+            ($proyecto->radicado)?'SI':'NO',
+            $this->mapParticipantes($proyecto->participantes),
+        ];
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Convocatoria',
+            'Código',
+            'Tipo',
+            'Regional',
+            'Código Centro Formacion',
+            'Centro Formacion',
+            'Código Linea Programatica',
+            'Linea Programatica',
+            'Título',
+            'Red Conocimiento',
+            'Area Conocimiento',
+            'Subareas Conocimiento',
+            'Disciplina',
+            'Objetivo General',
+            'Total Presupuestos',
+            'Total Roles',
+            'Total Proyecto',
+            'Finzalido',
+            'A Evaluar',
+            'Radicado',
+            'Participantes',
+        ];
+    }
+    
+    public function columnFormats(): array
+    {
+        return [
+            'O' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'P' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'Q' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+        ];
+    }
+
+    public function properties(): array
+    {
+        return [
+            'title' => 'Resumen proyectos '.$this->convocatoria->descripcion,
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Style the first row as bold text.
+            1    => ['font' => ['bold' => true]],
+        ];
+    }
+
+    private function mapParticipantes($participantes){
+
+        $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
+        $mapParticipantes = [];
+
+        foreach ($participantes as $participante) {
+            array_push($mapParticipantes, [
+                'nombre'=>$participante->nombre,
+                'documento'=>$participante->numero_documento,
+                'vinculacion'=>$participante->tipo_vinculacion_text,
+                'meses'=>$participante->pivot->cantidad_meses,
+                'horas'=>$participante->pivot->cantidad_horas,
+            ]);
+        }
+        return $mapParticipantes;
+    }
+}

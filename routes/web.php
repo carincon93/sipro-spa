@@ -59,6 +59,7 @@ use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ReporteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -660,6 +661,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('convocatorias.tp-evaluaciones', TpEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'tp-evaluaciones' => 'tp-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('convocatorias.servicios-tecnologicos-evaluaciones', ServicioTecnologicoEvaluacionController::class)->parameters(['convocatorias' => 'convocatoria', 'servicios-tecnologicos-evaluaciones' => 'servicio-tecnologico-evaluacion'])->except(['create', 'store', 'show']);
     Route::resource('evaluaciones', EvaluacionController::class)->parameters(['evaluaciones' => 'evaluacion'])->except(['show']);
+
+    /**
+     * Reportes
+     * 
+     */
+    Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
+    Route::get('reportes/convocatoria/{convocatoria}/resumen', [ReporteController::class, 'resumeProjects'])->name('reportes.resumeProjects');
 });
 
 require __DIR__ . '/auth.php';
