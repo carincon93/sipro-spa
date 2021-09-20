@@ -671,6 +671,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
     Route::get('reportes/convocatoria/{convocatoria}/resumen', [ReporteController::class, 'resumeProjects'])->name('reportes.resumeProjects');
+    Route::get('reportes/convocatoria/{convocatoria}/presupuestos-roles', [ReporteController::class, 'resumePresupuestos'])->name('reportes.resumePresupuestos');
 });
 
 require __DIR__ . '/auth.php';

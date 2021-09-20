@@ -66,11 +66,11 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $this->datos->titulo,
             ($this->datos->redConocimiento) ? $this->datos->redConocimiento->nombre : 'N/A',
             ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre : ($this->datos->areaConocimiento ? $this->datos->areaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->map(function ($disciplinaSubareaConocimiento) {
-                return $disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre;
-            }) : 'N/A')),
+                return ['nombre' => $disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre];
+            })->implode('nombre', ', ') : 'N/A')),
             ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->map(function ($disciplinaSubareaConocimiento) {
-                return ($disciplinaSubareaConocimiento->subareaConocimiento->nombre);
-            }) : 'N/A'),
+                return ['nombre' => $disciplinaSubareaConocimiento->subareaConocimiento->nombre];
+            })->implode('nombre', ', ') : 'N/A'),
             ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->implode('nombre', ', ') : 'N/A'),
             $this->datos->objetivo_general,
             $proyecto->total_proyecto_presupuesto,

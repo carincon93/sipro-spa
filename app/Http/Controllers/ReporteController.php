@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Exports\ProyectosExport;
+use App\Exports\PresupuestoRolesSennovaExport;
 use App\Models\Convocatoria;
 
 class ReporteController extends Controller
@@ -31,5 +32,10 @@ class ReporteController extends Controller
     public function resumeProjects(Convocatoria $convocatoria)
     {
         return Excel::download(new ProyectosExport($convocatoria), 'proyectos-'.time().'.xlsx');
+    }
+    
+    public function resumePresupuestos(Convocatoria $convocatoria)
+    {
+        return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-'.time().'.xlsx');
     }
 }
