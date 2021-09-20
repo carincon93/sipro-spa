@@ -39,7 +39,8 @@ class Proyecto extends Model
         'a_evaluar',
         'en_subsanacion',
         'estructuracion_proyectos',
-        'estado'
+        'estado',
+        'precio_proyecto'
     ];
 
     /**
