@@ -246,9 +246,18 @@
                 <InfoMessage>
                     <div class="mt-4">
                         <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
                         {#if $form.fecha_ejecucion_requiere_comentario == false}
-                            <Textarea disabled={isSuperAdmin ? undefined : ta.evaluacion.finalizado == true || ta.evaluacion.habilitado == false || ta.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fecha_ejecucion_comentario" bind:value={$form.fecha_ejecucion_comentario} error={errors.fecha_ejecucion_comentario} required />
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="fecha_ejecucion_comentario"
+                                bind:value={$form.fecha_ejecucion_comentario}
+                                error={errors.fecha_ejecucion_comentario}
+                                required
+                            />
                         {/if}
                     </div>
                 </InfoMessage>
@@ -260,7 +269,7 @@
                         <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList disabled={true} id="linea_programatica_id" bind:value={taInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                        <DynamicList disabled={true} id="linea_programatica_id" bind:value={taInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
                     </div>
                 </div>
                 <div class="mt-44 grid grid-cols-2">
@@ -288,7 +297,7 @@
                         <Label class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                     </div>
                     <div>
-                        <SelectMulti disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
+                        <SelectMulti classes="evaluacion-select-multi" disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
                         {#if lineasTecnoaAcademia?.length == 0}
                             <div>
                                 <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -451,7 +460,7 @@
                     <Label class="mb-4" for="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="municipios" bind:selectedValue={taInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={taInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
                 </div>
             </div>
 
@@ -460,7 +469,7 @@
                     <Label class="mb-4" for="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="municipios_impactar" bind:selectedValue={taInfo.municipios_impactar} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios_impactar" bind:selectedValue={taInfo.municipios_impactar} items={municipios} isMulti={true} placeholder="Buscar municipios" />
                 </div>
             </div>
 
@@ -581,7 +590,7 @@
                     <Label class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                     {#if programasFormacionArticular?.length == 0}
                         <div>
                             <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -610,7 +619,7 @@
                     <Label class="mb-4" for="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="dis_curricular_id" bind:selectedValue={taInfo.dis_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="dis_curricular_id" bind:selectedValue={taInfo.dis_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 </div>
             </div>
 

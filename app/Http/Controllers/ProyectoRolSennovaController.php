@@ -325,6 +325,9 @@ class ProyectoRolSennovaController extends Controller
 
         $proyecto = $evaluacion->proyecto;
 
+        $proyectoRolSennova->load('convocatoriaRolSennova.rolSennova');
+        $proyectoRolSennova->load('actividades');
+
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado', 'modificable'),
@@ -333,7 +336,6 @@ class ProyectoRolSennovaController extends Controller
             })->where('proyecto_rol_evaluacion.evaluacion_id', '!=', $evaluacion->id)->first(),
             'proyecto'              => $evaluacion->proyecto->only('id', 'diff_meses', 'finalizado', 'max_meses_ejecucion', 'codigo_linea_programatica'),
             'proyectoRolSennova'    => $proyectoRolSennova,
-            'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
             'lineaProgramatica'     => $evaluacion->proyecto->lineaProgramatica->only('id'),
             'proyectoRolEvaluacion' => ProyectoRolEvaluacion::where('evaluacion_id', $evaluacion->id)->where('proyecto_rol_sennova_id', $proyectoRolSennova->id)->first()
         ]);

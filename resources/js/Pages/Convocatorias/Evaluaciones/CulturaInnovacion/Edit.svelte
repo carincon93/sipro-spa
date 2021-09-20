@@ -46,7 +46,7 @@
     let municipios
     let programasFormacion
     let programasFormacionArticular
-    let proyectoDialogOpen = true
+    let proyectoDialogOpen = culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
     let sending = false
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
@@ -132,6 +132,7 @@
     }
 
     let form = useForm({
+        clausula_confidencialidad: culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad,
         titulo_puntaje: culturaInnovacionEvaluacion.titulo_puntaje,
         titulo_comentario: culturaInnovacionEvaluacion.titulo_comentario,
         titulo_requiere_comentario: culturaInnovacionEvaluacion.titulo_comentario == null ? true : false,
@@ -279,7 +280,7 @@
                 <p class="mb-4">Código dependencia presupuestal (SIIF)</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="linea_programatica_id" bind:value={culturaInnovacionInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 5)} classes="min-h" placeholder="Busque por el nombre de la línea programática" />
+                <DynamicList disabled={true} id="linea_programatica_id" bind:value={culturaInnovacionInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 5)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" />
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -287,7 +288,7 @@
                 <p class="mb-4">Área de conocimiento</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="area_conocimiento_id" bind:value={culturaInnovacionInfo.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" />
+                <DynamicList disabled={true} id="area_conocimiento_id" bind:value={culturaInnovacionInfo.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la área de conocimiento" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -305,7 +306,7 @@
                 <p class="mb-4">¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="actividad_economica_id" bind:value={culturaInnovacionInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" />
+                <DynamicList disabled={true} id="actividad_economica_id" bind:value={culturaInnovacionInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="evaluacion-select min-h" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -323,7 +324,7 @@
                 <p class="mb-4">Temática estratégica SENA</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="tematica_estrategica_id" bind:value={culturaInnovacionInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
+                <DynamicList classes="evaluacion-select" disabled={true} id="tematica_estrategica_id" bind:value={culturaInnovacionInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -729,7 +730,7 @@
                 <p class="mb-4">Nombre de los municipios beneficiados</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="municipios" bind:selectedValue={culturaInnovacionInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={culturaInnovacionInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
                 {#if municipios?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -767,7 +768,7 @@
                 <p class="mb-4">Nombre de los programas de formación con registro calificado a impactar</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="programas_formacion" bind:selectedValue={culturaInnovacionInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion" bind:selectedValue={culturaInnovacionInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacion?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -787,7 +788,7 @@
                 <p class="mb-4">Nombre de los programas de formación articulados</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="programas_formacion_articulados" bind:selectedValue={culturaInnovacionInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={culturaInnovacionInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacionArticular?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -883,6 +884,17 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)}
+                {#if $form.clausula_confidencialidad}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
+                {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
+                {/if}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
@@ -897,28 +909,16 @@
         </div>
         <div slot="content">
             <div>
-                <h1 class="text-center mt-4 mb-4">Evaluación</h1>
-                <p class="text-center mb-4">Realice la evaluacion cuantitativa de los siguientes ítems:</p>
-                <ul class="list-disc">
-                    <li>Título</li>
-                    <li>Video</li>
-                    <li>Resumen</li>
-                    <li>Antecedentes, árbol de problemas, identificación y descripción del problema, justificación y marco conceptual</li>
-                    <li>Árbol de objetivos, objetivo genral y objetivos específicos</li>
-                    <li>Metodología y actividades</li>
-                    <li>Resultados esperados</li>
-                    <li>Productos esperados</li>
-                    <li>Impactos, propuesta de sostenibilidad y la cadena de valor</li>
-                    <li>Análisis de riesgos</li>
-                    <li>Ortografía</li>
-                    <li>Redacción</li>
-                    <li>Normas APA</li>
-                </ul>
+                <h1 class="text-center mt-4 mb-4">Cláusula de confidencialidad</h1>
+                <p class="mb-4">
+                    Al hacer clic en el botón Aceptar, dejo constancia del tratamiento confidencial que daré a la información relacionada con el proceso de evaluación que incluye, sin limitarse a esta, la información sobre proyectos, centros de formación, formuladores, autores y coautores de proyectos, resultados del proceso de evaluación en sus dos etapas. Por tanto, declaro que me abstendré de
+                    usar o divulgar para cualquier fin y por cualquier medio la información enunciada.
+                </p>
             </div>
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Continuar</Button>
+                <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

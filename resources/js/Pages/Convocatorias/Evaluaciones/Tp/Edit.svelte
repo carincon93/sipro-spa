@@ -168,9 +168,18 @@
                 <InfoMessage>
                     <div class="mt-4">
                         <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
                         {#if $form.fecha_ejecucion_requiere_comentario == false}
-                            <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="fecha_ejecucion_comentario" bind:value={$form.fecha_ejecucion_comentario} error={errors.fecha_ejecucion_comentario} required />
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="fecha_ejecucion_comentario"
+                                bind:value={$form.fecha_ejecucion_comentario}
+                                error={errors.fecha_ejecucion_comentario}
+                                required
+                            />
                         {/if}
                     </div>
                 </InfoMessage>
@@ -181,7 +190,7 @@
                     <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList disabled={true} id="linea_programatica_id" bind:value={tpInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                    <DynamicList disabled={true} id="linea_programatica_id" bind:value={tpInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -199,7 +208,7 @@
                     <Label class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
                 </div>
                 <div>
-                    <DynamicList disabled={true} id="nodo_tecnoparque_id" bind:value={tpInfo.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', tpInfo.centro_formacion_id)} message={errors.nodo_tecnoparque_id} />
+                    <DynamicList classes="evaluacion-select" disabled={true} id="nodo_tecnoparque_id" bind:value={tpInfo.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', tpInfo.centro_formacion_id)} message={errors.nodo_tecnoparque_id} />
                 </div>
             </div>
 
@@ -223,9 +232,18 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
                             {#if $form.resumen_regional_requiere_comentario == false}
-                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="resumen_regional_comentario" bind:value={$form.resumen_regional_comentario} error={errors.resumen_regional_comentario} required />
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="resumen_regional_comentario"
+                                    bind:value={$form.resumen_regional_comentario}
+                                    error={errors.resumen_regional_comentario}
+                                    required
+                                />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -254,10 +272,10 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿Los antecedentes regionales son correctos? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_regional_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_regional_requiere_comentario} />
                             {#if $form.antecedentes_regional_requiere_comentario == false}
                                 <Textarea
-                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
                                     label="Comentario"
                                     class="mt-4"
                                     maxlength="40000"
@@ -291,9 +309,18 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿Los retos y prioridades locales son correctos? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
                             {#if $form.retos_oportunidades_requiere_comentario == false}
-                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="retos_oportunidades_comentario" bind:value={$form.retos_oportunidades_comentario} error={errors.retos_oportunidades_comentario} required />
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="retos_oportunidades_comentario"
+                                    bind:value={$form.retos_oportunidades_comentario}
+                                    error={errors.retos_oportunidades_comentario}
+                                    required
+                                />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -310,10 +337,10 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿La justificación y pertinencia en el territorio es correcta? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.pertinencia_territorio_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.pertinencia_territorio_requiere_comentario} />
                             {#if $form.pertinencia_territorio_requiere_comentario == false}
                                 <Textarea
-                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
                                     label="Comentario"
                                     class="mt-4"
                                     maxlength="40000"
@@ -343,7 +370,7 @@
                     <Label class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="municipios" bind:selectedValue={tpInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={tpInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
                 </div>
             </div>
 
@@ -362,9 +389,18 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿Los municipios y la descripción del beneficio son correctos? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
                             {#if $form.municipios_requiere_comentario == false}
-                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="municipios_comentario" bind:value={$form.municipios_comentario} error={errors.municipios_comentario} required />
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="municipios_comentario"
+                                    bind:value={$form.municipios_comentario}
+                                    error={errors.municipios_comentario}
+                                    required
+                                />
                             {/if}
                         </div>
                     </InfoMessage>
@@ -381,10 +417,10 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿El impacto en el centro de formación es correcto? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.impacto_centro_formacion_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.impacto_centro_formacion_requiere_comentario} />
                             {#if $form.impacto_centro_formacion_requiere_comentario == false}
                                 <Textarea
-                                    disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined}
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
                                     label="Comentario"
                                     class="mt-4"
                                     maxlength="40000"
@@ -410,9 +446,18 @@
                     <InfoMessage>
                         <div class="mt-4">
                             <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
+                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
                             {#if $form.bibliografia_requiere_comentario == false}
-                                <Textarea disabled={isSuperAdmin ? undefined : tp.evaluacion.finalizado == true || tp.evaluacion.habilitado == false || tp.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="bibliografia_comentario" bind:value={$form.bibliografia_comentario} error={errors.bibliografia_comentario} required />
+                                <Textarea
+                                    disabled={isSuperAdmin ? undefined : tpEvaluacion.evaluacion.finalizado == true || tpEvaluacion.evaluacion.habilitado == false || tpEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                    label="Comentario"
+                                    class="mt-4"
+                                    maxlength="40000"
+                                    id="bibliografia_comentario"
+                                    bind:value={$form.bibliografia_comentario}
+                                    error={errors.bibliografia_comentario}
+                                    required
+                                />
                             {/if}
                         </div>
                     </InfoMessage>

@@ -302,7 +302,7 @@
                 <p class="mb-4">Código dependencia presupuestal (SIIF)</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="linea_programatica_id" bind:value={idiInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 2)} classes="min-h" placeholder="Busque por el nombre de la línea programática" />
+                <DynamicList disabled={true} id="linea_programatica_id" bind:value={idiInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 2)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" />
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -310,7 +310,7 @@
                 <p class="mb-4">Red de conocimiento sectorial</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="red_conocimiento_id" bind:value={idiInfo.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" />
+                <DynamicList disabled={true} id="red_conocimiento_id" bind:value={idiInfo.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -337,7 +337,7 @@
                 <p class="mb-4">Área de conocimiento</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="area_conocimiento_id" bind:value={idiInfo.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" />
+                <DynamicList disabled={true} id="area_conocimiento_id" bind:value={idiInfo.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la área de conocimiento" />
             </div>
         </div>
         {#if idiInfo.area_conocimiento_id}
@@ -346,7 +346,7 @@
                     <p class="mb-4">Subárea de conocimiento</p>
                 </div>
                 <div>
-                    <DynamicList disabled={true} id="subarea_conocimiento_id" bind:value={idiInfo.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', idiInfo.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" />
+                    <DynamicList disabled={true} id="subarea_conocimiento_id" bind:value={idiInfo.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', idiInfo.area_conocimiento_id)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la subárea de conocimiento" />
                 </div>
             </div>
         {/if}
@@ -356,7 +356,7 @@
                     <p class="mb-4">Disciplina de la subárea de conocimiento</p>
                 </div>
                 <div>
-                    <DynamicList disabled={true} id="disciplina_subarea_conocimiento_id" bind:value={idiInfo.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', idiInfo.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" />
+                    <DynamicList disabled={true} id="disciplina_subarea_conocimiento_id" bind:value={idiInfo.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', idiInfo.subarea_conocimiento_id)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" />
 
                     <InfoMessage>
                         <div class="mt-4">
@@ -384,7 +384,7 @@
                 <p class="mb-4">¿En cuál de estas actividades económicas se puede aplicar el proyecto?</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="actividad_economica_id" bind:value={idiInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" />
+                <DynamicList disabled={true} id="actividad_economica_id" bind:value={idiInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="evaluacion-select min-h" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -411,7 +411,7 @@
                 <p class="mb-4">Temática estratégica SENA</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="tematica_estrategica_id" bind:value={idiInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
+                <DynamicList classes="evaluacion-select" disabled={true} id="tematica_estrategica_id" bind:value={idiInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -871,7 +871,7 @@
                 <p class="mb-4">Nombre de los municipios beneficiados</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="municipios" bind:selectedValue={idiInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={idiInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
                 {#if municipios?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -891,7 +891,7 @@
                 <p class="mb-4">Nombre de los programas de formación con registro calificado a impactar</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="programas_formacion" bind:selectedValue={idiInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion" bind:selectedValue={idiInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacion?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
@@ -911,7 +911,7 @@
                 <p class="mb-4">Nombre de los programas de formación articulados"</p>
             </div>
             <div>
-                <SelectMulti disabled={true} id="programas_formacion_articulados" bind:selectedValue={idiInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={idiInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacionArticular?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>

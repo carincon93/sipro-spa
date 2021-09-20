@@ -240,7 +240,7 @@
                         <Label class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
                     </div>
                     <div>
-                        <DynamicList id="estado_sistema_gestion_id" bind:value={servicioTecnologicoInfo.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', servicioTecnologicoInfo.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} />
+                        <DynamicList id="estado_sistema_gestion_id" bind:value={servicioTecnologicoInfo.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', servicioTecnologicoInfo.tipo_proyecto_st_id['value'])} classes="evaluacion-select min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} />
                     </div>
                 </div>
             {/if}
@@ -259,7 +259,7 @@
                     <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="linea_programatica_id" bind:value={servicioTecnologicoInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                    <DynamicList id="linea_programatica_id" bind:value={servicioTecnologicoInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
                 </div>
             </div>
         </fieldset>
@@ -537,7 +537,7 @@
                 <Label class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
             </div>
             <div>
-                <SelectMulti id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
                 {#if programasFormacion?.length == 0}
                     <div>
                         <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>

@@ -227,7 +227,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo'),
+            'evaluacion'                    => $evaluacion,
             'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
             'proyecto'                      => $evaluacion->proyecto,
         ]);

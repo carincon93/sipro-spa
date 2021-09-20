@@ -79,7 +79,7 @@
                     <Label class="mb-4" for="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="lineas_investigacion" bind:selectedValue={articulacionSennovaInfo.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="lineas_investigacion" bind:selectedValue={articulacionSennovaInfo.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" />
                 </div>
             </div>
 
@@ -88,7 +88,7 @@
                     <Label class="mb-4" for="grupos_investigacion" value="Grupos de investigación en los cuales está vinculada la TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti disabled={true} id="grupos_investigacion" bind:selectedValue={articulacionSennovaInfo.grupos_investigacion} items={gruposInvestigacion} isMulti={true} error={errors.grupos_investigacion} placeholder="Buscar por el nombre del grupo de investigación" />
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="grupos_investigacion" bind:selectedValue={articulacionSennovaInfo.grupos_investigacion} items={gruposInvestigacion} isMulti={true} error={errors.grupos_investigacion} placeholder="Buscar por el nombre del grupo de investigación" />
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
                         <Label class="mb-4" for="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
                     </div>
                     <div>
-                        <SelectMulti disabled={true} id="semilleros_investigacion" bind:selectedValue={articulacionSennovaInfo.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" />
+                        <SelectMulti classes="evaluacion-select-multi" disabled={true} id="semilleros_investigacion" bind:selectedValue={articulacionSennovaInfo.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" />
                     </div>
                 </div>
             {/if}
@@ -136,7 +136,6 @@
 
                 <div class="mt-16">
                     <InfoMessage>
-               
                         <div class="mt-4">
                             <p>¿La articulación SENNOVA está definida correctamente? Por favor seleccione si Cumple o No cumple.</p>
                             <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.articulacion_sennova_requiere_comentario} />

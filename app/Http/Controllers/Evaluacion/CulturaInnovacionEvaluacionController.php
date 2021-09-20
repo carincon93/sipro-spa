@@ -104,7 +104,9 @@ class CulturaInnovacionEvaluacionController extends Controller
         $this->authorize('modificar-evaluacion-autor', $culturaInnovacionEvaluacion->evaluacion);
 
         $culturaInnovacionEvaluacion->evaluacion()->update([
-            'iniciado' => true
+            'iniciado' => true,
+            'clausula_confidencialidad' => $request->clausula_confidencialidad
+
         ]);
 
         $culturaInnovacionEvaluacion->titulo_puntaje              = $request->titulo_puntaje;
