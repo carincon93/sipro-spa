@@ -49225,20 +49225,28 @@ __webpack_require__.r(__webpack_exports__);
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i].value;
-	child_ctx[25] = list[i].label;
+	child_ctx[24] = list[i].id;
+	child_ctx[25] = list[i].descripcion;
+	child_ctx[27] = i;
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i].value;
-	child_ctx[25] = list[i].label;
+	child_ctx[28] = list[i].value;
+	child_ctx[29] = list[i].label;
+	return child_ctx;
+}
+
+function get_each_context_2(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[28] = list[i].value;
+	child_ctx[29] = list[i].label;
 	return child_ctx;
 }
 
 // (107:20) {#if presupuestoInfo.segundo_grupo_presupuestal_id}
-function create_if_block_11(ctx) {
+function create_if_block_12(ctx) {
 	let div;
 	let label;
 	let t;
@@ -49254,6 +49262,7 @@ function create_if_block_11(ctx) {
 
 	dynamiclist = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_12__.default({
 			props: {
+				classes: "evaluacion-select",
 				disabled: true,
 				id: "tercer_grupo_presupuestal_id",
 				value: /*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id,
@@ -49280,9 +49289,9 @@ function create_if_block_11(ctx) {
 		},
 		p(ctx, dirty) {
 			const dynamiclist_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id;
-			if (dirty & /*presupuestoInfo*/ 256) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.tercer-grupo-presupuestal", /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id);
-			if (dirty & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].tercer_grupo_presupuestal_id;
+			if (dirty[0] & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id;
+			if (dirty[0] & /*presupuestoInfo*/ 256) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.tercer-grupo-presupuestal", /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id);
+			if (dirty[0] & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].tercer_grupo_presupuestal_id;
 			dynamiclist.$set(dynamiclist_changes);
 		},
 		i(local) {
@@ -49305,7 +49314,7 @@ function create_if_block_11(ctx) {
 }
 
 // (114:20) {#if presupuestoInfo.segundo_grupo_presupuestal_id && presupuestoInfo.tercer_grupo_presupuestal_id}
-function create_if_block_9(ctx) {
+function create_if_block_10(ctx) {
 	let div;
 	let label;
 	let t0;
@@ -49327,6 +49336,7 @@ function create_if_block_9(ctx) {
 	}
 
 	let dynamiclist_props = {
+		classes: "evaluacion-select",
 		disabled: true,
 		id: "convocatoria_presupuesto_id",
 		value: /*presupuestoInfo*/ ctx[8].convocatoria_presupuesto_id,
@@ -49346,7 +49356,7 @@ function create_if_block_9(ctx) {
 
 	dynamiclist = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_12__.default({ props: dynamiclist_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(dynamiclist, "recurso", dynamiclist_recurso_binding));
-	let if_block = /*presupuestoSennova*/ ctx[9]?.mensaje && create_if_block_10(ctx);
+	let if_block = /*presupuestoSennova*/ ctx[9]?.mensaje && create_if_block_11(ctx);
 
 	return {
 		c() {
@@ -49371,18 +49381,18 @@ function create_if_block_9(ctx) {
 		},
 		p(ctx, dirty) {
 			const dynamiclist_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].convocatoria_presupuesto_id;
+			if (dirty[0] & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].convocatoria_presupuesto_id;
 
-			if (dirty & /*convocatoria, proyecto, presupuestoInfo*/ 266) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.usos-presupuestales", [
+			if (dirty[0] & /*convocatoria, proyecto, presupuestoInfo*/ 266) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.usos-presupuestales", [
 				/*convocatoria*/ ctx[1],
 				/*proyecto*/ ctx[3].linea_programatica,
 				/*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id,
 				/*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id
 			]);
 
-			if (dirty & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].convocatoria_presupuesto_id;
+			if (dirty[0] & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].convocatoria_presupuesto_id;
 
-			if (!updating_recurso && dirty & /*presupuestoSennova*/ 512) {
+			if (!updating_recurso && dirty[0] & /*presupuestoSennova*/ 512) {
 				updating_recurso = true;
 				dynamiclist_changes.recurso = /*presupuestoSennova*/ ctx[9];
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_recurso = false);
@@ -49394,11 +49404,11 @@ function create_if_block_9(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*presupuestoSennova*/ 512) {
+					if (dirty[0] & /*presupuestoSennova*/ 512) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_10(ctx);
+					if_block = create_if_block_11(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -49437,8 +49447,8 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (128:24) {#if presupuestoSennova?.mensaje}
-function create_if_block_10(ctx) {
+// (129:24) {#if presupuestoSennova?.mensaje}
+function create_if_block_11(ctx) {
 	let infomessage;
 	let current;
 
@@ -49458,7 +49468,7 @@ function create_if_block_10(ctx) {
 		},
 		p(ctx, dirty) {
 			const infomessage_changes = {};
-			if (dirty & /*presupuestoSennova*/ 512) infomessage_changes.message = /*presupuestoSennova*/ ctx[9].mensaje;
+			if (dirty[0] & /*presupuestoSennova*/ 512) infomessage_changes.message = /*presupuestoSennova*/ ctx[9].mensaje;
 			infomessage.$set(infomessage_changes);
 		},
 		i(local) {
@@ -49476,8 +49486,8 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (179:89) 
-function create_if_block_8(ctx) {
+// (180:89) 
+function create_if_block_9(ctx) {
 	let div;
 	let label;
 	let t;
@@ -49530,10 +49540,10 @@ function create_if_block_8(ctx) {
 		},
 		p(ctx, dirty) {
 			const select_changes = {};
-			if (dirty & /*opcionesServiciosEdicion*/ 128) select_changes.items = /*opcionesServiciosEdicion*/ ctx[7];
-			if (dirty & /*errors*/ 1) select_changes.error = /*errors*/ ctx[0].servicio_edicion_info;
+			if (dirty[0] & /*opcionesServiciosEdicion*/ 128) select_changes.items = /*opcionesServiciosEdicion*/ ctx[7];
+			if (dirty[0] & /*errors*/ 1) select_changes.error = /*errors*/ ctx[0].servicio_edicion_info;
 
-			if (!updating_selectedValue && dirty & /*presupuestoInfo*/ 256) {
+			if (!updating_selectedValue && dirty[0] & /*presupuestoInfo*/ 256) {
 				updating_selectedValue = true;
 				select_changes.selectedValue = /*presupuestoInfo*/ ctx[8].servicio_edicion_info;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_selectedValue = false);
@@ -49560,8 +49570,8 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (147:20) {#if presupuestoInfo.codigo_uso_presupuestal == '2010100600203101'}
-function create_if_block_7(ctx) {
+// (148:20) {#if presupuestoInfo.codigo_uso_presupuestal == '2010100600203101'}
+function create_if_block_8(ctx) {
 	let div0;
 	let label0;
 	let t0;
@@ -49600,11 +49610,11 @@ function create_if_block_7(ctx) {
 			}
 		});
 
-	let each_value_1 = /*tiposLicencia*/ ctx[5];
+	let each_value_2 = /*tiposLicencia*/ ctx[5];
 	let each_blocks_1 = [];
 
-	for (let i = 0; i < each_value_1.length; i += 1) {
-		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+	for (let i = 0; i < each_value_2.length; i += 1) {
+		each_blocks_1[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
 	}
 
 	label1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
@@ -49615,11 +49625,11 @@ function create_if_block_7(ctx) {
 			}
 		});
 
-	let each_value = /*tiposSoftware*/ ctx[6];
+	let each_value_1 = /*tiposSoftware*/ ctx[6];
 	let each_blocks = [];
 
-	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	for (let i = 0; i < each_value_1.length; i += 1) {
+		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
 	}
 
 	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_6__.default({
@@ -49745,17 +49755,17 @@ function create_if_block_7(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty & /*tiposLicencia*/ 32) {
-				each_value_1 = /*tiposLicencia*/ ctx[5];
+			if (dirty[0] & /*tiposLicencia*/ 32) {
+				each_value_2 = /*tiposLicencia*/ ctx[5];
 				let i;
 
-				for (i = 0; i < each_value_1.length; i += 1) {
-					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+				for (i = 0; i < each_value_2.length; i += 1) {
+					const child_ctx = get_each_context_2(ctx, each_value_2, i);
 
 					if (each_blocks_1[i]) {
 						each_blocks_1[i].p(child_ctx, dirty);
 					} else {
-						each_blocks_1[i] = create_each_block_1(child_ctx);
+						each_blocks_1[i] = create_each_block_2(child_ctx);
 						each_blocks_1[i].c();
 						each_blocks_1[i].m(select0, null);
 					}
@@ -49765,24 +49775,24 @@ function create_if_block_7(ctx) {
 					each_blocks_1[i].d(1);
 				}
 
-				each_blocks_1.length = each_value_1.length;
+				each_blocks_1.length = each_value_2.length;
 			}
 
-			if (!current || dirty & /*presupuestoInfo, tiposLicencia*/ 288 && select0_value_value !== (select0_value_value = /*presupuestoInfo*/ ctx[8].tipo_licencia)) {
+			if (!current || dirty[0] & /*presupuestoInfo, tiposLicencia*/ 288 && select0_value_value !== (select0_value_value = /*presupuestoInfo*/ ctx[8].tipo_licencia)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.select_option)(select0, /*presupuestoInfo*/ ctx[8].tipo_licencia);
 			}
 
-			if (dirty & /*tiposSoftware*/ 64) {
-				each_value = /*tiposSoftware*/ ctx[6];
+			if (dirty[0] & /*tiposSoftware*/ 64) {
+				each_value_1 = /*tiposSoftware*/ ctx[6];
 				let i;
 
-				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context(ctx, each_value, i);
+				for (i = 0; i < each_value_1.length; i += 1) {
+					const child_ctx = get_each_context_1(ctx, each_value_1, i);
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
 					} else {
-						each_blocks[i] = create_each_block(child_ctx);
+						each_blocks[i] = create_each_block_1(child_ctx);
 						each_blocks[i].c();
 						each_blocks[i].m(select1, null);
 					}
@@ -49792,18 +49802,18 @@ function create_if_block_7(ctx) {
 					each_blocks[i].d(1);
 				}
 
-				each_blocks.length = each_value.length;
+				each_blocks.length = each_value_1.length;
 			}
 
-			if (!current || dirty & /*presupuestoInfo, tiposLicencia*/ 288 && select1_value_value !== (select1_value_value = /*presupuestoInfo*/ ctx[8].tipo_software)) {
+			if (!current || dirty[0] & /*presupuestoInfo, tiposLicencia*/ 288 && select1_value_value !== (select1_value_value = /*presupuestoInfo*/ ctx[8].tipo_software)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.select_option)(select1, /*presupuestoInfo*/ ctx[8].tipo_software);
 			}
 
-			if (!current || dirty & /*presupuestoInfo, tiposLicencia*/ 288 && input0_value_value !== (input0_value_value = /*presupuestoInfo*/ ctx[8].fecha_inicio)) {
+			if (!current || dirty[0] & /*presupuestoInfo, tiposLicencia*/ 288 && input0_value_value !== (input0_value_value = /*presupuestoInfo*/ ctx[8].fecha_inicio)) {
 				input0.value = input0_value_value;
 			}
 
-			if (!current || dirty & /*presupuestoInfo, tiposLicencia*/ 288 && input1_value_value !== (input1_value_value = /*presupuestoInfo*/ ctx[8].fecha_finalizacion)) {
+			if (!current || dirty[0] & /*presupuestoInfo, tiposLicencia*/ 288 && input1_value_value !== (input1_value_value = /*presupuestoInfo*/ ctx[8].fecha_finalizacion)) {
 				input1.value = input1_value_value;
 			}
 		},
@@ -49838,10 +49848,42 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (152:32) {#each tiposLicencia as { value, label }}
+// (153:32) {#each tiposLicencia as { value, label }}
+function create_each_block_2(ctx) {
+	let option;
+	let t_value = /*label*/ ctx[29] + "";
+	let t;
+	let option_value_value;
+
+	return {
+		c() {
+			option = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("option");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
+			option.__value = option_value_value = /*value*/ ctx[28];
+			option.value = option.__value;
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, option, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(option, t);
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*tiposLicencia*/ 32 && t_value !== (t_value = /*label*/ ctx[29] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+
+			if (dirty[0] & /*tiposLicencia*/ 32 && option_value_value !== (option_value_value = /*value*/ ctx[28])) {
+				option.__value = option_value_value;
+				option.value = option.__value;
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(option);
+		}
+	};
+}
+
+// (163:32) {#each tiposSoftware as { value, label }}
 function create_each_block_1(ctx) {
 	let option;
-	let t_value = /*label*/ ctx[25] + "";
+	let t_value = /*label*/ ctx[29] + "";
 	let t;
 	let option_value_value;
 
@@ -49849,7 +49891,7 @@ function create_each_block_1(ctx) {
 		c() {
 			option = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("option");
 			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
-			option.__value = option_value_value = /*value*/ ctx[24];
+			option.__value = option_value_value = /*value*/ ctx[28];
 			option.value = option.__value;
 		},
 		m(target, anchor) {
@@ -49857,9 +49899,9 @@ function create_each_block_1(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(option, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*tiposLicencia*/ 32 && t_value !== (t_value = /*label*/ ctx[25] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*tiposSoftware*/ 64 && t_value !== (t_value = /*label*/ ctx[29] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 
-			if (dirty & /*tiposLicencia*/ 32 && option_value_value !== (option_value_value = /*value*/ ctx[24])) {
+			if (dirty[0] & /*tiposSoftware*/ 64 && option_value_value !== (option_value_value = /*value*/ ctx[28])) {
 				option.__value = option_value_value;
 				option.value = option.__value;
 			}
@@ -49870,39 +49912,115 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (162:32) {#each tiposSoftware as { value, label }}
+// (187:20) {#if proyectoPresupuesto.actividades?.length > 0}
+function create_if_block_7(ctx) {
+	let h6;
+	let t1;
+	let div2;
+	let div0;
+	let t2;
+	let div1;
+	let ul;
+	let each_value = /*proyectoPresupuesto*/ ctx[4].actividades;
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	}
+
+	return {
+		c() {
+			h6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h6");
+			h6.textContent = "Actividades";
+			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			ul = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("ul");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h6, "class", "mt-20 mb-12 text-2xl");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "p-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(ul, "class", "list-disc p-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "p-2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "bg-white rounded shadow overflow-hidden");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, h6, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t1, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div0);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, ul);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(ul, null);
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*proyectoPresupuesto*/ 16) {
+				each_value = /*proyectoPresupuesto*/ ctx[4].actividades;
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(ul, null);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value.length;
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h6);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+		}
+	};
+}
+
+// (194:36) {#each proyectoPresupuesto.actividades as { id, descripcion }
 function create_each_block(ctx) {
-	let option;
-	let t_value = /*label*/ ctx[25] + "";
+	let li;
+	let t_value = /*descripcion*/ ctx[25] + "";
 	let t;
-	let option_value_value;
 
 	return {
 		c() {
-			option = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("option");
+			li = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("li");
 			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
-			option.__value = option_value_value = /*value*/ ctx[24];
-			option.value = option.__value;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(li, "class", "first-letter-uppercase mb-4");
 		},
 		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, option, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(option, t);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, li, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*tiposSoftware*/ 64 && t_value !== (t_value = /*label*/ ctx[25] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
-
-			if (dirty & /*tiposSoftware*/ 64 && option_value_value !== (option_value_value = /*value*/ ctx[24])) {
-				option.__value = option_value_value;
-				option.value = option.__value;
-			}
+			if (dirty[0] & /*proyectoPresupuesto*/ 16 && t_value !== (t_value = /*descripcion*/ ctx[25] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(option);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
 		}
 	};
 }
 
-// (191:24) {#if $form.correcto == false}
+// (207:24) {#if $form.correcto == false}
 function create_if_block_6(ctx) {
 	let textarea;
 	let updating_value;
@@ -49944,15 +50062,15 @@ function create_if_block_6(ctx) {
 		p(ctx, dirty) {
 			const textarea_changes = {};
 
-			if (dirty & /*evaluacion*/ 4) textarea_changes.disabled = /*isSuperAdmin*/ ctx[13]
+			if (dirty[0] & /*evaluacion*/ 4) textarea_changes.disabled = /*isSuperAdmin*/ ctx[13]
 			? undefined
 			: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
 				? true
 				: undefined;
 
-			if (dirty & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].comentario;
+			if (dirty[0] & /*errors*/ 1) textarea_changes.error = /*errors*/ ctx[0].comentario;
 
-			if (!updating_value && dirty & /*$form*/ 2048) {
+			if (!updating_value && dirty[0] & /*$form*/ 2048) {
 				updating_value = true;
 				textarea_changes.value = /*$form*/ ctx[11].comentario;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
@@ -49975,7 +50093,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (187:16) <InfoMessage>
+// (203:16) <InfoMessage>
 function create_default_slot_2(ctx) {
 	let div;
 	let p;
@@ -50030,13 +50148,13 @@ function create_default_slot_2(ctx) {
 		p(ctx, dirty) {
 			const switch_1_changes = {};
 
-			if (dirty & /*evaluacion*/ 4) switch_1_changes.disabled = /*isSuperAdmin*/ ctx[13]
+			if (dirty[0] & /*evaluacion*/ 4) switch_1_changes.disabled = /*isSuperAdmin*/ ctx[13]
 			? undefined
 			: /*evaluacion*/ ctx[2].finalizado == true || /*evaluacion*/ ctx[2].habilitado == false || /*evaluacion*/ ctx[2].modificable == false
 				? true
 				: undefined;
 
-			if (!updating_checked && dirty & /*$form*/ 2048) {
+			if (!updating_checked && dirty[0] & /*$form*/ 2048) {
 				updating_checked = true;
 				switch_1_changes.checked = /*$form*/ ctx[11].correcto;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked = false);
@@ -50048,7 +50166,7 @@ function create_default_slot_2(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*$form*/ 2048) {
+					if (dirty[0] & /*$form*/ 2048) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -50086,7 +50204,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (198:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+// (214:20) {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
 function create_if_block_4(ctx) {
 	let if_block_anchor;
 	let current;
@@ -50107,7 +50225,7 @@ function create_if_block_4(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*presupuestoInfo*/ 256) {
+					if (dirty[0] & /*presupuestoInfo*/ 256) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
@@ -50142,7 +50260,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (199:24) {#if presupuestoInfo.convocatoria_presupuesto_id != '' || presupuestoInfo.convocatoria_presupuesto_id != ''}
+// (215:24) {#if presupuestoInfo.convocatoria_presupuesto_id != '' || presupuestoInfo.convocatoria_presupuesto_id != ''}
 function create_if_block_5(ctx) {
 	let loadingbutton;
 	let current;
@@ -50167,9 +50285,9 @@ function create_if_block_5(ctx) {
 		},
 		p(ctx, dirty) {
 			const loadingbutton_changes = {};
-			if (dirty & /*sending*/ 1024) loadingbutton_changes.loading = /*sending*/ ctx[10];
+			if (dirty[0] & /*sending*/ 1024) loadingbutton_changes.loading = /*sending*/ ctx[10];
 
-			if (dirty & /*$$scope*/ 1073741824) {
+			if (dirty[1] & /*$$scope*/ 8) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -50190,7 +50308,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (200:28) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (216:28) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -50207,7 +50325,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (206:8) {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
+// (222:8) {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
 function create_if_block_3(ctx) {
 	let div;
 	let h1;
@@ -50257,7 +50375,7 @@ function create_if_block_3(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*convocatoria, evaluacion, proyectoPresupuesto*/ 22 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.presupuesto.soportes", [
+			if (dirty[0] & /*convocatoria, evaluacion, proyectoPresupuesto*/ 22 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.presupuesto.soportes", [
 				/*convocatoria*/ ctx[1].id,
 				/*evaluacion*/ ctx[2].id,
 				/*proyectoPresupuesto*/ ctx[4].id
@@ -50273,7 +50391,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (218:4) {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
+// (234:4) {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
 function create_if_block_1(ctx) {
 	let h1;
 	let t1;
@@ -50288,7 +50406,7 @@ function create_if_block_1(ctx) {
 		return create_else_block;
 	}
 
-	let current_block_type = select_block_type_1(ctx, -1);
+	let current_block_type = select_block_type_1(ctx, [-1, -1]);
 	let if_block = current_block_type(ctx);
 
 	return {
@@ -50342,7 +50460,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (234:20) {:else}
+// (250:20) {:else}
 function create_else_block(ctx) {
 	let tr;
 	let td0;
@@ -50399,7 +50517,7 @@ function create_else_block(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(a, t2);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*convocatoria, proyecto, proyectoPresupuesto*/ 26 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.proyectos.presupuesto.download", [
+			if (dirty[0] & /*convocatoria, proyecto, proyectoPresupuesto*/ 26 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.proyectos.presupuesto.download", [
 				/*convocatoria*/ ctx[1].id,
 				/*proyecto*/ ctx[3].id,
 				/*proyectoPresupuesto*/ ctx[4].id
@@ -50413,7 +50531,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (230:20) {#if !proyectoPresupuesto.formato_estudio_mercado}
+// (246:20) {#if !proyectoPresupuesto.formato_estudio_mercado}
 function create_if_block_2(ctx) {
 	let tr;
 
@@ -50458,15 +50576,16 @@ function create_default_slot(ctx) {
 	let t7;
 	let current_block_type_index;
 	let if_block2;
-	let fieldset_disabled_value;
 	let t8;
-	let infomessage;
+	let fieldset_disabled_value;
 	let t9;
+	let infomessage;
+	let t10;
 	let div4;
 	let show_if = /*isSuperAdmin*/ ctx[13] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[12], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
-	let t10;
 	let t11;
-	let if_block5_anchor;
+	let t12;
+	let if_block6_anchor;
 	let current;
 	let mounted;
 	let dispose;
@@ -50480,6 +50599,7 @@ function create_default_slot(ctx) {
 
 	dynamiclist = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_12__.default({
 			props: {
+				classes: "evaluacion-select",
 				disabled: true,
 				id: "segundo_grupo_presupuestal_id",
 				value: /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id,
@@ -50489,8 +50609,8 @@ function create_default_slot(ctx) {
 			}
 		});
 
-	let if_block0 = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id && create_if_block_11(ctx);
-	let if_block1 = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id && /*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id && create_if_block_9(ctx);
+	let if_block0 = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id && create_if_block_12(ctx);
+	let if_block1 = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id && /*presupuestoInfo*/ ctx[8].tercer_grupo_presupuestal_id && create_if_block_10(ctx);
 
 	textarea0 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -50525,7 +50645,7 @@ function create_default_slot(ctx) {
 			}
 		});
 
-	const if_block_creators = [create_if_block_7, create_if_block_8];
+	const if_block_creators = [create_if_block_8, create_if_block_9];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
@@ -50534,9 +50654,11 @@ function create_default_slot(ctx) {
 		return -1;
 	}
 
-	if (~(current_block_type_index = select_block_type(ctx, -1))) {
+	if (~(current_block_type_index = select_block_type(ctx, [-1, -1]))) {
 		if_block2 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 	}
+
+	let if_block3 = /*proyectoPresupuesto*/ ctx[4].actividades?.length > 0 && create_if_block_7(ctx);
 
 	infomessage = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -50545,9 +50667,9 @@ function create_default_slot(ctx) {
 			}
 		});
 
-	let if_block3 = show_if && create_if_block_4(ctx);
-	let if_block4 = (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_3(ctx);
-	let if_block5 = (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_1(ctx);
+	let if_block4 = show_if && create_if_block_4(ctx);
+	let if_block5 = (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_3(ctx);
+	let if_block6 = (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_1(ctx);
 
 	return {
 		c() {
@@ -50577,15 +50699,17 @@ function create_default_slot(ctx) {
 			t7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block2) if_block2.c();
 			t8 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
-			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (if_block3) if_block3.c();
+			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
 			t10 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (if_block4) if_block4.c();
 			t11 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block5) if_block5.c();
-			if_block5_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
+			t12 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if (if_block6) if_block6.c();
+			if_block6_anchor = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.empty)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(hr, "class", "mt-10 mb-10");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
@@ -50632,16 +50756,18 @@ function create_default_slot(ctx) {
 				if_blocks[current_block_type_index].m(fieldset, null);
 			}
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t8);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, form_1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t8);
+			if (if_block3) if_block3.m(fieldset, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t9);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, form_1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t10);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div4);
-			if (if_block3) if_block3.m(div4, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div6, t10);
-			if (if_block4) if_block4.m(div6, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t11, anchor);
-			if (if_block5) if_block5.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block5_anchor, anchor);
+			if (if_block4) if_block4.m(div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div6, t11);
+			if (if_block5) if_block5.m(div6, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t12, anchor);
+			if (if_block6) if_block6.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block6_anchor, anchor);
 			current = true;
 
 			if (!mounted) {
@@ -50651,20 +50777,20 @@ function create_default_slot(ctx) {
 		},
 		p(ctx, dirty) {
 			const dynamiclist_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id;
-			if (dirty & /*proyecto*/ 8) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.segundo-grupo-presupuestal", /*proyecto*/ ctx[3].linea_programatica);
-			if (dirty & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].segundo_grupo_presupuestal_id;
+			if (dirty[0] & /*presupuestoInfo*/ 256) dynamiclist_changes.value = /*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id;
+			if (dirty[0] & /*proyecto*/ 8) dynamiclist_changes.routeWebApi = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.segundo-grupo-presupuestal", /*proyecto*/ ctx[3].linea_programatica);
+			if (dirty[0] & /*errors*/ 1) dynamiclist_changes.message = /*errors*/ ctx[0].segundo_grupo_presupuestal_id;
 			dynamiclist.$set(dynamiclist_changes);
 
 			if (/*presupuestoInfo*/ ctx[8].segundo_grupo_presupuestal_id) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
-					if (dirty & /*presupuestoInfo*/ 256) {
+					if (dirty[0] & /*presupuestoInfo*/ 256) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_11(ctx);
+					if_block0 = create_if_block_12(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(fieldset, t2);
@@ -50683,11 +50809,11 @@ function create_default_slot(ctx) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 
-					if (dirty & /*presupuestoInfo*/ 256) {
+					if (dirty[0] & /*presupuestoInfo*/ 256) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_9(ctx);
+					if_block1 = create_if_block_10(ctx);
 					if_block1.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					if_block1.m(fieldset, t3);
@@ -50703,14 +50829,14 @@ function create_default_slot(ctx) {
 			}
 
 			const textarea0_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) textarea0_changes.value = /*presupuestoInfo*/ ctx[8].descripcion;
+			if (dirty[0] & /*presupuestoInfo*/ 256) textarea0_changes.value = /*presupuestoInfo*/ ctx[8].descripcion;
 			textarea0.$set(textarea0_changes);
 			const textarea1_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) textarea1_changes.value = /*presupuestoInfo*/ ctx[8].justificacion;
+			if (dirty[0] & /*presupuestoInfo*/ 256) textarea1_changes.value = /*presupuestoInfo*/ ctx[8].justificacion;
 			textarea1.$set(textarea1_changes);
 			const input_changes = {};
-			if (dirty & /*presupuestoInfo*/ 256) input_changes.value = /*presupuestoInfo*/ ctx[8].valor_total;
-			if (dirty & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].valor_total;
+			if (dirty[0] & /*presupuestoInfo*/ 256) input_changes.value = /*presupuestoInfo*/ ctx[8].valor_total;
+			if (dirty[0] & /*errors*/ 1) input_changes.error = /*errors*/ ctx[0].valor_total;
 			input.$set(input_changes);
 			let previous_block_index = current_block_type_index;
 			current_block_type_index = select_block_type(ctx, dirty);
@@ -50741,13 +50867,26 @@ function create_default_slot(ctx) {
 					}
 
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
-					if_block2.m(fieldset, null);
+					if_block2.m(fieldset, t8);
 				} else {
 					if_block2 = null;
 				}
 			}
 
-			if (!current || dirty & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[13] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[12], [11]) && /*proyecto*/ ctx[3].finalizado == true
+			if (/*proyectoPresupuesto*/ ctx[4].actividades?.length > 0) {
+				if (if_block3) {
+					if_block3.p(ctx, dirty);
+				} else {
+					if_block3 = create_if_block_7(ctx);
+					if_block3.c();
+					if_block3.m(fieldset, null);
+				}
+			} else if (if_block3) {
+				if_block3.d(1);
+				if_block3 = null;
+			}
+
+			if (!current || dirty[0] & /*proyecto*/ 8 && fieldset_disabled_value !== (fieldset_disabled_value = /*isSuperAdmin*/ ctx[13] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[12], [11]) && /*proyecto*/ ctx[3].finalizado == true
 			? undefined
 			: true)) {
 				fieldset.disabled = fieldset_disabled_value;
@@ -50755,60 +50894,60 @@ function create_default_slot(ctx) {
 
 			const infomessage_changes = {};
 
-			if (dirty & /*$$scope, evaluacion, errors, $form*/ 1073743877) {
+			if (dirty[0] & /*evaluacion, errors, $form*/ 2053 | dirty[1] & /*$$scope*/ 8) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
 			infomessage.$set(infomessage_changes);
-			if (dirty & /*proyecto, evaluacion*/ 12) show_if = /*isSuperAdmin*/ ctx[13] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[12], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
+			if (dirty[0] & /*proyecto, evaluacion*/ 12) show_if = /*isSuperAdmin*/ ctx[13] || (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.checkRole)(/*authUser*/ ctx[12], [11]) && /*proyecto*/ ctx[3].finalizado == true && /*evaluacion*/ ctx[2].finalizado == false && /*evaluacion*/ ctx[2].habilitado == true && /*evaluacion*/ ctx[2].modificable == true;
 
 			if (show_if) {
-				if (if_block3) {
-					if_block3.p(ctx, dirty);
+				if (if_block4) {
+					if_block4.p(ctx, dirty);
 
-					if (dirty & /*proyecto, evaluacion*/ 12) {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
+					if (dirty[0] & /*proyecto, evaluacion*/ 12) {
+						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					}
 				} else {
-					if_block3 = create_if_block_4(ctx);
-					if_block3.c();
-					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
-					if_block3.m(div4, null);
+					if_block4 = create_if_block_4(ctx);
+					if_block4.c();
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
+					if_block4.m(div4, null);
 				}
-			} else if (if_block3) {
+			} else if (if_block4) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
 
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block3, 1, 1, () => {
-					if_block3 = null;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block4, 1, 1, () => {
+					if_block4 = null;
 				});
 
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
 			if (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") {
-				if (if_block4) {
-					if_block4.p(ctx, dirty);
-				} else {
-					if_block4 = create_if_block_3(ctx);
-					if_block4.c();
-					if_block4.m(div6, null);
-				}
-			} else if (if_block4) {
-				if_block4.d(1);
-				if_block4 = null;
-			}
-
-			if (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
-					if_block5 = create_if_block_1(ctx);
+					if_block5 = create_if_block_3(ctx);
 					if_block5.c();
-					if_block5.m(if_block5_anchor.parentNode, if_block5_anchor);
+					if_block5.m(div6, null);
 				}
 			} else if (if_block5) {
 				if_block5.d(1);
 				if_block5 = null;
+			}
+
+			if (/*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*presupuestoInfo*/ ctx[8].codigo_uso_presupuestal == "020202008005096") {
+				if (if_block6) {
+					if_block6.p(ctx, dirty);
+				} else {
+					if_block6 = create_if_block_1(ctx);
+					if_block6.c();
+					if_block6.m(if_block6_anchor.parentNode, if_block6_anchor);
+				}
+			} else if (if_block6) {
+				if_block6.d(1);
+				if_block6 = null;
 			}
 		},
 		i(local) {
@@ -50822,7 +50961,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(input.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4);
 			current = true;
 		},
 		o(local) {
@@ -50835,7 +50974,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(input.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block2);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(infomessage.$$.fragment, local);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block4);
 			current = false;
 		},
 		d(detaching) {
@@ -50852,12 +50991,13 @@ function create_default_slot(ctx) {
 				if_blocks[current_block_type_index].d();
 			}
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage);
 			if (if_block3) if_block3.d();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage);
 			if (if_block4) if_block4.d();
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t11);
-			if (if_block5) if_block5.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block5_anchor);
+			if (if_block5) if_block5.d();
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t12);
+			if (if_block6) if_block6.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(if_block6_anchor);
 			mounted = false;
 			dispose();
 		}
@@ -50890,7 +51030,7 @@ function create_if_block(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*convocatoria, evaluacion*/ 6 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.presupuesto.index", [/*convocatoria*/ ctx[1].id, /*evaluacion*/ ctx[2].id]))) {
+			if (dirty[0] & /*convocatoria, evaluacion*/ 6 && a_href_value !== (a_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("convocatorias.evaluaciones.presupuesto.index", [/*convocatoria*/ ctx[1].id, /*evaluacion*/ ctx[2].id]))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a, "href", a_href_value);
 			}
 		},
@@ -50947,7 +51087,7 @@ function create_header_slot(ctx) {
 		},
 		p(ctx, dirty) {
 			if (show_if) if_block.p(ctx, dirty);
-			if (dirty & /*proyectoPresupuesto*/ 16 && t3_value !== (t3_value = /*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
+			if (dirty[0] & /*proyectoPresupuesto*/ 16 && t3_value !== (t3_value = /*proyectoPresupuesto*/ ctx[4].convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t3, t3_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(header);
@@ -50978,10 +51118,10 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(authenticatedlayout, target, anchor);
 			current = true;
 		},
-		p(ctx, [dirty]) {
+		p(ctx, dirty) {
 			const authenticatedlayout_changes = {};
 
-			if (dirty & /*$$scope, proyectoPresupuesto, convocatoria, evaluacion, proyecto, presupuestoInfo, sending, errors, $form, tiposSoftware, tiposLicencia, opcionesServiciosEdicion, presupuestoSennova*/ 1073745919) {
+			if (dirty[0] & /*proyectoPresupuesto, convocatoria, evaluacion, proyecto, presupuestoInfo, sending, errors, $form, tiposSoftware, tiposLicencia, opcionesServiciosEdicion, presupuestoSennova*/ 4095 | dirty[1] & /*$$scope*/ 8) {
 				authenticatedlayout_changes.$$scope = { dirty, ctx };
 			}
 
@@ -51110,7 +51250,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*proyectoPresupuesto*/ 16) {
+		if ($$self.$$.dirty[0] & /*proyectoPresupuesto*/ 16) {
 			$: (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
 				_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.title,
 				$title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal
@@ -51120,7 +51260,7 @@ function instance($$self, $$props, $$invalidate) {
 			);
 		}
 
-		if ($$self.$$.dirty & /*presupuestoInfo, prevSegundoGrupoPresupuestal, presupuestoSennova*/ 131840) {
+		if ($$self.$$.dirty[0] & /*presupuestoInfo, prevSegundoGrupoPresupuestal, presupuestoSennova*/ 131840) {
 			$: {
 				if (presupuestoInfo.segundo_grupo_presupuestal_id != prevSegundoGrupoPresupuestal) {
 					$$invalidate(9, presupuestoSennova = null);
@@ -51162,17 +51302,25 @@ class Edit extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent 
 	constructor(options) {
 		super();
 
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
-			errors: 0,
-			convocatoria: 1,
-			evaluacion: 2,
-			proyectoPresupuestoEvaluacion: 16,
-			proyecto: 3,
-			proyectoPresupuesto: 4,
-			tiposLicencia: 5,
-			tiposSoftware: 6,
-			opcionesServiciosEdicion: 7
-		});
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(
+			this,
+			options,
+			instance,
+			create_fragment,
+			svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal,
+			{
+				errors: 0,
+				convocatoria: 1,
+				evaluacion: 2,
+				proyectoPresupuestoEvaluacion: 16,
+				proyecto: 3,
+				proyectoPresupuesto: 4,
+				tiposLicencia: 5,
+				tiposSoftware: 6,
+				opcionesServiciosEdicion: 7
+			},
+			[-1, -1]
+		);
 	}
 }
 

@@ -48160,6 +48160,7 @@ function create_if_block_5(ctx) {
 
 	dynamiclist = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_7__.default({
 			props: {
+				classes: "evaluacion-select",
 				disabled: true,
 				id: "subtipologia_minciencias_id",
 				value: /*productoInfo*/ ctx[7].subtipologia_minciencias_id,

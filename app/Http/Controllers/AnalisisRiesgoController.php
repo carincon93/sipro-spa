@@ -220,7 +220,7 @@ class AnalisisRiesgoController extends Controller
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
-            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'finalizado'),
             'filters'           => request()->all('search'),
             'analisisRiesgos'   => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')
                 ->filterAnalisisRiesgo(request()->only('search'))->paginate()->appends(['search' => request()->search]),

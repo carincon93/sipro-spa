@@ -8425,9 +8425,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".items .listItem{\n  border-bottom:1px
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -31151,9 +31151,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./resources/js/Shared/SelectMulti.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte":
 /*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./resources/js/Shared/SelectMulti.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte ***!
   \***********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31164,7 +31164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_69_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte");
 
             
 
@@ -31173,11 +31173,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_69_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_69_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -49935,8 +49935,8 @@ function get_each_context_3(ctx, list, i) {
 	return child_ctx;
 }
 
-// (242:20) {#if $form.titulo_requiere_comentario == false}
-function create_if_block_26(ctx) {
+// (243:20) {#if $form.titulo_requiere_comentario == false}
+function create_if_block_27(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -50001,7 +50001,7 @@ function create_if_block_26(ctx) {
 	};
 }
 
-// (230:12) <InfoMessage>
+// (231:12) <InfoMessage>
 function create_default_slot_29(ctx) {
 	let h1;
 	let t1;
@@ -50073,7 +50073,7 @@ function create_default_slot_29(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding));
-	let if_block = /*$form*/ ctx[18].titulo_requiere_comentario == false && create_if_block_26(ctx);
+	let if_block = /*$form*/ ctx[18].titulo_requiere_comentario == false && create_if_block_27(ctx);
 
 	return {
 		c() {
@@ -50155,7 +50155,7 @@ function create_default_slot_29(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_26(ctx);
+					if_block = create_if_block_27(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -50201,8 +50201,8 @@ function create_default_slot_29(ctx) {
 	};
 }
 
-// (270:20) {#if $form.fechas_requiere_comentario == false}
-function create_if_block_25(ctx) {
+// (271:20) {#if $form.fechas_requiere_comentario == false}
+function create_if_block_26(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -50270,7 +50270,7 @@ function create_if_block_25(ctx) {
 	};
 }
 
-// (266:12) <InfoMessage>
+// (267:12) <InfoMessage>
 function create_default_slot_28(ctx) {
 	let div;
 	let p;
@@ -50298,7 +50298,7 @@ function create_default_slot_28(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_1));
-	let if_block = /*$form*/ ctx[18].fechas_requiere_comentario == false && create_if_block_25(ctx);
+	let if_block = /*$form*/ ctx[18].fechas_requiere_comentario == false && create_if_block_26(ctx);
 
 	return {
 		c() {
@@ -50343,7 +50343,7 @@ function create_default_slot_28(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_25(ctx);
+					if_block = create_if_block_26(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -50377,8 +50377,8 @@ function create_default_slot_28(ctx) {
 	};
 }
 
-// (296:24) {#if $form.area_conocimiento_requiere_comentario == false}
-function create_if_block_24(ctx) {
+// (297:24) {#if $form.area_conocimiento_requiere_comentario == false}
+function create_if_block_25(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -50446,7 +50446,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (292:16) <InfoMessage>
+// (293:16) <InfoMessage>
 function create_default_slot_27(ctx) {
 	let div;
 	let p;
@@ -50474,7 +50474,7 @@ function create_default_slot_27(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_2));
-	let if_block = /*$form*/ ctx[18].area_conocimiento_requiere_comentario == false && create_if_block_24(ctx);
+	let if_block = /*$form*/ ctx[18].area_conocimiento_requiere_comentario == false && create_if_block_25(ctx);
 
 	return {
 		c() {
@@ -50519,7 +50519,7 @@ function create_default_slot_27(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_24(ctx);
+					if_block = create_if_block_25(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -50553,8 +50553,8 @@ function create_default_slot_27(ctx) {
 	};
 }
 
-// (314:24) {#if $form.actividad_economica_requiere_comentario == false}
-function create_if_block_23(ctx) {
+// (315:24) {#if $form.actividad_economica_requiere_comentario == false}
+function create_if_block_24(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -50622,7 +50622,7 @@ function create_if_block_23(ctx) {
 	};
 }
 
-// (310:16) <InfoMessage>
+// (311:16) <InfoMessage>
 function create_default_slot_26(ctx) {
 	let div;
 	let p;
@@ -50650,7 +50650,7 @@ function create_default_slot_26(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_3));
-	let if_block = /*$form*/ ctx[18].actividad_economica_requiere_comentario == false && create_if_block_23(ctx);
+	let if_block = /*$form*/ ctx[18].actividad_economica_requiere_comentario == false && create_if_block_24(ctx);
 
 	return {
 		c() {
@@ -50695,7 +50695,7 @@ function create_default_slot_26(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_23(ctx);
+					if_block = create_if_block_24(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -50729,8 +50729,8 @@ function create_default_slot_26(ctx) {
 	};
 }
 
-// (332:24) {#if $form.tematica_estrategica_requiere_comentario == false}
-function create_if_block_22(ctx) {
+// (333:24) {#if $form.tematica_estrategica_requiere_comentario == false}
+function create_if_block_23(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -50798,7 +50798,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (328:16) <InfoMessage>
+// (329:16) <InfoMessage>
 function create_default_slot_25(ctx) {
 	let div;
 	let p;
@@ -50826,7 +50826,7 @@ function create_default_slot_25(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_4));
-	let if_block = /*$form*/ ctx[18].tematica_estrategica_requiere_comentario == false && create_if_block_22(ctx);
+	let if_block = /*$form*/ ctx[18].tematica_estrategica_requiere_comentario == false && create_if_block_23(ctx);
 
 	return {
 		c() {
@@ -50871,7 +50871,7 @@ function create_default_slot_25(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_22(ctx);
+					if_block = create_if_block_23(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -50905,8 +50905,8 @@ function create_default_slot_25(ctx) {
 	};
 }
 
-// (345:16) {#if tieneVideo}
-function create_if_block_20(ctx) {
+// (346:16) {#if tieneVideo}
+function create_if_block_21(ctx) {
 	let input;
 	let updating_value;
 	let t;
@@ -50989,8 +50989,8 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (361:28) {#if $form.video_requiere_comentario == false}
-function create_if_block_21(ctx) {
+// (362:28) {#if $form.video_requiere_comentario == false}
+function create_if_block_22(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -51055,7 +51055,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (348:20) <InfoMessage>
+// (349:20) <InfoMessage>
 function create_default_slot_24(ctx) {
 	let h1;
 	let t1;
@@ -51127,7 +51127,7 @@ function create_default_slot_24(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_5));
-	let if_block = /*$form*/ ctx[18].video_requiere_comentario == false && create_if_block_21(ctx);
+	let if_block = /*$form*/ ctx[18].video_requiere_comentario == false && create_if_block_22(ctx);
 
 	return {
 		c() {
@@ -51209,7 +51209,7 @@ function create_default_slot_24(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_21(ctx);
+					if_block = create_if_block_22(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -51255,8 +51255,8 @@ function create_default_slot_24(ctx) {
 	};
 }
 
-// (379:16) {#if requiereJustificacionIndustria4}
-function create_if_block_18(ctx) {
+// (380:16) {#if requiereJustificacionIndustria4}
+function create_if_block_19(ctx) {
 	let textarea;
 	let updating_value;
 	let t;
@@ -51337,8 +51337,8 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (386:28) {#if $form.justificacion_industria_4_requiere_comentario == false}
-function create_if_block_19(ctx) {
+// (387:28) {#if $form.justificacion_industria_4_requiere_comentario == false}
+function create_if_block_20(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -51406,7 +51406,7 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (382:20) <InfoMessage>
+// (383:20) <InfoMessage>
 function create_default_slot_23(ctx) {
 	let div;
 	let p;
@@ -51434,7 +51434,7 @@ function create_default_slot_23(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_6));
-	let if_block = /*$form*/ ctx[18].justificacion_industria_4_requiere_comentario == false && create_if_block_19(ctx);
+	let if_block = /*$form*/ ctx[18].justificacion_industria_4_requiere_comentario == false && create_if_block_20(ctx);
 
 	return {
 		c() {
@@ -51479,7 +51479,7 @@ function create_default_slot_23(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_19(ctx);
+					if_block = create_if_block_20(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -51513,8 +51513,8 @@ function create_default_slot_23(ctx) {
 	};
 }
 
-// (412:16) {#if requiereJustificacionEconomiaNaranja}
-function create_if_block_16(ctx) {
+// (413:16) {#if requiereJustificacionEconomiaNaranja}
+function create_if_block_17(ctx) {
 	let textarea;
 	let updating_value;
 	let t;
@@ -51595,8 +51595,8 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (419:28) {#if $form.justificacion_economia_naranja_requiere_comentario == false}
-function create_if_block_17(ctx) {
+// (420:28) {#if $form.justificacion_economia_naranja_requiere_comentario == false}
+function create_if_block_18(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -51664,7 +51664,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (415:20) <InfoMessage>
+// (416:20) <InfoMessage>
 function create_default_slot_22(ctx) {
 	let div;
 	let p;
@@ -51692,7 +51692,7 @@ function create_default_slot_22(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_7));
-	let if_block = /*$form*/ ctx[18].justificacion_economia_naranja_requiere_comentario == false && create_if_block_17(ctx);
+	let if_block = /*$form*/ ctx[18].justificacion_economia_naranja_requiere_comentario == false && create_if_block_18(ctx);
 
 	return {
 		c() {
@@ -51737,7 +51737,7 @@ function create_default_slot_22(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_17(ctx);
+					if_block = create_if_block_18(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -51771,8 +51771,8 @@ function create_default_slot_22(ctx) {
 	};
 }
 
-// (445:16) {#if requiereJustificacionPoliticaDiscapacidad}
-function create_if_block_14(ctx) {
+// (446:16) {#if requiereJustificacionPoliticaDiscapacidad}
+function create_if_block_15(ctx) {
 	let textarea;
 	let updating_value;
 	let t;
@@ -51853,8 +51853,8 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (452:28) {#if $form.justificacion_politica_discapacidad_requiere_comentario == false}
-function create_if_block_15(ctx) {
+// (453:28) {#if $form.justificacion_politica_discapacidad_requiere_comentario == false}
+function create_if_block_16(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -51922,7 +51922,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (448:20) <InfoMessage>
+// (449:20) <InfoMessage>
 function create_default_slot_21(ctx) {
 	let div;
 	let p;
@@ -51950,7 +51950,7 @@ function create_default_slot_21(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_8));
-	let if_block = /*$form*/ ctx[18].justificacion_politica_discapacidad_requiere_comentario == false && create_if_block_15(ctx);
+	let if_block = /*$form*/ ctx[18].justificacion_politica_discapacidad_requiere_comentario == false && create_if_block_16(ctx);
 
 	return {
 		c() {
@@ -51995,7 +51995,7 @@ function create_default_slot_21(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_15(ctx);
+					if_block = create_if_block_16(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -52029,7 +52029,7 @@ function create_default_slot_21(ctx) {
 	};
 }
 
-// (475:16) <FormField>
+// (476:16) <FormField>
 function create_default_slot_20(ctx) {
 	let radio;
 	let updating_group;
@@ -52082,7 +52082,7 @@ function create_default_slot_20(ctx) {
 	};
 }
 
-// (477:20) 
+// (478:20) 
 function create_label_slot_12(ctx) {
 	let span;
 
@@ -52101,8 +52101,8 @@ function create_label_slot_12(ctx) {
 	};
 }
 
-// (485:12) {#if culturaInnovacionInfo.muestreo == 1}
-function create_if_block_13(ctx) {
+// (486:12) {#if culturaInnovacionInfo.muestreo == 1}
+function create_if_block_14(ctx) {
 	let div11;
 	let div5;
 	let div0;
@@ -52377,7 +52377,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (494:28) <FormField>
+// (495:28) <FormField>
 function create_default_slot_19(ctx) {
 	let radio;
 	let updating_group;
@@ -52430,7 +52430,7 @@ function create_default_slot_19(ctx) {
 	};
 }
 
-// (496:32) 
+// (497:32) 
 function create_label_slot_11(ctx) {
 	let span;
 
@@ -52449,7 +52449,7 @@ function create_label_slot_11(ctx) {
 	};
 }
 
-// (500:28) <FormField>
+// (501:28) <FormField>
 function create_default_slot_18(ctx) {
 	let radio;
 	let updating_group;
@@ -52502,7 +52502,7 @@ function create_default_slot_18(ctx) {
 	};
 }
 
-// (502:32) 
+// (503:32) 
 function create_label_slot_10(ctx) {
 	let span;
 
@@ -52521,7 +52521,7 @@ function create_label_slot_10(ctx) {
 	};
 }
 
-// (506:28) <FormField>
+// (507:28) <FormField>
 function create_default_slot_17(ctx) {
 	let radio;
 	let updating_group;
@@ -52574,7 +52574,7 @@ function create_default_slot_17(ctx) {
 	};
 }
 
-// (508:32) 
+// (509:32) 
 function create_label_slot_9(ctx) {
 	let span;
 
@@ -52593,7 +52593,7 @@ function create_label_slot_9(ctx) {
 	};
 }
 
-// (512:28) <FormField>
+// (513:28) <FormField>
 function create_default_slot_16(ctx) {
 	let radio;
 	let updating_group;
@@ -52646,7 +52646,7 @@ function create_default_slot_16(ctx) {
 	};
 }
 
-// (514:32) 
+// (515:32) 
 function create_label_slot_8(ctx) {
 	let span;
 
@@ -52665,7 +52665,7 @@ function create_label_slot_8(ctx) {
 	};
 }
 
-// (526:28) <FormField>
+// (527:28) <FormField>
 function create_default_slot_15(ctx) {
 	let radio;
 	let updating_group;
@@ -52718,7 +52718,7 @@ function create_default_slot_15(ctx) {
 	};
 }
 
-// (528:32) 
+// (529:32) 
 function create_label_slot_7(ctx) {
 	let span;
 
@@ -52737,7 +52737,7 @@ function create_label_slot_7(ctx) {
 	};
 }
 
-// (532:28) <FormField>
+// (533:28) <FormField>
 function create_default_slot_14(ctx) {
 	let radio;
 	let updating_group;
@@ -52790,7 +52790,7 @@ function create_default_slot_14(ctx) {
 	};
 }
 
-// (534:32) 
+// (535:32) 
 function create_label_slot_6(ctx) {
 	let span;
 
@@ -52809,7 +52809,7 @@ function create_label_slot_6(ctx) {
 	};
 }
 
-// (538:28) <FormField>
+// (539:28) <FormField>
 function create_default_slot_13(ctx) {
 	let radio;
 	let updating_group;
@@ -52862,7 +52862,7 @@ function create_default_slot_13(ctx) {
 	};
 }
 
-// (540:32) 
+// (541:32) 
 function create_label_slot_5(ctx) {
 	let span;
 
@@ -52881,7 +52881,7 @@ function create_label_slot_5(ctx) {
 	};
 }
 
-// (548:16) <FormField>
+// (549:16) <FormField>
 function create_default_slot_12(ctx) {
 	let radio;
 	let updating_group;
@@ -52934,7 +52934,7 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (550:20) 
+// (551:20) 
 function create_label_slot_4(ctx) {
 	let span;
 
@@ -52953,7 +52953,7 @@ function create_label_slot_4(ctx) {
 	};
 }
 
-// (554:16) <FormField>
+// (555:16) <FormField>
 function create_default_slot_11(ctx) {
 	let radio;
 	let updating_group;
@@ -53006,7 +53006,7 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (556:20) 
+// (557:20) 
 function create_label_slot_3(ctx) {
 	let span;
 
@@ -53025,7 +53025,7 @@ function create_label_slot_3(ctx) {
 	};
 }
 
-// (560:16) <FormField>
+// (561:16) <FormField>
 function create_default_slot_10(ctx) {
 	let radio;
 	let updating_group;
@@ -53078,7 +53078,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (562:20) 
+// (563:20) 
 function create_label_slot_2(ctx) {
 	let span;
 
@@ -53097,7 +53097,7 @@ function create_label_slot_2(ctx) {
 	};
 }
 
-// (566:16) <FormField>
+// (567:16) <FormField>
 function create_default_slot_9(ctx) {
 	let radio;
 	let updating_group;
@@ -53150,7 +53150,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (568:20) 
+// (569:20) 
 function create_label_slot_1(ctx) {
 	let span;
 
@@ -53169,7 +53169,7 @@ function create_label_slot_1(ctx) {
 	};
 }
 
-// (575:16) <FormField>
+// (576:16) <FormField>
 function create_default_slot_8(ctx) {
 	let radio;
 	let updating_group;
@@ -53222,7 +53222,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (577:20) 
+// (578:20) 
 function create_label_slot(ctx) {
 	let span;
 
@@ -53241,8 +53241,8 @@ function create_label_slot(ctx) {
 	};
 }
 
-// (621:8) {#if culturaInnovacionInfo.relacionado_mesas_sectoriales?.value == 1}
-function create_if_block_11(ctx) {
+// (622:8) {#if culturaInnovacionInfo.relacionado_mesas_sectoriales?.value == 1}
+function create_if_block_12(ctx) {
 	let div2;
 	let div0;
 	let t1;
@@ -53313,8 +53313,8 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (628:32) {#if id == mesaSectorialRelacionada}
-function create_if_block_12(ctx) {
+// (629:32) {#if id == mesaSectorialRelacionada}
+function create_if_block_13(ctx) {
 	let li;
 	let t_value = /*nombre*/ ctx[125] + "";
 	let t;
@@ -53337,10 +53337,10 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (627:28) {#each culturaInnovacionInfo.mesa_sectorial_id as mesaSectorialRelacionada}
+// (628:28) {#each culturaInnovacionInfo.mesa_sectorial_id as mesaSectorialRelacionada}
 function create_each_block_3(ctx) {
 	let if_block_anchor;
-	let if_block = /*id*/ ctx[124] == /*mesaSectorialRelacionada*/ ctx[127] && create_if_block_12(ctx);
+	let if_block = /*id*/ ctx[124] == /*mesaSectorialRelacionada*/ ctx[127] && create_if_block_13(ctx);
 
 	return {
 		c() {
@@ -53356,7 +53356,7 @@ function create_each_block_3(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_12(ctx);
+					if_block = create_if_block_13(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -53372,7 +53372,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (626:24) {#each mesasSectoriales as { id, nombre }
+// (627:24) {#each mesasSectoriales as { id, nombre }
 function create_each_block_2(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*culturaInnovacionInfo*/ ctx[7].mesa_sectorial_id;
@@ -53428,8 +53428,8 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (647:8) {#if culturaInnovacionInfo.relacionado_tecnoacademia?.value == 1}
-function create_if_block_9(ctx) {
+// (648:8) {#if culturaInnovacionInfo.relacionado_tecnoacademia?.value == 1}
+function create_if_block_10(ctx) {
 	let div2;
 	let div0;
 	let t1;
@@ -53566,8 +53566,8 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (660:32) {#if value == lineaTecnologica}
-function create_if_block_10(ctx) {
+// (661:32) {#if value == lineaTecnologica}
+function create_if_block_11(ctx) {
 	let li;
 	let t_value = /*label*/ ctx[118] + "";
 	let t;
@@ -53590,10 +53590,10 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (659:28) {#each culturaInnovacionInfo.linea_tecnologica_id as lineaTecnologica}
+// (660:28) {#each culturaInnovacionInfo.linea_tecnologica_id as lineaTecnologica}
 function create_each_block_1(ctx) {
 	let if_block_anchor;
-	let if_block = /*value*/ ctx[117] == /*lineaTecnologica*/ ctx[121] && create_if_block_10(ctx);
+	let if_block = /*value*/ ctx[117] == /*lineaTecnologica*/ ctx[121] && create_if_block_11(ctx);
 
 	return {
 		c() {
@@ -53609,7 +53609,7 @@ function create_each_block_1(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_10(ctx);
+					if_block = create_if_block_11(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -53625,7 +53625,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (658:24) {#each lineasTecnologicas as { value, label }
+// (659:24) {#each lineasTecnologicas as { value, label }
 function create_each_block(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*culturaInnovacionInfo*/ ctx[7].linea_tecnologica_id;
@@ -53681,8 +53681,8 @@ function create_each_block(ctx) {
 	};
 }
 
-// (690:24) {#if $form.resumen_requiere_comentario == false}
-function create_if_block_8(ctx) {
+// (691:24) {#if $form.resumen_requiere_comentario == false}
+function create_if_block_9(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -53747,7 +53747,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (677:16) <InfoMessage>
+// (678:16) <InfoMessage>
 function create_default_slot_7(ctx) {
 	let h1;
 	let t1;
@@ -53819,7 +53819,7 @@ function create_default_slot_7(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_9));
-	let if_block = /*$form*/ ctx[18].resumen_requiere_comentario == false && create_if_block_8(ctx);
+	let if_block = /*$form*/ ctx[18].resumen_requiere_comentario == false && create_if_block_9(ctx);
 
 	return {
 		c() {
@@ -53901,7 +53901,7 @@ function create_default_slot_7(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_8(ctx);
+					if_block = create_if_block_9(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -53947,8 +53947,8 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (733:16) {#if municipios?.length == 0}
-function create_if_block_7(ctx) {
+// (734:16) {#if municipios?.length == 0}
+function create_if_block_8(ctx) {
 	let div;
 	let p;
 	let t2;
@@ -53990,7 +53990,50 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (771:16) {#if programasFormacion?.length == 0}
+// (772:16) {#if programasFormacion?.length == 0}
+function create_if_block_7(ctx) {
+	let div;
+	let p;
+	let t2;
+	let button;
+	let mounted;
+	let dispose;
+
+	return {
+		c() {
+			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.innerHTML = `Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong>`;
+			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
+
+			button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            Refrescar`;
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(button, "type", "button");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(button, "class", "flex underline");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, p);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, button);
+
+			if (!mounted) {
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(button, "click", /*getProgramasFormacion*/ ctx[25]);
+				mounted = true;
+			}
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (792:16) {#if programasFormacionArticular?.length == 0}
 function create_if_block_6(ctx) {
 	let div;
 	let p;
@@ -54033,51 +54076,8 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (791:16) {#if programasFormacionArticular?.length == 0}
+// (817:24) {#if $form.bibliografia_requiere_comentario == false}
 function create_if_block_5(ctx) {
-	let div;
-	let p;
-	let t2;
-	let button;
-	let mounted;
-	let dispose;
-
-	return {
-		c() {
-			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
-			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			p.innerHTML = `Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong>`;
-			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			button = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("button");
-
-			button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            Refrescar`;
-
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(button, "type", "button");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(button, "class", "flex underline");
-		},
-		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, p);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, button);
-
-			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(button, "click", /*getProgramasFormacion*/ ctx[25]);
-				mounted = true;
-			}
-		},
-		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
-			mounted = false;
-			dispose();
-		}
-	};
-}
-
-// (816:24) {#if $form.bibliografia_requiere_comentario == false}
-function create_if_block_4(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -54145,7 +54145,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (812:16) <InfoMessage>
+// (813:16) <InfoMessage>
 function create_default_slot_6(ctx) {
 	let div;
 	let p;
@@ -54173,7 +54173,7 @@ function create_default_slot_6(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_10));
-	let if_block = /*$form*/ ctx[18].bibliografia_requiere_comentario == false && create_if_block_4(ctx);
+	let if_block = /*$form*/ ctx[18].bibliografia_requiere_comentario == false && create_if_block_5(ctx);
 
 	return {
 		c() {
@@ -54218,7 +54218,7 @@ function create_default_slot_6(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_4(ctx);
+					if_block = create_if_block_5(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -54252,8 +54252,8 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (838:16) {#if $form.ortografia_requiere_comentario == false}
-function create_if_block_3(ctx) {
+// (839:16) {#if $form.ortografia_requiere_comentario == false}
+function create_if_block_4(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -54318,7 +54318,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (826:8) <InfoMessage>
+// (827:8) <InfoMessage>
 function create_default_slot_5(ctx) {
 	let h1;
 	let t1;
@@ -54390,7 +54390,7 @@ function create_default_slot_5(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_11));
-	let if_block = /*$form*/ ctx[18].ortografia_requiere_comentario == false && create_if_block_3(ctx);
+	let if_block = /*$form*/ ctx[18].ortografia_requiere_comentario == false && create_if_block_4(ctx);
 
 	return {
 		c() {
@@ -54469,7 +54469,7 @@ function create_default_slot_5(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_3(ctx);
+					if_block = create_if_block_4(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -54515,8 +54515,8 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (858:16) {#if $form.redaccion_requiere_comentario == false}
-function create_if_block_2(ctx) {
+// (859:16) {#if $form.redaccion_requiere_comentario == false}
+function create_if_block_3(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -54581,7 +54581,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (846:8) <InfoMessage>
+// (847:8) <InfoMessage>
 function create_default_slot_4(ctx) {
 	let h1;
 	let t1;
@@ -54653,7 +54653,7 @@ function create_default_slot_4(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_12));
-	let if_block = /*$form*/ ctx[18].redaccion_requiere_comentario == false && create_if_block_2(ctx);
+	let if_block = /*$form*/ ctx[18].redaccion_requiere_comentario == false && create_if_block_3(ctx);
 
 	return {
 		c() {
@@ -54732,7 +54732,7 @@ function create_default_slot_4(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_2(ctx);
+					if_block = create_if_block_3(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -54778,8 +54778,8 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (878:16) {#if $form.normas_apa_requiere_comentario == false}
-function create_if_block_1(ctx) {
+// (879:16) {#if $form.normas_apa_requiere_comentario == false}
+function create_if_block_2(ctx) {
 	let textarea;
 	let updating_value;
 	let current;
@@ -54844,7 +54844,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (866:8) <InfoMessage>
+// (867:8) <InfoMessage>
 function create_default_slot_3(ctx) {
 	let h1;
 	let t1;
@@ -54916,7 +54916,7 @@ function create_default_slot_3(ctx) {
 
 	switch_1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch_1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch_1, "checked", switch_1_checked_binding_13));
-	let if_block = /*$form*/ ctx[18].normas_apa_requiere_comentario == false && create_if_block_1(ctx);
+	let if_block = /*$form*/ ctx[18].normas_apa_requiere_comentario == false && create_if_block_2(ctx);
 
 	return {
 		c() {
@@ -54995,7 +54995,7 @@ function create_default_slot_3(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					}
 				} else {
-					if_block = create_if_block_1(ctx);
+					if_block = create_if_block_2(ctx);
 					if_block.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block, 1);
 					if_block.m(div, null);
@@ -55041,10 +55041,19 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (885:12) {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)}
+// (886:12) {#if isSuperAdmin || (checkRole(authUser, [11]) && culturaInnovacion.proyecto.finalizado == true && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)}
 function create_if_block(ctx) {
+	let t;
 	let loadingbutton;
 	let current;
+
+	function select_block_type(ctx, dirty) {
+		if (/*$form*/ ctx[18].clausula_confidencialidad) return create_if_block_1;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx, [-1, -1, -1, -1, -1]);
+	let if_block = current_block_type(ctx);
 
 	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -55058,13 +55067,27 @@ function create_if_block(ctx) {
 
 	return {
 		c() {
+			if_block.c();
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(loadingbutton.$$.fragment);
 		},
 		m(target, anchor) {
+			if_block.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(loadingbutton, target, anchor);
 			current = true;
 		},
 		p(ctx, dirty) {
+			if (current_block_type !== (current_block_type = select_block_type(ctx, dirty))) {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(t.parentNode, t);
+				}
+			}
+
 			const loadingbutton_changes = {};
 			if (dirty[0] & /*sending*/ 4096) loadingbutton_changes.loading = /*sending*/ ctx[12];
 
@@ -55084,12 +55107,92 @@ function create_if_block(ctx) {
 			current = false;
 		},
 		d(detaching) {
+			if_block.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(loadingbutton, detaching);
 		}
 	};
 }
 
-// (886:16) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (892:16) {:else}
+function create_else_block(ctx) {
+	let svg;
+	let path;
+	let t0;
+	let span;
+
+	return {
+		c() {
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			span.textContent = "No ha aceptado la cláusula de confidencialidad";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "h-6 w-6 text-red-500 mr-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "text-red-500");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, svg, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(svg);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+		}
+	};
+}
+
+// (887:16) {#if $form.clausula_confidencialidad}
+function create_if_block_1(ctx) {
+	let svg;
+	let path;
+	let t0;
+	let span;
+
+	return {
+		c() {
+			svg = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("svg");
+			path = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.svg_element)("path");
+			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
+			span.textContent = "Ha aceptado la cláusula de confidencialidad";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linecap", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-linejoin", "round");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "stroke-width", "2");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(path, "d", "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "xmlns", "http://www.w3.org/2000/svg");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "class", "h-6 w-6 text-green-500 mr-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "fill", "none");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 24 24");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "stroke", "currentColor");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "text-green-500");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, svg, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(svg, path);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(svg);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
+		}
+	};
+}
+
+// (898:16) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -55106,7 +55209,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (892:8) 
+// (904:8) 
 function create_title_slot(ctx) {
 	let div;
 	let figure;
@@ -55145,7 +55248,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (898:8) 
+// (910:8) 
 function create_content_slot(ctx) {
 	let div1;
 
@@ -55153,21 +55256,9 @@ function create_content_slot(ctx) {
 		c() {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
-			div1.innerHTML = `<div><h1 class="text-center mt-4 mb-4">Evaluación</h1> 
-                <p class="text-center mb-4">Realice la evaluacion cuantitativa de los siguientes ítems:</p> 
-                <ul class="list-disc"><li>Título</li> 
-                    <li>Video</li> 
-                    <li>Resumen</li> 
-                    <li>Antecedentes, árbol de problemas, identificación y descripción del problema, justificación y marco conceptual</li> 
-                    <li>Árbol de objetivos, objetivo genral y objetivos específicos</li> 
-                    <li>Metodología y actividades</li> 
-                    <li>Resultados esperados</li> 
-                    <li>Productos esperados</li> 
-                    <li>Impactos, propuesta de sostenibilidad y la cadena de valor</li> 
-                    <li>Análisis de riesgos</li> 
-                    <li>Ortografía</li> 
-                    <li>Redacción</li> 
-                    <li>Normas APA</li></ul></div>`;
+			div1.innerHTML = `<div><h1 class="text-center mt-4 mb-4">Cláusula de confidencialidad</h1> 
+                <p class="mb-4">Al hacer clic en el botón Aceptar, dejo constancia del tratamiento confidencial que daré a la información relacionada con el proceso de evaluación que incluye, sin limitarse a esta, la información sobre proyectos, centros de formación, formuladores, autores y coautores de proyectos, resultados del proceso de evaluación en sus dos etapas. Por tanto, declaro que me abstendré de
+                    usar o divulgar para cualquier fin y por cualquier medio la información enunciada.</p></div>`;
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "slot", "content");
 		},
@@ -55180,13 +55271,13 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (921:16) <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>
+// (921:16) <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>
 function create_default_slot_1(ctx) {
 	let t;
 
 	return {
 		c() {
-			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Continuar");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Aceptar");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
@@ -55253,7 +55344,7 @@ function create_actions_slot(ctx) {
 	};
 }
 
-// (222:0) <AuthenticatedLayout>
+// (223:0) <AuthenticatedLayout>
 function create_default_slot(ctx) {
 	let evaluationstepper;
 	let t0;
@@ -55579,7 +55670,7 @@ function create_default_slot(ctx) {
 		disabled: true,
 		id: "linea_programatica_id",
 		routeWebApi: (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.lineas-programaticas", 5),
-		classes: "min-h",
+		classes: "evaluacion-select min-h",
 		placeholder: "Busque por el nombre de la línea programática"
 	};
 
@@ -55598,7 +55689,7 @@ function create_default_slot(ctx) {
 		disabled: true,
 		id: "area_conocimiento_id",
 		routeWebApi: (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.areas-conocimiento"),
-		classes: "min-h",
+		classes: "evaluacion-select min-h",
 		placeholder: "Busque por el nombre de la área de conocimiento"
 	};
 
@@ -55625,7 +55716,7 @@ function create_default_slot(ctx) {
 		id: "actividad_economica_id",
 		routeWebApi: (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.actividades-economicas"),
 		placeholder: "Busque por el nombre de la actividad económica",
-		classes: "min-h"
+		classes: "evaluacion-select min-h"
 	};
 
 	if (/*culturaInnovacionInfo*/ ctx[7].actividad_economica_id !== void 0) {
@@ -55647,6 +55738,7 @@ function create_default_slot(ctx) {
 	}
 
 	let dynamiclist3_props = {
+		classes: "evaluacion-select",
 		disabled: true,
 		id: "tematica_estrategica_id",
 		routeWebApi: (0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)("web-api.tematicas-estrategicas"),
@@ -55679,7 +55771,7 @@ function create_default_slot(ctx) {
 
 	switch0 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch0, "checked", switch0_checked_binding));
-	let if_block0 = /*tieneVideo*/ ctx[14] && create_if_block_20(ctx);
+	let if_block0 = /*tieneVideo*/ ctx[14] && create_if_block_21(ctx);
 
 	function switch1_checked_binding(value) {
 		/*switch1_checked_binding*/ ctx[56](value);
@@ -55693,7 +55785,7 @@ function create_default_slot(ctx) {
 
 	switch1 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch1, "checked", switch1_checked_binding));
-	let if_block1 = /*requiereJustificacionIndustria4*/ ctx[15] && create_if_block_18(ctx);
+	let if_block1 = /*requiereJustificacionIndustria4*/ ctx[15] && create_if_block_19(ctx);
 
 	function switch2_checked_binding(value) {
 		/*switch2_checked_binding*/ ctx[60](value);
@@ -55707,7 +55799,7 @@ function create_default_slot(ctx) {
 
 	switch2 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch2, "checked", switch2_checked_binding));
-	let if_block2 = /*requiereJustificacionEconomiaNaranja*/ ctx[16] && create_if_block_16(ctx);
+	let if_block2 = /*requiereJustificacionEconomiaNaranja*/ ctx[16] && create_if_block_17(ctx);
 
 	function switch3_checked_binding(value) {
 		/*switch3_checked_binding*/ ctx[64](value);
@@ -55721,7 +55813,7 @@ function create_default_slot(ctx) {
 
 	switch3 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_17__.default({ props: switch3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch3, "checked", switch3_checked_binding));
-	let if_block3 = /*requiereJustificacionPoliticaDiscapacidad*/ ctx[17] && create_if_block_14(ctx);
+	let if_block3 = /*requiereJustificacionPoliticaDiscapacidad*/ ctx[17] && create_if_block_15(ctx);
 
 	formfield0 = new _smui_form_field__WEBPACK_IMPORTED_MODULE_18__.default({
 			props: {
@@ -55733,7 +55825,7 @@ function create_default_slot(ctx) {
 			}
 		});
 
-	let if_block4 = /*culturaInnovacionInfo*/ ctx[7].muestreo == 1 && create_if_block_13(ctx);
+	let if_block4 = /*culturaInnovacionInfo*/ ctx[7].muestreo == 1 && create_if_block_14(ctx);
 
 	formfield1 = new _smui_form_field__WEBPACK_IMPORTED_MODULE_18__.default({
 			props: {
@@ -55860,7 +55952,7 @@ function create_default_slot(ctx) {
 
 	select3 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_14__.default({ props: select3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select3, "selectedValue", select3_selectedValue_binding));
-	let if_block5 = /*culturaInnovacionInfo*/ ctx[7].relacionado_mesas_sectoriales?.value == 1 && create_if_block_11(ctx);
+	let if_block5 = /*culturaInnovacionInfo*/ ctx[7].relacionado_mesas_sectoriales?.value == 1 && create_if_block_12(ctx);
 
 	function select4_selectedValue_binding(value) {
 		/*select4_selectedValue_binding*/ ctx[85](value);
@@ -55880,7 +55972,7 @@ function create_default_slot(ctx) {
 
 	select4 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_14__.default({ props: select4_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select4, "selectedValue", select4_selectedValue_binding));
-	let if_block6 = /*culturaInnovacionInfo*/ ctx[7].relacionado_tecnoacademia?.value == 1 && create_if_block_9(ctx);
+	let if_block6 = /*culturaInnovacionInfo*/ ctx[7].relacionado_tecnoacademia?.value == 1 && create_if_block_10(ctx);
 
 	function textarea1_value_binding(value) {
 		/*textarea1_value_binding*/ ctx[87](value);
@@ -56004,6 +56096,7 @@ function create_default_slot(ctx) {
 	}
 
 	let selectmulti0_props = {
+		classes: "evaluacion-select-multi",
 		disabled: true,
 		id: "municipios",
 		items: /*municipios*/ ctx[8],
@@ -56017,7 +56110,7 @@ function create_default_slot(ctx) {
 
 	selectmulti0 = new _Shared_SelectMulti__WEBPACK_IMPORTED_MODULE_15__.default({ props: selectmulti0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(selectmulti0, "selectedValue", selectmulti0_selectedValue_binding));
-	let if_block7 = /*municipios*/ ctx[8]?.length == 0 && create_if_block_7(ctx);
+	let if_block7 = /*municipios*/ ctx[8]?.length == 0 && create_if_block_8(ctx);
 
 	function textarea4_value_binding(value) {
 		/*textarea4_value_binding*/ ctx[95](value);
@@ -56060,6 +56153,7 @@ function create_default_slot(ctx) {
 	}
 
 	let selectmulti1_props = {
+		classes: "evaluacion-select-multi",
 		disabled: true,
 		id: "programas_formacion",
 		items: /*programasFormacion*/ ctx[9],
@@ -56073,13 +56167,14 @@ function create_default_slot(ctx) {
 
 	selectmulti1 = new _Shared_SelectMulti__WEBPACK_IMPORTED_MODULE_15__.default({ props: selectmulti1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(selectmulti1, "selectedValue", selectmulti1_selectedValue_binding));
-	let if_block8 = /*programasFormacion*/ ctx[9]?.length == 0 && create_if_block_6(ctx);
+	let if_block8 = /*programasFormacion*/ ctx[9]?.length == 0 && create_if_block_7(ctx);
 
 	function selectmulti2_selectedValue_binding(value) {
 		/*selectmulti2_selectedValue_binding*/ ctx[98](value);
 	}
 
 	let selectmulti2_props = {
+		classes: "evaluacion-select-multi",
 		disabled: true,
 		id: "programas_formacion_articulados",
 		items: /*programasFormacionArticular*/ ctx[10],
@@ -56093,7 +56188,7 @@ function create_default_slot(ctx) {
 
 	selectmulti2 = new _Shared_SelectMulti__WEBPACK_IMPORTED_MODULE_15__.default({ props: selectmulti2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(selectmulti2, "selectedValue", selectmulti2_selectedValue_binding));
-	let if_block9 = /*programasFormacionArticular*/ ctx[10]?.length == 0 && create_if_block_5(ctx);
+	let if_block9 = /*programasFormacionArticular*/ ctx[10]?.length == 0 && create_if_block_6(ctx);
 
 	function textarea6_value_binding(value) {
 		/*textarea6_value_binding*/ ctx[99](value);
@@ -56908,7 +57003,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_20(ctx);
+					if_block0 = create_if_block_21(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(div20, null);
@@ -56941,7 +57036,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_18(ctx);
+					if_block1 = create_if_block_19(ctx);
 					if_block1.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					if_block1.m(div24, null);
@@ -56974,7 +57069,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					}
 				} else {
-					if_block2 = create_if_block_16(ctx);
+					if_block2 = create_if_block_17(ctx);
 					if_block2.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					if_block2.m(div28, null);
@@ -57007,7 +57102,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					}
 				} else {
-					if_block3 = create_if_block_14(ctx);
+					if_block3 = create_if_block_15(ctx);
 					if_block3.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					if_block3.m(div32, null);
@@ -57038,7 +57133,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					}
 				} else {
-					if_block4 = create_if_block_13(ctx);
+					if_block4 = create_if_block_14(ctx);
 					if_block4.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					if_block4.m(div40, t49);
@@ -57132,7 +57227,7 @@ function create_default_slot(ctx) {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
-					if_block5 = create_if_block_11(ctx);
+					if_block5 = create_if_block_12(ctx);
 					if_block5.c();
 					if_block5.m(form_1, t68);
 				}
@@ -57160,7 +57255,7 @@ function create_default_slot(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block6, 1);
 					}
 				} else {
-					if_block6 = create_if_block_9(ctx);
+					if_block6 = create_if_block_10(ctx);
 					if_block6.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block6, 1);
 					if_block6.m(form_1, t72);
@@ -57235,7 +57330,7 @@ function create_default_slot(ctx) {
 				if (if_block7) {
 					if_block7.p(ctx, dirty);
 				} else {
-					if_block7 = create_if_block_7(ctx);
+					if_block7 = create_if_block_8(ctx);
 					if_block7.c();
 					if_block7.m(div70, null);
 				}
@@ -57277,7 +57372,7 @@ function create_default_slot(ctx) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {
-					if_block8 = create_if_block_6(ctx);
+					if_block8 = create_if_block_7(ctx);
 					if_block8.c();
 					if_block8.m(div79, null);
 				}
@@ -57301,7 +57396,7 @@ function create_default_slot(ctx) {
 				if (if_block9) {
 					if_block9.p(ctx, dirty);
 				} else {
-					if_block9 = create_if_block_5(ctx);
+					if_block9 = create_if_block_6(ctx);
 					if_block9.c();
 					if_block9.m(div82, null);
 				}
@@ -57374,7 +57469,7 @@ function create_default_slot(ctx) {
 
 			const dialog_changes = {};
 
-			if (dirty[0] & /*proyectoDialogOpen, culturaInnovacion*/ 2052 | dirty[4] & /*$$scope*/ 64) {
+			if (dirty[0] & /*$form, proyectoDialogOpen, culturaInnovacion*/ 264196 | dirty[4] & /*$$scope*/ 64) {
 				dialog_changes.$$scope = { dirty, ctx };
 			}
 
@@ -57588,7 +57683,7 @@ function create_fragment(ctx) {
 		p(ctx, dirty) {
 			const authenticatedlayout_changes = {};
 
-			if (dirty[0] & /*proyectoDialogOpen, culturaInnovacion, sending, culturaInnovacionEvaluacion, $form, errors, culturaInnovacionInfo, programasFormacionArticular, programasFormacion, municipios, lineasTecnologicas, tecnoacademias, opcionesAplicaNoAplica, mesasSectoriales, requiereJustificacionPoliticaDiscapacidad, requiereJustificacionEconomiaNaranja, requiereJustificacionIndustria4, tieneVideo, convocatoria*/ 524287 | dirty[4] & /*$$scope*/ 64) {
+			if (dirty[0] & /*proyectoDialogOpen, $form, culturaInnovacion, sending, culturaInnovacionEvaluacion, errors, culturaInnovacionInfo, programasFormacionArticular, programasFormacion, municipios, lineasTecnologicas, tecnoacademias, opcionesAplicaNoAplica, mesasSectoriales, requiereJustificacionPoliticaDiscapacidad, requiereJustificacionEconomiaNaranja, requiereJustificacionIndustria4, tieneVideo, convocatoria*/ 524287 | dirty[4] & /*$$scope*/ 64) {
 				authenticatedlayout_changes.$$scope = { dirty, ctx };
 			}
 
@@ -57639,7 +57734,11 @@ function instance($$self, $$props, $$invalidate) {
 	let municipios;
 	let programasFormacion;
 	let programasFormacionArticular;
-	let proyectoDialogOpen = true;
+
+	let proyectoDialogOpen = culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad == false
+	? true
+	: false;
+
 	let sending = false;
 	let opcionesSiNo = [{ value: 1, label: "Si" }, { value: 2, label: "No" }];
 	let lineasTecnologicas = [];
@@ -57723,6 +57822,7 @@ function instance($$self, $$props, $$invalidate) {
 	});
 
 	let form = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({
+		clausula_confidencialidad: culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad,
 		titulo_puntaje: culturaInnovacionEvaluacion.titulo_puntaje,
 		titulo_comentario: culturaInnovacionEvaluacion.titulo_comentario,
 		titulo_requiere_comentario: culturaInnovacionEvaluacion.titulo_comentario == null
@@ -58367,7 +58467,7 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const click_handler = event => $$invalidate(11, proyectoDialogOpen = false);
+	const click_handler = event => ((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.clausula_confidencialidad = true, $form), $$invalidate(11, proyectoDialogOpen = false));
 
 	function dialog_open_binding(value) {
 		proyectoDialogOpen = value;
@@ -63892,7 +63992,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/InputError */ "./resources/js/Shared/InputError.svelte");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.16.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_69_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_69_css_C_laragon_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.69.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.69.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.69.css!./resources/js/Shared/SelectMulti.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\SelectMulti.svelte generated by Svelte v3.38.3 */
 
@@ -63910,19 +64010,19 @@ function create_fragment(ctx) {
 	let current;
 
 	function selectmulti_selectedValue_binding(value) {
-		/*selectmulti_selectedValue_binding*/ ctx[10](value);
+		/*selectmulti_selectedValue_binding*/ ctx[11](value);
 	}
 
 	let selectmulti_props = {
-		isDisabled: /*disabled*/ ctx[6],
+		isDisabled: /*disabled*/ ctx[7],
 		inputAttributes: { id: /*id*/ ctx[1] },
-		items: /*items*/ ctx[2],
-		containerClasses: "items",
+		items: /*items*/ ctx[3],
+		containerClasses: "items " + /*classes*/ ctx[2],
 		isMulti: true,
-		groupBy: /*groupBy*/ ctx[7],
-		placeholder: /*required*/ ctx[5]
-		? /*placeholder*/ ctx[3] + " *"
-		: /*placeholder*/ ctx[3]
+		groupBy: /*groupBy*/ ctx[8],
+		placeholder: /*required*/ ctx[6]
+		? /*placeholder*/ ctx[4] + " *"
+		: /*placeholder*/ ctx[4]
 	};
 
 	if (/*selectedValue*/ ctx[0] !== void 0) {
@@ -63931,7 +64031,7 @@ function create_fragment(ctx) {
 
 	selectmulti = new svelte_select__WEBPACK_IMPORTED_MODULE_3__.default({ props: selectmulti_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(selectmulti, "selectedValue", selectmulti_selectedValue_binding));
-	inputerror = new _Shared_InputError__WEBPACK_IMPORTED_MODULE_4__.default({ props: { message: /*error*/ ctx[4] } });
+	inputerror = new _Shared_InputError__WEBPACK_IMPORTED_MODULE_4__.default({ props: { message: /*error*/ ctx[5] } });
 
 	return {
 		c() {
@@ -63947,13 +64047,14 @@ function create_fragment(ctx) {
 		},
 		p(ctx, [dirty]) {
 			const selectmulti_changes = {};
-			if (dirty & /*disabled*/ 64) selectmulti_changes.isDisabled = /*disabled*/ ctx[6];
+			if (dirty & /*disabled*/ 128) selectmulti_changes.isDisabled = /*disabled*/ ctx[7];
 			if (dirty & /*id*/ 2) selectmulti_changes.inputAttributes = { id: /*id*/ ctx[1] };
-			if (dirty & /*items*/ 4) selectmulti_changes.items = /*items*/ ctx[2];
+			if (dirty & /*items*/ 8) selectmulti_changes.items = /*items*/ ctx[3];
+			if (dirty & /*classes*/ 4) selectmulti_changes.containerClasses = "items " + /*classes*/ ctx[2];
 
-			if (dirty & /*required, placeholder*/ 40) selectmulti_changes.placeholder = /*required*/ ctx[5]
-			? /*placeholder*/ ctx[3] + " *"
-			: /*placeholder*/ ctx[3];
+			if (dirty & /*required, placeholder*/ 80) selectmulti_changes.placeholder = /*required*/ ctx[6]
+			? /*placeholder*/ ctx[4] + " *"
+			: /*placeholder*/ ctx[4];
 
 			if (!updating_selectedValue && dirty & /*selectedValue*/ 1) {
 				updating_selectedValue = true;
@@ -63963,7 +64064,7 @@ function create_fragment(ctx) {
 
 			selectmulti.$set(selectmulti_changes);
 			const inputerror_changes = {};
-			if (dirty & /*error*/ 16) inputerror_changes.message = /*error*/ ctx[4];
+			if (dirty & /*error*/ 32) inputerror_changes.message = /*error*/ ctx[5];
 			inputerror.$set(inputerror_changes);
 		},
 		i(local) {
@@ -63987,8 +64088,9 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let $_;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, svelte_i18n__WEBPACK_IMPORTED_MODULE_2__._, $$value => $$invalidate(9, $_ = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, svelte_i18n__WEBPACK_IMPORTED_MODULE_2__._, $$value => $$invalidate(10, $_ = $$value));
 	let { id = "" } = $$props;
+	let { classes = "" } = $$props;
 	let { selectedValue } = $$props;
 	let { items } = $$props;
 	let { placeholder } = $$props;
@@ -63999,7 +64101,7 @@ function instance($$self, $$props, $$invalidate) {
 	let select = null;
 
 	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.onMount)(() => {
-		$$invalidate(8, select = document.getElementById(id));
+		$$invalidate(9, select = document.getElementById(id));
 	});
 
 	function selectmulti_selectedValue_binding(value) {
@@ -64009,12 +64111,13 @@ function instance($$self, $$props, $$invalidate) {
 
 	$$self.$$set = $$props => {
 		if ("id" in $$props) $$invalidate(1, id = $$props.id);
+		if ("classes" in $$props) $$invalidate(2, classes = $$props.classes);
 		if ("selectedValue" in $$props) $$invalidate(0, selectedValue = $$props.selectedValue);
-		if ("items" in $$props) $$invalidate(2, items = $$props.items);
-		if ("placeholder" in $$props) $$invalidate(3, placeholder = $$props.placeholder);
-		if ("error" in $$props) $$invalidate(4, error = $$props.error);
-		if ("required" in $$props) $$invalidate(5, required = $$props.required);
-		if ("disabled" in $$props) $$invalidate(6, disabled = $$props.disabled);
+		if ("items" in $$props) $$invalidate(3, items = $$props.items);
+		if ("placeholder" in $$props) $$invalidate(4, placeholder = $$props.placeholder);
+		if ("error" in $$props) $$invalidate(5, error = $$props.error);
+		if ("required" in $$props) $$invalidate(6, required = $$props.required);
+		if ("disabled" in $$props) $$invalidate(7, disabled = $$props.disabled);
 	};
 
 	$$self.$$.update = () => {
@@ -64022,7 +64125,7 @@ function instance($$self, $$props, $$invalidate) {
 			$: selectedValue;
 		}
 
-		if ($$self.$$.dirty & /*required, select, selectedValue, $_*/ 801) {
+		if ($$self.$$.dirty & /*required, select, selectedValue, $_*/ 1601) {
 			$: if (required && select != null) {
 				selectedValue != undefined
 				? select.setCustomValidity("")
@@ -64034,6 +64137,7 @@ function instance($$self, $$props, $$invalidate) {
 	return [
 		selectedValue,
 		id,
+		classes,
 		items,
 		placeholder,
 		error,
@@ -64052,12 +64156,13 @@ class SelectMulti_1 extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteC
 
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, {
 			id: 1,
+			classes: 2,
 			selectedValue: 0,
-			items: 2,
-			placeholder: 3,
-			error: 4,
-			required: 5,
-			disabled: 6
+			items: 3,
+			placeholder: 4,
+			error: 5,
+			required: 6,
+			disabled: 7
 		});
 	}
 }

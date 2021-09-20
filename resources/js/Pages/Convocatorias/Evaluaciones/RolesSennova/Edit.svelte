@@ -5,11 +5,9 @@
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Shared/Input'
-    import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import InfoMessage from '@/Shared/InfoMessage'
     import Textarea from '@/Shared/Textarea'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Switch from '@/Shared/Switch'
 
     export let errors
@@ -17,13 +15,9 @@
     export let evaluacion
     export let proyectoRolEvaluacion
     export let proyecto
-    export let lineaProgramatica
-    export let rolSennova
     export let proyectoRolSennova
 
-    let infoRolSennova
-
-    $: $title = rolSennova.nombre
+    $: $title = proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre
 
     /**
      * Permisos
@@ -52,27 +46,6 @@
             })
         }
     }
-
-    let diff_meses = proyecto.diff_meses
-    $: if (rolSennovaInfo.convocatoria_rol_sennova_id) {
-        if (proyecto.codigo_linea_programatica == 68) {
-            rolSennovaInfo.descripcion = infoRolSennova?.perfil == null ? 'Sin descripción' : infoRolSennova?.perfil
-            rolSennovaInfo.numero_roles = 1
-            if (rolSennovaInfo.convocatoria_rol_sennova_id == 108) {
-                rolSennovaInfo.numero_meses = 6
-            } else {
-                rolSennovaInfo.numero_meses = proyecto.max_meses_ejecucion
-            }
-        }
-
-        if (proyecto.codigo_linea_programatica == 70) {
-            if ((rolSennovaInfo.convocatoria_rol_sennova_id == 51 && proyecto.diff_meses >= 11) || (rolSennovaInfo.convocatoria_rol_sennova_id == 52 && proyecto.diff_meses >= 11) || (rolSennovaInfo.convocatoria_rol_sennova_id == 53 && proyecto.diff_meses >= 11)) {
-                diff_meses = 11
-            } else {
-                diff_meses = proyecto.diff_meses
-            }
-        }
-    }
 </script>
 
 <AuthenticatedLayout>
@@ -84,7 +57,7 @@
                         <a use:inertia href={route('convocatorias.evaluaciones.proyecto-rol-sennova.index', [convocatoria.id, evaluacion.id])} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
-                    {rolSennova.nombre}
+                    {proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre}
                 </h1>
             </div>
         </div>
@@ -93,14 +66,21 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={rolSennovaInfo.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} placeholder="Busque por el nombre del rol" />
+                <div class="mt-4 mb-10">
+                    <p class="mb-10">
+                        {proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre}
+                    </p>
+                    <p class="mb-10 whitespace-pre-line">
+                        Experiencia: {proyectoRolSennova.convocatoria_rol_sennova.experiencia}
+                    </p>
+                    <p class="mb-10">
+                        Asignación mensual: {proyectoRolSennova.convocatoria_rol_sennova.asignacion_mensual}
+                    </p>
                 </div>
 
                 <div class="mt-4">
-                    {#if infoRolSennova?.perfil}
-                        <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
+                    {#if proyectoRolSennova.convocatoria_rol_sennova?.perfil}
+                        <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={proyectoRolSennova.convocatoria_rol_sennova.perfil} />
                     {:else}
                         <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
                     {/if}
@@ -115,6 +95,21 @@
                 <div class="mt-4">
                     <Input disabled label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" bind:value={rolSennovaInfo.numero_roles} />
                 </div>
+
+                {#if proyectoRolSennova.actividades?.length > 0}
+                    <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                    <div class="bg-white rounded shadow overflow-hidden">
+                        <div class="p-4" />
+
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each proyectoRolSennova.actividades as { id, descripcion }, i}
+                                    <li class="first-letter-uppercase mb-4">{descripcion}</li>
+                                {/each}
+                            </ul>
+                        </div>
+                    </div>
+                {/if}
             </fieldset>
 
             <InfoMessage>
