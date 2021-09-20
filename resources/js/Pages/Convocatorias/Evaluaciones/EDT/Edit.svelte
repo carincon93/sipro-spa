@@ -61,31 +61,31 @@
         <form class="p-8">
             <div class="mt-4">
                 <Label class="mb-4" labelFor="proyecto_presupuesto_id" value="Presupuesto" />
-                <Select id="proyecto_presupuesto_id" items={proyectoPresupuesto} bind:selectedValue={edtInfo.proyecto_presupuesto_id} autocomplete="off" placeholder="Seleccione el presupuesto" />
+                <Select disabled={true} id="proyecto_presupuesto_id" items={proyectoPresupuesto} bind:selectedValue={edtInfo.proyecto_presupuesto_id} autocomplete="off" placeholder="Seleccione el presupuesto" />
             </div>
             <div class="mt-4">
                 <Label class="mb-4" labelFor="tipo_evento" value="Tipo de evento" />
-                <Select id="tipo_evento" items={tiposEvento} bind:selectedValue={edtInfo.tipo_evento} autocomplete="off" placeholder="Seleccione el tipo de evento" />
+                <Select disabled={true} id="tipo_evento" items={tiposEvento} bind:selectedValue={edtInfo.tipo_evento} autocomplete="off" placeholder="Seleccione el tipo de evento" />
             </div>
 
             <div class="mt-8">
-                <Textarea label="Descripción del evento" maxlength="40000" id="descripcion_evento" bind:value={edtInfo.descripcion_evento} />
+                <Textarea disabled label="Descripción del evento" maxlength="40000" id="descripcion_evento" bind:value={edtInfo.descripcion_evento} />
             </div>
 
             <div class="mt-8">
-                <Textarea label="Descripción de participación de la entidad" maxlength="40000" id="descripcion_participacion_entidad" bind:value={edtInfo.descripcion_participacion_entidad} />
+                <Textarea disabled label="Descripción de participación de la entidad" maxlength="40000" id="descripcion_participacion_entidad" bind:value={edtInfo.descripcion_participacion_entidad} />
             </div>
 
             <div class="mt-8">
-                <Input label="Público objetivo" id="publico_objetivo" type="text" class="mt-1" bind:value={edtInfo.publico_objetivo} />
+                <Input disabled label="Público objetivo" id="publico_objetivo" type="text" class="mt-1" bind:value={edtInfo.publico_objetivo} />
             </div>
 
             <div class="mt-8">
-                <Input label="Número de asistentes" id="numero_asistentes" type="number" input$min="0" input$max="9999" class="mt-1" placeholder="Escriba el número de asistentes" bind:value={edtInfo.numero_asistentes} />
+                <Input disabled label="Número de asistentes" id="numero_asistentes" type="number" input$min="0" input$max="9999" class="mt-1" placeholder="Escriba el número de asistentes" bind:value={edtInfo.numero_asistentes} />
             </div>
 
             <div class="mt-8">
-                <Input label="Estrategia de comunicación" id="estrategia_comunicacion" type="text" class="mt-1" bind:value={edtInfo.estrategia_comunicacion} />
+                <Input disabled label="Estrategia de comunicación" id="estrategia_comunicacion" type="text" class="mt-1" bind:value={edtInfo.estrategia_comunicacion} />
             </div>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0" />
         </form>

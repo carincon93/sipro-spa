@@ -99,7 +99,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={eventos.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 15])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.edt.edit', [convocatoria.id, proyecto.id, evento.id]))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.edt.edit', [convocatoria.id, evaluacion.id, evento.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

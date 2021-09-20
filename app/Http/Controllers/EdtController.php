@@ -257,6 +257,7 @@ class EdtController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/EDT/Edit', [
             'convocatoria'          => $convocatoria,
             'proyecto'              => $evaluacion->proyecto,
+            'evaluacion'            => $evaluacion,
             'edt'                   => $edt,
             'tiposEvento'           => json_decode(Storage::get('json/tipos-edt.json'), true),
             'proyectoPresupuesto'   => $evaluacion->proyecto->proyectoPresupuesto()->selectRaw('id as value, concat(\'Servicios de organización y asistencia de convenciones y ferias\', chr(10), \'∙ Presupuesto: $\', valor_total) as label')->whereHas('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal', function ($query) {
