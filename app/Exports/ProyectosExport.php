@@ -25,31 +25,31 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return $this->convocatoria->proyectos;
     }
     /**
-    * @var Invoice $proyecto
-    */
+     * @var Invoice $proyecto
+     */
     public function map($proyecto): array
     {
         $tipo = '';
-        if(!empty($proyecto->idi)){
+        if (!empty($proyecto->idi)) {
             $this->datos =  $proyecto->idi;
             $tipo = 'I+D+I';
-        }else if(!empty($proyecto->ta)){
+        } else if (!empty($proyecto->ta)) {
             $this->datos =  $proyecto->ta;
             $tipo = 'Tecnoacademia';
-        }else if(!empty($proyecto->tp)){
+        } else if (!empty($proyecto->tp)) {
             $this->datos =  $proyecto->tp;
             $tipo = 'Tecnoparque';
-        }else if(!empty($proyecto->culturaInnovacion)){
+        } else if (!empty($proyecto->culturaInnovacion)) {
             $this->datos =  $proyecto->culturaInnovacion;
             $tipo = 'Apropiación de la cultura de la innovación';
-        }else if(!empty($proyecto->servicioTecnologico)){
+        } else if (!empty($proyecto->servicioTecnologico)) {
             $this->datos =  $proyecto->servicioTecnologico;
             $tipo = 'Servicios tecnológicos';
         }
@@ -64,17 +64,16 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $proyecto->lineaProgramatica->codigo,
             $proyecto->lineaProgramatica->nombre,
             $this->datos->titulo,
-            ($this->datos->redConocimiento)?$this->datos->redConocimiento->nombre:'N/A',
-            ($this->datos->areaConocimiento)?$this->datos->areaConocimiento->nombre:'N/A',
-            ($this->datos->areaConocimiento)?$this->datos->areaConocimiento->subareasConocimiento->implode('nombre',', '):'N/A',
-            '',
+            ($this->datos->redConocimiento) ? $this->datos->redConocimiento->nombre : 'N/A',
+            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre : ($this->datos->areaConocimiento ? $this->datos->areaConocimiento->nombre : 'N/A'),
+            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->nombre : 'N/A',
+            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->implode('nombre', ', ') : 'N/A'),
             $this->datos->objetivo_general,
             $proyecto->total_proyecto_presupuesto,
             $proyecto->total_roles_sennova,
-            $proyecto->precio_proyecto,
-            ($proyecto->finalizado)?'SI':'NO',
-            ($proyecto->a_evaluar)?'SI':'NO',
-            ($proyecto->radicado)?'SI':'NO',
+            $proyecto->precio_proyecto > 0 ? $proyecto->precio_proyecto : '0',
+            ($proyecto->finalizado) ? 'SI' : 'NO',
+            ($proyecto->a_evaluar) ? 'SI' : 'NO',
             $this->mapParticipantes($proyecto->participantes),
         ];
     }
@@ -100,12 +99,11 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Total Roles',
             'Total Proyecto',
             'Finzalido',
-            'A Evaluar',
             'Radicado',
             'Participantes',
         ];
     }
-    
+
     public function columnFormats(): array
     {
         return [
@@ -118,7 +116,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
     public function properties(): array
     {
         return [
-            'title' => 'Resumen proyectos '.$this->convocatoria->descripcion,
+            'title' => 'Resumen proyectos ' . $this->convocatoria->descripcion,
         ];
     }
 
@@ -130,18 +128,19 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
         ];
     }
 
-    private function mapParticipantes($participantes){
+    private function mapParticipantes($participantes)
+    {
 
         $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
         $mapParticipantes = [];
 
         foreach ($participantes as $participante) {
             array_push($mapParticipantes, [
-                'nombre'=>$participante->nombre,
-                'documento'=>$participante->numero_documento,
-                'vinculacion'=>$participante->tipo_vinculacion_text,
-                'meses'=>$participante->pivot->cantidad_meses,
-                'horas'=>$participante->pivot->cantidad_horas,
+                'nombre' => $participante->nombre,
+                'documento' => $participante->numero_documento,
+                'vinculacion' => $participante->tipo_vinculacion_text,
+                'meses' => $participante->pivot->cantidad_meses,
+                'horas' => $participante->pivot->cantidad_horas,
             ]);
         }
         return $mapParticipantes;
