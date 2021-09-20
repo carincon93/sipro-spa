@@ -83,7 +83,7 @@ class ProyectoController extends Controller
      * @param  mixed $proyecto
      * @return void
      */
-    public function showCadenaValor(Convocatoria $convocatoria, Proyecto $proyecto)
+    public function showCadenaValor(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
@@ -139,7 +139,8 @@ class ProyectoController extends Controller
             'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'productos'     => $productos,
-            'objetivos'     => $objetivos
+            'objetivos'     => $objetivos,
+            'to_pdf'            => ($request->to_pdf == 1) ? true : false
         ]);
     }
 
@@ -599,7 +600,7 @@ class ProyectoController extends Controller
         $proyecto->centroFormacion->dinamizadorSennova->notify(new ProyectoFinalizado($convocatoria, $proyecto));
 
         $version = $proyecto->codigo . '-PDF-' . \Carbon\Carbon::now()->format('YmdHis');
-        // $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
+        $proyecto->PdfVersiones()->save(new ProyectoPdfVersion(['version' => $version]));
 
         return back()->with('success', 'Se ha finalizado el proyecto correctamente.');
     }

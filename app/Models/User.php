@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -170,6 +171,17 @@ class User extends Authenticatable
     public static function makePassword($documentNumber)
     {
         return bcrypt("sena$documentNumber*");
+    }
+
+    /**
+     * getTipoVinculacionTextAttribute
+     *
+     * @return void
+     */
+    public function getTipoVinculacionTextAttribute()
+    {
+        $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
+        return ($tipos_vinculacion->where('value',$this->tipo_vinculacion)->first())?$tipos_vinculacion->where('value',$this->tipo_vinculacion)->first()['label']:'Sin información registrada';
     }
 
     /**
