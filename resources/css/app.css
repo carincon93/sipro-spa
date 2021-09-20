@@ -286,3 +286,20 @@ th.th-actions {
 .overflow-x-scroll {
     overflow-x: scroll;
 }
+
+.evaluacion-select .selectedItem {
+    line-height: 1.4 !important;
+    height: auto !important;
+    overflow-x: auto !important;
+}
+.evaluacion-select .selection {
+    white-space: unset !important;
+}
+
+.evaluacion-select-multi .multiSelectItem {
+    height: auto !important;
+}
+
+.evaluacion-select-multi .multiSelectItem_label {
+    white-space: unset !important;
+}

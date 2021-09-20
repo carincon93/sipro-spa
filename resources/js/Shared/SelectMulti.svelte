@@ -6,6 +6,7 @@
     import InputError from '@/Shared/InputError'
 
     export let id = ''
+    export let classes = ''
     export let selectedValue
     export let items
     export let placeholder
@@ -27,7 +28,7 @@
     }
 </script>
 
-<SelectMulti isDisabled={disabled} inputAttributes={{ id: id }} bind:selectedValue {items} containerClasses="items" isMulti={true} {groupBy} placeholder={required ? placeholder + ' *' : placeholder} />
+<SelectMulti isDisabled={disabled} inputAttributes={{ id: id }} bind:selectedValue {items} containerClasses="items {classes}" isMulti={true} {groupBy} placeholder={required ? placeholder + ' *' : placeholder} />
 <InputError message={error} />
 
 <style>

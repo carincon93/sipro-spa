@@ -101,13 +101,13 @@
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
                     <div class="mt-4">
                         <Label labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                        <DynamicList disabled={true} id="segundo_grupo_presupuestal_id" value={presupuestoInfo.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} />
+                        <DynamicList classes="evaluacion-select" disabled={true} id="segundo_grupo_presupuestal_id" value={presupuestoInfo.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} />
                     </div>
 
                     {#if presupuestoInfo.segundo_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
-                            <DynamicList disabled={true} id="tercer_grupo_presupuestal_id" value={presupuestoInfo.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', presupuestoInfo.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} />
+                            <DynamicList classes="evaluacion-select" disabled={true} id="tercer_grupo_presupuestal_id" value={presupuestoInfo.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', presupuestoInfo.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} />
                         </div>
                     {/if}
 
@@ -115,6 +115,7 @@
                         <div class="mt-4">
                             <Label labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
                             <DynamicList
+                                classes="evaluacion-select"
                                 disabled={true}
                                 id="convocatoria_presupuesto_id"
                                 value={presupuestoInfo.convocatoria_presupuesto_id}
@@ -180,6 +181,21 @@
                         <div class="mt-4">
                             <Label class="mb-4" labelFor="servicio_edicion_info" value="Nodo editorial" />
                             <Select disabled={true} id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={presupuestoInfo.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" />
+                        </div>
+                    {/if}
+
+                    {#if proyectoPresupuesto.actividades?.length > 0}
+                        <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                        <div class="bg-white rounded shadow overflow-hidden">
+                            <div class="p-4" />
+
+                            <div class="p-2">
+                                <ul class="list-disc p-4">
+                                    {#each proyectoPresupuesto.actividades as { id, descripcion }, i}
+                                        <li class="first-letter-uppercase mb-4">{descripcion}</li>
+                                    {/each}
+                                </ul>
+                            </div>
                         </div>
                     {/if}
                 </fieldset>

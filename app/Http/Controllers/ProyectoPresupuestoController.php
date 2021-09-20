@@ -502,6 +502,7 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
 
+        $presupuesto->load('actividades');
         $presupuesto->softwareInfo;
         $presupuesto->servicioEdicionInfo;
         $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal;

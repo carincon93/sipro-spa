@@ -123,7 +123,7 @@
                 {#if productoInfo.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
                         <Label class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
-                        <DynamicList disabled={true} id="subtipologia_minciencias_id" value={productoInfo.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" />
+                        <DynamicList classes="evaluacion-select" disabled={true} id="subtipologia_minciencias_id" value={productoInfo.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" />
                     </div>
 
                     <div class="mt-8">
