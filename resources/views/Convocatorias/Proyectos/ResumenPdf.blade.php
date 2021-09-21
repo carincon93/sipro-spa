@@ -923,12 +923,12 @@
          @foreach($proyecto->efectosDirectos as $efeDir)
          <table width="100%" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
-               <td style="border: 1px solid black !important;" class="title" width="15%">EFE-{{$efeDir->id}}</td>
+               <td style="border: 1px solid black !important;" class="title" width="35%">EFE-{{$efeDir->id}}</td>
                <td style="border: 1px solid black !important;">{{$efeDir->descripcion}}</td>
             </tr>
             @foreach($efeDir->efectosindirectos as $efeind)
                <tr>
-                  <td valign="middle" width="15%" style="border: 1px solid black !important;">
+                  <td valign="middle" width="35%" style="border: 1px solid black !important;">
                      <span class="title">Efecto indirecto EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</span>
                   </td>
                   <td style="border: 1px solid black !important;">{{$efeind->descripcion}}</td>
@@ -945,13 +945,13 @@
          @foreach($proyecto->causasDirectas as $cauDir)
          <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
-               <td class="title" width="15%">CAU-{{$cauDir->id}}</td>
+               <td class="title" width="35%">CAU-{{$cauDir->id}}</td>
                <td>{{$cauDir->descripcion}}</td>
             </tr>
             @foreach($cauDir->causasindirectas as $cauind)
                <tr>
-                  <td width="15%" valign="top">
-                     <span class="title">Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</span>
+                  <td width="35%" valign="top">
+                     <span class="title">Causa indirecta CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</span>
                   </td>
                   <td>{{$cauind->descripcion}}</td>
                </tr>
