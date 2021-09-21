@@ -173,7 +173,7 @@ class Evaluacion extends Model
     public function getTotalEvaluacionAttribute()
     {
         $total = 0;
-        if ($this->proyecto->idi()->exists()) {
+        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
             $total = $this->idiEvaluacion->titulo_puntaje +
                 $this->idiEvaluacion->video_puntaje +
                 $this->idiEvaluacion->resumen_puntaje +
@@ -188,7 +188,7 @@ class Evaluacion extends Model
                 $this->idiEvaluacion->ortografia_puntaje +
                 $this->idiEvaluacion->redaccion_puntaje +
                 $this->idiEvaluacion->normas_apa_puntaje;
-        } else if ($this->proyecto->culturaInnovacion()->exists()) {
+        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
             $total = $this->culturaInnovacionEvaluacion->titulo_puntaje +
                 $this->culturaInnovacionEvaluacion->video_puntaje +
                 $this->culturaInnovacionEvaluacion->resumen_puntaje +
@@ -203,7 +203,7 @@ class Evaluacion extends Model
                 $this->culturaInnovacionEvaluacion->ortografia_puntaje +
                 $this->culturaInnovacionEvaluacion->redaccion_puntaje +
                 $this->culturaInnovacionEvaluacion->normas_apa_puntaje;
-        } else if ($this->proyecto->servicioTecnologico()->exists()) {
+        } else if ($this->proyecto->servicioTecnologico()->exists() && $this->servicioTecnologicoEvaluacion) {
             $total = $this->servicioTecnologicoEvaluacion->titulo_puntaje +
                 $this->servicioTecnologicoEvaluacion->resumen_puntaje +
                 $this->servicioTecnologicoEvaluacion->antecedentes_puntaje +
@@ -253,7 +253,7 @@ class Evaluacion extends Model
     public function getTotalRecomendacionesAttribute()
     {
         $total = 0;
-        if ($this->proyecto->idi()->exists()) {
+        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
             $this->idiEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->idiEvaluacion->video_comentario != null ? $total++ : null;
             $this->idiEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -287,7 +287,7 @@ class Evaluacion extends Model
             $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->culturaInnovacion()->exists()) {
+        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
             $this->culturaInnovacionEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->video_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -321,7 +321,7 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->ta()->exists()) {
+        } else if ($this->proyecto->ta()->exists() && $this->taEvaluacion) {
             $this->taEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->taEvaluacion->antecedentes_tecnoacademia_comentario != null ? $total++ : null;
             $this->taEvaluacion->retos_oportunidades_comentario != null ? $total++ : null;
@@ -344,7 +344,7 @@ class Evaluacion extends Model
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->taEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->tp()->exists()) {
+        } else if ($this->proyecto->tp()->exists() && $this->tpEvaluacion) {
             $this->tpEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->tpEvaluacion->antecedentes_regional_comentario != null ? $total++ : null;
             $this->tpEvaluacion->municipios_comentario != null ? $total++ : null;
@@ -363,7 +363,7 @@ class Evaluacion extends Model
             $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_objetivos_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->servicioTecnologico()->exists()) {
+        } else if ($this->proyecto->servicioTecnologico()->exists() && $this->servicioTecnologicoEvaluacion) {
             $this->servicioTecnologicoEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->resumen_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->antecedentes_comentario != null ? $total++ : null;
@@ -420,7 +420,9 @@ class Evaluacion extends Model
     public function getValidarEvaluacionAttribute()
     {
         $itemsPorEvaluar = [];
-        if ($this->proyecto->idi()->exists()) {
+        $countRolesSinEvaluar = 0;
+
+        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
             $this->idiEvaluacion->titulo_puntaje == null ? array_push($itemsPorEvaluar, 'Título') : null;
             $this->idiEvaluacion->resumen_puntaje == null ? array_push($itemsPorEvaluar, 'Resumen') : null;
             $this->idiEvaluacion->problema_central_puntaje == null ? array_push($itemsPorEvaluar, 'Problema central') : null;
@@ -434,7 +436,7 @@ class Evaluacion extends Model
             $this->idiEvaluacion->ortografia_puntaje == null ? array_push($itemsPorEvaluar, 'Ortografía') : null;
             $this->idiEvaluacion->redaccion_puntaje == null ? array_push($itemsPorEvaluar, 'Redacción') : null;
             $this->idiEvaluacion->normas_apa_puntaje == null ? array_push($itemsPorEvaluar, 'Normas APA') : null;
-        } else if ($this->proyecto->culturaInnovacion()->exists()) {
+        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
             $this->culturaInnovacionEvaluacion->titulo_puntaje == null ? array_push($itemsPorEvaluar, 'Título') : null;
             $this->culturaInnovacionEvaluacion->resumen_puntaje == null ? array_push($itemsPorEvaluar, 'Resumen') : null;
             $this->culturaInnovacionEvaluacion->problema_central_puntaje == null ? array_push($itemsPorEvaluar, 'Problema central') : null;
@@ -451,7 +453,6 @@ class Evaluacion extends Model
         }
 
         if ($this->proyecto->lineaProgramatica->codigo != 23) {
-            $countRolesSinEvaluar = 0;
             foreach ($this->proyecto->proyectoRolesSennova as $proyectoRol) {
                 !$proyectoRol->proyectoRolesEvaluaciones()->where('evaluacion_id', $this->id)->first() ? $countRolesSinEvaluar++ : null;
             }
@@ -479,7 +480,8 @@ class Evaluacion extends Model
     public function scopeFilterEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('id', 'ilike', '%' . $search . '%');
+            $query->where('users.nombre', 'ilike', '%' . $search . '%');
+            $query->join('users', 'evaluaciones.user_id', 'users.id');
         });
     }
 }
