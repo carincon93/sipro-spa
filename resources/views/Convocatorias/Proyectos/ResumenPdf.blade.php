@@ -712,10 +712,10 @@
          @endif
          
          <div class="rotate90 page_break">
-            <img class="" src="data:image/png;base64,{{$base64Arbolproblemas}}" alt="Árbol de problemas" width="100%">
+            <img class="" src="data:image/png;base64,{{$base64Arbolproblemas}}" alt="Árbol de problemas" width="100%" style="max-height: 800px;">
          </div>
          <div class="rotate90">
-            <img class="" src="data:image/png;base64,{{$base64Arbolobjetivos}}" alt="Árbol de objetivos" width="100%">
+            <img class="" src="data:image/png;base64,{{$base64Arbolobjetivos}}" alt="Árbol de objetivos" width="100%" style="max-height: 800px;">
          </div>
          <div class="page_break">
             <p class="title" style="text-align: center;">Presupuesto ${{number_format($proyecto->precio_proyecto, 0, ",", ".")}} COP</p>
@@ -1398,7 +1398,7 @@
          
          <div class="rotate90 page_break" style="margin-top: 1.8in !important">
             <p class="title" style="text-align:center">Cadena de valor</p>
-            <img src="data:image/png;base64,{{$base64CadenaValor}}" alt="Cadena de valor" width="100%">
+            <img src="data:image/png;base64,{{$base64CadenaValor}}" alt="Cadena de valor" width="100%"  style="max-height: 800px;">
          </div>
       </main>
    </body>
