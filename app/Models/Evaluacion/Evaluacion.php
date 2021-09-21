@@ -479,7 +479,8 @@ class Evaluacion extends Model
     public function scopeFilterEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('id', 'ilike', '%' . $search . '%');
+            $query->where('users.nombre', 'ilike', '%' . $search . '%');
+            $query->join('users', 'evaluaciones.user_id', 'users.id');
         });
     }
 }
