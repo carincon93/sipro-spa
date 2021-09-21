@@ -420,6 +420,8 @@ class Evaluacion extends Model
     public function getValidarEvaluacionAttribute()
     {
         $itemsPorEvaluar = [];
+        $countRolesSinEvaluar = 0;
+
         if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
             $this->idiEvaluacion->titulo_puntaje == null ? array_push($itemsPorEvaluar, 'Título') : null;
             $this->idiEvaluacion->resumen_puntaje == null ? array_push($itemsPorEvaluar, 'Resumen') : null;
@@ -451,7 +453,6 @@ class Evaluacion extends Model
         }
 
         if ($this->proyecto->lineaProgramatica->codigo != 23) {
-            $countRolesSinEvaluar = 0;
             foreach ($this->proyecto->proyectoRolesSennova as $proyectoRol) {
                 !$proyectoRol->proyectoRolesEvaluaciones()->where('evaluacion_id', $this->id)->first() ? $countRolesSinEvaluar++ : null;
             }
