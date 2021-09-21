@@ -599,21 +599,20 @@
                   </ol>
                </td>
             </tr>
-            <tr>
-               <td width="35%" class="title">Descripción del beneficio en los municipios</td>
-               <td>
-                  <p>{{$datos->impacto_municipios}}</p>
-               </td>
-            </tr>
-            @if(!empty($datos->impacto_centro_formacion))
-            <tr>
-               <td width="35%" class="title">Impacto en el centro de formación</td>
-               <td>
-                  <p>{{$datos->impacto_centro_formacion}}</p>
-               </td>
-            </tr>
-            @endif
          </table>
+         @endif
+
+         @if(!empty($datos->impacto_municipios))
+         <div class="border">
+            <p class="title">Descripción del beneficio en los municipios</p>
+            <p>{{$datos->impacto_municipios}}</p>
+         </div>
+         @endif
+         @if(!empty($datos->impacto_centro_formacion))
+         <div class="border">
+            <p class="title">Impacto en el centro de formación</p>
+            <p>{{$datos->impacto_centro_formacion}}</p>
+         </div>
          @endif
          @if($proyecto->municipiosAImpactar->count()>0)
          <table class="" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
@@ -916,122 +915,110 @@
             <p>{{$datos->objetivo_general}}</p>
          </div>
          
-         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td class="title" colspan="2">Efectos Directos</td>
             </tr>
          </table>
          @foreach($proyecto->efectosDirectos as $efeDir)
-         <table width="100%" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table width="100%" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td style="border: 1px solid black !important;" class="title" width="15%">EFE-{{$efeDir->id}}</td>
-               <td style="border: 1px solid black !important;" colspan="2">{{$efeDir->descripcion}}</td>
+               <td style="border: 1px solid black !important;">{{$efeDir->descripcion}}</td>
             </tr>
+            @foreach($efeDir->efectosindirectos as $efeind)
                <tr>
-                  @foreach($efeDir->efectosindirectos as $efeind)
-                  <td width="33%" valign="top" style="border: 1px solid black !important;">
+                  <td valign="middle" width="15%" style="border: 1px solid black !important;">
                      <span class="title">Efecto indirecto EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</span>
-                     <br>{{$efeind->descripcion}}
                   </td>
-                  @endforeach
-                  @for($i=0; $i<=(2-$efeDir->efectosindirectos()->count()); $i++)
-                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
-                  @endfor
+                  <td style="border: 1px solid black !important;">{{$efeind->descripcion}}</td>
                </tr>
+            @endforeach
          </table>
          @endforeach
          
-         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td class="title" colspan="2">Causas Directas</td>
             </tr>
          </table>
          @foreach($proyecto->causasDirectas as $cauDir)
-         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td class="title" width="15%">CAU-{{$cauDir->id}}</td>
-               <td colspan="2">{{$cauDir->descripcion}}</td>
+               <td>{{$cauDir->descripcion}}</td>
             </tr>
+            @foreach($cauDir->causasindirectas as $cauind)
                <tr>
-                  @foreach($cauDir->causasindirectas as $cauind)
-                  <td width="33%" valign="top">
+                  <td width="15%" valign="top">
                      <span class="title">Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</span>
-                     <br>{{$cauind->descripcion}}
                   </td>
-                  @endforeach
-                  @for($i=0; $i<=(2-$cauDir->causasindirectas()->count()); $i++)
-                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
-                  @endfor
+                  <td>{{$cauind->descripcion}}</td>
                </tr>
+            @endforeach
          </table>
          @endforeach
          
-         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td class="title" colspan="2">Objetivos Específicos</td>
             </tr>
          </table>
          @foreach($proyecto->causasDirectas as $cauDir)
-         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td width="15%">
                   <span class="title">OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}</span><br>
                   <small>Causa Directa: CAU-{{$cauDir->id}}</small>
                </td>
-               <td colspan="2">{{$cauDir->objetivoEspecifico->descripcion}}</td>
+               <td>{{$cauDir->objetivoEspecifico->descripcion}}</td>
             </tr>
-               <tr>
-                  @foreach($cauDir->causasindirectas as $cauind)
-                  <td width="33%" valign="top">
-                     <span class="mb-3">
-                        <span class="title">Actividad: OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}-ACT-{{$cauind->actividad->id}}</span><br>
-                        <small>Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</small><br>
-                        <span class="title">Fecha de ejecución</span><br>
-                        Del: {{$cauind->actividad->year_inicio}}-{{$cauind->actividad->mes_inicio}}-{{$cauind->actividad->dia_inicio}} hasta {{$cauind->actividad->year_finalizacion}}-{{$cauind->actividad->mes_finalizacion}}-{{$cauind->actividad->dia_finalizacion}}
-                     </span>
-                     <br>{{$cauind->actividad->descripcion}}
-                  </td>
-                  @endforeach
-                  @for($i=0; $i<=(2-$cauDir->causasindirectas()->count()); $i++)
-                  <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
-                  @endfor
-               </tr>
+            @foreach($cauDir->causasindirectas as $cauind)
+            <tr>
+               <td width="15%" valign="top">
+                  <span class="mb-3">
+                     <span class="title">Actividad: OBJ-ESP-{{$cauDir->objetivoEspecifico->id}}-ACT-{{$cauind->actividad->id}}</span><br>
+                     <small>Efecto indirecto CAU-{{$cauDir->id}}-IND-{{$cauind->id}}:</small><br>
+                     <span class="title">Fecha de ejecución</span><br>
+                     Del: {{$cauind->actividad->year_inicio}}-{{$cauind->actividad->mes_inicio}}-{{$cauind->actividad->dia_inicio}} hasta {{$cauind->actividad->year_finalizacion}}-{{$cauind->actividad->mes_finalizacion}}-{{$cauind->actividad->dia_finalizacion}}
+                  </span>
+               </td>
+               <td>{{$cauind->actividad->descripcion}}</td>
+            </tr>
+            @endforeach
          </table>
          @endforeach
          
-         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+         <table class=" page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
             <tr>
                <td class="title" colspan="2">Resultados</td>
             </tr>
          </table>
          @foreach($proyecto->efectosDirectos as $efeDir)
             @foreach($efeDir->resultados as $resultado)
-            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
+            <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none; margin-bottom: 10px;">
                <tr>
                   <td width="15%">
                   <span class="title">RES-{{$resultado->id}}</span><br>
                   <small>Efecto directo: EFE-{{$efeDir->id}}</small>
                   </td>
-                  <td colspan="2">
+                  <td>
                   {{$resultado->descripcion}}
                   </td>
                </tr>
-                  <tr>
-                     @foreach($efeDir->efectosindirectos as $efeind)
-                     <td width="33%" valign="top">
-                        <span class="mb-3">
-                           <span class="title">RES-{{$resultado->id}}-IMP-{{$efeind->impacto->id}}</span><br>
-                           <small>Efecto indirecto: EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</small>
-                        </span>
-                        <br>
-                        <span class="title">Tipo:</span> {{($tiposImpacto->where('value',$efeind->impacto->tipo)->first())?$tiposImpacto->where('value',$efeind->impacto->tipo)->first()['label']:''}}.<br>
-                        {{$efeind->impacto->descripcion}}
-                     </td>
-                     @endforeach
-                     @for($i=0; $i<=(2-$efeDir->efectosindirectos()->count()); $i++)
-                     <td width="33%" valign="top" style="border: 1px solid black !important;"></td>
-                     @endfor
-                  </tr>
+               @foreach($efeDir->efectosindirectos as $efeind)
+               <tr>
+                  <td width="15%" valign="top">
+                     <span class="mb-3">
+                        <span class="title">RES-{{$resultado->id}}-IMP-{{$efeind->impacto->id}}</span><br>
+                        <small>Efecto indirecto: EFE-{{$efeDir->id}}-IND-{{$efeind->id}}:</small>
+                     </span>
+                     <br>
+                     <span class="title">Tipo:</span> {{($tiposImpacto->where('value',$efeind->impacto->tipo)->first())?$tiposImpacto->where('value',$efeind->impacto->tipo)->first()['label']:''}}.
+                  </td>
+                  <td>{{$efeind->impacto->descripcion}}</td>
+               </tr>
+               @endforeach
             </table>
             @endforeach
          @endforeach
@@ -1039,7 +1026,7 @@
          <div class="page_break" style="text-align:center">
             <p class="title">Gant Actividades</p>
             <center>
-               <img style="margin:auto; max-height:90%; max-width:100%;" src="data:image/png;base64,{{$base64GantActividades}}" alt="Gant Actividades">
+               <img style="margin:0 auto; max-height:90%; max-width:100%;" src="data:image/png;base64,{{$base64GantActividades}}" alt="Gant Actividades">
             </center>
          </div>
          
@@ -1121,7 +1108,7 @@
          @endif
          <div class="border page_break">
             <p class="title" style="text-align:center">Productos</p>
-            <img class="" src="data:image/png;base64,{{$base64GantProductos}}" alt="Gant Productos" width="100%">
+            <img class="" src="data:image/png;base64,{{$base64GantProductos}}" alt="Gant Productos" width="100%" style="max-width: 90%;">
             
             @foreach($proyecto->efectosDirectos as $efeDir)
                @foreach($efeDir->resultados as $resultado)

@@ -813,7 +813,9 @@
 
 {#if to_pdf}
     <style>
-        nav, button.absolute.bottom-1\.5 {
+        nav,
+        button.absolute.bottom-1\.5,
+        .bg-gray-200.p-4.rounded.border-orangered.border.mb-5 {
             display: none !important;
         }
     </style>
