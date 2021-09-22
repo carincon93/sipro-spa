@@ -24,6 +24,8 @@
     let filters = {
         year: $page.props.filters.year,
     }
+
+    console.log(evaluaciones)
 </script>
 
 <AuthenticatedLayout>
@@ -54,7 +56,7 @@
             </tr>
         </thead>
         <tbody slot="tbody">
-            {#each evaluaciones.data as evaluacion (evaluacion.id)}
+            {#each evaluaciones.data as evaluacion}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
