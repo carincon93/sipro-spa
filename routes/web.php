@@ -593,6 +593,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
     Route::get('proyectos/{proyecto}/editar', [ProyectoController::class, 'editProyecto'])->name('proyectos.edit');
     Route::put('proyectos/{proyecto}/editar', [ProyectoController::class, 'update'])->name('proyectos.update');
+    Route::post('proyectos/actualizar-precio-proyecto', [ProyectoController::class, 'udpdatePrecioProyecto'])->name('proyectos.update.precio-proyecto');
 
     /**
      * Evaluaciones
