@@ -8,6 +8,7 @@
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
+    import LoadingButton from '@/Shared/LoadingButton'
     import { Item, Text } from '@smui/list'
 
     export let proyectos
@@ -23,11 +24,32 @@
     let filters = {
         year: $page.props.filters.year,
     }
+
+    let sending = false
+    function submit() {
+        if (isSuperAdmin) {
+            Inertia.post(route('proyectos.update.precio-proyecto'), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <DataTable class="mt-20" bind:filters showFilters={false}>
         <div slot="title">Proyectos</div>
+
+        <div slot="caption">
+            <form on:submit|preventDefault={submit}>
+                <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar precio de proyectos</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">

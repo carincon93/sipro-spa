@@ -1122,4 +1122,15 @@ class ProyectoController extends Controller
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    public function udpdatePrecioProyecto()
+    {
+        $proyectos = Proyecto::all();
+
+        foreach ($proyectos as $proyecto) {
+            $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
 }
