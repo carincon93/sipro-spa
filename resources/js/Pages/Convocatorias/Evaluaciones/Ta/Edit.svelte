@@ -215,7 +215,7 @@
 
     let lineasTecnoaAcademia
     async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada]))
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada.id]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
         }
@@ -286,7 +286,15 @@
                     <Label class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                 </div>
                 <div>
-                    <Select disabled={true} id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={taInfo.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" />
+                    {tecnoacademiaRelacionada.nombre}
+                    <br />
+                    {#if tecnoacademiaRelacionada.modalidad == 1}
+                        ∙ itinerante
+                    {:else if tecnoacademiaRelacionada.modalidad == 2}
+                        ∙ itinerante - vehículo
+                    {:else if tecnoacademiaRelacionada.modalidad == 3}
+                        ∙ fija con extensión
+                    {/if}
                 </div>
             </div>
         </fieldset>
