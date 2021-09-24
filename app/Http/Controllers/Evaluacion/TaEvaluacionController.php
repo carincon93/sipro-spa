@@ -101,7 +101,7 @@ class TaEvaluacionController extends Controller
             'idiSegundaEvaluacion'                      => TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
                 $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
             })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->first(),
-            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,
+            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null,
             'lineasTecnoacademiaRelacionadas'           => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
             'regionales'                                => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
