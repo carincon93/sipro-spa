@@ -65,52 +65,50 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
-                <div class="mt-4 mb-10">
-                    <p class="mb-10">
-                        {proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre}
-                    </p>
-                    <p class="mb-10 whitespace-pre-line">
-                        Experiencia: {proyectoRolSennova.convocatoria_rol_sennova.experiencia}
-                    </p>
-                    <p class="mb-10">
-                        Asignación mensual: {proyectoRolSennova.convocatoria_rol_sennova.asignacion_mensual}
-                    </p>
-                </div>
+            <div class="mt-4 mb-10">
+                <p class="mb-10">
+                    {proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre}
+                </p>
+                <p class="mb-10 whitespace-pre-line">
+                    Experiencia: {proyectoRolSennova.convocatoria_rol_sennova.experiencia}
+                </p>
+                <p class="mb-10">
+                    Asignación mensual: {proyectoRolSennova.convocatoria_rol_sennova.asignacion_mensual}
+                </p>
+            </div>
 
-                <div class="mt-4">
-                    {#if proyectoRolSennova.convocatoria_rol_sennova?.perfil}
-                        <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={proyectoRolSennova.convocatoria_rol_sennova.perfil} />
-                    {:else}
-                        <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
-                    {/if}
-                </div>
-
-                {#if proyecto.codigo_linea_programatica != 68}
-                    <div class="mt-4">
-                        <Input disabled label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" class="mt-1" bind:value={rolSennovaInfo.numero_meses} />
-                    </div>
+            <div class="mt-4">
+                {#if proyectoRolSennova.convocatoria_rol_sennova?.perfil}
+                    <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={proyectoRolSennova.convocatoria_rol_sennova.perfil} />
+                {:else}
+                    <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
                 {/if}
+            </div>
 
+            {#if proyecto.codigo_linea_programatica != 68}
                 <div class="mt-4">
-                    <Input disabled label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" bind:value={rolSennovaInfo.numero_roles} />
+                    <Input disabled label="Número de meses que requiere el apoyo." id="numero_meses" type="number" input$min="1" input$step="0.1" class="mt-1" bind:value={rolSennovaInfo.numero_meses} />
                 </div>
+            {/if}
 
-                {#if proyectoRolSennova.actividades?.length > 0}
-                    <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
-                    <div class="bg-white rounded shadow overflow-hidden">
-                        <div class="p-4" />
+            <div class="mt-4">
+                <Input disabled label="Número de personas requeridas" id="numero_roles" type="number" input$min="1" class="mt-1" bind:value={rolSennovaInfo.numero_roles} />
+            </div>
 
-                        <div class="p-2">
-                            <ul class="list-disc p-4">
-                                {#each proyectoRolSennova.actividades as { id, descripcion }, i}
-                                    <li class="first-letter-uppercase mb-4">{descripcion}</li>
-                                {/each}
-                            </ul>
-                        </div>
+            {#if proyectoRolSennova.actividades?.length > 0}
+                <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4" />
+
+                    <div class="p-2">
+                        <ul class="list-disc p-4">
+                            {#each proyectoRolSennova.actividades as { id, descripcion }, i}
+                                <li class="first-letter-uppercase mb-4">{descripcion}</li>
+                            {/each}
+                        </ul>
                     </div>
-                {/if}
-            </fieldset>
+                </div>
+            {/if}
 
             <InfoMessage>
                 <div class="mt-4">
