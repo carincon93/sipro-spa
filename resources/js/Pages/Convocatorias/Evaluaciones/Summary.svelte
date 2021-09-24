@@ -33,7 +33,7 @@
     })
 
     function finishEvaluacion() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.finish', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
