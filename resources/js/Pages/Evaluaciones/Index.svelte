@@ -23,9 +23,8 @@
 
     let filters = {
         year: $page.props.filters.year,
+        estado: $page.props.filters.estado,
     }
-
-    console.log(evaluaciones)
 </script>
 
 <AuthenticatedLayout>
@@ -37,6 +36,22 @@
             <select id="year" class="mt-1 w-full form-select" bind:value={filters.year}>
                 <option value={null}>Seleccione un año</option>
                 <option value="2022">2022</option>
+            </select>
+
+            <label for="year" class="block text-gray-700">Estado:</label>
+            <select id="year" class="mt-1 w-full form-select" bind:value={filters.estado}>
+                <option value={null}>Seleccione un estado</option>
+                <option value="finalizados idi">Finalizado I+D+i</option>
+                <option value="finalizados ta">Finalizado TA</option>
+                <option value="finalizados tp">Finalizado TP</option>
+                <option value="finalizados cultura innovacion">Finalizado Cultura innovacion</option>
+                <option value="finalizados st">Finalizado ST</option>
+
+                <option value="sin evaluar idi">Sin evaluar I+D+i</option>
+                <option value="sin evaluar ta">Sin evaluar TA</option>
+                <option value="sin evaluar tp">Sin evaluar TP</option>
+                <option value="sin evaluar cultura innovacion">Sin evaluar Cultura innovacion</option>
+                <option value="sin evaluar st">Sin evaluar ST</option>
             </select>
         </div>
         <div slot="actions">
@@ -90,7 +105,9 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {evaluacion.habilitado ? 'Habilitado' : 'Deshabilitado'}
+                            {evaluacion.verificar_estado_evaluacion}
+                            <br />
+                            {evaluacion.habilitado ? 'Habilitada' : 'Deshabilitada'}
                         </p>
                     </td>
                     <td class="border-t td-actions">

@@ -40,6 +40,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
+            $convocatoria = Convocatoria::where('esta_activa', true)->first();
+
+            if ($convocatoria && $convocatoria->fase != 1) {
+                return false;
+            }
 
             $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
