@@ -26,8 +26,6 @@ class TpController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
-
         return Inertia::render('Convocatorias/Proyectos/Tp/Index', [
             'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),

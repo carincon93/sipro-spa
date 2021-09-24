@@ -218,6 +218,10 @@
             {/if}
 
             {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('reportes.index'))} variant={route().current('reportes.*') ? 'raised' : 'outlined'} class="p-2">Reportes</Button>
+            {/if}
+
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('roles-sennova.index'))} variant={route().current('roles-sennova.*') ? 'raised' : 'outlined'} class="p-2">Roles SENNOVA</Button>
             {/if}
 
@@ -239,10 +243,6 @@
 
             {#if isSuperAdmin || checkRole(authUser, [4, 21, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">Usuarios</Button>
-            {/if}
-
-            {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('reportes.index'))} variant={route().current('reportes.*') ? 'raised' : 'outlined'} class="p-2">Reportes</Button>
             {/if}
         </div>
     </div>

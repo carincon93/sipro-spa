@@ -15,8 +15,8 @@
 
     $title = 'Reportes de sistema'
 
-    export let convocatorias;
-    export let errors;
+    export let convocatorias
+    export let errors
 
     /**
      * Permisos
@@ -29,11 +29,11 @@
     let form = useForm({
         _token: $page.props.csrf_token,
         convocatoria: null,
-    });
+    })
 
     function downloadReport(report) {
-        if(report!=null && $form.convocatoria!=null){
-            window.open(route('reportes.'+report, {convocatoria:$form.convocatoria.value}))
+        if (report != null && $form.convocatoria != null) {
+            window.open(route('reportes.' + report, { convocatoria: $form.convocatoria.value }))
         }
     }
 </script>
@@ -51,14 +51,15 @@
         </thead>
         <tbody slot="tbody">
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Resumen proyectos</p></td>
-                <td>
-                    <Label required class="mb-4" labelFor="convocatorias" value="Convocatoria" />
+                <td class="border-t">
+                    <p class="px-6 py-4 focus:text-indigo-500">Resumen proyectos</p>
+                </td>
+                <td class="border-t">
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
                     {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                        <Button variant="raised" on:click={()=>downloadReport('resumeProjects')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('resumeProjects')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>
@@ -70,7 +71,7 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                        <Button variant="raised" on:click={()=>downloadReport('resumePresupuestos')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('resumePresupuestos')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>

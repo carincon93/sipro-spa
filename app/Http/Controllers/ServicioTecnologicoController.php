@@ -24,8 +24,6 @@ class ServicioTecnologicoController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
-
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Index', [
             'convocatoria'          => $convocatoria,
             'filters'               => request()->all('search', 'estructuracion_proyectos'),

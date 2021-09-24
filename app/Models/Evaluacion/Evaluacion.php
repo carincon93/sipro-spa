@@ -2,6 +2,7 @@
 
 namespace App\Models\Evaluacion;
 
+use App\Models\Convocatoria;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +22,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -170,6 +171,29 @@ class Evaluacion extends Model
         return $this->hasMany(EvaluacionCausalRechazo::class);
     }
 
+    public function getVerificarEstadoEvaluacionAttribute()
+    {
+        $estado = null;
+        if ($this->idiEvaluacion && $this->proyecto->idi()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->idiEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->culturaInnovacionEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->taEvaluacion && $this->proyecto->ta()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->taEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->tpEvaluacion && $this->proyecto->tp()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->tpEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->servicioTecnologicoEvaluacion && $this->proyecto->servicioTecnologico()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->servicioTecnologicoEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        }
+
+        return $estado;
+    }
+
+    /**
+     * getTotalEvaluacionAttribute
+     *
+     * @return void
+     */
     public function getTotalEvaluacionAttribute()
     {
         $total = 0;
@@ -340,6 +364,7 @@ class Evaluacion extends Model
             $this->taEvaluacion->bibliografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->entidad_aliada_comentario != null ? $total++ : null;
             $this->taEvaluacion->edt_comentario != null ? $total++ : null;
+            $this->taEvaluacion->articulacion_centro_formacion_comentario != null ? $total++ : null;
 
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
@@ -485,6 +510,38 @@ class Evaluacion extends Model
             $query->select('users.nombre', 'evaluaciones.*');
             $query->where('users.nombre', 'ilike', '%' . $search . '%');
             $query->join('users', 'evaluaciones.user_id', 'users.id');
+        })->when($filters['estado'] ?? null, function ($query, $estado) {
+            if ($estado == 'finalizados idi') {
+                $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados cultira innovacion') {
+                $query->join('cultura_innovacion_evaluaciones', 'evaluaciones.id', 'cultura_innovacion_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados ta') {
+                $query->join('ta_evaluaciones', 'evaluaciones.id', 'ta_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados tp') {
+                $query->join('tp_evaluaciones', 'evaluaciones.id', 'tp_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados st') {
+                $query->join('servicios_tecnologicos_evaluaciones', 'evaluaciones.id', 'servicios_tecnologicos_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'sin evaluar idi') {
+                $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');
+                $query->where('idi_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar cultura innovacion') {
+                $query->join('cultura_innovacion_evaluaciones', 'evaluaciones.id', 'cultura_innovacion_evaluaciones.id');
+                $query->where('cultura_innovacion_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar ta') {
+                $query->join('ta_evaluaciones', 'evaluaciones.id', 'ta_evaluaciones.id');
+                $query->where('ta_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar tp') {
+                $query->join('tp_evaluaciones', 'evaluaciones.id', 'tp_evaluaciones.id');
+                $query->where('tp_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar st') {
+                $query->join('servicios_tecnologicos_evaluaciones', 'evaluaciones.id', 'servicios_tecnologicos_evaluaciones.id');
+                $query->where('servicios_tecnologicos_evaluaciones.updated_at', null);
+            }
         });
     }
 }

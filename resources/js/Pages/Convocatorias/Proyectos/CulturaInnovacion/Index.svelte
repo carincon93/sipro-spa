@@ -41,7 +41,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkPermission(authUser, [11])}
+            {#if isSuperAdmin || (checkPermission(authUser, [11]) && convocatoria.fase == 1)}
                 <Button on:click={() => Inertia.visit(route('convocatorias.cultura-innovacion.create', [convocatoria.id]))} variant="raised">Crear proyecto Apropiación de la cultura de la innovación</Button>
             {/if}
         </div>

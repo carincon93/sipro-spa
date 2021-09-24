@@ -177,6 +177,9 @@
         bibliografia_comentario: taEvaluacion.bibliografia_comentario,
         bibliografia_requiere_comentario: taEvaluacion.bibliografia_comentario == null ? true : false,
 
+        articulacion_centro_formacion_comentario: taEvaluacion.articulacion_centro_formacion_comentario,
+        articulacion_centro_formacion_requiere_comentario: taEvaluacion.articulacion_centro_formacion_comentario == null ? true : false,
+
         ortografia_comentario: taEvaluacion.ortografia_comentario,
         ortografia_requiere_comentario: taEvaluacion.ortografia_comentario == null ? true : false,
         redaccion_comentario: taEvaluacion.redaccion_comentario,
@@ -609,6 +612,24 @@
             </div>
             <div>
                 <Textarea disabled maxlength="40000" id="articulacion_centro_formacion" bind:value={taInfo.articulacion_centro_formacion} />
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información relacionada con la articulación con el centro de formación es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.articulacion_centro_formacion_requiere_comentario} />
+                        {#if $form.articulacion_centro_formacion_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="articulacion_centro_formacion_comentario"
+                                bind:value={$form.articulacion_centro_formacion_comentario}
+                                error={errors.articulacion_centro_formacion_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
             </div>
         </div>
 

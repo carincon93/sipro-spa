@@ -42,6 +42,7 @@ class TaEvaluacion extends Model
         'productos_comentario',
         'entidad_aliada_comentario',
         'edt_comentario',
+        'articulacion_centro_formacion_comentario',
         'ortografia_comentario',
         'redaccion_comentario',
         'normas_apa_comentario',
