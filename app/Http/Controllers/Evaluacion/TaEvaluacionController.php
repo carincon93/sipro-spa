@@ -101,7 +101,7 @@ class TaEvaluacionController extends Controller
             'idiSegundaEvaluacion'                      => TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
                 $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
             })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->first(),
-            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->id : null,
+            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null,
             'lineasTecnoacademiaRelacionadas'           => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
             'regionales'                                => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
@@ -140,6 +140,7 @@ class TaEvaluacionController extends Controller
         $taEvaluacion->fecha_ejecucion_comentario               = $request->fecha_ejecucion_requiere_comentario == false ? $request->fecha_ejecucion_comentario : null;
         $taEvaluacion->proyectos_macro_comentario               = $request->proyectos_macro_requiere_comentario == false ? $request->proyectos_macro_comentario : null;
         $taEvaluacion->bibliografia_comentario                  = $request->bibliografia_requiere_comentario == false ? $request->bibliografia_comentario : null;
+        $taEvaluacion->articulacion_centro_formacion_comentario = $request->articulacion_centro_formacion_requiere_comentario == false ? $request->articulacion_centro_formacion_comentario : null;
 
         $taEvaluacion->ortografia_comentario                    = $request->ortografia_requiere_comentario == false ? $request->ortografia_comentario : null;
         $taEvaluacion->redaccion_comentario                     = $request->redaccion_requiere_comentario == false ? $request->redaccion_comentario : null;

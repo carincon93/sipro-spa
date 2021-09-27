@@ -25,7 +25,7 @@ class EvaluacionController extends Controller
         return Inertia::render('Evaluaciones/Index', [
             'filters'       => request()->all('search'),
             'evaluaciones'  => Evaluacion::with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,nodo_tecnoparque_id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('evaluaciones.id', 'ASC')
-                ->filterEvaluacion(request()->only('search'))->paginate(),
+                ->filterEvaluacion(request()->only('search', 'estado'))->paginate()->appends(['search' => request()->search, 'estado' => request()->estado]),
         ]);
     }
 
@@ -271,7 +271,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', 'comentarios_generales', 'replicas'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
             'proyecto'                      => $evaluacion->proyecto,
         ]);
     }
@@ -287,9 +287,11 @@ class EvaluacionController extends Controller
     {
         $this->authorize('modificar-evaluacion-autor', $evaluacion);
 
-        $evaluacion->update(
-            ['evaluacion_id' => $evaluacion->id, 'comentarios_generales' => $request->comentarios_generales],
-        );
+        if ($request->has('comentario_evaluador')) {
+            $evaluacion->update(
+                ['evaluacion_id' => $evaluacion->id, 'comentario_evaluador' => $request->comentario_evaluador],
+            );
+        }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

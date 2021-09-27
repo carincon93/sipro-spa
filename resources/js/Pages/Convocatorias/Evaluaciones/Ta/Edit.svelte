@@ -177,6 +177,9 @@
         bibliografia_comentario: taEvaluacion.bibliografia_comentario,
         bibliografia_requiere_comentario: taEvaluacion.bibliografia_comentario == null ? true : false,
 
+        articulacion_centro_formacion_comentario: taEvaluacion.articulacion_centro_formacion_comentario,
+        articulacion_centro_formacion_requiere_comentario: taEvaluacion.articulacion_centro_formacion_comentario == null ? true : false,
+
         ortografia_comentario: taEvaluacion.ortografia_comentario,
         ortografia_requiere_comentario: taEvaluacion.ortografia_comentario == null ? true : false,
         redaccion_comentario: taEvaluacion.redaccion_comentario,
@@ -185,7 +188,7 @@
         normas_apa_requiere_comentario: taEvaluacion.normas_apa_comentario == null ? true : false,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && ta.proyecto.finalizado == true && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.ta-evaluaciones.update', [convocatoria.id, taEvaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -215,7 +218,7 @@
 
     let lineasTecnoaAcademia
     async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada]))
+        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada.id]))
         if (res.status == '200') {
             lineasTecnoaAcademia = res.data
         }
@@ -226,375 +229,89 @@
     <EvaluationStepper {convocatoria} evaluacion={taEvaluacion.evaluacion} proyecto={ta.proyecto} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [11]) && ta.proyecto.finalizado == true) ? undefined : true}>
-            <div class="mt-44">
-                <p class="text-center">Fecha de ejecución</p>
-                <div class="mt-4 flex items-start justify-around">
-                    <div class="mt-4 flex">
-                        <Label labelFor="fecha_inicio" value="Del" />
-                        <div class="ml-4">
-                            <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" bind:value={taInfo.fecha_inicio} />
-                        </div>
-                    </div>
-                    <div class="mt-4 flex">
-                        <Label labelFor="fecha_finalizacion" value="hasta" />
-                        <div class="ml-4">
-                            <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" bind:value={taInfo.fecha_finalizacion} />
-                        </div>
+        <div class="mt-44">
+            <p class="text-center">Fecha de ejecución</p>
+            <div class="mt-4 flex items-start justify-around">
+                <div class="mt-4 flex">
+                    <Label labelFor="fecha_inicio" value="Del" />
+                    <div class="ml-4">
+                        <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" bind:value={taInfo.fecha_inicio} />
                     </div>
                 </div>
-                <InfoMessage>
-                    <div class="mt-4">
-                        <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
-                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
-                        {#if $form.fecha_ejecucion_requiere_comentario == false}
-                            <Textarea
-                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                label="Comentario"
-                                class="mt-4"
-                                maxlength="40000"
-                                id="fecha_ejecucion_comentario"
-                                bind:value={$form.fecha_ejecucion_comentario}
-                                error={errors.fecha_ejecucion_comentario}
-                                required
-                            />
-                        {/if}
+                <div class="mt-4 flex">
+                    <Label labelFor="fecha_finalizacion" value="hasta" />
+                    <div class="ml-4">
+                        <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" bind:value={taInfo.fecha_finalizacion} />
                     </div>
-                </InfoMessage>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
-                    </div>
-                    <div>
-                        <DynamicList disabled={true} id="linea_programatica_id" bind:value={taInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
-                    </div>
-                </div>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                    </div>
-                    <div>
-                        {ta.proyecto.centro_formacion.nombre}
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
-                    </div>
-                    <div>
-                        <Select disabled={true} id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={taInfo.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" />
-                    </div>
-                </div>
-            </fieldset>
-            {#if taInfo.tecnoacademia_id && lineasTecnoaAcademia}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
-                    </div>
-                    <div>
-                        <SelectMulti classes="evaluacion-select-multi" disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
-                        {#if lineasTecnoaAcademia?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
-                    </div>
-                </div>
-            {/if}
-
-            <fieldset disabled>
-                <div class="mt-40 grid grid-cols-1">
-                    <div>
-                        <Label class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                        <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
-                    </div>
-                    <div>
-                        <Textarea disabled maxlength="40000" id="resumen" bind:value={taInfo.resumen} />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="resumen_regional" bind:value={taInfo.resumen_regional} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
-                            {#if $form.resumen_regional_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="resumen_regional_comentario"
-                                    bind:value={$form.resumen_regional_comentario}
-                                    error={errors.resumen_regional_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
                 </div>
             </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                        <InfoMessage
-                            message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+            <InfoMessage>
+                <div class="mt-4">
+                    <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
+                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
+                    {#if $form.fecha_ejecucion_requiere_comentario == false}
+                        <Textarea
+                            disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                            label="Comentario"
+                            class="mt-4"
+                            maxlength="40000"
+                            id="fecha_ejecucion_comentario"
+                            bind:value={$form.fecha_ejecucion_comentario}
+                            error={errors.fecha_ejecucion_comentario}
+                            required
                         />
-                    </div>
-                    <div>
-                        <Textarea disabled maxlength="40000" id="antecedentes" bind:value={taInfo.antecedentes} />
-                    </div>
+                    {/if}
                 </div>
-            </fieldset>
+            </InfoMessage>
+        </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="antecedentes_tecnoacademia" bind:value={taInfo.antecedentes_tecnoacademia} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿Los antecedentes de la Tecnoacademia y su impacto en la región son correctos? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_tecnoacademia_requiere_comentario} />
-                            {#if $form.antecedentes_tecnoacademia_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="antecedentes_tecnoacademia_comentario"
-                                    bind:value={$form.antecedentes_tecnoacademia_comentario}
-                                    error={errors.antecedentes_tecnoacademia_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                    </div>
-                    <div>
-                        <Textarea disabled maxlength="40000" id="justificacion_problema" bind:value={taInfo.justificacion_problema} />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="retos_oportunidades" bind:value={taInfo.retos_oportunidades} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La descripción es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
-                            {#if $form.retos_oportunidades_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="retos_oportunidades_comentario"
-                                    bind:value={$form.retos_oportunidades_comentario}
-                                    error={errors.retos_oportunidades_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="pertinencia_territorio" bind:value={taInfo.pertinencia_territorio} />
-                </div>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                        <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
-                    </div>
-                    <div>
-                        <Textarea disabled maxlength="40000" id="marco_conceptual" bind:value={taInfo.marco_conceptual} />
-                    </div>
-                </div>
-            </fieldset>
-
+        <fieldset disabled>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" for="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
+                    <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={taInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                    <DynamicList disabled={true} id="linea_programatica_id" bind:value={taInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                </div>
+            </div>
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                </div>
+                <div>
+                    {ta.proyecto.centro_formacion.nombre}
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" for="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
+                    <Label class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                 </div>
                 <div>
-                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios_impactar" bind:selectedValue={taInfo.municipios_impactar} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+                    {tecnoacademiaRelacionada.nombre}
+                    <br />
+                    {#if tecnoacademiaRelacionada.modalidad == 1}
+                        ∙ itinerante
+                    {:else if tecnoacademiaRelacionada.modalidad == 2}
+                        ∙ itinerante - vehículo
+                    {:else if tecnoacademiaRelacionada.modalidad == 3}
+                        ∙ fija con extensión
+                    {/if}
                 </div>
             </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="impacto_municipios" bind:value={taInfo.impacto_municipios} />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div />
-                <div>
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La información relacionada con los municipios es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
-                            {#if $form.municipios_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="municipios_comentario"
-                                    bind:value={$form.municipios_comentario}
-                                    error={errors.municipios_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
+        </fieldset>
+        {#if taInfo.tecnoacademia_id && lineasTecnoaAcademia}
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
+                    <Label class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                 </div>
                 <div>
-                    <Select disabled={true} id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
-
-                    <Tags disabled id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={taInfo.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
-                </div>
-                <div>
-                    <Select disabled={true} items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={taInfo.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" />
-                </div>
-            </div>
-
-            {#if taInfo.proyeccion_nuevas_instituciones?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
-                    </div>
-                    <div>
-                        <Select disabled={true} id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
-
-                        <Tags disabled id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={taInfo.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Institucienes Educativas en articulación con la media?" />
-                </div>
-                <div>
-                    <Select disabled={true} items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={taInfo.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" />
-                </div>
-            </div>
-
-            {#if taInfo.proyeccion_articulacion_media?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
-                    </div>
-                    <div>
-                        <Select disabled={true} id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
-
-                        <Tags disabled id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={taInfo.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-1">
-                <div />
-                <div>
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La información relacionada con las instituciones es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.instituciones_requiere_comentario} />
-                            {#if $form.instituciones_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="instituciones_comentario"
-                                    bind:value={$form.instituciones_comentario}
-                                    error={errors.instituciones_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
-                </div>
-                <div>
-                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                    {#if programasFormacionArticular?.length == 0}
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
+                    {#if lineasTecnoaAcademia?.length == 0}
                         <div>
                             <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
+                            <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                 </svg>
@@ -604,192 +321,493 @@
                     {/if}
                 </div>
             </div>
+        {/if}
 
+        <fieldset disabled>
             <div class="mt-40 grid grid-cols-1">
                 <div>
-                    <Label class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
+                    <Label class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
+                    <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea disabled maxlength="40000" id="articulacion_centro_formacion" bind:value={taInfo.articulacion_centro_formacion} />
+                    <Textarea disabled maxlength="40000" id="resumen" bind:value={taInfo.resumen} />
                 </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" for="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
-                </div>
-                <div>
-                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="dis_curricular_id" bind:selectedValue={taInfo.dis_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La información es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyectos_macro_requiere_comentario} />
-                            {#if $form.proyectos_macro_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="proyectos_macro_comentario"
-                                    bind:value={$form.proyectos_macro_comentario}
-                                    error={errors.proyectos_macro_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="lineas_medulares_centro" bind:value={taInfo.lineas_medulares_centro} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La información sobre las líneas medulares es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_medulares_centro_requiere_comentario} />
-                            {#if $form.lineas_medulares_centro_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="lineas_medulares_centro_comentario"
-                                    bind:value={$form.lineas_medulares_centro_comentario}
-                                    error={errors.lineas_medulares_centro_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="lineas_tecnologicas_centro" bind:value={taInfo.lineas_tecnologicas_centro} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La información sobre las líneas tecnológicas es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_tecnologicas_centro_requiere_comentario} />
-                            {#if $form.lineas_tecnologicas_centro_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="lineas_tecnologicas_centro_comentario"
-                                    bind:value={$form.lineas_tecnologicas_centro_comentario}
-                                    error={errors.lineas_tecnologicas_centro_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea disabled maxlength="40000" id="bibliografia" bind:value={taInfo.bibliografia} />
-
-                    <InfoMessage>
-                        <div class="mt-4">
-                            <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                            <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
-                            {#if $form.bibliografia_requiere_comentario == false}
-                                <Textarea
-                                    disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
-                                    label="Comentario"
-                                    class="mt-4"
-                                    maxlength="40000"
-                                    id="bibliografia_comentario"
-                                    bind:value={$form.bibliografia_comentario}
-                                    error={errors.bibliografia_comentario}
-                                    required
-                                />
-                            {/if}
-                        </div>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <hr class="mt-10 mb-10" />
-
-            <h1>Ortografía</h1>
-            <InfoMessage>
-                <div class="mt-4">
-                    <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
-                    {#if $form.ortografia_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
-                    {/if}
-                </div>
-            </InfoMessage>
-
-            <hr class="mt-10 mb-10" />
-            <h1>Redacción</h1>
-            <InfoMessage>
-                <div class="mt-4">
-                    <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
-                    {#if $form.redaccion_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
-                    {/if}
-                </div>
-            </InfoMessage>
-
-            <hr class="mt-10 mb-10" />
-            <h1>Normas APA</h1>
-            <InfoMessage>
-                <div class="mt-4">
-                    <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
-                    <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
-                    {#if $form.normas_apa_requiere_comentario == false}
-                        <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
-                    {/if}
-                </div>
-            </InfoMessage>
-
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-                {#if isSuperAdmin || (checkRole(authUser, [11]) && ta.proyecto.finalizado == true && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)}
-                    {#if $form.clausula_confidencialidad}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
-                    {:else}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
-                    {/if}
-
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
-                {/if}
             </div>
         </fieldset>
+
+        <div class="mt-40 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="resumen_regional" bind:value={taInfo.resumen_regional} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
+                        {#if $form.resumen_regional_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="resumen_regional_comentario"
+                                bind:value={$form.resumen_regional_comentario}
+                                error={errors.resumen_regional_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <fieldset disabled>
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                    <InfoMessage
+                        message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                    />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="antecedentes" bind:value={taInfo.antecedentes} />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="antecedentes_tecnoacademia" bind:value={taInfo.antecedentes_tecnoacademia} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿Los antecedentes de la Tecnoacademia y su impacto en la región son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_tecnoacademia_requiere_comentario} />
+                        {#if $form.antecedentes_tecnoacademia_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="antecedentes_tecnoacademia_comentario"
+                                bind:value={$form.antecedentes_tecnoacademia_comentario}
+                                error={errors.antecedentes_tecnoacademia_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <fieldset disabled>
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="justificacion_problema" bind:value={taInfo.justificacion_problema} />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="retos_oportunidades" bind:value={taInfo.retos_oportunidades} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La descripción es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
+                        {#if $form.retos_oportunidades_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="retos_oportunidades_comentario"
+                                bind:value={$form.retos_oportunidades_comentario}
+                                error={errors.retos_oportunidades_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="pertinencia_territorio" bind:value={taInfo.pertinencia_territorio} />
+            </div>
+        </div>
+
+        <fieldset disabled>
+            <div class="mt-44 grid grid-cols-1">
+                <div>
+                    <Label class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                    <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                </div>
+                <div>
+                    <Textarea disabled maxlength="40000" id="marco_conceptual" bind:value={taInfo.marco_conceptual} />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" for="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
+            </div>
+            <div>
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={taInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" for="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
+            </div>
+            <div>
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios_impactar" bind:selectedValue={taInfo.municipios_impactar} items={municipios} isMulti={true} placeholder="Buscar municipios" />
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="impacto_municipios" bind:value={taInfo.impacto_municipios} />
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div />
+            <div>
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información relacionada con los municipios es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
+                        {#if $form.municipios_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="municipios_comentario" bind:value={$form.municipios_comentario} error={errors.municipios_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
+            </div>
+            <div>
+                <Select disabled={true} id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                <Tags disabled id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={taInfo.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" />
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas TecnoAcademia?" />
+            </div>
+            <div>
+                <Select disabled={true} items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={taInfo.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" />
+            </div>
+        </div>
+
+        {#if taInfo.proyeccion_nuevas_instituciones?.value == 1}
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                </div>
+                <div>
+                    <Select disabled={true} id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                    <Tags disabled id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={taInfo.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" />
+                </div>
+            </div>
+        {/if}
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Institucienes Educativas en articulación con la media?" />
+            </div>
+            <div>
+                <Select disabled={true} items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={taInfo.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" />
+            </div>
+        </div>
+
+        {#if taInfo.proyeccion_articulacion_media?.value == 1}
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                </div>
+                <div>
+                    <Select disabled={true} id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
+
+                    <Tags disabled id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={taInfo.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" />
+                </div>
+            </div>
+        {/if}
+
+        <div class="mt-44 grid grid-cols-1">
+            <div />
+            <div>
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información relacionada con las instituciones es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.instituciones_requiere_comentario} />
+                        {#if $form.instituciones_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="instituciones_comentario"
+                                bind:value={$form.instituciones_comentario}
+                                error={errors.instituciones_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
+            </div>
+            <div>
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                {#if programasFormacionArticular?.length == 0}
+                    <div>
+                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                        <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Refrescar
+                        </button>
+                    </div>
+                {/if}
+            </div>
+        </div>
+
+        <div class="mt-40 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="articulacion_centro_formacion" bind:value={taInfo.articulacion_centro_formacion} />
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información relacionada con la articulación con el centro de formación es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.articulacion_centro_formacion_requiere_comentario} />
+                        {#if $form.articulacion_centro_formacion_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="articulacion_centro_formacion_comentario"
+                                bind:value={$form.articulacion_centro_formacion_comentario}
+                                error={errors.articulacion_centro_formacion_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-2">
+            <div>
+                <Label class="mb-4" for="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+            </div>
+            <div>
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="dis_curricular_id" bind:selectedValue={taInfo.dis_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+            </div>
+        </div>
+
+        <div class="mt-40 grid grid-cols-1">
+            <div>
+                <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyectos_macro_requiere_comentario} />
+                        {#if $form.proyectos_macro_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="proyectos_macro_comentario"
+                                bind:value={$form.proyectos_macro_comentario}
+                                error={errors.proyectos_macro_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-40 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="lineas_medulares_centro" bind:value={taInfo.lineas_medulares_centro} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información sobre las líneas medulares es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_medulares_centro_requiere_comentario} />
+                        {#if $form.lineas_medulares_centro_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="lineas_medulares_centro_comentario"
+                                bind:value={$form.lineas_medulares_centro_comentario}
+                                error={errors.lineas_medulares_centro_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-40 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="lineas_tecnologicas_centro" bind:value={taInfo.lineas_tecnologicas_centro} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La información sobre las líneas tecnológicas es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_tecnologicas_centro_requiere_comentario} />
+                        {#if $form.lineas_tecnologicas_centro_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="lineas_tecnologicas_centro_comentario"
+                                bind:value={$form.lineas_tecnologicas_centro_comentario}
+                                error={errors.lineas_tecnologicas_centro_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <div class="mt-44 grid grid-cols-1">
+            <div>
+                <Label class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+            </div>
+            <div>
+                <Textarea disabled maxlength="40000" id="bibliografia" bind:value={taInfo.bibliografia} />
+
+                <InfoMessage>
+                    <div class="mt-4">
+                        <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
+                        {#if $form.bibliografia_requiere_comentario == false}
+                            <Textarea
+                                disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined}
+                                label="Comentario"
+                                class="mt-4"
+                                maxlength="40000"
+                                id="bibliografia_comentario"
+                                bind:value={$form.bibliografia_comentario}
+                                error={errors.bibliografia_comentario}
+                                required
+                            />
+                        {/if}
+                    </div>
+                </InfoMessage>
+            </div>
+        </div>
+
+        <hr class="mt-10 mb-10" />
+
+        <h1>Ortografía</h1>
+        <InfoMessage>
+            <div class="mt-4">
+                <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
+                {#if $form.ortografia_requiere_comentario == false}
+                    <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="ortografia_comentario" bind:value={$form.ortografia_comentario} error={errors.ortografia_comentario} required />
+                {/if}
+            </div>
+        </InfoMessage>
+
+        <hr class="mt-10 mb-10" />
+        <h1>Redacción</h1>
+        <InfoMessage>
+            <div class="mt-4">
+                <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
+                {#if $form.redaccion_requiere_comentario == false}
+                    <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="redaccioncomentario" bind:value={$form.redaccion_comentario} error={errors.redaccion_comentario} />
+                {/if}
+            </div>
+        </InfoMessage>
+
+        <hr class="mt-10 mb-10" />
+        <h1>Normas APA</h1>
+        <InfoMessage>
+            <div class="mt-4">
+                <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
+                <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
+                {#if $form.normas_apa_requiere_comentario == false}
+                    <Textarea disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="normas_apa_comentario" bind:value={$form.normas_apa_comentario} error={errors.normas_apa_comentario} required />
+                {/if}
+            </div>
+        </InfoMessage>
+
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
+            {#if isSuperAdmin || (checkRole(authUser, [11]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)}
+                {#if $form.clausula_confidencialidad}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-green-500">Ha aceptado la cláusula de confidencialidad</span>
+                {:else}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
+                {/if}
+
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+            {/if}
+        </div>
     </form>
 
     <Dialog bind:open={proyectoDialogOpen} id="informacion">

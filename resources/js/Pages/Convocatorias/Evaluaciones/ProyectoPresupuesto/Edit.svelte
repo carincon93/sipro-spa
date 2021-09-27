@@ -59,7 +59,7 @@
         correcto: proyectoPresupuestoEvaluacion?.correcto == undefined || proyectoPresupuestoEvaluacion?.correcto == true ? true : false,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.presupuesto.update', [convocatoria.id, evaluacion.id, proyectoPresupuesto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -98,107 +98,105 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto">
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
+                <div class="mt-4">
+                    <Label labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
+                    <DynamicList classes="evaluacion-select" disabled={true} id="segundo_grupo_presupuestal_id" value={presupuestoInfo.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} />
+                </div>
+
+                {#if presupuestoInfo.segundo_grupo_presupuestal_id}
                     <div class="mt-4">
-                        <Label labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                        <DynamicList classes="evaluacion-select" disabled={true} id="segundo_grupo_presupuestal_id" value={presupuestoInfo.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} />
+                        <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
+                        <DynamicList classes="evaluacion-select" disabled={true} id="tercer_grupo_presupuestal_id" value={presupuestoInfo.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', presupuestoInfo.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} />
+                    </div>
+                {/if}
+
+                {#if presupuestoInfo.segundo_grupo_presupuestal_id && presupuestoInfo.tercer_grupo_presupuestal_id}
+                    <div class="mt-4">
+                        <Label labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
+                        <DynamicList
+                            classes="evaluacion-select"
+                            disabled={true}
+                            id="convocatoria_presupuesto_id"
+                            value={presupuestoInfo.convocatoria_presupuesto_id}
+                            routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, presupuestoInfo.segundo_grupo_presupuestal_id, presupuestoInfo.tercer_grupo_presupuestal_id])}
+                            placeholder="Busque por el nombre del uso presupuestal"
+                            message={errors.convocatoria_presupuesto_id}
+                            bind:recurso={presupuestoSennova}
+                        />
                     </div>
 
-                    {#if presupuestoInfo.segundo_grupo_presupuestal_id}
-                        <div class="mt-4">
-                            <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
-                            <DynamicList classes="evaluacion-select" disabled={true} id="tercer_grupo_presupuestal_id" value={presupuestoInfo.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', presupuestoInfo.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} />
-                        </div>
+                    {#if presupuestoSennova?.mensaje}
+                        <InfoMessage message={presupuestoSennova.mensaje} />
                     {/if}
+                {/if}
 
-                    {#if presupuestoInfo.segundo_grupo_presupuestal_id && presupuestoInfo.tercer_grupo_presupuestal_id}
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Textarea disabled label="Describa el bien o servicio a adquirir. Sea específico" maxlength="40000" id="descripcion" value={presupuestoInfo.descripcion} />
+                </div>
+
+                <div class="mt-4">
+                    <Textarea disabled label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" value={presupuestoInfo.justificacion} />
+                </div>
+
+                <div class="mt-4">
+                    <Input disabled label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" value={presupuestoInfo.valor_total} error={errors.valor_total} />
+                </div>
+
+                {#if presupuestoInfo.codigo_uso_presupuestal == '2010100600203101'}
+                    <div class="mt-4">
+                        <Label class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
+                        <select disabled id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_licencia}>
+                            <option value="">Seleccione el tipo de licencia </option>
+                            {#each tiposLicencia as { value, label }}
+                                <option {value}>{label}</option>
+                            {/each}
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <Label class="mb-4" labelFor="tipo_software" value="Tipo de software" />
+                        <select disabled id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_software}>
+                            <option value="">Seleccione el tipo de software </option>
+                            {#each tiposSoftware as { value, label }}
+                                <option {value}>{label}</option>
+                            {/each}
+                        </select>
+                    </div>
+
+                    <div class="mt-8">
+                        <p>Periodo de uso</p>
                         <div class="mt-4">
-                            <Label labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
-                            <DynamicList
-                                classes="evaluacion-select"
-                                disabled={true}
-                                id="convocatoria_presupuesto_id"
-                                value={presupuestoInfo.convocatoria_presupuesto_id}
-                                routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, presupuestoInfo.segundo_grupo_presupuestal_id, presupuestoInfo.tercer_grupo_presupuestal_id])}
-                                placeholder="Busque por el nombre del uso presupuestal"
-                                message={errors.convocatoria_presupuesto_id}
-                                bind:recurso={presupuestoSennova}
-                            />
+                            <Label class="mb-4" labelFor="fecha_inicio" value="Fecha de inicio" />
+                            <input disabled label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1 p-4" value={presupuestoInfo.fecha_inicio} />
                         </div>
-
-                        {#if presupuestoSennova?.mensaje}
-                            <InfoMessage message={presupuestoSennova.mensaje} />
-                        {/if}
-                    {/if}
-
-                    <hr class="mt-10 mb-10" />
-
-                    <div class="mt-4">
-                        <Textarea disabled label="Describa el bien o servicio a adquirir. Sea específico" maxlength="40000" id="descripcion" value={presupuestoInfo.descripcion} />
-                    </div>
-
-                    <div class="mt-4">
-                        <Textarea disabled label="Justificación de la necesidad: ¿por qué se requiere este producto o servicio?" maxlength="40000" id="justificacion" value={presupuestoInfo.justificacion} />
-                    </div>
-
-                    <div class="mt-4">
-                        <Input disabled label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" value={presupuestoInfo.valor_total} error={errors.valor_total} />
-                    </div>
-
-                    {#if presupuestoInfo.codigo_uso_presupuestal == '2010100600203101'}
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
-                            <select disabled id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_licencia}>
-                                <option value="">Seleccione el tipo de licencia </option>
-                                {#each tiposLicencia as { value, label }}
-                                    <option {value}>{label}</option>
+                            <Label class="mb-4" labelFor="fecha_finalizacion" value="Fecha de finalización (Cuando aplique)" />
+                            <input disabled label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1 p-4" value={presupuestoInfo.fecha_finalizacion} />
+                        </div>
+                    </div>
+                {:else if presupuestoInfo.codigo_uso_presupuestal == '2020200800901'}
+                    <div class="mt-4">
+                        <Label class="mb-4" labelFor="servicio_edicion_info" value="Nodo editorial" />
+                        <Select disabled={true} id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={presupuestoInfo.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" />
+                    </div>
+                {/if}
+
+                {#if proyectoPresupuesto.actividades?.length > 0}
+                    <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
+                    <div class="bg-white rounded shadow overflow-hidden">
+                        <div class="p-4" />
+
+                        <div class="p-2">
+                            <ul class="list-disc p-4">
+                                {#each proyectoPresupuesto.actividades as { id, descripcion }, i}
+                                    <li class="first-letter-uppercase mb-4">{descripcion}</li>
                                 {/each}
-                            </select>
+                            </ul>
                         </div>
-
-                        <div class="mt-4">
-                            <Label class="mb-4" labelFor="tipo_software" value="Tipo de software" />
-                            <select disabled id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_software}>
-                                <option value="">Seleccione el tipo de software </option>
-                                {#each tiposSoftware as { value, label }}
-                                    <option {value}>{label}</option>
-                                {/each}
-                            </select>
-                        </div>
-
-                        <div class="mt-8">
-                            <p>Periodo de uso</p>
-                            <div class="mt-4">
-                                <Label class="mb-4" labelFor="fecha_inicio" value="Fecha de inicio" />
-                                <input disabled label="Fecha de inicio" id="fecha_inicio" type="date" class="mt-1 p-4" value={presupuestoInfo.fecha_inicio} />
-                            </div>
-                            <div class="mt-4">
-                                <Label class="mb-4" labelFor="fecha_finalizacion" value="Fecha de finalización (Cuando aplique)" />
-                                <input disabled label="Fecha de finalización" id="fecha_finalizacion" type="date" class="mt-1 p-4" value={presupuestoInfo.fecha_finalizacion} />
-                            </div>
-                        </div>
-                    {:else if presupuestoInfo.codigo_uso_presupuestal == '2020200800901'}
-                        <div class="mt-4">
-                            <Label class="mb-4" labelFor="servicio_edicion_info" value="Nodo editorial" />
-                            <Select disabled={true} id="servicio_edicion_info" items={opcionesServiciosEdicion} bind:selectedValue={presupuestoInfo.servicio_edicion_info} error={errors.servicio_edicion_info} autocomplete="off" placeholder="Seleccione una opción" />
-                        </div>
-                    {/if}
-
-                    {#if proyectoPresupuesto.actividades?.length > 0}
-                        <h6 class="mt-20 mb-12 text-2xl">Actividades</h6>
-                        <div class="bg-white rounded shadow overflow-hidden">
-                            <div class="p-4" />
-
-                            <div class="p-2">
-                                <ul class="list-disc p-4">
-                                    {#each proyectoPresupuesto.actividades as { id, descripcion }, i}
-                                        <li class="first-letter-uppercase mb-4">{descripcion}</li>
-                                    {/each}
-                                </ul>
-                            </div>
-                        </div>
-                    {/if}
-                </fieldset>
+                    </div>
+                {/if}
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -211,7 +209,7 @@
                 </InfoMessage>
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                         {#if presupuestoInfo.convocatoria_presupuesto_id != '' || presupuestoInfo.convocatoria_presupuesto_id != ''}
                             <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Evaluar</LoadingButton>
                         {/if}

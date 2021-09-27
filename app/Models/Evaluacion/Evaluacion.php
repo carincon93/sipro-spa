@@ -2,6 +2,7 @@
 
 namespace App\Models\Evaluacion;
 
+use App\Models\Convocatoria;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +22,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +39,8 @@ class Evaluacion extends Model
         'modificable',
         'clausula_confidencialidad',
         'justificacion_causal_rechazo',
-        'comentarios_generales',
+        'comentario_formulador',
+        'comentario_evaluador',
         'replicas'
     ];
 
@@ -170,10 +172,33 @@ class Evaluacion extends Model
         return $this->hasMany(EvaluacionCausalRechazo::class);
     }
 
+    public function getVerificarEstadoEvaluacionAttribute()
+    {
+        $estado = null;
+        if ($this->idiEvaluacion && $this->proyecto->idi()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->idiEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->culturaInnovacionEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->taEvaluacion && $this->proyecto->ta()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->taEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->tpEvaluacion && $this->proyecto->tp()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->tpEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        } else if ($this->servicioTecnologicoEvaluacion && $this->proyecto->servicioTecnologico()->exists()) {
+            $estado = $this->finalizado ? 'Finalizado' : ($this->servicioTecnologicoEvaluacion->updated_at == null ? 'Sin evaluar' : 'Evaluación iniciada');
+        }
+
+        return $estado;
+    }
+
+    /**
+     * getTotalEvaluacionAttribute
+     *
+     * @return void
+     */
     public function getTotalEvaluacionAttribute()
     {
         $total = 0;
-        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
+        if ($this->idiEvaluacion && $this->proyecto->idi()->exists()) {
             $total = $this->idiEvaluacion->titulo_puntaje +
                 $this->idiEvaluacion->video_puntaje +
                 $this->idiEvaluacion->resumen_puntaje +
@@ -188,7 +213,7 @@ class Evaluacion extends Model
                 $this->idiEvaluacion->ortografia_puntaje +
                 $this->idiEvaluacion->redaccion_puntaje +
                 $this->idiEvaluacion->normas_apa_puntaje;
-        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
+        } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
             $total = $this->culturaInnovacionEvaluacion->titulo_puntaje +
                 $this->culturaInnovacionEvaluacion->video_puntaje +
                 $this->culturaInnovacionEvaluacion->resumen_puntaje +
@@ -203,7 +228,7 @@ class Evaluacion extends Model
                 $this->culturaInnovacionEvaluacion->ortografia_puntaje +
                 $this->culturaInnovacionEvaluacion->redaccion_puntaje +
                 $this->culturaInnovacionEvaluacion->normas_apa_puntaje;
-        } else if ($this->proyecto->servicioTecnologico()->exists() && $this->servicioTecnologicoEvaluacion) {
+        } else if ($this->servicioTecnologicoEvaluacion && $this->proyecto->servicioTecnologico()->exists()) {
             $total = $this->servicioTecnologicoEvaluacion->titulo_puntaje +
                 $this->servicioTecnologicoEvaluacion->resumen_puntaje +
                 $this->servicioTecnologicoEvaluacion->antecedentes_puntaje +
@@ -253,7 +278,7 @@ class Evaluacion extends Model
     public function getTotalRecomendacionesAttribute()
     {
         $total = 0;
-        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
+        if ($this->idiEvaluacion && $this->proyecto->idi()->exists()) {
             $this->idiEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->idiEvaluacion->video_comentario != null ? $total++ : null;
             $this->idiEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -287,7 +312,7 @@ class Evaluacion extends Model
             $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
+        } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
             $this->culturaInnovacionEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->video_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -321,7 +346,7 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->ta()->exists() && $this->taEvaluacion) {
+        } else if ($this->taEvaluacion && $this->proyecto->ta()->exists()) {
             $this->taEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->taEvaluacion->antecedentes_tecnoacademia_comentario != null ? $total++ : null;
             $this->taEvaluacion->retos_oportunidades_comentario != null ? $total++ : null;
@@ -340,11 +365,12 @@ class Evaluacion extends Model
             $this->taEvaluacion->bibliografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->entidad_aliada_comentario != null ? $total++ : null;
             $this->taEvaluacion->edt_comentario != null ? $total++ : null;
+            $this->taEvaluacion->articulacion_centro_formacion_comentario != null ? $total++ : null;
 
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->taEvaluacion->normas_apa_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->tp()->exists() && $this->tpEvaluacion) {
+        } else if ($this->tpEvaluacion && $this->proyecto->tp()->exists()) {
             $this->tpEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->tpEvaluacion->antecedentes_regional_comentario != null ? $total++ : null;
             $this->tpEvaluacion->municipios_comentario != null ? $total++ : null;
@@ -363,7 +389,7 @@ class Evaluacion extends Model
             $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_objetivos_comentario != null ? $total++ : null;
-        } else if ($this->proyecto->servicioTecnologico()->exists() && $this->servicioTecnologicoEvaluacion) {
+        } else if ($this->servicioTecnologicoEvaluacion && $this->proyecto->servicioTecnologico()->exists()) {
             $this->servicioTecnologicoEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->resumen_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->antecedentes_comentario != null ? $total++ : null;
@@ -422,7 +448,7 @@ class Evaluacion extends Model
         $itemsPorEvaluar = [];
         $countRolesSinEvaluar = 0;
 
-        if ($this->proyecto->idi()->exists() && $this->idiEvaluacion) {
+        if ($this->idiEvaluacion && $this->proyecto->idi()->exists()) {
             $this->idiEvaluacion->titulo_puntaje == null ? array_push($itemsPorEvaluar, 'Título') : null;
             $this->idiEvaluacion->resumen_puntaje == null ? array_push($itemsPorEvaluar, 'Resumen') : null;
             $this->idiEvaluacion->problema_central_puntaje == null ? array_push($itemsPorEvaluar, 'Problema central') : null;
@@ -436,7 +462,7 @@ class Evaluacion extends Model
             $this->idiEvaluacion->ortografia_puntaje == null ? array_push($itemsPorEvaluar, 'Ortografía') : null;
             $this->idiEvaluacion->redaccion_puntaje == null ? array_push($itemsPorEvaluar, 'Redacción') : null;
             $this->idiEvaluacion->normas_apa_puntaje == null ? array_push($itemsPorEvaluar, 'Normas APA') : null;
-        } else if ($this->proyecto->culturaInnovacion()->exists() && $this->culturaInnovacionEvaluacion) {
+        } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
             $this->culturaInnovacionEvaluacion->titulo_puntaje == null ? array_push($itemsPorEvaluar, 'Título') : null;
             $this->culturaInnovacionEvaluacion->resumen_puntaje == null ? array_push($itemsPorEvaluar, 'Resumen') : null;
             $this->culturaInnovacionEvaluacion->problema_central_puntaje == null ? array_push($itemsPorEvaluar, 'Problema central') : null;
@@ -452,7 +478,7 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->normas_apa_puntaje == null ? array_push($itemsPorEvaluar, 'Normas APA') : null;
         }
 
-        if ($this->proyecto->lineaProgramatica->codigo != 23) {
+        if ($this->proyecto && $this->proyecto->lineaProgramatica->codigo != 23) {
             foreach ($this->proyecto->proyectoRolesSennova as $proyectoRol) {
                 !$proyectoRol->proyectoRolesEvaluaciones()->where('evaluacion_id', $this->id)->first() ? $countRolesSinEvaluar++ : null;
             }
@@ -461,8 +487,10 @@ class Evaluacion extends Model
         $countRolesSinEvaluar > 0 ? array_push($itemsPorEvaluar, 'Hay ' . $countRolesSinEvaluar . ' rol(es) sin evaluar') : null;
 
         $countPresupuestosSinEvaluar = 0;
-        foreach ($this->proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
-            !$proyectoPresupuesto->proyectoPresupuestosEvaluaciones()->where('evaluacion_id', $this->id)->first() ? $countPresupuestosSinEvaluar++ : null;
+        if ($this->proyecto) {
+            foreach ($this->proyecto->proyectoPresupuesto as $proyectoPresupuesto) {
+                !$proyectoPresupuesto->proyectoPresupuestosEvaluaciones()->where('evaluacion_id', $this->id)->first() ? $countPresupuestosSinEvaluar++ : null;
+            }
         }
 
         $countPresupuestosSinEvaluar > 0 ? array_push($itemsPorEvaluar, 'Hay ' . $countPresupuestosSinEvaluar . ' rubro(s) presupuestal(es) sin evaluar') : null;
@@ -480,8 +508,41 @@ class Evaluacion extends Model
     public function scopeFilterEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->select('users.nombre', 'evaluaciones.*');
             $query->where('users.nombre', 'ilike', '%' . $search . '%');
             $query->join('users', 'evaluaciones.user_id', 'users.id');
+        })->when($filters['estado'] ?? null, function ($query, $estado) {
+            if ($estado == 'finalizados idi') {
+                $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados cultira innovacion') {
+                $query->join('cultura_innovacion_evaluaciones', 'evaluaciones.id', 'cultura_innovacion_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados ta') {
+                $query->join('ta_evaluaciones', 'evaluaciones.id', 'ta_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados tp') {
+                $query->join('tp_evaluaciones', 'evaluaciones.id', 'tp_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'finalizados st') {
+                $query->join('servicios_tecnologicos_evaluaciones', 'evaluaciones.id', 'servicios_tecnologicos_evaluaciones.id');
+                $query->where('evaluaciones.finalizado', true);
+            } else if ($estado == 'sin evaluar idi') {
+                $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');
+                $query->where('idi_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar cultura innovacion') {
+                $query->join('cultura_innovacion_evaluaciones', 'evaluaciones.id', 'cultura_innovacion_evaluaciones.id');
+                $query->where('cultura_innovacion_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar ta') {
+                $query->join('ta_evaluaciones', 'evaluaciones.id', 'ta_evaluaciones.id');
+                $query->where('ta_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar tp') {
+                $query->join('tp_evaluaciones', 'evaluaciones.id', 'tp_evaluaciones.id');
+                $query->where('tp_evaluaciones.updated_at', null);
+            } else if ($estado == 'sin evaluar st') {
+                $query->join('servicios_tecnologicos_evaluaciones', 'evaluaciones.id', 'servicios_tecnologicos_evaluaciones.id');
+                $query->where('servicios_tecnologicos_evaluaciones.updated_at', null);
+            }
         });
     }
 }

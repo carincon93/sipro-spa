@@ -25,8 +25,6 @@ class IdiController extends Controller
      */
     public function index(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
-
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id', 'fase_formateada'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),

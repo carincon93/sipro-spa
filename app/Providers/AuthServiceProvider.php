@@ -40,6 +40,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
+            $convocatoria = Convocatoria::where('esta_activa', true)->first();
+
+            if ($convocatoria && $convocatoria->fase != 1) {
+                return false;
+            }
 
             $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
@@ -53,8 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('visualizar-proyecto-autor', function (User $user, Proyecto $proyecto) {
-            if ($user->hasRole([5, 17, 18, 19, 20]) || $proyecto->participantes()->where('user_id', $user->id)->exists()) {
-
+            if ($user->hasRole([5, 17, 18, 19, 20]) || $proyecto->participantes()->where('user_id', $user->id)->exists() || $user->evaluaciones()->where('proyecto_id', $proyecto->id)->first()) {
                 return true;
             }
 
