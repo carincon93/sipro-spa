@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page, useForm } from '@inertiajs/inertia-svelte'
+    import { inertia, page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -57,6 +57,9 @@
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Inventario de equipos</div>
+        <div slot="caption">
+            <a class="bg-indigo-500 text-white p-2 rounded" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>
+        </div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
