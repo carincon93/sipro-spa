@@ -459,6 +459,8 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
 
+        $evaluacion->load('taEvaluacion');
+
         $evaluacion->proyecto->codigo_linea_programatica                = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040115');
         $evaluacion->proyecto->total_viaticos                           = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2042186') + PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2041102');
@@ -484,7 +486,7 @@ class ProyectoPresupuestoController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Index', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                => $evaluacion->only('id'),
+            'evaluacion'                => $evaluacion,
             'proyecto'                  => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'codigo', 'diff_meses', 'total_proyecto_presupuesto', 'total_maquinaria_industrial', 'total_servicios_especiales_construccion', 'total_viaticos', 'total_mantenimiento_maquinaria', 'max_valor_materiales_formacion', 'max_valor_bienestar_alumnos', 'max_valor_viaticos_interior', 'max_valor_edt', 'max_valor_mantenimiento_equipos', 'max_valor_proyecto', 'salarios_minimos'),
             'filters'                   => request()->all('search', 'presupuestos'),
             'proyectoPresupuesto'       => ProyectoPresupuesto::select('proyecto_presupuesto.id', 'proyecto_presupuesto.convocatoria_presupuesto_id', 'proyecto_presupuesto.proyecto_id', 'proyecto_presupuesto.valor_total')->where('proyecto_id', $evaluacion->proyecto->id)->filterProyectoPresupuesto(request()->only('search', 'presupuestos'))->with('convocatoriaPresupuesto.presupuestoSennova.tercerGrupoPresupuestal:id,nombre', 'convocatoriaPresupuesto.presupuestoSennova.segundoGrupoPresupuestal:id,nombre,codigo', 'convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal:id,descripcion', 'proyectoPresupuestosEvaluaciones')->paginate()->appends(['search' => request()->search, 'presupuestos' => request()->presupuestos]),
@@ -535,6 +537,30 @@ class ProyectoPresupuestoController extends Controller
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
+
+    public function updatedProyectoPresupuestoEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
+    {
+        $this->authorize('modificar-evaluacion-autor', $evaluacion);
+
+        $evaluacion->taEvaluacion()->update(
+            ['proyecto_presupuesto_comentario' => $request->proyecto_presupuesto_comentario]
+        );
+
+        foreach ($evaluacion->proyecto->proyectoPresupuesto()->get() as $proyectoPresupuesto) {
+            if ($proyectoPresupuesto->proyectoPresupuestosEvaluaciones()->where('evaluacion_id', $evaluacion->id)->where('comentario')) {
+                ProyectoPresupuestoEvaluacion::updateOrCreate(
+                    ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $proyectoPresupuesto->id],
+                    [
+                        'comentario' => $request->proyecto_presupuesto_requiere_comentario == false ? $request->proyecto_presupuesto_comentario : null,
+                        'correcto' => $request->proyecto_presupuesto_requiere_comentario == false ? false : true
+                    ]
+                );
+            }
+        }
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
 
     /**
      * cleanFileName
