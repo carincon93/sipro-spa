@@ -609,6 +609,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/articulacion', [TaController::class, 'showArticulacionSennovaEvaluacion'])->name('convocatorias.evaluaciones.articulacion-sennova');
     Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/articulacion', [TaController::class, 'updatedArticulacionSennovaEvaluacion'])->name('convocatorias.evaluaciones.articulacion-sennova.guardar-evaluacion');
+    Route::put('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto', [ProyectoPresupuestoController::class, 'updatedProyectoPresupuestoEvaluacion'])->name('convocatorias.evaluaciones.proyecto-presupuesto.guardar-evaluacion');
+    
 
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto', [ProyectoPresupuestoController::class, 'proyectoPresupuestoEvaluacion'])->name('convocatorias.evaluaciones.presupuesto.index');
     Route::get('convocatorias/{convocatoria}/evaluaciones/{evaluacion}/presupuesto/{presupuesto}/editar', [ProyectoPresupuestoController::class, 'evaluacionForm'])->name('convocatorias.evaluaciones.presupuesto.edit');

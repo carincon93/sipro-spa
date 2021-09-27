@@ -1,17 +1,21 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
     import Pagination from '@/Shared/Pagination'
-    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Textarea from '@/Shared/Textarea'
+    import Switch from '@/Shared/Switch'
+    import InfoMessage from '@/Shared/InfoMessage'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
 
+    export let errors
     export let convocatoria
     export let evaluacion
     export let proyecto
@@ -28,6 +32,21 @@
 
     let filters = {
         presupuestos: $page.props.filters.presupuestos,
+    }
+
+    let sending = false
+    let form = useForm({
+        proyecto_presupuesto_comentario: evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario,
+        proyecto_presupuesto_requiere_comentario: evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario == null ? true : false,
+    })
+    function submit() {
+        if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+            $form.put(route('convocatorias.evaluaciones.proyecto-presupuesto.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
     }
 </script>
 
@@ -317,4 +336,30 @@
         </tfoot>
     </DataTable>
     <Pagination links={proyectoPresupuesto.links} />
+
+    <!-- {#if proyecto.codigo_linea_programatica == 70}
+        <hr class="mt-10 mb-10" />
+
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+
+        <div class="mt-16">
+            <form on:submit|preventDefault={submit}>
+                <InfoMessage>
+                    <h1>Criterios de evaluacion</h1>
+                    <div class="mt-4">
+                        <p>¿Los rubros presupuestales son correctos? Por favor seleccione si Cumple o No cumple.</p>
+                        <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyecto_presupuesto_requiere_comentario} />
+                        {#if $form.proyecto_presupuesto_requiere_comentario == false}
+                            <Textarea disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} label="Comentario" class="mt-4" maxlength="40000" id="proyecto_presupuesto_comentario" bind:value={$form.proyecto_presupuesto_comentario} error={errors.proyecto_presupuesto_comentario} required />
+                        {/if}
+                    </div>
+                </InfoMessage>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    {/if} -->
 </AuthenticatedLayout>
