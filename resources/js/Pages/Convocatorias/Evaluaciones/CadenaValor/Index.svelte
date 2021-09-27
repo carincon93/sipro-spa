@@ -71,7 +71,7 @@
             data.addRows([[{ v: 'Sexto objetivo específico', f: '<strong>Sexto objetivo específico</strong><div>' + objetivos['Sexto objetivo específico'] + '</div>' }, 'Objetivo general', 'Sexto objetivo específico']])
         }
         productos.map((producto) => {
-            data.addRows([[{ v: producto.v, f: '<strong>Producto</strong><div>' + producto.f + '</div>' }, producto.fkey, producto.tooltip]])
+            data.addRows([[{ v: producto.v, f: '<strong>Producto</strong><div>' + producto.f + '<div><strong>Meta</strong></div>' + producto.meta + '</div>' }, producto.fkey, producto.tooltip]])
             producto.actividades.map((actividad) => {
                 data.addRows([[{ v: 'act' + producto.v + actividad.id, f: '<strong>Actividad</strong><div>' + actividad.descripcion + '</div>' }, producto.v, actividad.descripcion]])
 

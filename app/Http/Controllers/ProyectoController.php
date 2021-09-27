@@ -233,7 +233,7 @@ class ProyectoController extends Controller
         foreach ($evaluacion->proyecto->efectosDirectos as $efectoDirecto) {
             foreach ($efectoDirecto->resultados as $resultado) {
                 foreach ($resultado->productos as $producto) {
-                    $productos->prepend(['v' => 'prod' . $producto->id,  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
+                    $productos->prepend(['v' => 'prod' . $producto->id, 'meta' => $producto->productoTaTp ? $producto->productoTaTp->valor_proyectado : 'Sin información',  'f' => $producto->nombre, 'fkey' =>  $resultado->objetivoEspecifico->numero, 'tootlip' => 'prod' . $producto->id, 'actividades' => $producto->actividades]);
                 }
             }
         }
