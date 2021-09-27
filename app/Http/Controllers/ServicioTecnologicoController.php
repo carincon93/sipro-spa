@@ -63,7 +63,7 @@ class ServicioTecnologicoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
             'roles'                 => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
             'sectoresProductivos'   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
             'tiposProyectoSt'       => $tipoProyectoSt
@@ -174,7 +174,7 @@ class ServicioTecnologicoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
             'servicioTecnologico'           => $servicioTecnologico,
             'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
             'tiposProyectoSt'               => $tipoProyectoSt,

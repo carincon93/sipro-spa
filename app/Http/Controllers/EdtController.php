@@ -42,7 +42,7 @@ class EdtController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/EDT/Index', [
-            'convocatoria'     => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'     => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'         => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion', 'evaluaciones'),
             'filters'          => request()->all('search'),
             'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $proyecto->id)
@@ -220,7 +220,7 @@ class EdtController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/EDT/Index', [
-            'convocatoria'     => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'     => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluacion'       => $evaluacion,
             'proyecto'         => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
             'filters'          => request()->all('search'),
