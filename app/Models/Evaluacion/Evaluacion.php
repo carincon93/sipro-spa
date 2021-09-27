@@ -39,7 +39,8 @@ class Evaluacion extends Model
         'modificable',
         'clausula_confidencialidad',
         'justificacion_causal_rechazo',
-        'comentarios_generales',
+        'comentario_formulador',
+        'comentario_evaluador',
         'replicas'
     ];
 

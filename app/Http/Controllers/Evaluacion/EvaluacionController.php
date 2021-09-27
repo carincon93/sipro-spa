@@ -271,7 +271,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', 'comentarios_generales', 'replicas'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
             'proyecto'                      => $evaluacion->proyecto,
         ]);
     }
@@ -287,9 +287,11 @@ class EvaluacionController extends Controller
     {
         $this->authorize('modificar-evaluacion-autor', $evaluacion);
 
-        $evaluacion->update(
-            ['evaluacion_id' => $evaluacion->id, 'comentarios_generales' => $request->comentarios_generales],
-        );
+        if ($request->has('comentario_evaluador')) {
+            $evaluacion->update(
+                ['evaluacion_id' => $evaluacion->id, 'comentario_evaluador' => $request->comentario_evaluador],
+            );
+        }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
