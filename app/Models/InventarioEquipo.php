@@ -17,6 +17,13 @@ class InventarioEquipo extends Model
     protected $table = 'inventario_equipos';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    public $appends = ['estado_formateado'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -77,5 +84,31 @@ class InventarioEquipo extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('nombre', 'ilike', '%' . $search . '%');
         });
+    }
+
+    /**
+     * getEstadoFormateadoAttribute
+     *
+     * @return void
+     */
+    public function getEstadoFormateadoAttribute()
+    {
+        switch ($this->estado) {
+            case '1':
+                return 'Bueno, en uso';
+                break;
+            case '2':
+                return 'Bueno, sin uso';
+                break;
+            case '3':
+                return 'En uso, sin mantenimiento';
+                break;
+            case '4':
+                return 'Para dar de baja';
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 }

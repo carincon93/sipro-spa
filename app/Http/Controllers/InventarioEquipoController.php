@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InventarioEquiposExport;
 use App\Models\InventarioEquipo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioEquipoRequest;
@@ -12,6 +13,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventarioEquipoController extends Controller
 {
@@ -215,5 +217,16 @@ class InventarioEquipoController extends Controller
         $evaluacion->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * inventarioEquiposExcel
+     *
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function inventarioEquiposExcel(Proyecto $proyecto)
+    {
+        return Excel::download(new InventarioEquiposExport($proyecto), 'Inventario-equipos' . $proyecto->codigo . time() . '.xlsx');
     }
 }
