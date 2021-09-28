@@ -460,6 +460,7 @@ class ProyectoPresupuestoController extends Controller
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
 
         $evaluacion->load('taEvaluacion');
+        $evaluacion->load('tpEvaluacion');
 
         $evaluacion->proyecto->codigo_linea_programatica                = $evaluacion->proyecto->lineaProgramatica->codigo;
         $evaluacion->proyecto->total_maquinaria_industrial              = PresupuestoValidationTrait::totalSegundoGrupoPresupuestalProyecto($evaluacion->proyecto, '2040115');
