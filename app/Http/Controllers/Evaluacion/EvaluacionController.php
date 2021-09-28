@@ -271,7 +271,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'modificable', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
             'proyecto'                      => $evaluacion->proyecto,
         ]);
     }
