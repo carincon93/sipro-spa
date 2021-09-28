@@ -149,6 +149,9 @@
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Objetivo específico</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Resultado</th>
+                    {#if proyecto.codigo_linea_programatica == 70}
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Meta</th>
+                    {/if}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
                 </tr>
             </thead>
@@ -172,6 +175,14 @@
                                 {producto.resultado.descripcion}
                             </p>
                         </td>
+
+                        {#if proyecto.codigo_linea_programatica == 70}
+                            <td class="border-t">
+                                <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                                    {producto.producto_ta_tp?.valor_proyectado}
+                                </p>
+                            </td>
+                        {/if}
 
                         <td class="border-t td-actions">
                             <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
