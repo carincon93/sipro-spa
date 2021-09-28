@@ -55,7 +55,7 @@
         Ir a la evaluación
     </a>
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">EDT</div>
 
         <div slot="caption">

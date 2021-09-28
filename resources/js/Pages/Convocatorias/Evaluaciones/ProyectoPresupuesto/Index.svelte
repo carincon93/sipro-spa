@@ -337,15 +337,15 @@
     </DataTable>
     <Pagination links={proyectoPresupuesto.links} />
 
-    <!-- {#if proyecto.codigo_linea_programatica == 70}
+    {#if proyecto.codigo_linea_programatica == 69 || proyecto.codigo_linea_programatica == 70}
         <hr class="mt-10 mb-10" />
 
-        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación</h1>
+        <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación general</h1>
+        <InfoMessage alertMsg={true}><strong>Importante:</strong> Si hace una evaluación general de los rubros presupeustales reemplazará los ítems ya evaluados.</InfoMessage>
 
         <div class="mt-16">
             <form on:submit|preventDefault={submit}>
                 <InfoMessage>
-                    <h1>Criterios de evaluacion</h1>
                     <div class="mt-4">
                         <p>¿Los rubros presupuestales son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyecto_presupuesto_requiere_comentario} />
@@ -361,5 +361,5 @@
                 </div>
             </form>
         </div>
-    {/if} -->
+    {/if}
 </AuthenticatedLayout>
