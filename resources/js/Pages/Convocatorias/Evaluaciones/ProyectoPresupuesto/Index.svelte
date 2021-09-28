@@ -36,8 +36,8 @@
 
     let sending = false
     let form = useForm({
-        proyecto_presupuesto_comentario: evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario,
-        proyecto_presupuesto_requiere_comentario: evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario == null ? true : false,
+        proyecto_presupuesto_comentario: evaluacion.ta_evaluacion ? evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario : evaluacion.tp_evaluacion?.proyecto_presupuesto_comentario,
+        proyecto_presupuesto_requiere_comentario: evaluacion.ta_evaluacion ? (evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario == null ? true : false) : evaluacion.tp_evaluacion?.proyecto_presupuesto_comentario == null ? true : false,
     })
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
