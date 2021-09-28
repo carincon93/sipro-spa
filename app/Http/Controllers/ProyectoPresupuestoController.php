@@ -532,7 +532,7 @@ class ProyectoPresupuestoController extends Controller
 
         ProyectoPresupuestoEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
-            ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null, 'es_evaluacion_general' => false]
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
