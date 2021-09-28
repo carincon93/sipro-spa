@@ -55,7 +55,7 @@
         Ir a la evaluación
     </a>
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">Inventario de equipos</div>
         <div slot="caption">
             <a class="bg-indigo-500 text-white p-2 rounded" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>

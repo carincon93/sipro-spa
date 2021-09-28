@@ -174,7 +174,7 @@ class InventarioEquipoController extends Controller
             'evaluacion'        => $evaluacion,
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
-                ->filterInventarioEquipo(request()->only('search'))->paginate(),
+                ->filterInventarioEquipo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 

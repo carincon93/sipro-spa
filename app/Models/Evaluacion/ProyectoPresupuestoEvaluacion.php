@@ -25,7 +25,8 @@ class ProyectoPresupuestoEvaluacion extends Model
         'proyecto_presupuesto_id',
         'evaluacion_id',
         'comentario',
-        'correcto'
+        'correcto',
+        'es_evaluacion_general'
     ];
 
     /**

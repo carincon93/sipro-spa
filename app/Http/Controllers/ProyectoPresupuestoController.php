@@ -532,7 +532,7 @@ class ProyectoPresupuestoController extends Controller
 
         ProyectoPresupuestoEvaluacion::updateOrCreate(
             ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $presupuesto->id],
-            ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null]
+            ['correcto' => $request->correcto, 'comentario' => $request->correcto == false ? $request->comentario : null, 'es_evaluacion_general' => false]
         );
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
@@ -542,20 +542,26 @@ class ProyectoPresupuestoController extends Controller
     {
         $this->authorize('modificar-evaluacion-autor', $evaluacion);
 
-        $evaluacion->taEvaluacion()->update(
-            ['proyecto_presupuesto_comentario' => $request->proyecto_presupuesto_comentario]
-        );
+        if ($evaluacion->taEvaluacion()->exists()) {
+            $evaluacion->taEvaluacion()->update(
+                ['proyecto_presupuesto_comentario' => $request->proyecto_presupuesto_comentario]
+            );
+        } else if ($evaluacion->tpEvaluacion()->exists()) {
+            $evaluacion->tpEvaluacion()->update(
+                ['proyecto_presupuesto_comentario' => $request->proyecto_presupuesto_comentario]
+            );
+        }
 
         foreach ($evaluacion->proyecto->proyectoPresupuesto()->get() as $proyectoPresupuesto) {
-            if ($proyectoPresupuesto->proyectoPresupuestosEvaluaciones()->where('evaluacion_id', $evaluacion->id)->where('comentario')) {
-                ProyectoPresupuestoEvaluacion::updateOrCreate(
-                    ['evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $proyectoPresupuesto->id],
-                    [
-                        'comentario' => $request->proyecto_presupuesto_requiere_comentario == false ? $request->proyecto_presupuesto_comentario : null,
-                        'correcto' => $request->proyecto_presupuesto_requiere_comentario == false ? false : true
-                    ]
-                );
-            }
+            ProyectoPresupuestoEvaluacion::updateOrCreate(
+                [
+                    'evaluacion_id' => $evaluacion->id, 'proyecto_presupuesto_id' => $proyectoPresupuesto->id,
+                ],
+                [
+                    'comentario' => $request->proyecto_presupuesto_requiere_comentario == false ? $request->proyecto_presupuesto_comentario : null,
+                    'correcto' => $request->proyecto_presupuesto_requiere_comentario == false ? false : true,
+                ]
+            );
         }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
