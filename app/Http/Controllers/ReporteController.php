@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -50,9 +51,15 @@ class ReporteController extends Controller
     {
         return Excel::download(new EvaluacionesExport($convocatoria), 'Evaluaciones-' . time() . '.xlsx');
     }
-    
+
+    /**
+     * resumePresupuestos
+     *
+     * @param  mixed $convocatoria
+     * @return void
+     */
     public function resumePresupuestos(Convocatoria $convocatoria)
     {
-        return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-'.time().'.xlsx');
+        return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-' . time() . '.xlsx');
     }
 }
