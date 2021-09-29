@@ -675,6 +675,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
     Route::get('reportes/convocatoria/{convocatoria}/resumen', [ReporteController::class, 'resumeProjects'])->name('reportes.resumeProjects');
     Route::get('reportes/convocatoria/{convocatoria}/presupuestos-roles', [ReporteController::class, 'resumePresupuestos'])->name('reportes.resumePresupuestos');
+    Route::get('reportes/convocatoria/{convocatoria}/reportes/evaluaciones', [ReporteController::class, 'evaluacionesExcel'])->name('reportes.evaluaciones');
     Route::get('proyectos/{proyecto}/invetario-equipos', [InventarioEquipoController::class, 'inventarioEquiposExcel'])->name('reportes.inventario-equipos');
 });
 

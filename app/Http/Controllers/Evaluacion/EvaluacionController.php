@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Exports\EvaluacionesExport;
 use App\Models\Evaluacion\Evaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\EvaluacionRequest;
@@ -10,6 +11,7 @@ use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EvaluacionController extends Controller
 {
