@@ -27,7 +27,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function collection()
     {
-        return Evaluacion::join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->get();
+        return Evaluacion::select('evaluaciones.*')->join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->get();
     }
 
     /**
@@ -47,7 +47,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
             $evaluacion->evaluacionCausalesRechazo()->count() > 0 ? $evaluacion->evaluacionCausalesRechazo()->get()->map(function ($causalesRechazo) {
                 return  strtr(utf8_decode($causalesRechazo->causal_rechazo_formateado), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
             }) : 'Sin causal de rechazo',
-            $evaluacion->finalizado ? 'Finalizado' : ( $evaluacion->iniciado ? 'Evaluación iniciada' : 'Sin evaluar'),
+            $evaluacion->getVerificarEstadoEvaluacionAttribute(),
         ];
     }
 
