@@ -134,13 +134,12 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
 
     private function mapParticipantes($participantes)
     {
-
         $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
         $mapParticipantes = [];
 
         foreach ($participantes as $participante) {
             array_push($mapParticipantes, [
-                'nombre' => $participante->nombre,
+                'nombre' => strtr(utf8_decode($participante->nombre), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'),
                 'documento' => $participante->numero_documento,
                 'vinculacion' => $participante->tipo_vinculacion_text,
                 'meses' => $participante->pivot->cantidad_meses,
