@@ -58,7 +58,7 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">Inventario de equipos</div>
         <div slot="caption">
-            <a class="bg-indigo-500 text-white p-2 rounded" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>
+            <a class="bg-indigo-600 text-white p-2 rounded shadow" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>
         </div>
 
         <thead slot="thead">

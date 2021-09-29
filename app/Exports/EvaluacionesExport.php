@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -14,12 +15,19 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 
 class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting
 {
+    protected $convocatoria;
+
+    public function __construct(Convocatoria $convocatoria)
+    {
+        $this->convocatoria = $convocatoria;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Evaluacion::all();
+        return Evaluacion::join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->get();
     }
 
     /**

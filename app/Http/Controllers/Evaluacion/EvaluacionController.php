@@ -297,14 +297,4 @@ class EvaluacionController extends Controller
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
-
-    /**
-     * EvaluacionesExcel
-     *
-     * @return void
-     */
-    public function EvaluacionesExcel()
-    {
-        return Excel::download(new EvaluacionesExport(), 'Evaluaciones-' . time() . '.xlsx');
-    }
 }
