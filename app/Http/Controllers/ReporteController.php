@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Models\Convocatoria;
+use App\Models\Proyecto;
 
 class ReporteController extends Controller
 {
@@ -39,6 +40,12 @@ class ReporteController extends Controller
     {
         $this->authorize('viewAny', [User::class]);
 
+        $proyectos = Proyecto::all();
+
+        foreach ($proyectos as $proyecto) {
+            $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
+        }
+
         return Excel::download(new ProyectosExport($convocatoria), 'proyectos-' . time() . '.xlsx');
     }
 
@@ -49,7 +56,7 @@ class ReporteController extends Controller
      */
     public function EvaluacionesExcel(Convocatoria $convocatoria)
     {
-        return Excel::download(new EvaluacionesExport($convocatoria), 'Evaluaciones-' . time() . '.xlsx');
+        return Excel::download(new EvaluacionesExport($convocatoria), 'evaluaciones-' . time() . '.xlsx');
     }
 
     /**
