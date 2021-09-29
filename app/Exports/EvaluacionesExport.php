@@ -47,6 +47,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
             $evaluacion->evaluacionCausalesRechazo()->count() > 0 ? $evaluacion->evaluacionCausalesRechazo()->get()->map(function ($causalesRechazo) {
                 return  strtr(utf8_decode($causalesRechazo->causal_rechazo_formateado), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
             }) : 'Sin causal de rechazo',
+            $evaluacion->finalizado ? 'Finalizado' : ( $evaluacion->iniciado ? 'Evaluación iniciada' : 'Sin evaluar'),
         ];
     }
 
@@ -59,9 +60,10 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
             'Código proyecto',
             'Línea programática',
             'Evaluador',
-            'Estado',
+            'Estado proyecto',
             'Puntaje',
             'Causales de rechazo',
+            'Estado evaluación',
         ];
     }
 
