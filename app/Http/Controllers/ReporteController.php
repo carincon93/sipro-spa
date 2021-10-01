@@ -57,7 +57,7 @@ class ReporteController extends Controller
      */
     public function EvaluacionesExcel(Convocatoria $convocatoria)
     {
-        $this->authorize('descargarReportes', [User::class]);
+        $this->authorize('descargar-reportes', [User::class]);
 
         return Excel::download(new EvaluacionesExport($convocatoria), 'evaluaciones-' . time() . '.xlsx');
     }
