@@ -21,7 +21,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [User::class]);
+        $this->authorize('descargarReportes', [User::class]);
 
         return Inertia::render('Reportes/Index', [
             'filters'   => request()->all('search'),
@@ -37,7 +37,7 @@ class ReporteController extends Controller
      */
     public function resumeProjects(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [User::class]);
+        $this->authorize('descargarReportes', [User::class]);
 
         $proyectos = Proyecto::all();
 
@@ -55,6 +55,8 @@ class ReporteController extends Controller
      */
     public function EvaluacionesExcel(Convocatoria $convocatoria)
     {
+        $this->authorize('descargarReportes', [User::class]);
+
         return Excel::download(new EvaluacionesExport($convocatoria), 'evaluaciones-' . time() . '.xlsx');
     }
 }
