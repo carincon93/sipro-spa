@@ -288,7 +288,7 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'codigo_linea_programatica', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos'   => $efectosDirectos,
             'causasDirectas'    => $causasDirectas,
@@ -372,7 +372,7 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolProblemas', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'justificacion_problema', 'pregunta_formulacion_problema', 'antecedentes', 'marco_conceptual', 'codigo_linea_programatica', 'finalizado'),
@@ -802,7 +802,7 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ArbolesProyecto/ArbolObjetivos', [
-            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'en_subsanacion', 'evaluaciones'),
             'efectosDirectos' => $efectosDirectos,
             'causasDirectas'  => $causasDirectas,
@@ -907,7 +907,7 @@ class ArbolProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ArbolesProyecto/ArbolObjetivos', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'identificacion_problema', 'problema_central', 'objetivo_general', 'fecha_inicio', 'fecha_finalizacion', 'finalizado', 'cantidad_objetivos'),

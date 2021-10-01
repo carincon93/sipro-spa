@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos', 'total_proyecto_presupuesto_aprobado', 'total_roles_sennova_aprobado', 'precio_proyecto_aprobado'];
 
     /**
      * The attributes that are mass assignable.
@@ -448,7 +448,11 @@ class Proyecto extends Model
         return $cantidadMesesEjecucion;
     }
 
-
+    /**
+     * getTotalProyectoPresupuestoAttribute
+     *
+     * @return int
+     */
     public function getTotalProyectoPresupuestoAttribute()
     {
         $total = 0;
@@ -479,6 +483,57 @@ class Proyecto extends Model
 
         return $total;
     }
+
+    /**
+     * getTotalProyectoPresupuestoAprobadoAttribute
+     *
+     * @return int
+     */
+    public function getTotalProyectoPresupuestoAprobadoAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->proyectoPresupuesto as $proyectoPresupuesto) {
+            if ($proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->sumar_al_presupuesto && $proyectoPresupuesto->getPresupuestoAprobadoAttribute()) {
+                $total += $proyectoPresupuesto->valor_total;
+            }
+        }
+
+        return $total;
+    }
+
+    /**
+     * getTotalRolesSennovaAprobadoAttribute
+     *
+     * @return int
+     */
+    public function getTotalRolesSennovaAprobadoAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->proyectoRolesSennova as $proyectoRolSennova) {
+            if ($proyectoRolSennova->convocatoriaRolSennova->rolSennova->sumar_al_presupuesto && $proyectoRolSennova->getRolAprobadoAttribute()) {
+                $total += $proyectoRolSennova->getTotalRolSennova();
+            }
+        }
+
+        return $total;
+    }
+
+    /**
+     * getPrecioProyectoAprobadoAttribute
+     *
+     * @return int
+     */
+    public function getPrecioProyectoAprobadoAttribute()
+    {
+        $total = 0;
+
+        $total = $this->getTotalProyectoPresupuestoAprobadoAttribute() + $this->getTotalRolesSennovaAprobadoAttribute();
+
+        return $total;
+    }
+
 
     /**
      * getPrecioProyecto
@@ -519,7 +574,6 @@ class Proyecto extends Model
             $causalRechazo  = null;
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
-            $countPresupuestoNoAprobado = 0;
 
             $estados = array(1, 2);
 
@@ -527,13 +581,8 @@ class Proyecto extends Model
                 $puntajeTotal += $evaluacion->total_evaluacion;
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
-                // Sumar los presupuesto no aprobados
-                $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
-                foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
-                    $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
-                }
-
                 if ($key === count($evaluaciones) - 1) {
+
                     array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
                     if ($causalRechazo == null) {
@@ -556,10 +605,11 @@ class Proyecto extends Model
                     }
 
                     if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
-                        $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                        $this->precio_proyecto - $this->getPrecioProyectoAprobadoAttribute() >= floor($this->precio_proyecto * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
                     }
                 }
             }
+
 
             $cantidadEvaluaciones = count($evaluaciones);
 

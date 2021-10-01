@@ -40,6 +40,7 @@ class TpEvaluacion extends Model
         'arbol_problemas_comentario',
         'arbol_objetivos_comentario',
         'ortografia_comentario',
+        'proyecto_presupuesto_comentario',
         'redaccion_comentario',
         'normas_apa_comentario'
     ];

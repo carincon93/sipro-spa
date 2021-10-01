@@ -33,14 +33,14 @@
             <p class="text-sm text-center">Generalidades</p>
         </a>
     </div>
-    {#if proyecto.codigo_linea_programatica != 70}
+    {#if proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <div class="w-10/12 step">
             <a use:inertia active={route().current('convocatorias.evaluaciones.participantes')} href={route('convocatorias.evaluaciones.participantes', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
                 <p class="text-sm text-center">{proyecto.codigo_linea_programatica == 68 ? 'Formulador del proyecto' : 'Participantes'}</p>
             </a>
         </div>
-    {:else}
+    {:else if proyecto.codigo_linea_programatica == 70}
         <div class="w-10/12 step">
             <a use:inertia active={route().current('convocatorias.evaluaciones.articulacion-sennova')} href={route('convocatorias.evaluaciones.articulacion-sennova', [convocatoria.id, evaluacion.id])} class="flex flex-col items-center inline-block">
                 <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />

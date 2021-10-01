@@ -133,7 +133,7 @@
         </form>
     {/if}
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+    <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">Anexos</div>
 
         <thead slot="thead">

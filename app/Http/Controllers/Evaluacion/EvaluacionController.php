@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Exports\EvaluacionesExport;
 use App\Models\Evaluacion\Evaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\EvaluacionRequest;
@@ -10,6 +11,7 @@ use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EvaluacionController extends Controller
 {
@@ -226,7 +228,7 @@ class EvaluacionController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluacion'                    => $evaluacion,
             'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
             'proyecto'                      => $evaluacion->proyecto,
@@ -270,8 +272,8 @@ class EvaluacionController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada'),
-            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'modificable', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas'),
             'proyecto'                      => $evaluacion->proyecto,
         ]);
     }

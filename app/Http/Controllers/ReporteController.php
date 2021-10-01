@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Inertia\Inertia;
 use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Models\Convocatoria;
+use App\Models\Proyecto;
 
 class ReporteController extends Controller
 {
@@ -22,16 +24,39 @@ class ReporteController extends Controller
     {
         $this->authorize('viewAny', [User::class]);
 
-
         return Inertia::render('Reportes/Index', [
             'filters'   => request()->all('search'),
             'convocatorias' => Convocatoria::select('id as value', 'descripcion as label')->get()
         ]);
     }
-    
+
+    /**
+     * resumeProjects
+     *
+     * @param  mixed $convocatoria
+     * @return void
+     */
     public function resumeProjects(Convocatoria $convocatoria)
     {
-        return Excel::download(new ProyectosExport($convocatoria), 'proyectos-'.time().'.xlsx');
+        $this->authorize('viewAny', [User::class]);
+
+        $proyectos = Proyecto::all();
+
+        foreach ($proyectos as $proyecto) {
+            $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
+        }
+
+        return Excel::download(new ProyectosExport($convocatoria), 'proyectos-' . time() . '.xlsx');
+    }
+
+    /**
+     * EvaluacionesExcel
+     *
+     * @return void
+     */
+    public function EvaluacionesExcel(Convocatoria $convocatoria)
+    {
+        return Excel::download(new EvaluacionesExport($convocatoria), 'evaluaciones-' . time() . '.xlsx');
     }
     
     public function resumePresupuestos(Convocatoria $convocatoria)

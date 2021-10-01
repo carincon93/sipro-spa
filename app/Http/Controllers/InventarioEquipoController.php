@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InventarioEquiposExport;
 use App\Models\InventarioEquipo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioEquipoRequest;
@@ -12,6 +13,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventarioEquipoController extends Controller
 {
@@ -27,7 +29,7 @@ class InventarioEquipoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
@@ -45,7 +47,7 @@ class InventarioEquipoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Create', [
-            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
         ]);
@@ -103,7 +105,7 @@ class InventarioEquipoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'inventarioEquipo'          => $inventarioEquipo,
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
@@ -167,12 +169,12 @@ class InventarioEquipoController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'evaluacion'        => $evaluacion,
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
-                ->filterInventarioEquipo(request()->only('search'))->paginate(),
+                ->filterInventarioEquipo(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -187,7 +189,7 @@ class InventarioEquipoController extends Controller
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
 
         return Inertia::render('Convocatorias/Evaluaciones/InventarioEquipos/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'proyecto'                  => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
             'evaluacion'                => $evaluacion,
             'inventarioEquipo'          => $inventarioEquipo,
@@ -215,5 +217,16 @@ class InventarioEquipoController extends Controller
         $evaluacion->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * inventarioEquiposExcel
+     *
+     * @param  mixed $proyecto
+     * @return void
+     */
+    public function inventarioEquiposExcel(Proyecto $proyecto)
+    {
+        return Excel::download(new InventarioEquiposExport($proyecto), 'Inventario-equipos' . $proyecto->codigo . time() . '.xlsx');
     }
 }

@@ -21,7 +21,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/ServiciosTecnologicos/Index', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'filters'               => request()->all('search'),
             'serviciosTecnologicos' => ServicioTecnologicoEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -99,7 +99,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/ServiciosTecnologicos/Edit', [
-            'convocatoria'                          => $convocatoria->only('id', 'fase_formateada', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
+            'convocatoria'                          => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
             'servicioTecnologico'                   => $servicioTecnologico,
             'servicioTecnologicoEvaluacion'         => $servicioTecnologicoEvaluacion,
             'servicioTecnologicoSegundaEvaluacion'  => ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
