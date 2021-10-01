@@ -47,6 +47,7 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
             $presupuesto->descripcion,
             $presupuesto->justificacion,
             $presupuesto->valor_total,
+            ($presupuesto->proyectoPresupuestosEvaluaciones()->count() > 0)?(($presupuesto->presupuesto_aprobado)?'SI':'NO'):'Sin evaluar',
 
         ];
     }
@@ -62,6 +63,7 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
             'Descripción',
             'Justificación',
             'Valor',
+            'Aprobado',
         ];
     }
 

@@ -50,6 +50,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
             ucfirst($rolSennova->convocatoriaRolSennova->nivel_academico_formateado),
             $rolSennova->convocatoriaRolSennova->asignacion_mensual,
             $rolSennova->getTotalRolSennova(),
+            ($rolSennova->proyectoRolesEvaluaciones()->count() > 0)?(($rolSennova->rol_aprobado)?'SI':'NO'):'Sin evaluar',
 
         ];
     }
@@ -68,6 +69,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
             'Nivel académico',
             'Asignación mensual',
             'Total',
+            'Aprobado',
         ];
     }
 

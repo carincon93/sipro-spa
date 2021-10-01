@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\EvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
+use App\Exports\EvaluacionesExport;
+use App\Exports\EvaluacionesProyectosPresupuestoExport;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 
@@ -68,5 +69,15 @@ class ReporteController extends Controller
     public function resumePresupuestos(Convocatoria $convocatoria)
     {
         return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-' . time() . '.xlsx');
+    }
+    
+    /**
+     * EvaluacionesProyectosPresupuestoExport
+     *
+     * @return void
+     */
+    public function EvaluacionesProyectosPresupuestoExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new EvaluacionesProyectosPresupuestoExport($convocatoria), 'evaluaciones-proyecto-prespuestos-aprobados-'.time().'.xlsx');
     }
 }
