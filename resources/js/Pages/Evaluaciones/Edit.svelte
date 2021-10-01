@@ -1,6 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
@@ -72,6 +73,8 @@
             </div>
         </div>
     </header>
+
+    <Button class="mb-2" variant="raised" on:click={() => Inertia.visit(route('convocatorias.evaluaciones.redireccionar', [evaluacion.proyecto.convocatoria.id, evaluacion.id]))}>Detalles de la evaluación</Button>
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
