@@ -116,91 +116,47 @@
                     <td class="border-t">
                         <p class="px-6 py-4">
                             {#if evaluacion.proyecto.estado_evaluacion_idi}
-                                {evaluacion.proyecto.estado_evaluacion_idi.estado}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
                                         Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_idi.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {evaluacion.proyecto.estado_evaluacion_idi.evaluacionesHabilitadas} habilitada(s) / {evaluacion.proyecto.estado_evaluacion_idi.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if evaluacion.proyecto.estado_evaluacion_idi.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {evaluacion.proyecto.estado_evaluacion_idi.alerta}
-                                            </strong>
-                                        {/if}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_cultura_innovacion}
-                                {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.estado}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
                                         Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.evaluacionesHabilitadas} habilitada(s) / {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if evaluacion.proyecto.estado_evaluacion_cultura_innovacion.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.alerta}
-                                            </strong>
-                                        {/if}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos}
-                                {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.estado}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
                                         Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.evaluacionesHabilitadas} habilitada(s) / {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.alerta}
-                                            </strong>
-                                        {/if}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_ta}
                                 {evaluacion.proyecto.estado_evaluacion_ta.estado}
                                 {#if isSuperAdmin}
-                                    <br />
                                     <small>
-                                        <br />
                                         Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_ta.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {evaluacion.proyecto.estado_evaluacion_ta.evaluacionesHabilitadas} habilitada(s) / {evaluacion.proyecto.estado_evaluacion_ta.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if evaluacion.proyecto.estado_evaluacion_ta.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {evaluacion.proyecto.estado_evaluacion_ta.alerta}
-                                            </strong>
-                                        {/if}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_tp}
                                 {evaluacion.proyecto.estado_evaluacion_tp.estado}
                                 {#if isSuperAdmin}
-                                    <br />
                                     <small>
-                                        <br />
                                         Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_tp.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {evaluacion.proyecto.estado_evaluacion_tp.evaluacionesHabilitadas} habilitada(s) / {evaluacion.proyecto.estado_evaluacion_tp.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if evaluacion.proyecto.estado_evaluacion_tp.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {evaluacion.proyecto.estado_evaluacion_tp.alerta}
-                                            </strong>
-                                        {/if}
                                     </small>
                                 {/if}
                             {/if}
