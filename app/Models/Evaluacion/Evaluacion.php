@@ -171,7 +171,7 @@ class Evaluacion extends Model
     {
         return $this->hasMany(EvaluacionCausalRechazo::class);
     }
-    
+
     /**
      * getVerificarEstadoEvaluacionAttribute
      *
