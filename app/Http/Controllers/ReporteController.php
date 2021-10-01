@@ -21,7 +21,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $this->authorize('descargarReportes', [User::class]);
+        $this->authorize('descargar-reportes', [User::class]);
 
         return Inertia::render('Reportes/Index', [
             'filters'   => request()->all('search'),
@@ -37,7 +37,7 @@ class ReporteController extends Controller
      */
     public function resumeProjects(Convocatoria $convocatoria)
     {
-        $this->authorize('descargarReportes', [User::class]);
+        $this->authorize('descargar-reportes', [User::class]);
 
         $proyectos = Proyecto::all();
 
