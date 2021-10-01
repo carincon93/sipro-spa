@@ -217,7 +217,7 @@
                 <Button on:click={() => Inertia.visit(route('regionales.index'))} variant={route().current('regionales.*') ? 'raised' : 'outlined'} class="p-2">Regionales</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('reportes.index'))} variant={route().current('reportes.*') ? 'raised' : 'outlined'} class="p-2">Reportes</Button>
             {/if}
 

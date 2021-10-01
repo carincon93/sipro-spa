@@ -108,7 +108,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('regionales.index')}>Regionales</a>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('reportes.index')}>Reportes</a>
             {/if}
 
