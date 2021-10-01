@@ -63,11 +63,12 @@ class ReporteController extends Controller
     /**
      * resumePresupuestos
      *
+     * @param  mixed $convocatoria
      * @return void
      */
     public function resumePresupuestos(Convocatoria $convocatoria)
     {
-        return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-'.time().'.xlsx');
+        return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-' . time() . '.xlsx');
     }
     
     /**
