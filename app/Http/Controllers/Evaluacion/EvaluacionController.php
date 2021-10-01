@@ -133,6 +133,7 @@ class EvaluacionController extends Controller
         $this->authorize('update', [Evaluacion::class, $evaluacion]);
 
         $evaluacion->proyecto->only('codigo');
+        $evaluacion->proyecto->convocatoria;
 
         return Inertia::render('Evaluaciones/Edit', [
             'evaluacion'    => $evaluacion,

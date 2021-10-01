@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\EvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Exports\ProyectosExport;
 use App\Models\Convocatoria;
