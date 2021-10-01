@@ -54,7 +54,7 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if isSuperAdmin}
+                    {#if (isSuperAdmin && $form.convocatoria)}
                         <Button variant="raised" on:click={() => downloadReport('resumeProjects')}>Descargar</Button>
                     {/if}
                 </td>
@@ -65,7 +65,7 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
+                    {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                         <Button variant="raised" on:click={()=>downloadReport('resumePresupuestos')}>Descargar</Button>
                     {/if}
                 </td>
@@ -79,7 +79,18 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if isSuperAdmin && $form.convocatoria}
-                        <a class="bg-indigo-600 p-2 rounded shadow text-white uppercase" style="letter-spacing: 0.0892857143em; font-size: 14.7px;" target="_blank" href={route('reportes.evaluaciones', [$form.convocatoria?.value])}>Descargar</a>
+                        <Button variant="raised" on:click={()=>downloadReport('evaluaciones')}>Descargar</Button>
+                    {/if}
+                </td>
+            </tr>
+            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Resumen presupuesto proyecto aprobado</p></td>
+                <td>
+                    <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
+                </td>
+                <td class="border-t td-actions">
+                    {#if isSuperAdmin && $form.convocatoria}
+                        <Button variant="raised" on:click={()=>downloadReport('resumeProyectoPresupuestoAprobado')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>

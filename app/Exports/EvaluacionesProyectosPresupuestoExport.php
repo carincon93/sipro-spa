@@ -14,14 +14,17 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 use Illuminate\Support\Facades\Storage;
 
-class ProyectosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting
+class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting
 {
+
     protected $datos;
     protected $convocatoria;
+    protected $proyectos;
 
     public function __construct(Convocatoria $convocatoria)
     {
         $this->convocatoria = $convocatoria;
+        $this->proyectos = $convocatoria->proyectos()->withCount(['evaluaciones'])->get();
     }
 
     /**
@@ -29,7 +32,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
      */
     public function collection()
     {
-        return $this->convocatoria->proyectos;
+        return $this->proyectos;
     }
     /**
      * @var Invoice $proyecto
@@ -54,7 +57,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $tipo = 'Servicios tecnológicos';
         }
 
-        return [
+        $data = [
             $this->convocatoria->descripcion,
             $proyecto->codigo,
             $tipo,
@@ -64,28 +67,29 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $proyecto->lineaProgramatica->codigo,
             $proyecto->lineaProgramatica->nombre,
             $this->datos->titulo,
-            ($this->datos->redConocimiento) ? $this->datos->redConocimiento->nombre : 'N/A',
-            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre : ($this->datos->areaConocimiento ? $this->datos->areaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->map(function ($disciplinaSubareaConocimiento) {
-                return ['nombre' => $disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre];
-            })->implode('nombre', ', ') : 'N/A')),
-            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->subareaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->map(function ($disciplinaSubareaConocimiento) {
-                return ['nombre' => $disciplinaSubareaConocimiento->subareaConocimiento->nombre];
-            })->implode('nombre', ', ') : 'N/A'),
-            ($this->datos->disciplinaSubareaConocimiento) ? $this->datos->disciplinaSubareaConocimiento->nombre : ($this->datos->disciplinasSubareaConocimiento ? $this->datos->disciplinasSubareaConocimiento->implode('nombre', ', ') : 'N/A'),
-            $this->datos->objetivo_general,
             $proyecto->total_proyecto_presupuesto,
             $proyecto->total_roles_sennova,
             $proyecto->precio_proyecto > 0 ? $proyecto->precio_proyecto : '0',
             ($proyecto->finalizado) ? 'SI' : 'NO',
             ($proyecto->a_evaluar) ? 'SI' : 'NO',
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
-            $this->mapParticipantes($proyecto->participantes),
+            $proyecto->total_proyecto_presupuesto_aprobado,
+            $proyecto->total_roles_sennova_aprobado,
+            $proyecto->precio_proyecto_aprobado > 0 ? $proyecto->precio_proyecto_aprobado : '0',
         ];
+
+        foreach ($proyecto->evaluaciones as $evaluacion) {
+            $data[] = $evaluacion->evaluador->nombre;
+            $data[] = $evaluacion->getVerificarEstadoEvaluacionAttribute();
+        }
+
+        return $data;
     }
 
     public function headings(): array
     {
-        return [
+        $cantEvaluadores=0;
+        $headers = [
             'Convocatoria',
             'Código',
             'Tipo',
@@ -95,34 +99,46 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Código línea programática',
             'Linea Programatica',
             'Título',
-            'Red Conocimiento',
-            'Área Conocimiento',
-            'Subareas conocimiento',
-            'Disciplina',
-            'Objetivo General',
             'Total Presupuestos',
             'Total Roles',
             'Total Proyecto',
             'Finalizado',
             'Radicado',
             'Evaluación',
-            'Participantes',
+            'Total Presupuestos Aprobado',
+            'Total Roles Aprobado',
+            'Total Proyecto Aprobado',
         ];
+        
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->evaluaciones_count>$cantEvaluadores) {
+                $cantEvaluadores = $proyecto->evaluaciones_count;
+            }
+        }
+
+        for ($i=0; $i < $cantEvaluadores; $i++) { 
+            $headers = array_merge($headers, ['Evaluador '.($i+1), 'Estado evaluación '.($i+1)]);
+        }
+
+        return $headers;
     }
 
     public function columnFormats(): array
     {
         return [
-            'O' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'J' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'K' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'L' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
             'P' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
             'Q' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'R' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
         ];
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Resumen proyectos ' . $this->convocatoria->descripcion,
+            'title' => 'Resumen Presupuesto aprobado proyectos ' . $this->convocatoria->descripcion,
         ];
     }
 
@@ -132,22 +148,5 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
         ];
-    }
-
-    private function mapParticipantes($participantes)
-    {
-        $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
-        $mapParticipantes = [];
-
-        foreach ($participantes as $participante) {
-            array_push($mapParticipantes, [
-                'nombre' => strtr(utf8_decode($participante->nombre), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'),
-                'documento' => $participante->numero_documento,
-                'vinculacion' => $participante->tipo_vinculacion_text,
-                'meses' => $participante->pivot->cantidad_meses,
-                'horas' => $participante->pivot->cantidad_horas,
-            ]);
-        }
-        return $mapParticipantes;
     }
 }
