@@ -122,7 +122,7 @@
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
-                                        Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_idi.numeroRecomendaciones}
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_cultura_innovacion}
@@ -132,7 +132,7 @@
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
-                                        Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_cultura_innovacion.numeroRecomendaciones}
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos}
@@ -142,21 +142,21 @@
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
                                         <br />
-                                        Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos.numeroRecomendaciones}
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_ta}
                                 {evaluacion.proyecto.estado_evaluacion_ta.estado}
                                 {#if isSuperAdmin}
                                     <small>
-                                        Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_ta.numeroRecomendaciones}
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_tp}
                                 {evaluacion.proyecto.estado_evaluacion_tp.estado}
                                 {#if isSuperAdmin}
                                     <small>
-                                        Número de recomendaciones: {evaluacion.proyecto.estado_evaluacion_tp.numeroRecomendaciones}
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {/if}
