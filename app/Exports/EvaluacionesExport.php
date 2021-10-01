@@ -44,6 +44,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
             $evaluacion->evaluador->nombre,
             $evaluacion->proyecto->idi()->exists() ? $evaluacion->proyecto->estado_evaluacion_idi['estado'] : ($evaluacion->proyecto->culturaInnovacion()->exists() ? $evaluacion->proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($evaluacion->proyecto->ta()->exists() ? $evaluacion->proyecto->estado_evaluacion_ta['estado'] : ($evaluacion->proyecto->tp()->exists() ? $evaluacion->proyecto->estado_evaluacion_tp['estado'] : ($evaluacion->proyecto->servicioTecnologico()->exists() ? $evaluacion->proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
             $evaluacion->proyecto->idi()->exists() ? $evaluacion->getTotalEvaluacionAttribute() : ($evaluacion->proyecto->culturaInnovacion()->exists() ? $evaluacion->getTotalEvaluacionAttribute() : ($evaluacion->proyecto->servicioTecnologico()->exists() ? $evaluacion->getTotalEvaluacionAttribute() : 'Sin información registrada')),
+            $evaluacion->getTotalRecomendacionesAttribute(),
             $evaluacion->evaluacionCausalesRechazo()->count() > 0 ? $evaluacion->evaluacionCausalesRechazo()->get()->map(function ($causalesRechazo) {
                 return  strtr(utf8_decode($causalesRechazo->causal_rechazo_formateado), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
             }) : 'Sin causal de rechazo',
@@ -62,6 +63,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
             'Evaluador',
             'Estado proyecto',
             'Puntaje',
+            'Total recomendaciones',
             'Causales de rechazo',
             'Estado evaluación',
         ];
