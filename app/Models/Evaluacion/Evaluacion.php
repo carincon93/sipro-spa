@@ -22,7 +22,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion', 'estado_proyecto_por_evaluador'];
 
     /**
      * The attributes that are mass assignable.
@@ -501,6 +501,15 @@ class Evaluacion extends Model
         $countPresupuestosSinEvaluar > 0 ? array_push($itemsPorEvaluar, 'Hay ' . $countPresupuestosSinEvaluar . ' rubro(s) presupuestal(es) sin evaluar') : null;
 
         return $itemsPorEvaluar;
+    }
+
+    public function getEstadoProyectoPorEvaluadorAttribute()
+    {
+        if ($this->idiEvaluacion()->exists() || $this->servicioTecnologicoEvaluacion()->exists()) {
+            return $this->proyecto->estadoEvaluacionIdi($this->total_evaluacion, $this->total_recomendaciones, null);
+        } else if ($this->culturaInnovacionEvaluacion()->exists()) {
+            return $this->proyecto->estadoEvaluacionCulturaInnovacion($this->total_evaluacion, $this->total_recomendaciones, null);
+        }
     }
 
     /**
