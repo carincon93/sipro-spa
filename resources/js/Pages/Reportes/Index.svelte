@@ -78,8 +78,10 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [20, 18, 19, 5, 17])}
-                        <a class="bg-indigo-600 p-2 rounded shadow text-white uppercase" style="letter-spacing: 0.0892857143em; font-size: 14.7px;" target="_blank" href={route('reportes.evaluaciones', [$form.convocatoria?.value])}>Descargar</a>
+                    {#if $form.convocatoria}
+                        {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [20, 18, 19, 5, 17])}
+                            <a class="bg-indigo-600 p-2 rounded shadow text-white uppercase" style="letter-spacing: 0.0892857143em; font-size: 14.7px;" target="_blank" href={route('reportes.evaluaciones', [$form.convocatoria?.value])}>Descargar</a>
+                        {/if}
                     {/if}
                 </td>
             </tr>
