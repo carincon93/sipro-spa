@@ -83,10 +83,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
 
     public function columnFormats(): array
     {
-        return [
-            'J' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
-            'K' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
-        ];
+        return [];
     }
 
     /**
