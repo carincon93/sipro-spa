@@ -25,8 +25,8 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         $idproyectos = explode(',', $this->convocatoria->proyectos->implode('id', ','));
@@ -40,6 +40,10 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
     {
         return [
             $presupuesto->proyecto->convocatoria->descripcion,
+            $presupuesto->proyecto->centroFormacion->regional->nombre,
+            $presupuesto->proyecto->centroFormacion->codigo,
+            $presupuesto->proyecto->centroFormacion->nombre,
+            $presupuesto->proyecto->lineaProgramatica->codigo,
             $presupuesto->proyecto->codigo,
             $presupuesto->convocatoriaPresupuesto->presupuestoSennova->tercerGrupoPresupuestal->nombre,
             $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre,
@@ -47,7 +51,7 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
             $presupuesto->descripcion,
             $presupuesto->justificacion,
             $presupuesto->valor_total,
-            ($presupuesto->proyectoPresupuestosEvaluaciones()->count() > 0)?(($presupuesto->presupuesto_aprobado)?'SI':'NO'):'Sin evaluar',
+            ($presupuesto->proyectoPresupuestosEvaluaciones()->count() > 0) ? (($presupuesto->presupuesto_aprobado) ? 'SI' : 'NO') : 'Sin evaluar',
 
         ];
     }
@@ -56,10 +60,14 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
     {
         return [
             'Convocatoria',
-            'Código',
-            'Tercer Grupo Presupuestal',
-            'Segundo Grupo Presupuestal',
-            'Uso Presupuestal',
+            'Regional',
+            'Código Centro de formación',
+            'Centro de formación',
+            'Línea programática',
+            'Código proyecto',
+            'Homologable 2018',
+            'Rubro 2019',
+            'Uso presupuestal',
             'Descripción',
             'Justificación',
             'Valor',
