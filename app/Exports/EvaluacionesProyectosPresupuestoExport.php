@@ -80,6 +80,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
 
         foreach ($proyecto->evaluaciones as $evaluacion) {
             $data[] = $evaluacion->evaluador->nombre;
+            $data[] = $evaluacion->evaluador->numero_documento;
             $data[] = $evaluacion->getVerificarEstadoEvaluacionAttribute();
         }
 
@@ -88,7 +89,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
 
     public function headings(): array
     {
-        $cantEvaluadores=0;
+        $cantEvaluadores = 0;
         $headers = [
             'Convocatoria',
             'Código',
@@ -109,15 +110,15 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
             'Total Roles Aprobado',
             'Total Proyecto Aprobado',
         ];
-        
+
         foreach ($this->proyectos as $proyecto) {
-            if ($proyecto->evaluaciones_count>$cantEvaluadores) {
+            if ($proyecto->evaluaciones_count > $cantEvaluadores) {
                 $cantEvaluadores = $proyecto->evaluaciones_count;
             }
         }
 
-        for ($i=0; $i < $cantEvaluadores; $i++) { 
-            $headers = array_merge($headers, ['Evaluador '.($i+1), 'Estado evaluación '.($i+1)]);
+        for ($i = 0; $i < $cantEvaluadores; $i++) {
+            $headers = array_merge($headers, ['Evaluador ' . ($i + 1), 'Estado evaluación ' . ($i + 1)]);
         }
 
         return $headers;
