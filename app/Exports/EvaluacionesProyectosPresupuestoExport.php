@@ -81,6 +81,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
         foreach ($proyecto->evaluaciones as $evaluacion) {
             $data[] = $evaluacion->evaluador->nombre;
             $data[] = $evaluacion->evaluador->numero_documento;
+            $data[] = $evaluacion->evaluador->email;
             $data[] = $evaluacion->getVerificarEstadoEvaluacionAttribute();
         }
 
