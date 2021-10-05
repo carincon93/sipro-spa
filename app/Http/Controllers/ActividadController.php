@@ -72,7 +72,7 @@ class ActividadController extends Controller
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
                 })
-            )->orderBy('fecha_inicio', 'ASC')->get(),
+            )->where('fecha_inicio', '<>', null)->orderBy('fecha_inicio', 'ASC')->get(),
             'to_pdf'          => ($request->to_pdf == 1) ? true : false
         ]);
     }
@@ -320,7 +320,7 @@ class ActividadController extends Controller
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
                     return $objetivoEspecifico->id;
                 })
-            )->orderBy('fecha_inicio', 'ASC')->get(),
+            )->where('fecha_inicio', '<>', null)->orderBy('fecha_inicio', 'ASC')->get(),
         ]);
     }
 
