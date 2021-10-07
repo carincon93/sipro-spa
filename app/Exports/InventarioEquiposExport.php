@@ -42,12 +42,12 @@ class InventarioEquiposExport implements FromCollection, WithHeadings, WithMappi
             $invetarioEquipo->codigo_interno,
             $invetarioEquipo->fecha_adquisicion,
             $invetarioEquipo->estado_formateado,
-            $invetarioEquipo->uso_st ? 'Si' : 'No',
-            $invetarioEquipo->uso_otra_dependencia ? 'Si' : 'No',
+            $invetarioEquipo->uso_st == '1' ? 'Si' : 'No',
+            $invetarioEquipo->uso_otra_dependencia == '1' ? 'Si' : 'No',
             $invetarioEquipo->dependencia ? $invetarioEquipo->dependencia : 'N/A',
             $invetarioEquipo->descripcion,
-            $invetarioEquipo->mantenimiento_prox_year ? 'Si' : 'No',
-            $invetarioEquipo->calibracion_prox_year ? 'Si' : 'No',
+            $invetarioEquipo->mantenimiento_prox_year == '1' ? 'Si' : 'No',
+            $invetarioEquipo->calibracion_prox_year == '1' ? 'Si' : 'No',
         ];
     }
 
