@@ -44,7 +44,8 @@ class Convocatoria extends Model
         'max_fecha_finalizacion_proyectos_tp',
         'fecha_finalizacion_fase',
         'fase',
-        'mostrar_recomendaciones'
+        'mostrar_recomendaciones',
+        'hora_finalizacion_fase'
     ];
 
     /**
@@ -140,7 +141,7 @@ class Convocatoria extends Model
     public function getFaseFormateadaAttribute()
     {
         $fase = null;
-        $fechaLimite = Carbon::parse($this->fecha_finalizacion_fase, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        $fechaLimite = Carbon::parse($this->fecha_finalizacion_fase, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY') . ' a las ' . $this->hora_finalizacion_fase;
         switch ($this->fase) {
             case 1:
                 $fase = 'Fase de formulación hasta el <br />' . $fechaLimite;
