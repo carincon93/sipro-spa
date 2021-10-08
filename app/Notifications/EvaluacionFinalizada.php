@@ -62,7 +62,7 @@ class EvaluacionFinalizada extends Notification
             default:
                 break;
         }
-        $message = "El proyecto SGPS-" . (8000 + $this->proyecto->id) . "-" . $year . " ha sido evaluado correctamente. En los próximos días el proyecto será subsanado y deberá realizar una nueva revisión. Por favor, este atento (a).";
+        $message = "El proyecto SGPS-" . (8000 + $this->proyecto->id) . "-" . $year . " ha sido evaluado correctamente. ¡Muchas gracias!.";
         return (new MailMessage)
             ->line($message)
             ->line('Gracias por la atención prestada.');
@@ -97,7 +97,7 @@ class EvaluacionFinalizada extends Notification
             default:
                 break;
         }
-        $message = "El proyecto SGPS-" . (8000 + $this->proyecto->id) . "-" . $year . " ha sido evaluado correctamente. En los próximos días el proyecto será subsanado y deberá realizar una nueva revisión. Por favor, este atento (a).";
+        $message = "El proyecto SGPS-" . (8000 + $this->proyecto->id) . "-" . $year . " ha sido evaluado correctamente. ¡Muchas gracias!.";
         return [
             "proyectoId"    => $this->proyecto->id,
             "subject"       => "El proyecto ha sido evaluado correctamente",
