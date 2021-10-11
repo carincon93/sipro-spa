@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
@@ -23,7 +22,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [User::class]);
+        $this->authorize('descargar-reportes', [User::class]);
 
         return Inertia::render('Reportes/Index', [
             'filters'   => request()->all('search'),
@@ -39,7 +38,7 @@ class ReporteController extends Controller
      */
     public function resumeProjects(Convocatoria $convocatoria)
     {
-        $this->authorize('viewAny', [User::class]);
+        $this->authorize('descargar-reportes', [User::class]);
 
         $proyectos = Proyecto::all();
 
@@ -57,6 +56,8 @@ class ReporteController extends Controller
      */
     public function EvaluacionesExcel(Convocatoria $convocatoria)
     {
+        $this->authorize('descargar-reportes', [User::class]);
+
         return Excel::download(new EvaluacionesExport($convocatoria), 'evaluaciones-' . time() . '.xlsx');
     }
 

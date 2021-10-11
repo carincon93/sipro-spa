@@ -1,16 +1,11 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { useForm, page } from '@inertiajs/inertia-svelte'
+    import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import { Inertia } from '@inertiajs/inertia'
 
     import Button from '@/Shared/Button'
-    import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
-    import DataTableMenu from '@/Shared/DataTableMenu'
-    import { Item, Text } from '@smui/list'
-    import Label from '@/Shared/Label'
     import Select from '@/Shared/Select'
 
     $title = 'Reportes de sistema'
@@ -54,7 +49,7 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if (isSuperAdmin && $form.convocatoria)}
+                    {#if $form.convocatoria && (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17]))}
                         <Button variant="raised" on:click={() => downloadReport('resumeProjects')}>Descargar</Button>
                     {/if}
                 </td>
@@ -89,7 +84,7 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if isSuperAdmin && $form.convocatoria}
+                    {#if $form.convocatoria && (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17]))}
                         <Button variant="raised" on:click={()=>downloadReport('resumeProyectoPresupuestoAprobado')}>Descargar</Button>
                     {/if}
                 </td>

@@ -66,7 +66,8 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Título</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluador</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado evaluación</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado proyecto</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
             </tr>
         </thead>
@@ -105,9 +106,60 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
+                            <br />
                             {evaluacion.verificar_estado_evaluacion}
                             <br />
                             {evaluacion.habilitado ? 'Habilitada' : 'Deshabilitada'}
+                        </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4">
+                            {#if evaluacion.proyecto.estado_evaluacion_idi}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
+                                {#if isSuperAdmin}
+                                    <br />
+                                    <small>
+                                        Puntaje: {evaluacion.total_evaluacion}
+                                        <br />
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
+                                    </small>
+                                {/if}
+                            {:else if evaluacion.proyecto.estado_evaluacion_cultura_innovacion}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
+                                {#if isSuperAdmin}
+                                    <br />
+                                    <small>
+                                        Puntaje: {evaluacion.total_evaluacion}
+                                        <br />
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
+                                    </small>
+                                {/if}
+                            {:else if evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos}
+                                {evaluacion.estado_proyecto_por_evaluador?.estado}
+                                {#if isSuperAdmin}
+                                    <br />
+                                    <small>
+                                        Puntaje: {evaluacion.total_evaluacion}
+                                        <br />
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
+                                    </small>
+                                {/if}
+                            {:else if evaluacion.proyecto.estado_evaluacion_ta}
+                                {evaluacion.proyecto.estado_evaluacion_ta.estado}
+                                {#if isSuperAdmin}
+                                    <small>
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
+                                    </small>
+                                {/if}
+                            {:else if evaluacion.proyecto.estado_evaluacion_tp}
+                                {evaluacion.proyecto.estado_evaluacion_tp.estado}
+                                {#if isSuperAdmin}
+                                    <small>
+                                        Número de recomendaciones: {evaluacion.total_recomendaciones}
+                                    </small>
+                                {/if}
+                            {/if}
                         </p>
                     </td>
                     <td class="border-t td-actions">

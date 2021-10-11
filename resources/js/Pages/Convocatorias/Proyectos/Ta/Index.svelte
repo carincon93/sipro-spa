@@ -83,7 +83,6 @@
                         <td class="border-t">
                             <p class="px-6 py-4">
                                 {proyecto_ta.proyecto.estado_evaluacion_ta.estado}
-
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>

@@ -147,7 +147,7 @@
                 </ul>
             </InfoMessage>
         {:else if evaluacion.finalizado == false && evaluacion.validar_evaluacion.length == 0}
-            <InfoMessage class="mb-2" message="Si desea finalizar la evaluación de clic en <strong>Finalizar evaluación</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
+            <InfoMessage class="mb-2" message="Si desea finalizar la evaluación de clic en <strong>Finalizar evaluación</strong> y a continuación, escriba la contraseña de su usuario." />
             <Button on:click={(event) => (finishEvaluacionDialogOpen = true)} variant="raised">Finalizar evaluación</Button>
         {/if}
     </div>

@@ -26,7 +26,7 @@ class EvaluacionController extends Controller
 
         return Inertia::render('Evaluaciones/Index', [
             'filters'       => request()->all('search'),
-            'evaluaciones'  => Evaluacion::with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,nodo_tecnoparque_id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('evaluaciones.id', 'ASC')
+            'evaluaciones'  => Evaluacion::with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,nodo_tecnoparque_id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('proyecto_id', 'ASC')
                 ->filterEvaluacion(request()->only('search', 'estado'))->paginate()->appends(['search' => request()->search, 'estado' => request()->estado]),
         ]);
     }
@@ -133,6 +133,7 @@ class EvaluacionController extends Controller
         $this->authorize('update', [Evaluacion::class, $evaluacion]);
 
         $evaluacion->proyecto->only('codigo');
+        $evaluacion->proyecto->convocatoria;
 
         return Inertia::render('Evaluaciones/Edit', [
             'evaluacion'    => $evaluacion,
