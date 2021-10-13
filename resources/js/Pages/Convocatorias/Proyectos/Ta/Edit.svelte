@@ -385,7 +385,7 @@
                         <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                     </div>
                     <div>
-                        <Textarea label="Resumen del proyecto" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} change={syncColumnLong('resumen', $resumenForm)} required />
+                        <Textarea label="Resumen del proyecto" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
                     </div>
                 </div>
             </fieldset>
@@ -395,7 +395,7 @@
                     <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} change={syncColumnLong('resumen_regional', $formResumenRegional)} required />
+                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} on:input={() => syncColumnLong('resumen_regional', $formResumenRegional)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -424,7 +424,7 @@
                         />
                     </div>
                     <div>
-                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} change={syncColumnLong('antecedentes', $formAntecedentes)} required />
+                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
                     </div>
                 </div>
             </fieldset>
@@ -434,7 +434,7 @@
                     <Label required class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$formAntecedentesTA.antecedentes_tecnoacademia} change={syncColumnLong('antecedentes_tecnoacademia', $formAntecedentesTA)} required />
+                    <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$formAntecedentesTA.antecedentes_tecnoacademia} on:input={() => syncColumnLong('antecedentes_tecnoacademia', $formAntecedentesTA)} required />
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -459,7 +459,7 @@
                         <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                     </div>
                     <div>
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} change={syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
                     </div>
                 </div>
             </fieldset>
@@ -469,7 +469,7 @@
                     <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} change={syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
+                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} on:input={() => syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -494,7 +494,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
                 </div>
                 <div>
-                    <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} change={syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
+                    <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} on:input={() => syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
                 </div>
             </div>
 
@@ -505,7 +505,7 @@
                         <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                     </div>
                     <div>
-                        <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} change={syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
+                        <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
                     </div>
                 </div>
             </fieldset>
@@ -533,7 +533,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} change={syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
+                    <Textarea label="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
                 </div>
             </div>
 
@@ -667,7 +667,7 @@
                     <Label required class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
                 </div>
                 <div>
-                    <Textarea label="Articulación con el centro de formación" maxlength="40000" id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$formArticulacionCentroFormacion.articulacion_centro_formacion} change={syncColumnLong('articulacion_centro_formacion', $formArticulacionCentroFormacion)} required />
+                    <Textarea label="Articulación con el centro de formación" maxlength="40000" id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$formArticulacionCentroFormacion.articulacion_centro_formacion} on:input={() => syncColumnLong('articulacion_centro_formacion', $formArticulacionCentroFormacion)} required />
                 </div>
             </div>
 
@@ -693,7 +693,7 @@
                     <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$formProyectosMacro.proyectos_macro} change={syncColumnLong('proyectos_macro', $formProyectosMacro)} required />
+                    <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$formProyectosMacro.proyectos_macro} on:input={() => syncColumnLong('proyectos_macro', $formProyectosMacro)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -718,7 +718,7 @@
                     <Label required class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$formLineasMedularesCentro.lineas_medulares_centro} change={syncColumnLong('lineas_medulares_centro', $formLineasMedularesCentro)} required />
+                    <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$formLineasMedularesCentro.lineas_medulares_centro} on:input={() => syncColumnLong('lineas_medulares_centro', $formLineasMedularesCentro)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -743,7 +743,7 @@
                     <Label required class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$formLineasTecnologicasCentro.lineas_tecnologicas_centro} change={syncColumnLong('lineas_tecnologicas_centro', $formLineasTecnologicasCentro)} required />
+                    <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$formLineasTecnologicasCentro.lineas_tecnologicas_centro} on:input={() => syncColumnLong('lineas_tecnologicas_centro', $formLineasTecnologicasCentro)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -769,7 +769,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} change={syncColumnLong('bibliografia', $formBibliografia)} required />
+                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}

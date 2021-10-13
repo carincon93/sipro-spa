@@ -83,8 +83,8 @@
     })
 
     async function syncColumnLong(column, form) {
-        return new Promise(resolve => {
-        if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
+        return new Promise((resolve) => {
+            if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]),
@@ -270,7 +270,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} change={syncColumnLong('resumen', $resumenForm)} required />
+                    <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -304,7 +304,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} change={syncColumnLong('antecedentes', $formAntecedentes)} required />
+                    <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -334,7 +334,7 @@
                 </div>
 
                 <div>
-                    <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} change={syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
+                    <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} on:input={() => syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -407,7 +407,7 @@
                     </InfoMessage>
                 </div>
                 <div>
-                    <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} change={syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
+                    <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -451,7 +451,7 @@
                     <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
                 </div>
                 <div>
-                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$formZonaInfluencia.zona_influencia} change={syncColumnLong('zona_influencia', $formZonaInfluencia)} required />
+                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$formZonaInfluencia.zona_influencia} on:input={() => syncColumnLong('zona_influencia', $formZonaInfluencia)} required />
                 </div>
             </div>
 
@@ -461,7 +461,7 @@
                     <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} change={syncColumnLong('bibliografia', $formBibliografia)} required />
+                    <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
