@@ -194,6 +194,14 @@ class ConvocatoriaController extends Controller
                         }
                         break;
 
+                    case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                        if (json_decode($proyecto->estado_evaluacion_servicios_tecnologicos)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                        } else {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                        }
+                        break;
+
                     default:
                         break;
                 }
