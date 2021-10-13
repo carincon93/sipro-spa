@@ -498,7 +498,7 @@
 
                     {#if requiereJustificacionIndustria4}
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} change={syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+                        <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} on:input={() => syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
 
                         {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
@@ -535,7 +535,7 @@
                             id="justificacion_economia_naranja"
                             error={errors.justificacion_economia_naranja}
                             bind:value={$formJustificacionEconomiaNaranja.justificacion_economia_naranja}
-                            change={syncColumnLong('justificacion_economia_naranja', $formJustificacionEconomiaNaranja)}
+                            on:input={() => syncColumnLong('justificacion_economia_naranja', $formJustificacionEconomiaNaranja)}
                             required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'}
                         />
 
@@ -574,7 +574,7 @@
                             id="justificacion_politica_discapacidad"
                             error={errors.justificacion_politica_discapacidad}
                             bind:value={$formJustificacionPoliticaDiscapacidad.justificacion_politica_discapacidad}
-                            change={syncColumnLong('justificacion_politica_discapacidad', $formJustificacionPoliticaDiscapacidad)}
+                            on:input={() => syncColumnLong('justificacion_politica_discapacidad', $formJustificacionPoliticaDiscapacidad)}
                             required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'}
                         />
                         {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
@@ -868,7 +868,7 @@
                     <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} change={syncColumnLong('resumen', $resumenForm)} bind:value={$resumenForm.resumen} required />
+                    <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} bind:value={$resumenForm.resumen} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
@@ -894,7 +894,7 @@
                     <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
                 </div>
                 <div>
-                    <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} change={syncColumnLong('antecedentes', $formAntecedentes)} required />
+                    <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
                 </div>
             </div>
 
@@ -904,7 +904,7 @@
                     <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
                 </div>
                 <div>
-                    <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} change={syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
+                    <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
                 </div>
             </div>
 
@@ -982,7 +982,7 @@
                     <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} change={syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
+                    <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
                 </div>
             </div>
 
@@ -991,7 +991,7 @@
                     <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} change={syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
+                    <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} on:input={() => syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
                 </div>
             </div>
 
@@ -1001,7 +1001,7 @@
                     <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
                 </div>
                 <div>
-                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} change={syncColumnLong('bibliografia', $formBibliografia)} required />
+                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
                     {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
