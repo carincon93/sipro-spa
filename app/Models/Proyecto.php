@@ -836,13 +836,10 @@ class Proyecto extends Model
             $cantidadEvaluaciones = count($evaluaciones);
 
             $totalRecomendaciones = 0;
-            $estadoEvaluacion = '';
-            $causalRechazo  = null;
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
             $countPresupuestoNoAprobado = 0;
 
-            $estados = array(1, 2);
 
             foreach ($evaluaciones as $key => $evaluacion) {
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
@@ -851,13 +848,19 @@ class Proyecto extends Model
                     $requiereSubsanar = true;
                 }
 
-                // Sumar los presupuesto no aprobados
+                // Sumar los presupuestos no aprobados
                 $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
                 foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
             }
-            return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
+
+            $estadoEvaluacion = null;
+
+            $estadoEvaluacion = $totalRecomendaciones == 0 ? 'Pre-aprobado' : 'Proyecto con observaciones';
+            $requiereSubsanar = $totalRecomendaciones == 0 ? false : true;
+
+            return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }
     }
 
@@ -874,28 +877,31 @@ class Proyecto extends Model
             $cantidadEvaluaciones = count($evaluaciones);
 
             $totalRecomendaciones = 0;
-            $estadoEvaluacion = '';
-            $causalRechazo  = null;
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
             $countPresupuestoNoAprobado = 0;
 
-            $estados = array(1, 2);
 
-            foreach ($evaluaciones as $key => $evaluacion) {
+            foreach ($evaluaciones as $evaluacion) {
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
                 if ($evaluacion->tpEvaluacion->anexos_comentario != null) {
                     $requiereSubsanar = true;
                 }
 
-                // Sumar los presupuesto no aprobados
+                // Sumar los presupuestos no aprobados
                 $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
                 foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
             }
-            return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
+
+            $estadoEvaluacion = null;
+
+            $estadoEvaluacion = $totalRecomendaciones == 0 ? 'Pre-aprobado' : 'Proyecto con observaciones';
+            $requiereSubsanar = $totalRecomendaciones == 0 ? false : true;
+
+            return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }
     }
 
