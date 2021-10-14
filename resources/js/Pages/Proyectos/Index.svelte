@@ -55,14 +55,14 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 {#if isSuperAdmin}
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluación </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Versiones (.pdf) </th>
                 {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
 
         <tbody slot="tbody">
-            {#each proyectos.data as { id, estado, titulo, codigo, fecha_ejecucion }}
+            {#each proyectos.data as { id, estado, titulo, codigo, fecha_ejecucion, pdf_versiones, convocatoria }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
@@ -74,25 +74,20 @@
                     </td>
                     {#if isSuperAdmin}
                         <td class="border-t">
-                            <p class="px-6 py-4">
-                                <!-- {estado_evaluacion_proyectos.estado}
-                                {#if isSuperAdmin}
-                                    <br />
-                                    <small>
-                                        Puntaje: {estado_evaluacion_proyectos.puntaje}
-                                        <br />
-                                        Número de recomendaciones: {estado_evaluacion_proyectos.numeroRecomendaciones}
-                                        <br />
-                                        Evaluaciones: {estado_evaluacion_proyectos.evaluacionesHabilitadas} habilitada(s) / {estado_evaluacion_proyectos.evaluacionesFinalizadas} finalizada(s)
-                                        <br />
-                                        {#if estado_evaluacion_proyectos.alerta}
-                                            <strong class="text-red-500">
-                                                Importante: {estado_evaluacion_proyectos.alerta}
-                                            </strong>
-                                        {/if}
-                                    </small>
-                                {/if} -->
-                            </p>
+                            {#if pdf_versiones}
+                                <ul>
+                                    {#each pdf_versiones as version}
+                                        <li>
+                                            {#if version.estado == 1}
+                                                <a class="text-indigo-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, id, version.version])}> {version.version}.pdf - Descargar</a>
+                                                <small class="block">{version.created_at}</small>
+                                            {/if}
+                                        </li>
+                                    {/each}
+                                </ul>
+                            {:else}
+                                <p>No se ha generado un historial aún</p>
+                            {/if}
                         </td>
                     {/if}
 

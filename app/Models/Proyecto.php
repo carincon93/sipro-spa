@@ -349,6 +349,23 @@ class Proyecto extends Model
             ]);
     }
 
+        /**
+     * Filtrar registros
+     *
+     * @param  mixed $query
+     * @param  mixed $filters
+     * @return void
+     */
+    public function scopeFilterProyecto($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->where('proyectos.id', $search - 8000);
+        });
+    }
+
     public static function getLog($proyectoId)
     {
         return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->where('type', '!=', 'App\Notifications\EvaluacionFinalizada')->orderBy('created_at', 'DESC')->get();
