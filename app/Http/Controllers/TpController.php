@@ -143,6 +143,8 @@ class TpController extends Controller
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;
 
+        $tp->mostrar_recomendaciones = $tp->proyecto->mostrar_recomendaciones;
+
         if (auth()->user()->hasRole(16)) {
             $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
         } else {
