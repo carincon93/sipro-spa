@@ -230,7 +230,7 @@ class IdiController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
-        if ($idi->proyecto->finalizado) {
+        if ($convocatoria->fase != 1) {
             return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 

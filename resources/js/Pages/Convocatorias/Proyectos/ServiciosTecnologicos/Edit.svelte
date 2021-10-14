@@ -536,7 +536,7 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && convocatoria.fase == 1)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}

@@ -570,7 +570,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if efectoIndirecto.impacto.descripcion != null}
+                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.modificable}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -632,7 +632,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    {#if resultado.descripcion != null}
+                                    {#if resultado.descripcion != null && proyecto.modificable}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -700,7 +700,7 @@
                                     {/if}
                                 </p>
                             </div>
-                            {#if causaDirecta.objetivo_especifico.descripcion != null}
+                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.modificable}
                                 <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                     <div class="flex items-center cursor-pointer select-none group">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -745,7 +745,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if causaIndirecta.actividad.descripcion != null}
+                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.modificable}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -993,7 +993,8 @@
 
 {#if to_pdf}
     <style>
-        nav, button.absolute.bottom-1\.5 {
+        nav,
+        button.absolute.bottom-1\.5 {
             display: none !important;
         }
     </style>

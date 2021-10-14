@@ -284,7 +284,7 @@ class TaController extends Controller
 
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
-        if ($ta->proyecto->finalizado) {
+        if ($convocatoria->fase != 1) {
             return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 
