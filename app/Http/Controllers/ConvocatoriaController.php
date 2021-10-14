@@ -129,6 +129,10 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
+        foreach ($convocatoria->evaluaciones()->get() as $evaluacion) {
+            $evaluacion->update(['estado' => $evaluacion->verificar_estado_evaluacion]);
+        }
+
         $convocatoria->descripcion                              = $request->descripcion;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
@@ -215,6 +219,8 @@ class ConvocatoriaController extends Controller
             $convocatoria->proyectos()->update(['modificable' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         }
+
+        $convocatoria->evaluaciones()->where('estado', 'LIKE', 'Sin evaluar')->update(['habilitado' => false]);
 
         $convocatoria->save();
 
