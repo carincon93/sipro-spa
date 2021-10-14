@@ -178,6 +178,7 @@ class Ta extends Model
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
             $query->where('resumen', 'ilike', '%' . $search . '%');
+            $query->orWhere('ta.id', $search - 8000);
         });
     }
 
