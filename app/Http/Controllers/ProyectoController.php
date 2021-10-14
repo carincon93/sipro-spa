@@ -40,7 +40,7 @@ class ProyectoController extends Controller
     {
         return Inertia::render('Proyectos/Index', [
             'filters'       => request()->all('search'),
-            'proyectos'     => Proyecto::orderBy('id', 'ASC')->paginate()->appends(['search' => request()->search]),
+            'proyectos'     => Proyecto::with('PdfVersiones', 'convocatoria')->orderBy('id', 'ASC')->filterProyecto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
