@@ -311,7 +311,7 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                     {#each ta.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -397,7 +397,7 @@
                 <div>
                     <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} on:input={() => syncColumnLong('resumen_regional', $formResumenRegional)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -435,7 +435,7 @@
                 </div>
                 <div>
                     <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$formAntecedentesTA.antecedentes_tecnoacademia} on:input={() => syncColumnLong('antecedentes_tecnoacademia', $formAntecedentesTA)} required />
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -471,7 +471,7 @@
                 <div>
                     <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} on:input={() => syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -540,7 +540,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div />
                 <div>
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -628,7 +628,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div />
                 <div>
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -695,7 +695,7 @@
                 <div>
                     <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$formProyectosMacro.proyectos_macro} on:input={() => syncColumnLong('proyectos_macro', $formProyectosMacro)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -720,7 +720,7 @@
                 <div>
                     <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$formLineasMedularesCentro.lineas_medulares_centro} on:input={() => syncColumnLong('lineas_medulares_centro', $formLineasMedularesCentro)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -745,7 +745,7 @@
                 <div>
                     <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$formLineasTecnologicasCentro.lineas_tecnologicas_centro} on:input={() => syncColumnLong('lineas_tecnologicas_centro', $formLineasTecnologicasCentro)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -771,7 +771,7 @@
                 <div>
                     <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                         {#each ta.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -789,7 +789,7 @@
                 </div>
             </div>
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -807,7 +807,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each ta.proyecto.evaluaciones as evaluacion, i}
@@ -825,7 +825,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each ta.proyecto.evaluaciones as evaluacion, i}

@@ -38,7 +38,7 @@
                 Se debe establecer un riesgo por cada nivel (A nivel de objetivo general - A nivel de actividades - A nivel de productos). Estos riesgos podrán ser clasificados conforme los siguientes tipos: mercados, operacionales, legales, administrativos.
             </p>
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                 {#each proyecto.evaluaciones as evaluacion, i}
                     {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

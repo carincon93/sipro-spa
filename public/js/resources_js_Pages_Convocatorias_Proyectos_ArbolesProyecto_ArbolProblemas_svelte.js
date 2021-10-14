@@ -7631,10 +7631,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "#main-menu-dialog .mdc-dialog__surface
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -30093,10 +30093,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -30106,7 +30106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_6_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./ArbolProblemas.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_82_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./ArbolProblemas.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte");
 
             
 
@@ -30115,11 +30115,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_6_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_82_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_6_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_82_css_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -44061,7 +44061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _popperjs_core__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/popper.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_6_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_6_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.6.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_82_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte_82_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_ArbolesProyecto_ArbolProblemas_svelte__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte.82.css!./resources/js/Pages/Convocatorias/Proyectos/ArbolesProyecto/ArbolProblemas.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Pages\Convocatorias\Proyectos\ArbolesProyecto\ArbolProblemas.svelte generated by Svelte v3.38.3 */
 
@@ -44200,7 +44200,7 @@ function create_if_block_33(ctx) {
 	};
 }
 
-// (418:4) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (418:4) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_26(ctx) {
 	let each_1_anchor;
 	let each_value_11 = /*proyecto*/ ctx[3].evaluaciones;
@@ -47967,7 +47967,7 @@ function create_default_slot(ctx) {
 	let mounted;
 	let dispose;
 	let if_block0 = !/*to_pdf*/ ctx[1] && create_if_block_33(ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[27] || /*convocatoria*/ ctx[2].mostrar_recomendaciones) && create_if_block_26(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[27] || /*proyecto*/ ctx[3].mostrar_recomendaciones) && create_if_block_26(ctx);
 	let each_value_10 = { length: /*causasDirectasCount*/ ctx[18] };
 	let each_blocks_2 = [];
 
@@ -48165,7 +48165,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", h1_class_value);
 			}
 
-			if (/*isSuperAdmin*/ ctx[27] || /*convocatoria*/ ctx[2].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[27] || /*proyecto*/ ctx[3].mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
@@ -48360,7 +48360,7 @@ function create_if_block(ctx) {
 	return {
 		c() {
 			style = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("style");
-			style.textContent = "nav, button.absolute.bottom-1\\.5 {\r\n            display: none !important;\r\n        }";
+			style.textContent = "nav,\r\n        button.absolute.bottom-1\\.5 {\r\n            display: none !important;\r\n        }";
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, style, anchor);
@@ -48403,7 +48403,7 @@ function create_fragment(ctx) {
 		p(ctx, dirty) {
 			const authenticatedlayout_changes = {};
 
-			if (dirty[0] & /*dialogOpen, sending, formId, proyecto, errors, $formCausaIndirecta, showCausaIndirectaForm, $formCausaDirecta, showCausaDirectaForm, $formEfectoIndirecto, showEfectoIndirectoForm, $formProblemaCentral, showProblemaCentralForm, $formEfectoDirecto, showEfectoDirectoForm, codigo, dialogTitle, containerArbol, causasDirectas, cantidadCeldasCausasIndirectas, containerCausaDirecta, efectosDirectos, cantidadCeldasEfectosIndirectos, causasDirectasCount, convocatoria, to_pdf*/ 67108863 | dirty[2] & /*$$scope*/ 67108864) {
+			if (dirty[0] & /*dialogOpen, sending, formId, proyecto, errors, $formCausaIndirecta, showCausaIndirectaForm, $formCausaDirecta, showCausaDirectaForm, $formEfectoIndirecto, showEfectoIndirectoForm, $formProblemaCentral, showProblemaCentralForm, $formEfectoDirecto, showEfectoDirectoForm, codigo, dialogTitle, containerArbol, causasDirectas, cantidadCeldasCausasIndirectas, containerCausaDirecta, efectosDirectos, cantidadCeldasEfectosIndirectos, causasDirectasCount, to_pdf, convocatoria*/ 67108863 | dirty[2] & /*$$scope*/ 67108864) {
 				authenticatedlayout_changes.$$scope = { dirty, ctx };
 			}
 

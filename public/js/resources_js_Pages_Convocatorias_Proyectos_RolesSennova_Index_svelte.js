@@ -55477,7 +55477,7 @@ function create_actions_slot(ctx) {
 	};
 }
 
-// (136:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (136:16) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let th;
 
@@ -55508,7 +55508,7 @@ function create_thead_slot(ctx) {
 	let t5;
 	let t6;
 	let th3;
-	let if_block = (/*isSuperAdmin*/ ctx[7] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[7] || /*proyecto*/ ctx[2].mostrar_recomendaciones) && create_if_block_4(ctx);
 
 	return {
 		c() {
@@ -55548,7 +55548,7 @@ function create_thead_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(tr, th3);
 		},
 		p(ctx, dirty) {
-			if (/*isSuperAdmin*/ ctx[7] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[7] || /*proyecto*/ ctx[2].mostrar_recomendaciones) {
 				if (if_block) {
 					
 				} else {
@@ -55568,7 +55568,7 @@ function create_thead_slot(ctx) {
 	};
 }
 
-// (161:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (161:20) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_2(ctx) {
 	let td;
 	let div;
@@ -55937,7 +55937,7 @@ function create_each_block(key_1, ctx) {
 	let td3;
 	let datatablemenu;
 	let current;
-	let if_block = (/*isSuperAdmin*/ ctx[7] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_2(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[7] || /*proyecto*/ ctx[2].mostrar_recomendaciones) && create_if_block_2(ctx);
 
 	datatablemenu = new _Shared_DataTableMenu__WEBPACK_IMPORTED_MODULE_7__.default({
 			props: {
@@ -56011,7 +56011,7 @@ function create_each_block(key_1, ctx) {
 			? /*proyectoRolSennova*/ ctx[17]?.convocatoria_rol_sennova?.asignacion_mensual
 			: 0) + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t5, t5_value);
 
-			if (/*isSuperAdmin*/ ctx[7] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[7] || /*proyecto*/ ctx[2].mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {

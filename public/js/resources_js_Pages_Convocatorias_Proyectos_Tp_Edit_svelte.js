@@ -48269,7 +48269,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (201:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (201:16) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_22(ctx) {
 	let each_1_anchor;
 	let each_value_10 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -48432,7 +48432,7 @@ function create_each_block_10(ctx) {
 	};
 }
 
-// (264:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (264:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_20(ctx) {
 	let each_1_anchor;
 	let each_value_9 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -48595,7 +48595,7 @@ function create_each_block_9(ctx) {
 	};
 }
 
-// (303:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (303:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_18(ctx) {
 	let each_1_anchor;
 	let each_value_8 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -48758,7 +48758,7 @@ function create_each_block_8(ctx) {
 	};
 }
 
-// (328:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (328:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_16(ctx) {
 	let each_1_anchor;
 	let each_value_7 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -48921,7 +48921,7 @@ function create_each_block_7(ctx) {
 	};
 }
 
-// (353:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (353:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_14(ctx) {
 	let each_1_anchor;
 	let each_value_6 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -49084,7 +49084,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (404:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (404:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_12(ctx) {
 	let each_1_anchor;
 	let each_value_5 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -49247,7 +49247,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (429:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (429:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_10(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -49410,7 +49410,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (455:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (455:20) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_8(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*tp*/ ctx[2].proyecto.evaluaciones;
@@ -49573,7 +49573,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (473:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (473:12) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let hr;
 	let t0;
@@ -49756,7 +49756,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (491:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (491:12) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -49939,7 +49939,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (509:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (509:12) {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -50897,7 +50897,7 @@ function create_default_slot(ctx) {
 		});
 
 	let if_block0 = (/*errors*/ ctx[0].fecha_inicio || /*errors*/ ctx[0].fecha_finalizacion || /*errors*/ ctx[0].max_meses_ejecucion) && create_if_block_24(ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_22(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_22(ctx);
 
 	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51027,7 +51027,7 @@ function create_default_slot(ctx) {
 	textarea1 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea1, "value", textarea1_value_binding));
 	textarea1.$on("input", /*input_handler_1*/ ctx[45]);
-	let if_block2 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_20(ctx);
+	let if_block2 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_20(ctx);
 
 	label7 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51091,7 +51091,7 @@ function create_default_slot(ctx) {
 	textarea3 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea3, "value", textarea3_value_binding));
 	textarea3.$on("input", /*input_handler_3*/ ctx[49]);
-	let if_block3 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_18(ctx);
+	let if_block3 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_18(ctx);
 
 	label9 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51120,7 +51120,7 @@ function create_default_slot(ctx) {
 	textarea4 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea4_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea4, "value", textarea4_value_binding));
 	textarea4.$on("input", /*input_handler_4*/ ctx[51]);
-	let if_block4 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_16(ctx);
+	let if_block4 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_16(ctx);
 
 	label10 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51149,7 +51149,7 @@ function create_default_slot(ctx) {
 	textarea5 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea5_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea5, "value", textarea5_value_binding));
 	textarea5.$on("input", /*input_handler_5*/ ctx[53]);
-	let if_block5 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_14(ctx);
+	let if_block5 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_14(ctx);
 
 	label11 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51243,7 +51243,7 @@ function create_default_slot(ctx) {
 	textarea7 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea7_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea7, "value", textarea7_value_binding));
 	textarea7.$on("input", /*input_handler_7*/ ctx[58]);
-	let if_block6 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_12(ctx);
+	let if_block6 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_12(ctx);
 
 	label14 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51272,7 +51272,7 @@ function create_default_slot(ctx) {
 	textarea8 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea8_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea8, "value", textarea8_value_binding));
 	textarea8.$on("input", /*input_handler_8*/ ctx[60]);
-	let if_block7 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_10(ctx);
+	let if_block7 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_10(ctx);
 
 	label15 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51307,10 +51307,10 @@ function create_default_slot(ctx) {
 	textarea9 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_13__.default({ props: textarea9_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea9, "value", textarea9_value_binding));
 	textarea9.$on("input", /*input_handler_9*/ ctx[62]);
-	let if_block8 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_8(ctx);
-	let if_block9 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
-	let if_block10 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_4(ctx);
-	let if_block11 = (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_2(ctx);
+	let if_block8 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_8(ctx);
+	let if_block9 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block10 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block11 = (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_2(ctx);
 	let if_block12 = show_if_1 && create_if_block_1(ctx);
 	let if_block13 = show_if && create_if_block(ctx);
 
@@ -51854,7 +51854,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
@@ -51910,7 +51910,7 @@ function create_default_slot(ctx) {
 
 			textarea1.$set(textarea1_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
@@ -51944,7 +51944,7 @@ function create_default_slot(ctx) {
 
 			textarea3.$set(textarea3_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 				} else {
@@ -51968,7 +51968,7 @@ function create_default_slot(ctx) {
 
 			textarea4.$set(textarea4_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {
@@ -51992,7 +51992,7 @@ function create_default_slot(ctx) {
 
 			textarea5.$set(textarea5_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
@@ -52037,7 +52037,7 @@ function create_default_slot(ctx) {
 
 			textarea7.$set(textarea7_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
@@ -52061,7 +52061,7 @@ function create_default_slot(ctx) {
 
 			textarea8.$set(textarea8_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block7) {
 					if_block7.p(ctx, dirty);
 				} else {
@@ -52085,7 +52085,7 @@ function create_default_slot(ctx) {
 
 			textarea9.$set(textarea9_changes);
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {
@@ -52098,7 +52098,7 @@ function create_default_slot(ctx) {
 				if_block8 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block9) {
 					if_block9.p(ctx, dirty);
 				} else {
@@ -52111,7 +52111,7 @@ function create_default_slot(ctx) {
 				if_block9 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block10) {
 					if_block10.p(ctx, dirty);
 				} else {
@@ -52124,7 +52124,7 @@ function create_default_slot(ctx) {
 				if_block10 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[20] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[20] || /*tp*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block11) {
 					if_block11.p(ctx, dirty);
 				} else {

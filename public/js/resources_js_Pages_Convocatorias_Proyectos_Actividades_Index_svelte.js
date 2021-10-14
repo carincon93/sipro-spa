@@ -55540,7 +55540,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (75:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (75:12) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_11(ctx) {
 	let each_1_anchor;
 	let each_value_2 = /*proyecto*/ ctx[1].evaluaciones;
@@ -56050,7 +56050,7 @@ function create_default_slot_8(ctx) {
 // (130:4) {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
 function create_if_block_5(ctx) {
 	let if_block_anchor;
-	let if_block = (/*isSuperAdmin*/ ctx[10] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[10] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
 
 	return {
 		c() {
@@ -56062,7 +56062,7 @@ function create_if_block_5(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (/*isSuperAdmin*/ ctx[10] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[10] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
@@ -56082,7 +56082,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (131:8) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (131:8) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*proyecto*/ ctx[1].evaluaciones;
@@ -57220,7 +57220,7 @@ function create_default_slot(ctx) {
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_11__.default({ props: textarea_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding));
 	let if_block0 = (/*proyecto*/ ctx[1].codigo_linea_programatica == 69 || /*proyecto*/ ctx[1].codigo_linea_programatica == 70) && create_if_block_18(ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[10] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_11(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[10] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_11(ctx);
 	let if_block2 = show_if && create_if_block_10(ctx);
 
 	infomessage1 = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_9__.default({
@@ -57381,7 +57381,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[10] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[10] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {

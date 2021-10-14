@@ -51016,7 +51016,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (93:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (93:12) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*proyecto*/ ctx[3].evaluaciones;
@@ -51461,7 +51461,7 @@ function create_each_block_1(ctx) {
 // (92:8) 
 function create_caption_slot(ctx) {
 	let div;
-	let if_block = (/*isSuperAdmin*/ ctx[8] || /*convocatoria*/ ctx[2].mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[8] || /*proyecto*/ ctx[3].mostrar_recomendaciones) && create_if_block_4(ctx);
 
 	return {
 		c() {
@@ -51474,7 +51474,7 @@ function create_caption_slot(ctx) {
 			if (if_block) if_block.m(div, null);
 		},
 		p(ctx, dirty) {
-			if (/*isSuperAdmin*/ ctx[8] || /*convocatoria*/ ctx[2].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[8] || /*proyecto*/ ctx[3].mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {

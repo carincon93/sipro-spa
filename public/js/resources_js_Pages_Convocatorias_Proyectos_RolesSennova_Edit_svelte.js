@@ -48287,7 +48287,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (131:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (131:12) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let each_value = /*proyectoRolSennova*/ ctx[4].proyecto_roles_evaluaciones;
@@ -48745,7 +48745,7 @@ function create_default_slot(ctx) {
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding_1));
 	let if_block2 = show_if_1 && create_if_block_4(ctx);
 	let if_block3 = show_if && create_if_block_3(ctx);
-	let if_block4 = (/*isSuperAdmin*/ ctx[11] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_1(ctx);
+	let if_block4 = (/*isSuperAdmin*/ ctx[11] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_1(ctx);
 
 	function dialog_open_binding(value) {
 		/*dialog_open_binding*/ ctx[23](value);
@@ -48805,7 +48805,7 @@ function create_default_slot(ctx) {
 			: true;
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "bg-white rounded shadow max-w-3xl");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "bg-white rounded shadow max-w-3xl flex-1");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "ml-1.5");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "flex");
 		},
@@ -48973,7 +48973,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[11] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[11] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {

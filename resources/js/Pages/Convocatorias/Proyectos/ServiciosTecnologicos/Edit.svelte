@@ -153,7 +153,7 @@
                 />
                 <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -197,7 +197,7 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -272,7 +272,7 @@
                 <div>
                     <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -306,7 +306,7 @@
                 <div>
                     <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -336,7 +336,7 @@
                 <div>
                     <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} on:input={() => syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -374,7 +374,7 @@
                 <div>
                     <Textarea label="Pregunta formulación del problema" sinContador={true} id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -408,7 +408,7 @@
                 </div>
                 <div>
                     <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -463,7 +463,7 @@
                 <div>
                     <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -481,7 +481,7 @@
                 </div>
             </div>
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -499,7 +499,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
@@ -517,7 +517,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}

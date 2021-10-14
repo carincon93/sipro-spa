@@ -50348,7 +50348,7 @@ function create_actions_slot(ctx) {
 	};
 }
 
-// (240:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (240:16) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let th;
 
@@ -50377,7 +50377,7 @@ function create_thead_slot(ctx) {
 	let t3;
 	let t4;
 	let th2;
-	let if_block = (/*isSuperAdmin*/ ctx[6] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[6] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
 
 	return {
 		c() {
@@ -50411,7 +50411,7 @@ function create_thead_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(tr, th2);
 		},
 		p(ctx, dirty) {
-			if (/*isSuperAdmin*/ ctx[6] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[6] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block) {
 					
 				} else {
@@ -50450,7 +50450,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (280:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (280:20) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_3(ctx) {
 	let td;
 	let div;
@@ -50980,7 +50980,7 @@ function create_each_block(key_1, ctx) {
 	let datatablemenu;
 	let current;
 	let if_block0 = !/*presupuesto*/ ctx[14].convocatoria_presupuesto?.presupuesto_sennova?.sumar_al_presupuesto && create_if_block_5(ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[6] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_3(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[6] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_3(ctx);
 
 	datatablemenu = new _Shared_DataTableMenu__WEBPACK_IMPORTED_MODULE_9__.default({
 			props: {
@@ -51099,7 +51099,7 @@ function create_each_block(key_1, ctx) {
 				if_block0 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[6] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[6] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {

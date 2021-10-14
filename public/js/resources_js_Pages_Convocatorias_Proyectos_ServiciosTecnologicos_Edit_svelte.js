@@ -48244,7 +48244,7 @@ function get_each_context_10(ctx, list, i) {
 	return child_ctx;
 }
 
-// (156:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (156:16) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_25(ctx) {
 	let each_1_anchor;
 	let each_value_10 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -48490,7 +48490,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (200:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (200:16) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_22(ctx) {
 	let each_1_anchor;
 	let each_value_9 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -48765,7 +48765,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (275:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (275:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_19(ctx) {
 	let each_1_anchor;
 	let each_value_8 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -48951,7 +48951,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (309:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (309:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_17(ctx) {
 	let each_1_anchor;
 	let each_value_7 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -49114,7 +49114,7 @@ function create_each_block_7(ctx) {
 	};
 }
 
-// (339:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (339:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_15(ctx) {
 	let each_1_anchor;
 	let each_value_6 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -49342,7 +49342,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (377:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (377:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_13(ctx) {
 	let each_1_anchor;
 	let each_value_5 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -49551,7 +49551,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (411:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (411:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_11(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -49757,7 +49757,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (466:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (466:20) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_8(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*servicioTecnologico*/ ctx[2].proyecto.evaluaciones;
@@ -49920,7 +49920,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (484:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (484:12) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let hr;
 	let t0;
@@ -50103,7 +50103,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (502:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (502:12) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -50286,7 +50286,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (520:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (520:12) {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -51218,7 +51218,7 @@ function create_default_slot(ctx) {
 
 	textarea0 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea0, "value", textarea0_value_binding));
-	let if_block0 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_25(ctx);
+	let if_block0 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_25(ctx);
 
 	infomessage0 = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_15__.default({
 			props: {
@@ -51248,7 +51248,7 @@ function create_default_slot(ctx) {
 		});
 
 	let if_block1 = (/*errors*/ ctx[0].fecha_inicio || /*errors*/ ctx[0].fecha_finalizacion || /*errors*/ ctx[0].max_meses_ejecucion) && create_if_block_24(ctx);
-	let if_block2 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_22(ctx);
+	let if_block2 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_22(ctx);
 
 	label3 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51373,7 +51373,7 @@ function create_default_slot(ctx) {
 	textarea1 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea1, "value", textarea1_value_binding));
 	textarea1.$on("input", /*input_handler*/ ctx[40]);
-	let if_block4 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_19(ctx);
+	let if_block4 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_19(ctx);
 
 	label7 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51410,7 +51410,7 @@ function create_default_slot(ctx) {
 	textarea2 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea2, "value", textarea2_value_binding));
 	textarea2.$on("input", /*input_handler_1*/ ctx[42]);
-	let if_block5 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_17(ctx);
+	let if_block5 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_17(ctx);
 
 	label8 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51447,7 +51447,7 @@ function create_default_slot(ctx) {
 	textarea3 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea3, "value", textarea3_value_binding));
 	textarea3.$on("input", /*input_handler_2*/ ctx[44]);
-	let if_block6 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_15(ctx);
+	let if_block6 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_15(ctx);
 
 	label9 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51484,7 +51484,7 @@ function create_default_slot(ctx) {
 
 	textarea4 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea4_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea4, "value", textarea4_value_binding));
-	let if_block7 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_13(ctx);
+	let if_block7 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_13(ctx);
 
 	label10 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51522,7 +51522,7 @@ function create_default_slot(ctx) {
 	textarea5 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea5_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea5, "value", textarea5_value_binding));
 	textarea5.$on("input", /*input_handler_3*/ ctx[47]);
-	let if_block8 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_11(ctx);
+	let if_block8 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_11(ctx);
 
 	label11 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -51618,10 +51618,10 @@ function create_default_slot(ctx) {
 	textarea6 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea6_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea6, "value", textarea6_value_binding));
 	textarea6.$on("input", /*input_handler_5*/ ctx[52]);
-	let if_block10 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_8(ctx);
-	let if_block11 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
-	let if_block12 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_4(ctx);
-	let if_block13 = (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_2(ctx);
+	let if_block10 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_8(ctx);
+	let if_block11 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block12 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block13 = (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_2(ctx);
 	let if_block14 = show_if_1 && create_if_block_1(ctx);
 	let if_block15 = show_if && create_if_block(ctx);
 
@@ -52069,7 +52069,7 @@ function create_default_slot(ctx) {
 
 			textarea0.$set(textarea0_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -52154,7 +52154,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
@@ -52241,7 +52241,7 @@ function create_default_slot(ctx) {
 
 			textarea1.$set(textarea1_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {
@@ -52272,7 +52272,7 @@ function create_default_slot(ctx) {
 
 			textarea2.$set(textarea2_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
@@ -52296,7 +52296,7 @@ function create_default_slot(ctx) {
 
 			textarea3.$set(textarea3_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
@@ -52327,7 +52327,7 @@ function create_default_slot(ctx) {
 
 			textarea4.$set(textarea4_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block7) {
 					if_block7.p(ctx, dirty);
 				} else {
@@ -52358,7 +52358,7 @@ function create_default_slot(ctx) {
 
 			textarea5.$set(textarea5_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {
@@ -52417,7 +52417,7 @@ function create_default_slot(ctx) {
 
 			textarea6.$set(textarea6_changes);
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block10) {
 					if_block10.p(ctx, dirty);
 				} else {
@@ -52430,7 +52430,7 @@ function create_default_slot(ctx) {
 				if_block10 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block11) {
 					if_block11.p(ctx, dirty);
 				} else {
@@ -52443,7 +52443,7 @@ function create_default_slot(ctx) {
 				if_block11 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block12) {
 					if_block12.p(ctx, dirty);
 				} else {
@@ -52456,7 +52456,7 @@ function create_default_slot(ctx) {
 				if_block12 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[18] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[18] || /*servicioTecnologico*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block13) {
 					if_block13.p(ctx, dirty);
 				} else {

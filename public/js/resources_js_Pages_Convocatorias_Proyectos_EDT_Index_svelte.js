@@ -49238,7 +49238,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (42:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (42:12) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let each_value_1 = /*proyecto*/ ctx[1].evaluaciones;
@@ -49450,7 +49450,7 @@ function create_caption_slot(ctx) {
 
 	current_block_type_index = select_block_type_1(ctx, -1);
 	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[4] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) && create_if_block_3(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[4] || /*proyecto*/ ctx[1].mostrar_recomendaciones) && create_if_block_3(ctx);
 
 	return {
 		c() {
@@ -49492,7 +49492,7 @@ function create_caption_slot(ctx) {
 				if_block0.m(div, t);
 			}
 
-			if (/*isSuperAdmin*/ ctx[4] || /*convocatoria*/ ctx[0].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[4] || /*proyecto*/ ctx[1].mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {

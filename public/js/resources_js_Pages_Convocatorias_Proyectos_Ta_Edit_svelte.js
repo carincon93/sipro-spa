@@ -7817,9 +7817,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "#main-menu-dialog .mdc-dialog__surface
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -30585,9 +30585,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
+/***/ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
+  !*** ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte ***!
   \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -30598,7 +30598,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_55_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./Edit.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_84_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../../../../node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./Edit.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
 
             
 
@@ -30607,11 +30607,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_55_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_84_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_55_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_84_css_Edit_svelte__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -48323,7 +48323,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var C_laragon_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_55_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_55_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.55.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
+/* harmony import */ var C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_84_css_svelte_loader_cssPath_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte_84_css_C_laragon_www_sipro_spa_resources_js_Pages_Convocatorias_Proyectos_Ta_Edit_svelte__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!=!svelte-loader?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte */ "./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!=!./node_modules/svelte-loader/index.js?cssPath=C:/laragon/www/sipro-spa/resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte.84.css!./resources/js/Pages/Convocatorias/Proyectos/Ta/Edit.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Pages\Convocatorias\Proyectos\Ta\Edit.svelte generated by Svelte v3.38.3 */
 
@@ -48524,7 +48524,7 @@ function create_if_block_32(ctx) {
 	};
 }
 
-// (314:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (314:16) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_30(ctx) {
 	let each_1_anchor;
 	let each_value_12 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -48841,7 +48841,7 @@ function create_if_block_29(ctx) {
 	};
 }
 
-// (400:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (400:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_26(ctx) {
 	let each_1_anchor;
 	let each_value_11 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -49004,7 +49004,7 @@ function create_each_block_11(ctx) {
 	};
 }
 
-// (438:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (438:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_24(ctx) {
 	let each_1_anchor;
 	let each_value_10 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -49167,7 +49167,7 @@ function create_each_block_10(ctx) {
 	};
 }
 
-// (474:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (474:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_22(ctx) {
 	let each_1_anchor;
 	let each_value_9 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -49330,7 +49330,7 @@ function create_each_block_9(ctx) {
 	};
 }
 
-// (543:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (543:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_20(ctx) {
 	let each_1_anchor;
 	let each_value_8 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -49930,7 +49930,7 @@ function create_default_slot_14(ctx) {
 	};
 }
 
-// (631:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (631:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_16(ctx) {
 	let each_1_anchor;
 	let each_value_7 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -50299,7 +50299,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (698:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (698:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_14(ctx) {
 	let each_1_anchor;
 	let each_value_6 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -50462,7 +50462,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (723:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (723:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_12(ctx) {
 	let each_1_anchor;
 	let each_value_5 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -50625,7 +50625,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (748:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (748:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_10(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -50788,7 +50788,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (774:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (774:20) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_8(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*ta*/ ctx[2].proyecto.evaluaciones;
@@ -50951,7 +50951,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (792:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (792:12) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let hr;
 	let t0;
@@ -51134,7 +51134,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (810:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (810:12) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -51317,7 +51317,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (828:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (828:12) {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -52999,7 +52999,7 @@ function create_default_slot(ctx) {
 		});
 
 	let if_block0 = (/*errors*/ ctx[0].fecha_inicio || /*errors*/ ctx[0].fecha_finalizacion || /*errors*/ ctx[0].max_meses_ejecucion) && create_if_block_32(ctx);
-	let if_block1 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_30(ctx);
+	let if_block1 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_30(ctx);
 
 	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53131,7 +53131,7 @@ function create_default_slot(ctx) {
 	textarea1 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea1, "value", textarea1_value_binding));
 	textarea1.$on("input", /*input_handler_1*/ ctx[79]);
-	let if_block3 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_26(ctx);
+	let if_block3 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_26(ctx);
 
 	label7 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53195,7 +53195,7 @@ function create_default_slot(ctx) {
 	textarea3 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea3, "value", textarea3_value_binding));
 	textarea3.$on("input", /*input_handler_3*/ ctx[83]);
-	let if_block4 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_24(ctx);
+	let if_block4 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_24(ctx);
 
 	label9 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53253,7 +53253,7 @@ function create_default_slot(ctx) {
 	textarea5 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea5_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea5, "value", textarea5_value_binding));
 	textarea5.$on("input", /*input_handler_5*/ ctx[87]);
-	let if_block5 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_22(ctx);
+	let if_block5 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_22(ctx);
 
 	label11 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53405,7 +53405,7 @@ function create_default_slot(ctx) {
 	textarea8 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea8_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea8, "value", textarea8_value_binding));
 	textarea8.$on("input", /*input_handler_8*/ ctx[95]);
-	let if_block6 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_20(ctx);
+	let if_block6 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_20(ctx);
 
 	label16 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53537,7 +53537,7 @@ function create_default_slot(ctx) {
 	select3 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_20__.default({ props: select3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select3, "selectedValue", select3_selectedValue_binding));
 	let if_block8 = /*$form*/ ctx[11].proyeccion_articulacion_media?.value == 1 && create_if_block_18(ctx);
-	let if_block9 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_16(ctx);
+	let if_block9 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_16(ctx);
 
 	label19 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53667,7 +53667,7 @@ function create_default_slot(ctx) {
 	textarea11 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea11_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea11, "value", textarea11_value_binding));
 	textarea11.$on("input", /*input_handler_10*/ ctx[114]);
-	let if_block10 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_14(ctx);
+	let if_block10 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_14(ctx);
 
 	label23 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53696,7 +53696,7 @@ function create_default_slot(ctx) {
 	textarea12 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea12_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea12, "value", textarea12_value_binding));
 	textarea12.$on("input", /*input_handler_11*/ ctx[116]);
-	let if_block11 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_12(ctx);
+	let if_block11 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_12(ctx);
 
 	label24 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53725,7 +53725,7 @@ function create_default_slot(ctx) {
 	textarea13 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea13_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea13, "value", textarea13_value_binding));
 	textarea13.$on("input", /*input_handler_12*/ ctx[118]);
-	let if_block12 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_10(ctx);
+	let if_block12 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_10(ctx);
 
 	label25 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -53760,10 +53760,10 @@ function create_default_slot(ctx) {
 	textarea14 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_14__.default({ props: textarea14_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea14, "value", textarea14_value_binding));
 	textarea14.$on("input", /*input_handler_13*/ ctx[120]);
-	let if_block13 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_8(ctx);
-	let if_block14 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
-	let if_block15 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_4(ctx);
-	let if_block16 = (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_2(ctx);
+	let if_block13 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_8(ctx);
+	let if_block14 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block15 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block16 = (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_2(ctx);
 	let if_block17 = show_if_1 && create_if_block_1(ctx);
 	let if_block18 = show_if && create_if_block(ctx);
 
@@ -54563,7 +54563,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
@@ -54643,7 +54643,7 @@ function create_default_slot(ctx) {
 
 			textarea1.$set(textarea1_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 				} else {
@@ -54677,7 +54677,7 @@ function create_default_slot(ctx) {
 
 			textarea3.$set(textarea3_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {
@@ -54711,7 +54711,7 @@ function create_default_slot(ctx) {
 
 			textarea5.$set(textarea5_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
@@ -54777,7 +54777,7 @@ function create_default_slot(ctx) {
 
 			textarea8.$set(textarea8_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
@@ -54896,7 +54896,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block9) {
 					if_block9.p(ctx, dirty);
 				} else {
@@ -54966,7 +54966,7 @@ function create_default_slot(ctx) {
 
 			textarea11.$set(textarea11_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block10) {
 					if_block10.p(ctx, dirty);
 				} else {
@@ -54990,7 +54990,7 @@ function create_default_slot(ctx) {
 
 			textarea12.$set(textarea12_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block11) {
 					if_block11.p(ctx, dirty);
 				} else {
@@ -55014,7 +55014,7 @@ function create_default_slot(ctx) {
 
 			textarea13.$set(textarea13_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block12) {
 					if_block12.p(ctx, dirty);
 				} else {
@@ -55038,7 +55038,7 @@ function create_default_slot(ctx) {
 
 			textarea14.$set(textarea14_changes);
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block13) {
 					if_block13.p(ctx, dirty);
 				} else {
@@ -55051,7 +55051,7 @@ function create_default_slot(ctx) {
 				if_block13 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block14) {
 					if_block14.p(ctx, dirty);
 				} else {
@@ -55064,7 +55064,7 @@ function create_default_slot(ctx) {
 				if_block14 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block15) {
 					if_block15.p(ctx, dirty);
 				} else {
@@ -55077,7 +55077,7 @@ function create_default_slot(ctx) {
 				if_block15 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[40] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[40] || /*ta*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block16) {
 					if_block16.p(ctx, dirty);
 				} else {

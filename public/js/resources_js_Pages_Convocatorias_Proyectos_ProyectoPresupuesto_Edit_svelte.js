@@ -49245,7 +49245,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (239:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (239:16) {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let each_value = /*proyectoPresupuesto*/ ctx[3].proyecto_presupuestos_evaluaciones;
@@ -49907,7 +49907,7 @@ function create_default_slot(ctx) {
 	let if_block5 = show_if_1 && create_if_block_8(ctx);
 	let if_block6 = show_if && create_if_block_6(ctx);
 	let if_block7 = (/*proyectoPresupuesto*/ ctx[3].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*$form*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_5(ctx);
-	let if_block8 = (/*isSuperAdmin*/ ctx[12] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_3(ctx);
+	let if_block8 = (/*isSuperAdmin*/ ctx[12] || /*proyecto*/ ctx[2].mostrar_recomendaciones) && create_if_block_3(ctx);
 	let if_block9 = (/*proyectoPresupuesto*/ ctx[3].convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || /*$form*/ ctx[8].codigo_uso_presupuestal == "020202008005096") && create_if_block_1(ctx);
 
 	function dialog_open_binding(value) {
@@ -50278,7 +50278,7 @@ function create_default_slot(ctx) {
 				if_block7 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[12] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[12] || /*proyecto*/ ctx[2].mostrar_recomendaciones) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {

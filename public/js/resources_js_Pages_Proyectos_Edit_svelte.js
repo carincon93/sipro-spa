@@ -38998,7 +38998,7 @@ function create_if_block_1(ctx) {
 			const loadingbutton_changes = {};
 			if (dirty & /*sending*/ 4) loadingbutton_changes.loading = /*sending*/ ctx[2];
 
-			if (dirty & /*$$scope*/ 16384) {
+			if (dirty & /*$$scope*/ 32768) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -39019,7 +39019,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (90:20) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+// (97:20) <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -39036,9 +39036,9 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (42:0) <AuthenticatedLayout>
+// (43:0) <AuthenticatedLayout>
 function create_default_slot(ctx) {
-	let div5;
+	let div6;
 	let form_1;
 	let fieldset;
 	let div0;
@@ -39082,13 +39082,22 @@ function create_default_slot(ctx) {
 	let inputerror3;
 	let t15;
 	let div4;
+	let label4;
+	let t16;
+	let br4;
+	let t17;
+	let switch4;
+	let updating_checked_4;
+	let t18;
+	let inputerror4;
+	let t19;
+	let div5;
 	let current;
 	let mounted;
 	let dispose;
 
 	label0 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_5__.default({
 			props: {
-				required: true,
 				labelFor: "a_evaluar",
 				value: "¿El proyecto está radicado?",
 				class: "inline-block mb-4"
@@ -39114,7 +39123,6 @@ function create_default_slot(ctx) {
 
 	label1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_5__.default({
 			props: {
-				required: true,
 				labelFor: "modificable",
 				value: "¿El proyecto es modificable?",
 				class: "inline-block mb-4"
@@ -39140,7 +39148,6 @@ function create_default_slot(ctx) {
 
 	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_5__.default({
 			props: {
-				required: true,
 				labelFor: "finalizado",
 				value: "¿El proyecto está finalizado?",
 				class: "inline-block mb-4"
@@ -39166,7 +39173,6 @@ function create_default_slot(ctx) {
 
 	label3 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_5__.default({
 			props: {
-				required: true,
 				labelFor: "radicado",
 				value: "¿El proyecto está radicado?",
 				class: "inline-block mb-4"
@@ -39190,11 +39196,38 @@ function create_default_slot(ctx) {
 			props: { message: /*errors*/ ctx[0].radicado }
 		});
 
+	label4 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_5__.default({
+			props: {
+				labelFor: "mostrar_recomendaciones",
+				value: "¿El formulador puede observar las recomendaciones?",
+				class: "inline-block mb-4"
+			}
+		});
+
+	function switch4_checked_binding(value) {
+		/*switch4_checked_binding*/ ctx[11](value);
+	}
+
+	let switch4_props = {};
+
+	if (/*$form*/ ctx[3].mostrar_recomendaciones !== void 0) {
+		switch4_props.checked = /*$form*/ ctx[3].mostrar_recomendaciones;
+	}
+
+	switch4 = new _Shared_Switch__WEBPACK_IMPORTED_MODULE_8__.default({ props: switch4_props });
+	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(switch4, "checked", switch4_checked_binding));
+
+	inputerror4 = new _Shared_InputError__WEBPACK_IMPORTED_MODULE_6__.default({
+			props: {
+				message: /*errors*/ ctx[0].mostrar_recomendaciones
+			}
+		});
+
 	let if_block = /*isSuperAdmin*/ ctx[4] && create_if_block_1(ctx);
 
 	return {
 		c() {
-			div5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div6 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			form_1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("form");
 			fieldset = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("fieldset");
 			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
@@ -39234,18 +39267,28 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(inputerror3.$$.fragment);
 			t15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			div4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(label4.$$.fragment);
+			t16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			br4 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("br");
+			t17 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(switch4.$$.fragment);
+			t18 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(inputerror4.$$.fragment);
+			t19 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (if_block) if_block.c();
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(fieldset, "class", "p-8");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "bg-white rounded shadow max-w-3xl");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div6, "class", "bg-white rounded shadow max-w-3xl");
 		},
 		m(target, anchor) {
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div5, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div5, form_1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div6, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div6, form_1);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, fieldset);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label0, div0, null);
@@ -39282,9 +39325,18 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch3, div3, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div3, t14);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(inputerror3, div3, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t15);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div4);
-			if (if_block) if_block.m(div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, t15);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(fieldset, div4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(label4, div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, t16);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, br4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, t17);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(switch4, div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div4, t18);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(inputerror4, div4, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, t19);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(form_1, div5);
+			if (if_block) if_block.m(div5, null);
 			current = true;
 
 			if (!mounted) {
@@ -39341,6 +39393,18 @@ function create_default_slot(ctx) {
 			const inputerror3_changes = {};
 			if (dirty & /*errors*/ 1) inputerror3_changes.message = /*errors*/ ctx[0].radicado;
 			inputerror3.$set(inputerror3_changes);
+			const switch4_changes = {};
+
+			if (!updating_checked_4 && dirty & /*$form*/ 8) {
+				updating_checked_4 = true;
+				switch4_changes.checked = /*$form*/ ctx[3].mostrar_recomendaciones;
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_checked_4 = false);
+			}
+
+			switch4.$set(switch4_changes);
+			const inputerror4_changes = {};
+			if (dirty & /*errors*/ 1) inputerror4_changes.message = /*errors*/ ctx[0].mostrar_recomendaciones;
+			inputerror4.$set(inputerror4_changes);
 			if (/*isSuperAdmin*/ ctx[4]) if_block.p(ctx, dirty);
 		},
 		i(local) {
@@ -39357,6 +39421,9 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label3.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch3.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(inputerror3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(label4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(switch4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(inputerror4.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block);
 			current = true;
 		},
@@ -39373,11 +39440,14 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label3.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch3.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(inputerror3.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(label4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(switch4.$$.fragment, local);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(inputerror4.$$.fragment, local);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block);
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div5);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div6);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(inputerror0);
@@ -39390,6 +39460,9 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label3);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch3);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(inputerror3);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(switch4);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(inputerror4);
 			if (if_block) if_block.d();
 			mounted = false;
 			dispose();
@@ -39397,7 +39470,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (47:20) {#if isSuperAdmin}
+// (48:20) {#if isSuperAdmin}
 function create_if_block(ctx) {
 	let a;
 	let t;
@@ -39431,7 +39504,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (43:4) 
+// (44:4) 
 function create_header_slot(ctx) {
 	let header;
 	let div1;
@@ -39509,7 +39582,7 @@ function create_fragment(ctx) {
 		p(ctx, [dirty]) {
 			const authenticatedlayout_changes = {};
 
-			if (dirty & /*$$scope, proyecto, sending, errors, $form*/ 16399) {
+			if (dirty & /*$$scope, proyecto, sending, errors, $form*/ 32783) {
 				authenticatedlayout_changes.$$scope = { dirty, ctx };
 			}
 
@@ -39534,8 +39607,8 @@ function instance($$self, $$props, $$invalidate) {
 	let $title;
 	let $page;
 	let $form;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.title, $$value => $$invalidate(11, $title = $$value));
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.page, $$value => $$invalidate(12, $page = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.title, $$value => $$invalidate(12, $title = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, _inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.page, $$value => $$invalidate(13, $page = $$value));
 	let { errors } = $$props;
 	let { proyecto } = $$props;
 
@@ -39551,7 +39624,8 @@ function instance($$self, $$props, $$invalidate) {
 		a_evaluar: proyecto.a_evaluar,
 		modificable: proyecto.modificable,
 		finalizado: proyecto.finalizado,
-		radicado: proyecto.radicado
+		radicado: proyecto.radicado,
+		mostrar_recomendaciones: proyecto.mostrar_recomendaciones
 	});
 
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(3, $form = value));
@@ -39594,6 +39668,13 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
+	function switch4_checked_binding(value) {
+		if ($$self.$$.not_equal($form.mostrar_recomendaciones, value)) {
+			$form.mostrar_recomendaciones = value;
+			form.set($form);
+		}
+	}
+
 	$$self.$$set = $$props => {
 		if ("errors" in $$props) $$invalidate(0, errors = $$props.errors);
 		if ("proyecto" in $$props) $$invalidate(1, proyecto = $$props.proyecto);
@@ -39616,7 +39697,8 @@ function instance($$self, $$props, $$invalidate) {
 		switch0_checked_binding,
 		switch1_checked_binding,
 		switch2_checked_binding,
-		switch3_checked_binding
+		switch3_checked_binding,
+		switch4_checked_binding
 	];
 }
 

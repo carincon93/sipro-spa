@@ -50942,7 +50942,7 @@ function get_each_context_18(ctx, list, i) {
 	return child_ctx;
 }
 
-// (245:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (245:16) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_43(ctx) {
 	let each_1_anchor;
 	let each_value_18 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -51188,7 +51188,7 @@ function create_if_block_42(ctx) {
 	};
 }
 
-// (289:16) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (289:16) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_40(ctx) {
 	let each_1_anchor;
 	let each_value_17 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -51442,7 +51442,7 @@ function create_if_block_39(ctx) {
 	};
 }
 
-// (342:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (342:20) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_37(ctx) {
 	let each_1_anchor;
 	let each_value_16 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -51605,7 +51605,7 @@ function create_each_block_16(ctx) {
 	};
 }
 
-// (366:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (366:20) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_35(ctx) {
 	let each_1_anchor;
 	let each_value_15 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -51768,7 +51768,7 @@ function create_each_block_15(ctx) {
 	};
 }
 
-// (390:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (390:20) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_33(ctx) {
 	let each_1_anchor;
 	let each_value_14 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -51968,7 +51968,7 @@ function create_if_block_30(ctx) {
 
 	input = new _Shared_Input__WEBPACK_IMPORTED_MODULE_8__.default({ props: input_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input, "value", input_value_binding));
-	let if_block = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_31(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_31(ctx);
 
 	return {
 		c() {
@@ -52001,7 +52001,7 @@ function create_if_block_30(ctx) {
 
 			input.$set(input_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
@@ -52036,7 +52036,7 @@ function create_if_block_30(ctx) {
 	};
 }
 
-// (417:24) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (417:24) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_31(ctx) {
 	let each_1_anchor;
 	let each_value_13 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -52237,7 +52237,7 @@ function create_if_block_27(ctx) {
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_15__.default({ props: textarea_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding));
 	textarea.$on("input", /*input_handler*/ ctx[67]);
-	let if_block = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_28(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_28(ctx);
 
 	return {
 		c() {
@@ -52273,7 +52273,7 @@ function create_if_block_27(ctx) {
 
 			textarea.$set(textarea_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
@@ -52308,7 +52308,7 @@ function create_if_block_27(ctx) {
 	};
 }
 
-// (449:24) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (449:24) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_28(ctx) {
 	let each_1_anchor;
 	let each_value_12 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -52509,7 +52509,7 @@ function create_if_block_24(ctx) {
 	textarea = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_15__.default({ props: textarea_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea, "value", textarea_value_binding_1));
 	textarea.$on("input", /*input_handler_1*/ ctx[70]);
-	let if_block = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_25(ctx);
+	let if_block = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_25(ctx);
 
 	return {
 		c() {
@@ -52545,7 +52545,7 @@ function create_if_block_24(ctx) {
 
 			textarea.$set(textarea_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
@@ -52580,7 +52580,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (488:24) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (488:24) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_25(ctx) {
 	let each_1_anchor;
 	let each_value_11 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -55309,7 +55309,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (804:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (804:20) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_13(ctx) {
 	let each_1_anchor;
 	let each_value_4 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -55601,7 +55601,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (937:20) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (937:20) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_8(ctx) {
 	let each_1_anchor;
 	let each_value_3 = /*culturaInnovacion*/ ctx[2].proyecto.evaluaciones;
@@ -55764,7 +55764,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (955:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (955:12) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_6(ctx) {
 	let hr;
 	let t0;
@@ -55947,7 +55947,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (973:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (973:12) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -56130,7 +56130,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (991:12) {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+// (991:12) {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -57211,7 +57211,7 @@ function create_default_slot(ctx) {
 
 	textarea0 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_15__.default({ props: textarea0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea0, "value", textarea0_value_binding));
-	let if_block0 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_43(ctx);
+	let if_block0 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_43(ctx);
 
 	infomessage0 = new _Shared_InfoMessage__WEBPACK_IMPORTED_MODULE_16__.default({
 			props: {
@@ -57241,7 +57241,7 @@ function create_default_slot(ctx) {
 		});
 
 	let if_block1 = (/*errors*/ ctx[0].fecha_inicio || /*errors*/ ctx[0].fecha_finalizacion || /*errors*/ ctx[0].max_meses_ejecucion) && create_if_block_42(ctx);
-	let if_block2 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_40(ctx);
+	let if_block2 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_40(ctx);
 
 	label3 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -57311,7 +57311,7 @@ function create_default_slot(ctx) {
 
 	dynamiclist1 = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_14__.default({ props: dynamiclist1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(dynamiclist1, "value", dynamiclist1_value_binding));
-	let if_block4 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_37(ctx);
+	let if_block4 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_37(ctx);
 
 	label6 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -57341,7 +57341,7 @@ function create_default_slot(ctx) {
 
 	dynamiclist2 = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_14__.default({ props: dynamiclist2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(dynamiclist2, "value", dynamiclist2_value_binding));
-	let if_block5 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_35(ctx);
+	let if_block5 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_35(ctx);
 
 	label7 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -57370,7 +57370,7 @@ function create_default_slot(ctx) {
 
 	dynamiclist3 = new _Shared_Dropdowns_DynamicList__WEBPACK_IMPORTED_MODULE_14__.default({ props: dynamiclist3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(dynamiclist3, "value", dynamiclist3_value_binding));
-	let if_block6 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_33(ctx);
+	let if_block6 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_33(ctx);
 
 	label8 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -57711,7 +57711,7 @@ function create_default_slot(ctx) {
 	textarea1 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_15__.default({ props: textarea1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea1, "value", textarea1_value_binding));
 	textarea1.$on("input", /*input_handler_3*/ ctx[98]);
-	let if_block14 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_13(ctx);
+	let if_block14 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_13(ctx);
 
 	label18 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_10__.default({
 			props: {
@@ -57998,10 +57998,10 @@ function create_default_slot(ctx) {
 	textarea6 = new _Shared_Textarea__WEBPACK_IMPORTED_MODULE_15__.default({ props: textarea6_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(textarea6, "value", textarea6_value_binding));
 	textarea6.$on("input", /*input_handler_8*/ ctx[112]);
-	let if_block18 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_8(ctx);
-	let if_block19 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_6(ctx);
-	let if_block20 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_4(ctx);
-	let if_block21 = (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) && create_if_block_2(ctx);
+	let if_block18 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_8(ctx);
+	let if_block19 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_6(ctx);
+	let if_block20 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_4(ctx);
+	let if_block21 = (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) && create_if_block_2(ctx);
 	let if_block22 = show_if_1 && create_if_block_1(ctx);
 	let if_block23 = show_if && create_if_block(ctx);
 
@@ -58737,7 +58737,7 @@ function create_default_slot(ctx) {
 
 			textarea0.$set(textarea0_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -58822,7 +58822,7 @@ function create_default_slot(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
@@ -58881,7 +58881,7 @@ function create_default_slot(ctx) {
 
 			dynamiclist1.$set(dynamiclist1_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {
@@ -58905,7 +58905,7 @@ function create_default_slot(ctx) {
 
 			dynamiclist2.$set(dynamiclist2_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
@@ -58929,7 +58929,7 @@ function create_default_slot(ctx) {
 
 			dynamiclist3.$set(dynamiclist3_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
@@ -59256,7 +59256,7 @@ function create_default_slot(ctx) {
 
 			textarea1.$set(textarea1_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block14) {
 					if_block14.p(ctx, dirty);
 				} else {
@@ -59405,7 +59405,7 @@ function create_default_slot(ctx) {
 
 			textarea6.$set(textarea6_changes);
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block18) {
 					if_block18.p(ctx, dirty);
 				} else {
@@ -59418,7 +59418,7 @@ function create_default_slot(ctx) {
 				if_block18 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block19) {
 					if_block19.p(ctx, dirty);
 				} else {
@@ -59431,7 +59431,7 @@ function create_default_slot(ctx) {
 				if_block19 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block20) {
 					if_block20.p(ctx, dirty);
 				} else {
@@ -59444,7 +59444,7 @@ function create_default_slot(ctx) {
 				if_block20 = null;
 			}
 
-			if (/*isSuperAdmin*/ ctx[29] || /*convocatoria*/ ctx[1].mostrar_recomendaciones) {
+			if (/*isSuperAdmin*/ ctx[29] || /*culturaInnovacion*/ ctx[2].proyecto.mostrar_recomendaciones) {
 				if (if_block21) {
 					if_block21.p(ctx, dirty);
 				} else {
