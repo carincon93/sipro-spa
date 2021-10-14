@@ -143,30 +143,18 @@
             <figure>
                 <img src={window.basePath + '/images/megaphone.png'} alt="Megafono" />
             </figure>
-            Anuncios
+            Anuncio: Fase de subsanación
         </div>
         <div slot="content">
-            <small>Agosto 2</small>
-            <div>
-                <h1 class="text-purple-200 mb-4">Manual de usuario</h1>
+            <small>Octubre 14</small>
 
-                <p>Antes de empezar la formulación descargue el manual de usuario.</p>
-                <a target="_blank" class="text-white underline inline-block mb-4 flex" download href={route('manual-usuario.download')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Manual de usuario
-                </a>
+            <hr class="mt-10 mb-10" />
+            <div>
+                <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
             </div>
             <hr class="mt-10 mb-10" />
             <div>
-                <h1 class="text-purple-200 mb-4">Usuarios del curso de estructuración de proyectos</h1>
-                <p>Si usted es una de las personas que realizó el curso de estructuración de proyectos y su usuario requiere un rol diferente al de Proponente I+D+i por favor escriba al correo ccvasquez@sena.edu.co solicitando cambio de rol.</p>
-            </div>
-            <hr class="mt-10 mb-10" />
-            <div>
-                <h1 class="text-purple-200 mb-4">Reportar errores</h1>
-                <p>Si desea notificar un error diríjase a la opción <strong>Soporte</strong> dando clic en su nombre de usuario ubicado en la parte superior derecha.</p>
+                <p>El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
             </div>
         </div>
         <div slot="actions">
