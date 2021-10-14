@@ -151,6 +151,8 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
         $servicioTecnologico->proyecto->centroFormacion;
 
+        $servicioTecnologico->mostrar_recomendaciones = $servicioTecnologico->proyecto->mostrar_recomendaciones;
+
         if (auth()->user()->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)

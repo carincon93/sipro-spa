@@ -149,6 +149,7 @@ class IdiController extends Controller
 
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;
+        $idi->mostrar_recomendaciones = $idi->proyecto->mostrar_recomendaciones;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi', 'mostrar_recomendaciones'),
