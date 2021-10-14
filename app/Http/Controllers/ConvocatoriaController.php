@@ -129,6 +129,10 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
+        foreach ($convocatoria->evaluaciones()->get() as $evaluacion) {
+            $evaluacion->update(['estado' => $evaluacion->verificar_estado_evaluacion]);
+        }
+
         $convocatoria->descripcion                              = $request->descripcion;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
@@ -164,7 +168,7 @@ class ConvocatoriaController extends Controller
                 switch ($proyecto) {
                     case $proyecto->estado_evaluacion_idi != null:
                         if (json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi, 'mostrar_recomendaciones' => true]);
                         } else {
                             $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
                         }
@@ -172,7 +176,7 @@ class ConvocatoriaController extends Controller
 
                     case $proyecto->estado_evaluacion_cultura_innovacion != null:
                         if (json_decode($proyecto->estado_evaluacion_cultura_innovacion)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion, 'mostrar_recomendaciones' => true]);
                         } else {
                             $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
                         }
@@ -180,7 +184,7 @@ class ConvocatoriaController extends Controller
 
                     case $proyecto->estado_evaluacion_ta != null:
                         if (json_decode($proyecto->estado_evaluacion_ta)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta, 'mostrar_recomendaciones' => true]);
                         } else {
                             $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
                         }
@@ -188,9 +192,17 @@ class ConvocatoriaController extends Controller
 
                     case $proyecto->estado_evaluacion_tp != null:
                         if (json_decode($proyecto->estado_evaluacion_tp)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp, 'mostrar_recomendaciones' => true]);
                         } else {
                             $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                        }
+                        break;
+
+                    case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                        if (json_decode($proyecto->estado_evaluacion_servicios_tecnologicos)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos, 'mostrar_recomendaciones' => true]);
+                        } else {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
                         }
                         break;
 
@@ -207,6 +219,8 @@ class ConvocatoriaController extends Controller
             $convocatoria->proyectos()->update(['modificable' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         }
+
+        $convocatoria->evaluaciones()->where('estado', 'LIKE', 'Sin evaluar')->update(['habilitado' => false]);
 
         $convocatoria->save();
 

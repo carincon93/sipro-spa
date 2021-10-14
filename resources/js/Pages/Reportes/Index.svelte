@@ -61,7 +61,7 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                        <Button variant="raised" on:click={()=>downloadReport('resumePresupuestos')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('resumePresupuestos')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>
@@ -73,7 +73,7 @@
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
                 <td class="border-t td-actions">
-                    {#if isSuperAdmin && $form.convocatoria}
+                    {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <Button variant="raised" on:click={()=>downloadReport('evaluaciones')}>Descargar</Button>
                     {/if}
                 </td>

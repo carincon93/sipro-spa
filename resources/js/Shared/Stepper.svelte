@@ -143,7 +143,7 @@
     <div class="w-10/12 step">
         <a use:inertia active={route().current('convocatorias.proyectos.summary')} href={route('convocatorias.proyectos.summary', [convocatoria.id, proyecto.id])} class="flex flex-col items-center inline-block">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
-            <p class="text-sm text-center">Finalizar formulación</p>
+            <p class="text-sm text-center">Finalizar {convocatoria.fase == 1 ? 'formulación' : 'proyecto'}</p>
         </a>
     </div>
 </div>

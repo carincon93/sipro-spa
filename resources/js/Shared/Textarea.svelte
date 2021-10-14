@@ -15,7 +15,6 @@
     export let maxlength = 2000
     export let localStorageForm = null
     export let count = 0
-    export let change = ()=>{}
 
     const theme = writable(null)
 
@@ -24,10 +23,6 @@
     $: props = {
         ...$$restProps,
         class: `w-full block bg-white ${$$restProps.class || ''}`,
-    }
-
-    function update(event) {
-        value = event.target.value
     }
 
     onMount(() => {
@@ -44,9 +39,9 @@
 
 <div bind:this={container}>
     {#if sinContador == true}
-        <Textarea {disabled} textarea on:change={() => change} bind:value {label} {...props} {id} on:input={update} on:blur={() => theme.set({ name: id, value: value })} />
+        <Textarea {disabled} textarea bind:value {label} {...props} {id} on:input on:blur={() => theme.set({ name: id, value: value })} />
     {:else}
-        <Textarea {disabled} textarea on:change={() => change} input$maxlength={maxlength} bind:value {label} {...props} {id} on:input={update} on:blur={() => theme.set({ name: id, value: value })}>
+        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input on:blur={() => theme.set({ name: id, value: value })}>
             <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
         </Textarea>
     {/if}

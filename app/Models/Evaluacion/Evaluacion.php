@@ -41,7 +41,8 @@ class Evaluacion extends Model
         'justificacion_causal_rechazo',
         'comentario_formulador',
         'comentario_evaluador',
-        'replicas'
+        'replicas',
+        'estado'
     ];
 
     /**

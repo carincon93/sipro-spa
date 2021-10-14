@@ -40,7 +40,8 @@ class Proyecto extends Model
         'en_subsanacion',
         'estructuracion_proyectos',
         'estado',
-        'precio_proyecto'
+        'precio_proyecto',
+        'mostrar_recomendaciones'
     ];
 
     /**
@@ -564,7 +565,7 @@ class Proyecto extends Model
     public function getEstadoEvaluacionIdiAttribute()
     {
         if ($this->idi()->exists()) {
-
+            $convocatoria = Convocatoria::select('fase')->where('esta_activa', true)->first();
             $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
             $evaluacionesFinalizadas = $this->evaluaciones()->where('habilitado', true)->where('finalizado', true)->count();
 
@@ -591,7 +592,7 @@ class Proyecto extends Model
                                 if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
                                     $causalRechazo = 'En revisión por Cord. SENNOVA';
                                 } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                    $causalRechazo = 'Rechazado';
+                                    $causalRechazo = 'Rechazado - Por causal de rechazo';
                                 }
 
                                 if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
@@ -604,7 +605,7 @@ class Proyecto extends Model
                         }
                     }
 
-                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0 && $convocatoria->fase == 5) {
                         $this->precio_proyecto - $this->getPrecioProyectoAprobadoAttribute() >= floor($this->precio_proyecto * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
                     }
                 }
@@ -636,7 +637,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -692,9 +693,9 @@ class Proyecto extends Model
                         }
                     }
 
-                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
-                        $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
-                    }
+                    // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                    //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                    // }
                 }
             }
 
@@ -723,7 +724,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -768,11 +769,11 @@ class Proyecto extends Model
                     if ($causalRechazo == null) {
                         switch ($evaluacion) {
                             case $evaluacion->servicioTecnologicoEvaluacion()->exists():
-                                if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                                    $causalRechazo = 'En revisión por Cord. SENNOVA';
-                                } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                    $causalRechazo = 'Rechazado';
-                                }
+                                // if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                //     $causalRechazo = 'En revisión por Cord. SENNOVA';
+                                // } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                //     $causalRechazo = 'Rechazado - Causal de rechazo';
+                                // }
 
                                 if ($evaluacion->servicioTecnologicoEvaluacion->anexos_comentario != null) {
                                     $requiereSubsanar = true;
@@ -784,9 +785,9 @@ class Proyecto extends Model
                         }
                     }
 
-                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
-                        $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
-                    }
+                    // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                    //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                    // }
                 }
             }
 
@@ -815,7 +816,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -836,13 +837,10 @@ class Proyecto extends Model
             $cantidadEvaluaciones = count($evaluaciones);
 
             $totalRecomendaciones = 0;
-            $estadoEvaluacion = '';
-            $causalRechazo  = null;
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
             $countPresupuestoNoAprobado = 0;
 
-            $estados = array(1, 2);
 
             foreach ($evaluaciones as $key => $evaluacion) {
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
@@ -851,13 +849,19 @@ class Proyecto extends Model
                     $requiereSubsanar = true;
                 }
 
-                // Sumar los presupuesto no aprobados
+                // Sumar los presupuestos no aprobados
                 $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
                 foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
             }
-            return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
+
+            $estadoEvaluacion = null;
+
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Pre-aprobado' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con observaciones');
+            $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
+
+            return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }
     }
 
@@ -874,28 +878,31 @@ class Proyecto extends Model
             $cantidadEvaluaciones = count($evaluaciones);
 
             $totalRecomendaciones = 0;
-            $estadoEvaluacion = '';
-            $causalRechazo  = null;
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
             $countPresupuestoNoAprobado = 0;
 
-            $estados = array(1, 2);
 
-            foreach ($evaluaciones as $key => $evaluacion) {
+            foreach ($evaluaciones as $evaluacion) {
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
                 if ($evaluacion->tpEvaluacion->anexos_comentario != null) {
                     $requiereSubsanar = true;
                 }
 
-                // Sumar los presupuesto no aprobados
+                // Sumar los presupuestos no aprobados
                 $totalPresupuestosEvaluados += $evaluacion->proyectoPresupuestosEvaluaciones()->count();
                 foreach ($evaluacion->proyectoPresupuestosEvaluaciones()->get() as $presupuestoEvaluacion) {
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
             }
-            return collect(['estado' => null, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
+
+            $estadoEvaluacion = null;
+
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Pre-aprobado' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con observaciones');
+            $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
+
+            return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }
     }
 
@@ -933,6 +940,7 @@ class Proyecto extends Model
         } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
             $id = $estadosEvaluacion->where('value', 4)->first()['value'];
+            $requiereSubsanar = false;
         }
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);

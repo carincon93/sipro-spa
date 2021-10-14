@@ -72,7 +72,7 @@
                     </div>
                 </div>
             {/if}
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                 {#each proyecto.evaluaciones as evaluacion, i}
                     {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                         <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -128,7 +128,7 @@
     />
 
     {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
-        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+        {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
             {#each proyecto.evaluaciones as evaluacion, i}
                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">

@@ -25,12 +25,12 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         $idproyectos = explode(',', $this->convocatoria->proyectos->implode('id', ','));
-        return ProyectoRolSennova::whereIn('proyecto_id', $idproyectos)->with('convocatoriaRolSennova.rolSennova','convocatoriaRolSennova.lineaProgramatica',)->get();
+        return ProyectoRolSennova::whereIn('proyecto_id', $idproyectos)->with('convocatoriaRolSennova.rolSennova', 'convocatoriaRolSennova.lineaProgramatica',)->get();
     }
 
     /**
@@ -40,6 +40,10 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
     {
         return [
             $rolSennova->proyecto->convocatoria->descripcion,
+            $rolSennova->proyecto->centroFormacion->regional->nombre,
+            $rolSennova->proyecto->centroFormacion->codigo,
+            $rolSennova->proyecto->centroFormacion->nombre,
+            $rolSennova->proyecto->lineaProgramatica->codigo,
             $rolSennova->proyecto->codigo,
             $rolSennova->convocatoriaRolSennova->rolSennova->nombre,
             $rolSennova->convocatoriaRolSennova->lineaProgramatica->nombre,
@@ -50,7 +54,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
             ucfirst($rolSennova->convocatoriaRolSennova->nivel_academico_formateado),
             $rolSennova->convocatoriaRolSennova->asignacion_mensual,
             $rolSennova->getTotalRolSennova(),
-            ($rolSennova->proyectoRolesEvaluaciones()->count() > 0)?(($rolSennova->rol_aprobado)?'SI':'NO'):'Sin evaluar',
+            ($rolSennova->proyectoRolesEvaluaciones()->count() > 0) ? (($rolSennova->rol_aprobado) ? 'SI' : 'NO') : 'Sin evaluar',
 
         ];
     }
@@ -59,9 +63,13 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
     {
         return [
             'Convocatoria',
-            'Código',
-            'Rol Sennova',
-            'Linea Programatica',
+            'Regional',
+            'Código Centro de formación',
+            'Centro de formación',
+            'Línea programática',
+            'Código proyecto',
+            'Rol SENNOVA',
+            'Linea programática',
             'Descripción',
             'Número de meses',
             'Número de roles',
@@ -75,10 +83,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
 
     public function columnFormats(): array
     {
-        return [
-            'J' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
-            'K' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
-        ];
+        return [];
     }
 
     /**
