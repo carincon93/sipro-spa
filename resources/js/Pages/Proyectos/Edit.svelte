@@ -59,7 +59,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8">
                 <div class="mt-4">
-                    <Label labelFor="a_evaluar" value="¿El proyecto está radicado?" class="inline-block mb-4" />
+                    <Label labelFor="a_evaluar" value="¿El proyecto ha sido enviado a evaluación?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.a_evaluar} />
                     <InputError message={errors.a_evaluar} />
