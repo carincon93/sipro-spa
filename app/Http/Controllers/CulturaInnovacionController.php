@@ -232,7 +232,7 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
-        if ($culturaInnovacion->proyecto->finalizado) {
+        if ($convocatoria->fase != 1) {
             return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 

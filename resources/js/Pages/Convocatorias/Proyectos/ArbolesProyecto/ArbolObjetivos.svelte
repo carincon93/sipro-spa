@@ -461,7 +461,7 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -570,7 +570,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if efectoIndirecto.impacto.descripcion != null}
+                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.modificable}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -632,7 +632,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    {#if resultado.descripcion != null}
+                                    {#if resultado.descripcion != null && proyecto.modificable}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -700,7 +700,7 @@
                                     {/if}
                                 </p>
                             </div>
-                            {#if causaDirecta.objetivo_especifico.descripcion != null}
+                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.modificable}
                                 <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                     <div class="flex items-center cursor-pointer select-none group">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -745,7 +745,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if causaIndirecta.actividad.descripcion != null}
+                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.modificable}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

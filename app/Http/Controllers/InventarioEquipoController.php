@@ -30,7 +30,7 @@ class InventarioEquipoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Index', [
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'mostrar_recomendaciones'),
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterInventarioEquipo(request()->only('search'))->paginate(),
@@ -48,7 +48,7 @@ class InventarioEquipoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Create', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'mostrar_recomendaciones'),
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
         ]);
     }
@@ -106,7 +106,7 @@ class InventarioEquipoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Edit', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable'),
+            'proyecto'                  => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'mostrar_recomendaciones'),
             'inventarioEquipo'          => $inventarioEquipo,
             'estadosInventarioEquipos'  => json_decode(Storage::get('json/estados-inventario-equipos.json'), true),
 

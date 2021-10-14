@@ -198,7 +198,7 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                     {#each tp.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -261,7 +261,7 @@
                 <div>
                     <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} on:input={() => syncColumnLong('resumen_regional', $formResumenRegional)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -300,7 +300,7 @@
                 <div>
                     <Textarea maxlength="40000" id="antecedentes_regional" error={errors.antecedentes_regional} bind:value={$formAntecedentesRegional.antecedentes_regional} on:input={() => syncColumnLong('antecedentes_regional', $formAntecedentesRegional)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -325,7 +325,7 @@
                 <div>
                     <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} on:input={() => syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -350,7 +350,7 @@
                 <div>
                     <Textarea maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} on:input={() => syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -401,7 +401,7 @@
             <div class="mt-44 grid grid-cols-1">
                 <div />
                 <div>
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -426,7 +426,7 @@
                 <div>
                     <Textarea maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} on:input={() => syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -452,7 +452,7 @@
                 <div>
                     <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                         {#each tp.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -470,7 +470,7 @@
                 </div>
             </div>
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -488,7 +488,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -506,7 +506,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || tp.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each tp.proyecto.evaluaciones as evaluacion, i}
@@ -525,7 +525,7 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true && convocatoria.fase == 1)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}

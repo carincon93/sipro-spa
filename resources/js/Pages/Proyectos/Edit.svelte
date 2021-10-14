@@ -26,6 +26,7 @@
         modificable: proyecto.modificable,
         finalizado: proyecto.finalizado,
         radicado: proyecto.radicado,
+        mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
     })
 
     function submit() {
@@ -58,30 +59,36 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8">
                 <div class="mt-4">
-                    <Label required labelFor="a_evaluar" value="¿El proyecto está radicado?" class="inline-block mb-4" />
+                    <Label labelFor="a_evaluar" value="¿El proyecto está radicado?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.a_evaluar} />
                     <InputError message={errors.a_evaluar} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="modificable" value="¿El proyecto es modificable?" class="inline-block mb-4" />
+                    <Label labelFor="modificable" value="¿El proyecto es modificable?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.modificable} />
                     <InputError message={errors.modificable} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="finalizado" value="¿El proyecto está finalizado?" class="inline-block mb-4" />
+                    <Label labelFor="finalizado" value="¿El proyecto está finalizado?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.finalizado} />
                     <InputError message={errors.finalizado} />
                 </div>
                 <div class="mt-4">
-                    <Label required labelFor="radicado" value="¿El proyecto está radicado?" class="inline-block mb-4" />
+                    <Label labelFor="radicado" value="¿El proyecto está radicado?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.radicado} />
                     <InputError message={errors.radicado} />
+                </div>
+                <div class="mt-4">
+                    <Label labelFor="mostrar_recomendaciones" value="¿El formulador puede observar las recomendaciones?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.mostrar_recomendaciones} />
+                    <InputError message={errors.mostrar_recomendaciones} />
                 </div>
             </fieldset>
 

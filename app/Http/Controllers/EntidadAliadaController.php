@@ -44,7 +44,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones', 'mostrar_recomendaciones'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),
@@ -67,7 +67,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Create', [
             'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'modificable'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'modificable', 'mostrar_recomendaciones'),
             'actividades'   => Actividad::whereIn(
                 'objetivo_especifico_id',
                 $objetivoEspecifico->map(function ($objetivoEspecifico) {
@@ -203,7 +203,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Edit', [
             'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'        => $proyecto->only('id', 'modificable', 'codigo_linea_programatica'),
+            'proyecto'        => $proyecto->only('id', 'modificable', 'codigo_linea_programatica', 'mostrar_recomendaciones'),
             'entidadAliada'   => $entidadAliada,
             'actividades'     => Actividad::whereIn(
                 'objetivo_especifico_id',

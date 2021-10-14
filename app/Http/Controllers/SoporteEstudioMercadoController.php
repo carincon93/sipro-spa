@@ -34,7 +34,7 @@ class SoporteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'                  => $proyecto->only('id', 'modificable'),
+            'proyecto'                  => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'filters'                   => request()->all('search'),
             'soportesEstudioMercado'    => $presupuesto->soportesEstudioMercado()->orderBy('id', 'ASC')
@@ -60,7 +60,7 @@ class SoporteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Create', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'                  => $proyecto->only('id', 'modificable'),
+            'proyecto'                  => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
         ]);
     }
@@ -126,7 +126,7 @@ class SoporteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'              => $proyecto->only('id', 'modificable'),
+            'proyecto'              => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
             'proyectoPresupuesto'   => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'soporteEstudioMercado' => $soporte
         ]);

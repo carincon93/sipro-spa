@@ -40,7 +40,8 @@ class Proyecto extends Model
         'en_subsanacion',
         'estructuracion_proyectos',
         'estado',
-        'precio_proyecto'
+        'precio_proyecto',
+        'mostrar_recomendaciones'
     ];
 
     /**
@@ -591,7 +592,7 @@ class Proyecto extends Model
                                 if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
                                     $causalRechazo = 'En revisión por Cord. SENNOVA';
                                 } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                    $causalRechazo = 'Rechazado';
+                                    $causalRechazo = 'Rechazado - Por causal de rechazo';
                                 }
 
                                 if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
@@ -636,7 +637,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -723,7 +724,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -768,11 +769,11 @@ class Proyecto extends Model
                     if ($causalRechazo == null) {
                         switch ($evaluacion) {
                             case $evaluacion->servicioTecnologicoEvaluacion()->exists():
-                                if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                                    $causalRechazo = 'En revisión por Cord. SENNOVA';
-                                } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                    $causalRechazo = 'Rechazado';
-                                }
+                                // if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                //     $causalRechazo = 'En revisión por Cord. SENNOVA';
+                                // } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                //     $causalRechazo = 'Rechazado - Causal de rechazo';
+                                // }
 
                                 if ($evaluacion->servicioTecnologicoEvaluacion->anexos_comentario != null) {
                                     $requiereSubsanar = true;
@@ -815,7 +816,7 @@ class Proyecto extends Model
 
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-                $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+                $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -939,6 +940,7 @@ class Proyecto extends Model
         } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
             $id = $estadosEvaluacion->where('value', 4)->first()['value'];
+            $requiereSubsanar = false;
         }
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);

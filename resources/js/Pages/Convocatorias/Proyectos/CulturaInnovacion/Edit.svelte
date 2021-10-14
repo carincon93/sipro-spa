@@ -242,7 +242,7 @@
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                     {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -286,7 +286,7 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                     {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -339,7 +339,7 @@
                 <div>
                     <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                         {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -363,7 +363,7 @@
                 <div>
                     <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                         {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -387,7 +387,7 @@
                 <div>
                     <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                         {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -414,7 +414,7 @@
                         <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
                         <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
 
-                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -446,7 +446,7 @@
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
                         <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} on:input={() => syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
 
-                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -485,7 +485,7 @@
                             required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'}
                         />
 
-                        {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                        {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -801,7 +801,7 @@
                 <div>
                     <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                         {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -934,7 +934,7 @@
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                         {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -952,7 +952,7 @@
                 </div>
             </div>
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
@@ -970,7 +970,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
@@ -988,7 +988,7 @@
                 {/each}
             {/if}
 
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
@@ -1007,7 +1007,7 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true && convocatoria.fase == 1)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}

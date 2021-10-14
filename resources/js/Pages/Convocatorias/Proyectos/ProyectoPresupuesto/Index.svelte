@@ -237,7 +237,7 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Información</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Subtotal del costo de los productos o servicios requeridos</th>
-                {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluación</th>
                 {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
@@ -277,7 +277,7 @@
                             <span class="text-red-400 text-center text-xs px-6"> Este uso presupuestal NO suma al total del presupuesto </span>
                         {/if}
                     </td>
-                    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+                    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                         <td class="border-t">
                             <div class="px-6 py-4">
                                 {#if presupuesto.presupuesto_aprobado}

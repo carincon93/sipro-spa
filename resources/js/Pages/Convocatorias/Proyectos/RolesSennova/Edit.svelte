@@ -91,7 +91,7 @@
     </header>
 
     <div class="flex">
-        <div class="bg-white rounded shadow max-w-3xl">
+        <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submit}>
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                     <div class="mt-4">
@@ -128,7 +128,7 @@
             </form>
         </div>
         <div class="ml-1.5">
-            {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                 {#each proyectoRolSennova.proyecto_roles_evaluaciones as evaluacionRol, i}
                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
                         <div class="flex text-orangered-900 font-black">

@@ -159,7 +159,7 @@
 
     <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
-    {#if isSuperAdmin || convocatoria.mostrar_recomendaciones}
+    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
         {#each proyecto.evaluaciones as evaluacion, i}
             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -217,6 +217,7 @@
         }
     </style>
 {/if}
+
 <style>
     :global(#orgchart_div table) {
         border-collapse: unset;
