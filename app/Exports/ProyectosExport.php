@@ -79,6 +79,8 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             ($proyecto->finalizado) ? 'SI' : 'NO',
             ($proyecto->a_evaluar) ? 'SI' : 'NO',
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
+            $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['puntaje'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['puntaje'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['puntaje'] : 'N/A')),
+            $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['alerta'] : 'N/A',
             $this->mapParticipantes($proyecto->participantes),
         ];
     }
@@ -105,7 +107,9 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Total Proyecto',
             'Finalizado',
             'Radicado',
-            'Evaluación',
+            'Estado final',
+            'Puntaje',
+            'Mensaje',
             'Participantes',
         ];
     }
