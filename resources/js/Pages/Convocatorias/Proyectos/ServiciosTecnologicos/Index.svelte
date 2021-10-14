@@ -10,6 +10,7 @@
     import Button from '@/Shared/Button'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
+    import Dialog from '@/Shared/Dialog'
 
     export let convocatoria
     export let serviciosTecnologicos
@@ -25,6 +26,8 @@
     let filters = {
         estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
     }
+
+    let dialogOpen = true
 </script>
 
 <AuthenticatedLayout>
@@ -126,4 +129,32 @@
         </tbody>
     </DataTable>
     <Pagination links={serviciosTecnologicos.links} />
+
+    {#if convocatoria.fase == 3}
+        <Dialog bind:open={dialogOpen} id="informacion">
+            <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
+            <div slot="content">
+                <small>Octubre 14</small>
+
+                <hr class="mt-10 mb-10" />
+                <div>
+                    <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
+                </div>
+
+                <hr class="mt-10 mb-10" />
+                <div>
+                    <p>Revise cuales proyectos tienen el mensaje de <strong>Requiere ser subsanado</strong>, ingrese al proyecto y realice la respectiva subsanación. <br /> <img class="mx-auto" src={window.basePath + '/images/img-subsanacion.png'} alt="" /></p>
+                </div>
+                <hr class="mt-10 mb-10" />
+                <div>
+                    <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
+                </div>
+            </div>
+            <div slot="actions">
+                <div class="p-4">
+                    <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
+                </div>
+            </div>
+        </Dialog>
+    {/if}
 </AuthenticatedLayout>
