@@ -40,6 +40,7 @@ class Proyecto extends Model
         'en_subsanacion',
         'estructuracion_proyectos',
         'estado',
+        'estado_cord_sennova',
         'precio_proyecto',
         'mostrar_recomendaciones'
     ];
@@ -349,7 +350,7 @@ class Proyecto extends Model
             ]);
     }
 
-        /**
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
