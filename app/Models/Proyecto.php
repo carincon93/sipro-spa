@@ -1006,31 +1006,24 @@ class Proyecto extends Model
     public function getDesviacionEstandarAttribute()
     {
         $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
-        $nums = array();
+        $nums = [];
+        $sample = true;
+        $dvst = 0;
 
         foreach ($evaluaciones as $evaluacion) {
             array_push($nums, $evaluacion->total_evaluacion);
         }
-
-        /**
-         * Calcular desviacion Estandar
-         * @author evilnapsis
-         **/
-        $sq = 0;
         if (count($nums) > 0) {
-            $sum = 0;
-            for ($i = 0; $i < count($nums); $i++) {
-                $sum += $nums[$i];
+            $fMean = array_sum($nums) / count($nums);
+            $fVariance = 0.0;
+            foreach ($nums as $i) {
+                $fVariance += pow($i - $fMean, 2);
             }
-            $media = $sum / count($nums);
-            $sum2 = 0;
-            for ($i = 0; $i < count($nums); $i++) {
-                $sum2 += ($nums[$i] - $media) * ($nums[$i] - $media);
-            }
-            $vari = $sum2 / count($nums);
-            $sq = sqrt($vari);
+            $fVariance /= ($sample ? count($nums) - 1 : count($nums));
+
+            $dvst = (float) sqrt($fVariance);
         }
 
-        return $sq;
+        return $dvst;
     }
 }
