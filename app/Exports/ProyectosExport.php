@@ -111,7 +111,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Estado final',
             'Estado coordinación SENNOVA',
             'Puntaje',
-            'Mensaje',
+            'Desviación estándar',
             'Participantes',
         ];
     }
