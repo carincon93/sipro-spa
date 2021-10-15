@@ -1013,12 +1013,13 @@ class Proyecto extends Model
         foreach ($evaluaciones as $evaluacion) {
             array_push($nums, $evaluacion->total_evaluacion);
         }
-        if (count($nums) > 0) {
+        if (count($nums) > 0 && ($sample ? count($nums) - 1 : count($nums)) > 0) {
             $fMean = array_sum($nums) / count($nums);
             $fVariance = 0.0;
             foreach ($nums as $i) {
                 $fVariance += pow($i - $fMean, 2);
             }
+
             $fVariance /= ($sample ? count($nums) - 1 : count($nums));
 
             $dvst = (float) sqrt($fVariance);
