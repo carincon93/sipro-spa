@@ -524,8 +524,9 @@ class Evaluacion extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->select('users.nombre', 'evaluaciones.*');
-            $query->where('users.nombre', 'ilike', '%' . $search . '%');
             $query->join('users', 'evaluaciones.user_id', 'users.id');
+            $query->where('users.nombre', 'ilike', '%' . $search . '%');
+            $query->orWhere('evaluaciones.proyecto_id', $search - 8000);
         })->when($filters['estado'] ?? null, function ($query, $estado) {
             if ($estado == 'finalizados idi') {
                 $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');
