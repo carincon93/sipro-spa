@@ -126,7 +126,7 @@ class LineaInvestigacion extends Model
     {
         $user = Auth::user();
         if ($user->hasRole(1)) {
-            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion')->filterLineaInvestigacion(request()->only('search'))->orderBy('lineas_investigacion.nombre', 'ASC')->paginate();
+            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion.centroFormacion')->filterLineaInvestigacion(request()->only('search'))->orderBy('lineas_investigacion.nombre', 'ASC')->paginate();
         } else if ($user->hasRole([4, 21])) {
             $centroFormacionId = null;
             if ($user->dinamizadorCentroFormacion()->exists()) {
