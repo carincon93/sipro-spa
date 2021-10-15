@@ -920,7 +920,7 @@
                 {#if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == true && convocatoria.fase == 3}
                     <h1 class="text-center mb-4 font-black text-2xl">Este proyecto requiere ser subsanado</h1>
                     <p>Por favor revise las observaciones de los evaluadores en cada uno de los campos y secciones.</p>
-                    <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>
+                    <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si hay comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>
                 {:else if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == false && convocatoria.fase == 3}
                     <div>
                         <h1 class="text-center mb-4 font-black text-2xl">Este proyecto no requiere subsanación</h1>
@@ -952,8 +952,7 @@
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
                 {#if ta.proyecto.modificable}
-
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnoacademia_id')}>Continuar diligenciando</Button>
+                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnoacademia_id')}>Continuar diligenciando</Button>
                 {/if}
             </div>
         </div>
