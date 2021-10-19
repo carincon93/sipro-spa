@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="mt-4">
-                    {#if proyectoRolSennova.convocatoria_rol_sennova?.perfil}
+                    {#if proyectoRolSennova.convocatoria_rol_sennova?.perfil && proyecto.codigo_linea_programatica != 68}
                         <Textarea disabled={proyecto.codigo_linea_programatica != 68} label="Descripción" maxlength="40000" id="descripcion" bind:value={proyectoRolSennova.convocatoria_rol_sennova.perfil} />
                     {:else}
                         <Textarea disabled label="Descripción" maxlength="40000" id="descripcion" bind:value={rolSennovaInfo.descripcion} />
