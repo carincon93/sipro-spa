@@ -1097,6 +1097,8 @@ class ProyectoController extends Controller
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
+        $proyecto->evaluaciones->load('evaluacionCausalesRechazo');
+
         return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluaciones'                  => $proyecto->evaluaciones,

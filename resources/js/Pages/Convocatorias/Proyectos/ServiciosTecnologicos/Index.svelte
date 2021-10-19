@@ -28,6 +28,12 @@
     }
 
     let dialogOpen = true
+    let puedeVisualizarEstado = false
+    serviciosTecnologicos.data.map((element) => {
+        if (puedeVisualizarEstado == false) {
+            puedeVisualizarEstado = JSON.parse(element.proyecto.estado_cord_sennova)?.estado == 'Rechazado para acompañamiento con mesa técnica' || JSON.parse(element.proyecto.estado_cord_sennova)?.estado == 'En revisión'
+        }
+    })
 </script>
 
 <AuthenticatedLayout>
@@ -67,7 +73,14 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
-                            {#if JSON.parse(proyecto.estado)?.requiereSubsanar && convocatoria.fase == 3}
+                            {#if JSON.parse(proyecto.estado_cord_sennova)?.requiereSubsanar && convocatoria.fase == 3}
+                                <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
+                                {#if puedeVisualizarEstado}
+                                    <p class="py-4">
+                                        {JSON.parse(proyecto.estado_cord_sennova)?.estado}
+                                    </p>
+                                {/if}
+                            {:else if JSON.parse(proyecto.estado)?.requiereSubsanar && convocatoria.fase == 3}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
                             {/if}
                         </p>

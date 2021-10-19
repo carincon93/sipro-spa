@@ -782,7 +782,7 @@ class Proyecto extends Model
                 }
 
                 if ($key === count($evaluaciones) - 1) {
-                    array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                    array_push($estados, $this->estadoEvaluacionServiciosTecnologicos($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
                     if ($causalRechazo == null) {
                         switch ($evaluacion) {
@@ -826,14 +826,14 @@ class Proyecto extends Model
             $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
 
             if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
-                $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
-                $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
+                $estadoEvaluacion = $this->estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
+                $requiereSubsanar = $this->estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
             } else {
                 $estadoEvaluacion = $causalRechazo;
             }
 
             if ($cantidadEvaluaciones == 0) {
-                $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
+                $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion_st.json'), true));
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
@@ -963,6 +963,47 @@ class Proyecto extends Model
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
     }
+
+    /**
+     * estadoEvaluacionIdi
+     *
+     * @param  mixed $puntajeTotal
+     * @param  mixed $totalRecomendaciones
+     * @param  mixed $requiereSubsanar
+     * @return void
+     */
+    public function estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
+    {
+        $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion_st.json'), true));
+
+        $id = null;
+        if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 1)->first()['value'];
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado - No requiere ser subsanado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 2)->first()['value'];
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 4)->first()['value'];
+            $requiereSubsanar = false;
+        }
+
+        return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
+    }
+
 
     /**
      * estadoEvaluacionCulturaInnovacion
