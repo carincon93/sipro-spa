@@ -75,13 +75,13 @@
                             {proyecto.codigo}
                             {#if JSON.parse(proyecto.estado_cord_sennova)?.requiereSubsanar && convocatoria.fase == 3}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
-                                {#if puedeVisualizarEstado}
-                                    <p class="py-4">
-                                        {JSON.parse(proyecto.estado_cord_sennova)?.estado}
-                                    </p>
-                                {/if}
                             {:else if JSON.parse(proyecto.estado)?.requiereSubsanar && convocatoria.fase == 3}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
+                            {/if}
+                            {#if puedeVisualizarEstado}
+                                <p class="py-4 text-red-500">
+                                    {JSON.parse(proyecto.estado_cord_sennova)?.estado}
+                                </p>
                             {/if}
                         </p>
                     </td>
