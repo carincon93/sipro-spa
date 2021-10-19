@@ -76,6 +76,63 @@
 <AuthenticatedLayout>
     <Stepper {convocatoria} {proyecto} />
 
+    {#each evaluaciones as evaluacion}
+        {#each evaluacion.evaluacion_causales_rechazo as causalRechazo}
+            {#if causalRechazo.causal_rechazo == 1}
+                <h1 class="mt-24 mb-8 font-black">
+                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                </h1>
+                <div>
+                    <Label
+                        class="flex items-center"
+                        labelFor="1"
+                        value="El proyecto se inscribe en alguna de las líneas de la Estrategia Regional, pero su formulación obedece a los objetivos de otra línea. Ejemplo: se formula un proyecto de la Estrategia Regional con el objeto de modernizar un ambiente de formación y se verifica que el proyecto se enfoca en la prestación de nuevos servicios tecnológicos"
+                    />
+                </div>
+                <hr />
+            {/if}
+
+            {#if causalRechazo.causal_rechazo == 2}
+                <h1 class="mt-24 mb-8 font-black">
+                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                </h1>
+
+                <div>
+                    <Label class="flex items-center" labelFor="2" value="En la formulación del proyecto se consideran como actividades principales y no como productos resultados de investigación, la realización de actividades de divulgación tecnológica como congresos, simposios, semanarios, entre otros." />
+                </div>
+                <hr />
+            {/if}
+
+            {#if causalRechazo.causal_rechazo == 3}
+                <h1 class="mt-24 mb-8 font-black">
+                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                </h1>
+
+                <div>
+                    <Label class="flex items-center" labelFor="3" value="Se verifique que el proyecto y sus productos resultados de investigación sean parte de una tesis doctoral, de maestría o de pregrado." />
+                </div>
+                <hr />
+            {/if}
+
+            {#if causalRechazo.causal_rechazo == 4}
+                <h1 class="mt-24 mb-8 font-black">
+                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                </h1>
+
+                <div>
+                    <Label class="flex items-center" labelFor="4" value="Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA." />
+                </div>
+                <hr />
+            {/if}
+        {/each}
+
+        {#if evaluacion.justificacion_causal_rechazo}
+            <h1 class="mt-20 font-black">Justificación de la causal de rechazo</h1>
+            <p>{evaluacion.justificacion_causal_rechazo}</p>
+            <hr />
+        {/if}
+    {/each}
+
     <h1 class="mt-24 mb-8 text-center text-3xl">Comentarios generales</h1>
     <InfoMessage>Este es un espacio para que haga un comentario general, de una respuesta o le resuelva alguna duda a los evaluadores.</InfoMessage>
 
