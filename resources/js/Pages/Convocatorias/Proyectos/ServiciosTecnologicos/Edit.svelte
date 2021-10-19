@@ -556,11 +556,11 @@
         </div>
         <div slot="content">
             <div>
-                {#if JSON.parse(servicioTecnologico.proyecto.estado)?.requiereSubsanar == true && convocatoria.fase == 3}
+                {#if (JSON.parse(servicioTecnologico.proyecto.estado_cord_sennova)?.requiereSubsanar == true && convocatoria.fase == 3) || (JSON.parse(servicioTecnologico.proyecto.estado)?.requiereSubsanar == true && convocatoria.fase == 3)}
                     <h1 class="text-center mb-4 font-black text-2xl">Este proyecto requiere ser subsanado</h1>
                     <p>Por favor revise las observaciones de los evaluadores en cada uno de los campos y secciones.</p>
                     <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si hay comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>
-                {:else if JSON.parse(servicioTecnologico.proyecto.estado)?.requiereSubsanar == false && convocatoria.fase == 3}
+                {:else if (JSON.parse(servicioTecnologico.proyecto.estado_cord_sennova)?.requiereSubsanar == false && convocatoria.fase == 3) || (JSON.parse(servicioTecnologico.proyecto.estado)?.requiereSubsanar == false && convocatoria.fase == 3)}
                     <div>
                         <h1 class="text-center mb-4 font-black text-2xl">Este proyecto no requiere subsanación</h1>
                         <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>

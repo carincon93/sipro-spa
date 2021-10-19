@@ -218,6 +218,7 @@ class Idi extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1)) { // Admin
+            dd('mal');
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
@@ -226,6 +227,7 @@ class Idi extends Model
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else if ($authUser->hasRole(2)) { // Director regional
+            dd('mal1');
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
@@ -247,6 +249,7 @@ class Idi extends Model
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
             }
 
+            dd('mal2');
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
@@ -269,6 +272,7 @@ class Idi extends Model
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
         } else {
+            dd('mal4');
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('proyecto_participantes', 'proyectos.id', 'proyecto_participantes.proyecto_id')
