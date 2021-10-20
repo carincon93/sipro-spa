@@ -42,7 +42,7 @@ class ProyectoFinalizado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line("El proyecto {$this->proyecto->codigo} ha sido finalizado. Por favor verifique que la información fue diligenciada correctamente haciendo clic en 'Revisar proyecto' y de ser así confirme el proyecto dirigiéndose al último paso 'Finalizar formulación' y dar clic en 'Confirmar formulación'.")
+            ->line("El proyecto {$this->proyecto->codigo} ha sido finalizado. Por favor verifique que la información fue diligenciada correctamente haciendo clic en 'Revisar proyecto' y de ser así confirme el proyecto dirigiéndose al último paso 'Finalizar proyecto' y dar clic en 'Confirmar proyecto'.")
             ->action('Revisar proyecto', url("/convocatorias/{$this->convocatoria->id}/proyectos/{$this->proyecto->id}/editar?notificacion={$this->id}"));
     }
 
@@ -57,7 +57,7 @@ class ProyectoFinalizado extends Notification
         return [
             "proyectoId"    => $this->proyecto->id,
             "subject"       => "Proyecto se ha finalizado",
-            "message"       => "El proyecto {$this->proyecto->codigo} ha sido finalizado. Por favor verifique que la información fue diligenciada correctamente haciendo clic en los tres puntos, luego clic en 'Ver detalles'. Debe hacer la respectiva revisión y de estar todo correcto debe confirmar el proyecto, para hacer esto debe dirigirse al paso de 'Finalizar formulación' y dar clic en 'Confirmar formulación'.",
+            "message"       => "El proyecto {$this->proyecto->codigo} ha sido finalizado. Por favor verifique que la información fue diligenciada correctamente haciendo clic en los tres puntos, luego clic en 'Ver detalles'. Debe hacer la respectiva revisión y de estar todo correcto debe confirmar el proyecto, para hacer esto debe dirigirse al paso de 'Finalizar proyecto' y dar clic en 'Confirmar proyecto'.",
             "action"        => "convocatorias/{$this->convocatoria->id}/proyectos/{$this->proyecto->id}/editar?notificacion={$this->id}"
         ];
     }
