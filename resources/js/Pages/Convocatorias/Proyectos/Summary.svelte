@@ -80,7 +80,7 @@
     }
 
     function sendProject() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -101,7 +101,7 @@
         comentario: '',
     })
     function submitComentario() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -143,29 +143,31 @@
             </InfoMessage>
         {/if}
 
-        {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
-            <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
-        {:else if proyecto.a_evaluar == true}
-            <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
-        {/if}
-
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.modificable == true && proyecto.finalizado == true && proyecto.a_evaluar == false)}
+        <InfoMessage class="mb-2">
+            <h1 class="text-3xl"><strong>¡Tenga en cuenta!</strong></h1>
+            <p>
+                Esta es una opción para notificar al Dinamizador que ha finalizado de diligenciar/subsanar el proyecto y de esta manera haga una revisión con el objetivo de confirmar o hacer un comentario de ajuste. Si el Dinamizador por alguna razón NO confirma el proyecto
+                <strong>la plataforma lo hará automáticamente al finalizar cada fase ya sea de formulación o de subsanación.</strong>
+            </p>
+        </InfoMessage>
+        <hr class="mt-10 mb-10" />
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
                 {#if proyectoCompleto}
-                    <p class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar formulación</strong> y a continuación, escriba la contraseña de su usuario.</p>
                     <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar formulación</Button>
+                    <small class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar formulación</strong> y a continuación, escriba la contraseña de su usuario.</small>
                 {:else if proyectoCompleto == false}
                     <form on:submit|preventDefault={submitComentario}>
-                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true) ? undefined : true}>
+                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true) ? undefined : true}>
                             <div class="mt-8">
                                 <p class="mb-2">Si considera que el proyecto está incompleto por favor haga un comentario al proponente detallando que información o ítems debe completar.</p>
                                 <Textarea label="Comentario" maxlength="40000" id="comentario" error={errors.comentario} bind:value={$comentarioForm.comentario} required />
                             </div>
                         </fieldset>
                         <div class="mt-10 flex items-center">
-                            {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)}
+                            {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)}
                                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>
@@ -260,6 +262,12 @@
             {/if}
         {/if}
     </div>
+    <hr class="mt-10 mb-10" />
+    {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
+        <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
+    {:else if proyecto.a_evaluar == true}
+        <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
+    {/if}
     <hr class="mt-10 mb-10" />
     <div>
         <InfoMessage>

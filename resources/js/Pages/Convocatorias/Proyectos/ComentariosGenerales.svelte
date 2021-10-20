@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div class="py-4 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
@@ -177,7 +177,7 @@
                 </div>
             </div>
             <div class="py-4 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
@@ -202,7 +202,7 @@
                 </div>
             </div>
             <div class="py-4  flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
