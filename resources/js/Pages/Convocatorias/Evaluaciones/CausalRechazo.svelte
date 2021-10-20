@@ -84,11 +84,13 @@
                     <input type="checkbox" bind:group={$form.causal_rechazo} id="4" value={4} class="rounded text-indigo-500" />
                 </div>
             </div>
-            <div class="mt-8 mb-8">
-                <Label required={$form.causal_rechazo?.length > 0} labelFor="justificacion_causal_rechazo" value="Justificación" />
+            {#if $form.causal_rechazo?.length > 0}
+                <div class="mt-8 mb-8">
+                    <Label required labelFor="justificacion_causal_rechazo" value="Justificación" />
 
-                <Textarea required={$form.causal_rechazo?.length > 0} maxlength="40000" id="justificacion_causal_rechazo" error={errors.justificacion_causal_rechazo} bind:value={$form.justificacion_causal_rechazo} />
-            </div>
+                    <Textarea required maxlength="40000" id="justificacion_causal_rechazo" error={errors.justificacion_causal_rechazo} bind:value={$form.justificacion_causal_rechazo} />
+                </div>
+            {/if}
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
