@@ -985,7 +985,7 @@ class Proyecto extends Model
         } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
             $id = $estadosEvaluacion->where('value', 2)->first()['value'];
-        } elseif ($puntajeTotal >= 0 && $totalRecomendaciones > 0) { // Subsanación
+        } elseif ($puntajeTotal >= 0 && $totalRecomendaciones >= 0) { // Subsanación
             $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
             $id = $estadosEvaluacion->where('value', 3)->first()['value'];
             $requiereSubsanar = true;
