@@ -937,6 +937,7 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
         $id = null;
+        $estadoEvaluacion = null;
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
@@ -977,6 +978,7 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion_st.json'), true));
 
         $id = null;
+        $estadoEvaluacion = null;
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
@@ -1006,6 +1008,7 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
         $id = null;
+        $estadoEvaluacion = null;
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
