@@ -506,8 +506,10 @@ class Evaluacion extends Model
 
     public function getEstadoProyectoPorEvaluadorAttribute()
     {
-        if ($this->idiEvaluacion()->exists() || $this->servicioTecnologicoEvaluacion()->exists()) {
+        if ($this->idiEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionIdi($this->total_evaluacion, $this->total_recomendaciones, null);
+        } else if ($this->servicioTecnologicoEvaluacion()->exists()) {
+            return $this->proyecto->estadoEvaluacionServiciosTecnologicos($this->total_evaluacion, $this->total_recomendaciones, null);
         } else if ($this->culturaInnovacionEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionCulturaInnovacion($this->total_evaluacion, $this->total_recomendaciones, null);
         }
