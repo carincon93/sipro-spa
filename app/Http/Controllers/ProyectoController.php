@@ -66,13 +66,36 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        $proyecto->a_evaluar    = $request->a_evaluar;
-        $proyecto->modificable  = $request->modificable;
-        $proyecto->finalizado   = $request->finalizado;
-        $proyecto->radicado     = $request->radicado;
+        $proyecto->a_evaluar                = $request->a_evaluar;
+        $proyecto->modificable              = $request->modificable;
+        $proyecto->finalizado               = $request->finalizado;
+        $proyecto->radicado                 = $request->radicado;
         $proyecto->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
 
         $proyecto->save();
+
+        switch ($proyecto) {
+            case $proyecto->estado_evaluacion_idi != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
+                break;
+            case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                break;
+
+            case $proyecto->estado_evaluacion_ta != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_ta]);
+                break;
+
+            case $proyecto->estado_evaluacion_tp != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_tp]);
+                break;
+
+            case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                break;
+            default:
+                break;
+        }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
