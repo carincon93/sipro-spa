@@ -161,11 +161,7 @@
                     {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                         <td class="border-t">
                             <div class="px-6 py-4">
-                                {#if proyectoRolSennova.rol_aprobado}
-                                    Aprobado
-                                {:else}
-                                    Reprobado
-                                {/if}
+                                {proyectoRolSennova.rol_aprobado}
                             </div>
                         </td>
                     {/if}

@@ -286,11 +286,7 @@
                     {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                         <td class="border-t">
                             <div class="px-6 py-4">
-                                {#if presupuesto.presupuesto_aprobado}
-                                    Aprobado
-                                {:else}
-                                    Reprobado
-                                {/if}
+                                {presupuesto.presupuesto_aprobado}
                             </div>
                         </td>
                     {/if}
