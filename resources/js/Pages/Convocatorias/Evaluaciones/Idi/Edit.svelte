@@ -1128,14 +1128,14 @@
                 <p>Antes de iniciar a la segunda evaluación por favor diríjase a la sección <strong>Comentarios generales</strong> y verifique si el proponente hizo alguna aclaración sobre algún ítem.</p>
 
                 {#if idi.proyecto.pdf_versiones}
-                    <hr class="mx-4" />
+                    <hr class="mx-4 block" />
                     <p class="mt-4">También revise la versión del proyecto en .pdf para ir verificando los cambios realizados en los diferentes campos.</p>
                     <h1 class="text-center mt-4 mb-4">Version del proyecto (.pdf)</h1>
                     <ul>
                         {#each idi.proyecto.pdf_versiones as version}
                             <li>
                                 {#if version.estado == 1}
-                                    <a class="text-indigo-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, idi.id, version.version])}> {version.version}.pdf - Descargar</a>
+                                    <a class="text-white underline" href={route('convocatorias.proyectos.version', [convocatoria.id, idi.id, version.version])}> {version.version}.pdf - Descargar</a>
                                     <small class="block">{version.created_at}</small>
                                 {/if}
                             </li>
