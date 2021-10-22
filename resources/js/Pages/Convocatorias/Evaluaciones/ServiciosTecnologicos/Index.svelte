@@ -57,10 +57,10 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
-                            <br />
                             {#if proyecto.modificable == true && proyecto.finalizado == false && proyecto.a_evaluar == false}
                                 El proyecto se encuentra en subsanación
+                            {:else}
+                                {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
                             {/if}
                         </p>
                     </td>
