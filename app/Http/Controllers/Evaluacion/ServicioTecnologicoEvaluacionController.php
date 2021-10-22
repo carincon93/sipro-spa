@@ -71,6 +71,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
 
         $servicioTecnologicoEvaluacion->evaluacion->proyecto;
         $servicioTecnologico = $servicioTecnologicoEvaluacion->evaluacion->proyecto->servicioTecnologico;
+        $servicioTecnologico->proyecto->pdfVersiones;
         $servicioTecnologico->proyecto->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
         $servicioTecnologico->proyecto->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
 

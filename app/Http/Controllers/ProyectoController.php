@@ -595,6 +595,7 @@ class ProyectoController extends Controller
 
         $evaluacion->iniciado = false;
         $evaluacion->finalizado = true;
+        $evaluacion->modificable = false;
         $evaluacion->save();
 
         Auth::user()->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));

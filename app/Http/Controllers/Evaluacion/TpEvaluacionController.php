@@ -71,6 +71,7 @@ class TpEvaluacionController extends Controller
 
         $tpEvaluacion->evaluacion->proyecto;
         $tp = $tpEvaluacion->evaluacion->proyecto->tp;
+        $tp->proyecto->pdfVersiones;
         $tp->codigo_linea_programatica = $tp->proyecto->lineaProgramatica->codigo;
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;

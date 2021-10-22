@@ -74,6 +74,7 @@ class IdiEvaluacionController extends Controller
 
         $idiEvaluacion->evaluacion->proyecto;
         $idi = $idiEvaluacion->evaluacion->proyecto->idi;
+        $idi->proyecto->pdfVersiones;
         $idi->proyecto->codigo_linea_programatica = $idi->proyecto->lineaProgramatica->codigo;
         $idi->proyecto->precio_proyecto           = $idi->proyecto->precioProyecto;
 

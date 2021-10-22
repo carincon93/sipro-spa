@@ -213,8 +213,8 @@ class ConvocatoriaController extends Controller
 
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         } else if ($request->fase == 4) { // Segunda evaluación
-            $convocatoria->proyectos()->update(['modificable' => false, 'finalizado' => true, 'mostrar_recomendaciones' => false]);
-            // $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
+            $convocatoria->proyectos()->update(['modificable' => false, 'finalizado' => true, 'a_evaluar' => true, 'mostrar_recomendaciones' => false]);
+            $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
         } else if ($request->fase == 5) { // Finalizar convocatoria
             $convocatoria->proyectos()->update(['modificable' => false]);
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);

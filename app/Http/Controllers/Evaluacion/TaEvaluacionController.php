@@ -72,6 +72,7 @@ class TaEvaluacionController extends Controller
 
         $taEvaluacion->evaluacion->proyecto;
         $ta = $taEvaluacion->evaluacion->proyecto->ta;
+        $ta->proyecto->pdfVersiones;
         $ta->proyecto->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
         $ta->proyecto->precio_proyecto           = $ta->proyecto->precioProyecto;
         $ta->proyecto->centroFormacion;
