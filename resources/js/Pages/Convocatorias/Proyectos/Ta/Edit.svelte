@@ -917,7 +917,7 @@
         </div>
         <div slot="content">
             <div>
-                {#if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == true && convocatoria.fase == 3}
+                {#if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == true}
                     <h1 class="text-center mb-4 font-black text-2xl">Este proyecto requiere ser subsanado</h1>
                     <p>Por favor revise las observaciones de los evaluadores en cada uno de los campos y secciones.</p>
                     <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si hay comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>

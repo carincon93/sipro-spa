@@ -67,9 +67,9 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
-                            {#if JSON.parse(proyecto.estado_cord_sennova)?.requiereSubsanar && convocatoria.fase == 3}
+                            {#if JSON.parse(proyecto.estado_cord_sennova)?.requiereSubsanar}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
-                            {:else if JSON.parse(proyecto.estado)?.requiereSubsanar && convocatoria.fase == 3}
+                            {:else if JSON.parse(proyecto.estado)?.requiereSubsanar}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
                             {/if}
                             {#if JSON.parse(proyecto.estado_cord_sennova)?.estado != undefined && JSON.parse(proyecto.estado_cord_sennova)?.estado == 'En revisión'}
