@@ -348,7 +348,7 @@ class ProyectoController extends Controller
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $idi                            = $proyecto->idi;
                 $idi->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
@@ -357,9 +357,9 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->ta()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad_social'       => 'required|string|max:10000',
-                    'propuesta_sostenibilidad_ambiental'    => 'required|string|max:10000',
-                    'propuesta_sostenibilidad_financiera'   => 'required|string|max:10000',
+                    'propuesta_sostenibilidad_social'       => 'required|string|max:40000',
+                    'propuesta_sostenibilidad_ambiental'    => 'required|string|max:40000',
+                    'propuesta_sostenibilidad_financiera'   => 'required|string|max:40000',
                 ]);
                 $ta = $proyecto->ta;
                 $ta->propuesta_sostenibilidad_social        = $request->propuesta_sostenibilidad_social;
@@ -370,7 +370,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->tp()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $tp                           = $proyecto->tp;
                 $tp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
@@ -379,7 +379,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $culturaInnovacion                              = $proyecto->culturaInnovacion;
                 $culturaInnovacion->propuesta_sostenibilidad    = $request->propuesta_sostenibilidad;
@@ -388,7 +388,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $servicioTecnologico                            = $proyecto->servicioTecnologico;
                 $servicioTecnologico->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
