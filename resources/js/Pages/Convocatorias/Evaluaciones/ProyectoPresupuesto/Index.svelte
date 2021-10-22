@@ -352,7 +352,7 @@
         <hr class="mt-10 mb-10" />
 
         <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación general</h1>
-        <InfoMessage alertMsg={true}><strong>Importante:</strong> Si hace una evaluación general de los rubros presupeustales reemplazará los ítems ya evaluados.</InfoMessage>
+        <InfoMessage alertMsg={true}><strong>Importante:</strong> Si hace una evaluación general de los rubros presupuestales reemplazará los ítems ya evaluados.</InfoMessage>
 
         <div class="mt-16">
             <form on:submit|preventDefault={submit}>

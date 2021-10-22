@@ -849,9 +849,9 @@
                 <p>Antes de iniciar a la segunda evaluación por favor diríjase a la sección <strong>Comentarios generales</strong> y verifique si el proponente hizo alguna aclaración sobre algún ítem.</p>
 
                 {#if ta.proyecto.pdf_versiones}
-                    <hr class="mx-4 block" />
-                    <p class="mt-4">También revise la versión del proyecto en .pdf para ir verificando los cambios realizados en los diferentes campos.</p>
+                    <hr class="m-10 block" />
                     <h1 class="text-center mt-4 mb-4">Version del proyecto (.pdf)</h1>
+                    <p class="mt-4">También revise la versión del proyecto en .pdf para ir verificando los cambios realizados en los diferentes campos.</p>
                     <ul>
                         {#each ta.proyecto.pdf_versiones as version}
                             <li>
