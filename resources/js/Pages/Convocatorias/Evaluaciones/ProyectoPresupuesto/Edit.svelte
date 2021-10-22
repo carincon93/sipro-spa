@@ -33,8 +33,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let dialogEvaluacion = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'
-
     let presupuestoInfo = {
         codigo_uso_presupuestal: '',
 
@@ -56,6 +54,8 @@
         },
         formato_estudio_mercado: '',
     }
+
+    let dialogEvaluacion = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'
 
     let sending = false
     let form = useForm({
