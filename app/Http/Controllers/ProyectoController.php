@@ -66,11 +66,18 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        $proyecto->a_evaluar                = $request->a_evaluar;
-        $proyecto->modificable              = $request->modificable;
-        $proyecto->finalizado               = $request->finalizado;
-        $proyecto->radicado                 = $request->radicado;
-        $proyecto->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
+        if ($request->subsanacion == true) {
+            $proyecto->a_evaluar   = false;
+            $proyecto->modificable = true;
+            $proyecto->finalizado  = false;
+            $proyecto->mostrar_recomendaciones = true;
+            $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
+        } else {
+            $proyecto->a_evaluar   = true;
+            $proyecto->modificable = false;
+            $proyecto->finalizado  = true;
+            $proyecto->mostrar_recomendaciones = false;
+        }
 
         $proyecto->save();
 

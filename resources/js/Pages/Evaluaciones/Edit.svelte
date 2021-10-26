@@ -12,7 +12,6 @@
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let evaluacion
@@ -56,22 +55,6 @@
     function destroy() {
         if (isSuperAdmin) {
             $form.delete(route('evaluaciones.destroy', evaluacion.id))
-        }
-    }
-
-    let formProyecto = useForm({
-        modificable: evaluacion.proyecto.modificable,
-        finalizado: evaluacion.proyecto.finalizado,
-        mostrar_recomendaciones: evaluacion.proyecto.mostrar_recomendaciones,
-    })
-
-    function submitProyecto() {
-        if (isSuperAdmin) {
-            $formProyecto.put(route('proyectos.update', evaluacion.proyecto.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-                preserveScroll: true,
-            })
         }
     }
 </script>
@@ -134,50 +117,6 @@
                 {/if}
                 {#if isSuperAdmin}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar evaluación</LoadingButton>
-                {/if}
-            </div>
-        </form>
-    </div>
-
-    <hr class="mt-20 mb-10" />
-
-    <h1 class="text-3xl mb-10">Administración del proyecto</h1>
-    <InfoMessage class="mb-10 max-w-3xl">
-        <p>
-            Tenga en cuenta que si activa una evaluación deberá bloquear el proyecto. Para ello desactive las opciones: <strong>¿El proyecto es modificable? y ¿El formulador puede observar las recomendaciones?</strong>.
-            <br />
-            Una vez finalicen la evaluación vuelva a dejar estas opciones como estaban en un principio.
-        </p>
-    </InfoMessage>
-
-    <div class="bg-white rounded shadow max-w-3xl">
-        <form on:submit|preventDefault={submitProyecto}>
-            <fieldset class="p-8">
-                <div class="mt-4">
-                    <Label labelFor="modificable" value="¿El proyecto es modificable?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$formProyecto.modificable} />
-                    <InputError message={errors.modificable} />
-                </div>
-
-                <div class="mt-4">
-                    <Label labelFor="finalizado" value="¿El proyecto está finalizado?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$formProyecto.finalizado} />
-                    <InputError message={errors.finalizado} />
-                </div>
-
-                <div class="mt-4">
-                    <Label labelFor="mostrar_recomendaciones" value="¿El formulador puede observar las recomendaciones?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$formProyecto.mostrar_recomendaciones} />
-                    <InputError message={errors.mostrar_recomendaciones} />
-                </div>
-            </fieldset>
-
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar proyecto</LoadingButton>
                 {/if}
             </div>
         </form>
