@@ -145,7 +145,7 @@
 
             <hr class="mt-10 mb-10" />
             <div>
-                <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
+                <p>Inicio etapa de segunda evaluación desde el 22 de octubre a las 13:00 HH hasta el 3 de noviembre a las 23:59 HH</p>
             </div>
 
             <hr class="mt-10 mb-10" />
