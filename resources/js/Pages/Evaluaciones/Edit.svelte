@@ -12,7 +12,6 @@
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let evaluacion
