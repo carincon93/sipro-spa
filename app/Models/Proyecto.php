@@ -1059,4 +1059,30 @@ class Proyecto extends Model
 
         return $dvst;
     }
+
+
+    public function updateValoresProyecto()
+    {
+        $proyecto = $this;
+        $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
+        switch ($proyecto) {
+            case $proyecto->estado_evaluacion_idi != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
+                break;
+            case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                break;
+            case $proyecto->estado_evaluacion_ta != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_ta]);
+                break;
+            case $proyecto->estado_evaluacion_tp != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_tp]);
+                break;
+            case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                break;
+            default:
+                break;
+        }
+    }
 }
