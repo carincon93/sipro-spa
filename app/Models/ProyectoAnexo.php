@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,13 @@ class ProyectoAnexo extends Model
      * @var string
      */
     protected $table = 'proyecto_anexo';
+
+    /**
+     * appends
+     *
+     * @var array
+     */
+    public $appends = ['fecha_actualizacion'];
 
     /**
      * The attributes that are mass assignable.
@@ -80,5 +88,10 @@ class ProyectoAnexo extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getFechaActualizacionAttribute()
+    {
+        return Carbon::parse($this->updated_at, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
     }
 }
