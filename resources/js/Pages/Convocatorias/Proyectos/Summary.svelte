@@ -80,7 +80,7 @@
     }
 
     function sendProject() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -101,7 +101,7 @@
         comentario: '',
     })
     function submitComentario() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => {
@@ -143,29 +143,33 @@
             </InfoMessage>
         {/if}
 
-        {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
-            <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
-        {:else if proyecto.a_evaluar == true}
-            <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
-        {/if}
-
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.modificable == true && proyecto.finalizado == true && proyecto.a_evaluar == false)}
+        <InfoMessage class="mb-2">
+            <h1 class="text-3xl"><strong>¡Tenga en cuenta!</strong></h1>
+            <p>
+                Esta es una opción para notificar al Dinamizador que ha finalizado de diligenciar/subsanar el proyecto y de esta manera haga una revisión con el objetivo de confirmar o hacer un comentario de ajuste. Si el Dinamizador por alguna razón NO confirma el proyecto
+                <strong>la plataforma lo hará automáticamente al finalizar cada fase ya sea de formulación o de subsanación.</strong>
+            </p>
+        </InfoMessage>
+        <hr class="mt-10 mb-10" />
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
                 {#if proyectoCompleto}
-                    <p class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar formulación</strong> y a continuación, escriba la contraseña de su usuario.</p>
-                    <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar formulación</Button>
+                    <br />
+                    <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised">Confirmar proyecto</Button>
+                    <br />
+                    <small class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar proyecto</strong> y a continuación, escriba la contraseña de su usuario.</small>
                 {:else if proyectoCompleto == false}
                     <form on:submit|preventDefault={submitComentario}>
-                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true) ? undefined : true}>
+                        <fieldset disabled={isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true) ? undefined : true}>
                             <div class="mt-8">
                                 <p class="mb-2">Si considera que el proyecto está incompleto por favor haga un comentario al proponente detallando que información o ítems debe completar.</p>
                                 <Textarea label="Comentario" maxlength="40000" id="comentario" error={errors.comentario} bind:value={$comentarioForm.comentario} required />
                             </div>
                         </fieldset>
                         <div class="mt-10 flex items-center">
-                            {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.modificable == true)}
+                            {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)}
                                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>
@@ -261,6 +265,12 @@
         {/if}
     </div>
     <hr class="mt-10 mb-10" />
+    {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
+        <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
+    {:else if proyecto.a_evaluar == true}
+        <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
+    {/if}
+    <hr class="mt-10 mb-10" />
     <div>
         <InfoMessage>
             <h1><strong>Historial de acciones</strong></h1>
@@ -327,20 +337,20 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
-            Confirmar formulación
+            Confirmar proyecto
         </div>
         <div slot="content">
-            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea confirmar la formulación del proyecto?<br />Una vez confirmado el proyecto no se podrá modificar." />
+            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea confirmar el proyecto del proyecto?<br />Una vez confirmado el proyecto no se podrá modificar." />
 
             <form on:submit|preventDefault={sendProject} id="confirmar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar la formulación de este proyecto" class="mb-4" />
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar el proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
             </form>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (sendProjectDialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="confirmar-proyecto">Confirmar formulación</Button>
+                <Button variant="raised" form="confirmar-proyecto">Confirmar proyecto</Button>
             </div>
         </div>
     </Dialog>

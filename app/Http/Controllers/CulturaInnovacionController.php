@@ -151,6 +151,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->precio_proyecto           = $culturaInnovacion->proyecto->precioProyecto;
         $culturaInnovacion->proyecto->centroFormacion;
 
+        $culturaInnovacion->mostrar_recomendaciones = $culturaInnovacion->proyecto->mostrar_recomendaciones;
+
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura', 'mostrar_recomendaciones'),
             'culturaInnovacion'                         => $culturaInnovacion,

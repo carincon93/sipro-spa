@@ -506,8 +506,10 @@ class Evaluacion extends Model
 
     public function getEstadoProyectoPorEvaluadorAttribute()
     {
-        if ($this->idiEvaluacion()->exists() || $this->servicioTecnologicoEvaluacion()->exists()) {
+        if ($this->idiEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionIdi($this->total_evaluacion, $this->total_recomendaciones, null);
+        } else if ($this->servicioTecnologicoEvaluacion()->exists()) {
+            return $this->proyecto->estadoEvaluacionServiciosTecnologicos($this->total_evaluacion, $this->total_recomendaciones, null);
         } else if ($this->culturaInnovacionEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionCulturaInnovacion($this->total_evaluacion, $this->total_recomendaciones, null);
         }
@@ -523,9 +525,16 @@ class Evaluacion extends Model
     public function scopeFilterEvaluacion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+
             $query->select('users.nombre', 'evaluaciones.*');
-            $query->where('users.nombre', 'ilike', '%' . $search . '%');
             $query->join('users', 'evaluaciones.user_id', 'users.id');
+            $query->where('users.nombre', 'ilike', '%' . $search . '%');
+            if (is_numeric($search)) {
+                $query->orWhere('evaluaciones.proyecto_id', $search - 8000);
+            }
         })->when($filters['estado'] ?? null, function ($query, $estado) {
             if ($estado == 'finalizados idi') {
                 $query->join('idi_evaluaciones', 'evaluaciones.id', 'idi_evaluaciones.id');

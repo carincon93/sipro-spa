@@ -11,6 +11,8 @@
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
@@ -52,6 +54,8 @@
         },
         formato_estudio_mercado: '',
     }
+
+    let dialogEvaluacion = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'
 
     let sending = false
     let form = useForm({
@@ -219,50 +223,38 @@
                 </div>
             </form>
         </div>
-        {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
-            <div class="px-4">
-                <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
-                <ul>
-                    <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" use:inertia href={route('convocatorias.evaluaciones.presupuesto.soportes', [convocatoria.id, evaluacion.id, proyectoPresupuesto.id])}>Soportes / Cotizaciones</a>
-                    </li>
-                </ul>
-            </div>
-        {/if}
     </div>
 
-    {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'}
-        <h1 class="text-2xl mt-10">Archivos</h1>
-        <div class="mt-4 bg-white rounded shadow">
-            <table class="w-full whitespace-no-wrap table-fixed data-table">
-                <thead>
-                    <tr class="text-left font-bold">
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre archivo</th>
-                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {#if !proyectoPresupuesto.formato_estudio_mercado}
-                        <tr>
-                            <td class="border-t px-6 py-4" colspan="2">Sin información registrada</td>
-                        </tr>
-                    {:else}
-                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                            <td class="border-t px-6 pt-6 pb-4"> Estudio de mercado </td>
-
-                            <td class="border-t px-6 pt-6 pb-4">
-                                <a target="_blank" class="flex text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                    </svg>
-                                    Descargar estudio de mercado
-                                </a>
-                            </td>
-                        </tr>
-                    {/if}
-                </tbody>
-            </table>
+    <Dialog bind:open={dialogEvaluacion} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">Archivos</div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Por favor descargue el anexo y los soportes/cotizaciones</h1>
+                <a target="_blank" class="flex text-white underline block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Descargar estudio de mercado
+                </a>
+                <hr class="mb-4" />
+                <div>
+                    {#each proyectoPresupuesto.soportes_estudio_mercado as soporte}
+                        {soporte.empresa}
+                        <a target="_blank" class="flex text-white underline block mb-4" download href={route('convocatorias.proyectos.presupuesto.soportes.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar soporte/cotización
+                        </a>
+                        <hr class="mb-4" />
+                    {/each}
+                </div>
+            </div>
         </div>
-    {/if}
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (dialogEvaluacion = false)} variant={null}>Aceptar</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

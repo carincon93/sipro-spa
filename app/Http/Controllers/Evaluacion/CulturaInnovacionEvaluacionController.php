@@ -72,6 +72,7 @@ class CulturaInnovacionEvaluacionController extends Controller
 
         $culturaInnovacionEvaluacion->evaluacion->proyecto;
         $culturaInnovacion = $culturaInnovacionEvaluacion->evaluacion->proyecto->culturaInnovacion;
+        $culturaInnovacion->proyecto->pdfVersiones;
         $culturaInnovacion->proyecto->codigo_linea_programatica = $culturaInnovacion->proyecto->lineaProgramatica->codigo;
         $culturaInnovacion->proyecto->precio_proyecto           = $culturaInnovacion->proyecto->precioProyecto;
         $culturaInnovacion->proyecto->centroFormacion;

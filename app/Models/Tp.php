@@ -120,6 +120,9 @@ class Tp extends Model
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
             $query->where('resumen', 'ilike', '%' . $search . '%');
+            if (is_numeric($search)) {
+                $query->orWhere('tp.id', $search - 8000);
+            }
         });
     }
 

@@ -40,7 +40,7 @@ class ProyectoController extends Controller
     {
         return Inertia::render('Proyectos/Index', [
             'filters'       => request()->all('search'),
-            'proyectos'     => Proyecto::orderBy('id', 'ASC')->paginate()->appends(['search' => request()->search]),
+            'proyectos'     => Proyecto::with('PdfVersiones', 'convocatoria')->orderBy('id', 'ASC')->filterProyecto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -66,13 +66,43 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        $proyecto->a_evaluar    = $request->a_evaluar;
-        $proyecto->modificable  = $request->modificable;
-        $proyecto->finalizado   = $request->finalizado;
-        $proyecto->radicado     = $request->radicado;
-        $proyecto->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
+        if ($request->subsanacion == true) {
+            $proyecto->a_evaluar   = false;
+            $proyecto->modificable = true;
+            $proyecto->finalizado  = false;
+            $proyecto->mostrar_recomendaciones = true;
+            $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
+        } else {
+            $proyecto->a_evaluar   = true;
+            $proyecto->modificable = false;
+            $proyecto->finalizado  = true;
+            $proyecto->mostrar_recomendaciones = false;
+        }
 
         $proyecto->save();
+
+        switch ($proyecto) {
+            case $proyecto->estado_evaluacion_idi != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
+                break;
+            case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                break;
+
+            case $proyecto->estado_evaluacion_ta != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_ta]);
+                break;
+
+            case $proyecto->estado_evaluacion_tp != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_tp]);
+                break;
+
+            case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                $proyecto->update(['estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                break;
+            default:
+                break;
+        }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -325,7 +355,7 @@ class ProyectoController extends Controller
         switch ($proyecto) {
             case $proyecto->idi()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $idi                            = $proyecto->idi;
                 $idi->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
@@ -334,9 +364,9 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->ta()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad_social'       => 'required|string|max:10000',
-                    'propuesta_sostenibilidad_ambiental'    => 'required|string|max:10000',
-                    'propuesta_sostenibilidad_financiera'   => 'required|string|max:10000',
+                    'propuesta_sostenibilidad_social'       => 'required|string|max:40000',
+                    'propuesta_sostenibilidad_ambiental'    => 'required|string|max:40000',
+                    'propuesta_sostenibilidad_financiera'   => 'required|string|max:40000',
                 ]);
                 $ta = $proyecto->ta;
                 $ta->propuesta_sostenibilidad_social        = $request->propuesta_sostenibilidad_social;
@@ -347,7 +377,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->tp()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $tp                           = $proyecto->tp;
                 $tp->propuesta_sostenibilidad = $request->propuesta_sostenibilidad;
@@ -356,7 +386,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->culturaInnovacion()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $culturaInnovacion                              = $proyecto->culturaInnovacion;
                 $culturaInnovacion->propuesta_sostenibilidad    = $request->propuesta_sostenibilidad;
@@ -365,7 +395,7 @@ class ProyectoController extends Controller
                 break;
             case $proyecto->servicioTecnologico()->exists():
                 $request->validate([
-                    'propuesta_sostenibilidad' => 'required|string|max:10000',
+                    'propuesta_sostenibilidad' => 'required|string|max:40000',
                 ]);
                 $servicioTecnologico                            = $proyecto->servicioTecnologico;
                 $servicioTecnologico->propuesta_sostenibilidad  = $request->propuesta_sostenibilidad;
@@ -572,6 +602,7 @@ class ProyectoController extends Controller
 
         $evaluacion->iniciado = false;
         $evaluacion->finalizado = true;
+        $evaluacion->modificable = false;
         $evaluacion->save();
 
         Auth::user()->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));
@@ -1096,6 +1127,8 @@ class ProyectoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
+        $proyecto->evaluaciones->load('evaluacionCausalesRechazo');
 
         return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),

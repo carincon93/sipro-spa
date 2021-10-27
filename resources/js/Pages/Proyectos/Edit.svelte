@@ -1,6 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
+    import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
@@ -8,6 +9,8 @@
     import InputError from '@/Shared/InputError'
     import LoadingButton from '@/Shared/LoadingButton'
     import Switch from '@/Shared/Switch'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Button from '@/Shared/Button'
 
     export let errors
     export let proyecto
@@ -22,11 +25,7 @@
 
     let sending = false
     let form = useForm({
-        a_evaluar: proyecto.a_evaluar,
-        modificable: proyecto.modificable,
-        finalizado: proyecto.finalizado,
-        radicado: proyecto.radicado,
-        mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
+        subsanacion: proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false ? true : false,
     })
 
     function submit() {
@@ -55,40 +54,28 @@
         </div>
     </header>
 
+    <Button class="mb-2" variant="raised" on:click={() => Inertia.visit(route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id]))}>Detalles del proyecto</Button>
+
+    <br />
+
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8">
                 <div class="mt-4">
-                    <Label labelFor="a_evaluar" value="¿El proyecto está radicado?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$form.a_evaluar} />
-                    <InputError message={errors.a_evaluar} />
-                </div>
+                    <Label labelFor="subsanacion" value="¿El proyecto puede ser subsanado? Nota: Se finalizarán todas la evaluaciones del proyecto {proyecto.codigo}" class="inline-block mb-4" />
 
-                <div class="mt-4">
-                    <Label labelFor="modificable" value="¿El proyecto es modificable?" class="inline-block mb-4" />
+                    <InfoMessage>
+                        <p class="font-black">Tenga en cuenta: Información del estado del proyecto (Se tienen en cuenta la(s) {JSON.parse(proyecto.estado).evaluacionesHabilitadas} evaluacion(es) habilitada(s))</p>
+                        <ul>
+                            <li>Estado del proyecto: {JSON.parse(proyecto.estado).estado}</li>
+                            <li>Número de recomendaciones: {JSON.parse(proyecto.estado).numeroRecomendaciones}</li>
+                            <li>Puntaje total: {JSON.parse(proyecto.estado).puntaje}</li>
+                            <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado).requiereSubsanar ? 'Si' : 'No'}</li>
+                        </ul>
+                    </InfoMessage>
                     <br />
-                    <Switch bind:checked={$form.modificable} />
-                    <InputError message={errors.modificable} />
-                </div>
-
-                <div class="mt-4">
-                    <Label labelFor="finalizado" value="¿El proyecto está finalizado?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$form.finalizado} />
-                    <InputError message={errors.finalizado} />
-                </div>
-                <div class="mt-4">
-                    <Label labelFor="radicado" value="¿El proyecto está radicado?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$form.radicado} />
-                    <InputError message={errors.radicado} />
-                </div>
-                <div class="mt-4">
-                    <Label labelFor="mostrar_recomendaciones" value="¿El formulador puede observar las recomendaciones?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$form.mostrar_recomendaciones} />
-                    <InputError message={errors.mostrar_recomendaciones} />
+                    <Switch bind:checked={$form.subsanacion} />
+                    <InputError message={errors.subsanacion} />
                 </div>
             </fieldset>
 

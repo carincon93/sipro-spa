@@ -1096,32 +1096,45 @@
         </div>
         <div slot="content">
             <div>
-                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
-                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
-                <ul class="list-disc">
-                    <li>Video</li>
-                    <li>Industria 4.0</li>
-                    <li>Economía naranja</li>
-                    <li>Política Institucional para Atención de las Personas con discapacidad</li>
-                    <li>Origen de las muestras</li>
-                    <li>Plan tecnológico</li>
-                    <li>Agendas Departamentales de Competitividad e Innovación</li>
-                    <li>Mesas sectoriales</li>
-                    <li>Tecnoacademia</li>
-                    <li>Resumen</li>
-                    <li>Antecedentes</li>
-                    <li>Marco conceptual</li>
-                    <li>Bibliografía</li>
-                    <li>Número de aprendices beneficiados</li>
-                    <li>Nombre de los municipios beneficiados</li>
-                    <li>Impacto en el centro de formación</li>
-                </ul>
+                {#if (JSON.parse(idi.proyecto.estado_cord_sennova)?.requiereSubsanar == true && idi.proyecto.mostrar_recomendaciones == true) || (JSON.parse(idi.proyecto.estado)?.requiereSubsanar == true && idi.proyecto.mostrar_recomendaciones == true)}
+                    <h1 class="text-center mb-4 font-black text-2xl">Este proyecto requiere ser subsanado</h1>
+                    <p>Por favor revise las observaciones de los evaluadores en cada uno de los campos y secciones.</p>
+                    <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si hay comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>
+                {:else if (JSON.parse(idi.proyecto.estado_cord_sennova)?.requiereSubsanar == false && idi.proyecto.mostrar_recomendaciones == true) || (JSON.parse(idi.proyecto.estado)?.requiereSubsanar == false && idi.proyecto.mostrar_recomendaciones == true)}
+                    <div>
+                        <h1 class="text-center mb-4 font-black text-2xl">Este proyecto no requiere subsanación</h1>
+                        <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
+                    </div>
+                {:else}
+                    <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Generalidades</strong> por favor continue diligenciando los siguientes campos:</h1>
+                    <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                    <ul class="list-disc">
+                        <li>Video</li>
+                        <li>Industria 4.0</li>
+                        <li>Economía naranja</li>
+                        <li>Política Institucional para Atención de las Personas con discapacidad</li>
+                        <li>Origen de las muestras</li>
+                        <li>Plan tecnológico</li>
+                        <li>Agendas Departamentales de Competitividad e Innovación</li>
+                        <li>Mesas sectoriales</li>
+                        <li>Tecnoacademia</li>
+                        <li>Resumen</li>
+                        <li>Antecedentes</li>
+                        <li>Marco conceptual</li>
+                        <li>Bibliografía</li>
+                        <li>Número de aprendices beneficiados</li>
+                        <li>Nombre de los municipios beneficiados</li>
+                        <li>Impacto en el centro de formación</li>
+                    </ul>
+                {/if}
             </div>
         </div>
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
+                {#if idi.proyecto.modificable}
+                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
+                {/if}
             </div>
         </div>
     </Dialog>

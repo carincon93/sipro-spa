@@ -147,6 +147,17 @@ class ProyectoRolSennova extends Model
 
     public function getRolAprobadoAttribute()
     {
-        return $this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('correcto', true)->count();
+        $estado = '';
+
+        if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('correcto', true)->count()) {
+            $estado = 'Aprobado';
+        } else if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->where('correcto', false)->count()) {
+            $estado = 'Reprobado';
+        } else if ($this->proyectoRolesEvaluaciones()->count() == 0) {
+            $estado = 'Sin evaluar';
+        }
+
+
+        return $estado;
     }
 }

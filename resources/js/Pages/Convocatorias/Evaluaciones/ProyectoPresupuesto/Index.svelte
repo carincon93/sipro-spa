@@ -301,9 +301,14 @@
                         {/if}
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
-                            {presupuesto.proyecto_presupuestos_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
-                        </p>
+                        <div class="flex items-center">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {presupuesto.proyecto_presupuestos_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
+                            </p>
+                            {#if convocatoria.fase == 4}
+                                <small class="text-red-500">{presupuesto.proyecto_presupuestos_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id && item.correcto == false) ? 'Por favor revise si hicieron la respectiva subsanación' : ''}</small>
+                            {/if}
+                        </div>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
@@ -328,14 +333,14 @@
 
             {#if proyectoPresupuesto.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="5">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>
 
         <tfoot slot="tfoot">
             <tr>
-                <td colspan="4" class="border-t p-4">
+                <td colspan="5" class="border-t p-4">
                     <strong>Actualmente el total del costo de los productos o servicios requeridos es de:</strong> ${new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.total_proyecto_presupuesto) ? proyecto.total_proyecto_presupuesto : 0)} COP
                 </td>
             </tr>
@@ -347,7 +352,7 @@
         <hr class="mt-10 mb-10" />
 
         <h1 class="text-3xl mt-24 mb-8 text-center" id="evaluacion">Evaluación general</h1>
-        <InfoMessage alertMsg={true}><strong>Importante:</strong> Si hace una evaluación general de los rubros presupeustales reemplazará los ítems ya evaluados.</InfoMessage>
+        <InfoMessage alertMsg={true}><strong>Importante:</strong> Si hace una evaluación general de los rubros presupuestales reemplazará los ítems ya evaluados.</InfoMessage>
 
         <div class="mt-16">
             <form on:submit|preventDefault={submit}>

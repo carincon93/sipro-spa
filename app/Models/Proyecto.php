@@ -40,6 +40,7 @@ class Proyecto extends Model
         'en_subsanacion',
         'estructuracion_proyectos',
         'estado',
+        'estado_cord_sennova',
         'precio_proyecto',
         'mostrar_recomendaciones'
     ];
@@ -349,9 +350,26 @@ class Proyecto extends Model
             ]);
     }
 
+    /**
+     * Filtrar registros
+     *
+     * @param  mixed $query
+     * @param  mixed $filters
+     * @return void
+     */
+    public function scopeFilterProyecto($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->where('proyectos.id', $search - 8000);
+        });
+    }
+
     public static function getLog($proyectoId)
     {
-        return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->orderBy('created_at', 'DESC')->get();
+        return DB::table('notifications')->select('data', 'created_at')->whereRaw("data->>'proyectoId' = '" . $proyectoId . "'")->where('type', '!=', 'App\Notifications\EvaluacionFinalizada')->orderBy('created_at', 'DESC')->get();
     }
 
 
@@ -764,7 +782,7 @@ class Proyecto extends Model
                 }
 
                 if ($key === count($evaluaciones) - 1) {
-                    array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                    array_push($estados, $this->estadoEvaluacionServiciosTecnologicos($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
                     if ($causalRechazo == null) {
                         switch ($evaluacion) {
@@ -808,14 +826,14 @@ class Proyecto extends Model
             $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
 
             if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
-                $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
-                $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
+                $estadoEvaluacion = $this->estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
+                $requiereSubsanar = $this->estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
             } else {
                 $estadoEvaluacion = $causalRechazo;
             }
 
             if ($cantidadEvaluaciones == 0) {
-                $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
+                $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion_st.json'), true));
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
@@ -919,6 +937,7 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
         $id = null;
+        $estadoEvaluacion = null;
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
@@ -947,6 +966,36 @@ class Proyecto extends Model
     }
 
     /**
+     * estadoEvaluacionIdi
+     *
+     * @param  mixed $puntajeTotal
+     * @param  mixed $totalRecomendaciones
+     * @param  mixed $requiereSubsanar
+     * @return void
+     */
+    public function estadoEvaluacionServiciosTecnologicos($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
+    {
+        $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion_st.json'), true));
+
+        $id = null;
+        $estadoEvaluacion = null;
+        if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 1)->first()['value'];
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 2)->first()['value'];
+        } elseif ($puntajeTotal >= 0 && $totalRecomendaciones >= 0) { // Subsanación
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+            $requiereSubsanar = true;
+        }
+
+        return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
+    }
+
+
+    /**
      * estadoEvaluacionCulturaInnovacion
      *
      * @param  mixed $puntajeTotal
@@ -959,10 +1008,11 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
         $id = null;
+        $estadoEvaluacion = null;
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado - No requiere ser subsanado
+        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
             $id = $estadosEvaluacion->where('value', 2)->first()['value'];
         } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
@@ -988,31 +1038,25 @@ class Proyecto extends Model
     public function getDesviacionEstandarAttribute()
     {
         $evaluaciones = $this->evaluaciones()->where('habilitado', true)->get();
-        $nums = array();
+        $nums = [];
+        $sample = true;
+        $dvst = 0;
 
         foreach ($evaluaciones as $evaluacion) {
             array_push($nums, $evaluacion->total_evaluacion);
         }
+        if (count($nums) > 0 && ($sample ? count($nums) - 1 : count($nums)) > 0) {
+            $fMean = array_sum($nums) / count($nums);
+            $fVariance = 0.0;
+            foreach ($nums as $i) {
+                $fVariance += pow($i - $fMean, 2);
+            }
 
-        /**
-         * Calcular desviacion Estandar
-         * @author evilnapsis
-         **/
-        $sq = 0;
-        if (count($nums) > 0) {
-            $sum = 0;
-            for ($i = 0; $i < count($nums); $i++) {
-                $sum += $nums[$i];
-            }
-            $media = $sum / count($nums);
-            $sum2 = 0;
-            for ($i = 0; $i < count($nums); $i++) {
-                $sum2 += ($nums[$i] - $media) * ($nums[$i] - $media);
-            }
-            $vari = $sum2 / count($nums);
-            $sq = sqrt($vari);
+            $fVariance /= ($sample ? count($nums) - 1 : count($nums));
+
+            $dvst = (float) sqrt($fVariance);
         }
 
-        return $sq;
+        return $dvst;
     }
 }

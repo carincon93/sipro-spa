@@ -190,6 +190,9 @@ class Idi extends Model
             $search = str_replace("'", "", $search);
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(titulo) ilike unaccent('%" . $search . "%')");
+            if (is_numeric($search)) {
+                $query->orWhere('idi.id', $search - 8000);
+            }
         });
     }
 

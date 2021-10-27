@@ -134,9 +134,14 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
-                            {proyectoRolSennova.proyecto_roles_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
-                        </p>
+                        <div class="flex items-center">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {proyectoRolSennova.proyecto_roles_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
+                            </p>
+                            {#if convocatoria.fase == 4}
+                                <small class="text-red-500">{proyectoRolSennova.proyecto_roles_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id && item.correcto == false) ? 'Por favor revise si hicieron la respectiva subsanación' : ''}</small>
+                            {/if}
+                        </div>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>

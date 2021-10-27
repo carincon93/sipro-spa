@@ -46,6 +46,7 @@
     let municipios
     let programasFormacion
     let programasFormacionArticular
+    let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
     let sending = false
     let opcionesSiNo = [
@@ -919,6 +920,43 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={dialogSegundaEvaluacion} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/feedback.png'} alt="Evaluación" class="h-32 mb-6" />
+            </figure>
+            Código del proyecto: {culturaInnovacion.proyecto.codigo}
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Importante</h1>
+
+                <p>Antes de iniciar a la segunda evaluación por favor diríjase a la sección <strong>Comentarios generales</strong> y verifique si el proponente hizo alguna aclaración sobre algún ítem.</p>
+
+                {#if culturaInnovacion.proyecto.pdf_versiones}
+                    <hr class="m-10 block" />
+                    <h1 class="text-center mt-4 mb-4">Version del proyecto (.pdf)</h1>
+                    <p class="mt-4">También revise la versión del proyecto en .pdf para ir verificando los cambios realizados en los diferentes campos.</p>
+                    <ul>
+                        {#each culturaInnovacion.proyecto.pdf_versiones as version}
+                            <li>
+                                {#if version.estado == 1}
+                                    <a class="text-white underline" href={route('convocatorias.proyectos.version', [convocatoria.id, culturaInnovacion.id, version.version])}> {version.version}.pdf - Descargar</a>
+                                    <small class="block">{version.created_at}</small>
+                                {/if}
+                            </li>
+                        {/each}
+                    </ul>
+                {/if}
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (dialogSegundaEvaluacion = false)} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>
