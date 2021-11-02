@@ -26,16 +26,6 @@
     {/if}
 
     <div class="py-12">
-        {#if isSuperAdmin}
-            <div class="flex justify-center items-center flex-col">
-                <p>
-                    Si desea revisar, {#if isSuperAdmin} editar {/if} la información de la convocatoria, de clic en el siguiente botón
-                </p>
-                <div>
-                    <Button on:click={() => Inertia.visit(route('convocatorias.edit', [convocatoria.id]))} class="mt-8 mb-20" variant="raised">Ver detalles</Button>
-                </div>
-            </div>
-        {/if}
         {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
             <h1 class="text-4xl text-center">
                 A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} en la(s) que puede formular proyectos.
