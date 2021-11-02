@@ -27,14 +27,14 @@ class EvaluacionRequest extends FormRequest
             return [
                 'user_id'       => ['required', 'integer', 'exists:users,id'],
                 'habilitado'    => ['required', 'boolean'],
-                'finalizado'    => ['required', 'boolean'],
+                // 'finalizado'    => ['required', 'boolean'],
             ];
         } else {
             return [
-                'proyecto_id'    => ['required', 'integer', 'exists:proyectos,id'],
+                'proyecto_id'   => ['required', 'integer', 'exists:proyectos,id'],
                 'user_id'       => ['required', 'integer', 'exists:users,id'],
                 'habilitado'    => ['required', 'boolean'],
-                'finalizado'    => ['required', 'boolean'],
+                // 'finalizado'    => ['required', 'boolean'],
             ];
         }
     }

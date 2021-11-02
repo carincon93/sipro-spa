@@ -129,10 +129,6 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('update', [Convocatoria::class, $convocatoria]);
 
-        foreach ($convocatoria->evaluaciones()->get() as $evaluacion) {
-            $evaluacion->update(['estado' => $evaluacion->verificar_estado_evaluacion]);
-        }
-
         $convocatoria->descripcion                              = $request->descripcion;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
@@ -145,6 +141,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
+        $convocatoria->hora_finalizacion_fase                   = $request->hora_finalizacion_fase;
 
         if ($request->esta_activa) {
             $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
@@ -154,8 +151,46 @@ class ConvocatoriaController extends Controller
             }
         }
         $convocatoria->esta_activa              = $request->esta_activa;
-        $convocatoria->fase                     = $request->fase;
         $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
+
+        $convocatoria->save();
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Convocatoria  $convocatoria
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, Convocatoria $convocatoria)
+    {
+        $this->authorize('delete', [Convocatoria::class, $convocatoria]);
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            return back()
+                ->withErrors(['password' => 'Contraseña incorrecta']);
+        }
+
+        $convocatoria->delete();
+
+        return redirect()->route('convocatorias.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * updateFase
+     *
+     * @param  mixed $request
+     * @param  mixed $convocatoria
+     * @return void
+     */
+    public function updateFase(Request $request, Convocatoria $convocatoria)
+    {
+        foreach ($convocatoria->evaluaciones()->get() as $evaluacion) {
+            $evaluacion->update(['estado' => $evaluacion->verificar_estado_evaluacion]);
+        }
+
+        $convocatoria->fase = $request->fase;
 
         if ($request->fase == 1) { // Formulación
             $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
@@ -222,27 +257,6 @@ class ConvocatoriaController extends Controller
 
         $convocatoria->evaluaciones()->where('estado', 'LIKE', 'Sin evaluar')->update(['habilitado' => false]);
 
-        $convocatoria->save();
-
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Convocatoria  $convocatoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, Convocatoria $convocatoria)
-    {
-        $this->authorize('delete', [Convocatoria::class, $convocatoria]);
-        if (!Hash::check($request->password, Auth::user()->password)) {
-            return back()
-                ->withErrors(['password' => 'Contraseña incorrecta']);
-        }
-
-        $convocatoria->delete();
-
-        return redirect()->route('convocatorias.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

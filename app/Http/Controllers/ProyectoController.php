@@ -52,8 +52,12 @@ class ProyectoController extends Controller
      */
     public function editProyecto(Proyecto $proyecto)
     {
+        $proyecto->load('evaluaciones');
+        $proyecto->load('evaluaciones.evaluador');
         return Inertia::render('Proyectos/Edit', [
             'proyecto'    => $proyecto,
+            'proyectos'   => Proyecto::selectRaw("id as value, concat('SGPS-', id + 8000, '-SIPRO') as label")->with('idi', 'ta', 'tp', 'servicioTecnologico', 'culturaInnovacion')->orderBy('id', 'ASC')->get(),
+            'evaluadores' => User::select('users.id as value', 'users.nombre as label')->join('model_has_roles', 'users.id', 'model_has_roles.model_id')->join('roles', 'model_has_roles.role_id', 'roles.id')->where('roles.id', 11)->get()
         ]);
     }
 
