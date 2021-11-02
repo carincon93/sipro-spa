@@ -12,6 +12,7 @@
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let evaluacion
@@ -31,7 +32,6 @@
     let form = useForm({
         habilitado: evaluacion.habilitado,
         modificable: evaluacion.modificable,
-        finalizado: evaluacion.finalizado,
         proyecto_id: {
             value: evaluacion.proyecto_id,
             label: proyectos.find((item) => item.value == evaluacion.proyecto_id)?.label,
@@ -81,7 +81,10 @@
             <fieldset class="p-8">
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="user_id" value="Evaluador" />
-                    <Select id="user_id" items={evaluadores} bind:selectedValue={$form.user_id} error={errors.user_id} autocomplete="off" placeholder="Seleccione un evaluador" required />
+                    <Select disabled={evaluacion.clausula_confidencialidad} id="user_id" items={evaluadores} bind:selectedValue={$form.user_id} error={errors.user_id} autocomplete="off" placeholder="Seleccione un evaluador" required />
+                    {#if evaluacion.clausula_confidencialidad}
+                        <InfoMessage alertMsg={true}>No se puede modificar el evaluador debido a que la evaluación ya tiene información registrada. Por favor genere una nueva evaluación con el nuevo evaluador y posteriormente deshabilite esta evaluación.</InfoMessage>
+                    {/if}
                 </div>
 
                 <div class="mt-4">
@@ -90,24 +93,17 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="habilitado" value="¿La evaluación está habilitada?" class="inline-block mb-4" />
+                    <Label required labelFor="habilitado" value="¿La evaluación está habilitada? Nota: Una evaluación habilitada significa que el sistema la puede tomar para hacer el cálculo del promedio y asignar el estado del proyecto." class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.habilitado} />
                     <InputError message={errors.habilitado} />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="modificable" value="¿La evaluación es modificable?" class="inline-block mb-4" />
+                    <Label required labelFor="modificable" value="¿La evaluación es modificable? Nota: Si la evaluación es modificable el evaluador podrá editar la información de la evaluación. Por otro lado el formulador NO podrá modicar la información del proyecto mientras se está realizando una evaluación." class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.modificable} />
                     <InputError message={errors.modificable} />
-                </div>
-
-                <div class="mt-4">
-                    <Label required labelFor="finalizado" value="¿La evaluación está finalizada?" class="inline-block mb-4" />
-                    <br />
-                    <Switch bind:checked={$form.finalizado} />
-                    <InputError message={errors.finalizado} />
                 </div>
             </fieldset>
 

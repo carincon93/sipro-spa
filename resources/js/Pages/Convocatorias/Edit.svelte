@@ -9,7 +9,7 @@
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
     import Button from '@/Shared/Button'
-    import LoadingButton from '@/Shared/LoadingButton'
+    import InfoMessage from '@/Shared/InfoMessage'
     import Textarea from '@/Shared/Textarea'
     import Password from '@/Shared/Password'
     import Switch from '@/Shared/Switch'
@@ -29,14 +29,28 @@
 
     let dialogOpen = false
     let sending = false
-    let form = useForm({
-        descripcion: convocatoria.descripcion,
-        esta_activa: convocatoria.esta_activa,
+
+    let formFase = useForm({
         fase: {
             value: convocatoria.fase,
             label: fases.find((item) => item.value == convocatoria.fase)?.label,
         },
+    })
+
+    function submitFase() {
+        if (isSuperAdmin) {
+            $formFase.put(route('convocatorias.update-fase', convocatoria.id), {
+                onStart: () => (sending = true),
+                onFinish: () => (sending = false),
+                preserveScroll: true,
+            })
+        }
+    }
+    let form = useForm({
+        descripcion: convocatoria.descripcion,
+        esta_activa: convocatoria.esta_activa,
         fecha_finalizacion_fase: convocatoria.fecha_finalizacion_fase,
+        hora_finalizacion_fase: convocatoria.hora_finalizacion_fase,
         min_fecha_inicio_proyectos_idi: convocatoria.min_fecha_inicio_proyectos_idi,
         max_fecha_finalizacion_proyectos_idi: convocatoria.max_fecha_finalizacion_proyectos_idi,
         min_fecha_inicio_proyectos_cultura: convocatoria.min_fecha_inicio_proyectos_cultura,
@@ -47,11 +61,10 @@
         max_fecha_finalizacion_proyectos_ta: convocatoria.max_fecha_finalizacion_proyectos_ta,
         min_fecha_inicio_proyectos_tp: convocatoria.min_fecha_inicio_proyectos_tp,
         max_fecha_finalizacion_proyectos_tp: convocatoria.max_fecha_finalizacion_proyectos_tp,
-
         mostrar_recomendaciones: convocatoria.mostrar_recomendaciones,
     })
 
-    function submit() {
+    function submitInfo() {
         if (isSuperAdmin) {
             $form.put(route('convocatorias.update', convocatoria.id), {
                 onStart: () => (sending = true),
@@ -94,13 +107,50 @@
 
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
-            <form on:submit|preventDefault={submit}>
+            <form on:submit|preventDefault={submitFase}>
+                <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="fase" value="Fase" />
+                        </div>
+                        <div>
+                            <Select id="fase" items={fases} bind:selectedValue={$formFase.fase} error={errors.fase} autocomplete="off" placeholder="Seleccione una fase" required />
+                        </div>
+                    </div>
+
+                    <InfoMessage class="mt-10">
+                        {#if $formFase.fase?.value == 1}
+                            <strong>Tenga en cuenta:</strong> La fase de {$formFase.fase?.label.toLowerCase()} permitirá a los formuladores crear, modificar y eliminar proyectos.
+                        {:else if $formFase.fase?.value == 2}
+                            <strong>Tenga en cuenta:</strong> La fase de {$formFase.fase?.label.toLowerCase()} bloqueará a los formuladores las acciones de crear, modificar y eliminar proyectos.
+                        {:else if $formFase.fase?.value == 3}
+                            <strong>Tenga en cuenta:</strong> La fase de {$formFase.fase?.label.toLowerCase()} permitirá a los formuladores modificar aquellos proyectos que pueden ser subsanados y a los evaluadores se le bloqueará la acción de modificar las evaluaciones.
+                        {:else if $formFase.fase?.value == 4}
+                            <strong>Tenga en cuenta:</strong> La fase de {$formFase.fase?.label.toLowerCase()} bloqueará a los formuladores la acción de modificar aquellos proyectos que pasaron a etapa de subsanación y a los evaluadores se le habilitarán aquellas evaluaciones de proyectos subsanados.
+                        {:else if $formFase.fase?.value == 5}
+                            <strong>Tenga en cuenta:</strong> La fase de {$formFase.fase?.label.toLowerCase()} bloqueará a los formuladores la modificación de proyectos y a los evaluadores la modificación de las evaluaciones.
+                        {/if}
+                    </InfoMessage>
+                </fieldset>
+                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                    {#if isSuperAdmin}
+                        <Button class="btn-indigo ml-auto" type="submit">Editar fase</Button>
+                    {/if}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr class="mt-10 mb-10" />
+
+    <div class="flex">
+        <div class="bg-white rounded shadow max-w-3xl flex-1">
+            <form on:submit|preventDefault={submitInfo}>
                 <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                     {#if $form.fase?.label}
                         <div class="mt-4 mb-20">
-                            <p class="text-center">Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}</p>
                             <div class="mt-4 ">
-                                <Label required labelFor="fecha_finalizacion_fase" value="Fecha límite" />
+                                <Label required labelFor="fecha_finalizacion_fase" value="Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}" />
                                 <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
                             </div>
                         </div>
@@ -108,6 +158,14 @@
                             <InputError message={errors.fecha_finalizacion_fase} />
                         {/if}
                     {/if}
+
+                    <div class="mt-4 mb-20">
+                        <div class="mt-4 ">
+                            <Label required labelFor="hora_finalizacion_fase" value="Hora límite" />
+                            <Input id="hora_finalizacion_fase" type="time" input$step="1" class="mt-1" bind:value={$form.hora_finalizacion_fase} required />
+                            <InputError message={errors.hora_finalizacion_fase} />
+                        </div>
+                    </div>
 
                     <div class="mt-4">
                         <Textarea label="Descripción" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
@@ -126,17 +184,6 @@
                         <Switch bind:checked={$form.mostrar_recomendaciones} />
                         <InputError message={errors.mostrar_recomendaciones} />
                     </div>
-
-                    <div class="mt-44 mb-20 grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="fase" value="Fase" />
-                        </div>
-                        <div>
-                            <Select id="fase" items={fases} bind:selectedValue={$form.fase} error={errors.fase} autocomplete="off" placeholder="Seleccione una fase" required />
-                        </div>
-                    </div>
-
-                    <hr />
 
                     <div class="mt-20">
                         <p class="text-center">Fechas máximas de ejecución de proyectos I+D+i</p>
@@ -248,7 +295,7 @@
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar convocatoria </button>
                     {/if}
                     {#if isSuperAdmin}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar convocatoria</LoadingButton>
+                        <Button class="btn-indigo ml-auto" type="submit">Editar convocatoria</Button>
                     {/if}
                 </div>
             </form>

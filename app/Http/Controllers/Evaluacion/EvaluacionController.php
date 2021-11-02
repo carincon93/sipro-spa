@@ -158,8 +158,15 @@ class EvaluacionController extends Controller
         }
 
         $evaluacion->habilitado  = $request->habilitado;
-        $evaluacion->modificable = $request->modificable;
-        $evaluacion->finalizado  = $request->finalizado;
+
+        if ($request->modificable) {
+            $evaluacion->proyecto()->update(['modificable' => false, 'finalizado' => true, 'a_evaluar' => true, 'mostrar_recomendaciones' => false]);
+            $evaluacion->modificable = $request->modificable;
+            $evaluacion->finalizado  = false;
+        } else {
+            $evaluacion->modificable = $request->modificable;
+            $evaluacion->finalizado  = true;
+        }
         $evaluacion->evaluador()->associate($request->user_id);
         $evaluacion->proyecto()->associate($evaluacion->proyecto_id);
 
