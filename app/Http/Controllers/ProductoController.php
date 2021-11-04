@@ -212,6 +212,8 @@ class ProductoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
         $proyecto->idi;
         $producto->productoIdi;
         $proyecto->culturaInnovacion;

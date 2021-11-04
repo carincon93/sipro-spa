@@ -141,13 +141,15 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea disabled={proyecto.codigo_linea_programatica == 70} label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
-                <div class="mt-8">
-                    <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
-                    <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
-                </div>
+                {#if proyecto.codigo_linea_programatica != 70}
+                    <div class="mt-8">
+                        <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
+                        <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
+                    </div>
+                {/if}
                 {#if proyecto.servicio_tecnologico == null}
                     <div class="mt-8">
                         <Label required labelFor="indicador" value="Indicador" />
@@ -157,7 +159,7 @@
                         {:else}
                             <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
                         {/if}
-                        <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                        <Textarea disabled={proyecto.codigo_linea_programatica == 70} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 
@@ -186,7 +188,7 @@
                             <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
                         {/if}
 
-                        <Textarea maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
+                        <Textarea disabled={proyecto.codigo_linea_programatica == 70} maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
 

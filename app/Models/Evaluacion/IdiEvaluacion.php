@@ -135,6 +135,7 @@ class IdiEvaluacion extends Model
     public static function getProyectosPorEvaluador($convocatoria)
     {
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) { // Admin
             $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
