@@ -141,20 +141,16 @@
     <Dialog bind:open={dialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
         <div slot="content">
-            <small>Octubre 14</small>
+            <small>Noviembre 4</small>
 
-            <hr class="mt-10 mb-10" />
-            <div>
-                <p>Inicio etapa de segunda evaluación desde el 22 de octubre a las 13:00 HH hasta el 3 de noviembre a las 23:59 HH</p>
-            </div>
-
-            <hr class="mt-10 mb-10" />
-            <div>
-                <p>Revise cuales proyectos tienen el mensaje de <strong>Requiere ser subsanado</strong>, ingrese al proyecto y realice la respectiva subsanación. <br /> <img class="mx-auto" src={window.basePath + '/images/img-subsanacion.png'} alt="" /></p>
-            </div>
             <hr class="mt-10 mb-10" />
             <div>
                 <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
+            </div>
+
+            <hr class="mt-10 mb-10" />
+            <div>
+                <p>Los PDF finales de los proyectos se generará dentro de las próximas 24 horas. Por favor este atento (a).</p>
             </div>
         </div>
         <div slot="actions">

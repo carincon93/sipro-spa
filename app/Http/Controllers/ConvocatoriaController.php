@@ -191,6 +191,7 @@ class ConvocatoriaController extends Controller
         }
 
         $convocatoria->fase = $request->fase;
+        $convocatoria->save();
 
         if ($request->fase == 1) { // Formulación
             $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
