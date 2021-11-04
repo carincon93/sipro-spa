@@ -152,6 +152,11 @@ class ConvocatoriaController extends Controller
         }
         $convocatoria->esta_activa              = $request->esta_activa;
         $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
+        if ($request->mostrar_recomendaciones == true) {
+            $convocatoria->proyectos()->update(['mostrar_recomendaciones' => true]);
+        } else {
+            $convocatoria->proyectos()->update(['mostrar_recomendaciones' => false]);
+        }
 
         $convocatoria->save();
 
