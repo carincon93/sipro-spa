@@ -42,7 +42,8 @@ class Proyecto extends Model
         'estado',
         'estado_cord_sennova',
         'precio_proyecto',
-        'mostrar_recomendaciones'
+        'mostrar_recomendaciones',
+        'mostrar_requiere_subsanacion'
     ];
 
     /**
