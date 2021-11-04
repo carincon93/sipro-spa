@@ -983,14 +983,14 @@ class Proyecto extends Model
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
+        } elseif ($puntajeTotal >= 90 && $totalRecomendaciones == 0) { // Preaprobado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
             $id = $estadosEvaluacion->where('value', 2)->first()['value'];
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
+        } elseif ($puntajeTotal >= 90 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
             $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
             $id = $estadosEvaluacion->where('value', 5)->first()['value'];
             $requiereSubsanar = true;
-        } elseif ($puntajeTotal >= 70 && $puntajeTotal <= 90 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 90 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
             $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
             $id = $estadosEvaluacion->where('value', 5)->first()['value'];
             $requiereSubsanar = true;
