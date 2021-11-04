@@ -986,10 +986,13 @@ class Proyecto extends Model
         } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
             $id = $estadosEvaluacion->where('value', 2)->first()['value'];
-        } elseif ($puntajeTotal >= 0 && $totalRecomendaciones >= 0) { // Subsanación
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
+        } elseif ($puntajeTotal >= 70 && $puntajeTotal <= 90 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 5)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 5)->first()['value'];
             $requiereSubsanar = true;
+        } elseif ($puntajeTotal >= 0 && $puntajeTotal <= 69 && $totalRecomendaciones >= 0) { // Rechazado
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 6)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 6)->first()['value'];
         }
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
