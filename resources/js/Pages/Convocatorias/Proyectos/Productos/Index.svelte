@@ -98,7 +98,7 @@
     {:else}
         <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
             <div slot="actions">
-                {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11, 17]) && validacionResultados == null && proyecto.modificable == true)}
+                {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11, 17]) && validacionResultados == null && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
                     <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear producto</Button>
                 {/if}
             </div>

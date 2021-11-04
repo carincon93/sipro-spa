@@ -141,10 +141,10 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea disabled={proyecto.codigo_linea_programatica == 70} label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
-                {#if proyecto.codigo_linea_programatica != 70}
+                {#if proyecto.codigo_linea_programatica != 70 || isSuperAdmin}
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="resultado_id" value="Resultado" />
                         <Select id="resultado_id" items={resultados} bind:selectedValue={resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
@@ -159,7 +159,7 @@
                         {:else}
                             <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
                         {/if}
-                        <Textarea disabled={proyecto.codigo_linea_programatica == 70} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                        <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 
@@ -188,7 +188,7 @@
                             <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
                         {/if}
 
-                        <Textarea disabled={proyecto.codigo_linea_programatica == 70} maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
+                        <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
 
@@ -232,7 +232,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10]) && proyecto.modificable == true)}
+                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar producto </button>
                 {/if}
                 {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
