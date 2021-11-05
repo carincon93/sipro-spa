@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="mt-20">
-                    <Textarea disabled={proyecto.codigo_linea_programatica == 70 && isSuperAdmin == false} label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
+                    <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="15000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
 
                 <h6 class="mt-20 mb-12 text-2xl">Rubros presupuestales</h6>

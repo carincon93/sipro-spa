@@ -570,7 +570,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.modificable}
+                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -632,7 +632,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    {#if resultado.descripcion != null && proyecto.modificable}
+                                    {#if resultado.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -700,7 +700,7 @@
                                     {/if}
                                 </p>
                             </div>
-                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.modificable}
+                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
                                 <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                     <div class="flex items-center cursor-pointer select-none group">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -745,7 +745,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.modificable}
+                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -849,7 +849,7 @@
                             <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
                         </div>
                         <div class="mt-8">
-                            <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="15000" id="descripcion-actividad" error={errors.descripcion} bind:value={$formActividad.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -872,7 +872,7 @@
                                 {causaDirectaObjetivoEspecifico}
                             </p>
                             <div>
-                                <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
+                                <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="descripcion-objetivo-especifico" error={errors.descripcion} bind:value={$formObjetivoEspecifico.descripcion} required />
                             </div>
                         </fieldset>
                     </form>
@@ -902,7 +902,7 @@
                         </p>
                         <div>
                             <Label required class="mb-4" labelFor="objetivo-general" value="Objetivo general" />
-                            <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="10000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="10000" id="objetivo-general" error={errors.objetivo_general} bind:value={$formObjetivoGeneral.objetivo_general} required />
                         </div>
                     </fieldset>
                 </form>
@@ -929,7 +929,7 @@
                                 </div>
                             {/if}
                             <div class="mb-20">
-                                <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
+                                <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="1000" id="descripcion-resultado" error={errors.descripcion} bind:value={$formResultado.descripcion} required />
                             </div>
                         </fieldset>
                     </form>
@@ -965,7 +965,7 @@
                             {/if}
                         </div>
                         <div class="mt-4">
-                            <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="10000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="10000" id="descripcion-impacto" error={errors.descripcion} bind:value={$formImpacto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>

@@ -104,6 +104,14 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                {#if proyecto.codigo_linea_programatica == 70}
+                    <InfoMessage class="mb-10">
+                        <p>
+                            <strong>Importante:</strong> Debe modifcar las fechas de ejecución, meta y las activiades a asociar.
+                        </p>
+                    </InfoMessage>
+                {/if}
+
                 <div class="mt-8 mb-8">
                     <Label class="text-center" required value="Fecha de ejecución" />
                     <div class="mt-4 flex items-start justify-around">
@@ -128,7 +136,7 @@
                 <hr />
 
                 <div class="mt-8">
-                    {#if $form.tatp_servicio_tecnologico}
+                    {#if $form.tatp_servicio_tecnologico && proyecto.codigo_linea_programatica != 70}
                         <InfoMessage>
                             <p>
                                 Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
@@ -141,7 +149,7 @@
                             </p>
                         </InfoMessage>
                     {/if}
-                    <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
+                    <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
 
                 {#if proyecto.codigo_linea_programatica != 70 || isSuperAdmin}
@@ -154,12 +162,14 @@
                     <div class="mt-8">
                         <Label required labelFor="indicador" value="Indicador" />
 
-                        {#if $form.tatp_servicio_tecnologico == true}
-                            <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
-                        {:else}
-                            <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#if $form.tatp_servicio_tecnologico == true}
+                                <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                            {:else}
+                                <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                            {/if}
                         {/if}
-                        <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
+                        <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
                     </div>
                 {/if}
 
@@ -182,13 +192,15 @@
                     <div class="mt-8">
                         <Label required labelFor="medio_verificacion" value="Medio de verificación" />
 
-                        {#if proyecto.servicio_tecnologico}
-                            <InfoMessage message="Los medios de verificación corresponden a las evidencias y/o fuentes de información en las que está disponibles los registros, la información necesaria y suficiente. Dichos medios pueden ser documentos oficiales, informes, evaluaciones, encuestas, documentos o reportes internos que genera el proyecto, entre otros." />
-                        {:else}
-                            <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            {#if proyecto.servicio_tecnologico}
+                                <InfoMessage message="Los medios de verificación corresponden a las evidencias y/o fuentes de información en las que está disponibles los registros, la información necesaria y suficiente. Dichos medios pueden ser documentos oficiales, informes, evaluaciones, encuestas, documentos o reportes internos que genera el proyecto, entre otros." />
+                            {:else}
+                                <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                            {/if}
                         {/if}
 
-                        <Textarea disabled={proyecto.codigo_linea_programatica == 70 || (isSuperAdmin && proyecto.codigo_linea_programatica != 70) ? false : undefined} maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
+                        <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} maxlength="40000" id="medio_verificacion" error={errors.medio_verificacion} bind:value={$form.medio_verificacion} required />
                     </div>
                 {/if}
 
