@@ -82,7 +82,7 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin || convocatoria.fase == 5}
+                    {#if isSuperAdmin || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones)}
                         <td class="border-t">
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion_idi.estado}
