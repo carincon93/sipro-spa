@@ -107,7 +107,11 @@
                 <tr class="text-left font-bold">
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Objetivo específico</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Resultado</th>
+                    {#if proyecto.codigo_linea_programatica != 70}
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Resultado</th>
+                    {:else if proyecto.codigo_linea_programatica == 70}
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Meta</th>
+                    {/if}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
                 </tr>
             </thead>
@@ -129,7 +133,11 @@
 
                         <td class="border-t">
                             <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
-                                {producto.resultado.descripcion}
+                                {#if proyecto.codigo_linea_programatica != 70}
+                                    {producto.resultado.descripcion}
+                                {:else if proyecto.codigo_linea_programatica == 70}
+                                    {producto.producto_ta_tp.valor_proyectado}
+                                {/if}
                             </p>
                         </td>
 
