@@ -630,7 +630,6 @@ class Proyecto extends Model
                 }
             }
 
-
             $cantidadEvaluaciones = count($evaluaciones);
 
             $sq = 0;
