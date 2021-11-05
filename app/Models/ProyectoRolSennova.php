@@ -149,9 +149,9 @@ class ProyectoRolSennova extends Model
     {
         $estado = '';
 
-        if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->count() == $this->proyectoRolesEvaluaciones()->where('correcto', true)->count()) {
+        if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->where('correcto', true)->count() > 0) {
             $estado = 'Aprobado';
-        } else if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->where('correcto', false)->count()) {
+        } else if ($this->proyectoRolesEvaluaciones()->count() > 0 && $this->proyectoRolesEvaluaciones()->where('correcto', false)->count() == $this->proyectoRolesEvaluaciones()->count()) {
             $estado = 'Reprobado';
         } else if ($this->proyectoRolesEvaluaciones()->count() == 0) {
             $estado = 'Sin evaluar';
