@@ -189,7 +189,7 @@ class ProyectoPresupuesto extends Model
         if ($this->proyectoPresupuestosEvaluaciones()->count() > 0 && $this->proyectoPresupuestosEvaluaciones()->where('correcto', true)->count() > 0) {
             $estado = 'Aprobado';
         } else if ($this->proyectoPresupuestosEvaluaciones()->count() > 0 && $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count() == $this->proyectoPresupuestosEvaluaciones()->count()) {
-            $estado = 'Reprobado';
+            $estado = 'Rechazado';
         } else if ($this->proyectoPresupuestosEvaluaciones()->count() == 0) {
             $estado = 'Sin evaluar';
         }
