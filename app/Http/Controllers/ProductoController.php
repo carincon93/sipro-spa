@@ -35,19 +35,19 @@ class ProductoController extends Controller
 
         $proyecto->load('evaluaciones.idiEvaluacion');
 
-        if ($proyecto->ta()->exists()) {
-            foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-                foreach ($efectoDirecto->resultados as $resultado) {
-                    foreach ($resultado->productos as $producto) {
-                        $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
+        // if ($proyecto->ta()->exists()) {
+        //     foreach ($proyecto->efectosDirectos as $efectoDirecto) {
+        //         foreach ($efectoDirecto->resultados as $resultado) {
+        //             foreach ($resultado->productos as $producto) {
+        //                 $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
 
-                        if ($productoAprendices) {
-                            $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
-                        }
-                    }
-                }
-            }
-        }
+        //                 if ($productoAprendices) {
+        //                     $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         $resultado = $proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
@@ -249,6 +249,12 @@ class ProductoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
+        $producto->nombre               = $request->nombre;
+        $producto->fecha_inicio         = $request->fecha_inicio;
+        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
+        $producto->indicador            = $request->indicador;
+        $producto->resultado()->associate($request->resultado_id);
+
         if ($producto->resultado_id != $request->resultado_id) {
             $producto->actividades()->sync([]);
         } else {
@@ -289,12 +295,6 @@ class ProductoController extends Controller
                 'formula_indicador'  => $request->formula_indicador,
             ]);
         }
-
-        $producto->nombre               = $request->nombre;
-        $producto->fecha_inicio         = $request->fecha_inicio;
-        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
-        $producto->indicador            = $request->indicador;
-        $producto->resultado()->associate($request->resultado_id);
 
         $producto->save();
 
