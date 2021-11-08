@@ -982,7 +982,7 @@ class Proyecto extends Model
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
-        } elseif ($puntajeTotal >= 90 && $totalRecomendaciones == 0) { // Preaprobado
+        } elseif ($puntajeTotal >= 90 && $totalRecomendaciones == 0) { // Pre-aprobado
             $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
             $id = $estadosEvaluacion->where('value', 2)->first()['value'];
         } elseif ($puntajeTotal >= 90 && $totalRecomendaciones >= 0) { // Pre-aprobado con observaciones
