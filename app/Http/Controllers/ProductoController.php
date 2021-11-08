@@ -249,12 +249,6 @@ class ProductoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        $producto->nombre               = $request->nombre;
-        $producto->fecha_inicio         = $request->fecha_inicio;
-        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
-        $producto->indicador            = $request->indicador;
-        $producto->resultado()->associate($request->resultado_id);
-
         if ($producto->resultado_id != $request->resultado_id) {
             $producto->actividades()->sync([]);
         } else {
@@ -296,6 +290,11 @@ class ProductoController extends Controller
             ]);
         }
 
+        $producto->nombre               = $request->nombre;
+        $producto->fecha_inicio         = $request->fecha_inicio;
+        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
+        $producto->indicador            = $request->indicador;
+        $producto->resultado()->associate($request->resultado_id);
         $producto->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
