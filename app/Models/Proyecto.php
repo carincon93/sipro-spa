@@ -994,8 +994,8 @@ class Proyecto extends Model
             $id = $estadosEvaluacion->where('value', 5)->first()['value'];
             $requiereSubsanar = true;
         } elseif ($puntajeTotal >= 0 && $puntajeTotal <= 69 && $totalRecomendaciones >= 0) { // Rechazado
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 6)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 6)->first()['value'];
+            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
+            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
         }
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
