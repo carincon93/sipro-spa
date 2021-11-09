@@ -168,7 +168,7 @@ class TaController extends Controller
 
         $ta->mostrar_recomendaciones = $ta->proyecto->mostrar_recomendaciones;
 
-        if (auth()->user()->hasRole(12)) {
+        if (auth()->user()->hasRole(12) && !auth()->user()->hasRole(5)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
