@@ -10,10 +10,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * appends
@@ -182,6 +183,17 @@ class User extends Authenticatable
     {
         $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
         return ($tipos_vinculacion->where('value',$this->tipo_vinculacion)->first())?$tipos_vinculacion->where('value',$this->tipo_vinculacion)->first()['label']:'Sin información registrada';
+    }
+
+    /**
+     * getTipoDocumentoTextAttribute
+     *
+     * @return void
+     */
+    public function getTipoDocumentoTextAttribute()
+    {
+        $tipos_documentos = collect(json_decode(Storage::get('json/tipos-documento.json'), true));
+        return ($tipos_documentos->where('value',$this->tipo_documento)->first())?$tipos_documentos->where('value',$this->tipo_documento)->first()['label']:'Sin información registrada';
     }
 
     /**

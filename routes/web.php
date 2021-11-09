@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\API\WebController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegionalController;
@@ -678,6 +679,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reportes/convocatoria/{convocatoria}/reportes/evaluaciones', [ReporteController::class, 'evaluacionesExcel'])->name('reportes.evaluaciones');
     Route::get('proyectos/{proyecto}/invetario-equipos', [InventarioEquipoController::class, 'inventarioEquiposExcel'])->name('reportes.inventario-equipos');
     Route::get('reportes/convocatoria/{convocatoria}/resumen-presupuesto-aprobado', [ReporteController::class, 'EvaluacionesProyectosPresupuestoExport'])->name('reportes.resumeProyectoPresupuestoAprobado');
+
+    /**
+     * Tokens
+     * 
+     */
+    Route::prefix('tokens')->group(function () {
+        Route::post('create', [ApiController::class, 'CreateToken'])->name('tokens.create');
+    });
 });
 
 require __DIR__ . '/auth.php';

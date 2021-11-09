@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,12 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['api', 'auth:sanctum'])->name('v1.')->prefix('v1')->group(function () {
     // API Resources
-    Route::apiResources(
-        [
-            // 
-        ]
-    );
+    Route::get('user_sennova', [ApiController::class, 'isUserSennova'])->name('user_sennova');
+    Route::get('user_sennova/{id}/projects', [ApiController::class, 'projectsByUser'])->name('projects_by_user');
+    Route::get('center/{id}/projects', [ApiController::class, 'projectsByCenter'])->name('projects_by_center');
+    Route::get('projects/{id}', [ApiController::class, 'summaryProject'])->name('project');
 });
 
