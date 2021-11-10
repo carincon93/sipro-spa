@@ -36,7 +36,7 @@ class TaRequest extends FormRequest
                 'programas_formacion_articulados*'          => ['required', 'integer', 'exists:programas_formacion,id'],
                 'dis_curricular_id*'                        => ['required', 'integer', 'exists:dis_curriculares,id'],
                 'nombre_instituciones'                      => ['nullable', 'json'],
-                'nombre_instituciones_programas'            => ['required', 'json'],
+                'nombre_instituciones_programas'            => ['required_if:otras_nombre_instituciones_programas,null', 'nullable', 'json'],
                 'nuevas_instituciones'                      => ['nullable', 'json'],
                 'proyeccion_nuevas_instituciones'           => ['required', 'min:0', 'max:3', 'integer'],
                 'proyeccion_articulacion_media'             => ['required', 'min:0', 'max:3', 'integer'],
