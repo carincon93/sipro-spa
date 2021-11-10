@@ -220,7 +220,7 @@ class TaController extends Controller
         $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
 
-        $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
+        $ta->numero_instituciones               = is_array(json_decode($request->nombre_instituciones)) ? count(json_decode($request->nombre_instituciones)) : 0;
         $ta->nombre_instituciones               = $request->nombre_instituciones;
         $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
         $ta->nuevas_instituciones               = $request->nuevas_instituciones;
