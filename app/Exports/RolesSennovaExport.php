@@ -30,7 +30,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
     public function collection()
     {
         $idproyectos = explode(',', $this->convocatoria->proyectos->implode('id', ','));
-        return ProyectoRolSennova::whereIn('proyecto_id', $idproyectos)->with('convocatoriaRolSennova.rolSennova', 'convocatoriaRolSennova.lineaProgramatica',)->get();
+        return ProyectoRolSennova::whereIn('proyecto_id', $idproyectos)->whereNotIn('id', [1052, 1113])->with('convocatoriaRolSennova.rolSennova', 'convocatoriaRolSennova.lineaProgramatica',)->get();
     }
 
     /**

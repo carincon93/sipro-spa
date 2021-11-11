@@ -29,7 +29,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
      */
     public function collection()
     {
-        return $this->convocatoria->proyectos;
+        return $this->convocatoria->proyectos()->whereNotIn('id', [1052, 1113])->get();
     }
     /**
      * @var Invoice $proyecto
