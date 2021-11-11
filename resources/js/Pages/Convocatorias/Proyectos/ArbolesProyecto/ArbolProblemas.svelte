@@ -483,25 +483,27 @@
                                             {/if}
                                         </p>
                                     </div>
-                                    <Dropdown class="absolute bottom-1.5" placement="bottom-end">
-                                        <div class="flex items-center cursor-pointer select-none group">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </div>
-                                        <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                            <Button variant={null} on:click={destroyEfectoIndirecto(efectoIndirecto)}>
-                                                Eliminar
-                                                <br />
-                                                <small class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                    </svg>
-                                                    También se eliminará el impacto asociado
-                                                </small>
-                                            </Button>
-                                        </div>
-                                    </Dropdown>
+                                    {#if proyecto.codigo_linea_programatica != 70}
+                                        <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                            <div class="flex items-center cursor-pointer select-none group">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </div>
+                                            <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                                <Button variant={null} on:click={destroyEfectoIndirecto(efectoIndirecto)}>
+                                                    Eliminar
+                                                    <br />
+                                                    <small class="flex items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                        </svg>
+                                                        También se eliminará el impacto asociado
+                                                    </small>
+                                                </Button>
+                                            </div>
+                                        </Dropdown>
+                                    {/if}
                                 </div>
                             {/if}
                         {/each}
@@ -546,25 +548,27 @@
                                 {/if}
                             </p>
                         </div>
-                        <Dropdown class="absolute bottom-1.5" placement="bottom-end">
-                            <div class="flex items-center cursor-pointer select-none group">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </div>
-                            <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                <Button variant={null} on:click={destroyEfectoDirecto(efectoDirecto)}>
-                                    Eliminar
-                                    <br />
-                                    <small class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                        </svg>
-                                        También se eliminará el resultado asociado
-                                    </small>
-                                </Button>
-                            </div>
-                        </Dropdown>
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                <div class="flex items-center cursor-pointer select-none group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </div>
+                                <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                    <Button variant={null} on:click={destroyEfectoDirecto(efectoDirecto)}>
+                                        Eliminar
+                                        <br />
+                                        <small class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                            También se eliminará el resultado asociado
+                                        </small>
+                                    </Button>
+                                </div>
+                            </Dropdown>
+                        {/if}
                     </div>
                 </div>
             {/each}
@@ -608,25 +612,27 @@
                                 {/if}
                             </p>
                         </div>
-                        <Dropdown class="absolute bottom-1.5" placement="bottom-end">
-                            <div class="flex items-center cursor-pointer select-none group">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </div>
-                            <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                <Button variant={null} on:click={destroyCausaDirecta(causaDirecta)}>
-                                    Eliminar
-                                    <br />
-                                    <small class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                        </svg>
-                                        También se eliminará el objetivo específico asociado
-                                    </small>
-                                </Button>
-                            </div>
-                        </Dropdown>
+                        {#if proyecto.codigo_linea_programatica != 70}
+                            <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                <div class="flex items-center cursor-pointer select-none group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </div>
+                                <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                    <Button variant={null} on:click={destroyCausaDirecta(causaDirecta)}>
+                                        Eliminar
+                                        <br />
+                                        <small class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                            También se eliminará el objetivo específico asociado
+                                        </small>
+                                    </Button>
+                                </div>
+                            </Dropdown>
+                        {/if}
                     </div>
 
                     {#if i == 0}
@@ -651,25 +657,27 @@
                                             {/if}
                                         </p>
                                     </div>
-                                    <Dropdown class="absolute bottom-1.5" placement="bottom-end">
-                                        <div class="flex items-center cursor-pointer select-none group">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </div>
-                                        <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                            <Button variant={null} on:click={destroyCausaIndirecta(causaIndirecta)}>
-                                                Eliminar
-                                                <br />
-                                                <small class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                    </svg>
-                                                    También se eliminará la actividad asociada
-                                                </small>
-                                            </Button>
-                                        </div>
-                                    </Dropdown>
+                                    {#if proyecto.codigo_linea_programatica != 70}
+                                        <Dropdown class="absolute bottom-1.5" placement="bottom-end">
+                                            <div class="flex items-center cursor-pointer select-none group">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </div>
+                                            <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                                                <Button variant={null} on:click={destroyCausaIndirecta(causaIndirecta)}>
+                                                    Eliminar
+                                                    <br />
+                                                    <small class="flex items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                        </svg>
+                                                        También se eliminará la actividad asociada
+                                                    </small>
+                                                </Button>
+                                            </div>
+                                        </Dropdown>
+                                    {/if}
                                 </div>
                             {/if}
                         {/each}
@@ -739,7 +747,7 @@
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
-                            <Textarea label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -748,7 +756,7 @@
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
-                            <Textarea label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -757,7 +765,7 @@
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Corresponden a situaciones negativas generadas por los efectos directos." />
-                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
@@ -771,13 +779,13 @@
                                     class="mb-2"
                                     message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                                 />
-                                <Textarea label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
+                                <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
                             </div>
                             <div class="mt-10">
                                 <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
                                 <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
 
-                                <Textarea label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
+                                <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
                             </div>
                         {/if}
 
@@ -787,7 +795,7 @@
                                 class="mb-2"
                                 message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
                             />
-                            <Textarea label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
                         </div>
                     </fieldset>
                 </form>
@@ -796,7 +804,7 @@
                     <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                         <div class="mt-4">
                             <InfoMessage class="mb-2" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
-                            <Textarea label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
+                            <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>

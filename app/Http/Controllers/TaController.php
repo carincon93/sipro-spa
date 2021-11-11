@@ -168,7 +168,7 @@ class TaController extends Controller
 
         $ta->mostrar_recomendaciones = $ta->proyecto->mostrar_recomendaciones;
 
-        if (auth()->user()->hasRole(12)) {
+        if (auth()->user()->hasRole(12) && !auth()->user()->hasRole(5)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
@@ -220,7 +220,7 @@ class TaController extends Controller
         $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
         $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
 
-        $ta->numero_instituciones               = count(json_decode($request->nombre_instituciones));
+        $ta->numero_instituciones               = is_array(json_decode($request->nombre_instituciones)) ? count(json_decode($request->nombre_instituciones)) : 0;
         $ta->nombre_instituciones               = $request->nombre_instituciones;
         $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
         $ta->nuevas_instituciones               = $request->nuevas_instituciones;

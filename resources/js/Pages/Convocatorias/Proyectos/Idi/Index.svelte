@@ -55,7 +55,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
                 {#if isSuperAdmin || convocatoria.fase == 5}
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluación </th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
@@ -67,7 +67,7 @@
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
-                            {#if JSON.parse(proyecto.estado)?.requiereSubsanar && proyecto.mostrar_recomendaciones == true}
+                            {#if JSON.parse(proyecto.estado)?.requiereSubsanar && proyecto.mostrar_recomendaciones == true && proyecto.mostrar_requiere_subsanacion == true}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
                             {/if}
                         </p>
@@ -82,7 +82,7 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin || convocatoria.fase == 5}
+                    {#if isSuperAdmin || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones)}
                         <td class="border-t">
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion_idi.estado}
@@ -131,31 +131,23 @@
     </DataTable>
     <Pagination links={idi.links} />
 
-    {#if convocatoria.fase == 3}
-        <Dialog bind:open={dialogOpen} id="informacion">
-            <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
-            <div slot="content">
-                <small>Octubre 14</small>
+    <Dialog bind:open={dialogOpen} id="informacion">
+        <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
+        <div slot="content">
+            <small>Noviembre 4</small>
 
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
-                </div>
-
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Revise cuales proyectos tienen el mensaje de <strong>Requiere ser subsanado</strong>, ingrese al proyecto y realice la respectiva subsanación. <br /> <img class="mx-auto" src={window.basePath + '/images/img-subsanacion.png'} alt="" /></p>
-                </div>
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
-                </div>
+            <hr class="mt-10 mb-10" />
+            <div>
+                <p>
+                    Actualmente la plataforma SGPS-SIPRO permite consultar el estado del proyecto y las observaciones formuladas por el equipo evaluador al término de la Segunda Etapa de Evaluación, sin embargo, de acuerdo con los Lineamientos de la Convocatoria, el equipo SENNOVA verificará la aplicación final de causales de rechazo y las reglas relativas a la bolsa regional; lo que podrá dar
+                    lugar a cambios en la información actual. Los resultados finales del proceso se consignarán en el respectivo informe y se reflejarán en la plataforma en la semana 45 del año.
+                </p>
             </div>
-            <div slot="actions">
-                <div class="p-4">
-                    <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
-                </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
             </div>
-        </Dialog>
-    {/if}
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

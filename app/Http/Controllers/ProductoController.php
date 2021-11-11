@@ -35,19 +35,19 @@ class ProductoController extends Controller
 
         $proyecto->load('evaluaciones.idiEvaluacion');
 
-        if ($proyecto->ta()->exists()) {
-            foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-                foreach ($efectoDirecto->resultados as $resultado) {
-                    foreach ($resultado->productos as $producto) {
-                        $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
+        // if ($proyecto->ta()->exists()) {
+        //     foreach ($proyecto->efectosDirectos as $efectoDirecto) {
+        //         foreach ($efectoDirecto->resultados as $resultado) {
+        //             foreach ($resultado->productos as $producto) {
+        //                 $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
 
-                        if ($productoAprendices) {
-                            $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
-                        }
-                    }
-                }
-            }
-        }
+        //                 if ($productoAprendices) {
+        //                     $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         $resultado = $proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
@@ -77,7 +77,7 @@ class ProductoController extends Controller
                 $resultado->map(function ($resultado) {
                     return $resultado->id;
                 })
-            )->with('resultado.objetivoEspecifico')->orderBy('resultado_id', 'ASC')
+            )->with('resultado.objetivoEspecifico', 'productoTaTp')->orderBy('resultado_id', 'ASC')
                 ->filterProducto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'productosGantt'        => Producto::whereIn(
                 'resultado_id',
@@ -212,6 +212,8 @@ class ProductoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
         $proyecto->idi;
         $producto->productoIdi;
         $proyecto->culturaInnovacion;
@@ -246,12 +248,6 @@ class ProductoController extends Controller
     public function update(ProductoRequest $request, Convocatoria $convocatoria, Proyecto $proyecto, Producto $producto)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
-
-        $producto->nombre               = $request->nombre;
-        $producto->fecha_inicio         = $request->fecha_inicio;
-        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
-        $producto->indicador            = $request->indicador;
-        $producto->resultado()->associate($request->resultado_id);
 
         if ($producto->resultado_id != $request->resultado_id) {
             $producto->actividades()->sync([]);
@@ -294,6 +290,11 @@ class ProductoController extends Controller
             ]);
         }
 
+        $producto->nombre               = $request->nombre;
+        $producto->fecha_inicio         = $request->fecha_inicio;
+        $producto->fecha_finalizacion   = $request->fecha_finalizacion;
+        $producto->indicador            = $request->indicador;
+        $producto->resultado()->associate($request->resultado_id);
         $producto->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');

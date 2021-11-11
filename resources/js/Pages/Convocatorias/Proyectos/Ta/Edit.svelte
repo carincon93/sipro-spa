@@ -560,12 +560,12 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
+                    <Label required={$form.otras_nombre_instituciones_programas ? undefined : true} class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
                 </div>
                 <div>
                     <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
-                    <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required />
+                    <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required={$form.otras_nombre_instituciones_programas ? undefined : true} />
                     <div class="mt-10">
                         <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
                         <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones_programas" error={errors.otras_nombre_instituciones_programas} bind:value={$form.otras_nombre_instituciones_programas} />
@@ -585,12 +585,12 @@
             {#if $form.proyeccion_nuevas_instituciones?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                        <Label required={$form.otras_nuevas_instituciones ? undefined : true} class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
                     </div>
                     <div>
                         <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
 
-                        <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required />
+                        <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required={$form.otras_nuevas_instituciones ? undefined : true} />
                         <div class="mt-10">
                             <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
                             <Textarea label="Instituciones" maxlength="40000" id="otras_nuevas_instituciones" error={errors.otras_nuevas_instituciones} bind:value={$form.otras_nuevas_instituciones} />
@@ -611,12 +611,12 @@
             {#if $form.proyeccion_articulacion_media?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                        <Label required={$form.otras_nombre_instituciones ? undefined : true} class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
                     </div>
                     <div>
                         <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
 
-                        <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required />
+                        <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required={$form.otras_nombre_instituciones ? undefined : true} />
                         <div class="mt-10">
                             <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
                             <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones" error={errors.otras_nombre_instituciones} bind:value={$form.otras_nombre_instituciones} />
@@ -917,11 +917,11 @@
         </div>
         <div slot="content">
             <div>
-                {#if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == true && ta.proyecto.mostrar_recomendaciones == true}
+                {#if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == true && ta.proyecto.mostrar_recomendaciones == true && ta.proyecto.mostrar_requiere_subsanacion == true}
                     <h1 class="text-center mb-4 font-black text-2xl">Este proyecto requiere ser subsanado</h1>
                     <p>Por favor revise las observaciones de los evaluadores en cada uno de los campos y secciones.</p>
                     <p>Importante: Se ha agregado una sección de <strong>Comentarios generales</strong>, revise si hay comentarios de los evaluadores y por favor escriba la respectiva respuesta.</p>
-                {:else if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == false && ta.proyecto.mostrar_recomendaciones == true}
+                {:else if JSON.parse(ta.proyecto.estado)?.requiereSubsanar == false && ta.proyecto.mostrar_recomendaciones == true && ta.proyecto.mostrar_requiere_subsanacion == true}
                     <div>
                         <h1 class="text-center mb-4 font-black text-2xl">Este proyecto no requiere subsanación</h1>
                         <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>

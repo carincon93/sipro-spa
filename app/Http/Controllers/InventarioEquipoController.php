@@ -26,11 +26,12 @@ class InventarioEquipoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->load('evaluaciones');
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/InventarioEquipos/Index', [
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'mostrar_recomendaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'mostrar_recomendaciones', 'evaluaciones'),
             'filters'           => request()->all('search'),
             'inventarioEquipos' => InventarioEquipo::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterInventarioEquipo(request()->only('search'))->paginate(),

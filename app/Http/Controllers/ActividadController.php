@@ -121,6 +121,8 @@ class ActividadController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
+        $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
+
         $resultados = $proyecto->efectosDirectos()->whereHas('resultados', function ($query) {
             $query->where('descripcion', '!=', null);
         })->with('resultados')->get()->pluck('resultados')->flatten();
@@ -131,7 +133,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'mostrar_recomendaciones'),
+            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'mostrar_recomendaciones', 'codigo_linea_programatica'),
             'actividad'                      => $actividad,
             'productos'                      => $productos,
             'productosRelacionados'          => $actividad->productos()->pluck('id'),

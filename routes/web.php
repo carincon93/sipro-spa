@@ -134,8 +134,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Trae los conceptos internos SENA
     Route::get('web-api/segundo-grupo-presupuestal/{linea_programatica}', [WebController::class, 'segundoGrupoPresupuestal'])->name('web-api.segundo-grupo-presupuestal');
 
-
-
     Route::get('web-api/tercer-grupo-presupuestal/{segundo_grupo_presupuestal}', [WebController::class, 'tercerGrupoPresupuestal'])->name('web-api.tercer-grupo-presupuestal');
 
     // Trae los usos presupuestales
@@ -428,6 +426,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('convocatorias/{convocatoria}/dashboard', [ConvocatoriaController::class, 'dashboard'])->name('convocatorias.dashboard');
+    Route::put('convocatorias/{convocatoria}/update-fase', [ConvocatoriaController::class, 'updateFase'])->name('convocatorias.update-fase');
 
     Route::resource('convocatorias', ConvocatoriaController::class)->parameters(['convocatorias' => 'convocatoria'])->except(['show']);
 
@@ -457,7 +456,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Actualiza la actividad en el arbol de objetivos
     Route::post('convocatorias/{convocatoria}/proyectos/{proyecto}/actividad/{actividad}', [ArbolProyectoController::class, 'updateActividad'])->name('proyectos.actividad');
     Route::post('proyectos/{proyecto}/actividad/{actividad}/destroy', [ArbolProyectoController::class, 'destroyActividad'])->name('proyectos.actividad.destroy');
-
 
     /**
      * Muestra el árbol de problemas

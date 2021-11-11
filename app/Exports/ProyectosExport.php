@@ -36,6 +36,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
      */
     public function map($proyecto): array
     {
+        $proyecto->updateValoresProyecto();
         $tipo = '';
         if (!empty($proyecto->idi)) {
             $this->datos =  $proyecto->idi;
@@ -78,8 +79,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $proyecto->precio_proyecto > 0 ? $proyecto->precio_proyecto : '0',
             ($proyecto->finalizado) ? 'SI' : 'NO',
             ($proyecto->a_evaluar) ? 'SI' : 'NO',
-            $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
-            $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : 'N/A',
+            $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : ($proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada'))))),
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['puntaje'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['puntaje'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['puntaje'] : 'N/A')),
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['alerta'] : 'N/A',
             $this->mapParticipantes($proyecto->participantes),
@@ -109,7 +109,6 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Finalizado',
             'Radicado',
             'Estado final',
-            'Estado coordinación SENNOVA',
             'Puntaje',
             'Desviación estándar',
             'Participantes',
