@@ -876,7 +876,7 @@ class Proyecto extends Model
 
             $estadoEvaluacion = null;
 
-            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Pre-aprobado' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Pre-aprobado con observaciones');
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
             return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
@@ -917,7 +917,7 @@ class Proyecto extends Model
 
             $estadoEvaluacion = null;
 
-            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Pre-aprobado' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Pre-aprobado con observaciones');
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
             return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
@@ -937,7 +937,7 @@ class Proyecto extends Model
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
         $id = null;
-        $estadoEvaluacion = null;
+        $estadoEvaluacion = '';
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
             $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             $id = $estadosEvaluacion->where('value', 1)->first()['value'];
@@ -1012,32 +1012,20 @@ class Proyecto extends Model
      */
     public function estadoEvaluacionCulturaInnovacion($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
     {
-        $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
-
         $id = null;
-        $estadoEvaluacion = null;
+        $estadoEvaluacion = '';
         if ($puntajeTotal == 0 && $totalRecomendaciones == 0) {
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 1)->first()['value'];
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones == 0) { // Preaprobado
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 2)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 2)->first()['value'];
-        } elseif ($puntajeTotal >= 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
-            $requiereSubsanar = true;
-        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones == 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
-            $requiereSubsanar = true;
-        } elseif ($puntajeTotal >= 70 && $puntajeTotal < 91 && $totalRecomendaciones > 0) { // Pre-aprobado con observaciones
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 3)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 3)->first()['value'];
-            $requiereSubsanar = true;
-        } elseif ($puntajeTotal < 70) { // Rechazado - No requiere ser subsanado
-            $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
-            $id = $estadosEvaluacion->where('value', 4)->first()['value'];
+            $estadoEvaluacion = 'No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.';
+            $id = 1;
+        } elseif ($puntajeTotal >= 70) { // Cumple
+            $estadoEvaluacion = 'Cumple';
+            $id = 2;
+        } elseif ($puntajeTotal >= 0 && $puntajeTotal <= 69) { // Cumple
+            $estadoEvaluacion = 'Proyecto con asignación de apoyo técnico para la formulación';
+            $id = 2;
         }
+
+        $requiereSubsanar = $totalRecomendaciones > 0 ? true : false;
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);
     }
