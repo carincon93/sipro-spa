@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -85,9 +86,15 @@ class ApiController extends Controller
     public function projectsByUser($id)
     {
         $user = User::findOrFail($id);
-
+        $proyectos = $user->proyectos()->whereRaw(
+            DB::raw("estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                or estado->>'estado'='Pre-aprobado'
+                or estado->>'estado'='Pre-aprobado con observaciones'
+                or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación'")
+        )->get();
         $projects = [];
-        foreach ($user->proyectos as $proyecto) {
+        foreach ($proyectos as $proyecto) {
             $tipo = '';
             if (!empty($proyecto->idi)) {
                 $datos =  $proyecto->idi;
@@ -105,8 +112,7 @@ class ApiController extends Controller
                 $datos =  $proyecto->servicioTecnologico;
                 $tipo = 'Servicios tecnológicos';
             }
-            $userFormuler = $proyecto->participantes()->wherePivot('es_formulador', true)->first();
-            array_push($projects, [
+            $data = [
                 "type"=> "projects",
                 "id"=> $proyecto->id,
                 "attributes"=> [
@@ -117,20 +123,10 @@ class ApiController extends Controller
                     'general_objective' => $datos->objetivo_general,
                     'start_date' => $proyecto->fecha_inicio,
                     'end_date' => $proyecto->fecha_finalizacion,
+                    'evaluation_state' => $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : ($proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada'))))),
                     "links"=> [
                       "proyect_api"=> route('v1.project', $proyecto->id),
                       "public_url"=> route('convocatorias.proyectos.edit', ['convocatoria'=>$proyecto->convocatoria, 'proyecto'=>$proyecto]),
-                    ]
-                ],
-                "formuler"=>[
-                    "type"=> "users",
-                    "id"=> $userFormuler->id,
-                    "attributes"=> [
-                        'name' => $userFormuler->nombre,
-                        'document_type' => $userFormuler->tipo_documento_text,
-                        'document_number' => $userFormuler->numero_documento,
-                        'email' => $userFormuler->email,
-                        'cellphone' => $userFormuler->numero_celular
                     ]
                 ],
                 "training_center"=>[
@@ -145,7 +141,25 @@ class ApiController extends Controller
                       "proyects_api"=> route('v1.projects_by_center', $proyecto->centroFormacion->id)
                     ]
                 ],
-            ]);
+            ];
+            $formuler = [];
+            $userFormuler = $proyecto->participantes()->wherePivot('es_formulador', true)->first();
+            if (!empty($userFormuler)) {
+                $formuler = 
+                ["formuler"=>[
+                        "type"=> "users",
+                        "id"=> $userFormuler->id,
+                        "attributes"=> [
+                            'name' => $userFormuler->nombre,
+                            'document_type' => $userFormuler->tipo_documento_text,
+                            'document_number' => $userFormuler->numero_documento,
+                            'email' => $userFormuler->email,
+                            'cellphone' => $userFormuler->numero_celular
+                        ]
+                    ]
+                ];
+            }
+            array_push($projects, array_merge($data,$formuler));
         }
 
         return response()->json(['data'=>$projects]);
@@ -154,9 +168,16 @@ class ApiController extends Controller
     public function projectsByCenter($id)
     {
         $center = CentroFormacion::findOrFail($id);
-
+        $proyectos = $center->proyectos()->whereRaw(
+            DB::raw("estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                or estado->>'estado'='Pre-aprobado'
+                or estado->>'estado'='Pre-aprobado con observaciones'
+                or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación'")
+        )->get();
         $projects = [];
-        foreach ($center->proyectos as $proyecto) {
+        foreach ($proyectos as $proyecto)
+        {
             $tipo = '';
             if (!empty($proyecto->idi)) {
                 $datos =  $proyecto->idi;
@@ -174,8 +195,7 @@ class ApiController extends Controller
                 $datos =  $proyecto->servicioTecnologico;
                 $tipo = 'Servicios tecnológicos';
             }
-            $userFormuler = $proyecto->participantes()->wherePivot('es_formulador', true)->first();
-            array_push($projects, [
+            $data = [
                 "type"=> "projects",
                 "id"=> $proyecto->id,
                 "attributes"=> [
@@ -184,25 +204,33 @@ class ApiController extends Controller
                     'code' => $proyecto->codigo,
                     'title' => $datos->titulo,
                     'general_objective' => $datos->objetivo_general,
+                    'evaluation_state' => $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : ($proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada'))))),
                     'start_date' => $proyecto->fecha_inicio,
                     'end_date' => $proyecto->fecha_finalizacion,
                     "links"=> [
                       "proyect_api"=> route('v1.project', $proyecto->id),
                       "public_url"=> route('convocatorias.proyectos.edit', ['convocatoria'=>$proyecto->convocatoria, 'proyecto'=>$proyecto]),
                     ]
-                ],
-                "formuler"=>[
-                    "type"=> "users",
-                    "id"=> $userFormuler->id,
-                    "attributes"=> [
-                        'name' => $userFormuler->nombre,
-                        'document_type' => $userFormuler->tipo_documento_text,
-                        'document_number' => $userFormuler->numero_documento,
-                        'email' => $userFormuler->email,
-                        'cellphone' => $userFormuler->numero_celular
+                ]
+            ];
+            $formuler = [];
+            $userFormuler = $proyecto->participantes()->wherePivot('es_formulador', true)->first();
+            if (!empty($userFormuler)) {
+                $formuler = 
+                ["formuler"=>[
+                        "type"=> "users",
+                        "id"=> $userFormuler->id,
+                        "attributes"=> [
+                            'name' => $userFormuler->nombre,
+                            'document_type' => $userFormuler->tipo_documento_text,
+                            'document_number' => $userFormuler->numero_documento,
+                            'email' => $userFormuler->email,
+                            'cellphone' => $userFormuler->numero_celular
+                        ]
                     ]
-                ],
-            ]);
+                ];
+            }
+            array_push($projects, array_merge($data,$formuler));
         }
 
         $response = array_merge(['data'=> $projects], [
@@ -272,8 +300,7 @@ class ApiController extends Controller
                 'price_project' => $proyecto->precio_proyecto > 0 ? $proyecto->precio_proyecto : '0',
                 'finalized' => ($proyecto->finalizado) ? 'SI' : 'NO',
                 'to_evaluate' => ($proyecto->a_evaluar) ? 'SI' : 'NO',
-                'evaluation_state' => $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
-                'state_cord_sennova' => $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : 'N/A',
+                'evaluation_state' => $proyecto->estado_cord_sennova ? json_decode($proyecto->estado_cord_sennova)->estado : ($proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada'))))),
                 'score' => $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['puntaje'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['puntaje'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['puntaje'] : 'N/A')),
                 'alert' => $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['alerta'] : 'N/A'
             ],
