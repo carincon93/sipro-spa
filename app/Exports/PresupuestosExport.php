@@ -38,22 +38,31 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function map($presupuesto): array
     {
-        return [
+        $data = [
             $presupuesto->proyecto->convocatoria->descripcion,
             $presupuesto->proyecto->centroFormacion->regional->nombre,
             $presupuesto->proyecto->centroFormacion->codigo,
             $presupuesto->proyecto->centroFormacion->nombre,
             $presupuesto->proyecto->lineaProgramatica->codigo,
             $presupuesto->proyecto->codigo,
+            $presupuesto->proyecto->titulo,
+            $presupuesto->convocatoriaPresupuesto->presupuestoSennova->primerGrupoPresupuestal->nombre,
             $presupuesto->convocatoriaPresupuesto->presupuestoSennova->tercerGrupoPresupuestal->nombre,
             $presupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->nombre,
             $presupuesto->convocatoriaPresupuesto->presupuestoSennova->usoPresupuestal->nombre,
             $presupuesto->descripcion,
             $presupuesto->justificacion,
             $presupuesto->valor_total,
-            ($presupuesto->proyectoPresupuestosEvaluaciones()->count() > 0) ? (($presupuesto->presupuesto_aprobado) ? 'SI' : 'NO') : 'Sin evaluar',
-
+            $presupuesto->getPresupuestoAprobadoAttribute(),
         ];
+
+        foreach ($presupuesto->proyectoPresupuestosEvaluaciones as $presupuestoEvaluacion) {
+            $data[] = $presupuestoEvaluacion->evaluacion->evaluador->nombre;
+            $data[] = $presupuestoEvaluacion->correcto ? 'Cumple' : 'No cumple';
+            $data[] = $presupuestoEvaluacion->comentario;
+        }
+
+        return $data;
     }
 
     public function headings(): array
@@ -65,20 +74,31 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
             'Centro de formación',
             'Línea programática',
             'Código proyecto',
+            'Título',
+            'Rubro 2018',
             'Homologable 2018',
             'Rubro 2019',
             'Uso presupuestal',
             'Descripción',
             'Justificación',
             'Valor',
-            'Aprobado',
+            'Estado final',
+            'Evaluador 1',
+            'Evaluación',
+            'Comentario',
+            'Evaluador 2',
+            'Evaluación',
+            'Comentario',
+            'Evaluador 3',
+            'Evaluación',
+            'Comentario',
         ];
     }
 
     public function columnFormats(): array
     {
         return [
-            'H' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'N' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
         ];
     }
 

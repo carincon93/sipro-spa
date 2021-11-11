@@ -119,7 +119,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
         }
 
         for ($i = 0; $i < $cantEvaluadores; $i++) {
-            $headers = array_merge($headers, ['Evaluador ' . ($i + 1), 'Estado evaluación ' . ($i + 1)]);
+            $headers = array_merge($headers, ['Evaluador ' . ($i + 1), 'Número ' . ($i + 1)]);
         }
 
         return $headers;
