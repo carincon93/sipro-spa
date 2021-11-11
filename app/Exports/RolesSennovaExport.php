@@ -38,7 +38,7 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function map($rolSennova): array
     {
-        return [
+        $data = [
             $rolSennova->proyecto->convocatoria->descripcion,
             $rolSennova->proyecto->centroFormacion->regional->nombre,
             $rolSennova->proyecto->centroFormacion->codigo,
@@ -54,9 +54,17 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
             ucfirst($rolSennova->convocatoriaRolSennova->nivel_academico_formateado),
             $rolSennova->convocatoriaRolSennova->asignacion_mensual,
             $rolSennova->getTotalRolSennova(),
-            ($rolSennova->proyectoRolesEvaluaciones()->count() > 0) ? (($rolSennova->rol_aprobado) ? 'SI' : 'NO') : 'Sin evaluar',
+            $rolSennova->getRolAprobadoAttribute(),
 
         ];
+
+        foreach ($rolSennova->proyectoRolesEvaluaciones as $rolEvaluacion) {
+            $data[] = $rolEvaluacion->evaluacion->evaluador->nombre;
+            $data[] = $rolEvaluacion->correcto ? 'Cumple' : 'No cumple';
+            $data[] = $rolEvaluacion->comentario;
+        }
+
+        return $data;
     }
 
     public function headings(): array
@@ -77,13 +85,25 @@ class RolesSennovaExport implements FromCollection, WithHeadings, WithMapping, W
             'Nivel académico',
             'Asignación mensual',
             'Total',
-            'Aprobado',
+            'Estado final',
+            'Evaluador 1',
+            'Evaluación',
+            'Comentario',
+            'Evaluador 2',
+            'Evaluación',
+            'Comentario',
+            'Evaluador 3',
+            'Evaluación',
+            'Comentario',
         ];
     }
 
     public function columnFormats(): array
     {
-        return [];
+        return [
+            'N' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+            'O' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+        ];
     }
 
     /**
