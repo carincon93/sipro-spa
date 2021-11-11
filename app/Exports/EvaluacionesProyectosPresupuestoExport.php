@@ -24,7 +24,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
     public function __construct(Convocatoria $convocatoria)
     {
         $this->convocatoria = $convocatoria;
-        $this->proyectos = $convocatoria->proyectos()->withCount(['evaluaciones'])->get();
+        $this->proyectos = $convocatoria->proyectos()->whereNotIn('id', [1052, 1113])->withCount(['evaluaciones'])->get();
     }
 
     /**

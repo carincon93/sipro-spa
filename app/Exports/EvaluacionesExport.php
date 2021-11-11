@@ -27,7 +27,7 @@ class EvaluacionesExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function collection()
     {
-        return Evaluacion::select('evaluaciones.*')->join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->get();
+        return Evaluacion::select('evaluaciones.*')->join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**
