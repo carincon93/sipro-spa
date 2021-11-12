@@ -99,9 +99,9 @@ class TaEvaluacionController extends Controller
             'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
             'ta'                                        => $ta,
             'taEvaluacion'                              => $taEvaluacion,
-            'idiSegundaEvaluacion'                      => TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+            'otrasEvaluaciones'                         => TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
                 $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
-            })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->first(),
+            })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->get(),
             'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null,
             'lineasTecnoacademiaRelacionadas'           => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
             'regionales'                                => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),

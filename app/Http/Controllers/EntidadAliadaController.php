@@ -10,6 +10,7 @@ use App\Models\Actividad;
 use App\Models\EntidadAliadaIdi;
 use App\Models\EntidadAliadaTa;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -481,11 +482,24 @@ class EntidadAliadaController extends Controller
             $evaluacion->entidad_aliada_puntaje = 0;
         }
 
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->ta()->exists():
+                $ta = $evaluacion->proyecto->ta;
+
+                $otrasEvaluaciones = TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->get();
+                break;
+            default:
+                break;
+        }
+
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluacion'        => $evaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'tipoEntidad'       => $tipo,
+            'otrasEvaluaciones' => $otrasEvaluaciones,
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),

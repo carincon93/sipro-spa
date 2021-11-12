@@ -7,6 +7,7 @@ use App\Http\Requests\EdtRequest;
 use App\Models\Convocatoria;
 use App\Models\Edt;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -219,12 +220,25 @@ class EdtController extends Controller
             }
         }
 
+        switch ($evaluacion->proyecto) {
+            case $evaluacion->proyecto->ta()->exists():
+                $ta = $evaluacion->proyecto->ta;
+
+                $otrasEvaluaciones = TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
+                    $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->get();
+                break;
+            default:
+                break;
+        }
+
         return Inertia::render('Convocatorias/Evaluaciones/EDT/Index', [
-            'convocatoria'     => $convocatoria->only('id', 'fase_formateada', 'fase'),
-            'evaluacion'       => $evaluacion,
-            'proyecto'         => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
-            'filters'          => request()->all('search'),
-            'eventos'          => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $evaluacion->proyecto->id)
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'evaluacion'        => $evaluacion,
+            'otrasEvaluaciones' => $otrasEvaluaciones,
+            'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'servicios_organizacion'),
+            'filters'           => request()->all('search'),
+            'eventos'           => Edt::with('proyectoPresupuesto')->orderBy('descripcion_evento', 'ASC')->where('ta_id', $evaluacion->proyecto->id)
                 ->filterEdt(request()->only('search'))->select('edt.id', 'edt.descripcion_evento', 'edt.numero_asistentes', 'edt.proyecto_presupuesto_id')->paginate(),
         ]);
     }

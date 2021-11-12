@@ -20,6 +20,7 @@
     export let evaluacion
     export let proyecto
     export let eventos
+    export let otrasEvaluaciones
 
     $title = 'EDT'
 
@@ -129,6 +130,15 @@
         <form on:submit|preventDefault={submitTaEvaluacion}>
             <InfoMessage>
                 <div class="mt-4">
+                    {#if checkRole(authUser, [5])}
+                        {#each otrasEvaluaciones as evaluacion}
+                            <div class="mb-8">
+                                <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                {evaluacion.edt_comentario ? evaluacion.edt_comentario : 'Estado: El evaluador(a) da cumplimiento a los edt'}
+                                <br />
+                            </div>
+                        {/each}
+                    {/if}
                     <p>¿Las EDT son correctas? Por favor seleccione si Cumple o No cumple.</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.edt_requiere_comentario} />
                     {#if $formTaEvaluacion.edt_requiere_comentario == false}

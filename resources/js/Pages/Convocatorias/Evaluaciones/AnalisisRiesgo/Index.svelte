@@ -22,6 +22,7 @@
     export let evaluacion
     export let proyecto
     export let analisisRiesgos
+    export let otrasEvaluaciones
 
     $title = 'Análisis de riesgos'
 
@@ -386,6 +387,15 @@
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.analisis_riesgos_comentario ? evaluacion.analisis_riesgos_comentario : 'Estado: El evaluador(a) da cumplimiento a los análisis de riesgos'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿Los análisis de riesgos son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.analisis_riesgos_requiere_comentario} />
                         {#if $formTaEvaluacion.analisis_riesgos_requiere_comentario == false}

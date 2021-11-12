@@ -24,6 +24,7 @@
     export let gruposInvestigacionRelacionados
     export let lineasInvestigacionRelacionadas
     export let semillerosInvestigacionRelacionados
+    export let otrasEvaluaciones
 
     $title = 'Articulación SENNOVA'
 
@@ -136,6 +137,15 @@
             <div class="mt-16">
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.articulacion_sennova_comentario ? evaluacion.articulacion_sennova_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La articulación SENNOVA está definida correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.articulacion_sennova_requiere_comentario} />
                         {#if $formTaEvaluacion.articulacion_sennova_requiere_comentario == false}

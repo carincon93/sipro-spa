@@ -26,6 +26,7 @@
     export let actividades
     export let actividadesGantt
     export let year
+    export let otrasEvaluaciones
 
     $title = 'Actividades'
 
@@ -501,6 +502,15 @@
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.metodologia_comentario ? evaluacion.metodologia_comentario : 'Estado: El evaluador(a) da cumplimiento a la metodología y actividades'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La metodología y las actividades están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.metodologia_requiere_comentario} />
                         {#if $formTaEvaluacion.metodologia_requiere_comentario == false}
