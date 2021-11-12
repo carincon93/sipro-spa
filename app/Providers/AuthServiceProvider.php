@@ -118,8 +118,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('modificar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
 
-            dd($evaluacion->proyecto->lineaProgramatica->codigo == 70);
-
             if ($user->hasRole(5) && $evaluacion->proyecto->lineaProgramatica->codigo == 70) {
                 return true;
             }
