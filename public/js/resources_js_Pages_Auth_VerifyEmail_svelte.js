@@ -1578,6 +1578,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "route": () => (/* binding */ route),
 /* harmony export */   "checkPermission": () => (/* binding */ checkPermission),
+/* harmony export */   "checkPermissionByUser": () => (/* binding */ checkPermissionByUser),
 /* harmony export */   "checkRole": () => (/* binding */ checkRole),
 /* harmony export */   "monthDiff": () => (/* binding */ monthDiff)
 /* harmony export */ });
@@ -1589,6 +1590,17 @@ function checkPermission(authUser, permissionsId) {
   var findPermissions = [];
   findPermissions = permissionsId.map(function (permissionId) {
     return authUser.can.find(function (element) {
+      return element == permissionId;
+    }) == permissionId;
+  });
+  return findPermissions.find(function (element) {
+    return element == true;
+  }) == true;
+}
+function checkPermissionByUser(authUser, permissionsId) {
+  var findPermissions = [];
+  findPermissions = permissionsId.map(function (permissionId) {
+    return authUser.can_by_user.find(function (element) {
       return element == permissionId;
     }) == permissionId;
   });
