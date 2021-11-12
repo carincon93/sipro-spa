@@ -132,7 +132,7 @@ class CulturaInnovacionEvaluacion extends Model
     public static function getProyectosPorEvaluador($convocatoria)
     {
         $authUser = Auth::user();
-        if ($authUser->hasRole(1)) { // Admin
+        if ($authUser->hasRole(1) || $authUser->hasRole(20)) { // Admin
             $culturaInnovacion = CulturaInnovacion::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')

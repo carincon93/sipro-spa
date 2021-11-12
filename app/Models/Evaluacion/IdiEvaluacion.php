@@ -136,7 +136,7 @@ class IdiEvaluacion extends Model
     {
         $authUser = Auth::user();
 
-        if ($authUser->hasRole(1)) { // Admin
+        if ($authUser->hasRole(1) || $authUser->hasRole(18)) { // Admin
             $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
