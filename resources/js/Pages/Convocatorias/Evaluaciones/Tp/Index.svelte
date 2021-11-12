@@ -68,7 +68,13 @@
                         <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
-                                    <Text>Evaluar</Text>
+                                    <Text>
+                                        {#if checkRole(authUser, [17])}
+                                            Verificar
+                                        {:else}
+                                            Evaluar
+                                        {/if}
+                                    </Text>
                                 </Item>
                             {:else}
                                 <Item>

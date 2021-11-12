@@ -69,7 +69,13 @@
                         <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
-                                    <Text>Evaluar</Text>
+                                    <Text>
+                                        {#if checkRole(authUser, [20])}
+                                            Verificar
+                                        {:else}
+                                            Evaluar
+                                        {/if}
+                                    </Text>
                                 </Item>
                             {:else}
                                 <Item>
