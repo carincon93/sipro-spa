@@ -40,7 +40,7 @@
         proyecto_presupuesto_requiere_comentario: evaluacion.ta_evaluacion ? (evaluacion.ta_evaluacion?.proyecto_presupuesto_comentario == null ? true : false) : evaluacion.tp_evaluacion?.proyecto_presupuesto_comentario == null ? true : false,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.proyecto-presupuesto.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -312,7 +312,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectoPresupuesto.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                            {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.presupuesto.edit', [convocatoria.id, evaluacion.id, presupuesto.id]))}>
                                     <Text>Evaluar</Text>
                                 </Item>
@@ -366,7 +366,7 @@
                     </div>
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+                    {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
