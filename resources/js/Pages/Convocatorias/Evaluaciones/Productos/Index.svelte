@@ -25,6 +25,7 @@
     export let proyecto
     export let productos
     export let productosGantt
+    export let otrasEvaluaciones
 
     $title = 'Productos'
 
@@ -435,6 +436,15 @@
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.productos_comentario ? evaluacion.productos_comentario : 'Estado: El evaluador(a) da cumplimiento a los productos'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿Los productos y las metas están definidas correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.productos_requiere_comentario} />
                         {#if $formTaEvaluacion.productos_requiere_comentario == false}

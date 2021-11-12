@@ -24,6 +24,7 @@
     export let tipoEntidad
     export let entidadesAliadas
     export let infraestructuraTecnoacademia
+    export let otrasEvaluaciones
 
     $title = 'Entidades aliadas'
 
@@ -177,6 +178,15 @@
             <form on:submit|preventDefault={submitTaEvaluacion}>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.entidad_aliada_comentario ? evaluacion.entidad_aliada_comentario : 'Estado: El evaluador(a) da cumplimiento a las entidades aliadas'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿Las entidades aliadas son correctas? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.entidad_aliada_requiere_comentario} />
                         {#if $formTaEvaluacion.entidad_aliada_requiere_comentario == false}

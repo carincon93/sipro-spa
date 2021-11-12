@@ -516,9 +516,9 @@ class ProyectoPresupuestoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/ProyectoPresupuesto/Edit', [
             'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluacion'                    => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado', 'modificable'),
-            'segundaEvaluacion'             => ProyectoPresupuestoEvaluacion::whereHas('evaluacion', function ($query) use ($proyecto) {
+            'otrasEvaluaciones'             => ProyectoPresupuestoEvaluacion::where('proyecto_presupuesto_id', $presupuesto->id)->with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($proyecto) {
                 $query->where('evaluaciones.proyecto_id', $proyecto->id)->where('evaluaciones.habilitado', true);
-            })->where('proyecto_presupuesto_evaluacion.evaluacion_id', '!=', $evaluacion->id)->first(),
+            })->where('proyecto_presupuesto_evaluacion.evaluacion_id', '!=', $evaluacion->id)->get(),
             'proyecto'                      => $evaluacion->proyecto,
             'proyectoPresupuesto'           => $presupuesto,
             'tiposLicencia'                 => json_decode(Storage::get('json/tipos-licencia-software.json'), true),

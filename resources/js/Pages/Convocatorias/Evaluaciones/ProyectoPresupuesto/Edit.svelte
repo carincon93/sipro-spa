@@ -24,6 +24,7 @@
     export let tiposLicencia
     export let tiposSoftware
     export let opcionesServiciosEdicion
+    export let otrasEvaluaciones
 
     $: $title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal ? proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion : null
 
@@ -206,6 +207,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5])}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.comentario ? evaluacion.comentario : 'Estado: El evaluador(a) da cumplimiento al rubro presupuestal'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿El rubro presupuestal es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$form.correcto} />
                         {#if $form.correcto == false}

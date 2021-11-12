@@ -13,6 +13,7 @@ use App\Http\Requests\TaRequest;
 use App\Models\ActividadEconomica;
 use App\Models\DisCurricular;
 use App\Models\Evaluacion\Evaluacion;
+use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
 use App\Models\ProgramaFormacion;
@@ -380,10 +381,14 @@ class TaController extends Controller
         $evaluacion->proyecto->proyectos_ejecucion                  = $evaluacion->proyecto->ta->proyectos_ejecucion;
         $evaluacion->proyecto->articulacion_semillero               = $evaluacion->proyecto->ta->articulacion_semillero;
         $evaluacion->proyecto->semilleros_en_formalizacion          = $evaluacion->proyecto->ta->semilleros_en_formalizacion;
+        $ta = $evaluacion->proyecto->ta;
 
         return Inertia::render('Convocatorias/Evaluaciones/ArticulacionSennova/Index', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase', 'year', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'mostrar_recomendaciones'),
             'evaluacion'                => $evaluacion,
+            'otrasEvaluaciones'         => TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
+                $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
+            })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->get(),
             'proyecto'                  => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'proyectos_ejecucion', 'modificable', 'articulacion_semillero', 'semilleros_en_formalizacion'),
             'lineasInvestigacion'       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', $evaluacion->proyecto->centroFormacion->id)->get(),
             'gruposInvestigacion'       => GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ \', centros_formacion.nombre, chr(10)) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $evaluacion->proyecto->centroFormacion->regional->id)->get(),
