@@ -109,6 +109,23 @@ class TaEvaluacion extends Model
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->join('users', 'evaluaciones.user_id', 'users.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
+                ->whereNotIn('evaluaciones.id', [
+                    1846,
+                    1845,
+                    1844,
+                    1843,
+                    1842,
+                    1841,
+                    1840,
+                    1839,
+                    1838,
+                    1837,
+                    1836,
+                    1835,
+                    1834,
+                    1833,
+                    1832
+                ])
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();
