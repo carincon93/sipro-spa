@@ -101,6 +101,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('visualizar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
+            if ($user->hasRole(5) && $evaluacion->proyecto->lineaProgramatica->codigo == 70) {
+                return true;
+            }
+
             if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
                 return false;
             }
@@ -113,6 +117,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('modificar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
+
+            if ($user->hasRole(5) && $evaluacion->proyecto->lineaProgramatica->codigo == 70) {
+                return true;
+            }
+
             if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
                 return false;
             }

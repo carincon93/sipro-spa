@@ -55,7 +55,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkRole(authUser, [11])}
+                    {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                         <a use:inertia href={route('convocatorias.evaluaciones.analisis-riesgos', [convocatoria.id, evaluacion.id])} class="text-indigo-400 hover:text-indigo-600">Análisis de riesgos</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -67,7 +67,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11, 5]) && proyecto.finalizado == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label class="mb-4" labelFor="nivel" value="Nivel de riesgo" />
                     <Select disabled={true} id="nivel" items={nivelesRiesgo} bind:selectedValue={analisisRiesgoInfo.nivel} autocomplete="off" placeholder="Seleccione el nivel del riesgo" />

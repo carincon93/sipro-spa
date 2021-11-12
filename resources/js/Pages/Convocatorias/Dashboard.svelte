@@ -78,45 +78,53 @@
             <hr class="mt-20 mb-20" />
         {/if}
 
-        {#if isSuperAdmin || checkRole(authUser, [11])}
+        {#if isSuperAdmin || checkRole(authUser, [11, 5, 20, 19, 18])}
             <h1 class="text-4xl text-center" id="evaluacion">
                 A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} para realizar las respectivas evaluaciones.
             </h1>
             <div class="flex justify-around mt-24 gap-4">
-                <a use:inertia href={route('convocatorias.idi-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
-                    <figure>
-                        <img src={window.basePath + '/images/evaidi.png'} alt="Línea programática - I+D+i" class="bg-white h-44 w-44 object-contain rounded-full" />
-                    </figure>
-                    I+D+i
-                </a>
+                {#if isSuperAdmin || checkRole(authUser, [11, 18])}
+                    <a use:inertia href={route('convocatorias.idi-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                        <figure>
+                            <img src={window.basePath + '/images/evaidi.png'} alt="Línea programática - I+D+i" class="bg-white h-44 w-44 object-contain rounded-full" />
+                        </figure>
+                        I+D+i
+                    </a>
+                {/if}
 
-                <a use:inertia href={route('convocatorias.ta-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
-                    <figure>
-                        <img src={window.basePath + '/images/evata.png'} alt="Línea programática - Tecnoacademia" class="bg-white h-44 w-44 object-contain rounded-full" />
-                    </figure>
-                    Tecnoacademia
-                </a>
+                {#if isSuperAdmin || checkRole(authUser, [11, 5])}
+                    <a use:inertia href={route('convocatorias.ta-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                        <figure>
+                            <img src={window.basePath + '/images/evata.png'} alt="Línea programática - Tecnoacademia" class="bg-white h-44 w-44 object-contain rounded-full" />
+                        </figure>
+                        Tecnoacademia
+                    </a>
+                {/if}
 
-                <a use:inertia href={route('convocatorias.tp-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
-                    <figure>
-                        <img src={window.basePath + '/images/evatp.png'} alt="Línea programática - Tecnoparque" class="bg-white h-44 w-44 object-contain rounded-full" />
-                    </figure>
-                    Tecnoparque
-                </a>
-
-                <a use:inertia href={route('convocatorias.servicios-tecnologicos-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
-                    <figure>
-                        <img src={window.basePath + '/images/evast.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
-                    </figure>
-                    Servicios tecnológicos
-                </a>
-
-                <a use:inertia href={route('convocatorias.cultura-innovacion-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
-                    <figure>
-                        <img src={window.basePath + '/images/evacultura.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
-                    </figure>
-                    Apropiación de la cultura de la innovación
-                </a>
+                {#if isSuperAdmin || checkRole(authUser, [11, 17])}
+                    <a use:inertia href={route('convocatorias.tp-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                        <figure>
+                            <img src={window.basePath + '/images/evatp.png'} alt="Línea programática - Tecnoparque" class="bg-white h-44 w-44 object-contain rounded-full" />
+                        </figure>
+                        Tecnoparque
+                    </a>
+                {/if}
+                {#if isSuperAdmin || checkRole(authUser, [11, 19])}
+                    <a use:inertia href={route('convocatorias.servicios-tecnologicos-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                        <figure>
+                            <img src={window.basePath + '/images/evast.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
+                        </figure>
+                        Servicios tecnológicos
+                    </a>
+                {/if}
+                {#if isSuperAdmin || checkRole(authUser, [11, 20])}
+                    <a use:inertia href={route('convocatorias.cultura-innovacion-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
+                        <figure>
+                            <img src={window.basePath + '/images/evacultura.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
+                        </figure>
+                        Apropiación de la cultura de la innovación
+                    </a>
+                {/if}
             </div>
         {/if}
     </div>

@@ -60,7 +60,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkRole(authUser, [11])}
+                    {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                         <a use:inertia href={route('convocatorias.evaluaciones.entidades-aliadas', [convocatoria.id, evaluacion.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -73,7 +73,7 @@
     <div class="flex">
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form>
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true) ? undefined : true}>
+                <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [11, 5]) && proyecto.finalizado == true) ? undefined : true}>
                     <div class="mt-8">
                         <Label class="mb-4" labelFor="tipo" value="Tipo de entidad aliada" />
                         <Select disabled={true} id="tipo" items={tiposEntidadAliada} bind:selectedValue={entidadAliadaInfo.tipo} autocomplete="off" placeholder="Seleccione el tipo de entidad" />
