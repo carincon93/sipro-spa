@@ -44,8 +44,9 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
+            $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
-            if ((bool) $user->can_by_user->search(11) || (bool) $user->can_by_user->search(1) || (bool) $user->can_by_user->search(5) || (bool) $user->can_by_user->search(8) || (bool) $user->can_by_user->search(17)) {
+            if ($user->can_by_user->search(11) !== false && $lineaProgramatica->codigo == 65 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 23 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 66 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 82 || $user->can_by_user->search(5) !== false && $lineaProgramatica->codigo == 68 || $user->can_by_user->search(8) !== false && $lineaProgramatica->codigo == 70 || $user->can_by_user->search(17) !== false && $lineaProgramatica->codigo == 69) {
                 return true;
             }
 
@@ -53,8 +54,6 @@ class AuthServiceProvider extends ServiceProvider
             if ($convocatoria && $convocatoria->fase != 1) {
                 return false;
             }
-
-            $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
             if ($lineaProgramatica && $user->getAllPermissions()->whereIn('id', [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21])->count() > 0) {
                 return true;

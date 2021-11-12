@@ -50,7 +50,7 @@ class TaController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
+        $this->authorize('formular-proyecto', [5]);
 
         if (auth()->user()->hasRole(12)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad

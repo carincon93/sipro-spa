@@ -40,7 +40,7 @@ class CulturaInnovacionController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
+        $this->authorize('formular-proyecto', [9]);
 
         if (auth()->user()->hasRole(15)) {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->whereIn('centros_formacion.codigo', [9309, 9503, 9230, 9124, 9525, 9222, 9212, 9116, 9517, 9401, 9403, 9303, 9310, 9529, 9308])->orderBy('centros_formacion.nombre', 'ASC')->get();
