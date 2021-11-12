@@ -46,6 +46,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
             $convocatoria = Convocatoria::where('esta_activa', true)->first();
 
+            $user->getAllPermissions()->whereIn('id', [11, 1, 5, 8, 17])->count() > 0 ? true : null;
+
             if ($convocatoria && $convocatoria->fase != 1) {
                 return false;
             }
