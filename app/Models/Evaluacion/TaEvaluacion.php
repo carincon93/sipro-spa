@@ -104,7 +104,7 @@ class TaEvaluacion extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1) || $authUser->hasRole(5)) { // Admin
-            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'users.nombre as nombre_user', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'users.nombre as nombre_user', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'evaluaciones.evaluacion_final', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->join('users', 'evaluaciones.user_id', 'users.id')

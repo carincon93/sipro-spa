@@ -40,11 +40,15 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each ta.data as { evaluacion_id, nombre_user, proyecto, fecha_ejecucion, iniciado, habilitado, finalizado }}
+            {#each ta.data as { evaluacion_id, nombre_user, proyecto, fecha_ejecucion, iniciado, habilitado, finalizado, evaluacion_final }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
+
+                            {#if evaluacion_final}
+                                <span class="block text-danger"> Evaluación final </span>
+                            {/if}
 
                             {#if !habilitado}
                                 <span class="block text-danger">Evaluación deshabilitada. No puede realizar la evaluación.</span>

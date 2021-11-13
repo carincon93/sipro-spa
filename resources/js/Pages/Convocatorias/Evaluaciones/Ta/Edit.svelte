@@ -250,7 +250,7 @@
             </div>
             <InfoMessage>
                 <div class="mt-4">
-                    {#if checkRole(authUser, [5])}
+                    {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                         {#each otrasEvaluaciones as evaluacion}
                             <div class="mb-8">
                                 <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -356,7 +356,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -407,7 +407,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -455,7 +455,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -536,7 +536,7 @@
             <div>
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -615,7 +615,7 @@
             <div>
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -671,7 +671,7 @@
                 <Textarea disabled maxlength="40000" id="articulacion_centro_formacion" bind:value={taInfo.articulacion_centro_formacion} />
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -716,7 +716,7 @@
                 <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -753,7 +753,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -790,7 +790,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -828,7 +828,7 @@
 
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -861,7 +861,7 @@
         <h1>Ortografía</h1>
         <InfoMessage>
             <div class="mt-4">
-                {#if checkRole(authUser, [5])}
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                     {#each otrasEvaluaciones as evaluacion}
                         <div class="mb-8">
                             <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -882,7 +882,7 @@
         <h1>Redacción</h1>
         <InfoMessage>
             <div class="mt-4">
-                {#if checkRole(authUser, [5])}
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                     {#each otrasEvaluaciones as evaluacion}
                         <div class="mb-8">
                             <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
@@ -903,7 +903,7 @@
         <h1>Normas APA</h1>
         <InfoMessage>
             <div class="mt-4">
-                {#if checkRole(authUser, [5])}
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
                     {#each otrasEvaluaciones as evaluacion}
                         <div class="mb-8">
                             <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
