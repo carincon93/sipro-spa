@@ -104,28 +104,11 @@ class TaEvaluacion extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1) || $authUser->hasRole(5)) { // Admin
-            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'users.nombre as nombre_user', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
+            $ta = Ta::select('evaluaciones.id as evaluacion_id', 'users.nombre as nombre_user', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'evaluaciones.evaluacion_final', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->join('users', 'evaluaciones.user_id', 'users.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->whereNotIn('evaluaciones.id', [
-                    1846,
-                    1845,
-                    1844,
-                    1843,
-                    1842,
-                    1841,
-                    1840,
-                    1839,
-                    1838,
-                    1837,
-                    1836,
-                    1835,
-                    1834,
-                    1833,
-                    1832
-                ])
                 ->distinct()
                 ->orderBy('ta.id', 'ASC')
                 ->filterTa(request()->only('search'))->paginate();

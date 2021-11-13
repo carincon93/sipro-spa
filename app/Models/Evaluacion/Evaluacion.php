@@ -42,7 +42,8 @@ class Evaluacion extends Model
         'comentario_formulador',
         'comentario_evaluador',
         'replicas',
-        'estado'
+        'estado',
+        'evaluacion_final'
     ];
 
     /**

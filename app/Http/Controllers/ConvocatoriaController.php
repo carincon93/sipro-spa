@@ -195,15 +195,15 @@ class ConvocatoriaController extends Controller
             $evaluacion->update(['estado' => $evaluacion->verificar_estado_evaluacion]);
         }
 
-        $convocatoria->fase = $request->fase;
+        $convocatoria->fase = $request->fase['value'];
         $convocatoria->save();
 
-        if ($request->fase == 1) { // Formulación
+        if ($request->fase['value'] == 1) { // Formulación
             $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
-        } else if ($request->fase == 2) { // Primera evaluación
+        } else if ($request->fase['value'] == 2) { // Primera evaluación
             $convocatoria->proyectos()->update(['modificable' => false]);
-        } else if ($request->fase == 3) { // Subsanación
+        } else if ($request->fase['value'] == 3) { // Subsanación
 
             foreach ($convocatoria->proyectos()->get() as $proyecto) {
                 switch ($proyecto) {
@@ -253,10 +253,10 @@ class ConvocatoriaController extends Controller
             }
 
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
-        } else if ($request->fase == 4) { // Segunda evaluación
+        } else if ($request->fase['value'] == 4) { // Segunda evaluación
             $convocatoria->proyectos()->update(['modificable' => false, 'finalizado' => true, 'a_evaluar' => true, 'mostrar_recomendaciones' => false]);
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
-        } else if ($request->fase == 5) { // Finalizar convocatoria
+        } else if ($request->fase['value'] == 5) { // Finalizar convocatoria
             $convocatoria->proyectos()->update(['modificable' => false]);
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         }

@@ -14,6 +14,7 @@
     export let convocatoria
     export let evaluacion
     export let proyecto
+    export let otrasEvaluaciones
 
     $: $title = 'Comentarios generales'
 
@@ -46,7 +47,27 @@
     <EvaluationStepper {convocatoria} {evaluacion} {proyecto} />
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Comentarios generales</h1>
-    <InfoMessage>Este es un espacio para que haga un comentario general al formulador del proyecto.</InfoMessage>
+    <InfoMessage class="mb-10">
+        {#if evaluacion.evaluacion_final != true}
+            Este es un espacio para que haga un comentario general al formulador del proyecto.
+        {:else}
+            Este es un espacio para que haga un comentario final al formulador del proyecto.
+        {/if}
+    </InfoMessage>
+
+    {#if evaluacion.evaluacion_final}
+        <InfoMessage>
+            {#each otrasEvaluaciones as evaluacion}
+                <div class="mb-8">
+                    <h4>Comentario general del evaluador(a): <span class="font-black capitalize">{evaluacion.evaluador.nombre}</span></h4>
+                    <p class="whitespace-pre-line">
+                        {evaluacion.comentario_evaluador ? evaluacion.comentario_evaluador : 'Sin información registrada'}
+                    </p>
+                    <br />
+                </div>
+            {/each}
+        </InfoMessage>
+    {/if}
 
     {#if evaluacion.replicas}
         <hr class="mt-10 mb-10 border-black-200" />
@@ -57,10 +78,11 @@
             {evaluacion.replicas ? evaluacion.replicas : 'Sin información registrada'}
         </p>
     {/if}
+
     <form on:submit|preventDefault={submit}>
         <div class="mt-28">
             <div class="mt-8 mb-8">
-                <Label labelFor=" comentario_evaluador" value="Comentarios" />
+                <Label labelFor=" comentario_evaluador" value={evaluacion.evaluacion_final ? 'Comentario final' : 'Comentarios'} />
 
                 <Textarea maxlength="40000" id=" comentario_evaluador" error={errors.comentario_evaluador} bind:value={$form.comentario_evaluador} />
             </div>

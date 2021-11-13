@@ -137,7 +137,7 @@
             <div class="mt-16">
                 <InfoMessage>
                     <div class="mt-4">
-                        {#if checkRole(authUser, [5])}
+                        {#if checkRole(authUser, [5]) && evaluacion.evaluacion_final}
                             {#each otrasEvaluaciones as evaluacion}
                                 <div class="mb-8">
                                     <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
