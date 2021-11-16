@@ -218,7 +218,7 @@
                 </div>
             </form>
         </div>
-        <div class="px-4">
+        <div class="px-4 flex-1">
             {#if proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
                 <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
                 <ul>
