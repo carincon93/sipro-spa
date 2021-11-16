@@ -168,6 +168,7 @@ class TaController extends Controller
         $ta->proyecto->centroFormacion;
 
         $ta->mostrar_recomendaciones = $ta->proyecto->mostrar_recomendaciones;
+        $ta->mostrar_requiere_subsanacion = $ta->proyecto->mostrar_requiere_subsanacion;
 
         if (auth()->user()->hasRole(12) && !auth()->user()->hasRole(5)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad

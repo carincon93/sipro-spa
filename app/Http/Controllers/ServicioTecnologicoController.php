@@ -152,6 +152,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->proyecto->centroFormacion;
 
         $servicioTecnologico->mostrar_recomendaciones = $servicioTecnologico->proyecto->mostrar_recomendaciones;
+        $servicioTecnologico->mostrar_requiere_subsanacion = $servicioTecnologico->proyecto->mostrar_requiere_subsanacion;
 
         if (auth()->user()->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
