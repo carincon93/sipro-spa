@@ -180,7 +180,7 @@ trait PresupuestoValidationTrait
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
             $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040106') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040516') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040115') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040125') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040108');
 
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -203,7 +203,7 @@ trait PresupuestoValidationTrait
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros de "materiales para la formación"
             $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040424');
 
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -225,7 +225,7 @@ trait PresupuestoValidationTrait
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
             $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040424');
 
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -245,7 +245,7 @@ trait PresupuestoValidationTrait
 
         if ($codigoSegundoPresupuestal == '2042186') {
             $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2042186');
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -264,7 +264,7 @@ trait PresupuestoValidationTrait
         if ($codigoSegundoPresupuestal == '2041102') {
 
             $total = 0;
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoria_presupuesto_id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -285,7 +285,7 @@ trait PresupuestoValidationTrait
             // Calcula el promedio entre lo que viene del form + los estudios de mercado de todos los rubros adecuaciones y construcciones, equipo de sistemas, mantenimiento de maquinaria y equipo, transporte y sofware, maquinaria industrial, otras compras de equipos, software
             $total = self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040125') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040115') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040516') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2040106') + self::totalSegundoGrupoPresupuestalProyecto($proyecto, '2045110');
 
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
@@ -307,7 +307,7 @@ trait PresupuestoValidationTrait
 
         if ($codigoSegundoPresupuestal == '20202008005096') {
 
-            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->id == $convocatoriaPresupuesto->id) {
+            if ($proyectoPresupuesto && $proyectoPresupuesto->convocatoriaPresupuesto->presupuestoSennova->segundoGrupoPresupuestal->codigo == $codigoSegundoPresupuestal) {
                 $total = $total - $proyectoPresupuesto->valor_total + $valorTotal;
             } else {
                 $total += $valorTotal;
