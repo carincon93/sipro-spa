@@ -101,7 +101,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyecto.participantes.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (checkRole(authUser, [11]) && proyecto.finalizado == true)}
+                            {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && proyecto.finalizado == true)}
                                 <Item on:SMUI:action={() => showParticipante(participante)}>
                                     <Text>Detalles</Text>
                                 </Item>

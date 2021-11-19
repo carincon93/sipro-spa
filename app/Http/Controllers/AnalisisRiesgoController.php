@@ -177,7 +177,7 @@ class AnalisisRiesgoController extends Controller
                 $evaluacion->idiEvaluacion;
                 $idi = $evaluacion->proyecto->idi;
 
-                $segundaEvaluacion = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
+                $otrasEvaluaciones = IdiEvaluacion::whereHas('evaluacion', function ($query) use ($idi) {
                     $query->where('evaluaciones.proyecto_id', $idi->id)->where('evaluaciones.habilitado', true);
                 })->where('idi_evaluaciones.id', '!=', $evaluacion->idiEvaluacion->id)->first();
                 break;
@@ -185,15 +185,15 @@ class AnalisisRiesgoController extends Controller
                 $evaluacion->taEvaluacion;
                 $ta = $evaluacion->proyecto->ta;
 
-                $segundaEvaluacion = TaEvaluacion::whereHas('evaluacion', function ($query) use ($ta) {
+                $otrasEvaluaciones = TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
                     $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
-                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->first();
+                })->where('ta_evaluaciones.id', '!=', $evaluacion->taEvaluacion->id)->get();
                 break;
             case $evaluacion->proyecto->tp()->exists():
                 $evaluacion->tpEvaluacion;
                 $tp = $evaluacion->proyecto->tp;
 
-                $segundaEvaluacion = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
+                $otrasEvaluaciones = TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
                     $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
                 })->where('tp_evaluaciones.id', '!=', $evaluacion->tpEvaluacion->id)->first();
                 break;
@@ -201,14 +201,14 @@ class AnalisisRiesgoController extends Controller
                 $evaluacion->culturaInnovacionEvaluacion;
                 $culturaInnovacion = $evaluacion->proyecto->culturaInnovacion;
 
-                $segundaEvaluacion = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
+                $otrasEvaluaciones = CulturaInnovacionEvaluacion::whereHas('evaluacion', function ($query) use ($culturaInnovacion) {
                     $query->where('evaluaciones.proyecto_id', $culturaInnovacion->id)->where('evaluaciones.habilitado', true);
                 })->where('cultura_innovacion_evaluaciones.id', '!=', $evaluacion->culturaInnovacionEvaluacion->id)->first();
                 break;
             case $evaluacion->proyecto->servicioTecnologico()->exists():
                 $servicioTecnologico = $evaluacion->proyecto->servicioTecnologico;
 
-                $segundaEvaluacion = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
+                $otrasEvaluaciones = ServicioTecnologicoEvaluacion::whereHas('evaluacion', function ($query) use ($servicioTecnologico) {
                     $query->where('evaluaciones.proyecto_id', $servicioTecnologico->id)->where('evaluaciones.habilitado', true);
                 })->where('servicios_tecnologicos_evaluaciones.id', '!=', $evaluacion->servicioTecnologicoEvaluacion->id)->first();
                 break;
@@ -219,7 +219,7 @@ class AnalisisRiesgoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
             'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
             'evaluacion'        => $evaluacion,
-            'segundaEvaluacion' => $segundaEvaluacion,
+            'otrasEvaluaciones' => $otrasEvaluaciones,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'finalizado'),
             'filters'           => request()->all('search'),
             'analisisRiesgos'   => AnalisisRiesgo::where('proyecto_id', $evaluacion->proyecto->id)->orderBy('descripcion', 'ASC')

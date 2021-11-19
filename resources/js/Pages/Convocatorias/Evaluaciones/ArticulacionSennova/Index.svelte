@@ -24,6 +24,7 @@
     export let gruposInvestigacionRelacionados
     export let lineasInvestigacionRelacionadas
     export let semillerosInvestigacionRelacionados
+    export let otrasEvaluaciones
 
     $title = 'Articulación SENNOVA'
 
@@ -55,7 +56,7 @@
         articulacion_sennova_requiere_comentario: evaluacion.ta_evaluacion.articulacion_sennova_comentario == null ? true : false,
     })
     function submitTaEvaluacion() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formTaEvaluacion.put(route('convocatorias.evaluaciones.articulacion-sennova.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -136,6 +137,15 @@
             <div class="mt-16">
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.articulacion_sennova_comentario ? evaluacion.articulacion_sennova_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <br />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La articulación SENNOVA está definida correctamente? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : evaluacion.finalizado == true || evaluacion.habilitado == false || evaluacion.modificable == false ? true : undefined} bind:checked={$formTaEvaluacion.articulacion_sennova_requiere_comentario} />
                         {#if $formTaEvaluacion.articulacion_sennova_requiere_comentario == false}
@@ -155,7 +165,7 @@
             </div>
         {/if}
         <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [11]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>

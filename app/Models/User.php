@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,7 +22,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['can'];
+    protected $appends = ['can', 'can_by_user'];
 
     /**
      * The attributes that are mass assignable.
@@ -182,7 +183,7 @@ class User extends Authenticatable
     public function getTipoVinculacionTextAttribute()
     {
         $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
-        return ($tipos_vinculacion->where('value',$this->tipo_vinculacion)->first())?$tipos_vinculacion->where('value',$this->tipo_vinculacion)->first()['label']:'Sin información registrada';
+        return ($tipos_vinculacion->where('value', $this->tipo_vinculacion)->first()) ? $tipos_vinculacion->where('value', $this->tipo_vinculacion)->first()['label'] : 'Sin información registrada';
     }
 
     /**
@@ -206,6 +207,16 @@ class User extends Authenticatable
         return $this->getAllPermissions()->map(function ($t) {
             return ['id' => $t['id']];
         })->pluck('id');
+    }
+
+    /**
+     * getPermissionsByUserAttribute
+     *
+     * @return void
+     */
+    public function getCanByUserAttribute()
+    {
+        return DB::table('model_has_permissions')->select('permission_id')->where('model_id', $this->id)->get()->pluck('permission_id');
     }
 
     /**

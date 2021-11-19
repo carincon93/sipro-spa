@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
             'csrf_token' => csrf_token(),
             'convocatoria' => Convocatoria::where('esta_activa', true)->first(),
             'auth' => [
-                'user'                  => $request->user() ? $request->user()->only('id', 'nombre', 'nombre_usuario', 'email', 'roles', 'can', 'centro_formacion_id') : null,
+                'user'                  => $request->user() ? $request->user()->only('id', 'nombre', 'nombre_usuario', 'email', 'roles', 'can', 'can_by_user', 'centro_formacion_id') : null,
                 'numeroNotificaciones'  => $request->user() ? $request->user()->unreadNotifications()->count() : 0
             ],
             'flash' => function () {

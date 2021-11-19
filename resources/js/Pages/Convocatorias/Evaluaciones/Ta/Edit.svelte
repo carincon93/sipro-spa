@@ -32,6 +32,7 @@
     export let proyectoDisCurriculares
     export let disCurriculares
     export let tecnoAcademias
+    export let otrasEvaluaciones
 
     $: $title = ta ? ta.titulo : null
 
@@ -190,7 +191,7 @@
         normas_apa_requiere_comentario: taEvaluacion.normas_apa_comentario == null ? true : false,
     })
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [11]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
+        if (isSuperAdmin || (checkRole(authUser, [11, 5]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.ta-evaluaciones.update', [convocatoria.id, taEvaluacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -249,6 +250,15 @@
             </div>
             <InfoMessage>
                 <div class="mt-4">
+                    {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                        {#each otrasEvaluaciones as evaluacion}
+                            <div class="mb-8">
+                                <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                {evaluacion.fecha_ejecucion_comentario ? evaluacion.fecha_ejecucion_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                <br />
+                            </div>
+                        {/each}
+                    {/if}
                     <p>¿Las fechas son correctas? Por favor seleccione si Cumple o No cumple</p>
                     <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.fecha_ejecucion_requiere_comentario} />
                     {#if $form.fecha_ejecucion_requiere_comentario == false}
@@ -346,6 +356,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.resumen_regional_comentario ? evaluacion.resumen_regional_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿El resumen ejecutivo regional es correcto? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.resumen_regional_requiere_comentario} />
                         {#if $form.resumen_regional_requiere_comentario == false}
@@ -388,6 +407,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.antecedentes_tecnoacademia_comentario ? evaluacion.antecedentes_tecnoacademia_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿Los antecedentes de la Tecnoacademia y su impacto en la región son correctos? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.antecedentes_tecnoacademia_requiere_comentario} />
                         {#if $form.antecedentes_tecnoacademia_requiere_comentario == false}
@@ -427,6 +455,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.retos_oportunidades_comentario ? evaluacion.retos_oportunidades_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La descripción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.retos_oportunidades_requiere_comentario} />
                         {#if $form.retos_oportunidades_requiere_comentario == false}
@@ -499,6 +536,15 @@
             <div>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.div ? evaluacion.div : 'Sin recomendación'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información relacionada con los municipios es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.municipios_requiere_comentario} />
                         {#if $form.municipios_requiere_comentario == false}
@@ -569,6 +615,15 @@
             <div>
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.instituciones_comentario ? evaluacion.instituciones_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información relacionada con las instituciones es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.instituciones_requiere_comentario} />
                         {#if $form.instituciones_requiere_comentario == false}
@@ -616,6 +671,15 @@
                 <Textarea disabled maxlength="40000" id="articulacion_centro_formacion" bind:value={taInfo.articulacion_centro_formacion} />
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.articulacion_centro_formacion_comentario ? evaluacion.articulacion_centro_formacion_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información relacionada con la articulación con el centro de formación es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.articulacion_centro_formacion_requiere_comentario} />
                         {#if $form.articulacion_centro_formacion_requiere_comentario == false}
@@ -652,6 +716,15 @@
                 <Textarea disabled maxlength="40000" id="proyectos_macro" bind:value={taInfo.proyectos_macro} />
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.proyectos_macro_comentario ? evaluacion.proyectos_macro_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.proyectos_macro_requiere_comentario} />
                         {#if $form.proyectos_macro_requiere_comentario == false}
@@ -680,6 +753,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.lineas_medulares_centro_comentario ? evaluacion.lineas_medulares_centro_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información sobre las líneas medulares es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_medulares_centro_requiere_comentario} />
                         {#if $form.lineas_medulares_centro_requiere_comentario == false}
@@ -708,6 +790,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.lineas_tecnologicas_centro_comentario ? evaluacion.lineas_tecnologicas_centro_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La información sobre las líneas tecnológicas es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.lineas_tecnologicas_centro_requiere_comentario} />
                         {#if $form.lineas_tecnologicas_centro_requiere_comentario == false}
@@ -737,6 +828,15 @@
 
                 <InfoMessage>
                     <div class="mt-4">
+                        {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                            {#each otrasEvaluaciones as evaluacion}
+                                <div class="mb-8">
+                                    <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                                    {evaluacion.bibliografia_comentario ? evaluacion.bibliografia_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                                    <hr />
+                                </div>
+                            {/each}
+                        {/if}
                         <p>¿La bibliografia es correcta? Por favor seleccione si Cumple o No cumple.</p>
                         <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.bibliografia_requiere_comentario} />
                         {#if $form.bibliografia_requiere_comentario == false}
@@ -761,6 +861,15 @@
         <h1>Ortografía</h1>
         <InfoMessage>
             <div class="mt-4">
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                    {#each otrasEvaluaciones as evaluacion}
+                        <div class="mb-8">
+                            <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                            {evaluacion.ortografia_comentario ? evaluacion.ortografia_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                            <br />
+                        </div>
+                    {/each}
+                {/if}
                 <p>¿La ortografía es correcta? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.ortografia_requiere_comentario} />
                 {#if $form.ortografia_requiere_comentario == false}
@@ -773,6 +882,15 @@
         <h1>Redacción</h1>
         <InfoMessage>
             <div class="mt-4">
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                    {#each otrasEvaluaciones as evaluacion}
+                        <div class="mb-8">
+                            <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                            {evaluacion.redaccion_comentario ? evaluacion.redaccion_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                            <br />
+                        </div>
+                    {/each}
+                {/if}
                 <p>¿La redacción es correcta? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.redaccion_requiere_comentario} />
                 {#if $form.redaccion_requiere_comentario == false}
@@ -785,6 +903,15 @@
         <h1>Normas APA</h1>
         <InfoMessage>
             <div class="mt-4">
+                {#if checkRole(authUser, [5]) && taEvaluacion.evaluacion.evaluacion_final}
+                    {#each otrasEvaluaciones as evaluacion}
+                        <div class="mb-8">
+                            <h4>Evaluador(a): <span class="font-black capitalize">{evaluacion.evaluacion.evaluador.nombre}</span></h4>
+                            {evaluacion.normas_apa_comentario ? evaluacion.normas_apa_comentario : 'Estado: El evaluador(a) da cumplimiento al ítem'}
+                            <br />
+                        </div>
+                    {/each}
+                {/if}
                 <p>¿Las normas APA son correctas? Por favor seleccione si Cumple o No cumple.</p>
                 <Switch onMessage="Cumple" offMessage="No cumple" disabled={isSuperAdmin ? undefined : taEvaluacion.evaluacion.finalizado == true || taEvaluacion.evaluacion.habilitado == false || taEvaluacion.evaluacion.modificable == false ? true : undefined} bind:checked={$form.normas_apa_requiere_comentario} />
                 {#if $form.normas_apa_requiere_comentario == false}
@@ -794,7 +921,7 @@
         </InfoMessage>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [11]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)}
+            {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)}
                 {#if $form.clausula_confidencialidad}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

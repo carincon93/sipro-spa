@@ -32,16 +32,23 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Teacnoacademia </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
+                {#if checkRole(authUser, [5])}
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Evaluador </th>
+                {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
 
         <tbody slot="tbody">
-            {#each ta.data as { evaluacion_id, proyecto, fecha_ejecucion, iniciado, habilitado, finalizado }}
+            {#each ta.data as { evaluacion_id, nombre_user, proyecto, fecha_ejecucion, iniciado, habilitado, finalizado, evaluacion_final }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
                             {proyecto.codigo}
+
+                            {#if evaluacion_final}
+                                <span class="block text-danger"> Evaluación final </span>
+                            {/if}
 
                             {#if !habilitado}
                                 <span class="block text-danger">Evaluación deshabilitada. No puede realizar la evaluación.</span>
@@ -67,11 +74,25 @@
                             {/if}
                         </p>
                     </td>
+                    {#if checkRole(authUser, [5])}
+                        <td class="border-t">
+                            <p class="px-6 py-4">
+                                {nombre_user}
+                            </p>
+                        </td>
+                    {/if}
+
                     <td class="border-t td-actions">
                         <DataTableMenu class={ta.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [11])}
+                            {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.ta-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
-                                    <Text>Evaluar</Text>
+                                    <Text>
+                                        {#if checkRole(authUser, [5])}
+                                            Verificar
+                                        {:else}
+                                            Evaluar
+                                        {/if}
+                                    </Text>
                                 </Item>
                             {:else}
                                 <Item>

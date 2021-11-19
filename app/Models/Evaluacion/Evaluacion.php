@@ -42,7 +42,8 @@ class Evaluacion extends Model
         'comentario_formulador',
         'comentario_evaluador',
         'replicas',
-        'estado'
+        'estado',
+        'evaluacion_final'
     ];
 
     /**
@@ -318,6 +319,8 @@ class Evaluacion extends Model
             $this->idiEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->idiEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->idiEvaluacion->normas_apa_comentario != null ? $total++ : null;
+
+            $this->comentario_evaluador != null ? $total++ : null;
         } else if ($this->culturaInnovacionEvaluacion && $this->proyecto->culturaInnovacion()->exists()) {
             $this->culturaInnovacionEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->video_comentario != null ? $total++ : null;
@@ -352,6 +355,8 @@ class Evaluacion extends Model
             $this->culturaInnovacionEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->culturaInnovacionEvaluacion->normas_apa_comentario != null ? $total++ : null;
+
+            $this->comentario_evaluador != null ? $total++ : null;
         } else if ($this->taEvaluacion && $this->proyecto->ta()->exists()) {
             $this->taEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->taEvaluacion->antecedentes_tecnoacademia_comentario != null ? $total++ : null;
@@ -376,6 +381,8 @@ class Evaluacion extends Model
             $this->taEvaluacion->ortografia_comentario != null ? $total++ : null;
             $this->taEvaluacion->redaccion_comentario != null ? $total++ : null;
             $this->taEvaluacion->normas_apa_comentario != null ? $total++ : null;
+
+            $this->comentario_evaluador != null ? $total++ : null;
         } else if ($this->tpEvaluacion && $this->proyecto->tp()->exists()) {
             $this->tpEvaluacion->resumen_regional_comentario != null ? $total++ : null;
             $this->tpEvaluacion->antecedentes_regional_comentario != null ? $total++ : null;
@@ -395,6 +402,8 @@ class Evaluacion extends Model
             $this->tpEvaluacion->normas_apa_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_problemas_comentario != null ? $total++ : null;
             $this->tpEvaluacion->arbol_objetivos_comentario != null ? $total++ : null;
+
+            $this->comentario_evaluador != null ? $total++ : null;
         } else if ($this->servicioTecnologicoEvaluacion && $this->proyecto->servicioTecnologico()->exists()) {
             $this->servicioTecnologicoEvaluacion->titulo_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->resumen_comentario != null ? $total++ : null;
@@ -441,6 +450,8 @@ class Evaluacion extends Model
             $this->servicioTecnologicoEvaluacion->riesgos_productos_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->riesgos_actividades_comentario != null ? $total++ : null;
             $this->servicioTecnologicoEvaluacion->inventario_equipos_comentario != null ? $total++ : null;
+
+            $this->comentario_evaluador != null ? $total++ : null;
         }
 
         $total += $this->proyectoPresupuestosEvaluaciones()->where('correcto', false)->count();

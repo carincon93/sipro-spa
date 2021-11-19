@@ -39,7 +39,7 @@ class IdiController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [null]);
+        $this->authorize('formular-proyecto', [3]);
 
         if (auth()->user()->hasRole(6)) {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
@@ -150,6 +150,7 @@ class IdiController extends Controller
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;
         $idi->mostrar_recomendaciones = $idi->proyecto->mostrar_recomendaciones;
+        $idi->mostrar_requiere_subsanacion = $idi->proyecto->mostrar_requiere_subsanacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi', 'mostrar_recomendaciones'),
