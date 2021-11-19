@@ -682,9 +682,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Tokens
      * 
      */
-    Route::prefix('tokens')->group(function () {
-        Route::post('create', [ApiController::class, 'CreateToken'])->name('tokens.create');
-    });
+    // Route::prefix('tokens')->group(function () {
+    //     Route::post('create', [ApiController::class, 'CreateToken'])->name('tokens.create');
+    // });
 });
 
 require __DIR__ . '/auth.php';
