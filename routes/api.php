@@ -16,7 +16,7 @@ use App\Http\Controllers\API\ApiController;
 |
 */
 
-Route::middleware(['auth:api'])->name('v1.')->prefix('v1')->group(function () {
+Route::middleware(['checkToken', 'api'])->name('v1.')->prefix('v1')->group(function () {
     // API Resources
     Route::get('user_sennova', [ApiController::class, 'isUserSennova'])->name('user_sennova');
     Route::get('user_sennova/{id}/projects', [ApiController::class, 'projectsByUser'])->name('projects_by_user');
