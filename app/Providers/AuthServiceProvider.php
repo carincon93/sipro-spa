@@ -9,7 +9,6 @@ use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,12 +33,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        if (! $this->app->routesAreCached()) {
-            Passport::routes();
-            Passport::tokensExpireIn(now()->addYears(50));
-            Passport::refreshTokensExpireIn(now()->addYears(50));
-            Passport::personalAccessTokensExpireIn(now()->addYears(50));
-        }
         $this->registerSuperAdminPolicy();
 
         Gate::define('listar-convocatorias', function (User $user) {
