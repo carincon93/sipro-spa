@@ -17,7 +17,10 @@ class CheckToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($token = $request->bearerToken()) {
+        $validated = $request->validate([
+            'token' => 'required',
+        ]);
+        if ($token = $request->token) {
             $accessToken = PersonalAccessToken::findToken($token);
             if (!empty($accessToken)) {
                 $accessToken->forceFill(['last_used_at' => now()])->save();
