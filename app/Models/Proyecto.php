@@ -658,7 +658,7 @@ class Proyecto extends Model
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
-            if ($this->estado_cord_sennova != NULL) {
+            if ($this->estado_cord_sennova != NULL && request()->isMethod('GET')) {
                 $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
                 $estadoEvaluacion = $estadosEvaluacion['estado'];
             }
@@ -750,7 +750,7 @@ class Proyecto extends Model
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
-            if ($this->estado_cord_sennova != NULL) {
+            if ($this->estado_cord_sennova != NULL && request()->isMethod('GET')) {
                 $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
                 $estadoEvaluacion = $estadosEvaluacion['estado'];
             }
@@ -847,7 +847,7 @@ class Proyecto extends Model
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
-            if ($this->estado_cord_sennova != NULL) {
+            if ($this->estado_cord_sennova != NULL && request()->isMethod('GET')) {
                 $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
                 $estadoEvaluacion = $estadosEvaluacion['estado'];
             }
@@ -894,7 +894,7 @@ class Proyecto extends Model
             $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
-            if ($this->estado_cord_sennova != NULL) {
+            if ($this->estado_cord_sennova != NULL && request()->isMethod('GET')) {
                 $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
                 $estadoEvaluacion = $estadosEvaluacion['estado'];
             }
@@ -940,7 +940,7 @@ class Proyecto extends Model
             $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
-            if ($this->estado_cord_sennova != NULL) {
+            if ($this->estado_cord_sennova != NULL && request()->isMethod('GET')) {
                 $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
                 $estadoEvaluacion = $estadosEvaluacion['estado'];
             }

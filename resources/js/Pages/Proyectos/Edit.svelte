@@ -6,6 +6,7 @@
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Shared/Label'
+    import Input from '@/Shared/Input'
     import InputError from '@/Shared/InputError'
     import LoadingButton from '@/Shared/LoadingButton'
     import Switch from '@/Shared/Switch'
@@ -29,7 +30,8 @@
 
     let sending = false
     let form = useForm({
-        subsanacion: proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false ? true : false,
+        subsanacion: proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
+        estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova).estado : null,
     })
 
     function submit() {
@@ -85,7 +87,7 @@
     $: if ($formEvaluacion?.modificable) {
         $form.subsanacion = false
     } else {
-        $form.subsanacion = true
+        $form.subsanacion = proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false
     }
 </script>
 
@@ -128,6 +130,15 @@
                             <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado).requiereSubsanar ? 'Si' : 'No'}</li>
                         </ul>
                     </InfoMessage>
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label labelFor="estado_cord_sennova" value="Por favor defina el estado del proyecto. (Solo si el proyecto tuvo uno revisión por la cord. SENNOVA)" class="inline-block mb-4" />
+                    <br />
+                    <Input label="Estado (Definido por la cord. SENNOVA)" id="estado_cord_sennova" type="text" class="mt-1" bind:value={$form.estado_cord_sennova} error={errors.estado_cord_sennova} />
+                    <InputError message={errors.estado_cord_sennova} />
                 </div>
 
                 <hr class="mt-10 mb-10" />
@@ -187,7 +198,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={(event) => ((dialogOpen = false), ($form.subsanacion = proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false))} variant={null}>Cancelar</Button>
 
                 <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form="evaluacion">Guardar</LoadingButton>
             </div>
