@@ -93,7 +93,6 @@ class ProyectoController extends Controller
                 $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
                 break;
             case $proyecto->estado_evaluacion_cultura_innovacion != null:
-                dd('test');
                 $proyecto->update(['estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
                 break;
 
