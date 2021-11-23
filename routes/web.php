@@ -687,4 +687,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
+Route::middleware(['checkToken'])->name('v1.')->prefix('api/v1')->group(function () {
+    // API Resources
+    Route::get('user_sennova', [ApiController::class, 'isUserSennova'])->name('user_sennova');
+    Route::get('user_sennova/{id}/projects', [ApiController::class, 'projectsByUser'])->name('projects_by_user');
+    Route::get('center/{id}/projects', [ApiController::class, 'projectsByCenter'])->name('projects_by_center');
+    Route::get('projects/{id}', [ApiController::class, 'summaryProject'])->name('project');
+});
+
 require __DIR__ . '/auth.php';
