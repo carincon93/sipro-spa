@@ -315,7 +315,7 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with TecnoacademiaLineaTecnoacademia
+     * Relationship with TecnoacademiaLineasTecnoacademia
      *
      * @return object
      */
