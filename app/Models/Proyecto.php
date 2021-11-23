@@ -891,7 +891,7 @@ class Proyecto extends Model
 
             $estadoEvaluacion = null;
 
-            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
             if ($this->estado_cord_sennova != NULL) {
@@ -937,7 +937,7 @@ class Proyecto extends Model
 
             $estadoEvaluacion = null;
 
-            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
+            $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
             if ($this->estado_cord_sennova != NULL) {
