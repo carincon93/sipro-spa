@@ -41,7 +41,7 @@ class Proyecto extends Model
         'estructuracion_proyectos',
         'estado',
         'estado_cord_sennova',
-        'precio_proyecto',
+        // 'precio_proyecto',
         'mostrar_recomendaciones',
         'mostrar_requiere_subsanacion'
     ];
@@ -658,6 +658,11 @@ class Proyecto extends Model
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
+            if ($this->estado_cord_sennova != NULL) {
+                $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
+                $estadoEvaluacion = $estadosEvaluacion['estado'];
+            }
+
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
         }
     }
@@ -743,6 +748,11 @@ class Proyecto extends Model
             if ($cantidadEvaluaciones == 0) {
                 $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
+            }
+
+            if ($this->estado_cord_sennova != NULL) {
+                $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
+                $estadoEvaluacion = $estadosEvaluacion['estado'];
             }
 
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
@@ -837,6 +847,11 @@ class Proyecto extends Model
                 $estadoEvaluacion = $estadosEvaluacion->where('value', 1)->first()['label'];
             }
 
+            if ($this->estado_cord_sennova != NULL) {
+                $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
+                $estadoEvaluacion = $estadosEvaluacion['estado'];
+            }
+
             return collect(['estado' => $estadoEvaluacion, 'puntaje' => $puntajeTotal, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => $alerta]);
         }
     }
@@ -879,6 +894,11 @@ class Proyecto extends Model
             $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
 
+            if ($this->estado_cord_sennova != NULL) {
+                $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
+                $estadoEvaluacion = $estadosEvaluacion['estado'];
+            }
+
             return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }
     }
@@ -919,6 +939,11 @@ class Proyecto extends Model
 
             $estadoEvaluacion = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? 'Cumple' : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? 'No priorizado' : 'Proyecto con asignación de apoyo técnico para la formulación:');
             $requiereSubsanar = $totalRecomendaciones == 0 &&  $evaluacionesFinalizadas > 0 ? false : ($totalRecomendaciones == 0 &&  $evaluacionesFinalizadas == 0 ? false : true);
+
+            if ($this->estado_cord_sennova != NULL) {
+                $estadosEvaluacion = collect(json_decode($this->estado_cord_sennova, true));
+                $estadoEvaluacion = $estadosEvaluacion['estado'];
+            }
 
             return collect(['estado' => $estadoEvaluacion, 'numeroRecomendaciones' => $totalRecomendaciones, 'evaluacionesHabilitadas' => $cantidadEvaluaciones, 'evaluacionesFinalizadas' => $evaluacionesFinalizadas, 'requiereSubsanar' => $requiereSubsanar, 'alerta' => null]);
         }

@@ -41,6 +41,7 @@ class ProyectoController extends Controller
         return Inertia::render('Proyectos/Index', [
             'filters'       => request()->all('search'),
             'proyectos'     => Proyecto::with('PdfVersiones', 'convocatoria')->orderBy('id', 'ASC')->filterProyecto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'proyectosId'   => Proyecto::selectRaw("id + 8000 as codigo_only")->orderBy('id', 'ASC')->get()->pluck('codigo_only')->flatten('codigo_only')
         ]);
     }
 
@@ -1161,13 +1162,22 @@ class ProyectoController extends Controller
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
-    public function udpdatePrecioProyecto()
+    public function udpdateEstadosProyectos(Request $request)
     {
-        $proyectos = Proyecto::all();
+        $proyectosId = collect([]);
+        collect(json_decode($request->proyectos_id))->pluck('value')->map(function ($item) use ($proyectosId) {
+            return $proyectosId->push($item - 8000);
+        });
 
-        foreach ($proyectos as $proyecto) {
-            $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
-        }
+        Proyecto::whereIn('id', $proyectosId)->update([
+            'modificable'                   => $request->estado_subsanable,
+            'mostrar_recomendaciones'       => $request->estado_subsanable,
+            'mostrar_requiere_subsanacion'  => $request->estado_subsanable,
+            'a_evaluar'                     => $request->estado_subsanable ? false : true,
+            'finalizado'                    => $request->estado_subsanable ? false : true,
+        ]);
+
+        Evaluacion::whereIn('proyecto_id', $proyectosId)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

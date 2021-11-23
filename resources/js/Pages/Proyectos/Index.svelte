@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -9,9 +9,13 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import LoadingButton from '@/Shared/LoadingButton'
+    import Tags from '@/Shared/Tags'
+    import Label from '@/Shared/Label'
+    import Switch from '@/Shared/Switch'
     import { Item, Text } from '@smui/list'
 
     export let proyectos
+    export let proyectosId
 
     $title = 'Proyectos'
 
@@ -26,9 +30,13 @@
     }
 
     let sending = false
+    let form = useForm({
+        proyectos_id: null,
+        estado_subsanable: false,
+    })
     function submit() {
         if (isSuperAdmin) {
-            Inertia.post(route('proyectos.update.precio-proyecto'), {
+            $form.post(route('proyectos.update.actualizar-estados-proyectos'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -43,9 +51,21 @@
 
         <div slot="caption">
             <form on:submit|preventDefault={submit}>
+                <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Códigos SGPS" required />
+
+                <div class="mt-4">
+                    {#if $form.estado_subsanable}
+                        <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
+                    {:else}
+                        <Label labelFor="estado_subsanable" value="La opción de proyectos finalizados está seleccionada. Nota: Los proyectos finalizados no podrán ser modifcados." class="inline-block mb-4" />
+                    {/if}
+                    <br />
+                    <Switch bind:checked={$form.estado_subsanable} onMessage="Subsanable(s)" offMessage="Finalizado(s)" />
+                </div>
+
                 <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar precio de proyectos</LoadingButton>
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
                     {/if}
                 </div>
             </form>
