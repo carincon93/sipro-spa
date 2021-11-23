@@ -24,7 +24,7 @@ class Ta extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion'];
+    protected $appends = ['titulo', 'fecha_ejecucion'];
 
     /**
      * The attributes that are mass assignable.
@@ -280,5 +280,15 @@ class Ta extends Model
     public function getUpdatedAtAttribute($value)
     {
         return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
+    }
+
+    /**
+     * getTituloAttribute
+     *
+     * @return void
+     */
+    public function getTituloAttribute()
+    {
+        return $this->proyecto->tecnoacademiaLineasTecnoacademia->first()->tecnoacademia->nombre;
     }
 }
