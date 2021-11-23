@@ -25,6 +25,7 @@ use App\Notifications\ProyectoFinalizado;
 use App\Notifications\ProyectoConfirmado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -71,6 +72,7 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+
         if ($request->subsanacion == true) {
             $proyecto->a_evaluar   = false;
             $proyecto->modificable = true;
@@ -91,6 +93,7 @@ class ProyectoController extends Controller
                 $proyecto->update(['estado' => $proyecto->estado_evaluacion_idi]);
                 break;
             case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                dd('test');
                 $proyecto->update(['estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
                 break;
 
@@ -107,6 +110,17 @@ class ProyectoController extends Controller
                 break;
             default:
                 break;
+        }
+
+        if ($request->estado_cord_sennova) {
+            $request->subsanacion = $request->subsanacion ? 1 : 0;
+            $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
+            sleep(2);
+            $proyecto->update(
+                [
+                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiere_subsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
+                ]
+            );
         }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
