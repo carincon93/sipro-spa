@@ -39,16 +39,16 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
         $proyecto->updateValoresProyecto();
         $tipo = '';
         if (!empty($proyecto->idi)) {
-            $this->datos =  $proyecto->idi;
+            $this->datos = $proyecto->idi;
             $tipo = 'I+D+I';
         } else if (!empty($proyecto->ta)) {
-            $this->datos =  $proyecto->ta;
+            $this->datos = $proyecto->ta;
             $tipo = 'Tecnoacademia';
         } else if (!empty($proyecto->tp)) {
-            $this->datos =  $proyecto->tp;
+            $this->datos = $proyecto->tp;
             $tipo = 'Tecnoparque';
         } else if (!empty($proyecto->culturaInnovacion)) {
-            $this->datos =  $proyecto->culturaInnovacion;
+            $this->datos = $proyecto->culturaInnovacion;
             $tipo = 'Apropiación de la cultura de la innovación';
         } else if (!empty($proyecto->servicioTecnologico)) {
             $this->datos =  $proyecto->servicioTecnologico;
