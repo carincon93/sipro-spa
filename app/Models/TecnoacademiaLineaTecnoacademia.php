@@ -69,7 +69,7 @@ class TecnoacademiaLineaTecnoacademia extends Model
      *
      * @return void
      */
-    public function proyecto()
+    public function proyectos()
     {
         return $this->hasMany(Proyecto::class);
     }

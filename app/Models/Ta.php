@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Ta extends Model
 {
@@ -289,6 +290,10 @@ class Ta extends Model
      */
     public function getTituloAttribute()
     {
-        return $this->proyecto->tecnoacademiaLineasTecnoacademia->first()->tecnoacademia->nombre;
+        return DB::table('proyectos')->select('tecnoacademias.nombre')->join('proyecto_linea_tecnoacademia', 'proyectos.id', 'proyecto_linea_tecnoacademia.proyecto_id')
+            ->join('tecnoacademia_linea_tecnoacademia', 'proyecto_linea_tecnoacademia.tecnoacademia_linea_tecnoacademia_id', 'tecnoacademia_linea_tecnoacademia.id')
+            ->join('tecnoacademias', 'tecnoacademia_linea_tecnoacademia.tecnoacademia_id', 'tecnoacademias.id')->where('proyectos.id', $this->id)->first() ? DB::table('proyectos')->select('tecnoacademias.nombre')->join('proyecto_linea_tecnoacademia', 'proyectos.id', 'proyecto_linea_tecnoacademia.proyecto_id')
+            ->join('tecnoacademia_linea_tecnoacademia', 'proyecto_linea_tecnoacademia.tecnoacademia_linea_tecnoacademia_id', 'tecnoacademia_linea_tecnoacademia.id')
+            ->join('tecnoacademias', 'tecnoacademia_linea_tecnoacademia.tecnoacademia_id', 'tecnoacademias.id')->where('proyectos.id', $this->id)->first()->nombre : '';
     }
 }
