@@ -186,7 +186,7 @@
                 <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">Convocatorias</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('evaluaciones.index'))} variant={route().current('evaluaciones.*') ? 'raised' : 'outlined'} class="p-2">Evaluaciones</Button>
             {/if}
 
@@ -194,7 +194,7 @@
                 <Button on:click={() => Inertia.visit(route('grupos-investigacion.index'))} variant={route().current('grupos-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Grupos de investigación</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('lineas-investigacion.index'))} variant={route().current('lineas-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Líneas de investigación</Button>
             {/if}
 
@@ -210,11 +210,11 @@
                 <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">Mesas técnicas</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">Programas de formación</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('proyectos.index'))} variant={route().current('proyectos.*') ? 'raised' : 'outlined'} class="p-2">Proyectos</Button>
             {/if}
 
@@ -238,7 +238,7 @@
                 <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('semilleros-investigacion.index'))} variant={route().current('semilleros-investigacion.*') ? 'raised' : 'outlined'} class="p-2">Semilleros de investigación</Button>
             {/if}
 

@@ -35,7 +35,7 @@
         estado_subsanable: false,
     })
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.post(route('proyectos.update.actualizar-estados-proyectos'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -51,11 +51,11 @@
 
         <div slot="caption">
             <form on:submit|preventDefault={submit}>
-                <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Códigos SGPS" required />
+                <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Código(s) SGPS" required />
 
                 <div class="mt-4">
                     {#if $form.estado_subsanable}
-                        <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
+                        <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, además se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
                     {:else}
                         <Label labelFor="estado_subsanable" value="La opción de proyectos finalizados está seleccionada. Nota: Los proyectos finalizados no podrán ser modifcados." class="inline-block mb-4" />
                     {/if}
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
                     {/if}
                 </div>
@@ -74,7 +74,7 @@
         <thead slot="thead">
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Versiones (.pdf) </th>
                 {/if}
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
@@ -93,7 +93,7 @@
                             {/if}
                         </p>
                     </td>
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <td class="border-t">
                             {#if pdf_versiones}
                                 <ul>
@@ -105,16 +105,19 @@
                                             {/if}
                                         </li>
                                     {/each}
+                                    {#if pdf_versiones.length == 0}
+                                        <p>No se ha generado algún pdf</p>
+                                    {/if}
                                 </ul>
                             {:else}
-                                <p>No se ha generado un historial aún</p>
+                                <p>No se ha generado algún pdf</p>
                             {/if}
                         </td>
                     {/if}
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectos.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin}
+                            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

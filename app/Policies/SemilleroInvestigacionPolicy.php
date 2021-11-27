@@ -18,7 +18,7 @@ class SemilleroInvestigacionPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole([4, 21])) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
             return true;
         }
 
@@ -34,7 +34,7 @@ class SemilleroInvestigacionPolicy
      */
     public function view(User $user)
     {
-        if ($user->hasRole([4, 21])) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
             return true;
         }
 
@@ -49,7 +49,7 @@ class SemilleroInvestigacionPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasRole([4, 21])) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
             return true;
         }
 
@@ -65,7 +65,7 @@ class SemilleroInvestigacionPolicy
      */
     public function update(User $user, SemilleroInvestigacion $semilleroInvestigacion)
     {
-        if ($user->hasRole(4) && $user->dinamizadorCentroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
+        if ($user->hasRole([20, 18, 19, 5, 17]) || $user->hasRole(4) && $user->dinamizadorCentroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
             return true;
         }
 

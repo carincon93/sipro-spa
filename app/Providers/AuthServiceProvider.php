@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\SemilleroInvestigacion' => 'App\Policies\SemilleroInvestigacionPolicy',
         'App\Models\LineaInvestigacion' => 'App\Policies\LineaInvestigacionPolicy',
         'App\Models\ProgramaFormacion' => 'App\Policies\ProgramaFormacionPolicy',
+        'App\Models\Evaluacion\Evaluacion' => 'App\Policies\EvaluacionPolicy',
     ];
 
     /**
@@ -101,7 +102,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('visualizar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
-            if ($user->hasRole(5) && $evaluacion->proyecto->lineaProgramatica->codigo == 70) {
+            if ($user->hasRole([20, 18, 19, 5, 17])) {
                 return true;
             }
 
@@ -118,7 +119,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('modificar-evaluacion-autor', function (User $user, Evaluacion $evaluacion) {
 
-            if ($user->hasRole(5) && $evaluacion->proyecto->lineaProgramatica->codigo == 70) {
+            if ($user->hasRole([20, 18, 19, 5, 17])) {
                 return true;
             }
 

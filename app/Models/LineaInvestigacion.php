@@ -125,7 +125,7 @@ class LineaInvestigacion extends Model
     public static function getLineasInvestigacionByRol()
     {
         $user = Auth::user();
-        if ($user->hasRole(1)) {
+        if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
             $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion.centroFormacion')->filterLineaInvestigacion(request()->only('search'))->orderBy('lineas_investigacion.nombre', 'ASC')->paginate();
         } else if ($user->hasRole([4, 21])) {
             $centroFormacionId = null;

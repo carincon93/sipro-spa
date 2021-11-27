@@ -43,7 +43,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.put(route('evaluaciones.update', evaluacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -53,7 +53,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.delete(route('evaluaciones.destroy', evaluacion.id))
         }
     }
@@ -64,7 +64,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <a use:inertia href={route('evaluaciones.index')} class="text-indigo-400 hover:text-indigo-600"> Evaluaciones </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -108,10 +108,10 @@
             </fieldset>
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar evaluación </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar evaluación</LoadingButton>
                 {/if}
             </div>

@@ -35,7 +35,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.put(route('proyectos.update', proyecto.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -54,7 +54,7 @@
     })
 
     function submitEvaluacion() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $formEvaluacion.put(route('evaluaciones.update', $formEvaluacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -96,7 +96,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin}
+                    {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <a use:inertia href={route('proyectos.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -151,10 +151,13 @@
                         <Button type="button" variant="raised" on:click={() => showEvaluacionDialog(evaluacion)}>Modificar</Button>
                     </div>
                 {/each}
+                {#if proyecto.evaluaciones.length == 0}
+                    <p class="p-4">El proyecto no tiene evaluadores asignados</p>
+                {/if}
             </fieldset>
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>

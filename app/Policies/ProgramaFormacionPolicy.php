@@ -18,7 +18,7 @@ class ProgramaFormacionPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole([4, 21])) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
             return true;
         }
 
@@ -34,7 +34,7 @@ class ProgramaFormacionPolicy
      */
     public function view(User $user, ProgramaFormacion $programaFormacion)
     {
-        if ($user->hasRole([4, 21]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
             return true;
         }
 
@@ -49,7 +49,7 @@ class ProgramaFormacionPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasRole([4, 21])) {
+        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
             return true;
         }
 
@@ -65,7 +65,7 @@ class ProgramaFormacionPolicy
      */
     public function update(User $user, ProgramaFormacion $programaFormacion)
     {
-        if ($user->hasRole([4, 21]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
+        if ($user->hasRole([20, 18, 19, 5, 17]) || $user->hasRole([4, 21]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
             return true;
         }
 
@@ -81,7 +81,7 @@ class ProgramaFormacionPolicy
      */
     public function delete(User $user, ProgramaFormacion $programaFormacion)
     {
-        if ($user->hasRole([4, 21]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
+        if ($user->hasRole([20, 18, 19, 5, 17]) || $user->hasRole([4, 21]) && $user->centro_formacion_id == $programaFormacion->centro_formacion_id) {
             return true;
         }
 

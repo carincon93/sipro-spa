@@ -55,7 +55,7 @@
             </select>
         </div>
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('evaluaciones.create'))} variant="raised">Crear evaluación</Button>
             {/if}
         </div>
@@ -117,7 +117,7 @@
                         <p class="px-6 py-4">
                             {#if evaluacion.proyecto.estado_evaluacion_idi}
                                 {evaluacion.estado_proyecto_por_evaluador?.estado}
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
@@ -127,7 +127,7 @@
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_cultura_innovacion}
                                 {evaluacion.estado_proyecto_por_evaluador?.estado}
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
@@ -137,7 +137,7 @@
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_servicios_tecnologicos}
                                 {evaluacion.estado_proyecto_por_evaluador?.estado}
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                     <br />
                                     <small>
                                         Puntaje: {evaluacion.total_evaluacion}
@@ -147,14 +147,14 @@
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_ta}
                                 {evaluacion.proyecto.estado_evaluacion_ta.estado}
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                     <small>
                                         Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>
                                 {/if}
                             {:else if evaluacion.proyecto.estado_evaluacion_tp}
                                 {evaluacion.proyecto.estado_evaluacion_tp.estado}
-                                {#if isSuperAdmin}
+                                {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                     <small>
                                         Número de recomendaciones: {evaluacion.total_recomendaciones}
                                     </small>

@@ -106,7 +106,7 @@ class ProgramaFormacion extends Model
     public static function getProgramasFormacionByRol()
     {
         $user = Auth::user();
-        if ($user->hasRole(1)) {
+        if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
             $lineasInvestigacion = ProgramaFormacion::select('programas_formacion.id', 'programas_formacion.nombre', 'programas_formacion.codigo', 'programas_formacion.centro_formacion_id')->with('centroFormacion')->filterProgramaFormacion(request()->only('search'))->orderBy('programas_formacion.nombre', 'ASC')->paginate();
         } else if ($user->hasRole([4, 21])) {
             $centroFormacionId = null;

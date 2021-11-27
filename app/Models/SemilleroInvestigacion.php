@@ -95,7 +95,7 @@ class SemilleroInvestigacion extends Model
     public static function getSemillerosInvestigacionByRol()
     {
         $user = Auth::user();
-        if ($user->hasRole(1)) {
+        if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
             $semilerosInvestigacion = SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id')->with('lineaInvestigacion', 'lineaInvestigacion.grupoInvestigacion')->filterSemilleroInvestigacion(request()->only('search'))->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate();
         } else if ($user->hasRole([4, 21])) {
             $centroFormacionId = null;

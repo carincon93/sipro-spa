@@ -22,12 +22,12 @@
     let sending = false
     let form = useForm({
         nombre: '',
-        centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21]) ? authUser.centro_formacion_id : null,
+        centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? authUser.centro_formacion_id : null,
         linea_investigacion_id: null,
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4, 21])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])) {
             $form.post(route('semilleros-investigacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -41,7 +41,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                         <a use:inertia href={route('semilleros-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Semilleros de investigación </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -53,7 +53,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
                     <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
@@ -75,7 +75,7 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(authUser, [4, 21])}
+                {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear semillero de investigación</LoadingButton>
                 {/if}
             </div>
