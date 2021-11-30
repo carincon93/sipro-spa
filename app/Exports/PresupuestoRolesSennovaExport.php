@@ -36,6 +36,6 @@ class PresupuestoRolesSennovaExport implements WithMultipleSheets, WithTitle
      */
     public function title(): string
     {
-        return 'Resumen Presupuestos y Roles SENNOVA';
+        return 'Resumen presupuestos y roles SENNOVA';
     }
 }
