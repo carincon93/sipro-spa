@@ -107,7 +107,7 @@ class PresupuestosExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function title(): string
     {
-        return 'Resumen Presupuestal';
+        return 'Resumen presupuestal';
     }
 
     public function properties(): array

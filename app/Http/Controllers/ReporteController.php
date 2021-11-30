@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ComentariosEvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Inertia\Inertia;
@@ -62,6 +63,18 @@ class ReporteController extends Controller
     }
 
     /**
+     * comentariosEvaluacionesExcel
+     *
+     * @return void
+     */
+    public function comentariosEvaluacionesExcel(Convocatoria $convocatoria)
+    {
+        $this->authorize('descargar-reportes', [User::class]);
+
+        return Excel::download(new ComentariosEvaluacionesExport($convocatoria), 'comentarios-evaluaciones-' . time() . '.xlsx');
+    }
+
+    /**
      * resumePresupuestos
      *
      * @param  mixed $convocatoria
@@ -71,7 +84,7 @@ class ReporteController extends Controller
     {
         return Excel::download(new PresupuestoRolesSennovaExport($convocatoria), 'prespuestos-roles-' . time() . '.xlsx');
     }
-    
+
     /**
      * EvaluacionesProyectosPresupuestoExport
      *
@@ -79,6 +92,6 @@ class ReporteController extends Controller
      */
     public function EvaluacionesProyectosPresupuestoExport(Convocatoria $convocatoria)
     {
-        return Excel::download(new EvaluacionesProyectosPresupuestoExport($convocatoria), 'evaluaciones-proyecto-prespuestos-aprobados-'.time().'.xlsx');
+        return Excel::download(new EvaluacionesProyectosPresupuestoExport($convocatoria), 'evaluaciones-proyecto-prespuestos-aprobados-' . time() . '.xlsx');
     }
 }

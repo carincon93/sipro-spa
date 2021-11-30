@@ -74,7 +74,7 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if (isSuperAdmin && $form.convocatoria) || checkRole(authUser, [20, 18, 19, 5, 17])}
-                        <Button variant="raised" on:click={()=>downloadReport('evaluaciones')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('evaluaciones')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>
@@ -85,7 +85,18 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if $form.convocatoria && (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17]))}
-                        <Button variant="raised" on:click={()=>downloadReport('resumeProyectoPresupuestoAprobado')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('resumeProyectoPresupuestoAprobado')}>Descargar</Button>
+                    {/if}
+                </td>
+            </tr>
+            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Comentarios evaluaciones</p></td>
+                <td>
+                    <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
+                </td>
+                <td class="border-t td-actions">
+                    {#if $form.convocatoria && (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17]))}
+                        <Button variant="raised" on:click={() => downloadReport('comentarios-evaluaciones')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>
