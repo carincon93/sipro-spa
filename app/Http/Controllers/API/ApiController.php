@@ -87,11 +87,11 @@ class ApiController extends Controller
     {
         $user = User::findOrFail($id);
         $proyectos = $user->proyectos()->whereRaw(
-            DB::raw("estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
-                or estado->>'estado'='Pre-aprobado'
-                or estado->>'estado'='Pre-aprobado con observaciones'
-                or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
-                or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación'")
+            DB::raw("(estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                            or estado->>'estado'='Pre-aprobado'
+                            or estado->>'estado'='Pre-aprobado con observaciones'
+                            or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                            or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación')")
         )->get();
         $projects = [];
         foreach ($proyectos as $proyecto) {
@@ -169,11 +169,11 @@ class ApiController extends Controller
     {
         $center = CentroFormacion::findOrFail($id);
         $proyectos = $center->proyectos()->whereRaw(
-            DB::raw("estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
-                or estado->>'estado'='Pre-aprobado'
-                or estado->>'estado'='Pre-aprobado con observaciones'
-                or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
-                or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación'")
+            DB::raw("(estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                            or estado->>'estado'='Pre-aprobado'
+                            or estado->>'estado'='Pre-aprobado con observaciones'
+                            or estado->>'estado'='No priorizado anexo 1C. Comuníquese con el Dinamizador SENNOVA.'
+                            or estado->>'estado'='Proyecto con asignación de apoyo técnico para la formulación')")
         )->get();
         $projects = [];
         foreach ($proyectos as $proyecto)
