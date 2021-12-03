@@ -191,6 +191,20 @@ class EvaluacionController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activas()
+    {
+        $this->authorize('viewAny', [Evaluacion::class]);
+
+        return Inertia::render('Evaluaciones/Activas', [
+            'evaluaciones'  => Evaluacion::where('modificable', true)->with('proyecto.tecnoacademiaLineasTecnoacademia.tecnoacademia', 'proyecto.ta:id,fecha_inicio,fecha_finalizacion', 'proyecto.idi:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.tp:id,nodo_tecnoparque_id,fecha_inicio,fecha_finalizacion', 'proyecto.culturaInnovacion:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.servicioTecnologico:id,titulo,fecha_inicio,fecha_finalizacion', 'proyecto.centroFormacion', 'evaluador:id,nombre')->orderBy('proyecto_id', 'ASC')->paginate(),
+        ]);
+    }
+
+    /**
      * redireccionar
      *
      * @param  mixed $convocatoria
