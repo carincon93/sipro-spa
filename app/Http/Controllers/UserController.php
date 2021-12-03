@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -219,6 +220,12 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * markAsReadNotification
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function markAsReadNotification(Request $request)
     {
         if ($request->notificacion) {
@@ -229,5 +236,20 @@ class UserController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function enLinea()
+    {
+        $this->authorize('viewAny', [User::class]);
+
+        return Inertia::render('Users/UsersActivos', [
+            'filters'   => request()->all('search'),
+            'usuarios'  => User::with('centroFormacion')->join('sessions', 'users.id', 'sessions.user_id')->paginate()
+        ]);
     }
 }

@@ -126,6 +126,18 @@ class ProyectoController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activos()
+    {
+        return Inertia::render('Proyectos/Activos', [
+            'proyectos' => Proyecto::where('modificable', true)->orderBy('id', 'ASC')->paginate(),
+        ]);
+    }
+
+    /**
      * showCadenaValor
      *
      * @param  mixed $convocatoria

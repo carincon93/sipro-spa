@@ -56,6 +56,7 @@
         </div>
         <div slot="actions">
             {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
+                <Button on:click={() => Inertia.visit(route('evaluaciones.activas'))} variant="raised">Evaluaciones activas</Button>
                 <Button on:click={() => Inertia.visit(route('evaluaciones.create'))} variant="raised">Crear evaluación</Button>
             {/if}
         </div>

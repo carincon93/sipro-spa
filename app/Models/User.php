@@ -194,7 +194,7 @@ class User extends Authenticatable
     public function getTipoDocumentoTextAttribute()
     {
         $tipos_documentos = collect(json_decode(Storage::get('json/tipos-documento.json'), true));
-        return ($tipos_documentos->where('value',$this->tipo_documento)->first())?$tipos_documentos->where('value',$this->tipo_documento)->first()['label']:'Sin información registrada';
+        return ($tipos_documentos->where('value', $this->tipo_documento)->first()) ? $tipos_documentos->where('value', $this->tipo_documento)->first()['label'] : 'Sin información registrada';
     }
 
     /**
