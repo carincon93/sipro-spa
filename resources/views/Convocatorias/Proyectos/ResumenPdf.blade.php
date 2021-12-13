@@ -451,43 +451,40 @@
         <table width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
             @if ($datos->nombre_instituciones_programas && !empty($datos->nombre_instituciones_programas))
                 <tr>
-                    <td width="35%">
+                    <td width="100%">
                         <p class="title">Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias</p>
-                    </td>
-                    <td>
-                        <ul>
-                            @foreach (json_decode($datos->nombre_instituciones_programas) as $instProg)
-                                <li>{{ $instProg->value }}</li>
-                            @endforeach
-                        </ul>
+                        @if(json_decode($datos->nombre_instituciones_programas))
+                        @php 
+                            $nombre_instituciones_programas = collect(json_decode($datos->nombre_instituciones_programas));
+                        @endphp
+                        <p>{{ $nombre_instituciones_programas->implode('value', ', ') }}</p>
+                        @endif
                     </td>
                 </tr>
             @endif
             @if ($datos->proyeccion_nuevas_tecnoacademias == 1 && !empty($datos->nuevas_instituciones))
                 <tr>
-                    <td width="35%">
+                    <td width="100%">
                         <p class="title">Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia</p>
-                    </td>
-                    <td>
-                        <ul>
-                            @foreach (json_decode($datos->nuevas_instituciones) as $instNuevaProg)
-                                <li>{{ $instNuevaProg->value }}</li>
-                            @endforeach
-                        </ul>
+                        @if(json_decode($datos->nuevas_instituciones))
+                        @php 
+                            $nuevas_instituciones = collect(json_decode($datos->nuevas_instituciones));
+                        @endphp
+                        <p>{{ $nuevas_instituciones->implode('value', ', ') }}</p>
+                        @endif
                     </td>
                 </tr>
             @endif
             @if ($datos->proyeccion_articulacion_media == 1 && !empty($datos->nombre_instituciones))
                 <tr>
-                    <td width="35%">
+                    <td width="100%">
                         <p class="title">Instituciones donde se implementará el programa que tienen <b>articulación con la Media</b></p>
-                    </td>
-                    <td>
-                        <ul>
-                            @foreach (json_decode($datos->nombre_instituciones) as $inst)
-                                <li>{{ $inst->value }}</li>
-                            @endforeach
-                        </ul>
+                        @if(json_decode($datos->nombre_instituciones))
+                        @php 
+                            $nombre_instituciones = collect(json_decode($datos->nombre_instituciones));
+                        @endphp
+                        <p>{{ $nombre_instituciones->implode('value', ', ') }}</p>
+                        @endif
                     </td>
                 </tr>
             @endif
@@ -604,13 +601,11 @@
         @if ($proyecto->municipios->count() > 0)
             <table class="page_break" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
                 <tr>
-                    <td width="35%" class="title">Municipios beneficiados</td>
-                    <td>
-                        <ol>
-                            @foreach ($proyecto->municipios as $mun)
-                                <li>{{ $mun->nombre }}</li>
-                            @endforeach
-                        </ol>
+                    <td width="100%" class="title">Municipios beneficiados</td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <p>{{ $proyecto->municipios->implode('nombre', ', ') }}</p>
                     </td>
                 </tr>
             </table>
@@ -631,28 +626,30 @@
         @if ($proyecto->municipiosAImpactar->count() > 0)
             <table class="" width="100%" border="1" cellspacing="0" cellpadding="3" style="border-top: none;">
                 <tr>
-                    <td width="35%" class="title">Municipios a impactar en la vigencia el proyecto:</td>
-                    <td>
-                        <ol>
-                            @foreach ($proyecto->municipiosAImpactar as $munImp)
-                                <li>{{ $munImp->nombre }}</li>
-                            @endforeach
-                        </ol>
+                    <td width="100%" class="title">Municipios a impactar en la vigencia el proyecto:</td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <p>{{ $proyecto->municipiosAImpactar->implode('nombre', ', ') }}</p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="35%" class="title">Descripción del beneficio o impacto en los municipios</td>
-                    <td>
+                    <td width="100%" class="title">Descripción del beneficio o impacto en los municipios</td>
+                </tr>
+                <tr>
+                    <td width="100%">
                         <p>{{ $datos->impacto_municipios }}</p>
                     </td>
                 </tr>
                 @if (!empty($datos->impacto_centro_formacion))
-                    <tr>
-                        <td width="35%" class="title">Impacto en el centro de formación</td>
-                        <td>
-                            <p>{{ $datos->impacto_centro_formacion }}</p>
-                        </td>
-                    </tr>
+                <tr>
+                    <td width="100%" class="title">Impacto en el centro de formación</td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <p>{{ $datos->impacto_centro_formacion }}</p>
+                    </td>
+                </tr>
                 @endif
             </table>
         @endif
@@ -959,12 +956,14 @@
                     <td>{{ $cauDir->descripcion }}</td>
                 </tr>
                 @foreach ($cauDir->causasindirectas as $cauind)
+                    @if(!empty($cauind->descripcion))
                     <tr>
                         <td width="35%" valign="top">
                             <span class="title">Causa indirecta CAU-{{ $cauDir->id }}-IND-{{ $cauind->id }}:</span>
                         </td>
                         <td>{{ $cauind->descripcion }}</td>
                     </tr>
+                    @endif
                 @endforeach
             </table>
         @endforeach
@@ -1116,9 +1115,14 @@
                 </table>
             </div>
         @endif
+        <div class="page_break" style="text-align:center">
+            <p class="title">Gant Productos</p>
+            <center>
+                <img style="margin:0 auto; max-height:90%; max-width:100%;" src="data:image/png;base64,{{ $base64GantProductos }}" alt="Gant Productos">
+            </center>
+        </div>
         <div class="border page_break">
             <p class="title" style="text-align:center">Productos</p>
-            <img class="" src="data:image/png;base64,{{ $base64GantProductos }}" alt="Gant Productos" width="100%" style="max-width: 90%;">
 
             @foreach ($proyecto->efectosDirectos as $efeDir)
                 @foreach ($efeDir->resultados as $resultado)
@@ -1395,9 +1399,11 @@
             </table>
         </div>
 
-        <div class="rotate90 page_break" style="margin-top: 1.8in !important">
-            <p class="title" style="text-align:center">Cadena de valor</p>
-            <img src="data:image/png;base64,{{ $base64CadenaValor }}" alt="Cadena de valor" width="100%" style="max-height: 800px;">
+        <div class="page_break" style="text-align:center">
+            <p class="title">Cadena de valor</p>
+            <center>
+                <img style="margin:0 auto; max-height:90%; max-width:100%;" src="data:image/png;base64,{{ $base64CadenaValor }}" alt="Cadena de valor">
+            </center>
         </div>
     </main>
 </body>

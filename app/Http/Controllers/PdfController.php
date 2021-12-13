@@ -24,6 +24,8 @@ class PdfController extends Controller
      */
     static function generateProjectSumary(Convocatoria $convocatoria, Proyecto $proyecto, $save = false)
     {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', -1);
         $datos = null;
             $tipoProyectoSt = null;
             if(!empty($proyecto->idi)){
@@ -53,7 +55,7 @@ class PdfController extends Controller
             $base64Arbolobjetivos = PdfController::takeScreenshot(route('convocatorias.proyectos.arbol-objetivos', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
             $base64GantProductos = PdfController::takeScreenshot(route('convocatorias.proyectos.productos.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
             $base64GantActividades = PdfController::takeScreenshot(route('convocatorias.proyectos.actividades.index', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '.flex.relative.mt-10');
-            $base64CadenaValor = PdfController::takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]), '#orgchart_div');
+            $base64CadenaValor = PdfController::takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
             
             $pdf = PDF::loadView('Convocatorias.Proyectos.ResumenPdf', [
                 'convocatoria' => $convocatoria, 
