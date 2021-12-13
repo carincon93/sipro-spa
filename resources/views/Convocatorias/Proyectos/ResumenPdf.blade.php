@@ -956,7 +956,7 @@
                     <td>{{ $cauDir->descripcion }}</td>
                 </tr>
                 @foreach ($cauDir->causasindirectas as $cauind)
-                    @if(!empty($cauind->descripcion))
+                    @if(!empty($cauind->descripcion) && strlen(trim($cauind->descripcion))>0)
                     <tr>
                         <td width="35%" valign="top">
                             <span class="title">Causa indirecta CAU-{{ $cauDir->id }}-IND-{{ $cauind->id }}:</span>
