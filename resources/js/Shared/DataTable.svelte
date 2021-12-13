@@ -4,6 +4,7 @@
     export let filters
     export let showFilters
     export let routeParams
+    export let showSearchInput = true
 
     $: props = {
         ...$$restProps,
@@ -20,10 +21,12 @@
     </div>
 
     <div class="mb-6 flex justify-between items-center">
-        <SearchFilter {routeParams} class="w-full max-w-md mr-4" {showFilters} bind:filters>
-            <slot name="filters" />
-        </SearchFilter>
-        <slot name="actions" />
+        {#if showSearchInput}
+            <SearchFilter {routeParams} class="w-full max-w-md mr-4" {showFilters} bind:filters>
+                <slot name="filters" />
+            </SearchFilter>
+            <slot name="actions" />
+        {/if}
     </div>
     <div class="bg-white rounded shadow">
         <table class="w-full whitespace-no-wrap table-fixed data-table">

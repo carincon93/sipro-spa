@@ -12,6 +12,8 @@
     import Tags from '@/Shared/Tags'
     import Label from '@/Shared/Label'
     import Switch from '@/Shared/Switch'
+    import Button from '@/Shared/Button'
+    import InfoMessage from '@/Shared/InfoMessage'
     import { Item, Text } from '@smui/list'
 
     export let proyectos
@@ -50,25 +52,33 @@
         <div slot="title">Proyectos</div>
 
         <div slot="caption">
-            <form on:submit|preventDefault={submit}>
-                <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Código(s) SGPS" required />
+            <InfoMessage>
+                <form on:submit|preventDefault={submit}>
+                    <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Código(s) SGPS" required />
 
-                <div class="mt-4">
-                    {#if $form.estado_subsanable}
-                        <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, además se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
-                    {:else}
-                        <Label labelFor="estado_subsanable" value="La opción de proyectos finalizados está seleccionada. Nota: Los proyectos finalizados no podrán ser modifcados." class="inline-block mb-4" />
-                    {/if}
-                    <br />
-                    <Switch bind:checked={$form.estado_subsanable} onMessage="Subsanable(s)" offMessage="Finalizado(s)" />
-                </div>
+                    <div class="mt-4">
+                        {#if $form.estado_subsanable}
+                            <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, además se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
+                        {:else}
+                            <Label labelFor="estado_subsanable" value="La opción de proyectos finalizados está seleccionada. Nota: Los proyectos finalizados no podrán ser modifcados." class="inline-block mb-4" />
+                        {/if}
+                        <br />
+                        <Switch bind:checked={$form.estado_subsanable} onMessage="Subsanable(s)" offMessage="Finalizado(s)" />
+                    </div>
 
-                <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
-                    {/if}
-                </div>
-            </form>
+                    <div class="py-4 flex items-center sticky bottom-0">
+                        {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
+                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
+                        {/if}
+                    </div>
+                </form>
+            </InfoMessage>
+        </div>
+
+        <div slot="actions">
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('proyectos.activos'))} variant="raised">Proyectos activos</Button>
+            {/if}
         </div>
 
         <thead slot="thead">
