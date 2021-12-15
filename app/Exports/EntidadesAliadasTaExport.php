@@ -49,7 +49,7 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
             $entidadAliada->naturaleza,
             $entidadAliada->tipo_empresa,
             $entidadAliada->nit,
-            config('app.url') . ' /convocatorias/' . $this->convocatoria->id . '/proyectos/' . $entidadAliada->proyecto_id . '/entidades-aliadas/' . $entidadAliada->id . '/soporte_convenio/download',
+            config('app.url') . '/convocatorias/' . $this->convocatoria->id . '/proyectos/' . $entidadAliada->proyecto_id . '/entidades-aliadas/' . $entidadAliada->id . '/soporte_convenio/download',
             $entidadAliada->fecha_inicio_convenio,
             $entidadAliada->fecha_fin_convenio,
         ];
