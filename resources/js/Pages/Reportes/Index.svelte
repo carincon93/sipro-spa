@@ -50,7 +50,7 @@
                 </td>
                 <td class="border-t td-actions">
                     {#if $form.convocatoria && (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17]))}
-                        <Button variant="raised" on:click={() => downloadReport('resumeProjects')}>Descargar</Button>
+                        <Button variant="raised" on:click={() => downloadReport('resumen-proyectos')}>Descargar</Button>
                     {/if}
                 </td>
             </tr>
