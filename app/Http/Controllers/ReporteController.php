@@ -10,6 +10,7 @@ use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
+use App\Exports\InfoProyectosExport;
 use App\Exports\InfoProyectosTaExport;
 use App\Exports\ProyectosTaExport;
 use App\Models\Convocatoria;
@@ -34,12 +35,12 @@ class ReporteController extends Controller
     }
 
     /**
-     * resumeProjects
+     * resumenProyectos
      *
      * @param  mixed $convocatoria
      * @return void
      */
-    public function resumeProjects(Convocatoria $convocatoria)
+    public function resumenProyectos(Convocatoria $convocatoria)
     {
         $this->authorize('descargar-reportes', [User::class]);
 
@@ -49,7 +50,7 @@ class ReporteController extends Controller
             $proyecto->update(['precio_proyecto' => $proyecto->precio_proyecto]);
         }
 
-        return Excel::download(new ProyectosExport($convocatoria), 'proyectos-' . time() . '.xlsx');
+        return Excel::download(new InfoProyectosExport($convocatoria), 'proyectos-' . time() . '.xlsx');
     }
 
     /**

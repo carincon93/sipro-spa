@@ -28,7 +28,7 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function collection()
     {
-        return EntidadAliada::select('entidades_aliadas.*', 'entidad_aliada_ta.soporte_convenio', 'entidad_aliada_ta.fecha_inicio_convenio', 'entidad_aliada_ta.fecha_fin_convenio', 'proyectos.id as proyecto_id')->join('entidad_aliada_ta', 'entidades_aliadas.id', 'entidad_aliada_ta.entidad_aliada_id')->join('proyectos', 'entidades_aliadas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return EntidadAliada::select('entidades_aliadas.*', 'entidad_aliada_ta.soporte_convenio', 'entidad_aliada_ta.fecha_inicio_convenio', 'entidad_aliada_ta.fecha_fin_convenio', 'proyectos.id as proyecto_id')->join('entidad_aliada_ta', 'entidades_aliadas.id', 'entidad_aliada_ta.entidad_aliada_id')->join('proyectos', 'entidades_aliadas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**
@@ -37,7 +37,13 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
     public function map($entidadAliada): array
     {
         return [
-            'SGPS-' . ($entidadAliada->proyecto_id + 8000),
+            $this->convocatoria->descripcion,
+            $entidadAliada->proyecto->codigo,
+            $entidadAliada->proyecto->centroFormacion->regional->nombre,
+            $entidadAliada->proyecto->centroFormacion->codigo,
+            $entidadAliada->proyecto->centroFormacion->nombre,
+            $entidadAliada->proyecto->lineaProgramatica->codigo,
+            $entidadAliada->proyecto->lineaProgramatica->nombre,
             $entidadAliada->tipo,
             $entidadAliada->nombre,
             $entidadAliada->naturaleza,
@@ -52,7 +58,13 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
     public function headings(): array
     {
         return [
+            'Convocatoria',
             'Código del proyecto',
+            'Regional',
+            'Código del centro de formación',
+            'Centro de formación',
+            'Código de la línea programática',
+            'Línea programática',
             'Tipo de entidad',
             'Nombre',
             'Naturaleza',
@@ -74,13 +86,13 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function title(): string
     {
-        return 'Entidades aliadas';
+        return 'Entidades aliadas - TA';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Entidades aliadas',
+            'title' => 'Entidades aliadas - TA',
         ];
     }
 
