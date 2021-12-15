@@ -22,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Tecnoacademia' => 'App\Policies\TecnoacademiaPolicy',
         'App\Models\SemilleroInvestigacion' => 'App\Policies\SemilleroInvestigacionPolicy',
         'App\Models\LineaInvestigacion' => 'App\Policies\LineaInvestigacionPolicy',
+        'App\Models\AmbienteModernizacion' => 'App\Policies\AmbienteModernizacionPolicy',
         'App\Models\ProgramaFormacion' => 'App\Policies\ProgramaFormacionPolicy',
         'App\Models\Evaluacion\Evaluacion' => 'App\Policies\EvaluacionPolicy',
     ];

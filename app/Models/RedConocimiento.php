@@ -65,6 +65,16 @@ class RedConocimiento extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->hasMany(AmbienteModernizacion::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

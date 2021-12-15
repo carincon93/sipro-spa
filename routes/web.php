@@ -22,6 +22,7 @@ use App\Http\Controllers\ArbolProyectoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\AmbienteModernizacionController;
 use App\Http\Controllers\ConvocatoriaRolSennovaController;
 use App\Http\Controllers\RolSennovaController;
 use App\Http\Controllers\ProyectoRolSennovaController;
@@ -587,6 +588,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('roles', RoleController::class)->except(['show']);
 
     /**
+     * Proyectos modernización
+     * 
+     */
+
+    Route::get('ambientes-modernizacion/{ambiente_modernizacion}/download', [AmbienteModernizacionController::class, 'download'])->name('ambientes-modernizacion.download');
+    Route::resource('ambientes-modernizacion', AmbienteModernizacionController::class)->parameters(['ambientes-modernizacion' => 'ambiente-modernizacion'])->except(['show']);
+
+    /**
      * Proyectos
      * 
      */
@@ -682,6 +691,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reportes/convocatoria/{convocatoria}/comentarios-evaluaciones', [ReporteController::class, 'comentariosEvaluacionesExcel'])->name('reportes.comentarios-evaluaciones');
     Route::get('proyectos/{proyecto}/invetario-equipos', [InventarioEquipoController::class, 'inventarioEquiposExcel'])->name('reportes.inventario-equipos');
     Route::get('reportes/convocatoria/{convocatoria}/resumen-presupuesto-aprobado', [ReporteController::class, 'EvaluacionesProyectosPresupuestoExport'])->name('reportes.resumeProyectoPresupuestoAprobado');
+    Route::get('reportes/convocatoria/{convocatoria}/proyectos-ta', [ReporteController::class, 'proyectosTaExport'])->name('reportes.proyectos-ta');
 
     /**
      * Tokens

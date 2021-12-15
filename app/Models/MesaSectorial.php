@@ -64,6 +64,16 @@ class MesaSectorial extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->belongsToMany(AmbienteModernizacion::class, 'ambiente_modernizacion_mesa_sectorial', 'mesa_sectorial_id', 'ambiente_modernizacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -77,6 +77,16 @@ class LineaProgramatica extends Model
     }
 
     /**
+     * Relationship with CodigoProyectoSgps
+     *
+     * @return void
+     */
+    public function codigosProyectosSgps()
+    {
+        return $this->hasMany(CodigoProyectoSgps::class);
+    }
+
+    /**
      * Relationship with Anexo
      *
      * @return object

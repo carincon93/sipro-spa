@@ -139,6 +139,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->hasMany(AmbienteModernizacion::class, 'dinamizador_sennova_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

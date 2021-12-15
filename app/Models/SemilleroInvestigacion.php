@@ -67,6 +67,16 @@ class SemilleroInvestigacion extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->belongsToMany(AmbienteModernizacion::class, 'ambiente_modernizacion_semillero_investigacion', 'semillero_investigacion_id', 'ambiente_modernizacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

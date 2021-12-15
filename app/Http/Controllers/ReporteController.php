@@ -10,6 +10,8 @@ use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
+use App\Exports\InfoProyectosTaExport;
+use App\Exports\ProyectosTaExport;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 
@@ -93,5 +95,15 @@ class ReporteController extends Controller
     public function EvaluacionesProyectosPresupuestoExport(Convocatoria $convocatoria)
     {
         return Excel::download(new EvaluacionesProyectosPresupuestoExport($convocatoria), 'evaluaciones-proyecto-prespuestos-aprobados-' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosTaExport
+     *
+     * @return void
+     */
+    public function proyectosTaExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosTaExport($convocatoria), 'proyectos-ta' . time() . '.xlsx');
     }
 }

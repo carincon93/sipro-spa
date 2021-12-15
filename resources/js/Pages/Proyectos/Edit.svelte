@@ -32,6 +32,7 @@
     let form = useForm({
         subsanacion: proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
         estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova).estado : null,
+        mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
     })
 
     function submit() {
@@ -139,6 +140,15 @@
                     <br />
                     <Input label="Estado (Definido por la cord. SENNOVA)" id="estado_cord_sennova" type="text" class="mt-1" bind:value={$form.estado_cord_sennova} error={errors.estado_cord_sennova} />
                     <InputError message={errors.estado_cord_sennova} />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label labelFor="mostrar_recomendaciones" value="¿Los proponentes pueden observar las recomendaciones?" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.mostrar_recomendaciones} />
+                    <InputError message={errors.mostrar_recomendaciones} />
                 </div>
 
                 <hr class="mt-10 mb-10" />

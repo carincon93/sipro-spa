@@ -79,6 +79,16 @@ class ProgramaFormacion extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->belongsToMany(AmbienteModernizacion::class, 'ambiente_modernizacion_programa_calificado', 'programa_formacion_calificado_id', 'ambiente_modernizacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
