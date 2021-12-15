@@ -28,7 +28,7 @@ class EfectosIndirectosTaExport implements FromCollection, WithHeadings, WithMap
      */
     public function collection()
     {
-        return EfectoIndirecto::select('efectos_indirectos.*', 'proyectos.id as proyecto_id')->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return EfectoIndirecto::select('efectos_indirectos.*', 'proyectos.id as proyecto_id')->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**
