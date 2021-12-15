@@ -77,14 +77,14 @@ class ProyectoController extends Controller
             $proyecto->a_evaluar   = false;
             $proyecto->modificable = true;
             $proyecto->finalizado  = false;
-            $proyecto->mostrar_recomendaciones = true;
             $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
         } else {
             $proyecto->a_evaluar   = true;
             $proyecto->modificable = false;
             $proyecto->finalizado  = true;
-            $proyecto->mostrar_recomendaciones = false;
         }
+
+        $proyecto->mostrar_recomendaciones = $request->mostrar_recomendaciones;
 
         $proyecto->save();
 

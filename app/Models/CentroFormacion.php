@@ -88,6 +88,16 @@ class CentroFormacion extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->hasMany(AmbienteModernizacion::class);
+    }
+
+    /**
      * Relationship with ProgramaFormacion
      *
      * @return object
@@ -155,6 +165,16 @@ class CentroFormacion extends Model
     public function reglasRolesCultura()
     {
         return $this->hasMany(ReglaRolCultura::class);
+    }
+
+    /**
+     * Relationship with CodigoProyectoSgps
+     *
+     * @return void
+     */
+    public function codigosProyectosSgps()
+    {
+        return $this->hasMany(CodigoProyectoSgps::class);
     }
 
     /**

@@ -87,6 +87,16 @@ class LineaInvestigacion extends Model
     }
 
     /**
+     * Relationship with AmbienteModernizacion
+     *
+     * @return object
+     */
+    public function ambientesModernizacion()
+    {
+        return $this->hasMany(AmbienteModernizacion::class);
+    }
+
+    /**
      * Relationship with Proyecto
      *
      * @return object
