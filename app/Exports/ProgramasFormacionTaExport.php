@@ -61,13 +61,13 @@ class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMa
      */
     public function title(): string
     {
-        return 'Programas de formación';
+        return 'Programas de formación articulados';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Programas de formación',
+            'title' => 'Programas de formación articulados',
         ];
     }
 

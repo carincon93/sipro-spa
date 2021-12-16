@@ -28,7 +28,7 @@ class GruposInvestigacionTaExport implements FromCollection, WithHeadings, WithM
      */
     public function collection()
     {
-        return GrupoInvestigacion::join('proyecto_grupo_investigacion', 'grupos_investigacion.id', 'proyecto_grupo_investigacion.grupo_investigacion_id')->join('proyectos', 'proyecto_grupo_investigacion.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return GrupoInvestigacion::select('grupos_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')->join('proyecto_grupo_investigacion', 'grupos_investigacion.id', 'proyecto_grupo_investigacion.grupo_investigacion_id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('proyectos', 'proyecto_grupo_investigacion.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**
@@ -38,8 +38,8 @@ class GruposInvestigacionTaExport implements FromCollection, WithHeadings, WithM
     {
         return [
             'SGPS-' . ($grupoInvestigacion->proyecto_id + 8000),
+            $grupoInvestigacion->nombre_centro,
             $grupoInvestigacion->nombre,
-
         ];
     }
 
@@ -47,6 +47,7 @@ class GruposInvestigacionTaExport implements FromCollection, WithHeadings, WithM
     {
         return [
             'Código del proyecto',
+            'Centro de formación',
             'Nombre',
         ];
     }
