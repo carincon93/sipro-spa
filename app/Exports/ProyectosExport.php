@@ -83,6 +83,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['puntaje'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['puntaje'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['puntaje'] : 'N/A')),
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['alerta'] : 'N/A',
             $this->mapParticipantes($proyecto->participantes),
+            $proyecto->idi()->exists() ? $proyecto->idi->numero_aprendices : ($proyecto->culturaInnovacion()->exists() ? $proyecto->culturaInnovacion->numero_aprendices : 'N/A')
         ];
     }
 
@@ -112,6 +113,7 @@ class ProyectosExport implements FromCollection, WithHeadings, WithMapping, With
             'Puntaje',
             'Desviación estándar',
             'Participantes',
+            'Número de aprendices beneficiados',
         ];
     }
 
