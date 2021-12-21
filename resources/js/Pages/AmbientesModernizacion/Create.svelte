@@ -345,7 +345,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label class="mb-4" for="programas_formacion" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados." />
+                        <Label required class="mb-4" for="programas_formacion" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados." />
                     </div>
                     <div>
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
@@ -452,7 +452,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label class="mb-4" labelFor="datos_empresa" value="Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria (Separados por coma)" />
+                        <Label required class="mb-4" labelFor="datos_empresa" value="Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria (Separados por coma)" />
                     </div>
                     <div>
                         <Tags id="datos_empresa" class="mt-4" enforceWhitelist={false} bind:tags={$form.datos_empresa} placeholder="Empresas" error={errors.datos_empresa} />
@@ -461,7 +461,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label class="mb-4" labelFor="cursos_complementarios" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario (Separados por coma)" />
+                        <Label required class="mb-4" labelFor="cursos_complementarios" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario (Separados por coma)" />
                     </div>
                     <div>
                         <Tags id="cursos_complementarios" class="mt-4" enforceWhitelist={false} bind:tags={$form.cursos_complementarios} placeholder="Cursos de formación complementarios" error={errors.cursos_complementarios} />

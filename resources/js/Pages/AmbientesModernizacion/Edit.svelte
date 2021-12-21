@@ -120,7 +120,7 @@
         cursos_complementarios: ambienteModernizacion.cursos_complementarios,
         coordenada_latitud_ambiente: ambienteModernizacion.coordenada_latitud_ambiente,
         coordenada_longitud_ambiente: ambienteModernizacion.coordenada_longitud_ambiente,
-        soporte_fotos_ambiente: ambienteModernizacion.soporte_fotos_ambiente,
+        soporte_fotos_ambiente: null,
         impacto_procesos_formacion: ambienteModernizacion.impacto_procesos_formacion,
         pertinencia_sector_productivo: ambienteModernizacion.pertinencia_sector_productivo,
         palabras_clave_ambiente: ambienteModernizacion.palabras_clave_ambiente,
