@@ -166,16 +166,16 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->alineado_mesas_sectoriales = $request->alineado_mesas_sectoriales;
         $ambienteModernizacion->financiado_anteriormente = $request->financiado_anteriormente;
         $ambienteModernizacion->estado_general_maquinaria = $request->estado_general_maquinaria;
-        $ambienteModernizacion->razon_estado_general = $request->razon_estado_general;
+        $ambienteModernizacion->razon_estado_general = $request->estado_general_maquinaria == '1' ? null : $request->razon_estado_general;
         $ambienteModernizacion->ambiente_activo = $request->ambiente_activo;
-        $ambienteModernizacion->justificacion_ambiente_inactivo = $request->justificacion_ambiente_inactivo;
+        $ambienteModernizacion->justificacion_ambiente_inactivo = $request->ambiente_activo ? null : $request->justificacion_ambiente_inactivo;
         $ambienteModernizacion->ambiente_activo_procesos_idi = $request->ambiente_activo_procesos_idi;
-        $ambienteModernizacion->numero_proyectos_beneficiados = $request->numero_proyectos_beneficiados;
+        $ambienteModernizacion->numero_proyectos_beneficiados = $request->ambiente_activo_procesos_idi == 1 ? $request->numero_proyectos_beneficiados : 0;
         $ambienteModernizacion->ambiente_formacion_complementaria = $request->ambiente_formacion_complementaria;
-        $ambienteModernizacion->numero_total_cursos_comp = $request->numero_total_cursos_comp;
-        $ambienteModernizacion->numero_cursos_empresas = $request->numero_cursos_empresas;
-        $ambienteModernizacion->datos_empresa = $request->datos_empresa;
-        $ambienteModernizacion->cursos_complementarios = $request->cursos_complementarios;
+        $ambienteModernizacion->numero_total_cursos_comp = $request->ambiente_formacion_complementaria == 1 ? $request->numero_total_cursos_comp : 0;
+        $ambienteModernizacion->numero_cursos_empresas = $request->ambiente_formacion_complementaria == 1 ? $request->numero_cursos_empresas : 0;
+        $ambienteModernizacion->datos_empresa = $request->ambiente_formacion_complementaria == 1 ? $request->datos_empresa : null;
+        $ambienteModernizacion->cursos_complementarios = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
         $ambienteModernizacion->coordenada_latitud_ambiente = $request->coordenada_latitud_ambiente;
         $ambienteModernizacion->coordenada_longitud_ambiente = $request->coordenada_longitud_ambiente;
         $ambienteModernizacion->impacto_procesos_formacion = $request->impacto_procesos_formacion;
@@ -203,12 +203,12 @@ class AmbienteModernizacionController extends Controller
 
         $ambienteModernizacion->save();
 
-        $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id);
-        $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id);
-        $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->sync($request->cod_proyectos_beneficiados_id);
-        $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados);
-        $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion);
-        $ambienteModernizacion->semilerosInvestigacion()->sync($request->semilleros_investigacion_id);
+        $request->alineado_mesas_sectoriales == 1 ? $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id) : $ambienteModernizacion->mesasSectoriales()->detach();
+        $request->financiado_anteriormente == 1 ? $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id) : $ambienteModernizacion->codigosProyectosSgps()->detach();
+        $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->sync($request->cod_proyectos_beneficiados_id) : $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->detach();
+        $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados) : $ambienteModernizacion->programasFormacionCalificados()->detach();
+        $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion) : $ambienteModernizacion->programasFormacionNoCalificados()->detach();
+        $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->semilerosInvestigacion()->sync($request->semilleros_investigacion_id) : $ambienteModernizacion->semilerosInvestigacion()->detach();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
