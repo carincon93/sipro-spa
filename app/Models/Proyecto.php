@@ -41,9 +41,9 @@ class Proyecto extends Model
         'estructuracion_proyectos',
         'estado',
         'estado_cord_sennova',
-        // 'precio_proyecto',
         'mostrar_recomendaciones',
-        'mostrar_requiere_subsanacion'
+        'mostrar_requiere_subsanacion',
+        'en_evaluacion'
     ];
 
     /**
