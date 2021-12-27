@@ -141,7 +141,7 @@ class IdiEvaluacion extends Model
                 ->join('proyectos', 'idi.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->whereRaw("proyectos.estado->>'estado' = 'Pre-aprobado con observaciones'")
+                ->where('proyectos.en_evaluacion', true)
                 ->distinct()
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();
@@ -151,7 +151,7 @@ class IdiEvaluacion extends Model
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->where('evaluaciones.user_id', $authUser->id)
-                ->whereRaw("proyectos.estado->>'estado' = 'Pre-aprobado con observaciones'")
+                ->where('proyectos.en_evaluacion', true)
                 ->distinct()
                 ->orderBy('idi.id', 'ASC')
                 ->filterIdi(request()->only('search'))->paginate();

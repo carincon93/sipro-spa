@@ -137,7 +137,7 @@ class CulturaInnovacionEvaluacion extends Model
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->whereRaw("proyectos.estado->>'estado' = 'Pre-aprobado con observaciones'")
+                ->where('proyectos.en_evaluacion', true)
                 ->distinct()
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
@@ -147,7 +147,7 @@ class CulturaInnovacionEvaluacion extends Model
                 ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
                 ->where('proyectos.convocatoria_id', $convocatoria->id)
                 ->where('evaluaciones.user_id', $authUser->id)
-                ->whereRaw("proyectos.estado->>'estado' = 'Pre-aprobado con observaciones'")
+                ->where('proyectos.en_evaluacion', true)
                 ->distinct()
                 ->orderBy('cultura_innovacion.id', 'ASC')
                 ->filterCulturaInnovacion(request()->only('search'))->paginate();
