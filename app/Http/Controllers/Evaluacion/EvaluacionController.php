@@ -74,6 +74,9 @@ class EvaluacionController extends Controller
 
         $proyecto->finalizado = true;
         $proyecto->modificable = false;
+        if ($evaluacion->modificable) {
+            $proyecto->en_evaluacion = true;
+        }
         $proyecto->save();
 
         switch ($proyecto) {

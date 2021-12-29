@@ -127,6 +127,16 @@ class ProyectoController extends Controller
             );
         }
 
+        if ($request->subsanacion == true) {
+            $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
+            sleep(2);
+            $proyecto->update(
+                [
+                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiere_subsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
+                ]
+            );
+        }
+
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
