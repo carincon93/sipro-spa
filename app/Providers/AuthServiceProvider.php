@@ -107,7 +107,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
+            if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado) && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
                 return false;
             }
 
@@ -124,7 +124,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
+            if ($evaluacion->proyecto->idi()->exists() && json_decode($evaluacion->proyecto->estado) && json_decode($evaluacion->proyecto->estado)->estado == 'Rechazado') {
                 return false;
             }
 
