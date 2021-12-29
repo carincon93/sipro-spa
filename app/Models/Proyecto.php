@@ -36,7 +36,7 @@ class Proyecto extends Model
         'linea_programatica_id',
         'finalizado',
         'modificable',
-        'a_evaluar',
+        'habilitado_para_evaluar',
         'en_subsanacion',
         'estructuracion_proyectos',
         'estado',

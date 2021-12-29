@@ -110,6 +110,7 @@ class UserController extends Controller
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'rolesRelacionados'     => $user->roles()->pluck('id'),
+            'permisosRelacionados'  => $user->permissions()->pluck('id'),
             'roles'                 => Role::getRolesByRol(),
             'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'tecnoacademiaLineasTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
 
@@ -144,6 +145,7 @@ class UserController extends Controller
         $user->save();
 
         $user->syncRoles($request->role_id);
+        $user->syncPermissions($request->permission_id);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

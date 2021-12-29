@@ -67,7 +67,7 @@
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {#if proyecto.modificable == true && proyecto.finalizado == false && proyecto.a_evaluar == false}
+                            {#if proyecto.modificable == true && proyecto.finalizado == false && proyecto.habilitado_para_evaluar == false}
                                 El proyecto se encuentra en subsanación
                             {:else}
                                 {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}

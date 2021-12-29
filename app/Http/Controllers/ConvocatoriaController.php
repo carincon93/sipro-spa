@@ -199,51 +199,51 @@ class ConvocatoriaController extends Controller
         $convocatoria->save();
 
         if ($request->fase['value'] == 1) { // Formulación
-            $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false]);
+            $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         } else if ($request->fase['value'] == 2) { // Primera evaluación
-            $convocatoria->proyectos()->update(['modificable' => false]);
+            $convocatoria->proyectos()->update(['modificable' => false, 'habilitado_para_evaluar' => true]);
         } else if ($request->fase['value'] == 3) { // Subsanación
 
             foreach ($convocatoria->proyectos()->get() as $proyecto) {
                 switch ($proyecto) {
                     case $proyecto->estado_evaluacion_idi != null:
                         if (json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi, 'mostrar_recomendaciones' => true]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi, 'mostrar_recomendaciones' => true]);
                         } else {
-                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_idi]);
                         }
                         break;
 
                     case $proyecto->estado_evaluacion_cultura_innovacion != null:
                         if (json_decode($proyecto->estado_evaluacion_cultura_innovacion)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion, 'mostrar_recomendaciones' => true]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion, 'mostrar_recomendaciones' => true]);
                         } else {
-                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion]);
                         }
                         break;
 
                     case $proyecto->estado_evaluacion_ta != null:
                         if (json_decode($proyecto->estado_evaluacion_ta)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta, 'mostrar_recomendaciones' => true]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta, 'mostrar_recomendaciones' => true]);
                         } else {
-                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_ta]);
                         }
                         break;
 
                     case $proyecto->estado_evaluacion_tp != null:
                         if (json_decode($proyecto->estado_evaluacion_tp)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp, 'mostrar_recomendaciones' => true]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp, 'mostrar_recomendaciones' => true]);
                         } else {
-                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_tp]);
                         }
                         break;
 
                     case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
                         if (json_decode($proyecto->estado_evaluacion_servicios_tecnologicos)->requiereSubsanar) {
-                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos, 'mostrar_recomendaciones' => true]);
+                            $proyecto->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos, 'mostrar_recomendaciones' => true]);
                         } else {
-                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'a_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => false, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos]);
                         }
                         break;
 
@@ -254,7 +254,44 @@ class ConvocatoriaController extends Controller
 
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         } else if ($request->fase['value'] == 4) { // Segunda evaluación
-            $convocatoria->proyectos()->update(['modificable' => false, 'finalizado' => true, 'a_evaluar' => true, 'mostrar_recomendaciones' => false]);
+
+            foreach ($convocatoria->proyectos()->get() as $proyecto) {
+                switch ($proyecto) {
+                    case $proyecto->estado_evaluacion_idi != null:
+                        if (json_decode($proyecto->estado_evaluacion_idi)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => true, 'estado' => $proyecto->estado_evaluacion_idi, 'mostrar_recomendaciones' => false, 'en_evaluacion' => true]);
+                        }
+                        break;
+
+                    case $proyecto->estado_evaluacion_cultura_innovacion != null:
+                        if (json_decode($proyecto->estado_evaluacion_cultura_innovacion)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => true, 'estado' => $proyecto->estado_evaluacion_cultura_innovacion, 'mostrar_recomendaciones' => false, 'en_evaluacion' => true]);
+                        }
+                        break;
+
+                    case $proyecto->estado_evaluacion_ta != null:
+                        if (json_decode($proyecto->estado_evaluacion_ta)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => true, 'estado' => $proyecto->estado_evaluacion_ta, 'mostrar_recomendaciones' => false, 'en_evaluacion' => true]);
+                        }
+                        break;
+
+                    case $proyecto->estado_evaluacion_tp != null:
+                        if (json_decode($proyecto->estado_evaluacion_tp)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => true, 'estado' => $proyecto->estado_evaluacion_tp, 'mostrar_recomendaciones' => false, 'en_evaluacion' => true]);
+                        }
+                        break;
+
+                    case $proyecto->estado_evaluacion_servicios_tecnologicos != null:
+                        if (json_decode($proyecto->estado_evaluacion_servicios_tecnologicos)->requiereSubsanar) {
+                            $proyecto->update(['finalizado' => true, 'modificable' => false, 'habilitado_para_evaluar' => true, 'estado' => $proyecto->estado_evaluacion_servicios_tecnologicos, 'mostrar_recomendaciones' => false, 'en_evaluacion' => true]);
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
             $convocatoria->evaluaciones()->where('clausula_confidencialidad', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => false]);
         } else if ($request->fase['value'] == 5) { // Finalizar convocatoria
             $convocatoria->proyectos()->update(['modificable' => false]);

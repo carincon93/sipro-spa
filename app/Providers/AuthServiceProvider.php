@@ -90,7 +90,7 @@ class AuthServiceProvider extends ServiceProvider
             }
 
             if ($proyecto->modificable == true) {
-                if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $user->dinamizadorCentroFormacion && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->a_evaluar == false || $user->hasRole(21) && $proyecto->centroFormacion->id == $user->centroFormacion->id && $proyecto->a_evaluar == false) {
+                if ($proyecto->participantes()->where('user_id', $user->id)->exists() || $user->hasRole(4) && $user->dinamizadorCentroFormacion && $proyecto->centroFormacion->id == $user->dinamizadorCentroFormacion->id && $proyecto->habilitado_para_evaluar == false || $user->hasRole(21) && $proyecto->centroFormacion->id == $user->centroFormacion->id && $proyecto->habilitado_para_evaluar == false) {
                     return true;
                 }
             }

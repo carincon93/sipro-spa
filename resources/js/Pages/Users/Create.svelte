@@ -39,6 +39,7 @@
         tipo_vinculacion: '',
         centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21]) ? authUser.centro_formacion_id : null,
         role_id: [],
+        permission_id: [],
         autorizacion_datos: false,
     })
 
@@ -149,6 +150,53 @@
                     {/if}
                 {/each}
             </div>
+        </div>
+
+        <div class="bg-white rounded shadow overflow-hidden mt-20">
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [17, 18, 20, 19, 5]) ? undefined : true}>
+                <div class="p-4">
+                    <Label class="mb-4" labelFor="role_id" value="Seleccione algún permiso especial para el usuario (Aplica cuando la convocatoria ha finalizado)" />
+                    <InputError message={errors.permission_id} />
+                </div>
+                <div class="grid grid-cols-2">
+                    {#if isSuperAdmin}
+                        <div class="pt-8 pb-8 border-t">
+                            <FormField>
+                                <Checkbox bind:group={$form.permission_id} value={1} />
+                                <span slot="label">Crear proyecto de I+D+i</span>
+                            </FormField>
+                        </div>
+
+                        <div class="pt-8 pb-8 border-t">
+                            <FormField>
+                                <Checkbox bind:group={$form.permission_id} value={8} />
+                                <span slot="label">Crear proyecto de TA</span>
+                            </FormField>
+                        </div>
+
+                        <div class="pt-8 pb-8 border-t">
+                            <FormField>
+                                <Checkbox bind:group={$form.permission_id} value={17} />
+                                <span slot="label">Crear proyecto de TP</span>
+                            </FormField>
+                        </div>
+
+                        <div class="pt-8 pb-8 border-t">
+                            <FormField>
+                                <Checkbox bind:group={$form.permission_id} value={11} />
+                                <span slot="label">Crear proyecto de Cultura de la Innovación</span>
+                            </FormField>
+                        </div>
+
+                        <div class="pt-8 pb-8 border-t">
+                            <FormField>
+                                <Checkbox bind:group={$form.permission_id} value={5} />
+                                <span slot="label">Crear proyecto de Servicios Tecnológicos</span>
+                            </FormField>
+                        </div>
+                    {/if}
+                </div>
+            </fieldset>
         </div>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

@@ -157,7 +157,8 @@ class TpController extends Controller
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'nodosTecnoParque'   => $nodosTecnoParque
+            'nodosTecnoParque'   => $nodosTecnoParque,
+            'versiones'          => $tp->proyecto->PdfVersiones,
         ]);
     }
 

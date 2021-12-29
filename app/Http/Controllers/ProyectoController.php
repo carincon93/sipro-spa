@@ -72,17 +72,22 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+        if ($request->en_evaluacion == true && $request->subsanacion == true) {
+            return back()->with('error', 'Se ha producido un error por tener estado de subsanación y evaluación habilitados a la misma vez.');
+        }
 
         if ($request->subsanacion == true) {
-            $proyecto->a_evaluar   = false;
-            $proyecto->modificable = true;
-            $proyecto->finalizado  = false;
+            $proyecto->habilitado_para_evaluar = false;
+            $proyecto->modificable      = true;
+            $proyecto->finalizado       = false;
             $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
         } else {
-            $proyecto->a_evaluar   = true;
+            $proyecto->habilitado_para_evaluar = true;
             $proyecto->modificable = false;
             $proyecto->finalizado  = true;
         }
+
+        $proyecto->en_evaluacion = $request->en_evaluacion;
 
         $proyecto->mostrar_recomendaciones = $request->mostrar_recomendaciones;
 
@@ -491,7 +496,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
             'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
@@ -612,7 +617,7 @@ class ProyectoController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Summary', [
             'convocatoria' => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
-            'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'a_evaluar'),
+            'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar'),
             'versiones'    => $evaluacion->proyecto->PdfVersiones,
         ]);
     }
@@ -683,7 +688,7 @@ class ProyectoController extends Controller
         }
 
 
-        $proyecto->a_evaluar = true;
+        $proyecto->habilitado_para_evaluar = true;
         $proyecto->finalizado = true;
         $proyecto->modificable = false;
         $proyecto->save();
@@ -704,7 +709,7 @@ class ProyectoController extends Controller
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
-        $proyecto->a_evaluar = false;
+        $proyecto->habilitado_para_evaluar = false;
         $proyecto->finalizado = false;
         $proyecto->modificable = true;
         $proyecto->save();
@@ -1198,7 +1203,7 @@ class ProyectoController extends Controller
             'modificable'                   => $request->estado_subsanable,
             'mostrar_recomendaciones'       => $request->estado_subsanable,
             'mostrar_requiere_subsanacion'  => $request->estado_subsanable,
-            'a_evaluar'                     => $request->estado_subsanable ? false : true,
+            'habilitado_para_evaluar'                     => $request->estado_subsanable ? false : true,
             'finalizado'                    => $request->estado_subsanable ? false : true,
         ]);
 
