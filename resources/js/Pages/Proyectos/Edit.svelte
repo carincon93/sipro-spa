@@ -1,7 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { Inertia } from '@inertiajs/inertia'
     import { route, checkRole } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
@@ -30,9 +29,10 @@
 
     let sending = false
     let form = useForm({
-        subsanacion: proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
+        subsanacion: proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
         estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova).estado : null,
         mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
+        en_evaluacion: proyecto.en_evaluacion,
     })
 
     function submit() {
@@ -87,8 +87,13 @@
 
     $: if ($formEvaluacion?.modificable) {
         $form.subsanacion = false
+        $form.en_evaluacion = true
     } else {
-        $form.subsanacion = proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false
+        $form.subsanacion = proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false
+    }
+
+    $: if ($form?.subsanacion && $form?.en_evaluacion) {
+        $form.en_evaluacion = false
     }
 </script>
 
@@ -96,20 +101,24 @@
     <header class="shadow bg-white" slot="header">
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
-                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
+                <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap flex items-center">
                     {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <a use:inertia href={route('proyectos.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-indigo-400 font-medium mx-1.5">/</span>
                     {proyecto.codigo}
+                    <a class="bg-indigo-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id])} target="_blank">
+                        <span class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                            <small> Ver detalles </small>
+                        </span>
+                    </a>
                 </h1>
             </div>
         </div>
     </header>
-
-    <Button class="mb-2" variant="raised" type="button" on:click={() => Inertia.visit(route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id]))}>Detalles del proyecto</Button>
-
-    <br />
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
@@ -131,6 +140,15 @@
                             <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado).requiereSubsanar ? 'Si' : 'No'}</li>
                         </ul>
                     </InfoMessage>
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label labelFor="en_evaluacion" value="¿El proyecto puede ser evaluado? Nota: Esta opción permite que los evaluadores visualicen el proyecto en su lista de evaluaciones" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.en_evaluacion} />
+                    <InputError message={errors.en_evaluacion} />
                 </div>
 
                 <hr class="mt-10 mb-10" />
@@ -211,7 +229,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => ((dialogOpen = false), ($form.subsanacion = proyecto.a_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false))} variant={null}>Cancelar</Button>
+                <Button on:click={(event) => ((dialogOpen = false), ($form.subsanacion = proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false))} variant={null}>Cancelar</Button>
 
                 <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form="evaluacion">Guardar</LoadingButton>
             </div>

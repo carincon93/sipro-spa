@@ -151,7 +151,7 @@
             </p>
         </InfoMessage>
         <hr class="mt-10 mb-10" />
-        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.a_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.a_evaluar == false)}
+        {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.habilitado_para_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.habilitado_para_evaluar == false)}
             <InfoMessage>
                 <p>¿El proyecto está completo?</p>
                 <Switch bind:checked={proyectoCompleto} />
@@ -265,9 +265,9 @@
         {/if}
     </div>
     <hr class="mt-10 mb-10" />
-    {#if proyecto.finalizado == true && proyecto.a_evaluar == false && !checkRole(authUser, [1, 4])}
+    {#if proyecto.finalizado == true && proyecto.habilitado_para_evaluar == false && !checkRole(authUser, [1, 4])}
         <InfoMessage class="mb-2" message="El proyecto se ha finalizado con éxito. Espere la respuesta del dinamizador SENNOVA." />
-    {:else if proyecto.a_evaluar == true}
+    {:else if proyecto.habilitado_para_evaluar == true}
         <InfoMessage class="mb-2" message="El dinamizador SENNOVA ha confirmado el proyecto." />
     {/if}
     <hr class="mt-10 mb-10" />

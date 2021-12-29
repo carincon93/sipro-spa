@@ -203,7 +203,8 @@ class TaController extends Controller
             'programasFormacion'                    => ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $ta->proyecto->centroFormacion->id)->orderBy('nombre', 'ASC')->get(),
             'tecnoAcademias'                        => $tecnoAcademias,
             'modalidades'                           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
-            'nivelesFormacion'                      => json_decode(Storage::get('json/nivel-formacion.json'), true)
+            'nivelesFormacion'                      => json_decode(Storage::get('json/nivel-formacion.json'), true),
+            'versiones'                             => $ta->proyecto->PdfVersiones,
         ]);
     }
 

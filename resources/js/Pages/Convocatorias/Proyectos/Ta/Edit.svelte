@@ -37,6 +37,7 @@
     export let tecnoAcademias
     export let modalidades
     export let nivelesFormacion
+    export let versiones
 
     $: $title = ta ? ta.titulo : null
 
@@ -914,6 +915,30 @@
                 <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
             </figure>
             Código del proyecto: {ta.proyecto.codigo}
+
+            {#if versiones.length > 0}
+                <hr class="border border-white my-4 w-full" />
+                <h6>Versiones - PDF</h6>
+                <ul>
+                    {#each versiones as version, i}
+                        <li class="bg-white p-2 rounded text-black text-xs">
+                            {#if version.estado == 1}
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, ta.proyecto.id, version.version])}>Descargar versión {i}</a>
+                            {:else}
+                                Generando, regrese pronto.
+                            {/if}
+                        </li>
+                    {/each}
+                </ul>
+                <hr class="border border-white my-5 w-full" />
+            {:else}
+                <hr class="border border-white my-4 w-full" />
+
+                <h6>Versiones - PDF</h6>
+
+                <p class="text-xs">No se ha generado un PDF aún</p>
+                <hr class="border border-white my-5 w-full" />
+            {/if}
         </div>
         <div slot="content">
             <div>

@@ -71,7 +71,7 @@ class EvaluacionesProyectosPresupuestoExport implements FromCollection, WithHead
             $proyecto->total_roles_sennova,
             $proyecto->precio_proyecto > 0 ? $proyecto->precio_proyecto : '0',
             ($proyecto->finalizado) ? 'SI' : 'NO',
-            ($proyecto->a_evaluar) ? 'SI' : 'NO',
+            ($proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
             $proyecto->idi()->exists() ? $proyecto->estado_evaluacion_idi['estado'] : ($proyecto->culturaInnovacion()->exists() ? $proyecto->estado_evaluacion_cultura_innovacion['estado'] : ($proyecto->ta()->exists() ? $proyecto->estado_evaluacion_ta['estado'] : ($proyecto->tp()->exists() ? $proyecto->estado_evaluacion_tp['estado'] : ($proyecto->servicioTecnologico()->exists() ? $proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada')))),
             $proyecto->total_proyecto_presupuesto_aprobado,
             $proyecto->total_roles_sennova_aprobado,
