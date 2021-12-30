@@ -80,16 +80,16 @@ class ProyectoController extends Controller
             $proyecto->habilitado_para_evaluar = false;
             $proyecto->modificable      = true;
             $proyecto->finalizado       = false;
+            $proyecto->mostrar_recomendaciones = true;
             $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
         } else {
             $proyecto->habilitado_para_evaluar = true;
             $proyecto->modificable = false;
             $proyecto->finalizado  = true;
+            $proyecto->mostrar_recomendaciones = $request->mostrar_recomendaciones;
         }
 
         $proyecto->en_evaluacion = $request->en_evaluacion;
-
-        $proyecto->mostrar_recomendaciones = $request->mostrar_recomendaciones;
 
         $proyecto->save();
 
@@ -116,18 +116,18 @@ class ProyectoController extends Controller
                 break;
         }
 
-        if ($request->estado_cord_sennova) {
+        if ($request->subsanacion == true) {
             $request->subsanacion = $request->subsanacion ? true : false;
-            $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
+            $proyecto->update(['estado' => $proyecto->estado]);
             sleep(2);
             $proyecto->update(
                 [
-                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiereSubsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
+                    'estado' => DB::raw("estado::jsonb || '{\"requiereSubsanar\":$request->subsanacion}'")
                 ]
             );
         }
 
-        if ($request->subsanacion == true) {
+        if ($request->estado_cord_sennova) {
             $request->subsanacion = $request->subsanacion ? true : false;
             $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
             sleep(2);
@@ -1203,6 +1203,12 @@ class ProyectoController extends Controller
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
+    /**
+     * udpdateEstadosProyectos
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function udpdateEstadosProyectos(Request $request)
     {
         $proyectosId = collect([]);
@@ -1210,35 +1216,57 @@ class ProyectoController extends Controller
             return $proyectosId->push($item - 8000);
         });
 
+        $proyectos = Proyecto::whereIn('id', $proyectosId)->get();
+
         if ($request->estado == 1) { // Subsanar
-            Proyecto::whereIn('id', $proyectosId)->update([
-                'modificable'                   => true,
-                'mostrar_recomendaciones'       => true,
-                'mostrar_requiere_subsanacion'  => true,
-                'habilitado_para_evaluar'       => false,
-                'en_evaluacion'                 => false,
-                'finalizado'                    => false,
-            ]);
+            foreach ($proyectos as $proyecto) {
+                $proyecto->update(['estado' => $proyecto->estado]);
+                sleep(2);
+                $proyecto->update(
+                    [
+                        'modificable'                   => true,
+                        'mostrar_recomendaciones'       => true,
+                        'mostrar_requiere_subsanacion'  => true,
+                        'habilitado_para_evaluar'       => false,
+                        'en_evaluacion'                 => false,
+                        'finalizado'                    => false,
+                        'estado' => DB::raw("estado::jsonb || '{\"requiereSubsanar\":true}'")
+                    ]
+                );
+            }
 
             Evaluacion::whereIn('proyecto_id', $proyectosId)->where('habilitado', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         } else if ($request->estado == 2) { // Finalizar
-            Proyecto::whereIn('id', $proyectosId)->update([
-                'modificable'                   => false,
-                'mostrar_recomendaciones'       => true,
-                'mostrar_requiere_subsanacion'  => true,
-                'habilitado_para_evaluar'       => false,
-                'en_evaluacion'                 => false,
-                'finalizado'                    => true,
-            ]);
+            foreach ($proyectos as $proyecto) {
+                $proyecto->update(['estado' => $proyecto->estado]);
+                sleep(2);
+                $proyecto->update(
+                    [
+                        'modificable'                   => false,
+                        'mostrar_recomendaciones'       => true,
+                        'mostrar_requiere_subsanacion'  => true,
+                        'habilitado_para_evaluar'       => false,
+                        'en_evaluacion'                 => false,
+                        'finalizado'                    => true,
+                        'estado' => DB::raw("estado::jsonb || '{\"requiereSubsanar\":false}'")
+                    ]
+                );
+            }
         } else if ($request->estado == 3) { // Evaluar
-            Proyecto::whereIn('id', $proyectosId)->update([
-                'modificable'                   => false,
-                'mostrar_recomendaciones'       => false,
-                'mostrar_requiere_subsanacion'  => false,
-                'habilitado_para_evaluar'       => true,
-                'en_evaluacion'                 => true,
-                'finalizado'                    => true,
-            ]);
+            foreach ($proyectos as $proyecto) {
+                $proyecto->update(['estado' => $proyecto->estado]);
+                sleep(2);
+                $proyecto->update(
+                    [
+                        'modificable'                   => false,
+                        'mostrar_recomendaciones'       => false,
+                        'mostrar_requiere_subsanacion'  => false,
+                        'habilitado_para_evaluar'       => true,
+                        'en_evaluacion'                 => true,
+                        'finalizado'                    => true,
+                    ]
+                );
+            }
 
             Evaluacion::whereIn('proyecto_id', $proyectosId)->where('habilitado', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => true]);
         }
