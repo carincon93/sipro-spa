@@ -298,7 +298,7 @@
                             {#if version.estado == 1}
                                 <a href={route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}>Descargar</a>
                             {:else}
-                                Generando, regrese pronto.
+                                Generando una nueva versión, regrese pronto.
                             {/if}
                         </li>
                     {/each}

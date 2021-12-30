@@ -327,6 +327,7 @@ class ProductoController extends Controller
         $resultado = $evaluacion->proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
+        $otrasEvaluaciones = null;
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;

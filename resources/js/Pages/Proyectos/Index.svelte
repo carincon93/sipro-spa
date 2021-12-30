@@ -10,8 +10,8 @@
     import DataTableMenu from '@/Shared/DataTableMenu'
     import LoadingButton from '@/Shared/LoadingButton'
     import Tags from '@/Shared/Tags'
-    import Label from '@/Shared/Label'
-    import Switch from '@/Shared/Switch'
+    import FormField from '@smui/form-field'
+    import Radio from '@smui/radio'
     import Button from '@/Shared/Button'
     import InfoMessage from '@/Shared/InfoMessage'
     import { Item, Text } from '@smui/list'
@@ -34,7 +34,7 @@
     let sending = false
     let form = useForm({
         proyectos_id: null,
-        estado_subsanable: false,
+        estado: false,
     })
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
@@ -53,17 +53,29 @@
 
         <div slot="caption">
             <InfoMessage>
+                <p>En esta sección puede seleccionar varios códigos de proyectos y cambiar el estado al mismo tiempo. Seleccione entre: Subsanar, finalizar o evaluar.</p>
                 <form on:submit|preventDefault={submit}>
                     <Tags enforceWhitelist={false} id="proyectos_id" class="mt-4" whitelist={proyectosId} bind:tags={$form.proyectos_id} placeholder="Código(s) SGPS" required />
 
-                    <div class="mt-4">
-                        {#if $form.estado_subsanable}
-                            <Label labelFor="estado_subsanable" value="La opción de proyectos subsanables está seleccionada Nota: Los proyectos serán modificables, además se finalizarán todas la evaluaciones y se mostrarán las recomendaciones de los evaluadores." class="inline-block mb-4" />
-                        {:else}
-                            <Label labelFor="estado_subsanable" value="La opción de proyectos finalizados está seleccionada. Nota: Los proyectos finalizados no podrán ser modifcados." class="inline-block mb-4" />
-                        {/if}
-                        <br />
-                        <Switch bind:checked={$form.estado_subsanable} onMessage="Subsanable(s)" offMessage="Finalizado(s)" />
+                    <div class="flex mt-4 items-center">
+                        <FormField>
+                            <Radio bind:group={$form.estado} value="1" />
+                            <span slot="label">Subsanar</span>
+                        </FormField>
+                    </div>
+
+                    <div class="flex mt-4 items-center">
+                        <FormField>
+                            <Radio bind:group={$form.estado} value="2" />
+                            <span slot="label">Finalizar</span>
+                        </FormField>
+                    </div>
+
+                    <div class="flex mt-4 items-center">
+                        <FormField>
+                            <Radio bind:group={$form.estado} value="3" />
+                            <span slot="label">Evaluar</span>
+                        </FormField>
                     </div>
 
                     <div class="py-4 flex items-center sticky bottom-0">
@@ -73,6 +85,8 @@
                     </div>
                 </form>
             </InfoMessage>
+
+            <hr class="my-10 w-full" />
         </div>
 
         <div slot="actions">

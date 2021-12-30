@@ -1096,27 +1096,27 @@
             Código del proyecto: {idi.proyecto.codigo}
 
             {#if versiones.length > 0}
-                <hr class="border border-white my-4 w-full" />
+                <hr class="my-10 w-full border-white" />
                 <h6>Versiones - PDF</h6>
                 <ul>
                     {#each versiones as version, i}
-                        <li class="bg-white p-2 rounded text-black text-xs">
+                        <li class="bg-white p-2 rounded text-black text-xs mb-2">
                             {#if version.estado == 1}
-                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, idi.proyecto.id, version.version])}>Descargar versión {i}</a>
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, idi.proyecto.id, version.version])}>Descargar versión {version.created_at}</a>
                             {:else}
-                                Generando, regrese pronto.
+                                Generando una nueva versión, regrese pronto.
                             {/if}
                         </li>
                     {/each}
                 </ul>
-                <hr class="border border-white my-5 w-full" />
+                <hr class="my-10 w-full border-white" />
             {:else}
-                <hr class="border border-white my-4 w-full" />
+                <hr class="my-10 w-full border-white" />
 
                 <h6>Versiones - PDF</h6>
 
                 <p class="text-xs">No se ha generado un PDF aún</p>
-                <hr class="border border-white my-5 w-full" />
+                <hr class="my-10 w-full border-white" />
             {/if}
         </div>
         <div slot="content">

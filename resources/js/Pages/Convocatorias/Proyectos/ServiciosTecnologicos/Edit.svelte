@@ -560,11 +560,11 @@
                 <h6>Versiones - PDF</h6>
                 <ul>
                     {#each versiones as version, i}
-                        <li class="bg-white p-2 rounded text-black text-xs">
+                        <li class="bg-white p-2 rounded text-black text-xs mb-2">
                             {#if version.estado == 1}
-                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, servicioTecnologico.proyecto.id, version.version])}>Descargar versión {i}</a>
+                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, servicioTecnologico.proyecto.id, version.version])}>Descargar versión {version.created_at}</a>
                             {:else}
-                                Generando, regrese pronto.
+                                Generando una nueva versión, regrese pronto.
                             {/if}
                         </li>
                     {/each}

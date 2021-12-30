@@ -172,6 +172,7 @@ class AnalisisRiesgoController extends Controller
 
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
+        $otrasEvaluaciones = null;
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;

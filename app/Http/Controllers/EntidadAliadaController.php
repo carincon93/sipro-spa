@@ -482,6 +482,7 @@ class EntidadAliadaController extends Controller
             $evaluacion->entidad_aliada_puntaje = 0;
         }
 
+        $otrasEvaluaciones = null;
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->ta()->exists():
                 $ta = $evaluacion->proyecto->ta;

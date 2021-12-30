@@ -117,22 +117,23 @@ class ProyectoController extends Controller
         }
 
         if ($request->estado_cord_sennova) {
-            $request->subsanacion = $request->subsanacion ? 1 : 0;
+            $request->subsanacion = $request->subsanacion ? true : false;
             $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
             sleep(2);
             $proyecto->update(
                 [
-                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiere_subsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
+                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiereSubsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
                 ]
             );
         }
 
         if ($request->subsanacion == true) {
+            $request->subsanacion = $request->subsanacion ? true : false;
             $proyecto->update(['estado_cord_sennova' => $proyecto->estado]);
             sleep(2);
             $proyecto->update(
                 [
-                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiere_subsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
+                    'estado_cord_sennova' => DB::raw("estado_cord_sennova::jsonb || '{\"requiereSubsanar\":$request->subsanacion, \"estado\": \"$request->estado_cord_sennova\"}'")
                 ]
             );
         }
@@ -1209,15 +1210,38 @@ class ProyectoController extends Controller
             return $proyectosId->push($item - 8000);
         });
 
-        Proyecto::whereIn('id', $proyectosId)->update([
-            'modificable'                   => $request->estado_subsanable,
-            'mostrar_recomendaciones'       => $request->estado_subsanable,
-            'mostrar_requiere_subsanacion'  => $request->estado_subsanable,
-            'habilitado_para_evaluar'                     => $request->estado_subsanable ? false : true,
-            'finalizado'                    => $request->estado_subsanable ? false : true,
-        ]);
+        if ($request->estado == 1) { // Subsanar
+            Proyecto::whereIn('id', $proyectosId)->update([
+                'modificable'                   => true,
+                'mostrar_recomendaciones'       => true,
+                'mostrar_requiere_subsanacion'  => true,
+                'habilitado_para_evaluar'       => false,
+                'en_evaluacion'                 => false,
+                'finalizado'                    => false,
+            ]);
 
-        Evaluacion::whereIn('proyecto_id', $proyectosId)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
+            Evaluacion::whereIn('proyecto_id', $proyectosId)->where('habilitado', true)->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
+        } else if ($request->estado == 2) { // Finalizar
+            Proyecto::whereIn('id', $proyectosId)->update([
+                'modificable'                   => false,
+                'mostrar_recomendaciones'       => true,
+                'mostrar_requiere_subsanacion'  => true,
+                'habilitado_para_evaluar'       => false,
+                'en_evaluacion'                 => false,
+                'finalizado'                    => true,
+            ]);
+        } else if ($request->estado == 3) { // Evaluar
+            Proyecto::whereIn('id', $proyectosId)->update([
+                'modificable'                   => false,
+                'mostrar_recomendaciones'       => false,
+                'mostrar_requiere_subsanacion'  => false,
+                'habilitado_para_evaluar'       => true,
+                'en_evaluacion'                 => true,
+                'finalizado'                    => true,
+            ]);
+
+            Evaluacion::whereIn('proyecto_id', $proyectosId)->where('habilitado', true)->update(['modificable' => true, 'finalizado' => false, 'iniciado' => true]);
+        }
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

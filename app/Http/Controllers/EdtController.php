@@ -220,6 +220,7 @@ class EdtController extends Controller
             }
         }
 
+        $otrasEvaluaciones = null;
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->ta()->exists():
                 $ta = $evaluacion->proyecto->ta;

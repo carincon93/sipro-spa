@@ -177,6 +177,7 @@ class ProyectoAnexoController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->especificaciones_area = $evaluacion->proyecto->servicioTecnologico->especificaciones_area : $evaluacion->proyecto->especificaciones_area = null;
         $evaluacion->proyecto->codigo_linea_programatica == 68 ? $evaluacion->proyecto->video = $evaluacion->proyecto->servicioTecnologico->video : $evaluacion->proyecto->video = null;
 
+        $otrasEvaluaciones = null;
         switch ($evaluacion->proyecto) {
             case $evaluacion->proyecto->idi()->exists():
                 $evaluacion->idiEvaluacion;
