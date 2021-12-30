@@ -602,7 +602,7 @@ class Proyecto extends Model
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
 
-                array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar, null)['id']);
 
                 if ($causalRechazo == null) {
 
@@ -647,8 +647,8 @@ class Proyecto extends Model
             $cantidadEvaluaciones > 0 ? $puntajeTotal = $puntajeTotal / $cantidadEvaluaciones : $puntajeTotal = 0;
 
             if ($causalRechazo == null && $cantidadEvaluaciones > 0) {
-                $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['estado'];
-                $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)['requiereSubsanar'];
+                $estadoEvaluacion = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar, null)['estado'];
+                $requiereSubsanar = $this->estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar, null)['requiereSubsanar'];
             } else {
                 $estadoEvaluacion = $causalRechazo;
             }
@@ -950,9 +950,10 @@ class Proyecto extends Model
      * @param  mixed $puntajeTotal
      * @param  mixed $totalRecomendaciones
      * @param  mixed $requiereSubsanar
+     * @param  mixed $causalRechazo
      * @return void
      */
-    public function estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar)
+    public function estadoEvaluacionIdi($puntajeTotal, $totalRecomendaciones, $requiereSubsanar, $causalRechazo)
     {
         $estadosEvaluacion = collect(json_decode(Storage::get('json/estados_evaluacion.json'), true));
 
@@ -980,6 +981,10 @@ class Proyecto extends Model
             $estadoEvaluacion = $estadosEvaluacion->where('value', 4)->first()['label'];
             $id = $estadosEvaluacion->where('value', 4)->first()['value'];
             $requiereSubsanar = false;
+        }
+
+        if ($causalRechazo) {
+            $estadoEvaluacion = $causalRechazo;
         }
 
         return collect(['id' => $id, 'estado' => $estadoEvaluacion, 'requiereSubsanar' => $requiereSubsanar]);

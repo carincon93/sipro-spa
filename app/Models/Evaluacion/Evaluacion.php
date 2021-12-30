@@ -518,7 +518,13 @@ class Evaluacion extends Model
     public function getEstadoProyectoPorEvaluadorAttribute()
     {
         if ($this->idiEvaluacion()->exists()) {
-            return $this->proyecto->estadoEvaluacionIdi($this->total_evaluacion, $this->total_recomendaciones, null);
+            $causalRechazo = null;
+            if ($this->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                $causalRechazo = 'En revisión por Cord. SENNOVA';
+            } else if ($this->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                $causalRechazo = 'Rechazado - Por causal de rechazo';
+            }
+            return $this->proyecto->estadoEvaluacionIdi($this->total_evaluacion, $this->total_recomendaciones, null, $causalRechazo);
         } else if ($this->servicioTecnologicoEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionServiciosTecnologicos($this->total_evaluacion, $this->total_recomendaciones, null);
         } else if ($this->culturaInnovacionEvaluacion()->exists()) {

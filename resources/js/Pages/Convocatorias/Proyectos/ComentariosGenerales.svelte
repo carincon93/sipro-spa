@@ -79,57 +79,55 @@
     {#each evaluaciones as evaluacion}
         {#each evaluacion.evaluacion_causales_rechazo as causalRechazo}
             {#if causalRechazo.causal_rechazo == 1}
-                <h1 class="mt-24 mb-8 font-black">
-                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
-                </h1>
-                <div>
-                    <Label
-                        class="flex items-center"
-                        labelFor="1"
-                        value="El proyecto se inscribe en alguna de las líneas de la Estrategia Regional, pero su formulación obedece a los objetivos de otra línea. Ejemplo: se formula un proyecto de la Estrategia Regional con el objeto de modernizar un ambiente de formación y se verifica que el proyecto se enfoca en la prestación de nuevos servicios tecnológicos"
-                    />
-                </div>
-                <hr />
+                <InfoMessage class="mt-24" alertMsg={true}>
+                    <h1 class="mb-8 font-black">
+                        <strong>¡Importante!</strong> Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                    </h1>
+                    <p>El proyecto se inscribe en alguna de las líneas de la Estrategia Regional, pero su formulación obedece a los objetivos de otra línea. Ejemplo: se formula un proyecto de la Estrategia Regional con el objeto de modernizar un ambiente de formación y se verifica que el proyecto se enfoca en la prestación de nuevos servicios tecnológicos</p>
+                    <hr />
+                </InfoMessage>
             {/if}
 
             {#if causalRechazo.causal_rechazo == 2}
-                <h1 class="mt-24 mb-8 font-black">
-                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
-                </h1>
+                <InfoMessage class="mt-24" alertMsg={true}>
+                    <h1 class="mb-8 font-black">
+                        <strong>¡Importante!</strong> Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                    </h1>
 
-                <div>
-                    <Label class="flex items-center" labelFor="2" value="En la formulación del proyecto se consideran como actividades principales y no como productos resultados de investigación, la realización de actividades de divulgación tecnológica como congresos, simposios, semanarios, entre otros." />
-                </div>
-                <hr />
+                    <p>En la formulación del proyecto se consideran como actividades principales y no como productos resultados de investigación, la realización de actividades de divulgación tecnológica como congresos, simposios, semanarios, entre otros.</p>
+                    <hr />
+                </InfoMessage>
             {/if}
 
             {#if causalRechazo.causal_rechazo == 3}
-                <h1 class="mt-24 mb-8 font-black">
-                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
-                </h1>
+                <InfoMessage class="mt-24" alertMsg={true}>
+                    <h1 class="mb-8 font-black">
+                        <strong>¡Importante!</strong> Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                    </h1>
 
-                <div>
-                    <Label class="flex items-center" labelFor="3" value="Se verifique que el proyecto y sus productos resultados de investigación sean parte de una tesis doctoral, de maestría o de pregrado." />
-                </div>
-                <hr />
+                    <p>Se verifique que el proyecto y sus productos resultados de investigación sean parte de una tesis doctoral, de maestría o de pregrado.</p>
+                    <hr />
+                </InfoMessage>
             {/if}
 
             {#if causalRechazo.causal_rechazo == 4}
-                <h1 class="mt-24 mb-8 font-black">
-                    Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
-                </h1>
+                <InfoMessage class="mt-24" alertMsg={true}>
+                    <h1 class="mb-8 font-black">
+                        <strong>¡Importante!</strong> Este proyecto tuvo la siguiente causal de rechazo {#if proyecto.modificable}, por favor haga la respectiva subsanación. {/if}
+                    </h1>
 
-                <div>
-                    <Label class="flex items-center" labelFor="4" value="Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA." />
-                </div>
-                <hr />
+                    <p>Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA.</p>
+                    <hr />
+                </InfoMessage>
             {/if}
         {/each}
 
         {#if evaluacion.justificacion_causal_rechazo}
-            <h1 class="mt-20 font-black">Justificación de la causal de rechazo</h1>
-            <p>{evaluacion.justificacion_causal_rechazo}</p>
-            <hr />
+            <InfoMessage alertMsg={true}>
+                <h1 class="font-black">Justificación de la causal de rechazo</h1>
+                <p>{evaluacion.justificacion_causal_rechazo}</p>
+                <hr />
+            </InfoMessage>
         {/if}
     {/each}
 
