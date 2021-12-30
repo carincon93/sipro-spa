@@ -67,7 +67,7 @@
                     {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                         <a use:inertia href={route('evaluaciones.index')} class="text-indigo-400 hover:text-indigo-600"> Evaluaciones </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-indigo-400 font-medium mx-1.5">/</span>
                     {evaluacion.proyecto.codigo}
                     <a class="bg-indigo-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.evaluaciones.redireccionar', [evaluacion.proyecto.convocatoria.id, evaluacion.id])} target="_blank">
                         <span class="flex items-center">
