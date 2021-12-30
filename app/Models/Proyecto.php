@@ -601,7 +601,6 @@ class Proyecto extends Model
                 $puntajeTotal += $evaluacion->total_evaluacion;
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
-
                 array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar, null)['id']);
 
                 if ($causalRechazo == null) {
