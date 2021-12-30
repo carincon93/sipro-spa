@@ -601,32 +601,32 @@ class Proyecto extends Model
                 $puntajeTotal += $evaluacion->total_evaluacion;
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
 
-                if ($key === count($evaluaciones) - 1) {
 
-                    array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                array_push($estados, $this->estadoEvaluacionIdi($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
-                    if ($causalRechazo == null) {
-                        switch ($evaluacion) {
-                            case $evaluacion->idiEvaluacion()->exists():
-                                if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                                    $causalRechazo = 'En revisión por Cord. SENNOVA';
-                                } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                    $causalRechazo = 'Rechazado - Por causal de rechazo';
-                                }
+                if ($causalRechazo == null) {
 
-                                if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
-                                    $requiereSubsanar = true;
-                                }
-                                break;
+                    switch ($evaluacion) {
+                        case $evaluacion->idiEvaluacion()->exists():
 
-                            default:
-                                break;
-                        }
+                            if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                                $causalRechazo = 'En revisión por Cord. SENNOVA';
+                            } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                                $causalRechazo = 'Rechazado - Por causal de rechazo';
+                            }
+
+                            if ($evaluacion->idiEvaluacion->anexos_comentario != null) {
+                                $requiereSubsanar = true;
+                            }
+                            break;
+
+                        default:
+                            break;
                     }
+                }
 
-                    if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0 && $convocatoria->fase == 5) {
-                        $this->precio_proyecto - $this->getPrecioProyectoAprobadoAttribute() >= floor($this->precio_proyecto * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
-                    }
+                if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0 && $convocatoria->fase == 5) {
+                    $this->precio_proyecto - $this->getPrecioProyectoAprobadoAttribute() >= floor($this->precio_proyecto * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
                 }
             }
 
@@ -700,26 +700,24 @@ class Proyecto extends Model
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
 
-                if ($key === count($evaluaciones) - 1) {
-                    array_push($estados, $this->estadoEvaluacionCulturaInnovacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                array_push($estados, $this->estadoEvaluacionCulturaInnovacion($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
-                    if ($causalRechazo == null) {
-                        switch ($evaluacion) {
-                            case $evaluacion->culturaInnovacionEvaluacion()->exists():
-                                if ($evaluacion->culturaInnovacionEvaluacion->anexos_comentario != null) {
-                                    $requiereSubsanar = true;
-                                }
-                                break;
+                if ($causalRechazo == null) {
+                    switch ($evaluacion) {
+                        case $evaluacion->culturaInnovacionEvaluacion()->exists():
+                            if ($evaluacion->culturaInnovacionEvaluacion->anexos_comentario != null) {
+                                $requiereSubsanar = true;
+                            }
+                            break;
 
-                            default:
-                                break;
-                        }
+                        default:
+                            break;
                     }
-
-                    // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
-                    //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
-                    // }
                 }
+
+                // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                // }
             }
 
             $cantidadEvaluaciones = count($evaluaciones);
@@ -791,32 +789,30 @@ class Proyecto extends Model
                     $presupuestoEvaluacion->correcto == false ? $countPresupuestoNoAprobado++ : null;
                 }
 
-                if ($key === count($evaluaciones) - 1) {
-                    array_push($estados, $this->estadoEvaluacionServiciosTecnologicos($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
+                array_push($estados, $this->estadoEvaluacionServiciosTecnologicos($evaluacion->total_evaluacion, $totalRecomendaciones, $requiereSubsanar)['id']);
 
-                    if ($causalRechazo == null) {
-                        switch ($evaluacion) {
-                            case $evaluacion->servicioTecnologicoEvaluacion()->exists():
-                                // if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
-                                //     $causalRechazo = 'En revisión por Cord. SENNOVA';
-                                // } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
-                                //     $causalRechazo = 'Rechazado - Causal de rechazo';
-                                // }
+                if ($causalRechazo == null) {
+                    switch ($evaluacion) {
+                        case $evaluacion->servicioTecnologicoEvaluacion()->exists():
+                            // if ($evaluacion->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                            //     $causalRechazo = 'En revisión por Cord. SENNOVA';
+                            // } else if ($evaluacion->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                            //     $causalRechazo = 'Rechazado - Causal de rechazo';
+                            // }
 
-                                if ($evaluacion->servicioTecnologicoEvaluacion->anexos_comentario != null) {
-                                    $requiereSubsanar = true;
-                                }
-                                break;
+                            if ($evaluacion->servicioTecnologicoEvaluacion->anexos_comentario != null) {
+                                $requiereSubsanar = true;
+                            }
+                            break;
 
-                            default:
-                                break;
-                        }
+                        default:
+                            break;
                     }
-
-                    // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
-                    //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
-                    // }
                 }
+
+                // if ($causalRechazo == null && $evaluacion->proyectoPresupuestosEvaluaciones()->count() > 0) {
+                //     $countPresupuestoNoAprobado >= floor($totalPresupuestosEvaluados * 0.8) ? $causalRechazo = 'Rechazado - No cumple con el presupuesto' : $causalRechazo = null;
+                // }
             }
 
             $cantidadEvaluaciones = count($evaluaciones);
@@ -873,7 +869,6 @@ class Proyecto extends Model
             $requiereSubsanar = false;
             $totalPresupuestosEvaluados = 0;
             $countPresupuestoNoAprobado = 0;
-
 
             foreach ($evaluaciones as $key => $evaluacion) {
                 $totalRecomendaciones += $evaluacion->total_recomendaciones;
