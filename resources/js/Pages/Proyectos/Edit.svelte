@@ -30,7 +30,7 @@
     let sending = false
     let form = useForm({
         subsanacion: proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
-        estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova).estado : null,
+        estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova)?.estado : null,
         mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
         en_evaluacion: proyecto.en_evaluacion,
     })
@@ -130,14 +130,14 @@
                     <InputError message={errors.subsanacion} />
 
                     <InfoMessage class="mt-10">
-                        <p class="font-black">Tenga en cuenta: Información del estado del proyecto (Se tienen en cuenta la(s) {JSON.parse(proyecto.estado).evaluacionesHabilitadas} evaluacion(es) habilitada(s))</p>
+                        <p class="font-black">Tenga en cuenta: Información del estado del proyecto (Se tienen en cuenta la(s) {JSON.parse(proyecto.estado)?.evaluacionesHabilitadas} evaluacion(es) habilitada(s))</p>
                         <ul>
-                            <li>Estado del proyecto: {JSON.parse(proyecto.estado).estado}</li>
-                            <li>Número de recomendaciones: {JSON.parse(proyecto.estado).numeroRecomendaciones}</li>
-                            {#if JSON.parse(proyecto.estado).puntaje}
-                                <li>Puntaje total: {JSON.parse(proyecto.estado).puntaje}</li>
+                            <li>Estado del proyecto: {JSON.parse(proyecto.estado)?.estado}</li>
+                            <li>Número de recomendaciones: {JSON.parse(proyecto.estado)?.numeroRecomendaciones}</li>
+                            {#if JSON.parse(proyecto.estado)?.puntaje}
+                                <li>Puntaje total: {JSON.parse(proyecto.estado)?.puntaje}</li>
                             {/if}
-                            <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado).requiereSubsanar ? 'Si' : 'No'}</li>
+                            <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado)?.requiereSubsanar ? 'Si' : 'No'}</li>
                         </ul>
                     </InfoMessage>
                 </div>
