@@ -30,6 +30,7 @@ class GrupoInvestigacion extends Model
         'enlace_gruplac',
         'codigo_minciencias',
         'categoria_minciencias',
+        'mision'
     ];
 
     /**

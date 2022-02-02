@@ -5,6 +5,7 @@
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Shared/Input'
+    import Textarea from '@/Shared/Textarea'
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -32,12 +33,15 @@
         email: grupoInvestigacion.email,
         enlace_gruplac: grupoInvestigacion.enlace_gruplac,
         codigo_minciencias: grupoInvestigacion.codigo_minciencias,
+        mision: grupoInvestigacion.mision,
         categoria_minciencias: {
             value: grupoInvestigacion.categoria_minciencias,
             label: categoriasMinciencias.find((item) => item.value == grupoInvestigacion.categoria_minciencias)?.label,
         },
         centro_formacion_id: grupoInvestigacion.centro_formacion_id,
     })
+
+    console.log(categoriasMinciencias.find((item) => item.value == grupoInvestigacion.categoria_minciencias)?.label)
 
     function submit() {
         if (isSuperAdmin) {
@@ -102,6 +106,10 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="mision" value="Misión" />
+                    <Textarea label="Misión" maxlength="40000" id="mision" bind:value={$form.mision} error={errors.mision} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

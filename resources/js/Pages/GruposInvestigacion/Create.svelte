@@ -4,6 +4,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
+    import Textarea from '@/Shared/Textarea'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -29,6 +30,7 @@
         enlace_gruplac: '',
         codigo_minciencias: '',
         categoria_minciencias: '',
+        mision: '',
         centro_formacion_id: null,
     })
 
@@ -88,6 +90,11 @@
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="mision" value="Misión" />
+                    <Textarea label="Misión" maxlength="40000" id="mision" bind:value={$form.mision} error={errors.mision} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

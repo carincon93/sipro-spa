@@ -57,6 +57,7 @@ class GrupoInvestigacionController extends Controller
         $grupoInvestigacion->enlace_gruplac           = $request->enlace_gruplac;
         $grupoInvestigacion->codigo_minciencias       = $request->codigo_minciencias;
         $grupoInvestigacion->categoria_minciencias    = $request->categoria_minciencias;
+        $grupoInvestigacion->mision                   = $request->mision;
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $grupoInvestigacion->save();
@@ -108,6 +109,7 @@ class GrupoInvestigacionController extends Controller
         $grupoInvestigacion->enlace_gruplac          = $request->enlace_gruplac;
         $grupoInvestigacion->codigo_minciencias      = $request->codigo_minciencias;
         $grupoInvestigacion->categoria_minciencias   = $request->categoria_minciencias;
+        $grupoInvestigacion->mision                  = $request->mision;
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $grupoInvestigacion->save();

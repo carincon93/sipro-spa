@@ -32,6 +32,7 @@ class GrupoInvestigacionRequest extends FormRequest
                 'enlace_gruplac'        => ['required', 'url', 'max:191'],
                 'codigo_minciencias'    => ['required', 'max:10', 'string', 'unique:grupos_investigacion,codigo_minciencias,' . $this->route('grupo_investigacion')->id . ',id'],
                 'categoria_minciencias' => ['required', 'max:16'],
+                'mision'                => ['required', 'string'],
             ];
         } else {
             return [
@@ -42,6 +43,7 @@ class GrupoInvestigacionRequest extends FormRequest
                 'enlace_gruplac'        => ['required', 'url', 'max:191'],
                 'codigo_minciencias'    => ['required', 'max:10', 'string', 'unique:grupos_investigacion,codigo_minciencias'],
                 'categoria_minciencias' => ['required', 'max:16'],
+                'mision'                => ['required', 'string'],
             ];
         }
     }
