@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="categoria_minciencias" value="Categoría Minciencias" />
+                    <Label required class="mb-4" labelFor="categoria_minciencias" value="Clasificación MinCiencias 894 – 2021" />
                     <Select id="categoria_minciencias" items={categoriasMinciencias} bind:selectedValue={$form.categoria_minciencias} error={errors.categoria_minciencias} autocomplete="off" placeholder="Seleccione una categoría Minciencias" required />
                 </div>
 

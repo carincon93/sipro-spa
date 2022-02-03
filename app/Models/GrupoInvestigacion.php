@@ -30,7 +30,19 @@ class GrupoInvestigacion extends Model
         'enlace_gruplac',
         'codigo_minciencias',
         'categoria_minciencias',
-        'mision'
+        'mision',
+        'vision',
+        'fecha_creacion_grupo',
+        'nombre_lider_grupo',
+        'email_contacto',
+        '"programa_nal_ctei_principal',
+        'programa_nal_ctei_secundaria',
+        'reconocimientos_grupos_investigacion',
+        'objetivo_general',
+        'objetivos_especificos',
+        'link_propio_grupo',
+        'gic_f_020',
+        'gic_f_032',
     ];
 
     /**

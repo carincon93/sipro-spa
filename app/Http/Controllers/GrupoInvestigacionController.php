@@ -6,6 +6,7 @@ use App\Http\Requests\GrupoInvestigacionRequest;
 use App\Models\GrupoInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class GrupoInvestigacionController extends Controller
@@ -51,13 +52,40 @@ class GrupoInvestigacionController extends Controller
         $this->authorize('create', [GrupoInvestigacion::class]);
 
         $grupoInvestigacion = new GrupoInvestigacion();
-        $grupoInvestigacion->nombre                   = $request->nombre;
-        $grupoInvestigacion->acronimo                 = $request->acronimo;
-        $grupoInvestigacion->email                    = $request->email;
-        $grupoInvestigacion->enlace_gruplac           = $request->enlace_gruplac;
-        $grupoInvestigacion->codigo_minciencias       = $request->codigo_minciencias;
-        $grupoInvestigacion->categoria_minciencias    = $request->categoria_minciencias;
-        $grupoInvestigacion->mision                   = $request->mision;
+        $grupoInvestigacion->nombre                                 = $request->nombre;
+        $grupoInvestigacion->acronimo                               = $request->acronimo;
+        $grupoInvestigacion->email                                  = $request->email;
+        $grupoInvestigacion->enlace_gruplac                         = $request->enlace_gruplac;
+        $grupoInvestigacion->codigo_minciencias                     = $request->codigo_minciencias;
+        $grupoInvestigacion->categoria_minciencias                  = $request->categoria_minciencias;
+        $grupoInvestigacion->mision                                 = $request->mision;
+        $grupoInvestigacion->vision                                 = $request->vision;
+        $grupoInvestigacion->fecha_creacion_grupo                   = $request->fecha_creacion_grupo;
+        $grupoInvestigacion->nombre_lider_grupo                     = $request->nombre_lider_grupo;
+        $grupoInvestigacion->email_contacto                         = $request->email_contacto;
+        $grupoInvestigacion->programa_nal_ctei_principal            = $request->programa_nal_ctei_principal;
+        $grupoInvestigacion->programa_nal_ctei_secundaria           = $request->programa_nal_ctei_secundaria;
+        $grupoInvestigacion->reconocimientos_grupos_investigacion   = $request->reconocimientos_grupos_investigacion;
+        $grupoInvestigacion->objetivo_general                       = $request->objetivo_general;
+        $grupoInvestigacion->objetivos_especificos                  = $request->objetivos_especificos;
+        $grupoInvestigacion->link_propio_grupo                      = $request->link_propio_grupo;
+
+
+        $nombreArchivoF020 = $this->cleanFileName('gic_f_020', $request->gic_f_020);
+        $gic_f_020 = $request->gic_f_020->storeAs(
+            'formatos_grupo_investigacion',
+            $nombreArchivoF020
+        );
+        $grupoInvestigacion->gic_f_020 = $gic_f_020;
+
+        $nombreArchivoF032 = $this->cleanFileName('gic_f_032', $request->gic_f_032);
+        $gic_f_032 = $request->gic_f_032->storeAs(
+            'formatos_grupo_investigacion',
+            $nombreArchivoF032
+        );
+        $grupoInvestigacion->gic_f_032 = $gic_f_032;
+
+
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $grupoInvestigacion->save();
@@ -130,5 +158,20 @@ class GrupoInvestigacionController extends Controller
         // $grupoInvestigacion->delete();
 
         return back()->with('error', 'No se puede eliminar el recurso debido a que hay información relacionada. Comuníquese con el administrador del sistema.');
+    }
+
+    /**
+     * cleanFileName
+     *
+     * @param  mixed $nombre
+     * @return void
+     */
+    public function cleanFileName($nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+        $random    = Str::random(10);
+
+        return str_replace(array("\r", "\n"), '', "formatocod{$random}." . $archivo->extension());
     }
 }

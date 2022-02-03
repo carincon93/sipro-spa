@@ -4,5 +4,5 @@
     { "value": 3, "label": "B" },
     { "value": 4, "label": "C" },
     { "value": 5, "label": "Reconocido" },
-    { "value": 6, "label": "No reconocido" }
+    { "value": 7, "label": "Avalado SENA" }
 ]
