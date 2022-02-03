@@ -26,6 +26,19 @@ class SemilleroInvestigacion extends Model
     protected $fillable = [
         'linea_investigacion_id',
         'nombre',
+        'codigo',
+        'fecha_creacion_semillero',
+        'nombre_lider_semillero',
+        'email_contacto',
+        'reconocimientos_semillero_investigacion',
+        'vision',
+        'mision',
+        'objetivo_general',
+        'objetivos_especificos',
+        'link_semillero',
+        'formato_gic_f020',
+        'formato_gic_f032',
+        'formato_aval_semillero',
     ];
 
     /**
