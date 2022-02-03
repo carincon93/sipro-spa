@@ -34,7 +34,7 @@ class SemilleroInvestigacionRequest extends FormRequest
             'mision'                  => ['required'],
             'objetivos_especificos'   => ['required'],
             'objetivo_general'        => ['required'],
-            'link_semillero'          => ['nullable'],
+            'link_semillero'          => ['nullable', 'url'],
             'formato_gic_f020'        => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
             'formato_gic_f032'        => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
             'formato_aval_semillero'  => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
