@@ -37,12 +37,12 @@ class GrupoInvestigacion extends Model
         'email_contacto',
         '"programa_nal_ctei_principal',
         'programa_nal_ctei_secundaria',
-        'reconocimientos_grupos_investigacion',
+        'reconocimientos_grupo_investigacion',
         'objetivo_general',
         'objetivos_especificos',
         'link_propio_grupo',
-        'gic_f_020',
-        'gic_f_032',
+        'formato_gic_f_020',
+        'formato_gic_f_032',
     ];
 
     /**
@@ -81,6 +81,16 @@ class GrupoInvestigacion extends Model
     public function lineasInvestigacion()
     {
         return $this->hasMany(LineaInvestigacion::class);
+    }
+
+    /**
+     * Relationship with RedConocimiento
+     *
+     * @return object
+     */
+    public function redesConocimiento()
+    {
+        return $this->belongsToMany(RedConocimiento::class, 'grupo_investigacion_red_conocimiento', 'grupo_investigacion_id', 'red_conocimiento_id');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LineaInvestigacionRequest;
+use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -30,11 +31,15 @@ class LineaInvestigacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', [LineaInvestigacion::class]);
 
-        return Inertia::render('LineasInvestigacion/Create');
+        $grupoInvestigacion = GrupoInvestigacion::find($request->grupoInvestigacionId);
+
+        return Inertia::render('LineasInvestigacion/Create', [
+            'grupoInvestigacionId' => $grupoInvestigacion ? $grupoInvestigacion->id : null,
+        ]);
     }
 
     /**
@@ -48,10 +53,12 @@ class LineaInvestigacionController extends Controller
         $this->authorize('create', [LineaInvestigacion::class]);
 
         $lineaInvestigacion = new LineaInvestigacion();
-        $lineaInvestigacion->nombre         = $request->nombre;
+        $lineaInvestigacion->nombre = $request->nombre;
         $lineaInvestigacion->grupoInvestigacion()->associate($request->grupo_investigacion_id);
 
         $lineaInvestigacion->save();
+
+        $lineaInvestigacion->programasFormacion()->attach($request->programas_formacion);
 
         return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -79,6 +86,8 @@ class LineaInvestigacionController extends Controller
 
         return Inertia::render('LineasInvestigacion/Edit', [
             'lineaInvestigacion' => $lineaInvestigacion,
+            'programasFormacion' => $lineaInvestigacion->grupoInvestigacion->centroFormacion->programasFormacion()->selectRaw("programas_formacion.id as value, CONCAT('Código: ', programas_formacion.codigo,' - ', programas_formacion.nombre) as label")->get(),
+            'programasFormacionLineaInvestigacion' => $lineaInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
         ]);
     }
 
@@ -95,6 +104,8 @@ class LineaInvestigacionController extends Controller
 
         $lineaInvestigacion->nombre = $request->nombre;
         $lineaInvestigacion->grupoInvestigacion()->associate($request->grupo_investigacion_id);
+
+        $lineaInvestigacion->programasFormacion()->sync($request->programas_formacion);
 
         $lineaInvestigacion->save();
 

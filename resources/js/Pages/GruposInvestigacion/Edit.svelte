@@ -4,6 +4,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
+    import File from '@/Shared/File'
     import Input from '@/Shared/Input'
     import Textarea from '@/Shared/Textarea'
     import Label from '@/Shared/Label'
@@ -12,10 +13,13 @@
     import Select from '@/Shared/Select'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Dialog from '@/Shared/Dialog'
+    import SelectMulti from '@/Shared/SelectMulti'
 
     export let errors
     export let grupoInvestigacion
     export let categoriasMinciencias
+    export let redesConocimiento
+    export let redesConocimientoGrupoInvestigacion
 
     $: $title = grupoInvestigacion ? grupoInvestigacion.nombre : null
 
@@ -28,6 +32,7 @@
     let dialogOpen = false
     let sending = false
     let form = useForm({
+        _method: 'put',
         nombre: grupoInvestigacion.nombre,
         acronimo: grupoInvestigacion.acronimo,
         email: grupoInvestigacion.email,
@@ -38,12 +43,26 @@
             value: grupoInvestigacion.categoria_minciencias,
             label: categoriasMinciencias.find((item) => item.value == grupoInvestigacion.categoria_minciencias)?.label,
         },
+        fecha_creacion_grupo: grupoInvestigacion.fecha_creacion_grupo,
+        nombre_lider_grupo: grupoInvestigacion.nombre_lider_grupo,
+        email_contacto: grupoInvestigacion.email_contacto,
+        reconocimientos_grupo_investigacion: grupoInvestigacion.reconocimientos_grupo_investigacion,
+        programa_nal_ctei_principal: grupoInvestigacion.programa_nal_ctei_principal,
+        programa_nal_ctei_secundaria: grupoInvestigacion.programa_nal_ctei_secundaria,
+        vision: grupoInvestigacion.vision,
+        mision: grupoInvestigacion.mision,
+        objetivo_general: grupoInvestigacion.objetivo_general,
+        objetivos_especificos: grupoInvestigacion.objetivos_especificos,
+        link_propio_grupo: grupoInvestigacion.link_propio_grupo,
+        formato_gic_f_020: null,
+        formato_gic_f_032: null,
+        redes_conocimiento: redesConocimientoGrupoInvestigacion.length > 0 ? redesConocimientoGrupoInvestigacion : null,
         centro_formacion_id: grupoInvestigacion.centro_formacion_id,
     })
 
     function submit() {
         if (isSuperAdmin) {
-            $form.put(route('grupos-investigacion.update', grupoInvestigacion.id), {
+            $form.post(route('grupos-investigacion.update', grupoInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
                 preserveScroll: true,
@@ -77,6 +96,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
                 <div class="mt-4">
+                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                </div>
+
+                <div class="mt-4">
                     <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
@@ -101,13 +125,74 @@
                     <Select id="categoria_minciencias" items={categoriasMinciencias} bind:selectedValue={$form.categoria_minciencias} error={errors.categoria_minciencias} autocomplete="off" placeholder="Seleccione una categoría Minciencias" required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                <div class="mt-4 ">
+                    <Label required labelFor="fecha_creacion_grupo" value="Fecha creación del semillero" />
+                    <Input id="fecha_creacion_grupo" type="date" class="mt-1" bind:value={$form.fecha_creacion_grupo} required />
                 </div>
+
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="mision" value="Misión" />
-                    <Textarea label="Misión" maxlength="40000" id="mision" bind:value={$form.mision} error={errors.mision} required />
+                    <Label required labelFor="nombre_lider_grupo" value="Nombre del líder del semillero" />
+                    <Input id="nombre_lider_grupo" type="text" class="mt-1" bind:value={$form.nombre_lider_grupo} error={errors.nombre_lider_grupo} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="email_contacto" value="Email de contacto" />
+                    <Input id="email_contacto" type="email" class="mt-1" bind:value={$form.email_contacto} error={errors.email_contacto} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="reconocimientos_grupo_investigacion" value="Reconocimientos semillero de investigación" />
+                    <Textarea maxlength="40000" id="reconocimientos_grupo_investigacion" bind:value={$form.reconocimientos_grupo_investigacion} error={errors.reconocimientos_grupo_investigacion} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="vision" value="Visión" />
+                    <Textarea maxlength="40000" id="vision" bind:value={$form.vision} error={errors.vision} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="mision" value="Misión" />
+                    <Textarea maxlength="40000" id="mision" bind:value={$form.mision} error={errors.mision} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="objetivo_general" value="Objetivo general" />
+                    <Textarea maxlength="40000" id="objetivo_general" bind:value={$form.objetivo_general} error={errors.objetivo_general} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="objetivos_especificos" value="Objetivos específicos " />
+                    <Textarea maxlength="40000" id="objetivos_especificos" bind:value={$form.objetivos_especificos} error={errors.objetivos_especificos} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="programa_nal_ctei_principal" value="Programa Nal. CTeI (Principal)" />
+                    <Input id="programa_nal_ctei_principal" type="text" class="mt-1" bind:value={$form.programa_nal_ctei_principal} error={errors.programa_nal_ctei_principal} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="programa_nal_ctei_secundaria" value="Programa Nal. CTeI (Secundaria)" />
+                    <Input id="programa_nal_ctei_secundaria" type="text" class="mt-1" bind:value={$form.programa_nal_ctei_secundaria} error={errors.programa_nal_ctei_secundaria} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label labelFor="link_propio_grupo" value="Link propio del grupo" />
+                    <Input id="link_propio_grupo" type="url" class="mt-1" bind:value={$form.link_propio_grupo} error={errors.link_propio_grupo} />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" for="redes_conocimiento" value="Red o redes de conocimiento afines al Grupo de Investigación" />
+                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.municipios} placeholder="Buscar redes de conocimiento" required />
+                </div>
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="GIC – F – 020" />
+                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
+                </div>
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="GIC – F – 032" />
+                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

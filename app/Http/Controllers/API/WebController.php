@@ -40,18 +40,19 @@ class WebController extends Controller
     {
         return redirect()->route('login');
     }
-    
+
     public function dashboard()
     {
         return Inertia::render('Dashboard');
     }
 
-    public function centrosFormacion(){
+    public function centrosFormacion()
+    {
         return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get());
     }
 
     // Trae los centros de formación - Cultura innovación
-    public function culturaInnovacionCentrosFormacion($value='')
+    public function culturaInnovacionCentrosFormacion($value = '')
     {
         return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')
             ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
@@ -75,7 +76,8 @@ class WebController extends Controller
     }
 
     // Trae las actividades por resultado
-    public function resultadosActividades($resultado) {
+    public function resultadosActividades($resultado)
+    {
         return response(Actividad::select('actividades.id', 'actividades.descripcion', 'actividades.resultado_id')
             ->where('actividades.resultado_id', $resultado)
             ->distinct()
@@ -83,7 +85,8 @@ class WebController extends Controller
     }
 
     // Trae los conceptos internos SENA
-    public function segundoGrupoPresupuestal($lineaProgramatica) {
+    public function segundoGrupoPresupuestal($lineaProgramatica)
+    {
         return response(SegundoGrupoPresupuestal::select('segundo_grupo_presupuestal.id as value', 'segundo_grupo_presupuestal.nombre as label')
             ->join('presupuesto_sennova', 'segundo_grupo_presupuestal.id', 'presupuesto_sennova.segundo_grupo_presupuestal_id')
             ->where('presupuesto_sennova.linea_programatica_id', $lineaProgramatica)
@@ -93,7 +96,8 @@ class WebController extends Controller
             ->get());
     }
 
-    public function tercerGrupoPresupuestal($segundoGrupoPresupuestal) {
+    public function tercerGrupoPresupuestal($segundoGrupoPresupuestal)
+    {
         return response(TercerGrupoPresupuestal::selectRaw('DISTINCT(tercer_grupo_presupuestal.id) as value, tercer_grupo_presupuestal.nombre as label')
             ->join('presupuesto_sennova', 'tercer_grupo_presupuestal.id', 'presupuesto_sennova.tercer_grupo_presupuestal_id')
             ->where('presupuesto_sennova.segundo_grupo_presupuestal_id', $segundoGrupoPresupuestal)
@@ -101,7 +105,8 @@ class WebController extends Controller
     }
 
     // Trae los usos presupuestales
-    public function usosPresupuestales($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal) {
+    public function usosPresupuestales($convocatoria, $lineaProgramatica, $segundoGrupoPresupuestal, $tercerGrupoPresupuestal)
+    {
         return response(PresupuestoSennova::select('convocatoria_presupuesto.id as value', 'usos_presupuestales.descripcion as label', 'usos_presupuestales.codigo', 'presupuesto_sennova.requiere_estudio_mercado', 'presupuesto_sennova.mensaje')
             ->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')
             ->join('convocatoria_presupuesto', 'presupuesto_sennova.id', 'convocatoria_presupuesto.presupuesto_sennova_id')
@@ -112,7 +117,8 @@ class WebController extends Controller
             ->orderBy('usos_presupuestales.descripcion', 'ASC')->get());
     }
 
-    public function rolesSennova($convocatoria, $proyectoId, $lineaProgramatica) {
+    public function rolesSennova($convocatoria, $proyectoId, $lineaProgramatica)
+    {
         $proyecto = Proyecto::find($proyectoId);
         if ($proyecto->servicioTecnologico()->exists()) {
             $rol = '';
@@ -171,7 +177,8 @@ class WebController extends Controller
      * Programas de formación
      * 
      */
-    public function programasFormacion($centroFormacion) {
+    public function programasFormacion($centroFormacion)
+    {
         return response(ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $centroFormacion)->orderBy('nombre', 'ASC')->get());
     }
 
@@ -179,7 +186,8 @@ class WebController extends Controller
      * Programas de formación articulados
      * 
      */
-    public function programasFormacionArticulados(){
+    public function programasFormacionArticulados()
+    {
         return response(ProgramaFormacionArticulado::selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')
             ->orderBy('nombre', 'ASC')->get());
     }
@@ -188,7 +196,8 @@ class WebController extends Controller
      * Estados de sistema de gestión
      * 
      */
-    public function estadosSistemaGestion($tipoProyectoSt) {
+    public function estadosSistemaGestion($tipoProyectoSt)
+    {
         $tipoProyectoStInfo = TipoProyectoSt::find($tipoProyectoSt);
         return response(EstadoSistemaGestion::selectRaw("id as value, CASE tipo_proyecto
             WHEN '1' THEN   concat(estados_sistema_gestion.estado, chr(10), '∙ Tipo A')
@@ -196,27 +205,38 @@ class WebController extends Controller
         END as label")->where('tipo_proyecto', $tipoProyectoStInfo->tipo_proyecto)->orderBy('id', 'ASC')->get());
     }
 
-     /**
+    /**
      * Regionales
      * 
      * Trae las regiones
      */
-    public function regiones() {
+    public function regiones()
+    {
         return response(Region::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
     /**
      * Trae las regionales
      */
-    public function regionales() {
+    public function regionales()
+    {
         return response(Regional::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
     /**
      * Trae los centros de formación por regional
      */
-    public function centrosFormacionRegional($regional) {
+    public function centrosFormacionRegional($regional)
+    {
         return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $regional)->orderBy('centros_formacion.nombre', 'ASC')->get());
+    }
+
+    /**
+     * Trae los centros de formación por grupo de investigación
+     */
+    public function centrosFormacionGrupoInvestigacion(GrupoInvestigacion $grupoInvestigacion)
+    {
+        return response(CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.id', $grupoInvestigacion->centro_formacion_id)->orderBy('centros_formacion.nombre', 'ASC')->first());
     }
 
     /**
@@ -224,7 +244,8 @@ class WebController extends Controller
      * 
      * Trae los subdirectores
      */
-    function subdirectores($rol) {
+    function subdirectores($rol)
+    {
         return response(User::select('users.id as value', 'users.nombre as label')
             ->join('model_has_roles', 'users.id', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', 'roles.id')
@@ -238,7 +259,8 @@ class WebController extends Controller
      * Trae los grupos de investigación
      * 
      */
-    public function gruposInvestigacion() {
+    public function gruposInvestigacion()
+    {
         return response(GrupoInvestigacion::selectRaw('grupos_investigacion.id as value, concat(grupos_investigacion.nombre, chr(10), \'∙ Acrónimo: \', grupos_investigacion.acronimo, chr(10), \'∙ Centro de formación: \', centros_formacion.nombre, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get());
     }
 
@@ -247,12 +269,14 @@ class WebController extends Controller
      * 
      * Trae las líneas de investigación
      */
-    public function lineasInvestigacion($centroFormacion) {
+    public function lineasInvestigacion($centroFormacion)
+    {
         return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
     }
 
     //municipios
-    public function municipios() {
+    public function municipios()
+    {
         return response(Municipio::select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')
             ->join('regionales', 'regionales.id', 'municipios.regional_id')
             ->get());
@@ -263,7 +287,8 @@ class WebController extends Controller
      * 
      * Trae las Tecnoacademias
      */
-    public function tecnoacademias() {
+    public function tecnoacademias()
+    {
         return response(Tecnoacademia::select('tecnoacademias.id as value', 'tecnoacademias.nombre as label')->get());
     }
 
@@ -272,7 +297,8 @@ class WebController extends Controller
      * 
      * Trae las tecnoacademias por centro de formacion
      */
-    public function tecnoacademiasCentroFormacion($centroFormacion) {
+    public function tecnoacademiasCentroFormacion($centroFormacion)
+    {
         return response(Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN   concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN   concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
@@ -287,7 +313,8 @@ class WebController extends Controller
      * 
      * Trae las líneas tecnoacademia
      */
-    public function líneasTecnoacademia($tecnoacademia) {
+    public function líneasTecnoacademia($tecnoacademia)
+    {
         return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());
     }
 
@@ -296,7 +323,8 @@ class WebController extends Controller
      * 
      * Trae los nodos tecnoparque
      */
-    public function nodosTecnoparque($centroFormacion) {
+    public function nodosTecnoparque($centroFormacion)
+    {
         return response(NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->where('nodos_tecnoparque.centro_formacion_id', $centroFormacion)->get());
     }
 
@@ -305,7 +333,8 @@ class WebController extends Controller
      * 
      * Trae las líneas programáticas
      */
-    public function líneasProgramaticas($categoriaProyecto) {
+    public function líneasProgramaticas($categoriaProyecto)
+    {
         if ($categoriaProyecto) {
             return response(LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')
                 ->where('lineas_programaticas.categoria_proyecto', 'ilike', '%' . $categoriaProyecto . '%')
@@ -321,7 +350,8 @@ class WebController extends Controller
      * 
      * Trae las redes de conocimiento 
      */
-    public function redesConocimiento() {
+    public function redesConocimiento()
+    {
         return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
@@ -330,7 +360,8 @@ class WebController extends Controller
      * 
      * Trae las áreas de conocimiento
      */
-    public function areasConocimiento() {
+    public function areasConocimiento()
+    {
         return response(AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
@@ -339,7 +370,8 @@ class WebController extends Controller
      * 
      * Trae las subáreas de conocimiento
      */
-    public function subareasConocimiento($areaConocimiento) {
+    public function subareasConocimiento($areaConocimiento)
+    {
         return response(SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label')->where('subareas_conocimiento.area_conocimiento_id', $areaConocimiento)->orderBy('nombre', 'ASC')->get());
     }
 
@@ -348,7 +380,8 @@ class WebController extends Controller
      * 
      * Trae las disciplinas de subáreas de conocimiento
      */
-    public function disciplinasSubareaConocimiento($subareaConocimiento) {
+    public function disciplinasSubareaConocimiento($subareaConocimiento)
+    {
         return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->where('disciplinas_subarea_conocimiento.subarea_conocimiento_id', $subareaConocimiento)->orderBy('nombre', 'ASC')->get());
     }
 
@@ -357,7 +390,8 @@ class WebController extends Controller
      * 
      * Trae los actividades económicas
      */
-    public function actividadesEconomicas() {
+    public function actividadesEconomicas()
+    {
         return response(ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
@@ -366,7 +400,8 @@ class WebController extends Controller
      * 
      * Trae las temáticas estrategicas SENA
      */
-    public function tematicasEstrategicas() {
+    public function tematicasEstrategicas()
+    {
         return response(TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('nombre', 'ASC')->get());
     }
 
@@ -375,7 +410,8 @@ class WebController extends Controller
      * 
      * Trae las subtipologías Minciencias
      */
-    public function subtipologiasMinciencias() {
+    public function subtipologiasMinciencias()
+    {
         return response(SubtipologiaMinciencias::selectRaw('subtipologias_minciencias.id as value, concat(subtipologias_minciencias.nombre, chr(10), \'∙ Tipología Minciencias: \', tipologias_minciencias.nombre) as label')->join('tipologias_minciencias', 'subtipologias_minciencias.tipologia_minciencias_id', 'tipologias_minciencias.id')->orderBy('subtipologias_minciencias.nombre')->get());
     }
 }

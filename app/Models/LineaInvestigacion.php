@@ -107,6 +107,16 @@ class LineaInvestigacion extends Model
     }
 
     /**
+     * Relationship with ProgramaFormacion
+     *
+     * @return object
+     */
+    public function programasFormacion()
+    {
+        return $this->belongsToMany(ProgramaFormacion::class, 'linea_investigacion_programa_formacion', 'linea_investigacion_id', 'programa_formacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -231,7 +231,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('tecnoacademias', TecnoacademiaController::class)->parameters(['tecnoacademias' => 'tecnoacademia'])->except(['show']);
 
     /**
-     * Líneas tecnoacadedmia
+     * Líneas tecnoacademia
      * 
      */
     Route::resource('lineas-tecnoacademia', LineaTecnoacademiaController::class)->parameters(['lineas-tecnoacademia' => 'linea-tecnoacademia'])->except(['show']);
@@ -249,6 +249,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::get('web-api/grupos-investigacion', [WebController::class, 'gruposInvestigacion'])->name('web-api.grupos-investigacion');
+
+    Route::get('web-api/centros-formacion-grupo-investigacion/{grupo_investigacion}', [WebController::class, 'centrosFormacionGrupoInvestigacion'])->name('web-api.centros-formacion-grupo-investigacion');
 
     Route::resource('lineas-investigacion', LineaInvestigacionController::class)->parameters(['lineas-investigacion' => 'linea-investigacion'])->except(['show']);
 

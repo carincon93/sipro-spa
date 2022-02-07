@@ -39,12 +39,12 @@ class GrupoInvestigacionRequest extends FormRequest
                 'email_contacto'                        => ['required', 'max:191', 'email'],
                 'programa_nal_ctei_principal'           => ['required', 'string', 'max:191'],
                 'programa_nal_ctei_secundaria'          => ['required', 'string', 'max:191'],
-                'reconocimientos_grupos_investigacion'  => ['required', 'string'],
+                'reconocimientos_grupo_investigacion'   => ['required', 'string'],
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
                 'link_propio_grupo'                     => ['nullable', 'url'],
-                'gic_f_020'                             => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-                'gic_f_032'                             => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'formato_gic_f_020'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'formato_gic_f_032'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
             ];
         } else {
             return [
@@ -62,12 +62,12 @@ class GrupoInvestigacionRequest extends FormRequest
                 'email_contacto'                        => ['required', 'max:191', 'email'],
                 'programa_nal_ctei_principal'           => ['required', 'string', 'max:191'],
                 'programa_nal_ctei_secundaria'          => ['required', 'string', 'max:191'],
-                'reconocimientos_grupos_investigacion'  => ['required', 'string'],
+                'reconocimientos_grupo_investigacion'   => ['required', 'string'],
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
-                'link_propio_grupo'                     => ['nullabel', 'url'],
-                'gic_f_020'                             => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-                'gic_f_032'                             => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'link_propio_grupo'                     => ['nullable', 'url'],
+                'formato_gic_f_020'                     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'formato_gic_f_032'                     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
             ];
         }
     }
@@ -94,5 +94,21 @@ class GrupoInvestigacionRequest extends FormRequest
         $this->merge([
             'email' => mb_strtolower($this->email),
         ]);
+
+        if (is_array($this->redes_conocimiento)) {
+            if (isset($this->redes_conocimiento['value']) && is_numeric($this->redes_conocimiento['value'])) {
+                $this->merge([
+                    'redes_conocimiento' => $this->redes_conocimiento['value'],
+                ]);
+            } else {
+                $redes_conocimiento = [];
+                foreach ($this->redes_conocimiento as $red_conocimiento) {
+                    if (is_array($red_conocimiento)) {
+                        array_push($redes_conocimiento, $red_conocimiento['value']);
+                    }
+                }
+                $this->merge(['redes_conocimiento' => $redes_conocimiento]);
+            }
+        }
     }
 }

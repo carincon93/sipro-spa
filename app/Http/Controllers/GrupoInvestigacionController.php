@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GrupoInvestigacionRequest;
 use App\Models\GrupoInvestigacion;
+use App\Models\RedConocimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -38,6 +39,7 @@ class GrupoInvestigacionController extends Controller
 
         return Inertia::render('GruposInvestigacion/Create', [
             'categoriasMinciencias' => json_decode(Storage::get('json/categorias-minciencias.json'), true),
+            'redesConocimiento'     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
         ]);
     }
 
@@ -65,32 +67,32 @@ class GrupoInvestigacionController extends Controller
         $grupoInvestigacion->email_contacto                         = $request->email_contacto;
         $grupoInvestigacion->programa_nal_ctei_principal            = $request->programa_nal_ctei_principal;
         $grupoInvestigacion->programa_nal_ctei_secundaria           = $request->programa_nal_ctei_secundaria;
-        $grupoInvestigacion->reconocimientos_grupos_investigacion   = $request->reconocimientos_grupos_investigacion;
+        $grupoInvestigacion->reconocimientos_grupo_investigacion    = $request->reconocimientos_grupo_investigacion;
         $grupoInvestigacion->objetivo_general                       = $request->objetivo_general;
         $grupoInvestigacion->objetivos_especificos                  = $request->objetivos_especificos;
         $grupoInvestigacion->link_propio_grupo                      = $request->link_propio_grupo;
 
-
-        $nombreArchivoF020 = $this->cleanFileName('gic_f_020', $request->gic_f_020);
-        $gic_f_020 = $request->gic_f_020->storeAs(
+        $nombreArchivoF020 = $this->cleanFileName('formato_gic_f_020', $request->formato_gic_f_020);
+        $formato_gic_f_020 = $request->formato_gic_f_020->storeAs(
             'formatos_grupo_investigacion',
             $nombreArchivoF020
         );
-        $grupoInvestigacion->gic_f_020 = $gic_f_020;
+        $grupoInvestigacion->formato_gic_f_020 = $formato_gic_f_020;
 
-        $nombreArchivoF032 = $this->cleanFileName('gic_f_032', $request->gic_f_032);
-        $gic_f_032 = $request->gic_f_032->storeAs(
+        $nombreArchivoF032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
+        $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
             'formatos_grupo_investigacion',
             $nombreArchivoF032
         );
-        $grupoInvestigacion->gic_f_032 = $gic_f_032;
-
+        $grupoInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
 
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
 
         $grupoInvestigacion->save();
 
-        return redirect()->route('grupos-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
+        $grupoInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
+
+        return redirect()->route('lineas-investigacion.create', ['grupoInvestigacionId' => $grupoInvestigacion->id])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -115,8 +117,10 @@ class GrupoInvestigacionController extends Controller
         $this->authorize('update', [GrupoInvestigacion::class, $grupoInvestigacion]);
 
         return Inertia::render('GruposInvestigacion/Edit', [
-            'grupoInvestigacion'    => $grupoInvestigacion,
-            'categoriasMinciencias' => json_decode(Storage::get('json/categorias-minciencias.json'), true),
+            'grupoInvestigacion'                    => $grupoInvestigacion,
+            'categoriasMinciencias'                 => json_decode(Storage::get('json/categorias-minciencias.json'), true),
+            'redesConocimiento'                     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'redesConocimientoGrupoInvestigacion'   => $grupoInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
         ]);
     }
 
@@ -131,14 +135,47 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('update', [GrupoInvestigacion::class, $grupoInvestigacion]);
 
-        $grupoInvestigacion->nombre                  = $request->nombre;
-        $grupoInvestigacion->acronimo                = $request->acronimo;
-        $grupoInvestigacion->email                   = $request->email;
-        $grupoInvestigacion->enlace_gruplac          = $request->enlace_gruplac;
-        $grupoInvestigacion->codigo_minciencias      = $request->codigo_minciencias;
-        $grupoInvestigacion->categoria_minciencias   = $request->categoria_minciencias;
-        $grupoInvestigacion->mision                  = $request->mision;
+        $grupoInvestigacion->nombre                                 = $request->nombre;
+        $grupoInvestigacion->acronimo                               = $request->acronimo;
+        $grupoInvestigacion->email                                  = $request->email;
+        $grupoInvestigacion->enlace_gruplac                         = $request->enlace_gruplac;
+        $grupoInvestigacion->codigo_minciencias                     = $request->codigo_minciencias;
+        $grupoInvestigacion->categoria_minciencias                  = $request->categoria_minciencias;
+        $grupoInvestigacion->mision                                 = $request->mision;
+        $grupoInvestigacion->vision                                 = $request->vision;
+        $grupoInvestigacion->fecha_creacion_grupo                   = $request->fecha_creacion_grupo;
+        $grupoInvestigacion->nombre_lider_grupo                     = $request->nombre_lider_grupo;
+        $grupoInvestigacion->email_contacto                         = $request->email_contacto;
+        $grupoInvestigacion->programa_nal_ctei_principal            = $request->programa_nal_ctei_principal;
+        $grupoInvestigacion->programa_nal_ctei_secundaria           = $request->programa_nal_ctei_secundaria;
+        $grupoInvestigacion->reconocimientos_grupo_investigacion    = $request->reconocimientos_grupo_investigacion;
+        $grupoInvestigacion->objetivo_general                       = $request->objetivo_general;
+        $grupoInvestigacion->objetivos_especificos                  = $request->objetivos_especificos;
+        $grupoInvestigacion->link_propio_grupo                      = $request->link_propio_grupo;
+
+        if ($request->hasFile('formato_gic_f_020')) {
+            $formato_gic_f_020 = $this->cleanFileName('formato_gic_f_020', $request->formato_gic_f_020);
+            Storage::delete($grupoInvestigacion->formato_gic_f_020);
+            $formato_gic_f_020 = $request->formato_gic_f_020->storeAs(
+                'formatos_grupo_investigacion',
+                $formato_gic_f_020
+            );
+            $grupoInvestigacion->formato_gic_f_020 = $formato_gic_f_020;
+        }
+
+        if ($request->hasFile('formato_gic_f_032')) {
+            $formato_gic_f_032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
+            Storage::delete($grupoInvestigacion->formato_gic_f_032);
+            $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
+                'formatos_grupo_investigacion',
+                $formato_gic_f_032
+            );
+            $grupoInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
+        }
+
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
+
+        $grupoInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
 
         $grupoInvestigacion->save();
 

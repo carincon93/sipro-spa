@@ -41,5 +41,21 @@ class LineaInvestigacionRequest extends FormRequest
                 'grupo_investigacion_id' => $this->grupo_investigacion_id['value'],
             ]);
         }
+
+        if (is_array($this->programas_formacion)) {
+            if (isset($this->programas_formacion['value']) && is_numeric($this->programas_formacion['value'])) {
+                $this->merge([
+                    'programas_formacion' => $this->programas_formacion['value'],
+                ]);
+            } else {
+                $programas_formacion = [];
+                foreach ($this->programas_formacion as $programa_formacion) {
+                    if (is_array($programa_formacion)) {
+                        array_push($programas_formacion, $programa_formacion['value']);
+                    }
+                }
+                $this->merge(['programas_formacion' => $programas_formacion]);
+            }
+        }
     }
 }

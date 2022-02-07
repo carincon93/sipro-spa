@@ -65,6 +65,16 @@ class RedConocimiento extends Model
     }
 
     /**
+     * Relationship with GrupoInvestigacion
+     *
+     * @return object
+     */
+    public function gruposInvestigacion()
+    {
+        return $this->belongsToMany(GrupoInvestigacion::class, 'grupo_investigacion_red_conocimiento', 'red_conocimiento_id', 'grupo_investigacion_id');
+    }
+
+    /**
      * Relationship with AmbienteModernizacion
      *
      * @return object
