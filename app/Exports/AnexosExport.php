@@ -43,7 +43,7 @@ class AnexosExport implements FromCollection, WithHeadings, WithMapping, WithSty
     {
         return [
             'SGPS-' . ($proyectoAnexo->proyecto_id + 8000),
-            config('app.url') . ' convocatorias/' . $this->convocatoria->id . '/proyectos/' . $proyectoAnexo->proyecto_id . '/proyecto-anexos/' . $proyectoAnexo->id . '/download',
+            config('app.url') . '/convocatorias/' . $this->convocatoria->id . '/proyectos/' . $proyectoAnexo->proyecto_id . '/proyecto-anexos/' . $proyectoAnexo->id . '/download',
         ];
     }
 
