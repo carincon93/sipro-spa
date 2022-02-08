@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Convocatoria;
 use App\Models\CulturaInnovacion;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -96,7 +97,8 @@ class GeneralidadesCulturaInnovacionExport implements FromCollection, WithHeadin
             $culturaInnovacion->relacionado_mesas_sectoriales == 1 ? 'Si' : ($culturaInnovacion->relacionado_mesas_sectoriales == 2 ? 'No' : 'No aplica'),
             $culturaInnovacion->relacionado_tecnoacademia == 1 ? 'Si' : ($culturaInnovacion->relacionado_tecnoacademia == 2 ? 'No' : 'No aplica'),
             $culturaInnovacion->bibliografia,
-            $culturaInnovacion->numero_aprendices
+            $culturaInnovacion->numero_aprendices,
+            $this->mapParticipantes($culturaInnovacion->proyecto->participantes),
         ];
     }
 
@@ -141,6 +143,7 @@ class GeneralidadesCulturaInnovacionExport implements FromCollection, WithHeadin
             'Relacionado con la TecnoAcademia',
             'Bibliografía',
             'Número de aprendices',
+            'Participantes'
         ];
     }
 
@@ -170,5 +173,22 @@ class GeneralidadesCulturaInnovacionExport implements FromCollection, WithHeadin
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
         ];
+    }
+
+    private function mapParticipantes($participantes)
+    {
+        $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
+        $mapParticipantes = [];
+
+        foreach ($participantes as $participante) {
+            array_push($mapParticipantes, [
+                'nombre' => strtr(utf8_decode($participante->nombre), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'),
+                'documento' => $participante->numero_documento,
+                'vinculacion' => $participante->tipo_vinculacion_text,
+                'meses' => $participante->pivot->cantidad_meses,
+                'horas' => $participante->pivot->cantidad_horas,
+            ]);
+        }
+        return $mapParticipantes;
     }
 }

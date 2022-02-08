@@ -126,7 +126,6 @@
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                 <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Proyectos TP</p></td>
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Cultura de innovación</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
