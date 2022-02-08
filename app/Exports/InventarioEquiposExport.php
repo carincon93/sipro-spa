@@ -30,24 +30,24 @@ class InventarioEquiposExport implements FromCollection, WithHeadings, WithMappi
     }
 
     /**
-     * @var Invoice $invetarioEquipo
+     * @var Invoice $inventarioEquipo
      */
-    public function map($invetarioEquipo): array
+    public function map($inventarioEquipo): array
     {
         return [
-            $invetarioEquipo->proyecto->codigo,
-            $invetarioEquipo->nombre,
-            $invetarioEquipo->marca,
-            $invetarioEquipo->serial,
-            $invetarioEquipo->codigo_interno,
-            $invetarioEquipo->fecha_adquisicion,
-            $invetarioEquipo->estado_formateado,
-            $invetarioEquipo->uso_st == '1' ? 'Si' : 'No',
-            $invetarioEquipo->uso_otra_dependencia == '1' ? 'Si' : 'No',
-            $invetarioEquipo->dependencia ? $invetarioEquipo->dependencia : 'N/A',
-            $invetarioEquipo->descripcion,
-            $invetarioEquipo->mantenimiento_prox_year == '1' ? 'Si' : 'No',
-            $invetarioEquipo->calibracion_prox_year == '1' ? 'Si' : 'No',
+            $inventarioEquipo->proyecto->codigo,
+            $inventarioEquipo->nombre,
+            $inventarioEquipo->marca,
+            $inventarioEquipo->serial,
+            $inventarioEquipo->codigo_interno,
+            $inventarioEquipo->fecha_adquisicion,
+            $inventarioEquipo->estado_formateado,
+            $inventarioEquipo->uso_st == '1' ? 'Si' : 'No',
+            $inventarioEquipo->uso_otra_dependencia == '1' ? 'Si' : 'No',
+            $inventarioEquipo->dependencia ? $inventarioEquipo->dependencia : 'N/A',
+            $inventarioEquipo->descripcion,
+            $inventarioEquipo->mantenimiento_prox_year == '1' ? 'Si' : 'No',
+            $inventarioEquipo->calibracion_prox_year == '1' ? 'Si' : 'No',
         ];
     }
 

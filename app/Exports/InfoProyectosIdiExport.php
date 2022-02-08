@@ -40,7 +40,7 @@ class InfoProyectosIdiExport implements WithMultipleSheets, WithTitle
         $sheets[] = new ProductosIdiExport($this->convocatoria);
         $sheets[] = new MunicipiosImpactadosExport($this->convocatoria, [1, 2, 29, 3]);
         $sheets[] = new ProgramasFormacionArticuladosExport($this->convocatoria);
-        $sheets[] = new ProgramasFormacionCalificadosExport($this->convocatoria);
+        $sheets[] = new ProgramasFormacionCalificadosExport($this->convocatoria, [1, 2, 29, 3]);
         $sheets[] = new EntidadesAliadasIdiExport($this->convocatoria);
 
         return $sheets;

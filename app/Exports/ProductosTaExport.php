@@ -18,9 +18,10 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -34,7 +35,7 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
             ->join('objetivos_especificos', 'resultados.objetivo_especifico_id', 'objetivos_especificos.id')
             ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
             ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', 5)
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

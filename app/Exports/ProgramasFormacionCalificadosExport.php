@@ -18,9 +18,10 @@ class ProgramasFormacionCalificadosExport implements FromCollection, WithHeading
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -41,7 +42,15 @@ class ProgramasFormacionCalificadosExport implements FromCollection, WithHeading
             WHEN '5' THEN 'Auxiliar'
             WHEN '6' THEN 'Operario'
             WHEN '7' THEN 'Profundización técnica'
-            END as nivel_formacion, regionales.nombre as nombre_regional, centros_formacion.codigo as codigo_centro, centros_formacion.nombre as nombre_centro, lineas_programaticas.nombre as nombre_linea, lineas_programaticas.codigo as codigo_linea, proyectos.id as proyecto_id")->join('proyecto_programa_formacion_impactados', 'programas_formacion.id', 'proyecto_programa_formacion_impactados.programa_formacion_id')->join('proyectos', 'proyecto_programa_formacion_impactados.proyecto_id', 'proyectos.id')->join('lineas_programaticas', 'proyectos.linea_programatica_id', 'lineas_programaticas.id')->join('centros_formacion', 'proyectos.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
+            END as nivel_formacion, regionales.nombre as nombre_regional, centros_formacion.codigo as codigo_centro, centros_formacion.nombre as nombre_centro, lineas_programaticas.nombre as nombre_linea, lineas_programaticas.codigo as codigo_linea, proyectos.id as proyecto_id")
+            ->join('proyecto_programa_formacion_impactados', 'programas_formacion.id', 'proyecto_programa_formacion_impactados.programa_formacion_id')
+            ->join('proyectos', 'proyecto_programa_formacion_impactados.proyecto_id', 'proyectos.id')
+            ->join('lineas_programaticas', 'proyectos.linea_programatica_id', 'lineas_programaticas.id')
+            ->join('centros_formacion', 'proyectos.centro_formacion_id', 'centros_formacion.id')
+            ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->where('proyectos.convocatoria_id', $this->convocatoria->id)
+            ->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**
