@@ -11,6 +11,7 @@ use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
 use App\Exports\InfoProyectosExport;
 use App\Exports\InfoProyectosIdiExport;
+use App\Exports\InfoProyectosCulturaInnovacionExport;
 use App\Exports\InfoProyectosTaExport;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
@@ -115,5 +116,15 @@ class ReporteController extends Controller
     public function proyectosIdiExport(Convocatoria $convocatoria)
     {
         return Excel::download(new InfoProyectosIdiExport($convocatoria), 'proyectos-idi' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosCulturaInnovacionExportExport
+     *
+     * @return void
+     */
+    public function proyectosCulturaInnovacionExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosCulturaInnovacionExport($convocatoria), 'proyectosCulturaInnovacion' . time() . '.xlsx');
     }
 }
