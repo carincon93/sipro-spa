@@ -28,7 +28,13 @@ class TematicasEstrategicasTaExport implements FromCollection, WithHeadings, Wit
      */
     public function collection()
     {
-        return TematicaEstrategica::select('tematicas_estrategicas.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')->join('ta_tematica_estrategica', 'tematicas_estrategicas.id', 'ta_tematica_estrategica.tematica_estrategica_id')->join('ta', 'ta_tematica_estrategica.ta_id', 'ta.id')->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return TematicaEstrategica::select('tematicas_estrategicas.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')
+            ->join('ta_tematica_estrategica', 'tematicas_estrategicas.id', 'ta_tematica_estrategica.tematica_estrategica_id')
+            ->join('ta', 'ta_tematica_estrategica.ta_id', 'ta.id')
+            ->join('proyectos', 'ta.id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

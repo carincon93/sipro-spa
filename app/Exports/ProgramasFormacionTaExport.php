@@ -28,7 +28,12 @@ class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMa
      */
     public function collection()
     {
-        return ProgramaFormacion::select('programas_formacion.*', 'proyectos.id as proyecto_id')->join('ta_programa_formacion', 'programas_formacion.id', 'ta_programa_formacion.programa_formacion_id')->join('proyectos', 'ta_programa_formacion.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return ProgramaFormacion::select('programas_formacion.*', 'proyectos.id as proyecto_id')
+            ->join('ta_programa_formacion', 'programas_formacion.id', 'ta_programa_formacion.programa_formacion_id')
+            ->join('proyectos', 'ta_programa_formacion.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

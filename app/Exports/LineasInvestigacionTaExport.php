@@ -18,9 +18,9 @@ class LineasInvestigacionTaExport implements FromCollection, WithHeadings, WithM
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
-        $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,7 +28,14 @@ class LineasInvestigacionTaExport implements FromCollection, WithHeadings, WithM
      */
     public function collection()
     {
-        return LineaInvestigacion::select('lineas_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')->join('proyecto_linea_investigacion', 'lineas_investigacion.id', 'proyecto_linea_investigacion.linea_investigacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('proyectos', 'proyecto_linea_investigacion.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return LineaInvestigacion::select('lineas_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')
+            ->join('proyecto_linea_investigacion', 'lineas_investigacion.id', 'proyecto_linea_investigacion.linea_investigacion_id')
+            ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
+            ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
+            ->join('proyectos', 'proyecto_linea_investigacion.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

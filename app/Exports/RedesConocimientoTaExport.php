@@ -28,7 +28,12 @@ class RedesConocimientoTaExport implements FromCollection, WithHeadings, WithMap
      */
     public function collection()
     {
-        return RedConocimiento::select('redes_conocimiento.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')->join('ta_red_conocimiento', 'redes_conocimiento.id', 'ta_red_conocimiento.red_conocimiento_id')->join('ta', 'ta_red_conocimiento.ta_id', 'ta.id')->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return RedConocimiento::select('redes_conocimiento.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')
+            ->join('ta_red_conocimiento', 'redes_conocimiento.id', 'ta_red_conocimiento.red_conocimiento_id')
+            ->join('ta', 'ta_red_conocimiento.ta_id', 'ta.id')
+            ->join('proyectos', 'ta.id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**

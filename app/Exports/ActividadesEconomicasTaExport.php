@@ -28,7 +28,13 @@ class ActividadesEconomicasTaExport implements FromCollection, WithHeadings, Wit
      */
     public function collection()
     {
-        return ActividadEconomica::select('actividades_economicas.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')->join('ta_actividad_economica', 'actividades_economicas.id', 'ta_actividad_economica.actividad_economica_id')->join('ta', 'ta_actividad_economica.ta_id', 'ta.id')->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return ActividadEconomica::select('actividades_economicas.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')
+            ->join('ta_actividad_economica', 'actividades_economicas.id', 'ta_actividad_economica.actividad_economica_id')
+            ->join('ta', 'ta_actividad_economica.ta_id', 'ta.id')
+            ->join('proyectos', 'ta.id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

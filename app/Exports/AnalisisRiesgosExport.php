@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class AnalisisRiesgosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,7 +29,11 @@ class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function collection()
     {
-        return AnalisisRiesgo::select('analisis_riesgos.*', 'proyectos.id as proyecto_id')->join('proyectos', 'analisis_riesgos.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return AnalisisRiesgo::select('analisis_riesgos.*', 'proyectos.id as proyecto_id')
+            ->join('proyectos', 'analisis_riesgos.id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

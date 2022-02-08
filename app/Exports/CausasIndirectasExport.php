@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\Impacto;
+use App\Models\CausaIndirecta;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ImpactosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class CausasIndirectasExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,25 +29,22 @@ class ImpactosTaExport implements FromCollection, WithHeadings, WithMapping, Wit
      */
     public function collection()
     {
-        return Impacto::selectRaw("impactos.*, proyectos.id as proyecto_id, CASE impactos.tipo
-            WHEN '1' THEN 'Impacto social'
-            WHEN '2' THEN 'Impacto tecnológico'
-            WHEN '3' THEN 'Impacto económico'
-            WHEN '4' THEN 'Impacto ambiental'
-            WHEN '5' THEN 'Impacto en el centro de formación'
-            WHEN '6' THEN 'Impacto en el sector productivo'
-            END as tipo")->join('efectos_indirectos', 'impactos.efecto_indirecto_id', 'efectos_indirectos.id')->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return CausaIndirecta::select('causas_indirectas.*', 'proyectos.id as proyecto_id')
+            ->join('causas_directas', 'causas_indirectas.causa_directa_id', 'causas_directas.id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $impacto
+     * @var Invoice $efectoIndirecto
      */
-    public function map($impacto): array
+    public function map($efectoIndirecto): array
     {
         return [
-            'SGPS-' . ($impacto->proyecto_id + 8000),
-            $impacto->tipo,
-            $impacto->descripcion,
+            'SGPS-' . ($efectoIndirecto->proyecto_id + 8000),
+            $efectoIndirecto->descripcion,
         ];
     }
 
@@ -54,7 +52,6 @@ class ImpactosTaExport implements FromCollection, WithHeadings, WithMapping, Wit
     {
         return [
             'Código del proyecto',
-            'Tipo',
             'Descripción',
         ];
     }
@@ -69,13 +66,13 @@ class ImpactosTaExport implements FromCollection, WithHeadings, WithMapping, Wit
      */
     public function title(): string
     {
-        return 'Impactos';
+        return 'Causas indirectas';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Impactos',
+            'title' => 'Causas indirectas',
         ];
     }
 

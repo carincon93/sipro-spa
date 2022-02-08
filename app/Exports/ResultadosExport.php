@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ResultadosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class ResultadosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,7 +29,12 @@ class ResultadosTaExport implements FromCollection, WithHeadings, WithMapping, W
      */
     public function collection()
     {
-        return Resultado::select('resultados.*', 'proyectos.id as proyecto_id')->join('efectos_directos', 'resultados.efecto_directo_id', 'efectos_directos.id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return Resultado::select('resultados.*', 'proyectos.id as proyecto_id')
+            ->join('efectos_directos', 'resultados.efecto_directo_id', 'efectos_directos.id')
+            ->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

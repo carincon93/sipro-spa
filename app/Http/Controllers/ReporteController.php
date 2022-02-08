@@ -6,13 +6,15 @@ use App\Exports\ComentariosEvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Inertia\Inertia;
-use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
 use App\Exports\InfoProyectosExport;
+use App\Exports\InfoProyectosIdiExport;
+use App\Exports\InfoProyectosStExport;
+use App\Exports\InfoProyectosCulturaInnovacionExport;
 use App\Exports\InfoProyectosTaExport;
-use App\Exports\ProyectosTaExport;
+use App\Exports\InfoProyectosTpExport;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 
@@ -106,5 +108,44 @@ class ReporteController extends Controller
     public function proyectosTaExport(Convocatoria $convocatoria)
     {
         return Excel::download(new InfoProyectosTaExport($convocatoria), 'proyectos-ta' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosIdiExport
+     *
+     * @return void
+     */
+    public function proyectosIdiExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosIdiExport($convocatoria), 'proyectos-idi' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosTpExport
+     *
+     * @return void
+     */
+    public function proyectosTpExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosTpExport($convocatoria), 'proyectos-tp' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosStExport
+     *
+     * @return void
+     */
+    public function proyectosStExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosStExport($convocatoria), 'proyectos-st' . time() . '.xlsx');
+    }
+
+    /** proyectosCulturaInnovacionExportExport
+     *
+     * @return void
+     */
+    public function proyectosCulturaInnovacionExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosCulturaInnovacionExport($convocatoria), 'proyectosCulturaInnovacion' . time() . '.xlsx');
     }
 }

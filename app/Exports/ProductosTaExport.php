@@ -18,9 +18,10 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,7 +29,15 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
      */
     public function collection()
     {
-        return Producto::select('productos.*', 'producto_ta_tp.*', 'proyectos.id as proyecto_id')->join('producto_ta_tp', 'productos.id', 'producto_ta_tp.producto_id')->join('resultados', 'productos.resultado_id', 'resultados.id')->join('objetivos_especificos', 'resultados.objetivo_especifico_id', 'objetivos_especificos.id')->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return Producto::select('productos.*', 'producto_ta_tp.*', 'proyectos.id as proyecto_id')
+            ->join('producto_ta_tp', 'productos.id', 'producto_ta_tp.producto_id')
+            ->join('resultados', 'productos.resultado_id', 'resultados.id')
+            ->join('objetivos_especificos', 'resultados.objetivo_especifico_id', 'objetivos_especificos.id')
+            ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

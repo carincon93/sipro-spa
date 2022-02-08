@@ -69,7 +69,8 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Label required labelFor="nombre" value="Nombre del semillero" />
+                    <Input id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 {#if isSuperAdmin}
@@ -135,17 +136,17 @@
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f020" value="GIC – F – 020" />
-                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} />
                 </div>
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f032" value="GIC – F – 032" />
-                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} />
                 </div>
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del Semillero" />
-                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

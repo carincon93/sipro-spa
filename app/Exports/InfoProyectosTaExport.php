@@ -26,30 +26,30 @@ class InfoProyectosTaExport implements WithMultipleSheets, WithTitle
         $sheets = [];
 
         $sheets[] = new GeneralidadesTaExport($this->convocatoria);
-        $sheets[] = new GruposInvestigacionTaExport($this->convocatoria);
-        $sheets[] = new SemillerosnvestigacionTaExport($this->convocatoria);
-        $sheets[] = new LineasInvestigacionTaExport($this->convocatoria);
+        $sheets[] = new GruposInvestigacionTaExport($this->convocatoria, 5);
+        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, 5);
+        $sheets[] = new LineasInvestigacionTaExport($this->convocatoria, 5);
         $sheets[] = new DisciplinasSubareaConocimientoTaExport($this->convocatoria);
         $sheets[] = new RedesConocimientoTaExport($this->convocatoria);
         $sheets[] = new TematicasEstrategicasTaExport($this->convocatoria);
         $sheets[] = new ActividadesEconomicasTaExport($this->convocatoria);
         $sheets[] = new ProgramasFormacionTaExport($this->convocatoria);
         $sheets[] = new EdtTaExport($this->convocatoria);
-        $sheets[] = new ProductosTaExport($this->convocatoria);
-        $sheets[] = new AnalisisRiesgosTaExport($this->convocatoria);
+        $sheets[] = new ProductosTaExport($this->convocatoria, 5);
+        $sheets[] = new AnalisisRiesgosExport($this->convocatoria, 5);
         $sheets[] = new EntidadesAliadasTaExport($this->convocatoria);
-        $sheets[] = new AnexosTaExport($this->convocatoria);
-        $sheets[] = new EfectosDirectosTaExport($this->convocatoria);
-        $sheets[] = new EfectosIndirectosTaExport($this->convocatoria);
-        $sheets[] = new CausassDirectasTaExport($this->convocatoria);
-        $sheets[] = new CausasIndirectasTaExport($this->convocatoria);
-        $sheets[] = new ImpactosTaExport($this->convocatoria);
-        $sheets[] = new ResultadosTaExport($this->convocatoria);
-        $sheets[] = new ObjetivosEspecificosTaExport($this->convocatoria);
-        $sheets[] = new ActividadesTaExport($this->convocatoria);
+        $sheets[] = new AnexosExport($this->convocatoria, 5);
+        $sheets[] = new EfectosDirectosExport($this->convocatoria, 5);
+        $sheets[] = new EfectosIndirectosExport($this->convocatoria, 5);
+        $sheets[] = new CausasDirectasExport($this->convocatoria, 5);
+        $sheets[] = new CausasIndirectasExport($this->convocatoria, 5);
+        $sheets[] = new ImpactosExport($this->convocatoria, 5);
+        $sheets[] = new ResultadosExport($this->convocatoria, 5);
+        $sheets[] = new ObjetivosEspecificosExport($this->convocatoria, 5);
+        $sheets[] = new ActividadesExport($this->convocatoria, 5);
         $sheets[] = new DisenoCurricularTaExport($this->convocatoria);
-        $sheets[] = new MunicipiosImpactadosTaExport($this->convocatoria);
-        $sheets[] = new MunicipiosAImpactarTaExport($this->convocatoria);
+        $sheets[] = new MunicipiosImpactadosExport($this->convocatoria, 5);
+        $sheets[] = new MunicipiosAImpactarTaExport($this->convocatoria, 5);
 
         return $sheets;
     }

@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class SemillerosnvestigacionTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class SemillerosnvestigacionExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,7 +29,14 @@ class SemillerosnvestigacionTaExport implements FromCollection, WithHeadings, Wi
      */
     public function collection()
     {
-        return SemilleroInvestigacion::select('semilleros_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('proyecto_semillero_investigacion', 'semilleros_investigacion.id', 'proyecto_semillero_investigacion.semillero_investigacion_id')->join('proyectos', 'proyecto_semillero_investigacion.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return SemilleroInvestigacion::select('semilleros_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')
+            ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
+            ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
+            ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
+            ->join('proyecto_semillero_investigacion', 'semilleros_investigacion.id', 'proyecto_semillero_investigacion.semillero_investigacion_id')
+            ->join('proyectos', 'proyecto_semillero_investigacion.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\EfectoIndirecto;
+use App\Models\EfectoDirecto;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class EfectosIndirectosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class EfectosDirectosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,17 +29,21 @@ class EfectosIndirectosTaExport implements FromCollection, WithHeadings, WithMap
      */
     public function collection()
     {
-        return EfectoIndirecto::select('efectos_indirectos.*', 'proyectos.id as proyecto_id')->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return EfectoDirecto::select('efectos_directos.*', 'proyectos.id as proyecto_id')
+            ->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $efectoIndirecto
+     * @var Invoice $efectoDirecto
      */
-    public function map($efectoIndirecto): array
+    public function map($efectoDirecto): array
     {
         return [
-            'SGPS-' . ($efectoIndirecto->proyecto_id + 8000),
-            $efectoIndirecto->descripcion,
+            'SGPS-' . ($efectoDirecto->proyecto_id + 8000),
+            $efectoDirecto->descripcion,
         ];
     }
 
@@ -60,13 +65,13 @@ class EfectosIndirectosTaExport implements FromCollection, WithHeadings, WithMap
      */
     public function title(): string
     {
-        return 'Efectos indirectos';
+        return 'Efectos directos';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Efectos indirectos',
+            'title' => 'Efectos directos',
         ];
     }
 

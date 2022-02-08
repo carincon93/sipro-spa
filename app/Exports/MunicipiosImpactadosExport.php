@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\EfectoDirecto;
+use App\Models\Municipio;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class MunicipiosImpactadosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,17 +29,22 @@ class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function collection()
     {
-        return EfectoDirecto::select('efectos_directos.*', 'proyectos.id as proyecto_id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return Municipio::select('municipios.*', 'proyectos.id as proyecto_id')
+            ->join('proyecto_municipio', 'municipios.id', 'proyecto_municipio.municipio_id')
+            ->join('proyectos', 'proyecto_municipio.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $efectoDirecto
+     * @var Invoice $municipio
      */
-    public function map($efectoDirecto): array
+    public function map($municipio): array
     {
         return [
-            'SGPS-' . ($efectoDirecto->proyecto_id + 8000),
-            $efectoDirecto->descripcion,
+            'SGPS-' . ($municipio->proyecto_id + 8000),
+            $municipio->nombre,
         ];
     }
 
@@ -46,7 +52,7 @@ class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMappi
     {
         return [
             'Código del proyecto',
-            'Descripción',
+            'Nombre',
         ];
     }
 
@@ -60,13 +66,13 @@ class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function title(): string
     {
-        return 'Efectos directos';
+        return 'Municipios impactados';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Efectos directos',
+            'title' => 'Municipios impactados',
         ];
     }
 

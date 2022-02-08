@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\Municipio;
+use App\Models\ObjetivoEspecifico;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class MunicipiosImpactadosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class ObjetivosEspecificosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,17 +29,22 @@ class MunicipiosImpactadosTaExport implements FromCollection, WithHeadings, With
      */
     public function collection()
     {
-        return Municipio::select('municipios.*', 'proyectos.id as proyecto_id')->join('proyecto_municipio', 'municipios.id', 'proyecto_municipio.municipio_id')->join('proyectos', 'proyecto_municipio.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return ObjetivoEspecifico::select('objetivos_especificos.*', 'proyectos.id as proyecto_id')
+            ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $municipio
+     * @var Invoice $impacto
      */
-    public function map($municipio): array
+    public function map($impacto): array
     {
         return [
-            'SGPS-' . ($municipio->proyecto_id + 8000),
-            $municipio->nombre,
+            'SGPS-' . ($impacto->proyecto_id + 8000),
+            $impacto->descripcion,
         ];
     }
 
@@ -46,7 +52,7 @@ class MunicipiosImpactadosTaExport implements FromCollection, WithHeadings, With
     {
         return [
             'Código del proyecto',
-            'Nombre',
+            'Descripción',
         ];
     }
 
@@ -60,13 +66,13 @@ class MunicipiosImpactadosTaExport implements FromCollection, WithHeadings, With
      */
     public function title(): string
     {
-        return 'Municipios impactados';
+        return 'Objetivos específicos';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Municipios impactados',
+            'title' => 'Objetivos específicos',
         ];
     }
 

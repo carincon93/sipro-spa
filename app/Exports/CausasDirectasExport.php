@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\ProyectoAnexo;
+use App\Models\CausaDirecta;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AnexosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class CausasDirectasExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -28,17 +29,21 @@ class AnexosTaExport implements FromCollection, WithHeadings, WithMapping, WithS
      */
     public function collection()
     {
-        return ProyectoAnexo::select('proyecto_anexo.*', 'proyectos.id as proyecto_id')->join('proyectos', 'proyecto_anexo.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return CausaDirecta::select('causas_directas.*', 'proyectos.id as proyecto_id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $proyectoAnexo
+     * @var Invoice $causaDirecta
      */
-    public function map($proyectoAnexo): array
+    public function map($causaDirecta): array
     {
         return [
-            'SGPS-' . ($proyectoAnexo->proyecto_id + 8000),
-            config('app.url') . ' /convocatorias/' . $this->convocatoria->id . '/proyectos/' . $proyectoAnexo->proyecto_id . '/proyecto-anexos/' . $proyectoAnexo->id . '/download',
+            'SGPS-' . ($causaDirecta->proyecto_id + 8000),
+            $causaDirecta->descripcion,
         ];
     }
 
@@ -46,7 +51,7 @@ class AnexosTaExport implements FromCollection, WithHeadings, WithMapping, WithS
     {
         return [
             'Código del proyecto',
-            'Enlace de descarga',
+            'Descripción',
         ];
     }
 
@@ -60,13 +65,13 @@ class AnexosTaExport implements FromCollection, WithHeadings, WithMapping, WithS
      */
     public function title(): string
     {
-        return 'Anexos';
+        return 'Causas directas';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Anexos',
+            'title' => 'Causas directas',
         ];
     }
 

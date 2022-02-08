@@ -694,6 +694,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('proyectos/{proyecto}/invetario-equipos', [InventarioEquipoController::class, 'inventarioEquiposExcel'])->name('reportes.inventario-equipos');
     Route::get('reportes/convocatoria/{convocatoria}/resumen-presupuesto-aprobado', [ReporteController::class, 'EvaluacionesProyectosPresupuestoExport'])->name('reportes.resumeProyectoPresupuestoAprobado');
     Route::get('reportes/convocatoria/{convocatoria}/proyectos-ta', [ReporteController::class, 'proyectosTaExport'])->name('reportes.proyectos-ta');
+    Route::get('reportes/convocatoria/{convocatoria}/proyectos-idi', [ReporteController::class, 'proyectosIdiExport'])->name('reportes.proyectos-idi');
+    Route::get('reportes/convocatoria/{convocatoria}/proyectos-tp', [ReporteController::class, 'proyectosTpExport'])->name('reportes.proyectos-tp');
+    Route::get('reportes/convocatoria/{convocatoria}/proyectos-st', [ReporteController::class, 'proyectosStExport'])->name('reportes.proyectos-st');
+    Route::get('reportes/convocatoria/{convocatoria}/proyectos-cultura-innovacion', [ReporteController::class, 'proyectosCulturaInnovacionExport'])->name('reportes.proyectos-cultura-innovacion');
+
 
     /**
      * Tokens
