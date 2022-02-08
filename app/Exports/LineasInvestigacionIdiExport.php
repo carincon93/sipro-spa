@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\ProgramaFormacion;
+use App\Models\LineaInvestigacion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,13 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class LineasInvestigacionIdiExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
-        $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,23 +28,25 @@ class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMa
      */
     public function collection()
     {
-        return ProgramaFormacion::select('programas_formacion.*', 'proyectos.id as proyecto_id')
-            ->join('ta_programa_formacion', 'programas_formacion.id', 'ta_programa_formacion.programa_formacion_id')
-            ->join('proyectos', 'ta_programa_formacion.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', 5)
+        return LineaInvestigacion::select('lineas_investigacion.*', 'centros_formacion.nombre as nombre_centro', 'proyectos.id as proyecto_id')
+            ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
+            ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
+            ->join('idi', 'idi.linea_investigacion_id', 'lineas_investigacion.id')
+            ->join('proyectos', 'idi.id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }
 
     /**
-     * @var Invoice $programaFormacion
+     * @var Invoice $lineaInvestigacion
      */
-    public function map($programaFormacion): array
+    public function map($lineaInvestigacion): array
     {
         return [
-            'SGPS-' . ($programaFormacion->proyecto_id + 8000),
-            $programaFormacion->nombre,
-
+            'SGPS-' . ($lineaInvestigacion->proyecto_id + 8000),
+            $lineaInvestigacion->nombre_centro,
+            $lineaInvestigacion->nombre,
         ];
     }
 
@@ -52,6 +54,7 @@ class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMa
     {
         return [
             'Código del proyecto',
+            'Centro de formación',
             'Nombre',
         ];
     }
@@ -66,13 +69,13 @@ class ProgramasFormacionTaExport implements FromCollection, WithHeadings, WithMa
      */
     public function title(): string
     {
-        return 'Programas de formación articulados';
+        return 'Líneas de investigación';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Programas de formación articulados',
+            'title' => 'Líneas de investigación',
         ];
     }
 

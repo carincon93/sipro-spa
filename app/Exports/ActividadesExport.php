@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\AnalisisRiesgo;
 use App\Models\Convocatoria;
+use App\Models\Actividad;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class ActividadesExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,23 +29,25 @@ class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function collection()
     {
-        return AnalisisRiesgo::select('analisis_riesgos.*', 'proyectos.id as proyecto_id')->join('proyectos', 'analisis_riesgos.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return Actividad::select('actividades.*', 'proyectos.id as proyecto_id')
+            ->join('objetivos_especificos', 'actividades.objetivo_especifico_id', 'objetivos_especificos.id')
+            ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $analisisRiesgo
+     * @var Invoice $actividad
      */
-    public function map($analisisRiesgo): array
+    public function map($actividad): array
     {
         return [
-            'SGPS-' . ($analisisRiesgo->proyecto_id + 8000),
-            $analisisRiesgo->nivel,
-            $analisisRiesgo->tipo,
-            $analisisRiesgo->descripcion,
-            $analisisRiesgo->impacto,
-            $analisisRiesgo->probabilidad,
-            $analisisRiesgo->efectos,
-            $analisisRiesgo->medidas_mitigacion,
+            'SGPS-' . ($actividad->proyecto_id + 8000),
+            $actividad->descripcion,
+            $actividad->fecha_inicio,
+            $actividad->fecha_finalizacion,
         ];
     }
 
@@ -52,13 +55,9 @@ class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMappi
     {
         return [
             'Código del proyecto',
-            'Nivel',
-            'Tipo',
             'Descripción',
-            'Impacto',
-            'Probabilidad',
-            'Efectos',
-            'Medidas de mitigación',
+            'Fecha de inicio',
+            'Fecha de finalización',
         ];
     }
 
@@ -72,13 +71,13 @@ class AnalisisRiesgosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function title(): string
     {
-        return 'Análisis de riesgos';
+        return 'Actividades';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Análisis de riesgos',
+            'title' => 'Actividades',
         ];
     }
 

@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\CausaIndirecta;
+use App\Models\ObjetivoEspecifico;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class CausasIndirectasTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class ObjetivosEspecificosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,17 +29,22 @@ class CausasIndirectasTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function collection()
     {
-        return CausaIndirecta::select('causas_indirectas.*', 'proyectos.id as proyecto_id')->join('causas_directas', 'causas_indirectas.causa_directa_id', 'causas_directas.id')->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return ObjetivoEspecifico::select('objetivos_especificos.*', 'proyectos.id as proyecto_id')
+            ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $efectoIndirecto
+     * @var Invoice $impacto
      */
-    public function map($efectoIndirecto): array
+    public function map($impacto): array
     {
         return [
-            'SGPS-' . ($efectoIndirecto->proyecto_id + 8000),
-            $efectoIndirecto->descripcion,
+            'SGPS-' . ($impacto->proyecto_id + 8000),
+            $impacto->descripcion,
         ];
     }
 
@@ -60,13 +66,13 @@ class CausasIndirectasTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function title(): string
     {
-        return 'Causas indirectas';
+        return 'Objetivos específicos';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Causas indirectas',
+            'title' => 'Objetivos específicos',
         ];
     }
 

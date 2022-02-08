@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\Actividad;
+use App\Models\Municipio;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ActividadesTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class MunicipiosImpactadosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,19 +29,22 @@ class ActividadesTaExport implements FromCollection, WithHeadings, WithMapping, 
      */
     public function collection()
     {
-        return Actividad::select('actividades.*', 'proyectos.id as proyecto_id')->join('objetivos_especificos', 'actividades.objetivo_especifico_id', 'objetivos_especificos.id')->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return Municipio::select('municipios.*', 'proyectos.id as proyecto_id')
+            ->join('proyecto_municipio', 'municipios.id', 'proyecto_municipio.municipio_id')
+            ->join('proyectos', 'proyecto_municipio.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $actividad
+     * @var Invoice $municipio
      */
-    public function map($actividad): array
+    public function map($municipio): array
     {
         return [
-            'SGPS-' . ($actividad->proyecto_id + 8000),
-            $actividad->descripcion,
-            $actividad->fecha_inicio,
-            $actividad->fecha_finalizacion,
+            'SGPS-' . ($municipio->proyecto_id + 8000),
+            $municipio->nombre,
         ];
     }
 
@@ -48,9 +52,7 @@ class ActividadesTaExport implements FromCollection, WithHeadings, WithMapping, 
     {
         return [
             'Código del proyecto',
-            'Descripción',
-            'Fecha de inicio',
-            'Fecha de finalización',
+            'Nombre',
         ];
     }
 
@@ -64,13 +66,13 @@ class ActividadesTaExport implements FromCollection, WithHeadings, WithMapping, 
      */
     public function title(): string
     {
-        return 'Actividades';
+        return 'Municipios impactados';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Actividades',
+            'title' => 'Municipios impactados',
         ];
     }
 

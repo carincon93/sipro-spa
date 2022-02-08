@@ -28,7 +28,12 @@ class EntidadesAliadasTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function collection()
     {
-        return EntidadAliada::select('entidades_aliadas.*', 'entidad_aliada_ta.soporte_convenio', 'entidad_aliada_ta.fecha_inicio_convenio', 'entidad_aliada_ta.fecha_fin_convenio', 'proyectos.id as proyecto_id')->join('entidad_aliada_ta', 'entidades_aliadas.id', 'entidad_aliada_ta.entidad_aliada_id')->join('proyectos', 'entidades_aliadas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->where('proyectos.convocatoria_id', $this->convocatoria->id)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return EntidadAliada::select('entidades_aliadas.*', 'entidad_aliada_ta.soporte_convenio', 'entidad_aliada_ta.fecha_inicio_convenio', 'entidad_aliada_ta.fecha_fin_convenio', 'proyectos.id as proyecto_id')
+            ->join('entidad_aliada_ta', 'entidades_aliadas.id', 'entidad_aliada_ta.entidad_aliada_id')
+            ->join('proyectos', 'entidades_aliadas.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->where('proyectos.convocatoria_id', $this->convocatoria->id)
+            ->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**

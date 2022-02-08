@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\EfectoDirecto;
+use App\Models\CausaDirecta;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class CausasDirectasExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,17 +29,21 @@ class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function collection()
     {
-        return EfectoDirecto::select('efectos_directos.*', 'proyectos.id as proyecto_id')->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return CausaDirecta::select('causas_directas.*', 'proyectos.id as proyecto_id')
+            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $efectoDirecto
+     * @var Invoice $causaDirecta
      */
-    public function map($efectoDirecto): array
+    public function map($causaDirecta): array
     {
         return [
-            'SGPS-' . ($efectoDirecto->proyecto_id + 8000),
-            $efectoDirecto->descripcion,
+            'SGPS-' . ($causaDirecta->proyecto_id + 8000),
+            $causaDirecta->descripcion,
         ];
     }
 
@@ -60,13 +65,13 @@ class EfectosDirectosTaExport implements FromCollection, WithHeadings, WithMappi
      */
     public function title(): string
     {
-        return 'Efectos directos';
+        return 'Causas directas';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Efectos directos',
+            'title' => 'Causas directas',
         ];
     }
 

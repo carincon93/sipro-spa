@@ -28,7 +28,13 @@ class DisciplinasSubareaConocimientoTaExport implements FromCollection, WithHead
      */
     public function collection()
     {
-        return DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')->join('ta_disciplina_subarea_conocimiento', 'disciplinas_subarea_conocimiento.id', 'ta_disciplina_subarea_conocimiento.disciplina_subarea_conocimiento_id')->join('ta', 'ta_disciplina_subarea_conocimiento.ta_id', 'ta.id')->join('proyectos', 'ta.id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.*', 'ta.id as ta_id', 'proyectos.id as proyecto_id')
+            ->join('ta_disciplina_subarea_conocimiento', 'disciplinas_subarea_conocimiento.id', 'ta_disciplina_subarea_conocimiento.disciplina_subarea_conocimiento_id')
+            ->join('ta', 'ta_disciplina_subarea_conocimiento.ta_id', 'ta.id')
+            ->join('proyectos', 'ta.id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', 5)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**

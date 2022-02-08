@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\ObjetivoEspecifico;
+use App\Models\ProyectoAnexo;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ObjetivosEspecificosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class AnexosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,17 +29,21 @@ class ObjetivosEspecificosTaExport implements FromCollection, WithHeadings, With
      */
     public function collection()
     {
-        return ObjetivoEspecifico::select('objetivos_especificos.*', 'proyectos.id as proyecto_id')->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return ProyectoAnexo::select('proyecto_anexo.*', 'proyectos.id as proyecto_id')
+            ->join('proyectos', 'proyecto_anexo.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereNotIn('proyectos.id', [1052, 1113])
+            ->get();
     }
 
     /**
-     * @var Invoice $impacto
+     * @var Invoice $proyectoAnexo
      */
-    public function map($impacto): array
+    public function map($proyectoAnexo): array
     {
         return [
-            'SGPS-' . ($impacto->proyecto_id + 8000),
-            $impacto->descripcion,
+            'SGPS-' . ($proyectoAnexo->proyecto_id + 8000),
+            config('app.url') . ' convocatorias/' . $this->convocatoria->id . '/proyectos/' . $proyectoAnexo->proyecto_id . '/proyecto-anexos/' . $proyectoAnexo->id . '/download',
         ];
     }
 
@@ -46,7 +51,7 @@ class ObjetivosEspecificosTaExport implements FromCollection, WithHeadings, With
     {
         return [
             'Código del proyecto',
-            'Descripción',
+            'Enlace de descarga',
         ];
     }
 
@@ -60,13 +65,13 @@ class ObjetivosEspecificosTaExport implements FromCollection, WithHeadings, With
      */
     public function title(): string
     {
-        return 'Objetivos específicos';
+        return 'Anexos';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Objetivos específicos',
+            'title' => 'Anexos',
         ];
     }
 

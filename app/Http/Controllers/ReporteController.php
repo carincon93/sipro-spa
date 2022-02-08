@@ -6,13 +6,12 @@ use App\Exports\ComentariosEvaluacionesExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Inertia\Inertia;
-use App\Exports\ProyectosExport;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
 use App\Exports\InfoProyectosExport;
+use App\Exports\InfoProyectosIdiExport;
 use App\Exports\InfoProyectosTaExport;
-use App\Exports\ProyectosTaExport;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 
@@ -106,5 +105,15 @@ class ReporteController extends Controller
     public function proyectosTaExport(Convocatoria $convocatoria)
     {
         return Excel::download(new InfoProyectosTaExport($convocatoria), 'proyectos-ta' . time() . '.xlsx');
+    }
+
+    /**
+     * proyectosIdiExport
+     *
+     * @return void
+     */
+    public function proyectosIdiExport(Convocatoria $convocatoria)
+    {
+        return Excel::download(new InfoProyectosIdiExport($convocatoria), 'proyectos-idi' . time() . '.xlsx');
     }
 }

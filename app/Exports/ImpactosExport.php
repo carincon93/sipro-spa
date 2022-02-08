@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\Producto;
+use App\Models\Impacto;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,13 +14,14 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class ImpactosExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria)
+    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
     {
         $this->convocatoria = $convocatoria;
+        $this->lineaProgramaticaId = $lineaProgramaticaId;
     }
 
     /**
@@ -28,29 +29,31 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
      */
     public function collection()
     {
-        return Producto::select('productos.*', 'producto_ta_tp.*', 'proyectos.id as proyecto_id')
-            ->join('producto_ta_tp', 'productos.id', 'producto_ta_tp.producto_id')
-            ->join('resultados', 'productos.resultado_id', 'resultados.id')
-            ->join('objetivos_especificos', 'resultados.objetivo_especifico_id', 'objetivos_especificos.id')
-            ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
-            ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', 5)
+        return Impacto::selectRaw("impactos.*, proyectos.id as proyecto_id, CASE impactos.tipo
+            WHEN '1' THEN 'Impacto social'
+            WHEN '2' THEN 'Impacto tecnológico'
+            WHEN '3' THEN 'Impacto económico'
+            WHEN '4' THEN 'Impacto ambiental'
+            WHEN '5' THEN 'Impacto en el centro de formación'
+            WHEN '6' THEN 'Impacto en el sector productivo'
+            END as tipo")
+            ->join('efectos_indirectos', 'impactos.efecto_indirecto_id', 'efectos_indirectos.id')
+            ->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')
+            ->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')
+            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }
 
     /**
-     * @var Invoice $producto
+     * @var Invoice $impacto
      */
-    public function map($producto): array
+    public function map($impacto): array
     {
         return [
-            'SGPS-' . ($producto->proyecto_id + 8000),
-            $producto->nombre,
-            $producto->fecha_inicio,
-            $producto->fecha_finalizacion,
-            $producto->valor_proyectado,
-            $producto->medio_verificacion,
+            'SGPS-' . ($impacto->proyecto_id + 8000),
+            $impacto->tipo,
+            $impacto->descripcion,
         ];
     }
 
@@ -58,11 +61,8 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
     {
         return [
             'Código del proyecto',
+            'Tipo',
             'Descripción',
-            'Fecha de inicio',
-            'Fecha de finalización',
-            'Valor proyectado',
-            'Medio de verificación',
         ];
     }
 
@@ -76,13 +76,13 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
      */
     public function title(): string
     {
-        return 'Productos';
+        return 'Impactos';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Productos',
+            'title' => 'Impactos',
         ];
     }
 
