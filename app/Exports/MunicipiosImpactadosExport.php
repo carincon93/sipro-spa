@@ -18,10 +18,10 @@ class MunicipiosImpactadosExport implements FromCollection, WithHeadings, WithMa
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -32,7 +32,7 @@ class MunicipiosImpactadosExport implements FromCollection, WithHeadings, WithMa
         return Municipio::select('municipios.*', 'proyectos.id as proyecto_id')
             ->join('proyecto_municipio', 'municipios.id', 'proyecto_municipio.municipio_id')
             ->join('proyectos', 'proyecto_municipio.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

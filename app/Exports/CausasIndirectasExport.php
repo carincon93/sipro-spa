@@ -18,10 +18,10 @@ class CausasIndirectasExport implements FromCollection, WithHeadings, WithMappin
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -32,7 +32,7 @@ class CausasIndirectasExport implements FromCollection, WithHeadings, WithMappin
         return CausaIndirecta::select('causas_indirectas.*', 'proyectos.id as proyecto_id')
             ->join('causas_directas', 'causas_indirectas.causa_directa_id', 'causas_directas.id')
             ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

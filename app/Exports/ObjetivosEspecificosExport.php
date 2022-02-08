@@ -18,10 +18,10 @@ class ObjetivosEspecificosExport implements FromCollection, WithHeadings, WithMa
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -32,7 +32,7 @@ class ObjetivosEspecificosExport implements FromCollection, WithHeadings, WithMa
         return ObjetivoEspecifico::select('objetivos_especificos.*', 'proyectos.id as proyecto_id')
             ->join('causas_directas', 'objetivos_especificos.causa_directa_id', 'causas_directas.id')
             ->join('proyectos', 'causas_directas.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

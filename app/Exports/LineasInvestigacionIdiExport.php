@@ -18,9 +18,9 @@ class LineasInvestigacionIdiExport implements FromCollection, WithHeadings, With
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -33,7 +33,7 @@ class LineasInvestigacionIdiExport implements FromCollection, WithHeadings, With
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
             ->join('idi', 'idi.linea_investigacion_id', 'lineas_investigacion.id')
             ->join('proyectos', 'idi.id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

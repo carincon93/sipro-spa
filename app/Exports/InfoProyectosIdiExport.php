@@ -25,19 +25,23 @@ class InfoProyectosIdiExport implements WithMultipleSheets, WithTitle
     {
         $sheets = [];
 
-        $sheets[] = new GeneralidadesIdiExport($this->convocatoria, 1);
-        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, 1);
-        $sheets[] = new AnalisisRiesgosExport($this->convocatoria, 1);
-        $sheets[] = new AnexosExport($this->convocatoria, 1);
-        $sheets[] = new EfectosDirectosExport($this->convocatoria, 1);
-        $sheets[] = new EfectosIndirectosExport($this->convocatoria, 1);
-        $sheets[] = new CausasDirectasExport($this->convocatoria, 1);
-        $sheets[] = new CausasIndirectasExport($this->convocatoria, 1);
-        $sheets[] = new ImpactosExport($this->convocatoria, 1);
-        $sheets[] = new ResultadosExport($this->convocatoria, 1);
-        $sheets[] = new ObjetivosEspecificosExport($this->convocatoria, 1);
-        $sheets[] = new ActividadesExport($this->convocatoria, 1);
-        $sheets[] = new MunicipiosImpactadosExport($this->convocatoria, 1);
+        $sheets[] = new GeneralidadesIdiExport($this->convocatoria);
+        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new AnalisisRiesgosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new AnexosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new EfectosDirectosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new EfectosIndirectosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new CausasDirectasExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new CausasIndirectasExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ImpactosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ResultadosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ObjetivosEspecificosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ActividadesExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ProductosIdiExport($this->convocatoria);
+        $sheets[] = new MunicipiosImpactadosExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new ProgramasFormacionArticuladosExport($this->convocatoria);
+        $sheets[] = new ProgramasFormacionCalificadosExport($this->convocatoria);
+        $sheets[] = new EntidadesAliadasIdiExport($this->convocatoria);
 
         return $sheets;
     }

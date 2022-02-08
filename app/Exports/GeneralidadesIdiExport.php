@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Convocatoria;
 use App\Models\Idi;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -64,12 +65,15 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             $idi->proyecto->centroFormacion->regional->nombre,
             $idi->proyecto->centroFormacion->codigo,
             $idi->proyecto->centroFormacion->nombre,
+            $idi->proyecto->lineaProgramatica->codigo,
             $idi->proyecto->codigo,
             $idi->titulo,
             $idi->fecha_inicio,
             $idi->fecha_finalizacion,
             $idi->lineaInvestigacion->grupoInvestigacion->nombre,
             $idi->lineaInvestigacion->nombre,
+            $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento->nombre,
+            $idi->disciplinaSubareaConocimiento->subareaConocimiento->nombre,
             $idi->disciplinaSubareaConocimiento->nombre,
             $idi->tematicaEstrategica->nombre,
             $idi->redConocimiento->nombre,
@@ -97,7 +101,8 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             $idi->relacionado_mesas_sectoriales == 1 ? 'Si' : ($idi->relacionado_mesas_sectoriales == 2 ? 'No' : 'No aplica'),
             $idi->relacionado_tecnoacademia == 1 ? 'Si' : ($idi->relacionado_tecnoacademia == 2 ? 'No' : 'No aplica'),
             $idi->bibliografia,
-            $idi->numero_aprendices
+            $idi->numero_aprendices,
+            $this->mapParticipantes($idi->proyecto->participantes),
         ];
     }
 
@@ -108,12 +113,15 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             'Regional',
             'Código del centro',
             'Centro de formación',
+            'Línea programática',
             'Código del proyecto',
             'Título',
             'Fecha de inicio',
             'Fecha de finalización',
             'Grupo de investigación',
             'Línea de investigación',
+            'Área de conocimiento',
+            'Subárea de conocimiento',
             'Disciplina de la subárea de conocimiento',
             'Temática estratégica',
             'Red de conocimiento',
@@ -142,6 +150,7 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             'Relacionado con la TecnoAcademia',
             'Bibliografía',
             'Número de aprendices',
+            'Participantes'
         ];
     }
 
@@ -171,5 +180,22 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
         ];
+    }
+
+    private function mapParticipantes($participantes)
+    {
+        $tipos_vinculacion = collect(json_decode(Storage::get('json/tipos-vinculacion.json'), true));
+        $mapParticipantes = [];
+
+        foreach ($participantes as $participante) {
+            array_push($mapParticipantes, [
+                'nombre' => strtr(utf8_decode($participante->nombre), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY'),
+                'documento' => $participante->numero_documento,
+                'vinculacion' => $participante->tipo_vinculacion_text,
+                'meses' => $participante->pivot->cantidad_meses,
+                'horas' => $participante->pivot->cantidad_horas,
+            ]);
+        }
+        return $mapParticipantes;
     }
 }

@@ -18,10 +18,10 @@ class ResultadosExport implements FromCollection, WithHeadings, WithMapping, Wit
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -32,7 +32,7 @@ class ResultadosExport implements FromCollection, WithHeadings, WithMapping, Wit
         return Resultado::select('resultados.*', 'proyectos.id as proyecto_id')
             ->join('efectos_directos', 'resultados.efecto_directo_id', 'efectos_directos.id')
             ->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
     }

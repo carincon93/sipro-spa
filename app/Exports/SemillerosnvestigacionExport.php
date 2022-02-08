@@ -18,10 +18,10 @@ class SemillerosnvestigacionExport implements FromCollection, WithHeadings, With
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -35,7 +35,7 @@ class SemillerosnvestigacionExport implements FromCollection, WithHeadings, With
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
             ->join('proyecto_semillero_investigacion', 'semilleros_investigacion.id', 'proyecto_semillero_investigacion.semillero_investigacion_id')
             ->join('proyectos', 'proyecto_semillero_investigacion.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 

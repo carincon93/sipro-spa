@@ -18,10 +18,10 @@ class EfectosIndirectosExport implements FromCollection, WithHeadings, WithMappi
 {
     protected $convocatoria;
 
-    public function __construct(Convocatoria $convocatoria, $lineaProgramaticaId)
+    public function __construct(Convocatoria $convocatoria, $lineasProgramaticasId)
     {
         $this->convocatoria = $convocatoria;
-        $this->lineaProgramaticaId = $lineaProgramaticaId;
+        $this->lineasProgramaticasId = $lineasProgramaticasId;
     }
 
     /**
@@ -32,7 +32,7 @@ class EfectosIndirectosExport implements FromCollection, WithHeadings, WithMappi
         return EfectoIndirecto::select('efectos_indirectos.*', 'proyectos.id as proyecto_id')
             ->join('efectos_directos', 'efectos_indirectos.efecto_directo_id', 'efectos_directos.id')
             ->join('proyectos', 'efectos_directos.proyecto_id', 'proyectos.id')
-            ->where('proyectos.linea_programatica_id', $this->lineaProgramaticaId)
+            ->whereIn('proyectos.linea_programatica_id', $this->lineasProgramaticasId)
             ->where('proyectos.convocatoria_id', $this->convocatoria->id)
             ->whereNotIn('proyectos.id', [1052, 1113])
             ->get();
