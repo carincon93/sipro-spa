@@ -271,7 +271,8 @@ class WebController extends Controller
      */
     public function lineasInvestigacion($centroFormacion)
     {
-        return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
+        // return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
+        return response(LineaInvestigacion::selectRaw("lineas_investigacion.id as value, CONCAT(lineas_investigacion.nombre, chr(10), programas_formacion.nombre) as label")->join('linea_investigacion_programa_formacion', 'lineas_investigacion.id', 'linea_investigacion_programa_formacion.linea_investigacion_id')->join('programas_formacion', 'linea_investigacion_programa_formacion.programa_formacion_id', 'programas_formacion.id')->orderBy('lineas_investigacion.nombre', 'ASC')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
     }
 
     //municipios
@@ -353,6 +354,16 @@ class WebController extends Controller
     public function redesConocimiento()
     {
         return response(RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get());
+    }
+
+    /**
+     * Web api
+     * 
+     * Trae los programas de formación por línea de investigación
+     */
+    public function líneaInvestigacionProgramaFormacion($lineaInvestigacionId)
+    {
+        return response(ProgramaFormacion::select('programas_formacion.id as value', 'programas_formacion.nombre as label')->join('linea_investigacion_programa_formacion', 'programas_formacion.id', 'linea_investigacion_programa_formacion.programa_formacion_id')->where('linea_investigacion_programa_formacion.linea_investigacion_id', $lineaInvestigacionId)->orderBy('nombre', 'ASC')->get());
     }
 
     /**

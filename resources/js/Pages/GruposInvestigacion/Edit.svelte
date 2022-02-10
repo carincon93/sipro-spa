@@ -132,12 +132,12 @@
                 </div>
 
                 <div class="mt-4 ">
-                    <Label required labelFor="fecha_creacion_grupo" value="Fecha creación del semillero" />
+                    <Label required labelFor="fecha_creacion_grupo" value="Fecha creación del grupo" />
                     <Input id="fecha_creacion_grupo" type="date" class="mt-1" bind:value={$form.fecha_creacion_grupo} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="nombre_lider_grupo" value="Nombre del líder del semillero" />
+                    <Label required labelFor="nombre_lider_grupo" value="Nombre del líder del grupo" />
                     <Input id="nombre_lider_grupo" type="text" class="mt-1" bind:value={$form.nombre_lider_grupo} error={errors.nombre_lider_grupo} required />
                 </div>
 
@@ -147,7 +147,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required labelFor="reconocimientos_grupo_investigacion" value="Reconocimientos semillero de investigación" />
+                    <Label required labelFor="reconocimientos_grupo_investigacion" value="Reconocimientos grupo de investigación" />
                     <Textarea maxlength="40000" id="reconocimientos_grupo_investigacion" bind:value={$form.reconocimientos_grupo_investigacion} error={errors.reconocimientos_grupo_investigacion} required />
                 </div>
 
@@ -187,17 +187,41 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" for="redes_conocimiento" value="Red o redes de conocimiento afines al Grupo de Investigación" />
-                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.municipios} placeholder="Buscar redes de conocimiento" required />
+                    <Label required class="mb-4" labelFor="redes_conocimiento" value="Red o redes de conocimiento afines al Grupo de Investigación" />
+                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.redes_conocimiento} placeholder="Buscar redes de conocimiento" required />
                 </div>
 
+                <hr class="mt-10 mb-10" />
+
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="GIC – F – 020" />
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
+                    {#if $form.formato_gic_f_020}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.download', [grupoInvestigacion.id, 'formato_gic_f020'])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar formato GIC – F – 020
+                        </a>
+                    {:else}
+                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 020</p>
+                    {/if}
                     <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
                 </div>
 
+                <hr class="mt-10 mb-10" />
+
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="GIC – F – 032" />
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
+                    {#if $form.formato_gic_f_032}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.download', [grupoInvestigacion.id, 'formato_gic_f032'])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar formato GIC – F – 032
+                        </a>
+                    {:else}
+                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 032</p>
+                    {/if}
                     <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} />
                 </div>
             </fieldset>

@@ -27,6 +27,7 @@
 
     onMount(() => {
         fitTextarea.watch(container.querySelector('textarea'))
+        container.querySelector('textarea').setAttribute('id', id)
     })
 
     theme.subscribe((value) => {
@@ -39,9 +40,9 @@
 
 <div bind:this={container}>
     {#if sinContador == true}
-        <Textarea {disabled} textarea bind:value {label} {...props} {id} on:input on:blur={() => theme.set({ name: id, value: value })} />
+        <Textarea {disabled} textarea bind:value {label} {...props} on:input on:blur={() => theme.set({ name: id, value: value })} />
     {:else}
-        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} {id} on:input on:blur={() => theme.set({ name: id, value: value })}>
+        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} on:input on:blur={() => theme.set({ name: id, value: value })}>
             <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
         </Textarea>
     {/if}

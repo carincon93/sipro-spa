@@ -103,6 +103,9 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             $idi->bibliografia,
             $idi->numero_aprendices,
             $this->mapParticipantes($idi->proyecto->participantes),
+            ($idi->proyecto->finalizado) ? 'SI' : 'NO',
+            ($idi->proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
+            $idi->proyecto->estado_cord_sennova ? json_decode($idi->proyecto->estado_cord_sennova)->estado : ($idi->proyecto->idi()->exists() ? $idi->proyecto->estado_evaluacion_idi['estado'] : 'Sin información registrada'),
         ];
     }
 
@@ -150,7 +153,10 @@ class GeneralidadesIdiExport implements FromCollection, WithHeadings, WithMappin
             'Relacionado con la TecnoAcademia',
             'Bibliografía',
             'Número de aprendices',
-            'Participantes'
+            'Participantes',
+            'Finalizado',
+            'Radicado',
+            'Estado final',
         ];
     }
 

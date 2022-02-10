@@ -76,7 +76,7 @@
     <form on:submit|preventDefault={submitTaEvaluacion}>
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" for="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
+                <Label class="mb-4" labelFor="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
             </div>
             <div>
                 <SelectMulti classes="evaluacion-select-multi" disabled={true} id="lineas_investigacion" bind:selectedValue={articulacionSennovaInfo.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" />
@@ -85,7 +85,7 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" for="grupos_investigacion" value="Grupos de investigación en los cuales está vinculada la TecnoAcademia" />
+                <Label class="mb-4" labelFor="grupos_investigacion" value="Grupos de investigación en los cuales está vinculada la TecnoAcademia" />
             </div>
             <div>
                 <SelectMulti classes="evaluacion-select-multi" disabled={true} id="grupos_investigacion" bind:selectedValue={articulacionSennovaInfo.grupos_investigacion} items={gruposInvestigacion} isMulti={true} error={errors.grupos_investigacion} placeholder="Buscar por el nombre del grupo de investigación" />
@@ -104,7 +104,7 @@
         {#if articulacionSennovaInfo.articulacion_semillero?.value == 1}
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" for="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
+                    <Label class="mb-4" labelFor="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti classes="evaluacion-select-multi" disabled={true} id="semilleros_investigacion" bind:selectedValue={articulacionSennovaInfo.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" />
@@ -113,7 +113,7 @@
         {/if}
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" for="proyectos_ejecucion" value="Proyectos o iniciativas en ejecución en el año {convocatoria.year - 1}" />
+                <Label class="mb-4" labelFor="proyectos_ejecucion" value="Proyectos o iniciativas en ejecución en el año {convocatoria.year - 1}" />
             </div>
             <div>
                 <Textarea disabled label="Proyectos / Iniciativas" maxlength="40000" id="proyectos_ejecucion" error={errors.proyectos_ejecucion} bind:value={articulacionSennovaInfo.proyectos_ejecucion} />

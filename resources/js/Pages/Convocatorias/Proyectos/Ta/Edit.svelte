@@ -513,7 +513,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
@@ -522,7 +522,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
+                    <Label required class="mb-4" labelFor="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
                 </div>
                 <div>
                     <SelectMulti id="municipios_impactar" bind:selectedValue={$form.municipios_impactar} items={municipios} isMulti={true} error={errors.municipios_impactar} placeholder="Buscar municipios" required />
@@ -649,7 +649,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
@@ -674,7 +674,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+                    <Label required class="mb-4" labelFor="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
                 </div>
                 <div>
                     <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />

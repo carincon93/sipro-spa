@@ -16,13 +16,15 @@ class LineaInvestigacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('viewAny', [LineaInvestigacion::class]);
 
         return Inertia::render('LineasInvestigacion/Index', [
             'filters'               => request()->all('search'),
-            'lineasInvestigacion'   => LineaInvestigacion::getLineasInvestigacionByRol()->appends(['search' => request()->search]),
+            'gruposInvestigacion'   => GrupoInvestigacion::orderBy('nombre')->get(),
+            'grupoInvestigacion'    => $grupoInvestigacion,
+            'lineasInvestigacion'   => $grupoInvestigacion->lineasInvestigacion()->with('grupoInvestigacion.centroFormacion')->filterLineaInvestigacion(request()->only('search', 'grupoInvestigacion'))->select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->orderBy('lineas_investigacion.nombre', 'ASC')->paginate()
         ]);
     }
 
@@ -31,14 +33,13 @@ class LineaInvestigacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('create', [LineaInvestigacion::class]);
 
-        $grupoInvestigacion = GrupoInvestigacion::find($request->grupoInvestigacionId);
-
         return Inertia::render('LineasInvestigacion/Create', [
-            'grupoInvestigacionId' => $grupoInvestigacion ? $grupoInvestigacion->id : null,
+            'grupoInvestigacion' => $grupoInvestigacion,
+            'programasFormacion' => $grupoInvestigacion->centroFormacion->programasFormacion()->selectRaw("programas_formacion.id as value, CONCAT('Código: ', programas_formacion.codigo, ' - ', programas_formacion.nombre) as label")->get()
         ]);
     }
 
@@ -48,19 +49,19 @@ class LineaInvestigacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LineaInvestigacionRequest $request)
+    public function store(LineaInvestigacionRequest $request, GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('create', [LineaInvestigacion::class]);
 
         $lineaInvestigacion = new LineaInvestigacion();
         $lineaInvestigacion->nombre = $request->nombre;
-        $lineaInvestigacion->grupoInvestigacion()->associate($request->grupo_investigacion_id);
+        $lineaInvestigacion->grupoInvestigacion()->associate($grupoInvestigacion);
 
         $lineaInvestigacion->save();
 
         $lineaInvestigacion->programasFormacion()->attach($request->programas_formacion);
 
-        return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('grupos-investigacion.lineas-investigacion.index', $grupoInvestigacion)->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -69,7 +70,7 @@ class LineaInvestigacionController extends Controller
      * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function show(LineaInvestigacion $lineaInvestigacion)
+    public function show(GrupoInvestigacion $grupoInvestigacion, LineaInvestigacion $lineaInvestigacion)
     {
         $this->authorize('view', [LineaInvestigacion::class, $lineaInvestigacion]);
     }
@@ -80,11 +81,12 @@ class LineaInvestigacionController extends Controller
      * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(LineaInvestigacion $lineaInvestigacion)
+    public function edit(GrupoInvestigacion $grupoInvestigacion, LineaInvestigacion $lineaInvestigacion)
     {
         $this->authorize('update', [LineaInvestigacion::class, $lineaInvestigacion]);
 
         return Inertia::render('LineasInvestigacion/Edit', [
+            'grupoInvestigacion' => $grupoInvestigacion,
             'lineaInvestigacion' => $lineaInvestigacion,
             'programasFormacion' => $lineaInvestigacion->grupoInvestigacion->centroFormacion->programasFormacion()->selectRaw("programas_formacion.id as value, CONCAT('Código: ', programas_formacion.codigo,' - ', programas_formacion.nombre) as label")->get(),
             'programasFormacionLineaInvestigacion' => $lineaInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
@@ -98,12 +100,12 @@ class LineaInvestigacionController extends Controller
      * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function update(LineaInvestigacionRequest $request, LineaInvestigacion $lineaInvestigacion)
+    public function update(LineaInvestigacionRequest $request, GrupoInvestigacion $grupoInvestigacion, LineaInvestigacion $lineaInvestigacion)
     {
         $this->authorize('update', [LineaInvestigacion::class, $lineaInvestigacion]);
 
         $lineaInvestigacion->nombre = $request->nombre;
-        $lineaInvestigacion->grupoInvestigacion()->associate($request->grupo_investigacion_id);
+        $lineaInvestigacion->grupoInvestigacion()->associate($grupoInvestigacion);
 
         $lineaInvestigacion->programasFormacion()->sync($request->programas_formacion);
 
@@ -118,7 +120,7 @@ class LineaInvestigacionController extends Controller
      * @param  \App\Models\LineaInvestigacion  $lineaInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LineaInvestigacion $lineaInvestigacion)
+    public function destroy(GrupoInvestigacion $grupoInvestigacion, LineaInvestigacion $lineaInvestigacion)
     {
         $this->authorize('delete', [LineaInvestigacion::class, $lineaInvestigacion]);
 
@@ -128,6 +130,6 @@ class LineaInvestigacionController extends Controller
             return back()->with('error', 'No se puede eliminar el recurso debido a que está asociado a uno o varios proyectos.');
         }
 
-        return redirect()->route('lineas-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('grupos-investigacion.lineas-investigacion.index', $grupoInvestigacion)->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

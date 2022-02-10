@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SemilleroInvestigacionRequest;
+use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
+use App\Models\RedConocimiento;
 use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,13 +19,14 @@ class SemilleroInvestigacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('viewAny', [SemilleroInvestigacion::class]);
 
         return Inertia::render('SemillerosInvestigacion/Index', [
             'filters'   => request()->all('search'),
-            'semillerosInvestigacion' => SemilleroInvestigacion::getSemillerosInvestigacionByRol()->appends(['search' => request()->search]),
+            'grupoInvestigacion'        => $grupoInvestigacion,
+            'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.nombre as nombre_linea_principal')->filterSemilleroInvestigacion(request()->only('search'))->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate(),
         ]);
     }
 
@@ -32,12 +35,14 @@ class SemilleroInvestigacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('create', [SemilleroInvestigacion::class]);
 
         return Inertia::render('SemillerosInvestigacion/Create', [
-            'lineasInvestigacion' => LineaInvestigacion::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
+            'grupoInvestigacion'  => $grupoInvestigacion,
+            'lineasInvestigacion' => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
+            'redesConocimiento'   => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
         ]);
     }
 
@@ -47,7 +52,7 @@ class SemilleroInvestigacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SemilleroInvestigacionRequest $request)
+    public function store(SemilleroInvestigacionRequest $request, GrupoInvestigacion $grupoInvestigacion)
     {
         $this->authorize('create', [SemilleroInvestigacion::class]);
 
@@ -63,7 +68,6 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivo_general = $request->objetivo_general;
         $semilleroInvestigacion->objetivos_especificos = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero = $request->link_semillero;
-
 
         $nombre_gic_f020 = $this->cleanFileName('formato_gic_f020', $request->formato_gic_f020);
 
@@ -89,12 +93,12 @@ class SemilleroInvestigacionController extends Controller
         );
         $semilleroInvestigacion->formato_aval_semillero = $formato_aval_semillero;
 
-
-
-
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
         $semilleroInvestigacion->save();
+
+        $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
+        $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
 
         return redirect()->route('semilleros-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -105,7 +109,7 @@ class SemilleroInvestigacionController extends Controller
      * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function show(SemilleroInvestigacion $semilleroInvestigacion)
+    public function show(GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
         $this->authorize('view', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
     }
@@ -116,15 +120,19 @@ class SemilleroInvestigacionController extends Controller
      * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(SemilleroInvestigacion $semilleroInvestigacion)
+    public function edit(GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
         $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
 
         return Inertia::render('SemillerosInvestigacion/Edit', [
-            'semilleroInvestigacion'  => $semilleroInvestigacion,
-            'lineasInvestigacion'     => LineaInvestigacion::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get(),
+            'semilleroInvestigacion'    => $semilleroInvestigacion,
+            'grupoInvestigacion'        => $grupoInvestigacion,
+            'lineasInvestigacion'       => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
+            'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'redesConocimientoSemilleroInvestigacion'   => $semilleroInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
+            'programasFormacionSemilleroInvestigacion'  => $semilleroInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
         ]);
     }
 
@@ -135,15 +143,15 @@ class SemilleroInvestigacionController extends Controller
      * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function update(SemilleroInvestigacionRequest $request, SemilleroInvestigacion $semilleroInvestigacion)
+    public function update(SemilleroInvestigacionRequest $request, GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
         $semilleroInvestigacion->nombre = $request->nombre;
         $semilleroInvestigacion->codigo = $request->codigo;
-        $semilleroInvestigacion->fecha_creacion_semillero = $request->fecha_creacion_semillero;
-        $semilleroInvestigacion->nombre_lider_semillero = $request->nombre_lider_semillero;
-        $semilleroInvestigacion->email_contacto = $request->email_contacto;
+        $semilleroInvestigacion->fecha_creacion_semillero   = $request->fecha_creacion_semillero;
+        $semilleroInvestigacion->nombre_lider_semillero     = $request->nombre_lider_semillero;
+        $semilleroInvestigacion->email_contacto             = $request->email_contacto;
         $semilleroInvestigacion->reconocimientos_semillero_investigacion = $request->reconocimientos_semillero_investigacion;
         $semilleroInvestigacion->vision = $request->vision;
         $semilleroInvestigacion->mision = $request->mision;
@@ -185,6 +193,9 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->save();
 
+        $semilleroInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
+        $semilleroInvestigacion->programasFormacion()->sync($request->programas_formacion);
+
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
@@ -194,7 +205,7 @@ class SemilleroInvestigacionController extends Controller
      * @param  \App\Models\SemilleroInvestigacion  $semilleroInvestigacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SemilleroInvestigacion $semilleroInvestigacion)
+    public function destroy(GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
         $this->authorize('delete', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
@@ -221,5 +232,26 @@ class SemilleroInvestigacionController extends Controller
         $random    = Str::random(10);
 
         return str_replace(array("\r", "\n"), '', "{$nombre}{$random}." . $archivo->extension());
+    }
+
+    /**
+     * descargarFormato
+     *
+     * @param  mixed $request
+     * @param  mixed $grupoInvestigacion
+     * @param  mixed $semilleroInvestigacion
+     * @return void
+     */
+    public function descargarFormato(Request $request, GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
+    {
+        if ($request->formato == 'formato_gic_f020') {
+            $ruta = $semilleroInvestigacion->formato_gic_f020;
+        } else if ($request->formato == 'formato_gic_f032') {
+            $ruta = $semilleroInvestigacion->formato_gic_f032;
+        } else if ($request->formato == 'formato_aval_semillero') {
+            $ruta = $semilleroInvestigacion->formato_aval_semillero;
+        }
+
+        return response()->download(storage_path("app/$ruta"));
     }
 }

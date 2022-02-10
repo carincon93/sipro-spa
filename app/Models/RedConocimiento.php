@@ -75,6 +75,16 @@ class RedConocimiento extends Model
     }
 
     /**
+     * Relationship with SemilleroInvestigacion
+     *
+     * @return object
+     */
+    public function semillerosInvestigacion()
+    {
+        return $this->belongsToMany(SemilleroInvestigacion::class, 'semillero_investigacion_red_conocimiento', 'red_conocimiento_id', 'semillero_investigacion_id');
+    }
+
+    /**
      * Relationship with AmbienteModernizacion
      *
      * @return object

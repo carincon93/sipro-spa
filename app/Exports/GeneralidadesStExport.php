@@ -88,6 +88,9 @@ class GeneralidadesStExport implements FromCollection, WithHeadings, WithMapping
             $servicioTecnologico->infraestructura_adecuada,
             $servicioTecnologico->bibliografia,
             $this->mapParticipantes($servicioTecnologico->proyecto->participantes),
+            ($servicioTecnologico->proyecto->finalizado) ? 'SI' : 'NO',
+            ($servicioTecnologico->proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
+            $servicioTecnologico->proyecto->estado_cord_sennova ? json_decode($servicioTecnologico->proyecto->estado_cord_sennova)->estado : ($servicioTecnologico->proyecto->servicioTecnologico()->exists() ? $servicioTecnologico->proyecto->estado_evaluacion_servicios_tecnologicos['estado'] : 'Sin información registrada'),
         ];
     }
 
@@ -120,7 +123,10 @@ class GeneralidadesStExport implements FromCollection, WithHeadings, WithMapping
             'Especificaciones del área',
             'Infraestructura adecuada',
             'Bibliografía',
-            'Participantes'
+            'Participantes',
+            'Finalizado',
+            'Radicado',
+            'Estado final',
         ];
     }
 

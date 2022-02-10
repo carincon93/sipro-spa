@@ -99,6 +99,16 @@ class ProgramaFormacion extends Model
     }
 
     /**
+     * Relationship with SemilleroInvestigacion
+     *
+     * @return object
+     */
+    public function semillerosInvestigacion()
+    {
+        return $this->belongsToMany(SemilleroInvestigacion::class, 'semillero_investigacion_programa_formacion', 'programa_formacion_id', 'semillero_investigacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

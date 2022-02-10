@@ -86,6 +86,9 @@ class GeneralidadesTaExport implements FromCollection, WithHeadings, WithMapping
             $ta->articulacion_semillero ? 'Si' : 'No',
             $ta->semilleros_en_formalizacion,
             $ta->infraestructura_tecnoacademia,
+            ($ta->proyecto->finalizado) ? 'SI' : 'NO',
+            ($ta->proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
+            $ta->proyecto->estado_cord_sennova ? json_decode($ta->proyecto->estado_cord_sennova)->estado : ($ta->proyecto->ta()->exists() ? $ta->proyecto->estado_evaluacion_ta['estado'] : 'Sin información registrada'),
         ];
     }
 
@@ -136,7 +139,10 @@ class GeneralidadesTaExport implements FromCollection, WithHeadings, WithMapping
             '¿Se proyecta incluir Instituciones Educativas en articulación con la media?',
             '¿Está la TecnoAcademia articulada con un semillero?',
             'Semilleros en proceso de formalización',
-            'Infraestructura tecnoacademia'
+            'Infraestructura tecnoacademia',
+            'Finalizado',
+            'Radicado',
+            'Estado final',
         ];
     }
 

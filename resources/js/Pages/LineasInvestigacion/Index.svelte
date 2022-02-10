@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, inertia } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -12,6 +12,7 @@
     import { Item, Text } from '@smui/list'
 
     export let lineasInvestigacion
+    export let grupoInvestigacion
 
     $title = 'Líneas de investigación'
 
@@ -21,16 +22,29 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let filters = {}
+    let filters = {
+        grupoInvestigacion: $page.props.filters.grupoInvestigacion,
+    }
 </script>
 
 <AuthenticatedLayout>
+    <header class="shadow bg-white" slot="header">
+        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
+            <div>
+                <h1>
+                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+                        <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
+                    {/if}
+                </h1>
+            </div>
+        </div>
+    </header>
     <DataTable class="mt-20">
-        <div slot="title">Líneas de investigación</div>
+        <div slot="title">Líneas de investigación - Grupo de investigación: {grupoInvestigacion.nombre}</div>
 
         <div slot="actions">
             {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                <Button on:click={() => Inertia.visit(route('lineas-investigacion.create'))} variant="raised">Crear línea de investigación</Button>
+                <Button on:click={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.create', grupoInvestigacion.id))} variant="raised">Crear línea de investigación</Button>
             {/if}
         </div>
 
@@ -63,7 +77,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={lineasInvestigacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('lineas-investigacion.edit', lineaInvestigacion.id))}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.edit', [grupoInvestigacion.id, lineaInvestigacion.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
                             {:else}

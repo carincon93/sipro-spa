@@ -240,6 +240,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Grupos de investigación
      * 
      */
+    Route::get('grupos-investigacion/{grupo_investigacion}/download/{formato}', [GrupoInvestigacionController::class, 'descargarFormato'])->name('grupos-investigacion.download');
+
     Route::resource('grupos-investigacion', GrupoInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion'])->except(['show']);
 
     /**
@@ -252,7 +254,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('web-api/centros-formacion-grupo-investigacion/{grupo_investigacion}', [WebController::class, 'centrosFormacionGrupoInvestigacion'])->name('web-api.centros-formacion-grupo-investigacion');
 
-    Route::resource('lineas-investigacion', LineaInvestigacionController::class)->parameters(['lineas-investigacion' => 'linea-investigacion'])->except(['show']);
+    Route::resource('grupos-investigacion.lineas-investigacion', LineaInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'lineas-investigacion' => 'linea-investigacion'])->except(['show']);
 
     /**
      * Semilleros de investigación
@@ -261,7 +263,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::get('web-api/lineas-investigacion/{centro_formacion}', [WebController::class, 'lineasInvestigacion'])->name('web-api.lineas-investigacion');
 
-    Route::resource('semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
+    Route::resource('grupos-investigacion.semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
+    Route::get('grupos-investigacion/{grupo_investigacion}/semilleros-investigacion/{semillero_investigacion}/download/{formato}', [SemilleroInvestigacionController::class, 'descargarFormato'])->name('grupos-investigacion.semilleros-investigacion.download');
+
+    Route::resource('grupos-investigacion.semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
     /**
      * Mesas sectoriales
@@ -309,6 +314,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las líneas programáticas
      */
     Route::get('web-api/lineas-programaticas/{categoria_proyecto}', [WebController::class, 'líneasProgramaticas'])->name('web-api.lineas-programaticas');
+
+    /**
+     * Web api
+     * 
+     * Trae los programas de formación por línea de investigación
+     */
+    Route::get('web-api/linea-investigacion-programa-formacion/{linea_investigacion}', [WebController::class, 'líneaInvestigacionProgramaFormacion'])->name('web-api.linea-investigacion-programa-formacion');
 
     /**
      * Web api

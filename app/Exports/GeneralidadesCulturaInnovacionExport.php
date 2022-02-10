@@ -99,6 +99,9 @@ class GeneralidadesCulturaInnovacionExport implements FromCollection, WithHeadin
             $culturaInnovacion->bibliografia,
             $culturaInnovacion->numero_aprendices,
             $this->mapParticipantes($culturaInnovacion->proyecto->participantes),
+            ($culturaInnovacion->proyecto->finalizado) ? 'SI' : 'NO',
+            ($culturaInnovacion->proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
+            $culturaInnovacion->proyecto->estado_cord_sennova ? json_decode($culturaInnovacion->proyecto->estado_cord_sennova)->estado : ($culturaInnovacion->proyecto->culturaInnovacion()->exists() ? $culturaInnovacion->proyecto->estado_evaluacion_cultura_innovacion['estado'] : 'Sin información registrada'),
         ];
     }
 
@@ -143,7 +146,10 @@ class GeneralidadesCulturaInnovacionExport implements FromCollection, WithHeadin
             'Relacionado con la TecnoAcademia',
             'Bibliografía',
             'Número de aprendices',
-            'Participantes'
+            'Participantes',
+            'Finalizado',
+            'Radicado',
+            'Estado final',
         ];
     }
 

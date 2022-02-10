@@ -12,8 +12,8 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
-    export let grupoInvestigacionId
-    let programasFormacion
+    export let grupoInvestigacion
+    export let programasFormacion
 
     $: $title = 'Crear línea de investigación'
 
@@ -26,45 +26,16 @@
     let sending = false
     let form = useForm({
         nombre: '',
-        grupo_investigacion_id: grupoInvestigacionId,
+        grupo_investigacion_id: grupoInvestigacion.id,
         programas_formacion: null,
     })
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])) {
-            $form.post(route('lineas-investigacion.store'), {
+            $form.post(route('grupos-investigacion.lineas-investigacion.store', grupoInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
             })
-        }
-    }
-
-    let oldGrupoInvestigacionId = null
-    let centroFormacionId
-    $: if ($form.grupo_investigacion_id) {
-        if (oldGrupoInvestigacionId != $form.grupo_investigacion_id) {
-            getCentroFormacion($form.grupo_investigacion_id)
-        }
-    }
-    async function getCentroFormacion(grupoInvestigacionId) {
-        let res = await axios.get(route('web-api.centros-formacion-grupo-investigacion', grupoInvestigacionId))
-        if (res.status == '200') {
-            oldGrupoInvestigacionId = $form.grupo_investigacion_id
-            centroFormacionId = res.data?.value
-        }
-    }
-
-    let oldCentroFormacionId = null
-    $: if (centroFormacionId) {
-        if (oldCentroFormacionId != centroFormacionId) {
-            getProgramasFormacion(centroFormacionId)
-        }
-    }
-    async function getProgramasFormacion(centroFormacionId) {
-        let res = await axios.get(route('web-api.programas-formacion', centroFormacionId))
-        if (res.status == '200') {
-            programasFormacion = res.data
-            oldCentroFormacionId = centroFormacionId
         }
     }
 </script>
@@ -75,7 +46,7 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('lineas-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
+                        <a use:inertia href={route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id)} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
@@ -88,16 +59,12 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
-                    <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
+                    <Label required labelFor="nombre" value="Nombre del grupo de investigación" />
+                    <Input id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="grupo_investigacion_id" value="Grupo de investigación" />
-                    <DynamicList id="grupo_investigacion_id" bind:value={$form.grupo_investigacion_id} routeWebApi={route('web-api.grupos-investigacion')} placeholder="Busque por el nombre del grupo de investigación" message={errors.grupo_investigacion_id} required />
-                </div>
-
-                <div class="mt-4">
-                    <Label required class="mb-4" for="programas_formacion" value="Programa(s) de formación asociados" />
+                    <Label required class="mb-4" labelFor="programas_formacion" value="Programa(s) de formación asociados" />
                     <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar programas de formación" required />
                 </div>
             </fieldset>

@@ -64,6 +64,9 @@ class GeneralidadesTpExport implements FromCollection, WithHeadings, WithMapping
             $tp->propuesta_sostenibilidad,
             $tp->impacto_centro_formacion,
             $tp->bibliografia,
+            ($tp->proyecto->finalizado) ? 'SI' : 'NO',
+            ($tp->proyecto->habilitado_para_evaluar) ? 'SI' : 'NO',
+            $tp->proyecto->estado_cord_sennova ? json_decode($tp->proyecto->estado_cord_sennova)->estado : ($tp->proyecto->tp()->exists() ? $tp->proyecto->estado_evaluacion_tp['estado'] : 'Sin información registrada'),
         ];
     }
 
@@ -94,6 +97,9 @@ class GeneralidadesTpExport implements FromCollection, WithHeadings, WithMapping
             'Propuesta de sostenibilidad',
             'Impacto en el centro de formación',
             'Bibliografía',
+            'Finalizado',
+            'Radicado',
+            'Estado final',
         ];
     }
 
