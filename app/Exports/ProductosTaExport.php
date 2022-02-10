@@ -51,6 +51,7 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
             $producto->fecha_inicio,
             $producto->fecha_finalizacion,
             $producto->valor_proyectado,
+            $producto->indicador,
             $producto->medio_verificacion,
         ];
     }
@@ -62,7 +63,8 @@ class ProductosTaExport implements FromCollection, WithHeadings, WithMapping, Wi
             'Descripción',
             'Fecha de inicio',
             'Fecha de finalización',
-            'Valor proyectado',
+            'Meta',
+            'Indicador',
             'Medio de verificación',
         ];
     }

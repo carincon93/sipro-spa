@@ -125,46 +125,17 @@ class LineaInvestigacion extends Model
      */
     public function scopeFilterLineaInvestigacion($query, array $filters)
     {
+        $query->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id');
+        $query->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id');
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $search = str_replace(' ', '%%', $search);
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
-            $query->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id');
-            $query->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id');
             $query->whereRaw("unaccent(lineas_investigacion.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
+        })->when($filters['grupoInvestigacion'] ?? null, function ($query, $grupoInvestigacion) {
+            $query->whereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $grupoInvestigacion . "%')");
         });
-    }
-
-    /**
-     * getLineasInvestigacionByRol
-     *
-     * @return object
-     */
-    public static function getLineasInvestigacionByRol()
-    {
-        $user = Auth::user();
-        if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
-            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion.centroFormacion')->filterLineaInvestigacion(request()->only('search'))->orderBy('lineas_investigacion.nombre', 'ASC')->paginate();
-        } else if ($user->hasRole([4, 21])) {
-            $centroFormacionId = null;
-            if ($user->dinamizadorCentroFormacion()->exists()) {
-                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
-            } else if ($user->hasRole(21)) {
-                $centroFormacionId = $user->centroFormacion->id;
-            }
-
-            $lineasInvestigacion = LineaInvestigacion::select('lineas_investigacion.id', 'lineas_investigacion.nombre', 'lineas_investigacion.grupo_investigacion_id')->with('grupoInvestigacion.centroFormacion')
-                ->whereHas(
-                    'grupoInvestigacion.centroFormacion',
-                    function ($query) use ($centroFormacionId) {
-                        $query->where('id', $centroFormacionId);
-                    }
-                )
-                ->filterLineaInvestigacion(request()->only('search'))->paginate();
-        }
-
-        return $lineasInvestigacion;
     }
 }

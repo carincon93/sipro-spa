@@ -169,23 +169,30 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" for="redes_conocimiento" value="Red o redes de conocimiento afines al Grupo de Investigación" />
-                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.municipios} placeholder="Buscar redes de conocimiento" required />
+                    <Label required class="mb-4" labelFor="redes_conocimiento" value="Red o redes de conocimiento afines al Grupo de Investigación" />
+                    <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.redes_conocimiento} placeholder="Buscar redes de conocimiento" required />
                 </div>
+
+                <hr class="mt-10 mb-10" />
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="GIC – F – 020" />
                     <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
                 </div>
 
+                <hr class="mt-10 mb-10" />
+
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="GIC – F – 032" />
                     <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 sticky bottom-0">
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
+                    <div class="flex items-center">
+                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
+                    </div>
+                    <p class="mt-4"><strong>Nota: </strong>Después de crear el grupo de investigación será redirigido(a) a una nueva sección para añadir las líneas de investigación declaradas y el alineamiento con los programas de formación</p>
                 {/if}
             </div>
         </form>

@@ -21,10 +21,12 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('viewAny', [GrupoInvestigacion::class]);
 
+        //  select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->orderBy('grupos_investigacion.nombre', 'ASC')->with('centroFormacion.regional')
+        //         ->filterGrupoInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+
         return Inertia::render('GruposInvestigacion/Index', [
             'filters'               => request()->all('search'),
-            'gruposInvestigacion'   => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->orderBy('grupos_investigacion.nombre', 'ASC')->with('centroFormacion.regional')
-                ->filterGrupoInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'gruposInvestigacion'   => GrupoInvestigacion::getGruposInvestigacionByRol()->appends(['search' => request()->search])
         ]);
     }
 
@@ -92,7 +94,7 @@ class GrupoInvestigacionController extends Controller
 
         $grupoInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
 
-        return redirect()->route('lineas-investigacion.create', ['grupoInvestigacionId' => $grupoInvestigacion->id])->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('lineas-investigacion.index', ['grupoInvestigacion' => $grupoInvestigacion->nombre])->with('success', 'El recurso se ha creado correctamente. A continuación, asocie las líneas de investigación.');
     }
 
     /**
@@ -175,9 +177,9 @@ class GrupoInvestigacionController extends Controller
 
         $grupoInvestigacion->centroFormacion()->associate($request->centro_formacion_id);
 
-        $grupoInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
-
         $grupoInvestigacion->save();
+
+        $grupoInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -210,5 +212,23 @@ class GrupoInvestigacionController extends Controller
         $random    = Str::random(10);
 
         return str_replace(array("\r", "\n"), '', "formatocod{$random}." . $archivo->extension());
+    }
+
+    /**
+     * descargarFormato
+     *
+     * @param  mixed $request
+     * @param  mixed $grupoInvestigacion
+     * @return void
+     */
+    public function descargarFormato(Request $request, GrupoInvestigacion $grupoInvestigacion)
+    {
+        if ($request->formato == 'formato_gic_f020') {
+            $ruta = $grupoInvestigacion->formato_gic_f020;
+        } else if ($request->formato == 'formato_gic_f032') {
+            $ruta = $grupoInvestigacion->formato_gic_f032;
+        }
+
+        return response()->download(storage_path("app/$ruta"));
     }
 }

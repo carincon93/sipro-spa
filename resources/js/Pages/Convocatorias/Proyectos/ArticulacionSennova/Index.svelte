@@ -99,7 +99,7 @@
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="lineas_investigacion" value="Líneas de Investigación en las cuales se están ejecutando iniciativas o proyectos de la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="lineas_investigacion" bind:selectedValue={$form.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" required />
@@ -108,7 +108,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="grupos_investigacion" value="Grupos de investigación en los cuales está vinculada la TecnoAcademia" />
+                    <Label required class="mb-4" labelFor="grupos_investigacion" value="Grupos de investigación en los cuales está vinculada la TecnoAcademia" />
                 </div>
                 <div>
                     <SelectMulti id="grupos_investigacion" bind:selectedValue={$form.grupos_investigacion} items={gruposInvestigacion} isMulti={true} error={errors.grupos_investigacion} placeholder="Buscar por el nombre del grupo de investigación" required />
@@ -127,7 +127,7 @@
             {#if $form.articulacion_semillero?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
+                        <Label required class="mb-4" labelFor="semilleros_investigacion" value="Semillero(s) de investigación de la TecnoAcademia" />
                     </div>
                     <div>
                         <SelectMulti id="semilleros_investigacion" bind:selectedValue={$form.semilleros_investigacion} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion} placeholder="Buscar por el nombre del semillero de investigación" required />
@@ -136,7 +136,7 @@
             {/if}
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="proyectos_ejecucion" value="Proyectos o iniciativas en ejecución en el año {convocatoria.year - 1}" />
+                    <Label required class="mb-4" labelFor="proyectos_ejecucion" value="Proyectos o iniciativas en ejecución en el año {convocatoria.year - 1}" />
                 </div>
                 <div>
                     <Textarea label="Proyectos / Iniciativas" maxlength="40000" id="proyectos_ejecucion" error={errors.proyectos_ejecucion} bind:value={$form.proyectos_ejecucion} required />
@@ -176,14 +176,14 @@
                         <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
                     </div>
                     <div>
-                        <SelectMulti id="disciplinas_subarea_conocimiento" bind:selectedValue={$form.disciplinas_subarea_conocimiento} items={disciplinasSubareaConocimiento} isMulti={true} error={errors.disciplinas_subarea_conocimiento} placeholder="Disciplinas subárea de concimiento" required />
+                        <SelectMulti id="disciplinas_subarea_conocimiento_id" bind:selectedValue={$form.disciplinas_subarea_conocimiento} items={disciplinasSubareaConocimiento} isMulti={true} error={errors.disciplinas_subarea_conocimiento} placeholder="Disciplinas subárea de concimiento" required />
                     </div>
                 </div>
             {/if}
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="redes_conocimiento" value="Red de conocimiento sectorial" />
+                    <Label required class="mb-4" labelFor="redes_conocimiento" value="Red de conocimiento sectorial" />
                 </div>
                 <div>
                     <SelectMulti id="redes_conocimiento" bind:selectedValue={$form.redes_conocimiento} items={redesConocimiento} isMulti={true} error={errors.redes_conocimiento} placeholder="Buscar por el nombre del grupo de investigación" required />
@@ -192,7 +192,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="actividades_economicas" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto?" />
+                    <Label required class="mb-4" labelFor="actividades_economicas" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto?" />
                 </div>
                 <div>
                     <SelectMulti id="actividades_economicas" bind:selectedValue={$form.actividades_economicas} items={actividadesEconomicas} isMulti={true} error={errors.actividades_economicas} placeholder="Buscar por el nombre del grupo de investigación" required />
@@ -201,7 +201,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="tematicas_estrategicas" value="Temática estratégica SENA" />
+                    <Label required class="mb-4" labelFor="tematicas_estrategicas" value="Temática estratégica SENA" />
                 </div>
                 <div>
                     <SelectMulti id="tematicas_estrategicas" bind:selectedValue={$form.tematicas_estrategicas} items={tematicasEstrategicas} isMulti={true} error={errors.tematicas_estrategicas} placeholder="Buscar por el nombre del grupo de investigación" required />

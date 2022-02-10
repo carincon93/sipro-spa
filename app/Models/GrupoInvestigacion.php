@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class GrupoInvestigacion extends Model
 {
@@ -122,5 +123,38 @@ class GrupoInvestigacion extends Model
             $query->orWhereRaw("unaccent(centros_formacion.nombre) ilike unaccent('%" . $search . "%')");
             $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getGruposInvestigacionByRol
+     *
+     * @return object
+     */
+    public static function getGruposInvestigacionByRol()
+    {
+        $user = Auth::user();
+        if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
+            $gruposInvestigacion = GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion')->filterGrupoInvestigacion(request()->only('search', 'grupoInvestigacion'))->orderBy('grupos_investigacion.nombre', 'ASC')->paginate();
+        } else if ($user->hasRole([4, 21])) {
+            $centroFormacionId = null;
+            if ($user->dinamizadorCentroFormacion()->exists()) {
+                $centroFormacionId = $user->dinamizadorCentroFormacion->id;
+            } else if ($user->hasRole(21)) {
+                $centroFormacionId = $user->centroFormacion->id;
+            }
+
+            $gruposInvestigacion = GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion')
+                ->whereHas(
+                    'centroFormacion',
+                    function ($query) use ($centroFormacionId) {
+                        $query->where('id', $centroFormacionId);
+                    }
+                )
+                ->filterGrupoInvestigacion(request()->only('search', 'grupoInvestigacion'))->paginate();
+        }
+
+        $gruposInvestigacion->load('centroFormacion.regional');
+
+        return $gruposInvestigacion;
     }
 }

@@ -535,7 +535,7 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
+                <Label class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
             </div>
             <div>
                 <SelectMulti classes="evaluacion-select-multi" id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />

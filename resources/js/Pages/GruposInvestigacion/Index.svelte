@@ -62,9 +62,15 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin}
+                            {#if isSuperAdmin || checkRole(authUser, [4])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
                                     <Text>Ver detalles</Text>
+                                </Item>
+                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id))}>
+                                    <Text>Líneas de investigación</Text>
+                                </Item>
+                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id))}>
+                                    <Text>Semilleros de investigación</Text>
                                 </Item>
                             {:else}
                                 <Item>

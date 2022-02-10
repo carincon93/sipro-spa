@@ -281,7 +281,7 @@
             {#if $form.financiado_anteriormente?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="codigos_proyectos_id" value="Si la respuesta anterior fue afirmativa, relacione únicamente los códigos de los proyectos SGPS relacionados" />
+                        <Label required class="mb-4"labelFor="codigos_proyectos_id" value="Si la respuesta anterior fue afirmativa, relacione únicamente los códigos de los proyectos SGPS relacionados" />
                     </div>
                     <div>
                         <SelectMulti id="codigos_proyectos_id" bind:selectedValue={$form.codigos_proyectos_id} items={codigosSgps} isMulti={true} error={errors.codigos_proyectos_id} placeholder="Buscar por el código/título del proyecto" required />
@@ -301,7 +301,7 @@
             {#if $form.estado_general_maquinaria?.value == 2 || $form.estado_general_maquinaria?.value == 3}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="razon_estado_general" value="Si la respuesta anterior fue regular o malo, describa la razón. Para mayor especificidad listar máquina por máquina para identificación a partir del tiempo de vida útil." />
+                        <Label required class="mb-4"labelFor="razon_estado_general" value="Si la respuesta anterior fue regular o malo, describa la razón. Para mayor especificidad listar máquina por máquina para identificación a partir del tiempo de vida útil." />
                     </div>
                     <div>
                         <Textarea label="Razón" maxlength="40000" id="razon_estado_general" error={errors.razon_estado_general} bind:value={$form.razon_estado_general} required />
@@ -321,7 +321,7 @@
             {#if $form.ambiente_activo?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="programas_formacion_calificados" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación con registro calificado beneficiados." />
+                        <Label required class="mb-4"labelFor="programas_formacion_calificados" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación con registro calificado beneficiados." />
                     </div>
                     <div>
                         {#if $form.centro_formacion_id?.value}
@@ -345,7 +345,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="programas_formacion" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados." />
+                        <Label required class="mb-4"labelFor="programas_formacion" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados." />
                     </div>
                     <div>
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
@@ -365,7 +365,7 @@
             {:else if $form.ambiente_activo?.value == 2}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="justificacion_ambiente_inactivo" value="Si la respuesta anterior fue negativa, justifique la respuesta" />
+                        <Label required class="mb-4"labelFor="justificacion_ambiente_inactivo" value="Si la respuesta anterior fue negativa, justifique la respuesta" />
                     </div>
                     <div>
                         <Textarea label="Justificación" maxlength="4000" id="justificacion_ambiente_inactivo" error={errors.justificacion_ambiente_inactivo} bind:value={$form.justificacion_ambiente_inactivo} required />
@@ -394,7 +394,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="cod_proyectos_beneficiados_id" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
+                        <Label required class="mb-4"labelFor="cod_proyectos_beneficiados_id" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
                     </div>
                     <div>
                         <SelectMulti id="cod_proyectos_beneficiados_id" bind:selectedValue={$form.cod_proyectos_beneficiados_id} items={codigosSgps} isMulti={true} error={errors.cod_proyectos_beneficiados_id} placeholder="Buscar por el código/título de los proyectos" required />
@@ -414,7 +414,7 @@
 
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" for="semilleros_investigacion_id" value="Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova" />
+                        <Label required class="mb-4"labelFor="semilleros_investigacion_id" value="Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova" />
                     </div>
                     <div>
                         <SelectMulti id="semilleros_investigacion_id" bind:selectedValue={$form.semilleros_investigacion_id} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion_id} placeholder="Buscar por el nombre del semillero de investigación" required />
@@ -489,7 +489,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="impacto_procesos_formacion" value="Describa el impacto generado en los procesos de formación" />
+                    <Label required class="mb-4"labelFor="impacto_procesos_formacion" value="Describa el impacto generado en los procesos de formación" />
                 </div>
                 <div>
                     <Textarea label="Impacto" maxlength="4000" id="impacto_procesos_formacion" error={errors.impacto_procesos_formacion} bind:value={$form.impacto_procesos_formacion} required />
@@ -498,7 +498,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="pertinencia_sector_productivo" value="Describa la pertinencia obtenida con el sector productivo" />
+                    <Label required class="mb-4"labelFor="pertinencia_sector_productivo" value="Describa la pertinencia obtenida con el sector productivo" />
                 </div>
                 <div>
                     <Textarea label="Pertinencia" maxlength="4000" id="pertinencia_sector_productivo" error={errors.pertinencia_sector_productivo} bind:value={$form.pertinencia_sector_productivo} required />
@@ -516,7 +516,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="observaciones_generales_ambiente" value="Observaciones generales del ambiente modernizado por Sennova" />
+                    <Label required class="mb-4"labelFor="observaciones_generales_ambiente" value="Observaciones generales del ambiente modernizado por Sennova" />
                 </div>
                 <div>
                     <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" error={errors.observaciones_generales_ambiente} bind:value={$form.observaciones_generales_ambiente} />

@@ -367,7 +367,7 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                <Label class="mb-4" labelFor="municipios" value="Nombre de los municipios beneficiados" />
             </div>
             <div>
                 <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={tpInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />

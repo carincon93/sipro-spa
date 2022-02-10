@@ -851,7 +851,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                    <Label required class="mb-4" labelFor="municipios" value="Nombre de los municipios beneficiados" />
                 </div>
                 <div>
                     <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
@@ -889,7 +889,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="programas_formacion" value="Nombre de los programas de formación con registro calificado a impactar" />
+                    <Label required class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con registro calificado a impactar" />
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
@@ -909,7 +909,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" for="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
+                    <Label class="mb-4" labelFor="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
                 </div>
                 <div>
                     <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" />

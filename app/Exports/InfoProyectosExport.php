@@ -29,7 +29,7 @@ class InfoProyectosExport implements WithMultipleSheets, WithTitle
         $sheets[] = new EntidadesAliadasIdiExport($this->convocatoria);
         $sheets[] = new EntidadesAliadasTaExport($this->convocatoria);
         $sheets[] = new ProgramasFormacionArticuladosExport($this->convocatoria);
-        $sheets[] = new ProgramasFormacionCalificadosExport($this->convocatoria);
+        $sheets[] = new ProgramasFormacionCalificadosExport($this->convocatoria, [1, 2, 29, 3, 9, 10]);
 
         return $sheets;
     }
@@ -39,6 +39,6 @@ class InfoProyectosExport implements WithMultipleSheets, WithTitle
      */
     public function title(): string
     {
-        return 'Proyectos TA';
+        return 'Proyectos';
     }
 }

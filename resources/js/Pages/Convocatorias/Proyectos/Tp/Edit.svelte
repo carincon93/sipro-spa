@@ -383,7 +383,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" for="municipios" value="Nombre de los municipios beneficiados" />
+                    <Label required class="mb-4" labelFor="municipios" value="Nombre de los municipios beneficiados" />
                 </div>
                 <div>
                     <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />

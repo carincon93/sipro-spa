@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" for="activadores" value="Nombre de los activadores" />
+                    <Label required class="mb-4" labelFor="activadores" value="Nombre de los activadores" />
                     <SelectMulti id="activadores" bind:selectedValue={$form.activadores} items={activadores} isMulti={true} error={errors.municipios} placeholder="Buscar activadores" required />
                 </div>
             </fieldset>
