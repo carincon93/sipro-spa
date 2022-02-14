@@ -177,7 +177,7 @@ class Tp extends Model
                 ->distinct()
                 ->orderBy('tp.id', 'ASC')
                 ->filterTp(request()->only('search'))->paginate();
-        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion || $authUser->hasRole(21)) { // Dinamizador SENNOVA o Subdirector de centro
+        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion || $authUser->hasRole(21) || $authUser->hasRole(24)) { // Dinamizador SENNOVA o Subdirector de centro
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
                 $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
