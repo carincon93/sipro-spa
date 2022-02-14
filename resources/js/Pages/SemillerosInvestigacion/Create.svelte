@@ -155,28 +155,28 @@
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f020" value="Formato GIC – F – 020" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} />
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f020" value="Formato GIC – F – 020" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} required />
                 </div>
 
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f032" value="Formato GIC – F – 032" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} />
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f032" value="Formato GIC – F – 032" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} required />
                 </div>
 
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} />
+                    <Label required class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} required />
                 </div>
 
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="linea_investigacion" value="Seleccione una línea de investigación y posteriormente asocie los programas de formación" />
+                    <Label required class="mb-4" labelFor="linea_investigacion" value="Seleccione una línea de investigación y posteriormente asocie los programas de formación" />
                     <Select id="linea_investigacion" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion} error={errors.linea_investigacion} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
                 </div>
                 {#if $form.linea_investigacion}

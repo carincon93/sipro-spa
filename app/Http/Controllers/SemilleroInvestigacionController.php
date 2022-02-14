@@ -58,7 +58,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion = new SemilleroInvestigacion();
         $semilleroInvestigacion->nombre = $request->nombre;
-        $semilleroInvestigacion->codigo = 'test';
+        $semilleroInvestigacion->codigo = '';
         $semilleroInvestigacion->fecha_creacion_semillero = $request->fecha_creacion_semillero;
         $semilleroInvestigacion->nombre_lider_semillero = $request->nombre_lider_semillero;
         $semilleroInvestigacion->email_contacto = $request->email_contacto;
@@ -97,10 +97,12 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->save();
 
+        $semilleroInvestigacion->update(['codigo' => 'SGPS-SEM-' . $semilleroInvestigacion->id]);
+
         $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
         $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
 
-        return redirect()->route('semilleros-investigacion.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -216,7 +218,7 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->delete();
 
 
-        return redirect()->route('semilleros-investigacion.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
     /**
