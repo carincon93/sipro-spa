@@ -109,6 +109,11 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
+                    <Label labelFor="nombre" value="Código" />
+                    <Input disabled id="codigo" type="text" class="mt-1" bind:value={semilleroInvestigacion.codigo} error={errors.codigo} required />
+                </div>
+
+                <div class="mt-4">
                     <Label required labelFor="linea_investigacion_id" value="Línea de investigación principal" />
                     <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
                 </div>
