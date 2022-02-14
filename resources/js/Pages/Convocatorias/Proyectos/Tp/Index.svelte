@@ -82,7 +82,7 @@
                             {proyecto_tp.fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin || (convocatoria.fase == 5 && proyecto_tp.proyecto.mostrar_recomendaciones)}
+                    {#if isSuperAdmin || (checkRole(authUser, [4, 24]) && proyecto_tp.proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && proyecto_tp.proyecto.mostrar_recomendaciones)}
                         <td class="border-t">
                             <p class="px-6 py-4">
                                 {proyecto_tp.proyecto.estado_evaluacion_tp.estado}
@@ -122,7 +122,7 @@
 
             {#if tp.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>
