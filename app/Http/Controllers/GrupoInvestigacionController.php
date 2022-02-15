@@ -94,7 +94,7 @@ class GrupoInvestigacionController extends Controller
 
         $grupoInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
 
-        return redirect()->route('lineas-investigacion.index', ['grupoInvestigacion' => $grupoInvestigacion->nombre])->with('success', 'El recurso se ha creado correctamente. A continuación, asocie las líneas de investigación.');
+        return redirect()->route('grupos-investigacion.lineas-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha creado correctamente. A continuación, asocie las líneas de investigación.');
     }
 
     /**
