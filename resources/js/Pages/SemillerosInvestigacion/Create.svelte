@@ -39,8 +39,8 @@
         objetivo_general: '',
         objetivos_especificos: '',
         link_semillero: '',
-        formato_gic_f020: '',
-        formato_gic_f032: '',
+        formato_gic_f_020: '',
+        formato_gic_f_032: '',
         formato_aval_semillero: '',
         centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? authUser.centro_formacion_id : null,
         linea_investigacion_id: null,
@@ -155,27 +155,6 @@
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f020" value="Formato GIC – F – 020" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} required />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
-                <div class="mt-4">
-                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f032" value="Formato GIC – F – 032" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} required />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
-                <div class="mt-4">
-                    <Label required class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} required />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
-                <div class="mt-4">
                     <Label required class="mb-4" labelFor="linea_investigacion" value="Seleccione una línea de investigación y posteriormente asocie los programas de formación" />
                     <Select id="linea_investigacion" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion} error={errors.linea_investigacion} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
                 </div>
@@ -185,6 +164,27 @@
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Programa(s) de formación" required />
                     </div>
                 {/if}
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} required />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} required />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label required class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} required />
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}

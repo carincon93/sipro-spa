@@ -223,10 +223,10 @@ class GrupoInvestigacionController extends Controller
      */
     public function descargarFormato(Request $request, GrupoInvestigacion $grupoInvestigacion)
     {
-        if ($request->formato == 'formato_gic_f020') {
-            $ruta = $grupoInvestigacion->formato_gic_f020;
-        } else if ($request->formato == 'formato_gic_f032') {
-            $ruta = $grupoInvestigacion->formato_gic_f032;
+        if ($request->formato == 'formato_gic_f_020') {
+            $ruta = $grupoInvestigacion->formato_gic_f_020;
+        } else if ($request->formato == 'formato_gic_f_032') {
+            $ruta = $grupoInvestigacion->formato_gic_f_032;
         }
 
         return response()->download(storage_path("app/$ruta"));
