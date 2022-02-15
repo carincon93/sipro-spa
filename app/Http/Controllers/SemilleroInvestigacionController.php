@@ -57,33 +57,32 @@ class SemilleroInvestigacionController extends Controller
         $this->authorize('create', [SemilleroInvestigacion::class]);
 
         $semilleroInvestigacion = new SemilleroInvestigacion();
-        $semilleroInvestigacion->nombre = $request->nombre;
-        $semilleroInvestigacion->codigo = '';
-        $semilleroInvestigacion->fecha_creacion_semillero = $request->fecha_creacion_semillero;
-        $semilleroInvestigacion->nombre_lider_semillero = $request->nombre_lider_semillero;
-        $semilleroInvestigacion->email_contacto = $request->email_contacto;
-        $semilleroInvestigacion->reconocimientos_semillero_investigacion = $request->reconocimientos_semillero_investigacion;
-        $semilleroInvestigacion->vision = $request->vision;
-        $semilleroInvestigacion->mision = $request->mision;
-        $semilleroInvestigacion->objetivo_general = $request->objetivo_general;
-        $semilleroInvestigacion->objetivos_especificos = $request->objetivos_especificos;
-        $semilleroInvestigacion->link_semillero = $request->link_semillero;
+        $semilleroInvestigacion->nombre                                     = $request->nombre;
+        $semilleroInvestigacion->fecha_creacion_semillero                   = $request->fecha_creacion_semillero;
+        $semilleroInvestigacion->nombre_lider_semillero                     = $request->nombre_lider_semillero;
+        $semilleroInvestigacion->email_contacto                             = $request->email_contacto;
+        $semilleroInvestigacion->reconocimientos_semillero_investigacion    = $request->reconocimientos_semillero_investigacion;
+        $semilleroInvestigacion->vision                                     = $request->vision;
+        $semilleroInvestigacion->mision                                     = $request->mision;
+        $semilleroInvestigacion->objetivo_general                           = $request->objetivo_general;
+        $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
+        $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
 
-        $nombre_gic_f020 = $this->cleanFileName('formato_gic_f020', $request->formato_gic_f020);
+        $nombre_gic_f020 = $this->cleanFileName('formato_gic_f_020', $request->formato_gic_f_020);
 
-        $formato_gic_f020 = $request->formato_gic_f020->storeAs(
+        $formato_gic_f_020 = $request->formato_gic_f_020->storeAs(
             'formatos_semillero_investigacion',
             $nombre_gic_f020
         );
-        $semilleroInvestigacion->formato_gic_f020 = $formato_gic_f020;
+        $semilleroInvestigacion->formato_gic_f_020 = $formato_gic_f_020;
 
-        $formato_gic_f032 = $this->cleanFileName('formato_gic_f032', $request->formato_gic_f032);
+        $formato_gic_f_032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
 
-        $formato_gic_f032 = $request->formato_gic_f032->storeAs(
+        $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
             'formatos_semillero_investigacion',
-            $formato_gic_f032
+            $formato_gic_f_032
         );
-        $semilleroInvestigacion->formato_gic_f032 = $formato_gic_f032;
+        $semilleroInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
 
         $formato_aval_semillero = $this->cleanFileName('formato_aval_semillero', $request->formato_aval_semillero);
 
@@ -149,36 +148,35 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
-        $semilleroInvestigacion->nombre = $request->nombre;
-        $semilleroInvestigacion->codigo = $request->codigo;
-        $semilleroInvestigacion->fecha_creacion_semillero   = $request->fecha_creacion_semillero;
-        $semilleroInvestigacion->nombre_lider_semillero     = $request->nombre_lider_semillero;
-        $semilleroInvestigacion->email_contacto             = $request->email_contacto;
-        $semilleroInvestigacion->reconocimientos_semillero_investigacion = $request->reconocimientos_semillero_investigacion;
-        $semilleroInvestigacion->vision = $request->vision;
-        $semilleroInvestigacion->mision = $request->mision;
-        $semilleroInvestigacion->objetivo_general = $request->objetivo_general;
-        $semilleroInvestigacion->objetivos_especificos = $request->objetivos_especificos;
-        $semilleroInvestigacion->link_semillero = $request->link_semillero;
+        $semilleroInvestigacion->nombre                                     = $request->nombre;
+        $semilleroInvestigacion->fecha_creacion_semillero                   = $request->fecha_creacion_semillero;
+        $semilleroInvestigacion->nombre_lider_semillero                     = $request->nombre_lider_semillero;
+        $semilleroInvestigacion->email_contacto                             = $request->email_contacto;
+        $semilleroInvestigacion->reconocimientos_semillero_investigacion    = $request->reconocimientos_semillero_investigacion;
+        $semilleroInvestigacion->vision                                     = $request->vision;
+        $semilleroInvestigacion->mision                                     = $request->mision;
+        $semilleroInvestigacion->objetivo_general                           = $request->objetivo_general;
+        $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
+        $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
 
-        if ($request->hasFile('formato_gic_f020')) {
-            $formato_gic_f020 = $this->cleanFileName('formato_gic_f020', $request->formato_gic_f020);
-            Storage::delete($semilleroInvestigacion->formato_gic_f020);
-            $formato_gic_f020 = $request->formato_gic_f020->storeAs(
+        if ($request->hasFile('formato_gic_f_020')) {
+            $formato_gic_f_020 = $this->cleanFileName('formato_gic_f_020', $request->formato_gic_f_020);
+            Storage::delete($semilleroInvestigacion->formato_gic_f_020);
+            $formato_gic_f_020 = $request->formato_gic_f_020->storeAs(
                 'formatos_semillero_investigacion',
-                $formato_gic_f020
+                $formato_gic_f_020
             );
-            $semilleroInvestigacion->formato_gic_f020 = $formato_gic_f020;
+            $semilleroInvestigacion->formato_gic_f_020 = $formato_gic_f_020;
         }
 
-        if ($request->hasFile('formato_gic_f032')) {
-            $formato_gic_f032 = $this->cleanFileName('formato_gic_f032', $request->formato_gic_f032);
-            Storage::delete($semilleroInvestigacion->formato_gic_f032);
-            $formato_gic_f032 = $request->formato_gic_f032->storeAs(
+        if ($request->hasFile('formato_gic_f_032')) {
+            $formato_gic_f_032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
+            Storage::delete($semilleroInvestigacion->formato_gic_f_032);
+            $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
                 'formatos_semillero_investigacion',
-                $formato_gic_f032
+                $formato_gic_f_032
             );
-            $semilleroInvestigacion->formato_gic_f032 = $formato_gic_f032;
+            $semilleroInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
         }
 
         if ($request->hasFile('formato_aval_semillero')) {
@@ -211,8 +209,8 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('delete', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
-        Storage::delete($semilleroInvestigacion->formato_gic_f020);
-        Storage::delete($semilleroInvestigacion->formato_gic_f032);
+        Storage::delete($semilleroInvestigacion->formato_gic_f_020);
+        Storage::delete($semilleroInvestigacion->formato_gic_f_032);
         Storage::delete($semilleroInvestigacion->formato_aval_semillero);
 
         $semilleroInvestigacion->delete();
@@ -246,10 +244,10 @@ class SemilleroInvestigacionController extends Controller
      */
     public function descargarFormato(Request $request, GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
-        if ($request->formato == 'formato_gic_f020') {
-            $ruta = $semilleroInvestigacion->formato_gic_f020;
-        } else if ($request->formato == 'formato_gic_f032') {
-            $ruta = $semilleroInvestigacion->formato_gic_f032;
+        if ($request->formato == 'formato_gic_f_020') {
+            $ruta = $semilleroInvestigacion->formato_gic_f_020;
+        } else if ($request->formato == 'formato_gic_f_032') {
+            $ruta = $semilleroInvestigacion->formato_gic_f_032;
         } else if ($request->formato == 'formato_aval_semillero') {
             $ruta = $semilleroInvestigacion->formato_aval_semillero;
         }

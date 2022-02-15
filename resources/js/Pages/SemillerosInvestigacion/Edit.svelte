@@ -45,8 +45,8 @@
         objetivo_general: semilleroInvestigacion.objetivo_general,
         objetivos_especificos: semilleroInvestigacion.objetivos_especificos,
         link_semillero: semilleroInvestigacion.link_semillero,
-        formato_gic_f020: null,
-        formato_gic_f032: null,
+        formato_gic_f_020: null,
+        formato_gic_f_032: null,
         formato_aval_semillero: null,
         linea_investigacion_id: {
             value: lineasInvestigacion.find((item) => item.value == semilleroInvestigacion.linea_investigacion_id)?.value,
@@ -175,57 +175,6 @@
 
                 <hr class="mt-10 mb-10" />
 
-                <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f020" value="Formato GIC – F – 020" />
-                    {#if $form.formato_gic_f_020}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f020'])}>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                            Descargar formato GIC – F – 020
-                        </a>
-                    {:else}
-                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 020</p>
-                    {/if}
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f020} error={errors?.formato_gic_f020} />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
-                <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f032" value="Formato GIC – F – 032" />
-                    {#if $form.formato_gic_f_032}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f032'])}>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                            Descargar formato GIC – F – 032
-                        </a>
-                    {:else}
-                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 032</p>
-                    {/if}
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f032} error={errors?.formato_gic_f032} />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
-                <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
-                    {#if $form.formato_aval_semillero}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_aval_semillero'])}>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                            Descargar aval del semillero
-                        </a>
-                    {:else}
-                        <p class="my-10 text-red-400">No se ha cargado el aval del semillero</p>
-                    {/if}
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} />
-                </div>
-
-                <hr class="mt-10 mb-10" />
-
                 <div class="mt-4">
                     <Label required={$form.programas_formacion?.length > 0 ? undefined : 'required'} class="mb-4" labelFor="linea_investigacion" value="Seleccione una línea de investigación y posteriormente asocie los programas de formación" />
                     <Select id="linea_investigacion" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion} error={errors.linea_investigacion} autocomplete="off" placeholder="Seleccione una línea de investigación" required={$form.programas_formacion?.length > 0 ? undefined : 'required'} />
@@ -237,6 +186,57 @@
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Programa(s) de formación" required />
                     </div>
                 {/if}
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
+                    {#if semilleroInvestigacion.formato_gic_f_020}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_020'])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar formato GIC – F – 020
+                        </a>
+                    {:else if semilleroInvestigacion.formato_gic_f_020 == null && $form.formato_gic_f_020 == null}
+                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 020</p>
+                    {/if}
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
+                    {#if semilleroInvestigacion.formato_gic_f_032}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_032'])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar formato GIC – F – 032
+                        </a>
+                    {:else if semilleroInvestigacion.formato_gic_f_032 == null && $form.formato_gic_f_032 == null}
+                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 032</p>
+                    {/if}
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt4-">
+                    <Label class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
+                    {#if semilleroInvestigacion.formato_aval_semillero}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_aval_semillero'])}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Descargar aval del semillero
+                        </a>
+                    {:else if semilleroInvestigacion.formato_aval_semillero == null && $form.formato_aval_semillero == null}
+                        <p class="my-10 text-red-400">No se ha cargado el aval del semillero</p>
+                    {/if}
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_aval_semillero} error={errors?.formato_aval_semillero} />
+                </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
