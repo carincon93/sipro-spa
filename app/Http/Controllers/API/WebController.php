@@ -271,8 +271,15 @@ class WebController extends Controller
      */
     public function lineasInvestigacion($centroFormacion)
     {
-        // return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
-        return response(LineaInvestigacion::selectRaw("lineas_investigacion.id as value, CONCAT(lineas_investigacion.nombre, chr(10), programas_formacion.nombre) as label")->join('linea_investigacion_programa_formacion', 'lineas_investigacion.id', 'linea_investigacion_programa_formacion.linea_investigacion_id')->join('programas_formacion', 'linea_investigacion_programa_formacion.programa_formacion_id', 'programas_formacion.id')->orderBy('lineas_investigacion.nombre', 'ASC')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
+        return response(LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->where('centros_formacion.id', $centroFormacion)->get());
+        // return response(LineaInvestigacion::selectRaw("lineas_investigacion.id as value, CONCAT(lineas_investigacion.nombre, chr(10), programas_formacion.nombre) as label")
+        //     ->join('linea_investigacion_programa_formacion', 'lineas_investigacion.id', 'linea_investigacion_programa_formacion.linea_investigacion_id')
+        //     ->join('programas_formacion', 'linea_investigacion_programa_formacion.programa_formacion_id', 'programas_formacion.id')
+        //     ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
+        //     ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
+        //     ->join('regionales', 'centros_formacion.regional_id', 'regionales.id')
+        //     ->orderBy('lineas_investigacion.nombre', 'ASC')
+        //     ->where('centros_formacion.id', $centroFormacion)->get());
     }
 
     //municipios
