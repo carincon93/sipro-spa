@@ -36,7 +36,7 @@ class SemilleroInvestigacion extends Model
         'objetivo_general',
         'objetivos_especificos',
         'link_semillero',
-        'formato_gic_f_020',
+        'formato_gic_f_021',
         'formato_gic_f_032',
         'formato_aval_semillero',
     ];
