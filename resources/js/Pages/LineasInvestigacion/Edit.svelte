@@ -69,7 +69,7 @@
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
-                    <Label required labelFor="nombre" value="Nombre del grupo de investigación" />
+                    <Label required labelFor="nombre" value="Nombre de la línea de investigación" />
                     <Input id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
                 </div>
 

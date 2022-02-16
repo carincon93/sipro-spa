@@ -45,7 +45,7 @@
         objetivo_general: semilleroInvestigacion.objetivo_general,
         objetivos_especificos: semilleroInvestigacion.objetivos_especificos,
         link_semillero: semilleroInvestigacion.link_semillero,
-        formato_gic_f_020: null,
+        formato_gic_f_021: null,
         formato_gic_f_032: null,
         formato_aval_semillero: null,
         linea_investigacion_id: {
@@ -190,18 +190,18 @@
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
-                    {#if semilleroInvestigacion.formato_gic_f_020}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_020'])}>
+                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_021" value="Formato GIC – F – 021" />
+                    {#if semilleroInvestigacion.formato_gic_f_021}
+                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_021'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
-                            Descargar formato GIC – F – 020
+                            Descargar formato GIC – F – 021
                         </a>
-                    {:else if semilleroInvestigacion.formato_gic_f_020 == null && $form.formato_gic_f_020 == null}
-                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 020</p>
+                    {:else if semilleroInvestigacion.formato_gic_f_021 == null && $form.formato_gic_f_021 == null}
+                        <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 021</p>
                     {/if}
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_021} error={errors?.formato_gic_f_021} />
                 </div>
 
                 <hr class="mt-10 mb-10" />

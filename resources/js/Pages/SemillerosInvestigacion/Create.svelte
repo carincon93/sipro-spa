@@ -39,7 +39,7 @@
         objetivo_general: '',
         objetivos_especificos: '',
         link_semillero: '',
-        formato_gic_f_020: '',
+        formato_gic_f_021: '',
         formato_gic_f_032: '',
         formato_aval_semillero: '',
         centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? authUser.centro_formacion_id : null,
@@ -168,8 +168,8 @@
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt-4">
-                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} required />
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_021" value="Formato GIC – F – 021" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_021} error={errors?.formato_gic_f_021} required />
                 </div>
 
                 <hr class="mt-10 mb-10" />
