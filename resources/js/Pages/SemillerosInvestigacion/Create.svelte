@@ -10,7 +10,6 @@
     import File from '@/Shared/File'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import SelectMulti from '@/Shared/SelectMulti'
     import Select from '@/Shared/Select'
 
@@ -47,6 +46,7 @@
         linea_investigacion: null,
         redes_conocimiento: null,
         programas_formacion: null,
+        lineas_investigacion: null,
     })
 
     function submit() {
@@ -95,6 +95,11 @@
                 <div class="mt-4">
                     <Label required labelFor="linea_investigacion_id" value="Línea de investigación principal" />
                     <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="lineas_investigacion" value="Articulación con líneas de investigación" />
+                    <SelectMulti id="lineas_investigacion" bind:selectedValue={$form.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" required />
                 </div>
 
                 <div class="mt-4">

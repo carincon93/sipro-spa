@@ -30,6 +30,7 @@ class InfoGruposLineasSemillerosExport implements WithMultipleSheets, WithTitle
         $sheets[] = new InfoSemillerosInvestigacionExport();
         $sheets[] = new SemilleroRedesConocimientoExport();
         $sheets[] = new SemillerosInvestigacionProgramaFormacionExport();
+        $sheets[] = new SemillerosInvestigacionLineaInvestigacionExport();
 
         return $sheets;
     }

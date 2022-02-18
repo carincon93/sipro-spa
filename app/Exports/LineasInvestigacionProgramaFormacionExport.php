@@ -66,7 +66,7 @@ class LineasInvestigacionProgramaFormacionExport implements FromCollection, With
         return [
             'Centro de formación',
             'Grupo de investigación',
-            'Nombre',
+            'Nombre del programa de formación',
             'Código',
             'Modalidad',
             'Nivel de formación',

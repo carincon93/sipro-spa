@@ -49,7 +49,7 @@ class GrupoRedesConocimientoExport implements FromCollection, WithHeadings, With
         return [
             'Centro de formación',
             'Grupo de investigación',
-            'Nombre',
+            'Nombre de la red de conocimiento',
         ];
     }
 
