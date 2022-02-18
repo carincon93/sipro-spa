@@ -54,9 +54,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Teacnoacademia </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
-                {#if isSuperAdmin || convocatoria.fase == 5}
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
-                {/if}
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -82,8 +80,8 @@
                             {proyecto_ta.fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin || (checkRole(authUser, [4, 22]) && proyecto_ta.proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && proyecto_ta.proyecto.mostrar_recomendaciones)}
-                        <td class="border-t">
+                    <td class="border-t">
+                        {#if isSuperAdmin || (checkRole(authUser, [4, 22]) && proyecto_ta.proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && proyecto_ta.proyecto.mostrar_recomendaciones)}
                             <p class="px-6 py-4">
                                 {proyecto_ta.proyecto.estado_evaluacion_ta.estado}
                                 {#if isSuperAdmin}
@@ -102,8 +100,10 @@
                                     </small>
                                 {/if}
                             </p>
-                        </td>
-                    {/if}
+                        {:else}
+                            <p class="px-6 py-4">No tiene permisos para ver el estado de este proyecto.</p>
+                        {/if}
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={ta.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [9, 10, 15])}

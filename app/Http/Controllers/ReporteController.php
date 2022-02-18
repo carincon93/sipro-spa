@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
+use App\Exports\InfoGruposLineasSemillerosExport;
 use App\Exports\InfoProyectosExport;
 use App\Exports\InfoProyectosIdiExport;
 use App\Exports\InfoProyectosStExport;
@@ -140,12 +141,21 @@ class ReporteController extends Controller
         return Excel::download(new InfoProyectosStExport($convocatoria), 'proyectos-st' . time() . '.xlsx');
     }
 
-    /** proyectosCulturaInnovacionExportExport
+    /** proyectosCulturaInnovacionExport
      *
      * @return void
      */
     public function proyectosCulturaInnovacionExport(Convocatoria $convocatoria)
     {
         return Excel::download(new InfoProyectosCulturaInnovacionExport($convocatoria), 'proyectosCulturaInnovacion' . time() . '.xlsx');
+    }
+
+    /** gruposLineasSemillerosExport
+     *
+     * @return void
+     */
+    public function gruposLineasSemillerosExport()
+    {
+        return Excel::download(new InfoGruposLineasSemillerosExport(), 'gruposLineasSemilleros' . time() . '.xlsx');
     }
 }

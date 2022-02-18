@@ -230,7 +230,7 @@ class Ta extends Model
             $centroFormacionId = null;
             if ($authUser->hasRole(4)) {
                 $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
-            } else if ($authUser->hasRole(21)) {
+            } else if ($authUser->hasRole(21) || $authUser->hasRole(22)) {
                 $centroFormacionId = $authUser->centroFormacion->id;
             } else if ($authUser->hasRole(3)) {
                 $centroFormacionId = $authUser->subdirectorCentroFormacion->id;

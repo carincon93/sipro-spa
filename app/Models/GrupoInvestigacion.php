@@ -36,7 +36,7 @@ class GrupoInvestigacion extends Model
         'fecha_creacion_grupo',
         'nombre_lider_grupo',
         'email_contacto',
-        '"programa_nal_ctei_principal',
+        'programa_nal_ctei_principal',
         'programa_nal_ctei_secundaria',
         'reconocimientos_grupo_investigacion',
         'objetivo_general',
