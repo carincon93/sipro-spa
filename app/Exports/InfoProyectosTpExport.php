@@ -26,7 +26,7 @@ class InfoProyectosTpExport implements WithMultipleSheets, WithTitle
         $sheets = [];
 
         $sheets[] = new GeneralidadesTpExport($this->convocatoria);
-        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, [4]);
+        $sheets[] = new SemillerosInvestigacionExport($this->convocatoria, [4]);
         $sheets[] = new AnalisisRiesgosExport($this->convocatoria, [4]);
         $sheets[] = new AnexosExport($this->convocatoria, [4]);
         $sheets[] = new EfectosDirectosExport($this->convocatoria, [4]);

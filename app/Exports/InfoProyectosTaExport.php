@@ -27,7 +27,7 @@ class InfoProyectosTaExport implements WithMultipleSheets, WithTitle
 
         $sheets[] = new GeneralidadesTaExport($this->convocatoria);
         $sheets[] = new GruposInvestigacionTaExport($this->convocatoria, 5);
-        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, [5]);
+        $sheets[] = new SemillerosInvestigacionExport($this->convocatoria, [5]);
         $sheets[] = new LineasInvestigacionTaExport($this->convocatoria, 5);
         $sheets[] = new DisciplinasSubareaConocimientoTaExport($this->convocatoria);
         $sheets[] = new RedesConocimientoTaExport($this->convocatoria);

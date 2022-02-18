@@ -26,7 +26,7 @@ class InfoProyectosIdiExport implements WithMultipleSheets, WithTitle
         $sheets = [];
 
         $sheets[] = new GeneralidadesIdiExport($this->convocatoria);
-        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, [1, 2, 29, 3]);
+        $sheets[] = new SemillerosInvestigacionExport($this->convocatoria, [1, 2, 29, 3]);
         $sheets[] = new AnalisisRiesgosExport($this->convocatoria, [1, 2, 29, 3]);
         $sheets[] = new AnexosExport($this->convocatoria, [1, 2, 29, 3]);
         $sheets[] = new EfectosDirectosExport($this->convocatoria, [1, 2, 29, 3]);

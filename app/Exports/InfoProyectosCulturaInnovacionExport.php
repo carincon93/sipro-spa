@@ -26,7 +26,7 @@ class InfoProyectosCulturaInnovacionExport implements WithMultipleSheets, WithTi
         $sheets = [];
 
         $sheets[] = new GeneralidadesCulturaInnovacionExport($this->convocatoria);
-        $sheets[] = new SemillerosnvestigacionExport($this->convocatoria, [9]);
+        $sheets[] = new SemillerosInvestigacionExport($this->convocatoria, [9]);
         $sheets[] = new AnalisisRiesgosExport($this->convocatoria, [9]);
         $sheets[] = new AnexosExport($this->convocatoria, [9]);
         $sheets[] = new EfectosDirectosExport($this->convocatoria, [9]);

@@ -195,7 +195,7 @@
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
-                    {#if $form.formato_gic_f_020}
+                    {#if grupoInvestigacion.formato_gic_f_020}
                         <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.download', [grupoInvestigacion.id, 'formato_gic_f_020'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -212,7 +212,7 @@
 
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
-                    {#if $form.formato_gic_f_032}
+                    {#if grupoInvestigacion.formato_gic_f_032}
                         <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.download', [grupoInvestigacion.id, 'formato_gic_f_032'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

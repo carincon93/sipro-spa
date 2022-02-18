@@ -54,9 +54,7 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
-                {#if isSuperAdmin || convocatoria.fase == 5}
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
-                {/if}
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -83,8 +81,8 @@
                             {fecha_ejecucion}
                         </p>
                     </td>
-                    {#if isSuperAdmin || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones)}
-                        <td class="border-t">
+                    <td class="border-t">
+                        {#if isSuperAdmin || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones)}
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion_cultura_innovacion.estado}
                                 {#if isSuperAdmin}
@@ -104,8 +102,10 @@
                                     </small>
                                 {/if}
                             </p>
-                        </td>
-                    {/if}
+                        {:else}
+                            <p class="px-6 py-4">No tiene permisos para ver el estado de este proyecto.</p>
+                        {/if}
+                    </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [12, 13, 21])}
