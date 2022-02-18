@@ -100,6 +100,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
         $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
+        $semilleroInvestigacion->lineasInvestigacionArticulados()->attach($request->lineas_investigacion);
 
         return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -134,6 +135,7 @@ class SemilleroInvestigacionController extends Controller
             'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
             'redesConocimientoSemilleroInvestigacion'   => $semilleroInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
             'programasFormacionSemilleroInvestigacion'  => $semilleroInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
+            'lineasInvestigacionSemilleroInvestigacion' => $semilleroInvestigacion->lineasInvestigacionArticulados()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
         ]);
     }
 
@@ -195,6 +197,7 @@ class SemilleroInvestigacionController extends Controller
 
         $semilleroInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
         $semilleroInvestigacion->programasFormacion()->sync($request->programas_formacion);
+        $semilleroInvestigacion->lineasInvestigacionArticulados()->sync($request->lineas_investigacion);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }

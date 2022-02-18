@@ -22,6 +22,7 @@
     export let redesConocimiento
     export let redesConocimientoSemilleroInvestigacion
     export let programasFormacionSemilleroInvestigacion
+    export let lineasInvestigacionSemilleroInvestigacion
 
     $: $title = semilleroInvestigacion ? semilleroInvestigacion.nombre : null
 
@@ -56,6 +57,7 @@
         centro_formacion_id: semilleroInvestigacion.linea_investigacion?.grupo_investigacion?.centro_formacion_id,
         redes_conocimiento: redesConocimientoSemilleroInvestigacion.length > 0 ? redesConocimientoSemilleroInvestigacion : null,
         programas_formacion: programasFormacionSemilleroInvestigacion.length > 0 ? programasFormacionSemilleroInvestigacion : null,
+        lineas_investigacion: lineasInvestigacionSemilleroInvestigacion.length > 0 ? lineasInvestigacionSemilleroInvestigacion : null,
     })
 
     function submit() {
@@ -116,6 +118,11 @@
                 <div class="mt-4">
                     <Label required labelFor="linea_investigacion_id" value="Línea de investigación principal" />
                     <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required class="mb-4" labelFor="lineas_investigacion" value="Articulación con líneas de investigación" />
+                    <SelectMulti id="lineas_investigacion" bind:selectedValue={$form.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" required />
                 </div>
 
                 <div class="mt-4">

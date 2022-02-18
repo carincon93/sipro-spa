@@ -110,6 +110,16 @@ class SemilleroInvestigacion extends Model
     }
 
     /**
+     * Relationship with LineaInvestigacion
+     *
+     * @return object
+     */
+    public function lineasInvestigacionArticulados()
+    {
+        return $this->belongsToMany(LineaInvestigacion::class, 'semillero_investigacion_linea_investigacion', 'semillero_investigacion_id', 'linea_investigacion_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class LineasInvestigacionExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
+class SemillerosInvestigacionLineaInvestigacionExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithProperties, WithColumnFormatting, WithTitle
 {
 
     public function __construct()
@@ -25,7 +25,9 @@ class LineasInvestigacionExport implements FromCollection, WithHeadings, WithMap
      */
     public function collection()
     {
-        return LineaInvestigacion::select('lineas_investigacion.*', 'grupos_investigacion.nombre as nombre_grupo', 'centros_formacion.nombre as nombre_centro')
+        return LineaInvestigacion::select('lineas_investigacion.*', 'grupos_investigacion.nombre as nombre_grupo', 'semilleros_investigacion.nombre as nombre_semillero', 'centros_formacion.nombre as nombre_centro')
+            ->join('semillero_investigacion_linea_investigacion', 'lineas_investigacion.id', 'semillero_investigacion_linea_investigacion.linea_investigacion_id')
+            ->join('semilleros_investigacion', 'semillero_investigacion_linea_investigacion.semillero_investigacion_id', 'semilleros_investigacion.id')
             ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
             ->get();
@@ -39,6 +41,7 @@ class LineasInvestigacionExport implements FromCollection, WithHeadings, WithMap
         return [
             $lineaInvestigacion->nombre_centro,
             $lineaInvestigacion->nombre_grupo,
+            $lineaInvestigacion->nombre_semillero,
             $lineaInvestigacion->nombre,
         ];
     }
@@ -48,6 +51,7 @@ class LineasInvestigacionExport implements FromCollection, WithHeadings, WithMap
         return [
             'Centro de formación',
             'Grupo de investigación',
+            'Semillero de investigación',
             'Nombre de la línea de investigación',
         ];
     }
@@ -62,13 +66,13 @@ class LineasInvestigacionExport implements FromCollection, WithHeadings, WithMap
      */
     public function title(): string
     {
-        return 'Líneas de investigación';
+        return 'Semilleros inv - Lineas de investigación articulados';
     }
 
     public function properties(): array
     {
         return [
-            'title' => 'Líneas de investigación',
+            'title' => 'Semilleros inv - Lineas de investigación articulados',
         ];
     }
 

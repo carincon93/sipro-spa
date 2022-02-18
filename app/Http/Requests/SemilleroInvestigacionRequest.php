@@ -41,6 +41,7 @@ class SemilleroInvestigacionRequest extends FormRequest
                 'formato_aval_semillero'    => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
                 'redes_conocimiento'        => ['required'],
                 'programas_formacion'       => ['required'],
+                'lineas_investigacion'      => ['required'],
             ];
         } else {
             return [
@@ -60,6 +61,7 @@ class SemilleroInvestigacionRequest extends FormRequest
                 'formato_aval_semillero'    => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
                 'redes_conocimiento'        => ['required'],
                 'programas_formacion'       => ['required'],
+                'lineas_investigacion'      => ['required'],
             ];
         }
     }
@@ -106,6 +108,22 @@ class SemilleroInvestigacionRequest extends FormRequest
                     }
                 }
                 $this->merge(['programas_formacion' => $programas_formacion]);
+            }
+        }
+
+        if (is_array($this->lineas_investigacion)) {
+            if (isset($this->lineas_investigacion['value']) && is_numeric($this->lineas_investigacion['value'])) {
+                $this->merge([
+                    'lineas_investigacion' => $this->lineas_investigacion['value'],
+                ]);
+            } else {
+                $lineasInvestigacion = [];
+                foreach ($this->lineas_investigacion as $lineaInvestigacion) {
+                    if (is_array($lineaInvestigacion)) {
+                        array_push($lineasInvestigacion, $lineaInvestigacion['value']);
+                    }
+                }
+                $this->merge(['lineas_investigacion' => $lineasInvestigacion]);
             }
         }
     }

@@ -55,7 +55,7 @@ class SemilleroRedesConocimientoExport implements FromCollection, WithHeadings, 
             'Grupo de investigación',
             'Línea de investigación',
             'Semillero de investigación',
-            'Nombre',
+            'Nombre de la red de conocimiento',
         ];
     }
 
