@@ -39,6 +39,7 @@ class SemilleroInvestigacion extends Model
         'formato_gic_f_021',
         'formato_gic_f_032',
         'formato_aval_semillero',
+        'es_semillero_tecnoacademia'
     ];
 
     /**

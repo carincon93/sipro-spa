@@ -32,6 +32,10 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
     let dialogOpen = false
     let sending = false
     let form = useForm({
@@ -58,6 +62,10 @@
         redes_conocimiento: redesConocimientoSemilleroInvestigacion.length > 0 ? redesConocimientoSemilleroInvestigacion : null,
         programas_formacion: programasFormacionSemilleroInvestigacion.length > 0 ? programasFormacionSemilleroInvestigacion : null,
         lineas_investigacion: lineasInvestigacionSemilleroInvestigacion.length > 0 ? lineasInvestigacionSemilleroInvestigacion : null,
+        es_semillero_tecnoacademia: {
+            value: semilleroInvestigacion.es_semillero_tecnoacademia,
+            label: opcionesSiNo.find((item) => item.value == semilleroInvestigacion.es_semillero_tecnoacademia)?.label,
+        },
     })
 
     function submit() {
@@ -113,6 +121,11 @@
                 <div class="mt-4">
                     <Label labelFor="nombre" value="Código" />
                     <Input disabled id="codigo" type="text" class="mt-1" bind:value={semilleroInvestigacion.codigo} error={errors.codigo} required />
+                </div>
+
+                <div class="mt-4">
+                    <Label required labelFor="es_semillero_tecnoacademia" value="¿Es semillero de TecnoAcademia?" />
+                    <Select items={opcionesSiNo} id="es_semillero_tecnoacademia" bind:selectedValue={$form.es_semillero_tecnoacademia} error={errors.es_semillero_tecnoacademia} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
 
                 <div class="mt-4">

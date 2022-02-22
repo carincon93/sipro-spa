@@ -67,6 +67,7 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivo_general                           = $request->objetivo_general;
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
+        $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
 
         $nombre_gic_f020 = $this->cleanFileName('formato_gic_f_021', $request->formato_gic_f_021);
 
@@ -160,6 +161,7 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivo_general                           = $request->objetivo_general;
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
+        $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
 
         if ($request->hasFile('formato_gic_f_021')) {
             $formato_gic_f_021 = $this->cleanFileName('formato_gic_f_021', $request->formato_gic_f_021);

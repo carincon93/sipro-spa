@@ -26,6 +26,10 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let opcionesSiNo = [
+        { value: 1, label: 'Si' },
+        { value: 2, label: 'No' },
+    ]
     let sending = false
     let form = useForm({
         nombre: '',
@@ -47,6 +51,7 @@
         redes_conocimiento: null,
         programas_formacion: null,
         lineas_investigacion: null,
+        es_semillero_tecnoacademia: null,
     })
 
     function submit() {
@@ -92,6 +97,11 @@
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
+                <div class="mt-4">
+                    <Label required labelFor="es_semillero_tecnoacademia" value="¿Es semillero de TecnoAcademia?" />
+                    <Select items={opcionesSiNo} id="es_semillero_tecnoacademia" bind:selectedValue={$form.es_semillero_tecnoacademia} error={errors.es_semillero_tecnoacademia} autocomplete="off" placeholder="Seleccione una opción" required />
+                </div>
+
                 <div class="mt-4">
                     <Label required labelFor="linea_investigacion_id" value="Línea de investigación principal" />
                     <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />

@@ -53,6 +53,7 @@ class InfoSemillerosInvestigacionExport implements FromCollection, WithHeadings,
             $semilleroInvestigacion->formato_gic_f_021 ? config('app.url') . '/grupos-investigacion/' . $semilleroInvestigacion->grupo_investigacion_id . '/semilleros-investigacion/' . $semilleroInvestigacion->id . '/download/formato_gic_f_021' : '',
             $semilleroInvestigacion->formato_gic_f_032 ? config('app.url') . '/grupos-investigacion/' . $semilleroInvestigacion->grupo_investigacion_id . '/semilleros-investigacion/' . $semilleroInvestigacion->id . '/download/formato_gic_f_032' : '',
             $semilleroInvestigacion->formato_aval_semillero ? config('app.url') . '/grupos-investigacion/' . $semilleroInvestigacion->grupo_investigacion_id . '/semilleros-investigacion/' . $semilleroInvestigacion->id . '/download/formato_aval_semillero' : '',
+            $semilleroInvestigacion->es_semillero_tecnoacademia == 1 ? 'Si' : ($semilleroInvestigacion->es_semillero_tecnoacademia == 2 ? 'No' : ''),
         ];
     }
 
@@ -75,6 +76,7 @@ class InfoSemillerosInvestigacionExport implements FromCollection, WithHeadings,
             'Formato GIC - F - 021',
             'Formato GIC -F - 032',
             'Formato aval de semillero',
+            'TecnoAcademia',
         ];
     }
 
