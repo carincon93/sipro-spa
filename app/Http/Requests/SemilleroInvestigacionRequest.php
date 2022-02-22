@@ -25,6 +25,7 @@ class SemilleroInvestigacionRequest extends FormRequest
     {
         if ($this->isMethod('PUT')) {
             return [
+                'es_semillero_tecnoacademia' => ['required', 'min:0', 'max:3', 'integer'],
                 'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_investigacion,id'],
                 'nombre'                    => ['required', 'max:191'],
                 'fecha_creacion_semillero'  => ['required', 'date', 'date_format:Y-m-d'],
@@ -45,6 +46,7 @@ class SemilleroInvestigacionRequest extends FormRequest
             ];
         } else {
             return [
+                'es_semillero_tecnoacademia' => ['required', 'min:0', 'max:3', 'integer'],
                 'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_investigacion,id'],
                 'nombre'                    => ['required', 'max:191'],
                 'fecha_creacion_semillero'  => ['required', 'date', 'date_format:Y-m-d'],
@@ -73,6 +75,12 @@ class SemilleroInvestigacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        if (is_array($this->es_semillero_tecnoacademia)) {
+            $this->merge([
+                'es_semillero_tecnoacademia' => $this->es_semillero_tecnoacademia['value'],
+            ]);
+        }
+
         if (is_array($this->linea_investigacion_id)) {
             $this->merge([
                 'linea_investigacion_id' => $this->linea_investigacion_id['value'],
