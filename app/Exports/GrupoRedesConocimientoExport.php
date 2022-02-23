@@ -25,7 +25,7 @@ class GrupoRedesConocimientoExport implements FromCollection, WithHeadings, With
      */
     public function collection()
     {
-        return RedConocimiento::select('redes_conocimiento.*', 'grupos_investigacion.nombre as nombre_grupo', 'centros_formacion.nombre as nombre_centro')
+        return RedConocimiento::select('redes_conocimiento.*', 'grupos_investigacion.nombre as nombre_grupo', 'centros_formacion.codigo as codigo_centro', 'centros_formacion.nombre as nombre_centro')
             ->join('grupo_investigacion_red_conocimiento', 'redes_conocimiento.id', 'grupo_investigacion_red_conocimiento.red_conocimiento_id')
             ->join('grupos_investigacion', 'grupo_investigacion_red_conocimiento.grupo_investigacion_id', 'grupos_investigacion.id')
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
@@ -47,6 +47,7 @@ class GrupoRedesConocimientoExport implements FromCollection, WithHeadings, With
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
             'Grupo de investigación',
             'Nombre de la red de conocimiento',

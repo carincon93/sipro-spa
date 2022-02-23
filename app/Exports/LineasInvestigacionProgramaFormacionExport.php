@@ -25,7 +25,7 @@ class LineasInvestigacionProgramaFormacionExport implements FromCollection, With
      */
     public function collection()
     {
-        return ProgramaFormacion::selectRaw("programas_formacion.*, grupos_investigacion.nombre as nombre_grupo, centros_formacion.nombre as nombre_centro, CASE programas_formacion.modalidad
+        return ProgramaFormacion::selectRaw("programas_formacion.*, grupos_investigacion.nombre as nombre_grupo, centros_formacion.codigo as codigo_centro, centros_formacion.nombre as nombre_centro, CASE programas_formacion.modalidad
             WHEN '1' THEN 'Presencial'
             WHEN '2' THEN 'A distancia'
             WHEN '3' THEN 'Virtual'
@@ -52,6 +52,7 @@ class LineasInvestigacionProgramaFormacionExport implements FromCollection, With
     public function map($programaFormacion): array
     {
         return [
+            $programaFormacion->codigo_centro,
             $programaFormacion->nombre_centro,
             $programaFormacion->nombre_grupo,
             $programaFormacion->nombre,
@@ -64,6 +65,7 @@ class LineasInvestigacionProgramaFormacionExport implements FromCollection, With
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
             'Grupo de investigación',
             'Nombre del programa de formación',

@@ -87,16 +87,6 @@ class Convocatoria extends Model
     }
 
     /**
-     * Relationship with ConvocatoriaBudget
-     *
-     * @return object
-     */
-    public function rubrosPresupuestalesConvocatoria()
-    {
-        return $this->hasMany(ConvocatoriaBudget::class);
-    }
-
-    /**
      * Relationship with ConvocatoriaRolSennova
      *
      * @return object
