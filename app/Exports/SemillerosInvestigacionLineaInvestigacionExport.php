@@ -25,7 +25,7 @@ class SemillerosInvestigacionLineaInvestigacionExport implements FromCollection,
      */
     public function collection()
     {
-        return LineaInvestigacion::select('lineas_investigacion.*', 'grupos_investigacion.nombre as nombre_grupo', 'semilleros_investigacion.nombre as nombre_semillero', 'centros_formacion.nombre as nombre_centro')
+        return LineaInvestigacion::select('lineas_investigacion.*', 'grupos_investigacion.nombre as nombre_grupo', 'semilleros_investigacion.nombre as nombre_semillero', 'centros_formacion.codigo as codigo_centro', 'centros_formacion.nombre as nombre_centro')
             ->join('semillero_investigacion_linea_investigacion', 'lineas_investigacion.id', 'semillero_investigacion_linea_investigacion.linea_investigacion_id')
             ->join('semilleros_investigacion', 'semillero_investigacion_linea_investigacion.semillero_investigacion_id', 'semilleros_investigacion.id')
             ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
@@ -39,6 +39,7 @@ class SemillerosInvestigacionLineaInvestigacionExport implements FromCollection,
     public function map($lineaInvestigacion): array
     {
         return [
+            $lineaInvestigacion->codigo_centro,
             $lineaInvestigacion->nombre_centro,
             $lineaInvestigacion->nombre_grupo,
             $lineaInvestigacion->nombre_semillero,
@@ -49,6 +50,7 @@ class SemillerosInvestigacionLineaInvestigacionExport implements FromCollection,
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
             'Grupo de investigación',
             'Semillero de investigación',

@@ -25,7 +25,7 @@ class SemilleroRedesConocimientoExport implements FromCollection, WithHeadings, 
      */
     public function collection()
     {
-        return RedConocimiento::select('redes_conocimiento.*', 'grupos_investigacion.nombre as nombre_grupo', 'semilleros_investigacion.nombre as nombre_semillero', 'lineas_investigacion.nombre as nombre_linea', 'centros_formacion.nombre as nombre_centro')
+        return RedConocimiento::select('redes_conocimiento.*', 'grupos_investigacion.nombre as nombre_grupo', 'semilleros_investigacion.nombre as nombre_semillero', 'lineas_investigacion.nombre as nombre_linea', 'centros_formacion.codigo as codigo_centro', 'centros_formacion.nombre as nombre_centro')
             ->join('semillero_investigacion_red_conocimiento', 'redes_conocimiento.id', 'semillero_investigacion_red_conocimiento.red_conocimiento_id')
             ->join('semilleros_investigacion', 'semillero_investigacion_red_conocimiento.semillero_investigacion_id', 'semilleros_investigacion.id')
             ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
@@ -40,6 +40,7 @@ class SemilleroRedesConocimientoExport implements FromCollection, WithHeadings, 
     public function map($redConocimiento): array
     {
         return [
+            $redConocimiento->codigo_centro,
             $redConocimiento->nombre_centro,
             $redConocimiento->nombre_grupo,
             $redConocimiento->nombre_linea,
@@ -51,6 +52,7 @@ class SemilleroRedesConocimientoExport implements FromCollection, WithHeadings, 
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
             'Grupo de investigación',
             'Línea de investigación',

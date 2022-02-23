@@ -25,7 +25,7 @@ class SemillerosInvestigacionProgramaFormacionExport implements FromCollection, 
      */
     public function collection()
     {
-        return ProgramaFormacion::selectRaw("programas_formacion.*, grupos_investigacion.nombre as nombre_grupo, semilleros_investigacion.nombre as nombre_semillero, centros_formacion.nombre as nombre_centro, CASE programas_formacion.modalidad
+        return ProgramaFormacion::selectRaw("programas_formacion.*, grupos_investigacion.nombre as nombre_grupo, semilleros_investigacion.nombre as nombre_semillero, centros_formacion.codigo as codigo_centro, centros_formacion.nombre as nombre_centro, CASE programas_formacion.modalidad
             WHEN '1' THEN 'Presencial'
             WHEN '2' THEN 'A distancia'
             WHEN '3' THEN 'Virtual'
@@ -53,6 +53,7 @@ class SemillerosInvestigacionProgramaFormacionExport implements FromCollection, 
     public function map($programaFormacion): array
     {
         return [
+            $programaFormacion->codigo_centro,
             $programaFormacion->nombre_centro,
             $programaFormacion->nombre_grupo,
             $programaFormacion->nombre_semillero,
@@ -66,6 +67,7 @@ class SemillerosInvestigacionProgramaFormacionExport implements FromCollection, 
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
             'Grupo de investigación',
             'Semillero de investigación',

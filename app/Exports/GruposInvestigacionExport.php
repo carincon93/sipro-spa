@@ -27,7 +27,7 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
      */
     public function collection()
     {
-        return GrupoInvestigacion::select('grupos_investigacion.*', 'centros_formacion.nombre as nombre_centro')
+        return GrupoInvestigacion::select('grupos_investigacion.*',  'centros_formacion.codigo as codigo_centro', 'centros_formacion.nombre as nombre_centro')
             ->join('lineas_investigacion', 'grupos_investigacion.id', 'lineas_investigacion.grupo_investigacion_id')
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
             ->get();
@@ -39,6 +39,7 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
     public function map($grupoInvestigacion): array
     {
         return [
+            $grupoInvestigacion->codigo_centro,
             $grupoInvestigacion->nombre_centro,
             $grupoInvestigacion->nombre,
             $grupoInvestigacion->acronimo,
@@ -65,8 +66,9 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
     public function headings(): array
     {
         return [
+            'Código del centro de formación',
             'Centro de formación',
-            'Nombre',
+            'Nombre del grupo de investigación',
             'Acrónimo',
             'Correo electrónico',
             'Enlace GrupLAC',
