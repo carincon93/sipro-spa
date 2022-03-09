@@ -54,7 +54,7 @@ class IdiRequest extends FormRequest
                 'numero_aprendices'                         => ['required', 'min:0', 'max:9999', 'integer'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
-                'programas_formacion_articulados*'          => ['nullable', 'integer', 'exists:programas_formacion,id'],
+                'programas_formacion_articulados*'          => ['nullable', 'integer', 'exists:programas_formacion_articulados,id'],
                 // 'impacto_municipios'                        => ['required', 'string'],
                 // 'impacto_centro_formacion'                  => ['required', 'string'],
                 'relacionado_plan_tecnologico'              => ['required', 'min:0', 'max:3', 'integer'],

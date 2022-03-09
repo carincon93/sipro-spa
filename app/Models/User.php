@@ -149,6 +149,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with ProyectoCapacidadInstalada
+     *
+     * @return object
+     */
+    public function proyectosCapacidadInstalada()
+    {
+        return $this->belongsToMany(ProyectoCapacidadInstalada::class, 'proyecto_capacidad_instalada_integrante', 'user_id', 'proyecto_capacidad_instalada_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query

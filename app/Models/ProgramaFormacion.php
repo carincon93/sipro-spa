@@ -69,6 +69,16 @@ class ProgramaFormacion extends Model
     }
 
     /**
+     * Relationship with ProyectoCapacidadInstalada
+     *
+     * @return object
+     */
+    public function proyectosCapacidadInstalada()
+    {
+        return $this->belongsToMany(ProyectoCapacidadInstalada::class, 'proyecto_capacidad_programa_formacion', 'programa_formacion_id', 'proyecto_capacidad_instalada_id');
+    }
+
+    /**
      * Relationship with Proyecto
      *
      * @return object

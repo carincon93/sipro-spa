@@ -57,6 +57,16 @@ class ProgramaFormacionArticulado extends Model
     }
 
     /**
+     * Relationship with ProyectoCapacidadInstalada
+     *
+     * @return object
+     */
+    public function proyectosCapacidadInstalada()
+    {
+        return $this->belongsToMany(ProyectoCapacidadInstalada::class, 'proyecto_capacidad_programa_formacion_articulado', 'programa_formacion_articulado_id', 'proyecto_capacidad_instalada_id');
+    }
+
+    /**
      * Relationship with AmbienteModernizacion
      *
      * @return object

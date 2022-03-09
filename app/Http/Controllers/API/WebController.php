@@ -30,7 +30,10 @@ use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
 use App\Models\ProgramaFormacionArticulado;
 use App\Models\Proyecto;
+use App\Models\SemilleroInvestigacion;
 use App\Models\SubareaConocimiento;
+use App\Models\SubtipoProyectoCapacidadInstalada;
+use App\Models\TipoProyectoCapacidadInstalada;
 use App\Models\TipoProyectoSt;
 use App\Models\User;
 
@@ -401,6 +404,36 @@ class WebController extends Controller
     public function disciplinasSubareaConocimiento($subareaConocimiento)
     {
         return response(DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label')->where('disciplinas_subarea_conocimiento.subarea_conocimiento_id', $subareaConocimiento)->orderBy('nombre', 'ASC')->get());
+    }
+
+    /**
+     * Web api
+     * 
+     * Trae los tipos de proyecto de capacidad instalada
+     */
+    public function tiposProyectoCapacidadInstalada()
+    {
+        return response(TipoProyectoCapacidadInstalada::select('tipos_proyecto_capacidad_instalada.id as value', 'tipos_proyecto_capacidad_instalada.tipo as label')->orderBy('tipo', 'ASC')->get());
+    }
+
+    /**
+     * Web api
+     * 
+     * Trae los subtipos de proyecto de capacidad instalada
+     */
+    public function subtiposProyectoCapacidadInstalada($tipoProyCapacidadInstalada)
+    {
+        return response(SubtipoProyectoCapacidadInstalada::select('subtipos_proyecto_capacidad_instalada.id as value', 'subtipos_proyecto_capacidad_instalada.subtipo as label')->where('subtipos_proyecto_capacidad_instalada.tipo_proyecto_capacidad_instalada_id', $tipoProyCapacidadInstalada)->orderBy('subtipo', 'ASC')->get());
+    }
+
+    /**
+     * Web api
+     * 
+     * Trae los semilleros de investigacion
+     */
+    public function semillerosInvestigacion($lineaInvestigacion)
+    {
+        return response(SemilleroInvestigacion::select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label')->where('semilleros_investigacion.linea_investigacion_id', $lineaInvestigacion)->orderBy('nombre', 'ASC')->get());
     }
 
     /**

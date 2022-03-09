@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ProyectoCapacidadInstaladaEntidadAliadaRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        if ($this->isMethod('PUT')) {
+            return [
+                'nombre'        => ['required', 'max:255'],
+                'nit'           => ['required', 'max:15'],
+                'documento'     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+            ];
+        } else {
+            return [
+                'nombre'        => ['required', 'max:255'],
+                'nit'           => ['required', 'max:15'],
+                'documento'     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+            ];
+        }
+    }
+}

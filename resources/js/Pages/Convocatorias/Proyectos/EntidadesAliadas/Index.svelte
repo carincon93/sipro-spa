@@ -48,8 +48,6 @@
             })
         }
     }
-
-    console.log(proyecto.evaluaciones)
 </script>
 
 <AuthenticatedLayout>

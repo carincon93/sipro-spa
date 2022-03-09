@@ -50,6 +50,7 @@ use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 use App\Http\Controllers\DisCurricularController;
 use App\Http\Controllers\EdtController;
+use App\Http\Controllers\ProyectoCapacidadInstaladaController;
 use App\Http\Controllers\Evaluacion\EvaluacionController;
 use App\Http\Controllers\Evaluacion\IdiEvaluacionController;
 use App\Http\Controllers\Evaluacion\CulturaInnovacionEvaluacionController;
@@ -73,7 +74,6 @@ use App\Http\Controllers\ReporteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 /**
  * Trae los centros de formación
@@ -269,6 +269,45 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('grupos-investigacion.semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
     /**
+     * Proyectos de capacidad instalada
+     * 
+     */
+    Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/column/{column}', [ProyectoCapacidadInstaladaController::class, 'updateLongColumn'])->name('proyectos-capacidad-instalada.updateLongColumn');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos', [ProyectoCapacidadInstaladaController::class, 'indexObjetivosEspecificos'])->name('proyectos-capacidad-instalada.objetivos-especificos.index');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/crear', [ProyectoCapacidadInstaladaController::class, 'createObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.create');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/crear', [ProyectoCapacidadInstaladaController::class, 'storeObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.store');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/{objetivo_especifico}/editar', [ProyectoCapacidadInstaladaController::class, 'editObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.edit');
+    Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/{objetivo_especifico}/editar', [ProyectoCapacidadInstaladaController::class, 'updateObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.update');
+    Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/{objetivo_especifico}', [ProyectoCapacidadInstaladaController::class, 'destroyObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.destroy');
+
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes', [ProyectoCapacidadInstaladaController::class, 'indexIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.index');
+
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users', [ProyectoCapacidadInstaladaController::class, 'filterIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.users');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/link', [ProyectoCapacidadInstaladaController::class, 'linkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.link');
+    Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/unlink', [ProyectoCapacidadInstaladaController::class, 'unlinkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.unlink');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/register', [ProyectoCapacidadInstaladaController::class, 'registerIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.register');
+
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/crear', [ProyectoCapacidadInstaladaController::class, 'createEntidadAliada'])->name('proyectos-capacidad-instalada.entidades-aliadas.create');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/crear', [ProyectoCapacidadInstaladaController::class, 'storeEntidadAliada'])->name('proyectos-capacidad-instalada.entidades-aliadas.store');
+
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/{entidad_aliada}/download', [ProyectoCapacidadInstaladaController::class, 'download'])->name('proyectos-capacidad-instalada.entidades-aliadas.download');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/{entidad_aliada}/editar', [ProyectoCapacidadInstaladaController::class, 'editEntidadAliada'])->name('proyectos-capacidad-instalada.entidades-aliadas.edit');
+    Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/{entidad_aliada}/editar', [ProyectoCapacidadInstaladaController::class, 'updateEntidadAliada'])->name('proyectos-capacidad-instalada.entidades-aliadas.update');
+    Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/entidades-aliadas/{entidad_aliada}', [ProyectoCapacidadInstaladaController::class, 'destroyEntidadAliada'])->name('proyectos-capacidad-instalada.entidades-aliadas.destroy');
+
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos', [ProyectoCapacidadInstaladaController::class, 'indexProductos'])->name('proyectos-capacidad-instalada.productos.index');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/crear', [ProyectoCapacidadInstaladaController::class, 'createProducto'])->name('proyectos-capacidad-instalada.productos.create');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/crear', [ProyectoCapacidadInstaladaController::class, 'storeProducto'])->name('proyectos-capacidad-instalada.productos.store');
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/{producto}/editar', [ProyectoCapacidadInstaladaController::class, 'editProducto'])->name('proyectos-capacidad-instalada.productos.edit');
+    Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/{producto}/editar', [ProyectoCapacidadInstaladaController::class, 'updateProducto'])->name('proyectos-capacidad-instalada.productos.update');
+    Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/{producto}', [ProyectoCapacidadInstaladaController::class, 'destroyProducto'])->name('proyectos-capacidad-instalada.productos.destroy');
+
+    Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar', [ProyectoCapacidadInstaladaController::class, 'finalizar'])->name('proyectos-capacidad-instalada.finalizar');
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar', [ProyectoCapacidadInstaladaController::class, 'storeFinalizar'])->name('proyectos-capacidad-instalada.store.finalizar');
+
+    Route::resource('proyectos-capacidad-instalada', ProyectoCapacidadInstaladaController::class)->parameters(['proyectos-capacidad-instalada' => 'proyecto-capacidad-instalada'])->except(['show']);
+
+    /**
      * Mesas sectoriales
      * 
      */
@@ -349,6 +388,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Trae las disciplinas de subáreas de conocimiento
      */
     Route::get('web-api/disciplinas-subarea-conocimiento/{subarea_conocimiento}', [WebController::class, 'disciplinasSubareaConocimiento'])->name('web-api.disciplinas-subarea-conocimiento');
+
+    /**
+     * Web api
+     * 
+     * Trae los tipos de proyectos de capacidad instalada
+     */
+    Route::get('web-api/tipos-proyecto-capacidad-instalada', [WebController::class, 'tiposProyectoCapacidadInstalada'])->name('web-api.tipos-proyecto-capacidad-instalada');
+
+    /**
+     * Web api
+     * 
+     * Trae los subtipos de proyectos de capacidad instalada
+     */
+    Route::get('web-api/subtipos-proyecto-capacidad-instalada/{tipo_proy_capacidad_instalada}', [WebController::class, 'subtiposProyectoCapacidadInstalada'])->name('web-api.subtipos-proyecto-capacidad-instalada');
+
+    /**
+     * Web api
+     * 
+     * Trae los semilleros de investigación
+     */
+    Route::get('web-api/semilleros-conocimiento/{linea_investigacion}', [WebController::class, 'semillerosInvestigacion'])->name('web-api.semilleros-investigacion');
 
     /**
      * Web api
@@ -605,7 +665,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Proyectos modernización
      * 
      */
-
     Route::get('ambientes-modernizacion/{ambiente_modernizacion}/download', [AmbienteModernizacionController::class, 'download'])->name('ambientes-modernizacion.download');
     Route::resource('ambientes-modernizacion', AmbienteModernizacionController::class)->parameters(['ambientes-modernizacion' => 'ambiente-modernizacion'])->except(['show']);
 

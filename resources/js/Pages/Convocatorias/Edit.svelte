@@ -147,10 +147,10 @@
         <div class="bg-white rounded shadow max-w-3xl flex-1">
             <form on:submit|preventDefault={submitInfo}>
                 <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
-                    {#if $form.fase?.label}
+                    {#if $formFase.fase?.label}
                         <div class="mt-4 mb-20">
                             <div class="mt-4 ">
-                                <Label required labelFor="fecha_finalizacion_fase" value="Fecha de finalización de la fase: {$form.fase?.label.toLowerCase()}" />
+                                <Label required labelFor="fecha_finalizacion_fase" value="Fecha de finalización de la fase: {$formFase.fase?.label.toLowerCase()}" />
                                 <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
                             </div>
                         </div>

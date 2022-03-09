@@ -265,7 +265,7 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with ProgramaFormacion
+     * Relationship with ProgramaFormacionArticulado
      *
      * @return object
      */

@@ -19,9 +19,9 @@ class {{ class }} extends Controller
     {
         $this->authorize('viewAny', [{{ model }}::class]);
 
-        return Inertia::render('{{ model }}s/Index', [
+        return Inertia::render(Nombre de la carpeta de la vista '/Index', [
             'filters'   => request()->all('search'),
-            '{{ modelVariable }}s' => {{ model }}::orderBy('', 'ASC')
+            '{{ modelVariable }}' => {{ model }}::orderBy(Nombre columna a ordenar, 'ASC')
                 ->filter{{ model }}(request()->only('search'))->paginate(),
         ]);
     }
@@ -35,7 +35,7 @@ class {{ class }} extends Controller
     {
         $this->authorize('create', [{{ model }}::class]);
 
-        return Inertia::render('{{ model }}s/Create');
+        return Inertia::render(Nombre de la carpeta de la vista '/Create');
     }
 
     /**
@@ -55,7 +55,7 @@ class {{ class }} extends Controller
 
         ${{ modelVariable }}->save();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'The resource has been created successfully.');
+        return redirect()->route(Nombre ruta'.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -68,7 +68,7 @@ class {{ class }} extends Controller
     {
         $this->authorize('view', [{{ model }}::class, ${{ modelVariable }}]);
 
-        return Inertia::render('{{ model }}s/Show', [
+        return Inertia::render(Nombre de la carpeta de la vista '/Show', [
             '{{ modelVariable }}' => ${{ modelVariable }}
         ]);
     }
@@ -83,7 +83,7 @@ class {{ class }} extends Controller
     {
         $this->authorize('update', [{{ model }}::class, ${{ modelVariable }}]);
 
-        return Inertia::render('{{ model }}s/Edit', [
+        return Inertia::render(Nombre de la carpeta de la vista '/Edit', [
             '{{ modelVariable }}' => ${{ modelVariable }}
         ]);
     }
@@ -105,7 +105,7 @@ class {{ class }} extends Controller
 
         ${{ modelVariable }}->save();
 
-        return redirect()->back()->with('success', 'The resource has been updated successfully.');
+        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**
@@ -120,6 +120,6 @@ class {{ class }} extends Controller
 
         ${{ modelVariable }}->delete();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'The resource has been deleted successfully.');
+        return redirect()->route(Nombre ruta'.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }
