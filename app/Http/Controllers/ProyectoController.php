@@ -943,7 +943,7 @@ class ProyectoController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = 0;
-        $user->tipo_vinculacion   = $request->tipo_vinculacion;
+        $user->tipo_vinculacion     = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 

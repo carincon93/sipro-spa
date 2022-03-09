@@ -10,6 +10,13 @@ class {{ class }} extends Model
     use HasFactory;
 
     /**
+     * table
+     *
+     * @var string
+     */
+    protected $table = 'nombre_tabla_bd';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -39,7 +46,7 @@ class {{ class }} extends Model
     /**
      * Relationship with FirstRelatedModel
      *
-     * @return void
+     * @return object
      */
     public function firstRelatedModel()
     {
@@ -49,7 +56,7 @@ class {{ class }} extends Model
     /**
      * Relationship with SecondRelatedModel
      *
-     * @return void
+     * @return object
      */
     public function secondRelatedModel()
     {
@@ -65,8 +72,9 @@ class {{ class }} extends Model
      */
     public function scopeFilter{{ class }}($query, array $filters)
     {
+        // En el where reemplazar 'Nombre columna' por el nombre de la columna a filtrar
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('replace', 'ilike', '%'.$search.'%');
+            $query->where('Nombre columna', 'ilike', '%'.$search.'%');
         });
     }
 }

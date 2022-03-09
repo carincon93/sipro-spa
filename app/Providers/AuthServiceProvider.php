@@ -6,6 +6,7 @@ use App\Models\Convocatoria;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\LineaProgramatica;
 use App\Models\Proyecto;
+use App\Models\ProyectoCapacidadInstalada;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -75,6 +76,14 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             } else {
                 return $proyecto->lineaProgramatica->codigo == 69 && ($user->getAllPermissions()->where('id', 20)->first() ? $user->getAllPermissions()->where('id', 20)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 70 && ($user->getAllPermissions()->where('id', 15)->first() ? $user->getAllPermissions()->where('id', 15)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 68 && ($user->getAllPermissions()->where('id', 16)->first() ? $user->getAllPermissions()->where('id', 16)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 65 && ($user->getAllPermissions()->where('id', 21)->first() ? $user->getAllPermissions()->where('id', 21)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 66 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 82 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null) || $proyecto->lineaProgramatica->codigo == 23 && ($user->getAllPermissions()->where('id', 14)->first() ? $user->getAllPermissions()->where('id', 14)->first()->exists() : null);
+            }
+
+            return false;
+        });
+
+        Gate::define('modificar-proyecto-capacidad-instalada', function (User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada) {
+            if ($proyectoCapacidadInstalada->integrantes()->where('user_id', $user->id)->exists()) {
+                return true;
             }
 
             return false;

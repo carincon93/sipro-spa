@@ -84,6 +84,16 @@ class ActividadEconomica extends Model
     }
 
     /**
+     * Relationship with ProyectoCapacidadInstalada
+     *
+     * @return void
+     */
+    public function proyectosCapacidadInstalada()
+    {
+        return $this->hasMany(ProyectoCapacidadInstalada::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
