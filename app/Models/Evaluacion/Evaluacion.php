@@ -22,7 +22,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion', 'estado_proyecto_por_evaluador'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion', 'estado_proyecto_por_evaluador', 'causal_rechazo_idi'];
 
     /**
      * The attributes that are mass assignable.
@@ -530,6 +530,19 @@ class Evaluacion extends Model
         } else if ($this->culturaInnovacionEvaluacion()->exists()) {
             return $this->proyecto->estadoEvaluacionCulturaInnovacion($this->total_evaluacion, $this->total_recomendaciones, null);
         }
+    }
+
+    public function getCausalRechazoIdiAttribute()
+    {
+        $causalRechazo = null;
+        if ($this->idiEvaluacion()->exists()) {
+            if ($this->evaluacionCausalesRechazo()->where('causal_rechazo', '=', 4)->first()) {
+                $causalRechazo = 'En revisión por Cord. SENNOVA';
+            } else if ($this->evaluacionCausalesRechazo()->whereIn('causal_rechazo', [1, 2, 3])->first()) {
+                $causalRechazo = 'Rechazado - Por causal de rechazo';
+            }
+        }
+        return $causalRechazo;
     }
 
     /**
