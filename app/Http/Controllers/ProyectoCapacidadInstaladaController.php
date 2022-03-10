@@ -76,7 +76,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value']]);
 
-        return redirect(route('proyectos-capacidad-instalada.edit', [$proyectoCapacidadInstalada]) . '#beneficia_a')->with('success', 'Por favor continue diligenciado la información básica.');
+        return redirect()->route('proyectos-capacidad-instalada.edit', [$proyectoCapacidadInstalada])->with('success', 'Por favor continue diligenciado la información básica.');
     }
 
     /**
