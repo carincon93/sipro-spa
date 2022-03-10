@@ -36,6 +36,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
+    let proyectoDialogOpen = true
     let sending = false
 
     let formBibliografia = useForm({
@@ -455,6 +456,39 @@
             <div class="p-4">
                 <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={proyectoDialogOpen} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+            </figure>
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Información básica</strong> por favor continue diligenciando los siguientes campos:</h1>
+                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                <ul class="list-disc">
+                    <li>Justificación</li>
+                    <li>Plan tecnológico</li>
+                    <li>Objetivo general</li>
+                    <li>Metodología</li>
+                    <li>Infraestructura para el desarrollo del proyecto</li>
+                    <li>Materiales de formación a utilizar</li>
+                    <li>Planteamiento del problema</li>
+                    <li>Conclusiones</li>
+                    <li>Bibliografía</li>
+                </ul>
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                {#if proyectoCapacidadInstalada.estado_proyecto != 'Finalizado'}
+                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
+                {/if}
             </div>
         </div>
     </Dialog>
