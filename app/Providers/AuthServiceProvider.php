@@ -7,6 +7,7 @@ use App\Models\Evaluacion\Evaluacion;
 use App\Models\LineaProgramatica;
 use App\Models\Proyecto;
 use App\Models\ProyectoCapacidadInstalada;
+use App\Models\ProyectoIdiTecnoacademia;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -83,6 +84,22 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('modificar-proyecto-capacidad-instalada', function (User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada) {
             if ($proyectoCapacidadInstalada->integrantes()->where('user_id', $user->id)->exists()) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Gate::define('crear-proyecto-idi-tecnoacademia', function (User $user) {
+            if ($user->hasRole([5, 12, 22])) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Gate::define('modificar-proyecto-idi-tecnoacademia', function (User $user, ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia) {
+            if ($proyectoIdiTecnoacademia->participantes()->where('user_id', $user->id)->exists()) {
                 return true;
             }
 

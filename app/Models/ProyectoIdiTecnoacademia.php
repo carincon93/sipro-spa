@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ProyectoIdiTecnoacademia extends Model
 {
@@ -21,7 +23,7 @@ class ProyectoIdiTecnoacademia extends Model
      *
      * @var array
      */
-    protected $appends = ['estado_formateado'];
+    protected $appends = ['estado_formateado', 'fecha_ejecucion'];
 
 
     /**
@@ -110,7 +112,7 @@ class ProyectoIdiTecnoacademia extends Model
      */
     public function beneficiados()
     {
-        return $this->belongsToMany(TipoBeneficiadoTa::class, 'proyecto_idi_tecnoacademia_beneficiados', 'beneficiado', 'proyecto_idi_tecnoacademia_id');
+        return $this->belongsToMany(TipoBeneficiadoTa::class, 'proyecto_idi_tecnoacademia_beneficiados', 'proyecto_idi_tecnoacademia_id', 'beneficiado');
     }
 
     /**
@@ -198,5 +200,39 @@ class ProyectoIdiTecnoacademia extends Model
                 break;
         }
         return $this->estado_proyecto;
+    }
+
+    /**
+     * getFechaEjecucionAttribute
+     *
+     * @return void
+     */
+    public function getFechaEjecucionAttribute()
+    {
+        $fecha_inicio       = Carbon::parse($this->fecha_inicio, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        $fecha_finalizacion = Carbon::parse($this->fecha_finalizacion, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+        return "$fecha_inicio al $fecha_finalizacion";
+    }
+
+    /**
+     * getProyectosPorRol
+     *
+     * @return object
+     */
+    public static function getProyectosPorRol()
+    {
+        $authUser = Auth::user();
+        if ($authUser->hasRole(1)) { // Admin
+            $proyectoIdiTecnoacademia = ProyectoIdiTecnoacademia::distinct('proyectos_idi_tecnoacademia.id')
+                ->orderBy('proyectos_idi_tecnoacademia.id', 'ASC')
+                ->filterProyectoIdiTecnoacademia(request()->only('search'))->paginate();
+        } else {
+            $proyectoIdiTecnoacademia = ProyectoIdiTecnoacademia::join('proyecto_idi_tecnoacademia_participante', 'proyectos_idi_tecnoacademia.id', 'proyecto_idi_tecnoacademia_participante.proyecto_idi_tecnoacademia_id')
+                ->where('proyecto_idi_tecnoacademia_participante.user_id', $authUser->id)
+                ->distinct('proyectos_idi_tecnoacademia.id')
+                ->orderBy('proyectos_idi_tecnoacademia.id', 'ASC')
+                ->filterProyectoIdiTecnoacademia(request()->only('search'))->paginate();
+        }
+        return $proyectoIdiTecnoacademia;
     }
 }

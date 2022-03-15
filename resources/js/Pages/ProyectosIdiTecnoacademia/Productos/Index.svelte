@@ -42,7 +42,7 @@
     <h1 class="mt-24 mb-8 text-center text-3xl">Productos</h1>
 
     <div class="mb-6 flex justify-between items-center">
-        {#if isSuperAdmin || checkRole(authUser, [12])}
+        {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
             <Button on:click={() => Inertia.visit(route('proyectos-idi-tecnoacademia.productos.create', proyectoIdiTecnoacademia.id))} variant="raised">Crear producto</Button>
         {/if}
     </div>
@@ -71,7 +71,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkRole(authUser, [12])}
+                                {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('proyectos-idi-tecnoacademia.productos.edit', [proyectoIdiTecnoacademia.id, producto.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>

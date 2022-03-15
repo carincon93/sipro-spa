@@ -27,7 +27,7 @@
         <div slot="title">Proyectos I+D+i TecnoAcademia</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(authUser, [12])}
+            {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                 <Button on:click={() => Inertia.visit(route('proyectos-idi-tecnoacademia.create'))} variant="raised">Crear proyecto I+D+i TecnoAcademia</Button>
             {/if}
         </div>
@@ -62,7 +62,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectosIdiTecnoacademia.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [12])}
+                            {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-idi-tecnoacademia.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

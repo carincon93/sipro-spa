@@ -50,7 +50,7 @@ class TipoBeneficiadoTa extends Model
      */
     public function proyectosIdiTecnoacademia()
     {
-        return $this->belongsToMany(ProyectoIdiTecnoacademia::class, 'proyecto_idi_tecnoacademia_beneficiados', 'proyecto_idi_tecnoacademia_id', 'beneficiado');
+        return $this->belongsToMany(ProyectoIdiTecnoacademia::class, 'proyecto_idi_tecnoacademia_beneficiados', 'beneficiado', 'proyecto_idi_tecnoacademia_id');
     }
 
     /**

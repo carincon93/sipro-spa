@@ -28,12 +28,11 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', [ProyectoIdiTecnoacademia::class]);
+        $this->authorize('crear-proyecto-idi-tecnoacademia');
 
         return Inertia::render('ProyectosIdiTecnoacademia/Index', [
             'filters'                   => request()->all('search'),
-            'proyectosIdiTecnoacademia' => ProyectoIdiTecnoacademia::orderBy('titulo', 'ASC')
-                ->filterProyectoIdiTecnoacademia(request()->only('search'))->paginate(),
+            'proyectosIdiTecnoacademia' => ProyectoIdiTecnoacademia::getProyectosPorRol()->appends(['search' => request()->search]),
         ]);
     }
 
@@ -44,7 +43,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', [ProyectoIdiTecnoacademia::class]);
+        $this->authorize('crear-proyecto-idi-tecnoacademia');
 
         return Inertia::render('ProyectosIdiTecnoacademia/Create', [
             'tecnoacademias'                    => Tecnoacademia::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
@@ -63,7 +62,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function store(ProyectoIdiTecnoacademiaRequest $request)
     {
-        $this->authorize('create', [ProyectoIdiTecnoacademia::class]);
+        $this->authorize('crear-proyecto-idi-tecnoacademia');
 
         $proyectoIdiTecnoacademia = new ProyectoIdiTecnoacademia();
         $proyectoIdiTecnoacademia->titulo                               = $request->titulo;
@@ -133,7 +132,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function edit(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia)
     {
-        $this->authorize('update', [ProyectoIdiTecnoacademia::class, $proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
 
         return Inertia::render('ProyectosIdiTecnoacademia/Edit', [
             'proyectoIdiTecnoacademia'          => $proyectoIdiTecnoacademia,
@@ -158,7 +157,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function update(ProyectoIdiTecnoacademiaRequest $request, ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia)
     {
-        $this->authorize('update', [ProyectoIdiTecnoacademia::class, $proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
 
         $proyectoIdiTecnoacademia->titulo                               = $request->titulo;
         $proyectoIdiTecnoacademia->fecha_inicio                         = $request->fecha_inicio;
@@ -218,7 +217,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
      */
     public function destroy(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia)
     {
-        $this->authorize('delete', [ProyectoIdiTecnoacademia::class, $proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
 
         $proyectoIdiTecnoacademia->delete();
 
@@ -314,6 +313,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
     public function updateParticipante(Request $request, ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia)
     {
+        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
+
         $data = $request->rol_sennova['value'];
 
         if ($proyectoIdiTecnoacademia->participantes()->where('users.id', $request->user_id)->exists()) {

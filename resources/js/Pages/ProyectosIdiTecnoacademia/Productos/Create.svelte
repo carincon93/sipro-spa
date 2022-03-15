@@ -37,7 +37,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [12])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
             $form.post(route('proyectos-idi-tecnoacademia.productos.store', [proyectoIdiTecnoacademia.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -96,7 +96,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [12]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [5, 12, 22]) ? undefined : true}>
                 <div class="mt-4">
                     <Select id="tipo_producto_idi_id" items={tiposProductos} bind:selectedValue={$form.tipo_producto_idi_id} error={errors.tipo_producto_idi_id} autocomplete="off" placeholder="Seleccione un tipo" required />
                 </div>
@@ -133,7 +133,7 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || checkRole(authUser, [12])}
+                {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear producto</LoadingButton>
                 {/if}
             </div>
