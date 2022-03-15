@@ -66,7 +66,7 @@ class CrudGenerator extends Command
         $this->info('=======================================================================');
         $this->info('Copie y pegue el siguiente código en web.php:');
         $this->info(__('use App\Http\Controllers\:controllerName', ['controllerName' => $this->className . 'Controller;']));
-        $this->info("Route::resource('/{$this->routeName}', {$this->className}Controller::class)->parameters(['{$this->routeName}' => 'reemplazar por ruta en singular']);");
+        $this->info("Route::resource('/{$this->routeName}', {$this->className}Controller::class)->parameters(['{$this->routeName}' => 'reemplazar ruta en singular']);");
         $this->info('=======================================================================');
         $this->info('Añada los siguientes permisos en la tabla permissions de la base de datos:');
         $this->info("mostrar {$clearRouteName}");

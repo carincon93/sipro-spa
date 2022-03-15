@@ -62,6 +62,7 @@ use App\Http\Controllers\ReglaRolCulturaController;
 use App\Http\Controllers\ReglaRolTpController;
 use App\Http\Controllers\SoporteEstudioMercadoController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ProyectoIdiTecnoacademiaController;
 use App\Http\Controllers\ReporteController;
 
 /*
@@ -281,7 +282,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/{objetivo_especifico}', [ProyectoCapacidadInstaladaController::class, 'destroyObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.destroy');
 
     Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes', [ProyectoCapacidadInstaladaController::class, 'indexIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.index');
-
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users', [ProyectoCapacidadInstaladaController::class, 'filterIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.users');
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/link', [ProyectoCapacidadInstaladaController::class, 'linkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.link');
     Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/unlink', [ProyectoCapacidadInstaladaController::class, 'unlinkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.unlink');
@@ -306,6 +306,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar', [ProyectoCapacidadInstaladaController::class, 'storeFinalizar'])->name('proyectos-capacidad-instalada.store.finalizar');
 
     Route::resource('proyectos-capacidad-instalada', ProyectoCapacidadInstaladaController::class)->parameters(['proyectos-capacidad-instalada' => 'proyecto-capacidad-instalada'])->except(['show']);
+
+    /**
+     * Proyectos I+D+i de Tecnoacademias
+     * 
+     */
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/download/{archivo}', [ProyectoIdiTecnoacademiaController::class, 'descargarPdf'])->name('proyectos-idi-tecnoacademia.download');
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/{producto}/download', [ProyectoIdiTecnoacademiaController::class, 'descargarSoportesProducto'])->name('proyectos-idi-tecnoacademia.productos.download');
+
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos', [ProyectoIdiTecnoacademiaController::class, 'indexProductos'])->name('proyectos-idi-tecnoacademia.productos.index');
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/crear', [ProyectoIdiTecnoacademiaController::class, 'createProducto'])->name('proyectos-idi-tecnoacademia.productos.create');
+    Route::post('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/crear', [ProyectoIdiTecnoacademiaController::class, 'storeProducto'])->name('proyectos-idi-tecnoacademia.productos.store');
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/{producto}/editar', [ProyectoIdiTecnoacademiaController::class, 'editProducto'])->name('proyectos-idi-tecnoacademia.productos.edit');
+    Route::put('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/{producto}/editar', [ProyectoIdiTecnoacademiaController::class, 'updateProducto'])->name('proyectos-idi-tecnoacademia.productos.update');
+    Route::delete('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/{producto}', [ProyectoIdiTecnoacademiaController::class, 'destroyProducto'])->name('proyectos-idi-tecnoacademia.productos.destroy');
+
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes', [ProyectoIdiTecnoacademiaController::class, 'indexParticipantes'])->name('proyectos-idi-tecnoacademia.participantes.index');
+
+    Route::post('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes/users', [ProyectoIdiTecnoacademiaController::class, 'filterParticipantes'])->name('proyectos-idi-tecnoacademia.participantes.users');
+    Route::post('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes/users/link', [ProyectoIdiTecnoacademiaController::class, 'linkParticipante'])->name('proyectos-idi-tecnoacademia.participantes.users.link');
+    Route::put('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes/users/link', [ProyectoIdiTecnoacademiaController::class, 'updateParticipante'])->name('proyectos-idi-tecnoacademia.participantes.users.update');
+    Route::delete('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes/users/unlink', [ProyectoIdiTecnoacademiaController::class, 'unlinkParticipante'])->name('proyectos-idi-tecnoacademia.participantes.users.unlink');
+    Route::post('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/participantes/users/register', [ProyectoIdiTecnoacademiaController::class, 'registerParticipante'])->name('proyectos-idi-tecnoacademia.participantes.users.register');
+
+    Route::resource('proyectos-idi-tecnoacademia', ProyectoIdiTecnoacademiaController::class)->parameters(['proyectos-idi-tecnoacademia' => 'proyecto-idi-tecnoacademia']);
 
     /**
      * Mesas sectoriales

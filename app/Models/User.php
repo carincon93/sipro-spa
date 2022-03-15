@@ -159,6 +159,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship with ProyectoIdiTecnoacademiaParticipante
+     *
+     * @return object
+     */
+    public function proyectosIdiTecnoacademiaParticipante()
+    {
+        return $this->belongsToMany(ProyectoIdiTecnoacademia::class, 'proyecto_idi_tecnoacademia_participante', 'user_id', 'proyecto_idi_tecnoacademia_id');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
