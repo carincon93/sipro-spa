@@ -110,7 +110,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
         $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
 
-        return redirect()->route('proyectos-idi-tecnoacademia.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
