@@ -68,7 +68,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [12])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
             $form.post(route('proyectos-idi-tecnoacademia.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -109,7 +109,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [12])}
+                    {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                         <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos I+D+i TecnoAcademia </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -120,7 +120,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [12]) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [5, 12, 22]) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué." />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -335,7 +335,7 @@
                     <Label required class="mb-4" labelFor="beneficiados" value="El proyecto beneficiará a" />
                 </div>
                 <div>
-                    <SelectMulti id="beneficiados" bind:selectedValue={$form.beneficiados} items={beneficiados} isMulti={true} error={errors.beneficiados} placeholder="Buscar municipios" required />
+                    <SelectMulti id="beneficiados" bind:selectedValue={$form.beneficiados} items={beneficiados} isMulti={true} error={errors.beneficiados} placeholder="Selecciona los beneficiados" required />
                 </div>
             </div>
 
@@ -413,9 +413,9 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(authUser, [12])}
+            {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
-                    {$_('Continue')}
+                    {$_('Save')}
                 </LoadingButton>
             {/if}
         </div>

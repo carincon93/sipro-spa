@@ -226,7 +226,6 @@ class ProyectoCapacidadInstalada extends Model
     /**
      * getProyectosPorRol
      *
-     * @param  mixed $convocatoria
      * @return object
      */
     public static function getProyectosPorRol()
