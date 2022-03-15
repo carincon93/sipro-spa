@@ -51,6 +51,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'semillerosInvestigacion'           => SemilleroInvestigacion::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
             'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
             'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
         ]);
     }
 
@@ -109,6 +110,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->programasSennova()->attach($request->programa_sennova_participante);
         $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
         $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
+
+        $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value']]);
 
         return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha creado correctamente.');
     }

@@ -24,7 +24,6 @@
     export let proyectoIdiTecnoacademia
     export let tecnoacademias
     export let programasSennova
-    // export let roles
     export let semillerosInvestigacion
     export let estadosProyectoIdiTecnoacademia
     export let beneficiados
@@ -424,16 +423,6 @@
                     <Textarea maxlength="40000" id="observaciones_resultados" error={errors.observaciones_resultados} bind:value={$form.observaciones_resultados} required />
                 </div>
             </div>
-
-            <!-- <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol" />
-                </div>
-
-                <div>
-                    <Select id="rol_sennova" items={roles} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
-                </div>
-            </div> -->
 
             {#if $form.progress}
                 <progress value={$form.progress.percentage} max="100" class="mt-4">
