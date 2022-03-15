@@ -69,6 +69,16 @@ class Municipio extends Model
     }
 
     /**
+     * Relationship with ProyectoIdiTecnoacademia
+     *
+     * @return object
+     */
+    public function proyectosIdiTecnoacademia()
+    {
+        return $this->belongsToMany(ProyectoIdiTecnoacademia::class, 'proyecto_idi_tecnoacademia_municipio', 'municipio_id', 'proyecto_idi_tecnoacademia_linea_id')->orderBy('municipios.nombre', 'ASC');
+    }
+
+    /**
      * Relationship with Proyecto
      *
      * @return object

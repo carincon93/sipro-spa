@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page, useForm } from '@inertiajs/inertia-svelte'
+    import { page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -48,7 +48,13 @@
                         <p class="px-6 py-4">{titulo}</p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4">{estado_proyecto}</p>
+                        <p class="px-6 py-4">
+                            {#if estado_proyecto == null}
+                                Sin estado asignado
+                            {:else}
+                                {estado_proyecto}
+                            {/if}
+                        </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">{fecha_ejecucion}</p>

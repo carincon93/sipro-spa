@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProyectoCapacidadInstaladaEntidadAliadaRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaObjetivoEspecificoRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaProductoRequest;
-use Illuminate\Support\Str;
 use App\Http\Requests\ProyectoCapacidadInstaladaRequest;
 use App\Models\CentroFormacion;
 use App\Models\ProyectoCapacidadInstaladaEntidadAliada;
@@ -17,6 +16,7 @@ use App\Models\ProyectoCapacidadInstaladaResultado;
 use App\Models\User;
 use App\Rules\Email;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -150,7 +150,7 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $proyectoCapacidadInstalada->update($request->only($column));
 
-        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back();
     }
 
     /**

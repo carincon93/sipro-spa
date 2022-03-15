@@ -83,4 +83,14 @@ class TecnoacademiaLineaTecnoacademia extends Model
     {
         return $this->hasMany(CulturaInnovacion::class);
     }
+
+    /**
+     * Relationship with ProyectoIdiTecnoacademiaLinea
+     *
+     * @return void
+     */
+    public function proyectosIdiTecnoacademiaLinea()
+    {
+        return $this->hasMany(ProyectoIdiTecnoacademiaLinea::class);
+    }
 }

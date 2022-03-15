@@ -93,6 +93,26 @@ class Tecnoacademia extends Model
     }
 
     /**
+     * Relationship with ProyectoIdiTecnoacademia
+     *
+     * @return void
+     */
+    public function proyectosIdiTecnoacademia()
+    {
+        return $this->hasMany(ProyectoIdiTecnoacademia::class);
+    }
+
+    /**
+     * Relationship with Municipio
+     *
+     * @return object
+     */
+    public function municipios()
+    {
+        return $this->belongsToMany(Municipio::class, 'proyecto_idi_tecnoacademia_municipio', 'proyecto_idi_tecnoacademia_linea_id', 'municipio_id')->orderBy('municipios.nombre', 'ASC');
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
