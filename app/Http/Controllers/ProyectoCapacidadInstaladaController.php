@@ -74,7 +74,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $proyectoCapacidadInstalada->save();
 
-        $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value']]);
+        $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
 
         return redirect()->route('proyectos-capacidad-instalada.edit', [$proyectoCapacidadInstalada])->with('success', 'Por favor continue diligenciado la información básica.');
     }
@@ -113,6 +113,8 @@ class ProyectoCapacidadInstaladaController extends Controller
             'listaBeneficiados'                     => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
             'proyectoProgramasFormacion'            => $proyectoCapacidadInstalada->programasFormacionImpactados()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
             'proyectoProgramasFormacionArticulados' => $proyectoCapacidadInstalada->programasFormacionArticulados()->selectRaw('programas_formacion_articulados.id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
+            'autorPrincipal'                        => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
+            'roles'                                 => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
         ]);
     }
 
@@ -143,7 +145,12 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $proyectoCapacidadInstalada->save();
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        $autorPrincipal = $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first();
+        if ($autorPrincipal) {
+            $proyectoCapacidadInstalada->integrantes()->updateExistingPivot($autorPrincipal->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+        }
+
+        return redirect()->route('proyectos-capacidad-instalada.integrantes.index', [$proyectoCapacidadInstalada])->with('success', 'Por favor continue asociando los integrantes.');
     }
 
     public function updateLongColumn(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada, $column)
@@ -231,7 +238,7 @@ class ProyectoCapacidadInstaladaController extends Controller
             return back()->with('error', 'El recurso ya está vinculado.');
         }
 
-        $proyectoCapacidadInstalada->integrantes()->attach($request->user_id, ['rol_sennova' => $request->rol_sennova['value']]);
+        $proyectoCapacidadInstalada->integrantes()->attach($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
         return back()->with('success', 'El recurso se ha vinculado correctamente.');
     }
 
@@ -253,6 +260,17 @@ class ProyectoCapacidadInstaladaController extends Controller
             return back()->with('success', 'El recurso se ha desvinculado correctamente.');
         }
         return back()->with('success', 'El recurso ya está desvinculado.');
+    }
+
+    public function updateParticipante(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
+    {
+        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+
+        if ($proyectoCapacidadInstalada->integrantes()->where('users.id', $request->user_id)->exists()) {
+            $proyectoCapacidadInstalada->integrantes()->updateExistingPivot($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+            return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        }
+        return back()->with('error', 'El recurso ya está desvinculado.');
     }
 
     /**
@@ -297,7 +315,10 @@ class ProyectoCapacidadInstaladaController extends Controller
         $user->assignRole(14);
 
         $data['user_id'] = $user->id;
-        $data['rol_sennova'] = $request->rol_sennova;
+        $data['rol_sennova']    = $request->rol_sennova;
+        $data['cantidad_meses'] = $request->cantidad_meses;
+        $data['cantidad_horas'] = $request->cantidad_horas;
+        $data['autor_principal'] = true;
 
         return $this->linkIntegrante(new Request($data), $proyectoCapacidadInstalada);
     }

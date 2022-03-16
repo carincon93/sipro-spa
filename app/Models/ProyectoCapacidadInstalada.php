@@ -170,7 +170,7 @@ class ProyectoCapacidadInstalada extends Model
      */
     public function integrantes()
     {
-        return $this->belongsToMany(User::class, 'proyecto_capacidad_instalada_integrante', 'proyecto_capacidad_instalada_id', 'user_id')->withPivot('rol_sennova');
+        return $this->belongsToMany(User::class, 'proyecto_capacidad_instalada_integrante', 'proyecto_capacidad_instalada_id', 'user_id')->withPivot('rol_sennova', 'cantidad_meses', 'cantidad_horas', 'autor_principal');
     }
 
     /**
