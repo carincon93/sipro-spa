@@ -18,11 +18,11 @@ class SemilleroInvestigacionPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
-            return true;
-        }
+        // if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
+        //     return true;
+        // }
 
-        return false;
+        return true;
     }
 
     /**
@@ -34,11 +34,11 @@ class SemilleroInvestigacionPolicy
      */
     public function view(User $user)
     {
-        if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
-            return true;
-        }
+        // if ($user->hasRole([4, 21, 20, 18, 19, 5, 17])) {
+        //     return true;
+        // }
 
-        return false;
+        return true;
     }
 
     /**

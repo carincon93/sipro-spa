@@ -83,7 +83,7 @@ class LineaInvestigacionController extends Controller
      */
     public function edit(GrupoInvestigacion $grupoInvestigacion, LineaInvestigacion $lineaInvestigacion)
     {
-        $this->authorize('update', [LineaInvestigacion::class, $lineaInvestigacion]);
+        $this->authorize('view', [LineaInvestigacion::class, $lineaInvestigacion]);
 
         return Inertia::render('LineasInvestigacion/Edit', [
             'grupoInvestigacion' => $grupoInvestigacion,

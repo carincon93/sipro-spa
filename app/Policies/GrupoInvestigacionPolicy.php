@@ -18,11 +18,11 @@ class GrupoInvestigacionPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->hasRole([4])) {
-            return true;
-        }
+        // if ($user->hasRole([4])) {
+        //     return true;
+        // }
 
-        return false;
+        return true;
     }
 
     /**
@@ -34,11 +34,11 @@ class GrupoInvestigacionPolicy
      */
     public function view(User $user)
     {
-        if ($user->hasRole([4])) {
-            return true;
-        }
+        // if ($user->hasRole([4])) {
+        //     return true;
+        // }
 
-        return false;
+        return true;
     }
 
     /**

@@ -132,14 +132,15 @@ class GrupoInvestigacion extends Model
      */
     public static function getGruposInvestigacionByRol()
     {
+        $gruposInvestigacion = [];
         $user = Auth::user();
         if ($user->hasRole([1, 20, 18, 19, 5, 17])) {
             $gruposInvestigacion = GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion')->filterGrupoInvestigacion(request()->only('search', 'grupoInvestigacion'))->orderBy('grupos_investigacion.nombre', 'ASC')->paginate();
-        } else if ($user->hasRole([4, 21])) {
+        } else {
             $centroFormacionId = null;
             if ($user->dinamizadorCentroFormacion()->exists()) {
                 $centroFormacionId = $user->dinamizadorCentroFormacion->id;
-            } else if ($user->hasRole(21)) {
+            } else {
                 $centroFormacionId = $user->centroFormacion->id;
             }
 
