@@ -284,6 +284,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes', [ProyectoCapacidadInstaladaController::class, 'indexIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.index');
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users', [ProyectoCapacidadInstaladaController::class, 'filterIntegrantes'])->name('proyectos-capacidad-instalada.integrantes.users');
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/link', [ProyectoCapacidadInstaladaController::class, 'linkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.link');
+    Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/link', [ProyectoCapacidadInstaladaController::class, 'updateParticipante'])->name('proyectos-capacidad-instalada.integrantes.users.update');
     Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/unlink', [ProyectoCapacidadInstaladaController::class, 'unlinkIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.unlink');
     Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/integrantes/users/register', [ProyectoCapacidadInstaladaController::class, 'registerIntegrante'])->name('proyectos-capacidad-instalada.integrantes.users.register');
 

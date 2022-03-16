@@ -111,7 +111,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
         $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
 
-        $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value']]);
+        $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
 
         return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -148,6 +148,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'programasRelacionados'             => $proyectoIdiTecnoacademia->programasSennova()->select('programas_sennova.id as value', 'programas_sennova.nombre as label')->get(),
             'beneficiadosRelacionados'          => $proyectoIdiTecnoacademia->beneficiados()->select('tipos_beneficiados_ta.id as value', 'tipos_beneficiados_ta.nombre as label')->get(),
             'municipiosRelacionados'            => $proyectoIdiTecnoacademia->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
+            'autorPrincipal'                    => $proyectoIdiTecnoacademia->participantes()->where('proyecto_idi_tecnoacademia_participante.autor_principal', true)->first(),
         ]);
     }
 
@@ -209,7 +211,12 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->beneficiados()->sync($request->beneficiados);
         $proyectoIdiTecnoacademia->lineas()->sync($request->tecnoacademia_linea_tecnoacademia_id);
 
-        return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
+        $autorPrincipal = $proyectoIdiTecnoacademia->participantes()->where('proyecto_idi_tecnoacademia_participante.autor_principal', true)->first();
+        if ($autorPrincipal) {
+            $proyectoIdiTecnoacademia->participantes()->updateExistingPivot($autorPrincipal->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+        }
+
+        return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'Por favor continue asociando los participantes.');
     }
 
     /**
@@ -289,7 +296,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             return back()->with('error', 'El recurso ya está vinculado.');
         }
 
-        $proyectoIdiTecnoacademia->participantes()->attach($request->user_id, ['rol_sennova' => $request->rol_sennova['value']]);
+        $proyectoIdiTecnoacademia->participantes()->attach($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
         return back()->with('success', 'El recurso se ha vinculado correctamente.');
     }
 
@@ -318,10 +325,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
     {
         $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
 
-        $data = $request->rol_sennova['value'];
-
         if ($proyectoIdiTecnoacademia->participantes()->where('users.id', $request->user_id)->exists()) {
-            $proyectoIdiTecnoacademia->participantes()->updateExistingPivot($request->user_id, ['rol_sennova' => $data]);
+            $proyectoIdiTecnoacademia->participantes()->updateExistingPivot($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
             return back()->with('success', 'El recurso se ha actualizado correctamente.');
         }
         return back()->with('error', 'El recurso ya está desvinculado.');
@@ -368,8 +373,10 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         $user->assignRole(14);
 
-        $data['user_id'] = $user->id;
-        $data['rol_sennova'] = $request->rol_sennova;
+        $data['user_id']        = $user->id;
+        $data['rol_sennova']    = $request->rol_sennova;
+        $data['cantidad_meses'] = $request->cantidad_meses;
+        $data['cantidad_horas'] = $request->cantidad_horas;
 
         return $this->linkParticipante(new Request($data), $proyectoIdiTecnoacademia);
     }

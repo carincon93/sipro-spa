@@ -4,7 +4,7 @@
     import { onMount } from 'svelte'
     import axios from 'axios'
     import { Inertia } from '@inertiajs/inertia'
-    import { route, checkRole, checkPermission } from '@/Utils'
+    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import InputError from '@/Shared/InputError'
@@ -17,6 +17,7 @@
     import SelectMulti from '@/Shared/SelectMulti'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
+    import Input from '@/Shared/Input'
 
     export let errors
     export let centrosFormacion
@@ -26,6 +27,8 @@
     export let programasFormacionArticular
     export let proyectoProgramasFormacion
     export let proyectoProgramasFormacionArticulados
+    export let roles
+    export let autorPrincipal
 
     $: $title = 'Editar proyecto de capacidad instalada'
 
@@ -94,6 +97,12 @@
         },
         programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
+        rol_sennova: {
+            value: roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.value,
+            label: roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.label,
+        },
+        cantidad_meses: autorPrincipal.pivot.cantidad_meses,
+        cantidad_horas: autorPrincipal.pivot.cantidad_horas,
     })
 
     function submit() {
@@ -425,6 +434,37 @@
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
                 </div>
             </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
+                </div>
+
+                <div>
+                    <Select id="rol_sennova" items={roles} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación al proyecto" />
+                </div>
+                <div>
+                    <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto" />
+                </div>
+                <div>
+                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    {#if $form.rol_sennova?.maxHoras}
+                        <InfoMessage>Horas máximas permitidas para este rol: {$form.rol_sennova?.maxHoras}.</InfoMessage>
+                    {/if}
+                </div>
+            </div>
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
@@ -432,7 +472,7 @@
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar proyecto de capacdad instalada </button>
             {/if}
             {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [25]))}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar proyecto</LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar y continuar</LoadingButton>
             {/if}
         </div>
     </form>

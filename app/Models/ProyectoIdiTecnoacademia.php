@@ -132,7 +132,7 @@ class ProyectoIdiTecnoacademia extends Model
      */
     public function participantes()
     {
-        return $this->belongsToMany(User::class, 'proyecto_idi_tecnoacademia_participante', 'proyecto_idi_tecnoacademia_id', 'user_id')->withPivot('rol_sennova');
+        return $this->belongsToMany(User::class, 'proyecto_idi_tecnoacademia_participante', 'proyecto_idi_tecnoacademia_id', 'user_id')->withPivot('rol_sennova', 'cantidad_meses', 'cantidad_horas', 'autor_principal');
     }
 
     /**

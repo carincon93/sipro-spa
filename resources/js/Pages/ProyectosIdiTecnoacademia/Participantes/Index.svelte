@@ -75,8 +75,8 @@
     let formParticipante = useForm({
         _method: null,
         user_id: 0,
-        // cantidad_horas: 0,
-        // cantidad_meses: 0,
+        cantidad_horas: 0,
+        cantidad_meses: 0,
         rol_sennova: null,
     })
 
@@ -88,8 +88,8 @@
         $formParticipante.user_id = user.id
         if (user.pivot) {
             $formParticipante._method = 'PUT'
-            // $formParticipante.cantidad_meses = user.pivot.cantidad_meses
-            // $formParticipante.cantidad_horas = user.pivot.cantidad_horas
+            $formParticipante.cantidad_meses = user.pivot.cantidad_meses
+            $formParticipante.cantidad_horas = user.pivot.cantidad_horas
             $formParticipante.rol_sennova = {
                 value: user.pivot.rol_sennova,
                 label: roles.find((item) => item.value == user.pivot.rol_sennova)?.label,
@@ -125,6 +125,8 @@
         numero_celular: '',
         tipo_vinculacion: '',
         rol_sennova: null,
+        cantidad_meses: 0,
+        cantidad_horas: 0,
         centro_formacion_id: null,
         autorizacion_datos: false,
     })
@@ -185,6 +187,13 @@
             </div>
         </div>
     </header>
+
+    <a use:inertia href={route('proyectos-idi-tecnoacademia.productos.index', proyectoIdiTecnoacademia.id)} class="flex bottom-0 fixed hover:bg-indigo-600 mb-4 px-6 py-2 bg-indigo-700 rounded-lg shadow-2xl text-center text-white z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        Ir a los productos
+    </a>
 
     <div class="bg-indigo-100 p-4">
         <h1 class="text-4xl text-center">Participantes</h1>
@@ -352,6 +361,12 @@
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                     </div>
+                    <div class="mt-4">
+                        <Input label="Número de meses de vinculación al proyecto" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max="11.5" class="mt-1" bind:value={$formParticipante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                    </div>
+                    <div class="mt-4">
+                        <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$formParticipante.rol_sennova?.maxHoras} class="mt-1" bind:value={$formParticipante.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -408,6 +423,26 @@
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formNuevoIntegrante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
+                    </div>
+
+                    <div class="mt-8">
+                        <Input label="Número de meses de vinculación al proyecto" id="cantidad_meses_nuevo_participante" type="number" input$step="0.1" input$min="1" input$max="11.5" class="mt-1" bind:value={$formNuevoIntegrante.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" error={errors.cantidad_meses} required />
+                    </div>
+
+                    <div class="mt-8">
+                        <Input
+                            label="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                            id="cantidad_horas_nuevo_participante"
+                            type="number"
+                            input$step="1"
+                            input$min="1"
+                            input$max={$formNuevoIntegrante.rol_sennova?.maxHoras}
+                            class="mt-1"
+                            bind:value={$formNuevoIntegrante.cantidad_horas}
+                            placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto"
+                            autocomplete="off"
+                            required
+                        />
                     </div>
 
                     <div class="mt-8">
