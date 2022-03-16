@@ -34,7 +34,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == lineaInvestigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])) {
             $form.put(route('grupos-investigacion.lineas-investigacion.update', [grupoInvestigacion.id, lineaInvestigacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -65,7 +65,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == lineaInvestigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
                     <Label required labelFor="nombre" value="Nombre de la línea de investigación" />
                     <Input id="nombre" type="text" class="mt-1" bind:value={$form.nombre} error={errors.nombre} required />
@@ -80,7 +80,7 @@
                 {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar línea de investigación </button>
                 {/if}
-                {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+                {#if isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == lineaInvestigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar línea de investigación</LoadingButton>
                 {/if}
             </div>
