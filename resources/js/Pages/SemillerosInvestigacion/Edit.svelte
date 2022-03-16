@@ -69,7 +69,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == semilleroInvestigacion.linea_investigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])) {
             $form.post(route('grupos-investigacion.semilleros-investigacion.update', [grupoInvestigacion.id, semilleroInvestigacion.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -115,7 +115,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17]) ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == semilleroInvestigacion.linea_investigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17]) ? undefined : true}>
                 <div class="mt-4">
                     <Label labelFor="nombre" value="Código" />
                     <Input disabled id="codigo" type="text" class="mt-1" bind:value={semilleroInvestigacion.codigo} error={errors.codigo} required />
@@ -260,7 +260,7 @@
                 {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar semillero de investigación </button>
                 {/if}
-                {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+                {#if isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == semilleroInvestigacion.linea_investigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar semillero de investigación</LoadingButton>
                 {/if}
             </div>

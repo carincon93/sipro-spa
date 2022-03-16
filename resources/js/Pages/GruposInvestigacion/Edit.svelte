@@ -29,6 +29,8 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    console.log(authUser)
+
     let dialogOpen = false
     let sending = false
     let form = useForm({
@@ -61,7 +63,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == grupoInvestigacion.centro_formacion_id)) {
             $form.post(route('grupos-investigacion.update', grupoInvestigacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -92,7 +94,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == grupoInvestigacion.centro_formacion_id) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
@@ -227,7 +229,7 @@
                 {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar grupo de investigación </button>
                 {/if}
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == grupoInvestigacion.centro_formacion_id)}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar grupo de investigación</LoadingButton>
                 {/if}
             </div>
