@@ -55,9 +55,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id)} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
-                    {/if}
+                    <a use:inertia href={route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id)} class="text-indigo-400 hover:text-indigo-600"> Líneas de investigación </a>
                     <span class="text-indigo-400 font-medium">/</span>
                     {lineaInvestigacion.nombre}
                 </h1>

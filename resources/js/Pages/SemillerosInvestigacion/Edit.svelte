@@ -105,9 +105,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id)} class="text-indigo-400 hover:text-indigo-600"> Semilleros de investigación </a>
-                    {/if}
+                    <a use:inertia href={route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id)} class="text-indigo-400 hover:text-indigo-600"> Semilleros de investigación </a>
                     <span class="text-indigo-400 font-medium">/</span>
                     {semilleroInvestigacion.nombre}
                 </h1>
@@ -123,17 +121,17 @@
                     <Input disabled id="codigo" type="text" class="mt-1" bind:value={semilleroInvestigacion.codigo} error={errors.codigo} required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required labelFor="es_semillero_tecnoacademia" value="¿Es semillero de TecnoAcademia?" />
+                <div class="mt-8">
+                    <Label required class="mb-4" labelFor="es_semillero_tecnoacademia" value="¿Es semillero de TecnoAcademia?" />
                     <Select items={opcionesSiNo} id="es_semillero_tecnoacademia" bind:selectedValue={$form.es_semillero_tecnoacademia} error={errors.es_semillero_tecnoacademia} autocomplete="off" placeholder="Seleccione una opción" required />
                 </div>
 
-                <div class="mt-4">
-                    <Label required labelFor="linea_investigacion_id" value="Línea de investigación principal" />
+                <div class="mt-8">
+                    <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación principal" />
                     <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="mt-8">
                     <Label required class="mb-4" labelFor="lineas_investigacion" value="Articulación con líneas de investigación" />
                     <SelectMulti id="lineas_investigacion" bind:selectedValue={$form.lineas_investigacion} items={lineasInvestigacion} isMulti={true} error={errors.lineas_investigacion} placeholder="Buscar por el nombre de la línea de investigación" required />
                 </div>

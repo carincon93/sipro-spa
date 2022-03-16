@@ -29,7 +29,7 @@
         <div slot="title">Grupos de investigación</div>
 
         <div slot="actions">
-            {#if isSuperAdmin}
+            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
                 <Button on:click={() => Inertia.visit(route('grupos-investigacion.create'))} variant="raised">Crear grupo de investigación</Button>
             {/if}
         </div>
@@ -62,21 +62,15 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
-                                    <Text>Ver detalles</Text>
-                                </Item>
-                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id))}>
-                                    <Text>Líneas de investigación</Text>
-                                </Item>
-                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id))}>
-                                    <Text>Semilleros de investigación</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
-                                </Item>
-                            {/if}
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
+                                <Text>Ver detalles</Text>
+                            </Item>
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id))}>
+                                <Text>Líneas de investigación</Text>
+                            </Item>
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id))}>
+                                <Text>Semilleros de investigación</Text>
+                            </Item>
                         </DataTableMenu>
                     </td>
                 </tr>

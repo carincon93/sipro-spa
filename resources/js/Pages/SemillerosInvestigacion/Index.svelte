@@ -30,9 +30,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
-                    {/if}
+                    <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
                 </h1>
             </div>
         </div>
@@ -74,15 +72,9 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={semillerosInvestigacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
-                                    <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
-                                </Item>
-                            {/if}
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
+                                <Text>Ver detalles</Text>
+                            </Item>
                         </DataTableMenu>
                     </td>
                 </tr>

@@ -125,7 +125,7 @@ class SemilleroInvestigacionController extends Controller
      */
     public function edit(GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
     {
-        $this->authorize('update', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
+        $this->authorize('view', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
         $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
 

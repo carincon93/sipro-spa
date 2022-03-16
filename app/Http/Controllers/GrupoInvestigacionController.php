@@ -116,7 +116,7 @@ class GrupoInvestigacionController extends Controller
      */
     public function edit(GrupoInvestigacion $grupoInvestigacion)
     {
-        $this->authorize('update', [GrupoInvestigacion::class, $grupoInvestigacion]);
+        $this->authorize('view', [GrupoInvestigacion::class, $grupoInvestigacion]);
 
         return Inertia::render('GruposInvestigacion/Edit', [
             'grupoInvestigacion'                    => $grupoInvestigacion,
