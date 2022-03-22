@@ -51,7 +51,7 @@ class ConvocatoriaRolSennovaController extends Controller
         $this->authorize('create', [ConvocatoriaRolSennova::class]);
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
             'rolesSennova'      => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
         ]);
@@ -106,7 +106,7 @@ class ConvocatoriaRolSennovaController extends Controller
         $convocatoriaRolSennova->rolSennova;
 
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Edit', [
-            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'convocatoriaRolSennova'    => $convocatoriaRolSennova,
             'nivelesAcademicos'         => json_decode(Storage::get('json/niveles-academicos.json'), true),
             'rolesSennova'              => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
