@@ -21,7 +21,7 @@ class TpEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/Tp/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'filters'       => request()->all('search'),
             'tp'            => TpEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -83,7 +83,7 @@ class TpEvaluacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Tp/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
             'tp'                    => $tp,
             'tpEvaluacion'          => $tpEvaluacion,
             'idiSegundaEvaluacion'  => TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {

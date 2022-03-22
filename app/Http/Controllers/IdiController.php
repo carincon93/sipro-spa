@@ -26,7 +26,7 @@ class IdiController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),
             'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
@@ -39,7 +39,7 @@ class IdiController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [3]);
+        $this->authorize('formular-proyecto', [3, $convocatoria]);
 
         if (auth()->user()->hasRole(6)) {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
@@ -48,7 +48,7 @@ class IdiController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'centrosFormacion'  => $centrosFormacion
         ]);
@@ -62,7 +62,7 @@ class IdiController extends Controller
      */
     public function store(IdiRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [$request->linea_programatica_id]);
+        $this->authorize('formular-proyecto', [$request->linea_programatica_id, $convocatoria]);
 
         $proyecto = new Proyecto();
         $proyecto->centroFormacion()->associate($request->centro_formacion_id);
@@ -107,6 +107,12 @@ class IdiController extends Controller
         $idi->actividadEconomica()->associate($request->actividad_economica_id);
 
         $proyecto->idi()->save($idi);
+
+        if ($convocatoria->tipo_convocatoria == 2) {
+            $proyecto->proyectoDemo()->create([
+                'proyecto_id' => $proyecto->id
+            ]);
+        }
 
         $proyecto->participantes()->attach(
             Auth::user()->id,
@@ -153,7 +159,7 @@ class IdiController extends Controller
         $idi->mostrar_requiere_subsanacion = $idi->proyecto->mostrar_requiere_subsanacion;
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi', 'mostrar_recomendaciones'),
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi', 'mostrar_recomendaciones'),
             'idi'                                       => $idi,
             'mesasSectorialesRelacionadas'              => $idi->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
@@ -220,7 +226,7 @@ class IdiController extends Controller
 
         $idi->update($request->only($column));
 
-        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back();
     }
 
     /**
@@ -233,7 +239,7 @@ class IdiController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
 
-        if ($convocatoria->fase != 1) {
+        if ($idi->proyecto->radicado) {
             return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
         }
 

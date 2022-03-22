@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
+    import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
     import InputError from '@/Shared/InputError'
@@ -45,7 +45,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || checkPermission(authUser, [5])) {
+        if (isSuperAdmin || checkPermissionByUser(authUser, [5]) || (checkPermission(authUser, [5]) && convocatoria.esta_activa == true)) {
             $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -59,7 +59,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [5])}
+                    {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])}
                         <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', [convocatoria.id])} class="text-indigo-400 hover:text-indigo-600"> Servicios tecnológicos </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -152,7 +152,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermission(authUser, [5])}
+            {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || (checkPermission(authUser, [5]) && convocatoria.esta_activa == true)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>

@@ -27,7 +27,7 @@ class TpController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/Tp/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'filters'       => request()->all('search', 'estructuracion_proyectos'),
             'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
@@ -40,7 +40,7 @@ class TpController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [4]);
+        $this->authorize('formular-proyecto', [4, $convocatoria]);
 
         if (auth()->user()->hasRole(16)) {
             $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
@@ -49,7 +49,7 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
             'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
             'nodosTecnoParque'  => $nodosTecnoParque
         ]);
@@ -63,7 +63,7 @@ class TpController extends Controller
      */
     public function store(TpRequest $request, Convocatoria $convocatoria, Tp $tp)
     {
-        $this->authorize('formular-proyecto', [4]);
+        $this->authorize('formular-proyecto', [4, $convocatoria]);
 
         $nodoTecnoParque = NodoTecnoparque::find($request->nodo_tecnoparque_id);
 
@@ -153,7 +153,7 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
-            'convocatoria'       => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
+            'convocatoria'       => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
             'tp'                 => $tp,
             'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
             'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
@@ -194,7 +194,7 @@ class TpController extends Controller
 
         $tp->update($request->only($column));
 
-        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back();
     }
 
     /**

@@ -27,7 +27,7 @@ class CulturaInnovacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'fase'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'fase'),
             'filters'           => request()->all('search', 'estructuracion_proyectos'),
             'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
         ]);
@@ -40,7 +40,7 @@ class CulturaInnovacionController extends Controller
      */
     public function create(Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [9]);
+        $this->authorize('formular-proyecto', [9, $convocatoria]);
 
         if (auth()->user()->hasRole(15)) {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->whereIn('centros_formacion.codigo', [9309, 9503, 9230, 9124, 9525, 9222, 9212, 9116, 9517, 9401, 9403, 9303, 9310, 9529, 9308, 9101])->orderBy('centros_formacion.nombre', 'ASC')->get();
@@ -49,7 +49,7 @@ class CulturaInnovacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
             'centrosFormacion'  => $centrosFormacion
         ]);
@@ -63,7 +63,7 @@ class CulturaInnovacionController extends Controller
      */
     public function store(CulturaInnovacionRequest $request, Convocatoria $convocatoria)
     {
-        $this->authorize('formular-proyecto', [$request->linea_programatica_id]);
+        $this->authorize('formular-proyecto', [$request->linea_programatica_id, $convocatoria]);
 
         if (ProyectoRolSennovaValidationTrait::culturaInnovacionNumeroProyectos($request->centro_formacion_id, $request->linea_programatica_id)) {
             return back()->with('error', 'El centro de formación ya tiene registrado un proyecto de la línea programática 65.');
@@ -155,7 +155,7 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->mostrar_requiere_subsanacion = $culturaInnovacion->proyecto->mostrar_requiere_subsanacion;
 
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura', 'mostrar_recomendaciones'),
+            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura', 'mostrar_recomendaciones'),
             'culturaInnovacion'                         => $culturaInnovacion,
             'mesasSectorialesRelacionadas'              => $culturaInnovacion->mesasSectoriales()->pluck('id'),
             'lineasTecnoacademiaRelacionadas'           => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->pluck('id'),
@@ -223,7 +223,7 @@ class CulturaInnovacionController extends Controller
 
         $culturaInnovacion->update($request->only($column));
 
-        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        return back();
     }
 
     /**

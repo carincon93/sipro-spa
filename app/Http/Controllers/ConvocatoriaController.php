@@ -7,6 +7,7 @@ use App\Models\Convocatoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -35,7 +36,7 @@ class ConvocatoriaController extends Controller
 
         return Inertia::render('Convocatorias/Index', [
             'filters'               => request()->all('search'),
-            'convocatorias'         => Convocatoria::filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'convocatorias'         => Convocatoria::orderBy('id', 'ASC')->filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoriaActiva'    => Convocatoria::where('esta_activa', 1)->first(),
         ]);
     }
@@ -50,7 +51,9 @@ class ConvocatoriaController extends Controller
         $this->authorize('create', [Convocatoria::class]);
 
         return Inertia::render('Convocatorias/Create', [
-            'fases' => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
+            'fases'             => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
+            'tiposConvocatoria' => collect(json_decode(Storage::get('json/tipos-convocatoria.json'), true)),
+            'convocatorias'     => Convocatoria::select('id as value', 'descripcion as label')->orderBy('id', 'ASC')->get(),
         ]);
     }
 
@@ -67,26 +70,38 @@ class ConvocatoriaController extends Controller
         $convocatoria = new Convocatoria();
         $convocatoria->descripcion                              = $request->descripcion;
         $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
-        $convocatoria->min_fecha_inicio_proyectos_idi           = $request->min_fecha_inicio_proyectos_idi;
         $convocatoria->max_fecha_finalizacion_proyectos_idi     = $request->max_fecha_finalizacion_proyectos_idi;
         $convocatoria->min_fecha_inicio_proyectos_cultura       = $request->min_fecha_inicio_proyectos_cultura;
         $convocatoria->max_fecha_finalizacion_proyectos_cultura = $request->max_fecha_finalizacion_proyectos_cultura;
         $convocatoria->min_fecha_inicio_proyectos_st            = $request->min_fecha_inicio_proyectos_st;
         $convocatoria->max_fecha_finalizacion_proyectos_st      = $request->max_fecha_finalizacion_proyectos_st;
         $convocatoria->min_fecha_inicio_proyectos_ta            = $request->min_fecha_inicio_proyectos_ta;
-        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
         $convocatoria->max_fecha_finalizacion_proyectos_ta      = $request->max_fecha_finalizacion_proyectos_ta;
+        $convocatoria->min_fecha_inicio_proyectos_tp            = $request->min_fecha_inicio_proyectos_tp;
+        $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
-
+        $convocatoria->hora_finalizacion_fase                   = $request->hora_finalizacion_fase;
+        $convocatoria->tipo_convocatoria                        = $request->tipo_convocatoria;
         $convocatoria->fase                                     = 1;
-        if ($request->esta_activa) {
-            $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
-            $convocatoriaPrevActiva->esta_activa = false;
-            $convocatoriaPrevActiva->save();
+
+        $convocatoriaFormulacionActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 1)->first();
+        if ($convocatoriaFormulacionActiva && $request->esta_activa && $request->tipo_convocatoria == 1) {
+            $convocatoriaFormulacionActiva->esta_activa = false;
+            $convocatoriaFormulacionActiva->save();
         }
+
+        $convocatoriaDemoActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 2)->first();
+        if ($convocatoriaDemoActiva && $request->esta_activa && $request->tipo_convocatoria == 2) {
+            $convocatoriaDemoActiva->esta_activa = false;
+            $convocatoriaDemoActiva->save();
+        }
+
         $convocatoria->esta_activa = $request->esta_activa;
 
         $convocatoria->save();
+
+        DB::select('SELECT public."crear_convocatoria_presupuesto"(' . $request->convocatoria_id['value'] . ',' . $convocatoria->id . ')');
+        DB::select('SELECT public."crear_convocatoria_rol_sennova"(' . $request->convocatoria_id['value'] . ',' . $convocatoria->id . ')');
 
         return redirect()->route('convocatorias.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -144,12 +159,19 @@ class ConvocatoriaController extends Controller
         $convocatoria->hora_finalizacion_fase                   = $request->hora_finalizacion_fase;
 
         if ($request->esta_activa) {
-            $convocatoriaPrevActiva = Convocatoria::where('esta_activa', true)->first();
-            if ($convocatoriaPrevActiva && $convocatoriaPrevActiva->id != $convocatoria->id) {
-                $convocatoriaPrevActiva->esta_activa = false;
-                $convocatoriaPrevActiva->save();
+            $convocatoriaFormulacionActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 1)->first();
+            if ($convocatoriaFormulacionActiva && $convocatoriaFormulacionActiva->id != $convocatoria->id && $convocatoria->tipo_convocatoria == 1) {
+                $convocatoriaFormulacionActiva->esta_activa = false;
+                $convocatoriaFormulacionActiva->save();
+            }
+
+            $convocatoriaDemoActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 2)->first();
+            if ($convocatoriaDemoActiva && $convocatoriaDemoActiva->id != $convocatoria->id && $convocatoria->tipo_convocatoria == 2) {
+                $convocatoriaDemoActiva->esta_activa = false;
+                $convocatoriaDemoActiva->save();
             }
         }
+
         $convocatoria->esta_activa              = $request->esta_activa;
         $convocatoria->mostrar_recomendaciones  = $request->mostrar_recomendaciones;
         if ($request->mostrar_recomendaciones == true) {
@@ -202,7 +224,7 @@ class ConvocatoriaController extends Controller
             $convocatoria->proyectos()->update(['finalizado' => false, 'modificable' => true, 'habilitado_para_evaluar' => false]);
             $convocatoria->evaluaciones()->update(['modificable' => false, 'finalizado' => true, 'iniciado' => false]);
         } else if ($request->fase['value'] == 2) { // Primera evaluación
-            $convocatoria->proyectos()->update(['modificable' => false, 'habilitado_para_evaluar' => true]);
+            $convocatoria->proyectos()->update(['modificable' => false, 'habilitado_para_evaluar' => true, 'radicado' => true]);
         } else if ($request->fase['value'] == 3) { // Subsanación
 
             foreach ($convocatoria->proyectos()->get() as $proyecto) {

@@ -2,7 +2,7 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { Inertia } from '@inertiajs/inertia'
-    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
+    import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -167,7 +167,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true))) {
+            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true))) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.idi.updateLongColumn', [convocatoria.id, idi.id, column]),
@@ -186,7 +186,7 @@
     }
 
     async function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
@@ -205,7 +205,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)) {
             $deleteForm.delete(route('convocatorias.idi.destroy', [convocatoria.id, idi.id]), {
                 preserveScroll: true,
             })
@@ -250,7 +250,7 @@
     <Stepper {convocatoria} proyecto={idi} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) ? undefined : checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -1077,10 +1077,10 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true && convocatoria.fase == 1)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
                 <small>{idi.updated_at}</small>
 
                 <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>

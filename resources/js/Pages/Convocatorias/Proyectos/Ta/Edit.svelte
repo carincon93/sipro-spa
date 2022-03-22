@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
+    import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -187,7 +187,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+            if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]),
@@ -206,7 +206,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true)) {
             $form.put(route('convocatorias.ta.update', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -220,7 +220,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false)) {
             $deleteForm.delete(route('convocatorias.ta.destroy', [convocatoria.id, ta.id]), {
                 preserveScroll: true,
             })
@@ -256,7 +256,7 @@
         centro_formacion_id: ta.proyecto.centro_formacion_id,
     })
     function submitProgramasFormacion() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $formProgramasFormacion.post(route('convocatorias.proyectos.programas-formacion.store', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => ((sending = false), ((programasFormacionDialogOpen = false), $formProgramasFormacion.reset())),
@@ -270,7 +270,7 @@
         nombre: '',
     })
     function submitDisCurricular() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $formDisCurricular.post(route('convocatorias.proyectos.dis-curriculares.store', [convocatoria.id, ta.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => ((sending = false), (disCurricularDialogOpen = false)),
@@ -284,7 +284,7 @@
     <Stepper {convocatoria} proyecto={ta} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) ? undefined : checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true ? undefined : true}>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
@@ -845,7 +845,7 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && convocatoria.fase == 1)}
+            {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)}
