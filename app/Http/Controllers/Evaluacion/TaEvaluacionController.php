@@ -22,7 +22,7 @@ class TaEvaluacionController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Evaluaciones/Ta/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
+            'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'filters'       => request()->all('search'),
             'ta'            => TaEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
@@ -96,7 +96,7 @@ class TaEvaluacionController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Ta/Edit', [
-            'convocatoria'                              => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
+            'convocatoria'                              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
             'ta'                                        => $ta,
             'taEvaluacion'                              => $taEvaluacion,
             'otrasEvaluaciones'                         => TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {

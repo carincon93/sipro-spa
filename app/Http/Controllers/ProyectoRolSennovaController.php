@@ -42,7 +42,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Index', [
-            'convocatoria'           => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'           => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'proyecto'               => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta', 'en_subsanacion', 'mostrar_recomendaciones'),
             'filters'                => request()->all('search'),
             'proyectoRolesSennova'   => ProyectoRolSennova::where('proyecto_id', $proyecto->id)->filterProyectoRolSennova(request()->only('search'))->with('convocatoriaRolSennova.rolSennova')->paginate(),
@@ -65,7 +65,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Create', [
-            'convocatoria'       => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'       => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'proyecto'           => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'mostrar_recomendaciones'),
             'lineaProgramatica'  => $proyecto->lineaProgramatica->only('id')
         ]);
@@ -176,7 +176,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
+            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
             'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'en_subsanacion', 'mostrar_recomendaciones'),
             'proyectoRolSennova'    => $proyectoRolSennova,
             'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
@@ -299,7 +299,7 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Index', [
-            'convocatoria'           => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'           => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'             => $evaluacion->only('id'),
             'proyecto'               => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado', 'total_roles_sennova', 'cantidad_instructores_planta', 'cantidad_dinamizadores_planta', 'cantidad_psicopedagogos_planta'),
             'filters'                => request()->all('search'),
@@ -329,7 +329,7 @@ class ProyectoRolSennovaController extends Controller
         $proyectoRolSennova->load('actividades');
 
         return Inertia::render('Convocatorias/Evaluaciones/RolesSennova/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'            => $evaluacion->only('id', 'iniciado', 'finalizado', 'habilitado', 'modificable'),
             'otrasEvaluaciones'     => ProyectoRolEvaluacion::where('proyecto_rol_sennova_id', $proyectoRolSennova->id)->with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($proyecto) {
                 $query->where('evaluaciones.proyecto_id', $proyecto->id)->where('evaluaciones.habilitado', true);
