@@ -48,70 +48,74 @@
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Soportes</h1>
 
-    <InfoMessage class="mb-8">
-        <strong>Importante:</strong>
-        <p class="mt-4">
-            Deberá adjuntar mínimo 2 soportes (Máximo 3 soportes) de los valores relacionados en el <strong>Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021</strong>, que podrán ser precotizaciones, precios de catálogos de canales comerciales oficiales de proveedores o de almacenes de grandes superficies, o valores de acuerdos marco de precios de Colombia Compra. Los valores del
-            estudio deberán corresponder a proveedores ubicados en Colombia y tener una fecha no mayor a 4 meses.
-        </p>
-    </InfoMessage>
+    {#if convocatoria.tipo_convocatoria == 1}
+        <InfoMessage class="mb-8">
+            <strong>Importante:</strong>
+            <p class="mt-4">
+                Deberá adjuntar mínimo 2 soportes (Máximo 3 soportes) de los valores relacionados en el <strong>Formato guía 4: Estudio de mercado - Convocatoria Sennova 2021</strong>, que podrán ser precotizaciones, precios de catálogos de canales comerciales oficiales de proveedores o de almacenes de grandes superficies, o valores de acuerdos marco de precios de Colombia Compra. Los valores del
+                estudio deberán corresponder a proveedores ubicados en Colombia y tener una fecha no mayor a 4 meses.
+            </p>
+        </InfoMessage>
 
-    <div>
-        <div class="mb-6 flex justify-end items-center">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
-                <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.create', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))}>
-                    <div>
-                        <span>Crear</span>
-                        <span class="hidden md:inline">soporte</span>
-                    </div>
-                </Button>
-            {/if}
-        </div>
-    </div>
-    <div class="bg-white rounded shadow">
-        <table class="w-full whitespace-no-wrap table-fixed data-table">
-            <thead>
-                <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Empresa</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Soporte/Cotización</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {#each soportesEstudioMercado.data as soporte, i}
-                    <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4">
-                            {soporte.empresa}
-                        </td>
-
-                        <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.soportes.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id])}>Descargar soporte/cotización</a>
-                        </td>
-
-                        <td class="border-t px-6 pt-6 pb-4">
-                            <DataTableMenu class={soportesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21]) && proyecto.modificable == true)}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
-                            </DataTableMenu>
-                        </td>
-                    </tr>
-                {/each}
-
-                {#if soportesEstudioMercado.data.length === 0}
-                    <tr>
-                        <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
-                    </tr>
+        <div>
+            <div class="mb-6 flex justify-end items-center">
+                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                    <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.create', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))}>
+                        <div>
+                            <span>Crear</span>
+                            <span class="hidden md:inline">soporte</span>
+                        </div>
+                    </Button>
                 {/if}
-            </tbody>
-        </table>
-    </div>
-    <Pagination links={soportesEstudioMercado.links} />
+            </div>
+        </div>
+        <div class="bg-white rounded shadow">
+            <table class="w-full whitespace-no-wrap table-fixed data-table">
+                <thead>
+                    <tr class="text-left font-bold">
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Empresa</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Soporte/Cotización</th>
+                        <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {#each soportesEstudioMercado.data as soporte, i}
+                        <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                            <td class="border-t px-6 pt-6 pb-4">
+                                {soporte.empresa}
+                            </td>
+
+                            <td class="border-t px-6 pt-6 pb-4">
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.soportes.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id])}>Descargar soporte/cotización</a>
+                            </td>
+
+                            <td class="border-t px-6 pt-6 pb-4">
+                                <DataTableMenu class={soportesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
+                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21]) && proyecto.modificable == true)}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                    {:else}
+                                        <Item>
+                                            <Text>No tiene permisos</Text>
+                                        </Item>
+                                    {/if}
+                                </DataTableMenu>
+                            </td>
+                        </tr>
+                    {/each}
+
+                    {#if soportesEstudioMercado.data.length === 0}
+                        <tr>
+                            <td class="border-t px-6 py-4" colspan="3">Sin información registrada</td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        </div>
+        <Pagination links={soportesEstudioMercado.links} />
+    {:else if convocatoria.tipo_convocatoria == 2}
+        <InfoMessage class="mt-20" alertMsg={true}>No se permite el cargue de archivos anexos porque es un proyecto DEMO de ejercicio y no es un proyecto oficial.</InfoMessage>
+    {/if}
 </AuthenticatedLayout>

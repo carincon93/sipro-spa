@@ -77,106 +77,110 @@
         </form>
     {/if}
 
-    <InfoMessage class="mt-20">
-        <h1 class="mb-10 font-black">Importante:</h1>
-        <ul>
-            <li><strong>ANEXO 1A. Acta_Reunión Regional</strong> NO se adjunta en plataforma. Se envía junto al Anexo 1B a la Coordinación Sennova (Obligatorio)</li>
+    {#if convocatoria.tipo_convocatoria == 1}
+        <InfoMessage class="mt-20">
+            <h1 class="mb-10 font-black">Importante:</h1>
+            <ul>
+                <li><strong>ANEXO 1A. Acta_Reunión Regional</strong> NO se adjunta en plataforma. Se envía junto al Anexo 1B a la Coordinación Sennova (Obligatorio)</li>
 
-            <li><strong>ANEXO 1C. Carta C.I Director Regional</strong> NO se adjunta en plataforma. Se envía a la Coordinación Sennova, uno por regional, junto con el Anexo 1A (Obligatorio)</li>
-        </ul>
-    </InfoMessage>
+                <li><strong>ANEXO 1C. Carta C.I Director Regional</strong> NO se adjunta en plataforma. Se envía a la Coordinación Sennova, uno por regional, junto con el Anexo 1A (Obligatorio)</li>
+            </ul>
+        </InfoMessage>
 
-    <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
-        <div slot="title">Anexos</div>
+        <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
+            <div slot="title">Anexos</div>
 
-        <div slot="caption">
-            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-                {#each proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            {#if evaluacion.idi_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.anexos_comentario ? evaluacion.idi_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.cultura_innovacion_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.anexos_comentario ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.ta_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.anexos_comentario ? evaluacion.ta_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.tp_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.anexos_comentario ? evaluacion.tp_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.servicio_tecnologico_evaluacion}
-                                <hr class="mt-10 mb-10 border-black-200" />
-                                <h1 class="font-black">Anexos</h1>
-
-                                <ul class="list-disc pl-4">
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
-                                </ul>
-
-                                <hr class="mt-10 mb-10 border-black-200" />
-                                <h1 class="font-black">Video</h1>
-
-                                <ul class="list-disc pl-4">
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
-                                </ul>
-
-                                <hr class="mt-10 mb-10 border-black-200" />
-                                <h1 class="font-black">Especificaciones del área</h1>
-
-                                <ul class="list-disc pl-4">
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
-                                </ul>
-                            {/if}
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
-        </div>
-
-        <thead slot="thead">
-            <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
-            </tr>
-        </thead>
-
-        <tbody slot="tbody">
-            {#each anexos.data as anexo (anexo.id)}
-                <tr>
-                    <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
-                            {anexo.nombre}
-                            <br />
-                            {#if anexo.obligatorio}
-                                <span class="text-red-500">* El anexo es obligatorio</span>
-                            {/if}
-                            {#if anexo.archivo}
-                                <a target="_blank" class="text-indigo-400 underline inline-block mt-4 mb-4 flex" download href={route('anexos.download', [anexo.id])}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            <div slot="caption">
+                {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+                    {#each proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
+                                <div class="flex text-orangered-900 font-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                     </svg>
-                                    Descargar formato
-                                </a>
-                            {/if}
-                        </p>
-                    </td>
-                    <td class="border-t">
-                        {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 17, 18, 19, 20, 21])}
-                            <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
-                        {/if}
-                    </td>
-                </tr>
-            {/each}
+                                    Recomendación del evaluador COD-{evaluacion.id}:
+                                </div>
+                                {#if evaluacion.idi_evaluacion}
+                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.anexos_comentario ? evaluacion.idi_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.cultura_innovacion_evaluacion}
+                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.anexos_comentario ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.ta_evaluacion}
+                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.anexos_comentario ? evaluacion.ta_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.tp_evaluacion}
+                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.anexos_comentario ? evaluacion.tp_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                    <hr class="mt-10 mb-10 border-black-200" />
+                                    <h1 class="font-black">Anexos</h1>
 
-            {#if anexos.data.length === 0}
-                <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                                    <ul class="list-disc pl-4">
+                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
+                                    </ul>
+
+                                    <hr class="mt-10 mb-10 border-black-200" />
+                                    <h1 class="font-black">Video</h1>
+
+                                    <ul class="list-disc pl-4">
+                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
+                                    </ul>
+
+                                    <hr class="mt-10 mb-10 border-black-200" />
+                                    <h1 class="font-black">Especificaciones del área</h1>
+
+                                    <ul class="list-disc pl-4">
+                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
+                                    </ul>
+                                {/if}
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
+            </div>
+
+            <thead slot="thead">
+                <tr class="text-left font-bold">
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
                 </tr>
-            {/if}
-        </tbody>
-    </DataTable>
-    <Pagination links={anexos.links} />
+            </thead>
+
+            <tbody slot="tbody">
+                {#each anexos.data as anexo (anexo.id)}
+                    <tr>
+                        <td class="border-t">
+                            <p class="px-6 py-4 focus:text-indigo-500">
+                                {anexo.nombre}
+                                <br />
+                                {#if anexo.obligatorio}
+                                    <span class="text-red-500">* El anexo es obligatorio</span>
+                                {/if}
+                                {#if anexo.archivo}
+                                    <a target="_blank" class="text-indigo-400 underline inline-block mt-4 mb-4 flex" download href={route('anexos.download', [anexo.id])}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        Descargar formato
+                                    </a>
+                                {/if}
+                            </p>
+                        </td>
+                        <td class="border-t">
+                            {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 17, 18, 19, 20, 21])}
+                                <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
+                            {/if}
+                        </td>
+                    </tr>
+                {/each}
+
+                {#if anexos.data.length === 0}
+                    <tr>
+                        <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    </tr>
+                {/if}
+            </tbody>
+        </DataTable>
+        <Pagination links={anexos.links} />
+    {:else if convocatoria.tipo_convocatoria == 2}
+        <InfoMessage class="mt-20" alertMsg={true}>No se permite el cargue de archivos anexos porque es un proyecto DEMO de ejercicio y no es un proyecto oficial.</InfoMessage>
+    {/if}
 </AuthenticatedLayout>

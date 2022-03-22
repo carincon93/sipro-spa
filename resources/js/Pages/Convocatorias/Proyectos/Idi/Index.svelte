@@ -32,7 +32,9 @@
 
 <AuthenticatedLayout>
     <DataTable class="mt-20" routeParams={[convocatoria.id]} bind:filters showFilters={true}>
-        <div slot="title">I+D+i</div>
+        <div slot="title">
+            I+D+i {#if convocatoria.tipo_convocatoria == 2}- Proyectos de ejercicio (DEMO){/if}
+        </div>
 
         <div slot="filters">
             <label for="estructuracion_proyectos" class="block text-gray-700">Filtros:</label>
@@ -54,7 +56,9 @@
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">
+                    Estado {#if convocatoria.tipo_convocatoria == 2}(No aplica para proyectos demo){/if}
+                </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -81,7 +85,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        {#if isSuperAdmin || (checkRole(authUser, [4]) && proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones)}
+                        {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkRole(authUser, [4]) && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1) || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1)}
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion_idi.estado}
                                 {#if isSuperAdmin}
@@ -108,7 +112,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 14])}
+                            {#if isSuperAdmin || checkPermissionByUser(authUser, [1]) || checkPermission(authUser, [3, 4, 14])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
@@ -134,15 +138,22 @@
     <Dialog bind:open={dialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
         <div slot="content">
-            <small>Noviembre 4</small>
+            {#if convocatoria.tipo_convocatoria == 1}
+                <small>Noviembre 4</small>
 
-            <hr class="mt-10 mb-10" />
-            <div>
-                <p>
-                    Actualmente la plataforma SGPS-SIPRO permite consultar el estado del proyecto y las observaciones formuladas por el equipo evaluador al término de la Segunda Etapa de Evaluación, sin embargo, de acuerdo con los Lineamientos de la Convocatoria, el equipo SENNOVA verificará la aplicación final de causales de rechazo y las reglas relativas a la bolsa regional; lo que podrá dar
-                    lugar a cambios en la información actual. Los resultados finales del proceso se consignarán en el respectivo informe y se reflejarán en la plataforma en la semana 45 del año.
-                </p>
-            </div>
+                <hr class="mt-10 mb-10" />
+                <div>
+                    <p>
+                        Actualmente la plataforma SGPS-SIPRO permite consultar el estado del proyecto y las observaciones formuladas por el equipo evaluador al término de la Segunda Etapa de Evaluación, sin embargo, de acuerdo con los Lineamientos de la Convocatoria, el equipo SENNOVA verificará la aplicación final de causales de rechazo y las reglas relativas a la bolsa regional; lo que podrá dar
+                        lugar a cambios en la información actual. Los resultados finales del proceso se consignarán en el respectivo informe y se reflejarán en la plataforma en la semana 45 del año.
+                    </p>
+                </div>
+            {:else}
+                <hr class="mt-10 mb-10" />
+                <div>
+                    <p>Estos proyectos son de ejercicio y NO son válidos para metas de gerente público y son diferentes a los proyectos de capacidad instalada y proyectos de convocatorias.</p>
+                </div>
+            {/if}
         </div>
         <div slot="actions">
             <div class="p-4">

@@ -145,6 +145,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with ProyectoDemo
+     *
+     * @return object
+     */
+    public function proyectoDemo()
+    {
+        return $this->hasOne(ProyectoDemo::class);
+    }
+
+    /**
      * Relationship with EntidadAliada
      *
      * @return object
@@ -397,8 +407,14 @@ class Proyecto extends Model
         if ($this->tp()->exists()) $fechaFinalizacion  =  $this->tp->fecha_finalizacion;
         if ($this->servicioTecnologico()->exists()) $fechaFinalizacion =  $this->servicioTecnologico->fecha_finalizacion;
         if ($this->culturaInnovacion()->exists()) $fechaFinalizacion =  $this->culturaInnovacion->fecha_finalizacion;
+        $codigo = 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
+        if ($this->proyectoDemo()->exists()) {
+            $numeroConsecutivo = sprintf("%05s", $this->proyectoDemo->id);
+            $codigo = 'DEMO-' . $numeroConsecutivo . '-' . date('Y', strtotime($fechaFinalizacion));
+            $fechaFinalizacion =  $this->idi->fecha_finalizacion;
+        }
 
-        return 'SGPS-' . ($this->id + 8000) . '-' . date('Y', strtotime($fechaFinalizacion));
+        return $codigo;
     }
 
     public function getFechaInicioAttribute()

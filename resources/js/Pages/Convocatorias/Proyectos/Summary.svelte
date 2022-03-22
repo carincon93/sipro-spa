@@ -143,13 +143,15 @@
             </InfoMessage>
         {/if}
 
-        <InfoMessage class="mb-2">
-            <h1 class="text-3xl"><strong>¡Tenga en cuenta!</strong></h1>
-            <p>
-                Esta es una opción para notificar al Dinamizador que ha finalizado de diligenciar/subsanar el proyecto y de esta manera haga una revisión con el objetivo de confirmar o hacer un comentario de ajuste. Si el Dinamizador por alguna razón NO confirma el proyecto
-                <strong>la plataforma lo hará automáticamente al finalizar cada fase ya sea de formulación o de subsanación.</strong>
-            </p>
-        </InfoMessage>
+        {#if convocatoria.tipo_convocatoria == 1}
+            <InfoMessage class="mb-2">
+                <h1 class="text-3xl"><strong>¡Tenga en cuenta!</strong></h1>
+                <p>
+                    Esta es una opción para notificar al Dinamizador que ha finalizado de diligenciar/subsanar el proyecto y de esta manera haga una revisión con el objetivo de confirmar o hacer un comentario de ajuste. Si el Dinamizador por alguna razón NO confirma el proyecto
+                    <strong>la plataforma lo hará automáticamente al finalizar cada fase ya sea de formulación o de subsanación.</strong>
+                </p>
+            </InfoMessage>
+        {/if}
         <hr class="mt-10 mb-10" />
         {#if (isSuperAdmin && proyecto.finalizado == true && proyecto.habilitado_para_evaluar == false) || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true && proyecto.habilitado_para_evaluar == false)}
             <InfoMessage>
@@ -178,8 +180,12 @@
             </InfoMessage>
         {:else if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
             {#if proyecto.finalizado == false && proyecto.modificable == true && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
-                <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
-                <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
+                {#if convocatoria.tipo_convocatoria == 1}
+                    <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
+                    <Button on:click={(event) => (finishProjectDialogOpen = true)} variant="raised">Finalizar proyecto</Button>
+                {:else}
+                    <InfoMessage class="mb-2" message="El proyecto está completo." />
+                {/if}
             {:else if proyecto.finalizado == false}
                 <InfoMessage class="mb-2" alertMsg={true}>
                     <p><strong>La información del proyecto está incompleta. Para poder finalizar el proyecto debe completar los siguientes ítems:</strong></p>
@@ -237,10 +243,6 @@
                                 <li>El valor máximo del presupuesto total es: ${new Intl.NumberFormat('de-DE').format(proyecto.max_valor_presupuesto)}</li>
                             {/if}
                         {/if}
-
-                        <!-- {#if !actividadesPresupuesto}
-                            <li>Hay actividades sin presupuesto relacionado</li>
-                        {/if} -->
                         {#if !productosActividades}
                             <li>Hay productos sin actividades relacionadas</li>
                         {/if}

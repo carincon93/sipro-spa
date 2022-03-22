@@ -251,7 +251,7 @@ class EvaluacionController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/CausalRechazo', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'                    => $evaluacion,
             'causalesRechazoRegistradas'    => $evaluacion->evaluacionCausalesRechazo()->pluck('causal_rechazo'),
             'proyecto'                      => $evaluacion->proyecto,
@@ -295,7 +295,7 @@ class EvaluacionController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/ComentariosGenerales', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'                    => $evaluacion->only('id', 'finalizado', 'habilitado', 'modificable', 'justificacion_causal_rechazo', ' comentario_formulador', 'comentario_evaluador', 'replicas', 'evaluacion_final'),
             'otrasEvaluaciones'             => Evaluacion::where('proyecto_id', $evaluacion->proyecto_id)->where('id', '!=', $evaluacion->id)->with('evaluador')->get(),
             'proyecto'                      => $evaluacion->proyecto,

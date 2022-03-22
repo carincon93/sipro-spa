@@ -78,8 +78,8 @@ class ProyectoController extends Controller
 
         if ($request->subsanacion == true) {
             $proyecto->habilitado_para_evaluar = false;
-            $proyecto->modificable      = true;
-            $proyecto->finalizado       = false;
+            $proyecto->modificable = true;
+            $proyecto->finalizado  = false;
             $proyecto->mostrar_recomendaciones = true;
             $proyecto->evaluaciones()->update(['finalizado' => true, 'modificable' => false, 'iniciado' => false]);
         } else {
@@ -89,7 +89,8 @@ class ProyectoController extends Controller
             $proyecto->mostrar_recomendaciones = $request->mostrar_recomendaciones;
         }
 
-        $proyecto->en_evaluacion = $request->en_evaluacion;
+        $proyecto->en_evaluacion   = $request->en_evaluacion;
+        $proyecto->radicado        = $request->radicado;
 
         $proyecto->save();
 
@@ -213,7 +214,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria', 'mostrar_recomendaciones'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
             'productos'     => $productos,
             'objetivos'     => $objetivos,
@@ -316,7 +317,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/CadenaValor/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'        => $evaluacion,
             'segundaEvaluacion' => $segundaEvaluacion,
             'proyecto'          => $evaluacion->proyecto,
@@ -506,7 +507,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
-            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'convocatoria'              => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
             'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
@@ -626,7 +627,7 @@ class ProyectoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/Summary', [
-            'convocatoria' => $convocatoria->only('id', 'fase_formateada', 'fase', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
+            'convocatoria' => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos', 'finalizado'),
             'evaluacion'   => $evaluacion,
             'proyecto'     => $evaluacion->proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar'),
             'versiones'    => $evaluacion->proyecto->PdfVersiones,
@@ -1177,7 +1178,7 @@ class ProyectoController extends Controller
         $proyecto->evaluaciones->load('evaluacionCausalesRechazo');
 
         return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
-            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'                  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluaciones'                  => $proyecto->evaluaciones,
             'proyecto'                      => $proyecto,
         ]);

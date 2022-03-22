@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
+    import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
     import { onMount } from 'svelte'
@@ -85,7 +85,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
+            if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]),
@@ -102,8 +102,9 @@
             }
         })
     }
+
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -117,7 +118,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false) || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false)) {
             $deleteForm.delete(route('convocatorias.servicios-tecnologicos.destroy', [convocatoria.id, servicioTecnologico.id]), {
                 preserveScroll: true,
             })
@@ -144,7 +145,7 @@
     <Stepper {convocatoria} proyecto={servicioTecnologico} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) ? undefined : checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true ? undefined : true}>
             <div class="mt-28">
                 <Label
                     required
@@ -537,10 +538,10 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && convocatoria.fase == 1)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false) || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}
                 <small>{servicioTecnologico.updated_at}</small>
 
                 <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>

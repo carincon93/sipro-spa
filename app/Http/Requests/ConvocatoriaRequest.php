@@ -25,18 +25,33 @@ class ConvocatoriaRequest extends FormRequest
     {
         return [
             'descripcion'                               => ['required'],
-            'esta_activa'                               => ['required', 'boolean'],
+            'esta_activa'                               => ['required_if:tipo_convocatoria,1', 'nullable', 'boolean'],
             'fecha_finalizacion_fase'                   => ['required', 'date', 'date_format:Y-m-d'],
             'min_fecha_inicio_proyectos_idi'            => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_idi'],
             'max_fecha_finalizacion_proyectos_idi'      => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_idi'],
-            'min_fecha_inicio_proyectos_cultura'        => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_cultura'],
-            'max_fecha_finalizacion_proyectos_cultura'  => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_cultura'],
-            'min_fecha_inicio_proyectos_st'             => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_st'],
-            'max_fecha_finalizacion_proyectos_st'       => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_st'],
-            'min_fecha_inicio_proyectos_ta'             => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_ta'],
-            'min_fecha_inicio_proyectos_tp'             => ['required', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_tp'],
-            'max_fecha_finalizacion_proyectos_ta'       => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_ta'],
-            'max_fecha_finalizacion_proyectos_tp'       => ['required', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_tp'],
+            'min_fecha_inicio_proyectos_cultura'        => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_cultura'],
+            'max_fecha_finalizacion_proyectos_cultura'  => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_cultura'],
+            'min_fecha_inicio_proyectos_st'             => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_st'],
+            'max_fecha_finalizacion_proyectos_st'       => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_st'],
+            'min_fecha_inicio_proyectos_ta'             => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_ta'],
+            'min_fecha_inicio_proyectos_tp'             => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'before:max_fecha_finalizacion_proyectos_tp'],
+            'max_fecha_finalizacion_proyectos_ta'       => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_ta'],
+            'max_fecha_finalizacion_proyectos_tp'       => ['required_if:tipo_convocatoria,1', 'nullable', 'date', 'date_format:Y-m-d', 'after:min_fecha_inicio_proyectos_tp'],
+            'hora_finalizacion_fase'                    => ['required']
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->tipo_convocatoria)) {
+            $this->merge([
+                'tipo_convocatoria' => $this->tipo_convocatoria['value'] == '1' ? 1 : 2,
+            ]);
+        }
     }
 }

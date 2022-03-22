@@ -44,7 +44,7 @@ class EntidadAliadaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
             'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones', 'mostrar_recomendaciones'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
@@ -67,7 +67,7 @@ class EntidadAliadaController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Create', [
-            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'  => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'modificable', 'mostrar_recomendaciones'),
             'actividades'   => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -110,8 +110,8 @@ class EntidadAliadaController extends Controller
                 'codigo_gruplac'                            => 'nullable|max:191',
                 'enlace_gruplac'                            => 'nullable|url|max:191',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'required|max:10000000|file|mimetypes:application/pdf',
-                'carta_propiedad_intelectual'               => 'required|max:10000000|file|mimetypes:application/pdf',
+                'carta_intencion'                           => 'required_if:tipo_convocatoria,1|nullable|max:10000000|file|mimetypes:application/pdf',
+                'carta_propiedad_intelectual'               => 'required_if:tipo_convocatoria,1|nullable|max:10000000|file|mimetypes:application/pdf',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -130,20 +130,24 @@ class EntidadAliadaController extends Controller
             $entidadAliadaIdi->recursos_dinero                          = $request->recursos_dinero;
             $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
 
-            $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
-            $rutaCartaIntencion          = $request->carta_intencion->storeAs(
-                'cartas-intencion',
-                $nombreArchivoCartaIntencion
-            );
-            $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
+            if ($request->hasFile('carta_intencion')) {
+                $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
+                $rutaCartaIntencion          = $request->carta_intencion->storeAs(
+                    'cartas-intencion',
+                    $nombreArchivoCartaIntencion
+                );
+                $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
+            }
 
-            $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
-            $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
-                'cartas-propiedad-intelectual',
-                $nombreArchivoPropiedadIntelectual
-            );
+            if ($request->hasFile('carta_propiedad_intelectual')) {
+                $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
+                $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
+                    'cartas-propiedad-intelectual',
+                    $nombreArchivoPropiedadIntelectual
+                );
 
-            $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
+                $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
+            }
 
             $entidadAliada->actividades()->attach($request->actividad_id);
 
@@ -203,7 +207,7 @@ class EntidadAliadaController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Edit', [
-            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'proyecto'        => $proyecto->only('id', 'modificable', 'codigo_linea_programatica', 'mostrar_recomendaciones'),
             'entidadAliada'   => $entidadAliada,
             'actividades'     => Actividad::whereIn(
@@ -496,7 +500,7 @@ class EntidadAliadaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'        => $evaluacion,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'finalizado'),
             'tipoEntidad'       => $tipo,
@@ -528,7 +532,7 @@ class EntidadAliadaController extends Controller
         $evaluacion->proyecto->codigo_linea_programatica = $evaluacion->proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Evaluaciones/EntidadesAliadas/Edit', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'        => $evaluacion->only('id'),
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica'),
             'entidadAliada'     => $entidadAliada,

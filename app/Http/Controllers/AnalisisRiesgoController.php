@@ -33,7 +33,7 @@ class AnalisisRiesgoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Index', [
-            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase', 'mostrar_recomendaciones'),
+            'convocatoria'    => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
             'proyecto'        => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
             'filters'         => request()->all('search'),
             'analisisRiesgos' => AnalisisRiesgo::where('proyecto_id', $proyecto->id)->orderBy('descripcion', 'ASC')
@@ -111,7 +111,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-proyecto-autor', $proyecto);
 
         return Inertia::render('Convocatorias/Proyectos/AnalisisRiesgo/Edit', [
-            'convocatoria'         => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'         => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'proyecto'             => $proyecto,
             'analisisRiesgo'       => $analisisRiesgo,
             'nivelesRiesgo'        => json_decode(Storage::get('json/niveles-riesgo.json'), true),
@@ -218,7 +218,7 @@ class AnalisisRiesgoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Index', [
-            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'      => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'        => $evaluacion,
             'otrasEvaluaciones' => $otrasEvaluaciones,
             'proyecto'          => $evaluacion->proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'finalizado'),
@@ -297,7 +297,7 @@ class AnalisisRiesgoController extends Controller
         $this->authorize('visualizar-evaluacion-autor', $evaluacion);
 
         return Inertia::render('Convocatorias/Evaluaciones/AnalisisRiesgo/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase'),
+            'convocatoria'          => $convocatoria->only('id', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'evaluacion'            => $evaluacion->only('id'),
             'proyecto'              => $evaluacion->proyecto,
             'analisisRiesgo'        => $analisisRiesgo,

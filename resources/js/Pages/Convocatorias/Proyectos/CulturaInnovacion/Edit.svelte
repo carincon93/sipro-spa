@@ -1,7 +1,7 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { useForm, page } from '@inertiajs/inertia-svelte'
-    import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
+    import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
@@ -156,7 +156,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
+            if (isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
                 //guardar
                 Inertia.post(
                     route('convocatorias.cultura-innovacion.updateLongColumn', [convocatoria.id, culturaInnovacion.id, column]),
@@ -174,7 +174,7 @@
         })
     }
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
@@ -193,7 +193,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [13]) && culturaInnovacion.proyecto.modificable == true)) {
+        if (isSuperAdmin || (checkPermission(authUser, [13]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false)) {
             $deleteForm.delete(route('convocatorias.cultura-innovacion.destroy', [convocatoria.id, culturaInnovacion.id]), {
                 preserveScroll: true,
             })
@@ -238,7 +238,7 @@
     <Stepper {convocatoria} proyecto={culturaInnovacion} />
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) ? undefined : checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -1008,10 +1008,10 @@
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true && convocatoria.fase == 1)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
+            {#if isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true)}
                 <small>{culturaInnovacion.updated_at}</small>
 
                 <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>

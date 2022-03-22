@@ -47,15 +47,18 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole([20, 18, 19, 5, 17]);
         });
 
-        Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId) {
+        Gate::define('formular-proyecto', function (User $user, $lineaProgramaticaId, $convocatoria) {
             $lineaProgramatica = LineaProgramatica::find($lineaProgramaticaId);
 
             if ($user->can_by_user->search(11) !== false && $lineaProgramatica->codigo == 65 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 23 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 66 || $user->can_by_user->search(1) !== false && $lineaProgramatica->codigo == 82 || $user->can_by_user->search(5) !== false && $lineaProgramatica->codigo == 68 || $user->can_by_user->search(8) !== false && $lineaProgramatica->codigo == 70 || $user->can_by_user->search(17) !== false && $lineaProgramatica->codigo == 69) {
                 return true;
             }
 
-            $convocatoria = Convocatoria::where('esta_activa', true)->first();
-            if ($convocatoria && $convocatoria->fase != 1) {
+            if ($convocatoria && $convocatoria->tipo_convocatoria == 2 && $convocatoria->esta_activa == true) {
+                return true;
+            }
+
+            if ($convocatoria && $convocatoria->fase != 1 && $convocatoria->tipo_convocatoria == 1) {
                 return false;
             }
 

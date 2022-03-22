@@ -33,6 +33,7 @@
         estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova)?.estado : null,
         mostrar_recomendaciones: proyecto.mostrar_recomendaciones,
         en_evaluacion: proyecto.en_evaluacion,
+        radicado: proyecto.radicado,
     })
 
     function submit() {
@@ -130,12 +131,12 @@
                     <InputError message={errors.subsanacion} />
 
                     <InfoMessage class="mt-10">
-                        <p class="font-black">Tenga en cuenta: Información del estado del proyecto (Se tienen en cuenta la(s) {JSON.parse(proyecto.estado)?.evaluacionesHabilitadas} evaluacion(es) habilitada(s))</p>
+                        <p class="font-black">Tenga en cuenta: Información del estado del proyecto (Se tienen en cuenta la(s) {JSON.parse(proyecto.estado) ? JSON.parse(proyecto.estado)?.evaluacionesHabilitadas : 0} evaluacion(es) habilitada(s))</p>
                         <ul>
-                            <li>Estado del proyecto: {JSON.parse(proyecto.estado)?.estado}</li>
-                            <li>Número de recomendaciones: {JSON.parse(proyecto.estado)?.numeroRecomendaciones}</li>
+                            <li>Estado del proyecto: {JSON.parse(proyecto.estado) ? JSON.parse(proyecto.estado)?.estado : 'Sin estado'}</li>
+                            <li>Número de recomendaciones: {JSON.parse(proyecto.estado) ? JSON.parse(proyecto.estado)?.numeroRecomendaciones : 0}</li>
                             {#if JSON.parse(proyecto.estado)?.puntaje}
-                                <li>Puntaje total: {JSON.parse(proyecto.estado)?.puntaje}</li>
+                                <li>Puntaje total: {JSON.parse(proyecto.estado) ? JSON.parse(proyecto.estado)?.puntaje : 0}</li>
                             {/if}
                             <li>¿Requiere ser subsanado?: {JSON.parse(proyecto.estado)?.requiereSubsanar ? 'Si' : 'No'}</li>
                         </ul>
@@ -149,6 +150,15 @@
                     <br />
                     <Switch bind:checked={$form.en_evaluacion} />
                     <InputError message={errors.en_evaluacion} />
+                </div>
+
+                <hr class="mt-10 mb-10" />
+
+                <div class="mt-4">
+                    <Label labelFor="radicado" value="¿El proyecto esta radicado? Nota: Si la opción es si evita que sea eliminado del sistema" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.radicado} />
+                    <InputError message={errors.radicado} />
                 </div>
 
                 <hr class="mt-10 mb-10" />

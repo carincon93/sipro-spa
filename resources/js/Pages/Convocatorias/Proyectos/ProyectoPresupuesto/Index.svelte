@@ -313,7 +313,7 @@
 
             {#if proyectoPresupuesto.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4">Sin información registrada</td>
+                    <td class="border-t px-6 py-4" colspan="5">Sin información registrada</td>
                 </tr>
             {/if}
         </tbody>

@@ -194,35 +194,35 @@
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={1} />
-                                <span slot="label">Crear proyecto de I+D+i</span>
+                                <span slot="label">Crear/modificar proyecto de I+D+i</span>
                             </FormField>
                         </div>
 
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={8} />
-                                <span slot="label">Crear proyecto de TA</span>
+                                <span slot="label">Crear/modificar proyecto de TA</span>
                             </FormField>
                         </div>
 
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={17} />
-                                <span slot="label">Crear proyecto de TP</span>
+                                <span slot="label">Crear/modificar proyecto de TP</span>
                             </FormField>
                         </div>
 
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={11} />
-                                <span slot="label">Crear proyecto de Cultura de la Innovación</span>
+                                <span slot="label">Crear/modificar proyecto de Cultura de la Innovación</span>
                             </FormField>
                         </div>
 
                         <div class="pt-8 pb-8 border-t">
                             <FormField>
                                 <Checkbox bind:group={$form.permission_id} value={5} />
-                                <span slot="label">Crear proyecto de Servicios Tecnológicos</span>
+                                <span slot="label">Crear/modificar proyecto de Servicios Tecnológicos</span>
                             </FormField>
                         </div>
                     {/if}

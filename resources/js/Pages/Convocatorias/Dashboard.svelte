@@ -3,9 +3,6 @@
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import { Inertia } from '@inertiajs/inertia'
-
-    import Button from '@/Shared/Button'
 
     export let convocatoria
 
@@ -16,7 +13,7 @@
 </script>
 
 <AuthenticatedLayout>
-    {#if isSuperAdmin || checkRole(authUser, [11])}
+    {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkRole(authUser, [11]) && convocatoria.tipo_convocatoria == 1)}
         <a class="flex bg-orangered-900 bottom-0 fixed hover:bg-orangered-600 mb-4 px-6 py-2 rounded-3xl shadow-2xl text-center text-white z-50" href="#evaluacion">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -39,7 +36,7 @@
                         I+D+i
                     </a>
                 {/if}
-                {#if isSuperAdmin || checkPermission(authUser, [8, 9, 10, 15])}
+                {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkPermission(authUser, [8, 9, 10, 15]) && convocatoria.tipo_convocatoria == 1)}
                     <a use:inertia href={route('convocatorias.ta.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                         <figure>
                             <img src={window.basePath + '/images/ta.png'} alt="Línea programática - Tecnoacademia" class="bg-white h-44 w-44 object-contain rounded-full" />
@@ -48,7 +45,7 @@
                     </a>
                 {/if}
 
-                {#if isSuperAdmin || checkPermission(authUser, [17, 18, 19, 20])}
+                {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkPermission(authUser, [17, 18, 19, 20]) && convocatoria.tipo_convocatoria == 1)}
                     <a use:inertia href={route('convocatorias.tp.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                         <figure>
                             <img src={window.basePath + '/images/tp.png'} alt="Línea programática - Tecnoparque" class="bg-white h-44 w-44 object-contain rounded-full" />
@@ -57,7 +54,7 @@
                     </a>
                 {/if}
 
-                {#if isSuperAdmin || checkPermission(authUser, [5, 6, 7, 16])}
+                {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkPermission(authUser, [5, 6, 7, 16]) && convocatoria.tipo_convocatoria == 1)}
                     <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                         <figure>
                             <img src={window.basePath + '/images/st.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
@@ -66,7 +63,7 @@
                     </a>
                 {/if}
 
-                {#if isSuperAdmin || checkPermission(authUser, [11, 12, 13, 21])}
+                {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkPermission(authUser, [11, 12, 13, 21]) && convocatoria.tipo_convocatoria == 1)}
                     <a use:inertia href={route('convocatorias.cultura-innovacion.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col w-80 h-96">
                         <figure>
                             <img src={window.basePath + '/images/cultura-innovacion.png'} alt="Línea programática - Servicios tecnológicos" class="bg-white h-44 w-44 object-contain rounded-full" />
@@ -75,10 +72,10 @@
                     </a>
                 {/if}
             </div>
-            <hr class="mt-20 mb-20" />
         {/if}
 
-        {#if isSuperAdmin || checkRole(authUser, [11, 5, 20, 19, 18])}
+        {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkRole(authUser, [11, 5, 20, 19, 18]) && convocatoria.tipo_convocatoria == 1)}
+            <hr class="mt-20 mb-20" />
             <h1 class="text-4xl text-center" id="evaluacion">
                 A continuación, se listan la(s) línea(s) programática(s) de la vigencia {convocatoria.year} para realizar las respectivas evaluaciones.
             </h1>
