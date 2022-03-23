@@ -30,7 +30,7 @@
 
         <div slot="actions">
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('regionales.create'))} variant="raised">Crear Regional</Button>
+                <Button on:click={() => Inertia.visit(route('regionales.create'))} variant="raised">Crear regional</Button>
             {/if}
         </div>
 

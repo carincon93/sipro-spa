@@ -17,6 +17,13 @@ class PresupuestoSennova extends Model
     protected $table = 'presupuesto_sennova';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    public $appends = ['codigo'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -126,5 +133,15 @@ class PresupuestoSennova extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(mensaje) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    /**
+     * getCodigoAttribute
+     *
+     * @return void
+     */
+    public function getCodigoAttribute()
+    {
+        return 'PS-' . sprintf("%04s", $this->id) . '-' . date('Y', strtotime($this->created_at));
     }
 }

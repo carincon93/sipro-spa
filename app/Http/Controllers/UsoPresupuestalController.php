@@ -20,7 +20,7 @@ class UsoPresupuestalController extends Controller
 
         return Inertia::render('Presupuesto/UsosPresupuestales/Index', [
             'filters'               => request()->all('search'),
-            'UsosPresupuestales'    => UsoPresupuestal::orderBy('descripcion', 'ASC')
+            'usosPresupuestales'    => UsoPresupuestal::orderBy('descripcion', 'ASC')
                 ->filterUsoPresupuestal(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
@@ -47,11 +47,11 @@ class UsoPresupuestalController extends Controller
     {
         $this->authorize('create', [UsoPresupuestal::class]);
 
-        $UsoPresupuestal = new UsoPresupuestal();
-        $UsoPresupuestal->descripcion   = $request->descripcion;
-        $UsoPresupuestal->codigo        = $request->codigo;
+        $usoPresupuestal = new UsoPresupuestal();
+        $usoPresupuestal->descripcion   = $request->descripcion;
+        $usoPresupuestal->codigo        = $request->codigo;
 
-        $UsoPresupuestal->save();
+        $usoPresupuestal->save();
 
         return redirect()->route('usos-presupuestales.index')->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -59,26 +59,26 @@ class UsoPresupuestalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UsoPresupuestal  $UsoPresupuestal
+     * @param  \App\Models\UsoPresupuestal  $usoPresupuestal
      * @return \Illuminate\Http\Response
      */
-    public function show(UsoPresupuestal $UsoPresupuestal)
+    public function show(UsoPresupuestal $usoPresupuestal)
     {
-        $this->authorize('view', [UsoPresupuestal::class, $UsoPresupuestal]);
+        $this->authorize('view', [UsoPresupuestal::class, $usoPresupuestal]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UsoPresupuestal  $UsoPresupuestal
+     * @param  \App\Models\UsoPresupuestal  $usoPresupuestal
      * @return \Illuminate\Http\Response
      */
-    public function edit(UsoPresupuestal $UsoPresupuestal)
+    public function edit(UsoPresupuestal $usoPresupuestal)
     {
-        $this->authorize('update', [UsoPresupuestal::class, $UsoPresupuestal]);
+        $this->authorize('update', [UsoPresupuestal::class, $usoPresupuestal]);
 
         return Inertia::render('Presupuesto/UsosPresupuestales/Edit', [
-            'UsoPresupuestal' => $UsoPresupuestal
+            'usoPresupuestal' => $usoPresupuestal
         ]);
     }
 
@@ -86,17 +86,17 @@ class UsoPresupuestalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UsoPresupuestal  $UsoPresupuestal
+     * @param  \App\Models\UsoPresupuestal  $usoPresupuestal
      * @return \Illuminate\Http\Response
      */
-    public function update(UsoPresupuestalRequest $request, UsoPresupuestal $UsoPresupuestal)
+    public function update(UsoPresupuestalRequest $request, UsoPresupuestal $usoPresupuestal)
     {
-        $this->authorize('update', [UsoPresupuestal::class, $UsoPresupuestal]);
+        $this->authorize('update', [UsoPresupuestal::class, $usoPresupuestal]);
 
-        $UsoPresupuestal->descripcion   = $request->descripcion;
-        $UsoPresupuestal->codigo        = $request->codigo;
+        $usoPresupuestal->descripcion   = $request->descripcion;
+        $usoPresupuestal->codigo        = $request->codigo;
 
-        $UsoPresupuestal->save();
+        $usoPresupuestal->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -104,14 +104,14 @@ class UsoPresupuestalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UsoPresupuestal  $UsoPresupuestal
+     * @param  \App\Models\UsoPresupuestal  $usoPresupuestal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UsoPresupuestal $UsoPresupuestal)
+    public function destroy(UsoPresupuestal $usoPresupuestal)
     {
-        $this->authorize('delete', [UsoPresupuestal::class, $UsoPresupuestal]);
+        $this->authorize('delete', [UsoPresupuestal::class, $usoPresupuestal]);
 
-        $UsoPresupuestal->delete();
+        $usoPresupuestal->delete();
 
         return redirect()->route('usos-presupuestales.index')->with('success', 'El recurso se ha eliminado correctamente.');
     }

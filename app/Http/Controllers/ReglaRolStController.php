@@ -23,7 +23,7 @@ class ReglaRolStController extends Controller
 
         return Inertia::render('ReglasRolesSt/Index', [
             'filters'           => request()->all('search'),
-            'reglasRolesSt'     => ReglaRolSt::selectRaw("reglas_roles_st.id, roles_sennova.nombre as nombre_rol, centros_formacion.nombre as nombre_centro, CASE tipos_proyecto_st.tipo_proyecto
+            'reglasRolesSt'     => ReglaRolSt::selectRaw("reglas_roles_st.id, reglas_roles_st.maximo, roles_sennova.nombre as nombre_rol, centros_formacion.nombre as nombre_centro, CASE tipos_proyecto_st.tipo_proyecto
                 WHEN '1' THEN	'A'
                 WHEN '2' THEN	'B'
             END as tipo_proyecto")->join('roles_sennova', 'reglas_roles_st.rol_sennova_id', 'roles_sennova.id')->join('tipos_proyecto_st', 'reglas_roles_st.tipo_proyecto_st_id', 'tipos_proyecto_st.id')->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->orderBy('roles_sennova.nombre', 'ASC')

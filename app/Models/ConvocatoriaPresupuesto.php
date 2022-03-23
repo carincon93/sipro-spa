@@ -73,4 +73,21 @@ class ConvocatoriaPresupuesto extends Model
     {
         return $this->hasMany(ProyectoPresupuesto::class);
     }
+
+    /**
+     * Filtrar registros
+     *
+     * @param  mixed $query
+     * @param  mixed $filters
+     * @return void
+     */
+    public function scopeFilterConvocatoriaPresupuesto($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $search = str_replace('"', "", $search);
+            $search = str_replace("'", "", $search);
+            $search = str_replace(' ', '%%', $search);
+            $query->whereRaw("unaccent(presupuesto_sennova_id) ilike unaccent('%" . $search . "%')");
+        });
+    }
 }

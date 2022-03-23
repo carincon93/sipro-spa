@@ -31,25 +31,25 @@
             <InfoMessage>
                 Para modificar las reglas de negocio de los roles de Tecnoacademia haga clic en el siguiente botón:
 
-                <Button on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas de roles TA</Button>
+                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas - Roles TA</Button>
             </InfoMessage>
 
             <InfoMessage>
                 Para modificar las reglas de negocio de los roles de Tecnoparque haga clic en el siguiente botón:
 
-                <Button on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas de roles TP</Button>
+                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas - Roles TP</Button>
             </InfoMessage>
 
             <InfoMessage>
                 Para modificar las reglas de negocio de los roles de Servicios Tecnológicos haga clic en el siguiente botón:
 
-                <Button on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas de roles ST</Button>
+                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas - Roles ST</Button>
             </InfoMessage>
 
             <InfoMessage>
                 Para modificar las reglas de negocio de los roles de Cultura de la innovación haga clic en el siguiente botón:
 
-                <Button on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas de roles Cultura de la innovación</Button>
+                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas - Roles C. de la innovación</Button>
             </InfoMessage>
         </div>
 

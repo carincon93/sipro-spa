@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConvocatoriaPresupuestoRequest;
+use App\Models\Convocatoria;
 use App\Models\ConvocatoriaPresupuesto;
+use App\Models\PresupuestoSennova;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,13 +16,13 @@ class ConvocatoriaPresupuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Convocatoria $convocatoria)
     {
         $this->authorize('viewAny', [ConvocatoriaPresupuesto::class]);
 
-        return Inertia::render('ConvocatoriaPresupuesto/Index', [
+        return Inertia::render('Convocatorias/ConvocatoriaPresupuesto/Index', [
             'filters'                   => request()->all('search'),
-            'convocatoriaPresupuesto'   => ConvocatoriaPresupuesto::orderBy('', 'ASC')
+            'convocatoriaPresupuesto'   => $convocatoria->convocatoriaPresupuestos()->select('convocatoria_presupuesto.id', 'convocatoria_presupuesto.presupuesto_sennova_id')->join('presupuesto_sennova', 'convocatoria_presupuesto.presupuesto_sennova_id', 'presupuesto_sennova.id')->orderBy('presupuesto_sennova.linea_programatica_id', 'DESC')->with('presupuestoSennova.segundoGrupoPresupuestal', 'presupuestoSennova.tercerGrupoPresupuestal', 'presupuestoSennova.usoPresupuestal', 'presupuestoSennova.lineaProgramatica')
                 ->filterConvocatoriaPresupuesto(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
@@ -30,11 +32,14 @@ class ConvocatoriaPresupuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Convocatoria $convocatoria)
     {
         $this->authorize('create', [ConvocatoriaPresupuesto::class]);
 
-        return Inertia::render('ConvocatoriaPresupuesto/Create');
+        return Inertia::render('Convocatorias/ConvocatoriaPresupuesto/Create', [
+            'convocatoria'          => $convocatoria,
+            'presupuestosSennova'   => PresupuestoSennova::selectRaw("presupuesto_sennova.id as value, CONCAT('PS-',to_char(presupuesto_sennova.id, 'fm0000'), '-', date_part('year', presupuesto_sennova.created_at), chr(10), '∙ Uso presupuestal: ', usos_presupuestales.descripcion, chr(10), '∙ Línea programática: ', lineas_programaticas.codigo) as label")->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')->join('lineas_programaticas', 'presupuesto_sennova.linea_programatica_id', 'lineas_programaticas.id')->orderBy('presupuesto_sennova.id', 'ASC')->get()
+        ]);
     }
 
     /**
@@ -43,43 +48,46 @@ class ConvocatoriaPresupuestoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ConvocatoriaPresupuestoRequest $request)
+    public function store(ConvocatoriaPresupuestoRequest $request, Convocatoria $convocatoria)
     {
         $this->authorize('create', [ConvocatoriaPresupuesto::class]);
 
-        $callBudget = new ConvocatoriaPresupuesto();
-        $callBudget->fieldName = $request->fieldName;
-        $callBudget->fieldName = $request->fieldName;
-        $callBudget->fieldName = $request->fieldName;
+        $convocatoriaPresupuesto = new ConvocatoriaPresupuesto();
+        $convocatoriaPresupuesto->convocatoria()->associate($convocatoria);
+        $convocatoriaPresupuesto->presupuestoSennova()->associate($request->presupuesto_sennova_id);
 
-        $callBudget->save();
+        $convocatoriaPresupuesto->save();
 
-        return redirect()->route('convocatoria-presupuesto.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('convocatorias.convocatoria-presupuesto.index', [$convocatoria])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ConvocatoriaPresupuesto  $callBudget
+     * @param  \App\Models\ConvocatoriaPresupuesto  $convocatoriaPresupuesto
      * @return \Illuminate\Http\Response
      */
-    public function show(ConvocatoriaPresupuesto $callBudget)
+    public function show(Convocatoria $convocatoria, ConvocatoriaPresupuesto $convocatoriaPresupuesto)
     {
-        $this->authorize('view', [ConvocatoriaPresupuesto::class, $callBudget]);
+        $this->authorize('view', [ConvocatoriaPresupuesto::class, $convocatoriaPresupuesto]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ConvocatoriaPresupuesto  $callBudget
+     * @param  \App\Models\ConvocatoriaPresupuesto  $convocatoriaPresupuesto
      * @return \Illuminate\Http\Response
      */
-    public function edit(ConvocatoriaPresupuesto $callBudget)
+    public function edit(Convocatoria $convocatoria, ConvocatoriaPresupuesto $convocatoriaPresupuesto)
     {
-        $this->authorize('update', [ConvocatoriaPresupuesto::class, $callBudget]);
+        $this->authorize('update', [ConvocatoriaPresupuesto::class, $convocatoriaPresupuesto]);
 
-        return Inertia::render('ConvocatoriaPresupuesto/Edit', [
-            'callBudget' => $callBudget
+        $convocatoriaPresupuesto->presupuestoSennova;
+
+        return Inertia::render('Convocatorias/ConvocatoriaPresupuesto/Edit', [
+            'convocatoria'              => $convocatoria,
+            'convocatoriaPresupuesto'   => $convocatoriaPresupuesto,
+            'presupuestosSennova'       => PresupuestoSennova::selectRaw("presupuesto_sennova.id as value, CONCAT('PS-',to_char(presupuesto_sennova.id, 'fm0000'), '-', date_part('year', presupuesto_sennova.created_at), chr(10), '∙ Uso presupuestal: ', usos_presupuestales.descripcion, chr(10), '∙ Línea programática: ', lineas_programaticas.codigo) as label")->join('usos_presupuestales', 'presupuesto_sennova.uso_presupuestal_id', 'usos_presupuestales.id')->join('lineas_programaticas', 'presupuesto_sennova.linea_programatica_id', 'lineas_programaticas.id')->orderBy('presupuesto_sennova.id', 'ASC')->get()
         ]);
     }
 
@@ -87,18 +95,17 @@ class ConvocatoriaPresupuestoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ConvocatoriaPresupuesto  $callBudget
+     * @param  \App\Models\ConvocatoriaPresupuesto  $convocatoriaPresupuesto
      * @return \Illuminate\Http\Response
      */
-    public function update(ConvocatoriaPresupuestoRequest $request, ConvocatoriaPresupuesto $callBudget)
+    public function update(ConvocatoriaPresupuestoRequest $request, Convocatoria $convocatoria, ConvocatoriaPresupuesto $convocatoriaPresupuesto)
     {
-        $this->authorize('update', [ConvocatoriaPresupuesto::class, $callBudget]);
+        $this->authorize('update', [ConvocatoriaPresupuesto::class, $convocatoriaPresupuesto]);
 
-        $callBudget->fieldName = $request->fieldName;
-        $callBudget->fieldName = $request->fieldName;
-        $callBudget->fieldName = $request->fieldName;
+        $convocatoriaPresupuesto->convocatoria()->associate($convocatoria);
+        $convocatoriaPresupuesto->presupuestoSennova()->associate($request->presupuesto_sennova_id);
 
-        $callBudget->save();
+        $convocatoriaPresupuesto->save();
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -106,15 +113,15 @@ class ConvocatoriaPresupuestoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ConvocatoriaPresupuesto  $callBudget
+     * @param  \App\Models\ConvocatoriaPresupuesto  $convocatoriaPresupuesto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ConvocatoriaPresupuesto $callBudget)
+    public function destroy(Convocatoria $convocatoria, ConvocatoriaPresupuesto $convocatoriaPresupuesto)
     {
-        $this->authorize('delete', [ConvocatoriaPresupuesto::class, $callBudget]);
+        $this->authorize('delete', [ConvocatoriaPresupuesto::class, $convocatoriaPresupuesto]);
 
-        $callBudget->delete();
+        $convocatoriaPresupuesto->delete();
 
-        return redirect()->route('convocatoria-presupuesto.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('convocatorias.convocatoria-presupuesto.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
     }
 }

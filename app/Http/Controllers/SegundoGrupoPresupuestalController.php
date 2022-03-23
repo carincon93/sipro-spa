@@ -78,7 +78,7 @@ class SegundoGrupoPresupuestalController extends Controller
         $this->authorize('update', [SegundoGrupoPresupuestal::class, $segundoGrupoPresupuestal]);
 
         return Inertia::render('Presupuesto/SegundoGrupoPresupuestal/Edit', [
-            'segundoGrupoPresupuestal' => $segundoGrupoPresupuestal
+            'rubroSegundoGrupoPresupuestal' => $segundoGrupoPresupuestal
         ]);
     }
 

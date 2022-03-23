@@ -24,8 +24,21 @@ class ConvocatoriaPresupuestoRequest extends FormRequest
     public function rules()
     {
         return [
-            'convocatoria_id'        => ['required', 'min:0', 'max:9999999999', 'integer', 'exists:convocatorias,id'],
             'presupuesto_sennova_id' => ['required', 'min:0', 'max:9999999999', 'integer', 'exists:presupuesto_sennova,id'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->presupuesto_sennova_id)) {
+            $this->merge([
+                'presupuesto_sennova_id' => $this->presupuesto_sennova_id['value'],
+            ]);
+        }
     }
 }

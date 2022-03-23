@@ -66,10 +66,6 @@ class PrimerGrupoPresupuestalController extends Controller
     public function show(PrimerGrupoPresupuestal $primerGrupoPresupuestal)
     {
         $this->authorize('view', [PrimerGrupoPresupuestal::class, $primerGrupoPresupuestal]);
-
-        return Inertia::render('Presupuesto/PrimerGrupoPresupuestal/Show', [
-            'primerGrupoPresupuestal' => $primerGrupoPresupuestal
-        ]);
     }
 
     /**
@@ -83,7 +79,7 @@ class PrimerGrupoPresupuestalController extends Controller
         $this->authorize('update', [PrimerGrupoPresupuestal::class, $primerGrupoPresupuestal]);
 
         return Inertia::render('Presupuesto/PrimerGrupoPresupuestal/Edit', [
-            'primerGrupoPresupuestal' => $primerGrupoPresupuestal
+            'rubroPrimerGrupoPresupuestal' => $primerGrupoPresupuestal
         ]);
     }
 
