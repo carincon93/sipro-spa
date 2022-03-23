@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PresupuestoSennovaRequest;
+use App\Models\LineaProgramatica;
 use App\Models\PresupuestoSennova;
+use App\Models\PrimerGrupoPresupuestal;
+use App\Models\SegundoGrupoPresupuestal;
+use App\Models\TercerGrupoPresupuestal;
+use App\Models\UsoPresupuestal;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,9 +23,9 @@ class PresupuestoSennovaController extends Controller
     {
         $this->authorize('viewAny', [PresupuestoSennova::class]);
 
-        return Inertia::render('PresupuestoSennova/Index', [
+        return Inertia::render('Presupuesto/PresupuestoSennova/Index', [
             'filters'               => request()->all('search'),
-            'presupuestoSennova'    => PresupuestoSennova::orderBy('mensaje', 'ASC')
+            'presupuestoSennova'    => PresupuestoSennova::orderBy('linea_programatica_id', 'ASC')->orderBy('segundo_grupo_presupuestal_id', 'ASC')->with('usoPresupuestal', 'segundoGrupoPresupuestal', 'tercerGrupoPresupuestal', 'lineaProgramatica')
                 ->filterPresupuestoSennova(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
@@ -34,7 +39,13 @@ class PresupuestoSennovaController extends Controller
     {
         $this->authorize('create', [PresupuestoSennova::class]);
 
-        return Inertia::render('PresupuestoSennova/Create');
+        return Inertia::render('Presupuesto/PresupuestoSennova/Create', [
+            'primerGrupoPresupuestal'   => PrimerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'tercerGrupoPresupuestal'   => TercerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'usosPresupuestales'        => UsoPresupuestal::select('id as value', 'descripcion as label')->get(),
+            'lineasProgramaticas'       => LineaProgramatica::selectRaw('lineas_programaticas.id as value, concat(lineas_programaticas.nombre, chr(10), \'∙ Código: \', lineas_programaticas.codigo) as label')->get(),
+        ]);
     }
 
     /**
@@ -48,13 +59,21 @@ class PresupuestoSennovaController extends Controller
         $this->authorize('create', [PresupuestoSennova::class]);
 
         $presupuestoSennova = new PresupuestoSennova();
-        $presupuestoSennova->fieldName = $request->fieldName;
-        $presupuestoSennova->fieldName = $request->fieldName;
-        $presupuestoSennova->fieldName = $request->fieldName;
+
+        $presupuestoSennova->requiere_estudio_mercado   = $request->requiere_estudio_mercado;
+        $presupuestoSennova->sumar_al_presupuesto       = $request->sumar_al_presupuesto;
+        $presupuestoSennova->mensaje                    = $request->mensaje;
+        $presupuestoSennova->habilitado                 = $request->habilitado;
+
+        $presupuestoSennova->primerGrupoPresupuestal()->associate($request->primer_grupo_presupuestal_id);
+        $presupuestoSennova->segundoGrupoPresupuestal()->associate($request->segundo_grupo_presupuestal_id);
+        $presupuestoSennova->tercerGrupoPresupuestal()->associate($request->tercer_grupo_presupuestal_id);
+        $presupuestoSennova->usoPresupuestal()->associate($request->uso_presupuestal_id);
+        $presupuestoSennova->lineaProgramatica()->associate($request->linea_programatica_id);
 
         $presupuestoSennova->save();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha creado correctamente.');
+        return redirect()->route('presupuesto-sennova.index')->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -78,8 +97,13 @@ class PresupuestoSennovaController extends Controller
     {
         $this->authorize('update', [PresupuestoSennova::class, $presupuestoSennova]);
 
-        return Inertia::render('PresupuestoSennova/Edit', [
-            'sennovaBudget' => $presupuestoSennova
+        return Inertia::render('Presupuesto/PresupuestoSennova/Edit', [
+            'presupuestoSennova'        => $presupuestoSennova,
+            'primerGrupoPresupuestal'   => PrimerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'tercerGrupoPresupuestal'   => TercerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
+            'usosPresupuestales'        => UsoPresupuestal::select('id as value', 'descripcion as label')->get(),
+            'lineasProgramaticas'       => LineaProgramatica::selectRaw('lineas_programaticas.id as value, concat(lineas_programaticas.nombre, chr(10), \'∙ Código: \', lineas_programaticas.codigo) as label')->get(),
         ]);
     }
 
@@ -94,9 +118,16 @@ class PresupuestoSennovaController extends Controller
     {
         $this->authorize('update', [PresupuestoSennova::class, $presupuestoSennova]);
 
-        $presupuestoSennova->fieldName = $request->fieldName;
-        $presupuestoSennova->fieldName = $request->fieldName;
-        $presupuestoSennova->fieldName = $request->fieldName;
+        $presupuestoSennova->requiere_estudio_mercado   = $request->requiere_estudio_mercado;
+        $presupuestoSennova->sumar_al_presupuesto       = $request->sumar_al_presupuesto;
+        $presupuestoSennova->mensaje                    = $request->mensaje;
+        $presupuestoSennova->habilitado                 = $request->habilitado;
+
+        $presupuestoSennova->primerGrupoPresupuestal()->associate($request->primer_grupo_presupuestal_id);
+        $presupuestoSennova->segundoGrupoPresupuestal()->associate($request->segundo_grupo_presupuestal_id);
+        $presupuestoSennova->tercerGrupoPresupuestal()->associate($request->tercer_grupo_presupuestal_id);
+        $presupuestoSennova->usoPresupuestal()->associate($request->uso_presupuestal_id);
+        $presupuestoSennova->lineaProgramatica()->associate($request->linea_programatica_id);
 
         $presupuestoSennova->save();
 
@@ -115,6 +146,19 @@ class PresupuestoSennovaController extends Controller
 
         $presupuestoSennova->delete();
 
-        return redirect()->route('resourceRoute.index')->with('success', 'El recurso se ha eliminado correctamente.');
+        return redirect()->route('presupuesto-sennova.index')->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+
+    /**
+     * configuracionPresupuestoSennova
+     *
+     * @return void
+     */
+    public function configuracionPresupuestoSennova()
+    {
+        $this->authorize('viewAny', [PresupuestoSennova::class]);
+
+        return Inertia::render('Presupuesto/Dashboard');
     }
 }

@@ -635,7 +635,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Presupuesto de convocatoria
      * 
      */
-    Route::resource('convocatoria-presupuesto',  ConvocatoriaPresupuestoController::class)->parameters(['convocatoria-presupuesto' => 'convocatoria-presupuesto'])->except(['show']);
+    Route::resource('convocatorias.convocatoria-presupuesto',  ConvocatoriaPresupuestoController::class)->parameters(['convocatorias' => 'convocatoria', 'convocatoria-presupuesto' => 'convocatoria-presupuesto'])->except(['show']);
 
     /**
      * Primer grupo presupuestal
@@ -666,6 +666,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * 
      */
     Route::resource('presupuesto-sennova',  PresupuestoSennovaController::class)->parameters(['presupuesto-sennova' => 'presupuesto-sennova'])->except(['show']);
+
+    Route::get('configuracion-presupuesto-sennova',  [PresupuestoSennovaController::class, 'configuracionPresupuestoSennova'])->name('configuracion-presupuesto-sennova');
+
 
     /**
      * Roles SENNOVA

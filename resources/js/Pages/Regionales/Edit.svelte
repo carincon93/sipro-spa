@@ -14,7 +14,7 @@
     export let errors
     export let regional
 
-    $: $title = regional ? regional.name : null
+    $: $title = regional ? regional.nombre : null
 
     /**
      * Permisos

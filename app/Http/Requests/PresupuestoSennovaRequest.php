@@ -34,4 +34,54 @@ class PresupuestoSennovaRequest extends FormRequest
             'mensaje'                          => ['nullable', 'string'],
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        if (is_array($this->primer_grupo_presupuestal_id)) {
+            $this->merge([
+                'primer_grupo_presupuestal_id' => $this->primer_grupo_presupuestal_id['value'],
+            ]);
+        }
+
+        if (is_array($this->segundo_grupo_presupuestal_id)) {
+            $this->merge([
+                'segundo_grupo_presupuestal_id' => $this->segundo_grupo_presupuestal_id['value'],
+            ]);
+        }
+
+        if (is_array($this->tercer_grupo_presupuestal_id)) {
+            $this->merge([
+                'tercer_grupo_presupuestal_id' => $this->tercer_grupo_presupuestal_id['value'],
+            ]);
+        }
+
+        if (is_array($this->uso_presupuestal_id)) {
+            $this->merge([
+                'uso_presupuestal_id' => $this->uso_presupuestal_id['value'],
+            ]);
+        }
+
+        if (is_array($this->linea_programatica_id)) {
+            $this->merge([
+                'linea_programatica_id' => $this->linea_programatica_id['value'],
+            ]);
+        }
+
+        if (is_array($this->sumar_al_presupuesto)) {
+            $this->merge([
+                'sumar_al_presupuesto' => $this->sumar_al_presupuesto['value'] == '1' ? 1 : 0,
+            ]);
+        }
+
+        if (is_array($this->sumar_al_presupuesto)) {
+            $this->merge([
+                'sumar_al_presupuesto' => $this->sumar_al_presupuesto['value'] == '1' ? 1 : 0,
+            ]);
+        }
+    }
 }

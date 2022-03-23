@@ -98,6 +98,16 @@ class Convocatoria extends Model
     }
 
     /**
+     * Relationship with ConvocatoriaPresupuesto
+     *
+     * @return object
+     */
+    public function convocatoriaPresupuestos()
+    {
+        return $this->hasMany(ConvocatoriaPresupuesto::class);
+    }
+
+    /**
      * Filtrar registros
      *
      * @param  mixed $query
