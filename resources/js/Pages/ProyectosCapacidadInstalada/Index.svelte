@@ -27,7 +27,7 @@
         <div slot="title">Proyectos de capacidad instalada</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(authUser, [25])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 6])}
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.create'))} variant="raised">Crear proyecto de capacidad instalada</Button>
             {/if}
         </div>
@@ -62,7 +62,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectosCapacidadInstalada.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (estado_proyecto != 3 && checkRole(authUser, [25]))}
+                            {#if isSuperAdmin || (estado_proyecto != 3 && checkRole(authUser, [4, 6]))}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

@@ -29,7 +29,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [25])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 6])) {
             $form.post(route('proyectos-capacidad-instalada.store.finalizar', proyectoCapacidadInstalada.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -60,7 +60,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [25]) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 6]) ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="estado_proyecto" value="Estado del proyecto" />
@@ -72,7 +72,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(authUser, [25])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 6])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Save')}
                 </LoadingButton>
