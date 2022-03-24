@@ -235,8 +235,7 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Código</th>
-                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Información</th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción del bien o servicio</th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Subtotal del costo de los productos o servicios requeridos</th>
                 {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Evaluación</th>
@@ -249,26 +248,18 @@
             {#each proyectoPresupuesto.data as presupuesto (presupuesto.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6">
-                            PRE-{presupuesto.id}
-                        </p>
-                    </td>
-                    <td class="border-t">
                         <div class="flex flex-col focus:text-indigo-500 px-6 py-4">
+                            <small>
+                                Código: PRE-{presupuesto.id}
+                            </small>
                             <div class="mt-3">
-                                <small>Concepto interno SENA</small>
                                 <p>
-                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.segundo_grupo_presupuestal.nombre}
+                                    {presupuesto.descripcion}
                                 </p>
                             </div>
+
                             <div class="mt-3">
-                                <small>Rubro</small>
-                                <p>
-                                    {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.tercer_grupo_presupuestal.nombre}
-                                </p>
-                            </div>
-                            <div class="mt-3">
-                                <small>Uso presupuestal</small>
+                                <small class="underline">Uso presupuestal</small>
                                 <p>
                                     {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
                                 </p>
