@@ -74,7 +74,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $proyectoCapacidadInstalada->save();
 
-        $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+        $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
 
         return redirect()->route('proyectos-capacidad-instalada.edit', [$proyectoCapacidadInstalada])->with('success', 'Por favor continue diligenciado la información básica.');
     }

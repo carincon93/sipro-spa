@@ -116,7 +116,7 @@
 
         <InfoMessage class="max-w-3xl mt-10">
             <div class="px-4">
-                <h1 class="mb-4 text-2xl">¿Desea configurar nuevo rubros del presupuesto SENNOVA para la convocatoria {convocatoria.year}?</h1>
+                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos rubros del presupuesto SENNOVA para la convocatoria {convocatoria.year}?</h1>
                 <Button on:click={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.index', convocatoria.id))} variant="raised">Configurar rubros presupuesto SENNOVA</Button>
             </div>
         </InfoMessage>
