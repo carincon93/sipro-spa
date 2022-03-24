@@ -27,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\AmbienteModernizacion' => 'App\Policies\AmbienteModernizacionPolicy',
         'App\Models\ProgramaFormacion' => 'App\Policies\ProgramaFormacionPolicy',
         'App\Models\Evaluacion\Evaluacion' => 'App\Policies\EvaluacionPolicy',
+        'App\Models\Evaluacion\ProyectoCapacidadInstalada' => 'App\Policies\ProyectoCapacidadInstaladaPolicy'
     ];
 
     /**

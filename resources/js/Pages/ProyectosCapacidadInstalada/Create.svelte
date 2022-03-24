@@ -46,7 +46,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [25])) {
+        if (isSuperAdmin || checkRole(authUser, [4, 6])) {
             $form.post(route('proyectos-capacidad-instalada.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -60,7 +60,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [25])}
+                    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
                         <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos de capacidad instalada </a>
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
@@ -71,7 +71,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [25]) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4, 6]) ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -236,7 +236,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(authUser, [25])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 6])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
