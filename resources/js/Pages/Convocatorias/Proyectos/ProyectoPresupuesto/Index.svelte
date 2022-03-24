@@ -253,14 +253,14 @@
                                 Código: PRE-{presupuesto.id}
                             </small>
                             <div class="mt-3">
-                                <p>
+                                <p class="paragraph-ellipsis">
                                     {presupuesto.descripcion}
                                 </p>
                             </div>
 
                             <div class="mt-3">
                                 <small class="underline">Uso presupuestal</small>
-                                <p>
+                                <p class="whitespace-pre-line">
                                     {presupuesto.convocatoria_presupuesto?.presupuesto_sennova?.uso_presupuestal.descripcion}
                                 </p>
                             </div>
