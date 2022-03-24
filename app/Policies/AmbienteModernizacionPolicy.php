@@ -18,11 +18,11 @@ class AmbienteModernizacionPolicy
      */
     public function viewAny(User $user)
     {
+        return false;
+
         if ($user->hasRole([4])) {
             return true;
         }
-
-        return false;
     }
 
     /**
@@ -34,11 +34,11 @@ class AmbienteModernizacionPolicy
      */
     public function view(User $user)
     {
+        return false;
+
         if ($user->hasRole([4])) {
             return true;
         }
-
-        return false;
     }
 
     /**
@@ -49,11 +49,11 @@ class AmbienteModernizacionPolicy
      */
     public function create(User $user)
     {
+        return false;
+
         if ($user->hasRole([4])) {
             return true;
         }
-
-        return false;
     }
 
     /**
@@ -65,11 +65,11 @@ class AmbienteModernizacionPolicy
      */
     public function update(User $user, AmbienteModernizacion $ambienteModernizacion)
     {
+        return false;
+
         if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id) {
             return true;
         }
-
-        return false;
     }
 
     /**
@@ -81,11 +81,11 @@ class AmbienteModernizacionPolicy
      */
     public function delete(User $user, AmbienteModernizacion $ambienteModernizacion)
     {
+        return false;
+
         if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id) {
             return true;
         }
-
-        return false;
     }
 
     /**

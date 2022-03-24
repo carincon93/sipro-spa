@@ -176,7 +176,7 @@
     </div>
     <div slot="content">
         <div class="grid grid-cols-3 gap-5 p-8">
-            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Ambientes de modernización</Button>
             {/if}
             {#if isSuperAdmin}
