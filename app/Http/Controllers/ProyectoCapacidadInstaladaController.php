@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProyectoCapacidadInstalada;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NuevoProponenteRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaEntidadAliadaRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaObjetivoEspecificoRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaProductoRequest;
@@ -238,7 +239,7 @@ class ProyectoCapacidadInstaladaController extends Controller
             return back()->with('error', 'El recurso ya está vinculado.');
         }
 
-        $proyectoCapacidadInstalada->integrantes()->attach($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+        $proyectoCapacidadInstalada->integrantes()->attach($request->user_id, ['rol_sennova' => is_array($request->rol_sennova) ? $request->rol_sennova['value'] : $request->rol_sennova, 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
         return back()->with('success', 'El recurso se ha vinculado correctamente.');
     }
 
@@ -267,7 +268,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
 
         if ($proyectoCapacidadInstalada->integrantes()->where('users.id', $request->user_id)->exists()) {
-            $proyectoCapacidadInstalada->integrantes()->updateExistingPivot($request->user_id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
+            $proyectoCapacidadInstalada->integrantes()->updateExistingPivot($request->user_id, ['rol_sennova' => is_array($request->rol_sennova) ? $request->rol_sennova['value'] : $request->rol_sennova, 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
             return back()->with('success', 'El recurso se ha actualizado correctamente.');
         }
         return back()->with('error', 'El recurso ya está desvinculado.');
@@ -280,33 +281,20 @@ class ProyectoCapacidadInstaladaController extends Controller
      * @param  mixed $proyectoCapacidadInstalada
      * @return void
      */
-    public function registerIntegrante(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
+    public function registerIntegrante(NuevoProponenteRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
         $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
-
-        $request->validate(
-            [
-                'centro_formacion_id'   => 'required', 'min:0', 'max:2147483647', 'integer', 'exists:centros_formacion,id',
-                'nombre'                => 'required', 'max:255', 'string',
-                'email'                 => 'required', 'max:255', new Email, 'unique:users,email', 'email',
-                'tipo_documento'        => 'required', 'max:2',
-                'numero_documento'      => 'required', 'min:55555', 'unique:users,numero_documento', 'max:9999999999999', 'integer',
-                'numero_celular'        => 'required', 'min:3000000000', 'max:9999999999', 'integer',
-                'tipo_vinculacion'      => 'required', 'max:191',
-                'autorizacion_datos'    => 'required', 'boolean'
-            ]
-        );
 
         $user = new User();
 
         $user->nombre               = $request->nombre;
         $user->email                = $request->email;
         $user->password             = $user::makePassword($request->numero_documento);
-        $user->tipo_documento       = $request->tipo_documento['value'];
+        $user->tipo_documento       = $request->tipo_documento;
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = 0;
-        $user->tipo_vinculacion     = $request->tipo_vinculacion['value'];
+        $user->tipo_vinculacion     = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 

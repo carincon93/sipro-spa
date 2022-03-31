@@ -18,7 +18,7 @@
 
     let readyToSearch = false
     let form = {
-        search: $page.props.filters.search,
+        search: $page.props.filters?.search,
     }
 
     $: if (filters) {
