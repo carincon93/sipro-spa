@@ -138,7 +138,7 @@
                 {/if}
 
                 <div class="mt-4">
-                    <Label required labelFor="default_password" value="¿Usar contraseña por defecto?" class="inline-block mb-4" />
+                    <Label labelFor="default_password" value="¿Usar contraseña por defecto?" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.default_password} />
                 </div>

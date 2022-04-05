@@ -232,13 +232,15 @@ class ProyectoCapacidadInstalada extends Model
     {
         $authUser = Auth::user();
         if ($authUser->hasRole(1)) { // Admin
-            $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::distinct()
+            $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::select('proyectos_capacidad_instalada.*')
+                ->distinct('proyectos_capacidad_instalada.id')
                 ->orderBy('proyectos_capacidad_instalada.id', 'ASC')
                 ->filterProyectoCapacidadInstalada(request()->only('search'))->paginate();
         } else {
-            $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::join('proyecto_capacidad_instalada_integrante', 'proyectos_capacidad_instalada.id', 'proyecto_capacidad_instalada_integrante.proyecto_capacidad_instalada_id')
+            $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::select('proyectos_capacidad_instalada.*')
+                ->join('proyecto_capacidad_instalada_integrante', 'proyectos_capacidad_instalada.id', 'proyecto_capacidad_instalada_integrante.proyecto_capacidad_instalada_id')
                 ->where('proyecto_capacidad_instalada_integrante.user_id', $authUser->id)
-                ->distinct()
+                ->distinct('proyectos_capacidad_instalada.id')
                 ->orderBy('proyectos_capacidad_instalada.id', 'ASC')
                 ->filterProyectoCapacidadInstalada(request()->only('search'))->paginate();
         }

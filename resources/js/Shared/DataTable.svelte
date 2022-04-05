@@ -25,8 +25,8 @@
             <SearchFilter {routeParams} class="w-full max-w-md mr-4" {showFilters} bind:filters>
                 <slot name="filters" />
             </SearchFilter>
-            <slot name="actions" />
         {/if}
+        <slot name="actions" />
     </div>
     <div class="bg-white rounded shadow">
         <table class="w-full whitespace-no-wrap table-fixed data-table">
