@@ -14,6 +14,7 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import SelectMulti from '@/Shared/SelectMulti'
     import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let semilleroInvestigacion
@@ -84,7 +85,7 @@
         }
     }
 
-    let programasFormacion
+    let programasFormacion = []
     let oldLineaInvestigacionIdValue = null
 
     $: if ($form.linea_investigacion) {
@@ -198,11 +199,13 @@
                     <Select id="linea_investigacion" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion} error={errors.linea_investigacion} autocomplete="off" placeholder="Seleccione una línea de investigación" required={$form.programas_formacion?.length > 0 ? undefined : 'required'} />
                 </div>
 
-                {#if $form.linea_investigacion || programasFormacionSemilleroInvestigacion.length > 0}
+                {#if ($form.linea_investigacion && programasFormacion.length > 0) || programasFormacionSemilleroInvestigacion.length > 0}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="programas_formacion" value="Programa(s) de formación" />
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Programa(s) de formación" required />
                     </div>
+                {:else}
+                    <InfoMessage alertMsg={true}>La línea de investigación seleccionada no tiene programas de formación asociados, por favor antes de crear/modificar semilleros de investigación debe actualizar las lineas de investigación.</InfoMessage>
                 {/if}
 
                 <hr class="mt-10 mb-10" />
@@ -210,7 +213,7 @@
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_021" value="Formato GIC – F – 021" />
                     {#if semilleroInvestigacion.formato_gic_f_021}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_021'])}>
+                        <a target="_blank" class="text-indigo-400 underline  mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_021'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
@@ -227,7 +230,7 @@
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
                     {#if semilleroInvestigacion.formato_gic_f_032}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_032'])}>
+                        <a target="_blank" class="text-indigo-400 underline mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_gic_f_032'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
@@ -244,7 +247,7 @@
                 <div class="mt4-">
                     <Label class="mb-4 mt-8" labelFor="formato_aval_semillero" value="Aval del semillero" />
                     {#if semilleroInvestigacion.formato_aval_semillero}
-                        <a target="_blank" class="text-indigo-400 underline inline-block mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_aval_semillero'])}>
+                        <a target="_blank" class="text-indigo-400 underline mb-10 flex" download href={route('grupos-investigacion.semilleros-investigacion.download', [grupoInvestigacion.id, semilleroInvestigacion.id, 'formato_aval_semillero'])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>

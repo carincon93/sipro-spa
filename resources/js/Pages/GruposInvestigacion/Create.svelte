@@ -51,7 +51,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin) {
+        if (isSuperAdmin || checkRole(authUser, [4])) {
             $form.post(route('grupos-investigacion.store'), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -65,9 +65,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
-                    {/if}
+                    <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
                     <span class="text-indigo-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -77,7 +75,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
+            <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                     <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
@@ -115,7 +113,7 @@
 
                 <div class="mt-4 ">
                     <Label required labelFor="fecha_creacion_grupo" value="Fecha creación del grupo" />
-                    <Input id="fecha_creacion_grupo" type="date" class="mt-1" bind:value={$form.fecha_creacion_grupo} required />
+                    <input id="fecha_creacion_grupo" type="date" class="mt-1 p-4" bind:value={$form.fecha_creacion_grupo} required />
                 </div>
 
                 <div class="mt-4">
@@ -176,19 +174,19 @@
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_020" value="GIC – F – 020" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} />
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_020" value="Formato GIC – F – 020" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_020} error={errors?.formato_gic_f_020} required />
                 </div>
 
                 <hr class="mt-10 mb-10" />
 
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="formato_gic_f_032" value="GIC – F – 032" />
-                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} />
+                    <Label required class="mb-4 mt-8" labelFor="formato_gic_f_032" value="Formato GIC – F – 032" />
+                    <File type="file" maxSize="10000" class="mt-1" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document" bind:value={$form.formato_gic_f_032} error={errors?.formato_gic_f_032} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 sticky bottom-0">
-                {#if isSuperAdmin}
+                {#if isSuperAdmin || checkRole(authUser, [4])}
                     <div class="flex items-center">
                         <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
                     </div>

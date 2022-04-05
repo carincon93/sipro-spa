@@ -12,6 +12,7 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import SelectMulti from '@/Shared/SelectMulti'
     import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
     export let redesConocimiento
@@ -63,7 +64,7 @@
         }
     }
 
-    let programasFormacion
+    let programasFormacion = []
     let oldLineaInvestigacionIdValue = null
 
     $: if ($form.linea_investigacion) {
@@ -173,11 +174,13 @@
                     <Label required class="mb-4" labelFor="linea_investigacion" value="Seleccione una línea de investigación y posteriormente asocie los programas de formación" />
                     <Select id="linea_investigacion" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion} error={errors.linea_investigacion} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
                 </div>
-                {#if $form.linea_investigacion}
+                {#if $form.linea_investigacion && programasFormacion.length > 0}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="programas_formacion" value="Programa(s) de formación" />
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Programa(s) de formación" required />
                     </div>
+                {:else}
+                    <InfoMessage alertMsg={true}>La línea de investigación seleccionada no tiene programas de formación asociados, por favor antes de crear/modificar semilleros de investigación debe actualizar las lineas de investigación.</InfoMessage>
                 {/if}
 
                 <hr class="mt-10 mb-10" />
