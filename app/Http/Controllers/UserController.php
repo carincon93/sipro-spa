@@ -73,8 +73,8 @@ class UserController extends Controller
 
         $user->save();
 
-        if ($request->dinamizador_centro_formacion_id != null) {
-            CentroFormacion::where('id', $request->dinamizador_centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
+        if (array_search(4, $request->role_id)) {
+            CentroFormacion::where('id', $request->centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
         }
 
         $user->assignRole($request->role_id);
@@ -143,7 +143,7 @@ class UserController extends Controller
         $user->numero_documento     = $request->numero_documento;
         $user->numero_celular       = $request->numero_celular;
         $user->habilitado           = $request->habilitado;
-        $user->tipo_vinculacion   = $request->tipo_vinculacion;
+        $user->tipo_vinculacion     = $request->tipo_vinculacion;
         $user->autorizacion_datos   = $request->autorizacion_datos;
         $user->centroFormacion()->associate($request->centro_formacion_id);
 
@@ -153,8 +153,8 @@ class UserController extends Controller
 
         $user->save();
 
-        if ($request->dinamizador_centro_formacion_id != null) {
-            CentroFormacion::where('id', $request->dinamizador_centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
+        if (array_search(4, $request->role_id)) {
+            CentroFormacion::where('id', $request->centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
         }
 
         $user->syncRoles($request->role_id);
