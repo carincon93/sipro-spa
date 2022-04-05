@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\CentroFormacion;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -72,6 +73,10 @@ class UserController extends Controller
 
         $user->save();
 
+        if ($request->dinamizador_centro_formacion_id != null) {
+            CentroFormacion::where('id', $request->dinamizador_centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
+        }
+
         $user->assignRole($request->role_id);
 
         return redirect()->route('users.index')->with('success', 'El recurso se ha creado correctamente.');
@@ -103,6 +108,10 @@ class UserController extends Controller
             if ($notificacion) {
                 $notificacion->markAsRead();
             }
+        }
+
+        if ($user->dinamizadorCentroFormacion) {
+            $user->dinamizador_centro_formacion_id = $user->dinamizadorCentroFormacion->id;
         }
 
         return Inertia::render('Users/Edit', [
@@ -143,6 +152,10 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        if ($request->dinamizador_centro_formacion_id != null) {
+            CentroFormacion::where('id', $request->dinamizador_centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
+        }
 
         $user->syncRoles($request->role_id);
         $user->syncPermissions($request->permission_id);

@@ -37,6 +37,7 @@
         numero_celular: '',
         habilitado: true,
         tipo_vinculacion: '',
+        dinamizador_centro_formacion_id: null,
         centro_formacion_id: isSuperAdmin ? null : checkRole(authUser, [4, 21]) ? authUser.centro_formacion_id : null,
         role_id: [],
         permission_id: [],
@@ -152,6 +153,13 @@
             </div>
         </div>
 
+        {#if $form.role_id.find((item) => item == 4) == 4 && isSuperAdmin}
+            <div class="my-16">
+                <InfoMessage>El usuario tiene rol Dinamizador(a) SENNOVA, por favor seleccione el centro de formación</InfoMessage>
+                <Label required class="mb-4" labelFor="dinamizador_centro_formacion_id" value="Centro de formación" />
+                <DynamicList id="dinamizador_centro_formacion_id" bind:value={$form.dinamizador_centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.dinamizador_centro_formacion_id} required />
+            </div>
+        {/if}
         <div class="bg-white rounded shadow overflow-hidden mt-20">
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="p-4">
