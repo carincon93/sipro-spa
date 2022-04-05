@@ -21,10 +21,10 @@ class CentroFormacionController extends Controller
 
         return Inertia::render('CentrosFormacion/Index', [
             'filters'   => request()->all('search'),
-            'centrosFormacion' => CentroFormacion::select('centros_formacion.id', 'centros_formacion.nombre', 'centros_formacion.codigo', 'centros_formacion.regional_id')
+            'centrosFormacion' => CentroFormacion::select('centros_formacion.id', 'centros_formacion.nombre', 'centros_formacion.codigo', 'centros_formacion.regional_id', 'centros_formacion.dinamizador_sennova_id')
                 ->with(['regional' => function ($query) {
                     $query->orderBy('nombre', 'ASC');
-                }])
+                }])->with('dinamizadorSennova')
                 ->filterCentroFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
         ]);
     }
