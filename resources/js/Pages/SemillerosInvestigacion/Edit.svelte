@@ -205,7 +205,7 @@
                         <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Programa(s) de formación" required />
                     </div>
                 {:else}
-                    <InfoMessage alertMsg={true}>La línea de investigación seleccionada no tiene programas de formación asociados, por favor antes de crear/modificar semilleros de investigación debe actualizar las lineas de investigación.</InfoMessage>
+                    <InfoMessage alertMsg={true}>La línea de investigación seleccionada no tiene programas de formación asociados, por favor antes de crear/modificar semilleros de investigación debe actualizar las líneas de investigación.</InfoMessage>
                 {/if}
 
                 <hr class="mt-10 mb-10" />

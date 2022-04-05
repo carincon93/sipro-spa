@@ -60,7 +60,6 @@
         permission_id: permisosRelacionados,
         autorizacion_datos: usuario.autorizacion_datos,
         default_password: false,
-        dinamizador_centro_formacion_id: usuario.dinamizador_centro_formacion_id,
     })
 
     function submit() {
@@ -184,13 +183,6 @@
             </fieldset>
         </div>
 
-        {#if $form.role_id.find((item) => item == 4) == 4 && isSuperAdmin}
-            <div class="my-16">
-                <InfoMessage>El usuario tiene rol Dinamizador(a) SENNOVA, por favor seleccione el centro de formación</InfoMessage>
-                <Label required class="mb-4" labelFor="dinamizador_centro_formacion_id" value="Centro de formación" />
-                <DynamicList id="dinamizador_centro_formacion_id" bind:value={$form.dinamizador_centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.dinamizador_centro_formacion_id} required />
-            </div>
-        {/if}
         <div class="bg-white rounded shadow overflow-hidden mt-20">
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [17, 18, 20, 19, 5]) ? undefined : true}>
                 <div class="p-4">
@@ -238,6 +230,13 @@
             </fieldset>
         </div>
 
+        {#if $form.role_id.find((item) => item == 4) == 4 && isSuperAdmin}
+            <InfoMessage alertMsg={true} class="mt-10">
+                <strong>Importante:</strong>
+                <br />
+                El/la usuario(a) tiene rol Dinamizador(a) SENNOVA, al dar clic en 'Editar usuario' se configurará como dinamizador(a) del centro seleccionado
+            </InfoMessage>
+        {/if}
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar usuario </button>
