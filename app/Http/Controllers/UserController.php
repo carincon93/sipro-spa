@@ -73,7 +73,7 @@ class UserController extends Controller
 
         $user->save();
 
-        if (array_search(4, $request->role_id)) {
+        if (in_array(4, $request->role_id)) {
             CentroFormacion::where('id', $request->centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
         }
 
@@ -153,7 +153,7 @@ class UserController extends Controller
 
         $user->save();
 
-        if (array_search(4, $request->role_id)) {
+        if (in_array(4, $request->role_id)) {
             CentroFormacion::where('id', $request->centro_formacion_id)->update(['dinamizador_sennova_id' => $user->id]);
         }
 
