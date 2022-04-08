@@ -23,7 +23,7 @@ class ProyectoCapacidadInstalada extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion'];
+    protected $appends = ['fecha_ejecucion', 'codigo'];
 
     /**
      * The attributes that are mass assignable.
@@ -245,5 +245,18 @@ class ProyectoCapacidadInstalada extends Model
                 ->filterProyectoCapacidadInstalada(request()->only('search'))->paginate();
         }
         return $proyectoCapacidadInstalada;
+    }
+
+    /**
+     * Get codigo e.g. SGPS-8000-2021
+     *
+     * @return string
+     */
+    public function getCodigoAttribute()
+    {
+        $numeroConsecutivo = sprintf("%05s", $this->id);
+        $codigo = 'CAP-' . $numeroConsecutivo;
+
+        return $codigo;
     }
 }

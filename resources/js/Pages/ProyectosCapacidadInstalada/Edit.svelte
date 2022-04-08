@@ -505,6 +505,7 @@
             <figure>
                 <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
             </figure>
+            Código del proyecto: {proyectoCapacidadInstalada.codigo}
         </div>
         <div slot="content">
             <div>
