@@ -17,7 +17,7 @@
     <title>SGPS-SIPRO - Error {status}</title>
 </svelte:head>
 
-<div class="bg-indigo-700 flex flex-col items-center justify-center min-h-screen text-white">
+<div class="{status == 500 || status == 503 ? 'bg-red-700' : 'bg-indigo-700'} flex flex-col items-center justify-center min-h-screen text-white">
     <figure>
         <img src={window.basePath + '/images/error.png'} alt="Error" class="w-2/3 m-auto mb-10" />
     </figure>
