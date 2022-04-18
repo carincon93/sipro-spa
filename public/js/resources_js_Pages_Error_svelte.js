@@ -25985,6 +25985,7 @@ function create_fragment(ctx) {
 	let t1;
 	let div0;
 	let t2;
+	let div1_class_value;
 	let current;
 	document.title = title_value = "SGPS-SIPRO - Error " + /*status*/ ctx[0];
 
@@ -26013,7 +26014,10 @@ function create_fragment(ctx) {
 			if (img.src !== (img_src_value = window.basePath + "/images/error.png")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(img, "src", img_src_value);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(img, "alt", "Error");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(img, "class", "w-2/3 m-auto mb-10");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "bg-indigo-700 flex flex-col items-center justify-center min-h-screen text-white");
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value = "" + ((/*status*/ ctx[0] == 500 || /*status*/ ctx[0] == 503
+			? "bg-red-700"
+			: "bg-indigo-700") + " flex flex-col items-center justify-center min-h-screen text-white"));
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
@@ -26063,6 +26067,12 @@ function create_fragment(ctx) {
 				});
 
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+			}
+
+			if (!current || dirty & /*status*/ 1 && div1_class_value !== (div1_class_value = "" + ((/*status*/ ctx[0] == 500 || /*status*/ ctx[0] == 503
+			? "bg-red-700"
+			: "bg-indigo-700") + " flex flex-col items-center justify-center min-h-screen text-white"))) {
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value);
 			}
 		},
 		i(local) {
