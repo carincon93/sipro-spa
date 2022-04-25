@@ -28,6 +28,7 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
     public function collection()
     {
         return GrupoInvestigacion::select('grupos_investigacion.*',  'centros_formacion.codigo as codigo_centro', 'centros_formacion.nombre as nombre_centro')
+            ->distinct('grupos_investigacion.id')
             ->join('lineas_investigacion', 'grupos_investigacion.id', 'lineas_investigacion.grupo_investigacion_id')
             ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
             ->get();
@@ -46,7 +47,7 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
             $grupoInvestigacion->email,
             $grupoInvestigacion->enlace_gruplac,
             $grupoInvestigacion->codigo_minciencias,
-            $grupoInvestigacion->categoria_minciencias,
+            $grupoInvestigacion->categoria_minciencias_formateado,
             $grupoInvestigacion->mision,
             $grupoInvestigacion->vision,
             $grupoInvestigacion->fecha_creacion_grupo,
