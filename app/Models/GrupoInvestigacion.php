@@ -17,6 +17,12 @@ class GrupoInvestigacion extends Model
      */
     protected $table = 'grupos_investigacion';
 
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['categoria_minciencias_formateado'];
 
     /**
      * The attributes that are mass assignable.
@@ -157,5 +163,39 @@ class GrupoInvestigacion extends Model
         // $gruposInvestigacion->load('centroFormacion.regional');
 
         return $gruposInvestigacion;
+    }
+
+    /**
+     * getCategoriaMincienciasAttribute
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function getCategoriaMincienciasFormateadoAttribute()
+    {
+        $categoriaMinciencias = '';
+        switch ($this->categoria_minciencias) {
+            case 1:
+                $categoriaMinciencias = 'A';
+                break;
+            case 2:
+                $categoriaMinciencias = 'A1';
+                break;
+            case 3:
+                $categoriaMinciencias = 'B';
+                break;
+            case 4:
+                $categoriaMinciencias = 'C';
+                break;
+            case 5:
+                $categoriaMinciencias = 'Reconocido';
+                break;
+            case 7:
+                $categoriaMinciencias = 'Avalado SENA';
+                break;
+            default:
+                break;
+        }
+        return $categoriaMinciencias;
     }
 }

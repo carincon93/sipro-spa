@@ -38,6 +38,7 @@ class GrupoRedesConocimientoExport implements FromCollection, WithHeadings, With
     public function map($redConocimiento): array
     {
         return [
+            $redConocimiento->codigo_centro,
             $redConocimiento->nombre_centro,
             $redConocimiento->nombre_grupo,
             $redConocimiento->nombre,
