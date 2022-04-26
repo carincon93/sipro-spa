@@ -29,7 +29,7 @@ class GrupoInvestigacionRequest extends FormRequest
                 'nombre'                                => ['required', 'max:191', 'string'],
                 'acronimo'                              => ['required', 'max:191'],
                 'email'                                 => ['required', 'max:191', 'email', 'unique:grupos_investigacion,email,' . $this->route('grupo_investigacion')->id . ',id'],
-                'enlace_gruplac'                        => ['required', 'url', 'max:191'],
+                'enlace_gruplac'                        => ['required', 'url', 'string'],
                 'codigo_minciencias'                    => ['required', 'max:10', 'string', 'unique:grupos_investigacion,codigo_minciencias,' . $this->route('grupo_investigacion')->id . ',id'],
                 'categoria_minciencias'                 => ['required', 'max:16'],
                 'mision'                                => ['required', 'string'],
@@ -42,9 +42,9 @@ class GrupoInvestigacionRequest extends FormRequest
                 'reconocimientos_grupo_investigacion'   => ['required', 'string'],
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
-                'link_propio_grupo'                     => ['nullable', 'url'],
-                'formato_gic_f_020'                     => ['nullable', 'max:191', 'url'],
-                'formato_gic_f_032'                     => ['nullable', 'max:191', 'url'],
+                'link_propio_grupo'                     => ['nullable', 'url', 'string'],
+                'formato_gic_f_020'                     => ['nullable', 'string', 'url'],
+                'formato_gic_f_032'                     => ['nullable', 'string', 'url'],
                 'redes_conocimiento'                    => ['required']
             ];
         } else {
@@ -53,7 +53,7 @@ class GrupoInvestigacionRequest extends FormRequest
                 'nombre'                                => ['required', 'max:191', 'string'],
                 'acronimo'                              => ['required', 'max:191'],
                 'email'                                 => ['required', 'max:191', 'email', 'unique:grupos_investigacion,email'],
-                'enlace_gruplac'                        => ['required', 'url', 'max:191'],
+                'enlace_gruplac'                        => ['required', 'url', 'string'],
                 'codigo_minciencias'                    => ['required', 'max:10', 'string', 'unique:grupos_investigacion,codigo_minciencias'],
                 'categoria_minciencias'                 => ['required', 'max:16'],
                 'mision'                                => ['required', 'string'],
@@ -66,9 +66,9 @@ class GrupoInvestigacionRequest extends FormRequest
                 'reconocimientos_grupo_investigacion'   => ['required', 'string'],
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
-                'link_propio_grupo'                     => ['nullable', 'url'],
-                'formato_gic_f_020'                     => ['required', 'max:191', 'url'],
-                'formato_gic_f_032'                     => ['required', 'max:191', 'url'],
+                'link_propio_grupo'                     => ['nullable', 'url', 'string'],
+                'formato_gic_f_020'                     => ['required', 'string', 'url'],
+                'formato_gic_f_032'                     => ['required', 'string', 'url'],
                 'redes_conocimiento'                    => ['required']
             ];
         }

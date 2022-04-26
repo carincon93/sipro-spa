@@ -25,7 +25,7 @@ class ProyectoAnexoRequest extends FormRequest
     {
         return [
             'anexo_id'  => ['required', 'min:0', 'max:9999999999', 'integer', 'exists:anexos,id'],
-            'archivo'   => ['required', 'max:191', 'url'],
+            'archivo'   => ['required', 'string', 'url'],
         ];
     }
 }

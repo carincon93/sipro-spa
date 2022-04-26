@@ -26,12 +26,12 @@ class SoporteEstudioMercadoRequest extends FormRequest
         if ($this->isMethod('PUT')) {
             return [
                 'empresa' => ['required', 'max:191', 'string'],
-                'soporte' => ['nullable', 'max:191', 'url'],
+                'soporte' => ['nullable', 'string', 'url'],
             ];
         } else {
             return [
                 'empresa' => ['required', 'max:191', 'string'],
-                'soporte' => ['required', 'max:191', 'url'],
+                'soporte' => ['required', 'string', 'url'],
             ];
         }
     }

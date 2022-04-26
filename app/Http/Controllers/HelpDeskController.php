@@ -26,7 +26,7 @@ class HelpDeskController extends Controller
     {
         $request->validate([
             'email'         => 'required|email',
-            'archivo'       => 'required|url|max:191',
+            'archivo'       => 'required|url|string',
             'descripcion'   => 'required'
         ]);
 

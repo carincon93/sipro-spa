@@ -38,7 +38,7 @@ class CulturaInnovacionRequest extends FormRequest
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion', new FechaInicioProyecto($this->route('convocatoria'), 'cultura', null)],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio', new FechaFinalizacionProyecto($this->route('convocatoria'), 'cultura', null)],
                 'max_meses_ejecucion'                       => ['required', 'numeric', 'min:1', 'max:12'],
-                'video'                                     => ['nullable', 'max:191', 'url'],
+                'video'                                     => ['nullable', 'string', 'url'],
                 'muestreo'                                  => ['required', 'max:191'],
                 'actividades_muestreo'                      => ['nullable', 'max:191'],
                 'objetivo_muestreo'                         => ['nullable', 'max:191'],

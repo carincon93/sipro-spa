@@ -29,8 +29,8 @@ class ProyectoIdiTecnoacademiaProductoRequest extends FormRequest
             'estado'                => ['required', 'integer', 'min:0'],
             'lugar'                 => ['nullable', 'string', 'max:255'],
             'descripcion'           => ['required', 'string'],
-            'link'                  => ['nullable', 'url'],
-            'soporte'               => ['nullable', 'max:191', 'url'],
+            'link'                  => ['nullable', 'url', 'string'],
+            'soporte'               => ['nullable', 'string', 'url'],
         ];
     }
 
