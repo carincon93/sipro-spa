@@ -48,6 +48,20 @@ class SemillerosInvestigacionExport implements FromCollection, WithHeadings, Wit
             'SGPS-' . ($semilleroInvestigacion->proyecto_id + 8000),
             $semilleroInvestigacion->nombre_centro,
             $semilleroInvestigacion->nombre,
+            $semilleroInvestigacion->codigo,
+            $semilleroInvestigacion->fecha_creacion_semillero,
+            $semilleroInvestigacion->nombre_lider_semillero,
+            $semilleroInvestigacion->email_contacto,
+            $semilleroInvestigacion->reconocimientos_semillero_investigacion,
+            $semilleroInvestigacion->vision,
+            $semilleroInvestigacion->mision,
+            $semilleroInvestigacion->objetivo_general,
+            $semilleroInvestigacion->objetivos_especificos,
+            $semilleroInvestigacion->link_semillero,
+            $semilleroInvestigacion->formato_gic_f_021,
+            $semilleroInvestigacion->formato_gic_f_032,
+            $semilleroInvestigacion->formato_aval_semillero,
+            $semilleroInvestigacion->es_semillero_tecnoacademia == 1 ? 'Si' : ($semilleroInvestigacion->es_semillero_tecnoacademia == 2 ? 'No' : ''),
         ];
     }
 
@@ -57,6 +71,20 @@ class SemillerosInvestigacionExport implements FromCollection, WithHeadings, Wit
             'Código del proyecto',
             'Centro de formación',
             'Nombre',
+            'Código del semillero',
+            'Fecha de creación',
+            'Nombre del líder de semillero',
+            'Email de contacto',
+            'Reconocimientos',
+            'Visión',
+            'Misión',
+            'Objetivo general',
+            'Objetivos específicos',
+            'Link del semillero',
+            'Formato GIC F 021',
+            'Formato GIC F 032',
+            'Formato Aval del semillero',
+            '¿Semillero de TecnoAcademia?',
         ];
     }
 
