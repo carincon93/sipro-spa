@@ -59,8 +59,8 @@ class GruposInvestigacionExport implements FromCollection, WithHeadings, WithMap
             $grupoInvestigacion->objetivo_general,
             $grupoInvestigacion->objetivos_especificos,
             $grupoInvestigacion->link_propio_grupo,
-            $grupoInvestigacion->formato_gic_f_020 ? config('app.url') . '/grupos-investigacion/' . $grupoInvestigacion->id . '/download/formato_gic_f_020' : '',
-            $grupoInvestigacion->formato_gic_f_032 ? config('app.url') . '/grupos-investigacion/' . $grupoInvestigacion->id . '/download/formato_gic_f_032' : '',
+            $grupoInvestigacion->formato_gic_f_020,
+            $grupoInvestigacion->formato_gic_f_032,
         ];
     }
 

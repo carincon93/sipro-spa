@@ -58,8 +58,8 @@ class EntidadesAliadasIdiExport implements FromCollection, WithHeadings, WithMap
             $entidadAliada->descripcion_recursos_especie,
             $entidadAliada->recursos_dinero,
             $entidadAliada->descripcion_recursos_dinero,
-            config('app.url') . '/convocatorias/' . $this->convocatoria->id . '/proyectos/' . $entidadAliada->proyecto_id . '/entidades-aliadas/' . $entidadAliada->id . '/carta_intencion/download',
-            config('app.url') . '/convocatorias/' . $this->convocatoria->id . '/proyectos/' . $entidadAliada->proyecto_id . '/entidades-aliadas/' . $entidadAliada->id . '/carta_propiedad_intelectual/download',
+            $entidadAliada->carta_intencion,
+            $entidadAliada->carta_propiedad_intelectual,
         ];
     }
 
