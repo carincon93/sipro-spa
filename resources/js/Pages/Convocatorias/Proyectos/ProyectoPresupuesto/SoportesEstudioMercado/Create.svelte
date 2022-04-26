@@ -6,7 +6,6 @@
 
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
-    import File from '@/Shared/File'
     import LoadingButton from '@/Shared/LoadingButton'
     import PercentageProgress from '@/Shared/PercentageProgress'
 
@@ -72,8 +71,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label required class="mb-4" labelFor="soporte" value="Soporte/Cotización" />
-                    <File id="soporte" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.soporte} error={errors.soporte} required />
+                    <Label required class="mb-4" labelFor="soporte" value="Url del soporte/cotización" />
+                    <Input label="Url" id="soporte" type="url" class="mt-1" error={errors.soporte} placeholder="Url https://www.google.com.co" bind:value={$form.soporte} required />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

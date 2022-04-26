@@ -11,7 +11,7 @@
     import FormField from '@smui/form-field'
     import InputError from '@/Shared/InputError'
     import Switch from '@/Shared/Switch'
-    import File from '@/Shared/File'
+    import Input from '@/Shared/Input'
 
     export let errors
     export let lineasProgramaticas
@@ -71,9 +71,8 @@
                 </div>
 
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
-
-                    <File type="file" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
+                    <Label class="mb-4 mt-8" labelFor="archivo" value="Url del archivo" />
+                    <Input label="Url" id="archivo" type="url" class="mt-1" error={errors?.archivo} placeholder="Url https://www.google.com.co" bind:value={$form.archivo} />
                 </div>
 
                 <div class="mt-4">

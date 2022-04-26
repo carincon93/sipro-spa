@@ -9,7 +9,6 @@
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
-    import File from '@/Shared/File'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
@@ -114,8 +113,8 @@
                     </div>
                 {/if}
                 <div class="mt-8">
-                    <Label class="mb-4" labelFor="soporte" value="Adjuntar soportes" />
-                    <File id="soporte" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte} error={errors.soporte} />
+                    <Label class="mb-4" labelFor="soporte" value="Url del soporte" />
+                    <Input label="Url" id="soporte" type="url" class="mt-1" error={errors.soporte} placeholder="Url https://www.google.com.co" bind:value={$form.soporte} />
                     <InfoMessage>Si son varios archivos PDF por favor unirlos en <a href="https://www.ilovepdf.com/" target="_blank">https://www.ilovepdf.com/</a></InfoMessage>
                 </div>
                 {#if $form.tipo_producto_idi_id?.value == 1 || $form.tipo_producto_idi_id?.value == 6 || $form.tipo_producto_idi_id?.value == 8 || $form.tipo_producto_idi_id?.value == 9}

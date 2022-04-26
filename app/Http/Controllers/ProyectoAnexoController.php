@@ -75,15 +75,9 @@ class ProyectoAnexoController extends Controller
 
         $anexo = Anexo::select('id', 'nombre')->where('id', $request->anexo_id)->first();
 
-        $nombreArchivo = $this->cleanFileName($proyecto->codigo, $anexo->nombre, $request->archivo);
-        $archivo = $request->archivo->storeAs(
-            'anexos',
-            $nombreArchivo
-        );
-
         ProyectoAnexo::updateOrCreate(
             ['proyecto_id'  => $proyecto->id, 'anexo_id' => $anexo->id],
-            ['archivo'      => $archivo]
+            ['archivo'      => $request->archivo]
         );
 
         return redirect()->route('convocatorias.proyectos.proyecto-anexos.index', [$convocatoria, $proyecto])->with('success', 'El recurso se ha creado correctamente.');

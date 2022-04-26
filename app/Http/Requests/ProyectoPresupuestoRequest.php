@@ -28,7 +28,7 @@ class ProyectoPresupuestoRequest extends FormRequest
             'descripcion'                   => ['required', 'string'],
             'justificacion'                 => ['required'],
             'valor_total'                   => ['nullable', 'min:0', 'numeric'],
-            'formato_estudio_mercado'       => ['nullable', 'max:15000000', 'file'],
+            'formato_estudio_mercado'       => ['nullable', 'max:191', 'url'],
         ];
     }
 }

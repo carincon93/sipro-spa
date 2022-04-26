@@ -87,7 +87,7 @@
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.soportes.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id])}>Descargar soporte/cotización</a>
+                                <a target="_blank" class="text-indigo-400 underline inline-block mb-4" download href={soporte.soporte}>Descargar soporte/cotización</a>
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">

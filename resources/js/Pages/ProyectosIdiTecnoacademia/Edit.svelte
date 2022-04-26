@@ -15,7 +15,6 @@
     import Tags from '@/Shared/Tags'
     import Input from '@/Shared/Input'
     import Switch from '@/Shared/Switch'
-    import File from '@/Shared/File'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import InfoMessage from '@/Shared/InfoMessage'
@@ -64,9 +63,9 @@
         fecha_finalizacion: proyectoIdiTecnoacademia.fecha_finalizacion,
         resumen: proyectoIdiTecnoacademia.resumen,
         texto_exposicion: proyectoIdiTecnoacademia.texto_exposicion,
-        pdf_proyecto: null,
+        pdf_proyecto: proyectoIdiTecnoacademia.pdf_proyecto,
         resultados_obtenidos: proyectoIdiTecnoacademia.resultados_obtenidos,
-        documentos_resultados: null,
+        documentos_resultados: proyectoIdiTecnoacademia.documentos_resultados,
         observaciones_resultados: proyectoIdiTecnoacademia.observaciones_resultados,
         nombre_aprendices_vinculados: proyectoIdiTecnoacademia.nombre_aprendices_vinculados,
         nombre_instituciones_educativas: proyectoIdiTecnoacademia.nombre_instituciones_educativas,
@@ -237,11 +236,11 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" labelFor="pdf_proyecto" value="Proyecto, subir por favor el proyecto en documento pdf" />
+                    <Label class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
                 </div>
                 <div>
-                    <File id="pdf_proyecto" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.pdf_proyecto} error={errors.pdf_proyecto} />
-                    <InfoMessage><a href={route('proyectos-idi-tecnoacademia.download', [proyectoIdiTecnoacademia.id, 'pdf'])} class="underline font-black" target="_blank">De clic aquí para descargar pdf</a></InfoMessage>
+                    <Input label="Url" id="pdf_proyecto" type="url" class="mt-1" error={errors.pdf_proyecto} placeholder="Url https://www.google.com.co" bind:value={$form.pdf_proyecto} />
+                    <InfoMessage><a href={proyectoIdiTecnoacademia.pdf_proyecto} class="underline font-black" target="_blank" download>De clic aquí para descargar pdf</a></InfoMessage>
                 </div>
             </div>
 
@@ -414,11 +413,11 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor adjuntarlos" />
+                        <Label class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
                     </div>
                     <div>
-                        <File id="documentos_resultados" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} />
-                        <InfoMessage><a href={route('proyectos-idi-tecnoacademia.download', [proyectoIdiTecnoacademia.id, 'resultados'])} class="underline font-black" target="_blank">De clic aquí para descargar los archivos</a></InfoMessage>
+                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} />
+                        <InfoMessage><a href={proyectoIdiTecnoacademia.documentos_resultados} class="underline font-black" target="_blank" download>De clic aquí para descargar los archivos</a></InfoMessage>
                     </div>
                 </div>
             {/if}

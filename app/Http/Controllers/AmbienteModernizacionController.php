@@ -61,33 +61,27 @@ class AmbienteModernizacionController extends Controller
         $this->authorize('create', [AmbienteModernizacion::class]);
 
         $ambienteModernizacion = new AmbienteModernizacion();
-        $ambienteModernizacion->nombre_ambiente = $request->nombre_ambiente;
-        $ambienteModernizacion->alineado_mesas_sectoriales = $request->alineado_mesas_sectoriales;
-        $ambienteModernizacion->financiado_anteriormente = $request->financiado_anteriormente;
-        $ambienteModernizacion->estado_general_maquinaria = $request->estado_general_maquinaria;
-        $ambienteModernizacion->razon_estado_general = $request->razon_estado_general;
-        $ambienteModernizacion->ambiente_activo = $request->ambiente_activo;
-        $ambienteModernizacion->justificacion_ambiente_inactivo = $request->justificacion_ambiente_inactivo;
-        $ambienteModernizacion->ambiente_activo_procesos_idi = $request->ambiente_activo_procesos_idi;
-        $ambienteModernizacion->numero_proyectos_beneficiados = $request->numero_proyectos_beneficiados;
-        $ambienteModernizacion->ambiente_formacion_complementaria = $request->ambiente_formacion_complementaria;
-        $ambienteModernizacion->numero_total_cursos_comp = $request->numero_total_cursos_comp;
-        $ambienteModernizacion->numero_cursos_empresas = $request->numero_cursos_empresas;
-        $ambienteModernizacion->datos_empresa = $request->datos_empresa;
-        $ambienteModernizacion->cursos_complementarios = $request->cursos_complementarios;
-        $ambienteModernizacion->coordenada_latitud_ambiente = $request->coordenada_latitud_ambiente;
-        $ambienteModernizacion->coordenada_longitud_ambiente = $request->coordenada_longitud_ambiente;
-        $ambienteModernizacion->impacto_procesos_formacion = $request->impacto_procesos_formacion;
-        $ambienteModernizacion->pertinencia_sector_productivo = $request->pertinencia_sector_productivo;
-        $ambienteModernizacion->palabras_clave_ambiente = $request->palabras_clave_ambiente;
-        $ambienteModernizacion->observaciones_generales_ambiente = $request->observaciones_generales_ambiente;
-
-        if ($request->hasFile('soporte_fotos_ambiente')) {
-            $path = $request->file('soporte_fotos_ambiente')->store(
-                'fotos-ambientes'
-            );
-            $ambienteModernizacion->soporte_fotos_ambiente = $path;
-        }
+        $ambienteModernizacion->nombre_ambiente                     = $request->nombre_ambiente;
+        $ambienteModernizacion->alineado_mesas_sectoriales          = $request->alineado_mesas_sectoriales;
+        $ambienteModernizacion->financiado_anteriormente            = $request->financiado_anteriormente;
+        $ambienteModernizacion->estado_general_maquinaria           = $request->estado_general_maquinaria;
+        $ambienteModernizacion->razon_estado_general                = $request->razon_estado_general;
+        $ambienteModernizacion->ambiente_activo                     = $request->ambiente_activo;
+        $ambienteModernizacion->justificacion_ambiente_inactivo     = $request->justificacion_ambiente_inactivo;
+        $ambienteModernizacion->ambiente_activo_procesos_idi        = $request->ambiente_activo_procesos_idi;
+        $ambienteModernizacion->numero_proyectos_beneficiados       = $request->numero_proyectos_beneficiados;
+        $ambienteModernizacion->ambiente_formacion_complementaria   = $request->ambiente_formacion_complementaria;
+        $ambienteModernizacion->numero_total_cursos_comp            = $request->numero_total_cursos_comp;
+        $ambienteModernizacion->numero_cursos_empresas              = $request->numero_cursos_empresas;
+        $ambienteModernizacion->datos_empresa                       = $request->datos_empresa;
+        $ambienteModernizacion->cursos_complementarios              = $request->cursos_complementarios;
+        $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
+        $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
+        $ambienteModernizacion->impacto_procesos_formacion          = $request->impacto_procesos_formacion;
+        $ambienteModernizacion->pertinencia_sector_productivo       = $request->pertinencia_sector_productivo;
+        $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
+        $ambienteModernizacion->observaciones_generales_ambiente    = $request->observaciones_generales_ambiente;
+        $ambienteModernizacion->soporte_fotos_ambiente              = $request->soporte_fotos_ambiente;
 
         $ambienteModernizacion->redConocimiento()->associate($request->red_conocimiento_id);
         $ambienteModernizacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
@@ -162,34 +156,27 @@ class AmbienteModernizacionController extends Controller
     {
         $this->authorize('update', [AmbienteModernizacion::class, $ambienteModernizacion]);
 
-        $ambienteModernizacion->nombre_ambiente = $request->nombre_ambiente;
-        $ambienteModernizacion->alineado_mesas_sectoriales = $request->alineado_mesas_sectoriales;
-        $ambienteModernizacion->financiado_anteriormente = $request->financiado_anteriormente;
-        $ambienteModernizacion->estado_general_maquinaria = $request->estado_general_maquinaria;
-        $ambienteModernizacion->razon_estado_general = $request->estado_general_maquinaria == '1' ? null : $request->razon_estado_general;
-        $ambienteModernizacion->ambiente_activo = $request->ambiente_activo;
-        $ambienteModernizacion->justificacion_ambiente_inactivo = $request->ambiente_activo ? null : $request->justificacion_ambiente_inactivo;
-        $ambienteModernizacion->ambiente_activo_procesos_idi = $request->ambiente_activo_procesos_idi;
-        $ambienteModernizacion->numero_proyectos_beneficiados = $request->ambiente_activo_procesos_idi == 1 ? $request->numero_proyectos_beneficiados : 0;
-        $ambienteModernizacion->ambiente_formacion_complementaria = $request->ambiente_formacion_complementaria;
-        $ambienteModernizacion->numero_total_cursos_comp = $request->ambiente_formacion_complementaria == 1 ? $request->numero_total_cursos_comp : 0;
-        $ambienteModernizacion->numero_cursos_empresas = $request->ambiente_formacion_complementaria == 1 ? $request->numero_cursos_empresas : 0;
-        $ambienteModernizacion->datos_empresa = $request->ambiente_formacion_complementaria == 1 ? $request->datos_empresa : null;
-        $ambienteModernizacion->cursos_complementarios = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
-        $ambienteModernizacion->coordenada_latitud_ambiente = $request->coordenada_latitud_ambiente;
-        $ambienteModernizacion->coordenada_longitud_ambiente = $request->coordenada_longitud_ambiente;
-        $ambienteModernizacion->impacto_procesos_formacion = $request->impacto_procesos_formacion;
-        $ambienteModernizacion->pertinencia_sector_productivo = $request->pertinencia_sector_productivo;
-        $ambienteModernizacion->palabras_clave_ambiente = $request->palabras_clave_ambiente;
-        $ambienteModernizacion->observaciones_generales_ambiente = $request->observaciones_generales_ambiente;
-
-        if ($request->hasFile('soporte_fotos_ambiente')) {
-            Storage::delete($ambienteModernizacion->soporte_fotos_ambiente);
-            $path = $request->file('soporte_fotos_ambiente')->store(
-                'fotos-ambientes'
-            );
-            $ambienteModernizacion->soporte_fotos_ambiente = $path;
-        }
+        $ambienteModernizacion->nombre_ambiente                     = $request->nombre_ambiente;
+        $ambienteModernizacion->alineado_mesas_sectoriales          = $request->alineado_mesas_sectoriales;
+        $ambienteModernizacion->financiado_anteriormente            = $request->financiado_anteriormente;
+        $ambienteModernizacion->estado_general_maquinaria           = $request->estado_general_maquinaria;
+        $ambienteModernizacion->razon_estado_general                = $request->estado_general_maquinaria == '1' ? null : $request->razon_estado_general;
+        $ambienteModernizacion->ambiente_activo                     = $request->ambiente_activo;
+        $ambienteModernizacion->justificacion_ambiente_inactivo     = $request->ambiente_activo ? null : $request->justificacion_ambiente_inactivo;
+        $ambienteModernizacion->ambiente_activo_procesos_idi        = $request->ambiente_activo_procesos_idi;
+        $ambienteModernizacion->numero_proyectos_beneficiados       = $request->ambiente_activo_procesos_idi == 1 ? $request->numero_proyectos_beneficiados : 0;
+        $ambienteModernizacion->ambiente_formacion_complementaria   = $request->ambiente_formacion_complementaria;
+        $ambienteModernizacion->numero_total_cursos_comp            = $request->ambiente_formacion_complementaria == 1 ? $request->numero_total_cursos_comp : 0;
+        $ambienteModernizacion->numero_cursos_empresas              = $request->ambiente_formacion_complementaria == 1 ? $request->numero_cursos_empresas : 0;
+        $ambienteModernizacion->datos_empresa                       = $request->ambiente_formacion_complementaria == 1 ? $request->datos_empresa : null;
+        $ambienteModernizacion->cursos_complementarios              = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
+        $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
+        $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
+        $ambienteModernizacion->impacto_procesos_formacion          = $request->impacto_procesos_formacion;
+        $ambienteModernizacion->pertinencia_sector_productivo       = $request->pertinencia_sector_productivo;
+        $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
+        $ambienteModernizacion->observaciones_generales_ambiente    = $request->observaciones_generales_ambiente;
+        $ambienteModernizacion->soporte_fotos_ambiente              = $request->soporte_fotos_ambiente;
 
         $ambienteModernizacion->redConocimiento()->associate($request->red_conocimiento_id);
         $ambienteModernizacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
@@ -223,7 +210,6 @@ class AmbienteModernizacionController extends Controller
     {
         $this->authorize('delete', [AmbienteModernizacion::class, $ambienteModernizacion]);
 
-        Storage::delete($ambienteModernizacion->soporte_fotos_ambiente);
         $ambienteModernizacion->delete();
 
         return redirect()->route('ambientes-modernizacion.index')->with('success', 'El recurso se ha eliminado correctamente.');

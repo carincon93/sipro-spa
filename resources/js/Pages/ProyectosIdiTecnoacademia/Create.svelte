@@ -15,7 +15,6 @@
     import Tags from '@/Shared/Tags'
     import Input from '@/Shared/Input'
     import Switch from '@/Shared/Switch'
-    import File from '@/Shared/File'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
@@ -206,10 +205,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Proyecto, subir por favor el proyecto en documento pdf" />
+                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
                 </div>
                 <div>
-                    <File id="pdf_proyecto" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.pdf_proyecto} error={errors.pdf_proyecto} required />
+                    <Input label="Url" id="pdf_proyecto" type="url" class="mt-1" error={errors.pdf_proyecto} placeholder="Url https://www.google.com.co" bind:value={$form.pdf_proyecto} />
                 </div>
             </div>
 
@@ -382,10 +381,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor adjuntarlos" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
                     </div>
                     <div>
-                        <File id="documentos_resultados" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.documentos_resultados} error={errors.pdf_proyecto} required />
+                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} required />
                     </div>
                 </div>
             {/if}

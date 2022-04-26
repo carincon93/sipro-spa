@@ -110,8 +110,8 @@ class EntidadAliadaController extends Controller
                 'codigo_gruplac'                            => 'nullable|max:191',
                 'enlace_gruplac'                            => 'nullable|url|max:191',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'required_if:tipo_convocatoria,1|nullable|max:10000000|file|mimetypes:application/pdf',
-                'carta_propiedad_intelectual'               => 'required_if:tipo_convocatoria,1|nullable|max:10000000|file|mimetypes:application/pdf',
+                'carta_intencion'                           => 'required_if:tipo_convocatoria,1|nullable|max:191|url',
+                'carta_propiedad_intelectual'               => 'required_if:tipo_convocatoria,1|nullable|max:191|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -129,25 +129,8 @@ class EntidadAliadaController extends Controller
             $entidadAliadaIdi->descripcion_recursos_especie             = $request->descripcion_recursos_especie;
             $entidadAliadaIdi->recursos_dinero                          = $request->recursos_dinero;
             $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
-
-            if ($request->hasFile('carta_intencion')) {
-                $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
-                $rutaCartaIntencion          = $request->carta_intencion->storeAs(
-                    'cartas-intencion',
-                    $nombreArchivoCartaIntencion
-                );
-                $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
-            }
-
-            if ($request->hasFile('carta_propiedad_intelectual')) {
-                $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
-                $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
-                    'cartas-propiedad-intelectual',
-                    $nombreArchivoPropiedadIntelectual
-                );
-
-                $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
-            }
+            $entidadAliadaIdi->carta_intencion                          = $request->carta_intencion;
+            $entidadAliadaIdi->carta_propiedad_intelectual              = $request->carta_propiedad_intelectual;
 
             $entidadAliada->actividades()->attach($request->actividad_id);
 
@@ -156,18 +139,13 @@ class EntidadAliadaController extends Controller
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
         } elseif ($proyecto->ta()->exists()) {
             $request->validate([
-                'soporte_convenio'              => 'required|max:10000000|file|mimetypes:application/pdf',
+                'soporte_convenio'              => 'required|max:191|url',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
             ]);
-            $entidadAliadaTa = new EntidadAliadaTa();
-            $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
 
-            $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
-                'soportes-convenio',
-                $nombreSoporteConvenio
-            );
-            $entidadAliadaTa->soporte_convenio              = $rutaSoporteConvenio;
+            $entidadAliadaTa = new EntidadAliadaTa();
+            $entidadAliadaTa->soporte_convenio              = $request->soporte_convenio;
             $entidadAliadaTa->fecha_inicio_convenio         = $request->fecha_inicio_convenio;
             $entidadAliadaTa->fecha_fin_convenio            = $request->fecha_fin_convenio;
 
@@ -248,8 +226,8 @@ class EntidadAliadaController extends Controller
                 'codigo_gruplac'                            => 'nullable|max:191',
                 'enlace_gruplac'                            => 'nullable|url|max:191',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'nullable|max:10000000|file|mimetypes:application/pdf',
-                'carta_propiedad_intelectual'               => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'carta_intencion'                           => 'nullable|max:191|url',
+                'carta_propiedad_intelectual'               => 'nullable|max:191|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -269,27 +247,12 @@ class EntidadAliadaController extends Controller
                 'descripcion_recursos_dinero'                 => $request->descripcion_recursos_dinero
             ]);
 
-            if ($request->hasFile('carta_intencion')) {
-                Storage::delete($entidadAliada->entidadAliadaIdi->carta_intencion);
-                $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
-                $rutaCartaIntencion          = $request->carta_intencion->storeAs(
-                    'cartas-intencion',
-                    $nombreArchivoCartaIntencion
-                );
-
-                $entidadAliada->entidadAliadaIdi()->update(['carta_intencion' => $rutaCartaIntencion]);
+            if ($request->carta_intencion) {
+                $entidadAliada->entidadAliadaIdi()->update(['carta_intencion' => $request->carta_intencion]);
             }
 
-            if ($request->hasFile('carta_propiedad_intelectual')) {
-                Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
-                $nombreArchivoPropiedadIntelectual = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
-
-                $rutaPropiedadIntelectual = $request->carta_propiedad_intelectual->storeAs(
-                    'cartas-propiedad-intelectual',
-                    $nombreArchivoPropiedadIntelectual
-                );
-
-                $entidadAliada->entidadAliadaIdi()->update(['carta_propiedad_intelectual' => $rutaPropiedadIntelectual]);
+            if ($request->carta_propiedad_intelectual) {
+                $entidadAliada->entidadAliadaIdi()->update(['carta_propiedad_intelectual' => $request->carta_propiedad_intelectual]);
             }
 
             $entidadAliada->actividades()->sync($request->actividad_id);
@@ -300,8 +263,8 @@ class EntidadAliadaController extends Controller
                 'codigo_gruplac'                            => 'nullable|max:191',
                 'enlace_gruplac'                            => 'nullable|url|max:191',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'required|max:10000000|file|mimetypes:application/pdf',
-                'carta_propiedad_intelectual'               => 'required|max:10000000|file|mimetypes:application/pdf',
+                'carta_intencion'                           => 'required|max:191|url',
+                'carta_propiedad_intelectual'               => 'required|max:191|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -319,32 +282,15 @@ class EntidadAliadaController extends Controller
             $entidadAliadaIdi->descripcion_recursos_especie             = $request->descripcion_recursos_especie;
             $entidadAliadaIdi->recursos_dinero                          = $request->recursos_dinero;
             $entidadAliadaIdi->descripcion_recursos_dinero              = $request->descripcion_recursos_dinero;
-
-            $nombreArchivoCartaIntencion = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_intencion);
-
-
-            $rutaCartaIntencion          = $request->carta_intencion->storeAs(
-                'cartas-intencion',
-                $nombreArchivoCartaIntencion
-            );
-
-
-            $entidadAliadaIdi->carta_intencion  = $rutaCartaIntencion;
-
-            $nombreArchivoPropiedadIntelectual  = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->carta_propiedad_intelectual);
-            $rutaPropiedadIntelectual           = $request->carta_propiedad_intelectual->storeAs(
-                'cartas-propiedad-intelectual',
-                $nombreArchivoPropiedadIntelectual
-            );
-
-            $entidadAliadaIdi->carta_propiedad_intelectual = $rutaPropiedadIntelectual;
+            $entidadAliadaIdi->carta_intencion                          = $request->carta_intencion;
+            $entidadAliadaIdi->carta_propiedad_intelectual              = $request->carta_propiedad_intelectual;
 
             $entidadAliada->actividades()->sync($request->actividad_id);
 
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
         } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
-                'soporte_convenio'              => 'nullable|max:10000000|file|mimetypes:application/pdf',
+                'soporte_convenio'              => 'nullable|max:191|url',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
             ]);
@@ -354,16 +300,8 @@ class EntidadAliadaController extends Controller
                 'fecha_fin_convenio'            => $request->fecha_fin_convenio,
             ]);
 
-            if ($request->hasFile('soporte_convenio')) {
-                Storage::delete($entidadAliada->entidadAliadaTa->soporte_convenio);
-                $nombreSoporteConvenio = $this->cleanFileName($proyecto->codigo, $request->nombre, $request->soporte_convenio);
-
-                $rutaSoporteConvenio   = $request->soporte_convenio->storeAs(
-                    'soportes-convenio',
-                    $nombreSoporteConvenio
-                );
-
-                $entidadAliada->entidadAliadaTa()->update(['soporte_convenio' => $rutaSoporteConvenio]);
+            if ($request->soporte_convenio) {
+                $entidadAliada->entidadAliadaTa()->update(['soporte_convenio' => $request->soporte_convenio]);
             }
         }
 
@@ -383,13 +321,6 @@ class EntidadAliadaController extends Controller
     public function destroy(Convocatoria $convocatoria, Proyecto $proyecto, EntidadAliada $entidadAliada)
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
-
-        if ($entidadAliada->entidadAliadaTa()->exists()) {
-            Storage::delete($entidadAliada->entidadAliadaTa->soporte_convenio);
-        } elseif ($entidadAliada->entidadAliadaIdi()->exists()) {
-            Storage::delete($entidadAliada->entidadAliadaIdi->carta_intencion);
-            Storage::delete($entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual);
-        }
 
         $entidadAliada->delete();
 

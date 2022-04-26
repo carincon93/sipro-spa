@@ -13,7 +13,6 @@
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
-    import File from '@/Shared/File'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
@@ -54,7 +53,7 @@
             value: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.value,
             label: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.label,
         },
-        formato_estudio_mercado: '',
+        formato_estudio_mercado: proyectoPresupuesto.formato_estudio_mercado,
     })
 
     function submit() {
@@ -157,8 +156,8 @@
                     {#if presupuestoSennova?.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096'}
                         <InfoMessage message="Por favor indique el valor total que arrojó el Estudio de mercado - Convocatoria Sennova 2021" />
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Estudio de mercado - Convocatoria Sennova 2021" />
-                            <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="15000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
+                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Url del estudio de mercado - Convocatoria Sennova 2021" />
+                            <Input label="Url" id="formato_estudio_mercado" type="url" class="mt-1" error={errors.formato_estudio_mercado} placeholder="Url https://www.google.com.co" bind:value={$form.formato_estudio_mercado} />
                         </div>
                     {/if}
 
@@ -278,7 +277,7 @@
                             <td class="border-t px-6 pt-6 pb-4"> Estudio de mercado </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <a target="_blank" class="flex text-indigo-400 underline inline-block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>
+                                <a target="_blank" class="flex text-indigo-400 underline mb-4" download href={proyectoPresupuesto.formato_estudio_mercado}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                     </svg>

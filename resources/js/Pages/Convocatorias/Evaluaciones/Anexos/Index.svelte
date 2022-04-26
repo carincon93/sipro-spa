@@ -156,7 +156,7 @@
                         <td class="border-t">
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 {#if proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id}
-                                    <a target="_blank" class="text-indigo-400 underline inline-block mt-8 mb-4 flex" download href={route('convocatorias.proyectos.proyecto-anexos.download', [convocatoria.id, proyecto.id, proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.id])}>
+                                    <a target="_blank" class="text-indigo-400 underline mt-8 mb-4 flex" download href={proyectoAnexo.find((item) => item.anexo_id == anexo.id)?.archivo}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>

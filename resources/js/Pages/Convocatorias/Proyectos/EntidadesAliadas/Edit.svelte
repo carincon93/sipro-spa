@@ -11,7 +11,6 @@
     import Textarea from '@/Shared/Textarea'
     import Input from '@/Shared/Input'
     import Switch from '@/Shared/Switch'
-    import File from '@/Shared/File'
     import Select from '@/Shared/Select'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
@@ -60,10 +59,10 @@
         descripcion_recursos_especie: entidadAliada.entidad_aliada_idi ? entidadAliada.entidad_aliada_idi?.descripcion_recursos_especie : '',
         recursos_dinero: entidadAliada.entidad_aliada_idi ? entidadAliada.entidad_aliada_idi?.recursos_dinero : '',
         descripcion_recursos_dinero: entidadAliada.entidad_aliada_idi ? entidadAliada.entidad_aliada_idi?.descripcion_recursos_dinero : '',
-        carta_intencion: null,
-        carta_propiedad_intelectual: null,
+        carta_intencion: entidadAliada.entidad_aliada_idi?.carta_intencion,
+        carta_propiedad_intelectual: entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual,
         actividad_id: actividadesRelacionadas,
-        soporte_convenio: null,
+        soporte_convenio: entidadAliada.entidad_aliada_ta?.soporte_convenio,
         fecha_inicio_convenio: entidadAliada.entidad_aliada_ta?.fecha_inicio_convenio,
         fecha_fin_convenio: entidadAliada.entidad_aliada_ta?.fecha_fin_convenio,
     })
@@ -178,41 +177,49 @@
 
                         {#if convocatoria.tipo_convocatoria == 1}
                             <div class="mt-8">
-                                <Label class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                                <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} />
+                                <Label class="mb-4" labelFor="carta_intencion" value="Url del ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
 
                                 {#if entidadAliada.entidad_aliada_idi?.carta_intencion}
-                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
-                                        <span class="px-2 py-1 text-green-700 inline-block mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                            </svg>
-                                            Archivo cargado correctamente. Descargar carta de intención haciendo clic aquí.
-                                        </span>
+                                    <a target="_blank" class="text-green-600 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_intencion}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        <span class="px-2 py-1 inline-block mb-4"> Archivo cargado correctamente. Descargar dando clic en este enlace. </span>
                                     </a>
                                 {/if}
+
+                                <Input label="Url" id="carta_intencion" type="url" class="mt-1" error={errors.carta_intencion} placeholder="Url https://www.google.com.co" bind:value={$form.carta_intencion} required />
                             </div>
 
                             <div class="mt-8">
-                                <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                                <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} />
+                                <Label class="mb-4" labelFor="carta_propiedad_intelectual" value="Url del ANEXO 8. Propiedad intelectual" />
 
                                 {#if entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}
-                                    <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
-                                        <span class="px-2 py-1 text-green-700 inline-block mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                            </svg>
-                                            Archivo cargado correctamente. Descargar carta de propiedad intelectual haciendo clic aquí.
-                                        </span>
+                                    <a target="_blank" class="text-green-600 underline  mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                        <span class="px-2 py-1 inline-block mb-4"> Archivo cargado correctamente. Descargar dando clic en este enlace. </span>
                                     </a>
                                 {/if}
+
+                                <Input label="Url" id="carta_propiedad_intelectual" type="url" class="mt-1" error={errors.carta_propiedad_intelectual} placeholder="Url https://www.google.com.co" bind:value={$form.carta_propiedad_intelectual} required />
                             </div>
                         {/if}
                     {:else if proyecto.codigo_linea_programatica == 70}
                         <div class="mt-8">
-                            <Label class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                            <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} />
+                            <Label class="mb-4" labelFor="soporte_convenio" value="Url del archivo del convenio" />
+
+                            {#if entidadAliada.entidad_aliada_ta?.soporte_convenio}
+                                <a target="_blank" class="text-green-600 underline  mb-4 flex" download href={entidadAliada.entidad_aliada_ta?.soporte_convenio}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    <span class="px-2 py-1 inline-block mb-4"> Archivo cargado correctamente. Descargar dando clic en este enlace. </span>
+                                </a>
+                            {/if}
+
+                            <Input label="Url" id="soporte_convenio" type="url" class="mt-1" error={errors.soporte_convenio} placeholder="Url https://www.google.com.co" bind:value={$form.soporte_convenio} />
                         </div>
 
                         <div class="mt-4">
@@ -291,7 +298,7 @@
                 <h1 class="mb-4">Enlaces de interés</h1>
                 <ul>
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Crear miembro de la entidad aliada </a>
+                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Miembros de la entidad aliada </a>
                     </li>
                     <li class="mt-6">
                         <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específicos relacionados </a>
@@ -314,7 +321,7 @@
                 {#if proyecto.codigo_linea_programatica == 70}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
+                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_ta?.soporte_convenio}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -325,7 +332,7 @@
                 {:else}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_intencion}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -336,7 +343,7 @@
 
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>

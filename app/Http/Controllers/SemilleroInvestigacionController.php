@@ -68,30 +68,9 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
         $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
-
-        $nombre_gic_f020 = $this->cleanFileName('formato_gic_f_021', $request->formato_gic_f_021);
-
-        $formato_gic_f_021 = $request->formato_gic_f_021->storeAs(
-            'formatos_semillero_investigacion',
-            $nombre_gic_f020
-        );
-        $semilleroInvestigacion->formato_gic_f_021 = $formato_gic_f_021;
-
-        $formato_gic_f_032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
-
-        $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
-            'formatos_semillero_investigacion',
-            $formato_gic_f_032
-        );
-        $semilleroInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
-
-        $formato_aval_semillero = $this->cleanFileName('formato_aval_semillero', $request->formato_aval_semillero);
-
-        $formato_aval_semillero = $request->formato_aval_semillero->storeAs(
-            'formatos_semillero_investigacion',
-            $formato_aval_semillero
-        );
-        $semilleroInvestigacion->formato_aval_semillero = $formato_aval_semillero;
+        $semilleroInvestigacion->formato_gic_f_021                          = $request->formato_gic_f_021;
+        $semilleroInvestigacion->formato_gic_f_032                          = $request->formato_gic_f_032;
+        $semilleroInvestigacion->formato_aval_semillero                     = $request->formato_aval_semillero;
 
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
@@ -162,36 +141,9 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
         $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
-
-        if ($request->hasFile('formato_gic_f_021')) {
-            $formato_gic_f_021 = $this->cleanFileName('formato_gic_f_021', $request->formato_gic_f_021);
-            Storage::delete($semilleroInvestigacion->formato_gic_f_021);
-            $formato_gic_f_021 = $request->formato_gic_f_021->storeAs(
-                'formatos_semillero_investigacion',
-                $formato_gic_f_021
-            );
-            $semilleroInvestigacion->formato_gic_f_021 = $formato_gic_f_021;
-        }
-
-        if ($request->hasFile('formato_gic_f_032')) {
-            $formato_gic_f_032 = $this->cleanFileName('formato_gic_f_032', $request->formato_gic_f_032);
-            Storage::delete($semilleroInvestigacion->formato_gic_f_032);
-            $formato_gic_f_032 = $request->formato_gic_f_032->storeAs(
-                'formatos_semillero_investigacion',
-                $formato_gic_f_032
-            );
-            $semilleroInvestigacion->formato_gic_f_032 = $formato_gic_f_032;
-        }
-
-        if ($request->hasFile('formato_aval_semillero')) {
-            $formato_aval_semillero = $this->cleanFileName('formato_aval_semillero', $request->formato_aval_semillero);
-            Storage::delete($semilleroInvestigacion->formato_aval_semillero);
-            $formato_aval_semillero = $request->formato_aval_semillero->storeAs(
-                'formatos_semillero_investigacion',
-                $formato_aval_semillero
-            );
-            $semilleroInvestigacion->formato_aval_semillero = $formato_aval_semillero;
-        }
+        $semilleroInvestigacion->formato_gic_f_021                          = $request->formato_gic_f_021;
+        $semilleroInvestigacion->formato_gic_f_032                          = $request->formato_gic_f_032;
+        $semilleroInvestigacion->formato_aval_semillero                     = $request->formato_aval_semillero;
 
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
@@ -214,12 +166,7 @@ class SemilleroInvestigacionController extends Controller
     {
         $this->authorize('delete', [SemilleroInvestigacion::class, $semilleroInvestigacion]);
 
-        Storage::delete($semilleroInvestigacion->formato_gic_f_021);
-        Storage::delete($semilleroInvestigacion->formato_gic_f_032);
-        Storage::delete($semilleroInvestigacion->formato_aval_semillero);
-
         $semilleroInvestigacion->delete();
-
 
         return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha eliminado correctamente.');
     }

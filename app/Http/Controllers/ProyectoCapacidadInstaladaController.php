@@ -325,16 +325,9 @@ class ProyectoCapacidadInstaladaController extends Controller
         $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
 
         $entidadAliada = new ProyectoCapacidadInstaladaEntidadAliada();
-        $entidadAliada->nombre  = $request->nombre;
-        $entidadAliada->nit     = $request->nit;
-
-        $nombreDocumento = $this->cleanFileName($request->nombre, $request->documento);
-        $rutaDocumento          = $request->documento->storeAs(
-            'documentos-entidades-capacidad-instalada',
-            $nombreDocumento
-        );
-
-        $entidadAliada->documento = $rutaDocumento;
+        $entidadAliada->nombre      = $request->nombre;
+        $entidadAliada->nit         = $request->nit;
+        $entidadAliada->documento   = $request->documento;
 
         $entidadAliada->proyectoCapacidadInstalada()->associate($proyectoCapacidadInstalada);
         $entidadAliada->save();
@@ -356,19 +349,9 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
 
-        $entidadAliada->nombre  = $request->nombre;
-        $entidadAliada->nit     = $request->nit;
-
-        if ($request->hasFile('documento')) {
-            Storage::delete($entidadAliada->documento);
-            $nombreDocumento = $this->cleanFileName($request->nombre, $request->documento);
-            $rutaDocumento          = $request->documento->storeAs(
-                'documentos-entidades-capacidad-instalada',
-                $nombreDocumento
-            );
-
-            $entidadAliada->documento = $rutaDocumento;
-        }
+        $entidadAliada->nombre      = $request->nombre;
+        $entidadAliada->nit         = $request->nit;
+        $entidadAliada->documento   = $request->documento;
 
         $entidadAliada->save();
 
@@ -379,7 +362,6 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
 
-        Storage::delete($entidadAliada->documento);
         $entidadAliada->delete();
 
         return redirect()->route('proyectos-capacidad-instalada.integrantes.index', $proyectoCapacidadInstalada)->with('success', 'El recurso se ha eliminado correctamente.');

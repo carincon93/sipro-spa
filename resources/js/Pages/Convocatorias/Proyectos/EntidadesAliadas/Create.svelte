@@ -9,7 +9,6 @@
     import Textarea from '@/Shared/Textarea'
     import Input from '@/Shared/Input'
     import Switch from '@/Shared/Switch'
-    import File from '@/Shared/File'
     import Select from '@/Shared/Select'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
@@ -162,18 +161,18 @@
                     {#if convocatoria.tipo_convocatoria == 1}
                         <div class="mt-8">
                             <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
-                            <File id="carta_intencion" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_intencion} error={errors.carta_intencion} required />
+                            <Input label="Url" id="carta_intencion" type="url" class="mt-1" error={errors.carta_intencion} placeholder="Url https://www.google.com.co" bind:value={$form.carta_intencion} required />
                         </div>
 
                         <div class="mt-8">
                             <Label required class="mb-4" labelFor="carta_propiedad_intelectual" value="ANEXO 8. Propiedad intelectual" />
-                            <File id="carta_propiedad_intelectual" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.carta_propiedad_intelectual} error={errors.carta_propiedad_intelectual} required />
+                            <Input label="Url" id="carta_propiedad_intelectual" type="url" class="mt-1" error={errors.carta_propiedad_intelectual} placeholder="Url https://www.google.com.co" bind:value={$form.carta_propiedad_intelectual} required />
                         </div>
                     {/if}
                 {:else if proyecto.codigo_linea_programatica == 70}
                     <div class="mt-8">
-                        <Label required class="mb-4" labelFor="soporte_convenio" value="Convenio" />
-                        <File id="soporte_convenio" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte_convenio} error={errors.soporte_convenio} required />
+                        <Label required class="mb-4" labelFor="soporte_convenio" value="Url del archivo del convenio" />
+                        <Input label="Url" id="soporte_convenio" type="url" class="mt-1" error={errors.soporte_convenio} placeholder="Url https://www.google.com.co" bind:value={$form.soporte_convenio} required />
                     </div>
 
                     <div class="mt-4">

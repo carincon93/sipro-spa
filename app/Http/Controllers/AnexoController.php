@@ -53,20 +53,11 @@ class AnexoController extends Controller
         $this->authorize('create', [Anexo::class]);
 
         $anexo = new Anexo();
-        $anexo->nombre         = $request->nombre;
-        $anexo->descripcion    = $request->descripcion;
-        $anexo->obligatorio    = $request->obligatorio;
-        $anexo->habilitado     = $request->habilitado;
-
-        if ($request->hasFile('archivo')) {
-            $nombreArchivo     = $this->cleanFileName($request->nombre, $request->archivo);
-            $archivo = $request->archivo->storeAs(
-                'anexos',
-                $nombreArchivo
-            );
-
-            $anexo->archivo = $archivo;
-        }
+        $anexo->nombre          = $request->nombre;
+        $anexo->descripcion     = $request->descripcion;
+        $anexo->obligatorio     = $request->obligatorio;
+        $anexo->habilitado      = $request->habilitado;
+        $anexo->archivo         = $request->archivo;
 
         $anexo->save();
 
@@ -115,22 +106,13 @@ class AnexoController extends Controller
     {
         $this->authorize('update', [Anexo::class, $anexo]);
 
-        $anexo->nombre         = $request->nombre;
-        $anexo->descripcion    = $request->descripcion;
-        $anexo->obligatorio    = $request->obligatorio;
-        $anexo->habilitado     = $request->habilitado;
+        $anexo->nombre          = $request->nombre;
+        $anexo->descripcion     = $request->descripcion;
+        $anexo->obligatorio     = $request->obligatorio;
+        $anexo->habilitado      = $request->habilitado;
+        $anexo->archivo         = $request->archivo;
+
         $anexo->lineasProgramaticas()->sync($request->linea_programatica_id);
-
-        if ($request->hasFile('archivo')) {
-            Storage::delete($anexo->archivo);
-            $nombreArchivo     = $this->cleanFileName($request->nombre, $request->archivo);
-            $archivo = $request->archivo->storeAs(
-                'anexos',
-                $nombreArchivo
-            );
-
-            $anexo->archivo = $archivo;
-        }
 
         $anexo->save();
 

@@ -27,13 +27,13 @@ class ProyectoCapacidadInstaladaEntidadAliadaRequest extends FormRequest
             return [
                 'nombre'        => ['required', 'max:255'],
                 'nit'           => ['required', 'max:15'],
-                'documento'     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'documento'     => ['nullable', 'max:191', 'url'],
             ];
         } else {
             return [
                 'nombre'        => ['required', 'max:255'],
                 'nit'           => ['required', 'max:15'],
-                'documento'     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'documento'     => ['required', 'max:191', 'url'],
             ];
         }
     }

@@ -30,7 +30,7 @@ class ProyectoIdiTecnoacademiaProductoRequest extends FormRequest
             'lugar'                 => ['nullable', 'string', 'max:255'],
             'descripcion'           => ['required', 'string'],
             'link'                  => ['nullable', 'url'],
-            'soporte'               => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+            'soporte'               => ['nullable', 'max:191', 'url'],
         ];
     }
 

@@ -6,7 +6,7 @@
     import Dialog from '@/Shared/Dialog'
 
     import Textarea from '@/Shared/Textarea'
-    import File from '@/Shared/File'
+    import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -37,7 +37,7 @@
         habilitado: anexo.habilitado,
 
         linea_programatica_id: anexoLineasProgramaticas,
-        archivo: '',
+        archivo: anexo.archivo,
     })
 
     function submit() {
@@ -84,20 +84,20 @@
                 </div>
 
                 <div class="mt4-">
-                    <Label class="mb-4 mt-8" labelFor="archivo" value="Formato" />
-
-                    <File type="file" id="archivo" maxSize="10000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} />
+                    <Label class="mb-4 mt-8" labelFor="archivo" value="Url del archivo" />
 
                     {#if $form.archivo}
                         <div class="mt-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('anexos.download', [anexo.id])}>
+                            <a target="_blank" class="text-green-600 underline mb-4 flex" download href={anexo.archivo}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
-                                Descargar formato
+                                Archivo cargado correctamente. Descargar dando clic en este enlace.
                             </a>
                         </div>
                     {/if}
+
+                    <Input label="Url" id="archivo" type="url" class="mt-1" error={errors?.archivo} placeholder="Url https://www.google.com.co" bind:value={$form.archivo} />
                 </div>
 
                 <div class="mt-4">

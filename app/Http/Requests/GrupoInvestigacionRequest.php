@@ -43,8 +43,8 @@ class GrupoInvestigacionRequest extends FormRequest
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
                 'link_propio_grupo'                     => ['nullable', 'url'],
-                'formato_gic_f_020'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-                'formato_gic_f_032'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'formato_gic_f_020'                     => ['nullable', 'max:191', 'url'],
+                'formato_gic_f_032'                     => ['nullable', 'max:191', 'url'],
                 'redes_conocimiento'                    => ['required']
             ];
         } else {
@@ -67,8 +67,8 @@ class GrupoInvestigacionRequest extends FormRequest
                 'objetivo_general'                      => ['required', 'string'],
                 'objetivos_especificos'                 => ['required', 'string'],
                 'link_propio_grupo'                     => ['nullable', 'url'],
-                'formato_gic_f_020'                     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-                'formato_gic_f_032'                     => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                'formato_gic_f_020'                     => ['required', 'max:191', 'url'],
+                'formato_gic_f_032'                     => ['required', 'max:191', 'url'],
                 'redes_conocimiento'                    => ['required']
             ];
         }
